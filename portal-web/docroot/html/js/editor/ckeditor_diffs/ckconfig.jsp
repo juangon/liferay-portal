@@ -70,7 +70,9 @@ CKEDITOR.config.contentsCss = '<%= HtmlUtil.escapeJS(cssPath) %>/main.css';
 
 CKEDITOR.config.entities = false;
 
-CKEDITOR.config.extraPlugins = 'ajaxsave,restore,scayt,wsc';
+CKEDITOR.config.extraPlugins = 'ajaxsave,restore,scayt,wsc,video';
+
+CKEDITOR.config.filebrowserVideoBrowseUrl = CKEDITOR.config.filebrowserBrowseUrl; 
 
 CKEDITOR.config.height = 265;
 
@@ -116,7 +118,7 @@ CKEDITOR.config.toolbar_liferay = [
 	'/',
 	['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'],
 	['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-	['Image', 'Link', 'Unlink', 'Anchor'],
+	['Image', 'Video', 'Link', 'Unlink', 'Anchor'],
 	['Flash', 'Table', '-', 'Smiley', 'SpecialChar'],
 	['Find', 'Replace', 'SpellChecker', 'Scayt'],
 	['SelectAll', 'RemoveFormat'],
@@ -139,7 +141,7 @@ CKEDITOR.config.toolbar_liferayArticle = [
 	'/',
 	['Source'],
 	['Link', 'Unlink', 'Anchor'],
-	['Image', 'Flash', 'Table', '-', 'Smiley', 'SpecialChar', 'LiferayPageBreak']
+	['Image', 'Video', 'Flash', 'Table', '-', 'Smiley', 'SpecialChar', 'LiferayPageBreak']
 ];
 
 CKEDITOR.on(
