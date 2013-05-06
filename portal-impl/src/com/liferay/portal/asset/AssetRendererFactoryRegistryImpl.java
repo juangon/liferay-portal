@@ -14,7 +14,12 @@
 
 package com.liferay.portal.asset;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Portlet;
+import com.liferay.portal.security.auth.CompanyThreadLocal;
+import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portlet.asset.AssetRendererFactoryRegistry;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
 
@@ -28,6 +33,29 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class AssetRendererFactoryRegistryImpl
 	implements AssetRendererFactoryRegistry {
+
+	public AssetRendererFactory getActivePortletAssetRendererFactoryByClassName(
+		long companyId, String className) {
+
+		Map<String, AssetRendererFactory> filteredAssetRendererFactories =
+			filterAssetRendererFactories(
+				companyId, _assetRenderFactoriesMapByClassName);
+
+		return filteredAssetRendererFactories.get(className);
+	}
+
+	public List<AssetRendererFactory> getActivePortletsAssetRendererFactories(
+		long companyId) {
+
+		return ListUtil.fromMapValues(
+			filterAssetRendererFactories(
+				companyId, _assetRenderFactoriesMapByClassName));
+	}
+
+	public long[] getActivePortletsClassNameIds(long companyId) {
+
+		return _getClassNameIds(companyId);
+	}
 
 	public List<AssetRendererFactory> getAssetRendererFactories() {
 		return ListUtil.fromMapValues(_assetRenderFactoriesMapByClassName);
@@ -44,20 +72,7 @@ public class AssetRendererFactoryRegistryImpl
 	}
 
 	public long[] getClassNameIds() {
-		long[] classNameIds = new long[
-			_assetRenderFactoriesMapByClassName.size()];
-
-		int i = 0;
-
-		for (AssetRendererFactory assetRendererFactory :
-				_assetRenderFactoriesMapByClassName.values()) {
-
-			classNameIds[i] = assetRendererFactory.getClassNameId();
-
-			i++;
-		}
-
-		return classNameIds;
+		return _getClassNameIds(CompanyThreadLocal.getCompanyId());
 	}
 
 	public void register(AssetRendererFactory assetRendererFactory) {
@@ -72,6 +87,63 @@ public class AssetRendererFactoryRegistryImpl
 			assetRendererFactory.getClassName());
 		_assetRenderFactoriesMapByClassType.remove(
 			assetRendererFactory.getType());
+	}
+
+	private long[] _getClassNameIds(long companyId) {
+		Map<String, AssetRendererFactory> assetRenderFactories = null;
+
+		if (Validator.isNull(companyId)) {
+			assetRenderFactories =_assetRenderFactoriesMapByClassName;
+		}
+		else {
+			assetRenderFactories = filterAssetRendererFactories(
+				companyId, _assetRenderFactoriesMapByClassName);
+		}
+
+		long[] classNameIds = new long[assetRenderFactories.size()];
+
+		int i = 0;
+
+		for (AssetRendererFactory assetRendererFactory :
+				assetRenderFactories.values()) {
+
+			classNameIds[i] = assetRendererFactory.getClassNameId();
+
+			i++;
+		}
+
+		return classNameIds;
+	}
+
+	private Map<String, AssetRendererFactory> filterAssetRendererFactories(
+		long companyId,
+		Map<String, AssetRendererFactory> assetRendererFactories) {
+
+		Map<String, AssetRendererFactory> filteredAssetRendererFactories =
+			new ConcurrentHashMap<String, AssetRendererFactory>();
+
+		for (String className : assetRendererFactories.keySet()) {
+			AssetRendererFactory assetRendererFactory =
+				assetRendererFactories.get(className);
+
+			Portlet portlet = null;
+
+			try {
+				portlet = PortletLocalServiceUtil.getPortletById(
+					companyId, assetRendererFactory.getPortletId());
+			}
+			catch (SystemException e) {
+				portlet = PortletLocalServiceUtil.getPortletById(
+					assetRendererFactory.getPortletId());
+			}
+
+			if (portlet.isActive()) {
+				filteredAssetRendererFactories.put(
+					className, assetRendererFactory);
+			}
+		}
+
+		return filteredAssetRendererFactories;
 	}
 
 	private Map<String, AssetRendererFactory>

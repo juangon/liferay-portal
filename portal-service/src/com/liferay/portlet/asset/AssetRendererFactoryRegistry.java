@@ -24,6 +24,14 @@ import java.util.List;
  */
 public interface AssetRendererFactoryRegistry {
 
+	public AssetRendererFactory getActivePortletAssetRendererFactoryByClassName(
+		long companyId, String className);
+
+	public List<AssetRendererFactory> getActivePortletsAssetRendererFactories(
+		long companyId);
+
+	public long[] getActivePortletsClassNameIds(long companyId);
+
 	public List<AssetRendererFactory> getAssetRendererFactories();
 
 	public AssetRendererFactory getAssetRendererFactoryByClassName(

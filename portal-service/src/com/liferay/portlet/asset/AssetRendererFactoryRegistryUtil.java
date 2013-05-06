@@ -25,6 +25,24 @@ import java.util.List;
  */
 public class AssetRendererFactoryRegistryUtil {
 
+	public static AssetRendererFactory getActivePortletAssetRendererFactoryByClassName(
+		long companyId, String className) {
+
+		return getAssetRendererFactoryRegistry().
+			getActivePortletAssetRendererFactoryByClassName(
+				companyId, className);
+	}
+
+	public static List<AssetRendererFactory> getActivePortletsAssetRendererFactories(long companyId) {
+		return getAssetRendererFactoryRegistry().
+			getActivePortletsAssetRendererFactories(companyId);
+	}
+
+	public static long[] getActivePortletsClassNameIds(long companyId) {
+		return getAssetRendererFactoryRegistry().getActivePortletsClassNameIds(
+			companyId);
+	}
+
 	public static List<AssetRendererFactory> getAssetRendererFactories() {
 		return getAssetRendererFactoryRegistry().getAssetRendererFactories();
 	}

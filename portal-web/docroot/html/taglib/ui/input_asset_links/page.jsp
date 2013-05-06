@@ -22,6 +22,7 @@ String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_ui_input_
 long assetEntryId = GetterUtil.getLong((String)request.getAttribute("liferay-ui:input-asset-links:assetEntryId"));
 
 List<AssetLink> assetLinks = new ArrayList<AssetLink>();
+List<AssetLink> assetLinksActivePortlets = new ArrayList<AssetLink>();
 
 String assetLinksSearchContainerPrimaryKeys = ParamUtil.getString(request, "assetLinksSearchContainerPrimaryKeys");
 
@@ -51,6 +52,25 @@ else {
 	}
 }
 
+for (AssetLink assetLink : assetLinks) {
+	AssetEntry assetLinkEntry = null;
+
+	if ((assetEntryId > 0) || (assetLink.getEntryId1() == assetEntryId)) {
+		assetLinkEntry = AssetEntryLocalServiceUtil.getEntry(assetLink.getEntryId2());
+	}
+	else {
+		assetLinkEntry = AssetEntryLocalServiceUtil.getEntry(assetLink.getEntryId1());
+	}
+
+	assetLinkEntry = assetLinkEntry.toEscapedModel();
+
+	AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getActivePortletAssetRendererFactoryByClassName(assetLink.getCompanyId(), assetLinkEntry.getClassName());
+
+	if (assetRendererFactory !=null) {
+		assetLinksActivePortlets.add(assetLink);
+	}
+}
+
 long controlPanelPlid = PortalUtil.getControlPanelPlid(company.getCompanyId());
 
 PortletURL assetBrowserURL = PortletURLFactoryUtil.create(request, PortletKeys.ASSET_BROWSER, controlPanelPlid, PortletRequest.RENDER_PHASE);
@@ -64,7 +84,7 @@ assetBrowserURL.setWindowState(LiferayWindowState.POP_UP);
 <liferay-ui:icon-menu align="left" cssClass="select-existing-selector" icon='<%= themeDisplay.getPathThemeImages() + "/common/search.png" %>' id='<%= randomNamespace + "inputAssetLinks" %>' message="select" showWhenSingleIcon="<%= true %>">
 
 	<%
-	for (AssetRendererFactory assetRendererFactory : AssetRendererFactoryRegistryUtil.getAssetRendererFactories()) {
+	for (AssetRendererFactory assetRendererFactory : AssetRendererFactoryRegistryUtil.getActivePortletsAssetRendererFactories(company.getCompanyId())) {
 		if (assetRendererFactory.isLinkable() && assetRendererFactory.isSelectable()) {
 			if (assetEntryId > 0) {
 				assetBrowserURL.setParameter("refererAssetEntryId", String.valueOf(assetEntryId));
@@ -105,8 +125,8 @@ assetBrowserURL.setWindowState(LiferayWindowState.POP_UP);
 	headerNames="type,title,scope,null"
 >
 	<liferay-ui:search-container-results
-		results="<%= assetLinks %>"
-		total="<%= assetLinks.size() %>"
+		results="<%= assetLinksActivePortlets %>"
+		total="<%= assetLinksActivePortlets.size() %>"
 	/>
 
 	<liferay-ui:search-container-row
