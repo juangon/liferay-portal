@@ -25,7 +25,7 @@
 				<span class="portlet-title-text">$portlet_title</span>
 
 				#if ($valid_portlet_description)
-					$theme.iconHelp($portlet_description)
+					$theme.portletIconHelp($portlet_description)
 				#end
 			</h2>
 		#end

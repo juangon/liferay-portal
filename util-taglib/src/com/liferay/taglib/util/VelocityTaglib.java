@@ -180,6 +180,11 @@ public interface VelocityTaglib {
 	 * @deprecated As of 6.2.0, replaced by {@link #portletIconHelp}
 	 */
 	public void iconHelp() throws Exception;
+	
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #portletIconHelp(String)}
+	 */
+	public void iconHelp(String message) throws Exception;
 
 	/**
 	 * @deprecated As of 6.2.0, replaced by {@link #portletIconMaximize}
@@ -294,6 +299,8 @@ public interface VelocityTaglib {
 	public void portletIconEditGuest() throws Exception;
 
 	public void portletIconHelp() throws Exception;
+	
+	public void portletIconHelp(String message)throws Exception;
 
 	public void portletIconMaximize() throws Exception;
 
@@ -383,6 +390,6 @@ public interface VelocityTaglib {
 		throws Exception;
 
 	public String wrapPortlet(String wrapPage, String portletPage)
-		throws Exception;
+		throws Exception;	
 
 }

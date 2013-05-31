@@ -278,6 +278,14 @@ public class DummyVelocityTaglib implements VelocityTaglib {
 	public void iconHelp() throws Exception {
 		portletIconHelp();
 	}
+	
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #portletIconHelp(String)}
+	 */
+	@Override
+	public void iconHelp(String message) throws Exception {
+		portletIconHelp(message);
+	}
 
 	/**
 	 * @deprecated As of 6.2.0, replaced by {@link #portletIconMaximize}
@@ -461,6 +469,10 @@ public class DummyVelocityTaglib implements VelocityTaglib {
 
 	@Override
 	public void portletIconHelp() throws Exception {
+	}
+	
+	@Override
+	public void portletIconHelp(String message) throws Exception {
 	}
 
 	@Override

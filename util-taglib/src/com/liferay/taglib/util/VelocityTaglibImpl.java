@@ -531,6 +531,14 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 	public void iconHelp() throws Exception {
 		portletIconHelp();
 	}
+	
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #portletIconHelp(String)}
+	 */
+	@Override
+	public void iconHelp(String message) throws Exception {
+		portletIconHelp(message);
+	}
 
 	/**
 	 * @deprecated As of 6.2.0, replaced by {@link #portletIconMaximize}
@@ -830,6 +838,18 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 	@Override
 	public void portletIconHelp() throws Exception {
 		IconHelpTag iconHelpTag = new IconHelpTag();
+
+		setUp(iconHelpTag);
+
+		iconHelpTag.runTag();
+	}
+	
+	@Override
+	public void portletIconHelp(String message) throws Exception {
+		com.liferay.taglib.ui.IconHelpTag iconHelpTag =
+									new com.liferay.taglib.ui.IconHelpTag();
+		
+		iconHelpTag.setMessage(message);
 
 		setUp(iconHelpTag);
 
