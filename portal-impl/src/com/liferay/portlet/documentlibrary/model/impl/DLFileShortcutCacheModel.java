@@ -77,6 +77,7 @@ public class DLFileShortcutCacheModel implements CacheModel<DLFileShortcut>,
 		return sb.toString();
 	}
 
+	@Override
 	public DLFileShortcut toEntityModel() {
 		DLFileShortcutImpl dlFileShortcutImpl = new DLFileShortcutImpl();
 
@@ -139,6 +140,7 @@ public class DLFileShortcutCacheModel implements CacheModel<DLFileShortcut>,
 		return dlFileShortcutImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		fileShortcutId = objectInput.readLong();
@@ -158,6 +160,7 @@ public class DLFileShortcutCacheModel implements CacheModel<DLFileShortcut>,
 		statusDate = objectInput.readLong();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

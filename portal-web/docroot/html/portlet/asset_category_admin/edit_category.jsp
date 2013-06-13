@@ -90,7 +90,7 @@ else {
 
 				<c:choose>
 					<c:when test="<%= parentCategoryId == 0 %>">
-						<aui:select inputCssClass="vocabulary-select-list" label="to-vocabulary" name="vocabularyId">
+						<aui:select cssClass="vocabulary-select-list" label="to-vocabulary" name="vocabularyId">
 
 							<%
 							for (AssetVocabulary vocabulary : vocabularies) {
@@ -174,6 +174,10 @@ else {
 		</div>
 	</aui:fieldset>
 </aui:form>
+
+<aui:script>
+	Liferay.Util.focusFormField(document.<portlet:namespace /><%= randomNamespace %>fm.<portlet:namespace />title);
+</aui:script>
 
 <aui:script use="liferay-auto-fields">
 	var autoFields = new Liferay.AutoFields(

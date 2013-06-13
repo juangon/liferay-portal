@@ -37,6 +37,8 @@ public class PortletKeys {
 
 	public static final String ASSET_PUBLISHER = "101";
 
+	public static final String BACKGROUND_TASK = "189";
+
 	public static final String BLOGS = "33";
 
 	public static final String BLOGS_ADMIN = "161";
@@ -50,6 +52,8 @@ public class PortletKeys {
 	public static final String CALENDAR = "8";
 
 	public static final String CHAT = "1_WAR_chatportlet";
+
+	public static final String CONTROL_PANEL_HOME = "190";
 
 	public static final String CONTROL_PANEL_MENU = "160";
 
@@ -120,8 +124,6 @@ public class PortletKeys {
 
 	public static final String MESSAGE_BOARDS_ADMIN = "162";
 
-	public static final String MOBILE_DEVICE_GLOBAL_ADMIN = "177";
-
 	public static final String MOBILE_DEVICE_SITE_ADMIN = "178";
 
 	public static final String MONITORING = "131";
@@ -163,6 +165,8 @@ public class PortletKeys {
 	public static final String PORTLET_CSS = "113";
 
 	public static final String PORTLET_DISPLAY_TEMPLATES = "183";
+
+	public static final String PORTLET_SHARING = "133";
 
 	public static final long PREFS_OWNER_ID_DEFAULT = 0;
 

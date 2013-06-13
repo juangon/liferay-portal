@@ -494,31 +494,6 @@ AUI.add(
 									return label;
 								};
 							}
-							else if (type === 'ddm-fileupload') {
-								item.formatter = function(obj) {
-									var data = obj.data;
-
-									var label = STR_EMPTY;
-									var value = data[name];
-
-									if (value !== STR_EMPTY) {
-										var fileData = SpreadSheet.Util.parseJSON(value);
-
-										if (fileData.classPK) {
-											label = fileData.name;
-										}
-									}
-
-									return label;
-								};
-
-								structureField = instance.findStructureFieldByAttribute(structure, 'name', name);
-
-								config.validator.rules[name] = {
-									acceptFiles: structureField.acceptFiles,
-									requiredFields: true
-								};
-							}
 							else if ((type === 'radio') || (type === 'select')) {
 								structureField = instance.findStructureFieldByAttribute(structure, 'name', name);
 
@@ -709,15 +684,14 @@ AUI.add(
 				var previewDialog = instance.previewDialog;
 
 				if (!previewDialog) {
-					previewDialog = new A.Dialog(
+					previewDialog = Liferay.Util.Window.getWindow(
 						{
-							bodyContent: content,
-							centered: true,
-							modal: true,
-							width: A.getWin().width() / 2,
+							dialog: {
+								bodyContent: content
+							},
 							title: Liferay.Language.get('preview')
 						}
-					).render();
+					);
 
 					instance.previewDialog = previewDialog;
 				}
@@ -735,6 +709,6 @@ AUI.add(
 	},
 	'',
 	{
-		requires: ['aui-arraysort', 'aui-datatable', 'datatable-sort', 'aui-dialog', 'json', 'liferay-portlet-url']
+		requires: ['aui-arraysort', 'aui-datatable', 'datatable-sort', 'json', 'liferay-portlet-url', 'liferay-util-window']
 	}
 );

@@ -54,6 +54,7 @@ public class ResourceBlockCacheModel implements CacheModel<ResourceBlock>,
 		return sb.toString();
 	}
 
+	@Override
 	public ResourceBlock toEntityModel() {
 		ResourceBlockImpl resourceBlockImpl = new ResourceBlockImpl();
 
@@ -82,6 +83,7 @@ public class ResourceBlockCacheModel implements CacheModel<ResourceBlock>,
 		return resourceBlockImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		resourceBlockId = objectInput.readLong();
 		companyId = objectInput.readLong();
@@ -91,6 +93,7 @@ public class ResourceBlockCacheModel implements CacheModel<ResourceBlock>,
 		referenceCount = objectInput.readLong();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(resourceBlockId);

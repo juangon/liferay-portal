@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.servlet.DirectRequestDispatcherFactoryUtil;
 import com.liferay.portal.kernel.servlet.PipingServletResponse;
 import com.liferay.portal.kernel.servlet.TrackedServletRequest;
 import com.liferay.portal.kernel.servlet.taglib.FileAvailabilityUtil;
+import com.liferay.portal.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
@@ -156,12 +157,6 @@ public class IncludeTag extends AttributesTagSupport {
 	}
 
 	protected void callSetAttributes() {
-		if (_calledSetAttributes) {
-			return;
-		}
-
-		_calledSetAttributes = true;
-
 		HttpServletRequest request = getOriginalServletRequest();
 
 		if (isCleanUpSetAttributes()) {
@@ -183,8 +178,6 @@ public class IncludeTag extends AttributesTagSupport {
 	}
 
 	protected void cleanUpSetAttributes() {
-		_calledSetAttributes = false;
-
 		if (isCleanUpSetAttributes()) {
 			for (String name : _trackedRequest.getSetAttributes()) {
 				_trackedRequest.removeAttribute(name);
@@ -234,7 +227,14 @@ public class IncludeTag extends AttributesTagSupport {
 			return null;
 		}
 
-		Group group = themeDisplay.getScopeGroup();
+		Group group = null;
+
+		try {
+			group = StagingUtil.getLiveGroup(themeDisplay.getScopeGroupId());
+		}
+		catch (Exception e) {
+			return null;
+		}
 
 		UnicodeProperties typeSettingsProperties =
 			group.getTypeSettingsProperties();
@@ -316,10 +316,6 @@ public class IncludeTag extends AttributesTagSupport {
 	protected void setAttributes(HttpServletRequest request) {
 	}
 
-	protected void setCalledSetAttributes(boolean calledSetAttributes) {
-		_calledSetAttributes = calledSetAttributes;
-	}
-
 	protected boolean themeResourceExists(String page) throws Exception {
 		if ((page == null) || !_THEME_JSP_OVERRIDE_ENABLED || _strict) {
 			return false;
@@ -362,7 +358,6 @@ public class IncludeTag extends AttributesTagSupport {
 
 	private static Log _log = LogFactoryUtil.getLog(IncludeTag.class);
 
-	private boolean _calledSetAttributes;
 	private String _page;
 	private boolean _strict;
 	private TrackedServletRequest _trackedRequest;

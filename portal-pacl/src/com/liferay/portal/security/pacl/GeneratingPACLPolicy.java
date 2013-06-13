@@ -189,6 +189,7 @@ public class GeneratingPACLPolicy extends ActivePACLPolicy {
 			_authorizationProperty = authorizationProperty;
 		}
 
+		@Override
 		public Void run() {
 			String key = _authorizationProperty.getKey();
 

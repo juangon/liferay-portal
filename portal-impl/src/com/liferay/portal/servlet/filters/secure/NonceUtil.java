@@ -79,6 +79,7 @@ public class NonceUtil {
 			_createTime = System.currentTimeMillis();
 		}
 
+		@Override
 		public long getDelay(TimeUnit timeUnit) {
 			long leftDelayTime =
 				_NONCE_EXPIRATION + _createTime - System.currentTimeMillis();
@@ -86,6 +87,7 @@ public class NonceUtil {
 			return timeUnit.convert(leftDelayTime, TimeUnit.MILLISECONDS);
 		}
 
+		@Override
 		public int compareTo(Delayed delayed) {
 			NonceDelayed nonceDelayed = (NonceDelayed)delayed;
 
@@ -104,14 +106,6 @@ public class NonceUtil {
 
 		@Override
 		public boolean equals(Object obj) {
-			if (this == obj) {
-				return true;
-			}
-
-			if (!(obj instanceof NonceDelayed)) {
-				return false;
-			}
-
 			NonceDelayed nonceDelayed = (NonceDelayed)obj;
 
 			if (_nonce.equals(nonceDelayed._nonce)) {

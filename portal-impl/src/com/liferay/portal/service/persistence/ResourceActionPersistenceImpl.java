@@ -111,6 +111,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 * @return the matching resource actions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ResourceAction> findByName(String name)
 		throws SystemException {
 		return findByName(name, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
@@ -129,6 +130,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 * @return the range of matching resource actions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ResourceAction> findByName(String name, int start, int end)
 		throws SystemException {
 		return findByName(name, start, end, null);
@@ -148,6 +150,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 * @return the ordered range of matching resource actions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ResourceAction> findByName(String name, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -268,6 +271,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 * @throws com.liferay.portal.NoSuchResourceActionException if a matching resource action could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourceAction findByName_First(String name,
 		OrderByComparator orderByComparator)
 		throws NoSuchResourceActionException, SystemException {
@@ -298,6 +302,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 * @return the first matching resource action, or <code>null</code> if a matching resource action could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourceAction fetchByName_First(String name,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<ResourceAction> list = findByName(name, 0, 1, orderByComparator);
@@ -318,6 +323,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 * @throws com.liferay.portal.NoSuchResourceActionException if a matching resource action could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourceAction findByName_Last(String name,
 		OrderByComparator orderByComparator)
 		throws NoSuchResourceActionException, SystemException {
@@ -347,6 +353,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 * @return the last matching resource action, or <code>null</code> if a matching resource action could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourceAction fetchByName_Last(String name,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByName(name);
@@ -371,6 +378,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 * @throws com.liferay.portal.NoSuchResourceActionException if a resource action with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourceAction[] findByName_PrevAndNext(long resourceActionId,
 		String name, OrderByComparator orderByComparator)
 		throws NoSuchResourceActionException, SystemException {
@@ -526,6 +534,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 * @param name the name
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByName(String name) throws SystemException {
 		for (ResourceAction resourceAction : findByName(name,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -540,6 +549,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 * @return the number of matching resource actions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByName(String name) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_NAME;
 
@@ -622,6 +632,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 * @throws com.liferay.portal.NoSuchResourceActionException if a matching resource action could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourceAction findByN_A(String name, String actionId)
 		throws NoSuchResourceActionException, SystemException {
 		ResourceAction resourceAction = fetchByN_A(name, actionId);
@@ -657,6 +668,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 * @return the matching resource action, or <code>null</code> if a matching resource action could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourceAction fetchByN_A(String name, String actionId)
 		throws SystemException {
 		return fetchByN_A(name, actionId, true);
@@ -671,6 +683,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 * @return the matching resource action, or <code>null</code> if a matching resource action could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourceAction fetchByN_A(String name, String actionId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { name, actionId };
@@ -792,6 +805,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 * @return the resource action that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourceAction removeByN_A(String name, String actionId)
 		throws NoSuchResourceActionException, SystemException {
 		ResourceAction resourceAction = findByN_A(name, actionId);
@@ -807,6 +821,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 * @return the number of matching resource actions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByN_A(String name, String actionId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_N_A;
@@ -897,6 +912,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 *
 	 * @param resourceAction the resource action
 	 */
+	@Override
 	public void cacheResult(ResourceAction resourceAction) {
 		EntityCacheUtil.putResult(ResourceActionModelImpl.ENTITY_CACHE_ENABLED,
 			ResourceActionImpl.class, resourceAction.getPrimaryKey(),
@@ -914,6 +930,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 *
 	 * @param resourceActions the resource actions
 	 */
+	@Override
 	public void cacheResult(List<ResourceAction> resourceActions) {
 		for (ResourceAction resourceAction : resourceActions) {
 			if (EntityCacheUtil.getResult(
@@ -1034,6 +1051,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 * @param resourceActionId the primary key for the new resource action
 	 * @return the new resource action
 	 */
+	@Override
 	public ResourceAction create(long resourceActionId) {
 		ResourceAction resourceAction = new ResourceActionImpl();
 
@@ -1051,6 +1069,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 * @throws com.liferay.portal.NoSuchResourceActionException if a resource action with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourceAction remove(long resourceActionId)
 		throws NoSuchResourceActionException, SystemException {
 		return remove((Serializable)resourceActionId);
@@ -1247,6 +1266,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 * @throws com.liferay.portal.NoSuchResourceActionException if a resource action with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourceAction findByPrimaryKey(long resourceActionId)
 		throws NoSuchResourceActionException, SystemException {
 		return findByPrimaryKey((Serializable)resourceActionId);
@@ -1308,6 +1328,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 * @return the resource action, or <code>null</code> if a resource action with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourceAction fetchByPrimaryKey(long resourceActionId)
 		throws SystemException {
 		return fetchByPrimaryKey((Serializable)resourceActionId);
@@ -1319,6 +1340,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 * @return the resource actions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ResourceAction> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1335,6 +1357,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 * @return the range of resource actions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ResourceAction> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
@@ -1353,6 +1376,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 * @return the ordered range of resource actions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ResourceAction> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -1438,6 +1462,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (ResourceAction resourceAction : findAll()) {
 			remove(resourceAction);
@@ -1450,6 +1475,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 * @return the number of resource actions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -1535,6 +1561,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 		};
 
 	private static CacheModel<ResourceAction> _nullResourceActionCacheModel = new CacheModel<ResourceAction>() {
+			@Override
 			public ResourceAction toEntityModel() {
 				return _nullResourceAction;
 			}

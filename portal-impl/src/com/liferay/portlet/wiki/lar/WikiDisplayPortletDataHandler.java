@@ -14,30 +14,36 @@
 
 package com.liferay.portlet.wiki.lar;
 
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.lar.DataLevel;
 import com.liferay.portal.kernel.lar.PortletDataContext;
+import com.liferay.portal.kernel.lar.StagedModelDataHandlerUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.xml.Element;
-import com.liferay.portlet.journal.lar.JournalPortletDataHandler;
 import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
+import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
+import com.liferay.portlet.wiki.service.permission.WikiPermission;
 import com.liferay.portlet.wiki.service.persistence.WikiNodeUtil;
-import com.liferay.portlet.wiki.util.WikiCacheUtil;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.portlet.PortletPreferences;
 
 /**
  * @author Marcellus Tavares
+ * @author Zsolt Berentey
  */
 public class WikiDisplayPortletDataHandler extends WikiPortletDataHandler {
 
 	public WikiDisplayPortletDataHandler() {
+		setDataLevel(DataLevel.PORTLET_INSTANCE);
 		setDataPortletPreferences("title", "nodeId");
 	}
 
@@ -100,32 +106,22 @@ public class WikiDisplayPortletDataHandler extends WikiPortletDataHandler {
 		}
 
 		portletDataContext.addPermissions(
-			"com.liferay.portlet.wiki", portletDataContext.getScopeGroupId());
+			WikiPermission.RESOURCE_NAME, portletDataContext.getScopeGroupId());
 
 		Element rootElement = addExportDataRootElement(portletDataContext);
 
 		rootElement.addAttribute(
 			"group-id", String.valueOf(portletDataContext.getScopeGroupId()));
 
-		Element nodesElement = rootElement.addElement("nodes");
-		Element pagesElement = rootElement.addElement("pages");
+		StagedModelDataHandlerUtil.exportStagedModel(portletDataContext, node);
 
-		Element dlFileEntryTypesElement = pagesElement.addElement(
-			"dl-file-entry-types");
-		Element dlFoldersElement = pagesElement.addElement("dl-folders");
-		Element dlFileEntriesElement = pagesElement.addElement(
-			"dl-file-entries");
-		Element dlFileRanksElement = pagesElement.addElement("dl-file-ranks");
-		Element dlRepositoriesElement = pagesElement.addElement(
-			"dl-repositories");
-		Element dlRepositoryEntriesElement = pagesElement.addElement(
-			"dl-repository-entries");
+		List<WikiPage> pages = WikiPageLocalServiceUtil.getPages(
+			node.getNodeId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
-		WikiPortletDataHandler.exportNode(
-			portletDataContext, nodesElement, pagesElement,
-			dlFileEntryTypesElement, dlFoldersElement, dlFileEntriesElement,
-			dlFileRanksElement, dlRepositoriesElement,
-			dlRepositoryEntriesElement, node);
+		for (WikiPage page : pages) {
+			StagedModelDataHandlerUtil.exportStagedModel(
+				portletDataContext, page);
+		}
 
 		return getExportDataRootElementString(rootElement);
 	}
@@ -137,57 +133,20 @@ public class WikiDisplayPortletDataHandler extends WikiPortletDataHandler {
 		throws Exception {
 
 		portletDataContext.importPermissions(
-			"com.liferay.portlet.wiki", portletDataContext.getSourceGroupId(),
+			WikiPermission.RESOURCE_NAME, portletDataContext.getSourceGroupId(),
 			portletDataContext.getScopeGroupId());
 
-		Element rootElement = portletDataContext.getImportDataRootElement();
-
-		Element nodesElement = rootElement.element("nodes");
-
-		for (Element nodeElement : nodesElement.elements("node")) {
-			String path = nodeElement.attributeValue("path");
-
-			if (!portletDataContext.isPathNotProcessed(path)) {
-				continue;
-			}
-
-			WikiNode node = (WikiNode)portletDataContext.getZipEntryAsObject(
-				path);
-
-			WikiPortletDataHandler.importNode(portletDataContext, node);
-		}
-
-		Element pagesElement = rootElement.element("pages");
-
-		JournalPortletDataHandler.importReferenceData(
-			portletDataContext, pagesElement);
-
-		for (Element pageElement : pagesElement.elements("page")) {
-			String path = pageElement.attributeValue("path");
-
-			if (!portletDataContext.isPathNotProcessed(path)) {
-				continue;
-			}
-
-			WikiPage page = (WikiPage)portletDataContext.getZipEntryAsObject(
-				path);
-
-			WikiPortletDataHandler.importPage(
-				portletDataContext, pageElement, page);
-		}
-
-		Map<Long, Long> nodeIds =
-			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
-				WikiNode.class);
-
-		for (long nodeId : nodeIds.values()) {
-			WikiCacheUtil.clearCache(nodeId);
-		}
+		super.importData(
+			portletDataContext, portletId, portletPreferences, data);
 
 		long nodeId = GetterUtil.getLong(
 			portletPreferences.getValue("nodeId", StringPool.BLANK));
 
 		if (nodeId > 0) {
+			Map<Long, Long> nodeIds =
+				(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
+					WikiNode.class);
+
 			nodeId = MapUtil.getLong(nodeIds, nodeId, nodeId);
 
 			portletPreferences.setValue("nodeId", String.valueOf(nodeId));

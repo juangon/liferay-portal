@@ -167,26 +167,32 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 	public DLFileShortcutModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _fileShortcutId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setFileShortcutId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _fileShortcutId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return DLFileShortcut.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return DLFileShortcut.class.getName();
 	}
@@ -314,6 +320,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		}
 	}
 
+	@Override
 	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
@@ -324,6 +331,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		}
 	}
 
+	@Override
 	public void setUuid(String uuid) {
 		if (_originalUuid == null) {
 			_originalUuid = _uuid;
@@ -336,20 +344,24 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@Override
 	@JSON
 	public long getFileShortcutId() {
 		return _fileShortcutId;
 	}
 
+	@Override
 	public void setFileShortcutId(long fileShortcutId) {
 		_fileShortcutId = fileShortcutId;
 	}
 
+	@Override
 	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -366,11 +378,13 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		return _originalGroupId;
 	}
 
+	@Override
 	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
@@ -387,23 +401,28 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		return _originalCompanyId;
 	}
 
+	@Override
 	@JSON
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
 
+	@Override
 	@JSON
 	public String getUserName() {
 		if (_userName == null) {
@@ -414,42 +433,51 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		}
 	}
 
+	@Override
 	public void setUserName(String userName) {
 		_userName = userName;
 	}
 
+	@Override
 	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
 	}
 
+	@Override
 	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
 	@JSON
 	public long getRepositoryId() {
 		return _repositoryId;
 	}
 
+	@Override
 	public void setRepositoryId(long repositoryId) {
 		_repositoryId = repositoryId;
 	}
 
+	@Override
 	@JSON
 	public long getFolderId() {
 		return _folderId;
 	}
 
+	@Override
 	public void setFolderId(long folderId) {
 		_columnBitmask |= FOLDERID_COLUMN_BITMASK;
 
@@ -466,11 +494,13 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		return _originalFolderId;
 	}
 
+	@Override
 	@JSON
 	public long getToFileEntryId() {
 		return _toFileEntryId;
 	}
 
+	@Override
 	public void setToFileEntryId(long toFileEntryId) {
 		_columnBitmask |= TOFILEENTRYID_COLUMN_BITMASK;
 
@@ -487,15 +517,18 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		return _originalToFileEntryId;
 	}
 
+	@Override
 	@JSON
 	public boolean getActive() {
 		return _active;
 	}
 
+	@Override
 	public boolean isActive() {
 		return _active;
 	}
 
+	@Override
 	public void setActive(boolean active) {
 		_columnBitmask |= ACTIVE_COLUMN_BITMASK;
 
@@ -512,11 +545,13 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		return _originalActive;
 	}
 
+	@Override
 	@JSON
 	public int getStatus() {
 		return _status;
 	}
 
+	@Override
 	public void setStatus(int status) {
 		_columnBitmask |= STATUS_COLUMN_BITMASK;
 
@@ -533,24 +568,29 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		return _originalStatus;
 	}
 
+	@Override
 	@JSON
 	public long getStatusByUserId() {
 		return _statusByUserId;
 	}
 
+	@Override
 	public void setStatusByUserId(long statusByUserId) {
 		_statusByUserId = statusByUserId;
 	}
 
+	@Override
 	public String getStatusByUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getStatusByUserId(), "uuid",
 			_statusByUserUuid);
 	}
 
+	@Override
 	public void setStatusByUserUuid(String statusByUserUuid) {
 		_statusByUserUuid = statusByUserUuid;
 	}
 
+	@Override
 	@JSON
 	public String getStatusByUserName() {
 		if (_statusByUserName == null) {
@@ -561,15 +601,18 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		}
 	}
 
+	@Override
 	public void setStatusByUserName(String statusByUserName) {
 		_statusByUserName = statusByUserName;
 	}
 
+	@Override
 	@JSON
 	public Date getStatusDate() {
 		return _statusDate;
 	}
 
+	@Override
 	public void setStatusDate(Date statusDate) {
 		_statusDate = statusDate;
 	}
@@ -577,10 +620,12 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #isApproved}
 	 */
+	@Override
 	public boolean getApproved() {
 		return isApproved();
 	}
 
+	@Override
 	public boolean isApproved() {
 		if (getStatus() == WorkflowConstants.STATUS_APPROVED) {
 			return true;
@@ -590,6 +635,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		}
 	}
 
+	@Override
 	public boolean isDenied() {
 		if (getStatus() == WorkflowConstants.STATUS_DENIED) {
 			return true;
@@ -599,6 +645,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		}
 	}
 
+	@Override
 	public boolean isDraft() {
 		if (getStatus() == WorkflowConstants.STATUS_DRAFT) {
 			return true;
@@ -608,6 +655,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		}
 	}
 
+	@Override
 	public boolean isExpired() {
 		if (getStatus() == WorkflowConstants.STATUS_EXPIRED) {
 			return true;
@@ -617,6 +665,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		}
 	}
 
+	@Override
 	public boolean isInactive() {
 		if (getStatus() == WorkflowConstants.STATUS_INACTIVE) {
 			return true;
@@ -626,6 +675,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		}
 	}
 
+	@Override
 	public boolean isIncomplete() {
 		if (getStatus() == WorkflowConstants.STATUS_INCOMPLETE) {
 			return true;
@@ -635,6 +685,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		}
 	}
 
+	@Override
 	public boolean isInTrash() {
 		if (getStatus() == WorkflowConstants.STATUS_IN_TRASH) {
 			return true;
@@ -644,6 +695,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		}
 	}
 
+	@Override
 	public boolean isPending() {
 		if (getStatus() == WorkflowConstants.STATUS_PENDING) {
 			return true;
@@ -653,6 +705,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		}
 	}
 
+	@Override
 	public boolean isScheduled() {
 		if (getStatus() == WorkflowConstants.STATUS_SCHEDULED) {
 			return true;
@@ -715,6 +768,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		return dlFileShortcutImpl;
 	}
 
+	@Override
 	public int compareTo(DLFileShortcut dlFileShortcut) {
 		long primaryKey = dlFileShortcut.getPrimaryKey();
 
@@ -731,18 +785,15 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof DLFileShortcut)) {
 			return false;
 		}
 
-		DLFileShortcut dlFileShortcut = null;
-
-		try {
-			dlFileShortcut = (DLFileShortcut)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		DLFileShortcut dlFileShortcut = (DLFileShortcut)obj;
 
 		long primaryKey = dlFileShortcut.getPrimaryKey();
 
@@ -911,6 +962,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(52);
 

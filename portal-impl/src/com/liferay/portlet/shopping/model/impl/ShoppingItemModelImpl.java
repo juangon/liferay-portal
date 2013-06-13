@@ -202,26 +202,32 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 	public ShoppingItemModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _itemId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setItemId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _itemId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return ShoppingItem.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return ShoppingItem.class.getName();
 	}
@@ -476,22 +482,26 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		}
 	}
 
+	@Override
 	@JSON
 	public long getItemId() {
 		return _itemId;
 	}
 
+	@Override
 	public void setItemId(long itemId) {
 		_columnBitmask = -1L;
 
 		_itemId = itemId;
 	}
 
+	@Override
 	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -508,11 +518,13 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		return _originalGroupId;
 	}
 
+	@Override
 	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
@@ -529,23 +541,28 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		return _originalCompanyId;
 	}
 
+	@Override
 	@JSON
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
 
+	@Override
 	@JSON
 	public String getUserName() {
 		if (_userName == null) {
@@ -556,33 +573,40 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		}
 	}
 
+	@Override
 	public void setUserName(String userName) {
 		_userName = userName;
 	}
 
+	@Override
 	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
 	}
 
+	@Override
 	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
 	@JSON
 	public long getCategoryId() {
 		return _categoryId;
 	}
 
+	@Override
 	public void setCategoryId(long categoryId) {
 		_columnBitmask |= CATEGORYID_COLUMN_BITMASK;
 
@@ -599,6 +623,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		return _originalCategoryId;
 	}
 
+	@Override
 	@JSON
 	public String getSku() {
 		if (_sku == null) {
@@ -609,6 +634,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		}
 	}
 
+	@Override
 	public void setSku(String sku) {
 		_columnBitmask |= SKU_COLUMN_BITMASK;
 
@@ -623,6 +649,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		return GetterUtil.getString(_originalSku);
 	}
 
+	@Override
 	@JSON
 	public String getName() {
 		if (_name == null) {
@@ -633,10 +660,12 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		}
 	}
 
+	@Override
 	public void setName(String name) {
 		_name = name;
 	}
 
+	@Override
 	@JSON
 	public String getDescription() {
 		if (_description == null) {
@@ -647,10 +676,12 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		}
 	}
 
+	@Override
 	public void setDescription(String description) {
 		_description = description;
 	}
 
+	@Override
 	@JSON
 	public String getProperties() {
 		if (_properties == null) {
@@ -661,23 +692,28 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		}
 	}
 
+	@Override
 	public void setProperties(String properties) {
 		_properties = properties;
 	}
 
+	@Override
 	@JSON
 	public boolean getFields() {
 		return _fields;
 	}
 
+	@Override
 	public boolean isFields() {
 		return _fields;
 	}
 
+	@Override
 	public void setFields(boolean fields) {
 		_fields = fields;
 	}
 
+	@Override
 	@JSON
 	public String getFieldsQuantities() {
 		if (_fieldsQuantities == null) {
@@ -688,147 +724,180 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		}
 	}
 
+	@Override
 	public void setFieldsQuantities(String fieldsQuantities) {
 		_fieldsQuantities = fieldsQuantities;
 	}
 
+	@Override
 	@JSON
 	public int getMinQuantity() {
 		return _minQuantity;
 	}
 
+	@Override
 	public void setMinQuantity(int minQuantity) {
 		_minQuantity = minQuantity;
 	}
 
+	@Override
 	@JSON
 	public int getMaxQuantity() {
 		return _maxQuantity;
 	}
 
+	@Override
 	public void setMaxQuantity(int maxQuantity) {
 		_maxQuantity = maxQuantity;
 	}
 
+	@Override
 	@JSON
 	public double getPrice() {
 		return _price;
 	}
 
+	@Override
 	public void setPrice(double price) {
 		_price = price;
 	}
 
+	@Override
 	@JSON
 	public double getDiscount() {
 		return _discount;
 	}
 
+	@Override
 	public void setDiscount(double discount) {
 		_discount = discount;
 	}
 
+	@Override
 	@JSON
 	public boolean getTaxable() {
 		return _taxable;
 	}
 
+	@Override
 	public boolean isTaxable() {
 		return _taxable;
 	}
 
+	@Override
 	public void setTaxable(boolean taxable) {
 		_taxable = taxable;
 	}
 
+	@Override
 	@JSON
 	public double getShipping() {
 		return _shipping;
 	}
 
+	@Override
 	public void setShipping(double shipping) {
 		_shipping = shipping;
 	}
 
+	@Override
 	@JSON
 	public boolean getUseShippingFormula() {
 		return _useShippingFormula;
 	}
 
+	@Override
 	public boolean isUseShippingFormula() {
 		return _useShippingFormula;
 	}
 
+	@Override
 	public void setUseShippingFormula(boolean useShippingFormula) {
 		_useShippingFormula = useShippingFormula;
 	}
 
+	@Override
 	@JSON
 	public boolean getRequiresShipping() {
 		return _requiresShipping;
 	}
 
+	@Override
 	public boolean isRequiresShipping() {
 		return _requiresShipping;
 	}
 
+	@Override
 	public void setRequiresShipping(boolean requiresShipping) {
 		_requiresShipping = requiresShipping;
 	}
 
+	@Override
 	@JSON
 	public int getStockQuantity() {
 		return _stockQuantity;
 	}
 
+	@Override
 	public void setStockQuantity(int stockQuantity) {
 		_stockQuantity = stockQuantity;
 	}
 
+	@Override
 	@JSON
 	public boolean getFeatured() {
 		return _featured;
 	}
 
+	@Override
 	public boolean isFeatured() {
 		return _featured;
 	}
 
+	@Override
 	public void setFeatured(boolean featured) {
 		_featured = featured;
 	}
 
+	@Override
 	@JSON
 	public boolean getSale() {
 		return _sale;
 	}
 
+	@Override
 	public boolean isSale() {
 		return _sale;
 	}
 
+	@Override
 	public void setSale(boolean sale) {
 		_sale = sale;
 	}
 
+	@Override
 	@JSON
 	public boolean getSmallImage() {
 		return _smallImage;
 	}
 
+	@Override
 	public boolean isSmallImage() {
 		return _smallImage;
 	}
 
+	@Override
 	public void setSmallImage(boolean smallImage) {
 		_smallImage = smallImage;
 	}
 
+	@Override
 	@JSON
 	public long getSmallImageId() {
 		return _smallImageId;
 	}
 
+	@Override
 	public void setSmallImageId(long smallImageId) {
 		_columnBitmask |= SMALLIMAGEID_COLUMN_BITMASK;
 
@@ -845,6 +914,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		return _originalSmallImageId;
 	}
 
+	@Override
 	@JSON
 	public String getSmallImageURL() {
 		if (_smallImageURL == null) {
@@ -855,28 +925,34 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		}
 	}
 
+	@Override
 	public void setSmallImageURL(String smallImageURL) {
 		_smallImageURL = smallImageURL;
 	}
 
+	@Override
 	@JSON
 	public boolean getMediumImage() {
 		return _mediumImage;
 	}
 
+	@Override
 	public boolean isMediumImage() {
 		return _mediumImage;
 	}
 
+	@Override
 	public void setMediumImage(boolean mediumImage) {
 		_mediumImage = mediumImage;
 	}
 
+	@Override
 	@JSON
 	public long getMediumImageId() {
 		return _mediumImageId;
 	}
 
+	@Override
 	public void setMediumImageId(long mediumImageId) {
 		_columnBitmask |= MEDIUMIMAGEID_COLUMN_BITMASK;
 
@@ -893,6 +969,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		return _originalMediumImageId;
 	}
 
+	@Override
 	@JSON
 	public String getMediumImageURL() {
 		if (_mediumImageURL == null) {
@@ -903,28 +980,34 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		}
 	}
 
+	@Override
 	public void setMediumImageURL(String mediumImageURL) {
 		_mediumImageURL = mediumImageURL;
 	}
 
+	@Override
 	@JSON
 	public boolean getLargeImage() {
 		return _largeImage;
 	}
 
+	@Override
 	public boolean isLargeImage() {
 		return _largeImage;
 	}
 
+	@Override
 	public void setLargeImage(boolean largeImage) {
 		_largeImage = largeImage;
 	}
 
+	@Override
 	@JSON
 	public long getLargeImageId() {
 		return _largeImageId;
 	}
 
+	@Override
 	public void setLargeImageId(long largeImageId) {
 		_columnBitmask |= LARGEIMAGEID_COLUMN_BITMASK;
 
@@ -941,6 +1024,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		return _originalLargeImageId;
 	}
 
+	@Override
 	@JSON
 	public String getLargeImageURL() {
 		if (_largeImageURL == null) {
@@ -951,6 +1035,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		}
 	}
 
+	@Override
 	public void setLargeImageURL(String largeImageURL) {
 		_largeImageURL = largeImageURL;
 	}
@@ -1026,6 +1111,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		return shoppingItemImpl;
 	}
 
+	@Override
 	public int compareTo(ShoppingItem shoppingItem) {
 		int value = 0;
 
@@ -1048,18 +1134,15 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ShoppingItem)) {
 			return false;
 		}
 
-		ShoppingItem shoppingItem = null;
-
-		try {
-			shoppingItem = (ShoppingItem)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		ShoppingItem shoppingItem = (ShoppingItem)obj;
 
 		long primaryKey = shoppingItem.getPrimaryKey();
 
@@ -1329,6 +1412,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(106);
 

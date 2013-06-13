@@ -77,6 +77,7 @@ public class BookmarksFolderCacheModel implements CacheModel<BookmarksFolder>,
 		return sb.toString();
 	}
 
+	@Override
 	public BookmarksFolder toEntityModel() {
 		BookmarksFolderImpl bookmarksFolderImpl = new BookmarksFolderImpl();
 
@@ -152,6 +153,7 @@ public class BookmarksFolderCacheModel implements CacheModel<BookmarksFolder>,
 		return bookmarksFolderImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		folderId = objectInput.readLong();
@@ -171,6 +173,7 @@ public class BookmarksFolderCacheModel implements CacheModel<BookmarksFolder>,
 		statusDate = objectInput.readLong();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

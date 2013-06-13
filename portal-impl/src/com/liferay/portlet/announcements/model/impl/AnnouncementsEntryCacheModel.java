@@ -79,6 +79,7 @@ public class AnnouncementsEntryCacheModel implements CacheModel<AnnouncementsEnt
 		return sb.toString();
 	}
 
+	@Override
 	public AnnouncementsEntry toEntityModel() {
 		AnnouncementsEntryImpl announcementsEntryImpl = new AnnouncementsEntryImpl();
 
@@ -167,6 +168,7 @@ public class AnnouncementsEntryCacheModel implements CacheModel<AnnouncementsEnt
 		return announcementsEntryImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		entryId = objectInput.readLong();
@@ -187,6 +189,7 @@ public class AnnouncementsEntryCacheModel implements CacheModel<AnnouncementsEnt
 		alert = objectInput.readBoolean();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

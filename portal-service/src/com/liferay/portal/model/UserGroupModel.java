@@ -37,7 +37,7 @@ import java.util.Date;
  * @see com.liferay.portal.model.impl.UserGroupModelImpl
  * @generated
  */
-public interface UserGroupModel extends BaseModel<UserGroup>, StagedModel {
+public interface UserGroupModel extends BaseModel<UserGroup>, StagedAuditedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -64,6 +64,7 @@ public interface UserGroupModel extends BaseModel<UserGroup>, StagedModel {
 	 * @return the uuid of this user group
 	 */
 	@AutoEscape
+	@Override
 	public String getUuid();
 
 	/**
@@ -71,6 +72,7 @@ public interface UserGroupModel extends BaseModel<UserGroup>, StagedModel {
 	 *
 	 * @param uuid the uuid of this user group
 	 */
+	@Override
 	public void setUuid(String uuid);
 
 	/**
@@ -92,6 +94,7 @@ public interface UserGroupModel extends BaseModel<UserGroup>, StagedModel {
 	 *
 	 * @return the company ID of this user group
 	 */
+	@Override
 	public long getCompanyId();
 
 	/**
@@ -99,6 +102,7 @@ public interface UserGroupModel extends BaseModel<UserGroup>, StagedModel {
 	 *
 	 * @param companyId the company ID of this user group
 	 */
+	@Override
 	public void setCompanyId(long companyId);
 
 	/**
@@ -106,6 +110,7 @@ public interface UserGroupModel extends BaseModel<UserGroup>, StagedModel {
 	 *
 	 * @return the user ID of this user group
 	 */
+	@Override
 	public long getUserId();
 
 	/**
@@ -113,6 +118,7 @@ public interface UserGroupModel extends BaseModel<UserGroup>, StagedModel {
 	 *
 	 * @param userId the user ID of this user group
 	 */
+	@Override
 	public void setUserId(long userId);
 
 	/**
@@ -121,6 +127,7 @@ public interface UserGroupModel extends BaseModel<UserGroup>, StagedModel {
 	 * @return the user uuid of this user group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public String getUserUuid() throws SystemException;
 
 	/**
@@ -128,6 +135,7 @@ public interface UserGroupModel extends BaseModel<UserGroup>, StagedModel {
 	 *
 	 * @param userUuid the user uuid of this user group
 	 */
+	@Override
 	public void setUserUuid(String userUuid);
 
 	/**
@@ -136,6 +144,7 @@ public interface UserGroupModel extends BaseModel<UserGroup>, StagedModel {
 	 * @return the user name of this user group
 	 */
 	@AutoEscape
+	@Override
 	public String getUserName();
 
 	/**
@@ -143,6 +152,7 @@ public interface UserGroupModel extends BaseModel<UserGroup>, StagedModel {
 	 *
 	 * @param userName the user name of this user group
 	 */
+	@Override
 	public void setUserName(String userName);
 
 	/**
@@ -150,6 +160,7 @@ public interface UserGroupModel extends BaseModel<UserGroup>, StagedModel {
 	 *
 	 * @return the create date of this user group
 	 */
+	@Override
 	public Date getCreateDate();
 
 	/**
@@ -157,6 +168,7 @@ public interface UserGroupModel extends BaseModel<UserGroup>, StagedModel {
 	 *
 	 * @param createDate the create date of this user group
 	 */
+	@Override
 	public void setCreateDate(Date createDate);
 
 	/**
@@ -164,6 +176,7 @@ public interface UserGroupModel extends BaseModel<UserGroup>, StagedModel {
 	 *
 	 * @return the modified date of this user group
 	 */
+	@Override
 	public Date getModifiedDate();
 
 	/**
@@ -171,6 +184,7 @@ public interface UserGroupModel extends BaseModel<UserGroup>, StagedModel {
 	 *
 	 * @param modifiedDate the modified date of this user group
 	 */
+	@Override
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
@@ -238,41 +252,60 @@ public interface UserGroupModel extends BaseModel<UserGroup>, StagedModel {
 	 */
 	public void setAddedByLDAPImport(boolean addedByLDAPImport);
 
+	@Override
 	public boolean isNew();
 
+	@Override
 	public void setNew(boolean n);
 
+	@Override
 	public boolean isCachedModel();
 
+	@Override
 	public void setCachedModel(boolean cachedModel);
 
+	@Override
 	public boolean isEscapedModel();
 
+	@Override
 	public Serializable getPrimaryKeyObj();
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
+	@Override
 	public ExpandoBridge getExpandoBridge();
 
+	@Override
 	public void setExpandoBridgeAttributes(BaseModel<?> baseModel);
 
+	@Override
 	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge);
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext);
 
+	@Override
 	public Object clone();
 
+	@Override
 	public int compareTo(UserGroup userGroup);
 
+	@Override
 	public int hashCode();
 
+	@Override
 	public CacheModel<UserGroup> toCacheModel();
 
+	@Override
 	public UserGroup toEscapedModel();
 
+	@Override
 	public UserGroup toUnescapedModel();
 
+	@Override
 	public String toString();
 
+	@Override
 	public String toXmlString();
 }

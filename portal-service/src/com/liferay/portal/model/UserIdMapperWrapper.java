@@ -22,8 +22,8 @@ import java.util.Map;
  * This class is a wrapper for {@link UserIdMapper}.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       UserIdMapper
+ * @author Brian Wing Shun Chan
+ * @see UserIdMapper
  * @generated
  */
 public class UserIdMapperWrapper implements UserIdMapper,
@@ -32,14 +32,17 @@ public class UserIdMapperWrapper implements UserIdMapper,
 		_userIdMapper = userIdMapper;
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return UserIdMapper.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return UserIdMapper.class.getName();
 	}
 
+	@Override
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
@@ -52,6 +55,7 @@ public class UserIdMapperWrapper implements UserIdMapper,
 		return attributes;
 	}
 
+	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 		Long userIdMapperId = (Long)attributes.get("userIdMapperId");
 
@@ -89,6 +93,7 @@ public class UserIdMapperWrapper implements UserIdMapper,
 	*
 	* @return the primary key of this user ID mapper
 	*/
+	@Override
 	public long getPrimaryKey() {
 		return _userIdMapper.getPrimaryKey();
 	}
@@ -98,6 +103,7 @@ public class UserIdMapperWrapper implements UserIdMapper,
 	*
 	* @param primaryKey the primary key of this user ID mapper
 	*/
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_userIdMapper.setPrimaryKey(primaryKey);
 	}
@@ -107,6 +113,7 @@ public class UserIdMapperWrapper implements UserIdMapper,
 	*
 	* @return the user ID mapper ID of this user ID mapper
 	*/
+	@Override
 	public long getUserIdMapperId() {
 		return _userIdMapper.getUserIdMapperId();
 	}
@@ -116,6 +123,7 @@ public class UserIdMapperWrapper implements UserIdMapper,
 	*
 	* @param userIdMapperId the user ID mapper ID of this user ID mapper
 	*/
+	@Override
 	public void setUserIdMapperId(long userIdMapperId) {
 		_userIdMapper.setUserIdMapperId(userIdMapperId);
 	}
@@ -125,6 +133,7 @@ public class UserIdMapperWrapper implements UserIdMapper,
 	*
 	* @return the user ID of this user ID mapper
 	*/
+	@Override
 	public long getUserId() {
 		return _userIdMapper.getUserId();
 	}
@@ -134,6 +143,7 @@ public class UserIdMapperWrapper implements UserIdMapper,
 	*
 	* @param userId the user ID of this user ID mapper
 	*/
+	@Override
 	public void setUserId(long userId) {
 		_userIdMapper.setUserId(userId);
 	}
@@ -144,6 +154,7 @@ public class UserIdMapperWrapper implements UserIdMapper,
 	* @return the user uuid of this user ID mapper
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public java.lang.String getUserUuid()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _userIdMapper.getUserUuid();
@@ -154,6 +165,7 @@ public class UserIdMapperWrapper implements UserIdMapper,
 	*
 	* @param userUuid the user uuid of this user ID mapper
 	*/
+	@Override
 	public void setUserUuid(java.lang.String userUuid) {
 		_userIdMapper.setUserUuid(userUuid);
 	}
@@ -163,6 +175,7 @@ public class UserIdMapperWrapper implements UserIdMapper,
 	*
 	* @return the type of this user ID mapper
 	*/
+	@Override
 	public java.lang.String getType() {
 		return _userIdMapper.getType();
 	}
@@ -172,6 +185,7 @@ public class UserIdMapperWrapper implements UserIdMapper,
 	*
 	* @param type the type of this user ID mapper
 	*/
+	@Override
 	public void setType(java.lang.String type) {
 		_userIdMapper.setType(type);
 	}
@@ -181,6 +195,7 @@ public class UserIdMapperWrapper implements UserIdMapper,
 	*
 	* @return the description of this user ID mapper
 	*/
+	@Override
 	public java.lang.String getDescription() {
 		return _userIdMapper.getDescription();
 	}
@@ -190,6 +205,7 @@ public class UserIdMapperWrapper implements UserIdMapper,
 	*
 	* @param description the description of this user ID mapper
 	*/
+	@Override
 	public void setDescription(java.lang.String description) {
 		_userIdMapper.setDescription(description);
 	}
@@ -199,6 +215,7 @@ public class UserIdMapperWrapper implements UserIdMapper,
 	*
 	* @return the external user ID of this user ID mapper
 	*/
+	@Override
 	public java.lang.String getExternalUserId() {
 		return _userIdMapper.getExternalUserId();
 	}
@@ -208,52 +225,64 @@ public class UserIdMapperWrapper implements UserIdMapper,
 	*
 	* @param externalUserId the external user ID of this user ID mapper
 	*/
+	@Override
 	public void setExternalUserId(java.lang.String externalUserId) {
 		_userIdMapper.setExternalUserId(externalUserId);
 	}
 
+	@Override
 	public boolean isNew() {
 		return _userIdMapper.isNew();
 	}
 
+	@Override
 	public void setNew(boolean n) {
 		_userIdMapper.setNew(n);
 	}
 
+	@Override
 	public boolean isCachedModel() {
 		return _userIdMapper.isCachedModel();
 	}
 
+	@Override
 	public void setCachedModel(boolean cachedModel) {
 		_userIdMapper.setCachedModel(cachedModel);
 	}
 
+	@Override
 	public boolean isEscapedModel() {
 		return _userIdMapper.isEscapedModel();
 	}
 
+	@Override
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _userIdMapper.getPrimaryKeyObj();
 	}
 
+	@Override
 	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
 		_userIdMapper.setPrimaryKeyObj(primaryKeyObj);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
 		return _userIdMapper.getExpandoBridge();
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.model.BaseModel<?> baseModel) {
 		_userIdMapper.setExpandoBridgeAttributes(baseModel);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portlet.expando.model.ExpandoBridge expandoBridge) {
 		_userIdMapper.setExpandoBridgeAttributes(expandoBridge);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		_userIdMapper.setExpandoBridgeAttributes(serviceContext);
@@ -264,6 +293,7 @@ public class UserIdMapperWrapper implements UserIdMapper,
 		return new UserIdMapperWrapper((UserIdMapper)_userIdMapper.clone());
 	}
 
+	@Override
 	public int compareTo(com.liferay.portal.model.UserIdMapper userIdMapper) {
 		return _userIdMapper.compareTo(userIdMapper);
 	}
@@ -273,14 +303,17 @@ public class UserIdMapperWrapper implements UserIdMapper,
 		return _userIdMapper.hashCode();
 	}
 
+	@Override
 	public com.liferay.portal.model.CacheModel<com.liferay.portal.model.UserIdMapper> toCacheModel() {
 		return _userIdMapper.toCacheModel();
 	}
 
+	@Override
 	public com.liferay.portal.model.UserIdMapper toEscapedModel() {
 		return new UserIdMapperWrapper(_userIdMapper.toEscapedModel());
 	}
 
+	@Override
 	public com.liferay.portal.model.UserIdMapper toUnescapedModel() {
 		return new UserIdMapperWrapper(_userIdMapper.toUnescapedModel());
 	}
@@ -290,10 +323,12 @@ public class UserIdMapperWrapper implements UserIdMapper,
 		return _userIdMapper.toString();
 	}
 
+	@Override
 	public java.lang.String toXmlString() {
 		return _userIdMapper.toXmlString();
 	}
 
+	@Override
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_userIdMapper.persist();
@@ -306,10 +341,12 @@ public class UserIdMapperWrapper implements UserIdMapper,
 		return _userIdMapper;
 	}
 
+	@Override
 	public UserIdMapper getWrappedModel() {
 		return _userIdMapper;
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		_userIdMapper.resetOriginalValues();
 	}

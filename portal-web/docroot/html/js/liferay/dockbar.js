@@ -3,7 +3,6 @@ AUI.add(
 	function(A) {
 		var Lang = A.Lang;
 
-		var LayoutConfiguration = Liferay.LayoutConfiguration;
 		var Portlet = Liferay.Portlet;
 		var Util = Liferay.Util;
 
@@ -19,15 +18,15 @@ AUI.add(
 
 		var EVENT_CLICK = 'click';
 
-		var TPL_ADD_CONTENT = '<div class="lfr-add-panel" />';
+		var TPL_ADD_CONTENT = '<div class="lfr-add-panel" id="{0}" />';
 
 		var TPL_LOADING = '<div class="loading-animation" />';
 
 		var Dockbar = {
-			init: function() {
+			init: function(containerId) {
 				var instance = this;
 
-				var dockBar = A.one('#dockbar');
+				var dockBar = A.one(containerId);
 
 				if (dockBar) {
 					instance.dockBar = dockBar;
@@ -49,218 +48,38 @@ AUI.add(
 				}
 			},
 
-			addItem: function(options) {
+			getPanelNode: function() {
 				var instance = this;
 
-				if (options.url) {
-					options.text = '<a href="' + options.url + '">' + options.text + '</a>';
+				var addPanelNode = instance._addPanelNode;
+
+				if (!addPanelNode) {
+					var namespace = instance._namespace;
+
+					var addPanelSidebarId = namespace + 'addPanelSidebar';
+
+					addPanelNode = A.one('#' + addPanelSidebarId);
+
+					if (!addPanelNode) {
+						addPanelNode = A.Node.create(Lang.sub(TPL_ADD_CONTENT, [namespace]));
+
+						addPanelNode.plug(A.Plugin.ParseContent);
+
+						BODY.prepend(addPanelNode);
+
+						addPanelNode.set('id', addPanelSidebarId);
+
+						instance._addPanelNode = addPanelNode;
+					}
 				}
 
-				var item = A.Node.create('<li class="' + (options.className || '') + '">' + options.text + '</li>');
-
-				instance.dockBar.one('> ul').appendChild(item);
-
-				instance._toolbarItems[options.name] = item;
-
-				return item;
-			},
-
-			addMessage: function(message, messageId) {
-				var instance = this;
-
-				var messages = instance.messages;
-
-				if (!instance.messageList) {
-					instance.messageList = [];
-					instance.messageIdList = [];
-				}
-
-				messages.show();
-
-				if (!messageId) {
-					messageId = A.guid();
-				}
-
-				instance.messageList.push(message);
-				instance.messageIdList.push(messageId);
-
-				var currentBody = messages.get(BODY_CONTENT);
-
-				message = instance._createMessage(message, messageId);
-
-				messages.setStdModContent('body', message, 'after');
-
-				var messagesContainer = messages.get(BOUNDING_BOX);
-
-				var action = 'removeClass';
-
-				if (instance.messageList.length > 1) {
-					action = 'addClass';
-				}
-
-				messagesContainer[action]('multiple-messages');
-
-				return messageId;
-			},
-
-			clearMessages: function(event) {
-				var instance = this;
-
-				instance.messages.set(BODY_CONTENT, ' ');
-
-				instance.messageList = [];
-				instance.messageIdList = [];
+				return addPanelNode;
 			},
 
 			loadPanel: function() {
 				var instance = this;
 
 				Dockbar._loadAddPanel();
-			},
-
-			setMessage: function(message, messageId) {
-				var instance = this;
-
-				var messages = instance.messages;
-
-				if (!messageId) {
-					messageId = A.guid();
-				}
-
-				instance.messageList = [message];
-				instance.messageIdList = [messageId];
-
-				messages.show();
-
-				message = instance._createMessage(message, messageId);
-
-				messages.set(BODY_CONTENT, message);
-
-				var messagesContainer = messages.get(BOUNDING_BOX);
-
-				messagesContainer.removeClass('multiple-messages');
-
-				return messageId;
-			},
-
-			_addMenu: function(options) {
-				var instance = this;
-
-				var menu;
-				var name = options.name;
-
-				if (name && A.one(options.trigger)) {
-
-					delete options.name;
-
-					options.zIndex = instance.menuZIndex++;
-
-					A.mix(
-						options,
-						{
-							hideDelay: 500,
-							hideOn: 'mouseleave',
-							showOn: 'mouseover'
-						}
-					);
-
-					var boundingBox = options.boundingBox;
-
-					if (boundingBox && !(CONTENT_BOX in options)) {
-						options.contentBox = boundingBox + '> .aui-menu-content';
-					}
-
-					menu = new A.OverlayContext(options);
-
-					var contentBox = menu.get(CONTENT_BOX);
-
-					contentBox.plug(
-						A.Plugin.NodeFocusManager,
-						{
-							circular: false,
-							descendants: 'a',
-							focusClass: 'aui-focus',
-							keys: {
-								next: 'down:40',
-								previous: 'down:38'
-							}
-						}
-					);
-
-					var focusManager = contentBox.focusManager;
-
-					contentBox.all('li').addClass('aui-menu-item');
-
-					contentBox.delegate(
-						'mouseenter',
-						function(event) {
-							focusManager.focus(event.currentTarget.one('a'));
-						},
-						'.aui-menu-item'
-					);
-
-					contentBox.delegate(
-						'mouseleave',
-						function(event) {
-							focusManager.blur(event.currentTarget.one('a'));
-						},
-						'.aui-menu-item'
-					);
-
-					var MenuManager = Dockbar.MenuManager;
-
-					var dockBar = instance.dockBar;
-
-					var trigger = menu.get('trigger').item(0);
-					var button = trigger.one('a');
-
-					MenuManager.register(menu);
-
-					menu.on(
-						'visibleChange',
-						function(event) {
-							var visible = event.newVal;
-
-							if (visible) {
-								MenuManager.hideAll();
-							}
-
-							trigger.toggleClass('menu-button-active', visible);
-						}
-					);
-
-					button.on(
-						'focus',
-						function(event) {
-							menu.show();
-						}
-					);
-
-					button.on(
-						'keydown',
-						function(event) {
-							if (event.isKey('DOWN')) {
-								focusManager.focus(0);
-							}
-						}
-					);
-
-					menu.on(
-						'keydown',
-						function(event) {
-							if (focusManager.get('activeDescendant') == -1) {
-								button.focus();
-							}
-							else {
-								instance._updateMenu(event.domEvent, button);
-							}
-						}
-					);
-
-					instance[name] = menu.render(instance.dockBar);
-				}
-
-				return menu;
 			},
 
 			_createCustomizationMask: function(column) {
@@ -313,52 +132,14 @@ AUI.add(
 				return overlayMask;
 			},
 
-			_createMessage: function(message, messageId) {
-				var instance = this;
-
-				var cssClass = '';
-
-				if (instance.messageList.length == 1) {
-					cssClass = 'first';
-				}
-
-				return '<div class="dockbar-message ' + cssClass + '" id="' + messageId + '">' + message + '</div>';
-			},
-
-			_getPanelNode: function() {
-				var instance = this;
-
-				var addPanelNode = instance._addPanelNode;
-
-				if (!addPanelNode) {
-					addPanelNode = A.one('#' + instance._namespace + 'addPanelSidebar');
-
-					if (!addPanelNode) {
-						addPanelNode = A.Node.create(TPL_ADD_CONTENT);
-
-						addPanelNode.plug(A.Plugin.ParseContent);
-
-						BODY.appendChild(addPanelNode);
-
-						addPanelNode.set('id', instance._namespace + 'addPanelSidebar');
-
-						instance._addPanelNode = addPanelNode;
-					}
-				}
-
-				return addPanelNode;
-			},
-
 			_loadAddPanel: function() {
 				var instance = this;
 
 				BODY.toggleClass(CSS_ADD_CONTENT);
 
-				var addPanelNode = instance._getPanelNode();
+				var addPanelNode = instance.getPanelNode();
 
 				if (BODY.hasClass(CSS_ADD_CONTENT)) {
-					instance._setPanelOffset();
-
 					instance._addPanel();
 
 					addPanelNode.show();
@@ -386,13 +167,7 @@ AUI.add(
 			_setLoadingAnimation: function() {
 				var instance = this;
 
-				instance._getPanelNode().html(TPL_LOADING);
-			},
-
-			_setPanelOffset: function() {
-				var instance = this;
-
-				instance._addPanelNode.setStyle('top', instance.dockBar.height());
+				instance.getPanelNode().html(TPL_LOADING);
 			},
 
 			_toggleAppShortcut: function(item, force) {
@@ -401,61 +176,8 @@ AUI.add(
 				item.toggleClass('lfr-portlet-used', force);
 
 				instance._addContentNode.focusManager.refresh();
-			},
-
-			_updateMenu: function(event, item) {
-				var instance = this;
-
-				var menuButtons = instance.dockBar._menuButtons;
-				var lastButtonIndex = menuButtons.size();
-				var index = menuButtons.indexOf(item);
-
-				if (index > -1) {
-					var button;
-
-					if (event.isKey('LEFT') && index > 0) {
-						button = menuButtons.item(--index);
-					}
-					else if (event.isKey('RIGHT') && (index < lastButtonIndex)) {
-						button = menuButtons.item(++index);
-					}
-
-					if (button) {
-						if (event.isKeyInRange('LEFT', 'DOWN')) {
-							event.halt();
-						}
-
-						var MenuManager = Dockbar.MenuManager;
-
-						MenuManager.hideAll();
-
-						button.focus();
-					}
-				}
 			}
 		};
-
-		Liferay.provide(
-			Dockbar,
-			'addMenu',
-			function(options) {
-				var instance = this;
-
-				instance._addMenu(options);
-			},
-			['aui-overlay-context', 'node-focusmanager']
-		);
-
-		Liferay.provide(
-			Dockbar,
-			'addUnderlay',
-			function(options) {
-				var instance = this;
-
-				instance._addUnderlay(options);
-			},
-			['liferay-dockbar-underlay']
-		);
 
 		Liferay.provide(
 			Dockbar,
@@ -466,232 +188,50 @@ AUI.add(
 				var dockBar = instance.dockBar;
 				var namespace = instance._namespace;
 
-				dockBar.one('.pin-dockbar').on(
-					EVENT_CLICK,
-					function(event) {
-						event.halt();
-
-						BODY.toggleClass('lfr-dockbar-pinned');
-
-						var pinned = BODY.hasClass('lfr-dockbar-pinned');
-
-						Liferay.Store('liferay_dockbar_pinned', pinned);
-
-						Liferay.fire(
-							'dockbar:pinned',
-							{
-								pinned: pinned
-							}
-						);
-					}
-				);
-
 				Liferay.Util.toggleControls(dockBar);
-
-				var MenuManager = new A.OverlayManager(
-					{
-						zIndexBase: 100000
-					}
-				);
-
-				var UnderlayManager = new A.OverlayManager(
-					{
-						zIndexBase: 300
-					}
-				);
-
-				Dockbar.MenuManager = MenuManager;
-				Dockbar.UnderlayManager = UnderlayManager;
 
 				instance._toolbarItems = {};
 
-				var messages = instance._addUnderlay(
-					{
-						align: {
-							node: instance.dockBar,
-							points: ['tc', 'bc']
-						},
-						bodyContent: '',
-						boundingBox: '#' + namespace + 'dockbarMessages',
-						header: 'My messages',
-						name: 'messages',
-						visible: false
-					}
-				);
+				Liferay.fire('initLayout');
+				Liferay.fire('initNavigation');
 
-				messages.on(
-					'visibleChange',
+				var addContent = A.one('#' + namespace + 'addContent');
+
+				var addPanel = A.one('#' + namespace + 'addPanel');
+
+				Liferay.on(
+					'dockbar:closeAddContentMenu',
 					function(event) {
-						if (event.newVal) {
-							BODY.addClass('showing-messages');
-
-							MenuManager.hideAll();
-						}
-						else {
-							BODY.removeClass('showing-messages');
-						}
+						addContent.removeClass('open');
 					}
 				);
 
-				messages.closeTool.on(EVENT_CLICK, instance.clearMessages, instance);
-
-				var addContent = instance._addMenu(
-					{
-						boundingBox: '#' + namespace + 'addContentContainer',
-						name: 'addContent',
-						trigger: '#' + namespace + 'addContent'
-					}
-				);
-
-				if (addContent) {
-					addContent.on(
-						'show',
-						function() {
-							Liferay.fire('initLayout');
-							Liferay.fire('initNavigation');
-						}
-					);
-
-					var addContentNode = addContent.get(CONTENT_BOX);
-
-					instance._addContentNode = addContentNode;
-
-					var commonItems = addContentNode.one('.common-items');
-
-					if (commonItems) {
-						commonItems.removeClass('aui-menu-item');
-					}
-
-					addContentNode.delegate(
+				if (addPanel) {
+					addPanel.on(
 						EVENT_CLICK,
 						function(event) {
 							event.halt();
 
-							var item = event.currentTarget;
-
-							if (item.hasClass('lfr-portlet-used')) {
-								return;
-							}
-
-							var portletId = item.attr('data-portlet-id');
-
-							if (!item.hasClass('lfr-instanceable')) {
-								instance._toggleAppShortcut(item, true);
-							}
-
-							Portlet.add(
-								{
-									portletId: portletId
-								}
-							);
-
-							if (!event.shiftKey) {
-								MenuManager.hideAll();
-							}
-						},
-						'.app-shortcut'
-					);
-
-					addContentNode.focusManager.set('descendants', 'a:not(.lfr-portlet-used)');
-				}
-
-				var manageContent = instance._addMenu(
-					{
-						boundingBox: '#' + namespace + 'manageContentContainer',
-						name: 'manageContent',
-						trigger: '#' + namespace + 'manageContent'
-					}
-				);
-
-				instance._addMenu(
-					{
-						boundingBox: '#' + namespace + 'mySitesContainer',
-						constrain: true,
-						name: 'mySites',
-						trigger: '#' + namespace + 'mySites'
-					}
-				);
-
-				if (A.UA.ie === 6) {
-					var mySitesMenu = Dockbar.mySites;
-
-					if (mySitesMenu) {
-						mySitesMenu.onceAfter(
-							'visibleChange',
-							function(event) {
-								if (event.newVal) {
-									var menuBoundingBox = mySitesMenu.get('boundingBox');
-
-									if (menuBoundingBox.height() > 300) {
-										menuBoundingBox.addClass('aui-menu-scroll');
-									}
-								}
-							}
-						);
-					}
-				}
-
-				var userOptionsContainer = A.one('#' + namespace + 'userOptionsContainer');
-
-				if (userOptionsContainer) {
-					instance._addMenu(
-						{
-							boundingBox: userOptionsContainer,
-							name: 'userOptions',
-							trigger: '#' + namespace + 'userAvatar'
-						}
-					);
-				}
-
-				if (BODY.hasClass('staging') || BODY.hasClass('live-view')) {
-					instance._addMenu(
-						{
-							boundingBox: '#' + namespace + 'stagingContainer',
-							name: 'staging',
-							trigger: '#' + namespace + 'staging'
-						}
-					);
-				}
-
-				var addPanelButton = A.one('#' + instance._namespace + 'addPanel');
-
-				if (addPanelButton) {
-					addPanelButton.on(
-						EVENT_CLICK,
-						function(event) {
-							event.preventDefault();
-
-							addContent.hide();
-
 							instance._loadAddPanel();
+
+							Liferay.fire('dockbar:closeAddContentMenu');
 						}
 					);
 				}
+
+				var manageContent = A.one('#' + namespace + 'manageContent');
 
 				if (manageContent) {
-					manageContent.get(BOUNDING_BOX).delegate(
+					manageContent.delegate(
 						EVENT_CLICK,
 						function(event) {
 							event.preventDefault();
 
-							var fullDialog = event.currentTarget.ancestor('li').hasClass('full-dialog');
-
-							manageContent.hide();
-
-							var width = 960;
-
-							if (fullDialog) {
-								width = '90%';
-							}
+							manageContent.removeClass('open');
 
 							instance._openWindow(
 								{
-									dialog: {
-										align: Util.Window.ALIGN_CENTER,
-										modal: fullDialog,
-										width: width
-									},
-									id: 'manageContentDialog'
+									id: '#' + namespace + 'manageContentDialog'
 								},
 								event.currentTarget
 							);
@@ -700,17 +240,17 @@ AUI.add(
 					);
 				}
 
-				var manageCustomizationLink = A.one('#' + namespace + 'manageCustomization');
+				var manageCustomization = A.one('#' + namespace + 'manageCustomization');
 
-				if (manageCustomizationLink) {
-					if (!manageCustomizationLink.hasClass('disabled')) {
+				if (manageCustomization) {
+					if (!manageCustomization.hasClass('disabled')) {
 						instance._controls = dockBar.one('.layout-customizable-controls');
 
 						var columns = A.all('.portlet-column');
 
 						var customizationsHandle;
 
-						manageCustomizationLink.on(
+						manageCustomization.on(
 							EVENT_CLICK,
 							function(event) {
 								event.halt();
@@ -724,7 +264,7 @@ AUI.add(
 									customizationsHandle = null;
 								}
 
-								manageContent.hide();
+								manageContent.removeClass('open');
 
 								columns.each(
 									function(item, index, collection) {
@@ -759,21 +299,16 @@ AUI.add(
 					}
 				}
 
-				var myAccount = A.one('#' + namespace + 'userAvatar .user-links');
+				var userAvatar = A.one('#' + namespace + 'userAvatar');
 
-				if (myAccount) {
-					myAccount.delegate(
+				if (userAvatar) {
+					userAvatar.delegate(
 						EVENT_CLICK,
 						function(event) {
 							event.preventDefault();
 
 							instance._openWindow(
-								{
-									dialog: {
-										align: Util.Window.ALIGN_CENTER,
-										width: 960
-									}
-								},
+								{},
 								event.currentTarget
 							);
 						},
@@ -781,19 +316,9 @@ AUI.add(
 					);
 				}
 
-				dockBar._menuButtons = dockBar.all('ul.aui-toolbar > li > a, .user-links a, .sign-out a');
-
-				dockBar.delegate(
-					'keydown',
-					function(event) {
-						instance._updateMenu(event, event.currentTarget);
-					},
-					'.aui-toolbar a'
-				);
-
 				Liferay.fire('dockbarLoaded');
 			},
-			['aui-io-request', 'aui-overlay-context', 'liferay-dockbar-underlay', 'liferay-store', 'node-focusmanager']
+			['aui-io-request', 'aui-overlay-context-deprecated', 'liferay-store', 'node-focusmanager']
 		);
 
 		Liferay.provide(
@@ -804,10 +329,10 @@ AUI.add(
 
 				instance._setLoadingAnimation();
 
-				var addPanelButton = A.one('#' + instance._namespace + 'addPanel');
+				var addPanel = A.one('#' + instance._namespace + 'addPanel');
 
-				if (addPanelButton) {
-					var uri = addPanelButton.attr('href');
+				if (addPanel) {
+					var uri = addPanel.attr('href');
 
 					A.io.request(
 						uri,
@@ -816,7 +341,7 @@ AUI.add(
 								success: function(event, id, obj) {
 									var response = this.get('responseData');
 
-									var panelNode = instance._getPanelNode();
+									var panelNode = instance.getPanelNode();
 
 									panelNode.plug(A.Plugin.ParseContent);
 
@@ -827,7 +352,7 @@ AUI.add(
 					);
 				}
 			},
-			['aui-io-request']
+			['aui-io-request', 'aui-parse-content', 'event-outside']
 		);
 
 		Liferay.provide(
@@ -874,6 +399,6 @@ AUI.add(
 	},
 	'',
 	{
-		requires: ['aui-node', 'event-touch']
+		requires: ['aui-node', 'aui-overlay-context-deprecated', 'aui-overlay-manager-deprecated', 'event-touch']
 	}
 );

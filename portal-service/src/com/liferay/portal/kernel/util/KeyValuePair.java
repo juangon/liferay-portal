@@ -30,6 +30,7 @@ public class KeyValuePair implements Comparable<KeyValuePair>, Serializable {
 		_value = value;
 	}
 
+	@Override
 	public int compareTo(KeyValuePair kvp) {
 		return _key.compareTo(kvp.getKey());
 	}

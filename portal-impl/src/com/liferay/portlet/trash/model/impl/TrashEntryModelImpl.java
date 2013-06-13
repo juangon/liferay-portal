@@ -153,26 +153,32 @@ public class TrashEntryModelImpl extends BaseModelImpl<TrashEntry>
 	public TrashEntryModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _entryId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setEntryId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _entryId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return TrashEntry.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return TrashEntry.class.getName();
 	}
@@ -258,20 +264,24 @@ public class TrashEntryModelImpl extends BaseModelImpl<TrashEntry>
 		}
 	}
 
+	@Override
 	@JSON
 	public long getEntryId() {
 		return _entryId;
 	}
 
+	@Override
 	public void setEntryId(long entryId) {
 		_entryId = entryId;
 	}
 
+	@Override
 	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -288,11 +298,13 @@ public class TrashEntryModelImpl extends BaseModelImpl<TrashEntry>
 		return _originalGroupId;
 	}
 
+	@Override
 	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
@@ -309,23 +321,28 @@ public class TrashEntryModelImpl extends BaseModelImpl<TrashEntry>
 		return _originalCompanyId;
 	}
 
+	@Override
 	@JSON
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
 
+	@Override
 	@JSON
 	public String getUserName() {
 		if (_userName == null) {
@@ -336,15 +353,18 @@ public class TrashEntryModelImpl extends BaseModelImpl<TrashEntry>
 		}
 	}
 
+	@Override
 	public void setUserName(String userName) {
 		_userName = userName;
 	}
 
+	@Override
 	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_columnBitmask = -1L;
 
@@ -359,6 +379,7 @@ public class TrashEntryModelImpl extends BaseModelImpl<TrashEntry>
 		return _originalCreateDate;
 	}
 
+	@Override
 	public String getClassName() {
 		if (getClassNameId() <= 0) {
 			return StringPool.BLANK;
@@ -367,6 +388,7 @@ public class TrashEntryModelImpl extends BaseModelImpl<TrashEntry>
 		return PortalUtil.getClassName(getClassNameId());
 	}
 
+	@Override
 	public void setClassName(String className) {
 		long classNameId = 0;
 
@@ -377,11 +399,13 @@ public class TrashEntryModelImpl extends BaseModelImpl<TrashEntry>
 		setClassNameId(classNameId);
 	}
 
+	@Override
 	@JSON
 	public long getClassNameId() {
 		return _classNameId;
 	}
 
+	@Override
 	public void setClassNameId(long classNameId) {
 		_columnBitmask |= CLASSNAMEID_COLUMN_BITMASK;
 
@@ -398,11 +422,13 @@ public class TrashEntryModelImpl extends BaseModelImpl<TrashEntry>
 		return _originalClassNameId;
 	}
 
+	@Override
 	@JSON
 	public long getClassPK() {
 		return _classPK;
 	}
 
+	@Override
 	public void setClassPK(long classPK) {
 		_columnBitmask |= CLASSPK_COLUMN_BITMASK;
 
@@ -419,6 +445,7 @@ public class TrashEntryModelImpl extends BaseModelImpl<TrashEntry>
 		return _originalClassPK;
 	}
 
+	@Override
 	@JSON
 	public String getTypeSettings() {
 		if (_typeSettings == null) {
@@ -429,15 +456,18 @@ public class TrashEntryModelImpl extends BaseModelImpl<TrashEntry>
 		}
 	}
 
+	@Override
 	public void setTypeSettings(String typeSettings) {
 		_typeSettings = typeSettings;
 	}
 
+	@Override
 	@JSON
 	public int getStatus() {
 		return _status;
 	}
 
+	@Override
 	public void setStatus(int status) {
 		_status = status;
 	}
@@ -489,6 +519,7 @@ public class TrashEntryModelImpl extends BaseModelImpl<TrashEntry>
 		return trashEntryImpl;
 	}
 
+	@Override
 	public int compareTo(TrashEntry trashEntry) {
 		int value = 0;
 
@@ -505,18 +536,15 @@ public class TrashEntryModelImpl extends BaseModelImpl<TrashEntry>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof TrashEntry)) {
 			return false;
 		}
 
-		TrashEntry trashEntry = null;
-
-		try {
-			trashEntry = (TrashEntry)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		TrashEntry trashEntry = (TrashEntry)obj;
 
 		long primaryKey = trashEntry.getPrimaryKey();
 
@@ -633,6 +661,7 @@ public class TrashEntryModelImpl extends BaseModelImpl<TrashEntry>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(34);
 

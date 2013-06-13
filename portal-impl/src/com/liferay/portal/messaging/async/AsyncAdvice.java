@@ -71,6 +71,7 @@ public class AsyncAdvice extends AnnotationChainableMethodAdvice<Async> {
 			destinationName,
 			new Runnable() {
 
+				@Override
 				public void run() {
 					try {
 						methodInvocation.proceed();
@@ -112,6 +113,7 @@ public class AsyncAdvice extends AnnotationChainableMethodAdvice<Async> {
 	private static Async _nullAsync =
 		new Async() {
 
+			@Override
 			public Class<? extends Annotation> annotationType() {
 				return Async.class;
 			}

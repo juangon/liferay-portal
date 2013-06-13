@@ -128,6 +128,7 @@ public class LockLocalServiceTest {
 			return _systemException;
 		}
 
+		@Override
 		public void run() {
 			int count = 0;
 

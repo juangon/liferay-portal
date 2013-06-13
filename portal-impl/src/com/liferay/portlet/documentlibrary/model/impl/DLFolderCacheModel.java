@@ -86,6 +86,7 @@ public class DLFolderCacheModel implements CacheModel<DLFolder>, Externalizable 
 		return sb.toString();
 	}
 
+	@Override
 	public DLFolder toEntityModel() {
 		DLFolderImpl dlFolderImpl = new DLFolderImpl();
 
@@ -172,6 +173,7 @@ public class DLFolderCacheModel implements CacheModel<DLFolder>, Externalizable 
 		return dlFolderImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		folderId = objectInput.readLong();
@@ -196,6 +198,7 @@ public class DLFolderCacheModel implements CacheModel<DLFolder>, Externalizable 
 		statusDate = objectInput.readLong();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

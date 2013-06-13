@@ -48,6 +48,12 @@ if (ruleGroup != null) {
 	title="<%= title %>"
 />
 
+<c:if test="<%= rule == null %>">
+	<div class="alert alert-info">
+		<liferay-ui:message key="rule-help" />
+	</div>
+</c:if>
+
 <portlet:actionURL var="editRuleURL">
 	<portlet:param name="struts_action" value="/mobile_device_rules/edit_rule" />
 </portlet:actionURL>
@@ -64,13 +70,18 @@ if (ruleGroup != null) {
 
 	<aui:model-context bean="<%= rule %>" model="<%= MDRRule.class %>" />
 
+	<c:if test='<%= !PluginPackageUtil.isInstalled("wurfl-web") %>'>
+		<div class="alert alert-block">
+			<liferay-ui:message key="there-is-no-device-recognition-provider-installed" />
+		</div>
+	</c:if>
+
 	<aui:fieldset>
 		<aui:input name="name" />
 
 		<aui:input name="description" />
 
-		<aui:select changesContext="<%= true %>" name="type" onChange='<%= renderResponse.getNamespace() + "changeType();" %>'>
-			<aui:option disabled="<%= true %>" label="select-a-type" selected="<%= Validator.isNull(type) %>" />
+		<aui:select changesContext="<%= true %>" name="type" showEmptyOption="<%= true %>">
 
 			<%
 			for (String ruleHandlerType : RuleGroupProcessorUtil.getRuleHandlerTypes()) {
@@ -97,15 +108,13 @@ if (ruleGroup != null) {
 	</aui:button-row>
 </aui:form>
 
-<aui:script>
-	Liferay.provide(
-		window,
-		'<portlet:namespace />changeType',
-		function() {
-			var A = AUI();
+<aui:script use="aui-io">
+	var typeNode = A.one('#<portlet:namespace />type');
+	var typeSettings = A.one('#<portlet:namespace />typeSettings');
 
-			var typeNode = A.one('#<portlet:namespace /><%= "type" %>');
-
+	typeNode.on(
+		'change',
+		function(event) {
 			A.io.request(
 				<portlet:resourceURL var="editorURL">
 					<portlet:param name="struts_action" value="/mobile_device_rules/edit_rule_editor" />
@@ -114,21 +123,20 @@ if (ruleGroup != null) {
 				'<%= editorURL.toString() %>',
 				{
 					data: {
-						<%= "ruleId" %>: <%= ruleId %>,
-						<%= "type" %>: (typeNode && typeNode.val())
+						ruleId: <%= ruleId %>,
+						type: typeNode.val()
 					},
 					on: {
-						complete: function <portlet:namespace />displayForm(id, obj) {
-							var typeSettingsNode = A.one('#<portlet:namespace />typeSettings');
+						success: function(event, id, obj) {
+							var response = this.get('responseData');
 
-							if (typeSettingsNode) {
-								typeSettingsNode.setContent(obj.responseText);
+							if (typeSettings) {
+								typeSettings.html(response);
 							}
 						}
 					}
 				}
 			);
-		},
-		['aui-io']
+		}
 	);
 </aui:script>

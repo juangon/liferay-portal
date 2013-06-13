@@ -22,8 +22,8 @@ import java.util.Map;
  * This class is a wrapper for {@link UserGroupGroupRole}.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       UserGroupGroupRole
+ * @author Brian Wing Shun Chan
+ * @see UserGroupGroupRole
  * @generated
  */
 public class UserGroupGroupRoleWrapper implements UserGroupGroupRole,
@@ -32,14 +32,17 @@ public class UserGroupGroupRoleWrapper implements UserGroupGroupRole,
 		_userGroupGroupRole = userGroupGroupRole;
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return UserGroupGroupRole.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return UserGroupGroupRole.class.getName();
 	}
 
+	@Override
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
@@ -50,6 +53,7 @@ public class UserGroupGroupRoleWrapper implements UserGroupGroupRole,
 		return attributes;
 	}
 
+	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 		Long userGroupId = (Long)attributes.get("userGroupId");
 
@@ -75,6 +79,7 @@ public class UserGroupGroupRoleWrapper implements UserGroupGroupRole,
 	*
 	* @return the primary key of this user group group role
 	*/
+	@Override
 	public com.liferay.portal.service.persistence.UserGroupGroupRolePK getPrimaryKey() {
 		return _userGroupGroupRole.getPrimaryKey();
 	}
@@ -84,6 +89,7 @@ public class UserGroupGroupRoleWrapper implements UserGroupGroupRole,
 	*
 	* @param primaryKey the primary key of this user group group role
 	*/
+	@Override
 	public void setPrimaryKey(
 		com.liferay.portal.service.persistence.UserGroupGroupRolePK primaryKey) {
 		_userGroupGroupRole.setPrimaryKey(primaryKey);
@@ -94,6 +100,7 @@ public class UserGroupGroupRoleWrapper implements UserGroupGroupRole,
 	*
 	* @return the user group ID of this user group group role
 	*/
+	@Override
 	public long getUserGroupId() {
 		return _userGroupGroupRole.getUserGroupId();
 	}
@@ -103,6 +110,7 @@ public class UserGroupGroupRoleWrapper implements UserGroupGroupRole,
 	*
 	* @param userGroupId the user group ID of this user group group role
 	*/
+	@Override
 	public void setUserGroupId(long userGroupId) {
 		_userGroupGroupRole.setUserGroupId(userGroupId);
 	}
@@ -112,6 +120,7 @@ public class UserGroupGroupRoleWrapper implements UserGroupGroupRole,
 	*
 	* @return the group ID of this user group group role
 	*/
+	@Override
 	public long getGroupId() {
 		return _userGroupGroupRole.getGroupId();
 	}
@@ -121,6 +130,7 @@ public class UserGroupGroupRoleWrapper implements UserGroupGroupRole,
 	*
 	* @param groupId the group ID of this user group group role
 	*/
+	@Override
 	public void setGroupId(long groupId) {
 		_userGroupGroupRole.setGroupId(groupId);
 	}
@@ -130,6 +140,7 @@ public class UserGroupGroupRoleWrapper implements UserGroupGroupRole,
 	*
 	* @return the role ID of this user group group role
 	*/
+	@Override
 	public long getRoleId() {
 		return _userGroupGroupRole.getRoleId();
 	}
@@ -139,52 +150,64 @@ public class UserGroupGroupRoleWrapper implements UserGroupGroupRole,
 	*
 	* @param roleId the role ID of this user group group role
 	*/
+	@Override
 	public void setRoleId(long roleId) {
 		_userGroupGroupRole.setRoleId(roleId);
 	}
 
+	@Override
 	public boolean isNew() {
 		return _userGroupGroupRole.isNew();
 	}
 
+	@Override
 	public void setNew(boolean n) {
 		_userGroupGroupRole.setNew(n);
 	}
 
+	@Override
 	public boolean isCachedModel() {
 		return _userGroupGroupRole.isCachedModel();
 	}
 
+	@Override
 	public void setCachedModel(boolean cachedModel) {
 		_userGroupGroupRole.setCachedModel(cachedModel);
 	}
 
+	@Override
 	public boolean isEscapedModel() {
 		return _userGroupGroupRole.isEscapedModel();
 	}
 
+	@Override
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _userGroupGroupRole.getPrimaryKeyObj();
 	}
 
+	@Override
 	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
 		_userGroupGroupRole.setPrimaryKeyObj(primaryKeyObj);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
 		return _userGroupGroupRole.getExpandoBridge();
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.model.BaseModel<?> baseModel) {
 		_userGroupGroupRole.setExpandoBridgeAttributes(baseModel);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portlet.expando.model.ExpandoBridge expandoBridge) {
 		_userGroupGroupRole.setExpandoBridgeAttributes(expandoBridge);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		_userGroupGroupRole.setExpandoBridgeAttributes(serviceContext);
@@ -195,6 +218,7 @@ public class UserGroupGroupRoleWrapper implements UserGroupGroupRole,
 		return new UserGroupGroupRoleWrapper((UserGroupGroupRole)_userGroupGroupRole.clone());
 	}
 
+	@Override
 	public int compareTo(
 		com.liferay.portal.model.UserGroupGroupRole userGroupGroupRole) {
 		return _userGroupGroupRole.compareTo(userGroupGroupRole);
@@ -205,14 +229,17 @@ public class UserGroupGroupRoleWrapper implements UserGroupGroupRole,
 		return _userGroupGroupRole.hashCode();
 	}
 
+	@Override
 	public com.liferay.portal.model.CacheModel<com.liferay.portal.model.UserGroupGroupRole> toCacheModel() {
 		return _userGroupGroupRole.toCacheModel();
 	}
 
+	@Override
 	public com.liferay.portal.model.UserGroupGroupRole toEscapedModel() {
 		return new UserGroupGroupRoleWrapper(_userGroupGroupRole.toEscapedModel());
 	}
 
+	@Override
 	public com.liferay.portal.model.UserGroupGroupRole toUnescapedModel() {
 		return new UserGroupGroupRoleWrapper(_userGroupGroupRole.toUnescapedModel());
 	}
@@ -222,10 +249,12 @@ public class UserGroupGroupRoleWrapper implements UserGroupGroupRole,
 		return _userGroupGroupRole.toString();
 	}
 
+	@Override
 	public java.lang.String toXmlString() {
 		return _userGroupGroupRole.toXmlString();
 	}
 
+	@Override
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_userGroupGroupRole.persist();
@@ -238,10 +267,12 @@ public class UserGroupGroupRoleWrapper implements UserGroupGroupRole,
 		return _userGroupGroupRole;
 	}
 
+	@Override
 	public UserGroupGroupRole getWrappedModel() {
 		return _userGroupGroupRole;
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		_userGroupGroupRole.resetOriginalValues();
 	}

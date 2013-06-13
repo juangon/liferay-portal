@@ -77,6 +77,7 @@ public class SCProductEntryCacheModel implements CacheModel<SCProductEntry>,
 		return sb.toString();
 	}
 
+	@Override
 	public SCProductEntry toEntityModel() {
 		SCProductEntryImpl scProductEntryImpl = new SCProductEntryImpl();
 
@@ -174,6 +175,7 @@ public class SCProductEntryCacheModel implements CacheModel<SCProductEntry>,
 		return scProductEntryImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		productEntryId = objectInput.readLong();
 		groupId = objectInput.readLong();
@@ -193,6 +195,7 @@ public class SCProductEntryCacheModel implements CacheModel<SCProductEntry>,
 		repoArtifactId = objectInput.readUTF();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(productEntryId);

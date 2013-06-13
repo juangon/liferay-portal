@@ -101,9 +101,9 @@ public class AssetUtil {
 		CharPool.COLON, CharPool.COMMA, CharPool.EQUAL, CharPool.GREATER_THAN,
 		CharPool.FORWARD_SLASH, CharPool.LESS_THAN, CharPool.NEW_LINE,
 		CharPool.OPEN_BRACKET, CharPool.OPEN_CURLY_BRACE, CharPool.PERCENT,
-		CharPool.PIPE, CharPool.PLUS, CharPool.POUND, CharPool.QUESTION,
-		CharPool.QUOTE, CharPool.RETURN, CharPool.SEMICOLON, CharPool.SLASH,
-		CharPool.STAR, CharPool.TILDE
+		CharPool.PIPE, CharPool.PLUS, CharPool.POUND, CharPool.PRIME,
+		CharPool.QUESTION, CharPool.QUOTE, CharPool.RETURN, CharPool.SEMICOLON,
+		CharPool.SLASH, CharPool.STAR, CharPool.TILDE
 	};
 
 	public static Set<String> addLayoutTags(
@@ -275,7 +275,7 @@ public class AssetUtil {
 			LiferayPortletRequest liferayPortletRequest,
 			LiferayPortletResponse liferayPortletResponse, long[] classNameIds,
 			long[] classTypeIds, long[] allAssetCategoryIds,
-			String[] allAssetTagNames)
+			String[] allAssetTagNames, String redirect)
 		throws Exception {
 
 		ThemeDisplay themeDisplay =
@@ -286,15 +286,20 @@ public class AssetUtil {
 			new TreeMap<String, PortletURL>(
 				new ModelResourceComparator(themeDisplay.getLocale()));
 
-		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
+		if (Validator.isNull(redirect)) {
+			PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
-		PortletURL redirectURL = liferayPortletResponse.createLiferayPortletURL(
-			themeDisplay.getPlid(), portletDisplay.getId(),
-			PortletRequest.RENDER_PHASE, false);
+			PortletURL redirectURL =
+				liferayPortletResponse.createLiferayPortletURL(
+					themeDisplay.getPlid(), portletDisplay.getId(),
+					PortletRequest.RENDER_PHASE, false);
 
-		redirectURL.setParameter(
-			"struts_action", "/asset_publisher/add_asset_redirect");
-		redirectURL.setWindowState(LiferayWindowState.POP_UP);
+			redirectURL.setParameter(
+				"struts_action", "/asset_publisher/add_asset_redirect");
+			redirectURL.setWindowState(LiferayWindowState.POP_UP);
+
+			redirect = redirectURL.toString();
+		}
 
 		for (long classNameId : classNameIds) {
 			String className = PortalUtil.getClassName(classNameId);
@@ -321,8 +326,7 @@ public class AssetUtil {
 			if ((classTypeIds.length == 0) || classTypes.isEmpty()) {
 				PortletURL addPortletURL = getAddPortletURL(
 					liferayPortletRequest, liferayPortletResponse, className, 0,
-					allAssetCategoryIds, allAssetTagNames,
-					redirectURL.toString());
+					allAssetCategoryIds, allAssetTagNames, redirect);
 
 				if (addPortletURL != null) {
 					addPortletURLs.put(className, addPortletURL);
@@ -336,7 +340,7 @@ public class AssetUtil {
 					PortletURL addPortletURL = getAddPortletURL(
 						liferayPortletRequest, liferayPortletResponse,
 						className, classTypeId, allAssetCategoryIds,
-						allAssetTagNames, redirectURL.toString());
+						allAssetTagNames, redirect);
 
 					if (addPortletURL != null) {
 						String mesage =

@@ -77,6 +77,7 @@ public class DDMStructureCacheModel implements CacheModel<DDMStructure>,
 		return sb.toString();
 	}
 
+	@Override
 	public DDMStructure toEntityModel() {
 		DDMStructureImpl ddmStructureImpl = new DDMStructureImpl();
 
@@ -164,6 +165,7 @@ public class DDMStructureCacheModel implements CacheModel<DDMStructure>,
 		return ddmStructureImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput)
 		throws ClassNotFoundException, IOException {
 		uuid = objectInput.readUTF();
@@ -188,6 +190,7 @@ public class DDMStructureCacheModel implements CacheModel<DDMStructure>,
 		_localizedTransientFieldsMap = (java.util.Map<java.lang.String, java.util.Map<java.lang.String, java.util.Map<java.lang.String, java.lang.String>>>)objectInput.readObject();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

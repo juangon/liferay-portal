@@ -67,6 +67,7 @@ public class LDAPAuth implements Authenticator {
 	public static final String RESULT_PASSWORD_RESET =
 		"2.16.840.1.113730.3.4.4";
 
+	@Override
 	public int authenticateByEmailAddress(
 			long companyId, String emailAddress, String password,
 			Map<String, String[]> headerMap, Map<String, String[]> parameterMap)
@@ -83,6 +84,7 @@ public class LDAPAuth implements Authenticator {
 		}
 	}
 
+	@Override
 	public int authenticateByScreenName(
 			long companyId, String screenName, String password,
 			Map<String, String[]> headerMap, Map<String, String[]> parameterMap)
@@ -99,6 +101,7 @@ public class LDAPAuth implements Authenticator {
 		}
 	}
 
+	@Override
 	public int authenticateByUserId(
 			long companyId, long userId, String password,
 			Map<String, String[]> headerMap, Map<String, String[]> parameterMap)
@@ -493,30 +496,32 @@ public class LDAPAuth implements Authenticator {
 
 		// Only allow omniadmin if Liferay password checking is enabled
 
-		if (PropsValues.AUTH_PIPELINE_ENABLE_LIFERAY_CHECK) {
-			if (userId > 0) {
-				if (OmniadminUtil.isOmniadmin(userId)) {
+		if (!PropsValues.AUTH_PIPELINE_ENABLE_LIFERAY_CHECK) {
+			return FAILURE;
+		}
+
+		if (userId > 0) {
+			if (OmniadminUtil.isOmniadmin(userId)) {
+				return SUCCESS;
+			}
+		}
+		else if (Validator.isNotNull(emailAddress)) {
+			User user = UserLocalServiceUtil.fetchUserByEmailAddress(
+				companyId, emailAddress);
+
+			if (user != null) {
+				if (OmniadminUtil.isOmniadmin(user)) {
 					return SUCCESS;
 				}
 			}
-			else if (Validator.isNotNull(emailAddress)) {
-				User user = UserLocalServiceUtil.fetchUserByEmailAddress(
-					companyId, emailAddress);
+		}
+		else if (Validator.isNotNull(screenName)) {
+			User user = UserLocalServiceUtil.fetchUserByScreenName(
+				companyId, screenName);
 
-				if (user != null) {
-					if (OmniadminUtil.isOmniadmin(user)) {
-						return SUCCESS;
-					}
-				}
-			}
-			else if (Validator.isNotNull(screenName)) {
-				User user = UserLocalServiceUtil.fetchUserByScreenName(
-					companyId, screenName);
-
-				if (user != null) {
-					if (OmniadminUtil.isOmniadmin(user)) {
-						return SUCCESS;
-					}
+			if (user != null) {
+				if (OmniadminUtil.isOmniadmin(user)) {
+					return SUCCESS;
 				}
 			}
 		}

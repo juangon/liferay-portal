@@ -50,6 +50,7 @@ public class PortalPreferencesCacheModel implements CacheModel<PortalPreferences
 		return sb.toString();
 	}
 
+	@Override
 	public PortalPreferences toEntityModel() {
 		PortalPreferencesImpl portalPreferencesImpl = new PortalPreferencesImpl();
 
@@ -69,6 +70,7 @@ public class PortalPreferencesCacheModel implements CacheModel<PortalPreferences
 		return portalPreferencesImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		portalPreferencesId = objectInput.readLong();
 		ownerId = objectInput.readLong();
@@ -76,6 +78,7 @@ public class PortalPreferencesCacheModel implements CacheModel<PortalPreferences
 		preferences = objectInput.readUTF();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(portalPreferencesId);

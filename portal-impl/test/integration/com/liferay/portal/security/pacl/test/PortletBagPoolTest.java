@@ -42,17 +42,6 @@ public class PortletBagPoolTest {
 	}
 
 	@Test
-	public void test10() throws Exception {
-		try {
-			PortletBagPool.reset();
-
-			Assert.fail();
-		}
-		catch (SecurityException se) {
-		}
-	}
-
-	@Test
 	public void test2() throws Exception {
 		try {
 			PortletBagPool.get("fail");
@@ -81,7 +70,7 @@ public class PortletBagPoolTest {
 				new PortletBagImpl(
 					null, null, null, null, null, null, null, null, null, null,
 					null, null, null, null, null, null, null, null, null, null,
-					null, null, null, null, null, null, null));
+					null, null, null, null, null, null, null, null));
 		}
 		catch (SecurityException se) {
 			Assert.fail();
@@ -96,7 +85,7 @@ public class PortletBagPoolTest {
 				new PortletBagImpl(
 					null, null, null, null, null, null, null, null, null, null,
 					null, null, null, null, null, null, null, null, null, null,
-					null, null, null, null, null, null, null));
+					null, null, null, null, null, null, null, null));
 
 			Assert.fail();
 		}
@@ -112,7 +101,7 @@ public class PortletBagPoolTest {
 				new PortletBagImpl(
 					null, null, null, null, null, null, null, null, null, null,
 					null, null, null, null, null, null, null, null, null, null,
-					null, null, null, null, null, null, null));
+					null, null, null, null, null, null, null, null));
 		}
 		catch (SecurityException se) {
 			Assert.fail();
@@ -147,6 +136,17 @@ public class PortletBagPoolTest {
 		}
 		catch (SecurityException se) {
 			Assert.fail();
+		}
+	}
+
+	@Test
+	public void test10() throws Exception {
+		try {
+			PortletBagPool.reset();
+
+			Assert.fail();
+		}
+		catch (SecurityException se) {
 		}
 	}
 

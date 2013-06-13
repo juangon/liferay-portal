@@ -69,6 +69,7 @@ public class MDRRuleGroupInstanceCacheModel implements CacheModel<MDRRuleGroupIn
 		return sb.toString();
 	}
 
+	@Override
 	public MDRRuleGroupInstance toEntityModel() {
 		MDRRuleGroupInstanceImpl mdrRuleGroupInstanceImpl = new MDRRuleGroupInstanceImpl();
 
@@ -115,6 +116,7 @@ public class MDRRuleGroupInstanceCacheModel implements CacheModel<MDRRuleGroupIn
 		return mdrRuleGroupInstanceImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		ruleGroupInstanceId = objectInput.readLong();
@@ -130,6 +132,7 @@ public class MDRRuleGroupInstanceCacheModel implements CacheModel<MDRRuleGroupIn
 		priority = objectInput.readInt();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

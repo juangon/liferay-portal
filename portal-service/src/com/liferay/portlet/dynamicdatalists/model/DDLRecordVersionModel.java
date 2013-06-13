@@ -238,6 +238,7 @@ public interface DDLRecordVersionModel extends BaseModel<DDLRecordVersion>,
 	 *
 	 * @return the status of this d d l record version
 	 */
+	@Override
 	public int getStatus();
 
 	/**
@@ -245,6 +246,7 @@ public interface DDLRecordVersionModel extends BaseModel<DDLRecordVersion>,
 	 *
 	 * @param status the status of this d d l record version
 	 */
+	@Override
 	public void setStatus(int status);
 
 	/**
@@ -252,6 +254,7 @@ public interface DDLRecordVersionModel extends BaseModel<DDLRecordVersion>,
 	 *
 	 * @return the status by user ID of this d d l record version
 	 */
+	@Override
 	public long getStatusByUserId();
 
 	/**
@@ -259,6 +262,7 @@ public interface DDLRecordVersionModel extends BaseModel<DDLRecordVersion>,
 	 *
 	 * @param statusByUserId the status by user ID of this d d l record version
 	 */
+	@Override
 	public void setStatusByUserId(long statusByUserId);
 
 	/**
@@ -267,6 +271,7 @@ public interface DDLRecordVersionModel extends BaseModel<DDLRecordVersion>,
 	 * @return the status by user uuid of this d d l record version
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public String getStatusByUserUuid() throws SystemException;
 
 	/**
@@ -274,6 +279,7 @@ public interface DDLRecordVersionModel extends BaseModel<DDLRecordVersion>,
 	 *
 	 * @param statusByUserUuid the status by user uuid of this d d l record version
 	 */
+	@Override
 	public void setStatusByUserUuid(String statusByUserUuid);
 
 	/**
@@ -282,6 +288,7 @@ public interface DDLRecordVersionModel extends BaseModel<DDLRecordVersion>,
 	 * @return the status by user name of this d d l record version
 	 */
 	@AutoEscape
+	@Override
 	public String getStatusByUserName();
 
 	/**
@@ -289,6 +296,7 @@ public interface DDLRecordVersionModel extends BaseModel<DDLRecordVersion>,
 	 *
 	 * @param statusByUserName the status by user name of this d d l record version
 	 */
+	@Override
 	public void setStatusByUserName(String statusByUserName);
 
 	/**
@@ -296,6 +304,7 @@ public interface DDLRecordVersionModel extends BaseModel<DDLRecordVersion>,
 	 *
 	 * @return the status date of this d d l record version
 	 */
+	@Override
 	public Date getStatusDate();
 
 	/**
@@ -303,11 +312,13 @@ public interface DDLRecordVersionModel extends BaseModel<DDLRecordVersion>,
 	 *
 	 * @param statusDate the status date of this d d l record version
 	 */
+	@Override
 	public void setStatusDate(Date statusDate);
 
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #isApproved()}
 	 */
+	@Override
 	public boolean getApproved();
 
 	/**
@@ -315,6 +326,7 @@ public interface DDLRecordVersionModel extends BaseModel<DDLRecordVersion>,
 	 *
 	 * @return <code>true</code> if this d d l record version is approved; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isApproved();
 
 	/**
@@ -322,6 +334,7 @@ public interface DDLRecordVersionModel extends BaseModel<DDLRecordVersion>,
 	 *
 	 * @return <code>true</code> if this d d l record version is denied; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isDenied();
 
 	/**
@@ -329,6 +342,7 @@ public interface DDLRecordVersionModel extends BaseModel<DDLRecordVersion>,
 	 *
 	 * @return <code>true</code> if this d d l record version is a draft; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isDraft();
 
 	/**
@@ -336,6 +350,7 @@ public interface DDLRecordVersionModel extends BaseModel<DDLRecordVersion>,
 	 *
 	 * @return <code>true</code> if this d d l record version is expired; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isExpired();
 
 	/**
@@ -343,6 +358,7 @@ public interface DDLRecordVersionModel extends BaseModel<DDLRecordVersion>,
 	 *
 	 * @return <code>true</code> if this d d l record version is inactive; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isInactive();
 
 	/**
@@ -350,6 +366,7 @@ public interface DDLRecordVersionModel extends BaseModel<DDLRecordVersion>,
 	 *
 	 * @return <code>true</code> if this d d l record version is incomplete; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isIncomplete();
 
 	/**
@@ -357,6 +374,7 @@ public interface DDLRecordVersionModel extends BaseModel<DDLRecordVersion>,
 	 *
 	 * @return <code>true</code> if this d d l record version is in the Recycle Bin; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isInTrash();
 
 	/**
@@ -364,6 +382,7 @@ public interface DDLRecordVersionModel extends BaseModel<DDLRecordVersion>,
 	 *
 	 * @return <code>true</code> if this d d l record version is pending; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isPending();
 
 	/**
@@ -371,43 +390,63 @@ public interface DDLRecordVersionModel extends BaseModel<DDLRecordVersion>,
 	 *
 	 * @return <code>true</code> if this d d l record version is scheduled; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isScheduled();
 
+	@Override
 	public boolean isNew();
 
+	@Override
 	public void setNew(boolean n);
 
+	@Override
 	public boolean isCachedModel();
 
+	@Override
 	public void setCachedModel(boolean cachedModel);
 
+	@Override
 	public boolean isEscapedModel();
 
+	@Override
 	public Serializable getPrimaryKeyObj();
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
+	@Override
 	public ExpandoBridge getExpandoBridge();
 
+	@Override
 	public void setExpandoBridgeAttributes(BaseModel<?> baseModel);
 
+	@Override
 	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge);
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext);
 
+	@Override
 	public Object clone();
 
+	@Override
 	public int compareTo(DDLRecordVersion ddlRecordVersion);
 
+	@Override
 	public int hashCode();
 
+	@Override
 	public CacheModel<DDLRecordVersion> toCacheModel();
 
+	@Override
 	public DDLRecordVersion toEscapedModel();
 
+	@Override
 	public DDLRecordVersion toUnescapedModel();
 
+	@Override
 	public String toString();
 
+	@Override
 	public String toXmlString();
 }

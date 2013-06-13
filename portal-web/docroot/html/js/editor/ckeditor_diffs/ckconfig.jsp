@@ -16,11 +16,16 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+<%@ page import="com.liferay.portal.kernel.language.LanguageUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.ContentTypes" %>
 <%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.LocaleUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 
+<%@ page import="java.util.Locale" %>
+
 <%
+String contentsLanguageId = ParamUtil.getString(request, "contentsLanguageId");
 String cssPath = ParamUtil.getString(request, "cssPath");
 String cssClasses = ParamUtil.getString(request, "cssClasses");
 boolean inlineEdit = ParamUtil.getBoolean(request, "inlineEdit");
@@ -68,6 +73,16 @@ CKEDITOR.config.closeNoticeTimeout = 8000;
 
 CKEDITOR.config.contentsCss = '<%= HtmlUtil.escapeJS(cssPath) %>/main.css';
 
+<%
+Locale contentsLocale = LocaleUtil.fromLanguageId(contentsLanguageId);
+
+String contentsLanguageDir = LanguageUtil.get(contentsLocale, "lang.dir");
+%>
+
+CKEDITOR.config.contentsLangDirection = '<%= HtmlUtil.escapeJS(contentsLanguageDir) %>';
+
+CKEDITOR.config.contentsLanguage = '<%= HtmlUtil.escapeJS(contentsLanguageId.replace("iw_", "he_")) %>';
+
 CKEDITOR.config.entities = false;
 
 CKEDITOR.config.extraPlugins = 'ajaxsave,restore,scayt,wsc,video';
@@ -76,7 +91,7 @@ CKEDITOR.config.filebrowserVideoBrowseUrl = CKEDITOR.config.filebrowserBrowseUrl
 
 CKEDITOR.config.height = 265;
 
-CKEDITOR.config.language = '<%= HtmlUtil.escapeJS(languageId) %>';
+CKEDITOR.config.language = '<%= HtmlUtil.escapeJS(languageId.replace("iw_", "he_")) %>';
 
 CKEDITOR.config.resize_enabled = <%= resizable %>;
 

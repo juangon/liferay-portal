@@ -15,12 +15,10 @@
 package com.liferay.portal.service;
 
 /**
- * <p>
- * This class is a wrapper for {@link UserGroupGroupRoleService}.
- * </p>
+ * Provides a wrapper for {@link UserGroupGroupRoleService}.
  *
- * @author    Brian Wing Shun Chan
- * @see       UserGroupGroupRoleService
+ * @author Brian Wing Shun Chan
+ * @see UserGroupGroupRoleService
  * @generated
  */
 public class UserGroupGroupRoleServiceWrapper
@@ -36,6 +34,7 @@ public class UserGroupGroupRoleServiceWrapper
 	*
 	* @return the Spring bean ID for this bean
 	*/
+	@Override
 	public java.lang.String getBeanIdentifier() {
 		return _userGroupGroupRoleService.getBeanIdentifier();
 	}
@@ -45,10 +44,12 @@ public class UserGroupGroupRoleServiceWrapper
 	*
 	* @param beanIdentifier the Spring bean ID for this bean
 	*/
+	@Override
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		_userGroupGroupRoleService.setBeanIdentifier(beanIdentifier);
 	}
 
+	@Override
 	public void addUserGroupGroupRoles(long userGroupId, long groupId,
 		long[] roleIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -57,6 +58,7 @@ public class UserGroupGroupRoleServiceWrapper
 			roleIds);
 	}
 
+	@Override
 	public void addUserGroupGroupRoles(long[] userGroupIds, long groupId,
 		long roleId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -65,6 +67,7 @@ public class UserGroupGroupRoleServiceWrapper
 			groupId, roleId);
 	}
 
+	@Override
 	public void deleteUserGroupGroupRoles(long userGroupId, long groupId,
 		long[] roleIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -73,6 +76,7 @@ public class UserGroupGroupRoleServiceWrapper
 			groupId, roleIds);
 	}
 
+	@Override
 	public void deleteUserGroupGroupRoles(long[] userGroupIds, long groupId,
 		long roleId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -96,10 +100,12 @@ public class UserGroupGroupRoleServiceWrapper
 		_userGroupGroupRoleService = userGroupGroupRoleService;
 	}
 
+	@Override
 	public UserGroupGroupRoleService getWrappedService() {
 		return _userGroupGroupRoleService;
 	}
 
+	@Override
 	public void setWrappedService(
 		UserGroupGroupRoleService userGroupGroupRoleService) {
 		_userGroupGroupRoleService = userGroupGroupRoleService;

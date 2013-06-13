@@ -25,20 +25,29 @@ import java.util.Map;
 public class WorkflowEngineManagerProxyBean
 	extends BaseProxyBean implements WorkflowEngineManager {
 
+	@Override
 	public String getKey() {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public String getName() {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public Map<String, Object> getOptionalAttributes() {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public String getVersion() {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean isDeployed() {
+		return false;
 	}
 
 }

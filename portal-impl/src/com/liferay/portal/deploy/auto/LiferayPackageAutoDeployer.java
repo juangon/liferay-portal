@@ -15,6 +15,7 @@
 package com.liferay.portal.deploy.auto;
 
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
+import com.liferay.portal.kernel.deploy.auto.AutoDeployer;
 import com.liferay.portal.kernel.deploy.auto.context.AutoDeploymentContext;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -54,6 +55,7 @@ public class LiferayPackageAutoDeployer implements AutoDeployer {
 		}
 	}
 
+	@Override
 	public int autoDeploy(AutoDeploymentContext autoDeploymentContext)
 		throws AutoDeployException {
 
@@ -132,6 +134,7 @@ public class LiferayPackageAutoDeployer implements AutoDeployer {
 		}
 	}
 
+	@Override
 	public AutoDeployer cloneAutoDeployer() {
 		return new LiferayPackageAutoDeployer();
 	}

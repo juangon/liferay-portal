@@ -36,9 +36,11 @@ import java.util.Date;
 public class AddressCacheModel implements CacheModel<Address>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(39);
 
-		sb.append("{addressId=");
+		sb.append("{uuid=");
+		sb.append(uuid);
+		sb.append(", addressId=");
 		sb.append(addressId);
 		sb.append(", companyId=");
 		sb.append(companyId);
@@ -79,8 +81,16 @@ public class AddressCacheModel implements CacheModel<Address>, Externalizable {
 		return sb.toString();
 	}
 
+	@Override
 	public Address toEntityModel() {
 		AddressImpl addressImpl = new AddressImpl();
+
+		if (uuid == null) {
+			addressImpl.setUuid(StringPool.BLANK);
+		}
+		else {
+			addressImpl.setUuid(uuid);
+		}
 
 		addressImpl.setAddressId(addressId);
 		addressImpl.setCompanyId(companyId);
@@ -156,7 +166,9 @@ public class AddressCacheModel implements CacheModel<Address>, Externalizable {
 		return addressImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		uuid = objectInput.readUTF();
 		addressId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		userId = objectInput.readLong();
@@ -177,8 +189,16 @@ public class AddressCacheModel implements CacheModel<Address>, Externalizable {
 		primary = objectInput.readBoolean();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		if (uuid == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(uuid);
+		}
+
 		objectOutput.writeLong(addressId);
 		objectOutput.writeLong(companyId);
 		objectOutput.writeLong(userId);
@@ -237,6 +257,7 @@ public class AddressCacheModel implements CacheModel<Address>, Externalizable {
 		objectOutput.writeBoolean(primary);
 	}
 
+	public String uuid;
 	public long addressId;
 	public long companyId;
 	public long userId;

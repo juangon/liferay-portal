@@ -133,6 +133,7 @@ public interface GroupModel extends AttachedModel, BaseModel<Group> {
 	 *
 	 * @return the fully qualified class name of this group
 	 */
+	@Override
 	public String getClassName();
 
 	public void setClassName(String className);
@@ -142,6 +143,7 @@ public interface GroupModel extends AttachedModel, BaseModel<Group> {
 	 *
 	 * @return the class name ID of this group
 	 */
+	@Override
 	public long getClassNameId();
 
 	/**
@@ -149,6 +151,7 @@ public interface GroupModel extends AttachedModel, BaseModel<Group> {
 	 *
 	 * @param classNameId the class name ID of this group
 	 */
+	@Override
 	public void setClassNameId(long classNameId);
 
 	/**
@@ -156,6 +159,7 @@ public interface GroupModel extends AttachedModel, BaseModel<Group> {
 	 *
 	 * @return the class p k of this group
 	 */
+	@Override
 	public long getClassPK();
 
 	/**
@@ -163,6 +167,7 @@ public interface GroupModel extends AttachedModel, BaseModel<Group> {
 	 *
 	 * @param classPK the class p k of this group
 	 */
+	@Override
 	public void setClassPK(long classPK);
 
 	/**
@@ -324,41 +329,60 @@ public interface GroupModel extends AttachedModel, BaseModel<Group> {
 	 */
 	public void setActive(boolean active);
 
+	@Override
 	public boolean isNew();
 
+	@Override
 	public void setNew(boolean n);
 
+	@Override
 	public boolean isCachedModel();
 
+	@Override
 	public void setCachedModel(boolean cachedModel);
 
+	@Override
 	public boolean isEscapedModel();
 
+	@Override
 	public Serializable getPrimaryKeyObj();
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
+	@Override
 	public ExpandoBridge getExpandoBridge();
 
+	@Override
 	public void setExpandoBridgeAttributes(BaseModel<?> baseModel);
 
+	@Override
 	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge);
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext);
 
+	@Override
 	public Object clone();
 
+	@Override
 	public int compareTo(Group group);
 
+	@Override
 	public int hashCode();
 
+	@Override
 	public CacheModel<Group> toCacheModel();
 
+	@Override
 	public Group toEscapedModel();
 
+	@Override
 	public Group toUnescapedModel();
 
+	@Override
 	public String toString();
 
+	@Override
 	public String toXmlString();
 }

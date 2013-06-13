@@ -30,6 +30,7 @@ import com.liferay.portal.util.PropsValues;
 public class LegacyAlgorithmAwarePasswordEncryptor
 	extends BasePasswordEncryptor {
 
+	@Override
 	public String[] getSupportedAlgorithmTypes() {
 		return _parentPasswordEncryptor.getSupportedAlgorithmTypes();
 	}
@@ -56,8 +57,21 @@ public class LegacyAlgorithmAwarePasswordEncryptor
 							" is blank");
 			}
 
-			return _parentPasswordEncryptor.encrypt(
-				algorithm, plainTextPassword, encryptedPassword);
+			try {
+				return _parentPasswordEncryptor.encrypt(
+					algorithm, plainTextPassword, encryptedPassword);
+			}
+			catch (Exception e) {
+				StringBundler sb = new StringBundler(5);
+
+				sb.append("Password upgrade was not successfully configured. ");
+				sb.append("Please set the property ");
+				sb.append("\"passwords.encryption.algorithm.legacy\" with ");
+				sb.append("the previous password encryption algorithm and ");
+				sb.append("restart.");
+
+				throw new PwdEncryptorException(sb.toString(), e);
+			}
 		}
 
 		if (_log.isDebugEnabled()) {

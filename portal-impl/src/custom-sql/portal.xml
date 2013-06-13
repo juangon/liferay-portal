@@ -68,7 +68,7 @@
 	<sql id="com.liferay.portal.service.impl.ResourcePermissionLocalServiceImpl.findMissingResourcePermissions">
 		<![CDATA[
 			SELECT
-				TEMP_TABLE.companyId, TEMP_TABLE.name, TEMP_TABLE.scope, TEMP_TABLE.primKey, Role_.roleId
+				TEMP_TABLE.companyId AS companyId, TEMP_TABLE.name AS name, TEMP_TABLE.scope AS scope, TEMP_TABLE.primKey AS primKey, Role_.roleId AS roleId
 			FROM (
 				SELECT
 					DISTINCT ResourcePermission.companyId, ResourcePermission.name, ResourcePermission.scope, ResourcePermission.primKey
@@ -392,16 +392,12 @@
 			INNER JOIN
 				ResourcePermission ON
 					(ResourcePermission.primKey = CAST_TEXT(Group_.groupId))
-			INNER JOIN
-				ResourceAction ON
-					(ResourceAction.name = ResourcePermission.name)
 			WHERE
 				(Group_.liveGroupId = 0) AND
 				(ResourcePermission.name = ?) AND
 				(ResourcePermission.scope = ?) AND
-				(ResourceAction.actionId = ?) AND
 				(ResourcePermission.roleId = ?) AND
-				(BITAND(CAST_LONG(ResourcePermission.actionIds), CAST_LONG(ResourceAction.bitwiseValue)) != 0)
+				(BITAND(CAST_LONG(ResourcePermission.actionIds), ?) != 0)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.joinByRoleResourceTypePermissions">
@@ -410,12 +406,8 @@
 				ResourceTypePermission ON
 					(ResourceTypePermission.groupId = Group_.groupId) AND
 					(ResourceTypePermission.name = ?) AND
-					(ResourceTypePermission.roleId = ?)
-			INNER JOIN
-				ResourceAction ON
-					(ResourceAction.name = ResourceTypePermission.name) AND
-					(ResourceAction.actionId = ?) AND
-					(BITAND(CAST_LONG(ResourceTypePermission.actionIds), CAST_LONG(ResourceAction.bitwiseValue)) != 0)
+					(ResourceTypePermission.roleId = ?) AND
+					(BITAND(CAST_LONG(ResourceTypePermission.actionIds), ?) != 0)
 			WHERE
 				(Group_.liveGroupId = 0)
 		]]>
@@ -528,18 +520,6 @@
 					(PortletPreferences.portletId LIKE ?)
 				) AND
 				(PortletPreferences.preferences LIKE ?)
-		]]>
-	</sql>
-	<sql id="com.liferay.portal.service.persistence.LayoutSetBranchFinder.findByMaster">
-		<![CDATA[
-			SELECT
-				{LayoutSetBranch.*}
-			FROM
-				LayoutSetBranch
-			WHERE
-				(LayoutSetBranch.groupId = ?) AND
-				(LayoutSetBranch.privateLayout = ?) AND
-				(LayoutSetBranch.master = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.LockFinder.findByC_K">
@@ -1172,14 +1152,10 @@
 			INNER JOIN
 				Role_ ON
 					(Role_.roleId = ResourceBlockPermission.roleId)
-			INNER JOIN
-				ResourceAction ON
-					(ResourceAction.name = ResourceBlock.name)
 			WHERE
 				(ResourceBlock.resourceBlockId = ?) AND
 				(ResourceBlock.name = ?) AND
-				(ResourceAction.actionId = ?) AND
-				(MOD(INTEGER_DIV(ResourceBlockPermission.actionIds, ResourceAction.bitwisevalue), 2) = 1)
+				(MOD(INTEGER_DIV(ResourceBlockPermission.actionIds, ?), 2) = 1)
 			ORDER BY
 				Role_.name ASC
 		]]>
@@ -1213,16 +1189,12 @@
 			INNER JOIN
 				Role_ ON
 					(Role_.roleId = ResourcePermission.roleId)
-			INNER JOIN
-				ResourceAction ON
-					(ResourceAction.name = ResourcePermission.name)
 			WHERE
 				(ResourcePermission.companyId = ?) AND
 				(ResourcePermission.name = ?) AND
 				(ResourcePermission.scope = ?) AND
 				(ResourcePermission.primKey = ?) AND
-				(ResourceAction.actionId = ?) AND
-				(MOD(INTEGER_DIV(ResourcePermission.actionIds, ResourceAction.bitwisevalue), 2) = 1)
+				(MOD(INTEGER_DIV(ResourcePermission.actionIds, ?), 2) = 1)
 			ORDER BY
 				Role_.name ASC
 		]]>
@@ -1405,7 +1377,7 @@
 				(Contact_.twitterSn != '')
 		]]>
 	</sql>
-    <sql id="com.liferay.portal.service.persistence.UserFinder.joinByNoOrganizations">
+	<sql id="com.liferay.portal.service.persistence.UserFinder.joinByNoOrganizations">
 		<![CDATA[
 			LEFT JOIN
 				Users_Orgs ON

@@ -18,11 +18,12 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
- * The utility for the website remote service. This utility wraps {@link com.liferay.portal.service.impl.WebsiteServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
- *
- * <p>
- * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
- * </p>
+ * Provides the remote service utility for Website. This utility wraps
+ * {@link com.liferay.portal.service.impl.WebsiteServiceImpl} and is the
+ * primary access point for service operations in application layer code running
+ * on a remote server. Methods of this service are expected to have security
+ * checks based on the propagated JAAS credentials because this service can be
+ * accessed remotely.
  *
  * @author Brian Wing Shun Chan
  * @see WebsiteService
@@ -55,12 +56,27 @@ public class WebsiteServiceUtil {
 		getService().setBeanIdentifier(beanIdentifier);
 	}
 
+	/**
+	* @deprecated As of 6.2.0, replaced by {@link #addWebsite( String, long,
+	String, int, boolean, ServiceContext)}
+	*/
 	public static com.liferay.portal.model.Website addWebsite(
 		java.lang.String className, long classPK, java.lang.String url,
 		int typeId, boolean primary)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().addWebsite(className, classPK, url, typeId, primary);
+	}
+
+	public static com.liferay.portal.model.Website addWebsite(
+		java.lang.String className, long classPK, java.lang.String url,
+		int typeId, boolean primary,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .addWebsite(className, classPK, url, typeId, primary,
+			serviceContext);
 	}
 
 	public static void deleteWebsite(long websiteId)

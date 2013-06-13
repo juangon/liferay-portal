@@ -25,17 +25,14 @@ import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.security.pacl.DoPrivileged;
-import com.liferay.portal.kernel.template.TemplateContextType;
+import com.liferay.portal.kernel.template.TemplateConstants;
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.xml.Document;
-import com.liferay.portal.kernel.xml.Element;
-import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -62,12 +59,10 @@ import com.liferay.portlet.dynamicdatamapping.storage.Fields;
 import com.liferay.portlet.dynamicdatamapping.storage.StorageEngineUtil;
 import com.liferay.portlet.dynamicdatamapping.util.DDMImpl;
 import com.liferay.portlet.dynamicdatamapping.util.DDMUtil;
-import com.liferay.portlet.dynamicdatamapping.util.DDMXMLUtil;
-import com.liferay.portlet.journal.util.JournalUtil;
-import com.liferay.util.portlet.PortletRequestUtil;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -77,40 +72,20 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author Marcelllus Tavares
+ * @author Marcellus Tavares
  * @author Eduardo Lundgren
  */
 @DoPrivileged
 public class DDLImpl implements DDL {
 
-	public void addAllReservedEls(
-		Element rootElement, Map<String, String> tokens,
-		DDLRecordSet recordSet) {
-
-		JournalUtil.addReservedEl(
-			rootElement, tokens, DDLConstants.RESERVED_RECORD_SET_ID,
-			String.valueOf(recordSet.getRecordSetId()));
-
-		JournalUtil.addReservedEl(
-			rootElement, tokens, DDLConstants.RESERVED_RECORD_SET_NAME,
-			recordSet.getName());
-
-		JournalUtil.addReservedEl(
-			rootElement, tokens, DDLConstants.RESERVED_RECORD_SET_DESCRIPTION,
-			recordSet.getDescription());
-
-		JournalUtil.addReservedEl(
-			rootElement, tokens, DDLConstants.RESERVED_DDM_STRUCTURE_ID,
-			String.valueOf(recordSet.getDDMStructureId()));
-	}
-
+	@Override
 	public JSONObject getRecordJSONObject(DDLRecord record) throws Exception {
 		return getRecordJSONObject(record, false);
 	}
 
+	@Override
 	public JSONObject getRecordJSONObject(
 			DDLRecord record, boolean latestRecordVersion)
 		throws Exception {
@@ -181,6 +156,7 @@ public class DDLImpl implements DDL {
 		return jsonObject;
 	}
 
+	@Override
 	public List<DDLRecord> getRecords(Hits hits) throws Exception {
 		List<DDLRecord> records = new ArrayList<DDLRecord>();
 
@@ -219,6 +195,7 @@ public class DDLImpl implements DDL {
 		return records;
 	}
 
+	@Override
 	public JSONArray getRecordSetJSONArray(DDLRecordSet recordSet)
 		throws Exception {
 
@@ -269,12 +246,14 @@ public class DDLImpl implements DDL {
 		return jsonArray;
 	}
 
+	@Override
 	public JSONArray getRecordsJSONArray(DDLRecordSet recordSet)
 		throws Exception {
 
 		return getRecordsJSONArray(recordSet.getRecords(), false);
 	}
 
+	@Override
 	public JSONArray getRecordsJSONArray(List<DDLRecord> records)
 		throws Exception {
 
@@ -289,6 +268,7 @@ public class DDLImpl implements DDL {
 		return jsonArray;
 	}
 
+	@Override
 	public JSONArray getRecordsJSONArray(
 			List<DDLRecord> records, boolean latestRecordVersion)
 		throws Exception {
@@ -305,50 +285,47 @@ public class DDLImpl implements DDL {
 		return jsonArray;
 	}
 
+	@Override
 	public String getTemplateContent(
 			long ddmTemplateId, DDLRecordSet recordSet,
 			ThemeDisplay themeDisplay, RenderRequest renderRequest,
 			RenderResponse renderResponse)
 		throws Exception {
 
+		Map<String, Object> contextObjects = new HashMap<String, Object>();
+
+		contextObjects.put(
+			DDLConstants.RESERVED_DDM_STRUCTURE_ID,
+			recordSet.getDDMStructureId());
+		contextObjects.put(
+			DDLConstants.RESERVED_DDM_TEMPLATE_ID, ddmTemplateId);
+		contextObjects.put(
+			DDLConstants.RESERVED_RECORD_SET_DESCRIPTION,
+			recordSet.getDescription(themeDisplay.getLocale()));
+		contextObjects.put(
+			DDLConstants.RESERVED_RECORD_SET_ID, recordSet.getRecordSetId());
+		contextObjects.put(
+			DDLConstants.RESERVED_RECORD_SET_NAME,
+			recordSet.getName(themeDisplay.getLocale()));
+		contextObjects.put(TemplateConstants.TEMPLATE_ID, ddmTemplateId);
+
 		String viewMode = ParamUtil.getString(renderRequest, "viewMode");
 
-		String languageId = LanguageUtil.getLanguageId(renderRequest);
-
-		String xmlRequest = PortletRequestUtil.toXML(
-			renderRequest, renderResponse);
-
-		if (Validator.isNull(xmlRequest)) {
-			xmlRequest = "<request />";
+		if (Validator.isNull(viewMode)) {
+			viewMode = Constants.VIEW;
 		}
 
-		Map<String, String> tokens = JournalUtil.getTokens(
-			recordSet.getGroupId(), themeDisplay, xmlRequest);
+		contextObjects.put("viewMode", viewMode);
 
-		tokens.put("template_id", StringUtil.valueOf(ddmTemplateId));
-
-		String xml = StringPool.BLANK;
-
-		Document document = SAXReaderUtil.createDocument();
-
-		Element rootElement = document.addElement("root");
-
-		Document requestDocument = SAXReaderUtil.read(xmlRequest);
-
-		rootElement.add(requestDocument.getRootElement().createCopy());
-
-		addAllReservedEls(rootElement, tokens, recordSet);
-
-		xml = DDMXMLUtil.formatXML(document);
-
-		DDMTemplate template = DDMTemplateLocalServiceUtil.getTemplate(
+		DDMTemplate ddmTemplate = DDMTemplateLocalServiceUtil.getTemplate(
 			ddmTemplateId);
 
 		return _transformer.transform(
-			themeDisplay, tokens, viewMode, languageId, xml,
-			template.getScript(), template.getLanguage());
+			themeDisplay, contextObjects, ddmTemplate.getScript(),
+			ddmTemplate.getLanguage());
 	}
 
+	@Override
 	public boolean isEditable(
 			HttpServletRequest request, String portletId, long groupId)
 		throws Exception {
@@ -358,6 +335,7 @@ public class DDLImpl implements DDL {
 		return isEditable(portletId, groupId, defaultValue);
 	}
 
+	@Override
 	public boolean isEditable(
 			PortletPreferences preferences, String portletId, long groupId)
 		throws Exception {
@@ -368,26 +346,7 @@ public class DDLImpl implements DDL {
 		return isEditable(portletId, groupId, defaultValue);
 	}
 
-	public void sendRecordFileUpload(
-			HttpServletRequest request, HttpServletResponse response,
-			DDLRecord record, String fieldName, int valueIndex)
-		throws Exception {
-
-		Field field = record.getField(fieldName);
-
-		DDMUtil.sendFieldFile(request, response, field, valueIndex);
-	}
-
-	public void sendRecordFileUpload(
-			HttpServletRequest request, HttpServletResponse response,
-			long recordId, String fieldName, int valueIndex)
-		throws Exception {
-
-		DDLRecord record = DDLRecordServiceUtil.getRecord(recordId);
-
-		sendRecordFileUpload(request, response, record, fieldName, valueIndex);
-	}
-
+	@Override
 	public DDLRecord updateRecord(
 			long recordId, long recordSetId, boolean mergeFields,
 			boolean checkPermission, ServiceContext serviceContext)
@@ -448,11 +407,10 @@ public class DDLImpl implements DDL {
 
 		}
 
-		uploadRecordFieldFiles(record, serviceContext);
-
 		return record;
 	}
 
+	@Override
 	public DDLRecord updateRecord(
 			long recordId, long recordSetId, boolean mergeFields,
 			ServiceContext serviceContext)
@@ -460,21 +418,6 @@ public class DDLImpl implements DDL {
 
 		return updateRecord(
 			recordId, recordSetId, mergeFields, true, serviceContext);
-	}
-
-	public void uploadRecordFieldFile(
-			DDLRecord record, String fieldName, ServiceContext serviceContext)
-		throws Exception {
-
-		DDLRecordSet recordSet = record.getRecordSet();
-
-		DDMStructure ddmStructure = recordSet.getDDMStructure();
-
-		DDLRecordVersion recordVersion = record.getLatestRecordVersion();
-
-		DDMUtil.uploadFieldFile(
-			ddmStructure.getStructureId(), recordVersion.getDDMStorageId(),
-			record, fieldName, serviceContext);
 	}
 
 	protected String getFileEntryTitle(String uuid, long groupId) {
@@ -511,28 +454,9 @@ public class DDLImpl implements DDL {
 		return defaultValue;
 	}
 
-	protected void uploadRecordFieldFiles(
-			DDLRecord record, ServiceContext serviceContext)
-		throws Exception {
-
-		DDLRecordSet recordSet = record.getRecordSet();
-
-		DDMStructure ddmStructure = recordSet.getDDMStructure();
-
-		for (String fieldName : ddmStructure.getFieldNames()) {
-			String fieldDataType = ddmStructure.getFieldDataType(fieldName);
-
-			if (fieldDataType.equals(FieldConstants.FILE_UPLOAD)) {
-				uploadRecordFieldFile(record, fieldName, serviceContext);
-			}
-		}
-	}
-
 	private static Log _log = LogFactoryUtil.getLog(DDLImpl.class);
 
 	private Transformer _transformer = new Transformer(
-		PropsKeys.DYNAMIC_DATA_LISTS_TRANSFORMER_LISTENER,
-		PropsKeys.DYNAMIC_DATA_LISTS_ERROR_TEMPLATE,
-		TemplateContextType.STANDARD);
+		PropsKeys.DYNAMIC_DATA_LISTS_ERROR_TEMPLATE, false);
 
 }

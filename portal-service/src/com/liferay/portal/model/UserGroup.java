@@ -32,6 +32,7 @@ public interface UserGroup extends UserGroupModel, PersistedModel {
 	 * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.UserGroupImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public static final Accessor<UserGroup, String> NAME_ACCESSOR = new Accessor<UserGroup, String>() {
+			@Override
 			public String get(UserGroup userGroup) {
 				return userGroup.getName();
 			}

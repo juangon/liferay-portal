@@ -44,6 +44,7 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.kernel.util.ReflectionUtil;
 import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
 import com.liferay.portal.module.framework.ModuleFrameworkUtilAdapter;
+import com.liferay.portal.security.lang.SecurityManagerUtil;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
 import com.liferay.portal.spring.bean.BeanReferenceRefreshUtil;
@@ -78,6 +79,10 @@ import org.springframework.web.context.ContextLoaderListener;
  * @author Raymond Augé
  */
 public class PortalContextLoaderListener extends ContextLoaderListener {
+
+	public static String getPortalServletContextPath() {
+		return _portalServletContextPath;
+	}
 
 	@Override
 	public void contextDestroyed(ServletContextEvent servletContextEvent) {
@@ -128,6 +133,13 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 		}
 
 		try {
+			PortalLifecycleUtil.reset();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		try {
 			super.contextDestroyed(servletContextEvent);
 
 			try {
@@ -149,7 +161,6 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 		InstancePool.reset();
 		MethodCache.reset();
 		PortalBeanLocatorUtil.reset();
-		PortalLifecycleUtil.reset();
 		PortletBagPool.reset();
 
 		ReferenceRegistry.releaseReferences();
@@ -157,6 +168,8 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 		InitUtil.init();
 
 		ServletContext servletContext = servletContextEvent.getServletContext();
+
+		_portalServletContextPath = servletContext.getContextPath();
 
 		ClassPathUtil.initializeClassPaths(servletContext);
 
@@ -177,6 +190,8 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+
+		SecurityManagerUtil.applySmartStrategy();
 
 		PortalContextLoaderLifecycleThreadLocal.setInitializing(true);
 
@@ -265,6 +280,7 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 		PortalContextLoaderListener.class);
 
 	private static Field _filteredPropertyDescriptorsCacheField;
+	private static String _portalServletContextPath = "/";
 
 	static {
 		try {

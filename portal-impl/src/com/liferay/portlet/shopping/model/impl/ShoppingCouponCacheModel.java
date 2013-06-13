@@ -81,6 +81,7 @@ public class ShoppingCouponCacheModel implements CacheModel<ShoppingCoupon>,
 		return sb.toString();
 	}
 
+	@Override
 	public ShoppingCoupon toEntityModel() {
 		ShoppingCouponImpl shoppingCouponImpl = new ShoppingCouponImpl();
 
@@ -176,6 +177,7 @@ public class ShoppingCouponCacheModel implements CacheModel<ShoppingCoupon>,
 		return shoppingCouponImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		couponId = objectInput.readLong();
 		groupId = objectInput.readLong();
@@ -197,6 +199,7 @@ public class ShoppingCouponCacheModel implements CacheModel<ShoppingCoupon>,
 		discountType = objectInput.readUTF();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(couponId);

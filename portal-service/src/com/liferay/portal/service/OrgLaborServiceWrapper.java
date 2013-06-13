@@ -15,12 +15,10 @@
 package com.liferay.portal.service;
 
 /**
- * <p>
- * This class is a wrapper for {@link OrgLaborService}.
- * </p>
+ * Provides a wrapper for {@link OrgLaborService}.
  *
- * @author    Brian Wing Shun Chan
- * @see       OrgLaborService
+ * @author Brian Wing Shun Chan
+ * @see OrgLaborService
  * @generated
  */
 public class OrgLaborServiceWrapper implements OrgLaborService,
@@ -34,6 +32,7 @@ public class OrgLaborServiceWrapper implements OrgLaborService,
 	*
 	* @return the Spring bean ID for this bean
 	*/
+	@Override
 	public java.lang.String getBeanIdentifier() {
 		return _orgLaborService.getBeanIdentifier();
 	}
@@ -43,10 +42,12 @@ public class OrgLaborServiceWrapper implements OrgLaborService,
 	*
 	* @param beanIdentifier the Spring bean ID for this bean
 	*/
+	@Override
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		_orgLaborService.setBeanIdentifier(beanIdentifier);
 	}
 
+	@Override
 	public com.liferay.portal.model.OrgLabor addOrgLabor(long organizationId,
 		int typeId, int sunOpen, int sunClose, int monOpen, int monClose,
 		int tueOpen, int tueClose, int wedOpen, int wedClose, int thuOpen,
@@ -58,18 +59,21 @@ public class OrgLaborServiceWrapper implements OrgLaborService,
 			thuOpen, thuClose, friOpen, friClose, satOpen, satClose);
 	}
 
+	@Override
 	public void deleteOrgLabor(long orgLaborId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_orgLaborService.deleteOrgLabor(orgLaborId);
 	}
 
+	@Override
 	public com.liferay.portal.model.OrgLabor getOrgLabor(long orgLaborId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _orgLaborService.getOrgLabor(orgLaborId);
 	}
 
+	@Override
 	public java.util.List<com.liferay.portal.model.OrgLabor> getOrgLabors(
 		long organizationId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -77,6 +81,7 @@ public class OrgLaborServiceWrapper implements OrgLaborService,
 		return _orgLaborService.getOrgLabors(organizationId);
 	}
 
+	@Override
 	public com.liferay.portal.model.OrgLabor updateOrgLabor(long orgLaborId,
 		int typeId, int sunOpen, int sunClose, int monOpen, int monClose,
 		int tueOpen, int tueClose, int wedOpen, int wedClose, int thuOpen,
@@ -102,10 +107,12 @@ public class OrgLaborServiceWrapper implements OrgLaborService,
 		_orgLaborService = orgLaborService;
 	}
 
+	@Override
 	public OrgLaborService getWrappedService() {
 		return _orgLaborService;
 	}
 
+	@Override
 	public void setWrappedService(OrgLaborService orgLaborService) {
 		_orgLaborService = orgLaborService;
 	}

@@ -90,26 +90,32 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser>
 	public MBStatsUserModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _statsUserId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setStatsUserId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _statsUserId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return MBStatsUser.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return MBStatsUser.class.getName();
 	}
@@ -160,26 +166,32 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser>
 		}
 	}
 
+	@Override
 	public long getStatsUserId() {
 		return _statsUserId;
 	}
 
+	@Override
 	public void setStatsUserId(long statsUserId) {
 		_statsUserId = statsUserId;
 	}
 
+	@Override
 	public String getStatsUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getStatsUserId(), "uuid", _statsUserUuid);
 	}
 
+	@Override
 	public void setStatsUserUuid(String statsUserUuid) {
 		_statsUserUuid = statsUserUuid;
 	}
 
+	@Override
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -196,10 +208,12 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser>
 		return _originalGroupId;
 	}
 
+	@Override
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_columnBitmask |= USERID_COLUMN_BITMASK;
 
@@ -212,10 +226,12 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser>
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
@@ -224,10 +240,12 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser>
 		return _originalUserId;
 	}
 
+	@Override
 	public int getMessageCount() {
 		return _messageCount;
 	}
 
+	@Override
 	public void setMessageCount(int messageCount) {
 		_columnBitmask = -1L;
 
@@ -244,10 +262,12 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser>
 		return _originalMessageCount;
 	}
 
+	@Override
 	public Date getLastPostDate() {
 		return _lastPostDate;
 	}
 
+	@Override
 	public void setLastPostDate(Date lastPostDate) {
 		_lastPostDate = lastPostDate;
 	}
@@ -294,6 +314,7 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser>
 		return mbStatsUserImpl;
 	}
 
+	@Override
 	public int compareTo(MBStatsUser mbStatsUser) {
 		int value = 0;
 
@@ -318,18 +339,15 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof MBStatsUser)) {
 			return false;
 		}
 
-		MBStatsUser mbStatsUser = null;
-
-		try {
-			mbStatsUser = (MBStatsUser)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		MBStatsUser mbStatsUser = (MBStatsUser)obj;
 
 		long primaryKey = mbStatsUser.getPrimaryKey();
 
@@ -408,6 +426,7 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(19);
 

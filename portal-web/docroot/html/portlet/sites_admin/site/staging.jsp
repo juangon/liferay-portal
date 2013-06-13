@@ -29,7 +29,7 @@ LayoutSet publicLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(liveGroup.get
 
 <c:choose>
 	<c:when test="<%= privateLayoutSet.isLayoutSetPrototypeLinkActive() || publicLayoutSet.isLayoutSetPrototypeLinkActive() %>">
-		<div class="portlet-msg-info">
+		<div class="alert alert-info">
 			<liferay-ui:message key="staging-cannot-be-used-for-this-site-because-the-propagation-of-changes-from-the-site-template-is-enabled" />
 			<c:choose>
 				<c:when test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.UNLINK_LAYOUT_SET_PROTOTYPE) %>">
@@ -64,7 +64,11 @@ LayoutSet publicLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(liveGroup.get
 		<div class="staging-types" id="<portlet:namespace />stagingTypes">
 			<aui:field-wrapper label="staging-type">
 				<aui:input checked="<%= !liveGroup.isStaged() %>" id="none" label="none" name="stagingType" type="radio" value="<%= StagingConstants.TYPE_NOT_STAGED %>" />
-				<aui:input checked="<%= liveGroup.isStaged() && !liveGroup.isStagedRemotely() %>" helpMessage="staging-type-local" id="local" label="local-live" name="stagingType" type="radio" value="<%= StagingConstants.TYPE_LOCAL_STAGING %>" />
+
+				<c:if test="<%= !liveGroup.isCompany() %>">
+					<aui:input checked="<%= liveGroup.isStaged() && !liveGroup.isStagedRemotely() %>" helpMessage="staging-type-local" id="local" label="local-live" name="stagingType" type="radio" value="<%= StagingConstants.TYPE_LOCAL_STAGING %>" />
+				</c:if>
+
 				<aui:input checked="<%= liveGroup.isStaged() && liveGroup.isStagedRemotely() %>" helpMessage="staging-type-remote" id="remote" label="remote-live" name="stagingType" type="radio" value="<%= StagingConstants.TYPE_REMOTE_STAGING %>" />
 			</aui:field-wrapper>
 		</div>
@@ -79,7 +83,7 @@ LayoutSet publicLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(liveGroup.get
 		}
 		%>
 
-		<div class="<%= showRemoteOptions ? StringPool.BLANK : "aui-helper-hidden" %> staging-section" id="<portlet:namespace />remoteStagingOptions">
+		<div class="<%= showRemoteOptions ? StringPool.BLANK : "hide" %> staging-section" id="<portlet:namespace />remoteStagingOptions">
 			<br />
 
 			<liferay-ui:error exception="<%= RemoteExportException.class %>">
@@ -125,7 +129,7 @@ LayoutSet publicLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(liveGroup.get
 					</c:if>
 				</liferay-ui:error>
 
-				<div class="portlet-msg-info">
+				<div class="alert alert-info">
 					<liferay-ui:message key="remote-publish-help" />
 				</div>
 
@@ -141,36 +145,30 @@ LayoutSet publicLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(liveGroup.get
 			</aui:fieldset>
 		</div>
 
-		<div class="<%= (liveGroup.isStaged() ? StringPool.BLANK : "aui-helper-hidden") %> staging-section" id="<portlet:namespace />stagedPortlets">
+		<div class="<%= (liveGroup.isStaged() ? StringPool.BLANK : "hide") %> staging-section" id="<portlet:namespace />stagedPortlets">
 			<br />
 
-			<aui:fieldset helpMessage="page-versioning-help" label="page-versioning">
-				<aui:input label="enabled-on-public-pages" name="branchingPublic" type="checkbox" value='<%= GetterUtil.getBoolean(liveGroupTypeSettings.getProperty("branchingPublic")) %>' />
+			<c:if test="<%= !liveGroup.isCompany() %>">
+				<aui:fieldset helpMessage="page-versioning-help" label="page-versioning">
+					<aui:input label="enabled-on-public-pages" name="branchingPublic" type="checkbox" value='<%= GetterUtil.getBoolean(liveGroupTypeSettings.getProperty("branchingPublic")) %>' />
 
-				<aui:input label="enabled-on-private-pages" name="branchingPrivate" type="checkbox" value='<%= GetterUtil.getBoolean(liveGroupTypeSettings.getProperty("branchingPrivate")) %>' />
-			</aui:fieldset>
+					<aui:input label="enabled-on-private-pages" name="branchingPrivate" type="checkbox" value='<%= GetterUtil.getBoolean(liveGroupTypeSettings.getProperty("branchingPrivate")) %>' />
+				</aui:fieldset>
+			</c:if>
 
-			<aui:fieldset helpMessage="staged-portlets-help" label="staged-portlets">
-				<div class="portlet-msg-alert">
+			<aui:fieldset helpMessage="staged-portlets-help" label="staged-content">
+				<div class="alert alert-block">
 					<liferay-ui:message key="staged-portlets-alert" />
-				</div>
-
-				<div class="portlet-msg-info">
-					<liferay-ui:message key="always-exported-portlets-help" />
 				</div>
 
 				<%
 				Set<String> portletDataHandlerClasses = new HashSet<String>();
 
-				List<Portlet> portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId());
+				List<Portlet> dataSiteLevelPortlets = LayoutExporter.getDataSiteLevelPortlets(company.getCompanyId());
 
-				portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, locale));
+				dataSiteLevelPortlets = ListUtil.sort(dataSiteLevelPortlets, new PortletTitleComparator(application, locale));
 
-				for (Portlet curPortlet : portlets) {
-					if (!curPortlet.isActive()) {
-						continue;
-					}
-
+				for (Portlet curPortlet : dataSiteLevelPortlets) {
 					String portletDataHandlerClass = curPortlet.getPortletDataHandlerClass();
 
 					if (!portletDataHandlerClasses.contains(portletDataHandlerClass)) {
@@ -182,24 +180,10 @@ LayoutSet publicLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(liveGroup.get
 
 					PortletDataHandler portletDataHandler = curPortlet.getPortletDataHandlerInstance();
 
-					if (portletDataHandler == null) {
-						continue;
-					}
-
 					boolean staged = GetterUtil.getBoolean(liveGroupTypeSettings.getProperty(StagingConstants.STAGED_PORTLET + curPortlet.getRootPortletId()), portletDataHandler.isPublishToLiveByDefault());
-
-					if (portletDataHandler.isAlwaysStaged()) {
-						staged = true;
-					}
-
-					String includedInEveryPublish = StringPool.BLANK;
-
-					if (portletDataHandler.isAlwaysExportable()) {
-						includedInEveryPublish = " (*)";
-					}
 				%>
 
-					<aui:input disabled="<%= portletDataHandler.isAlwaysStaged() %>" label="<%= PortalUtil.getPortletTitle(curPortlet, application, locale) + includedInEveryPublish %>" name="<%= StagingConstants.STAGED_PORTLET + curPortlet.getRootPortletId() %>" type="checkbox" value="<%= staged %>" />
+					<aui:input label="<%= PortalUtil.getPortletTitle(curPortlet, application, locale) %>" name="<%= StagingConstants.STAGED_PORTLET + curPortlet.getRootPortletId() %>" type="checkbox" value="<%= staged %>" />
 
 				<%
 				}
@@ -227,7 +211,7 @@ LayoutSet publicLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(liveGroup.get
 		</aui:script>
 	</c:when>
 	<c:otherwise>
-		<div class="portlet-msg-info">
+		<div class="alert alert-info">
 			<liferay-ui:message key="you-do-not-have-permission-to-manage-settings-related-to-staging" />
 		</div>
 	</c:otherwise>

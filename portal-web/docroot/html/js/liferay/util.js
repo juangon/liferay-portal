@@ -40,10 +40,6 @@
 
 	var REGEX_DASH = /-([a-z])/gi;
 
-	var STR_LEFT_ROUND_BRACKET = '(';
-
-	var STR_RIGHT_ROUND_BRACKET = ')';
-
 	var STR_LEFT_SQUARE_BRACKET = '[';
 
 	var STR_RIGHT_SQUARE_BRACKET = ']';
@@ -57,11 +53,6 @@
 	};
 
 	var Window = {
-		ALIGN_CENTER: {
-			points: ['tc', 'tc']
-		},
-		XY: [50, 100],
-		XY_INCREMENTOR: 50,
 		_map: {}
 	};
 
@@ -381,24 +372,6 @@
 			return columnId;
 		},
 
-		getHistoryParam: function(portletNamespace) {
-			var historyKey = '&' + portletNamespace + 'historyKey=';
-			var historyParam = '';
-
-			if (location.hash) {
-				historyParam = location.hash.replace('#_LFR_FN_', historyKey);
-			}
-			else if (location.href.indexOf(historyKey) > -1) {
-				var historyParamRE = new RegExp(historyKey + '([^#&]+)');
-
-				historyParam = location.href.match(historyParamRE);
-
-				historyParam = historyParam && historyParam[0];
-			}
-
-			return historyParam;
-		},
-
 		getOpener: function() {
 			var openingWindow = Window._opener;
 
@@ -477,7 +450,7 @@
 				id = Util.getWindowName();
 			}
 
-			return Util.getTop().Liferay.Util.Window._map[id];
+			return Util.getTop().Liferay.Util.Window.getById(id);
 		},
 
 		getWindowName: function() {
@@ -883,7 +856,7 @@
 
 			var dialog = event.dialog;
 
-			iframeBody.addClass('aui-dialog-iframe-popup');
+			iframeBody.addClass('dialog-iframe-popup');
 
 			var detachEventHandles = function() {
 				AArray.invoke(eventHandles, 'detach');
@@ -905,7 +878,7 @@
 				)
 			];
 
-			var cancelButton = iframeBody.one('.aui-button-input-cancel');
+			var cancelButton = iframeBody.one('.btn-cancel');
 
 			if (cancelButton) {
 				cancelButton.after(
@@ -913,7 +886,7 @@
 					function() {
 						detachEventHandles();
 
-						dialog.close();
+						dialog.hide();
 					}
 				);
 			}
@@ -970,7 +943,7 @@
 			form.all(selector).set('checked', A.one(allBox).get('checked'));
 
 			if (selectClassName) {
-				form.all(selectClassName).toggleClass('selected', A.one(allBox).get('checked'));
+				form.all(selectClassName).toggleClass('info', A.one(allBox).get('checked'));
 			}
 		},
 		['aui-base']
@@ -992,10 +965,8 @@
 
 			inputs.each(
 				function(item, index, collection) {
-					if (!item.compareTo(allBox)) {
-						if (arrayIndexOf(name, item.getAttribute('name')) > -1) {
-							totalBoxes++;
-						}
+					if (!item.compareTo(allBox) && (arrayIndexOf(name, item.attr('name')) > -1)) {
+						totalBoxes++;
 
 						if (item.get('checked')) {
 							totalOn++;
@@ -1298,14 +1269,19 @@
 			var instance = this;
 
 			var defaultValues = {
-				availableFields: 'Liferay.FormBuilder.AVAILABLE_FIELDS.DDM_STRUCTURE',
-				eventName: 'selectStructure',
-				structureName: 'structures'
+				eventName: 'selectStructure'
 			};
 
 			config = A.merge(defaultValues,	config);
 
-			var ddmURL = Liferay.PortletURL.createRenderURL();
+			var ddmURL;
+
+			if (config.basePortletURL) {
+				ddmURL = Liferay.PortletURL.createURL(config.basePortletURL);
+			}
+			else {
+				ddmURL = Liferay.PortletURL.createRenderURL();
+			}
 
 			ddmURL.setEscapeXML(false);
 
@@ -1313,8 +1289,6 @@
 
 			ddmURL.setParameter('classNameId', config.classNameId);
 			ddmURL.setParameter('classPK', config.classPK);
-			ddmURL.setParameter('ddmResource', config.ddmResource);
-			ddmURL.setParameter('ddmResourceActionId', config.ddmResourceActionId);
 			ddmURL.setParameter('eventName', config.eventName);
 			ddmURL.setParameter('groupId', config.groupId);
 
@@ -1326,12 +1300,6 @@
 				ddmURL.setParameter('refererWebDAVToken', config.refererWebDAVToken);
 			}
 
-			ddmURL.setParameter('scopeAvailableFields', config.availableFields);
-			ddmURL.setParameter('scopeStorageType', config.storageType);
-			ddmURL.setParameter('scopeStructureName', config.structureName);
-			ddmURL.setParameter('scopeStructureType', config.structureType);
-			ddmURL.setParameter('scopeTemplateMode', config.templateMode);
-			ddmURL.setParameter('scopeTemplateType', config.templateType);
 			ddmURL.setParameter('scopeTitle', config.title);
 
 			if ('showGlobalScope' in config) {
@@ -1353,7 +1321,6 @@
 				ddmURL.setParameter('struts_action', '/dynamic_data_mapping/view');
 			}
 
-			ddmURL.setParameter('templateHeaderTitle', config.templateHeaderTitle);
 			ddmURL.setParameter('templateId', config.templateId);
 
 			ddmURL.setPortletId(166);
@@ -1367,10 +1334,6 @@
 				dialogConfig = {};
 
 				config.dialog = dialogConfig;
-			}
-
-			if (!('align' in dialogConfig)) {
-				dialogConfig.align = Util.Window.ALIGN_CENTER;
 			}
 
 			Util.openWindow(config);
@@ -1415,7 +1378,7 @@
 				var title = obj.one('.portlet-title-text');
 
 				if (title && !title.hasClass('not-editable')) {
-					title.setData('portletTitleEditOptions', options);
+					title.addClass('portlet-title-editable');
 
 					title.on(
 						EVENT_CLICK,
@@ -1437,10 +1400,12 @@
 							editable._startEditing(event);
 						}
 					);
+
+					title.setData('portletTitleEditOptions', options);
 				}
 			}
 		},
-		['aui-editable']
+		['aui-editable-deprecated']
 	);
 
 	Liferay.provide(
@@ -1457,7 +1422,7 @@
 
 			Liferay.Util.toggleDisabled(A.byIdNS(namespace, 'removeFolderButton'), true);
 		},
-		['aui-base']
+		['aui-base', 'liferay-node']
 	);
 
 	Liferay.provide(
@@ -1563,7 +1528,7 @@
 					}
 
 					if (!diff) {
-						var buttonRow = pageBody.one('.aui-button-holder');
+						var buttonRow = pageBody.one('.button-holder');
 						var templateEditor = pageBody.one('.lfr-template-editor');
 
 						if (buttonRow && templateEditor) {
@@ -1662,21 +1627,31 @@
 
 			var eventName = config.eventName || config.id;
 
-			var selectionEvent = Liferay.on(eventName, callback);
+			var eventHandles = [];
+
+			eventHandles.push(Liferay.on(eventName, callback));
+
+			var detachSelectionOnHideFn = function(event) {
+				if (!event.newVal) {
+					(new A.EventHandle(eventHandles)).detach();
+				}
+			};
 
 			if (dialog) {
+				eventHandles.push(dialog.after('visibleChange', detachSelectionOnHideFn));
+
 				dialog.show();
 			}
 			else {
 				Util.openWindow(
 					config,
 					function(dialogWindow) {
-						dialogWindow.after('close', selectionEvent.detach, selectionEvent);
+						eventHandles.push(dialogWindow.after('visibleChange', detachSelectionOnHideFn));
 					}
 				);
 			}
 		},
-		['aui-base']
+		['aui-base', 'liferay-util-window']
 	);
 
 	Liferay.provide(
@@ -1698,10 +1673,10 @@
 			if (button) {
 				button.set('disabled', false);
 
-				button.ancestor('.aui-button').removeClass('aui-button-disabled');
+				button.removeClass('btn-disabled');
 			}
 		},
-		['aui-base']
+		['aui-base', 'liferay-node']
 	);
 
 	Liferay.provide(
@@ -1821,11 +1796,21 @@
 
 			if (trigger) {
 				var hiddenClass = 'controls-hidden';
+				var iconHiddenClass = 'icon-remove';
+				var iconVisibleClass = 'icon-ok';
 				var visibleClass = 'controls-visible';
 				var currentClass = visibleClass;
+				var currentIconClass = iconVisibleClass;
 
 				if (Liferay._editControlsState != 'visible') {
 					currentClass = hiddenClass;
+					currentIconClass = iconHiddenClass;
+				}
+
+				var icon = trigger.one('.controls-state-icon');
+
+				if (icon) {
+					icon.addClass(currentIconClass);
 				}
 
 				docBody.addClass(currentClass);
@@ -1833,6 +1818,10 @@
 				trigger.on(
 					EVENT_CLICK,
 					function(event) {
+						if (icon) {
+							icon.toggleClass(iconVisibleClass).toggleClass(iconHiddenClass);
+						}
+
 						docBody.toggleClass(visibleClass).toggleClass(hiddenClass);
 
 						Liferay._editControlsState = (docBody.hasClass(visibleClass) ? 'visible' : 'hidden');
@@ -1857,7 +1846,7 @@
 				function(item, index, collection) {
 					item.attr('disabled', state);
 
-					item.ancestor('.aui-button').toggleClass('aui-button-disabled', state);
+					item.toggleClass('disabled', state);
 				}
 			);
 		},
@@ -1867,22 +1856,29 @@
 	Liferay.provide(
 		Util,
 		'toggleRadio',
-		function(radioId, showBoxId, hideBoxIds) {
+		function(radioId, showBoxIds, hideBoxIds) {
 			var radioButton = A.one('#' + radioId);
-			var showBox = A.one('#' + showBoxId);
 
 			if (radioButton) {
 				var checked = radioButton.get('checked');
 
-				if (showBox) {
-					showBox.toggle(checked);
+				var showBoxes;
+
+				if (Lang.isValue(showBoxIds)) {
+					if (Lang.isArray(showBoxIds)) {
+						showBoxIds = showBoxIds.join(',#');
+					}
+
+					showBoxes = A.all('#' + showBoxIds);
+
+					showBoxes.toggle(checked);
 				}
 
 				radioButton.on(
 					'change',
 					function() {
-						if (showBox) {
-							showBox.show();
+						if (showBoxes) {
+							showBoxes.show();
 						}
 
 						if (Lang.isValue(hideBoxIds)) {
@@ -1980,7 +1976,11 @@
 		Util,
 		'_openWindowProvider',
 		function(config, callback) {
-			Util._openWindow(config, callback);
+			var dialog = Window.getWindow(config);
+
+			if (Lang.isFunction(callback)) {
+				callback(dialog);
+			}
 		},
 		['liferay-util-window']
 	);
@@ -1990,7 +1990,7 @@
 		function(event) {
 			var id = event.id;
 
-			var dialog = Liferay.Util.getTop().Liferay.Util.Window._map[id];
+			var dialog = Liferay.Util.getTop().Liferay.Util.Window.getById(id);
 
 			if (dialog && dialog.iframe) {
 				var dialogWindow = dialog.iframe.node.get('contentWindow').getDOM();
@@ -2017,7 +2017,7 @@
 					}
 				}
 
-				dialog.close();
+				dialog.hide();
 			}
 		}
 	);
@@ -2037,7 +2037,7 @@
 		DROP_AREA: 440,
 		DROP_POSITION: 450,
 		DRAG_ITEM: 460,
-		TOOLTIP: 470,
+		TOOLTIP: 10000,
 		WINDOW: 1000,
 		MENU: 5000
 	};

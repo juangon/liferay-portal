@@ -125,14 +125,17 @@ public class BufferedIncrementAdvice
 	private static BufferedIncrement _nullBufferedIncrement =
 		new BufferedIncrement() {
 
+			@Override
 			public Class<? extends Annotation> annotationType() {
 				return BufferedIncrement.class;
 			}
 
+			@Override
 			public String configuration() {
 				return "default";
 			}
 
+			@Override
 			public Class<? extends Increment<?>> incrementClass() {
 				return null;
 			}

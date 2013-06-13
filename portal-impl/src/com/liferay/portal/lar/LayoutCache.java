@@ -94,41 +94,42 @@ public class LayoutCache {
 
 		Map<String, Long> entityMap = entityMapMap.get(entityName);
 
-		if (entityMap == null) {
-			entityMap = new HashMap<String, Long>();
-
-			if (entityName.equals("user-group")) {
-				List<UserGroup> userGroups = UserGroupLocalServiceUtil.search(
-					companyId, null, null, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-					(OrderByComparator)null);
-
-				for (int i = 0; i < userGroups.size(); i++) {
-					UserGroup userGroup = userGroups.get(i);
-
-					Group group = userGroup.getGroup();
-
-					entityMap.put(userGroup.getName(), group.getGroupId());
-				}
-			}
-			else if (entityName.equals("organization")) {
-				List<Organization> organizations =
-					OrganizationLocalServiceUtil.search(
-						companyId,
-						OrganizationConstants.ANY_PARENT_ORGANIZATION_ID, null,
-						OrganizationConstants.TYPE_REGULAR_ORGANIZATION, null,
-						null, null, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-
-				for (int i = 0; i < organizations.size(); i++) {
-					Organization organization = organizations.get(i);
-
-					Group group = organization.getGroup();
-
-					entityMap.put(organization.getName(), group.getGroupId());
-				}
-			}
-
-			entityMapMap.put(entityName, entityMap);
+		if (entityMap != null) {
+			return entityMap;
 		}
+
+		entityMap = new HashMap<String, Long>();
+
+		if (entityName.equals("user-group")) {
+			List<UserGroup> userGroups = UserGroupLocalServiceUtil.search(
+				companyId, null, null, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+				(OrderByComparator)null);
+
+			for (int i = 0; i < userGroups.size(); i++) {
+				UserGroup userGroup = userGroups.get(i);
+
+				Group group = userGroup.getGroup();
+
+				entityMap.put(userGroup.getName(), group.getGroupId());
+			}
+		}
+		else if (entityName.equals("organization")) {
+			List<Organization> organizations =
+				OrganizationLocalServiceUtil.search(
+					companyId, OrganizationConstants.ANY_PARENT_ORGANIZATION_ID,
+					null, OrganizationConstants.TYPE_REGULAR_ORGANIZATION, null,
+					null, null, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+			for (int i = 0; i < organizations.size(); i++) {
+				Organization organization = organizations.get(i);
+
+				Group group = organization.getGroup();
+
+				entityMap.put(organization.getName(), group.getGroupId());
+			}
+		}
+
+		entityMapMap.put(entityName, entityMap);
 
 		return entityMap;
 	}
@@ -152,27 +153,29 @@ public class LayoutCache {
 
 		List<Role> roles = groupRolesMap.get(groupId);
 
-		if (roles == null) {
-			Group group = GroupLocalServiceUtil.getGroup(groupId);
-
-			roles = ResourceActionsUtil.getRoles(
-				group.getCompanyId(), group, resourceName, null);
-
-			List<Team> teams = TeamLocalServiceUtil.getGroupTeams(groupId);
-
-			for (Team team : teams) {
-				Role teamRole = RoleLocalServiceUtil.getTeamRole(
-					group.getCompanyId(), team.getTeamId());
-
-				teamRole.setName(
-					PermissionExporter.ROLE_TEAM_PREFIX + team.getName());
-				teamRole.setDescription(team.getDescription());
-
-				roles.add(teamRole);
-			}
-
-			groupRolesMap.put(groupId, roles);
+		if (roles != null) {
+			return roles;
 		}
+
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+		roles = ResourceActionsUtil.getRoles(
+			group.getCompanyId(), group, resourceName, null);
+
+		List<Team> teams = TeamLocalServiceUtil.getGroupTeams(groupId);
+
+		for (Team team : teams) {
+			Role teamRole = RoleLocalServiceUtil.getTeamRole(
+				group.getCompanyId(), team.getTeamId());
+
+			teamRole.setName(
+				PermissionExporter.ROLE_TEAM_PREFIX + team.getName());
+			teamRole.setDescription(team.getDescription());
+
+			roles.add(teamRole);
+		}
+
+		groupRolesMap.put(groupId, roles);
 
 		return roles;
 	}

@@ -23,8 +23,8 @@ import java.util.Map;
  * This class is a wrapper for {@link Ticket}.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       Ticket
+ * @author Brian Wing Shun Chan
+ * @see Ticket
  * @generated
  */
 public class TicketWrapper implements Ticket, ModelWrapper<Ticket> {
@@ -32,14 +32,17 @@ public class TicketWrapper implements Ticket, ModelWrapper<Ticket> {
 		_ticket = ticket;
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return Ticket.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return Ticket.class.getName();
 	}
 
+	@Override
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
@@ -56,6 +59,7 @@ public class TicketWrapper implements Ticket, ModelWrapper<Ticket> {
 		return attributes;
 	}
 
+	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 		Long ticketId = (Long)attributes.get("ticketId");
 
@@ -117,6 +121,7 @@ public class TicketWrapper implements Ticket, ModelWrapper<Ticket> {
 	*
 	* @return the primary key of this ticket
 	*/
+	@Override
 	public long getPrimaryKey() {
 		return _ticket.getPrimaryKey();
 	}
@@ -126,6 +131,7 @@ public class TicketWrapper implements Ticket, ModelWrapper<Ticket> {
 	*
 	* @param primaryKey the primary key of this ticket
 	*/
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_ticket.setPrimaryKey(primaryKey);
 	}
@@ -135,6 +141,7 @@ public class TicketWrapper implements Ticket, ModelWrapper<Ticket> {
 	*
 	* @return the ticket ID of this ticket
 	*/
+	@Override
 	public long getTicketId() {
 		return _ticket.getTicketId();
 	}
@@ -144,6 +151,7 @@ public class TicketWrapper implements Ticket, ModelWrapper<Ticket> {
 	*
 	* @param ticketId the ticket ID of this ticket
 	*/
+	@Override
 	public void setTicketId(long ticketId) {
 		_ticket.setTicketId(ticketId);
 	}
@@ -153,6 +161,7 @@ public class TicketWrapper implements Ticket, ModelWrapper<Ticket> {
 	*
 	* @return the company ID of this ticket
 	*/
+	@Override
 	public long getCompanyId() {
 		return _ticket.getCompanyId();
 	}
@@ -162,6 +171,7 @@ public class TicketWrapper implements Ticket, ModelWrapper<Ticket> {
 	*
 	* @param companyId the company ID of this ticket
 	*/
+	@Override
 	public void setCompanyId(long companyId) {
 		_ticket.setCompanyId(companyId);
 	}
@@ -171,6 +181,7 @@ public class TicketWrapper implements Ticket, ModelWrapper<Ticket> {
 	*
 	* @return the create date of this ticket
 	*/
+	@Override
 	public java.util.Date getCreateDate() {
 		return _ticket.getCreateDate();
 	}
@@ -180,6 +191,7 @@ public class TicketWrapper implements Ticket, ModelWrapper<Ticket> {
 	*
 	* @param createDate the create date of this ticket
 	*/
+	@Override
 	public void setCreateDate(java.util.Date createDate) {
 		_ticket.setCreateDate(createDate);
 	}
@@ -189,10 +201,12 @@ public class TicketWrapper implements Ticket, ModelWrapper<Ticket> {
 	*
 	* @return the fully qualified class name of this ticket
 	*/
+	@Override
 	public java.lang.String getClassName() {
 		return _ticket.getClassName();
 	}
 
+	@Override
 	public void setClassName(java.lang.String className) {
 		_ticket.setClassName(className);
 	}
@@ -202,6 +216,7 @@ public class TicketWrapper implements Ticket, ModelWrapper<Ticket> {
 	*
 	* @return the class name ID of this ticket
 	*/
+	@Override
 	public long getClassNameId() {
 		return _ticket.getClassNameId();
 	}
@@ -211,6 +226,7 @@ public class TicketWrapper implements Ticket, ModelWrapper<Ticket> {
 	*
 	* @param classNameId the class name ID of this ticket
 	*/
+	@Override
 	public void setClassNameId(long classNameId) {
 		_ticket.setClassNameId(classNameId);
 	}
@@ -220,6 +236,7 @@ public class TicketWrapper implements Ticket, ModelWrapper<Ticket> {
 	*
 	* @return the class p k of this ticket
 	*/
+	@Override
 	public long getClassPK() {
 		return _ticket.getClassPK();
 	}
@@ -229,6 +246,7 @@ public class TicketWrapper implements Ticket, ModelWrapper<Ticket> {
 	*
 	* @param classPK the class p k of this ticket
 	*/
+	@Override
 	public void setClassPK(long classPK) {
 		_ticket.setClassPK(classPK);
 	}
@@ -238,6 +256,7 @@ public class TicketWrapper implements Ticket, ModelWrapper<Ticket> {
 	*
 	* @return the key of this ticket
 	*/
+	@Override
 	public java.lang.String getKey() {
 		return _ticket.getKey();
 	}
@@ -247,6 +266,7 @@ public class TicketWrapper implements Ticket, ModelWrapper<Ticket> {
 	*
 	* @param key the key of this ticket
 	*/
+	@Override
 	public void setKey(java.lang.String key) {
 		_ticket.setKey(key);
 	}
@@ -256,6 +276,7 @@ public class TicketWrapper implements Ticket, ModelWrapper<Ticket> {
 	*
 	* @return the type of this ticket
 	*/
+	@Override
 	public int getType() {
 		return _ticket.getType();
 	}
@@ -265,6 +286,7 @@ public class TicketWrapper implements Ticket, ModelWrapper<Ticket> {
 	*
 	* @param type the type of this ticket
 	*/
+	@Override
 	public void setType(int type) {
 		_ticket.setType(type);
 	}
@@ -274,6 +296,7 @@ public class TicketWrapper implements Ticket, ModelWrapper<Ticket> {
 	*
 	* @return the extra info of this ticket
 	*/
+	@Override
 	public java.lang.String getExtraInfo() {
 		return _ticket.getExtraInfo();
 	}
@@ -283,6 +306,7 @@ public class TicketWrapper implements Ticket, ModelWrapper<Ticket> {
 	*
 	* @param extraInfo the extra info of this ticket
 	*/
+	@Override
 	public void setExtraInfo(java.lang.String extraInfo) {
 		_ticket.setExtraInfo(extraInfo);
 	}
@@ -292,6 +316,7 @@ public class TicketWrapper implements Ticket, ModelWrapper<Ticket> {
 	*
 	* @return the expiration date of this ticket
 	*/
+	@Override
 	public java.util.Date getExpirationDate() {
 		return _ticket.getExpirationDate();
 	}
@@ -301,52 +326,64 @@ public class TicketWrapper implements Ticket, ModelWrapper<Ticket> {
 	*
 	* @param expirationDate the expiration date of this ticket
 	*/
+	@Override
 	public void setExpirationDate(java.util.Date expirationDate) {
 		_ticket.setExpirationDate(expirationDate);
 	}
 
+	@Override
 	public boolean isNew() {
 		return _ticket.isNew();
 	}
 
+	@Override
 	public void setNew(boolean n) {
 		_ticket.setNew(n);
 	}
 
+	@Override
 	public boolean isCachedModel() {
 		return _ticket.isCachedModel();
 	}
 
+	@Override
 	public void setCachedModel(boolean cachedModel) {
 		_ticket.setCachedModel(cachedModel);
 	}
 
+	@Override
 	public boolean isEscapedModel() {
 		return _ticket.isEscapedModel();
 	}
 
+	@Override
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _ticket.getPrimaryKeyObj();
 	}
 
+	@Override
 	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
 		_ticket.setPrimaryKeyObj(primaryKeyObj);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
 		return _ticket.getExpandoBridge();
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.model.BaseModel<?> baseModel) {
 		_ticket.setExpandoBridgeAttributes(baseModel);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portlet.expando.model.ExpandoBridge expandoBridge) {
 		_ticket.setExpandoBridgeAttributes(expandoBridge);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		_ticket.setExpandoBridgeAttributes(serviceContext);
@@ -357,6 +394,7 @@ public class TicketWrapper implements Ticket, ModelWrapper<Ticket> {
 		return new TicketWrapper((Ticket)_ticket.clone());
 	}
 
+	@Override
 	public int compareTo(com.liferay.portal.model.Ticket ticket) {
 		return _ticket.compareTo(ticket);
 	}
@@ -366,14 +404,17 @@ public class TicketWrapper implements Ticket, ModelWrapper<Ticket> {
 		return _ticket.hashCode();
 	}
 
+	@Override
 	public com.liferay.portal.model.CacheModel<com.liferay.portal.model.Ticket> toCacheModel() {
 		return _ticket.toCacheModel();
 	}
 
+	@Override
 	public com.liferay.portal.model.Ticket toEscapedModel() {
 		return new TicketWrapper(_ticket.toEscapedModel());
 	}
 
+	@Override
 	public com.liferay.portal.model.Ticket toUnescapedModel() {
 		return new TicketWrapper(_ticket.toUnescapedModel());
 	}
@@ -383,15 +424,18 @@ public class TicketWrapper implements Ticket, ModelWrapper<Ticket> {
 		return _ticket.toString();
 	}
 
+	@Override
 	public java.lang.String toXmlString() {
 		return _ticket.toXmlString();
 	}
 
+	@Override
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_ticket.persist();
 	}
 
+	@Override
 	public boolean isExpired() {
 		return _ticket.isExpired();
 	}
@@ -403,10 +447,12 @@ public class TicketWrapper implements Ticket, ModelWrapper<Ticket> {
 		return _ticket;
 	}
 
+	@Override
 	public Ticket getWrappedModel() {
 		return _ticket;
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		_ticket.resetOriginalValues();
 	}

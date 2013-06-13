@@ -15,12 +15,10 @@
 package com.liferay.portal.service;
 
 /**
- * <p>
- * This class is a wrapper for {@link ResourceBlockPermissionLocalService}.
- * </p>
+ * Provides a wrapper for {@link ResourceBlockPermissionLocalService}.
  *
- * @author    Brian Wing Shun Chan
- * @see       ResourceBlockPermissionLocalService
+ * @author Brian Wing Shun Chan
+ * @see ResourceBlockPermissionLocalService
  * @generated
  */
 public class ResourceBlockPermissionLocalServiceWrapper
@@ -38,6 +36,7 @@ public class ResourceBlockPermissionLocalServiceWrapper
 	* @return the resource block permission that was added
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.ResourceBlockPermission addResourceBlockPermission(
 		com.liferay.portal.model.ResourceBlockPermission resourceBlockPermission)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -50,6 +49,7 @@ public class ResourceBlockPermissionLocalServiceWrapper
 	* @param resourceBlockPermissionId the primary key for the new resource block permission
 	* @return the new resource block permission
 	*/
+	@Override
 	public com.liferay.portal.model.ResourceBlockPermission createResourceBlockPermission(
 		long resourceBlockPermissionId) {
 		return _resourceBlockPermissionLocalService.createResourceBlockPermission(resourceBlockPermissionId);
@@ -63,6 +63,7 @@ public class ResourceBlockPermissionLocalServiceWrapper
 	* @throws PortalException if a resource block permission with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.ResourceBlockPermission deleteResourceBlockPermission(
 		long resourceBlockPermissionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -77,12 +78,14 @@ public class ResourceBlockPermissionLocalServiceWrapper
 	* @return the resource block permission that was removed
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.ResourceBlockPermission deleteResourceBlockPermission(
 		com.liferay.portal.model.ResourceBlockPermission resourceBlockPermission)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _resourceBlockPermissionLocalService.deleteResourceBlockPermission(resourceBlockPermission);
 	}
 
+	@Override
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {
 		return _resourceBlockPermissionLocalService.dynamicQuery();
 	}
@@ -94,6 +97,7 @@ public class ResourceBlockPermissionLocalServiceWrapper
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -114,6 +118,7 @@ public class ResourceBlockPermissionLocalServiceWrapper
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -136,6 +141,7 @@ public class ResourceBlockPermissionLocalServiceWrapper
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -153,12 +159,14 @@ public class ResourceBlockPermissionLocalServiceWrapper
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _resourceBlockPermissionLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	@Override
 	public com.liferay.portal.model.ResourceBlockPermission fetchResourceBlockPermission(
 		long resourceBlockPermissionId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -173,6 +181,7 @@ public class ResourceBlockPermissionLocalServiceWrapper
 	* @throws PortalException if a resource block permission with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.ResourceBlockPermission getResourceBlockPermission(
 		long resourceBlockPermissionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -180,6 +189,7 @@ public class ResourceBlockPermissionLocalServiceWrapper
 		return _resourceBlockPermissionLocalService.getResourceBlockPermission(resourceBlockPermissionId);
 	}
 
+	@Override
 	public com.liferay.portal.model.PersistedModel getPersistedModel(
 		java.io.Serializable primaryKeyObj)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -199,6 +209,7 @@ public class ResourceBlockPermissionLocalServiceWrapper
 	* @return the range of resource block permissions
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public java.util.List<com.liferay.portal.model.ResourceBlockPermission> getResourceBlockPermissions(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -212,6 +223,7 @@ public class ResourceBlockPermissionLocalServiceWrapper
 	* @return the number of resource block permissions
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public int getResourceBlockPermissionsCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _resourceBlockPermissionLocalService.getResourceBlockPermissionsCount();
@@ -224,6 +236,7 @@ public class ResourceBlockPermissionLocalServiceWrapper
 	* @return the resource block permission that was updated
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.ResourceBlockPermission updateResourceBlockPermission(
 		com.liferay.portal.model.ResourceBlockPermission resourceBlockPermission)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -235,6 +248,7 @@ public class ResourceBlockPermissionLocalServiceWrapper
 	*
 	* @return the Spring bean ID for this bean
 	*/
+	@Override
 	public java.lang.String getBeanIdentifier() {
 		return _resourceBlockPermissionLocalService.getBeanIdentifier();
 	}
@@ -244,10 +258,12 @@ public class ResourceBlockPermissionLocalServiceWrapper
 	*
 	* @param beanIdentifier the Spring bean ID for this bean
 	*/
+	@Override
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		_resourceBlockPermissionLocalService.setBeanIdentifier(beanIdentifier);
 	}
 
+	@Override
 	public void addResourceBlockPermissions(long resourceBlockId,
 		com.liferay.portal.model.ResourceBlockPermissionsContainer resourceBlockPermissionsContainer)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -255,11 +271,13 @@ public class ResourceBlockPermissionLocalServiceWrapper
 			resourceBlockPermissionsContainer);
 	}
 
+	@Override
 	public void deleteResourceBlockPermissions(long resourceBlockId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_resourceBlockPermissionLocalService.deleteResourceBlockPermissions(resourceBlockId);
 	}
 
+	@Override
 	public java.util.Map<java.lang.Long, java.util.Set<java.lang.String>> getAvailableResourceBlockPermissionActionIds(
 		long[] roleIds, java.lang.String name, long primKey,
 		java.util.List<java.lang.String> actionIds)
@@ -269,18 +287,21 @@ public class ResourceBlockPermissionLocalServiceWrapper
 			name, primKey, actionIds);
 	}
 
+	@Override
 	public com.liferay.portal.model.ResourceBlockPermissionsContainer getResourceBlockPermissionsContainer(
 		long resourceBlockId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _resourceBlockPermissionLocalService.getResourceBlockPermissionsContainer(resourceBlockId);
 	}
 
+	@Override
 	public int getResourceBlockPermissionsCount(long resourceBlockId,
 		long roleId) throws com.liferay.portal.kernel.exception.SystemException {
 		return _resourceBlockPermissionLocalService.getResourceBlockPermissionsCount(resourceBlockId,
 			roleId);
 	}
 
+	@Override
 	public void updateResourceBlockPermission(long resourceBlockId,
 		long roleId, long actionIdsLong, int operator)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -303,10 +324,12 @@ public class ResourceBlockPermissionLocalServiceWrapper
 		_resourceBlockPermissionLocalService = resourceBlockPermissionLocalService;
 	}
 
+	@Override
 	public ResourceBlockPermissionLocalService getWrappedService() {
 		return _resourceBlockPermissionLocalService;
 	}
 
+	@Override
 	public void setWrappedService(
 		ResourceBlockPermissionLocalService resourceBlockPermissionLocalService) {
 		_resourceBlockPermissionLocalService = resourceBlockPermissionLocalService;

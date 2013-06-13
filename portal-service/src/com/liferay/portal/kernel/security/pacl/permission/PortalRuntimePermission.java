@@ -190,29 +190,37 @@ public class PortalRuntimePermission extends BasicPermission {
 
 	private static class NoPACL implements PACL {
 
+		@Override
 		public void checkDynamicQuery(Class<?> implClass) {
 		}
 
+		@Override
 		public void checkExpandoBridge(String className) {
 		}
 
+		@Override
 		public void checkGetBeanProperty(
 			String servletContextName, Class<?> clazz, String property) {
 		}
 
+		@Override
 		public void checkGetClassLoader(String classLoaderReferenceId) {
 		}
 
+		@Override
 		public void checkPortletBagPool(String portletId) {
 		}
 
+		@Override
 		public void checkSearchEngine(String searchEngineId) {
 		}
 
+		@Override
 		public void checkSetBeanProperty(
 			String servletContextName, Class<?> clazz, String property) {
 		}
 
+		@Override
 		public void checkThreadPoolExecutor(String name) {
 		}
 

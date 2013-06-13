@@ -45,6 +45,7 @@ public class ${entity.name}CacheModel implements CacheModel<${entity.name}>, Ext
 		return sb.toString();
 	}
 
+	@Override
 	public ${entity.name} toEntityModel() {
 		${entity.name}Impl ${entity.varName}Impl = new ${entity.name}Impl();
 
@@ -83,6 +84,7 @@ public class ${entity.name}CacheModel implements CacheModel<${entity.name}>, Ext
 		return ${entity.varName}Impl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws
 		<#assign throwsClassNotFoundException = false>
 
@@ -122,6 +124,7 @@ public class ${entity.name}CacheModel implements CacheModel<${entity.name}>, Ext
 		</#list>
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		<#list entity.regularColList as column>
 			<#if column.primitiveType>

@@ -108,6 +108,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @return the matching user trackers
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<UserTracker> findByCompanyId(long companyId)
 		throws SystemException {
 		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -127,6 +128,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @return the range of matching user trackers
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<UserTracker> findByCompanyId(long companyId, int start, int end)
 		throws SystemException {
 		return findByCompanyId(companyId, start, end, null);
@@ -146,6 +148,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @return the ordered range of matching user trackers
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<UserTracker> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -252,6 +255,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @throws com.liferay.portal.NoSuchUserTrackerException if a matching user tracker could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserTracker findByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchUserTrackerException, SystemException {
@@ -282,6 +286,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @return the first matching user tracker, or <code>null</code> if a matching user tracker could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserTracker fetchByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<UserTracker> list = findByCompanyId(companyId, 0, 1,
@@ -303,6 +308,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @throws com.liferay.portal.NoSuchUserTrackerException if a matching user tracker could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserTracker findByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchUserTrackerException, SystemException {
@@ -333,6 +339,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @return the last matching user tracker, or <code>null</code> if a matching user tracker could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserTracker fetchByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByCompanyId(companyId);
@@ -357,6 +364,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @throws com.liferay.portal.NoSuchUserTrackerException if a user tracker with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserTracker[] findByCompanyId_PrevAndNext(long userTrackerId,
 		long companyId, OrderByComparator orderByComparator)
 		throws NoSuchUserTrackerException, SystemException {
@@ -498,6 +506,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @param companyId the company ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (UserTracker userTracker : findByCompanyId(companyId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -512,6 +521,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @return the number of matching user trackers
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByCompanyId(long companyId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMPANYID;
 
@@ -585,6 +595,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @return the matching user trackers
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<UserTracker> findByUserId(long userId)
 		throws SystemException {
 		return findByUserId(userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
@@ -603,6 +614,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @return the range of matching user trackers
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<UserTracker> findByUserId(long userId, int start, int end)
 		throws SystemException {
 		return findByUserId(userId, start, end, null);
@@ -622,6 +634,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @return the ordered range of matching user trackers
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<UserTracker> findByUserId(long userId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -728,6 +741,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @throws com.liferay.portal.NoSuchUserTrackerException if a matching user tracker could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserTracker findByUserId_First(long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchUserTrackerException, SystemException {
@@ -757,6 +771,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @return the first matching user tracker, or <code>null</code> if a matching user tracker could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserTracker fetchByUserId_First(long userId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<UserTracker> list = findByUserId(userId, 0, 1, orderByComparator);
@@ -777,6 +792,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @throws com.liferay.portal.NoSuchUserTrackerException if a matching user tracker could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserTracker findByUserId_Last(long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchUserTrackerException, SystemException {
@@ -806,6 +822,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @return the last matching user tracker, or <code>null</code> if a matching user tracker could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserTracker fetchByUserId_Last(long userId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByUserId(userId);
@@ -830,6 +847,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @throws com.liferay.portal.NoSuchUserTrackerException if a user tracker with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserTracker[] findByUserId_PrevAndNext(long userTrackerId,
 		long userId, OrderByComparator orderByComparator)
 		throws NoSuchUserTrackerException, SystemException {
@@ -971,6 +989,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @param userId the user ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByUserId(long userId) throws SystemException {
 		for (UserTracker userTracker : findByUserId(userId, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null)) {
@@ -985,6 +1004,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @return the number of matching user trackers
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUserId(long userId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_USERID;
 
@@ -1059,6 +1079,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @return the matching user trackers
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<UserTracker> findBySessionId(String sessionId)
 		throws SystemException {
 		return findBySessionId(sessionId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -1078,6 +1099,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @return the range of matching user trackers
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<UserTracker> findBySessionId(String sessionId, int start,
 		int end) throws SystemException {
 		return findBySessionId(sessionId, start, end, null);
@@ -1097,6 +1119,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @return the ordered range of matching user trackers
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<UserTracker> findBySessionId(String sessionId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -1217,6 +1240,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @throws com.liferay.portal.NoSuchUserTrackerException if a matching user tracker could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserTracker findBySessionId_First(String sessionId,
 		OrderByComparator orderByComparator)
 		throws NoSuchUserTrackerException, SystemException {
@@ -1247,6 +1271,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @return the first matching user tracker, or <code>null</code> if a matching user tracker could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserTracker fetchBySessionId_First(String sessionId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<UserTracker> list = findBySessionId(sessionId, 0, 1,
@@ -1268,6 +1293,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @throws com.liferay.portal.NoSuchUserTrackerException if a matching user tracker could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserTracker findBySessionId_Last(String sessionId,
 		OrderByComparator orderByComparator)
 		throws NoSuchUserTrackerException, SystemException {
@@ -1298,6 +1324,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @return the last matching user tracker, or <code>null</code> if a matching user tracker could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserTracker fetchBySessionId_Last(String sessionId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countBySessionId(sessionId);
@@ -1322,6 +1349,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @throws com.liferay.portal.NoSuchUserTrackerException if a user tracker with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserTracker[] findBySessionId_PrevAndNext(long userTrackerId,
 		String sessionId, OrderByComparator orderByComparator)
 		throws NoSuchUserTrackerException, SystemException {
@@ -1477,6 +1505,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @param sessionId the session ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeBySessionId(String sessionId) throws SystemException {
 		for (UserTracker userTracker : findBySessionId(sessionId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -1491,6 +1520,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @return the number of matching user trackers
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countBySessionId(String sessionId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_SESSIONID;
 
@@ -1559,6 +1589,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 *
 	 * @param userTracker the user tracker
 	 */
+	@Override
 	public void cacheResult(UserTracker userTracker) {
 		EntityCacheUtil.putResult(UserTrackerModelImpl.ENTITY_CACHE_ENABLED,
 			UserTrackerImpl.class, userTracker.getPrimaryKey(), userTracker);
@@ -1571,6 +1602,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 *
 	 * @param userTrackers the user trackers
 	 */
+	@Override
 	public void cacheResult(List<UserTracker> userTrackers) {
 		for (UserTracker userTracker : userTrackers) {
 			if (EntityCacheUtil.getResult(
@@ -1637,6 +1669,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @param userTrackerId the primary key for the new user tracker
 	 * @return the new user tracker
 	 */
+	@Override
 	public UserTracker create(long userTrackerId) {
 		UserTracker userTracker = new UserTrackerImpl();
 
@@ -1654,6 +1687,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @throws com.liferay.portal.NoSuchUserTrackerException if a user tracker with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserTracker remove(long userTrackerId)
 		throws NoSuchUserTrackerException, SystemException {
 		return remove((Serializable)userTrackerId);
@@ -1888,6 +1922,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @throws com.liferay.portal.NoSuchUserTrackerException if a user tracker with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserTracker findByPrimaryKey(long userTrackerId)
 		throws NoSuchUserTrackerException, SystemException {
 		return findByPrimaryKey((Serializable)userTrackerId);
@@ -1948,6 +1983,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @return the user tracker, or <code>null</code> if a user tracker with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserTracker fetchByPrimaryKey(long userTrackerId)
 		throws SystemException {
 		return fetchByPrimaryKey((Serializable)userTrackerId);
@@ -1959,6 +1995,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @return the user trackers
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<UserTracker> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1975,6 +2012,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @return the range of user trackers
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<UserTracker> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
@@ -1993,6 +2031,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @return the ordered range of user trackers
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<UserTracker> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -2078,6 +2117,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (UserTracker userTracker : findAll()) {
 			remove(userTracker);
@@ -2090,6 +2130,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @return the number of user trackers
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -2175,6 +2216,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 		};
 
 	private static CacheModel<UserTracker> _nullUserTrackerCacheModel = new CacheModel<UserTracker>() {
+			@Override
 			public UserTracker toEntityModel() {
 				return _nullUserTracker;
 			}

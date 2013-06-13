@@ -191,7 +191,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 			{ "userId", Types.BIGINT },
 			{ "groupId", Types.BIGINT }
 		};
-	public static final String MAPPING_TABLE_USERS_GROUPS_SQL_CREATE = "create table Users_Groups (userId LONG not null,groupId LONG not null,primary key (userId, groupId))";
+	public static final String MAPPING_TABLE_USERS_GROUPS_SQL_CREATE = "create table Users_Groups (groupId LONG not null,userId LONG not null,primary key (groupId, userId))";
 	public static final boolean FINDER_CACHE_ENABLED_USERS_GROUPS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Users_Groups"), true);
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
@@ -200,26 +200,32 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 	public GroupModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _groupId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setGroupId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _groupId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return Group.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return Group.class.getName();
 	}
@@ -347,6 +353,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		}
 	}
 
+	@Override
 	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
@@ -357,6 +364,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		}
 	}
 
+	@Override
 	public void setUuid(String uuid) {
 		if (_originalUuid == null) {
 			_originalUuid = _uuid;
@@ -369,11 +377,13 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@Override
 	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -390,11 +400,13 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		return _originalGroupId;
 	}
 
+	@Override
 	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
@@ -411,24 +423,29 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		return _originalCompanyId;
 	}
 
+	@Override
 	@JSON
 	public long getCreatorUserId() {
 		return _creatorUserId;
 	}
 
+	@Override
 	public void setCreatorUserId(long creatorUserId) {
 		_creatorUserId = creatorUserId;
 	}
 
+	@Override
 	public String getCreatorUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getCreatorUserId(), "uuid",
 			_creatorUserUuid);
 	}
 
+	@Override
 	public void setCreatorUserUuid(String creatorUserUuid) {
 		_creatorUserUuid = creatorUserUuid;
 	}
 
+	@Override
 	public String getClassName() {
 		if (getClassNameId() <= 0) {
 			return StringPool.BLANK;
@@ -437,6 +454,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		return PortalUtil.getClassName(getClassNameId());
 	}
 
+	@Override
 	public void setClassName(String className) {
 		long classNameId = 0;
 
@@ -447,11 +465,13 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		setClassNameId(classNameId);
 	}
 
+	@Override
 	@JSON
 	public long getClassNameId() {
 		return _classNameId;
 	}
 
+	@Override
 	public void setClassNameId(long classNameId) {
 		_columnBitmask |= CLASSNAMEID_COLUMN_BITMASK;
 
@@ -468,11 +488,13 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		return _originalClassNameId;
 	}
 
+	@Override
 	@JSON
 	public long getClassPK() {
 		return _classPK;
 	}
 
+	@Override
 	public void setClassPK(long classPK) {
 		_columnBitmask |= CLASSPK_COLUMN_BITMASK;
 
@@ -489,11 +511,13 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		return _originalClassPK;
 	}
 
+	@Override
 	@JSON
 	public long getParentGroupId() {
 		return _parentGroupId;
 	}
 
+	@Override
 	public void setParentGroupId(long parentGroupId) {
 		_columnBitmask |= PARENTGROUPID_COLUMN_BITMASK;
 
@@ -510,11 +534,13 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		return _originalParentGroupId;
 	}
 
+	@Override
 	@JSON
 	public long getLiveGroupId() {
 		return _liveGroupId;
 	}
 
+	@Override
 	public void setLiveGroupId(long liveGroupId) {
 		_columnBitmask |= LIVEGROUPID_COLUMN_BITMASK;
 
@@ -531,6 +557,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		return _originalLiveGroupId;
 	}
 
+	@Override
 	@JSON
 	public String getTreePath() {
 		if (_treePath == null) {
@@ -541,10 +568,12 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		}
 	}
 
+	@Override
 	public void setTreePath(String treePath) {
 		_treePath = treePath;
 	}
 
+	@Override
 	@JSON
 	public String getName() {
 		if (_name == null) {
@@ -555,6 +584,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		}
 	}
 
+	@Override
 	public void setName(String name) {
 		_columnBitmask = -1L;
 
@@ -569,6 +599,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		return GetterUtil.getString(_originalName);
 	}
 
+	@Override
 	@JSON
 	public String getDescription() {
 		if (_description == null) {
@@ -579,15 +610,18 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		}
 	}
 
+	@Override
 	public void setDescription(String description) {
 		_description = description;
 	}
 
+	@Override
 	@JSON
 	public int getType() {
 		return _type;
 	}
 
+	@Override
 	public void setType(int type) {
 		_columnBitmask |= TYPE_COLUMN_BITMASK;
 
@@ -604,6 +638,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		return _originalType;
 	}
 
+	@Override
 	@JSON
 	public String getTypeSettings() {
 		if (_typeSettings == null) {
@@ -614,10 +649,12 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		}
 	}
 
+	@Override
 	public void setTypeSettings(String typeSettings) {
 		_typeSettings = typeSettings;
 	}
 
+	@Override
 	@JSON
 	public String getFriendlyURL() {
 		if (_friendlyURL == null) {
@@ -628,6 +665,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		}
 	}
 
+	@Override
 	public void setFriendlyURL(String friendlyURL) {
 		_columnBitmask |= FRIENDLYURL_COLUMN_BITMASK;
 
@@ -642,15 +680,18 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		return GetterUtil.getString(_originalFriendlyURL);
 	}
 
+	@Override
 	@JSON
 	public boolean getSite() {
 		return _site;
 	}
 
+	@Override
 	public boolean isSite() {
 		return _site;
 	}
 
+	@Override
 	public void setSite(boolean site) {
 		_columnBitmask |= SITE_COLUMN_BITMASK;
 
@@ -667,15 +708,18 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		return _originalSite;
 	}
 
+	@Override
 	@JSON
 	public boolean getActive() {
 		return _active;
 	}
 
+	@Override
 	public boolean isActive() {
 		return _active;
 	}
 
+	@Override
 	public void setActive(boolean active) {
 		_columnBitmask |= ACTIVE_COLUMN_BITMASK;
 
@@ -745,6 +789,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		return groupImpl;
 	}
 
+	@Override
 	public int compareTo(Group group) {
 		int value = 0;
 
@@ -759,18 +804,15 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof Group)) {
 			return false;
 		}
 
-		Group group = null;
-
-		try {
-			group = (Group)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		Group group = (Group)obj;
 
 		long primaryKey = group.getPrimaryKey();
 
@@ -952,6 +994,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(52);
 

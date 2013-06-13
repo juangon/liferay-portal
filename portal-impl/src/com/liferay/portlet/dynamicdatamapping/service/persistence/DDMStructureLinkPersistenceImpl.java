@@ -112,6 +112,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * @return the matching d d m structure links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructureLink> findByClassNameId(long classNameId)
 		throws SystemException {
 		return findByClassNameId(classNameId, QueryUtil.ALL_POS,
@@ -131,6 +132,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * @return the range of matching d d m structure links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructureLink> findByClassNameId(long classNameId,
 		int start, int end) throws SystemException {
 		return findByClassNameId(classNameId, start, end, null);
@@ -150,6 +152,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * @return the ordered range of matching d d m structure links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructureLink> findByClassNameId(long classNameId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -257,6 +260,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureLinkException if a matching d d m structure link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructureLink findByClassNameId_First(long classNameId,
 		OrderByComparator orderByComparator)
 		throws NoSuchStructureLinkException, SystemException {
@@ -287,6 +291,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * @return the first matching d d m structure link, or <code>null</code> if a matching d d m structure link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructureLink fetchByClassNameId_First(long classNameId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<DDMStructureLink> list = findByClassNameId(classNameId, 0, 1,
@@ -308,6 +313,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureLinkException if a matching d d m structure link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructureLink findByClassNameId_Last(long classNameId,
 		OrderByComparator orderByComparator)
 		throws NoSuchStructureLinkException, SystemException {
@@ -338,6 +344,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * @return the last matching d d m structure link, or <code>null</code> if a matching d d m structure link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructureLink fetchByClassNameId_Last(long classNameId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByClassNameId(classNameId);
@@ -362,6 +369,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureLinkException if a d d m structure link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructureLink[] findByClassNameId_PrevAndNext(
 		long structureLinkId, long classNameId,
 		OrderByComparator orderByComparator)
@@ -504,6 +512,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * @param classNameId the class name ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByClassNameId(long classNameId) throws SystemException {
 		for (DDMStructureLink ddmStructureLink : findByClassNameId(
 				classNameId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -518,6 +527,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * @return the number of matching d d m structure links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByClassNameId(long classNameId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_CLASSNAMEID;
 
@@ -582,6 +592,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureLinkException if a matching d d m structure link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructureLink findByClassPK(long classPK)
 		throws NoSuchStructureLinkException, SystemException {
 		DDMStructureLink ddmStructureLink = fetchByClassPK(classPK);
@@ -613,6 +624,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * @return the matching d d m structure link, or <code>null</code> if a matching d d m structure link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructureLink fetchByClassPK(long classPK)
 		throws SystemException {
 		return fetchByClassPK(classPK, true);
@@ -626,6 +638,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * @return the matching d d m structure link, or <code>null</code> if a matching d d m structure link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructureLink fetchByClassPK(long classPK,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { classPK };
@@ -710,6 +723,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * @return the d d m structure link that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructureLink removeByClassPK(long classPK)
 		throws NoSuchStructureLinkException, SystemException {
 		DDMStructureLink ddmStructureLink = findByClassPK(classPK);
@@ -724,6 +738,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * @return the number of matching d d m structure links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByClassPK(long classPK) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_CLASSPK;
 
@@ -800,6 +815,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * @return the matching d d m structure links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructureLink> findByStructureId(long structureId)
 		throws SystemException {
 		return findByStructureId(structureId, QueryUtil.ALL_POS,
@@ -819,6 +835,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * @return the range of matching d d m structure links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructureLink> findByStructureId(long structureId,
 		int start, int end) throws SystemException {
 		return findByStructureId(structureId, start, end, null);
@@ -838,6 +855,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * @return the ordered range of matching d d m structure links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructureLink> findByStructureId(long structureId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -945,6 +963,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureLinkException if a matching d d m structure link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructureLink findByStructureId_First(long structureId,
 		OrderByComparator orderByComparator)
 		throws NoSuchStructureLinkException, SystemException {
@@ -975,6 +994,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * @return the first matching d d m structure link, or <code>null</code> if a matching d d m structure link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructureLink fetchByStructureId_First(long structureId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<DDMStructureLink> list = findByStructureId(structureId, 0, 1,
@@ -996,6 +1016,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureLinkException if a matching d d m structure link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructureLink findByStructureId_Last(long structureId,
 		OrderByComparator orderByComparator)
 		throws NoSuchStructureLinkException, SystemException {
@@ -1026,6 +1047,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * @return the last matching d d m structure link, or <code>null</code> if a matching d d m structure link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructureLink fetchByStructureId_Last(long structureId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByStructureId(structureId);
@@ -1050,6 +1072,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureLinkException if a d d m structure link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructureLink[] findByStructureId_PrevAndNext(
 		long structureLinkId, long structureId,
 		OrderByComparator orderByComparator)
@@ -1192,6 +1215,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * @param structureId the structure ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByStructureId(long structureId) throws SystemException {
 		for (DDMStructureLink ddmStructureLink : findByStructureId(
 				structureId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -1206,6 +1230,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * @return the number of matching d d m structure links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByStructureId(long structureId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_STRUCTUREID;
 
@@ -1258,6 +1283,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 *
 	 * @param ddmStructureLink the d d m structure link
 	 */
+	@Override
 	public void cacheResult(DDMStructureLink ddmStructureLink) {
 		EntityCacheUtil.putResult(DDMStructureLinkModelImpl.ENTITY_CACHE_ENABLED,
 			DDMStructureLinkImpl.class, ddmStructureLink.getPrimaryKey(),
@@ -1274,6 +1300,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 *
 	 * @param ddmStructureLinks the d d m structure links
 	 */
+	@Override
 	public void cacheResult(List<DDMStructureLink> ddmStructureLinks) {
 		for (DDMStructureLink ddmStructureLink : ddmStructureLinks) {
 			if (EntityCacheUtil.getResult(
@@ -1386,6 +1413,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * @param structureLinkId the primary key for the new d d m structure link
 	 * @return the new d d m structure link
 	 */
+	@Override
 	public DDMStructureLink create(long structureLinkId) {
 		DDMStructureLink ddmStructureLink = new DDMStructureLinkImpl();
 
@@ -1403,6 +1431,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureLinkException if a d d m structure link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructureLink remove(long structureLinkId)
 		throws NoSuchStructureLinkException, SystemException {
 		return remove((Serializable)structureLinkId);
@@ -1621,6 +1650,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureLinkException if a d d m structure link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructureLink findByPrimaryKey(long structureLinkId)
 		throws NoSuchStructureLinkException, SystemException {
 		return findByPrimaryKey((Serializable)structureLinkId);
@@ -1682,6 +1712,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * @return the d d m structure link, or <code>null</code> if a d d m structure link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructureLink fetchByPrimaryKey(long structureLinkId)
 		throws SystemException {
 		return fetchByPrimaryKey((Serializable)structureLinkId);
@@ -1693,6 +1724,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * @return the d d m structure links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructureLink> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1709,6 +1741,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * @return the range of d d m structure links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructureLink> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
@@ -1727,6 +1760,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * @return the ordered range of d d m structure links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructureLink> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -1812,6 +1846,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (DDMStructureLink ddmStructureLink : findAll()) {
 			remove(ddmStructureLink);
@@ -1824,6 +1859,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	 * @return the number of d d m structure links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -1909,6 +1945,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 		};
 
 	private static CacheModel<DDMStructureLink> _nullDDMStructureLinkCacheModel = new CacheModel<DDMStructureLink>() {
+			@Override
 			public DDMStructureLink toEntityModel() {
 				return _nullDDMStructureLink;
 			}

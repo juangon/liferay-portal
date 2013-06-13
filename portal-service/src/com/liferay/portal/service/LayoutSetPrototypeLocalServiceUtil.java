@@ -18,11 +18,12 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
- * The utility for the layout set prototype local service. This utility wraps {@link com.liferay.portal.service.impl.LayoutSetPrototypeLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
+ * Provides the local service utility for LayoutSetPrototype. This utility wraps
+ * {@link com.liferay.portal.service.impl.LayoutSetPrototypeLocalServiceImpl} and is the
+ * primary access point for service operations in application layer code running
+ * on the local server. Methods of this service will not have security checks
+ * based on the propagated JAAS credentials because this service can only be
+ * accessed from within the same VM.
  *
  * @author Brian Wing Shun Chan
  * @see LayoutSetPrototypeLocalService
@@ -265,6 +266,12 @@ public class LayoutSetPrototypeLocalServiceUtil {
 		return getService()
 				   .addLayoutSetPrototype(userId, companyId, nameMap,
 			description, active, layoutsUpdateable, serviceContext);
+	}
+
+	public static void deleteNondefaultLayoutSetPrototypes(long companyId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteNondefaultLayoutSetPrototypes(companyId);
 	}
 
 	public static com.liferay.portal.model.LayoutSetPrototype fetchLayoutSetPrototypeByUuidAndCompanyId(

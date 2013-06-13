@@ -47,23 +47,25 @@ public class IntrabandPortalCache
 		_name = name;
 		_registrationReference = registrationReference;
 
-		_intraBand = registrationReference.getIntraband();
+		_intraband = registrationReference.getIntraband();
 
 		SystemDataType systemDataType = SystemDataType.PORTAL_CACHE;
 
 		_portalCacheType = systemDataType.getValue();
 	}
 
+	@Override
 	public void destroy() {
 		Serializer serializer = _createSerializer(
 			PortalCacheActionType.DESTROY);
 
-		_intraBand.sendDatagram(
+		_intraband.sendDatagram(
 			_registrationReference,
 			Datagram.createRequestDatagram(
 				_portalCacheType, serializer.toByteBuffer()));
 	}
 
+	@Override
 	public Collection<V> get(Collection<K> keys) {
 		Serializer serializer = _createSerializer(
 			PortalCacheActionType.GET_BULK);
@@ -88,6 +90,7 @@ public class IntrabandPortalCache
 		}
 	}
 
+	@Override
 	public V get(K key) {
 		Serializer serializer = _createSerializer(PortalCacheActionType.GET);
 
@@ -105,22 +108,25 @@ public class IntrabandPortalCache
 		}
 	}
 
+	@Override
 	public String getName() {
 		return _name;
 	}
 
+	@Override
 	public void put(K key, V value) {
 		Serializer serializer = _createSerializer(PortalCacheActionType.PUT);
 
 		serializer.writeObject(key);
 		serializer.writeObject(value);
 
-		_intraBand.sendDatagram(
+		_intraband.sendDatagram(
 			_registrationReference,
 			Datagram.createRequestDatagram(
 				_portalCacheType, serializer.toByteBuffer()));
 	}
 
+	@Override
 	public void put(K key, V value, int timeToLive) {
 		Serializer serializer = _createSerializer(
 			PortalCacheActionType.PUT_TTL);
@@ -129,44 +135,50 @@ public class IntrabandPortalCache
 		serializer.writeObject(value);
 		serializer.writeInt(timeToLive);
 
-		_intraBand.sendDatagram(
+		_intraband.sendDatagram(
 			_registrationReference,
 			Datagram.createRequestDatagram(
 				_portalCacheType, serializer.toByteBuffer()));
 	}
 
+	@Override
 	public void registerCacheListener(CacheListener<K, V> cacheListener) {
 	}
 
+	@Override
 	public void registerCacheListener(
 		CacheListener<K, V> cacheListener,
 		CacheListenerScope cacheListenerScope) {
 	}
 
+	@Override
 	public void remove(K key) {
 		Serializer serializer = _createSerializer(PortalCacheActionType.REMOVE);
 
 		serializer.writeObject(key);
 
-		_intraBand.sendDatagram(
+		_intraband.sendDatagram(
 			_registrationReference,
 			Datagram.createRequestDatagram(
 				_portalCacheType, serializer.toByteBuffer()));
 	}
 
+	@Override
 	public void removeAll() {
 		Serializer serializer = _createSerializer(
 			PortalCacheActionType.REMOVE_ALL);
 
-		_intraBand.sendDatagram(
+		_intraband.sendDatagram(
 			_registrationReference,
 			Datagram.createRequestDatagram(
 				_portalCacheType, serializer.toByteBuffer()));
 	}
 
+	@Override
 	public void unregisterCacheListener(CacheListener<K, V> cacheListener) {
 	}
 
+	@Override
 	public void unregisterCacheListeners() {
 	}
 
@@ -184,7 +196,7 @@ public class IntrabandPortalCache
 	private <T extends Serializable> T _syncSend(ByteBuffer byteBuffer)
 		throws Exception {
 
-		Datagram responseDatagram = _intraBand.sendSyncDatagram(
+		Datagram responseDatagram = _intraband.sendSyncDatagram(
 			_registrationReference,
 			Datagram.createRequestDatagram(_portalCacheType, byteBuffer));
 
@@ -196,7 +208,7 @@ public class IntrabandPortalCache
 
 	private static Log _log = LogFactoryUtil.getLog(IntrabandPortalCache.class);
 
-	private final Intraband _intraBand;
+	private final Intraband _intraband;
 	private final String _name;
 	private final byte _portalCacheType;
 	private final RegistrationReference _registrationReference;

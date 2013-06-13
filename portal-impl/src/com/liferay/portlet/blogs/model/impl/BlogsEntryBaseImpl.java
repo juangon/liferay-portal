@@ -38,6 +38,7 @@ public abstract class BlogsEntryBaseImpl extends BlogsEntryModelImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a blogs entry model instance should use the {@link BlogsEntry} interface instead.
 	 */
+	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
 			BlogsEntryLocalServiceUtil.addBlogsEntry(this);

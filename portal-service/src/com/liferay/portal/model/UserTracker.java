@@ -31,8 +31,6 @@ public interface UserTracker extends UserTrackerModel, PersistedModel {
 	 */
 	public void addPath(com.liferay.portal.model.UserTrackerPath path);
 
-	public int compareTo(com.liferay.portal.model.UserTracker userTracker);
-
 	public java.lang.String getEmailAddress();
 
 	public java.lang.String getFullName();

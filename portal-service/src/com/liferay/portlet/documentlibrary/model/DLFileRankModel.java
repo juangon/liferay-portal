@@ -14,11 +14,9 @@
 
 package com.liferay.portlet.documentlibrary.model;
 
-import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
-import com.liferay.portal.model.StagedGroupedModel;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -40,8 +38,7 @@ import java.util.Date;
  * @see com.liferay.portlet.documentlibrary.model.impl.DLFileRankModelImpl
  * @generated
  */
-public interface DLFileRankModel extends BaseModel<DLFileRank>,
-	StagedGroupedModel {
+public interface DLFileRankModel extends BaseModel<DLFileRank> {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -61,21 +58,6 @@ public interface DLFileRankModel extends BaseModel<DLFileRank>,
 	 * @param primaryKey the primary key of this document library file rank
 	 */
 	public void setPrimaryKey(long primaryKey);
-
-	/**
-	 * Returns the uuid of this document library file rank.
-	 *
-	 * @return the uuid of this document library file rank
-	 */
-	@AutoEscape
-	public String getUuid();
-
-	/**
-	 * Sets the uuid of this document library file rank.
-	 *
-	 * @param uuid the uuid of this document library file rank
-	 */
-	public void setUuid(String uuid);
 
 	/**
 	 * Returns the file rank ID of this document library file rank.
@@ -149,21 +131,6 @@ public interface DLFileRankModel extends BaseModel<DLFileRank>,
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Returns the user name of this document library file rank.
-	 *
-	 * @return the user name of this document library file rank
-	 */
-	@AutoEscape
-	public String getUserName();
-
-	/**
-	 * Sets the user name of this document library file rank.
-	 *
-	 * @param userName the user name of this document library file rank
-	 */
-	public void setUserName(String userName);
-
-	/**
 	 * Returns the create date of this document library file rank.
 	 *
 	 * @return the create date of this document library file rank
@@ -176,20 +143,6 @@ public interface DLFileRankModel extends BaseModel<DLFileRank>,
 	 * @param createDate the create date of this document library file rank
 	 */
 	public void setCreateDate(Date createDate);
-
-	/**
-	 * Returns the modified date of this document library file rank.
-	 *
-	 * @return the modified date of this document library file rank
-	 */
-	public Date getModifiedDate();
-
-	/**
-	 * Sets the modified date of this document library file rank.
-	 *
-	 * @param modifiedDate the modified date of this document library file rank
-	 */
-	public void setModifiedDate(Date modifiedDate);
 
 	/**
 	 * Returns the file entry ID of this document library file rank.
@@ -226,41 +179,60 @@ public interface DLFileRankModel extends BaseModel<DLFileRank>,
 	 */
 	public void setActive(boolean active);
 
+	@Override
 	public boolean isNew();
 
+	@Override
 	public void setNew(boolean n);
 
+	@Override
 	public boolean isCachedModel();
 
+	@Override
 	public void setCachedModel(boolean cachedModel);
 
+	@Override
 	public boolean isEscapedModel();
 
+	@Override
 	public Serializable getPrimaryKeyObj();
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
+	@Override
 	public ExpandoBridge getExpandoBridge();
 
+	@Override
 	public void setExpandoBridgeAttributes(BaseModel<?> baseModel);
 
+	@Override
 	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge);
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext);
 
+	@Override
 	public Object clone();
 
+	@Override
 	public int compareTo(DLFileRank dlFileRank);
 
+	@Override
 	public int hashCode();
 
+	@Override
 	public CacheModel<DLFileRank> toCacheModel();
 
+	@Override
 	public DLFileRank toEscapedModel();
 
+	@Override
 	public DLFileRank toUnescapedModel();
 
+	@Override
 	public String toString();
 
+	@Override
 	public String toXmlString();
 }

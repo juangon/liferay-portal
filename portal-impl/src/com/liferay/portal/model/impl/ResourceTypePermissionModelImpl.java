@@ -90,26 +90,32 @@ public class ResourceTypePermissionModelImpl extends BaseModelImpl<ResourceTypeP
 	public ResourceTypePermissionModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _resourceTypePermissionId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setResourceTypePermissionId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _resourceTypePermissionId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return ResourceTypePermission.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return ResourceTypePermission.class.getName();
 	}
@@ -168,18 +174,22 @@ public class ResourceTypePermissionModelImpl extends BaseModelImpl<ResourceTypeP
 		}
 	}
 
+	@Override
 	public long getResourceTypePermissionId() {
 		return _resourceTypePermissionId;
 	}
 
+	@Override
 	public void setResourceTypePermissionId(long resourceTypePermissionId) {
 		_resourceTypePermissionId = resourceTypePermissionId;
 	}
 
+	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
@@ -196,10 +206,12 @@ public class ResourceTypePermissionModelImpl extends BaseModelImpl<ResourceTypeP
 		return _originalCompanyId;
 	}
 
+	@Override
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -216,6 +228,7 @@ public class ResourceTypePermissionModelImpl extends BaseModelImpl<ResourceTypeP
 		return _originalGroupId;
 	}
 
+	@Override
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -225,6 +238,7 @@ public class ResourceTypePermissionModelImpl extends BaseModelImpl<ResourceTypeP
 		}
 	}
 
+	@Override
 	public void setName(String name) {
 		_columnBitmask |= NAME_COLUMN_BITMASK;
 
@@ -239,10 +253,12 @@ public class ResourceTypePermissionModelImpl extends BaseModelImpl<ResourceTypeP
 		return GetterUtil.getString(_originalName);
 	}
 
+	@Override
 	public long getRoleId() {
 		return _roleId;
 	}
 
+	@Override
 	public void setRoleId(long roleId) {
 		_columnBitmask |= ROLEID_COLUMN_BITMASK;
 
@@ -259,10 +275,12 @@ public class ResourceTypePermissionModelImpl extends BaseModelImpl<ResourceTypeP
 		return _originalRoleId;
 	}
 
+	@Override
 	public long getActionIds() {
 		return _actionIds;
 	}
 
+	@Override
 	public void setActionIds(long actionIds) {
 		_actionIds = actionIds;
 	}
@@ -310,6 +328,7 @@ public class ResourceTypePermissionModelImpl extends BaseModelImpl<ResourceTypeP
 		return resourceTypePermissionImpl;
 	}
 
+	@Override
 	public int compareTo(ResourceTypePermission resourceTypePermission) {
 		long primaryKey = resourceTypePermission.getPrimaryKey();
 
@@ -326,18 +345,15 @@ public class ResourceTypePermissionModelImpl extends BaseModelImpl<ResourceTypeP
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ResourceTypePermission)) {
 			return false;
 		}
 
-		ResourceTypePermission resourceTypePermission = null;
-
-		try {
-			resourceTypePermission = (ResourceTypePermission)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		ResourceTypePermission resourceTypePermission = (ResourceTypePermission)obj;
 
 		long primaryKey = resourceTypePermission.getPrimaryKey();
 
@@ -421,6 +437,7 @@ public class ResourceTypePermissionModelImpl extends BaseModelImpl<ResourceTypeP
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(22);
 

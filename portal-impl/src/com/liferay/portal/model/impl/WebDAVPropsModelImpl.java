@@ -92,26 +92,32 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 	public WebDAVPropsModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _webDavPropsId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setWebDavPropsId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _webDavPropsId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return WebDAVProps.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return WebDAVProps.class.getName();
 	}
@@ -176,38 +182,47 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 		}
 	}
 
+	@Override
 	public long getWebDavPropsId() {
 		return _webDavPropsId;
 	}
 
+	@Override
 	public void setWebDavPropsId(long webDavPropsId) {
 		_webDavPropsId = webDavPropsId;
 	}
 
+	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
+	@Override
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
 	}
 
+	@Override
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
 	public String getClassName() {
 		if (getClassNameId() <= 0) {
 			return StringPool.BLANK;
@@ -216,6 +231,7 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 		return PortalUtil.getClassName(getClassNameId());
 	}
 
+	@Override
 	public void setClassName(String className) {
 		long classNameId = 0;
 
@@ -226,10 +242,12 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 		setClassNameId(classNameId);
 	}
 
+	@Override
 	public long getClassNameId() {
 		return _classNameId;
 	}
 
+	@Override
 	public void setClassNameId(long classNameId) {
 		_columnBitmask |= CLASSNAMEID_COLUMN_BITMASK;
 
@@ -246,10 +264,12 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 		return _originalClassNameId;
 	}
 
+	@Override
 	public long getClassPK() {
 		return _classPK;
 	}
 
+	@Override
 	public void setClassPK(long classPK) {
 		_columnBitmask |= CLASSPK_COLUMN_BITMASK;
 
@@ -266,6 +286,7 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 		return _originalClassPK;
 	}
 
+	@Override
 	public String getProps() {
 		if (_props == null) {
 			return StringPool.BLANK;
@@ -275,6 +296,7 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 		}
 	}
 
+	@Override
 	public void setProps(String props) {
 		_props = props;
 	}
@@ -323,6 +345,7 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 		return webDAVPropsImpl;
 	}
 
+	@Override
 	public int compareTo(WebDAVProps webDAVProps) {
 		long primaryKey = webDAVProps.getPrimaryKey();
 
@@ -339,18 +362,15 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof WebDAVProps)) {
 			return false;
 		}
 
-		WebDAVProps webDAVProps = null;
-
-		try {
-			webDAVProps = (WebDAVProps)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		WebDAVProps webDAVProps = (WebDAVProps)obj;
 
 		long primaryKey = webDAVProps.getPrimaryKey();
 
@@ -446,6 +466,7 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(25);
 

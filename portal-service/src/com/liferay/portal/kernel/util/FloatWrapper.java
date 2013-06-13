@@ -30,6 +30,7 @@ public class FloatWrapper
 		_value = value;
 	}
 
+	@Override
 	public int compareTo(FloatWrapper floatWrapper) {
 		if (floatWrapper == null) {
 			return 1;

@@ -78,6 +78,7 @@ public class LayoutSetCacheModel implements CacheModel<LayoutSet>,
 		return sb.toString();
 	}
 
+	@Override
 	public LayoutSet toEntityModel() {
 		LayoutSetImpl layoutSetImpl = new LayoutSetImpl();
 
@@ -163,6 +164,7 @@ public class LayoutSetCacheModel implements CacheModel<LayoutSet>,
 		return layoutSetImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput)
 		throws ClassNotFoundException, IOException {
 		layoutSetId = objectInput.readLong();
@@ -186,6 +188,7 @@ public class LayoutSetCacheModel implements CacheModel<LayoutSet>,
 		_virtualHostname = (java.lang.String)objectInput.readObject();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(layoutSetId);

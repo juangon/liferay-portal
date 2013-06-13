@@ -34,7 +34,6 @@ page import="com.liferay.portal.kernel.search.SearchContextFactory" %><%@
 page import="com.liferay.portal.kernel.search.SearchResult" %><%@
 page import="com.liferay.portal.kernel.search.SearchResultUtil" %><%@
 page import="com.liferay.portal.kernel.search.Summary" %><%@
-page import="com.liferay.portal.kernel.util.MimeTypesUtil" %><%@
 page import="com.liferay.portal.kernel.workflow.WorkflowDefinition" %><%@
 page import="com.liferay.portal.kernel.workflow.WorkflowDefinitionManagerUtil" %><%@
 page import="com.liferay.portal.kernel.workflow.WorkflowEngineManagerUtil" %><%@
@@ -193,8 +192,6 @@ else if (!portletId.equals(PortletKeys.DOCUMENT_LIBRARY) && !ArrayUtil.contains(
 
 boolean enableRatings = GetterUtil.getBoolean(preferences.getValue("enableRatings", null), true);
 boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enableCommentRatings", null), true);
-
-String ddmResource = portletConfig.getInitParameter("ddm-resource");
 
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 %>

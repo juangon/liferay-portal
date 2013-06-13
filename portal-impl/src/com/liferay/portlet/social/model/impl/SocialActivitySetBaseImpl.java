@@ -38,6 +38,7 @@ public abstract class SocialActivitySetBaseImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a social activity set model instance should use the {@link SocialActivitySet} interface instead.
 	 */
+	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
 			SocialActivitySetLocalServiceUtil.addSocialActivitySet(this);

@@ -38,6 +38,7 @@ public abstract class DLFileShortcutBaseImpl extends DLFileShortcutModelImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a document library file shortcut model instance should use the {@link DLFileShortcut} interface instead.
 	 */
+	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
 			DLFileShortcutLocalServiceUtil.addDLFileShortcut(this);

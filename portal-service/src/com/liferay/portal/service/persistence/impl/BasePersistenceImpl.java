@@ -65,19 +65,24 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 
 	public static final String COUNT_COLUMN_NAME = "COUNT_VALUE";
 
+	@Override
 	public void clearCache() {
 	}
 
+	@Override
 	public void clearCache(List<T> model) {
 	}
 
+	@Override
 	public void clearCache(T model) {
 	}
 
+	@Override
 	public void closeSession(Session session) {
 		_sessionFactory.closeSession(session);
 	}
 
+	@Override
 	public long countWithDynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 
@@ -93,11 +98,13 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		}
 	}
 
+	@Override
 	@SuppressWarnings("unused")
 	public T fetchByPrimaryKey(Serializable primaryKey) throws SystemException {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	@SuppressWarnings("unused")
 	public T findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
@@ -105,6 +112,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	@SuppressWarnings("rawtypes")
 	public List findWithDynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
@@ -126,6 +134,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		}
 	}
 
+	@Override
 	@SuppressWarnings("rawtypes")
 	public List findWithDynamicQuery(
 			DynamicQuery dynamicQuery, int start, int end)
@@ -150,6 +159,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		}
 	}
 
+	@Override
 	@SuppressWarnings("rawtypes")
 	public List findWithDynamicQuery(
 			DynamicQuery dynamicQuery, int start, int end,
@@ -161,6 +171,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		return findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
+	@Override
 	public void flush() throws SystemException {
 		try {
 			Session session = _sessionFactory.getCurrentSession();
@@ -174,10 +185,12 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		}
 	}
 
+	@Override
 	public Session getCurrentSession() throws ORMException {
 		return _sessionFactory.getCurrentSession();
 	}
 
+	@Override
 	public DataSource getDataSource() {
 		return _dataSource;
 	}
@@ -186,22 +199,27 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		return _db;
 	}
 
+	@Override
 	public Dialect getDialect() {
 		return _dialect;
 	}
 
+	@Override
 	public ModelListener<T>[] getListeners() {
 		return listeners;
 	}
 
+	@Override
 	public Session openNewSession(Connection connection) throws ORMException {
 		return _sessionFactory.openNewSession(connection);
 	}
 
+	@Override
 	public Session openSession() throws ORMException {
 		return _sessionFactory.openSession();
 	}
 
+	@Override
 	public SystemException processException(Exception e) {
 		if (!(e instanceof ORMException)) {
 			_log.error("Caught unexpected exception " + e.getClass().getName());
@@ -214,6 +232,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		return new SystemException(e);
 	}
 
+	@Override
 	public void registerListener(ModelListener<T> listener) {
 		List<ModelListener<T>> listenersList = ListUtil.fromArray(listeners);
 
@@ -223,6 +242,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 			new ModelListener[listenersList.size()]);
 	}
 
+	@Override
 	@SuppressWarnings("unused")
 	public T remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
@@ -230,6 +250,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public T remove(T model) throws SystemException {
 		if (model instanceof ModelWrapper) {
 			ModelWrapper<T> modelWrapper = (ModelWrapper<T>)model;
@@ -250,6 +271,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		return model;
 	}
 
+	@Override
 	public void setDataSource(DataSource dataSource) {
 		_dataSource = dataSource;
 	}
@@ -260,6 +282,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		_db = DBFactoryUtil.getDB(_dialect);
 	}
 
+	@Override
 	public void unregisterListener(ModelListener<T> listener) {
 		List<ModelListener<T>> listenersList = ListUtil.fromArray(listeners);
 
@@ -269,6 +292,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 			new ModelListener[listenersList.size()]);
 	}
 
+	@Override
 	public T update(T model) throws SystemException {
 		if (model instanceof ModelWrapper) {
 			ModelWrapper<T> modelWrapper = (ModelWrapper<T>)model;
@@ -304,6 +328,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 	/**
 	 * @deprecated As of 6.2.0, replaced by {@link #update(BaseModel)}}
 	 */
+	@Override
 	public T update(T model, boolean merge) throws SystemException {
 		if (model instanceof ModelWrapper) {
 			ModelWrapper<T> modelWrapper = (ModelWrapper<T>)model;
@@ -340,12 +365,14 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 	 * @deprecated As of 6.2.0, replaced by {@link #update(BaseModel,
 	 *             ServiceContext)}}
 	 */
+	@Override
 	public T update(T model, boolean merge, ServiceContext serviceContext)
 		throws SystemException {
 
 		return update(model, serviceContext);
 	}
 
+	@Override
 	public T update(T model, ServiceContext serviceContext)
 		throws SystemException {
 

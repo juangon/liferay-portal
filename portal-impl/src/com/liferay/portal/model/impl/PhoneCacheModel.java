@@ -36,9 +36,11 @@ import java.util.Date;
 public class PhoneCacheModel implements CacheModel<Phone>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(27);
 
-		sb.append("{phoneId=");
+		sb.append("{uuid=");
+		sb.append(uuid);
+		sb.append(", phoneId=");
 		sb.append(phoneId);
 		sb.append(", companyId=");
 		sb.append(companyId);
@@ -67,8 +69,16 @@ public class PhoneCacheModel implements CacheModel<Phone>, Externalizable {
 		return sb.toString();
 	}
 
+	@Override
 	public Phone toEntityModel() {
 		PhoneImpl phoneImpl = new PhoneImpl();
+
+		if (uuid == null) {
+			phoneImpl.setUuid(StringPool.BLANK);
+		}
+		else {
+			phoneImpl.setUuid(uuid);
+		}
 
 		phoneImpl.setPhoneId(phoneId);
 		phoneImpl.setCompanyId(companyId);
@@ -120,7 +130,9 @@ public class PhoneCacheModel implements CacheModel<Phone>, Externalizable {
 		return phoneImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		uuid = objectInput.readUTF();
 		phoneId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		userId = objectInput.readLong();
@@ -135,8 +147,16 @@ public class PhoneCacheModel implements CacheModel<Phone>, Externalizable {
 		primary = objectInput.readBoolean();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		if (uuid == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(uuid);
+		}
+
 		objectOutput.writeLong(phoneId);
 		objectOutput.writeLong(companyId);
 		objectOutput.writeLong(userId);
@@ -171,6 +191,7 @@ public class PhoneCacheModel implements CacheModel<Phone>, Externalizable {
 		objectOutput.writeBoolean(primary);
 	}
 
+	public String uuid;
 	public long phoneId;
 	public long companyId;
 	public long userId;

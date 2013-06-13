@@ -37,6 +37,7 @@ public abstract class LayoutPrototypeBaseImpl extends LayoutPrototypeModelImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a layout prototype model instance should use the {@link LayoutPrototype} interface instead.
 	 */
+	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
 			LayoutPrototypeLocalServiceUtil.addLayoutPrototype(this);

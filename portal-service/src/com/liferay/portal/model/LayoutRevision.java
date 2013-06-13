@@ -56,8 +56,6 @@ public interface LayoutRevision extends LayoutRevisionModel, PersistedModel {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public java.lang.String getTypeSettings();
-
 	public com.liferay.portal.kernel.util.UnicodeProperties getTypeSettingsProperties();
 
 	public com.liferay.portal.model.ColorScheme getWapColorScheme()
@@ -74,8 +72,6 @@ public interface LayoutRevision extends LayoutRevisionModel, PersistedModel {
 	public boolean isInheritLookAndFeel();
 
 	public boolean isInheritWapLookAndFeel();
-
-	public void setTypeSettings(java.lang.String typeSettings);
 
 	public void setTypeSettingsProperties(
 		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties);

@@ -29,6 +29,7 @@ public abstract class ${entity.name}BaseImpl extends ${entity.name}ModelImpl imp
 	 */
 
 	<#if entity.hasLocalService() && entity.hasColumns()>
+		@Override
 		public void persist() throws SystemException {
 			if (this.isNew()) {
 				${entity.name}LocalServiceUtil.add${entity.name}(this);

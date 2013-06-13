@@ -17,12 +17,10 @@ package com.liferay.portlet.dynamicdatalists.service;
 import com.liferay.portal.service.ServiceWrapper;
 
 /**
- * <p>
- * This class is a wrapper for {@link DDLRecordService}.
- * </p>
+ * Provides a wrapper for {@link DDLRecordService}.
  *
- * @author    Brian Wing Shun Chan
- * @see       DDLRecordService
+ * @author Brian Wing Shun Chan
+ * @see DDLRecordService
  * @generated
  */
 public class DDLRecordServiceWrapper implements DDLRecordService,
@@ -36,6 +34,7 @@ public class DDLRecordServiceWrapper implements DDLRecordService,
 	*
 	* @return the Spring bean ID for this bean
 	*/
+	@Override
 	public java.lang.String getBeanIdentifier() {
 		return _ddlRecordService.getBeanIdentifier();
 	}
@@ -45,10 +44,12 @@ public class DDLRecordServiceWrapper implements DDLRecordService,
 	*
 	* @param beanIdentifier the Spring bean ID for this bean
 	*/
+	@Override
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		_ddlRecordService.setBeanIdentifier(beanIdentifier);
 	}
 
+	@Override
 	public com.liferay.portlet.dynamicdatalists.model.DDLRecord addRecord(
 		long groupId, long recordSetId, int displayIndex,
 		com.liferay.portlet.dynamicdatamapping.storage.Fields fields,
@@ -59,6 +60,7 @@ public class DDLRecordServiceWrapper implements DDLRecordService,
 			fields, serviceContext);
 	}
 
+	@Override
 	public com.liferay.portlet.dynamicdatalists.model.DDLRecord addRecord(
 		long groupId, long recordSetId, int displayIndex,
 		java.util.Map<java.lang.String, java.io.Serializable> fieldsMap,
@@ -69,6 +71,7 @@ public class DDLRecordServiceWrapper implements DDLRecordService,
 			fieldsMap, serviceContext);
 	}
 
+	@Override
 	public com.liferay.portlet.dynamicdatalists.model.DDLRecord deleteRecordLocale(
 		long recordId, java.util.Locale locale,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -78,6 +81,7 @@ public class DDLRecordServiceWrapper implements DDLRecordService,
 			serviceContext);
 	}
 
+	@Override
 	public com.liferay.portlet.dynamicdatalists.model.DDLRecord getRecord(
 		long recordId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -85,6 +89,7 @@ public class DDLRecordServiceWrapper implements DDLRecordService,
 		return _ddlRecordService.getRecord(recordId);
 	}
 
+	@Override
 	public com.liferay.portlet.dynamicdatalists.model.DDLRecord updateRecord(
 		long recordId, boolean majorVersion, int displayIndex,
 		com.liferay.portlet.dynamicdatamapping.storage.Fields fields,
@@ -96,6 +101,7 @@ public class DDLRecordServiceWrapper implements DDLRecordService,
 			displayIndex, fields, mergeFields, serviceContext);
 	}
 
+	@Override
 	public com.liferay.portlet.dynamicdatalists.model.DDLRecord updateRecord(
 		long recordId, int displayIndex,
 		java.util.Map<java.lang.String, java.io.Serializable> fieldsMap,
@@ -121,10 +127,12 @@ public class DDLRecordServiceWrapper implements DDLRecordService,
 		_ddlRecordService = ddlRecordService;
 	}
 
+	@Override
 	public DDLRecordService getWrappedService() {
 		return _ddlRecordService;
 	}
 
+	@Override
 	public void setWrappedService(DDLRecordService ddlRecordService) {
 		_ddlRecordService = ddlRecordService;
 	}

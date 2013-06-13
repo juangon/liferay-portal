@@ -321,12 +321,12 @@ public class PortalPolicy extends Policy {
 	private ConcurrentMap<Object, PermissionCollection> _permissionCollections =
 		new WeakValueConcurrentHashMap<Object, PermissionCollection>();
 	private Policy _policy;
-
 	private Map<Object, PermissionCollection> _rootPermissionCollections;
 
 	private class FieldPrivilegedExceptionAction
 		implements PrivilegedExceptionAction<Field> {
 
+		@Override
 		public Field run() throws Exception {
 			Field field = ProtectionDomain.class.getDeclaredField("key");
 
@@ -340,6 +340,7 @@ public class PortalPolicy extends Policy {
 	private class ProtectionDomainsPrivilegedExceptionAction
 		implements PrivilegedExceptionAction<List<ProtectionDomain>> {
 
+		@Override
 		public List<ProtectionDomain> run() throws Exception {
 			List<ProtectionDomain> protectionDomains =
 				new ArrayList<ProtectionDomain>();

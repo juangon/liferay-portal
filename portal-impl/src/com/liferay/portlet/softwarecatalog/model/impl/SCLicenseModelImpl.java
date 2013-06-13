@@ -150,26 +150,32 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 	public SCLicenseModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _licenseId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setLicenseId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _licenseId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return SCLicense.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return SCLicense.class.getName();
 	}
@@ -227,15 +233,18 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 		}
 	}
 
+	@Override
 	@JSON
 	public long getLicenseId() {
 		return _licenseId;
 	}
 
+	@Override
 	public void setLicenseId(long licenseId) {
 		_licenseId = licenseId;
 	}
 
+	@Override
 	@JSON
 	public String getName() {
 		if (_name == null) {
@@ -246,12 +255,14 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 		}
 	}
 
+	@Override
 	public void setName(String name) {
 		_columnBitmask = -1L;
 
 		_name = name;
 	}
 
+	@Override
 	@JSON
 	public String getUrl() {
 		if (_url == null) {
@@ -262,32 +273,39 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 		}
 	}
 
+	@Override
 	public void setUrl(String url) {
 		_url = url;
 	}
 
+	@Override
 	@JSON
 	public boolean getOpenSource() {
 		return _openSource;
 	}
 
+	@Override
 	public boolean isOpenSource() {
 		return _openSource;
 	}
 
+	@Override
 	public void setOpenSource(boolean openSource) {
 		_openSource = openSource;
 	}
 
+	@Override
 	@JSON
 	public boolean getActive() {
 		return _active;
 	}
 
+	@Override
 	public boolean isActive() {
 		return _active;
 	}
 
+	@Override
 	public void setActive(boolean active) {
 		_columnBitmask |= ACTIVE_COLUMN_BITMASK;
 
@@ -304,15 +322,18 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 		return _originalActive;
 	}
 
+	@Override
 	@JSON
 	public boolean getRecommended() {
 		return _recommended;
 	}
 
+	@Override
 	public boolean isRecommended() {
 		return _recommended;
 	}
 
+	@Override
 	public void setRecommended(boolean recommended) {
 		_columnBitmask |= RECOMMENDED_COLUMN_BITMASK;
 
@@ -372,6 +393,7 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 		return scLicenseImpl;
 	}
 
+	@Override
 	public int compareTo(SCLicense scLicense) {
 		int value = 0;
 
@@ -386,18 +408,15 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof SCLicense)) {
 			return false;
 		}
 
-		SCLicense scLicense = null;
-
-		try {
-			scLicense = (SCLicense)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		SCLicense scLicense = (SCLicense)obj;
 
 		long primaryKey = scLicense.getPrimaryKey();
 
@@ -481,6 +500,7 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(22);
 

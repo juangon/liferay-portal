@@ -27,6 +27,7 @@ public class License implements Serializable {
 
 		new Accessor<License, String>() {
 
+			@Override
 			public String get(License license) {
 				return license.getName();
 			}

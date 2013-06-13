@@ -24,29 +24,32 @@ import java.nio.channels.SelectionKey;
  */
 class SelectionKeyRegistrationReference implements RegistrationReference {
 
+	@Override
 	public void cancelRegistration() {
 		readSelectionKey.cancel();
 		writeSelectionKey.cancel();
 	}
 
+	@Override
 	public Intraband getIntraband() {
-		return intraBand;
+		return intraband;
 	}
 
+	@Override
 	public boolean isValid() {
 		return writeSelectionKey.isValid();
 	}
 
 	protected SelectionKeyRegistrationReference(
-		Intraband intraBand, SelectionKey readSelectionKey,
+		Intraband intraband, SelectionKey readSelectionKey,
 		SelectionKey writeSelectionKey) {
 
-		this.intraBand = intraBand;
+		this.intraband = intraband;
 		this.readSelectionKey = readSelectionKey;
 		this.writeSelectionKey = writeSelectionKey;
 	}
 
-	protected final Intraband intraBand;
+	protected final Intraband intraband;
 	protected final SelectionKey readSelectionKey;
 	protected final SelectionKey writeSelectionKey;
 

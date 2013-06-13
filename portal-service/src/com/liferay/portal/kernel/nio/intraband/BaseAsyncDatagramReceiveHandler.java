@@ -33,6 +33,7 @@ public abstract class BaseAsyncDatagramReceiveHandler
 			clazz.getName());
 	}
 
+	@Override
 	public void receive(
 		RegistrationReference registrationReference, Datagram datagram) {
 
@@ -57,6 +58,7 @@ public abstract class BaseAsyncDatagramReceiveHandler
 			_registrationReference = registrationReference;
 		}
 
+		@Override
 		public void run() {
 			try {
 				doReceive(_registrationReference, _datagram);

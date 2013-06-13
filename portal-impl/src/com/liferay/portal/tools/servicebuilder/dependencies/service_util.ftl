@@ -7,30 +7,38 @@ import com.liferay.portal.service.Invokable${sessionTypeName}Service;
 
 <#if sessionTypeName == "Local">
 /**
- * The utility for the ${entity.humanName} local service. This utility wraps {@link ${packagePath}.service.impl.${entity.name}LocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
+ * Provides the local service utility for ${entity.name}. This utility wraps
+ * {@link ${packagePath}.service.impl.${entity.name}LocalServiceImpl} and is the
+ * primary access point for service operations in application layer code running
+ * on the local server. Methods of this service will not have security checks
+ * based on the propagated JAAS credentials because this service can only be
+ * accessed from within the same VM.
  *
  * @author ${author}
  * @see ${entity.name}LocalService
  * @see ${packagePath}.service.base.${entity.name}LocalServiceBaseImpl
  * @see ${packagePath}.service.impl.${entity.name}LocalServiceImpl
+<#if classDeprecated>
+ * @deprecated ${classDeprecatedComment}
+</#if>
  * @generated
  */
 <#else>
 /**
- * The utility for the ${entity.humanName} remote service. This utility wraps {@link ${packagePath}.service.impl.${entity.name}ServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
- *
- * <p>
- * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
- * </p>
+ * Provides the remote service utility for ${entity.name}. This utility wraps
+ * {@link ${packagePath}.service.impl.${entity.name}ServiceImpl} and is the
+ * primary access point for service operations in application layer code running
+ * on a remote server. Methods of this service are expected to have security
+ * checks based on the propagated JAAS credentials because this service can be
+ * accessed remotely.
  *
  * @author ${author}
  * @see ${entity.name}Service
  * @see ${packagePath}.service.base.${entity.name}ServiceBaseImpl
  * @see ${packagePath}.service.impl.${entity.name}ServiceImpl
+<#if classDeprecated>
+ * @deprecated ${classDeprecatedComment}
+</#if>
  * @generated
  */
 </#if>

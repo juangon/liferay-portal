@@ -37,6 +37,7 @@ public abstract class ResourceTypePermissionBaseImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a resource type permission model instance should use the {@link ResourceTypePermission} interface instead.
 	 */
+	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
 			ResourceTypePermissionLocalServiceUtil.addResourceTypePermission(this);

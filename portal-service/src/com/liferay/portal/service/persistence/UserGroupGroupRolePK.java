@@ -61,6 +61,7 @@ public class UserGroupGroupRolePK implements Comparable<UserGroupGroupRolePK>,
 		this.roleId = roleId;
 	}
 
+	@Override
 	public int compareTo(UserGroupGroupRolePK pk) {
 		if (pk == null) {
 			return -1;
@@ -115,18 +116,15 @@ public class UserGroupGroupRolePK implements Comparable<UserGroupGroupRolePK>,
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof UserGroupGroupRolePK)) {
 			return false;
 		}
 
-		UserGroupGroupRolePK pk = null;
-
-		try {
-			pk = (UserGroupGroupRolePK)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		UserGroupGroupRolePK pk = (UserGroupGroupRolePK)obj;
 
 		if ((userGroupId == pk.userGroupId) && (groupId == pk.groupId) &&
 				(roleId == pk.roleId)) {

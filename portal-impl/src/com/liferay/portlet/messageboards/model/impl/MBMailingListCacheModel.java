@@ -97,6 +97,7 @@ public class MBMailingListCacheModel implements CacheModel<MBMailingList>,
 		return sb.toString();
 	}
 
+	@Override
 	public MBMailingList toEntityModel() {
 		MBMailingListImpl mbMailingListImpl = new MBMailingListImpl();
 
@@ -216,6 +217,7 @@ public class MBMailingListCacheModel implements CacheModel<MBMailingList>,
 		return mbMailingListImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		mailingListId = objectInput.readLong();
@@ -245,6 +247,7 @@ public class MBMailingListCacheModel implements CacheModel<MBMailingList>,
 		active = objectInput.readBoolean();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

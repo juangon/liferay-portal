@@ -66,6 +66,7 @@ public class UserGroupCacheModel implements CacheModel<UserGroup>,
 		return sb.toString();
 	}
 
+	@Override
 	public UserGroup toEntityModel() {
 		UserGroupImpl userGroupImpl = new UserGroupImpl();
 
@@ -124,6 +125,7 @@ public class UserGroupCacheModel implements CacheModel<UserGroup>,
 		return userGroupImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		userGroupId = objectInput.readLong();
@@ -138,6 +140,7 @@ public class UserGroupCacheModel implements CacheModel<UserGroup>,
 		addedByLDAPImport = objectInput.readBoolean();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

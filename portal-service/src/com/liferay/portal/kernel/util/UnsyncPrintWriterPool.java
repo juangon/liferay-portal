@@ -93,6 +93,7 @@ public class UnsyncPrintWriterPool {
 	private static class UnsyncPrintWriterPoolAction
 		implements PoolAction<UnsyncPrintWriter, Writer> {
 
+		@Override
 		public UnsyncPrintWriter onBorrow(
 			UnsyncPrintWriter unsyncPrintWriter, Writer writer) {
 
@@ -101,10 +102,12 @@ public class UnsyncPrintWriterPool {
 			return unsyncPrintWriter;
 		}
 
+		@Override
 		public UnsyncPrintWriter onCreate(Writer writer) {
 			return new UnsyncPrintWriter(writer);
 		}
 
+		@Override
 		public void onReturn(UnsyncPrintWriter unsyncPrintWriter) {
 			unsyncPrintWriter.reset(null);
 		}

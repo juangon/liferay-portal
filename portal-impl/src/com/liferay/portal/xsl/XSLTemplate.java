@@ -49,7 +49,7 @@ public class XSLTemplate extends AbstractProcessingTemplate {
 
 	public XSLTemplate(
 		XSLTemplateResource xslTemplateResource,
-		TemplateResource errorTemplateResource, Map<String, Object> context,
+		TemplateResource errorTemplateResource,
 		TemplateContextHelper templateContextHelper) {
 
 		if (xslTemplateResource == null) {
@@ -66,18 +66,14 @@ public class XSLTemplate extends AbstractProcessingTemplate {
 		_templateContextHelper = templateContextHelper;
 
 		_context = new HashMap<String, Object>();
-
-		if (context != null) {
-			for (Map.Entry<String, Object> entry : context.entrySet()) {
-				put(entry.getKey(), entry.getValue());
-			}
-		}
 	}
 
+	@Override
 	public Object get(String key) {
 		return _context.get(key);
 	}
 
+	@Override
 	public String[] getKeys() {
 		Set<String> keys = _context.keySet();
 
@@ -89,10 +85,12 @@ public class XSLTemplate extends AbstractProcessingTemplate {
 		return _templateContextHelper;
 	}
 
+	@Override
 	public void prepare(HttpServletRequest request) {
 		_templateContextHelper.prepare(this, request);
 	}
 
+	@Override
 	public void put(String key, Object value) {
 		if (value == null) {
 			return;
@@ -244,6 +242,7 @@ public class XSLTemplate extends AbstractProcessingTemplate {
 			_scriptSource = scriptSource;
 		}
 
+		@Override
 		public Transformer run() throws Exception {
 			return _transformerFactory.newTransformer(_scriptSource);
 		}

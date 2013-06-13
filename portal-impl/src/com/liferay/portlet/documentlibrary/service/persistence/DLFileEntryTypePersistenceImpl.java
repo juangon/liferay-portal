@@ -124,6 +124,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the matching document library file entry types
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntryType> findByUuid(String uuid)
 		throws SystemException {
 		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
@@ -142,6 +143,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the range of matching document library file entry types
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntryType> findByUuid(String uuid, int start, int end)
 		throws SystemException {
 		return findByUuid(uuid, start, end, null);
@@ -161,6 +163,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the ordered range of matching document library file entry types
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntryType> findByUuid(String uuid, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -281,6 +284,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryTypeException if a matching document library file entry type could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntryType findByUuid_First(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileEntryTypeException, SystemException {
@@ -311,6 +315,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the first matching document library file entry type, or <code>null</code> if a matching document library file entry type could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntryType fetchByUuid_First(String uuid,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<DLFileEntryType> list = findByUuid(uuid, 0, 1, orderByComparator);
@@ -331,6 +336,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryTypeException if a matching document library file entry type could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntryType findByUuid_Last(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileEntryTypeException, SystemException {
@@ -361,6 +367,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the last matching document library file entry type, or <code>null</code> if a matching document library file entry type could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntryType fetchByUuid_Last(String uuid,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByUuid(uuid);
@@ -385,6 +392,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryTypeException if a document library file entry type with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntryType[] findByUuid_PrevAndNext(long fileEntryTypeId,
 		String uuid, OrderByComparator orderByComparator)
 		throws NoSuchFileEntryTypeException, SystemException {
@@ -540,6 +548,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @param uuid the uuid
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByUuid(String uuid) throws SystemException {
 		for (DLFileEntryType dlFileEntryType : findByUuid(uuid,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -554,6 +563,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the number of matching document library file entry types
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUuid(String uuid) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID;
 
@@ -637,6 +647,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryTypeException if a matching document library file entry type could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntryType findByUUID_G(String uuid, long groupId)
 		throws NoSuchFileEntryTypeException, SystemException {
 		DLFileEntryType dlFileEntryType = fetchByUUID_G(uuid, groupId);
@@ -672,6 +683,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the matching document library file entry type, or <code>null</code> if a matching document library file entry type could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntryType fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		return fetchByUUID_G(uuid, groupId, true);
@@ -686,6 +698,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the matching document library file entry type, or <code>null</code> if a matching document library file entry type could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntryType fetchByUUID_G(String uuid, long groupId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, groupId };
@@ -792,6 +805,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the document library file entry type that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntryType removeByUUID_G(String uuid, long groupId)
 		throws NoSuchFileEntryTypeException, SystemException {
 		DLFileEntryType dlFileEntryType = findByUUID_G(uuid, groupId);
@@ -807,6 +821,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the number of matching document library file entry types
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID_G;
@@ -906,6 +921,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the matching document library file entry types
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntryType> findByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		return findByUuid_C(uuid, companyId, QueryUtil.ALL_POS,
@@ -926,6 +942,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the range of matching document library file entry types
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntryType> findByUuid_C(String uuid, long companyId,
 		int start, int end) throws SystemException {
 		return findByUuid_C(uuid, companyId, start, end, null);
@@ -946,6 +963,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the ordered range of matching document library file entry types
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntryType> findByUuid_C(String uuid, long companyId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1077,6 +1095,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryTypeException if a matching document library file entry type could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntryType findByUuid_C_First(String uuid, long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileEntryTypeException, SystemException {
@@ -1111,6 +1130,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the first matching document library file entry type, or <code>null</code> if a matching document library file entry type could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntryType fetchByUuid_C_First(String uuid, long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<DLFileEntryType> list = findByUuid_C(uuid, companyId, 0, 1,
@@ -1133,6 +1153,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryTypeException if a matching document library file entry type could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntryType findByUuid_C_Last(String uuid, long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileEntryTypeException, SystemException {
@@ -1167,6 +1188,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the last matching document library file entry type, or <code>null</code> if a matching document library file entry type could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntryType fetchByUuid_C_Last(String uuid, long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByUuid_C(uuid, companyId);
@@ -1192,6 +1214,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryTypeException if a document library file entry type with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntryType[] findByUuid_C_PrevAndNext(long fileEntryTypeId,
 		String uuid, long companyId, OrderByComparator orderByComparator)
 		throws NoSuchFileEntryTypeException, SystemException {
@@ -1352,6 +1375,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @param companyId the company ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		for (DLFileEntryType dlFileEntryType : findByUuid_C(uuid, companyId,
@@ -1368,6 +1392,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the number of matching document library file entry types
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID_C;
@@ -1469,6 +1494,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the matching document library file entry types
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntryType> findByGroupId(long groupId)
 		throws SystemException {
 		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
@@ -1487,6 +1513,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the range of matching document library file entry types
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntryType> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
 		return findByGroupId(groupId, start, end, null);
@@ -1506,6 +1533,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the ordered range of matching document library file entry types
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntryType> findByGroupId(long groupId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -1612,6 +1640,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryTypeException if a matching document library file entry type could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntryType findByGroupId_First(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileEntryTypeException, SystemException {
@@ -1642,6 +1671,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the first matching document library file entry type, or <code>null</code> if a matching document library file entry type could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntryType fetchByGroupId_First(long groupId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<DLFileEntryType> list = findByGroupId(groupId, 0, 1,
@@ -1663,6 +1693,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryTypeException if a matching document library file entry type could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntryType findByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileEntryTypeException, SystemException {
@@ -1693,6 +1724,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the last matching document library file entry type, or <code>null</code> if a matching document library file entry type could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntryType fetchByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByGroupId(groupId);
@@ -1717,6 +1749,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryTypeException if a document library file entry type with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntryType[] findByGroupId_PrevAndNext(long fileEntryTypeId,
 		long groupId, OrderByComparator orderByComparator)
 		throws NoSuchFileEntryTypeException, SystemException {
@@ -1859,6 +1892,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the matching document library file entry types that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntryType> filterFindByGroupId(long groupId)
 		throws SystemException {
 		return filterFindByGroupId(groupId, QueryUtil.ALL_POS,
@@ -1878,6 +1912,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the range of matching document library file entry types that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntryType> filterFindByGroupId(long groupId, int start,
 		int end) throws SystemException {
 		return filterFindByGroupId(groupId, start, end, null);
@@ -1897,6 +1932,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the ordered range of matching document library file entry types that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntryType> filterFindByGroupId(long groupId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -1988,6 +2024,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryTypeException if a document library file entry type with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntryType[] filterFindByGroupId_PrevAndNext(
 		long fileEntryTypeId, long groupId, OrderByComparator orderByComparator)
 		throws NoSuchFileEntryTypeException, SystemException {
@@ -2170,6 +2207,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the matching document library file entry types that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntryType> filterFindByGroupId(long[] groupIds)
 		throws SystemException {
 		return filterFindByGroupId(groupIds, QueryUtil.ALL_POS,
@@ -2189,6 +2227,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the range of matching document library file entry types that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntryType> filterFindByGroupId(long[] groupIds,
 		int start, int end) throws SystemException {
 		return filterFindByGroupId(groupIds, start, end, null);
@@ -2208,6 +2247,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the ordered range of matching document library file entry types that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntryType> filterFindByGroupId(long[] groupIds,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -2315,6 +2355,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the matching document library file entry types
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntryType> findByGroupId(long[] groupIds)
 		throws SystemException {
 		return findByGroupId(groupIds, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -2334,6 +2375,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the range of matching document library file entry types
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntryType> findByGroupId(long[] groupIds, int start,
 		int end) throws SystemException {
 		return findByGroupId(groupIds, start, end, null);
@@ -2353,6 +2395,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the ordered range of matching document library file entry types
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntryType> findByGroupId(long[] groupIds, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		if ((groupIds != null) && (groupIds.length == 1)) {
@@ -2477,6 +2520,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @param groupId the group ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (DLFileEntryType dlFileEntryType : findByGroupId(groupId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -2491,6 +2535,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the number of matching document library file entry types
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByGroupId(long groupId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPID;
 
@@ -2543,6 +2588,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the number of matching document library file entry types
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByGroupId(long[] groupIds) throws SystemException {
 		Object[] finderArgs = new Object[] { StringUtil.merge(groupIds) };
 
@@ -2617,6 +2663,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the number of matching document library file entry types that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByGroupId(long groupId) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return countByGroupId(groupId);
@@ -2665,6 +2712,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the number of matching document library file entry types that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByGroupId(long[] groupIds) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupIds)) {
 			return countByGroupId(groupIds);
@@ -2731,29 +2779,30 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "dlFileEntryType.groupId = ?";
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_5 = "(" +
 		removeConjunction(_FINDER_COLUMN_GROUPID_GROUPID_2) + ")";
-	public static final FinderPath FINDER_PATH_FETCH_BY_G_N = new FinderPath(DLFileEntryTypeModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FETCH_BY_G_F = new FinderPath(DLFileEntryTypeModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileEntryTypeModelImpl.FINDER_CACHE_ENABLED,
-			DLFileEntryTypeImpl.class, FINDER_CLASS_NAME_ENTITY, "fetchByG_N",
+			DLFileEntryTypeImpl.class, FINDER_CLASS_NAME_ENTITY, "fetchByG_F",
 			new String[] { Long.class.getName(), String.class.getName() },
 			DLFileEntryTypeModelImpl.GROUPID_COLUMN_BITMASK |
-			DLFileEntryTypeModelImpl.NAME_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_N = new FinderPath(DLFileEntryTypeModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileEntryTypeModelImpl.FILEENTRYTYPEKEY_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_F = new FinderPath(DLFileEntryTypeModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileEntryTypeModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_N",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_F",
 			new String[] { Long.class.getName(), String.class.getName() });
 
 	/**
-	 * Returns the document library file entry type where groupId = &#63; and name = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFileEntryTypeException} if it could not be found.
+	 * Returns the document library file entry type where groupId = &#63; and fileEntryTypeKey = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFileEntryTypeException} if it could not be found.
 	 *
 	 * @param groupId the group ID
-	 * @param name the name
+	 * @param fileEntryTypeKey the file entry type key
 	 * @return the matching document library file entry type
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryTypeException if a matching document library file entry type could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DLFileEntryType findByG_N(long groupId, String name)
+	@Override
+	public DLFileEntryType findByG_F(long groupId, String fileEntryTypeKey)
 		throws NoSuchFileEntryTypeException, SystemException {
-		DLFileEntryType dlFileEntryType = fetchByG_N(groupId, name);
+		DLFileEntryType dlFileEntryType = fetchByG_F(groupId, fileEntryTypeKey);
 
 		if (dlFileEntryType == null) {
 			StringBundler msg = new StringBundler(6);
@@ -2763,8 +2812,8 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 			msg.append("groupId=");
 			msg.append(groupId);
 
-			msg.append(", name=");
-			msg.append(name);
+			msg.append(", fileEntryTypeKey=");
+			msg.append(fileEntryTypeKey);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -2779,35 +2828,37 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	}
 
 	/**
-	 * Returns the document library file entry type where groupId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the document library file entry type where groupId = &#63; and fileEntryTypeKey = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
 	 * @param groupId the group ID
-	 * @param name the name
+	 * @param fileEntryTypeKey the file entry type key
 	 * @return the matching document library file entry type, or <code>null</code> if a matching document library file entry type could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DLFileEntryType fetchByG_N(long groupId, String name)
+	@Override
+	public DLFileEntryType fetchByG_F(long groupId, String fileEntryTypeKey)
 		throws SystemException {
-		return fetchByG_N(groupId, name, true);
+		return fetchByG_F(groupId, fileEntryTypeKey, true);
 	}
 
 	/**
-	 * Returns the document library file entry type where groupId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the document library file entry type where groupId = &#63; and fileEntryTypeKey = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
 	 * @param groupId the group ID
-	 * @param name the name
+	 * @param fileEntryTypeKey the file entry type key
 	 * @param retrieveFromCache whether to use the finder cache
 	 * @return the matching document library file entry type, or <code>null</code> if a matching document library file entry type could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DLFileEntryType fetchByG_N(long groupId, String name,
+	@Override
+	public DLFileEntryType fetchByG_F(long groupId, String fileEntryTypeKey,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { groupId, name };
+		Object[] finderArgs = new Object[] { groupId, fileEntryTypeKey };
 
 		Object result = null;
 
 		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_N,
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_F,
 					finderArgs, this);
 		}
 
@@ -2815,7 +2866,8 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 			DLFileEntryType dlFileEntryType = (DLFileEntryType)result;
 
 			if ((groupId != dlFileEntryType.getGroupId()) ||
-					!Validator.equals(name, dlFileEntryType.getName())) {
+					!Validator.equals(fileEntryTypeKey,
+						dlFileEntryType.getFileEntryTypeKey())) {
 				result = null;
 			}
 		}
@@ -2825,20 +2877,20 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 
 			query.append(_SQL_SELECT_DLFILEENTRYTYPE_WHERE);
 
-			query.append(_FINDER_COLUMN_G_N_GROUPID_2);
+			query.append(_FINDER_COLUMN_G_F_GROUPID_2);
 
-			boolean bindName = false;
+			boolean bindFileEntryTypeKey = false;
 
-			if (name == null) {
-				query.append(_FINDER_COLUMN_G_N_NAME_1);
+			if (fileEntryTypeKey == null) {
+				query.append(_FINDER_COLUMN_G_F_FILEENTRYTYPEKEY_1);
 			}
-			else if (name.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_G_N_NAME_3);
+			else if (fileEntryTypeKey.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_G_F_FILEENTRYTYPEKEY_3);
 			}
 			else {
-				bindName = true;
+				bindFileEntryTypeKey = true;
 
-				query.append(_FINDER_COLUMN_G_N_NAME_2);
+				query.append(_FINDER_COLUMN_G_F_FILEENTRYTYPEKEY_2);
 			}
 
 			String sql = query.toString();
@@ -2854,14 +2906,14 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 
 				qPos.add(groupId);
 
-				if (bindName) {
-					qPos.add(name);
+				if (bindFileEntryTypeKey) {
+					qPos.add(fileEntryTypeKey);
 				}
 
 				List<DLFileEntryType> list = q.list();
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N,
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_F,
 						finderArgs, list);
 				}
 				else {
@@ -2872,15 +2924,16 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 					cacheResult(dlFileEntryType);
 
 					if ((dlFileEntryType.getGroupId() != groupId) ||
-							(dlFileEntryType.getName() == null) ||
-							!dlFileEntryType.getName().equals(name)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N,
+							(dlFileEntryType.getFileEntryTypeKey() == null) ||
+							!dlFileEntryType.getFileEntryTypeKey()
+												.equals(fileEntryTypeKey)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_F,
 							finderArgs, dlFileEntryType);
 					}
 				}
 			}
 			catch (Exception e) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_N,
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_F,
 					finderArgs);
 
 				throw processException(e);
@@ -2899,32 +2952,35 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	}
 
 	/**
-	 * Removes the document library file entry type where groupId = &#63; and name = &#63; from the database.
+	 * Removes the document library file entry type where groupId = &#63; and fileEntryTypeKey = &#63; from the database.
 	 *
 	 * @param groupId the group ID
-	 * @param name the name
+	 * @param fileEntryTypeKey the file entry type key
 	 * @return the document library file entry type that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DLFileEntryType removeByG_N(long groupId, String name)
+	@Override
+	public DLFileEntryType removeByG_F(long groupId, String fileEntryTypeKey)
 		throws NoSuchFileEntryTypeException, SystemException {
-		DLFileEntryType dlFileEntryType = findByG_N(groupId, name);
+		DLFileEntryType dlFileEntryType = findByG_F(groupId, fileEntryTypeKey);
 
 		return remove(dlFileEntryType);
 	}
 
 	/**
-	 * Returns the number of document library file entry types where groupId = &#63; and name = &#63;.
+	 * Returns the number of document library file entry types where groupId = &#63; and fileEntryTypeKey = &#63;.
 	 *
 	 * @param groupId the group ID
-	 * @param name the name
+	 * @param fileEntryTypeKey the file entry type key
 	 * @return the number of matching document library file entry types
 	 * @throws SystemException if a system exception occurred
 	 */
-	public int countByG_N(long groupId, String name) throws SystemException {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_N;
+	@Override
+	public int countByG_F(long groupId, String fileEntryTypeKey)
+		throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_F;
 
-		Object[] finderArgs = new Object[] { groupId, name };
+		Object[] finderArgs = new Object[] { groupId, fileEntryTypeKey };
 
 		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
 				this);
@@ -2934,20 +2990,20 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 
 			query.append(_SQL_COUNT_DLFILEENTRYTYPE_WHERE);
 
-			query.append(_FINDER_COLUMN_G_N_GROUPID_2);
+			query.append(_FINDER_COLUMN_G_F_GROUPID_2);
 
-			boolean bindName = false;
+			boolean bindFileEntryTypeKey = false;
 
-			if (name == null) {
-				query.append(_FINDER_COLUMN_G_N_NAME_1);
+			if (fileEntryTypeKey == null) {
+				query.append(_FINDER_COLUMN_G_F_FILEENTRYTYPEKEY_1);
 			}
-			else if (name.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_G_N_NAME_3);
+			else if (fileEntryTypeKey.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_G_F_FILEENTRYTYPEKEY_3);
 			}
 			else {
-				bindName = true;
+				bindFileEntryTypeKey = true;
 
-				query.append(_FINDER_COLUMN_G_N_NAME_2);
+				query.append(_FINDER_COLUMN_G_F_FILEENTRYTYPEKEY_2);
 			}
 
 			String sql = query.toString();
@@ -2963,8 +3019,8 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 
 				qPos.add(groupId);
 
-				if (bindName) {
-					qPos.add(name);
+				if (bindFileEntryTypeKey) {
+					qPos.add(fileEntryTypeKey);
 				}
 
 				count = (Long)q.uniqueResult();
@@ -2984,16 +3040,17 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_G_N_GROUPID_2 = "dlFileEntryType.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_N_NAME_1 = "dlFileEntryType.name IS NULL";
-	private static final String _FINDER_COLUMN_G_N_NAME_2 = "dlFileEntryType.name = ?";
-	private static final String _FINDER_COLUMN_G_N_NAME_3 = "(dlFileEntryType.name IS NULL OR dlFileEntryType.name = '')";
+	private static final String _FINDER_COLUMN_G_F_GROUPID_2 = "dlFileEntryType.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_F_FILEENTRYTYPEKEY_1 = "dlFileEntryType.fileEntryTypeKey IS NULL";
+	private static final String _FINDER_COLUMN_G_F_FILEENTRYTYPEKEY_2 = "dlFileEntryType.fileEntryTypeKey = ?";
+	private static final String _FINDER_COLUMN_G_F_FILEENTRYTYPEKEY_3 = "(dlFileEntryType.fileEntryTypeKey IS NULL OR dlFileEntryType.fileEntryTypeKey = '')";
 
 	/**
 	 * Caches the document library file entry type in the entity cache if it is enabled.
 	 *
 	 * @param dlFileEntryType the document library file entry type
 	 */
+	@Override
 	public void cacheResult(DLFileEntryType dlFileEntryType) {
 		EntityCacheUtil.putResult(DLFileEntryTypeModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileEntryTypeImpl.class, dlFileEntryType.getPrimaryKey(),
@@ -3003,9 +3060,11 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 			new Object[] { dlFileEntryType.getUuid(), dlFileEntryType.getGroupId() },
 			dlFileEntryType);
 
-		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N,
-			new Object[] { dlFileEntryType.getGroupId(), dlFileEntryType.getName() },
-			dlFileEntryType);
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_F,
+			new Object[] {
+				dlFileEntryType.getGroupId(),
+				dlFileEntryType.getFileEntryTypeKey()
+			}, dlFileEntryType);
 
 		dlFileEntryType.resetOriginalValues();
 	}
@@ -3015,6 +3074,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 *
 	 * @param dlFileEntryTypes the document library file entry types
 	 */
+	@Override
 	public void cacheResult(List<DLFileEntryType> dlFileEntryTypes) {
 		for (DLFileEntryType dlFileEntryType : dlFileEntryTypes) {
 			if (EntityCacheUtil.getResult(
@@ -3092,12 +3152,13 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 				dlFileEntryType);
 
 			args = new Object[] {
-					dlFileEntryType.getGroupId(), dlFileEntryType.getName()
+					dlFileEntryType.getGroupId(),
+					dlFileEntryType.getFileEntryTypeKey()
 				};
 
-			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_N, args,
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_F, args,
 				Long.valueOf(1));
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N, args,
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_F, args,
 				dlFileEntryType);
 		}
 		else {
@@ -3116,14 +3177,15 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 			}
 
 			if ((dlFileEntryTypeModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_G_N.getColumnBitmask()) != 0) {
+					FINDER_PATH_FETCH_BY_G_F.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						dlFileEntryType.getGroupId(), dlFileEntryType.getName()
+						dlFileEntryType.getGroupId(),
+						dlFileEntryType.getFileEntryTypeKey()
 					};
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_N, args,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_F, args,
 					Long.valueOf(1));
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N, args,
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_F, args,
 					dlFileEntryType);
 			}
 		}
@@ -3151,21 +3213,22 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 		}
 
 		args = new Object[] {
-				dlFileEntryType.getGroupId(), dlFileEntryType.getName()
+				dlFileEntryType.getGroupId(),
+				dlFileEntryType.getFileEntryTypeKey()
 			};
 
-		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_N, args);
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_N, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_F, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_F, args);
 
 		if ((dlFileEntryTypeModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_G_N.getColumnBitmask()) != 0) {
+				FINDER_PATH_FETCH_BY_G_F.getColumnBitmask()) != 0) {
 			args = new Object[] {
 					dlFileEntryTypeModelImpl.getOriginalGroupId(),
-					dlFileEntryTypeModelImpl.getOriginalName()
+					dlFileEntryTypeModelImpl.getOriginalFileEntryTypeKey()
 				};
 
-			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_N, args);
-			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_N, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_F, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_F, args);
 		}
 	}
 
@@ -3175,6 +3238,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @param fileEntryTypeId the primary key for the new document library file entry type
 	 * @return the new document library file entry type
 	 */
+	@Override
 	public DLFileEntryType create(long fileEntryTypeId) {
 		DLFileEntryType dlFileEntryType = new DLFileEntryTypeImpl();
 
@@ -3196,6 +3260,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryTypeException if a document library file entry type with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntryType remove(long fileEntryTypeId)
 		throws NoSuchFileEntryTypeException, SystemException {
 		return remove((Serializable)fileEntryTypeId);
@@ -3423,6 +3488,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 		dlFileEntryTypeImpl.setUserName(dlFileEntryType.getUserName());
 		dlFileEntryTypeImpl.setCreateDate(dlFileEntryType.getCreateDate());
 		dlFileEntryTypeImpl.setModifiedDate(dlFileEntryType.getModifiedDate());
+		dlFileEntryTypeImpl.setFileEntryTypeKey(dlFileEntryType.getFileEntryTypeKey());
 		dlFileEntryTypeImpl.setName(dlFileEntryType.getName());
 		dlFileEntryTypeImpl.setDescription(dlFileEntryType.getDescription());
 
@@ -3462,6 +3528,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryTypeException if a document library file entry type with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntryType findByPrimaryKey(long fileEntryTypeId)
 		throws NoSuchFileEntryTypeException, SystemException {
 		return findByPrimaryKey((Serializable)fileEntryTypeId);
@@ -3523,6 +3590,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the document library file entry type, or <code>null</code> if a document library file entry type with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntryType fetchByPrimaryKey(long fileEntryTypeId)
 		throws SystemException {
 		return fetchByPrimaryKey((Serializable)fileEntryTypeId);
@@ -3534,6 +3602,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the document library file entry types
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntryType> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -3550,6 +3619,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the range of document library file entry types
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntryType> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
@@ -3568,6 +3638,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the ordered range of document library file entry types
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntryType> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -3653,6 +3724,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (DLFileEntryType dlFileEntryType : findAll()) {
 			remove(dlFileEntryType);
@@ -3665,6 +3737,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the number of document library file entry types
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -3703,6 +3776,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the document library folders associated with the document library file entry type
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portlet.documentlibrary.model.DLFolder> getDLFolders(
 		long pk) throws SystemException {
 		return getDLFolders(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
@@ -3721,6 +3795,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the range of document library folders associated with the document library file entry type
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portlet.documentlibrary.model.DLFolder> getDLFolders(
 		long pk, int start, int end) throws SystemException {
 		return getDLFolders(pk, start, end, null);
@@ -3754,6 +3829,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the ordered range of document library folders associated with the document library file entry type
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portlet.documentlibrary.model.DLFolder> getDLFolders(
 		long pk, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -3850,6 +3926,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the number of document library folders associated with the document library file entry type
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int getDLFoldersSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { pk };
 
@@ -3905,6 +3982,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return <code>true</code> if the document library folder is associated with the document library file entry type; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean containsDLFolder(long pk, long dlFolderPK)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { pk, dlFolderPK };
@@ -3937,6 +4015,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return <code>true</code> if the document library file entry type has any document library folders associated with it; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean containsDLFolders(long pk) throws SystemException {
 		if (getDLFoldersSize(pk) > 0) {
 			return true;
@@ -3953,6 +4032,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @param dlFolderPK the primary key of the document library folder
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addDLFolder(long pk, long dlFolderPK) throws SystemException {
 		try {
 			addDLFolder.add(pk, dlFolderPK);
@@ -3972,6 +4052,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @param dlFolder the document library folder
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addDLFolder(long pk,
 		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder)
 		throws SystemException {
@@ -3993,6 +4074,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @param dlFolderPKs the primary keys of the document library folders
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addDLFolders(long pk, long[] dlFolderPKs)
 		throws SystemException {
 		try {
@@ -4015,6 +4097,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @param dlFolders the document library folders
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addDLFolders(long pk,
 		List<com.liferay.portlet.documentlibrary.model.DLFolder> dlFolders)
 		throws SystemException {
@@ -4037,6 +4120,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @param pk the primary key of the document library file entry type to clear the associated document library folders from
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void clearDLFolders(long pk) throws SystemException {
 		try {
 			clearDLFolders.clear(pk);
@@ -4056,6 +4140,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @param dlFolderPK the primary key of the document library folder
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeDLFolder(long pk, long dlFolderPK)
 		throws SystemException {
 		try {
@@ -4076,6 +4161,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @param dlFolder the document library folder
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeDLFolder(long pk,
 		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder)
 		throws SystemException {
@@ -4097,6 +4183,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @param dlFolderPKs the primary keys of the document library folders
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeDLFolders(long pk, long[] dlFolderPKs)
 		throws SystemException {
 		try {
@@ -4119,6 +4206,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @param dlFolders the document library folders
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeDLFolders(long pk,
 		List<com.liferay.portlet.documentlibrary.model.DLFolder> dlFolders)
 		throws SystemException {
@@ -4142,6 +4230,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @param dlFolderPKs the primary keys of the document library folders to be associated with the document library file entry type
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setDLFolders(long pk, long[] dlFolderPKs)
 		throws SystemException {
 		try {
@@ -4174,6 +4263,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @param dlFolders the document library folders to be associated with the document library file entry type
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setDLFolders(long pk,
 		List<com.liferay.portlet.documentlibrary.model.DLFolder> dlFolders)
 		throws SystemException {
@@ -4203,6 +4293,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the d d m structures associated with the document library file entry type
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> getDDMStructures(
 		long pk) throws SystemException {
 		return getDDMStructures(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
@@ -4221,6 +4312,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the range of d d m structures associated with the document library file entry type
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> getDDMStructures(
 		long pk, int start, int end) throws SystemException {
 		return getDDMStructures(pk, start, end, null);
@@ -4254,6 +4346,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the ordered range of d d m structures associated with the document library file entry type
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> getDDMStructures(
 		long pk, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -4350,6 +4443,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return the number of d d m structures associated with the document library file entry type
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int getDDMStructuresSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { pk };
 
@@ -4405,6 +4499,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return <code>true</code> if the d d m structure is associated with the document library file entry type; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean containsDDMStructure(long pk, long ddmStructurePK)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { pk, ddmStructurePK };
@@ -4438,6 +4533,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @return <code>true</code> if the document library file entry type has any d d m structures associated with it; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean containsDDMStructures(long pk) throws SystemException {
 		if (getDDMStructuresSize(pk) > 0) {
 			return true;
@@ -4454,6 +4550,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @param ddmStructurePK the primary key of the d d m structure
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addDDMStructure(long pk, long ddmStructurePK)
 		throws SystemException {
 		try {
@@ -4474,6 +4571,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @param ddmStructure the d d m structure
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addDDMStructure(long pk,
 		com.liferay.portlet.dynamicdatamapping.model.DDMStructure ddmStructure)
 		throws SystemException {
@@ -4495,6 +4593,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @param ddmStructurePKs the primary keys of the d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addDDMStructures(long pk, long[] ddmStructurePKs)
 		throws SystemException {
 		try {
@@ -4517,6 +4616,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @param ddmStructures the d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addDDMStructures(long pk,
 		List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> ddmStructures)
 		throws SystemException {
@@ -4539,6 +4639,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @param pk the primary key of the document library file entry type to clear the associated d d m structures from
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void clearDDMStructures(long pk) throws SystemException {
 		try {
 			clearDDMStructures.clear(pk);
@@ -4558,6 +4659,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @param ddmStructurePK the primary key of the d d m structure
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeDDMStructure(long pk, long ddmStructurePK)
 		throws SystemException {
 		try {
@@ -4578,6 +4680,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @param ddmStructure the d d m structure
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeDDMStructure(long pk,
 		com.liferay.portlet.dynamicdatamapping.model.DDMStructure ddmStructure)
 		throws SystemException {
@@ -4599,6 +4702,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @param ddmStructurePKs the primary keys of the d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeDDMStructures(long pk, long[] ddmStructurePKs)
 		throws SystemException {
 		try {
@@ -4621,6 +4725,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @param ddmStructures the d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeDDMStructures(long pk,
 		List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> ddmStructures)
 		throws SystemException {
@@ -4644,6 +4749,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @param ddmStructurePKs the primary keys of the d d m structures to be associated with the document library file entry type
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setDDMStructures(long pk, long[] ddmStructurePKs)
 		throws SystemException {
 		try {
@@ -4677,6 +4783,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 * @param ddmStructures the d d m structures to be associated with the document library file entry type
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setDDMStructures(long pk,
 		List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> ddmStructures)
 		throws SystemException {
@@ -5134,6 +5241,7 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 		};
 
 	private static CacheModel<DLFileEntryType> _nullDLFileEntryTypeCacheModel = new CacheModel<DLFileEntryType>() {
+			@Override
 			public DLFileEntryType toEntityModel() {
 				return _nullDLFileEntryType;
 			}

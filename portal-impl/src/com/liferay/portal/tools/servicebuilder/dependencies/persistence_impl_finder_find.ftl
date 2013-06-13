@@ -88,6 +88,7 @@ that may or may not be enforced with a unique index at the database level. Case
 	 * @return the matching ${entity.humanNames}
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<${entity.name}> findBy${finder.name}(
 
 	<#list finderColsList as finderCol>
@@ -123,6 +124,7 @@ that may or may not be enforced with a unique index at the database level. Case
 	 * @return the range of matching ${entity.humanNames}
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<${entity.name}> findBy${finder.name}(
 
 	<#list finderColsList as finderCol>
@@ -155,6 +157,7 @@ that may or may not be enforced with a unique index at the database level. Case
 	 * @return the ordered range of matching ${entity.humanNames}
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<${entity.name}> findBy${finder.name}(
 
 	<#list finderColsList as finderCol>
@@ -279,6 +282,7 @@ that may or may not be enforced with a unique index at the database level. Case
 	 * @throws ${packagePath}.${noSuchEntity}Exception if a matching ${entity.humanName} could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ${entity.name} findBy${finder.name}_First(
 
 	<#list finderColsList as finderCol>
@@ -324,6 +328,7 @@ that may or may not be enforced with a unique index at the database level. Case
 	 * @return the first matching ${entity.humanName}, or <code>null</code> if a matching ${entity.humanName} could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ${entity.name} fetchBy${finder.name}_First(
 
 	<#list finderColsList as finderCol>
@@ -357,6 +362,7 @@ that may or may not be enforced with a unique index at the database level. Case
 	 * @throws ${packagePath}.${noSuchEntity}Exception if a matching ${entity.humanName} could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ${entity.name} findBy${finder.name}_Last(
 
 	<#list finderColsList as finderCol>
@@ -402,6 +408,7 @@ that may or may not be enforced with a unique index at the database level. Case
 	 * @return the last matching ${entity.humanName}, or <code>null</code> if a matching ${entity.humanName} could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ${entity.name} fetchBy${finder.name}_Last(
 
 	<#list finderColsList as finderCol>
@@ -448,6 +455,7 @@ that may or may not be enforced with a unique index at the database level. Case
 	 * @throws ${packagePath}.${noSuchEntity}Exception if a ${entity.humanName} with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ${entity.name}[] findBy${finder.name}_PrevAndNext(${entity.PKClassName} ${entity.PKVarName},
 
 	<#list finderColsList as finderCol>
@@ -546,6 +554,7 @@ that may or may not be enforced with a unique index at the database level. Case
 		 * @return the matching ${entity.humanNames} that the user has permission to view
 		 * @throws SystemException if a system exception occurred
 		 */
+		@Override
 		public List<${entity.name}> filterFindBy${finder.name}(
 
 		<#list finderColsList as finderCol>
@@ -581,6 +590,7 @@ that may or may not be enforced with a unique index at the database level. Case
 		 * @return the range of matching ${entity.humanNames} that the user has permission to view
 		 * @throws SystemException if a system exception occurred
 		 */
+		@Override
 		public List<${entity.name}> filterFindBy${finder.name}(
 
 		<#list finderColsList as finderCol>
@@ -613,6 +623,7 @@ that may or may not be enforced with a unique index at the database level. Case
 		 * @return the ordered range of matching ${entity.humanNames} that the user has permission to view
 		 * @throws SystemException if a system exception occurred
 		 */
+		@Override
 		public List<${entity.name}> filterFindBy${finder.name}(
 
 		<#list finderColsList as finderCol>
@@ -741,6 +752,7 @@ that may or may not be enforced with a unique index at the database level. Case
 		 * @throws ${packagePath}.${noSuchEntity}Exception if a ${entity.humanName} with the primary key could not be found
 		 * @throws SystemException if a system exception occurred
 		 */
+		@Override
 		public ${entity.name}[] filterFindBy${finder.name}_PrevAndNext(${entity.PKClassName} ${entity.PKVarName},
 
 		<#list finderColsList as finderCol>
@@ -992,6 +1004,7 @@ that may or may not be enforced with a unique index at the database level. Case
 			 * @return the matching ${entity.humanNames} that the user has permission to view
 			 * @throws SystemException if a system exception occurred
 			 */
+			@Override
 			public List<${entity.name}> filterFindBy${finder.name}(
 
 			<#list finderColsList as finderCol>
@@ -1039,6 +1052,7 @@ that may or may not be enforced with a unique index at the database level. Case
 			 * @return the range of matching ${entity.humanNames} that the user has permission to view
 			 * @throws SystemException if a system exception occurred
 			 */
+			@Override
 			public List<${entity.name}> filterFindBy${finder.name}(
 
 			<#list finderColsList as finderCol>
@@ -1083,6 +1097,7 @@ that may or may not be enforced with a unique index at the database level. Case
 			 * @return the ordered range of matching ${entity.humanNames} that the user has permission to view
 			 * @throws SystemException if a system exception occurred
 			 */
+			@Override
 			public List<${entity.name}> filterFindBy${finder.name}(
 
 			<#list finderColsList as finderCol>
@@ -1263,6 +1278,7 @@ that may or may not be enforced with a unique index at the database level. Case
 		 * @return the matching ${entity.humanNames}
 		 * @throws SystemException if a system exception occurred
 		 */
+		@Override
 		public List<${entity.name}> findBy${finder.name}(
 
 		<#list finderColsList as finderCol>
@@ -1310,6 +1326,7 @@ that may or may not be enforced with a unique index at the database level. Case
 		 * @return the range of matching ${entity.humanNames}
 		 * @throws SystemException if a system exception occurred
 		 */
+		@Override
 		public List<${entity.name}> findBy${finder.name}(
 
 		<#list finderColsList as finderCol>
@@ -1354,6 +1371,7 @@ that may or may not be enforced with a unique index at the database level. Case
 		 * @return the ordered range of matching ${entity.humanNames}
 		 * @throws SystemException if a system exception occurred
 		 */
+		@Override
 		public List<${entity.name}> findBy${finder.name}(
 
 		<#list finderColsList as finderCol>
@@ -1546,6 +1564,7 @@ that may or may not be enforced with a unique index at the database level. Case
 	 * @throws ${packagePath}.${noSuchEntity}Exception if a matching ${entity.humanName} could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ${entity.name} findBy${finder.name}(
 
 	<#list finderColsList as finderCol>
@@ -1602,6 +1621,7 @@ that may or may not be enforced with a unique index at the database level. Case
 	 * @return the matching ${entity.humanName}, or <code>null</code> if a matching ${entity.humanName} could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ${entity.name} fetchBy${finder.name}(
 
 	<#list finderColsList as finderCol>
@@ -1632,6 +1652,7 @@ that may or may not be enforced with a unique index at the database level. Case
 	 * @return the matching ${entity.humanName}, or <code>null</code> if a matching ${entity.humanName} could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ${entity.name} fetchBy${finder.name}(
 
 	<#list finderColsList as finderCol>

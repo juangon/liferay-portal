@@ -41,6 +41,7 @@ public class IntrabandTestUtil {
 			IntrabandTestUtil.class.getClassLoader(), interfaces,
 			new InvocationHandler() {
 
+				@Override
 				public Object invoke(
 					Object proxy, Method method, Object[] args) {
 
@@ -78,6 +79,7 @@ public class IntrabandTestUtil {
 	private static ServerSocketConfigurator _serverSocketConfigurator =
 		new ServerSocketConfigurator() {
 
+		@Override
 		public void configure(ServerSocket serverSocket)
 			throws SocketException {
 

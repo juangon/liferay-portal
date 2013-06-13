@@ -159,10 +159,12 @@ public class FutureClusterResponsesTest extends TestCase {
 			_address = address;
 		}
 
+		@Override
 		public String getDescription() {
 			return _address;
 		}
 
+		@Override
 		public Object getRealAddress() {
 			return _address;
 		}

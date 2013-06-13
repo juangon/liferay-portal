@@ -44,9 +44,11 @@ public class EhcachePortalCache<K extends Serializable, V>
 		_ehcache = ehcache;
 	}
 
+	@Override
 	public void destroy() {
 	}
 
+	@Override
 	public Collection<V> get(Collection<K> keys) {
 		List<V> values = new ArrayList<V>(keys.size());
 
@@ -57,6 +59,7 @@ public class EhcachePortalCache<K extends Serializable, V>
 		return values;
 	}
 
+	@Override
 	public V get(K key) {
 		Element element = _ehcache.get(key);
 
@@ -68,16 +71,19 @@ public class EhcachePortalCache<K extends Serializable, V>
 		}
 	}
 
+	@Override
 	public String getName() {
 		return _ehcache.getName();
 	}
 
+	@Override
 	public void put(K key, V value) {
 		Element element = new Element(key, value);
 
 		_ehcache.put(element);
 	}
 
+	@Override
 	public void put(K key, V value, int timeToLive) {
 		Element element = new Element(key, value);
 
@@ -86,10 +92,12 @@ public class EhcachePortalCache<K extends Serializable, V>
 		_ehcache.put(element);
 	}
 
+	@Override
 	public void registerCacheListener(CacheListener<K, V> cacheListener) {
 		registerCacheListener(cacheListener, CacheListenerScope.ALL);
 	}
 
+	@Override
 	public void registerCacheListener(
 		CacheListener<K, V> cacheListener,
 		CacheListenerScope cacheListenerScope) {
@@ -113,10 +121,12 @@ public class EhcachePortalCache<K extends Serializable, V>
 			cacheEventListener, notificationScope);
 	}
 
+	@Override
 	public void remove(K key) {
 		_ehcache.remove(key);
 	}
 
+	@Override
 	public void removeAll() {
 		_ehcache.removeAll();
 	}
@@ -125,6 +135,7 @@ public class EhcachePortalCache<K extends Serializable, V>
 		_ehcache = ehcache;
 	}
 
+	@Override
 	public void unregisterCacheListener(CacheListener<K, V> cacheListener) {
 		CacheEventListener cacheEventListener = _cacheEventListeners.get(
 			cacheListener);
@@ -139,6 +150,7 @@ public class EhcachePortalCache<K extends Serializable, V>
 		_cacheEventListeners.remove(cacheListener);
 	}
 
+	@Override
 	public void unregisterCacheListeners() {
 		RegisteredEventListeners registeredEventListeners =
 			_ehcache.getCacheEventNotificationService();

@@ -1180,6 +1180,7 @@ public class ProcessExecutorTest {
 	private static ServerSocketConfigurator _serverSocketConfigurator =
 		new ServerSocketConfigurator() {
 
+		@Override
 		public void configure(ServerSocket serverSocket)
 			throws SocketException {
 
@@ -1195,6 +1196,7 @@ public class ProcessExecutorTest {
 			_serverPort = serverPort;
 		}
 
+		@Override
 		public Serializable call() throws ProcessException {
 			try {
 				ServerThread serverThread = new ServerThread(
@@ -1391,6 +1393,7 @@ public class ProcessExecutorTest {
 				heartbeatThread.setUncaughtExceptionHandler(
 					new UncaughtExceptionHandler() {
 
+						@Override
 						public void uncaughtException(Thread t, Throwable e) {
 
 							// Swallow unconcerned uncaught exception
@@ -1457,6 +1460,7 @@ public class ProcessExecutorTest {
 				className);
 		}
 
+		@Override
 		public Serializable call() throws ProcessException {
 			Class<?> clazz = getClass();
 
@@ -1542,6 +1546,7 @@ public class ProcessExecutorTest {
 			_brokenPipingData = serializedData;
 		}
 
+		@Override
 		public Serializable call() throws ProcessException {
 			try {
 				FileOutputStream fileOutputStream = new FileOutputStream(
@@ -1574,6 +1579,7 @@ public class ProcessExecutorTest {
 	private static class DummyExceptionProcessCallable
 		implements ProcessCallable<Serializable> {
 
+		@Override
 		public Serializable call() throws ProcessException {
 			throw new ProcessException(
 				DummyExceptionProcessCallable.class.getName());
@@ -1596,6 +1602,7 @@ public class ProcessExecutorTest {
 			_countDownLatch = new CountDownLatch(1);
 		}
 
+		@Override
 		public Void call() throws Exception {
 			_countDownLatch.countDown();
 
@@ -1615,6 +1622,7 @@ public class ProcessExecutorTest {
 	private static class DummyReturnProcessCallable
 		implements ProcessCallable<String> {
 
+		@Override
 		public String call() {
 			return DummyReturnProcessCallable.class.getName();
 		}
@@ -1637,6 +1645,7 @@ public class ProcessExecutorTest {
 			_exitCode = exitCode;
 		}
 
+		@Override
 		public Serializable call() {
 			System.exit(_exitCode);
 
@@ -1673,6 +1682,7 @@ public class ProcessExecutorTest {
 			_bodyLog = bodyLog;
 		}
 
+		@Override
 		public Serializable call() throws ProcessException {
 			try {
 				FileOutputStream fileOutputStream = new FileOutputStream(
@@ -1734,6 +1744,7 @@ public class ProcessExecutorTest {
 			_signalFile = signalFile;
 		}
 
+		@Override
 		public Serializable call() throws ProcessException {
 			try {
 				_waitForSignalFile(_signalFile, true);
@@ -1796,6 +1807,7 @@ public class ProcessExecutorTest {
 			_thread = Thread.currentThread();
 		}
 
+		@Override
 		public boolean shutdown(int shutdownCode, Throwable shutdownError) {
 			try {
 				ProcessOutputStream processOutputStream =
@@ -1827,6 +1839,7 @@ public class ProcessExecutorTest {
 			_propertyKey = propertyKey;
 		}
 
+		@Override
 		public String call() {
 			return System.getProperty(_propertyKey);
 		}
@@ -1860,6 +1873,7 @@ public class ProcessExecutorTest {
 			_returnValue = returnValue;
 		}
 
+		@Override
 		public String call() throws ProcessException {
 			try {
 				ProcessOutputStream processOutputStream =
@@ -2066,6 +2080,7 @@ public class ProcessExecutorTest {
 			_thread = Thread.currentThread();
 		}
 
+		@Override
 		public boolean shutdown(int shutdownCode, Throwable shutdownThrowable) {
 			_thread.interrupt();
 
@@ -2084,6 +2099,7 @@ public class ProcessExecutorTest {
 	private static class UnserializableProcessCallable
 		implements ProcessCallable<Serializable> {
 
+		@Override
 		public Serializable call() {
 			return UnserializableProcessCallable.class.getName();
 		}

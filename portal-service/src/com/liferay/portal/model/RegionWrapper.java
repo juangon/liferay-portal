@@ -22,8 +22,8 @@ import java.util.Map;
  * This class is a wrapper for {@link Region}.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       Region
+ * @author Brian Wing Shun Chan
+ * @see Region
  * @generated
  */
 public class RegionWrapper implements Region, ModelWrapper<Region> {
@@ -31,14 +31,17 @@ public class RegionWrapper implements Region, ModelWrapper<Region> {
 		_region = region;
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return Region.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return Region.class.getName();
 	}
 
+	@Override
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
@@ -51,6 +54,7 @@ public class RegionWrapper implements Region, ModelWrapper<Region> {
 		return attributes;
 	}
 
+	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 		Long regionId = (Long)attributes.get("regionId");
 
@@ -88,6 +92,7 @@ public class RegionWrapper implements Region, ModelWrapper<Region> {
 	*
 	* @return the primary key of this region
 	*/
+	@Override
 	public long getPrimaryKey() {
 		return _region.getPrimaryKey();
 	}
@@ -97,6 +102,7 @@ public class RegionWrapper implements Region, ModelWrapper<Region> {
 	*
 	* @param primaryKey the primary key of this region
 	*/
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_region.setPrimaryKey(primaryKey);
 	}
@@ -106,6 +112,7 @@ public class RegionWrapper implements Region, ModelWrapper<Region> {
 	*
 	* @return the region ID of this region
 	*/
+	@Override
 	public long getRegionId() {
 		return _region.getRegionId();
 	}
@@ -115,6 +122,7 @@ public class RegionWrapper implements Region, ModelWrapper<Region> {
 	*
 	* @param regionId the region ID of this region
 	*/
+	@Override
 	public void setRegionId(long regionId) {
 		_region.setRegionId(regionId);
 	}
@@ -124,6 +132,7 @@ public class RegionWrapper implements Region, ModelWrapper<Region> {
 	*
 	* @return the country ID of this region
 	*/
+	@Override
 	public long getCountryId() {
 		return _region.getCountryId();
 	}
@@ -133,6 +142,7 @@ public class RegionWrapper implements Region, ModelWrapper<Region> {
 	*
 	* @param countryId the country ID of this region
 	*/
+	@Override
 	public void setCountryId(long countryId) {
 		_region.setCountryId(countryId);
 	}
@@ -142,6 +152,7 @@ public class RegionWrapper implements Region, ModelWrapper<Region> {
 	*
 	* @return the region code of this region
 	*/
+	@Override
 	public java.lang.String getRegionCode() {
 		return _region.getRegionCode();
 	}
@@ -151,6 +162,7 @@ public class RegionWrapper implements Region, ModelWrapper<Region> {
 	*
 	* @param regionCode the region code of this region
 	*/
+	@Override
 	public void setRegionCode(java.lang.String regionCode) {
 		_region.setRegionCode(regionCode);
 	}
@@ -160,6 +172,7 @@ public class RegionWrapper implements Region, ModelWrapper<Region> {
 	*
 	* @return the name of this region
 	*/
+	@Override
 	public java.lang.String getName() {
 		return _region.getName();
 	}
@@ -169,6 +182,7 @@ public class RegionWrapper implements Region, ModelWrapper<Region> {
 	*
 	* @param name the name of this region
 	*/
+	@Override
 	public void setName(java.lang.String name) {
 		_region.setName(name);
 	}
@@ -178,6 +192,7 @@ public class RegionWrapper implements Region, ModelWrapper<Region> {
 	*
 	* @return the active of this region
 	*/
+	@Override
 	public boolean getActive() {
 		return _region.getActive();
 	}
@@ -187,6 +202,7 @@ public class RegionWrapper implements Region, ModelWrapper<Region> {
 	*
 	* @return <code>true</code> if this region is active; <code>false</code> otherwise
 	*/
+	@Override
 	public boolean isActive() {
 		return _region.isActive();
 	}
@@ -196,52 +212,64 @@ public class RegionWrapper implements Region, ModelWrapper<Region> {
 	*
 	* @param active the active of this region
 	*/
+	@Override
 	public void setActive(boolean active) {
 		_region.setActive(active);
 	}
 
+	@Override
 	public boolean isNew() {
 		return _region.isNew();
 	}
 
+	@Override
 	public void setNew(boolean n) {
 		_region.setNew(n);
 	}
 
+	@Override
 	public boolean isCachedModel() {
 		return _region.isCachedModel();
 	}
 
+	@Override
 	public void setCachedModel(boolean cachedModel) {
 		_region.setCachedModel(cachedModel);
 	}
 
+	@Override
 	public boolean isEscapedModel() {
 		return _region.isEscapedModel();
 	}
 
+	@Override
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _region.getPrimaryKeyObj();
 	}
 
+	@Override
 	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
 		_region.setPrimaryKeyObj(primaryKeyObj);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
 		return _region.getExpandoBridge();
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.model.BaseModel<?> baseModel) {
 		_region.setExpandoBridgeAttributes(baseModel);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portlet.expando.model.ExpandoBridge expandoBridge) {
 		_region.setExpandoBridgeAttributes(expandoBridge);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		_region.setExpandoBridgeAttributes(serviceContext);
@@ -252,6 +280,7 @@ public class RegionWrapper implements Region, ModelWrapper<Region> {
 		return new RegionWrapper((Region)_region.clone());
 	}
 
+	@Override
 	public int compareTo(com.liferay.portal.model.Region region) {
 		return _region.compareTo(region);
 	}
@@ -261,14 +290,17 @@ public class RegionWrapper implements Region, ModelWrapper<Region> {
 		return _region.hashCode();
 	}
 
+	@Override
 	public com.liferay.portal.model.CacheModel<com.liferay.portal.model.Region> toCacheModel() {
 		return _region.toCacheModel();
 	}
 
+	@Override
 	public com.liferay.portal.model.Region toEscapedModel() {
 		return new RegionWrapper(_region.toEscapedModel());
 	}
 
+	@Override
 	public com.liferay.portal.model.Region toUnescapedModel() {
 		return new RegionWrapper(_region.toUnescapedModel());
 	}
@@ -278,6 +310,7 @@ public class RegionWrapper implements Region, ModelWrapper<Region> {
 		return _region.toString();
 	}
 
+	@Override
 	public java.lang.String toXmlString() {
 		return _region.toXmlString();
 	}
@@ -289,10 +322,12 @@ public class RegionWrapper implements Region, ModelWrapper<Region> {
 		return _region;
 	}
 
+	@Override
 	public Region getWrappedModel() {
 		return _region;
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		_region.resetOriginalValues();
 	}

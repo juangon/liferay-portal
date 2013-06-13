@@ -118,6 +118,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @return the matching teams
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Team> findByGroupId(long groupId) throws SystemException {
 		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -135,6 +136,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @return the range of matching teams
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Team> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
 		return findByGroupId(groupId, start, end, null);
@@ -154,6 +156,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @return the ordered range of matching teams
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Team> findByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -260,6 +263,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @throws com.liferay.portal.NoSuchTeamException if a matching team could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Team findByGroupId_First(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchTeamException, SystemException {
@@ -289,6 +293,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @return the first matching team, or <code>null</code> if a matching team could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Team fetchByGroupId_First(long groupId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<Team> list = findByGroupId(groupId, 0, 1, orderByComparator);
@@ -309,6 +314,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @throws com.liferay.portal.NoSuchTeamException if a matching team could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Team findByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchTeamException, SystemException {
@@ -338,6 +344,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @return the last matching team, or <code>null</code> if a matching team could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Team fetchByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByGroupId(groupId);
@@ -362,6 +369,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @throws com.liferay.portal.NoSuchTeamException if a team with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Team[] findByGroupId_PrevAndNext(long teamId, long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchTeamException, SystemException {
@@ -503,6 +511,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @return the matching teams that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Team> filterFindByGroupId(long groupId)
 		throws SystemException {
 		return filterFindByGroupId(groupId, QueryUtil.ALL_POS,
@@ -522,6 +531,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @return the range of matching teams that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Team> filterFindByGroupId(long groupId, int start, int end)
 		throws SystemException {
 		return filterFindByGroupId(groupId, start, end, null);
@@ -541,6 +551,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @return the ordered range of matching teams that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Team> filterFindByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -631,6 +642,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @throws com.liferay.portal.NoSuchTeamException if a team with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Team[] filterFindByGroupId_PrevAndNext(long teamId, long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchTeamException, SystemException {
@@ -810,6 +822,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @param groupId the group ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (Team team : findByGroupId(groupId, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null)) {
@@ -824,6 +837,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @return the number of matching teams
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByGroupId(long groupId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPID;
 
@@ -876,6 +890,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @return the number of matching teams that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByGroupId(long groupId) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return countByGroupId(groupId);
@@ -938,6 +953,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @throws com.liferay.portal.NoSuchTeamException if a matching team could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Team findByG_N(long groupId, String name)
 		throws NoSuchTeamException, SystemException {
 		Team team = fetchByG_N(groupId, name);
@@ -973,6 +989,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @return the matching team, or <code>null</code> if a matching team could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Team fetchByG_N(long groupId, String name) throws SystemException {
 		return fetchByG_N(groupId, name, true);
 	}
@@ -986,6 +1003,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @return the matching team, or <code>null</code> if a matching team could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Team fetchByG_N(long groupId, String name, boolean retrieveFromCache)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, name };
@@ -1092,6 +1110,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @return the team that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Team removeByG_N(long groupId, String name)
 		throws NoSuchTeamException, SystemException {
 		Team team = findByG_N(groupId, name);
@@ -1107,6 +1126,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @return the number of matching teams
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_N(long groupId, String name) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_N;
 
@@ -1180,6 +1200,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 *
 	 * @param team the team
 	 */
+	@Override
 	public void cacheResult(Team team) {
 		EntityCacheUtil.putResult(TeamModelImpl.ENTITY_CACHE_ENABLED,
 			TeamImpl.class, team.getPrimaryKey(), team);
@@ -1195,6 +1216,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 *
 	 * @param teams the teams
 	 */
+	@Override
 	public void cacheResult(List<Team> teams) {
 		for (Team team : teams) {
 			if (EntityCacheUtil.getResult(TeamModelImpl.ENTITY_CACHE_ENABLED,
@@ -1306,6 +1328,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @param teamId the primary key for the new team
 	 * @return the new team
 	 */
+	@Override
 	public Team create(long teamId) {
 		Team team = new TeamImpl();
 
@@ -1323,6 +1346,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @throws com.liferay.portal.NoSuchTeamException if a team with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Team remove(long teamId) throws NoSuchTeamException, SystemException {
 		return remove((Serializable)teamId);
 	}
@@ -1536,6 +1560,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @throws com.liferay.portal.NoSuchTeamException if a team with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Team findByPrimaryKey(long teamId)
 		throws NoSuchTeamException, SystemException {
 		return findByPrimaryKey((Serializable)teamId);
@@ -1595,6 +1620,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @return the team, or <code>null</code> if a team with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Team fetchByPrimaryKey(long teamId) throws SystemException {
 		return fetchByPrimaryKey((Serializable)teamId);
 	}
@@ -1605,6 +1631,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @return the teams
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Team> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1621,6 +1648,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @return the range of teams
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Team> findAll(int start, int end) throws SystemException {
 		return findAll(start, end, null);
 	}
@@ -1638,6 +1666,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @return the ordered range of teams
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Team> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -1723,6 +1752,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (Team team : findAll()) {
 			remove(team);
@@ -1735,6 +1765,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @return the number of teams
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -1773,6 +1804,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @return the users associated with the team
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portal.model.User> getUsers(long pk)
 		throws SystemException {
 		return getUsers(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
@@ -1791,6 +1823,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @return the range of users associated with the team
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portal.model.User> getUsers(long pk, int start,
 		int end) throws SystemException {
 		return getUsers(pk, start, end, null);
@@ -1823,6 +1856,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @return the ordered range of users associated with the team
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portal.model.User> getUsers(long pk, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -1916,6 +1950,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @return the number of users associated with the team
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int getUsersSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { pk };
 
@@ -1969,6 +2004,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @return <code>true</code> if the user is associated with the team; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean containsUser(long pk, long userPK) throws SystemException {
 		Object[] finderArgs = new Object[] { pk, userPK };
 
@@ -2000,6 +2036,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @return <code>true</code> if the team has any users associated with it; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean containsUsers(long pk) throws SystemException {
 		if (getUsersSize(pk) > 0) {
 			return true;
@@ -2016,6 +2053,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @param userPK the primary key of the user
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addUser(long pk, long userPK) throws SystemException {
 		try {
 			addUser.add(pk, userPK);
@@ -2035,6 +2073,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @param user the user
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addUser(long pk, com.liferay.portal.model.User user)
 		throws SystemException {
 		try {
@@ -2055,6 +2094,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @param userPKs the primary keys of the users
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addUsers(long pk, long[] userPKs) throws SystemException {
 		try {
 			for (long userPK : userPKs) {
@@ -2076,6 +2116,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @param users the users
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addUsers(long pk, List<com.liferay.portal.model.User> users)
 		throws SystemException {
 		try {
@@ -2097,6 +2138,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @param pk the primary key of the team to clear the associated users from
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void clearUsers(long pk) throws SystemException {
 		try {
 			clearUsers.clear(pk);
@@ -2116,6 +2158,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @param userPK the primary key of the user
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeUser(long pk, long userPK) throws SystemException {
 		try {
 			removeUser.remove(pk, userPK);
@@ -2135,6 +2178,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @param user the user
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeUser(long pk, com.liferay.portal.model.User user)
 		throws SystemException {
 		try {
@@ -2155,6 +2199,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @param userPKs the primary keys of the users
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeUsers(long pk, long[] userPKs) throws SystemException {
 		try {
 			for (long userPK : userPKs) {
@@ -2176,6 +2221,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @param users the users
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeUsers(long pk, List<com.liferay.portal.model.User> users)
 		throws SystemException {
 		try {
@@ -2198,6 +2244,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @param userPKs the primary keys of the users to be associated with the team
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setUsers(long pk, long[] userPKs) throws SystemException {
 		try {
 			Set<Long> userPKSet = SetUtil.fromArray(userPKs);
@@ -2229,6 +2276,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @param users the users to be associated with the team
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setUsers(long pk, List<com.liferay.portal.model.User> users)
 		throws SystemException {
 		try {
@@ -2257,6 +2305,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @return the user groups associated with the team
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portal.model.UserGroup> getUserGroups(long pk)
 		throws SystemException {
 		return getUserGroups(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
@@ -2275,6 +2324,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @return the range of user groups associated with the team
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portal.model.UserGroup> getUserGroups(long pk,
 		int start, int end) throws SystemException {
 		return getUserGroups(pk, start, end, null);
@@ -2307,6 +2357,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @return the ordered range of user groups associated with the team
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portal.model.UserGroup> getUserGroups(long pk,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -2402,6 +2453,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @return the number of user groups associated with the team
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int getUserGroupsSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { pk };
 
@@ -2456,6 +2508,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @return <code>true</code> if the user group is associated with the team; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean containsUserGroup(long pk, long userGroupPK)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { pk, userGroupPK };
@@ -2489,6 +2542,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @return <code>true</code> if the team has any user groups associated with it; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean containsUserGroups(long pk) throws SystemException {
 		if (getUserGroupsSize(pk) > 0) {
 			return true;
@@ -2505,6 +2559,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @param userGroupPK the primary key of the user group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addUserGroup(long pk, long userGroupPK)
 		throws SystemException {
 		try {
@@ -2525,6 +2580,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @param userGroup the user group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addUserGroup(long pk,
 		com.liferay.portal.model.UserGroup userGroup) throws SystemException {
 		try {
@@ -2545,6 +2601,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @param userGroupPKs the primary keys of the user groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addUserGroups(long pk, long[] userGroupPKs)
 		throws SystemException {
 		try {
@@ -2567,6 +2624,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @param userGroups the user groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addUserGroups(long pk,
 		List<com.liferay.portal.model.UserGroup> userGroups)
 		throws SystemException {
@@ -2589,6 +2647,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @param pk the primary key of the team to clear the associated user groups from
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void clearUserGroups(long pk) throws SystemException {
 		try {
 			clearUserGroups.clear(pk);
@@ -2608,6 +2667,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @param userGroupPK the primary key of the user group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeUserGroup(long pk, long userGroupPK)
 		throws SystemException {
 		try {
@@ -2628,6 +2688,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @param userGroup the user group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeUserGroup(long pk,
 		com.liferay.portal.model.UserGroup userGroup) throws SystemException {
 		try {
@@ -2648,6 +2709,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @param userGroupPKs the primary keys of the user groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeUserGroups(long pk, long[] userGroupPKs)
 		throws SystemException {
 		try {
@@ -2670,6 +2732,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @param userGroups the user groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeUserGroups(long pk,
 		List<com.liferay.portal.model.UserGroup> userGroups)
 		throws SystemException {
@@ -2693,6 +2756,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @param userGroupPKs the primary keys of the user groups to be associated with the team
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setUserGroups(long pk, long[] userGroupPKs)
 		throws SystemException {
 		try {
@@ -2725,6 +2789,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @param userGroups the user groups to be associated with the team
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setUserGroups(long pk,
 		List<com.liferay.portal.model.UserGroup> userGroups)
 		throws SystemException {
@@ -3164,6 +3229,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 		};
 
 	private static CacheModel<Team> _nullTeamCacheModel = new CacheModel<Team>() {
+			@Override
 			public Team toEntityModel() {
 				return _nullTeam;
 			}

@@ -49,6 +49,7 @@ public class WelderTestUtil {
 		FutureTask<Void> writeFutureTask = new FutureTask<Void>(
 			new Callable<Void>() {
 
+				@Override
 				public Void call() throws Exception {
 					ByteBuffer byteBuffer = ByteBuffer.wrap(data);
 
@@ -67,6 +68,7 @@ public class WelderTestUtil {
 		FutureTask<byte[]> readFutureTask = new FutureTask<byte[]>(
 			new Callable<byte[]>() {
 
+				@Override
 				public byte[] call() throws Exception {
 					ByteBuffer byteBuffer = ByteBuffer.allocate(data.length);
 

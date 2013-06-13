@@ -38,6 +38,7 @@ public abstract class JournalFolderBaseImpl extends JournalFolderModelImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a journal folder model instance should use the {@link JournalFolder} interface instead.
 	 */
+	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
 			JournalFolderLocalServiceUtil.addJournalFolder(this);

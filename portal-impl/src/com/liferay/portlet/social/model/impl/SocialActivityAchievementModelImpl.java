@@ -94,26 +94,32 @@ public class SocialActivityAchievementModelImpl extends BaseModelImpl<SocialActi
 	public SocialActivityAchievementModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _activityAchievementId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setActivityAchievementId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _activityAchievementId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return SocialActivityAchievement.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return SocialActivityAchievement.class.getName();
 	}
@@ -179,18 +185,22 @@ public class SocialActivityAchievementModelImpl extends BaseModelImpl<SocialActi
 		}
 	}
 
+	@Override
 	public long getActivityAchievementId() {
 		return _activityAchievementId;
 	}
 
+	@Override
 	public void setActivityAchievementId(long activityAchievementId) {
 		_activityAchievementId = activityAchievementId;
 	}
 
+	@Override
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -207,18 +217,22 @@ public class SocialActivityAchievementModelImpl extends BaseModelImpl<SocialActi
 		return _originalGroupId;
 	}
 
+	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
+	@Override
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_columnBitmask |= USERID_COLUMN_BITMASK;
 
@@ -231,10 +245,12 @@ public class SocialActivityAchievementModelImpl extends BaseModelImpl<SocialActi
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
@@ -243,14 +259,17 @@ public class SocialActivityAchievementModelImpl extends BaseModelImpl<SocialActi
 		return _originalUserId;
 	}
 
+	@Override
 	public long getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(long createDate) {
 		_createDate = createDate;
 	}
 
+	@Override
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -260,6 +279,7 @@ public class SocialActivityAchievementModelImpl extends BaseModelImpl<SocialActi
 		}
 	}
 
+	@Override
 	public void setName(String name) {
 		_columnBitmask |= NAME_COLUMN_BITMASK;
 
@@ -274,14 +294,17 @@ public class SocialActivityAchievementModelImpl extends BaseModelImpl<SocialActi
 		return GetterUtil.getString(_originalName);
 	}
 
+	@Override
 	public boolean getFirstInGroup() {
 		return _firstInGroup;
 	}
 
+	@Override
 	public boolean isFirstInGroup() {
 		return _firstInGroup;
 	}
 
+	@Override
 	public void setFirstInGroup(boolean firstInGroup) {
 		_columnBitmask |= FIRSTINGROUP_COLUMN_BITMASK;
 
@@ -342,6 +365,7 @@ public class SocialActivityAchievementModelImpl extends BaseModelImpl<SocialActi
 		return socialActivityAchievementImpl;
 	}
 
+	@Override
 	public int compareTo(SocialActivityAchievement socialActivityAchievement) {
 		long primaryKey = socialActivityAchievement.getPrimaryKey();
 
@@ -358,18 +382,15 @@ public class SocialActivityAchievementModelImpl extends BaseModelImpl<SocialActi
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof SocialActivityAchievement)) {
 			return false;
 		}
 
-		SocialActivityAchievement socialActivityAchievement = null;
-
-		try {
-			socialActivityAchievement = (SocialActivityAchievement)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		SocialActivityAchievement socialActivityAchievement = (SocialActivityAchievement)obj;
 
 		long primaryKey = socialActivityAchievement.getPrimaryKey();
 
@@ -457,6 +478,7 @@ public class SocialActivityAchievementModelImpl extends BaseModelImpl<SocialActi
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(25);
 

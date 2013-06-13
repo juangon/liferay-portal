@@ -38,6 +38,7 @@ public class PermissionDisplay
 		_actionLabel = actionLabel;
 	}
 
+	@Override
 	public int compareTo(PermissionDisplay permissionDisplay) {
 		int value = getPortletLabel().compareTo(
 			permissionDisplay.getPortletLabel());
@@ -57,8 +58,8 @@ public class PermissionDisplay
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
-			return false;
+		if (this == obj) {
+			return true;
 		}
 
 		if (!(obj instanceof PermissionDisplay)) {

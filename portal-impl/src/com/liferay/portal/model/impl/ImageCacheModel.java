@@ -55,6 +55,7 @@ public class ImageCacheModel implements CacheModel<Image>, Externalizable {
 		return sb.toString();
 	}
 
+	@Override
 	public Image toEntityModel() {
 		ImageImpl imageImpl = new ImageImpl();
 
@@ -83,6 +84,7 @@ public class ImageCacheModel implements CacheModel<Image>, Externalizable {
 		return imageImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		imageId = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
@@ -92,6 +94,7 @@ public class ImageCacheModel implements CacheModel<Image>, Externalizable {
 		size = objectInput.readInt();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(imageId);

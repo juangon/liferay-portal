@@ -21,13 +21,11 @@ import com.liferay.portal.service.GroupServiceUtil;
 import java.rmi.RemoteException;
 
 /**
- * <p>
- * This class provides a SOAP utility for the
+ * Provides the SOAP utility for the
  * {@link com.liferay.portal.service.GroupServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it is difficult for SOAP to
  * support certain types.
- * </p>
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
@@ -56,10 +54,10 @@ import java.rmi.RemoteException;
  * The SOAP utility is only generated for remote services.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       GroupServiceHttp
- * @see       com.liferay.portal.model.GroupSoap
- * @see       com.liferay.portal.service.GroupServiceUtil
+ * @author Brian Wing Shun Chan
+ * @see GroupServiceHttp
+ * @see com.liferay.portal.model.GroupSoap
+ * @see com.liferay.portal.service.GroupServiceUtil
  * @generated
  */
 public class GroupServiceSoap {
@@ -246,6 +244,28 @@ public class GroupServiceSoap {
 	}
 
 	/**
+	* Returns the company group.
+	*
+	* @param companyId the primary key of the company
+	* @return the group associated with the company
+	* @throws PortalException if a matching group could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portal.model.GroupSoap getCompanyGroup(
+		long companyId) throws RemoteException {
+		try {
+			com.liferay.portal.model.Group returnValue = GroupServiceUtil.getCompanyGroup(companyId);
+
+			return com.liferay.portal.model.GroupSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	/**
 	* Returns the group with the primary key.
 	*
 	* @param groupId the primary key of the group
@@ -286,6 +306,32 @@ public class GroupServiceSoap {
 					name);
 
 			return com.liferay.portal.model.GroupSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	/**
+	* Returns all the groups that are direct children of the parent group.
+	*
+	* @param companyId the primary key of the company
+	* @param parentGroupId the primary key of the parent group
+	* @param site whether the group is to be associated with a main site
+	* @return the matching groups, or <code>null</code> if no matches were
+	found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portal.model.GroupSoap[] getGroups(
+		long companyId, long parentGroupId, boolean site)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.portal.model.Group> returnValue = GroupServiceUtil.getGroups(companyId,
+					parentGroupId, site);
+
+			return com.liferay.portal.model.GroupSoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

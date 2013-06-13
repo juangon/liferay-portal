@@ -17,12 +17,10 @@ package com.liferay.portlet.softwarecatalog.service;
 import com.liferay.portal.service.ServiceWrapper;
 
 /**
- * <p>
- * This class is a wrapper for {@link SCProductVersionService}.
- * </p>
+ * Provides a wrapper for {@link SCProductVersionService}.
  *
- * @author    Brian Wing Shun Chan
- * @see       SCProductVersionService
+ * @author Brian Wing Shun Chan
+ * @see SCProductVersionService
  * @generated
  */
 public class SCProductVersionServiceWrapper implements SCProductVersionService,
@@ -37,6 +35,7 @@ public class SCProductVersionServiceWrapper implements SCProductVersionService,
 	*
 	* @return the Spring bean ID for this bean
 	*/
+	@Override
 	public java.lang.String getBeanIdentifier() {
 		return _scProductVersionService.getBeanIdentifier();
 	}
@@ -46,10 +45,12 @@ public class SCProductVersionServiceWrapper implements SCProductVersionService,
 	*
 	* @param beanIdentifier the Spring bean ID for this bean
 	*/
+	@Override
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		_scProductVersionService.setBeanIdentifier(beanIdentifier);
 	}
 
+	@Override
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion addProductVersion(
 		long productEntryId, java.lang.String version,
 		java.lang.String changeLog, java.lang.String downloadPageURL,
@@ -64,12 +65,14 @@ public class SCProductVersionServiceWrapper implements SCProductVersionService,
 			serviceContext);
 	}
 
+	@Override
 	public void deleteProductVersion(long productVersionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_scProductVersionService.deleteProductVersion(productVersionId);
 	}
 
+	@Override
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion getProductVersion(
 		long productVersionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -77,6 +80,7 @@ public class SCProductVersionServiceWrapper implements SCProductVersionService,
 		return _scProductVersionService.getProductVersion(productVersionId);
 	}
 
+	@Override
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> getProductVersions(
 		long productEntryId, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -85,12 +89,14 @@ public class SCProductVersionServiceWrapper implements SCProductVersionService,
 			start, end);
 	}
 
+	@Override
 	public int getProductVersionsCount(long productEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _scProductVersionService.getProductVersionsCount(productEntryId);
 	}
 
+	@Override
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion updateProductVersion(
 		long productVersionId, java.lang.String version,
 		java.lang.String changeLog, java.lang.String downloadPageURL,
@@ -118,10 +124,12 @@ public class SCProductVersionServiceWrapper implements SCProductVersionService,
 		_scProductVersionService = scProductVersionService;
 	}
 
+	@Override
 	public SCProductVersionService getWrappedService() {
 		return _scProductVersionService;
 	}
 
+	@Override
 	public void setWrappedService(
 		SCProductVersionService scProductVersionService) {
 		_scProductVersionService = scProductVersionService;

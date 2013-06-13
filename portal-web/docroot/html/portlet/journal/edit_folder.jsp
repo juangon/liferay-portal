@@ -54,7 +54,7 @@ boolean mergeWithParentFolderDisabled = ParamUtil.getBoolean(request, "mergeWith
 			<aui:field-wrapper label="parent-folder">
 
 				<%
-				String parentFolderName = StringPool.BLANK;
+				String parentFolderName = LanguageUtil.get(pageContext, "home");
 
 				try {
 					JournalFolder parentFolder = JournalFolderServiceUtil.getFolder(parentFolderId);
@@ -86,10 +86,9 @@ boolean mergeWithParentFolderDisabled = ParamUtil.getBoolean(request, "mergeWith
 							Liferay.Util.selectEntity(
 								{
 									dialog: {
-										align: Liferay.Util.Window.ALIGN_CENTER,
 										constrain: true,
 										modal: true,
-										stack: true,
+										zIndex: Liferay.zIndex.WINDOW + 2,
 										width: 680
 									},
 									id: '<portlet:namespace />selectFolder',

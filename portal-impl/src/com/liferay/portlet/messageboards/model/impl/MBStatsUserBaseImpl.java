@@ -38,6 +38,7 @@ public abstract class MBStatsUserBaseImpl extends MBStatsUserModelImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a message boards stats user model instance should use the {@link MBStatsUser} interface instead.
 	 */
+	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
 			MBStatsUserLocalServiceUtil.addMBStatsUser(this);

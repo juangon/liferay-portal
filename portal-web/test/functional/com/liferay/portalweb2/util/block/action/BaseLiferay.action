@@ -17,9 +17,21 @@
 		</default>
 	</command>
 
+	<command name="assertLocation">
+		<default>
+			<execute function="AssertLocation#assertLocation" />
+		</default>
+	</command>
+
 	<command name="assertNotChecked">
 		<default>
 			<execute function="AssertNotChecked#assertNotChecked" />
+		</default>
+	</command>
+
+	<command name="assertSelectedLabel">
+		<default>
+			<execute function="AssertSelectedLabel#assertSelectedLabel" />
 		</default>
 	</command>
 
@@ -86,6 +98,12 @@
 		</default>
 	</command>
 
+	<command name="doubleClick">
+		<default>
+			<execute function="DoubleClick#doubleClickAt" />
+		</default>
+	</command>
+
 	<command name="dragAndDrop">
 		<default>
 			<execute function="DragAndDrop#dragAndDrop" />
@@ -122,6 +140,12 @@
 		</default>
 	</command>
 
+	<command name="keyPress">
+		<default>
+			<execute function="KeyPress#keyPress" />
+		</default>
+	</command>
+
 	<command name="mouseOver">
 		<default>
 			<execute function="MouseOver#mouseOver" />
@@ -143,6 +167,18 @@
 	<command name="select">
 		<default>
 			<execute function="Select#select" />
+		</default>
+	</command>
+
+	<command name="selectFrame">
+		<default>
+			<execute function="SelectFrame#selectFrame" />
+		</default>
+	</command>
+
+	<command name="selectFrameTop">
+		<default>
+			<execute function="SelectFrameTop#selectFrameTop" />
 		</default>
 	</command>
 

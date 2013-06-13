@@ -22,11 +22,10 @@ import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.service.BaseLocalService;
 
 /**
- * The interface for the d l app local service.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
+ * Provides the local service interface for DLApp. Methods of this
+ * service will not have security checks based on the propagated JAAS
+ * credentials because this service can only be accessed from within the same
+ * VM.
  *
  * @author Brian Wing Shun Chan
  * @see DLAppLocalServiceUtil
@@ -196,14 +195,12 @@ public interface DLAppLocalService extends BaseLocalService {
 	* @param fileEntryId the primary key of the file entry
 	* @param serviceContext the service context to be applied
 	* @return the file rank
-	* @throws PortalException if a portal exception occurred
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.liferay.portlet.documentlibrary.model.DLFileRank addFileRank(
 		long repositoryId, long companyId, long userId, long fileEntryId,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
 	* Adds the file shortcut to the existing file entry. This method is only
@@ -746,14 +743,12 @@ public interface DLAppLocalService extends BaseLocalService {
 	* @param fileEntryId the primary key of the file rank's file entry
 	* @param serviceContext the service context to be applied
 	* @return the file rank
-	* @throws PortalException if a portal exception occurred
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.liferay.portlet.documentlibrary.model.DLFileRank updateFileRank(
 		long repositoryId, long companyId, long userId, long fileEntryId,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
 	* Updates a file shortcut to the existing file entry. This method is only

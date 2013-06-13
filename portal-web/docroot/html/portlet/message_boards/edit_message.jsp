@@ -74,12 +74,37 @@ if (Validator.isNull(redirect)) {
 
 	redirect = viewMessageURL.toString();
 }
+
+if (curParentMessage != null) {
+
+	MBUtil.addPortletBreadcrumbEntries(curParentMessage, request, renderResponse);
+
+	if (!layout.isTypeControlPanel()) {
+		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "reply"), currentURL);
+	}
+}
+else if (message != null) {
+	MBUtil.addPortletBreadcrumbEntries(message, request, renderResponse);
+
+	if (!layout.isTypeControlPanel()) {
+		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "edit"), currentURL);
+	}
+}
+else {
+	MBUtil.addPortletBreadcrumbEntries(categoryId, request, renderResponse);
+
+	if (!layout.isTypeControlPanel()) {
+		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-message"), currentURL);
+	}
+}
 %>
+
+<liferay-util:include page="/html/portlet/message_boards/top_links.jsp" />
 
 <liferay-ui:header
 	backURL="<%= redirect %>"
 	localizeTitle="<%= (message == null) %>"
-	title='<%= (message == null) ? "new-message" : message.getSubject() %>'
+	title='<%= (curParentMessage != null) ? LanguageUtil.format(pageContext, "reply-to-x", curParentMessage.getSubject()) : (message == null) ? "add-message" : LanguageUtil.format(pageContext, "edit-x", message.getSubject()) %>'
 />
 
 <c:if test="<%= preview %>">
@@ -109,12 +134,8 @@ if (Validator.isNull(redirect)) {
 
 	int depth = 0;
 
-	String className = "portlet-section-body results-row";
-	String classHoverName = "portlet-section-body-hover results-row hover";
-
 	request.setAttribute("edit_message.jsp-assetTagNames", ParamUtil.getString(request, "assetTagNames"));
 	request.setAttribute("edit_message.jsp-category", category);
-	request.setAttribute("edit_message.jsp-className", className);
 	request.setAttribute("edit_message.jsp-depth", depth);
 	request.setAttribute("edit_message.jsp-editable", Boolean.FALSE);
 	request.setAttribute("edit_message.jsp-message", previewMessage);
@@ -313,7 +334,7 @@ if (Validator.isNull(redirect)) {
 									/>
 								</span>
 
-								<aui:input cssClass="aui-helper-hidden" label="" name='<%= "msgFile" + (i + 1) %>' size="70" type="file" />
+								<aui:input cssClass="hide" label="" name='<%= "msgFile" + (i + 1) %>' size="70" type="file" />
 
 								<liferay-ui:icon-delete
 									id='<%= "removeExisting" + (i + 1) %>'
@@ -338,7 +359,7 @@ if (Validator.isNull(redirect)) {
 									sb.append("');");
 									%>
 
-									<span class="aui-helper-hidden" id="<portlet:namespace />undoFile<%= i + 1 %>">
+									<span class="hide" id="<portlet:namespace />undoFile<%= i + 1 %>">
 										<aui:input id='<%= "undoPath" + (i + 1) %>' name='<%= "undoPath" + (i + 1) %>' type="hidden" value="<%= fileEntry.getFileEntryId() %>" />
 
 										<span class="undo">(<liferay-ui:message key="marked-as-removed" />)</span> <a class="trash-undo-link" href="<%= sb.toString() %>" id="<portlet:namespace />undo"><liferay-ui:message key="undo" /></a>
@@ -401,7 +422,7 @@ if (Validator.isNull(redirect)) {
 	%>
 
 	<c:if test="<%= pending %>">
-		<div class="portlet-msg-info">
+		<div class="alert alert-info">
 			<liferay-ui:message key="there-is-a-publication-workflow-in-process" />
 		</div>
 	</c:if>
@@ -423,7 +444,7 @@ if (Validator.isNull(redirect)) {
 		%>
 
 		<c:if test="<%= (message != null) && message.isApproved() && WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(message.getCompanyId(), message.getGroupId(), MBMessage.class.getName()) %>">
-			<div class="portlet-msg-info">
+			<div class="alert alert-info">
 				<%= LanguageUtil.format(pageContext, "this-x-is-approved.-publishing-these-changes-will-cause-it-to-be-unpublished-and-go-through-the-approval-process-again", ResourceActionsUtil.getModelResource(locale, MBMessage.class.getName())) %>
 			</div>
 		</c:if>
@@ -450,11 +471,7 @@ if (Validator.isNull(redirect)) {
 
 		int depth = 0;
 
-		String className = "portlet-section-body results-row";
-		String classHoverName = "portlet-section-body-hover results-row hover";
-
 		request.setAttribute("edit_message.jsp-category", category);
-		request.setAttribute("edit_message.jsp-className", className);
 		request.setAttribute("edit_message.jsp-depth", depth);
 		request.setAttribute("edit_message.jsp-editable", Boolean.FALSE);
 		request.setAttribute("edit_message.jsp-message", message);
@@ -553,7 +570,7 @@ if (Validator.isNull(redirect)) {
 					}
 
 					if (file) {
-						file.ancestor('.aui-field').show();
+						file.ancestor('.field').show();
 
 						file.ancestor('li').addClass('deleted-input');
 					}
@@ -592,21 +609,3 @@ if (Validator.isNull(redirect)) {
 
 	</aui:script>
 </c:if>
-
-<%
-if (curParentMessage != null) {
-	MBUtil.addPortletBreadcrumbEntries(curParentMessage, request, renderResponse);
-
-	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "reply"), currentURL);
-}
-else if (message != null) {
-	MBUtil.addPortletBreadcrumbEntries(message, request, renderResponse);
-
-	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "edit"), currentURL);
-}
-else {
-	MBUtil.addPortletBreadcrumbEntries(categoryId, request, renderResponse);
-
-	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-message"), currentURL);
-}
-%>

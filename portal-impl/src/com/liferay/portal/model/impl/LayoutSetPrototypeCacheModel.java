@@ -66,6 +66,7 @@ public class LayoutSetPrototypeCacheModel implements CacheModel<LayoutSetPrototy
 		return sb.toString();
 	}
 
+	@Override
 	public LayoutSetPrototype toEntityModel() {
 		LayoutSetPrototypeImpl layoutSetPrototypeImpl = new LayoutSetPrototypeImpl();
 
@@ -129,6 +130,7 @@ public class LayoutSetPrototypeCacheModel implements CacheModel<LayoutSetPrototy
 		return layoutSetPrototypeImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		layoutSetPrototypeId = objectInput.readLong();
@@ -143,6 +145,7 @@ public class LayoutSetPrototypeCacheModel implements CacheModel<LayoutSetPrototy
 		active = objectInput.readBoolean();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

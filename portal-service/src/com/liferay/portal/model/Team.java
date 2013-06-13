@@ -32,6 +32,7 @@ public interface Team extends TeamModel, PersistedModel {
 	 * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.TeamImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public static final Accessor<Team, Long> TEAM_ID_ACCESSOR = new Accessor<Team, Long>() {
+			@Override
 			public Long get(Team team) {
 				return team.getTeamId();
 			}

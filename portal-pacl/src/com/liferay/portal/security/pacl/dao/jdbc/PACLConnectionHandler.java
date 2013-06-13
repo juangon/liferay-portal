@@ -43,6 +43,7 @@ public class PACLConnectionHandler implements InvocationHandler {
 		_paclPolicy = paclPolicy;
 	}
 
+	@Override
 	public Object invoke(Object proxy, Method method, Object[] arguments)
 		throws Throwable {
 
@@ -120,6 +121,7 @@ public class PACLConnectionHandler implements InvocationHandler {
 			_returnValue = returnValue;
 		}
 
+		@Override
 		public Statement run() {
 			return (Statement)ProxyUtil.newProxyInstance(
 				_paclPolicy.getClassLoader(),

@@ -3,71 +3,315 @@
 		<execute macro="User#pgFirstLogin" />
 	</set-up>
 
-	<command name="AddBlogEntryRegRole">
-		<var name="entryTitle" value="Blogs Entry Title" />
+	<command name="AddBlogsEntryOrgRole">
 		<var name="entryContent" value="Blogs Entry Content" />
+		<var name="entryTitle" value="Blogs Entry Title" />
+		<var name="orgName" value="Organization Name" />
+		<var name="orgType" value="Regular Organization" />
 		<var name="pageName" value="Blogs Page" />
 		<var name="portletName" value="Blogs" />
-		<var name="roleName" value="Roles Regrole Name" />
-		<var name="roleType" value="Regular" />
+		<var name="roleName" value="Roles Orgrole Name" />
+		<var name="rolePermission" value="Add Entry" />
+		<var name="siteName" value="Organization Name" />
+		<var name="sitePageName" value="${pageName}" />
+		<var name="sitePageType" value="Public" />
+		<var name="userEmailAddress" value="userea@liferay.com" />
+		<var name="userFirstName" value="userfn" />
+		<var name="userLastName" value="userln" />
+		<var name="userScreenName" value="usersn" />
 
-		<execute macro="Page#pgAdd" />
-
-		<execute macro="Portlet#pgAdd" />
-
-		<execute macro="User#cpAdd">
-			<var name="userEmailAddress" value="userea@liferay.com" />
-			<var name="userFirstName" value="userfn" />
-			<var name="userLastName" value="userln" />
-			<var name="userScreenName" value="usersn" />
+		<execute macro="User#addCP">
+			<var name="userEmailAddress" value="${userEmailAddress}" />
+			<var name="userFirstName" value="${userFirstName}" />
+			<var name="userLastName" value="${userLastName}" />
+			<var name="userScreenName" value="${userScreenName}" />
 		</execute>
 
-		<execute macro="User#cpEditPassword">
-			<var name="userEmailAddress" value="userea@liferay.com" />
-			<var name="userScreenName" value="usersn" />
+		<execute macro="User#editPasswordCP">
+			<var name="userEmailAddress" value="${userEmailAddress}" />
+			<var name="userScreenName" value="${userScreenName}" />
 		</execute>
 
-		<execute macro="Role#cpAddRegRole" />
-		<execute macro="Role#cpAssignRegRole">
-			<var name="userScreenName" value="usersn" />
+		<execute macro="Organization#addCP">
+			<var name="orgName" value="${orgName}" />
+			<var name="orgType" value="${orgType}" />
+		</execute>
+
+		<execute macro="Organization#addSiteCP">
+			<var name="orgName" value="${orgName}" />
+		</execute>
+
+		<execute macro="Organization#addMemberCP">
+			<var name="orgName" value="${orgName}" />
+			<var name="userFirstName" value="${userFirstName}" />
+			<var name="userLastName" value="${userLastName}" />
+			<var name="userScreenName" value="${userScreenName}" />
+		</execute>
+
+		<execute macro="SitePage#addPublicCP">
+			<var name="siteName" value="${siteName}" />
+			<var name="sitePageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="Portlet#pgAddOrganization">
+			<var name="pageName" value="${pageName}" />
+			<var name="potletName" value="${portletName}" />
+		</execute>
+
+		<execute macro="Role#addOrgRoleCP">
+			<var name="roleName" value="${roleName}" />
+		</execute>
+
+		<execute macro="Organization#assignOrgRoleCP">
+			<var name="orgName" value="${orgName}" />
+			<var name="roleName" value="${roleName}" />
+			<var name="userFirstName" value="${userFirstName}" />
+			<var name="userLastName" value="${userLastName}" />
+			<var name="userScreenName" value="${userScreenName}" />
 		</execute>
 
 		<execute macro="User#pgLogout" />
 		<execute macro="User#pgLogin">
-			<var name="userEmailAddress" value="userea@liferay.com" />
+			<var name="userEmailAddress" value="${userEmailAddress}" />
 		</execute>
 
-		<execute macro="BlogsEntry#pgAddNoPermission" />
+		<execute macro="BlogsEntry#addNoPermissionOrganizationPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
 
 		<execute macro="User#pgLogout" />
 		<execute macro="User#pgLogin">
 			<var name="userEmailAddress" value="test@liferay.com" />
 		</execute>
 
-		<execute macro="Role#cpDefinePermissionBlogEntry" />
+		<execute macro="Role#definePermissionBlogsEntryOrgCP" />
 
 		<execute macro="User#pgLogout" />
 		<execute macro="User#pgLogin">
-			<var name="userEmailAddress" value="userea@liferay.com" />
+			<var name="userEmailAddress" value="${userEmailAddress}" />
 		</execute>
 
-		<execute macro="BlogsEntry#pgAdd" />
+		<execute macro="BlogsEntry#addOrganizationPG">
+			<var name="entryContent" value="${entryContent}" />
+			<var name="entryTitle" value="${entryTitle}" />
+			<var name="pageName" value="${pageName}" />
+		</execute>
 
 		<execute macro="User#pgLogout" />
 		<execute macro="User#pgLogin">
 			<var name="userEmailAddress" value="test@liferay.com" />
 		</execute>
 
-		<execute macro="Role#cpRemovePermissionBlogEntry">
-			<var name="userScreenName" value="usersn" />
+		<execute macro="Role#removePermissionBlogsEntryOrgCP" />
+
+		<execute macro="User#pgLogout" />
+		<execute macro="User#pgLogin">
+			<var name="userEmailAddress" value="${userEmailAddress}" />
+		</execute>
+
+		<execute macro="BlogsEntry#addNoPermissionOrganizationPG">
+			<var name="pageName" value="${pageName}" />
 		</execute>
 
 		<execute macro="User#pgLogout" />
 		<execute macro="User#pgLogin">
-			<var name="userEmailAddress" value="userea@liferay.com" />
+			<var name="userEmailAddress" value="test@liferay.com" />
+		</execute>
+	</command>
+
+	<command name="AddBlogsEntryRegRole">
+		<var name="entryContent" value="Blogs Entry Content" />
+		<var name="entryTitle" value="Blogs Entry Title" />
+		<var name="pageName" value="Blogs Page" />
+		<var name="portletName" value="Blogs" />
+		<var name="roleName" value="Regrole Name" />
+		<var name="rolePermission" value="Add Entry" />
+		<var name="userEmailAddress" value="userea@liferay.com" />
+		<var name="userFirstName" value="userfn" />
+		<var name="userLastName" value="userln" />
+		<var name="userScreenName" value="usersn" />
+
+		<execute macro="Page#pgAdd">
+			<var name="pageName" value="${pageName}" />
 		</execute>
 
-		<execute macro="BlogsEntry#pgAddNoPermission" />
+		<execute macro="Portlet#pgAdd">
+			<var name="pageName" value="${pageName}" />
+			<var name="potletName" value="${portletName}" />
+		</execute>
+
+		<execute macro="User#addCP">
+			<var name="userEmailAddress" value="${userEmailAddress}" />
+			<var name="userFirstName" value="${userFirstName}" />
+			<var name="userLastName" value="${userLastName}" />
+			<var name="userScreenName" value="${userScreenName}" />
+		</execute>
+
+		<execute macro="User#editPasswordCP">
+			<var name="userEmailAddress" value="${userEmailAddress}" />
+			<var name="userScreenName" value="${userScreenName}" />
+		</execute>
+
+		<execute macro="Role#addRegRoleCP">
+			<var name="roleName" value="${roleName}" />
+		</execute>
+
+		<execute macro="Role#assignRegRoleCP">
+			<var name="roleName" value="${roleName}" />
+			<var name="userScreenName" value="${userScreenName}" />
+		</execute>
+
+		<execute macro="User#pgLogout" />
+		<execute macro="User#pgLogin">
+			<var name="userEmailAddress" value="${userEmailAddress}" />
+		</execute>
+
+		<execute macro="BlogsEntry#addNoPermissionPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="User#pgLogout" />
+		<execute macro="User#pgLogin">
+			<var name="userEmailAddress" value="test@liferay.com" />
+		</execute>
+
+		<execute macro="Role#definePermissionBlogsEntryRegCP" />
+
+		<execute macro="User#pgLogout" />
+		<execute macro="User#pgLogin">
+			<var name="userEmailAddress" value="${userEmailAddress}" />
+		</execute>
+
+		<execute macro="BlogsEntry#addPG">
+			<var name="entryContent" value="${entryContent}" />
+			<var name="entryTitle" value="${entryTitle}" />
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="User#pgLogout" />
+		<execute macro="User#pgLogin">
+			<var name="userEmailAddress" value="test@liferay.com" />
+		</execute>
+
+		<execute macro="Role#removePermissionBlogsEntryRegCP" />
+
+		<execute macro="User#pgLogout" />
+		<execute macro="User#pgLogin">
+			<var name="userEmailAddress" value="${userEmailAddress}" />
+		</execute>
+
+		<execute macro="BlogsEntry#addNoPermissionPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="User#pgLogout" />
+		<execute macro="User#pgLogin">
+			<var name="userEmailAddress" value="test@liferay.com" />
+		</execute>
+	</command>
+
+	<command name="AddBlogsEntrySiteRole">
+		<var name="entryContent" value="Blogs Entry Content" />
+		<var name="entryTitle" value="Blogs Entry Title" />
+		<var name="pageName" value="Blogs Page" />
+		<var name="portletName" value="Blogs" />
+		<var name="roleName" value="Roles Siterole Name" />
+		<var name="rolePermission" value="Add Entry" />
+		<var name="roleType" value="Site" />
+		<var name="siteName" value="Site Name" />
+		<var name="sitePageName" value="${pageName}" />
+		<var name="userEmailAddress" value="userea@liferay.com" />
+		<var name="userFirstName" value="userfn" />
+		<var name="userLastName" value="userln" />
+		<var name="userScreenName" value="usersn" />
+
+		<execute macro="User#addCP">
+			<var name="userEmailAddress" value="${userEmailAddress}" />
+			<var name="userFirstName" value="${userFirstName}" />
+			<var name="userLastName" value="${userLastName}" />
+			<var name="userScreenName" value="${userScreenName}" />
+		</execute>
+
+		<execute macro="User#editPasswordCP">
+			<var name="userEmailAddress" value="${userEmailAddress}" />
+			<var name="userScreenName" value="${userScreenName}" />
+		</execute>
+
+		<execute macro="Site#addBlankCP">
+			<var name="siteName" value="${siteName}" />
+		</execute>
+
+		<execute macro="Site#addMemberCP">
+			<var name="siteName" value="${siteName}" />
+			<var name="userFirstName" value="${userFirstName}" />
+			<var name="userLastName" value="${userLastName}" />
+			<var name="userScreenName" value="${userScreenName}" />
+		</execute>
+
+		<execute macro="SitePage#addPublicCP">
+			<var name="siteName" value="${siteName}" />
+			<var name="sitePageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="Portlet#pgAddSitePublic">
+			<var name="pageName" value="${pageName}" />
+			<var name="potletName" value="${portletName}" />
+		</execute>
+
+		<execute macro="Role#addSiteRoleCP">
+			<var name="roleName" value="${roleName}" />
+		</execute>
+
+		<execute macro="Site#assignRoleCP">
+			<var name="roleName" value="${roleName}" />
+			<var name="siteName" value="${siteName}" />
+			<var name="userFirstName" value="${userFirstName}" />
+			<var name="userLastName" value="${userLastName}" />
+			<var name="userScreenName" value="${userScreenName}" />
+		</execute>
+
+		<execute macro="User#pgLogout" />
+		<execute macro="User#pgLogin">
+			<var name="userEmailAddress" value="${userEmailAddress}" />
+		</execute>
+
+		<execute macro="BlogsEntry#addNoPermissionSitePublicPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="User#pgLogout" />
+		<execute macro="User#pgLogin">
+			<var name="userEmailAddress" value="test@liferay.com" />
+		</execute>
+
+		<execute macro="Role#definePermissionBlogsEntrySiteCP" />
+
+		<execute macro="User#pgLogout" />
+		<execute macro="User#pgLogin">
+			<var name="userEmailAddress" value="${userEmailAddress}" />
+		</execute>
+
+		<execute macro="BlogsEntry#addSitePublicPG">
+			<var name="entryContent" value="${entryContent}" />
+			<var name="entryTitle" value="${entryTitle}" />
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="User#pgLogout" />
+		<execute macro="User#pgLogin">
+			<var name="userEmailAddress" value="test@liferay.com" />
+		</execute>
+
+		<execute macro="Role#removePermissionBlogsEntrySiteCP" />
+
+		<execute macro="User#pgLogout" />
+		<execute macro="User#pgLogin">
+			<var name="userEmailAddress" value="${userEmailAddress}" />
+		</execute>
+
+		<execute macro="BlogsEntry#addNoPermissionSitePublicPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
 
 		<execute macro="User#pgLogout" />
 		<execute macro="User#pgLogin">
@@ -78,27 +322,389 @@
 	<command name="AddOrganizationRole">
 		<var name="roleName" value="Roles Orgrole Name" />
 
-		<execute macro="Role#cpAddOrgRole" />
+		<execute macro="Role#addOrgRoleCP">
+			<var name="roleName" value="${roleName}" />
+		</execute>
 	</command>
 
 	<command name="AddRegularRole">
 		<var name="roleName" value="Roles Regrole Name" />
 
-		<execute macro="Role#cpAddRegRole" />
+		<execute macro="Role#addRegRoleCP">
+			<var name="roleName" value="${roleName}" />
+		</execute>
 	</command>
 
 	<command name="AddSiteRole">
 		<var name="roleName" value="Roles Siterole Name" />
 
-		<execute macro="Role#cpAddSiteRole" />
+		<execute macro="Role#addSiteRoleCP">
+			<var name="roleName" value="${roleName}" />
+		</execute>
+	</command>
+
+	<command name="DeleteBlogsEntryOrgRole">
+		<var name="entryContent" value="Blogs Entry Content" />
+		<var name="entryTitle" value="Blogs Entry Title" />
+		<var name="orgName" value="Organization Name" />
+		<var name="orgType" value="Regular Organization" />
+		<var name="pageName" value="Blogs Page" />
+		<var name="portletName" value="Blogs" />
+		<var name="roleName" value="Roles Orgrole Name" />
+		<var name="rolePermission" value="Delete" />
+		<var name="roleType" value="Organization" />
+		<var name="siteName" value="Organization Name" />
+		<var name="sitePageName" value="${pageName}" />
+		<var name="userEmailAddress" value="userea@liferay.com" />
+		<var name="userFirstName" value="userfn" />
+		<var name="userLastName" value="userln" />
+		<var name="userScreenName" value="usersn" />
+
+		<execute macro="User#addCP">
+			<var name="userEmailAddress" value="${userEmailAddress}" />
+			<var name="userFirstName" value="${userFirstName}" />
+			<var name="userLastName" value="${userLastName}" />
+			<var name="userScreenName" value="${userScreenName}" />
+		</execute>
+
+		<execute macro="User#editPasswordCP">
+			<var name="userEmailAddress" value="${userEmailAddress}" />
+			<var name="userScreenName" value="${userScreenName}" />
+		</execute>
+
+		<execute macro="Organization#addCP">
+			<var name="orgName" value="${orgName}" />
+			<var name="orgType" value="${orgType}" />
+		</execute>
+
+		<execute macro="Organization#addSiteCP">
+			<var name="orgName" value="${orgName}" />
+		</execute>
+
+		<execute macro="Organization#addMemberCP">
+			<var name="orgName" value="${orgName}" />
+			<var name="userFirstName" value="${userFirstName}" />
+			<var name="userLastName" value="${userLastName}" />
+			<var name="userScreenName" value="${userScreenName}" />
+		</execute>
+
+		<execute macro="SitePage#addPublicCP">
+			<var name="siteName" value="${siteName}" />
+			<var name="sitePageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="Portlet#pgAddOrganization">
+			<var name="pageName" value="${pageName}" />
+			<var name="potletName" value="${portletName}" />
+		</execute>
+
+		<execute macro="Role#addOrgRoleCP">
+			<var name="roleName" value="${roleName}" />
+		</execute>
+
+		<execute macro="Organization#assignOrgRoleCP">
+			<var name="orgName" value="${orgName}" />
+			<var name="roleName" value="${roleName}" />
+			<var name="userFirstName" value="${userFirstName}" />
+			<var name="userLastName" value="${userLastName}" />
+			<var name="userScreenName" value="${userScreenName}" />
+		</execute>
+
+		<execute macro="BlogsEntry#addOrganizationPG">
+			<var name="entryContent" value="${entryContent}" />
+			<var name="entryTitle" value="${entryTitle}" />
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="User#pgLogout" />
+		<execute macro="User#pgLogin">
+			<var name="userEmailAddress" value="${userEmailAddress}" />
+		</execute>
+
+		<execute macro="BlogsEntry#deleteNoPermissionOrganizationPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="User#pgLogout" />
+		<execute macro="User#pgLogin">
+			<var name="userEmailAddress" value="test@liferay.com" />
+		</execute>
+
+		<execute macro="Role#definePermissionBlogsEntryOrgCP" />
+
+		<execute macro="User#pgLogout" />
+		<execute macro="User#pgLogin">
+			<var name="userEmailAddress" value="${userEmailAddress}" />
+		</execute>
+
+		<execute macro="BlogsEntry#deleteOrganizationPG">
+			<var name="entryContent" value="${entryContent}" />
+			<var name="entryTitle" value="${entryTitle}" />
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="User#pgLogout" />
+		<execute macro="User#pgLogin">
+			<var name="userEmailAddress" value="test@liferay.com" />
+		</execute>
+
+		<execute macro="Role#removePermissionBlogsEntryOrgCP" />
+
+		<execute macro="BlogsEntry#addOrganizationPG">
+			<var name="entryContent" value="${entryContent}" />
+			<var name="entryTitle" value="${entryTitle}" />
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="User#pgLogout" />
+		<execute macro="User#pgLogin">
+			<var name="userEmailAddress" value="${userEmailAddress}" />
+		</execute>
+
+		<execute macro="BlogsEntry#deleteNoPermissionOrganizationPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="User#pgLogout" />
+		<execute macro="User#pgLogin">
+			<var name="userEmailAddress" value="test@liferay.com" />
+		</execute>
+	</command>
+
+	<command name="DeleteBlogsEntryRegRole">
+		<var name="entryContent" value="Blogs Entry Content" />
+		<var name="entryTitle" value="Blogs Entry Title" />
+		<var name="pageName" value="Blogs Page" />
+		<var name="portletName" value="Blogs" />
+		<var name="roleName" value="Regrole Name" />
+		<var name="rolePermission" value="Delete" />
+		<var name="userEmailAddress" value="userea@liferay.com" />
+		<var name="userFirstName" value="userfn" />
+		<var name="userLastName" value="userln" />
+		<var name="userScreenName" value="usersn" />
+
+		<execute macro="Page#pgAdd">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="Portlet#pgAdd">
+			<var name="pageName" value="${pageName}" />
+			<var name="potletName" value="${portletName}" />
+		</execute>
+
+		<execute macro="User#addCP">
+			<var name="userEmailAddress" value="${userEmailAddress}" />
+			<var name="userFirstName" value="${userFirstName}" />
+			<var name="userLastName" value="${userLastName}" />
+			<var name="userScreenName" value="${userScreenName}" />
+		</execute>
+
+		<execute macro="User#editPasswordCP">
+			<var name="userEmailAddress" value="${userEmailAddress}" />
+			<var name="userScreenName" value="${userScreenName}" />
+		</execute>
+
+		<execute macro="Role#addRegRoleCP">
+			<var name="roleName" value="${roleName}" />
+		</execute>
+
+		<execute macro="Role#assignRegRoleCP">
+			<var name="roleName" value="${roleName}" />
+			<var name="userScreenName" value="${userScreenName}" />
+		</execute>
+
+		<execute macro="BlogsEntry#addPG">
+			<var name="entryContent" value="${entryContent}" />
+			<var name="entryTitle" value="${entryTitle}" />
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="User#pgLogout" />
+		<execute macro="User#pgLogin">
+			<var name="userEmailAddress" value="${userEmailAddress}" />
+		</execute>
+
+		<execute macro="BlogsEntry#deleteNoPermissionPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="User#pgLogout" />
+		<execute macro="User#pgLogin">
+			<var name="userEmailAddress" value="test@liferay.com" />
+		</execute>
+
+		<execute macro="Role#definePermissionBlogsEntryRegCP" />
+
+		<execute macro="User#pgLogout" />
+		<execute macro="User#pgLogin">
+			<var name="userEmailAddress" value="${userEmailAddress}" />
+		</execute>
+
+		<execute macro="BlogsEntry#deletePG">
+			<var name="entryContent" value="${entryContent}" />
+			<var name="entryTitle" value="${entryTitle}" />
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="User#pgLogout" />
+		<execute macro="User#pgLogin">
+			<var name="userEmailAddress" value="test@liferay.com" />
+		</execute>
+
+		<execute macro="Role#removePermissionBlogsEntryRegCP" />
+
+		<execute macro="BlogsEntry#addPG">
+			<var name="entryContent" value="${entryContent}" />
+			<var name="entryTitle" value="${entryTitle}" />
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="User#pgLogout" />
+		<execute macro="User#pgLogin">
+			<var name="userEmailAddress" value="${userEmailAddress}" />
+		</execute>
+
+		<execute macro="BlogsEntry#deleteNoPermissionPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="User#pgLogout" />
+		<execute macro="User#pgLogin">
+			<var name="userEmailAddress" value="test@liferay.com" />
+		</execute>
+	</command>
+
+	<command name="DeleteBlogsEntrySiteRole">
+		<var name="entryContent" value="Blogs Entry Content" />
+		<var name="entryTitle" value="Blogs Entry Title" />
+		<var name="pageName" value="Blogs Page" />
+		<var name="portletName" value="Blogs" />
+		<var name="roleName" value="Roles Siterole Name" />
+		<var name="rolePermission" value="Delete" />
+		<var name="roleType" value="Site" />
+		<var name="siteName" value="Site Name" />
+		<var name="sitePageName" value="${pageName}" />
+		<var name="userEmailAddress" value="userea@liferay.com" />
+		<var name="userFirstName" value="userfn" />
+		<var name="userLastName" value="userln" />
+		<var name="userScreenName" value="usersn" />
+
+		<execute macro="User#addCP">
+			<var name="userEmailAddress" value="${userEmailAddress}" />
+			<var name="userFirstName" value="${userFirstName}" />
+			<var name="userLastName" value="${userLastName}" />
+			<var name="userScreenName" value="${userScreenName}" />
+		</execute>
+
+		<execute macro="User#editPasswordCP">
+			<var name="userEmailAddress" value="${userEmailAddress}" />
+			<var name="userScreenName" value="${userScreenName}" />
+		</execute>
+
+		<execute macro="Site#addBlankCP">
+			<var name="siteName" value="${siteName}" />
+		</execute>
+
+		<execute macro="Site#addMemberCP">
+			<var name="siteName" value="${siteName}" />
+			<var name="userFirstName" value="${userFirstName}" />
+			<var name="userLastName" value="${userLastName}" />
+			<var name="userScreenName" value="${userScreenName}" />
+		</execute>
+
+		<execute macro="SitePage#addPublicCP">
+			<var name="siteName" value="${siteName}" />
+			<var name="sitePageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="Portlet#pgAddSitePublic">
+			<var name="pageName" value="${pageName}" />
+			<var name="potletName" value="${portletName}" />
+		</execute>
+
+		<execute macro="Role#addSiteRoleCP">
+			<var name="roleName" value="${roleName}" />
+		</execute>
+
+		<execute macro="Site#assignRoleCP">
+			<var name="roleName" value="${roleName}" />
+			<var name="siteName" value="${siteName}" />
+			<var name="userFirstName" value="${userFirstName}" />
+			<var name="userLastName" value="${userLastName}" />
+			<var name="userScreenName" value="${userScreenName}" />
+		</execute>
+
+		<execute macro="BlogsEntry#addSitePublicPG">
+			<var name="entryContent" value="${entryContent}" />
+			<var name="entryTitle" value="${entryTitle}" />
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="User#pgLogout" />
+		<execute macro="User#pgLogin">
+			<var name="userEmailAddress" value="${userEmailAddress}" />
+		</execute>
+
+		<execute macro="BlogsEntry#deleteNoPermissionSitePublicPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="User#pgLogout" />
+		<execute macro="User#pgLogin">
+			<var name="userEmailAddress" value="test@liferay.com" />
+		</execute>
+
+		<execute macro="Role#definePermissionBlogsEntrySiteCP" />
+
+		<execute macro="User#pgLogout" />
+		<execute macro="User#pgLogin">
+			<var name="userEmailAddress" value="${userEmailAddress}" />
+		</execute>
+
+		<execute macro="BlogsEntry#deleteSitePublicPG">
+			<var name="entryContent" value="${entryContent}" />
+			<var name="entryTitle" value="${entryTitle}" />
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="User#pgLogout" />
+		<execute macro="User#pgLogin">
+			<var name="userEmailAddress" value="test@liferay.com" />
+		</execute>
+
+		<execute macro="Role#removePermissionBlogsEntrySiteCP" />
+
+		<execute macro="BlogsEntry#addSitePublicPG">
+			<var name="entryContent" value="${entryContent}" />
+			<var name="entryTitle" value="${entryTitle}" />
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="User#pgLogout" />
+		<execute macro="User#pgLogin">
+			<var name="userEmailAddress" value="${userEmailAddress}" />
+		</execute>
+
+		<execute macro="BlogsEntry#deleteNoPermissionSitePublicPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="User#pgLogout" />
+		<execute macro="User#pgLogin">
+			<var name="userEmailAddress" value="test@liferay.com" />
+		</execute>
 	</command>
 
 	<tear-down>
-		<execute macro="User#cpTearDown" />
+		<execute macro="User#tearDownCP" />
 
-		<execute macro="Role#cpTearDown" />
+		<execute macro="Role#tearDownCP" />
 
-		<execute macro="BlogsEntry#cpTearDown" />
+		<execute macro="Organization#tearDownCP" />
+
+		<execute macro="Site#tearDownCP" />
+
+		<execute macro="BlogsEntry#tearDownCP" />
 
 		<execute macro="Page#pgTearDown" />
 	</tear-down>

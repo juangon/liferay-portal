@@ -40,7 +40,8 @@ import java.util.Map;
  * @see com.liferay.portal.model.impl.RoleModelImpl
  * @generated
  */
-public interface RoleModel extends AttachedModel, BaseModel<Role>, StagedModel {
+public interface RoleModel extends AttachedModel, BaseModel<Role>,
+	StagedAuditedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -67,6 +68,7 @@ public interface RoleModel extends AttachedModel, BaseModel<Role>, StagedModel {
 	 * @return the uuid of this role
 	 */
 	@AutoEscape
+	@Override
 	public String getUuid();
 
 	/**
@@ -74,6 +76,7 @@ public interface RoleModel extends AttachedModel, BaseModel<Role>, StagedModel {
 	 *
 	 * @param uuid the uuid of this role
 	 */
+	@Override
 	public void setUuid(String uuid);
 
 	/**
@@ -95,6 +98,7 @@ public interface RoleModel extends AttachedModel, BaseModel<Role>, StagedModel {
 	 *
 	 * @return the company ID of this role
 	 */
+	@Override
 	public long getCompanyId();
 
 	/**
@@ -102,6 +106,7 @@ public interface RoleModel extends AttachedModel, BaseModel<Role>, StagedModel {
 	 *
 	 * @param companyId the company ID of this role
 	 */
+	@Override
 	public void setCompanyId(long companyId);
 
 	/**
@@ -109,6 +114,7 @@ public interface RoleModel extends AttachedModel, BaseModel<Role>, StagedModel {
 	 *
 	 * @return the user ID of this role
 	 */
+	@Override
 	public long getUserId();
 
 	/**
@@ -116,6 +122,7 @@ public interface RoleModel extends AttachedModel, BaseModel<Role>, StagedModel {
 	 *
 	 * @param userId the user ID of this role
 	 */
+	@Override
 	public void setUserId(long userId);
 
 	/**
@@ -124,6 +131,7 @@ public interface RoleModel extends AttachedModel, BaseModel<Role>, StagedModel {
 	 * @return the user uuid of this role
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public String getUserUuid() throws SystemException;
 
 	/**
@@ -131,6 +139,7 @@ public interface RoleModel extends AttachedModel, BaseModel<Role>, StagedModel {
 	 *
 	 * @param userUuid the user uuid of this role
 	 */
+	@Override
 	public void setUserUuid(String userUuid);
 
 	/**
@@ -139,6 +148,7 @@ public interface RoleModel extends AttachedModel, BaseModel<Role>, StagedModel {
 	 * @return the user name of this role
 	 */
 	@AutoEscape
+	@Override
 	public String getUserName();
 
 	/**
@@ -146,6 +156,7 @@ public interface RoleModel extends AttachedModel, BaseModel<Role>, StagedModel {
 	 *
 	 * @param userName the user name of this role
 	 */
+	@Override
 	public void setUserName(String userName);
 
 	/**
@@ -153,6 +164,7 @@ public interface RoleModel extends AttachedModel, BaseModel<Role>, StagedModel {
 	 *
 	 * @return the create date of this role
 	 */
+	@Override
 	public Date getCreateDate();
 
 	/**
@@ -160,6 +172,7 @@ public interface RoleModel extends AttachedModel, BaseModel<Role>, StagedModel {
 	 *
 	 * @param createDate the create date of this role
 	 */
+	@Override
 	public void setCreateDate(Date createDate);
 
 	/**
@@ -167,6 +180,7 @@ public interface RoleModel extends AttachedModel, BaseModel<Role>, StagedModel {
 	 *
 	 * @return the modified date of this role
 	 */
+	@Override
 	public Date getModifiedDate();
 
 	/**
@@ -174,6 +188,7 @@ public interface RoleModel extends AttachedModel, BaseModel<Role>, StagedModel {
 	 *
 	 * @param modifiedDate the modified date of this role
 	 */
+	@Override
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
@@ -181,6 +196,7 @@ public interface RoleModel extends AttachedModel, BaseModel<Role>, StagedModel {
 	 *
 	 * @return the fully qualified class name of this role
 	 */
+	@Override
 	public String getClassName();
 
 	public void setClassName(String className);
@@ -190,6 +206,7 @@ public interface RoleModel extends AttachedModel, BaseModel<Role>, StagedModel {
 	 *
 	 * @return the class name ID of this role
 	 */
+	@Override
 	public long getClassNameId();
 
 	/**
@@ -197,6 +214,7 @@ public interface RoleModel extends AttachedModel, BaseModel<Role>, StagedModel {
 	 *
 	 * @param classNameId the class name ID of this role
 	 */
+	@Override
 	public void setClassNameId(long classNameId);
 
 	/**
@@ -204,6 +222,7 @@ public interface RoleModel extends AttachedModel, BaseModel<Role>, StagedModel {
 	 *
 	 * @return the class p k of this role
 	 */
+	@Override
 	public long getClassPK();
 
 	/**
@@ -211,6 +230,7 @@ public interface RoleModel extends AttachedModel, BaseModel<Role>, StagedModel {
 	 *
 	 * @param classPK the class p k of this role
 	 */
+	@Override
 	public void setClassPK(long classPK);
 
 	/**
@@ -457,44 +477,63 @@ public interface RoleModel extends AttachedModel, BaseModel<Role>, StagedModel {
 	 */
 	public void setSubtype(String subtype);
 
+	@Override
 	public boolean isNew();
 
+	@Override
 	public void setNew(boolean n);
 
+	@Override
 	public boolean isCachedModel();
 
+	@Override
 	public void setCachedModel(boolean cachedModel);
 
+	@Override
 	public boolean isEscapedModel();
 
+	@Override
 	public Serializable getPrimaryKeyObj();
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
+	@Override
 	public ExpandoBridge getExpandoBridge();
 
+	@Override
 	public void setExpandoBridgeAttributes(BaseModel<?> baseModel);
 
+	@Override
 	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge);
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext);
 
 	public void prepareLocalizedFieldsForImport(Locale defaultImportLocale)
 		throws LocaleException;
 
+	@Override
 	public Object clone();
 
+	@Override
 	public int compareTo(Role role);
 
+	@Override
 	public int hashCode();
 
+	@Override
 	public CacheModel<Role> toCacheModel();
 
+	@Override
 	public Role toEscapedModel();
 
+	@Override
 	public Role toUnescapedModel();
 
+	@Override
 	public String toString();
 
+	@Override
 	public String toXmlString();
 }

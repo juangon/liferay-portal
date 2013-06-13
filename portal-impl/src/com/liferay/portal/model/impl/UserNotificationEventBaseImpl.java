@@ -37,6 +37,7 @@ public abstract class UserNotificationEventBaseImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a user notification event model instance should use the {@link UserNotificationEvent} interface instead.
 	 */
+	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
 			UserNotificationEventLocalServiceUtil.addUserNotificationEvent(this);

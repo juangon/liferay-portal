@@ -109,6 +109,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the matching asset links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetLink> findByE1(long entryId1) throws SystemException {
 		return findByE1(entryId1, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -126,6 +127,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the range of matching asset links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetLink> findByE1(long entryId1, int start, int end)
 		throws SystemException {
 		return findByE1(entryId1, start, end, null);
@@ -145,6 +147,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the ordered range of matching asset links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetLink> findByE1(long entryId1, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -251,6 +254,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @throws com.liferay.portlet.asset.NoSuchLinkException if a matching asset link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetLink findByE1_First(long entryId1,
 		OrderByComparator orderByComparator)
 		throws NoSuchLinkException, SystemException {
@@ -280,6 +284,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the first matching asset link, or <code>null</code> if a matching asset link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetLink fetchByE1_First(long entryId1,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<AssetLink> list = findByE1(entryId1, 0, 1, orderByComparator);
@@ -300,6 +305,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @throws com.liferay.portlet.asset.NoSuchLinkException if a matching asset link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetLink findByE1_Last(long entryId1,
 		OrderByComparator orderByComparator)
 		throws NoSuchLinkException, SystemException {
@@ -329,6 +335,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the last matching asset link, or <code>null</code> if a matching asset link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetLink fetchByE1_Last(long entryId1,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByE1(entryId1);
@@ -353,6 +360,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @throws com.liferay.portlet.asset.NoSuchLinkException if a asset link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetLink[] findByE1_PrevAndNext(long linkId, long entryId1,
 		OrderByComparator orderByComparator)
 		throws NoSuchLinkException, SystemException {
@@ -494,6 +502,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @param entryId1 the entry id1
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByE1(long entryId1) throws SystemException {
 		for (AssetLink assetLink : findByE1(entryId1, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null)) {
@@ -508,6 +517,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the number of matching asset links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByE1(long entryId1) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_E1;
 
@@ -581,6 +591,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the matching asset links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetLink> findByE2(long entryId2) throws SystemException {
 		return findByE2(entryId2, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -598,6 +609,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the range of matching asset links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetLink> findByE2(long entryId2, int start, int end)
 		throws SystemException {
 		return findByE2(entryId2, start, end, null);
@@ -617,6 +629,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the ordered range of matching asset links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetLink> findByE2(long entryId2, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -723,6 +736,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @throws com.liferay.portlet.asset.NoSuchLinkException if a matching asset link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetLink findByE2_First(long entryId2,
 		OrderByComparator orderByComparator)
 		throws NoSuchLinkException, SystemException {
@@ -752,6 +766,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the first matching asset link, or <code>null</code> if a matching asset link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetLink fetchByE2_First(long entryId2,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<AssetLink> list = findByE2(entryId2, 0, 1, orderByComparator);
@@ -772,6 +787,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @throws com.liferay.portlet.asset.NoSuchLinkException if a matching asset link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetLink findByE2_Last(long entryId2,
 		OrderByComparator orderByComparator)
 		throws NoSuchLinkException, SystemException {
@@ -801,6 +817,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the last matching asset link, or <code>null</code> if a matching asset link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetLink fetchByE2_Last(long entryId2,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByE2(entryId2);
@@ -825,6 +842,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @throws com.liferay.portlet.asset.NoSuchLinkException if a asset link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetLink[] findByE2_PrevAndNext(long linkId, long entryId2,
 		OrderByComparator orderByComparator)
 		throws NoSuchLinkException, SystemException {
@@ -966,6 +984,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @param entryId2 the entry id2
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByE2(long entryId2) throws SystemException {
 		for (AssetLink assetLink : findByE2(entryId2, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null)) {
@@ -980,6 +999,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the number of matching asset links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByE2(long entryId2) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_E2;
 
@@ -1055,6 +1075,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the matching asset links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetLink> findByE_E(long entryId1, long entryId2)
 		throws SystemException {
 		return findByE_E(entryId1, entryId2, QueryUtil.ALL_POS,
@@ -1075,6 +1096,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the range of matching asset links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetLink> findByE_E(long entryId1, long entryId2, int start,
 		int end) throws SystemException {
 		return findByE_E(entryId1, entryId2, start, end, null);
@@ -1095,6 +1117,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the ordered range of matching asset links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetLink> findByE_E(long entryId1, long entryId2, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -1211,6 +1234,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @throws com.liferay.portlet.asset.NoSuchLinkException if a matching asset link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetLink findByE_E_First(long entryId1, long entryId2,
 		OrderByComparator orderByComparator)
 		throws NoSuchLinkException, SystemException {
@@ -1245,6 +1269,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the first matching asset link, or <code>null</code> if a matching asset link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetLink fetchByE_E_First(long entryId1, long entryId2,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<AssetLink> list = findByE_E(entryId1, entryId2, 0, 1,
@@ -1267,6 +1292,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @throws com.liferay.portlet.asset.NoSuchLinkException if a matching asset link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetLink findByE_E_Last(long entryId1, long entryId2,
 		OrderByComparator orderByComparator)
 		throws NoSuchLinkException, SystemException {
@@ -1301,6 +1327,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the last matching asset link, or <code>null</code> if a matching asset link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetLink fetchByE_E_Last(long entryId1, long entryId2,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByE_E(entryId1, entryId2);
@@ -1326,6 +1353,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @throws com.liferay.portlet.asset.NoSuchLinkException if a asset link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetLink[] findByE_E_PrevAndNext(long linkId, long entryId1,
 		long entryId2, OrderByComparator orderByComparator)
 		throws NoSuchLinkException, SystemException {
@@ -1472,6 +1500,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @param entryId2 the entry id2
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByE_E(long entryId1, long entryId2)
 		throws SystemException {
 		for (AssetLink assetLink : findByE_E(entryId1, entryId2,
@@ -1488,6 +1517,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the number of matching asset links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByE_E(long entryId1, long entryId2)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_E_E;
@@ -1569,6 +1599,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the matching asset links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetLink> findByE1_T(long entryId1, int type)
 		throws SystemException {
 		return findByE1_T(entryId1, type, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -1589,6 +1620,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the range of matching asset links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetLink> findByE1_T(long entryId1, int type, int start,
 		int end) throws SystemException {
 		return findByE1_T(entryId1, type, start, end, null);
@@ -1609,6 +1641,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the ordered range of matching asset links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetLink> findByE1_T(long entryId1, int type, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -1725,6 +1758,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @throws com.liferay.portlet.asset.NoSuchLinkException if a matching asset link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetLink findByE1_T_First(long entryId1, int type,
 		OrderByComparator orderByComparator)
 		throws NoSuchLinkException, SystemException {
@@ -1759,6 +1793,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the first matching asset link, or <code>null</code> if a matching asset link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetLink fetchByE1_T_First(long entryId1, int type,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<AssetLink> list = findByE1_T(entryId1, type, 0, 1,
@@ -1781,6 +1816,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @throws com.liferay.portlet.asset.NoSuchLinkException if a matching asset link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetLink findByE1_T_Last(long entryId1, int type,
 		OrderByComparator orderByComparator)
 		throws NoSuchLinkException, SystemException {
@@ -1814,6 +1850,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the last matching asset link, or <code>null</code> if a matching asset link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetLink fetchByE1_T_Last(long entryId1, int type,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByE1_T(entryId1, type);
@@ -1839,6 +1876,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @throws com.liferay.portlet.asset.NoSuchLinkException if a asset link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetLink[] findByE1_T_PrevAndNext(long linkId, long entryId1,
 		int type, OrderByComparator orderByComparator)
 		throws NoSuchLinkException, SystemException {
@@ -1985,6 +2023,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @param type the type
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByE1_T(long entryId1, int type) throws SystemException {
 		for (AssetLink assetLink : findByE1_T(entryId1, type,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -2000,6 +2039,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the number of matching asset links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByE1_T(long entryId1, int type) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_E1_T;
 
@@ -2080,6 +2120,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the matching asset links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetLink> findByE2_T(long entryId2, int type)
 		throws SystemException {
 		return findByE2_T(entryId2, type, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -2100,6 +2141,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the range of matching asset links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetLink> findByE2_T(long entryId2, int type, int start,
 		int end) throws SystemException {
 		return findByE2_T(entryId2, type, start, end, null);
@@ -2120,6 +2162,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the ordered range of matching asset links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetLink> findByE2_T(long entryId2, int type, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -2236,6 +2279,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @throws com.liferay.portlet.asset.NoSuchLinkException if a matching asset link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetLink findByE2_T_First(long entryId2, int type,
 		OrderByComparator orderByComparator)
 		throws NoSuchLinkException, SystemException {
@@ -2270,6 +2314,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the first matching asset link, or <code>null</code> if a matching asset link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetLink fetchByE2_T_First(long entryId2, int type,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<AssetLink> list = findByE2_T(entryId2, type, 0, 1,
@@ -2292,6 +2337,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @throws com.liferay.portlet.asset.NoSuchLinkException if a matching asset link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetLink findByE2_T_Last(long entryId2, int type,
 		OrderByComparator orderByComparator)
 		throws NoSuchLinkException, SystemException {
@@ -2325,6 +2371,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the last matching asset link, or <code>null</code> if a matching asset link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetLink fetchByE2_T_Last(long entryId2, int type,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByE2_T(entryId2, type);
@@ -2350,6 +2397,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @throws com.liferay.portlet.asset.NoSuchLinkException if a asset link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetLink[] findByE2_T_PrevAndNext(long linkId, long entryId2,
 		int type, OrderByComparator orderByComparator)
 		throws NoSuchLinkException, SystemException {
@@ -2496,6 +2544,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @param type the type
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByE2_T(long entryId2, int type) throws SystemException {
 		for (AssetLink assetLink : findByE2_T(entryId2, type,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -2511,6 +2560,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the number of matching asset links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByE2_T(long entryId2, int type) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_E2_T;
 
@@ -2590,6 +2640,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @throws com.liferay.portlet.asset.NoSuchLinkException if a matching asset link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetLink findByE_E_T(long entryId1, long entryId2, int type)
 		throws NoSuchLinkException, SystemException {
 		AssetLink assetLink = fetchByE_E_T(entryId1, entryId2, type);
@@ -2629,6 +2680,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the matching asset link, or <code>null</code> if a matching asset link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetLink fetchByE_E_T(long entryId1, long entryId2, int type)
 		throws SystemException {
 		return fetchByE_E_T(entryId1, entryId2, type, true);
@@ -2644,6 +2696,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the matching asset link, or <code>null</code> if a matching asset link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetLink fetchByE_E_T(long entryId1, long entryId2, int type,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { entryId1, entryId2, type };
@@ -2742,6 +2795,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the asset link that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetLink removeByE_E_T(long entryId1, long entryId2, int type)
 		throws NoSuchLinkException, SystemException {
 		AssetLink assetLink = findByE_E_T(entryId1, entryId2, type);
@@ -2758,6 +2812,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the number of matching asset links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByE_E_T(long entryId1, long entryId2, int type)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_E_E_T;
@@ -2821,6 +2876,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 *
 	 * @param assetLink the asset link
 	 */
+	@Override
 	public void cacheResult(AssetLink assetLink) {
 		EntityCacheUtil.putResult(AssetLinkModelImpl.ENTITY_CACHE_ENABLED,
 			AssetLinkImpl.class, assetLink.getPrimaryKey(), assetLink);
@@ -2839,6 +2895,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 *
 	 * @param assetLinks the asset links
 	 */
+	@Override
 	public void cacheResult(List<AssetLink> assetLinks) {
 		for (AssetLink assetLink : assetLinks) {
 			if (EntityCacheUtil.getResult(
@@ -2963,6 +3020,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @param linkId the primary key for the new asset link
 	 * @return the new asset link
 	 */
+	@Override
 	public AssetLink create(long linkId) {
 		AssetLink assetLink = new AssetLinkImpl();
 
@@ -2980,6 +3038,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @throws com.liferay.portlet.asset.NoSuchLinkException if a asset link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetLink remove(long linkId)
 		throws NoSuchLinkException, SystemException {
 		return remove((Serializable)linkId);
@@ -3260,6 +3319,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @throws com.liferay.portlet.asset.NoSuchLinkException if a asset link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetLink findByPrimaryKey(long linkId)
 		throws NoSuchLinkException, SystemException {
 		return findByPrimaryKey((Serializable)linkId);
@@ -3320,6 +3380,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the asset link, or <code>null</code> if a asset link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetLink fetchByPrimaryKey(long linkId) throws SystemException {
 		return fetchByPrimaryKey((Serializable)linkId);
 	}
@@ -3330,6 +3391,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the asset links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetLink> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -3346,6 +3408,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the range of asset links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetLink> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
@@ -3364,6 +3427,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the ordered range of asset links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetLink> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -3449,6 +3513,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (AssetLink assetLink : findAll()) {
 			remove(assetLink);
@@ -3461,6 +3526,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 * @return the number of asset links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -3554,6 +3620,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		};
 
 	private static CacheModel<AssetLink> _nullAssetLinkCacheModel = new CacheModel<AssetLink>() {
+			@Override
 			public AssetLink toEntityModel() {
 				return _nullAssetLink;
 			}

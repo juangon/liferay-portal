@@ -335,6 +335,7 @@ public class DBUpgrader {
 				private Annotation[] _annotations = new Annotation[] {
 					new Skip() {
 
+						@Override
 						public Class<? extends Annotation> annotationType() {
 							return Skip.class;
 						}

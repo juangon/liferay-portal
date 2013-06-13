@@ -115,6 +115,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	 * @return the matching service components
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ServiceComponent> findByBuildNamespace(String buildNamespace)
 		throws SystemException {
 		return findByBuildNamespace(buildNamespace, QueryUtil.ALL_POS,
@@ -134,6 +135,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	 * @return the range of matching service components
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ServiceComponent> findByBuildNamespace(String buildNamespace,
 		int start, int end) throws SystemException {
 		return findByBuildNamespace(buildNamespace, start, end, null);
@@ -153,6 +155,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	 * @return the ordered range of matching service components
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ServiceComponent> findByBuildNamespace(String buildNamespace,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -279,6 +282,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	 * @throws com.liferay.portal.NoSuchServiceComponentException if a matching service component could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ServiceComponent findByBuildNamespace_First(String buildNamespace,
 		OrderByComparator orderByComparator)
 		throws NoSuchServiceComponentException, SystemException {
@@ -309,6 +313,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	 * @return the first matching service component, or <code>null</code> if a matching service component could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ServiceComponent fetchByBuildNamespace_First(String buildNamespace,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<ServiceComponent> list = findByBuildNamespace(buildNamespace, 0,
@@ -330,6 +335,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	 * @throws com.liferay.portal.NoSuchServiceComponentException if a matching service component could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ServiceComponent findByBuildNamespace_Last(String buildNamespace,
 		OrderByComparator orderByComparator)
 		throws NoSuchServiceComponentException, SystemException {
@@ -360,6 +366,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	 * @return the last matching service component, or <code>null</code> if a matching service component could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ServiceComponent fetchByBuildNamespace_Last(String buildNamespace,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByBuildNamespace(buildNamespace);
@@ -384,6 +391,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	 * @throws com.liferay.portal.NoSuchServiceComponentException if a service component with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ServiceComponent[] findByBuildNamespace_PrevAndNext(
 		long serviceComponentId, String buildNamespace,
 		OrderByComparator orderByComparator)
@@ -541,6 +549,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	 * @param buildNamespace the build namespace
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByBuildNamespace(String buildNamespace)
 		throws SystemException {
 		for (ServiceComponent serviceComponent : findByBuildNamespace(
@@ -556,6 +565,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	 * @return the number of matching service components
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByBuildNamespace(String buildNamespace)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_BUILDNAMESPACE;
@@ -640,6 +650,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	 * @throws com.liferay.portal.NoSuchServiceComponentException if a matching service component could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ServiceComponent findByBNS_BNU(String buildNamespace,
 		long buildNumber)
 		throws NoSuchServiceComponentException, SystemException {
@@ -677,6 +688,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	 * @return the matching service component, or <code>null</code> if a matching service component could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ServiceComponent fetchByBNS_BNU(String buildNamespace,
 		long buildNumber) throws SystemException {
 		return fetchByBNS_BNU(buildNamespace, buildNumber, true);
@@ -691,6 +703,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	 * @return the matching service component, or <code>null</code> if a matching service component could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ServiceComponent fetchByBNS_BNU(String buildNamespace,
 		long buildNumber, boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { buildNamespace, buildNumber };
@@ -799,6 +812,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	 * @return the service component that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ServiceComponent removeByBNS_BNU(String buildNamespace,
 		long buildNumber)
 		throws NoSuchServiceComponentException, SystemException {
@@ -816,6 +830,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	 * @return the number of matching service components
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByBNS_BNU(String buildNamespace, long buildNumber)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_BNS_BNU;
@@ -890,6 +905,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	 *
 	 * @param serviceComponent the service component
 	 */
+	@Override
 	public void cacheResult(ServiceComponent serviceComponent) {
 		EntityCacheUtil.putResult(ServiceComponentModelImpl.ENTITY_CACHE_ENABLED,
 			ServiceComponentImpl.class, serviceComponent.getPrimaryKey(),
@@ -909,6 +925,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	 *
 	 * @param serviceComponents the service components
 	 */
+	@Override
 	public void cacheResult(List<ServiceComponent> serviceComponents) {
 		for (ServiceComponent serviceComponent : serviceComponents) {
 			if (EntityCacheUtil.getResult(
@@ -1033,6 +1050,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	 * @param serviceComponentId the primary key for the new service component
 	 * @return the new service component
 	 */
+	@Override
 	public ServiceComponent create(long serviceComponentId) {
 		ServiceComponent serviceComponent = new ServiceComponentImpl();
 
@@ -1050,6 +1068,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	 * @throws com.liferay.portal.NoSuchServiceComponentException if a service component with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ServiceComponent remove(long serviceComponentId)
 		throws NoSuchServiceComponentException, SystemException {
 		return remove((Serializable)serviceComponentId);
@@ -1252,6 +1271,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	 * @throws com.liferay.portal.NoSuchServiceComponentException if a service component with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ServiceComponent findByPrimaryKey(long serviceComponentId)
 		throws NoSuchServiceComponentException, SystemException {
 		return findByPrimaryKey((Serializable)serviceComponentId);
@@ -1313,6 +1333,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	 * @return the service component, or <code>null</code> if a service component with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ServiceComponent fetchByPrimaryKey(long serviceComponentId)
 		throws SystemException {
 		return fetchByPrimaryKey((Serializable)serviceComponentId);
@@ -1324,6 +1345,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	 * @return the service components
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ServiceComponent> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1340,6 +1362,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	 * @return the range of service components
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ServiceComponent> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
@@ -1358,6 +1381,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	 * @return the ordered range of service components
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ServiceComponent> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -1443,6 +1467,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (ServiceComponent serviceComponent : findAll()) {
 			remove(serviceComponent);
@@ -1455,6 +1480,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	 * @return the number of service components
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -1548,6 +1574,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 		};
 
 	private static CacheModel<ServiceComponent> _nullServiceComponentCacheModel = new CacheModel<ServiceComponent>() {
+			@Override
 			public ServiceComponent toEntityModel() {
 				return _nullServiceComponent;
 			}

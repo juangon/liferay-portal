@@ -24,13 +24,11 @@ import com.liferay.portal.service.http.TunnelUtil;
 import com.liferay.portlet.mobiledevicerules.service.MDRRuleGroupServiceUtil;
 
 /**
- * <p>
- * This class provides a HTTP utility for the
+ * Provides the HTTP utility for the
  * {@link com.liferay.portlet.mobiledevicerules.service.MDRRuleGroupServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it requires an additional
  * {@link com.liferay.portal.security.auth.HttpPrincipal} parameter.
- * </p>
  *
  * <p>
  * The benefits of using the HTTP utility is that it is fast and allows for
@@ -47,10 +45,10 @@ import com.liferay.portlet.mobiledevicerules.service.MDRRuleGroupServiceUtil;
  * The HTTP utility is only generated for remote services.
  * </p>
  *
- * @author    Edward C. Han
- * @see       MDRRuleGroupServiceSoap
- * @see       com.liferay.portal.security.auth.HttpPrincipal
- * @see       com.liferay.portlet.mobiledevicerules.service.MDRRuleGroupServiceUtil
+ * @author Edward C. Han
+ * @see MDRRuleGroupServiceSoap
+ * @see com.liferay.portal.security.auth.HttpPrincipal
+ * @see com.liferay.portlet.mobiledevicerules.service.MDRRuleGroupServiceUtil
  * @generated
  */
 public class MDRRuleGroupServiceHttp {

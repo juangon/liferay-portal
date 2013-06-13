@@ -36,6 +36,7 @@ public class MulticastServerTool {
 
 			DatagramHandler handler = new DatagramHandler() {
 
+				@Override
 				public void process(DatagramPacket packet) {
 					String s = new String(
 						packet.getData(), 0, packet.getLength());
@@ -43,6 +44,7 @@ public class MulticastServerTool {
 					System.out.println(s);
 				}
 
+				@Override
 				public void errorReceived(Throwable t) {
 					t.printStackTrace();
 				}

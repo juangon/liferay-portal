@@ -45,7 +45,6 @@ page import="com.liferay.portlet.dynamicdatamapping.NoSuchStructureException" %>
 page import="com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException" %><%@
 page import="com.liferay.portlet.dynamicdatamapping.model.DDMStructure" %><%@
 page import="com.liferay.portlet.dynamicdatamapping.model.DDMTemplate" %><%@
-page import="com.liferay.portlet.dynamicdatamapping.model.DDMTemplateConstants" %><%@
 page import="com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil" %><%@
 page import="com.liferay.portlet.dynamicdatamapping.service.DDMTemplateLocalServiceUtil" %><%@
 page import="com.liferay.portlet.dynamicdatamapping.service.DDMTemplateServiceUtil" %><%@
@@ -112,8 +111,6 @@ PortalPreferences portalPreferences = PortletPreferencesFactoryUtil.getPortalPre
 PortletPreferences preferences = liferayPortletRequest.getPreferences();
 
 String[] displayViews = StringUtil.split(PrefsParamUtil.getString(preferences, liferayPortletRequest, "displayViews", StringUtil.merge(PropsValues.JOURNAL_DISPLAY_VIEWS)));
-
-String ddmResource = portletConfig.getInitParameter("ddm-resource");
 
 Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale, timeZone);
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);

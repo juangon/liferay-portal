@@ -44,8 +44,6 @@ public interface User extends UserModel, PersistedModel {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public java.lang.String getDigest();
-
 	public java.lang.String getDigest(java.lang.String password);
 
 	public java.lang.String getDisplayEmailAddress();
@@ -234,11 +232,7 @@ public interface User extends UserModel, PersistedModel {
 
 	public boolean isPasswordModified();
 
-	public void setLanguageId(java.lang.String languageId);
-
 	public void setPasswordModified(boolean passwordModified);
 
 	public void setPasswordUnencrypted(java.lang.String passwordUnencrypted);
-
-	public void setTimeZoneId(java.lang.String timeZoneId);
 }

@@ -15,12 +15,10 @@
 package com.liferay.portal.service;
 
 /**
- * <p>
- * This class is a wrapper for {@link ResourceLocalService}.
- * </p>
+ * Provides a wrapper for {@link ResourceLocalService}.
  *
- * @author    Brian Wing Shun Chan
- * @see       ResourceLocalService
+ * @author Brian Wing Shun Chan
+ * @see ResourceLocalService
  * @generated
  */
 public class ResourceLocalServiceWrapper implements ResourceLocalService,
@@ -35,6 +33,7 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService,
 	*
 	* @return the Spring bean ID for this bean
 	*/
+	@Override
 	public java.lang.String getBeanIdentifier() {
 		return _resourceLocalService.getBeanIdentifier();
 	}
@@ -44,6 +43,7 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService,
 	*
 	* @param beanIdentifier the Spring bean ID for this bean
 	*/
+	@Override
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		_resourceLocalService.setBeanIdentifier(beanIdentifier);
 	}
@@ -93,6 +93,7 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService,
 	with the model or if a portal exception occurred
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void addModelResources(
 		com.liferay.portal.model.AuditedModel auditedModel,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -119,6 +120,7 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService,
 	with the model or if a portal exception occurred
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void addModelResources(long companyId, long groupId, long userId,
 		java.lang.String name, long primKey,
 		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
@@ -146,6 +148,7 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService,
 	with the model or if a portal exception occurred
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void addModelResources(long companyId, long groupId, long userId,
 		java.lang.String name, java.lang.String primKey,
 		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
@@ -176,6 +179,7 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService,
 	with the resource or if a portal exception occurred
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void addResources(long companyId, long groupId, long userId,
 		java.lang.String name, long primKey, boolean portletActions,
 		boolean addGroupPermissions, boolean addGuestPermissions)
@@ -206,6 +210,7 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService,
 	with the resource or if a portal exception occurred
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void addResources(long companyId, long groupId, long userId,
 		java.lang.String name, java.lang.String primKey,
 		boolean portletActions, boolean addGroupPermissions,
@@ -230,6 +235,7 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService,
 	with the resource or if a portal exception occurred
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void addResources(long companyId, long groupId,
 		java.lang.String name, boolean portletActions)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -247,6 +253,7 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService,
 	* @throws PortalException if a portal exception occurred
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void deleteResource(
 		com.liferay.portal.model.AuditedModel auditedModel, int scope)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -266,6 +273,7 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService,
 	* @throws PortalException if a portal exception occurred
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void deleteResource(long companyId, java.lang.String name,
 		int scope, long primKey)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -285,6 +293,7 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService,
 	* @throws PortalException if a portal exception occurred
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void deleteResource(long companyId, java.lang.String name,
 		int scope, java.lang.String primKey)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -303,6 +312,7 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService,
 	* @param primKey the primary key string of the resource
 	* @return the new resource
 	*/
+	@Override
 	public com.liferay.portal.model.Resource getResource(long companyId,
 		java.lang.String name, int scope, java.lang.String primKey) {
 		return _resourceLocalService.getResource(companyId, name, scope, primKey);
@@ -328,6 +338,7 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService,
 	could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public boolean hasUserPermissions(long userId, long resourceId,
 		java.util.List<com.liferay.portal.model.Resource> resources,
 		java.lang.String actionId, long[] roleIds)
@@ -347,6 +358,7 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService,
 	* @throws PortalException if a portal exception occurred
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void updateModelResources(
 		com.liferay.portal.model.AuditedModel auditedModel,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -369,6 +381,7 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService,
 	* @throws PortalException if a portal exception occurred
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void updateResources(long companyId, long groupId,
 		java.lang.String name, long primKey,
 		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
@@ -392,6 +405,7 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService,
 	* @throws PortalException if a portal exception occurred
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void updateResources(long companyId, long groupId,
 		java.lang.String name, java.lang.String primKey,
 		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
@@ -415,6 +429,7 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService,
 	* @param newPrimKey the new primary key string of the resource
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void updateResources(long companyId, java.lang.String name,
 		int scope, java.lang.String primKey, java.lang.String newPrimKey)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -437,10 +452,12 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService,
 		_resourceLocalService = resourceLocalService;
 	}
 
+	@Override
 	public ResourceLocalService getWrappedService() {
 		return _resourceLocalService;
 	}
 
+	@Override
 	public void setWrappedService(ResourceLocalService resourceLocalService) {
 		_resourceLocalService = resourceLocalService;
 	}

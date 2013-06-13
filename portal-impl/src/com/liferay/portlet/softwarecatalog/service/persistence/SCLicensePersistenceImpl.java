@@ -118,6 +118,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @return the matching s c licenses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<SCLicense> findByActive(boolean active)
 		throws SystemException {
 		return findByActive(active, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
@@ -136,6 +137,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @return the range of matching s c licenses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<SCLicense> findByActive(boolean active, int start, int end)
 		throws SystemException {
 		return findByActive(active, start, end, null);
@@ -155,6 +157,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @return the ordered range of matching s c licenses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<SCLicense> findByActive(boolean active, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -261,6 +264,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchLicenseException if a matching s c license could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SCLicense findByActive_First(boolean active,
 		OrderByComparator orderByComparator)
 		throws NoSuchLicenseException, SystemException {
@@ -290,6 +294,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @return the first matching s c license, or <code>null</code> if a matching s c license could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SCLicense fetchByActive_First(boolean active,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<SCLicense> list = findByActive(active, 0, 1, orderByComparator);
@@ -310,6 +315,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchLicenseException if a matching s c license could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SCLicense findByActive_Last(boolean active,
 		OrderByComparator orderByComparator)
 		throws NoSuchLicenseException, SystemException {
@@ -339,6 +345,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @return the last matching s c license, or <code>null</code> if a matching s c license could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SCLicense fetchByActive_Last(boolean active,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByActive(active);
@@ -363,6 +370,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchLicenseException if a s c license with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SCLicense[] findByActive_PrevAndNext(long licenseId, boolean active,
 		OrderByComparator orderByComparator)
 		throws NoSuchLicenseException, SystemException {
@@ -505,6 +513,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @return the matching s c licenses that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<SCLicense> filterFindByActive(boolean active)
 		throws SystemException {
 		return filterFindByActive(active, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -524,6 +533,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @return the range of matching s c licenses that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<SCLicense> filterFindByActive(boolean active, int start, int end)
 		throws SystemException {
 		return filterFindByActive(active, start, end, null);
@@ -543,6 +553,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @return the ordered range of matching s c licenses that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<SCLicense> filterFindByActive(boolean active, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled()) {
@@ -632,6 +643,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchLicenseException if a s c license with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SCLicense[] filterFindByActive_PrevAndNext(long licenseId,
 		boolean active, OrderByComparator orderByComparator)
 		throws NoSuchLicenseException, SystemException {
@@ -811,6 +823,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @param active the active
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByActive(boolean active) throws SystemException {
 		for (SCLicense scLicense : findByActive(active, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null)) {
@@ -825,6 +838,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @return the number of matching s c licenses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByActive(boolean active) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_ACTIVE;
 
@@ -877,6 +891,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @return the number of matching s c licenses that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByActive(boolean active) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled()) {
 			return countByActive(active);
@@ -948,6 +963,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @return the matching s c licenses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<SCLicense> findByA_R(boolean active, boolean recommended)
 		throws SystemException {
 		return findByA_R(active, recommended, QueryUtil.ALL_POS,
@@ -968,6 +984,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @return the range of matching s c licenses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<SCLicense> findByA_R(boolean active, boolean recommended,
 		int start, int end) throws SystemException {
 		return findByA_R(active, recommended, start, end, null);
@@ -988,6 +1005,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @return the ordered range of matching s c licenses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<SCLicense> findByA_R(boolean active, boolean recommended,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1105,6 +1123,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchLicenseException if a matching s c license could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SCLicense findByA_R_First(boolean active, boolean recommended,
 		OrderByComparator orderByComparator)
 		throws NoSuchLicenseException, SystemException {
@@ -1139,6 +1158,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @return the first matching s c license, or <code>null</code> if a matching s c license could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SCLicense fetchByA_R_First(boolean active, boolean recommended,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<SCLicense> list = findByA_R(active, recommended, 0, 1,
@@ -1161,6 +1181,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchLicenseException if a matching s c license could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SCLicense findByA_R_Last(boolean active, boolean recommended,
 		OrderByComparator orderByComparator)
 		throws NoSuchLicenseException, SystemException {
@@ -1195,6 +1216,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @return the last matching s c license, or <code>null</code> if a matching s c license could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SCLicense fetchByA_R_Last(boolean active, boolean recommended,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByA_R(active, recommended);
@@ -1220,6 +1242,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchLicenseException if a s c license with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SCLicense[] findByA_R_PrevAndNext(long licenseId, boolean active,
 		boolean recommended, OrderByComparator orderByComparator)
 		throws NoSuchLicenseException, SystemException {
@@ -1367,6 +1390,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @return the matching s c licenses that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<SCLicense> filterFindByA_R(boolean active, boolean recommended)
 		throws SystemException {
 		return filterFindByA_R(active, recommended, QueryUtil.ALL_POS,
@@ -1387,6 +1411,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @return the range of matching s c licenses that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<SCLicense> filterFindByA_R(boolean active, boolean recommended,
 		int start, int end) throws SystemException {
 		return filterFindByA_R(active, recommended, start, end, null);
@@ -1407,6 +1432,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @return the ordered range of matching s c licenses that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<SCLicense> filterFindByA_R(boolean active, boolean recommended,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1502,6 +1528,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchLicenseException if a s c license with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SCLicense[] filterFindByA_R_PrevAndNext(long licenseId,
 		boolean active, boolean recommended, OrderByComparator orderByComparator)
 		throws NoSuchLicenseException, SystemException {
@@ -1687,6 +1714,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @param recommended the recommended
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByA_R(boolean active, boolean recommended)
 		throws SystemException {
 		for (SCLicense scLicense : findByA_R(active, recommended,
@@ -1703,6 +1731,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @return the number of matching s c licenses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByA_R(boolean active, boolean recommended)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_A_R;
@@ -1761,6 +1790,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @return the number of matching s c licenses that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByA_R(boolean active, boolean recommended)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled()) {
@@ -1815,6 +1845,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 *
 	 * @param scLicense the s c license
 	 */
+	@Override
 	public void cacheResult(SCLicense scLicense) {
 		EntityCacheUtil.putResult(SCLicenseModelImpl.ENTITY_CACHE_ENABLED,
 			SCLicenseImpl.class, scLicense.getPrimaryKey(), scLicense);
@@ -1827,6 +1858,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 *
 	 * @param scLicenses the s c licenses
 	 */
+	@Override
 	public void cacheResult(List<SCLicense> scLicenses) {
 		for (SCLicense scLicense : scLicenses) {
 			if (EntityCacheUtil.getResult(
@@ -1893,6 +1925,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @param licenseId the primary key for the new s c license
 	 * @return the new s c license
 	 */
+	@Override
 	public SCLicense create(long licenseId) {
 		SCLicense scLicense = new SCLicenseImpl();
 
@@ -1910,6 +1943,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchLicenseException if a s c license with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SCLicense remove(long licenseId)
 		throws NoSuchLicenseException, SystemException {
 		return remove((Serializable)licenseId);
@@ -2135,6 +2169,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchLicenseException if a s c license with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SCLicense findByPrimaryKey(long licenseId)
 		throws NoSuchLicenseException, SystemException {
 		return findByPrimaryKey((Serializable)licenseId);
@@ -2195,6 +2230,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @return the s c license, or <code>null</code> if a s c license with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SCLicense fetchByPrimaryKey(long licenseId)
 		throws SystemException {
 		return fetchByPrimaryKey((Serializable)licenseId);
@@ -2206,6 +2242,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @return the s c licenses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<SCLicense> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -2222,6 +2259,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @return the range of s c licenses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<SCLicense> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
@@ -2240,6 +2278,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @return the ordered range of s c licenses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<SCLicense> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -2325,6 +2364,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (SCLicense scLicense : findAll()) {
 			remove(scLicense);
@@ -2337,6 +2377,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @return the number of s c licenses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -2375,6 +2416,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @return the s c product entries associated with the s c license
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getSCProductEntries(
 		long pk) throws SystemException {
 		return getSCProductEntries(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
@@ -2393,6 +2435,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @return the range of s c product entries associated with the s c license
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getSCProductEntries(
 		long pk, int start, int end) throws SystemException {
 		return getSCProductEntries(pk, start, end, null);
@@ -2426,6 +2469,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @return the ordered range of s c product entries associated with the s c license
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getSCProductEntries(
 		long pk, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -2522,6 +2566,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @return the number of s c product entries associated with the s c license
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int getSCProductEntriesSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { pk };
 
@@ -2577,6 +2622,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @return <code>true</code> if the s c product entry is associated with the s c license; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean containsSCProductEntry(long pk, long scProductEntryPK)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { pk, scProductEntryPK };
@@ -2610,6 +2656,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @return <code>true</code> if the s c license has any s c product entries associated with it; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean containsSCProductEntries(long pk) throws SystemException {
 		if (getSCProductEntriesSize(pk) > 0) {
 			return true;
@@ -2626,6 +2673,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @param scProductEntryPK the primary key of the s c product entry
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addSCProductEntry(long pk, long scProductEntryPK)
 		throws SystemException {
 		try {
@@ -2646,6 +2694,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @param scProductEntry the s c product entry
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addSCProductEntry(long pk,
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry)
 		throws SystemException {
@@ -2667,6 +2716,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @param scProductEntryPKs the primary keys of the s c product entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addSCProductEntries(long pk, long[] scProductEntryPKs)
 		throws SystemException {
 		try {
@@ -2689,6 +2739,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @param scProductEntries the s c product entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addSCProductEntries(long pk,
 		List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> scProductEntries)
 		throws SystemException {
@@ -2711,6 +2762,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @param pk the primary key of the s c license to clear the associated s c product entries from
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void clearSCProductEntries(long pk) throws SystemException {
 		try {
 			clearSCProductEntries.clear(pk);
@@ -2730,6 +2782,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @param scProductEntryPK the primary key of the s c product entry
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeSCProductEntry(long pk, long scProductEntryPK)
 		throws SystemException {
 		try {
@@ -2750,6 +2803,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @param scProductEntry the s c product entry
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeSCProductEntry(long pk,
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry)
 		throws SystemException {
@@ -2771,6 +2825,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @param scProductEntryPKs the primary keys of the s c product entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeSCProductEntries(long pk, long[] scProductEntryPKs)
 		throws SystemException {
 		try {
@@ -2793,6 +2848,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @param scProductEntries the s c product entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeSCProductEntries(long pk,
 		List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> scProductEntries)
 		throws SystemException {
@@ -2816,6 +2872,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @param scProductEntryPKs the primary keys of the s c product entries to be associated with the s c license
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setSCProductEntries(long pk, long[] scProductEntryPKs)
 		throws SystemException {
 		try {
@@ -2850,6 +2907,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @param scProductEntries the s c product entries to be associated with the s c license
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setSCProductEntries(long pk,
 		List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> scProductEntries)
 		throws SystemException {
@@ -3127,6 +3185,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		};
 
 	private static CacheModel<SCLicense> _nullSCLicenseCacheModel = new CacheModel<SCLicense>() {
+			@Override
 			public SCLicense toEntityModel() {
 				return _nullSCLicense;
 			}

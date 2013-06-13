@@ -25,8 +25,8 @@ import java.util.Map;
  * This class is a wrapper for {@link AssetEntry}.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       AssetEntry
+ * @author Brian Wing Shun Chan
+ * @see AssetEntry
  * @generated
  */
 public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
@@ -34,14 +34,17 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 		_assetEntry = assetEntry;
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return AssetEntry.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return AssetEntry.class.getName();
 	}
 
+	@Override
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
@@ -75,6 +78,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 		return attributes;
 	}
 
+	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 		Long entryId = (Long)attributes.get("entryId");
 
@@ -238,6 +242,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @return the primary key of this asset entry
 	*/
+	@Override
 	public long getPrimaryKey() {
 		return _assetEntry.getPrimaryKey();
 	}
@@ -247,6 +252,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @param primaryKey the primary key of this asset entry
 	*/
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_assetEntry.setPrimaryKey(primaryKey);
 	}
@@ -256,6 +262,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @return the entry ID of this asset entry
 	*/
+	@Override
 	public long getEntryId() {
 		return _assetEntry.getEntryId();
 	}
@@ -265,6 +272,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @param entryId the entry ID of this asset entry
 	*/
+	@Override
 	public void setEntryId(long entryId) {
 		_assetEntry.setEntryId(entryId);
 	}
@@ -274,6 +282,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @return the group ID of this asset entry
 	*/
+	@Override
 	public long getGroupId() {
 		return _assetEntry.getGroupId();
 	}
@@ -283,6 +292,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @param groupId the group ID of this asset entry
 	*/
+	@Override
 	public void setGroupId(long groupId) {
 		_assetEntry.setGroupId(groupId);
 	}
@@ -292,6 +302,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @return the company ID of this asset entry
 	*/
+	@Override
 	public long getCompanyId() {
 		return _assetEntry.getCompanyId();
 	}
@@ -301,6 +312,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @param companyId the company ID of this asset entry
 	*/
+	@Override
 	public void setCompanyId(long companyId) {
 		_assetEntry.setCompanyId(companyId);
 	}
@@ -310,6 +322,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @return the user ID of this asset entry
 	*/
+	@Override
 	public long getUserId() {
 		return _assetEntry.getUserId();
 	}
@@ -319,6 +332,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @param userId the user ID of this asset entry
 	*/
+	@Override
 	public void setUserId(long userId) {
 		_assetEntry.setUserId(userId);
 	}
@@ -329,6 +343,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	* @return the user uuid of this asset entry
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public java.lang.String getUserUuid()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _assetEntry.getUserUuid();
@@ -339,6 +354,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @param userUuid the user uuid of this asset entry
 	*/
+	@Override
 	public void setUserUuid(java.lang.String userUuid) {
 		_assetEntry.setUserUuid(userUuid);
 	}
@@ -348,6 +364,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @return the user name of this asset entry
 	*/
+	@Override
 	public java.lang.String getUserName() {
 		return _assetEntry.getUserName();
 	}
@@ -357,6 +374,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @param userName the user name of this asset entry
 	*/
+	@Override
 	public void setUserName(java.lang.String userName) {
 		_assetEntry.setUserName(userName);
 	}
@@ -366,6 +384,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @return the create date of this asset entry
 	*/
+	@Override
 	public java.util.Date getCreateDate() {
 		return _assetEntry.getCreateDate();
 	}
@@ -375,6 +394,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @param createDate the create date of this asset entry
 	*/
+	@Override
 	public void setCreateDate(java.util.Date createDate) {
 		_assetEntry.setCreateDate(createDate);
 	}
@@ -384,6 +404,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @return the modified date of this asset entry
 	*/
+	@Override
 	public java.util.Date getModifiedDate() {
 		return _assetEntry.getModifiedDate();
 	}
@@ -393,6 +414,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @param modifiedDate the modified date of this asset entry
 	*/
+	@Override
 	public void setModifiedDate(java.util.Date modifiedDate) {
 		_assetEntry.setModifiedDate(modifiedDate);
 	}
@@ -402,10 +424,12 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @return the fully qualified class name of this asset entry
 	*/
+	@Override
 	public java.lang.String getClassName() {
 		return _assetEntry.getClassName();
 	}
 
+	@Override
 	public void setClassName(java.lang.String className) {
 		_assetEntry.setClassName(className);
 	}
@@ -415,6 +439,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @return the class name ID of this asset entry
 	*/
+	@Override
 	public long getClassNameId() {
 		return _assetEntry.getClassNameId();
 	}
@@ -424,6 +449,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @param classNameId the class name ID of this asset entry
 	*/
+	@Override
 	public void setClassNameId(long classNameId) {
 		_assetEntry.setClassNameId(classNameId);
 	}
@@ -433,6 +459,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @return the class p k of this asset entry
 	*/
+	@Override
 	public long getClassPK() {
 		return _assetEntry.getClassPK();
 	}
@@ -442,6 +469,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @param classPK the class p k of this asset entry
 	*/
+	@Override
 	public void setClassPK(long classPK) {
 		_assetEntry.setClassPK(classPK);
 	}
@@ -451,6 +479,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @return the class uuid of this asset entry
 	*/
+	@Override
 	public java.lang.String getClassUuid() {
 		return _assetEntry.getClassUuid();
 	}
@@ -460,6 +489,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @param classUuid the class uuid of this asset entry
 	*/
+	@Override
 	public void setClassUuid(java.lang.String classUuid) {
 		_assetEntry.setClassUuid(classUuid);
 	}
@@ -469,6 +499,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @return the class type ID of this asset entry
 	*/
+	@Override
 	public long getClassTypeId() {
 		return _assetEntry.getClassTypeId();
 	}
@@ -478,6 +509,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @param classTypeId the class type ID of this asset entry
 	*/
+	@Override
 	public void setClassTypeId(long classTypeId) {
 		_assetEntry.setClassTypeId(classTypeId);
 	}
@@ -487,6 +519,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @return the visible of this asset entry
 	*/
+	@Override
 	public boolean getVisible() {
 		return _assetEntry.getVisible();
 	}
@@ -496,6 +529,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @return <code>true</code> if this asset entry is visible; <code>false</code> otherwise
 	*/
+	@Override
 	public boolean isVisible() {
 		return _assetEntry.isVisible();
 	}
@@ -505,6 +539,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @param visible the visible of this asset entry
 	*/
+	@Override
 	public void setVisible(boolean visible) {
 		_assetEntry.setVisible(visible);
 	}
@@ -514,6 +549,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @return the start date of this asset entry
 	*/
+	@Override
 	public java.util.Date getStartDate() {
 		return _assetEntry.getStartDate();
 	}
@@ -523,6 +559,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @param startDate the start date of this asset entry
 	*/
+	@Override
 	public void setStartDate(java.util.Date startDate) {
 		_assetEntry.setStartDate(startDate);
 	}
@@ -532,6 +569,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @return the end date of this asset entry
 	*/
+	@Override
 	public java.util.Date getEndDate() {
 		return _assetEntry.getEndDate();
 	}
@@ -541,6 +579,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @param endDate the end date of this asset entry
 	*/
+	@Override
 	public void setEndDate(java.util.Date endDate) {
 		_assetEntry.setEndDate(endDate);
 	}
@@ -550,6 +589,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @return the publish date of this asset entry
 	*/
+	@Override
 	public java.util.Date getPublishDate() {
 		return _assetEntry.getPublishDate();
 	}
@@ -559,6 +599,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @param publishDate the publish date of this asset entry
 	*/
+	@Override
 	public void setPublishDate(java.util.Date publishDate) {
 		_assetEntry.setPublishDate(publishDate);
 	}
@@ -568,6 +609,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @return the expiration date of this asset entry
 	*/
+	@Override
 	public java.util.Date getExpirationDate() {
 		return _assetEntry.getExpirationDate();
 	}
@@ -577,6 +619,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @param expirationDate the expiration date of this asset entry
 	*/
+	@Override
 	public void setExpirationDate(java.util.Date expirationDate) {
 		_assetEntry.setExpirationDate(expirationDate);
 	}
@@ -586,6 +629,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @return the mime type of this asset entry
 	*/
+	@Override
 	public java.lang.String getMimeType() {
 		return _assetEntry.getMimeType();
 	}
@@ -595,6 +639,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @param mimeType the mime type of this asset entry
 	*/
+	@Override
 	public void setMimeType(java.lang.String mimeType) {
 		_assetEntry.setMimeType(mimeType);
 	}
@@ -604,6 +649,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @return the title of this asset entry
 	*/
+	@Override
 	public java.lang.String getTitle() {
 		return _assetEntry.getTitle();
 	}
@@ -614,6 +660,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	* @param locale the locale of the language
 	* @return the localized title of this asset entry
 	*/
+	@Override
 	public java.lang.String getTitle(java.util.Locale locale) {
 		return _assetEntry.getTitle(locale);
 	}
@@ -625,6 +672,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	* @param useDefault whether to use the default language if no localization exists for the requested language
 	* @return the localized title of this asset entry. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
 	*/
+	@Override
 	public java.lang.String getTitle(java.util.Locale locale, boolean useDefault) {
 		return _assetEntry.getTitle(locale, useDefault);
 	}
@@ -635,6 +683,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	* @param languageId the ID of the language
 	* @return the localized title of this asset entry
 	*/
+	@Override
 	public java.lang.String getTitle(java.lang.String languageId) {
 		return _assetEntry.getTitle(languageId);
 	}
@@ -646,15 +695,18 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	* @param useDefault whether to use the default language if no localization exists for the requested language
 	* @return the localized title of this asset entry
 	*/
+	@Override
 	public java.lang.String getTitle(java.lang.String languageId,
 		boolean useDefault) {
 		return _assetEntry.getTitle(languageId, useDefault);
 	}
 
+	@Override
 	public java.lang.String getTitleCurrentLanguageId() {
 		return _assetEntry.getTitleCurrentLanguageId();
 	}
 
+	@Override
 	public java.lang.String getTitleCurrentValue() {
 		return _assetEntry.getTitleCurrentValue();
 	}
@@ -664,6 +716,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @return the locales and localized titles of this asset entry
 	*/
+	@Override
 	public java.util.Map<java.util.Locale, java.lang.String> getTitleMap() {
 		return _assetEntry.getTitleMap();
 	}
@@ -673,6 +726,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @param title the title of this asset entry
 	*/
+	@Override
 	public void setTitle(java.lang.String title) {
 		_assetEntry.setTitle(title);
 	}
@@ -683,6 +737,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	* @param title the localized title of this asset entry
 	* @param locale the locale of the language
 	*/
+	@Override
 	public void setTitle(java.lang.String title, java.util.Locale locale) {
 		_assetEntry.setTitle(title, locale);
 	}
@@ -694,11 +749,13 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	* @param locale the locale of the language
 	* @param defaultLocale the default locale
 	*/
+	@Override
 	public void setTitle(java.lang.String title, java.util.Locale locale,
 		java.util.Locale defaultLocale) {
 		_assetEntry.setTitle(title, locale, defaultLocale);
 	}
 
+	@Override
 	public void setTitleCurrentLanguageId(java.lang.String languageId) {
 		_assetEntry.setTitleCurrentLanguageId(languageId);
 	}
@@ -708,6 +765,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @param titleMap the locales and localized titles of this asset entry
 	*/
+	@Override
 	public void setTitleMap(
 		java.util.Map<java.util.Locale, java.lang.String> titleMap) {
 		_assetEntry.setTitleMap(titleMap);
@@ -719,6 +777,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	* @param titleMap the locales and localized titles of this asset entry
 	* @param defaultLocale the default locale
 	*/
+	@Override
 	public void setTitleMap(
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.util.Locale defaultLocale) {
@@ -730,6 +789,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @return the description of this asset entry
 	*/
+	@Override
 	public java.lang.String getDescription() {
 		return _assetEntry.getDescription();
 	}
@@ -740,6 +800,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	* @param locale the locale of the language
 	* @return the localized description of this asset entry
 	*/
+	@Override
 	public java.lang.String getDescription(java.util.Locale locale) {
 		return _assetEntry.getDescription(locale);
 	}
@@ -751,6 +812,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	* @param useDefault whether to use the default language if no localization exists for the requested language
 	* @return the localized description of this asset entry. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
 	*/
+	@Override
 	public java.lang.String getDescription(java.util.Locale locale,
 		boolean useDefault) {
 		return _assetEntry.getDescription(locale, useDefault);
@@ -762,6 +824,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	* @param languageId the ID of the language
 	* @return the localized description of this asset entry
 	*/
+	@Override
 	public java.lang.String getDescription(java.lang.String languageId) {
 		return _assetEntry.getDescription(languageId);
 	}
@@ -773,15 +836,18 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	* @param useDefault whether to use the default language if no localization exists for the requested language
 	* @return the localized description of this asset entry
 	*/
+	@Override
 	public java.lang.String getDescription(java.lang.String languageId,
 		boolean useDefault) {
 		return _assetEntry.getDescription(languageId, useDefault);
 	}
 
+	@Override
 	public java.lang.String getDescriptionCurrentLanguageId() {
 		return _assetEntry.getDescriptionCurrentLanguageId();
 	}
 
+	@Override
 	public java.lang.String getDescriptionCurrentValue() {
 		return _assetEntry.getDescriptionCurrentValue();
 	}
@@ -791,6 +857,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @return the locales and localized descriptions of this asset entry
 	*/
+	@Override
 	public java.util.Map<java.util.Locale, java.lang.String> getDescriptionMap() {
 		return _assetEntry.getDescriptionMap();
 	}
@@ -800,6 +867,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @param description the description of this asset entry
 	*/
+	@Override
 	public void setDescription(java.lang.String description) {
 		_assetEntry.setDescription(description);
 	}
@@ -810,6 +878,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	* @param description the localized description of this asset entry
 	* @param locale the locale of the language
 	*/
+	@Override
 	public void setDescription(java.lang.String description,
 		java.util.Locale locale) {
 		_assetEntry.setDescription(description, locale);
@@ -822,11 +891,13 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	* @param locale the locale of the language
 	* @param defaultLocale the default locale
 	*/
+	@Override
 	public void setDescription(java.lang.String description,
 		java.util.Locale locale, java.util.Locale defaultLocale) {
 		_assetEntry.setDescription(description, locale, defaultLocale);
 	}
 
+	@Override
 	public void setDescriptionCurrentLanguageId(java.lang.String languageId) {
 		_assetEntry.setDescriptionCurrentLanguageId(languageId);
 	}
@@ -836,6 +907,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @param descriptionMap the locales and localized descriptions of this asset entry
 	*/
+	@Override
 	public void setDescriptionMap(
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap) {
 		_assetEntry.setDescriptionMap(descriptionMap);
@@ -847,6 +919,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	* @param descriptionMap the locales and localized descriptions of this asset entry
 	* @param defaultLocale the default locale
 	*/
+	@Override
 	public void setDescriptionMap(
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.util.Locale defaultLocale) {
@@ -858,6 +931,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @return the summary of this asset entry
 	*/
+	@Override
 	public java.lang.String getSummary() {
 		return _assetEntry.getSummary();
 	}
@@ -868,6 +942,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	* @param locale the locale of the language
 	* @return the localized summary of this asset entry
 	*/
+	@Override
 	public java.lang.String getSummary(java.util.Locale locale) {
 		return _assetEntry.getSummary(locale);
 	}
@@ -879,6 +954,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	* @param useDefault whether to use the default language if no localization exists for the requested language
 	* @return the localized summary of this asset entry. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
 	*/
+	@Override
 	public java.lang.String getSummary(java.util.Locale locale,
 		boolean useDefault) {
 		return _assetEntry.getSummary(locale, useDefault);
@@ -890,6 +966,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	* @param languageId the ID of the language
 	* @return the localized summary of this asset entry
 	*/
+	@Override
 	public java.lang.String getSummary(java.lang.String languageId) {
 		return _assetEntry.getSummary(languageId);
 	}
@@ -901,15 +978,18 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	* @param useDefault whether to use the default language if no localization exists for the requested language
 	* @return the localized summary of this asset entry
 	*/
+	@Override
 	public java.lang.String getSummary(java.lang.String languageId,
 		boolean useDefault) {
 		return _assetEntry.getSummary(languageId, useDefault);
 	}
 
+	@Override
 	public java.lang.String getSummaryCurrentLanguageId() {
 		return _assetEntry.getSummaryCurrentLanguageId();
 	}
 
+	@Override
 	public java.lang.String getSummaryCurrentValue() {
 		return _assetEntry.getSummaryCurrentValue();
 	}
@@ -919,6 +999,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @return the locales and localized summaries of this asset entry
 	*/
+	@Override
 	public java.util.Map<java.util.Locale, java.lang.String> getSummaryMap() {
 		return _assetEntry.getSummaryMap();
 	}
@@ -928,6 +1009,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @param summary the summary of this asset entry
 	*/
+	@Override
 	public void setSummary(java.lang.String summary) {
 		_assetEntry.setSummary(summary);
 	}
@@ -938,6 +1020,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	* @param summary the localized summary of this asset entry
 	* @param locale the locale of the language
 	*/
+	@Override
 	public void setSummary(java.lang.String summary, java.util.Locale locale) {
 		_assetEntry.setSummary(summary, locale);
 	}
@@ -949,11 +1032,13 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	* @param locale the locale of the language
 	* @param defaultLocale the default locale
 	*/
+	@Override
 	public void setSummary(java.lang.String summary, java.util.Locale locale,
 		java.util.Locale defaultLocale) {
 		_assetEntry.setSummary(summary, locale, defaultLocale);
 	}
 
+	@Override
 	public void setSummaryCurrentLanguageId(java.lang.String languageId) {
 		_assetEntry.setSummaryCurrentLanguageId(languageId);
 	}
@@ -963,6 +1048,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @param summaryMap the locales and localized summaries of this asset entry
 	*/
+	@Override
 	public void setSummaryMap(
 		java.util.Map<java.util.Locale, java.lang.String> summaryMap) {
 		_assetEntry.setSummaryMap(summaryMap);
@@ -974,6 +1060,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	* @param summaryMap the locales and localized summaries of this asset entry
 	* @param defaultLocale the default locale
 	*/
+	@Override
 	public void setSummaryMap(
 		java.util.Map<java.util.Locale, java.lang.String> summaryMap,
 		java.util.Locale defaultLocale) {
@@ -985,6 +1072,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @return the url of this asset entry
 	*/
+	@Override
 	public java.lang.String getUrl() {
 		return _assetEntry.getUrl();
 	}
@@ -994,6 +1082,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @param url the url of this asset entry
 	*/
+	@Override
 	public void setUrl(java.lang.String url) {
 		_assetEntry.setUrl(url);
 	}
@@ -1003,6 +1092,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @return the layout uuid of this asset entry
 	*/
+	@Override
 	public java.lang.String getLayoutUuid() {
 		return _assetEntry.getLayoutUuid();
 	}
@@ -1012,6 +1102,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @param layoutUuid the layout uuid of this asset entry
 	*/
+	@Override
 	public void setLayoutUuid(java.lang.String layoutUuid) {
 		_assetEntry.setLayoutUuid(layoutUuid);
 	}
@@ -1021,6 +1112,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @return the height of this asset entry
 	*/
+	@Override
 	public int getHeight() {
 		return _assetEntry.getHeight();
 	}
@@ -1030,6 +1122,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @param height the height of this asset entry
 	*/
+	@Override
 	public void setHeight(int height) {
 		_assetEntry.setHeight(height);
 	}
@@ -1039,6 +1132,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @return the width of this asset entry
 	*/
+	@Override
 	public int getWidth() {
 		return _assetEntry.getWidth();
 	}
@@ -1048,6 +1142,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @param width the width of this asset entry
 	*/
+	@Override
 	public void setWidth(int width) {
 		_assetEntry.setWidth(width);
 	}
@@ -1057,6 +1152,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @return the priority of this asset entry
 	*/
+	@Override
 	public double getPriority() {
 		return _assetEntry.getPriority();
 	}
@@ -1066,6 +1162,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @param priority the priority of this asset entry
 	*/
+	@Override
 	public void setPriority(double priority) {
 		_assetEntry.setPriority(priority);
 	}
@@ -1075,6 +1172,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @return the view count of this asset entry
 	*/
+	@Override
 	public int getViewCount() {
 		return _assetEntry.getViewCount();
 	}
@@ -1084,57 +1182,70 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	*
 	* @param viewCount the view count of this asset entry
 	*/
+	@Override
 	public void setViewCount(int viewCount) {
 		_assetEntry.setViewCount(viewCount);
 	}
 
+	@Override
 	public boolean isNew() {
 		return _assetEntry.isNew();
 	}
 
+	@Override
 	public void setNew(boolean n) {
 		_assetEntry.setNew(n);
 	}
 
+	@Override
 	public boolean isCachedModel() {
 		return _assetEntry.isCachedModel();
 	}
 
+	@Override
 	public void setCachedModel(boolean cachedModel) {
 		_assetEntry.setCachedModel(cachedModel);
 	}
 
+	@Override
 	public boolean isEscapedModel() {
 		return _assetEntry.isEscapedModel();
 	}
 
+	@Override
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _assetEntry.getPrimaryKeyObj();
 	}
 
+	@Override
 	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
 		_assetEntry.setPrimaryKeyObj(primaryKeyObj);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
 		return _assetEntry.getExpandoBridge();
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.model.BaseModel<?> baseModel) {
 		_assetEntry.setExpandoBridgeAttributes(baseModel);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portlet.expando.model.ExpandoBridge expandoBridge) {
 		_assetEntry.setExpandoBridgeAttributes(expandoBridge);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		_assetEntry.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public void prepareLocalizedFieldsForImport(
 		java.util.Locale defaultImportLocale)
 		throws com.liferay.portal.LocaleException {
@@ -1146,6 +1257,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 		return new AssetEntryWrapper((AssetEntry)_assetEntry.clone());
 	}
 
+	@Override
 	public int compareTo(com.liferay.portlet.asset.model.AssetEntry assetEntry) {
 		return _assetEntry.compareTo(assetEntry);
 	}
@@ -1155,14 +1267,17 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 		return _assetEntry.hashCode();
 	}
 
+	@Override
 	public com.liferay.portal.model.CacheModel<com.liferay.portlet.asset.model.AssetEntry> toCacheModel() {
 		return _assetEntry.toCacheModel();
 	}
 
+	@Override
 	public com.liferay.portlet.asset.model.AssetEntry toEscapedModel() {
 		return new AssetEntryWrapper(_assetEntry.toEscapedModel());
 	}
 
+	@Override
 	public com.liferay.portlet.asset.model.AssetEntry toUnescapedModel() {
 		return new AssetEntryWrapper(_assetEntry.toUnescapedModel());
 	}
@@ -1172,38 +1287,46 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 		return _assetEntry.toString();
 	}
 
+	@Override
 	public java.lang.String toXmlString() {
 		return _assetEntry.toXmlString();
 	}
 
+	@Override
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_assetEntry.persist();
 	}
 
+	@Override
 	public com.liferay.portlet.asset.model.AssetRenderer getAssetRenderer() {
 		return _assetEntry.getAssetRenderer();
 	}
 
+	@Override
 	public com.liferay.portlet.asset.model.AssetRendererFactory getAssetRendererFactory() {
 		return _assetEntry.getAssetRendererFactory();
 	}
 
+	@Override
 	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getCategories()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _assetEntry.getCategories();
 	}
 
+	@Override
 	public long[] getCategoryIds()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _assetEntry.getCategoryIds();
 	}
 
+	@Override
 	public java.lang.String[] getTagNames()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _assetEntry.getTagNames();
 	}
 
+	@Override
 	public java.util.List<com.liferay.portlet.asset.model.AssetTag> getTags()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _assetEntry.getTags();
@@ -1216,10 +1339,12 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 		return _assetEntry;
 	}
 
+	@Override
 	public AssetEntry getWrappedModel() {
 		return _assetEntry;
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		_assetEntry.resetOriginalValues();
 	}

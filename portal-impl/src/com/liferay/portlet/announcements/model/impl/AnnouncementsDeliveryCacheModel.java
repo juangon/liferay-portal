@@ -57,6 +57,7 @@ public class AnnouncementsDeliveryCacheModel implements CacheModel<Announcements
 		return sb.toString();
 	}
 
+	@Override
 	public AnnouncementsDelivery toEntityModel() {
 		AnnouncementsDeliveryImpl announcementsDeliveryImpl = new AnnouncementsDeliveryImpl();
 
@@ -80,6 +81,7 @@ public class AnnouncementsDeliveryCacheModel implements CacheModel<Announcements
 		return announcementsDeliveryImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		deliveryId = objectInput.readLong();
 		companyId = objectInput.readLong();
@@ -90,6 +92,7 @@ public class AnnouncementsDeliveryCacheModel implements CacheModel<Announcements
 		website = objectInput.readBoolean();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(deliveryId);

@@ -31,20 +31,24 @@ import java.util.Set;
  */
 public abstract class BaseChecker implements Checker, PACLConstants {
 
+	@Override
 	public AuthorizationProperty generateAuthorizationProperty(
 		Object... arguments) {
 
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public ClassLoader getClassLoader() {
 		return _paclPolicy.getClassLoader();
 	}
 
+	@Override
 	public PACLPolicy getPACLPolicy() {
 		return _paclPolicy;
 	}
 
+	@Override
 	public String getServletContextName() {
 		return _paclPolicy.getServletContextName();
 	}
@@ -72,6 +76,7 @@ public abstract class BaseChecker implements Checker, PACLConstants {
 			callerClass, permission, getPACLPolicy());
 	}
 
+	@Override
 	public void setPACLPolicy(PACLPolicy paclPolicy) {
 		_paclPolicy = paclPolicy;
 	}

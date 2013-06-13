@@ -38,6 +38,7 @@ public abstract class DDLRecordSetBaseImpl extends DDLRecordSetModelImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a d d l record set model instance should use the {@link DDLRecordSet} interface instead.
 	 */
+	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
 			DDLRecordSetLocalServiceUtil.addDDLRecordSet(this);

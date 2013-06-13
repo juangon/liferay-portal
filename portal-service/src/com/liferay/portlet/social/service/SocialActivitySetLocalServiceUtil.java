@@ -18,11 +18,12 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
- * The utility for the social activity set local service. This utility wraps {@link com.liferay.portlet.social.service.impl.SocialActivitySetLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
+ * Provides the local service utility for SocialActivitySet. This utility wraps
+ * {@link com.liferay.portlet.social.service.impl.SocialActivitySetLocalServiceImpl} and is the
+ * primary access point for service operations in application layer code running
+ * on the local server. Methods of this service will not have security checks
+ * based on the propagated JAAS credentials because this service can only be
+ * accessed from within the same VM.
  *
  * @author Brian Wing Shun Chan
  * @see SocialActivitySetLocalService
@@ -284,10 +285,72 @@ public class SocialActivitySetLocalServiceUtil {
 				   .getClassActivitySet(userId, classNameId, classPK, type);
 	}
 
+	public static java.util.List<com.liferay.portlet.social.model.SocialActivitySet> getGroupActivitySets(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getGroupActivitySets(groupId, start, end);
+	}
+
+	public static int getGroupActivitySetsCount(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getGroupActivitySetsCount(groupId);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialActivitySet> getRelationActivitySets(
+		long userId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getRelationActivitySets(userId, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialActivitySet> getRelationActivitySets(
+		long userId, int type, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getRelationActivitySets(userId, type, start, end);
+	}
+
+	public static int getRelationActivitySetsCount(long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getRelationActivitySetsCount(userId);
+	}
+
+	public static int getRelationActivitySetsCount(long userId, int type)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getRelationActivitySetsCount(userId, type);
+	}
+
 	public static com.liferay.portlet.social.model.SocialActivitySet getUserActivitySet(
 		long groupId, long userId, int type)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getUserActivitySet(groupId, userId, type);
+	}
+
+	public static com.liferay.portlet.social.model.SocialActivitySet getUserActivitySet(
+		long groupId, long userId, long classNameId, int type)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getUserActivitySet(groupId, userId, classNameId, type);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialActivitySet> getUserActivitySets(
+		long userId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getUserActivitySets(userId, start, end);
+	}
+
+	public static int getUserActivitySetsCount(long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getUserActivitySetsCount(userId);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialActivitySet> getUserGroupsActivitySets(
+		long userId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getUserGroupsActivitySets(userId, start, end);
+	}
+
+	public static int getUserGroupsActivitySetsCount(long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getUserGroupsActivitySetsCount(userId);
 	}
 
 	public static void incrementActivityCount(long activitySetId,

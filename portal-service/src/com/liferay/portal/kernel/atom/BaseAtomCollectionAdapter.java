@@ -24,6 +24,7 @@ import java.util.Date;
 public abstract class BaseAtomCollectionAdapter<E>
 	implements AtomCollectionAdapter<E> {
 
+	@Override
 	public void deleteEntry(
 			String resourceName, AtomRequestContext atomRequestContext)
 		throws AtomException {
@@ -44,6 +45,7 @@ public abstract class BaseAtomCollectionAdapter<E>
 		}
 	}
 
+	@Override
 	public E getEntry(
 			String resourceName, AtomRequestContext atomRequestContext)
 		throws AtomException {
@@ -64,6 +66,7 @@ public abstract class BaseAtomCollectionAdapter<E>
 		}
 	}
 
+	@Override
 	public Iterable<E> getFeedEntries(AtomRequestContext atomRequestContext)
 		throws AtomException {
 
@@ -83,20 +86,24 @@ public abstract class BaseAtomCollectionAdapter<E>
 		}
 	}
 
+	@Override
 	public String getMediaContentType(E entry) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	@SuppressWarnings("unused")
 	public String getMediaName(E entry) throws AtomException {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	@SuppressWarnings("unused")
 	public InputStream getMediaStream(E entry) throws AtomException {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public E postEntry(
 			String title, String summary, String content, Date date,
 			AtomRequestContext atomRequestContext)
@@ -119,6 +126,7 @@ public abstract class BaseAtomCollectionAdapter<E>
 		}
 	}
 
+	@Override
 	public E postMedia(
 			String mimeType, String slug, InputStream inputStream,
 			AtomRequestContext atomRequestContext)
@@ -140,6 +148,7 @@ public abstract class BaseAtomCollectionAdapter<E>
 		}
 	}
 
+	@Override
 	public void putEntry(
 			E entry, String title, String summary, String content, Date date,
 			AtomRequestContext atomRequestContext)
@@ -162,6 +171,7 @@ public abstract class BaseAtomCollectionAdapter<E>
 		}
 	}
 
+	@Override
 	public void putMedia(
 			E entry, String mimeType, String slug, InputStream inputStream,
 			AtomRequestContext atomRequestContext)

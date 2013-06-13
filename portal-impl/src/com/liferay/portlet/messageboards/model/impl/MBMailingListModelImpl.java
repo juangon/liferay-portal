@@ -115,26 +115,32 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 	public MBMailingListModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _mailingListId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setMailingListId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _mailingListId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return MBMailingList.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return MBMailingList.class.getName();
 	}
@@ -332,6 +338,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 		}
 	}
 
+	@Override
 	public String getUuid() {
 		if (_uuid == null) {
 			return StringPool.BLANK;
@@ -341,6 +348,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 		}
 	}
 
+	@Override
 	public void setUuid(String uuid) {
 		if (_originalUuid == null) {
 			_originalUuid = _uuid;
@@ -353,18 +361,22 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@Override
 	public long getMailingListId() {
 		return _mailingListId;
 	}
 
+	@Override
 	public void setMailingListId(long mailingListId) {
 		_mailingListId = mailingListId;
 	}
 
+	@Override
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -381,10 +393,12 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 		return _originalGroupId;
 	}
 
+	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
@@ -401,22 +415,27 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 		return _originalCompanyId;
 	}
 
+	@Override
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
 
+	@Override
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -426,30 +445,37 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 		}
 	}
 
+	@Override
 	public void setUserName(String userName) {
 		_userName = userName;
 	}
 
+	@Override
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
 	}
 
+	@Override
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
 	public long getCategoryId() {
 		return _categoryId;
 	}
 
+	@Override
 	public void setCategoryId(long categoryId) {
 		_columnBitmask |= CATEGORYID_COLUMN_BITMASK;
 
@@ -466,6 +492,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 		return _originalCategoryId;
 	}
 
+	@Override
 	public String getEmailAddress() {
 		if (_emailAddress == null) {
 			return StringPool.BLANK;
@@ -475,10 +502,12 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 		}
 	}
 
+	@Override
 	public void setEmailAddress(String emailAddress) {
 		_emailAddress = emailAddress;
 	}
 
+	@Override
 	public String getInProtocol() {
 		if (_inProtocol == null) {
 			return StringPool.BLANK;
@@ -488,10 +517,12 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 		}
 	}
 
+	@Override
 	public void setInProtocol(String inProtocol) {
 		_inProtocol = inProtocol;
 	}
 
+	@Override
 	public String getInServerName() {
 		if (_inServerName == null) {
 			return StringPool.BLANK;
@@ -501,30 +532,37 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 		}
 	}
 
+	@Override
 	public void setInServerName(String inServerName) {
 		_inServerName = inServerName;
 	}
 
+	@Override
 	public int getInServerPort() {
 		return _inServerPort;
 	}
 
+	@Override
 	public void setInServerPort(int inServerPort) {
 		_inServerPort = inServerPort;
 	}
 
+	@Override
 	public boolean getInUseSSL() {
 		return _inUseSSL;
 	}
 
+	@Override
 	public boolean isInUseSSL() {
 		return _inUseSSL;
 	}
 
+	@Override
 	public void setInUseSSL(boolean inUseSSL) {
 		_inUseSSL = inUseSSL;
 	}
 
+	@Override
 	public String getInUserName() {
 		if (_inUserName == null) {
 			return StringPool.BLANK;
@@ -534,10 +572,12 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 		}
 	}
 
+	@Override
 	public void setInUserName(String inUserName) {
 		_inUserName = inUserName;
 	}
 
+	@Override
 	public String getInPassword() {
 		if (_inPassword == null) {
 			return StringPool.BLANK;
@@ -547,18 +587,22 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 		}
 	}
 
+	@Override
 	public void setInPassword(String inPassword) {
 		_inPassword = inPassword;
 	}
 
+	@Override
 	public int getInReadInterval() {
 		return _inReadInterval;
 	}
 
+	@Override
 	public void setInReadInterval(int inReadInterval) {
 		_inReadInterval = inReadInterval;
 	}
 
+	@Override
 	public String getOutEmailAddress() {
 		if (_outEmailAddress == null) {
 			return StringPool.BLANK;
@@ -568,22 +612,27 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 		}
 	}
 
+	@Override
 	public void setOutEmailAddress(String outEmailAddress) {
 		_outEmailAddress = outEmailAddress;
 	}
 
+	@Override
 	public boolean getOutCustom() {
 		return _outCustom;
 	}
 
+	@Override
 	public boolean isOutCustom() {
 		return _outCustom;
 	}
 
+	@Override
 	public void setOutCustom(boolean outCustom) {
 		_outCustom = outCustom;
 	}
 
+	@Override
 	public String getOutServerName() {
 		if (_outServerName == null) {
 			return StringPool.BLANK;
@@ -593,30 +642,37 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 		}
 	}
 
+	@Override
 	public void setOutServerName(String outServerName) {
 		_outServerName = outServerName;
 	}
 
+	@Override
 	public int getOutServerPort() {
 		return _outServerPort;
 	}
 
+	@Override
 	public void setOutServerPort(int outServerPort) {
 		_outServerPort = outServerPort;
 	}
 
+	@Override
 	public boolean getOutUseSSL() {
 		return _outUseSSL;
 	}
 
+	@Override
 	public boolean isOutUseSSL() {
 		return _outUseSSL;
 	}
 
+	@Override
 	public void setOutUseSSL(boolean outUseSSL) {
 		_outUseSSL = outUseSSL;
 	}
 
+	@Override
 	public String getOutUserName() {
 		if (_outUserName == null) {
 			return StringPool.BLANK;
@@ -626,10 +682,12 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 		}
 	}
 
+	@Override
 	public void setOutUserName(String outUserName) {
 		_outUserName = outUserName;
 	}
 
+	@Override
 	public String getOutPassword() {
 		if (_outPassword == null) {
 			return StringPool.BLANK;
@@ -639,30 +697,37 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 		}
 	}
 
+	@Override
 	public void setOutPassword(String outPassword) {
 		_outPassword = outPassword;
 	}
 
+	@Override
 	public boolean getAllowAnonymous() {
 		return _allowAnonymous;
 	}
 
+	@Override
 	public boolean isAllowAnonymous() {
 		return _allowAnonymous;
 	}
 
+	@Override
 	public void setAllowAnonymous(boolean allowAnonymous) {
 		_allowAnonymous = allowAnonymous;
 	}
 
+	@Override
 	public boolean getActive() {
 		return _active;
 	}
 
+	@Override
 	public boolean isActive() {
 		return _active;
 	}
 
+	@Override
 	public void setActive(boolean active) {
 		_columnBitmask |= ACTIVE_COLUMN_BITMASK;
 
@@ -742,6 +807,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 		return mbMailingListImpl;
 	}
 
+	@Override
 	public int compareTo(MBMailingList mbMailingList) {
 		long primaryKey = mbMailingList.getPrimaryKey();
 
@@ -758,18 +824,15 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof MBMailingList)) {
 			return false;
 		}
 
-		MBMailingList mbMailingList = null;
-
-		try {
-			mbMailingList = (MBMailingList)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		MBMailingList mbMailingList = (MBMailingList)obj;
 
 		long primaryKey = mbMailingList.getPrimaryKey();
 
@@ -1011,6 +1074,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(82);
 

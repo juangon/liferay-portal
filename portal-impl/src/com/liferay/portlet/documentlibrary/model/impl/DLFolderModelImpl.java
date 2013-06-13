@@ -189,26 +189,32 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 	public DLFolderModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _folderId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setFolderId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _folderId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return DLFolder.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return DLFolder.class.getName();
 	}
@@ -373,6 +379,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		}
 	}
 
+	@Override
 	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
@@ -383,6 +390,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		}
 	}
 
+	@Override
 	public void setUuid(String uuid) {
 		if (_originalUuid == null) {
 			_originalUuid = _uuid;
@@ -395,20 +403,24 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@Override
 	@JSON
 	public long getFolderId() {
 		return _folderId;
 	}
 
+	@Override
 	public void setFolderId(long folderId) {
 		_folderId = folderId;
 	}
 
+	@Override
 	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -425,11 +437,13 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		return _originalGroupId;
 	}
 
+	@Override
 	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
@@ -446,23 +460,28 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		return _originalCompanyId;
 	}
 
+	@Override
 	@JSON
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
 
+	@Override
 	@JSON
 	public String getUserName() {
 		if (_userName == null) {
@@ -473,33 +492,40 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		}
 	}
 
+	@Override
 	public void setUserName(String userName) {
 		_userName = userName;
 	}
 
+	@Override
 	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
 	}
 
+	@Override
 	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
 	@JSON
 	public long getRepositoryId() {
 		return _repositoryId;
 	}
 
+	@Override
 	public void setRepositoryId(long repositoryId) {
 		_columnBitmask |= REPOSITORYID_COLUMN_BITMASK;
 
@@ -516,15 +542,18 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		return _originalRepositoryId;
 	}
 
+	@Override
 	@JSON
 	public boolean getMountPoint() {
 		return _mountPoint;
 	}
 
+	@Override
 	public boolean isMountPoint() {
 		return _mountPoint;
 	}
 
+	@Override
 	public void setMountPoint(boolean mountPoint) {
 		_columnBitmask |= MOUNTPOINT_COLUMN_BITMASK;
 
@@ -541,11 +570,13 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		return _originalMountPoint;
 	}
 
+	@Override
 	@JSON
 	public long getParentFolderId() {
 		return _parentFolderId;
 	}
 
+	@Override
 	public void setParentFolderId(long parentFolderId) {
 		_columnBitmask = -1L;
 
@@ -562,6 +593,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		return _originalParentFolderId;
 	}
 
+	@Override
 	@JSON
 	public String getName() {
 		if (_name == null) {
@@ -572,6 +604,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		}
 	}
 
+	@Override
 	public void setName(String name) {
 		_columnBitmask = -1L;
 
@@ -586,6 +619,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		return GetterUtil.getString(_originalName);
 	}
 
+	@Override
 	@JSON
 	public String getDescription() {
 		if (_description == null) {
@@ -596,37 +630,45 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		}
 	}
 
+	@Override
 	public void setDescription(String description) {
 		_description = description;
 	}
 
+	@Override
 	@JSON
 	public Date getLastPostDate() {
 		return _lastPostDate;
 	}
 
+	@Override
 	public void setLastPostDate(Date lastPostDate) {
 		_lastPostDate = lastPostDate;
 	}
 
+	@Override
 	@JSON
 	public long getDefaultFileEntryTypeId() {
 		return _defaultFileEntryTypeId;
 	}
 
+	@Override
 	public void setDefaultFileEntryTypeId(long defaultFileEntryTypeId) {
 		_defaultFileEntryTypeId = defaultFileEntryTypeId;
 	}
 
+	@Override
 	@JSON
 	public boolean getHidden() {
 		return _hidden;
 	}
 
+	@Override
 	public boolean isHidden() {
 		return _hidden;
 	}
 
+	@Override
 	public void setHidden(boolean hidden) {
 		_columnBitmask |= HIDDEN_COLUMN_BITMASK;
 
@@ -643,24 +685,29 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		return _originalHidden;
 	}
 
+	@Override
 	@JSON
 	public boolean getOverrideFileEntryTypes() {
 		return _overrideFileEntryTypes;
 	}
 
+	@Override
 	public boolean isOverrideFileEntryTypes() {
 		return _overrideFileEntryTypes;
 	}
 
+	@Override
 	public void setOverrideFileEntryTypes(boolean overrideFileEntryTypes) {
 		_overrideFileEntryTypes = overrideFileEntryTypes;
 	}
 
+	@Override
 	@JSON
 	public int getStatus() {
 		return _status;
 	}
 
+	@Override
 	public void setStatus(int status) {
 		_columnBitmask |= STATUS_COLUMN_BITMASK;
 
@@ -677,24 +724,29 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		return _originalStatus;
 	}
 
+	@Override
 	@JSON
 	public long getStatusByUserId() {
 		return _statusByUserId;
 	}
 
+	@Override
 	public void setStatusByUserId(long statusByUserId) {
 		_statusByUserId = statusByUserId;
 	}
 
+	@Override
 	public String getStatusByUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getStatusByUserId(), "uuid",
 			_statusByUserUuid);
 	}
 
+	@Override
 	public void setStatusByUserUuid(String statusByUserUuid) {
 		_statusByUserUuid = statusByUserUuid;
 	}
 
+	@Override
 	@JSON
 	public String getStatusByUserName() {
 		if (_statusByUserName == null) {
@@ -705,35 +757,43 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		}
 	}
 
+	@Override
 	public void setStatusByUserName(String statusByUserName) {
 		_statusByUserName = statusByUserName;
 	}
 
+	@Override
 	@JSON
 	public Date getStatusDate() {
 		return _statusDate;
 	}
 
+	@Override
 	public void setStatusDate(Date statusDate) {
 		_statusDate = statusDate;
 	}
 
+	@Override
 	public long getContainerModelId() {
 		return getFolderId();
 	}
 
+	@Override
 	public void setContainerModelId(long containerModelId) {
 		_folderId = containerModelId;
 	}
 
+	@Override
 	public long getParentContainerModelId() {
 		return getParentFolderId();
 	}
 
+	@Override
 	public void setParentContainerModelId(long parentContainerModelId) {
 		_parentFolderId = parentContainerModelId;
 	}
 
+	@Override
 	public String getContainerModelName() {
 		return String.valueOf(getName());
 	}
@@ -741,10 +801,12 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #isApproved}
 	 */
+	@Override
 	public boolean getApproved() {
 		return isApproved();
 	}
 
+	@Override
 	public boolean isApproved() {
 		if (getStatus() == WorkflowConstants.STATUS_APPROVED) {
 			return true;
@@ -754,6 +816,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		}
 	}
 
+	@Override
 	public boolean isDenied() {
 		if (getStatus() == WorkflowConstants.STATUS_DENIED) {
 			return true;
@@ -763,6 +826,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		}
 	}
 
+	@Override
 	public boolean isDraft() {
 		if (getStatus() == WorkflowConstants.STATUS_DRAFT) {
 			return true;
@@ -772,6 +836,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		}
 	}
 
+	@Override
 	public boolean isExpired() {
 		if (getStatus() == WorkflowConstants.STATUS_EXPIRED) {
 			return true;
@@ -781,6 +846,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		}
 	}
 
+	@Override
 	public boolean isInactive() {
 		if (getStatus() == WorkflowConstants.STATUS_INACTIVE) {
 			return true;
@@ -790,6 +856,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		}
 	}
 
+	@Override
 	public boolean isIncomplete() {
 		if (getStatus() == WorkflowConstants.STATUS_INCOMPLETE) {
 			return true;
@@ -799,6 +866,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		}
 	}
 
+	@Override
 	public boolean isInTrash() {
 		if (getStatus() == WorkflowConstants.STATUS_IN_TRASH) {
 			return true;
@@ -808,6 +876,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		}
 	}
 
+	@Override
 	public boolean isPending() {
 		if (getStatus() == WorkflowConstants.STATUS_PENDING) {
 			return true;
@@ -817,6 +886,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		}
 	}
 
+	@Override
 	public boolean isScheduled() {
 		if (getStatus() == WorkflowConstants.STATUS_SCHEDULED) {
 			return true;
@@ -884,6 +954,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		return dlFolderImpl;
 	}
 
+	@Override
 	public int compareTo(DLFolder dlFolder) {
 		int value = 0;
 
@@ -912,18 +983,15 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof DLFolder)) {
 			return false;
 		}
 
-		DLFolder dlFolder = null;
-
-		try {
-			dlFolder = (DLFolder)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		DLFolder dlFolder = (DLFolder)obj;
 
 		long primaryKey = dlFolder.getPrimaryKey();
 
@@ -1137,6 +1205,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(67);
 

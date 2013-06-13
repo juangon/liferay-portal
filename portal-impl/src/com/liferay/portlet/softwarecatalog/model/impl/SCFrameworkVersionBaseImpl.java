@@ -38,6 +38,7 @@ public abstract class SCFrameworkVersionBaseImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a s c framework version model instance should use the {@link SCFrameworkVersion} interface instead.
 	 */
+	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
 			SCFrameworkVersionLocalServiceUtil.addSCFrameworkVersion(this);

@@ -53,6 +53,7 @@ public class DDMStorageLinkCacheModel implements CacheModel<DDMStorageLink>,
 		return sb.toString();
 	}
 
+	@Override
 	public DDMStorageLink toEntityModel() {
 		DDMStorageLinkImpl ddmStorageLinkImpl = new DDMStorageLinkImpl();
 
@@ -73,6 +74,7 @@ public class DDMStorageLinkCacheModel implements CacheModel<DDMStorageLink>,
 		return ddmStorageLinkImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		storageLinkId = objectInput.readLong();
@@ -81,6 +83,7 @@ public class DDMStorageLinkCacheModel implements CacheModel<DDMStorageLink>,
 		structureId = objectInput.readLong();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

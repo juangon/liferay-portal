@@ -147,6 +147,7 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
 		return sb.toString();
 	}
 
+	@Override
 	public ShoppingOrder toEntityModel() {
 		ShoppingOrderImpl shoppingOrderImpl = new ShoppingOrderImpl();
 
@@ -424,6 +425,7 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
 		return shoppingOrderImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		orderId = objectInput.readLong();
 		groupId = objectInput.readLong();
@@ -478,6 +480,7 @@ public class ShoppingOrderCacheModel implements CacheModel<ShoppingOrder>,
 		sendShippingEmail = objectInput.readBoolean();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(orderId);

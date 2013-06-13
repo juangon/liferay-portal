@@ -26,37 +26,36 @@
 <c:if test="<%= SessionErrors.contains(renderRequest, NoSuchPageException.class.getName()) %>">
 
 	<%
-	String nodeId = ParamUtil.getString(request, "nodeId");
-	String title = ParamUtil.getString(request, "title");
+	long nodeId = ParamUtil.getLong(request, "nodeId");
 
-	WikiNode node = null;
-
-	if (Validator.isNull(nodeId) || nodeId.equals("0")) {
-		node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
+	if (nodeId == 0) {
+		WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 
 		if (node != null) {
-			nodeId = String.valueOf(node.getNodeId());
+			nodeId = node.getNodeId();
 		}
 	}
 
+	String title = ParamUtil.getString(request, "title");
+
 	boolean hasDraftPage = false;
 
-	if (node != null) {
-		hasDraftPage = WikiPageLocalServiceUtil.hasDraftPage(node.getNodeId(), title);
+	if (nodeId > 0) {
+		hasDraftPage = WikiPageLocalServiceUtil.hasDraftPage(nodeId, title);
 	}
 
 	PortletURL searchURL = renderResponse.createRenderURL();
 
 	searchURL.setParameter("struts_action", "/wiki/search");
 	searchURL.setParameter("redirect", currentURL);
-	searchURL.setParameter("nodeId", nodeId);
+	searchURL.setParameter("nodeId", String.valueOf(nodeId));
 	searchURL.setParameter("keywords", title);
 
 	PortletURL editPageURL = renderResponse.createRenderURL();
 
 	editPageURL.setParameter("struts_action", "/wiki/edit_page");
 	editPageURL.setParameter("redirect", currentURL);
-	editPageURL.setParameter("nodeId", nodeId);
+	editPageURL.setParameter("nodeId", String.valueOf(nodeId));
 	editPageURL.setParameter("title", title);
 	%>
 
@@ -64,7 +63,7 @@
 		<c:when test="<%= hasDraftPage %>">
 
 			<%
-			WikiPage draftPage = WikiPageLocalServiceUtil.getDraftPage(node.getNodeId(), title);
+			WikiPage draftPage = WikiPageLocalServiceUtil.getDraftPage(nodeId, title);
 
 			boolean editableDraft = false;
 
@@ -75,7 +74,7 @@
 
 			<c:choose>
 				<c:when test="<%= editableDraft %>">
-					<div class="portlet-msg-info">
+					<div class="alert alert-info">
 						<liferay-ui:message key="this-page-has-an-associated-draft-that-is-not-yet-published" />
 					</div>
 
@@ -84,14 +83,14 @@
 					</div>
 				</c:when>
 				<c:otherwise>
-					<div class="portlet-msg-info">
+					<div class="alert alert-info">
 						<liferay-ui:message key="this-page-has-already-been-started-by-another-author" />
 					</div>
 				</c:otherwise>
 			</c:choose>
 		</c:when>
 		<c:otherwise>
-			<div class="portlet-msg-info">
+			<div class="alert alert-info">
 				<liferay-ui:message key="this-page-is-empty.-use-the-buttons-below-to-create-it-or-to-search-for-the-words-in-the-title" />
 			</div>
 

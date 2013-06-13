@@ -151,26 +151,32 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 	public MembershipRequestModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _membershipRequestId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setMembershipRequestId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _membershipRequestId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return MembershipRequest.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return MembershipRequest.class.getName();
 	}
@@ -256,20 +262,24 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 		}
 	}
 
+	@Override
 	@JSON
 	public long getMembershipRequestId() {
 		return _membershipRequestId;
 	}
 
+	@Override
 	public void setMembershipRequestId(long membershipRequestId) {
 		_membershipRequestId = membershipRequestId;
 	}
 
+	@Override
 	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -286,20 +296,24 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 		return _originalGroupId;
 	}
 
+	@Override
 	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
+	@Override
 	@JSON
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_columnBitmask |= USERID_COLUMN_BITMASK;
 
@@ -312,10 +326,12 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
@@ -324,17 +340,20 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 		return _originalUserId;
 	}
 
+	@Override
 	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_columnBitmask = -1L;
 
 		_createDate = createDate;
 	}
 
+	@Override
 	@JSON
 	public String getComments() {
 		if (_comments == null) {
@@ -345,10 +364,12 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 		}
 	}
 
+	@Override
 	public void setComments(String comments) {
 		_comments = comments;
 	}
 
+	@Override
 	@JSON
 	public String getReplyComments() {
 		if (_replyComments == null) {
@@ -359,42 +380,51 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 		}
 	}
 
+	@Override
 	public void setReplyComments(String replyComments) {
 		_replyComments = replyComments;
 	}
 
+	@Override
 	@JSON
 	public Date getReplyDate() {
 		return _replyDate;
 	}
 
+	@Override
 	public void setReplyDate(Date replyDate) {
 		_replyDate = replyDate;
 	}
 
+	@Override
 	@JSON
 	public long getReplierUserId() {
 		return _replierUserId;
 	}
 
+	@Override
 	public void setReplierUserId(long replierUserId) {
 		_replierUserId = replierUserId;
 	}
 
+	@Override
 	public String getReplierUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getReplierUserId(), "uuid",
 			_replierUserUuid);
 	}
 
+	@Override
 	public void setReplierUserUuid(String replierUserUuid) {
 		_replierUserUuid = replierUserUuid;
 	}
 
+	@Override
 	@JSON
 	public int getStatusId() {
 		return _statusId;
 	}
 
+	@Override
 	public void setStatusId(int statusId) {
 		_columnBitmask |= STATUSID_COLUMN_BITMASK;
 
@@ -458,6 +488,7 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 		return membershipRequestImpl;
 	}
 
+	@Override
 	public int compareTo(MembershipRequest membershipRequest) {
 		int value = 0;
 
@@ -475,18 +506,15 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof MembershipRequest)) {
 			return false;
 		}
 
-		MembershipRequest membershipRequest = null;
-
-		try {
-			membershipRequest = (MembershipRequest)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		MembershipRequest membershipRequest = (MembershipRequest)obj;
 
 		long primaryKey = membershipRequest.getPrimaryKey();
 
@@ -604,6 +632,7 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(34);
 

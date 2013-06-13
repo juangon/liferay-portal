@@ -185,6 +185,7 @@ public class BaseJsonClientTestCase {
 
 	private class StringHandler implements ResponseHandler<String> {
 
+		@Override
 		public String handleResponse(HttpResponse response)
 			throws HttpResponseException, IOException {
 

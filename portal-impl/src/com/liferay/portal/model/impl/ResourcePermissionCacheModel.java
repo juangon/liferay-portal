@@ -58,6 +58,7 @@ public class ResourcePermissionCacheModel implements CacheModel<ResourcePermissi
 		return sb.toString();
 	}
 
+	@Override
 	public ResourcePermission toEntityModel() {
 		ResourcePermissionImpl resourcePermissionImpl = new ResourcePermissionImpl();
 
@@ -89,6 +90,7 @@ public class ResourcePermissionCacheModel implements CacheModel<ResourcePermissi
 		return resourcePermissionImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		resourcePermissionId = objectInput.readLong();
 		companyId = objectInput.readLong();
@@ -100,6 +102,7 @@ public class ResourcePermissionCacheModel implements CacheModel<ResourcePermissi
 		actionIds = objectInput.readLong();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(resourcePermissionId);

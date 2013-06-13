@@ -145,26 +145,32 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 	public ResourcePermissionModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _resourcePermissionId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setResourcePermissionId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _resourcePermissionId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return ResourcePermission.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return ResourcePermission.class.getName();
 	}
@@ -236,20 +242,24 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		}
 	}
 
+	@Override
 	@JSON
 	public long getResourcePermissionId() {
 		return _resourcePermissionId;
 	}
 
+	@Override
 	public void setResourcePermissionId(long resourcePermissionId) {
 		_resourcePermissionId = resourcePermissionId;
 	}
 
+	@Override
 	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
@@ -266,6 +276,7 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		return _originalCompanyId;
 	}
 
+	@Override
 	@JSON
 	public String getName() {
 		if (_name == null) {
@@ -276,6 +287,7 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		}
 	}
 
+	@Override
 	public void setName(String name) {
 		_columnBitmask |= NAME_COLUMN_BITMASK;
 
@@ -290,11 +302,13 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		return GetterUtil.getString(_originalName);
 	}
 
+	@Override
 	@JSON
 	public int getScope() {
 		return _scope;
 	}
 
+	@Override
 	public void setScope(int scope) {
 		_columnBitmask |= SCOPE_COLUMN_BITMASK;
 
@@ -311,6 +325,7 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		return _originalScope;
 	}
 
+	@Override
 	@JSON
 	public String getPrimKey() {
 		if (_primKey == null) {
@@ -321,6 +336,7 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		}
 	}
 
+	@Override
 	public void setPrimKey(String primKey) {
 		_columnBitmask |= PRIMKEY_COLUMN_BITMASK;
 
@@ -335,11 +351,13 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		return GetterUtil.getString(_originalPrimKey);
 	}
 
+	@Override
 	@JSON
 	public long getRoleId() {
 		return _roleId;
 	}
 
+	@Override
 	public void setRoleId(long roleId) {
 		_columnBitmask |= ROLEID_COLUMN_BITMASK;
 
@@ -356,20 +374,24 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		return _originalRoleId;
 	}
 
+	@Override
 	@JSON
 	public long getOwnerId() {
 		return _ownerId;
 	}
 
+	@Override
 	public void setOwnerId(long ownerId) {
 		_ownerId = ownerId;
 	}
 
+	@Override
 	@JSON
 	public long getActionIds() {
 		return _actionIds;
 	}
 
+	@Override
 	public void setActionIds(long actionIds) {
 		_actionIds = actionIds;
 	}
@@ -419,6 +441,7 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		return resourcePermissionImpl;
 	}
 
+	@Override
 	public int compareTo(ResourcePermission resourcePermission) {
 		long primaryKey = resourcePermission.getPrimaryKey();
 
@@ -435,18 +458,15 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ResourcePermission)) {
 			return false;
 		}
 
-		ResourcePermission resourcePermission = null;
-
-		try {
-			resourcePermission = (ResourcePermission)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		ResourcePermission resourcePermission = (ResourcePermission)obj;
 
 		long primaryKey = resourcePermission.getPrimaryKey();
 
@@ -546,6 +566,7 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(28);
 

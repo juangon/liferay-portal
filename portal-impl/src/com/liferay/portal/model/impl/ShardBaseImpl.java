@@ -36,6 +36,7 @@ public abstract class ShardBaseImpl extends ShardModelImpl implements Shard {
 	 *
 	 * Never modify or reference this class directly. All methods that expect a shard model instance should use the {@link Shard} interface instead.
 	 */
+	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
 			ShardLocalServiceUtil.addShard(this);

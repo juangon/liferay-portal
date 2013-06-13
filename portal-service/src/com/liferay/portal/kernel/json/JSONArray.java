@@ -55,6 +55,7 @@ public interface JSONArray {
 
 	public JSONArray put(String value);
 
+	@Override
 	public String toString();
 
 	public String toString(int indentFactor) throws JSONException;

@@ -40,10 +40,12 @@ import javax.servlet.http.HttpServletResponse;
  */
 public abstract class BaseFilter implements LiferayFilter {
 
+	@Override
 	public void destroy() {
 		LiferayFilterTracker.removeLiferayFilter(this);
 	}
 
+	@Override
 	public void doFilter(
 			ServletRequest servletRequest, ServletResponse servletResponse,
 			FilterChain filterChain)
@@ -86,6 +88,7 @@ public abstract class BaseFilter implements LiferayFilter {
 		return _filterConfig;
 	}
 
+	@Override
 	public void init(FilterConfig filterConfig) {
 		_filterConfig = filterConfig;
 
@@ -106,16 +109,19 @@ public abstract class BaseFilter implements LiferayFilter {
 		LiferayFilterTracker.addLiferayFilter(this);
 	}
 
+	@Override
 	public boolean isFilterEnabled() {
 		return _filterEnabled;
 	}
 
+	@Override
 	public boolean isFilterEnabled(
 		HttpServletRequest request, HttpServletResponse response) {
 
 		return _filterEnabled;
 	}
 
+	@Override
 	public void setFilterEnabled(boolean filterEnabled) {
 		_filterEnabled = filterEnabled;
 	}
@@ -162,26 +168,28 @@ public abstract class BaseFilter implements LiferayFilter {
 
 		filterChain.doFilter(request, response);
 
-		if (log.isDebugEnabled()) {
-			long endTime = System.currentTimeMillis();
-
-			depther = (String)request.getAttribute(_DEPTHER);
-
-			if (depther == null) {
-				return;
-			}
-
-			log.debug(
-				"[" + threadName + "]" + depther + "< " +
-					filterClass.getName() + " " + path + " " +
-						(endTime - startTime) + " ms");
-
-			if (depther.length() > 0) {
-				depther = depther.substring(1);
-			}
-
-			request.setAttribute(_DEPTHER, depther);
+		if (!log.isDebugEnabled()) {
+			return;
 		}
+
+		long endTime = System.currentTimeMillis();
+
+		depther = (String)request.getAttribute(_DEPTHER);
+
+		if (depther == null) {
+			return;
+		}
+
+		log.debug(
+			"[" + threadName + "]" + depther + "< " +
+				filterClass.getName() + " " + path + " " +
+					(endTime - startTime) + " ms");
+
+		if (depther.length() > 0) {
+			depther = depther.substring(1);
+		}
+
+		request.setAttribute(_DEPTHER, depther);
 	}
 
 	protected void processFilter(

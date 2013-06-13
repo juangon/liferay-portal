@@ -190,6 +190,10 @@ public class PropsValues {
 
 	public static final String AUTO_DEPLOY_WEBSPHERE_WSADMIN_APP_MANAGER_QUERY = PropsUtil.get(PropsKeys.AUTO_DEPLOY_WEBSPHERE_WSADMIN_APP_MANAGER_QUERY);
 
+	public static final String AUTO_DEPLOY_WEBSPHERE_WSADMIN_APP_NAME_SUFFIX = PropsUtil.get(PropsKeys.AUTO_DEPLOY_WEBSPHERE_WSADMIN_APP_NAME_SUFFIX);
+
+	public static final String AUTO_DEPLOY_WEBSPHERE_WSADMIN_PROPERTIES_FILE = PropsUtil.get(PropsKeys.AUTO_DEPLOY_WEBSPHERE_WSADMIN_PROPERTIES_FILE);
+
 	public static final String[] AUTO_LOGIN_HOOKS = PropsUtil.getArray(PropsKeys.AUTO_LOGIN_HOOKS);
 
 	public static final boolean BASIC_AUTH_PASSWORD_REQUIRED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.BASIC_AUTH_PASSWORD_REQUIRED));
@@ -377,6 +381,8 @@ public class PropsValues {
 	public static String[] COMPANY_SETTINGS_FORM_MISCELLANEOUS = PropsUtil.getArray(PropsKeys.COMPANY_SETTINGS_FORM_MISCELLANEOUS);
 
 	public static final String CONTROL_PANEL_DEFAULT_ENTRY_CLASS = PropsUtil.get(PropsKeys.CONTROL_PANEL_DEFAULT_ENTRY_CLASS);
+
+	public static final String CONTROL_PANEL_HOME_PORTLET_ID = PropsUtil.get(PropsKeys.CONTROL_PANEL_HOME_PORTLET_ID);
 
 	public static final String CONTROL_PANEL_LAYOUT_FRIENDLY_URL = PropsUtil.get(PropsKeys.CONTROL_PANEL_LAYOUT_FRIENDLY_URL);
 
@@ -1028,6 +1034,8 @@ public class PropsValues {
 
 	public static final boolean LUCENE_REPLICATE_WRITE = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.LUCENE_REPLICATE_WRITE));
 
+	public static final String[] LUCENE_SPELL_CHECKER_SUPPORTED_LOCALES = StringUtil.split(PropsUtil.get(PropsKeys.LUCENE_SPELL_CHECKER_SUPPORTED_LOCALES));
+
 	public static final String LUCENE_STORE_TYPE = PropsUtil.get(PropsKeys.LUCENE_STORE_TYPE);
 
 	public static final boolean LUCENE_STORE_TYPE_FILE_FORCE_MMAP = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.LUCENE_STORE_TYPE_FILE_FORCE_MMAP));
@@ -1314,9 +1322,9 @@ public class PropsValues {
 
 	public static final long PASSWORDS_DEFAULT_POLICY_WARNING_TIME = GetterUtil.getLong(PropsUtil.get(PropsKeys.PASSWORDS_DEFAULT_POLICY_WARNING_TIME));
 
-	public static String PASSWORDS_ENCRYPTION_ALGORITHM_LEGACY = GetterUtil.getString(PropsUtil.get(PropsKeys.PASSWORDS_ENCRYPTION_ALGORITHM_LEGACY));
-
 	public static final String PASSWORDS_DIGEST_ENCODING = PropsUtil.get(PropsKeys.PASSWORDS_DIGEST_ENCODING);
+
+	public static String PASSWORDS_ENCRYPTION_ALGORITHM_LEGACY = GetterUtil.getString(PropsUtil.get(PropsKeys.PASSWORDS_ENCRYPTION_ALGORITHM_LEGACY));
 
 	public static final String PASSWORDS_PASSWORDPOLICYTOOLKIT_CHARSET_LOWERCASE = PropsUtil.get(PropsKeys.PASSWORDS_PASSWORDPOLICYTOOLKIT_CHARSET_LOWERCASE);
 
@@ -1386,8 +1394,6 @@ public class PropsValues {
 
 	public static final String POP_SERVER_SUBDOMAIN = PropsUtil.get(PropsKeys.POP_SERVER_SUBDOMAIN);
 
-	public static final String PORTAL_CTX = PropsUtil.get(PropsKeys.PORTAL_CTX);
-
 	public static final boolean PORTAL_IMPERSONATION_ENABLE = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.PORTAL_IMPERSONATION_ENABLE));
 
 	public static final int PORTAL_INSTANCE_HTTP_PORT = GetterUtil.getInteger(PropsUtil.get(PropsKeys.PORTAL_INSTANCE_HTTP_PORT));
@@ -1402,6 +1408,12 @@ public class PropsValues {
 
 	public static final String PORTAL_PROXY_PATH = PropsUtil.get(PropsKeys.PORTAL_PROXY_PATH);
 
+	public static final boolean PORTAL_RESILIENCY_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.PORTAL_RESILIENCY_ENABLED));
+
+	public static final boolean PORTAL_RESILIENCY_PORTLET_SHOW_FOOTER = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.PORTAL_RESILIENCY_PORTLET_SHOW_FOOTER));
+
+	public static final int PORTAL_RESILIENCY_SPI_AGENT_CLIENT_POOL_MAX_SIZE = GetterUtil.getInteger(PropsUtil.get(PropsKeys.PORTAL_RESILIENCY_SPI_AGENT_CLIENT_POOL_MAX_SIZE));
+
 	public static final String[] PORTAL_SECURITY_MANAGER_PRELOAD_CLASSLOADER_CLASSES = PropsUtil.getArray(PropsKeys.PORTAL_SECURITY_MANAGER_PRELOAD_CLASSLOADER_CLASSES);
 
 	public static final String PORTAL_SECURITY_MANAGER_STRATEGY = PropsUtil.get(PropsKeys.PORTAL_SECURITY_MANAGER_STRATEGY);
@@ -1413,6 +1425,8 @@ public class PropsValues {
 	public static String[] PORTLET_ADD_DEFAULT_RESOURCE_CHECK_WHITELIST_ACTIONS = PropsUtil.getArray(PropsKeys.PORTLET_ADD_DEFAULT_RESOURCE_CHECK_WHITELIST_ACTIONS);
 
 	public static final boolean PORTLET_CONTAINER_RESTRICT = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.PORTLET_CONTAINER_RESTRICT));
+
+	public static final String PORTLET_CROSS_LAYOUT_INVOCATION_MODE = PropsUtil.get(PropsKeys.PORTLET_CROSS_LAYOUT_INVOCATION_MODE);
 
 	public static final boolean PORTLET_CSS_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.PORTLET_CSS_ENABLED));
 
@@ -1437,6 +1451,8 @@ public class PropsValues {
 	public static final boolean PORTLET_URL_APPEND_PARAMETERS = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.PORTLET_URL_APPEND_PARAMETERS));
 
 	public static final boolean PORTLET_URL_ESCAPE_XML = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.PORTLET_URL_ESCAPE_XML));
+
+	public static final boolean PORTLET_URL_GENERATE_BY_PATH_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.PORTLET_URL_GENERATE_BY_PATH_ENABLED));
 
 	public static final String PORTLET_VIRTUAL_PATH = PropsUtil.get(PropsKeys.PORTLET_VIRTUAL_PATH);
 
@@ -1626,11 +1642,11 @@ public class PropsValues {
 
 	public static final int[] SOCIAL_ACTIVITY_CONTRIBUTION_LIMIT_VALUES = GetterUtil.getIntegerValues(PropsUtil.getArray(PropsKeys.SOCIAL_ACTIVITY_CONTRIBUTION_LIMIT_VALUES));
 
-	public static final long SOCIAL_ACTIVITY_COUNTER_LOCK_RETRY_DELAY = GetterUtil.getLong(PropsUtil.get(PropsKeys.SOCIAL_ACTIVITY_COUNTER_LOCK_RETRY_DELAY));
-
-	public static final long SOCIAL_ACTIVITY_COUNTER_LOCK_TIMEOUT = GetterUtil.getLong(PropsUtil.get(PropsKeys.SOCIAL_ACTIVITY_COUNTER_LOCK_TIMEOUT));
-
 	public static final String SOCIAL_ACTIVITY_COUNTER_PERIOD_LENGTH = PropsUtil.get(PropsKeys.SOCIAL_ACTIVITY_COUNTER_PERIOD_LENGTH);
+
+	public static final long SOCIAL_ACTIVITY_LOCK_RETRY_DELAY = GetterUtil.getLong(PropsUtil.get(PropsKeys.SOCIAL_ACTIVITY_LOCK_RETRY_DELAY));
+
+	public static final long SOCIAL_ACTIVITY_LOCK_TIMEOUT = GetterUtil.getLong(PropsUtil.get(PropsKeys.SOCIAL_ACTIVITY_LOCK_TIMEOUT));
 
 	public static final int[] SOCIAL_ACTIVITY_PARTICIPATION_INCREMENTS = GetterUtil.getIntegerValues(PropsUtil.getArray(PropsKeys.SOCIAL_ACTIVITY_PARTICIPATION_INCREMENTS));
 

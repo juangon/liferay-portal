@@ -112,6 +112,7 @@ public class MethodKey implements Externalizable {
 		return _declaringClass.getName().hashCode() ^ _methodName.hashCode();
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput)
 		throws ClassNotFoundException, IOException {
 
@@ -178,6 +179,7 @@ public class MethodKey implements Externalizable {
 		return new MethodKey(declaringClass, _methodName, parameterTypes);
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		Serializer serializer = new Serializer();
 
@@ -199,7 +201,6 @@ public class MethodKey implements Externalizable {
 	private static final long serialVersionUID = 1L;
 
 	private Class<?> _declaringClass;
-
 	private String _methodName;
 	private Class<?>[] _parameterTypes;
 

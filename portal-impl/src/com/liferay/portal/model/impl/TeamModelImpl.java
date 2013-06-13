@@ -143,7 +143,7 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 			{ "userId", Types.BIGINT },
 			{ "teamId", Types.BIGINT }
 		};
-	public static final String MAPPING_TABLE_USERS_TEAMS_SQL_CREATE = "create table Users_Teams (userId LONG not null,teamId LONG not null,primary key (userId, teamId))";
+	public static final String MAPPING_TABLE_USERS_TEAMS_SQL_CREATE = "create table Users_Teams (teamId LONG not null,userId LONG not null,primary key (teamId, userId))";
 	public static final boolean FINDER_CACHE_ENABLED_USERS_TEAMS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Users_Teams"), true);
 	public static final String MAPPING_TABLE_USERGROUPS_TEAMS_NAME = "UserGroups_Teams";
@@ -151,7 +151,7 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 			{ "userGroupId", Types.BIGINT },
 			{ "teamId", Types.BIGINT }
 		};
-	public static final String MAPPING_TABLE_USERGROUPS_TEAMS_SQL_CREATE = "create table UserGroups_Teams (userGroupId LONG not null,teamId LONG not null,primary key (userGroupId, teamId))";
+	public static final String MAPPING_TABLE_USERGROUPS_TEAMS_SQL_CREATE = "create table UserGroups_Teams (teamId LONG not null,userGroupId LONG not null,primary key (teamId, userGroupId))";
 	public static final boolean FINDER_CACHE_ENABLED_USERGROUPS_TEAMS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.UserGroups_Teams"), true);
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
@@ -160,26 +160,32 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 	public TeamModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _teamId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setTeamId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _teamId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return Team.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return Team.class.getName();
 	}
@@ -258,41 +264,50 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 		}
 	}
 
+	@Override
 	@JSON
 	public long getTeamId() {
 		return _teamId;
 	}
 
+	@Override
 	public void setTeamId(long teamId) {
 		_teamId = teamId;
 	}
 
+	@Override
 	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
+	@Override
 	@JSON
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
 
+	@Override
 	@JSON
 	public String getUserName() {
 		if (_userName == null) {
@@ -303,33 +318,40 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 		}
 	}
 
+	@Override
 	public void setUserName(String userName) {
 		_userName = userName;
 	}
 
+	@Override
 	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
 	}
 
+	@Override
 	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
 	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -346,6 +368,7 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 		return _originalGroupId;
 	}
 
+	@Override
 	@JSON
 	public String getName() {
 		if (_name == null) {
@@ -356,6 +379,7 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 		}
 	}
 
+	@Override
 	public void setName(String name) {
 		_columnBitmask = -1L;
 
@@ -370,6 +394,7 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 		return GetterUtil.getString(_originalName);
 	}
 
+	@Override
 	@JSON
 	public String getDescription() {
 		if (_description == null) {
@@ -380,6 +405,7 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 		}
 	}
 
+	@Override
 	public void setDescription(String description) {
 		_description = description;
 	}
@@ -430,6 +456,7 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 		return teamImpl;
 	}
 
+	@Override
 	public int compareTo(Team team) {
 		int value = 0;
 
@@ -444,18 +471,15 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof Team)) {
 			return false;
 		}
 
-		Team team = null;
-
-		try {
-			team = (Team)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		Team team = (Team)obj;
 
 		long primaryKey = team.getPrimaryKey();
 
@@ -569,6 +593,7 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(31);
 

@@ -31,10 +31,12 @@ public class PortalSessionAuthVerifier implements AuthVerifier {
 	public static final String AUTH_TYPE =
 		PortalSessionAuthVerifier.class.getSimpleName();
 
+	@Override
 	public String getAuthType() {
 		return AUTH_TYPE;
 	}
 
+	@Override
 	public AuthVerifierResult verify(
 			AccessControlContext accessControlContext, Properties properties)
 		throws AuthException {
@@ -55,11 +57,11 @@ public class PortalSessionAuthVerifier implements AuthVerifier {
 
 			return authVerifierResult;
 		}
-		catch (PortalException e) {
-			throw new AuthException(e);
+		catch (PortalException pe) {
+			throw new AuthException(pe);
 		}
-		catch (SystemException e) {
-			throw new AuthException(e);
+		catch (SystemException se) {
+			throw new AuthException(se);
 		}
 	}
 

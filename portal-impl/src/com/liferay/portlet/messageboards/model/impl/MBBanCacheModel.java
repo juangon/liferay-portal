@@ -62,6 +62,7 @@ public class MBBanCacheModel implements CacheModel<MBBan>, Externalizable {
 		return sb.toString();
 	}
 
+	@Override
 	public MBBan toEntityModel() {
 		MBBanImpl mbBanImpl = new MBBanImpl();
 
@@ -105,6 +106,7 @@ public class MBBanCacheModel implements CacheModel<MBBan>, Externalizable {
 		return mbBanImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		banId = objectInput.readLong();
@@ -117,6 +119,7 @@ public class MBBanCacheModel implements CacheModel<MBBan>, Externalizable {
 		banUserId = objectInput.readLong();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

@@ -37,6 +37,7 @@ public class HeadingNode
 		astVisitor.visit(this);
 	}
 
+	@Override
 	public int compareTo(HeadingNode headingNode) {
 		if (_level < headingNode.getLevel()) {
 			return -1;

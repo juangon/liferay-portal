@@ -15,6 +15,7 @@
 package com.liferay.portal.deploy.auto;
 
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
+import com.liferay.portal.kernel.deploy.auto.AutoDeployer;
 import com.liferay.portal.kernel.deploy.auto.context.AutoDeploymentContext;
 
 /**
@@ -26,6 +27,7 @@ public class ThreadSafeAutoDeployer implements AutoDeployer {
 		_autoDeployer = autoDeployer;
 	}
 
+	@Override
 	public int autoDeploy(AutoDeploymentContext autoDeploymentContext)
 		throws AutoDeployException {
 
@@ -34,6 +36,7 @@ public class ThreadSafeAutoDeployer implements AutoDeployer {
 		return cloneAutoDeployer.autoDeploy(autoDeploymentContext);
 	}
 
+	@Override
 	public AutoDeployer cloneAutoDeployer() {
 		throw new UnsupportedOperationException();
 	}

@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.security.pacl.DoPrivileged;
 import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.ReflectionUtil;
+import com.liferay.portal.security.lang.DoPrivilegedBean;
 import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 
@@ -51,16 +52,19 @@ public class BeanLocatorImpl implements BeanLocator {
 		return _applicationContext;
 	}
 
+	@Override
 	public ClassLoader getClassLoader() {
 		PortalRuntimePermission.checkGetClassLoader(_paclServletContextName);
 
 		return _classLoader;
 	}
 
+	@Override
 	public String[] getNames() {
 		return _applicationContext.getBeanDefinitionNames();
 	}
 
+	@Override
 	public Class<?> getType(String name) {
 		try {
 			return _applicationContext.getType(name);
@@ -70,6 +74,7 @@ public class BeanLocatorImpl implements BeanLocator {
 		}
 	}
 
+	@Override
 	public <T> Map<String, T> locate(Class<T> clazz)
 		throws BeanLocatorException {
 
@@ -84,6 +89,7 @@ public class BeanLocatorImpl implements BeanLocator {
 		}
 	}
 
+	@Override
 	public Object locate(String name) throws BeanLocatorException {
 		try {
 			return doLocate(name);
@@ -170,6 +176,12 @@ public class BeanLocatorImpl implements BeanLocator {
 			return bean;
 		}
 
+		if (bean instanceof DoPrivilegedBean) {
+			PortalRuntimePermission.checkGetBeanProperty(bean.getClass());
+
+			return bean;
+		}
+
 		return _pacl.getBean(bean, _classLoader);
 	}
 
@@ -187,6 +199,7 @@ public class BeanLocatorImpl implements BeanLocator {
 
 	private static class NoPACL implements PACL {
 
+		@Override
 		public Object getBean(Object bean, ClassLoader classLoader) {
 			return bean;
 		}

@@ -18,11 +18,12 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
- * The utility for the layout revision local service. This utility wraps {@link com.liferay.portal.service.impl.LayoutRevisionLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
+ * Provides the local service utility for LayoutRevision. This utility wraps
+ * {@link com.liferay.portal.service.impl.LayoutRevisionLocalServiceImpl} and is the
+ * primary access point for service operations in application layer code running
+ * on the local server. Methods of this service will not have security checks
+ * based on the propagated JAAS credentials because this service can only be
+ * accessed from within the same VM.
  *
  * @author Brian Wing Shun Chan
  * @see LayoutRevisionLocalService
@@ -376,6 +377,15 @@ public class LayoutRevisionLocalServiceUtil {
 		long layoutSetBranchId, long plid, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getLayoutRevisions(layoutSetBranchId, plid, status);
+	}
+
+	public static java.util.List<com.liferay.portal.model.LayoutRevision> getLayoutRevisions(
+		long layoutSetBranchId, long plid, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getLayoutRevisions(layoutSetBranchId, plid, start, end,
+			orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portal.model.LayoutRevision> getLayoutRevisions(

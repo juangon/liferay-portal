@@ -23,8 +23,8 @@ import java.util.Map;
  * This class is a wrapper for {@link PortletItem}.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       PortletItem
+ * @author Brian Wing Shun Chan
+ * @see PortletItem
  * @generated
  */
 public class PortletItemWrapper implements PortletItem,
@@ -33,14 +33,17 @@ public class PortletItemWrapper implements PortletItem,
 		_portletItem = portletItem;
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return PortletItem.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return PortletItem.class.getName();
 	}
 
+	@Override
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
@@ -58,6 +61,7 @@ public class PortletItemWrapper implements PortletItem,
 		return attributes;
 	}
 
+	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 		Long portletItemId = (Long)attributes.get("portletItemId");
 
@@ -125,6 +129,7 @@ public class PortletItemWrapper implements PortletItem,
 	*
 	* @return the primary key of this portlet item
 	*/
+	@Override
 	public long getPrimaryKey() {
 		return _portletItem.getPrimaryKey();
 	}
@@ -134,6 +139,7 @@ public class PortletItemWrapper implements PortletItem,
 	*
 	* @param primaryKey the primary key of this portlet item
 	*/
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_portletItem.setPrimaryKey(primaryKey);
 	}
@@ -143,6 +149,7 @@ public class PortletItemWrapper implements PortletItem,
 	*
 	* @return the portlet item ID of this portlet item
 	*/
+	@Override
 	public long getPortletItemId() {
 		return _portletItem.getPortletItemId();
 	}
@@ -152,6 +159,7 @@ public class PortletItemWrapper implements PortletItem,
 	*
 	* @param portletItemId the portlet item ID of this portlet item
 	*/
+	@Override
 	public void setPortletItemId(long portletItemId) {
 		_portletItem.setPortletItemId(portletItemId);
 	}
@@ -161,6 +169,7 @@ public class PortletItemWrapper implements PortletItem,
 	*
 	* @return the group ID of this portlet item
 	*/
+	@Override
 	public long getGroupId() {
 		return _portletItem.getGroupId();
 	}
@@ -170,6 +179,7 @@ public class PortletItemWrapper implements PortletItem,
 	*
 	* @param groupId the group ID of this portlet item
 	*/
+	@Override
 	public void setGroupId(long groupId) {
 		_portletItem.setGroupId(groupId);
 	}
@@ -179,6 +189,7 @@ public class PortletItemWrapper implements PortletItem,
 	*
 	* @return the company ID of this portlet item
 	*/
+	@Override
 	public long getCompanyId() {
 		return _portletItem.getCompanyId();
 	}
@@ -188,6 +199,7 @@ public class PortletItemWrapper implements PortletItem,
 	*
 	* @param companyId the company ID of this portlet item
 	*/
+	@Override
 	public void setCompanyId(long companyId) {
 		_portletItem.setCompanyId(companyId);
 	}
@@ -197,6 +209,7 @@ public class PortletItemWrapper implements PortletItem,
 	*
 	* @return the user ID of this portlet item
 	*/
+	@Override
 	public long getUserId() {
 		return _portletItem.getUserId();
 	}
@@ -206,6 +219,7 @@ public class PortletItemWrapper implements PortletItem,
 	*
 	* @param userId the user ID of this portlet item
 	*/
+	@Override
 	public void setUserId(long userId) {
 		_portletItem.setUserId(userId);
 	}
@@ -216,6 +230,7 @@ public class PortletItemWrapper implements PortletItem,
 	* @return the user uuid of this portlet item
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public java.lang.String getUserUuid()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _portletItem.getUserUuid();
@@ -226,6 +241,7 @@ public class PortletItemWrapper implements PortletItem,
 	*
 	* @param userUuid the user uuid of this portlet item
 	*/
+	@Override
 	public void setUserUuid(java.lang.String userUuid) {
 		_portletItem.setUserUuid(userUuid);
 	}
@@ -235,6 +251,7 @@ public class PortletItemWrapper implements PortletItem,
 	*
 	* @return the user name of this portlet item
 	*/
+	@Override
 	public java.lang.String getUserName() {
 		return _portletItem.getUserName();
 	}
@@ -244,6 +261,7 @@ public class PortletItemWrapper implements PortletItem,
 	*
 	* @param userName the user name of this portlet item
 	*/
+	@Override
 	public void setUserName(java.lang.String userName) {
 		_portletItem.setUserName(userName);
 	}
@@ -253,6 +271,7 @@ public class PortletItemWrapper implements PortletItem,
 	*
 	* @return the create date of this portlet item
 	*/
+	@Override
 	public java.util.Date getCreateDate() {
 		return _portletItem.getCreateDate();
 	}
@@ -262,6 +281,7 @@ public class PortletItemWrapper implements PortletItem,
 	*
 	* @param createDate the create date of this portlet item
 	*/
+	@Override
 	public void setCreateDate(java.util.Date createDate) {
 		_portletItem.setCreateDate(createDate);
 	}
@@ -271,6 +291,7 @@ public class PortletItemWrapper implements PortletItem,
 	*
 	* @return the modified date of this portlet item
 	*/
+	@Override
 	public java.util.Date getModifiedDate() {
 		return _portletItem.getModifiedDate();
 	}
@@ -280,6 +301,7 @@ public class PortletItemWrapper implements PortletItem,
 	*
 	* @param modifiedDate the modified date of this portlet item
 	*/
+	@Override
 	public void setModifiedDate(java.util.Date modifiedDate) {
 		_portletItem.setModifiedDate(modifiedDate);
 	}
@@ -289,6 +311,7 @@ public class PortletItemWrapper implements PortletItem,
 	*
 	* @return the name of this portlet item
 	*/
+	@Override
 	public java.lang.String getName() {
 		return _portletItem.getName();
 	}
@@ -298,6 +321,7 @@ public class PortletItemWrapper implements PortletItem,
 	*
 	* @param name the name of this portlet item
 	*/
+	@Override
 	public void setName(java.lang.String name) {
 		_portletItem.setName(name);
 	}
@@ -307,6 +331,7 @@ public class PortletItemWrapper implements PortletItem,
 	*
 	* @return the portlet ID of this portlet item
 	*/
+	@Override
 	public java.lang.String getPortletId() {
 		return _portletItem.getPortletId();
 	}
@@ -316,6 +341,7 @@ public class PortletItemWrapper implements PortletItem,
 	*
 	* @param portletId the portlet ID of this portlet item
 	*/
+	@Override
 	public void setPortletId(java.lang.String portletId) {
 		_portletItem.setPortletId(portletId);
 	}
@@ -325,10 +351,12 @@ public class PortletItemWrapper implements PortletItem,
 	*
 	* @return the fully qualified class name of this portlet item
 	*/
+	@Override
 	public java.lang.String getClassName() {
 		return _portletItem.getClassName();
 	}
 
+	@Override
 	public void setClassName(java.lang.String className) {
 		_portletItem.setClassName(className);
 	}
@@ -338,6 +366,7 @@ public class PortletItemWrapper implements PortletItem,
 	*
 	* @return the class name ID of this portlet item
 	*/
+	@Override
 	public long getClassNameId() {
 		return _portletItem.getClassNameId();
 	}
@@ -347,52 +376,64 @@ public class PortletItemWrapper implements PortletItem,
 	*
 	* @param classNameId the class name ID of this portlet item
 	*/
+	@Override
 	public void setClassNameId(long classNameId) {
 		_portletItem.setClassNameId(classNameId);
 	}
 
+	@Override
 	public boolean isNew() {
 		return _portletItem.isNew();
 	}
 
+	@Override
 	public void setNew(boolean n) {
 		_portletItem.setNew(n);
 	}
 
+	@Override
 	public boolean isCachedModel() {
 		return _portletItem.isCachedModel();
 	}
 
+	@Override
 	public void setCachedModel(boolean cachedModel) {
 		_portletItem.setCachedModel(cachedModel);
 	}
 
+	@Override
 	public boolean isEscapedModel() {
 		return _portletItem.isEscapedModel();
 	}
 
+	@Override
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _portletItem.getPrimaryKeyObj();
 	}
 
+	@Override
 	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
 		_portletItem.setPrimaryKeyObj(primaryKeyObj);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
 		return _portletItem.getExpandoBridge();
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.model.BaseModel<?> baseModel) {
 		_portletItem.setExpandoBridgeAttributes(baseModel);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portlet.expando.model.ExpandoBridge expandoBridge) {
 		_portletItem.setExpandoBridgeAttributes(expandoBridge);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		_portletItem.setExpandoBridgeAttributes(serviceContext);
@@ -403,6 +444,7 @@ public class PortletItemWrapper implements PortletItem,
 		return new PortletItemWrapper((PortletItem)_portletItem.clone());
 	}
 
+	@Override
 	public int compareTo(com.liferay.portal.model.PortletItem portletItem) {
 		return _portletItem.compareTo(portletItem);
 	}
@@ -412,14 +454,17 @@ public class PortletItemWrapper implements PortletItem,
 		return _portletItem.hashCode();
 	}
 
+	@Override
 	public com.liferay.portal.model.CacheModel<com.liferay.portal.model.PortletItem> toCacheModel() {
 		return _portletItem.toCacheModel();
 	}
 
+	@Override
 	public com.liferay.portal.model.PortletItem toEscapedModel() {
 		return new PortletItemWrapper(_portletItem.toEscapedModel());
 	}
 
+	@Override
 	public com.liferay.portal.model.PortletItem toUnescapedModel() {
 		return new PortletItemWrapper(_portletItem.toUnescapedModel());
 	}
@@ -429,10 +474,12 @@ public class PortletItemWrapper implements PortletItem,
 		return _portletItem.toString();
 	}
 
+	@Override
 	public java.lang.String toXmlString() {
 		return _portletItem.toXmlString();
 	}
 
+	@Override
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_portletItem.persist();
@@ -445,10 +492,12 @@ public class PortletItemWrapper implements PortletItem,
 		return _portletItem;
 	}
 
+	@Override
 	public PortletItem getWrappedModel() {
 		return _portletItem;
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		_portletItem.resetOriginalValues();
 	}

@@ -37,6 +37,7 @@ public class ImageTagMatcher extends CallbackMatcher {
 
 	private Callback _callBack = new Callback() {
 
+		@Override
 		public String foundMatch(MatchResult matchResult) {
 			String title = matchResult.group(0);
 

@@ -47,6 +47,7 @@ public class UserGroupGroupRoleCacheModel implements CacheModel<UserGroupGroupRo
 		return sb.toString();
 	}
 
+	@Override
 	public UserGroupGroupRole toEntityModel() {
 		UserGroupGroupRoleImpl userGroupGroupRoleImpl = new UserGroupGroupRoleImpl();
 
@@ -59,12 +60,14 @@ public class UserGroupGroupRoleCacheModel implements CacheModel<UserGroupGroupRo
 		return userGroupGroupRoleImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		userGroupId = objectInput.readLong();
 		groupId = objectInput.readLong();
 		roleId = objectInput.readLong();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(userGroupId);

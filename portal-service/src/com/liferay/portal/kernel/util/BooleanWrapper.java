@@ -30,6 +30,7 @@ public class BooleanWrapper
 		_value = value;
 	}
 
+	@Override
 	public int compareTo(BooleanWrapper booleanWrapper) {
 		if (booleanWrapper == null) {
 			return 1;

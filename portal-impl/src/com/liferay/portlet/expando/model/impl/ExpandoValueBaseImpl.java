@@ -38,6 +38,7 @@ public abstract class ExpandoValueBaseImpl extends ExpandoValueModelImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a expando value model instance should use the {@link ExpandoValue} interface instead.
 	 */
+	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
 			ExpandoValueLocalServiceUtil.addExpandoValue(this);

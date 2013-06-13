@@ -33,6 +33,7 @@ public interface JournalFolder extends JournalFolderModel, PersistedModel {
 	 * Never modify this interface directly. Add methods to {@link com.liferay.portlet.journal.model.impl.JournalFolderImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public static final Accessor<JournalFolder, Long> FOLDER_ID_ACCESSOR = new Accessor<JournalFolder, Long>() {
+			@Override
 			public Long get(JournalFolder journalFolder) {
 				return journalFolder.getFolderId();
 			}

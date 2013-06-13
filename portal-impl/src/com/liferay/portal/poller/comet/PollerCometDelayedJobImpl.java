@@ -31,6 +31,7 @@ import java.util.TimerTask;
 public class PollerCometDelayedJobImpl
 	extends BaseMessageListener implements PollerCometDelayedJob {
 
+	@Override
 	public void addPollerCometDelayedTask(
 		PollerCometDelayedTask pollerCometDelayedTask) {
 
@@ -68,7 +69,7 @@ public class PollerCometDelayedJobImpl
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
-		PollerCometDelayedJob.class);
+		PollerCometDelayedJobImpl.class);
 
 	private List<PollerCometDelayedTask> _pollerCometDelayedTasks =
 		new LinkedList<PollerCometDelayedTask>();

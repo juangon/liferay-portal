@@ -21,6 +21,8 @@ public class PortletDataHandlerKeys {
 
 	public static final String CATEGORIES = "CATEGORIES";
 
+	public static final String COMMENTS = "COMMENTS";
+
 	public static final String DATA_STRATEGY = "DATA_STRATEGY";
 
 	public static final String DATA_STRATEGY_COPY_AS_NEW =
@@ -74,8 +76,6 @@ public class PortletDataHandlerKeys {
 	public static final String PORTLET_DATA_CONTROL_DEFAULT =
 		"PORTLET_DATA_CONTROL_DEFAULT";
 
-	public static final String PORTLET_METADATA_ALL = "PORTLET_METADATA_ALL";
-
 	public static final String PORTLET_SETUP = "PORTLET_SETUP";
 
 	public static final String PORTLET_SETUP_ALL = "PORTLET_SETUP_ALL";
@@ -96,6 +96,8 @@ public class PortletDataHandlerKeys {
 		"PUBLIC_LAYOUT_PERMISSIONS";
 
 	public static final String PUBLISH_TO_REMOTE = "PUBLISH_TO_REMOTE";
+
+	public static final String RATINGS = "RATINGS";
 
 	public static final String SELECTED_LAYOUTS = "SELECTED_LAYOUTS";
 

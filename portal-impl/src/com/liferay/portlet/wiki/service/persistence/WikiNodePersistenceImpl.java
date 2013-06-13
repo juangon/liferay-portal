@@ -113,6 +113,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the matching wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiNode> findByUuid(String uuid) throws SystemException {
 		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -130,6 +131,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the range of matching wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiNode> findByUuid(String uuid, int start, int end)
 		throws SystemException {
 		return findByUuid(uuid, start, end, null);
@@ -149,6 +151,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the ordered range of matching wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiNode> findByUuid(String uuid, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -269,6 +272,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @throws com.liferay.portlet.wiki.NoSuchNodeException if a matching wiki node could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode findByUuid_First(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchNodeException, SystemException {
@@ -298,6 +302,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the first matching wiki node, or <code>null</code> if a matching wiki node could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode fetchByUuid_First(String uuid,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<WikiNode> list = findByUuid(uuid, 0, 1, orderByComparator);
@@ -318,6 +323,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @throws com.liferay.portlet.wiki.NoSuchNodeException if a matching wiki node could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode findByUuid_Last(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchNodeException, SystemException {
@@ -347,6 +353,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the last matching wiki node, or <code>null</code> if a matching wiki node could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode fetchByUuid_Last(String uuid,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByUuid(uuid);
@@ -371,6 +378,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @throws com.liferay.portlet.wiki.NoSuchNodeException if a wiki node with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode[] findByUuid_PrevAndNext(long nodeId, String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchNodeException, SystemException {
@@ -526,6 +534,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @param uuid the uuid
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByUuid(String uuid) throws SystemException {
 		for (WikiNode wikiNode : findByUuid(uuid, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null)) {
@@ -540,6 +549,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the number of matching wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUuid(String uuid) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID;
 
@@ -622,6 +632,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @throws com.liferay.portlet.wiki.NoSuchNodeException if a matching wiki node could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode findByUUID_G(String uuid, long groupId)
 		throws NoSuchNodeException, SystemException {
 		WikiNode wikiNode = fetchByUUID_G(uuid, groupId);
@@ -657,6 +668,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the matching wiki node, or <code>null</code> if a matching wiki node could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		return fetchByUUID_G(uuid, groupId, true);
@@ -671,6 +683,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the matching wiki node, or <code>null</code> if a matching wiki node could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode fetchByUUID_G(String uuid, long groupId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, groupId };
@@ -777,6 +790,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the wiki node that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode removeByUUID_G(String uuid, long groupId)
 		throws NoSuchNodeException, SystemException {
 		WikiNode wikiNode = findByUUID_G(uuid, groupId);
@@ -792,6 +806,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the number of matching wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID_G;
@@ -890,6 +905,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the matching wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiNode> findByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		return findByUuid_C(uuid, companyId, QueryUtil.ALL_POS,
@@ -910,6 +926,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the range of matching wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiNode> findByUuid_C(String uuid, long companyId, int start,
 		int end) throws SystemException {
 		return findByUuid_C(uuid, companyId, start, end, null);
@@ -930,6 +947,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the ordered range of matching wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiNode> findByUuid_C(String uuid, long companyId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -1060,6 +1078,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @throws com.liferay.portlet.wiki.NoSuchNodeException if a matching wiki node could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode findByUuid_C_First(String uuid, long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchNodeException, SystemException {
@@ -1094,6 +1113,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the first matching wiki node, or <code>null</code> if a matching wiki node could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode fetchByUuid_C_First(String uuid, long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<WikiNode> list = findByUuid_C(uuid, companyId, 0, 1,
@@ -1116,6 +1136,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @throws com.liferay.portlet.wiki.NoSuchNodeException if a matching wiki node could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode findByUuid_C_Last(String uuid, long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchNodeException, SystemException {
@@ -1150,6 +1171,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the last matching wiki node, or <code>null</code> if a matching wiki node could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode fetchByUuid_C_Last(String uuid, long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByUuid_C(uuid, companyId);
@@ -1175,6 +1197,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @throws com.liferay.portlet.wiki.NoSuchNodeException if a wiki node with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode[] findByUuid_C_PrevAndNext(long nodeId, String uuid,
 		long companyId, OrderByComparator orderByComparator)
 		throws NoSuchNodeException, SystemException {
@@ -1335,6 +1358,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @param companyId the company ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		for (WikiNode wikiNode : findByUuid_C(uuid, companyId,
@@ -1351,6 +1375,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the number of matching wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID_C;
@@ -1447,6 +1472,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the matching wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiNode> findByGroupId(long groupId) throws SystemException {
 		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1464,6 +1490,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the range of matching wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiNode> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
 		return findByGroupId(groupId, start, end, null);
@@ -1483,6 +1510,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the ordered range of matching wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiNode> findByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -1589,6 +1617,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @throws com.liferay.portlet.wiki.NoSuchNodeException if a matching wiki node could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode findByGroupId_First(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchNodeException, SystemException {
@@ -1618,6 +1647,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the first matching wiki node, or <code>null</code> if a matching wiki node could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode fetchByGroupId_First(long groupId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<WikiNode> list = findByGroupId(groupId, 0, 1, orderByComparator);
@@ -1638,6 +1668,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @throws com.liferay.portlet.wiki.NoSuchNodeException if a matching wiki node could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode findByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchNodeException, SystemException {
@@ -1667,6 +1698,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the last matching wiki node, or <code>null</code> if a matching wiki node could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode fetchByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByGroupId(groupId);
@@ -1691,6 +1723,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @throws com.liferay.portlet.wiki.NoSuchNodeException if a wiki node with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode[] findByGroupId_PrevAndNext(long nodeId, long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchNodeException, SystemException {
@@ -1833,6 +1866,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the matching wiki nodes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiNode> filterFindByGroupId(long groupId)
 		throws SystemException {
 		return filterFindByGroupId(groupId, QueryUtil.ALL_POS,
@@ -1852,6 +1886,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the range of matching wiki nodes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiNode> filterFindByGroupId(long groupId, int start, int end)
 		throws SystemException {
 		return filterFindByGroupId(groupId, start, end, null);
@@ -1871,6 +1906,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the ordered range of matching wiki nodes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiNode> filterFindByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -1961,6 +1997,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @throws com.liferay.portlet.wiki.NoSuchNodeException if a wiki node with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode[] filterFindByGroupId_PrevAndNext(long nodeId,
 		long groupId, OrderByComparator orderByComparator)
 		throws NoSuchNodeException, SystemException {
@@ -2141,6 +2178,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @param groupId the group ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (WikiNode wikiNode : findByGroupId(groupId, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null)) {
@@ -2155,6 +2193,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the number of matching wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByGroupId(long groupId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPID;
 
@@ -2207,6 +2246,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the number of matching wiki nodes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByGroupId(long groupId) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return countByGroupId(groupId);
@@ -2278,6 +2318,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the matching wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiNode> findByCompanyId(long companyId)
 		throws SystemException {
 		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -2297,6 +2338,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the range of matching wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiNode> findByCompanyId(long companyId, int start, int end)
 		throws SystemException {
 		return findByCompanyId(companyId, start, end, null);
@@ -2316,6 +2358,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the ordered range of matching wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiNode> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -2422,6 +2465,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @throws com.liferay.portlet.wiki.NoSuchNodeException if a matching wiki node could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode findByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchNodeException, SystemException {
@@ -2451,6 +2495,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the first matching wiki node, or <code>null</code> if a matching wiki node could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode fetchByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<WikiNode> list = findByCompanyId(companyId, 0, 1, orderByComparator);
@@ -2471,6 +2516,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @throws com.liferay.portlet.wiki.NoSuchNodeException if a matching wiki node could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode findByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchNodeException, SystemException {
@@ -2500,6 +2546,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the last matching wiki node, or <code>null</code> if a matching wiki node could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode fetchByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByCompanyId(companyId);
@@ -2524,6 +2571,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @throws com.liferay.portlet.wiki.NoSuchNodeException if a wiki node with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode[] findByCompanyId_PrevAndNext(long nodeId, long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchNodeException, SystemException {
@@ -2665,6 +2713,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @param companyId the company ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (WikiNode wikiNode : findByCompanyId(companyId, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null)) {
@@ -2679,6 +2728,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the number of matching wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByCompanyId(long companyId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMPANYID;
 
@@ -2745,6 +2795,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @throws com.liferay.portlet.wiki.NoSuchNodeException if a matching wiki node could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode findByG_N(long groupId, String name)
 		throws NoSuchNodeException, SystemException {
 		WikiNode wikiNode = fetchByG_N(groupId, name);
@@ -2780,6 +2831,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the matching wiki node, or <code>null</code> if a matching wiki node could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode fetchByG_N(long groupId, String name)
 		throws SystemException {
 		return fetchByG_N(groupId, name, true);
@@ -2794,6 +2846,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the matching wiki node, or <code>null</code> if a matching wiki node could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode fetchByG_N(long groupId, String name,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, name };
@@ -2900,6 +2953,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the wiki node that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode removeByG_N(long groupId, String name)
 		throws NoSuchNodeException, SystemException {
 		WikiNode wikiNode = findByG_N(groupId, name);
@@ -2915,6 +2969,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the number of matching wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_N(long groupId, String name) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_N;
 
@@ -3011,6 +3066,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the matching wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiNode> findByG_S(long groupId, int status)
 		throws SystemException {
 		return findByG_S(groupId, status, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -3031,6 +3087,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the range of matching wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiNode> findByG_S(long groupId, int status, int start, int end)
 		throws SystemException {
 		return findByG_S(groupId, status, start, end, null);
@@ -3051,6 +3108,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the ordered range of matching wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiNode> findByG_S(long groupId, int status, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -3167,6 +3225,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @throws com.liferay.portlet.wiki.NoSuchNodeException if a matching wiki node could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode findByG_S_First(long groupId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchNodeException, SystemException {
@@ -3200,6 +3259,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the first matching wiki node, or <code>null</code> if a matching wiki node could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode fetchByG_S_First(long groupId, int status,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<WikiNode> list = findByG_S(groupId, status, 0, 1, orderByComparator);
@@ -3221,6 +3281,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @throws com.liferay.portlet.wiki.NoSuchNodeException if a matching wiki node could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode findByG_S_Last(long groupId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchNodeException, SystemException {
@@ -3254,6 +3315,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the last matching wiki node, or <code>null</code> if a matching wiki node could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode fetchByG_S_Last(long groupId, int status,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByG_S(groupId, status);
@@ -3279,6 +3341,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @throws com.liferay.portlet.wiki.NoSuchNodeException if a wiki node with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode[] findByG_S_PrevAndNext(long nodeId, long groupId,
 		int status, OrderByComparator orderByComparator)
 		throws NoSuchNodeException, SystemException {
@@ -3426,6 +3489,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the matching wiki nodes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiNode> filterFindByG_S(long groupId, int status)
 		throws SystemException {
 		return filterFindByG_S(groupId, status, QueryUtil.ALL_POS,
@@ -3446,6 +3510,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the range of matching wiki nodes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiNode> filterFindByG_S(long groupId, int status, int start,
 		int end) throws SystemException {
 		return filterFindByG_S(groupId, status, start, end, null);
@@ -3466,6 +3531,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the ordered range of matching wiki nodes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiNode> filterFindByG_S(long groupId, int status, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -3561,6 +3627,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @throws com.liferay.portlet.wiki.NoSuchNodeException if a wiki node with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode[] filterFindByG_S_PrevAndNext(long nodeId, long groupId,
 		int status, OrderByComparator orderByComparator)
 		throws NoSuchNodeException, SystemException {
@@ -3747,6 +3814,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @param status the status
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByG_S(long groupId, int status) throws SystemException {
 		for (WikiNode wikiNode : findByG_S(groupId, status, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null)) {
@@ -3762,6 +3830,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the number of matching wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_S(long groupId, int status) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_S;
 
@@ -3819,6 +3888,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the number of matching wiki nodes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByG_S(long groupId, int status)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -3896,6 +3966,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the matching wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiNode> findByC_S(long companyId, int status)
 		throws SystemException {
 		return findByC_S(companyId, status, QueryUtil.ALL_POS,
@@ -3916,6 +3987,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the range of matching wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiNode> findByC_S(long companyId, int status, int start,
 		int end) throws SystemException {
 		return findByC_S(companyId, status, start, end, null);
@@ -3936,6 +4008,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the ordered range of matching wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiNode> findByC_S(long companyId, int status, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -4052,6 +4125,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @throws com.liferay.portlet.wiki.NoSuchNodeException if a matching wiki node could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode findByC_S_First(long companyId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchNodeException, SystemException {
@@ -4086,6 +4160,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the first matching wiki node, or <code>null</code> if a matching wiki node could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode fetchByC_S_First(long companyId, int status,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<WikiNode> list = findByC_S(companyId, status, 0, 1,
@@ -4108,6 +4183,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @throws com.liferay.portlet.wiki.NoSuchNodeException if a matching wiki node could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode findByC_S_Last(long companyId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchNodeException, SystemException {
@@ -4141,6 +4217,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the last matching wiki node, or <code>null</code> if a matching wiki node could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode fetchByC_S_Last(long companyId, int status,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByC_S(companyId, status);
@@ -4166,6 +4243,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @throws com.liferay.portlet.wiki.NoSuchNodeException if a wiki node with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode[] findByC_S_PrevAndNext(long nodeId, long companyId,
 		int status, OrderByComparator orderByComparator)
 		throws NoSuchNodeException, SystemException {
@@ -4312,6 +4390,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @param status the status
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByC_S(long companyId, int status)
 		throws SystemException {
 		for (WikiNode wikiNode : findByC_S(companyId, status,
@@ -4328,6 +4407,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the number of matching wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByC_S(long companyId, int status) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_S;
 
@@ -4385,6 +4465,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 *
 	 * @param wikiNode the wiki node
 	 */
+	@Override
 	public void cacheResult(WikiNode wikiNode) {
 		EntityCacheUtil.putResult(WikiNodeModelImpl.ENTITY_CACHE_ENABLED,
 			WikiNodeImpl.class, wikiNode.getPrimaryKey(), wikiNode);
@@ -4403,6 +4484,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 *
 	 * @param wikiNodes the wiki nodes
 	 */
+	@Override
 	public void cacheResult(List<WikiNode> wikiNodes) {
 		for (WikiNode wikiNode : wikiNodes) {
 			if (EntityCacheUtil.getResult(
@@ -4555,6 +4637,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @param nodeId the primary key for the new wiki node
 	 * @return the new wiki node
 	 */
+	@Override
 	public WikiNode create(long nodeId) {
 		WikiNode wikiNode = new WikiNodeImpl();
 
@@ -4576,6 +4659,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @throws com.liferay.portlet.wiki.NoSuchNodeException if a wiki node with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode remove(long nodeId)
 		throws NoSuchNodeException, SystemException {
 		return remove((Serializable)nodeId);
@@ -4883,6 +4967,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @throws com.liferay.portlet.wiki.NoSuchNodeException if a wiki node with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode findByPrimaryKey(long nodeId)
 		throws NoSuchNodeException, SystemException {
 		return findByPrimaryKey((Serializable)nodeId);
@@ -4942,6 +5027,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the wiki node, or <code>null</code> if a wiki node with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode fetchByPrimaryKey(long nodeId) throws SystemException {
 		return fetchByPrimaryKey((Serializable)nodeId);
 	}
@@ -4952,6 +5038,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiNode> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -4968,6 +5055,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the range of wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiNode> findAll(int start, int end) throws SystemException {
 		return findAll(start, end, null);
 	}
@@ -4985,6 +5073,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the ordered range of wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiNode> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -5070,6 +5159,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (WikiNode wikiNode : findAll()) {
 			remove(wikiNode);
@@ -5082,6 +5172,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the number of wiki nodes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -5185,6 +5276,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 		};
 
 	private static CacheModel<WikiNode> _nullWikiNodeCacheModel = new CacheModel<WikiNode>() {
+			@Override
 			public WikiNode toEntityModel() {
 				return _nullWikiNode;
 			}

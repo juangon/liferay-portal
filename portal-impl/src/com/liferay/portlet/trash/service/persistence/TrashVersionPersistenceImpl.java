@@ -107,6 +107,7 @@ public class TrashVersionPersistenceImpl extends BasePersistenceImpl<TrashVersio
 	 * @return the matching trash versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<TrashVersion> findByEntryId(long entryId)
 		throws SystemException {
 		return findByEntryId(entryId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
@@ -125,6 +126,7 @@ public class TrashVersionPersistenceImpl extends BasePersistenceImpl<TrashVersio
 	 * @return the range of matching trash versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<TrashVersion> findByEntryId(long entryId, int start, int end)
 		throws SystemException {
 		return findByEntryId(entryId, start, end, null);
@@ -144,6 +146,7 @@ public class TrashVersionPersistenceImpl extends BasePersistenceImpl<TrashVersio
 	 * @return the ordered range of matching trash versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<TrashVersion> findByEntryId(long entryId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -250,6 +253,7 @@ public class TrashVersionPersistenceImpl extends BasePersistenceImpl<TrashVersio
 	 * @throws com.liferay.portlet.trash.NoSuchVersionException if a matching trash version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public TrashVersion findByEntryId_First(long entryId,
 		OrderByComparator orderByComparator)
 		throws NoSuchVersionException, SystemException {
@@ -280,6 +284,7 @@ public class TrashVersionPersistenceImpl extends BasePersistenceImpl<TrashVersio
 	 * @return the first matching trash version, or <code>null</code> if a matching trash version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public TrashVersion fetchByEntryId_First(long entryId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<TrashVersion> list = findByEntryId(entryId, 0, 1, orderByComparator);
@@ -300,6 +305,7 @@ public class TrashVersionPersistenceImpl extends BasePersistenceImpl<TrashVersio
 	 * @throws com.liferay.portlet.trash.NoSuchVersionException if a matching trash version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public TrashVersion findByEntryId_Last(long entryId,
 		OrderByComparator orderByComparator)
 		throws NoSuchVersionException, SystemException {
@@ -330,6 +336,7 @@ public class TrashVersionPersistenceImpl extends BasePersistenceImpl<TrashVersio
 	 * @return the last matching trash version, or <code>null</code> if a matching trash version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public TrashVersion fetchByEntryId_Last(long entryId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByEntryId(entryId);
@@ -354,6 +361,7 @@ public class TrashVersionPersistenceImpl extends BasePersistenceImpl<TrashVersio
 	 * @throws com.liferay.portlet.trash.NoSuchVersionException if a trash version with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public TrashVersion[] findByEntryId_PrevAndNext(long versionId,
 		long entryId, OrderByComparator orderByComparator)
 		throws NoSuchVersionException, SystemException {
@@ -495,6 +503,7 @@ public class TrashVersionPersistenceImpl extends BasePersistenceImpl<TrashVersio
 	 * @param entryId the entry ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByEntryId(long entryId) throws SystemException {
 		for (TrashVersion trashVersion : findByEntryId(entryId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -509,6 +518,7 @@ public class TrashVersionPersistenceImpl extends BasePersistenceImpl<TrashVersio
 	 * @return the number of matching trash versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByEntryId(long entryId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_ENTRYID;
 
@@ -583,6 +593,7 @@ public class TrashVersionPersistenceImpl extends BasePersistenceImpl<TrashVersio
 	 * @return the matching trash versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<TrashVersion> findByC_C(long classNameId, long classPK)
 		throws SystemException {
 		return findByC_C(classNameId, classPK, QueryUtil.ALL_POS,
@@ -603,6 +614,7 @@ public class TrashVersionPersistenceImpl extends BasePersistenceImpl<TrashVersio
 	 * @return the range of matching trash versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<TrashVersion> findByC_C(long classNameId, long classPK,
 		int start, int end) throws SystemException {
 		return findByC_C(classNameId, classPK, start, end, null);
@@ -623,6 +635,7 @@ public class TrashVersionPersistenceImpl extends BasePersistenceImpl<TrashVersio
 	 * @return the ordered range of matching trash versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<TrashVersion> findByC_C(long classNameId, long classPK,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -740,6 +753,7 @@ public class TrashVersionPersistenceImpl extends BasePersistenceImpl<TrashVersio
 	 * @throws com.liferay.portlet.trash.NoSuchVersionException if a matching trash version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public TrashVersion findByC_C_First(long classNameId, long classPK,
 		OrderByComparator orderByComparator)
 		throws NoSuchVersionException, SystemException {
@@ -774,6 +788,7 @@ public class TrashVersionPersistenceImpl extends BasePersistenceImpl<TrashVersio
 	 * @return the first matching trash version, or <code>null</code> if a matching trash version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public TrashVersion fetchByC_C_First(long classNameId, long classPK,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<TrashVersion> list = findByC_C(classNameId, classPK, 0, 1,
@@ -796,6 +811,7 @@ public class TrashVersionPersistenceImpl extends BasePersistenceImpl<TrashVersio
 	 * @throws com.liferay.portlet.trash.NoSuchVersionException if a matching trash version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public TrashVersion findByC_C_Last(long classNameId, long classPK,
 		OrderByComparator orderByComparator)
 		throws NoSuchVersionException, SystemException {
@@ -830,6 +846,7 @@ public class TrashVersionPersistenceImpl extends BasePersistenceImpl<TrashVersio
 	 * @return the last matching trash version, or <code>null</code> if a matching trash version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public TrashVersion fetchByC_C_Last(long classNameId, long classPK,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByC_C(classNameId, classPK);
@@ -855,6 +872,7 @@ public class TrashVersionPersistenceImpl extends BasePersistenceImpl<TrashVersio
 	 * @throws com.liferay.portlet.trash.NoSuchVersionException if a trash version with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public TrashVersion[] findByC_C_PrevAndNext(long versionId,
 		long classNameId, long classPK, OrderByComparator orderByComparator)
 		throws NoSuchVersionException, SystemException {
@@ -1001,6 +1019,7 @@ public class TrashVersionPersistenceImpl extends BasePersistenceImpl<TrashVersio
 	 * @param classPK the class p k
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByC_C(long classNameId, long classPK)
 		throws SystemException {
 		for (TrashVersion trashVersion : findByC_C(classNameId, classPK,
@@ -1017,6 +1036,7 @@ public class TrashVersionPersistenceImpl extends BasePersistenceImpl<TrashVersio
 	 * @return the number of matching trash versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByC_C(long classNameId, long classPK)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_C;
@@ -1075,6 +1095,7 @@ public class TrashVersionPersistenceImpl extends BasePersistenceImpl<TrashVersio
 	 *
 	 * @param trashVersion the trash version
 	 */
+	@Override
 	public void cacheResult(TrashVersion trashVersion) {
 		EntityCacheUtil.putResult(TrashVersionModelImpl.ENTITY_CACHE_ENABLED,
 			TrashVersionImpl.class, trashVersion.getPrimaryKey(), trashVersion);
@@ -1087,6 +1108,7 @@ public class TrashVersionPersistenceImpl extends BasePersistenceImpl<TrashVersio
 	 *
 	 * @param trashVersions the trash versions
 	 */
+	@Override
 	public void cacheResult(List<TrashVersion> trashVersions) {
 		for (TrashVersion trashVersion : trashVersions) {
 			if (EntityCacheUtil.getResult(
@@ -1153,6 +1175,7 @@ public class TrashVersionPersistenceImpl extends BasePersistenceImpl<TrashVersio
 	 * @param versionId the primary key for the new trash version
 	 * @return the new trash version
 	 */
+	@Override
 	public TrashVersion create(long versionId) {
 		TrashVersion trashVersion = new TrashVersionImpl();
 
@@ -1170,6 +1193,7 @@ public class TrashVersionPersistenceImpl extends BasePersistenceImpl<TrashVersio
 	 * @throws com.liferay.portlet.trash.NoSuchVersionException if a trash version with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public TrashVersion remove(long versionId)
 		throws NoSuchVersionException, SystemException {
 		return remove((Serializable)versionId);
@@ -1384,6 +1408,7 @@ public class TrashVersionPersistenceImpl extends BasePersistenceImpl<TrashVersio
 	 * @throws com.liferay.portlet.trash.NoSuchVersionException if a trash version with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public TrashVersion findByPrimaryKey(long versionId)
 		throws NoSuchVersionException, SystemException {
 		return findByPrimaryKey((Serializable)versionId);
@@ -1444,6 +1469,7 @@ public class TrashVersionPersistenceImpl extends BasePersistenceImpl<TrashVersio
 	 * @return the trash version, or <code>null</code> if a trash version with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public TrashVersion fetchByPrimaryKey(long versionId)
 		throws SystemException {
 		return fetchByPrimaryKey((Serializable)versionId);
@@ -1455,6 +1481,7 @@ public class TrashVersionPersistenceImpl extends BasePersistenceImpl<TrashVersio
 	 * @return the trash versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<TrashVersion> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1471,6 +1498,7 @@ public class TrashVersionPersistenceImpl extends BasePersistenceImpl<TrashVersio
 	 * @return the range of trash versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<TrashVersion> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
@@ -1489,6 +1517,7 @@ public class TrashVersionPersistenceImpl extends BasePersistenceImpl<TrashVersio
 	 * @return the ordered range of trash versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<TrashVersion> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -1574,6 +1603,7 @@ public class TrashVersionPersistenceImpl extends BasePersistenceImpl<TrashVersio
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (TrashVersion trashVersion : findAll()) {
 			remove(trashVersion);
@@ -1586,6 +1616,7 @@ public class TrashVersionPersistenceImpl extends BasePersistenceImpl<TrashVersio
 	 * @return the number of trash versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -1671,6 +1702,7 @@ public class TrashVersionPersistenceImpl extends BasePersistenceImpl<TrashVersio
 		};
 
 	private static CacheModel<TrashVersion> _nullTrashVersionCacheModel = new CacheModel<TrashVersion>() {
+			@Override
 			public TrashVersion toEntityModel() {
 				return _nullTrashVersion;
 			}

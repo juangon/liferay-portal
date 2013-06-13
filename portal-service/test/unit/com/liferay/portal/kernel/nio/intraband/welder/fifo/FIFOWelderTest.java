@@ -181,6 +181,7 @@ public class FIFOWelderTest {
 			new FutureTask<MockRegistrationReference>(
 				new Callable<MockRegistrationReference>() {
 
+					@Override
 					public MockRegistrationReference call() throws Exception {
 						return (MockRegistrationReference)serverFifoWelder.weld(
 							new MockIntraband());
@@ -195,6 +196,7 @@ public class FIFOWelderTest {
 			new FutureTask<MockRegistrationReference>(
 				new Callable<MockRegistrationReference>() {
 
+					@Override
 					public MockRegistrationReference call() throws Exception {
 						return (MockRegistrationReference)clientFIFOWelder.weld(
 							new MockIntraband());

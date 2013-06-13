@@ -58,6 +58,11 @@ public class MBMessageStagedModelDataHandler
 	}
 
 	@Override
+	public String getDisplayName(MBMessage message) {
+		return message.getSubject();
+	}
+
+	@Override
 	protected void doExportStagedModel(
 			PortletDataContext portletDataContext, MBMessage message)
 		throws Exception {
@@ -89,10 +94,7 @@ public class MBMessageStagedModelDataHandler
 			"hasAttachmentsFileEntries",
 			String.valueOf(hasAttachmentsFileEntries));
 
-		if (portletDataContext.getBooleanParameter(
-				MBPortletDataHandler.NAMESPACE, "attachments") &&
-			hasAttachmentsFileEntries) {
-
+		if (hasAttachmentsFileEntries) {
 			for (FileEntry fileEntry : message.getAttachmentsFileEntries()) {
 				String name = fileEntry.getTitle();
 				String binPath = ExportImportPathUtil.getModelPath(
@@ -255,10 +257,7 @@ public class MBMessageStagedModelDataHandler
 		boolean hasAttachmentsFileEntries = GetterUtil.getBoolean(
 			messageElement.attributeValue("hasAttachmentsFileEntries"));
 
-		if (!hasAttachmentsFileEntries &&
-			portletDataContext.getBooleanParameter(
-				MBPortletDataHandler.NAMESPACE, "attachments")) {
-
+		if (!hasAttachmentsFileEntries) {
 			return Collections.emptyList();
 		}
 

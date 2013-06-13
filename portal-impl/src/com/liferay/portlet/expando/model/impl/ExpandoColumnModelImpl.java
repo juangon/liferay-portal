@@ -136,26 +136,32 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 	public ExpandoColumnModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _columnId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setColumnId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _columnId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return ExpandoColumn.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return ExpandoColumn.class.getName();
 	}
@@ -220,29 +226,35 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 		}
 	}
 
+	@Override
 	@JSON
 	public long getColumnId() {
 		return _columnId;
 	}
 
+	@Override
 	public void setColumnId(long columnId) {
 		_columnId = columnId;
 	}
 
+	@Override
 	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
+	@Override
 	@JSON
 	public long getTableId() {
 		return _tableId;
 	}
 
+	@Override
 	public void setTableId(long tableId) {
 		_columnBitmask |= TABLEID_COLUMN_BITMASK;
 
@@ -259,6 +271,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 		return _originalTableId;
 	}
 
+	@Override
 	@JSON
 	public String getName() {
 		if (_name == null) {
@@ -269,6 +282,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 		}
 	}
 
+	@Override
 	public void setName(String name) {
 		_columnBitmask = -1L;
 
@@ -283,15 +297,18 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 		return GetterUtil.getString(_originalName);
 	}
 
+	@Override
 	@JSON
 	public int getType() {
 		return _type;
 	}
 
+	@Override
 	public void setType(int type) {
 		_type = type;
 	}
 
+	@Override
 	@JSON
 	public String getDefaultData() {
 		if (_defaultData == null) {
@@ -302,10 +319,12 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 		}
 	}
 
+	@Override
 	public void setDefaultData(String defaultData) {
 		_defaultData = defaultData;
 	}
 
+	@Override
 	@JSON
 	public String getTypeSettings() {
 		if (_typeSettings == null) {
@@ -316,6 +335,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 		}
 	}
 
+	@Override
 	public void setTypeSettings(String typeSettings) {
 		_typeSettings = typeSettings;
 	}
@@ -351,6 +371,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 		return expandoColumnImpl;
 	}
 
+	@Override
 	public int compareTo(ExpandoColumn expandoColumn) {
 		int value = 0;
 
@@ -365,18 +386,15 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ExpandoColumn)) {
 			return false;
 		}
 
-		ExpandoColumn expandoColumn = null;
-
-		try {
-			expandoColumn = (ExpandoColumn)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		ExpandoColumn expandoColumn = (ExpandoColumn)obj;
 
 		long primaryKey = expandoColumn.getPrimaryKey();
 
@@ -468,6 +486,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(25);
 

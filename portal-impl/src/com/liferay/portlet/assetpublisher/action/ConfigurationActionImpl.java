@@ -44,6 +44,8 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
 import com.liferay.portlet.asset.AssetTagException;
+import com.liferay.portlet.asset.DuplicateQueryRuleException;
+import com.liferay.portlet.asset.model.AssetQueryRule;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.assetpublisher.util.AssetPublisher;
@@ -57,7 +59,9 @@ import java.io.Serializable;
 
 import java.text.DateFormat;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.portlet.ActionRequest;
@@ -92,82 +96,85 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 			super.processAction(portletConfig, actionRequest, actionResponse);
 		}
 		else if (cmd.equals(Constants.UPDATE)) {
-			validateEmailAssetEntryAdded(actionRequest);
-			validateEmailFrom(actionRequest);
-
-			updateDisplaySettings(actionRequest);
-
-			String selectionStyle = getParameter(
-				actionRequest, "selectionStyle");
-
-			if (selectionStyle.equals("dynamic")) {
-				updateQueryLogic(actionRequest, preferences);
-			}
-
-			updateDefaultAssetPublisher(actionRequest);
-
-			super.processAction(portletConfig, actionRequest, actionResponse);
-		}
-		else {
 			try {
-				if (cmd.equals("add-scope")) {
-					addScope(actionRequest, preferences);
-				}
-				else if (cmd.equals("add-selection")) {
-					AssetPublisherUtil.addSelection(
-						actionRequest, preferences, portletResource);
-				}
-				else if (cmd.equals("move-selection-down")) {
-					moveSelectionDown(actionRequest, preferences);
-				}
-				else if (cmd.equals("move-selection-up")) {
-					moveSelectionUp(actionRequest, preferences);
-				}
-				else if (cmd.equals("remove-selection")) {
-					removeSelection(actionRequest, preferences);
-				}
-				else if (cmd.equals("remove-scope")) {
-					removeScope(actionRequest, preferences);
-				}
-				else if (cmd.equals("select-scope")) {
-					setScopes(actionRequest, preferences);
-				}
-				else if (cmd.equals("selection-style")) {
-					setSelectionStyle(actionRequest, preferences);
+				validateEmailAssetEntryAdded(actionRequest);
+				validateEmailFrom(actionRequest);
+
+				updateDisplaySettings(actionRequest);
+
+				String selectionStyle = getParameter(
+					actionRequest, "selectionStyle");
+
+				if (selectionStyle.equals("dynamic")) {
+					updateQueryLogic(actionRequest, preferences);
 				}
 
-				if (SessionErrors.isEmpty(actionRequest)) {
-					preferences.store();
+				updateDefaultAssetPublisher(actionRequest);
 
-					LiferayPortletConfig liferayPortletConfig =
-						(LiferayPortletConfig)portletConfig;
-
-					SessionMessages.add(
-						actionRequest,
-						liferayPortletConfig.getPortletId() +
-							SessionMessages.KEY_SUFFIX_REFRESH_PORTLET,
-						portletResource);
-
-					SessionMessages.add(
-						actionRequest,
-						liferayPortletConfig.getPortletId() +
-							SessionMessages.KEY_SUFFIX_UPDATED_CONFIGURATION);
-				}
-
-				String redirect = PortalUtil.escapeRedirect(
-					ParamUtil.getString(actionRequest, "redirect"));
-
-				if (Validator.isNotNull(redirect)) {
-					actionResponse.sendRedirect(redirect);
-				}
+				super.processAction(
+					portletConfig, actionRequest, actionResponse);
 			}
 			catch (Exception e) {
-				if (e instanceof AssetTagException) {
+				if (e instanceof AssetTagException ||
+					e instanceof DuplicateQueryRuleException) {
+
 					SessionErrors.add(actionRequest, e.getClass(), e);
 				}
 				else {
 					throw e;
 				}
+			}
+		}
+		else {
+			if (cmd.equals("add-scope")) {
+				addScope(actionRequest, preferences);
+			}
+			else if (cmd.equals("add-selection")) {
+				AssetPublisherUtil.addSelection(
+					actionRequest, preferences, portletResource);
+			}
+			else if (cmd.equals("move-selection-down")) {
+				moveSelectionDown(actionRequest, preferences);
+			}
+			else if (cmd.equals("move-selection-up")) {
+				moveSelectionUp(actionRequest, preferences);
+			}
+			else if (cmd.equals("remove-selection")) {
+				removeSelection(actionRequest, preferences);
+			}
+			else if (cmd.equals("remove-scope")) {
+				removeScope(actionRequest, preferences);
+			}
+			else if (cmd.equals("select-scope")) {
+				setScopes(actionRequest, preferences);
+			}
+			else if (cmd.equals("selection-style")) {
+				setSelectionStyle(actionRequest, preferences);
+			}
+
+			if (SessionErrors.isEmpty(actionRequest)) {
+				preferences.store();
+
+				LiferayPortletConfig liferayPortletConfig =
+					(LiferayPortletConfig)portletConfig;
+
+				SessionMessages.add(
+					actionRequest,
+					liferayPortletConfig.getPortletId() +
+						SessionMessages.KEY_SUFFIX_REFRESH_PORTLET,
+					portletResource);
+
+				SessionMessages.add(
+					actionRequest,
+					liferayPortletConfig.getPortletId() +
+						SessionMessages.KEY_SUFFIX_UPDATED_CONFIGURATION);
+			}
+
+			String redirect = PortalUtil.escapeRedirect(
+				ParamUtil.getString(actionRequest, "redirect"));
+
+			if (Validator.isNotNull(redirect)) {
+				actionResponse.sendRedirect(redirect);
 			}
 		}
 	}
@@ -216,7 +223,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 		Serializable displayValue = DDMUtil.getDisplayFieldValue(
-			fieldValue, type, themeDisplay.getLocale());
+			themeDisplay, fieldValue, type);
 
 		jsonObject.put("displayValue", String.valueOf(displayValue));
 
@@ -362,6 +369,30 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 			return StringUtil.split(
 				getParameter(actionRequest, "classTypeIds" + assetClassName));
 		}
+	}
+
+	protected AssetQueryRule getQueryRule(
+		ActionRequest actionRequest, int index) {
+
+		boolean contains = ParamUtil.getBoolean(
+			actionRequest, "queryContains" + index);
+		boolean andOperator = ParamUtil.getBoolean(
+			actionRequest, "queryAndOperator" + index);
+
+		String name = ParamUtil.getString(actionRequest, "queryName" + index);
+
+		String[] values = null;
+
+		if (name.equals("assetTags")) {
+			values = StringUtil.split(
+				ParamUtil.getString(actionRequest, "queryTagNames" + index));
+		}
+		else {
+			values = StringUtil.split(
+				ParamUtil.getString(actionRequest, "queryCategoryIds" + index));
+		}
+
+		return new AssetQueryRule(contains, andOperator, name, values);
 	}
 
 	protected boolean getSubtypesFieldsFilterEnabled(
@@ -545,7 +576,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 			}
 		}
 
-		layout = LayoutLocalServiceUtil.updateLayout(
+		LayoutLocalServiceUtil.updateLayout(
 			layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(),
 			layout.getTypeSettings());
 	}
@@ -583,36 +614,25 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 
 		int i = 0;
 
+		List<AssetQueryRule> queryRules = new ArrayList<AssetQueryRule>();
+
 		for (int queryRulesIndex : queryRulesIndexes) {
-			boolean contains = ParamUtil.getBoolean(
-				actionRequest, "queryContains" + queryRulesIndex);
-			boolean andOperator = ParamUtil.getBoolean(
-				actionRequest, "queryAndOperator" + queryRulesIndex);
-			String name = ParamUtil.getString(
-				actionRequest, "queryName" + queryRulesIndex);
+			AssetQueryRule queryRule = getQueryRule(
+				actionRequest, queryRulesIndex);
 
-			String[] values = null;
+			validateQueryRule(userId, groupId, queryRules, queryRule);
 
-			if (name.equals("assetTags")) {
-				values = StringUtil.split(
-					ParamUtil.getString(
-						actionRequest, "queryTagNames" + queryRulesIndex));
-
-				AssetTagLocalServiceUtil.checkTags(userId, groupId, values);
-			}
-			else {
-				values = StringUtil.split(
-					ParamUtil.getString(
-						actionRequest, "queryCategoryIds" + queryRulesIndex));
-			}
+			queryRules.add(queryRule);
 
 			setPreference(
-				actionRequest, "queryContains" + i, String.valueOf(contains));
+				actionRequest, "queryContains" + i,
+				String.valueOf(queryRule.isContains()));
 			setPreference(
 				actionRequest, "queryAndOperator" + i,
-				String.valueOf(andOperator));
-			setPreference(actionRequest, "queryName" + i, name);
-			setPreference(actionRequest, "queryValues" + i, values);
+				String.valueOf(queryRule.isAndOperator()));
+			setPreference(actionRequest, "queryName" + i, queryRule.getName());
+			setPreference(
+				actionRequest, "queryValues" + i, queryRule.getValues());
 
 			i++;
 		}
@@ -665,6 +685,25 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 				 !Validator.isVariableTerm(emailFromAddress)) {
 
 			SessionErrors.add(actionRequest, "emailFromAddress");
+		}
+	}
+
+	protected void validateQueryRule(
+			long userId, long groupId, List<AssetQueryRule> queryRules,
+			AssetQueryRule queryRule)
+		throws Exception {
+
+		String name = queryRule.getName();
+
+		if (name.equals("assetTags")) {
+			AssetTagLocalServiceUtil.checkTags(
+				userId, groupId, queryRule.getValues());
+		}
+
+		if (queryRules.contains(queryRule)) {
+			throw new DuplicateQueryRuleException(
+				queryRule.isContains(), queryRule.isAndOperator(),
+				queryRule.getName());
 		}
 	}
 

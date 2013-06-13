@@ -86,26 +86,32 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent>
 	public ServiceComponentModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _serviceComponentId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setServiceComponentId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _serviceComponentId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return ServiceComponent.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return ServiceComponent.class.getName();
 	}
@@ -156,14 +162,17 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent>
 		}
 	}
 
+	@Override
 	public long getServiceComponentId() {
 		return _serviceComponentId;
 	}
 
+	@Override
 	public void setServiceComponentId(long serviceComponentId) {
 		_serviceComponentId = serviceComponentId;
 	}
 
+	@Override
 	public String getBuildNamespace() {
 		if (_buildNamespace == null) {
 			return StringPool.BLANK;
@@ -173,6 +182,7 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent>
 		}
 	}
 
+	@Override
 	public void setBuildNamespace(String buildNamespace) {
 		_columnBitmask = -1L;
 
@@ -187,10 +197,12 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent>
 		return GetterUtil.getString(_originalBuildNamespace);
 	}
 
+	@Override
 	public long getBuildNumber() {
 		return _buildNumber;
 	}
 
+	@Override
 	public void setBuildNumber(long buildNumber) {
 		_columnBitmask = -1L;
 
@@ -207,14 +219,17 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent>
 		return _originalBuildNumber;
 	}
 
+	@Override
 	public long getBuildDate() {
 		return _buildDate;
 	}
 
+	@Override
 	public void setBuildDate(long buildDate) {
 		_buildDate = buildDate;
 	}
 
+	@Override
 	public String getData() {
 		if (_data == null) {
 			return StringPool.BLANK;
@@ -224,6 +239,7 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent>
 		}
 	}
 
+	@Override
 	public void setData(String data) {
 		_data = data;
 	}
@@ -270,6 +286,7 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent>
 		return serviceComponentImpl;
 	}
 
+	@Override
 	public int compareTo(ServiceComponent serviceComponent) {
 		int value = 0;
 
@@ -303,18 +320,15 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ServiceComponent)) {
 			return false;
 		}
 
-		ServiceComponent serviceComponent = null;
-
-		try {
-			serviceComponent = (ServiceComponent)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		ServiceComponent serviceComponent = (ServiceComponent)obj;
 
 		long primaryKey = serviceComponent.getPrimaryKey();
 
@@ -392,6 +406,7 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(19);
 

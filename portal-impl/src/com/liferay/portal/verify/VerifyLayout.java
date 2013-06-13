@@ -17,6 +17,8 @@ package com.liferay.portal.verify;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutFriendlyURL;
+import com.liferay.portal.service.LayoutFriendlyURLLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 
 import java.util.List;
@@ -38,10 +40,17 @@ public class VerifyLayout extends VerifyProcess {
 			LayoutLocalServiceUtil.getNullFriendlyURLLayouts();
 
 		for (Layout layout : layouts) {
-			String friendlyURL = StringPool.SLASH + layout.getLayoutId();
+			List<LayoutFriendlyURL> layoutFriendlyURLs =
+				LayoutFriendlyURLLocalServiceUtil.getLayoutFriendlyURLs(
+					layout.getPlid());
 
-			LayoutLocalServiceUtil.updateFriendlyURL(
-				layout.getPlid(), friendlyURL);
+			for (LayoutFriendlyURL layoutFriendlyURL : layoutFriendlyURLs) {
+				String friendlyURL = StringPool.SLASH + layout.getLayoutId();
+
+				LayoutLocalServiceUtil.updateFriendlyURL(
+					layout.getPlid(), friendlyURL,
+					layoutFriendlyURL.getLanguageId());
+			}
 		}
 	}
 
@@ -59,17 +68,19 @@ public class VerifyLayout extends VerifyProcess {
 	}
 
 	protected void verifyUuid(String tableName) throws Exception {
-		StringBundler sb = new StringBundler(9);
+		StringBundler sb = new StringBundler(11);
 
 		sb.append("update ");
 		sb.append(tableName);
-		sb.append(" inner join Layout on ");
+		sb.append(" set layoutUuid = (select sourcePrototypeLayoutUuid from ");
+		sb.append("Layout where Layout.uuid_ = ");
 		sb.append(tableName);
-		sb.append(".layoutUuid = Layout.uuid_ set ");
+		sb.append(".layoutUuid) where exists (select 1 from Layout where ");
+		sb.append("Layout.uuid_ = ");
 		sb.append(tableName);
-		sb.append(".layoutUuid = Layout.sourcePrototypeLayoutUuid where ");
-		sb.append("Layout.sourcePrototypeLayoutUuid != '' and ");
-		sb.append("Layout.uuid_ != Layout.sourcePrototypeLayoutUuid");
+		sb.append(".layoutUuid and Layout.uuid_ != ");
+		sb.append("Layout.sourcePrototypeLayoutUuid and ");
+		sb.append("Layout.sourcePrototypeLayoutUuid != '')");
 
 		runSQL(sb.toString());
 	}

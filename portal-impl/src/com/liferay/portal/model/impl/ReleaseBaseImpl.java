@@ -37,6 +37,7 @@ public abstract class ReleaseBaseImpl extends ReleaseModelImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a release model instance should use the {@link Release} interface instead.
 	 */
+	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
 			ReleaseLocalServiceUtil.addRelease(this);

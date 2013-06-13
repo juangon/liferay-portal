@@ -24,13 +24,11 @@ import com.liferay.portal.service.http.TunnelUtil;
 import com.liferay.portlet.announcements.service.AnnouncementsEntryServiceUtil;
 
 /**
- * <p>
- * This class provides a HTTP utility for the
+ * Provides the HTTP utility for the
  * {@link com.liferay.portlet.announcements.service.AnnouncementsEntryServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it requires an additional
  * {@link com.liferay.portal.security.auth.HttpPrincipal} parameter.
- * </p>
  *
  * <p>
  * The benefits of using the HTTP utility is that it is fast and allows for
@@ -47,10 +45,10 @@ import com.liferay.portlet.announcements.service.AnnouncementsEntryServiceUtil;
  * The HTTP utility is only generated for remote services.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       AnnouncementsEntryServiceSoap
- * @see       com.liferay.portal.security.auth.HttpPrincipal
- * @see       com.liferay.portlet.announcements.service.AnnouncementsEntryServiceUtil
+ * @author Brian Wing Shun Chan
+ * @see AnnouncementsEntryServiceSoap
+ * @see com.liferay.portal.security.auth.HttpPrincipal
+ * @see com.liferay.portlet.announcements.service.AnnouncementsEntryServiceUtil
  * @generated
  */
 public class AnnouncementsEntryServiceHttp {
@@ -59,7 +57,7 @@ public class AnnouncementsEntryServiceHttp {
 		java.lang.String title, java.lang.String content, java.lang.String url,
 		java.lang.String type, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
-		boolean autoDisplayDate, int expirationDateMonth,
+		boolean displayImmediately, int expirationDateMonth,
 		int expirationDateDay, int expirationDateYear, int expirationDateHour,
 		int expirationDateMinute, int priority, boolean alert)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -71,7 +69,7 @@ public class AnnouncementsEntryServiceHttp {
 			MethodHandler methodHandler = new MethodHandler(methodKey, plid,
 					classNameId, classPK, title, content, url, type,
 					displayDateMonth, displayDateDay, displayDateYear,
-					displayDateHour, displayDateMinute, autoDisplayDate,
+					displayDateHour, displayDateMinute, displayImmediately,
 					expirationDateMonth, expirationDateDay, expirationDateYear,
 					expirationDateHour, expirationDateMinute, priority, alert);
 

@@ -66,6 +66,7 @@ public class OutputData implements Mergeable<OutputData>, Serializable {
 		return mergedSB;
 	}
 
+	@Override
 	public OutputData merge(OutputData outputData) {
 		if ((outputData == null) || (outputData == this)) {
 			return this;

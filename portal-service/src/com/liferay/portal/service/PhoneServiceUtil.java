@@ -18,11 +18,12 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
- * The utility for the phone remote service. This utility wraps {@link com.liferay.portal.service.impl.PhoneServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
- *
- * <p>
- * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
- * </p>
+ * Provides the remote service utility for Phone. This utility wraps
+ * {@link com.liferay.portal.service.impl.PhoneServiceImpl} and is the
+ * primary access point for service operations in application layer code running
+ * on a remote server. Methods of this service are expected to have security
+ * checks based on the propagated JAAS credentials because this service can be
+ * accessed remotely.
  *
  * @author Brian Wing Shun Chan
  * @see PhoneService
@@ -55,6 +56,10 @@ public class PhoneServiceUtil {
 		getService().setBeanIdentifier(beanIdentifier);
 	}
 
+	/**
+	* @deprecated As of 6.2.0, replaced by {@link #addPhone( String, long,
+	String, String, int, boolean, ServiceContext)}
+	*/
 	public static com.liferay.portal.model.Phone addPhone(
 		java.lang.String className, long classPK, java.lang.String number,
 		java.lang.String extension, int typeId, boolean primary)
@@ -63,6 +68,17 @@ public class PhoneServiceUtil {
 		return getService()
 				   .addPhone(className, classPK, number, extension, typeId,
 			primary);
+	}
+
+	public static com.liferay.portal.model.Phone addPhone(
+		java.lang.String className, long classPK, java.lang.String number,
+		java.lang.String extension, int typeId, boolean primary,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .addPhone(className, classPK, number, extension, typeId,
+			primary, serviceContext);
 	}
 
 	public static void deletePhone(long phoneId)

@@ -38,6 +38,7 @@ public abstract class MDRRuleBaseImpl extends MDRRuleModelImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a m d r rule model instance should use the {@link MDRRule} interface instead.
 	 */
+	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
 			MDRRuleLocalServiceUtil.addMDRRule(this);

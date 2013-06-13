@@ -14,22 +14,32 @@
 
 package com.liferay.portal.search.lucene;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.DocumentImpl;
+import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Tokenizer;
+
 import java.io.IOException;
 import java.io.Reader;
+import java.io.StringReader;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.document.Fieldable;
 
 /**
  * @author Raymond Augé
  * @author Mate Thurzo
  */
-public class PerFieldAnalyzer extends Analyzer {
+public class PerFieldAnalyzer extends Analyzer implements Tokenizer {
 
 	public PerFieldAnalyzer(
 		Analyzer defaultAnalyzer, Map<String, Analyzer> analyzerMap) {
@@ -82,11 +92,61 @@ public class PerFieldAnalyzer extends Analyzer {
 	}
 
 	@Override
+	public List<String> tokenize(
+			String fieldName, String input, String languageId)
+		throws SearchException {
+
+		List<String> tokens = new ArrayList<String>();
+		TokenStream tokenStream = null;
+
+		try {
+			String localizedFieldName = DocumentImpl.getLocalizedName(
+				languageId, fieldName);
+
+			Analyzer analyzer = getAnalyzer(localizedFieldName);
+
+			tokenStream = analyzer.tokenStream(
+				localizedFieldName, new StringReader(input));
+
+			CharTermAttribute charTermAttribute = tokenStream.addAttribute(
+				CharTermAttribute.class);
+
+			tokenStream.reset();
+
+			while (tokenStream.incrementToken()) {
+				tokens.add(charTermAttribute.toString());
+			}
+
+			tokenStream.end();
+		}
+		catch (IOException ioe) {
+			throw new SearchException(ioe);
+		}
+		finally {
+			if (tokenStream != null) {
+				try {
+					tokenStream.close();
+				}
+				catch (IOException ioe) {
+					if (_log.isWarnEnabled()) {
+						_log.warn("Unable to close token stream", ioe);
+					}
+				}
+			}
+
+		}
+
+		return tokens;
+	}
+
+	@Override
 	public TokenStream tokenStream(String fieldName, Reader reader) {
 		Analyzer analyzer = getAnalyzer(fieldName);
 
 		return analyzer.tokenStream(fieldName, reader);
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(PerFieldAnalyzer.class);
 
 	private Analyzer _analyzer;
 	private Map<String, Analyzer> _analyzers = new HashMap<String, Analyzer>();

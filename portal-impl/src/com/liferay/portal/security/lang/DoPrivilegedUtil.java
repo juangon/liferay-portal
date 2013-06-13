@@ -45,10 +45,12 @@ public class DoPrivilegedUtil {
 
 	private static class NoPACL implements PACL {
 
+		@Override
 		public <T> T wrap(PrivilegedAction<T> privilegedAction) {
 			return privilegedAction.run();
 		}
 
+		@Override
 		public <T> T wrap(
 				PrivilegedExceptionAction<T> privilegedExceptionAction)
 			throws Exception {
@@ -56,10 +58,12 @@ public class DoPrivilegedUtil {
 			return privilegedExceptionAction.run();
 		}
 
+		@Override
 		public <T> T wrap(T t) {
 			return t;
 		}
 
+		@Override
 		public <T> T wrap(T t, boolean checkActive) {
 			return t;
 		}

@@ -65,6 +65,7 @@ import org.apache.commons.lang.time.StopWatch;
 public class AudioProcessorImpl
 	extends DLPreviewableProcessor implements AudioProcessor {
 
+	@Override
 	public void afterPropertiesSet() {
 		boolean valid = true;
 
@@ -96,6 +97,7 @@ public class AudioProcessorImpl
 		FileUtil.mkdirs(PREVIEW_TMP_PATH);
 	}
 
+	@Override
 	public void generateAudio(
 			FileVersion sourceFileVersion, FileVersion destinationFileVersion)
 		throws Exception {
@@ -103,22 +105,26 @@ public class AudioProcessorImpl
 		_generateAudio(sourceFileVersion, destinationFileVersion);
 	}
 
+	@Override
 	public Set<String> getAudioMimeTypes() {
 		return _audioMimeTypes;
 	}
 
+	@Override
 	public InputStream getPreviewAsStream(FileVersion fileVersion, String type)
 		throws Exception {
 
 		return doGetPreviewAsStream(fileVersion, type);
 	}
 
+	@Override
 	public long getPreviewFileSize(FileVersion fileVersion, String type)
 		throws Exception {
 
 		return doGetPreviewFileSize(fileVersion, type);
 	}
 
+	@Override
 	public boolean hasAudio(FileVersion fileVersion) {
 		boolean hasAudio = false;
 
@@ -136,14 +142,17 @@ public class AudioProcessorImpl
 		return hasAudio;
 	}
 
+	@Override
 	public boolean isAudioSupported(FileVersion fileVersion) {
 		return isSupported(fileVersion);
 	}
 
+	@Override
 	public boolean isAudioSupported(String mimeType) {
 		return isSupported(mimeType);
 	}
 
+	@Override
 	public boolean isSupported(String mimeType) {
 		if (Validator.isNull(mimeType)) {
 			return false;
@@ -466,7 +475,7 @@ public class AudioProcessorImpl
 	private static final String[] _PREVIEW_TYPES =
 		PropsValues.DL_FILE_ENTRY_PREVIEW_AUDIO_CONTAINERS;
 
-	private static Log _log = LogFactoryUtil.getLog(AudioProcessor.class);
+	private static Log _log = LogFactoryUtil.getLog(AudioProcessorImpl.class);
 
 	private Set<String> _audioMimeTypes = SetUtil.fromArray(
 		PropsValues.DL_FILE_ENTRY_PREVIEW_AUDIO_MIME_TYPES);
@@ -490,6 +499,7 @@ public class AudioProcessorImpl
 			_audioProperties = audioProperties;
 		}
 
+		@Override
 		public String call() throws ProcessException {
 			Properties systemProperties = System.getProperties();
 

@@ -66,6 +66,7 @@ public class TemplateProcessor implements ColumnProcessor {
 		_portletRenderers = new TreeMap<Integer, List<PortletRenderer>>(
 			new Comparator<Integer>() {
 
+				@Override
 				public int compare(
 					Integer renderWeight1, Integer renderWeight2) {
 
@@ -83,10 +84,12 @@ public class TemplateProcessor implements ColumnProcessor {
 		return _portletAjaxRender;
 	}
 
+	@Override
 	public String processColumn(String columnId) throws Exception {
 		return processColumn(columnId, StringPool.BLANK);
 	}
 
+	@Override
 	public String processColumn(String columnId, String classNames)
 		throws Exception {
 
@@ -166,6 +169,7 @@ public class TemplateProcessor implements ColumnProcessor {
 		return sb.toString();
 	}
 
+	@Override
 	public String processMax() throws Exception {
 		BufferCacheServletResponse bufferCacheServletResponse =
 			new BufferCacheServletResponse(_response);
@@ -176,6 +180,7 @@ public class TemplateProcessor implements ColumnProcessor {
 		return bufferCacheServletResponse.getString();
 	}
 
+	@Override
 	public String processPortlet(String portletId) throws Exception {
 		_request.setAttribute(WebKeys.RENDER_PORTLET_RESOURCE, Boolean.TRUE);
 

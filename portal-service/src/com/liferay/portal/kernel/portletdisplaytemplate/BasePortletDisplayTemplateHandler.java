@@ -27,11 +27,12 @@ import java.util.Map;
 public abstract class BasePortletDisplayTemplateHandler
 	extends BaseTemplateHandler {
 
+	@Override
 	public Map<String, TemplateVariableGroup> getTemplateVariableGroups(
-			long classPK, Locale locale)
+			long classPK, String language, Locale locale)
 		throws Exception {
 
-		return PortletDisplayTemplateUtil.getTemplateVariableGroups();
+		return PortletDisplayTemplateUtil.getTemplateVariableGroups(language);
 	}
 
 }

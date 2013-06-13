@@ -50,6 +50,7 @@ public class ClusterGroupCacheModel implements CacheModel<ClusterGroup>,
 		return sb.toString();
 	}
 
+	@Override
 	public ClusterGroup toEntityModel() {
 		ClusterGroupImpl clusterGroupImpl = new ClusterGroupImpl();
 
@@ -76,6 +77,7 @@ public class ClusterGroupCacheModel implements CacheModel<ClusterGroup>,
 		return clusterGroupImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		clusterGroupId = objectInput.readLong();
 		name = objectInput.readUTF();
@@ -83,6 +85,7 @@ public class ClusterGroupCacheModel implements CacheModel<ClusterGroup>,
 		wholeCluster = objectInput.readBoolean();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(clusterGroupId);

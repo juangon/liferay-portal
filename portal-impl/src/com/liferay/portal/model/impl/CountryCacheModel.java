@@ -57,6 +57,7 @@ public class CountryCacheModel implements CacheModel<Country>, Externalizable {
 		return sb.toString();
 	}
 
+	@Override
 	public Country toEntityModel() {
 		CountryImpl countryImpl = new CountryImpl();
 
@@ -105,6 +106,7 @@ public class CountryCacheModel implements CacheModel<Country>, Externalizable {
 		return countryImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		countryId = objectInput.readLong();
 		name = objectInput.readUTF();
@@ -116,6 +118,7 @@ public class CountryCacheModel implements CacheModel<Country>, Externalizable {
 		active = objectInput.readBoolean();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(countryId);

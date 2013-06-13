@@ -45,10 +45,12 @@ import java.util.List;
 public class FileEntryAtomCollectionAdapter
 	extends BaseMediaAtomCollectionAdapter<FileEntry> {
 
+	@Override
 	public String getCollectionName() {
 		return COLLECTION_NAME;
 	}
 
+	@Override
 	public List<String> getEntryAuthors(FileEntry fileEntry) {
 		List<String> authors = new ArrayList<String>();
 
@@ -57,6 +59,7 @@ public class FileEntryAtomCollectionAdapter
 		return authors;
 	}
 
+	@Override
 	public AtomEntryContent getEntryContent(
 		FileEntry fileEntry, AtomRequestContext atomRequestContext) {
 
@@ -74,22 +77,27 @@ public class FileEntryAtomCollectionAdapter
 		return atomEntryContent;
 	}
 
+	@Override
 	public String getEntryId(FileEntry fileEntry) {
 		return String.valueOf(fileEntry.getPrimaryKey());
 	}
 
+	@Override
 	public String getEntrySummary(FileEntry fileEntry) {
 		return fileEntry.getDescription();
 	}
 
+	@Override
 	public String getEntryTitle(FileEntry fileEntry) {
 		return fileEntry.getTitle();
 	}
 
+	@Override
 	public Date getEntryUpdated(FileEntry fileEntry) {
 		return fileEntry.getModifiedDate();
 	}
 
+	@Override
 	public String getFeedTitle(AtomRequestContext atomRequestContext) {
 		return AtomUtil.createFeedTitleFromPortletName(
 			atomRequestContext, PortletKeys.DOCUMENT_LIBRARY) + " files";

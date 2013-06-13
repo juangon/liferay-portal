@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
@@ -139,60 +140,64 @@ public class LicenseUtil {
 	}
 
 	public static String getHostName() {
-		if (_hostName == null) {
-			_hostName = StringPool.BLANK;
+		if (_hostName != null) {
+			return _hostName;
+		}
 
-			try {
-				Runtime runtime = Runtime.getRuntime();
+		_hostName = StringPool.BLANK;
 
-				Process process = runtime.exec("hostname");
+		try {
+			Runtime runtime = Runtime.getRuntime();
 
-				BufferedReader bufferedReader = new BufferedReader(
-					new InputStreamReader(process.getInputStream()), 128);
+			Process process = runtime.exec("hostname");
 
-				_hostName = bufferedReader.readLine();
+			BufferedReader bufferedReader = new BufferedReader(
+				new InputStreamReader(process.getInputStream()), 128);
 
-				bufferedReader.close();
-			}
-			catch (Exception e) {
-				_log.error("Unable to read local server's host name");
+			_hostName = bufferedReader.readLine();
 
-				_log.error(e, e);
-			}
+			bufferedReader.close();
+		}
+		catch (Exception e) {
+			_log.error("Unable to read local server's host name");
+
+			_log.error(e, e);
 		}
 
 		return _hostName;
 	}
 
 	public static Set<String> getIpAddresses() {
-		if (_ipAddresses == null) {
-			_ipAddresses = new HashSet<String>();
+		if (_ipAddresses != null) {
+			return new HashSet<String>(_ipAddresses);
+		}
 
-			try {
-				List<NetworkInterface> networkInterfaces = Collections.list(
-					NetworkInterface.getNetworkInterfaces());
+		_ipAddresses = new HashSet<String>();
 
-				for (NetworkInterface networkInterface : networkInterfaces) {
-					List<InetAddress> inetAddresses = Collections.list(
-						networkInterface.getInetAddresses());
+		try {
+			List<NetworkInterface> networkInterfaces = Collections.list(
+				NetworkInterface.getNetworkInterfaces());
 
-					for (InetAddress inetAddress : inetAddresses) {
-						if (inetAddress.isLinkLocalAddress() ||
-							inetAddress.isLoopbackAddress() ||
-							!(inetAddress instanceof Inet4Address)) {
+			for (NetworkInterface networkInterface : networkInterfaces) {
+				List<InetAddress> inetAddresses = Collections.list(
+					networkInterface.getInetAddresses());
 
-							continue;
-						}
+				for (InetAddress inetAddress : inetAddresses) {
+					if (inetAddress.isLinkLocalAddress() ||
+						inetAddress.isLoopbackAddress() ||
+						!(inetAddress instanceof Inet4Address)) {
 
-						_ipAddresses.add(inetAddress.getHostAddress());
+						continue;
 					}
+
+					_ipAddresses.add(inetAddress.getHostAddress());
 				}
 			}
-			catch (Exception e) {
-				_log.error("Unable to read local server's IP addresses");
+		}
+		catch (Exception e) {
+			_log.error("Unable to read local server's IP addresses");
 
-				_log.error(e, e);
-			}
+			_log.error(e, e);
 		}
 
 		return new HashSet<String>(_ipAddresses);
@@ -535,10 +540,10 @@ public class LicenseUtil {
 		jsonObject.put("liferayVersion", ReleaseInfo.getBuildNumber());
 
 		if (Validator.isNull(productEntryName)) {
-			jsonObject.put("cmd", "QUERY");
+			jsonObject.put(Constants.CMD, "QUERY");
 		}
 		else {
-			jsonObject.put("cmd", "REGISTER");
+			jsonObject.put(Constants.CMD, "REGISTER");
 
 			if (productEntryName.startsWith("basic")) {
 				jsonObject.put("productEntryName", "basic");
@@ -713,8 +718,7 @@ public class LicenseUtil {
 	private static final String _PROXY_USER_NAME = GetterUtil.getString(
 		PropsUtil.get("license.proxy.username"));
 
-	private static Log _log = LogFactoryUtil.getLog(
-		DefaultLicenseManagerImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(LicenseUtil.class);
 
 	private static String _encryptedSymmetricKey;
 	private static MethodHandler _getServerInfoMethodHandler =

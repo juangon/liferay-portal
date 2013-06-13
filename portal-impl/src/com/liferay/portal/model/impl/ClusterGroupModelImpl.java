@@ -81,26 +81,32 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 	public ClusterGroupModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _clusterGroupId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setClusterGroupId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _clusterGroupId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return ClusterGroup.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return ClusterGroup.class.getName();
 	}
@@ -144,14 +150,17 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 		}
 	}
 
+	@Override
 	public long getClusterGroupId() {
 		return _clusterGroupId;
 	}
 
+	@Override
 	public void setClusterGroupId(long clusterGroupId) {
 		_clusterGroupId = clusterGroupId;
 	}
 
+	@Override
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -161,10 +170,12 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 		}
 	}
 
+	@Override
 	public void setName(String name) {
 		_name = name;
 	}
 
+	@Override
 	public String getClusterNodeIds() {
 		if (_clusterNodeIds == null) {
 			return StringPool.BLANK;
@@ -174,18 +185,22 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 		}
 	}
 
+	@Override
 	public void setClusterNodeIds(String clusterNodeIds) {
 		_clusterNodeIds = clusterNodeIds;
 	}
 
+	@Override
 	public boolean getWholeCluster() {
 		return _wholeCluster;
 	}
 
+	@Override
 	public boolean isWholeCluster() {
 		return _wholeCluster;
 	}
 
+	@Override
 	public void setWholeCluster(boolean wholeCluster) {
 		_wholeCluster = wholeCluster;
 	}
@@ -227,6 +242,7 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 		return clusterGroupImpl;
 	}
 
+	@Override
 	public int compareTo(ClusterGroup clusterGroup) {
 		long primaryKey = clusterGroup.getPrimaryKey();
 
@@ -243,18 +259,15 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ClusterGroup)) {
 			return false;
 		}
 
-		ClusterGroup clusterGroup = null;
-
-		try {
-			clusterGroup = (ClusterGroup)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		ClusterGroup clusterGroup = (ClusterGroup)obj;
 
 		long primaryKey = clusterGroup.getPrimaryKey();
 
@@ -319,6 +332,7 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(16);
 

@@ -44,10 +44,12 @@ public class FreeMarkerTaglibFactoryUtil implements CacheRegistryItem {
 		return new TaglibFactoryCacheWrapper(servletContext);
 	}
 
+	@Override
 	public String getRegistryName() {
 		return _registryName;
 	}
 
+	@Override
 	public void invalidate() {
 		_templateModels.clear();
 	}
@@ -55,43 +57,46 @@ public class FreeMarkerTaglibFactoryUtil implements CacheRegistryItem {
 	private static FreeMarkerTaglibFactoryUtil _getInstance(
 		ServletContext servletContext) {
 
-		if (_instance == null) {
-			synchronized(FreeMarkerTaglibFactoryUtil.class) {
-				if (_instance == null) {
-					String contextPath = ContextPathUtil.getContextPath(
-						servletContext);
+		if (_instance != null) {
+			return _instance;
+		}
 
-					// First call within current class loader
+		synchronized(FreeMarkerTaglibFactoryUtil.class) {
+			if (_instance == null) {
+				String contextPath = ContextPathUtil.getContextPath(
+					servletContext);
 
-					_instance = new FreeMarkerTaglibFactoryUtil(contextPath);
+				// First call within current class loader
 
-					// Unregister previous one if there is one, this should only
-					// happen on plugin redeploy
+				_instance = new FreeMarkerTaglibFactoryUtil(contextPath);
 
-					CacheRegistryUtil.unregister(_instance._registryName);
+				// Unregister previous one if there is one, this should only
+				// happen on plugin redeploy
 
-					// Register current instance
+				CacheRegistryUtil.unregister(_instance._registryName);
 
-					CacheRegistryUtil.register(_instance);
+				// Register current instance
 
-					// Save a hard stack copy to prevent Tomcat null out heap
-					// reference
+				CacheRegistryUtil.register(_instance);
 
-					final String name = _instance._registryName;
+				// Save a hard stack copy to prevent Tomcat null out heap
+				// reference
 
-					// Bind _instance lifecycle to servlet context to prevent
-					// memory leak on undeploy
+				final String name = _instance._registryName;
 
-					FinalizeManager.register(
-						servletContext,
-						new FinalizeAction() {
+				// Bind _instance lifecycle to servlet context to prevent memory
+				// leak on undeploy
 
-							public void doFinalize() {
-								CacheRegistryUtil.unregister(name);
-							}
+				FinalizeManager.register(
+					servletContext,
+					new FinalizeAction() {
 
-						});
-				}
+						@Override
+						public void doFinalize() {
+							CacheRegistryUtil.unregister(name);
+						}
+
+					});
 			}
 		}
 
@@ -122,6 +127,7 @@ public class FreeMarkerTaglibFactoryUtil implements CacheRegistryItem {
 			_taglibFactory = new TaglibFactory(servletContext);
 		}
 
+		@Override
 		public TemplateModel get(String uri) throws TemplateModelException {
 			TemplateModel templateModel = _templateModels.get(uri);
 
@@ -134,6 +140,7 @@ public class FreeMarkerTaglibFactoryUtil implements CacheRegistryItem {
 			return templateModel;
 		}
 
+		@Override
 		public boolean isEmpty() {
 			return false;
 		}

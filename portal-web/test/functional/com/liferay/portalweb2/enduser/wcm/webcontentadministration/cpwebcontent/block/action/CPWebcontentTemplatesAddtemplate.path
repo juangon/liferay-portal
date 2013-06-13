@@ -1,0 +1,77 @@
+<html>
+<head>
+<title>CPWebcontentTemplatesAddtemplate</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">CPWebcontentTemplatesAddtemplate</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>PAGE_NAME</td>
+	<td></td>
+	<td>CPWebcontentTemplatesAddtemplate</td>
+</tr>
+<!---->
+<tr>
+	<td>TEMPLATES_IFRAME</td>
+	<td>//div[contains(@class,'dialog-iframe-bd')]/iframe[contains(@src,'scopeTitle=Templates')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>CLOSE_WINDOW</td>
+	<td>//button[contains(@class, 'close-content')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>NAME_FIELD</td>
+	<td>//input[@id='_166_name']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>DETAILS</td>
+	<td>//div[@class='accordion-toggle']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>DESCRIPTION_FIELD</td>
+	<td>//textarea[@id='_166_description']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SAVE_BUTTON</td>
+	<td>//button[contains(.,'Save')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SAVE_AND_CONTINUE_BUTTON</td>
+	<td>//button[contains(.,'Save and Continue')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>CANCEL_BUTTON</td>
+	<td>//button[contains(., 'Cancel')]</td>
+	<td></td>
+</tr>
+<!---->
+<!--SCRIPT-->
+<tr>
+	<td>SCRIPT_CONTENT_FIELD</td>
+	<td>//div[@id='_166_richEditor']/textarea</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SCRIPT_FIELDS_1</td>
+	<td>//div[@id='_166_paletteData']/div[2]/ul/li/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SCRIPT_CHOOSE_FILE</td>
+	<td>//input[@id='_166_script']</td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

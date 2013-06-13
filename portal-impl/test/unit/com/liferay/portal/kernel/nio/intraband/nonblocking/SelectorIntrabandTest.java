@@ -33,6 +33,8 @@ import com.liferay.portal.test.AspectJMockingNewClassLoaderJUnitTestRunner;
 
 import java.io.IOException;
 
+import java.net.Socket;
+
 import java.nio.ByteBuffer;
 import java.nio.channels.Channel;
 import java.nio.channels.GatheringByteChannel;
@@ -133,7 +135,7 @@ public class SelectorIntrabandTest {
 
 		// Close selector, without log
 
-		_selectorIntraband = new SelectorIntraband(1000);
+		_selectorIntraband = new SelectorIntraband(_DEFAULT_TIMEOUT);
 
 		logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			SelectorIntraband.class.getName(), Level.OFF);
@@ -618,6 +620,10 @@ public class SelectorIntrabandTest {
 				interruptThread.join();
 			}
 
+			_selectorIntraband.close();
+
+			_selectorIntraband = new SelectorIntraband(_DEFAULT_TIMEOUT);
+
 			// Normal register
 
 			SelectionKeyRegistrationReference
@@ -635,9 +641,41 @@ public class SelectorIntrabandTest {
 
 			Assert.assertTrue(selectionKey.isValid());
 			Assert.assertEquals(
-				SelectionKey.OP_READ | SelectionKey.OP_WRITE,
-				selectionKey.interestOps());
+				SelectionKey.OP_READ, selectionKey.interestOps());
 			Assert.assertNotNull(selectionKey.attachment());
+
+			selectionKey.interestOps(
+				SelectionKey.OP_READ | SelectionKey.OP_WRITE);
+
+			selector = _selectorIntraband.selector;
+
+			selector.wakeup();
+
+			while (selectionKey.interestOps() != SelectionKey.OP_READ);
+
+			// Concurrent cancelling
+
+			wakeUpThread = new Thread(new WakeUpRunnable(_selectorIntraband));
+
+			wakeUpThread.start();
+
+			synchronized (selector) {
+				wakeUpThread.interrupt();
+				wakeUpThread.join();
+
+				selectionKey.interestOps(
+					SelectionKey.OP_READ | SelectionKey.OP_WRITE);
+
+				SocketChannel peerSocketChannel = peerSocketChannels[1];
+
+				peerSocketChannel.write(ByteBuffer.allocate(1));
+
+				Socket socket = peerSocketChannel.socket();
+
+				socket.shutdownOutput();
+			}
+
+			while (selectionKey.isValid());
 
 			// Register after close
 
@@ -796,7 +834,11 @@ public class SelectorIntrabandTest {
 			interruptThread.join();
 		}
 
+		_selectorIntraband.close();
+
 		// Normal register
+
+		_selectorIntraband = new SelectorIntraband(_DEFAULT_TIMEOUT);
 
 		SelectionKeyRegistrationReference selectionKeyRegistrationReference =
 			(SelectionKeyRegistrationReference)
@@ -816,11 +858,18 @@ public class SelectorIntrabandTest {
 			selectionKeyRegistrationReference.writeSelectionKey;
 
 		Assert.assertTrue(writeSelectionKey.isValid());
-		Assert.assertEquals(
-			SelectionKey.OP_WRITE, writeSelectionKey.interestOps());
+		Assert.assertEquals(0, writeSelectionKey.interestOps());
 		Assert.assertNotNull(writeSelectionKey.attachment());
 		Assert.assertSame(
 			readSelectionKey.attachment(), writeSelectionKey.attachment());
+
+		writeSelectionKey.interestOps(SelectionKey.OP_WRITE);
+
+		selector = _selectorIntraband.selector;
+
+		selector.wakeup();
+
+		while (writeSelectionKey.interestOps() != 0);
 
 		unregisterChannels(selectionKeyRegistrationReference);
 
@@ -1277,9 +1326,7 @@ public class SelectorIntrabandTest {
 	private static final long _DEFAULT_TIMEOUT = Time.SECOND;
 
 	private byte[] _data = _DATA_STRING.getBytes(Charset.defaultCharset());
-
 	private SelectorIntraband _selectorIntraband;
-
 	private byte _type = 1;
 
 	private static class MockDuplexSelectableChannel
@@ -1348,26 +1395,32 @@ public class SelectorIntrabandTest {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public long read(ByteBuffer[] byteBuffers, int offset, int length) {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public long read(ByteBuffer[] byteBuffers) {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public int read(ByteBuffer byteBuffer) {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public long write(ByteBuffer[] byteBuffers, int offset, int length) {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public long write(ByteBuffer[] byteBuffers) {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public int write(ByteBuffer byteBuffer) {
 			throw new UnsupportedOperationException();
 		}
@@ -1383,6 +1436,7 @@ public class SelectorIntrabandTest {
 			_selectorIntraband = selectorIntraband;
 		}
 
+		@Override
 		public void run() {
 			Thread currentThread = Thread.currentThread();
 

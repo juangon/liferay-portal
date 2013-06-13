@@ -49,6 +49,7 @@
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
 			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="app.server.bundled" value="true" />
 			<property name="app.server.type" value="glassfish" />
 			<property name="bundled.dir.name" value="$${db-upgrade.bundled.glassfish.dir.name}" />
@@ -91,6 +92,7 @@
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
 			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="bundled.dir.name" value="$${db-upgrade.bundled.jboss.dir.name}" />
 			<property name="bundled.file.name" value="$${db-upgrade.bundled.jboss.file.name}" />
 			<property name="legacy.theme.ids" value="classic,controlpanel" />
@@ -131,6 +133,7 @@
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
 			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="bundled.dir.name" value="$${db-upgrade.bundled.tomcat.dir.name}" />
 			<property name="bundled.file.name" value="$${db-upgrade.bundled.tomcat.file.name}" />
 			<property name="legacy.theme.ids" value="classic,controlpanel" />
@@ -178,6 +181,7 @@
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
 			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="bundled.dir.name" value="$${db-upgrade.bundled.tomcat.dir.name}" />
 			<property name="bundled.file.name" value="$${db-upgrade.bundled.tomcat.file.name}" />
 			<property name="legacy.theme.ids" value="classic,controlpanel" />
@@ -205,6 +209,7 @@
 
 		<antcall target="prepare-common">
 			<param name="database" value="mysql" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -219,6 +224,7 @@
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
 			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite}" />
 			<property name="test.pacl" value="$${test.pacl}" />
 		</ant>
@@ -235,6 +241,7 @@
 
 		<antcall target="prepare-common">
 			<param name="database" value="mysql" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -249,6 +256,7 @@
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
 			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite}" />
 			<property name="test.pacl" value="$${test.pacl}" />
 		</ant>
@@ -265,6 +273,7 @@
 
 		<antcall target="prepare-common">
 			<param name="database" value="mysql" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -279,6 +288,7 @@
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
 			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite}" />
 			<property name="test.pacl" value="$${test.pacl}" />
 		</ant>
@@ -295,6 +305,7 @@
 
 		<antcall target="prepare-common">
 			<param name="database" value="mysql" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -309,6 +320,7 @@
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
 			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite}" />
 			<property name="test.pacl" value="$${test.pacl}" />
 		</ant>
@@ -325,6 +337,7 @@
 
 		<antcall target="prepare-common">
 			<param name="database" value="mysql" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -339,6 +352,7 @@
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
 			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite}" />
 			<property name="test.pacl" value="$${test.pacl}" />
 		</ant>
@@ -362,6 +376,7 @@
 
 		<antcall target="prepare-common">
 			<param name="database" value="db2" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -376,6 +391,7 @@
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
 			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite}" />
 			<property name="test.pacl" value="$${test.pacl}" />
 		</ant>
@@ -396,6 +412,7 @@
 
 		<antcall target="prepare-common">
 			<param name="database" value="hsql" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -410,6 +427,7 @@
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
 			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite}" />
 			<property name="test.pacl" value="$${test.pacl}" />
 		</ant>
@@ -426,6 +444,7 @@
 
 		<antcall target="prepare-common">
 			<param name="database" value="mysql" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -440,6 +459,7 @@
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
 			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite}" />
 			<property name="test.pacl" value="$${test.pacl}" />
 		</ant>
@@ -456,6 +476,7 @@
 
 		<antcall target="prepare-common">
 			<param name="database" value="mysql" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -470,6 +491,7 @@
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
 			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.browser" value="googlechrome" />
 			<property name="test.name" value="${test.ant.script.suite}" />
 			<property name="test.pacl" value="$${test.pacl}" />
@@ -487,6 +509,7 @@
 
 		<antcall target="prepare-common">
 			<param name="database" value="mysql" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -501,6 +524,7 @@
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
 			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.browser" value="iehta" />
 			<property name="test.name" value="${test.ant.script.suite}" />
 			<property name="test.pacl" value="$${test.pacl}" />
@@ -525,6 +549,7 @@
 
 		<antcall target="prepare-common">
 			<param name="database" value="oracle-10" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -539,6 +564,7 @@
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
 			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite}" />
 			<property name="test.pacl" value="$${test.pacl}" />
 		</ant>
@@ -566,6 +592,7 @@
 
 		<antcall target="prepare-common">
 			<param name="database" value="oracle-11" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -580,6 +607,7 @@
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
 			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite}" />
 			<property name="test.pacl" value="$${test.pacl}" />
 		</ant>
@@ -607,6 +635,7 @@
 
 		<antcall target="prepare-common">
 			<param name="database" value="postgresql-8.4" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -621,6 +650,7 @@
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
 			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite}" />
 			<property name="test.pacl" value="$${test.pacl}" />
 		</ant>
@@ -648,6 +678,7 @@
 
 		<antcall target="prepare-common">
 			<param name="database" value="postgresql-9.0" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -662,6 +693,7 @@
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
 			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite}" />
 			<property name="test.pacl" value="$${test.pacl}" />
 		</ant>
@@ -689,6 +721,7 @@
 
 		<antcall target="prepare-common">
 			<param name="database" value="sql-server-2005" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -703,6 +736,7 @@
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
 			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite}" />
 			<property name="test.pacl" value="$${test.pacl}" />
 		</ant>
@@ -730,6 +764,7 @@
 
 		<antcall target="prepare-common">
 			<param name="database" value="sql-server-2008" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -744,6 +779,7 @@
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
 			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite}" />
 			<property name="test.pacl" value="$${test.pacl}" />
 		</ant>
@@ -771,6 +807,7 @@
 
 		<antcall target="prepare-common">
 			<param name="database" value="sybase" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -785,6 +822,7 @@
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
 			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite}" />
 			<property name="test.pacl" value="$${test.pacl}" />
 		</ant>
@@ -805,6 +843,7 @@
 
 		<antcall target="prepare-common">
 			<param name="database" value="mysql" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -819,6 +858,7 @@
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
 			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite}" />
 			<property name="test.pacl" value="$${test.pacl}" />
 		</ant>
@@ -835,6 +875,7 @@
 
 		<antcall target="prepare-common">
 			<param name="database" value="mysql" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 			<param name="vm.vmdk.suffix" value="websphere-6.1.0.27" />
 		</antcall>
@@ -850,6 +891,7 @@
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
 			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite}" />
 			<property name="test.pacl" value="$${test.pacl}" />
 		</ant>
@@ -866,6 +908,7 @@
 
 		<antcall target="prepare-common">
 			<param name="database" value="mysql" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -880,6 +923,7 @@
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
 			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite}" />
 			<property name="test.pacl" value="$${test.pacl}" />
 		</ant>
@@ -896,6 +940,7 @@
 
 		<antcall target="prepare-common">
 			<param name="database" value="mysql" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 			<param name="vm.vmdk.suffix" value="websphere-8.0.0.0" />
 		</antcall>
@@ -911,6 +956,7 @@
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
 			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite}" />
 			<property name="test.pacl" value="$${test.pacl}" />
 		</ant>

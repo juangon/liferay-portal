@@ -51,6 +51,7 @@ public class PortalHookPermission extends BasicPermission {
 
 	private static class NoPACL implements PACL {
 
+		@Override
 		public void checkPermission(
 			String name, ClassLoader portletClassLoader, Object subject) {
 		}

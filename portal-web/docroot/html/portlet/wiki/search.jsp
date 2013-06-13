@@ -55,7 +55,7 @@ portletURL.setParameter("keywords", keywords);
 		title="search"
 	/>
 
-	<span class="aui-search-bar">
+	<span class="form-search">
 		<aui:input inlineField="<%= true %>" label="" name="keywords" size="30" title="search-pages" type="text" value="<%= keywords %>" />
 
 		<aui:button type="submit" value="search" />
@@ -88,7 +88,9 @@ portletURL.setParameter("keywords", keywords);
 
 		Hits hits = indexer.search(searchContext);
 
-		if (searchContainer.recalculateCur(hits.getLength())) {
+		searchContainer.setTotal(hits.getLength());
+
+		if (searchContainer.isRecalculateCur()) {
 			searchContext.setEnd(searchContainer.getEnd());
 			searchContext.setStart(searchContainer.getStart());
 

@@ -79,7 +79,7 @@ if (selUser != null) {
 	<c:choose>
 		<c:when test="<%= PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_ENABLED && ((selUser == null) || ((publicLayoutSetPrototype == null) && (selUser.getPublicLayoutsPageCount() == 0))) && !layoutSetPrototypes.isEmpty() %>">
 			<aui:select label="public-pages" name="publicLayoutSetPrototypeId">
-				<aui:option label='<%= selUser == null ? "default" : "none" %>' selected="<%= true %>" value="" />
+				<aui:option label="none" selected="<%= true %>" value="" />
 
 				<%
 				for (LayoutSetPrototype layoutSetPrototype : layoutSetPrototypes) {
@@ -95,7 +95,7 @@ if (selUser != null) {
 
 			<c:choose>
 				<c:when test="<%= hasUnlinkLayoutSetPrototypePermission %>">
-					<div class="aui-helper-hidden" id="<portlet:namespace />publicLayoutSetPrototypeIdOptions">
+					<div class="hide" id="<portlet:namespace />publicLayoutSetPrototypeIdOptions">
 						<aui:input helpMessage="enable-propagation-of-changes-from-the-site-template-help" label="enable-propagation-of-changes-from-the-site-template" name="publicLayoutSetPrototypeLinkEnabled" type="checkbox" value="<%= publicLayoutSetPrototypeLinkEnabled %>" />
 					</div>
 				</c:when>
@@ -151,7 +151,7 @@ if (selUser != null) {
 	<c:choose>
 		<c:when test="<%= PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED && ((selUser == null) || ((privateLayoutSetPrototype == null) && (selUser.getPrivateLayoutsPageCount() == 0))) && !layoutSetPrototypes.isEmpty() %>">
 			<aui:select label="private-pages" name="privateLayoutSetPrototypeId">
-				<aui:option label='<%= selUser == null ? "default" : "none" %>' selected="<%= true %>" value="" />
+				<aui:option label="none" selected="<%= true %>" value="" />
 
 				<%
 				for (LayoutSetPrototype layoutSetPrototype : layoutSetPrototypes) {
@@ -167,7 +167,7 @@ if (selUser != null) {
 
 			<c:choose>
 				<c:when test="<%= hasUnlinkLayoutSetPrototypePermission %>">
-					<div class="aui-helper-hidden" id="<portlet:namespace />privateLayoutSetPrototypeIdOptions">
+					<div class="hide" id="<portlet:namespace />privateLayoutSetPrototypeIdOptions">
 						<aui:input helpMessage="enable-propagation-of-changes-from-the-site-template-help" label="enable-propagation-of-changes-from-the-site-template" name="privateLayoutSetPrototypeLinkEnabled" type="checkbox" value="<%= privateLayoutSetPrototypeLinkEnabled %>" />
 					</div>
 				</c:when>

@@ -21,11 +21,10 @@ import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 
 /**
- * The interface for the user notification event local service.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
+ * Provides the local service interface for UserNotificationEvent. Methods of this
+ * service will not have security checks based on the propagated JAAS
+ * credentials because this service can only be accessed from within the same
+ * VM.
  *
  * @author Brian Wing Shun Chan
  * @see UserNotificationEventLocalServiceUtil
@@ -170,6 +169,7 @@ public interface UserNotificationEventLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	@Override
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.PersistedModel getPersistedModel(
 		java.io.Serializable primaryKeyObj)
@@ -256,14 +256,51 @@ public interface UserNotificationEventLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portal.model.UserNotificationEvent> getArchivedUserNotificationEvents(
+		long userId, boolean archived)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portal.model.UserNotificationEvent> getArchivedUserNotificationEvents(
+		long userId, boolean archived, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getArchivedUserNotificationEventsCount(long userId,
+		boolean archived)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portal.model.UserNotificationEvent> getDeliveredUserNotificationEvents(
+		long userId, boolean delivered)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portal.model.UserNotificationEvent> getDeliveredUserNotificationEvents(
+		long userId, boolean delivered, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getDeliveredUserNotificationEventsCount(long userId,
+		boolean delivered)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.UserNotificationEvent> getUserNotificationEvents(
 		long userId) throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* @deprecated As of 6.2.0 {@link #getArchivedUserNotificationEvents(long, boolean)}
+	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.UserNotificationEvent> getUserNotificationEvents(
 		long userId, boolean archived)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* @deprecated As of 6.2.0 {@link #getArchivedUserNotificationEvents(long, boolean, int,
+	int)}
+	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.UserNotificationEvent> getUserNotificationEvents(
 		long userId, boolean archived, int start, int end)
@@ -278,6 +315,10 @@ public interface UserNotificationEventLocalService extends BaseLocalService,
 	public int getUserNotificationEventsCount(long userId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* @deprecated As of 6.2.0 {@link #getArchivedUserNotificationEventsCount(long,
+	boolean)}
+	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getUserNotificationEventsCount(long userId, boolean archived)
 		throws com.liferay.portal.kernel.exception.SystemException;

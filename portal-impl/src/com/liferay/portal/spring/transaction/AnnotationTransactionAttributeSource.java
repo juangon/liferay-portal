@@ -33,6 +33,7 @@ import org.springframework.transaction.interceptor.TransactionAttributeSource;
 public class AnnotationTransactionAttributeSource
 	implements TransactionAttributeSource {
 
+	@Override
 	public TransactionAttribute getTransactionAttribute(
 		Method method, Class<?> targetClass) {
 
@@ -70,6 +71,7 @@ public class AnnotationTransactionAttributeSource
 
 	private static TransactionAttribute _nullTransactionAttribute =
 		new DefaultTransactionAttribute();
+
 	private Map<MethodTargetClassKey, TransactionAttribute>
 		_transactionAttributes =
 			new ConcurrentHashMap<MethodTargetClassKey, TransactionAttribute>();

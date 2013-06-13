@@ -87,26 +87,32 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 	public VirtualHostModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _virtualHostId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setVirtualHostId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _virtualHostId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return VirtualHost.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return VirtualHost.class.getName();
 	}
@@ -150,18 +156,22 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 		}
 	}
 
+	@Override
 	public long getVirtualHostId() {
 		return _virtualHostId;
 	}
 
+	@Override
 	public void setVirtualHostId(long virtualHostId) {
 		_virtualHostId = virtualHostId;
 	}
 
+	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
@@ -178,10 +188,12 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 		return _originalCompanyId;
 	}
 
+	@Override
 	public long getLayoutSetId() {
 		return _layoutSetId;
 	}
 
+	@Override
 	public void setLayoutSetId(long layoutSetId) {
 		_columnBitmask |= LAYOUTSETID_COLUMN_BITMASK;
 
@@ -198,6 +210,7 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 		return _originalLayoutSetId;
 	}
 
+	@Override
 	public String getHostname() {
 		if (_hostname == null) {
 			return StringPool.BLANK;
@@ -207,6 +220,7 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 		}
 	}
 
+	@Override
 	public void setHostname(String hostname) {
 		_columnBitmask |= HOSTNAME_COLUMN_BITMASK;
 
@@ -262,6 +276,7 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 		return virtualHostImpl;
 	}
 
+	@Override
 	public int compareTo(VirtualHost virtualHost) {
 		long primaryKey = virtualHost.getPrimaryKey();
 
@@ -278,18 +293,15 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof VirtualHost)) {
 			return false;
 		}
 
-		VirtualHost virtualHost = null;
-
-		try {
-			virtualHost = (VirtualHost)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		VirtualHost virtualHost = (VirtualHost)obj;
 
 		long primaryKey = virtualHost.getPrimaryKey();
 
@@ -361,6 +373,7 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(16);
 

@@ -18,11 +18,12 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
- * The utility for the website local service. This utility wraps {@link com.liferay.portal.service.impl.WebsiteLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
+ * Provides the local service utility for Website. This utility wraps
+ * {@link com.liferay.portal.service.impl.WebsiteLocalServiceImpl} and is the
+ * primary access point for service operations in application layer code running
+ * on the local server. Methods of this service will not have security checks
+ * based on the propagated JAAS credentials because this service can only be
+ * accessed from within the same VM.
  *
  * @author Brian Wing Shun Chan
  * @see WebsiteLocalService
@@ -248,6 +249,10 @@ public class WebsiteLocalServiceUtil {
 		getService().setBeanIdentifier(beanIdentifier);
 	}
 
+	/**
+	* @deprecated As of 6.2.0, replaced by {@link #addWebsite(long, String,
+	long, String, int, boolean, ServiceContext)}
+	*/
 	public static com.liferay.portal.model.Website addWebsite(long userId,
 		java.lang.String className, long classPK, java.lang.String url,
 		int typeId, boolean primary)
@@ -257,10 +262,27 @@ public class WebsiteLocalServiceUtil {
 				   .addWebsite(userId, className, classPK, url, typeId, primary);
 	}
 
+	public static com.liferay.portal.model.Website addWebsite(long userId,
+		java.lang.String className, long classPK, java.lang.String url,
+		int typeId, boolean primary,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .addWebsite(userId, className, classPK, url, typeId,
+			primary, serviceContext);
+	}
+
 	public static void deleteWebsites(long companyId,
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteWebsites(companyId, className, classPK);
+	}
+
+	public static com.liferay.portal.model.Website fetchWebsiteByUuidAndCompanyId(
+		java.lang.String uuid, long companyId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchWebsiteByUuidAndCompanyId(uuid, companyId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Website> getWebsites()

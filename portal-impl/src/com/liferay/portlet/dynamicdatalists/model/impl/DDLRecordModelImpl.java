@@ -160,26 +160,32 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 	public DDLRecordModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _recordId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setRecordId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _recordId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return DDLRecord.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return DDLRecord.class.getName();
 	}
@@ -293,6 +299,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		}
 	}
 
+	@Override
 	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
@@ -303,6 +310,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		}
 	}
 
+	@Override
 	public void setUuid(String uuid) {
 		if (_originalUuid == null) {
 			_originalUuid = _uuid;
@@ -315,20 +323,24 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@Override
 	@JSON
 	public long getRecordId() {
 		return _recordId;
 	}
 
+	@Override
 	public void setRecordId(long recordId) {
 		_recordId = recordId;
 	}
 
+	@Override
 	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -345,11 +357,13 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		return _originalGroupId;
 	}
 
+	@Override
 	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
@@ -366,11 +380,13 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		return _originalCompanyId;
 	}
 
+	@Override
 	@JSON
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_columnBitmask |= USERID_COLUMN_BITMASK;
 
@@ -383,10 +399,12 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
@@ -395,6 +413,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		return _originalUserId;
 	}
 
+	@Override
 	@JSON
 	public String getUserName() {
 		if (_userName == null) {
@@ -405,28 +424,34 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		}
 	}
 
+	@Override
 	public void setUserName(String userName) {
 		_userName = userName;
 	}
 
+	@Override
 	@JSON
 	public long getVersionUserId() {
 		return _versionUserId;
 	}
 
+	@Override
 	public void setVersionUserId(long versionUserId) {
 		_versionUserId = versionUserId;
 	}
 
+	@Override
 	public String getVersionUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getVersionUserId(), "uuid",
 			_versionUserUuid);
 	}
 
+	@Override
 	public void setVersionUserUuid(String versionUserUuid) {
 		_versionUserUuid = versionUserUuid;
 	}
 
+	@Override
 	@JSON
 	public String getVersionUserName() {
 		if (_versionUserName == null) {
@@ -437,42 +462,51 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		}
 	}
 
+	@Override
 	public void setVersionUserName(String versionUserName) {
 		_versionUserName = versionUserName;
 	}
 
+	@Override
 	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
 	}
 
+	@Override
 	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
 	@JSON
 	public long getDDMStorageId() {
 		return _DDMStorageId;
 	}
 
+	@Override
 	public void setDDMStorageId(long DDMStorageId) {
 		_DDMStorageId = DDMStorageId;
 	}
 
+	@Override
 	@JSON
 	public long getRecordSetId() {
 		return _recordSetId;
 	}
 
+	@Override
 	public void setRecordSetId(long recordSetId) {
 		_columnBitmask |= RECORDSETID_COLUMN_BITMASK;
 
@@ -489,6 +523,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		return _originalRecordSetId;
 	}
 
+	@Override
 	@JSON
 	public String getVersion() {
 		if (_version == null) {
@@ -499,15 +534,18 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		}
 	}
 
+	@Override
 	public void setVersion(String version) {
 		_version = version;
 	}
 
+	@Override
 	@JSON
 	public int getDisplayIndex() {
 		return _displayIndex;
 	}
 
+	@Override
 	public void setDisplayIndex(int displayIndex) {
 		_displayIndex = displayIndex;
 	}
@@ -563,6 +601,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		return ddlRecordImpl;
 	}
 
+	@Override
 	public int compareTo(DDLRecord ddlRecord) {
 		long primaryKey = ddlRecord.getPrimaryKey();
 
@@ -579,18 +618,15 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof DDLRecord)) {
 			return false;
 		}
 
-		DDLRecord ddlRecord = null;
-
-		try {
-			ddlRecord = (DDLRecord)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		DDLRecord ddlRecord = (DDLRecord)obj;
 
 		long primaryKey = ddlRecord.getPrimaryKey();
 
@@ -742,6 +778,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(46);
 

@@ -70,6 +70,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 * @return the uuid of this document library folder
 	 */
 	@AutoEscape
+	@Override
 	public String getUuid();
 
 	/**
@@ -77,6 +78,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 *
 	 * @param uuid the uuid of this document library folder
 	 */
+	@Override
 	public void setUuid(String uuid);
 
 	/**
@@ -98,6 +100,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 *
 	 * @return the group ID of this document library folder
 	 */
+	@Override
 	public long getGroupId();
 
 	/**
@@ -105,6 +108,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 *
 	 * @param groupId the group ID of this document library folder
 	 */
+	@Override
 	public void setGroupId(long groupId);
 
 	/**
@@ -112,6 +116,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 *
 	 * @return the company ID of this document library folder
 	 */
+	@Override
 	public long getCompanyId();
 
 	/**
@@ -119,6 +124,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 *
 	 * @param companyId the company ID of this document library folder
 	 */
+	@Override
 	public void setCompanyId(long companyId);
 
 	/**
@@ -126,6 +132,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 *
 	 * @return the user ID of this document library folder
 	 */
+	@Override
 	public long getUserId();
 
 	/**
@@ -133,6 +140,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 *
 	 * @param userId the user ID of this document library folder
 	 */
+	@Override
 	public void setUserId(long userId);
 
 	/**
@@ -141,6 +149,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 * @return the user uuid of this document library folder
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public String getUserUuid() throws SystemException;
 
 	/**
@@ -148,6 +157,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 *
 	 * @param userUuid the user uuid of this document library folder
 	 */
+	@Override
 	public void setUserUuid(String userUuid);
 
 	/**
@@ -156,6 +166,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 * @return the user name of this document library folder
 	 */
 	@AutoEscape
+	@Override
 	public String getUserName();
 
 	/**
@@ -163,6 +174,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 *
 	 * @param userName the user name of this document library folder
 	 */
+	@Override
 	public void setUserName(String userName);
 
 	/**
@@ -170,6 +182,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 *
 	 * @return the create date of this document library folder
 	 */
+	@Override
 	public Date getCreateDate();
 
 	/**
@@ -177,6 +190,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 *
 	 * @param createDate the create date of this document library folder
 	 */
+	@Override
 	public void setCreateDate(Date createDate);
 
 	/**
@@ -184,6 +198,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 *
 	 * @return the modified date of this document library folder
 	 */
+	@Override
 	public Date getModifiedDate();
 
 	/**
@@ -191,6 +206,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 *
 	 * @param modifiedDate the modified date of this document library folder
 	 */
+	@Override
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
@@ -347,6 +363,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 *
 	 * @return the status of this document library folder
 	 */
+	@Override
 	public int getStatus();
 
 	/**
@@ -354,6 +371,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 *
 	 * @param status the status of this document library folder
 	 */
+	@Override
 	public void setStatus(int status);
 
 	/**
@@ -361,6 +379,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 *
 	 * @return the status by user ID of this document library folder
 	 */
+	@Override
 	public long getStatusByUserId();
 
 	/**
@@ -368,6 +387,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 *
 	 * @param statusByUserId the status by user ID of this document library folder
 	 */
+	@Override
 	public void setStatusByUserId(long statusByUserId);
 
 	/**
@@ -376,6 +396,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 * @return the status by user uuid of this document library folder
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public String getStatusByUserUuid() throws SystemException;
 
 	/**
@@ -383,6 +404,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 *
 	 * @param statusByUserUuid the status by user uuid of this document library folder
 	 */
+	@Override
 	public void setStatusByUserUuid(String statusByUserUuid);
 
 	/**
@@ -391,6 +413,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 * @return the status by user name of this document library folder
 	 */
 	@AutoEscape
+	@Override
 	public String getStatusByUserName();
 
 	/**
@@ -398,6 +421,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 *
 	 * @param statusByUserName the status by user name of this document library folder
 	 */
+	@Override
 	public void setStatusByUserName(String statusByUserName);
 
 	/**
@@ -405,6 +429,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 *
 	 * @return the status date of this document library folder
 	 */
+	@Override
 	public Date getStatusDate();
 
 	/**
@@ -412,11 +437,13 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 *
 	 * @param statusDate the status date of this document library folder
 	 */
+	@Override
 	public void setStatusDate(Date statusDate);
 
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #isApproved()}
 	 */
+	@Override
 	public boolean getApproved();
 
 	/**
@@ -424,6 +451,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 *
 	 * @return <code>true</code> if this document library folder is approved; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isApproved();
 
 	/**
@@ -431,6 +459,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 *
 	 * @return <code>true</code> if this document library folder is denied; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isDenied();
 
 	/**
@@ -438,6 +467,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 *
 	 * @return <code>true</code> if this document library folder is a draft; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isDraft();
 
 	/**
@@ -445,6 +475,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 *
 	 * @return <code>true</code> if this document library folder is expired; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isExpired();
 
 	/**
@@ -452,6 +483,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 *
 	 * @return <code>true</code> if this document library folder is inactive; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isInactive();
 
 	/**
@@ -459,6 +491,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 *
 	 * @return <code>true</code> if this document library folder is incomplete; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isIncomplete();
 
 	/**
@@ -466,6 +499,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 *
 	 * @return <code>true</code> if this document library folder is in the Recycle Bin; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isInTrash();
 
 	/**
@@ -473,6 +507,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 *
 	 * @return <code>true</code> if this document library folder is pending; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isPending();
 
 	/**
@@ -480,6 +515,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 *
 	 * @return <code>true</code> if this document library folder is scheduled; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isScheduled();
 
 	/**
@@ -487,6 +523,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 *
 	 * @return the container model ID of this document library folder
 	 */
+	@Override
 	public long getContainerModelId();
 
 	/**
@@ -494,6 +531,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 *
 	 * @param container model ID of this document library folder
 	 */
+	@Override
 	public void setContainerModelId(long containerModelId);
 
 	/**
@@ -501,6 +539,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 *
 	 * @return the container name of this document library folder
 	 */
+	@Override
 	public String getContainerModelName();
 
 	/**
@@ -508,6 +547,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 *
 	 * @return the parent container model ID of this document library folder
 	 */
+	@Override
 	public long getParentContainerModelId();
 
 	/**
@@ -515,43 +555,63 @@ public interface DLFolderModel extends BaseModel<DLFolder>, ContainerModel,
 	 *
 	 * @param parent container model ID of this document library folder
 	 */
+	@Override
 	public void setParentContainerModelId(long parentContainerModelId);
 
+	@Override
 	public boolean isNew();
 
+	@Override
 	public void setNew(boolean n);
 
+	@Override
 	public boolean isCachedModel();
 
+	@Override
 	public void setCachedModel(boolean cachedModel);
 
+	@Override
 	public boolean isEscapedModel();
 
+	@Override
 	public Serializable getPrimaryKeyObj();
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
+	@Override
 	public ExpandoBridge getExpandoBridge();
 
+	@Override
 	public void setExpandoBridgeAttributes(BaseModel<?> baseModel);
 
+	@Override
 	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge);
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext);
 
+	@Override
 	public Object clone();
 
+	@Override
 	public int compareTo(DLFolder dlFolder);
 
+	@Override
 	public int hashCode();
 
+	@Override
 	public CacheModel<DLFolder> toCacheModel();
 
+	@Override
 	public DLFolder toEscapedModel();
 
+	@Override
 	public DLFolder toUnescapedModel();
 
+	@Override
 	public String toString();
 
+	@Override
 	public String toXmlString();
 }

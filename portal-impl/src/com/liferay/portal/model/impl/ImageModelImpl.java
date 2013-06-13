@@ -136,26 +136,32 @@ public class ImageModelImpl extends BaseModelImpl<Image> implements ImageModel {
 	public ImageModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _imageId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setImageId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _imageId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return Image.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return Image.class.getName();
 	}
@@ -213,26 +219,31 @@ public class ImageModelImpl extends BaseModelImpl<Image> implements ImageModel {
 		}
 	}
 
+	@Override
 	@JSON
 	public long getImageId() {
 		return _imageId;
 	}
 
+	@Override
 	public void setImageId(long imageId) {
 		_columnBitmask = -1L;
 
 		_imageId = imageId;
 	}
 
+	@Override
 	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
 	@JSON
 	public String getType() {
 		if (_type == null) {
@@ -243,33 +254,40 @@ public class ImageModelImpl extends BaseModelImpl<Image> implements ImageModel {
 		}
 	}
 
+	@Override
 	public void setType(String type) {
 		_type = type;
 	}
 
+	@Override
 	@JSON
 	public int getHeight() {
 		return _height;
 	}
 
+	@Override
 	public void setHeight(int height) {
 		_height = height;
 	}
 
+	@Override
 	@JSON
 	public int getWidth() {
 		return _width;
 	}
 
+	@Override
 	public void setWidth(int width) {
 		_width = width;
 	}
 
+	@Override
 	@JSON
 	public int getSize() {
 		return _size;
 	}
 
+	@Override
 	public void setSize(int size) {
 		_columnBitmask |= SIZE_COLUMN_BITMASK;
 
@@ -329,6 +347,7 @@ public class ImageModelImpl extends BaseModelImpl<Image> implements ImageModel {
 		return imageImpl;
 	}
 
+	@Override
 	public int compareTo(Image image) {
 		int value = 0;
 
@@ -351,18 +370,15 @@ public class ImageModelImpl extends BaseModelImpl<Image> implements ImageModel {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof Image)) {
 			return false;
 		}
 
-		Image image = null;
-
-		try {
-			image = (Image)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		Image image = (Image)obj;
 
 		long primaryKey = image.getPrimaryKey();
 
@@ -443,6 +459,7 @@ public class ImageModelImpl extends BaseModelImpl<Image> implements ImageModel {
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(22);
 

@@ -423,6 +423,12 @@ public class ArrayUtil_IW {
 		return ArrayUtil.toString(array, param, delimiter);
 	}
 
+	public java.lang.String toString(java.lang.Object[] array,
+		java.lang.String param, java.lang.String delimiter,
+		java.util.Locale locale) {
+		return ArrayUtil.toString(array, param, delimiter, locale);
+	}
+
 	public <T, V> java.lang.String toString(T[] list,
 		com.liferay.portal.kernel.util.Accessor<T, V> accessor) {
 		return ArrayUtil.toString(list, accessor);
@@ -432,6 +438,12 @@ public class ArrayUtil_IW {
 		com.liferay.portal.kernel.util.Accessor<T, V> accessor,
 		java.lang.String delimiter) {
 		return ArrayUtil.toString(list, accessor, delimiter);
+	}
+
+	public <T, V> java.lang.String toString(T[] list,
+		com.liferay.portal.kernel.util.Accessor<T, V> accessor,
+		java.lang.String delimiter, java.util.Locale locale) {
+		return ArrayUtil.toString(list, accessor, delimiter, locale);
 	}
 
 	public java.lang.String[] toStringArray(boolean[] array) {

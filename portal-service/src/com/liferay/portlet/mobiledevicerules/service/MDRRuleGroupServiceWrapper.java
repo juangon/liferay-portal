@@ -17,12 +17,10 @@ package com.liferay.portlet.mobiledevicerules.service;
 import com.liferay.portal.service.ServiceWrapper;
 
 /**
- * <p>
- * This class is a wrapper for {@link MDRRuleGroupService}.
- * </p>
+ * Provides a wrapper for {@link MDRRuleGroupService}.
  *
- * @author    Edward C. Han
- * @see       MDRRuleGroupService
+ * @author Edward C. Han
+ * @see MDRRuleGroupService
  * @generated
  */
 public class MDRRuleGroupServiceWrapper implements MDRRuleGroupService,
@@ -36,6 +34,7 @@ public class MDRRuleGroupServiceWrapper implements MDRRuleGroupService,
 	*
 	* @return the Spring bean ID for this bean
 	*/
+	@Override
 	public java.lang.String getBeanIdentifier() {
 		return _mdrRuleGroupService.getBeanIdentifier();
 	}
@@ -45,10 +44,12 @@ public class MDRRuleGroupServiceWrapper implements MDRRuleGroupService,
 	*
 	* @param beanIdentifier the Spring bean ID for this bean
 	*/
+	@Override
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		_mdrRuleGroupService.setBeanIdentifier(beanIdentifier);
 	}
 
+	@Override
 	public com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup addRuleGroup(
 		long groupId,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
@@ -60,6 +61,7 @@ public class MDRRuleGroupServiceWrapper implements MDRRuleGroupService,
 			descriptionMap, serviceContext);
 	}
 
+	@Override
 	public com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup copyRuleGroup(
 		long ruleGroupId, long groupId,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -69,12 +71,14 @@ public class MDRRuleGroupServiceWrapper implements MDRRuleGroupService,
 			serviceContext);
 	}
 
+	@Override
 	public void deleteRuleGroup(long ruleGroupId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_mdrRuleGroupService.deleteRuleGroup(ruleGroupId);
 	}
 
+	@Override
 	public com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup fetchRuleGroup(
 		long ruleGroupId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -82,6 +86,7 @@ public class MDRRuleGroupServiceWrapper implements MDRRuleGroupService,
 		return _mdrRuleGroupService.fetchRuleGroup(ruleGroupId);
 	}
 
+	@Override
 	public com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup getRuleGroup(
 		long ruleGroupId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -89,6 +94,7 @@ public class MDRRuleGroupServiceWrapper implements MDRRuleGroupService,
 		return _mdrRuleGroupService.getRuleGroup(ruleGroupId);
 	}
 
+	@Override
 	public com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup updateRuleGroup(
 		long ruleGroupId,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
@@ -115,10 +121,12 @@ public class MDRRuleGroupServiceWrapper implements MDRRuleGroupService,
 		_mdrRuleGroupService = mdrRuleGroupService;
 	}
 
+	@Override
 	public MDRRuleGroupService getWrappedService() {
 		return _mdrRuleGroupService;
 	}
 
+	@Override
 	public void setWrappedService(MDRRuleGroupService mdrRuleGroupService) {
 		_mdrRuleGroupService = mdrRuleGroupService;
 	}

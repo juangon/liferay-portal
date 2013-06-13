@@ -93,26 +93,32 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 	public TicketModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _ticketId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setTicketId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _ticketId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return Ticket.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return Ticket.class.getName();
 	}
@@ -191,32 +197,39 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 		}
 	}
 
+	@Override
 	public long getTicketId() {
 		return _ticketId;
 	}
 
+	@Override
 	public void setTicketId(long ticketId) {
 		_columnBitmask = -1L;
 
 		_ticketId = ticketId;
 	}
 
+	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
+	@Override
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
 	}
 
+	@Override
 	public String getClassName() {
 		if (getClassNameId() <= 0) {
 			return StringPool.BLANK;
@@ -225,6 +238,7 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 		return PortalUtil.getClassName(getClassNameId());
 	}
 
+	@Override
 	public void setClassName(String className) {
 		long classNameId = 0;
 
@@ -235,22 +249,27 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 		setClassNameId(classNameId);
 	}
 
+	@Override
 	public long getClassNameId() {
 		return _classNameId;
 	}
 
+	@Override
 	public void setClassNameId(long classNameId) {
 		_classNameId = classNameId;
 	}
 
+	@Override
 	public long getClassPK() {
 		return _classPK;
 	}
 
+	@Override
 	public void setClassPK(long classPK) {
 		_classPK = classPK;
 	}
 
+	@Override
 	public String getKey() {
 		if (_key == null) {
 			return StringPool.BLANK;
@@ -260,6 +279,7 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 		}
 	}
 
+	@Override
 	public void setKey(String key) {
 		_columnBitmask |= KEY_COLUMN_BITMASK;
 
@@ -274,14 +294,17 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 		return GetterUtil.getString(_originalKey);
 	}
 
+	@Override
 	public int getType() {
 		return _type;
 	}
 
+	@Override
 	public void setType(int type) {
 		_type = type;
 	}
 
+	@Override
 	public String getExtraInfo() {
 		if (_extraInfo == null) {
 			return StringPool.BLANK;
@@ -291,14 +314,17 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 		}
 	}
 
+	@Override
 	public void setExtraInfo(String extraInfo) {
 		_extraInfo = extraInfo;
 	}
 
+	@Override
 	public Date getExpirationDate() {
 		return _expirationDate;
 	}
 
+	@Override
 	public void setExpirationDate(Date expirationDate) {
 		_expirationDate = expirationDate;
 	}
@@ -349,6 +375,7 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 		return ticketImpl;
 	}
 
+	@Override
 	public int compareTo(Ticket ticket) {
 		int value = 0;
 
@@ -371,18 +398,15 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof Ticket)) {
 			return false;
 		}
 
-		Ticket ticket = null;
-
-		try {
-			ticket = (Ticket)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		Ticket ticket = (Ticket)obj;
 
 		long primaryKey = ticket.getPrimaryKey();
 
@@ -486,6 +510,7 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(31);
 

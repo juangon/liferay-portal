@@ -33,6 +33,7 @@ import java.util.Map;
  */
 public class HibernateConfigurationConverter implements Converter<String> {
 
+	@Override
 	public String convert(String input) {
 		String output = input;
 

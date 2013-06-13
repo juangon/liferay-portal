@@ -21,11 +21,10 @@ import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 
 /**
- * The interface for the phone local service.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
+ * Provides the local service interface for Phone. Methods of this
+ * service will not have security checks based on the propagated JAAS
+ * credentials because this service can only be accessed from within the same
+ * VM.
  *
  * @author Brian Wing Shun Chan
  * @see PhoneLocalServiceUtil
@@ -166,6 +165,7 @@ public interface PhoneLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	@Override
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.PersistedModel getPersistedModel(
 		java.io.Serializable primaryKeyObj)
@@ -223,14 +223,30 @@ public interface PhoneLocalService extends BaseLocalService,
 	*/
 	public void setBeanIdentifier(java.lang.String beanIdentifier);
 
+	/**
+	* @deprecated As of 6.2.0, replaced by {@link #addPhone(long, String, long,
+	String, String, int, boolean, ServiceContext)}
+	*/
 	public com.liferay.portal.model.Phone addPhone(long userId,
 		java.lang.String className, long classPK, java.lang.String number,
 		java.lang.String extension, int typeId, boolean primary)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	public com.liferay.portal.model.Phone addPhone(long userId,
+		java.lang.String className, long classPK, java.lang.String number,
+		java.lang.String extension, int typeId, boolean primary,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	public void deletePhones(long companyId, java.lang.String className,
 		long classPK)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.model.Phone fetchPhoneByUuidAndCompanyId(
+		java.lang.String uuid, long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

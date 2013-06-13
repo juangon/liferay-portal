@@ -93,6 +93,7 @@ public class ServerStatistics
 		return _companyStatisticsByWebId.keySet();
 	}
 
+	@Override
 	public void processDataSample(
 			PortletRequestDataSample portletRequestDataSample)
 		throws MonitoringException {

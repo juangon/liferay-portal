@@ -95,6 +95,9 @@
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" arrayable-operator="OR" />
 		</finder>
+		<finder name="ParentStructureId" return-type="Collection">
+			<finder-column name="parentStructureId" />
+		</finder>
 		<finder name="ClassNameId" return-type="Collection">
 			<finder-column name="classNameId" />
 		</finder>
@@ -127,6 +130,7 @@
 		<!-- References -->
 
 		<reference package-path="com.liferay.portal" entity="Group" />
+		<reference package-path="com.liferay.portal" entity="SystemEvent" />
 		<reference package-path="com.liferay.portlet.documentlibrary" entity="DLFileEntryType" />
 	</entity>
 	<entity name="DDMStructureLink" local-service="true" remote-service="false">
@@ -204,12 +208,15 @@
 		<finder name="Language" return-type="Collection">
 			<finder-column name="language" />
 		</finder>
+		<finder name="SmallImageId" return-type="DDMTemplate">
+			<finder-column name="smallImageId" />
+		</finder>
 		<finder name="G_C" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="classNameId" />
 		</finder>
 		<finder name="G_CPK" return-type="Collection">
-			<finder-column name="groupId" />
+			<finder-column name="groupId" arrayable-operator="OR" />
 			<finder-column name="classPK" />
 		</finder>
 		<finder name="G_C_C" return-type="Collection">
@@ -245,6 +252,7 @@
 
 		<reference package-path="com.liferay.portal" entity="Group" />
 		<reference package-path="com.liferay.portal" entity="Image" />
+		<reference package-path="com.liferay.portal" entity="SystemEvent" />
 	</entity>
 	<exceptions>
 		<exception>Content</exception>

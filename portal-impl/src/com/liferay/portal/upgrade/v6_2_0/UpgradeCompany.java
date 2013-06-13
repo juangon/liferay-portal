@@ -14,17 +14,17 @@
 
 package com.liferay.portal.upgrade.v6_2_0;
 
-import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.Base64;
-import com.liferay.portal.model.Company;
-import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.Encryptor;
-import com.liferay.util.EncryptorException;
 
 import java.security.Key;
 
-import java.util.List;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  * @author Tomas Polesovsky
@@ -39,31 +39,62 @@ public class UpgradeCompany extends UpgradeProcess {
 			return;
 		}
 
-		List<Company> companies = CompanyLocalServiceUtil.getCompanies();
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
 
-		for (Company company : companies) {
-			upgradeKey(company);
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			ps = con.prepareStatement("select companyId, key_ from Company");
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long companyId = rs.getLong("companyId");
+				String key = rs.getString("key_");
+
+				upgradeKey(companyId, key);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
 
-	protected void upgradeKey(Company company)
-		throws EncryptorException, SystemException {
+	protected void upgradeKey(long companyId, String key) throws Exception {
+		Key keyObj = null;
 
-		Key key = company.getKeyObj();
+		if (Validator.isNotNull(key)) {
+			keyObj = (Key)Base64.stringToObjectSilent(key);
+		}
 
-		if (key != null) {
-			String algorithm = key.getAlgorithm();
+		if (keyObj != null) {
+			String algorithm = keyObj.getAlgorithm();
 
 			if (!algorithm.equals("DES")) {
 				return;
 			}
 		}
 
-		Key newKey = Encryptor.generateKey();
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
 
-		company.setKey(Base64.objectToString(newKey));
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
 
-		CompanyLocalServiceUtil.updateCompany(company);
+			ps = con.prepareStatement(
+				"update Company set key_ = ? where companyId = ?");
+
+			ps.setString(1, Base64.objectToString(Encryptor.generateKey()));
+			ps.setLong(2, companyId);
+
+			ps.executeUpdate();
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
 	}
 
 }

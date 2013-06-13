@@ -23,9 +23,12 @@ import java.lang.instrument.UnmodifiableClassException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import net.sourceforge.cobertura.coveragedata.ClassData;
+import net.sourceforge.cobertura.coveragedata.CoverageData;
 import net.sourceforge.cobertura.coveragedata.CoverageDataFileHandler;
+import net.sourceforge.cobertura.coveragedata.LineData;
 import net.sourceforge.cobertura.coveragedata.ProjectData;
 
 /**
@@ -40,9 +43,9 @@ public class InstrumentationAgent {
 			return;
 		}
 
-		try {
-			File dataFile = CoverageDataFileHandler.getDefaultDataFile();
+		File dataFile = CoverageDataFileHandler.getDefaultDataFile();
 
+		try {
 			ProjectData projectData = ProjectDataUtil.captureProjectData(
 				dataFile, _lockFile);
 
@@ -283,7 +286,25 @@ public class InstrumentationAgent {
 				classData.getName(), classData.getBranchCoverageRate(),
 				classData.getLineCoverageRate());
 
-			throw new RuntimeException(
+			Set<CoverageData> coverageDatas = classData.getLines();
+
+			for (CoverageData coverageData : coverageDatas) {
+				if (!(coverageData instanceof LineData)) {
+					continue;
+				}
+
+				LineData lineData = (LineData)coverageData;
+
+				if (lineData.isCovered()) {
+					continue;
+				}
+
+				System.out.printf(
+					"[Cobertura] %s line %d is not covered %n",
+					classData.getName(), lineData.getLineNumber());
+			}
+
+			throw new AssertionError(
 				classData.getName() + " is not fully covered");
 		}
 
@@ -294,7 +315,6 @@ public class InstrumentationAgent {
 	private static CoberturaClassFileTransformer _coberturaClassFileTransformer;
 	private static boolean _dynamicallyInstrumented;
 	private static String[] _excludes;
-
 	private static String[] _includes;
 	private static Instrumentation _instrumentation;
 	private static File _lockFile;
@@ -343,7 +363,7 @@ public class InstrumentationAgent {
 
 				return new ClassDefinition(clazz, _bytes);
 			}
-			catch (NoClassDefFoundError ncdf) {
+			catch (Throwable t) {
 				return null;
 			}
 		}

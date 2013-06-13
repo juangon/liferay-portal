@@ -85,6 +85,7 @@ public class PortalSocketPermission {
 
 	private static class NoPACL implements PACL {
 
+		@Override
 		public void checkPermission(String host, String action) {
 		}
 

@@ -33,8 +33,6 @@ public interface CalEvent extends CalEventModel, PersistedModel {
 	 */
 	public com.liferay.portal.kernel.cal.TZSRecurrence getRecurrenceObj();
 
-	public void setRecurrence(java.lang.String recurrence);
-
 	public void setRecurrenceObj(
 		com.liferay.portal.kernel.cal.TZSRecurrence recurrenceObj);
 }

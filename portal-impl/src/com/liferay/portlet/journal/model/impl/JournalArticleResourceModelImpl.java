@@ -88,26 +88,32 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 	public JournalArticleResourceModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _resourcePrimKey;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setResourcePrimKey(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _resourcePrimKey;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return JournalArticleResource.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return JournalArticleResource.class.getName();
 	}
@@ -151,6 +157,7 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 		}
 	}
 
+	@Override
 	public String getUuid() {
 		if (_uuid == null) {
 			return StringPool.BLANK;
@@ -160,6 +167,7 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 		}
 	}
 
+	@Override
 	public void setUuid(String uuid) {
 		if (_originalUuid == null) {
 			_originalUuid = _uuid;
@@ -172,18 +180,22 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@Override
 	public long getResourcePrimKey() {
 		return _resourcePrimKey;
 	}
 
+	@Override
 	public void setResourcePrimKey(long resourcePrimKey) {
 		_resourcePrimKey = resourcePrimKey;
 	}
 
+	@Override
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -200,6 +212,7 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 		return _originalGroupId;
 	}
 
+	@Override
 	public String getArticleId() {
 		if (_articleId == null) {
 			return StringPool.BLANK;
@@ -209,6 +222,7 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 		}
 	}
 
+	@Override
 	public void setArticleId(String articleId) {
 		_columnBitmask |= ARTICLEID_COLUMN_BITMASK;
 
@@ -264,6 +278,7 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 		return journalArticleResourceImpl;
 	}
 
+	@Override
 	public int compareTo(JournalArticleResource journalArticleResource) {
 		long primaryKey = journalArticleResource.getPrimaryKey();
 
@@ -280,18 +295,15 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof JournalArticleResource)) {
 			return false;
 		}
 
-		JournalArticleResource journalArticleResource = null;
-
-		try {
-			journalArticleResource = (JournalArticleResource)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		JournalArticleResource journalArticleResource = (JournalArticleResource)obj;
 
 		long primaryKey = journalArticleResource.getPrimaryKey();
 
@@ -367,6 +379,7 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(16);
 

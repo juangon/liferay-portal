@@ -26,25 +26,6 @@ MBCategory category = messageDisplay.getCategory();
 MBThread thread = messageDisplay.getThread();
 %>
 
-<c:choose>
-	<c:when test="<%= portletName.equals(PortletKeys.MESSAGE_BOARDS_ADMIN) %>">
-
-		<%
-		PortletURL portletURL = renderResponse.createRenderURL();
-
-		portletURL.setParameter("tabs1", "message-boards-home");
-		%>
-
-		<liferay-ui:tabs
-			names="message-boards-home,recent-posts,statistics,banned-users"
-			url="<%= portletURL.toString() %>"
-		/>
-	</c:when>
-	<c:otherwise>
-		<liferay-util:include page="/html/portlet/message_boards/top_links.jsp" />
-	</c:otherwise>
-</c:choose>
-
 <div id="<portlet:namespace />addAnswerFlagDiv" style="display: none;">
 	<liferay-ui:icon
 		image="checked"
@@ -92,7 +73,7 @@ MBThread thread = messageDisplay.getThread();
 </c:choose>
 
 <c:if test="<%= MBCategoryPermission.contains(permissionChecker, scopeGroupId, message.getCategoryId(), ActionKeys.REPLY_TO_MESSAGE) && !thread.isLocked() %>">
-	<div class="aui-helper-hidden" id="<portlet:namespace />addQuickReplyDiv">
+	<div class="hide" id="<portlet:namespace />addQuickReplyDiv">
 		<%@ include file="/html/portlet/message_boards/edit_message_quick.jspf" %>
 	</div>
 </c:if>

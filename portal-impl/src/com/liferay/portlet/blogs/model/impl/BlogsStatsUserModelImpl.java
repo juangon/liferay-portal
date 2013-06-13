@@ -96,26 +96,32 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser>
 	public BlogsStatsUserModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _statsUserId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setStatsUserId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _statsUserId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return BlogsStatsUser.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return BlogsStatsUser.class.getName();
 	}
@@ -196,26 +202,32 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser>
 		}
 	}
 
+	@Override
 	public long getStatsUserId() {
 		return _statsUserId;
 	}
 
+	@Override
 	public void setStatsUserId(long statsUserId) {
 		_statsUserId = statsUserId;
 	}
 
+	@Override
 	public String getStatsUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getStatsUserId(), "uuid", _statsUserUuid);
 	}
 
+	@Override
 	public void setStatsUserUuid(String statsUserUuid) {
 		_statsUserUuid = statsUserUuid;
 	}
 
+	@Override
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -232,10 +244,12 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser>
 		return _originalGroupId;
 	}
 
+	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
@@ -252,10 +266,12 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser>
 		return _originalCompanyId;
 	}
 
+	@Override
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_columnBitmask |= USERID_COLUMN_BITMASK;
 
@@ -268,10 +284,12 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser>
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
@@ -280,10 +298,12 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser>
 		return _originalUserId;
 	}
 
+	@Override
 	public int getEntryCount() {
 		return _entryCount;
 	}
 
+	@Override
 	public void setEntryCount(int entryCount) {
 		_columnBitmask = -1L;
 
@@ -300,10 +320,12 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser>
 		return _originalEntryCount;
 	}
 
+	@Override
 	public Date getLastPostDate() {
 		return _lastPostDate;
 	}
 
+	@Override
 	public void setLastPostDate(Date lastPostDate) {
 		_columnBitmask |= LASTPOSTDATE_COLUMN_BITMASK;
 
@@ -318,26 +340,32 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser>
 		return _originalLastPostDate;
 	}
 
+	@Override
 	public int getRatingsTotalEntries() {
 		return _ratingsTotalEntries;
 	}
 
+	@Override
 	public void setRatingsTotalEntries(int ratingsTotalEntries) {
 		_ratingsTotalEntries = ratingsTotalEntries;
 	}
 
+	@Override
 	public double getRatingsTotalScore() {
 		return _ratingsTotalScore;
 	}
 
+	@Override
 	public void setRatingsTotalScore(double ratingsTotalScore) {
 		_ratingsTotalScore = ratingsTotalScore;
 	}
 
+	@Override
 	public double getRatingsAverageScore() {
 		return _ratingsAverageScore;
 	}
 
+	@Override
 	public void setRatingsAverageScore(double ratingsAverageScore) {
 		_ratingsAverageScore = ratingsAverageScore;
 	}
@@ -388,6 +416,7 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser>
 		return blogsStatsUserImpl;
 	}
 
+	@Override
 	public int compareTo(BlogsStatsUser blogsStatsUser) {
 		int value = 0;
 
@@ -412,18 +441,15 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof BlogsStatsUser)) {
 			return false;
 		}
 
-		BlogsStatsUser blogsStatsUser = null;
-
-		try {
-			blogsStatsUser = (BlogsStatsUser)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		BlogsStatsUser blogsStatsUser = (BlogsStatsUser)obj;
 
 		long primaryKey = blogsStatsUser.getPrimaryKey();
 
@@ -524,6 +550,7 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(31);
 

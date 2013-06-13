@@ -168,7 +168,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 			{ "userId", Types.BIGINT },
 			{ "organizationId", Types.BIGINT }
 		};
-	public static final String MAPPING_TABLE_USERS_ORGS_SQL_CREATE = "create table Users_Orgs (userId LONG not null,organizationId LONG not null,primary key (userId, organizationId))";
+	public static final String MAPPING_TABLE_USERS_ORGS_SQL_CREATE = "create table Users_Orgs (organizationId LONG not null,userId LONG not null,primary key (organizationId, userId))";
 	public static final boolean FINDER_CACHE_ENABLED_USERS_ORGS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Users_Orgs"), true);
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
@@ -177,26 +177,32 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 	public OrganizationModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _organizationId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setOrganizationId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _organizationId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return Organization.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return Organization.class.getName();
 	}
@@ -324,6 +330,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 		}
 	}
 
+	@Override
 	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
@@ -334,6 +341,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 		}
 	}
 
+	@Override
 	public void setUuid(String uuid) {
 		if (_originalUuid == null) {
 			_originalUuid = _uuid;
@@ -346,20 +354,24 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@Override
 	@JSON
 	public long getOrganizationId() {
 		return _organizationId;
 	}
 
+	@Override
 	public void setOrganizationId(long organizationId) {
 		_organizationId = organizationId;
 	}
 
+	@Override
 	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
@@ -376,23 +388,28 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 		return _originalCompanyId;
 	}
 
+	@Override
 	@JSON
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
 
+	@Override
 	@JSON
 	public String getUserName() {
 		if (_userName == null) {
@@ -403,33 +420,40 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 		}
 	}
 
+	@Override
 	public void setUserName(String userName) {
 		_userName = userName;
 	}
 
+	@Override
 	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
 	}
 
+	@Override
 	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
 	@JSON
 	public long getParentOrganizationId() {
 		return _parentOrganizationId;
 	}
 
+	@Override
 	public void setParentOrganizationId(long parentOrganizationId) {
 		_columnBitmask |= PARENTORGANIZATIONID_COLUMN_BITMASK;
 
@@ -446,6 +470,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 		return _originalParentOrganizationId;
 	}
 
+	@Override
 	@JSON
 	public String getTreePath() {
 		if (_treePath == null) {
@@ -456,10 +481,12 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 		}
 	}
 
+	@Override
 	public void setTreePath(String treePath) {
 		_treePath = treePath;
 	}
 
+	@Override
 	@JSON
 	public String getName() {
 		if (_name == null) {
@@ -470,6 +497,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 		}
 	}
 
+	@Override
 	public void setName(String name) {
 		_columnBitmask = -1L;
 
@@ -484,6 +512,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 		return GetterUtil.getString(_originalName);
 	}
 
+	@Override
 	@JSON
 	public String getType() {
 		if (_type == null) {
@@ -494,50 +523,61 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 		}
 	}
 
+	@Override
 	public void setType(String type) {
 		_type = type;
 	}
 
+	@Override
 	@JSON
 	public boolean getRecursable() {
 		return _recursable;
 	}
 
+	@Override
 	public boolean isRecursable() {
 		return _recursable;
 	}
 
+	@Override
 	public void setRecursable(boolean recursable) {
 		_recursable = recursable;
 	}
 
+	@Override
 	@JSON
 	public long getRegionId() {
 		return _regionId;
 	}
 
+	@Override
 	public void setRegionId(long regionId) {
 		_regionId = regionId;
 	}
 
+	@Override
 	@JSON
 	public long getCountryId() {
 		return _countryId;
 	}
 
+	@Override
 	public void setCountryId(long countryId) {
 		_countryId = countryId;
 	}
 
+	@Override
 	@JSON
 	public int getStatusId() {
 		return _statusId;
 	}
 
+	@Override
 	public void setStatusId(int statusId) {
 		_statusId = statusId;
 	}
 
+	@Override
 	@JSON
 	public String getComments() {
 		if (_comments == null) {
@@ -548,6 +588,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 		}
 	}
 
+	@Override
 	public void setComments(String comments) {
 		_comments = comments;
 	}
@@ -605,6 +646,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 		return organizationImpl;
 	}
 
+	@Override
 	public int compareTo(Organization organization) {
 		int value = 0;
 
@@ -619,18 +661,15 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof Organization)) {
 			return false;
 		}
 
-		Organization organization = null;
-
-		try {
-			organization = (Organization)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		Organization organization = (Organization)obj;
 
 		long primaryKey = organization.getPrimaryKey();
 
@@ -796,6 +835,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(52);
 

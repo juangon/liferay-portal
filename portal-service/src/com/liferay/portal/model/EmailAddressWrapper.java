@@ -23,8 +23,8 @@ import java.util.Map;
  * This class is a wrapper for {@link EmailAddress}.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       EmailAddress
+ * @author Brian Wing Shun Chan
+ * @see EmailAddress
  * @generated
  */
 public class EmailAddressWrapper implements EmailAddress,
@@ -33,17 +33,21 @@ public class EmailAddressWrapper implements EmailAddress,
 		_emailAddress = emailAddress;
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return EmailAddress.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return EmailAddress.class.getName();
 	}
 
+	@Override
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("uuid", getUuid());
 		attributes.put("emailAddressId", getEmailAddressId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
@@ -59,7 +63,14 @@ public class EmailAddressWrapper implements EmailAddress,
 		return attributes;
 	}
 
+	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		String uuid = (String)attributes.get("uuid");
+
+		if (uuid != null) {
+			setUuid(uuid);
+		}
+
 		Long emailAddressId = (Long)attributes.get("emailAddressId");
 
 		if (emailAddressId != null) {
@@ -132,6 +143,7 @@ public class EmailAddressWrapper implements EmailAddress,
 	*
 	* @return the primary key of this email address
 	*/
+	@Override
 	public long getPrimaryKey() {
 		return _emailAddress.getPrimaryKey();
 	}
@@ -141,8 +153,29 @@ public class EmailAddressWrapper implements EmailAddress,
 	*
 	* @param primaryKey the primary key of this email address
 	*/
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_emailAddress.setPrimaryKey(primaryKey);
+	}
+
+	/**
+	* Returns the uuid of this email address.
+	*
+	* @return the uuid of this email address
+	*/
+	@Override
+	public java.lang.String getUuid() {
+		return _emailAddress.getUuid();
+	}
+
+	/**
+	* Sets the uuid of this email address.
+	*
+	* @param uuid the uuid of this email address
+	*/
+	@Override
+	public void setUuid(java.lang.String uuid) {
+		_emailAddress.setUuid(uuid);
 	}
 
 	/**
@@ -150,6 +183,7 @@ public class EmailAddressWrapper implements EmailAddress,
 	*
 	* @return the email address ID of this email address
 	*/
+	@Override
 	public long getEmailAddressId() {
 		return _emailAddress.getEmailAddressId();
 	}
@@ -159,6 +193,7 @@ public class EmailAddressWrapper implements EmailAddress,
 	*
 	* @param emailAddressId the email address ID of this email address
 	*/
+	@Override
 	public void setEmailAddressId(long emailAddressId) {
 		_emailAddress.setEmailAddressId(emailAddressId);
 	}
@@ -168,6 +203,7 @@ public class EmailAddressWrapper implements EmailAddress,
 	*
 	* @return the company ID of this email address
 	*/
+	@Override
 	public long getCompanyId() {
 		return _emailAddress.getCompanyId();
 	}
@@ -177,6 +213,7 @@ public class EmailAddressWrapper implements EmailAddress,
 	*
 	* @param companyId the company ID of this email address
 	*/
+	@Override
 	public void setCompanyId(long companyId) {
 		_emailAddress.setCompanyId(companyId);
 	}
@@ -186,6 +223,7 @@ public class EmailAddressWrapper implements EmailAddress,
 	*
 	* @return the user ID of this email address
 	*/
+	@Override
 	public long getUserId() {
 		return _emailAddress.getUserId();
 	}
@@ -195,6 +233,7 @@ public class EmailAddressWrapper implements EmailAddress,
 	*
 	* @param userId the user ID of this email address
 	*/
+	@Override
 	public void setUserId(long userId) {
 		_emailAddress.setUserId(userId);
 	}
@@ -205,6 +244,7 @@ public class EmailAddressWrapper implements EmailAddress,
 	* @return the user uuid of this email address
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public java.lang.String getUserUuid()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _emailAddress.getUserUuid();
@@ -215,6 +255,7 @@ public class EmailAddressWrapper implements EmailAddress,
 	*
 	* @param userUuid the user uuid of this email address
 	*/
+	@Override
 	public void setUserUuid(java.lang.String userUuid) {
 		_emailAddress.setUserUuid(userUuid);
 	}
@@ -224,6 +265,7 @@ public class EmailAddressWrapper implements EmailAddress,
 	*
 	* @return the user name of this email address
 	*/
+	@Override
 	public java.lang.String getUserName() {
 		return _emailAddress.getUserName();
 	}
@@ -233,6 +275,7 @@ public class EmailAddressWrapper implements EmailAddress,
 	*
 	* @param userName the user name of this email address
 	*/
+	@Override
 	public void setUserName(java.lang.String userName) {
 		_emailAddress.setUserName(userName);
 	}
@@ -242,6 +285,7 @@ public class EmailAddressWrapper implements EmailAddress,
 	*
 	* @return the create date of this email address
 	*/
+	@Override
 	public java.util.Date getCreateDate() {
 		return _emailAddress.getCreateDate();
 	}
@@ -251,6 +295,7 @@ public class EmailAddressWrapper implements EmailAddress,
 	*
 	* @param createDate the create date of this email address
 	*/
+	@Override
 	public void setCreateDate(java.util.Date createDate) {
 		_emailAddress.setCreateDate(createDate);
 	}
@@ -260,6 +305,7 @@ public class EmailAddressWrapper implements EmailAddress,
 	*
 	* @return the modified date of this email address
 	*/
+	@Override
 	public java.util.Date getModifiedDate() {
 		return _emailAddress.getModifiedDate();
 	}
@@ -269,6 +315,7 @@ public class EmailAddressWrapper implements EmailAddress,
 	*
 	* @param modifiedDate the modified date of this email address
 	*/
+	@Override
 	public void setModifiedDate(java.util.Date modifiedDate) {
 		_emailAddress.setModifiedDate(modifiedDate);
 	}
@@ -278,10 +325,12 @@ public class EmailAddressWrapper implements EmailAddress,
 	*
 	* @return the fully qualified class name of this email address
 	*/
+	@Override
 	public java.lang.String getClassName() {
 		return _emailAddress.getClassName();
 	}
 
+	@Override
 	public void setClassName(java.lang.String className) {
 		_emailAddress.setClassName(className);
 	}
@@ -291,6 +340,7 @@ public class EmailAddressWrapper implements EmailAddress,
 	*
 	* @return the class name ID of this email address
 	*/
+	@Override
 	public long getClassNameId() {
 		return _emailAddress.getClassNameId();
 	}
@@ -300,6 +350,7 @@ public class EmailAddressWrapper implements EmailAddress,
 	*
 	* @param classNameId the class name ID of this email address
 	*/
+	@Override
 	public void setClassNameId(long classNameId) {
 		_emailAddress.setClassNameId(classNameId);
 	}
@@ -309,6 +360,7 @@ public class EmailAddressWrapper implements EmailAddress,
 	*
 	* @return the class p k of this email address
 	*/
+	@Override
 	public long getClassPK() {
 		return _emailAddress.getClassPK();
 	}
@@ -318,6 +370,7 @@ public class EmailAddressWrapper implements EmailAddress,
 	*
 	* @param classPK the class p k of this email address
 	*/
+	@Override
 	public void setClassPK(long classPK) {
 		_emailAddress.setClassPK(classPK);
 	}
@@ -327,6 +380,7 @@ public class EmailAddressWrapper implements EmailAddress,
 	*
 	* @return the address of this email address
 	*/
+	@Override
 	public java.lang.String getAddress() {
 		return _emailAddress.getAddress();
 	}
@@ -336,6 +390,7 @@ public class EmailAddressWrapper implements EmailAddress,
 	*
 	* @param address the address of this email address
 	*/
+	@Override
 	public void setAddress(java.lang.String address) {
 		_emailAddress.setAddress(address);
 	}
@@ -345,6 +400,7 @@ public class EmailAddressWrapper implements EmailAddress,
 	*
 	* @return the type ID of this email address
 	*/
+	@Override
 	public int getTypeId() {
 		return _emailAddress.getTypeId();
 	}
@@ -354,6 +410,7 @@ public class EmailAddressWrapper implements EmailAddress,
 	*
 	* @param typeId the type ID of this email address
 	*/
+	@Override
 	public void setTypeId(int typeId) {
 		_emailAddress.setTypeId(typeId);
 	}
@@ -363,6 +420,7 @@ public class EmailAddressWrapper implements EmailAddress,
 	*
 	* @return the primary of this email address
 	*/
+	@Override
 	public boolean getPrimary() {
 		return _emailAddress.getPrimary();
 	}
@@ -372,6 +430,7 @@ public class EmailAddressWrapper implements EmailAddress,
 	*
 	* @return <code>true</code> if this email address is primary; <code>false</code> otherwise
 	*/
+	@Override
 	public boolean isPrimary() {
 		return _emailAddress.isPrimary();
 	}
@@ -381,52 +440,64 @@ public class EmailAddressWrapper implements EmailAddress,
 	*
 	* @param primary the primary of this email address
 	*/
+	@Override
 	public void setPrimary(boolean primary) {
 		_emailAddress.setPrimary(primary);
 	}
 
+	@Override
 	public boolean isNew() {
 		return _emailAddress.isNew();
 	}
 
+	@Override
 	public void setNew(boolean n) {
 		_emailAddress.setNew(n);
 	}
 
+	@Override
 	public boolean isCachedModel() {
 		return _emailAddress.isCachedModel();
 	}
 
+	@Override
 	public void setCachedModel(boolean cachedModel) {
 		_emailAddress.setCachedModel(cachedModel);
 	}
 
+	@Override
 	public boolean isEscapedModel() {
 		return _emailAddress.isEscapedModel();
 	}
 
+	@Override
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _emailAddress.getPrimaryKeyObj();
 	}
 
+	@Override
 	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
 		_emailAddress.setPrimaryKeyObj(primaryKeyObj);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
 		return _emailAddress.getExpandoBridge();
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.model.BaseModel<?> baseModel) {
 		_emailAddress.setExpandoBridgeAttributes(baseModel);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portlet.expando.model.ExpandoBridge expandoBridge) {
 		_emailAddress.setExpandoBridgeAttributes(expandoBridge);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		_emailAddress.setExpandoBridgeAttributes(serviceContext);
@@ -437,6 +508,7 @@ public class EmailAddressWrapper implements EmailAddress,
 		return new EmailAddressWrapper((EmailAddress)_emailAddress.clone());
 	}
 
+	@Override
 	public int compareTo(com.liferay.portal.model.EmailAddress emailAddress) {
 		return _emailAddress.compareTo(emailAddress);
 	}
@@ -446,14 +518,17 @@ public class EmailAddressWrapper implements EmailAddress,
 		return _emailAddress.hashCode();
 	}
 
+	@Override
 	public com.liferay.portal.model.CacheModel<com.liferay.portal.model.EmailAddress> toCacheModel() {
 		return _emailAddress.toCacheModel();
 	}
 
+	@Override
 	public com.liferay.portal.model.EmailAddress toEscapedModel() {
 		return new EmailAddressWrapper(_emailAddress.toEscapedModel());
 	}
 
+	@Override
 	public com.liferay.portal.model.EmailAddress toUnescapedModel() {
 		return new EmailAddressWrapper(_emailAddress.toUnescapedModel());
 	}
@@ -463,15 +538,18 @@ public class EmailAddressWrapper implements EmailAddress,
 		return _emailAddress.toString();
 	}
 
+	@Override
 	public java.lang.String toXmlString() {
 		return _emailAddress.toXmlString();
 	}
 
+	@Override
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_emailAddress.persist();
 	}
 
+	@Override
 	public com.liferay.portal.model.ListType getType()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -485,10 +563,12 @@ public class EmailAddressWrapper implements EmailAddress,
 		return _emailAddress;
 	}
 
+	@Override
 	public EmailAddress getWrappedModel() {
 		return _emailAddress;
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		_emailAddress.resetOriginalValues();
 	}

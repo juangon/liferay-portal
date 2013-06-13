@@ -16,6 +16,7 @@ package com.liferay.portal.search.lucene;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.resiliency.spi.SPIUtil;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.InstanceFactory;
@@ -30,6 +31,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
@@ -68,11 +70,14 @@ public class IndexAccessorImpl implements IndexAccessor {
 	public IndexAccessorImpl(long companyId) {
 		_companyId = companyId;
 
-		_checkLuceneDir();
-		_initIndexWriter();
-		_initCommitScheduler();
+		if (!SPIUtil.isSPI()) {
+			_checkLuceneDir();
+			_initIndexWriter();
+			_initCommitScheduler();
+		}
 	}
 
+	@Override
 	public void addDocument(Document document) throws IOException {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
@@ -81,7 +86,28 @@ public class IndexAccessorImpl implements IndexAccessor {
 		_write(null, document);
 	}
 
+	@Override
+	public void addDocuments(Collection<Document> documents)
+		throws IOException {
+
+		try {
+			for (Document document : documents) {
+				_indexWriter.addDocument(document);
+			}
+
+			_batchCount++;
+		}
+		finally {
+			_commit();
+		}
+	}
+
+	@Override
 	public void close() {
+		if (SPIUtil.isSPI()) {
+			return;
+		}
+
 		try {
 			_indexWriter.close();
 		}
@@ -90,6 +116,7 @@ public class IndexAccessorImpl implements IndexAccessor {
 		}
 	}
 
+	@Override
 	public void delete() {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
@@ -98,6 +125,7 @@ public class IndexAccessorImpl implements IndexAccessor {
 		_deleteDirectory();
 	}
 
+	@Override
 	public void deleteDocuments(Term term) throws IOException {
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
@@ -113,18 +141,22 @@ public class IndexAccessorImpl implements IndexAccessor {
 		}
 	}
 
+	@Override
 	public void dumpIndex(OutputStream outputStream) throws IOException {
 		_dumpIndexDeletionPolicy.dump(outputStream, _indexWriter, _commitLock);
 	}
 
+	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public long getLastGeneration() {
 		return _dumpIndexDeletionPolicy.getLastGeneration();
 	}
 
+	@Override
 	public Directory getLuceneDir() {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Lucene store type " + PropsValues.LUCENE_STORE_TYPE);
@@ -148,6 +180,7 @@ public class IndexAccessorImpl implements IndexAccessor {
 		}
 	}
 
+	@Override
 	public void loadIndex(InputStream inputStream) throws IOException {
 		File tempFile = FileUtil.createTempFile();
 
@@ -190,6 +223,7 @@ public class IndexAccessorImpl implements IndexAccessor {
 		FileUtil.deltree(tempFile);
 	}
 
+	@Override
 	public void updateDocument(Term term, Document document)
 		throws IOException {
 
@@ -363,6 +397,7 @@ public class IndexAccessorImpl implements IndexAccessor {
 
 		Runnable runnable = new Runnable() {
 
+			@Override
 			public void run() {
 				try {
 					if (_batchCount > 0) {

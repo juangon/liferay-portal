@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
+import com.liferay.portal.model.SystemEventConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -42,6 +43,7 @@ import java.util.Map;
 public class PollsQuestionLocalServiceImpl
 	extends PollsQuestionLocalServiceBaseImpl {
 
+	@Override
 	public PollsQuestion addQuestion(
 			long userId, Map<Locale, String> titleMap,
 			Map<Locale, String> descriptionMap, int expirationDateMonth,
@@ -114,6 +116,7 @@ public class PollsQuestionLocalServiceImpl
 		return question;
 	}
 
+	@Override
 	public void addQuestionResources(
 			long questionId, boolean addGroupPermissions,
 			boolean addGuestPermissions)
@@ -126,6 +129,7 @@ public class PollsQuestionLocalServiceImpl
 			question, addGroupPermissions, addGuestPermissions);
 	}
 
+	@Override
 	public void addQuestionResources(
 			long questionId, String[] groupPermissions,
 			String[] guestPermissions)
@@ -137,6 +141,7 @@ public class PollsQuestionLocalServiceImpl
 		addQuestionResources(question, groupPermissions, guestPermissions);
 	}
 
+	@Override
 	public void addQuestionResources(
 			PollsQuestion question, boolean addGroupPermissions,
 			boolean addGuestPermissions)
@@ -149,6 +154,7 @@ public class PollsQuestionLocalServiceImpl
 			addGuestPermissions);
 	}
 
+	@Override
 	public void addQuestionResources(
 			PollsQuestion question, String[] groupPermissions,
 			String[] guestPermissions)
@@ -160,6 +166,7 @@ public class PollsQuestionLocalServiceImpl
 			question.getQuestionId(), groupPermissions, guestPermissions);
 	}
 
+	@Override
 	public void deleteQuestion(long questionId)
 		throws PortalException, SystemException {
 
@@ -169,6 +176,7 @@ public class PollsQuestionLocalServiceImpl
 		deleteQuestion(question);
 	}
 
+	@Override
 	public void deleteQuestion(PollsQuestion question)
 		throws PortalException, SystemException {
 
@@ -182,6 +190,13 @@ public class PollsQuestionLocalServiceImpl
 			question.getCompanyId(), PollsQuestion.class.getName(),
 			ResourceConstants.SCOPE_INDIVIDUAL, question.getQuestionId());
 
+		// System event
+
+		systemEventLocalService.addSystemEvent(
+			question.getGroupId(), PollsQuestion.class.getName(),
+			question.getQuestionId(), question.getUuid(),
+			SystemEventConstants.TYPE_DELETE);
+
 		// Choices
 
 		pollsChoicePersistence.removeByQuestionId(question.getQuestionId());
@@ -191,6 +206,7 @@ public class PollsQuestionLocalServiceImpl
 		pollsVotePersistence.removeByQuestionId(question.getQuestionId());
 	}
 
+	@Override
 	public void deleteQuestions(long groupId)
 		throws PortalException, SystemException {
 
@@ -201,28 +217,33 @@ public class PollsQuestionLocalServiceImpl
 		}
 	}
 
+	@Override
 	public PollsQuestion getQuestion(long questionId)
 		throws PortalException, SystemException {
 
 		return pollsQuestionPersistence.findByPrimaryKey(questionId);
 	}
 
+	@Override
 	public List<PollsQuestion> getQuestions(long groupId)
 		throws SystemException {
 
 		return pollsQuestionPersistence.findByGroupId(groupId);
 	}
 
+	@Override
 	public List<PollsQuestion> getQuestions(long groupId, int start, int end)
 		throws SystemException {
 
 		return pollsQuestionPersistence.findByGroupId(groupId, start, end);
 	}
 
+	@Override
 	public int getQuestionsCount(long groupId) throws SystemException {
 		return pollsQuestionPersistence.countByGroupId(groupId);
 	}
 
+	@Override
 	public PollsQuestion updateQuestion(
 			long userId, long questionId, Map<Locale, String> titleMap,
 			Map<Locale, String> descriptionMap, int expirationDateMonth,
@@ -259,31 +280,32 @@ public class PollsQuestionLocalServiceImpl
 
 		// Choices
 
-		if (choices != null) {
-			int oldChoicesCount = pollsChoicePersistence.countByQuestionId(
-				questionId);
+		if (choices == null) {
+			return question;
+		}
 
-			if (oldChoicesCount > choices.size()) {
-				throw new QuestionChoiceException();
+		int oldChoicesCount = pollsChoicePersistence.countByQuestionId(
+			questionId);
+
+		if (oldChoicesCount > choices.size()) {
+			throw new QuestionChoiceException();
+		}
+
+		for (PollsChoice choice : choices) {
+			String choiceName = choice.getName();
+			String choiceDescription = choice.getDescription();
+
+			choice = pollsChoicePersistence.fetchByQ_N(questionId, choiceName);
+
+			if (choice == null) {
+				pollsChoiceLocalService.addChoice(
+					userId, questionId, choiceName, choiceDescription,
+					new ServiceContext());
 			}
-
-			for (PollsChoice choice : choices) {
-				String choiceName = choice.getName();
-				String choiceDescription = choice.getDescription();
-
-				choice = pollsChoicePersistence.fetchByQ_N(
-					questionId, choiceName);
-
-				if (choice == null) {
-					pollsChoiceLocalService.addChoice(
-						userId, questionId, choiceName, choiceDescription,
-						new ServiceContext());
-				}
-				else {
-					pollsChoiceLocalService.updateChoice(
-						choice.getChoiceId(), questionId, choiceName,
-						choiceDescription, new ServiceContext());
-				}
+			else {
+				pollsChoiceLocalService.updateChoice(
+					choice.getChoiceId(), questionId, choiceName,
+					choiceDescription, new ServiceContext());
 			}
 		}
 

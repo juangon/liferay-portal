@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.SystemEventConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PropsValues;
@@ -29,16 +30,19 @@ import com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup;
 import com.liferay.portlet.mobiledevicerules.service.base.MDRRuleGroupLocalServiceBaseImpl;
 
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 /**
  * @author Edward C. Han
+ * @author Manuel de la Peña
  */
 public class MDRRuleGroupLocalServiceImpl
 	extends MDRRuleGroupLocalServiceBaseImpl {
 
+	@Override
 	public MDRRuleGroup addRuleGroup(
 			long groupId, Map<Locale, String> nameMap,
 			Map<Locale, String> descriptionMap, ServiceContext serviceContext)
@@ -65,6 +69,7 @@ public class MDRRuleGroupLocalServiceImpl
 		return updateMDRRuleGroup(ruleGroup);
 	}
 
+	@Override
 	public MDRRuleGroup copyRuleGroup(
 			long ruleGroupId, long groupId, ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -75,6 +80,7 @@ public class MDRRuleGroupLocalServiceImpl
 		return copyRuleGroup(ruleGroup, groupId, serviceContext);
 	}
 
+	@Override
 	public MDRRuleGroup copyRuleGroup(
 			MDRRuleGroup ruleGroup, long groupId, ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -115,7 +121,10 @@ public class MDRRuleGroupLocalServiceImpl
 		return newRuleGroup;
 	}
 
-	public void deleteRuleGroup(long ruleGroupId) throws SystemException {
+	@Override
+	public void deleteRuleGroup(long ruleGroupId)
+		throws PortalException, SystemException {
+
 		MDRRuleGroup ruleGroup = mdrRuleGroupPersistence.fetchByPrimaryKey(
 			ruleGroupId);
 
@@ -124,23 +133,35 @@ public class MDRRuleGroupLocalServiceImpl
 		}
 	}
 
-	public void deleteRuleGroup(MDRRuleGroup ruleGroup) throws SystemException {
+	@Override
+	public void deleteRuleGroup(MDRRuleGroup ruleGroup)
+		throws PortalException, SystemException {
 
 		// Rule group
 
 		mdrRuleGroupPersistence.remove(ruleGroup);
 
+		// System event
+
+		systemEventLocalService.addSystemEvent(
+			ruleGroup.getGroupId(), MDRRuleGroup.class.getName(),
+			ruleGroup.getRuleGroupId(), ruleGroup.getUuid(),
+			SystemEventConstants.TYPE_DELETE);
+
 		// Rules
 
 		mdrRuleLocalService.deleteRules(ruleGroup.getRuleGroupId());
 
-		//	Rule group instances
+		// Rule group instances
 
 		mdrRuleGroupInstanceLocalService.deleteRuleGroupInstances(
 			ruleGroup.getRuleGroupId());
 	}
 
-	public void deleteRuleGroups(long groupId) throws SystemException {
+	@Override
+	public void deleteRuleGroups(long groupId)
+		throws PortalException, SystemException {
+
 		List<MDRRuleGroup> ruleGroups = mdrRuleGroupPersistence.findByGroupId(
 			groupId);
 
@@ -149,63 +170,150 @@ public class MDRRuleGroupLocalServiceImpl
 		}
 	}
 
+	@Override
 	public MDRRuleGroup fetchRuleGroup(long ruleGroupId)
 		throws SystemException {
 
 		return mdrRuleGroupPersistence.fetchByPrimaryKey(ruleGroupId);
 	}
 
+	@Override
 	public MDRRuleGroup getRuleGroup(long ruleGroupId)
 		throws PortalException, SystemException {
 
 		return mdrRuleGroupPersistence.findByPrimaryKey(ruleGroupId);
 	}
 
+	@Override
 	public List<MDRRuleGroup> getRuleGroups(long groupId)
 		throws SystemException {
 
 		return mdrRuleGroupPersistence.findByGroupId(groupId);
 	}
 
+	@Override
 	public List<MDRRuleGroup> getRuleGroups(long groupId, int start, int end)
 		throws SystemException {
 
 		return mdrRuleGroupPersistence.findByGroupId(groupId, start, end);
 	}
 
+	@Override
 	public int getRuleGroupsCount(long groupId) throws SystemException {
 		return mdrRuleGroupPersistence.countByGroupId(groupId);
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #search(long, String,
+	 *             LinkedHashMap, boolean, int, int)}
+	 */
+	@Override
 	public List<MDRRuleGroup> search(
 			long groupId, String name, boolean andOperator, int start, int end)
 		throws SystemException {
 
+		LinkedHashMap<String, Object> params =
+			new LinkedHashMap<String, Object>();
+
+		params.put("includeGlobalScope", Boolean.TRUE);
+
 		return mdrRuleGroupFinder.findByG_N(
-			groupId, name, andOperator, start, end);
+			groupId, name, params, andOperator, start, end);
 	}
 
+	@Override
+	public List<MDRRuleGroup> search(
+			long groupId, String name, LinkedHashMap<String, Object> params,
+			boolean andOperator, int start, int end)
+		throws SystemException {
+
+		return mdrRuleGroupFinder.findByG_N(
+			groupId, name, params, andOperator, start, end);
+	}
+
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #searchByKeywords(long,
+	 *             String, LinkedHashMap, boolean, int, int)}
+	 */
+	@Override
 	public List<MDRRuleGroup> searchByKeywords(
 			long groupId, String keywords, boolean andOperator, int start,
 			int end)
 		throws SystemException {
 
-		return mdrRuleGroupFinder.findByKeywords(groupId, keywords, start, end);
+		LinkedHashMap<String, Object> params =
+			new LinkedHashMap<String, Object>();
+
+		params.put("includeGlobalScope", Boolean.TRUE);
+
+		return mdrRuleGroupFinder.findByKeywords(
+			groupId, keywords, params, start, end);
 	}
 
+	@Override
+	public List<MDRRuleGroup> searchByKeywords(
+			long groupId, String keywords, LinkedHashMap<String, Object> params,
+			boolean andOperator, int start, int end)
+		throws SystemException {
+
+		return mdrRuleGroupFinder.findByKeywords(
+			groupId, keywords, params, start, end);
+	}
+
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #searchByKeywordsCount(long,
+	 *             String, LinkedHashMap, boolean)}
+	 */
+	@Override
 	public int searchByKeywordsCount(
 			long groupId, String keywords, boolean andOperator)
 		throws SystemException {
 
-		return mdrRuleGroupFinder.countByKeywords(groupId, keywords);
+		LinkedHashMap<String, Object> params =
+			new LinkedHashMap<String, Object>();
+
+		params.put("includeGlobalScope", Boolean.TRUE);
+
+		return mdrRuleGroupFinder.countByKeywords(groupId, keywords, params);
 	}
 
+	@Override
+	public int searchByKeywordsCount(
+			long groupId, String keywords, LinkedHashMap<String, Object> params,
+			boolean andOperator)
+		throws SystemException {
+
+		return mdrRuleGroupFinder.countByKeywords(groupId, keywords, params);
+	}
+
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #searchCount(long, String,
+	 *             LinkedHashMap, boolean)}
+	 */
+	@Override
 	public int searchCount(long groupId, String name, boolean andOperator)
 		throws SystemException {
 
-		return mdrRuleGroupFinder.countByG_N(groupId, name, andOperator);
+		LinkedHashMap<String, Object> params =
+			new LinkedHashMap<String, Object>();
+
+		params.put("includeGlobalScope", Boolean.TRUE);
+
+		return mdrRuleGroupFinder.countByG_N(
+			groupId, name, params, andOperator);
 	}
 
+	@Override
+	public int searchCount(
+			long groupId, String name, LinkedHashMap<String, Object> params,
+			boolean andOperator)
+		throws SystemException {
+
+		return mdrRuleGroupFinder.countByG_N(
+			groupId, name, params, andOperator);
+	}
+
+	@Override
 	public MDRRuleGroup updateRuleGroup(
 			long ruleGroupId, Map<Locale, String> nameMap,
 			Map<Locale, String> descriptionMap, ServiceContext serviceContext)

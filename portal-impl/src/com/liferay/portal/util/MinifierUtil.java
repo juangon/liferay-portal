@@ -99,6 +99,7 @@ public class MinifierUtil {
 
 	private class JavaScriptErrorReporter implements ErrorReporter {
 
+		@Override
 		public void error(
 			String message, String sourceName, int line, String lineSource,
 			int lineOffset) {
@@ -111,6 +112,7 @@ public class MinifierUtil {
 			}
 		}
 
+		@Override
 		public EvaluatorException runtimeError(
 			String message, String sourceName, int line, String lineSource,
 			int lineOffset) {
@@ -120,6 +122,7 @@ public class MinifierUtil {
 			return new EvaluatorException(message);
 		}
 
+		@Override
 		public void warning(
 			String message, String sourceName, int line, String lineSource,
 			int lineOffset) {

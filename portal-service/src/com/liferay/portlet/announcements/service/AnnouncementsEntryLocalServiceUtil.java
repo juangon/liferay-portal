@@ -18,11 +18,12 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
- * The utility for the announcements entry local service. This utility wraps {@link com.liferay.portlet.announcements.service.impl.AnnouncementsEntryLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
+ * Provides the local service utility for AnnouncementsEntry. This utility wraps
+ * {@link com.liferay.portlet.announcements.service.impl.AnnouncementsEntryLocalServiceImpl} and is the
+ * primary access point for service operations in application layer code running
+ * on the local server. Methods of this service will not have security checks
+ * based on the propagated JAAS credentials because this service can only be
+ * accessed from within the same VM.
  *
  * @author Brian Wing Shun Chan
  * @see AnnouncementsEntryLocalService
@@ -256,7 +257,7 @@ public class AnnouncementsEntryLocalServiceUtil {
 		long userId, long classNameId, long classPK, java.lang.String title,
 		java.lang.String content, java.lang.String url, java.lang.String type,
 		int displayDateMonth, int displayDateDay, int displayDateYear,
-		int displayDateHour, int displayDateMinute, boolean autoDisplayDate,
+		int displayDateHour, int displayDateMinute, boolean displayImmediately,
 		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
 		int expirationDateHour, int expirationDateMinute, int priority,
 		boolean alert)
@@ -265,7 +266,7 @@ public class AnnouncementsEntryLocalServiceUtil {
 		return getService()
 				   .addEntry(userId, classNameId, classPK, title, content, url,
 			type, displayDateMonth, displayDateDay, displayDateYear,
-			displayDateHour, displayDateMinute, autoDisplayDate,
+			displayDateHour, displayDateMinute, displayImmediately,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
 			expirationDateHour, expirationDateMinute, priority, alert);
 	}

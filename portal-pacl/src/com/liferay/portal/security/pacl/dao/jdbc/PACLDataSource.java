@@ -68,6 +68,7 @@ public class PACLDataSource extends DataSourceWrapper {
 			_paclPolicy = paclPolicy;
 		}
 
+		@Override
 		public Connection run() {
 			return (Connection)ProxyUtil.newProxyInstance(
 				_paclPolicy.getClassLoader(), new Class<?>[] {Connection.class},

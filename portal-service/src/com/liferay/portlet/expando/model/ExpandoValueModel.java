@@ -131,6 +131,7 @@ public interface ExpandoValueModel extends AttachedModel, BaseModel<ExpandoValue
 	 *
 	 * @return the fully qualified class name of this expando value
 	 */
+	@Override
 	public String getClassName();
 
 	public void setClassName(String className);
@@ -140,6 +141,7 @@ public interface ExpandoValueModel extends AttachedModel, BaseModel<ExpandoValue
 	 *
 	 * @return the class name ID of this expando value
 	 */
+	@Override
 	public long getClassNameId();
 
 	/**
@@ -147,6 +149,7 @@ public interface ExpandoValueModel extends AttachedModel, BaseModel<ExpandoValue
 	 *
 	 * @param classNameId the class name ID of this expando value
 	 */
+	@Override
 	public void setClassNameId(long classNameId);
 
 	/**
@@ -154,6 +157,7 @@ public interface ExpandoValueModel extends AttachedModel, BaseModel<ExpandoValue
 	 *
 	 * @return the class p k of this expando value
 	 */
+	@Override
 	public long getClassPK();
 
 	/**
@@ -161,6 +165,7 @@ public interface ExpandoValueModel extends AttachedModel, BaseModel<ExpandoValue
 	 *
 	 * @param classPK the class p k of this expando value
 	 */
+	@Override
 	public void setClassPK(long classPK);
 
 	/**
@@ -178,41 +183,60 @@ public interface ExpandoValueModel extends AttachedModel, BaseModel<ExpandoValue
 	 */
 	public void setData(String data);
 
+	@Override
 	public boolean isNew();
 
+	@Override
 	public void setNew(boolean n);
 
+	@Override
 	public boolean isCachedModel();
 
+	@Override
 	public void setCachedModel(boolean cachedModel);
 
+	@Override
 	public boolean isEscapedModel();
 
+	@Override
 	public Serializable getPrimaryKeyObj();
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
+	@Override
 	public ExpandoBridge getExpandoBridge();
 
+	@Override
 	public void setExpandoBridgeAttributes(BaseModel<?> baseModel);
 
+	@Override
 	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge);
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext);
 
+	@Override
 	public Object clone();
 
+	@Override
 	public int compareTo(ExpandoValue expandoValue);
 
+	@Override
 	public int hashCode();
 
+	@Override
 	public CacheModel<ExpandoValue> toCacheModel();
 
+	@Override
 	public ExpandoValue toEscapedModel();
 
+	@Override
 	public ExpandoValue toUnescapedModel();
 
+	@Override
 	public String toString();
 
+	@Override
 	public String toXmlString();
 }

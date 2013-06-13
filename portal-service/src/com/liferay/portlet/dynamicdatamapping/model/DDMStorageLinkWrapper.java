@@ -24,8 +24,8 @@ import java.util.Map;
  * This class is a wrapper for {@link DDMStorageLink}.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       DDMStorageLink
+ * @author Brian Wing Shun Chan
+ * @see DDMStorageLink
  * @generated
  */
 public class DDMStorageLinkWrapper implements DDMStorageLink,
@@ -34,14 +34,17 @@ public class DDMStorageLinkWrapper implements DDMStorageLink,
 		_ddmStorageLink = ddmStorageLink;
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return DDMStorageLink.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return DDMStorageLink.class.getName();
 	}
 
+	@Override
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
@@ -54,6 +57,7 @@ public class DDMStorageLinkWrapper implements DDMStorageLink,
 		return attributes;
 	}
 
+	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 		String uuid = (String)attributes.get("uuid");
 
@@ -91,6 +95,7 @@ public class DDMStorageLinkWrapper implements DDMStorageLink,
 	*
 	* @return the primary key of this d d m storage link
 	*/
+	@Override
 	public long getPrimaryKey() {
 		return _ddmStorageLink.getPrimaryKey();
 	}
@@ -100,6 +105,7 @@ public class DDMStorageLinkWrapper implements DDMStorageLink,
 	*
 	* @param primaryKey the primary key of this d d m storage link
 	*/
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_ddmStorageLink.setPrimaryKey(primaryKey);
 	}
@@ -109,6 +115,7 @@ public class DDMStorageLinkWrapper implements DDMStorageLink,
 	*
 	* @return the uuid of this d d m storage link
 	*/
+	@Override
 	public java.lang.String getUuid() {
 		return _ddmStorageLink.getUuid();
 	}
@@ -118,6 +125,7 @@ public class DDMStorageLinkWrapper implements DDMStorageLink,
 	*
 	* @param uuid the uuid of this d d m storage link
 	*/
+	@Override
 	public void setUuid(java.lang.String uuid) {
 		_ddmStorageLink.setUuid(uuid);
 	}
@@ -127,6 +135,7 @@ public class DDMStorageLinkWrapper implements DDMStorageLink,
 	*
 	* @return the storage link ID of this d d m storage link
 	*/
+	@Override
 	public long getStorageLinkId() {
 		return _ddmStorageLink.getStorageLinkId();
 	}
@@ -136,6 +145,7 @@ public class DDMStorageLinkWrapper implements DDMStorageLink,
 	*
 	* @param storageLinkId the storage link ID of this d d m storage link
 	*/
+	@Override
 	public void setStorageLinkId(long storageLinkId) {
 		_ddmStorageLink.setStorageLinkId(storageLinkId);
 	}
@@ -145,10 +155,12 @@ public class DDMStorageLinkWrapper implements DDMStorageLink,
 	*
 	* @return the fully qualified class name of this d d m storage link
 	*/
+	@Override
 	public java.lang.String getClassName() {
 		return _ddmStorageLink.getClassName();
 	}
 
+	@Override
 	public void setClassName(java.lang.String className) {
 		_ddmStorageLink.setClassName(className);
 	}
@@ -158,6 +170,7 @@ public class DDMStorageLinkWrapper implements DDMStorageLink,
 	*
 	* @return the class name ID of this d d m storage link
 	*/
+	@Override
 	public long getClassNameId() {
 		return _ddmStorageLink.getClassNameId();
 	}
@@ -167,6 +180,7 @@ public class DDMStorageLinkWrapper implements DDMStorageLink,
 	*
 	* @param classNameId the class name ID of this d d m storage link
 	*/
+	@Override
 	public void setClassNameId(long classNameId) {
 		_ddmStorageLink.setClassNameId(classNameId);
 	}
@@ -176,6 +190,7 @@ public class DDMStorageLinkWrapper implements DDMStorageLink,
 	*
 	* @return the class p k of this d d m storage link
 	*/
+	@Override
 	public long getClassPK() {
 		return _ddmStorageLink.getClassPK();
 	}
@@ -185,6 +200,7 @@ public class DDMStorageLinkWrapper implements DDMStorageLink,
 	*
 	* @param classPK the class p k of this d d m storage link
 	*/
+	@Override
 	public void setClassPK(long classPK) {
 		_ddmStorageLink.setClassPK(classPK);
 	}
@@ -194,6 +210,7 @@ public class DDMStorageLinkWrapper implements DDMStorageLink,
 	*
 	* @return the structure ID of this d d m storage link
 	*/
+	@Override
 	public long getStructureId() {
 		return _ddmStorageLink.getStructureId();
 	}
@@ -203,52 +220,64 @@ public class DDMStorageLinkWrapper implements DDMStorageLink,
 	*
 	* @param structureId the structure ID of this d d m storage link
 	*/
+	@Override
 	public void setStructureId(long structureId) {
 		_ddmStorageLink.setStructureId(structureId);
 	}
 
+	@Override
 	public boolean isNew() {
 		return _ddmStorageLink.isNew();
 	}
 
+	@Override
 	public void setNew(boolean n) {
 		_ddmStorageLink.setNew(n);
 	}
 
+	@Override
 	public boolean isCachedModel() {
 		return _ddmStorageLink.isCachedModel();
 	}
 
+	@Override
 	public void setCachedModel(boolean cachedModel) {
 		_ddmStorageLink.setCachedModel(cachedModel);
 	}
 
+	@Override
 	public boolean isEscapedModel() {
 		return _ddmStorageLink.isEscapedModel();
 	}
 
+	@Override
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _ddmStorageLink.getPrimaryKeyObj();
 	}
 
+	@Override
 	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
 		_ddmStorageLink.setPrimaryKeyObj(primaryKeyObj);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
 		return _ddmStorageLink.getExpandoBridge();
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.model.BaseModel<?> baseModel) {
 		_ddmStorageLink.setExpandoBridgeAttributes(baseModel);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portlet.expando.model.ExpandoBridge expandoBridge) {
 		_ddmStorageLink.setExpandoBridgeAttributes(expandoBridge);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		_ddmStorageLink.setExpandoBridgeAttributes(serviceContext);
@@ -259,6 +288,7 @@ public class DDMStorageLinkWrapper implements DDMStorageLink,
 		return new DDMStorageLinkWrapper((DDMStorageLink)_ddmStorageLink.clone());
 	}
 
+	@Override
 	public int compareTo(
 		com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink ddmStorageLink) {
 		return _ddmStorageLink.compareTo(ddmStorageLink);
@@ -269,14 +299,17 @@ public class DDMStorageLinkWrapper implements DDMStorageLink,
 		return _ddmStorageLink.hashCode();
 	}
 
+	@Override
 	public com.liferay.portal.model.CacheModel<com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink> toCacheModel() {
 		return _ddmStorageLink.toCacheModel();
 	}
 
+	@Override
 	public com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink toEscapedModel() {
 		return new DDMStorageLinkWrapper(_ddmStorageLink.toEscapedModel());
 	}
 
+	@Override
 	public com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink toUnescapedModel() {
 		return new DDMStorageLinkWrapper(_ddmStorageLink.toUnescapedModel());
 	}
@@ -286,21 +319,25 @@ public class DDMStorageLinkWrapper implements DDMStorageLink,
 		return _ddmStorageLink.toString();
 	}
 
+	@Override
 	public java.lang.String toXmlString() {
 		return _ddmStorageLink.toXmlString();
 	}
 
+	@Override
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_ddmStorageLink.persist();
 	}
 
+	@Override
 	public java.lang.String getStorageType()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _ddmStorageLink.getStorageType();
 	}
 
+	@Override
 	public com.liferay.portlet.dynamicdatamapping.model.DDMStructure getStructure()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -314,10 +351,12 @@ public class DDMStorageLinkWrapper implements DDMStorageLink,
 		return _ddmStorageLink;
 	}
 
+	@Override
 	public DDMStorageLink getWrappedModel() {
 		return _ddmStorageLink;
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		_ddmStorageLink.resetOriginalValues();
 	}

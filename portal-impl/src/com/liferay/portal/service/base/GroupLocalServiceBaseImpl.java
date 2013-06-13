@@ -33,6 +33,7 @@ import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountService;
 import com.liferay.portal.service.AddressLocalService;
 import com.liferay.portal.service.AddressService;
+import com.liferay.portal.service.BackgroundTaskLocalService;
 import com.liferay.portal.service.BaseLocalServiceImpl;
 import com.liferay.portal.service.BrowserTrackerLocalService;
 import com.liferay.portal.service.CMISRepositoryLocalService;
@@ -52,6 +53,7 @@ import com.liferay.portal.service.ImageLocalService;
 import com.liferay.portal.service.ImageService;
 import com.liferay.portal.service.LayoutBranchLocalService;
 import com.liferay.portal.service.LayoutBranchService;
+import com.liferay.portal.service.LayoutFriendlyURLLocalService;
 import com.liferay.portal.service.LayoutLocalService;
 import com.liferay.portal.service.LayoutPrototypeLocalService;
 import com.liferay.portal.service.LayoutPrototypeService;
@@ -110,6 +112,7 @@ import com.liferay.portal.service.RoleService;
 import com.liferay.portal.service.ServiceComponentLocalService;
 import com.liferay.portal.service.ShardLocalService;
 import com.liferay.portal.service.SubscriptionLocalService;
+import com.liferay.portal.service.SystemEventLocalService;
 import com.liferay.portal.service.TeamLocalService;
 import com.liferay.portal.service.TeamService;
 import com.liferay.portal.service.ThemeLocalService;
@@ -124,6 +127,7 @@ import com.liferay.portal.service.UserGroupService;
 import com.liferay.portal.service.UserIdMapperLocalService;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserNotificationEventLocalService;
+import com.liferay.portal.service.UserNotificationInterpreterLocalService;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.UserTrackerLocalService;
 import com.liferay.portal.service.UserTrackerPathLocalService;
@@ -135,6 +139,7 @@ import com.liferay.portal.service.WorkflowDefinitionLinkLocalService;
 import com.liferay.portal.service.WorkflowInstanceLinkLocalService;
 import com.liferay.portal.service.persistence.AccountPersistence;
 import com.liferay.portal.service.persistence.AddressPersistence;
+import com.liferay.portal.service.persistence.BackgroundTaskPersistence;
 import com.liferay.portal.service.persistence.BrowserTrackerPersistence;
 import com.liferay.portal.service.persistence.ClassNamePersistence;
 import com.liferay.portal.service.persistence.ClusterGroupPersistence;
@@ -147,10 +152,10 @@ import com.liferay.portal.service.persistence.GroupPersistence;
 import com.liferay.portal.service.persistence.ImagePersistence;
 import com.liferay.portal.service.persistence.LayoutBranchPersistence;
 import com.liferay.portal.service.persistence.LayoutFinder;
+import com.liferay.portal.service.persistence.LayoutFriendlyURLPersistence;
 import com.liferay.portal.service.persistence.LayoutPersistence;
 import com.liferay.portal.service.persistence.LayoutPrototypePersistence;
 import com.liferay.portal.service.persistence.LayoutRevisionPersistence;
-import com.liferay.portal.service.persistence.LayoutSetBranchFinder;
 import com.liferay.portal.service.persistence.LayoutSetBranchPersistence;
 import com.liferay.portal.service.persistence.LayoutSetPersistence;
 import com.liferay.portal.service.persistence.LayoutSetPrototypePersistence;
@@ -190,6 +195,7 @@ import com.liferay.portal.service.persistence.RolePersistence;
 import com.liferay.portal.service.persistence.ServiceComponentPersistence;
 import com.liferay.portal.service.persistence.ShardPersistence;
 import com.liferay.portal.service.persistence.SubscriptionPersistence;
+import com.liferay.portal.service.persistence.SystemEventPersistence;
 import com.liferay.portal.service.persistence.TeamFinder;
 import com.liferay.portal.service.persistence.TeamPersistence;
 import com.liferay.portal.service.persistence.TicketPersistence;
@@ -255,10 +261,6 @@ import com.liferay.portlet.journal.service.JournalTemplateLocalService;
 import com.liferay.portlet.journal.service.JournalTemplateService;
 import com.liferay.portlet.journal.service.persistence.JournalArticleFinder;
 import com.liferay.portlet.journal.service.persistence.JournalArticlePersistence;
-import com.liferay.portlet.journal.service.persistence.JournalStructureFinder;
-import com.liferay.portlet.journal.service.persistence.JournalStructurePersistence;
-import com.liferay.portlet.journal.service.persistence.JournalTemplateFinder;
-import com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence;
 import com.liferay.portlet.messageboards.service.MBBanLocalService;
 import com.liferay.portlet.messageboards.service.MBBanService;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalService;
@@ -288,8 +290,11 @@ import com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinder;
 import com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistence;
 import com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinder;
 import com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence;
+import com.liferay.portlet.social.service.SocialActivityLocalService;
 import com.liferay.portlet.social.service.SocialActivitySettingLocalService;
 import com.liferay.portlet.social.service.SocialActivitySettingService;
+import com.liferay.portlet.social.service.persistence.SocialActivityFinder;
+import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
 import com.liferay.portlet.social.service.persistence.SocialActivitySettingPersistence;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService;
@@ -308,7 +313,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 /**
- * The base implementation of the group local service.
+ * Provides the base implementation for the group local service.
  *
  * <p>
  * This implementation exists only as a container for the default service methods generated by ServiceBuilder. All custom service methods should be put in {@link com.liferay.portal.service.impl.GroupLocalServiceImpl}.
@@ -335,6 +340,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.REINDEX)
+	@Override
 	public Group addGroup(Group group) throws SystemException {
 		group.setNew(true);
 
@@ -347,6 +353,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @param groupId the primary key for the new group
 	 * @return the new group
 	 */
+	@Override
 	public Group createGroup(long groupId) {
 		return groupPersistence.create(groupId);
 	}
@@ -360,6 +367,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.DELETE)
+	@Override
 	public Group deleteGroup(long groupId)
 		throws PortalException, SystemException {
 		return groupPersistence.remove(groupId);
@@ -374,11 +382,13 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.DELETE)
+	@Override
 	public Group deleteGroup(Group group)
 		throws PortalException, SystemException {
 		return groupPersistence.remove(group);
 	}
 
+	@Override
 	public DynamicQuery dynamicQuery() {
 		Class<?> clazz = getClass();
 
@@ -393,6 +403,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @return the matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	@SuppressWarnings("rawtypes")
 	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
@@ -412,6 +423,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @return the range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	@SuppressWarnings("rawtypes")
 	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
 		throws SystemException {
@@ -432,6 +444,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @return the ordered range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	@SuppressWarnings("rawtypes")
 	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -446,11 +459,13 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @return the number of rows that match the dynamic query
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public long dynamicQueryCount(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return groupPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	@Override
 	public Group fetchGroup(long groupId) throws SystemException {
 		return groupPersistence.fetchByPrimaryKey(groupId);
 	}
@@ -463,10 +478,12 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @throws PortalException if a group with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group getGroup(long groupId) throws PortalException, SystemException {
 		return groupPersistence.findByPrimaryKey(groupId);
 	}
 
+	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException, SystemException {
 		return groupPersistence.findByPrimaryKey(primaryKeyObj);
@@ -481,6 +498,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @throws PortalException if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group getGroupByUuidAndGroupId(String uuid, long groupId)
 		throws PortalException, SystemException {
 		return groupPersistence.findByUUID_G(uuid, groupId);
@@ -498,6 +516,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @return the range of groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> getGroups(int start, int end) throws SystemException {
 		return groupPersistence.findAll(start, end);
 	}
@@ -508,6 +527,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @return the number of groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int getGroupsCount() throws SystemException {
 		return groupPersistence.countAll();
 	}
@@ -520,6 +540,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.REINDEX)
+	@Override
 	public Group updateGroup(Group group) throws SystemException {
 		return groupPersistence.update(group);
 	}
@@ -527,6 +548,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addOrganizationGroup(long organizationId, long groupId)
 		throws SystemException {
 		organizationPersistence.addGroup(organizationId, groupId);
@@ -535,6 +557,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addOrganizationGroup(long organizationId, Group group)
 		throws SystemException {
 		organizationPersistence.addGroup(organizationId, group);
@@ -543,6 +566,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addOrganizationGroups(long organizationId, long[] groupIds)
 		throws SystemException {
 		organizationPersistence.addGroups(organizationId, groupIds);
@@ -551,6 +575,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addOrganizationGroups(long organizationId, List<Group> Groups)
 		throws SystemException {
 		organizationPersistence.addGroups(organizationId, Groups);
@@ -559,6 +584,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void clearOrganizationGroups(long organizationId)
 		throws SystemException {
 		organizationPersistence.clearGroups(organizationId);
@@ -567,6 +593,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void deleteOrganizationGroup(long organizationId, long groupId)
 		throws SystemException {
 		organizationPersistence.removeGroup(organizationId, groupId);
@@ -575,6 +602,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void deleteOrganizationGroup(long organizationId, Group group)
 		throws SystemException {
 		organizationPersistence.removeGroup(organizationId, group);
@@ -583,6 +611,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void deleteOrganizationGroups(long organizationId, long[] groupIds)
 		throws SystemException {
 		organizationPersistence.removeGroups(organizationId, groupIds);
@@ -591,6 +620,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void deleteOrganizationGroups(long organizationId, List<Group> Groups)
 		throws SystemException {
 		organizationPersistence.removeGroups(organizationId, Groups);
@@ -599,6 +629,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> getOrganizationGroups(long organizationId)
 		throws SystemException {
 		return organizationPersistence.getGroups(organizationId);
@@ -607,6 +638,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> getOrganizationGroups(long organizationId, int start,
 		int end) throws SystemException {
 		return organizationPersistence.getGroups(organizationId, start, end);
@@ -615,6 +647,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> getOrganizationGroups(long organizationId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		return organizationPersistence.getGroups(organizationId, start, end,
@@ -624,6 +657,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int getOrganizationGroupsCount(long organizationId)
 		throws SystemException {
 		return organizationPersistence.getGroupsSize(organizationId);
@@ -632,6 +666,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean hasOrganizationGroup(long organizationId, long groupId)
 		throws SystemException {
 		return organizationPersistence.containsGroup(organizationId, groupId);
@@ -640,6 +675,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean hasOrganizationGroups(long organizationId)
 		throws SystemException {
 		return organizationPersistence.containsGroups(organizationId);
@@ -648,6 +684,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setOrganizationGroups(long organizationId, long[] groupIds)
 		throws SystemException {
 		organizationPersistence.setGroups(organizationId, groupIds);
@@ -656,6 +693,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addRoleGroup(long roleId, long groupId)
 		throws SystemException {
 		rolePersistence.addGroup(roleId, groupId);
@@ -664,6 +702,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addRoleGroup(long roleId, Group group)
 		throws SystemException {
 		rolePersistence.addGroup(roleId, group);
@@ -672,6 +711,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addRoleGroups(long roleId, long[] groupIds)
 		throws SystemException {
 		rolePersistence.addGroups(roleId, groupIds);
@@ -680,6 +720,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addRoleGroups(long roleId, List<Group> Groups)
 		throws SystemException {
 		rolePersistence.addGroups(roleId, Groups);
@@ -688,6 +729,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void clearRoleGroups(long roleId) throws SystemException {
 		rolePersistence.clearGroups(roleId);
 	}
@@ -695,6 +737,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void deleteRoleGroup(long roleId, long groupId)
 		throws SystemException {
 		rolePersistence.removeGroup(roleId, groupId);
@@ -703,6 +746,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void deleteRoleGroup(long roleId, Group group)
 		throws SystemException {
 		rolePersistence.removeGroup(roleId, group);
@@ -711,6 +755,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void deleteRoleGroups(long roleId, long[] groupIds)
 		throws SystemException {
 		rolePersistence.removeGroups(roleId, groupIds);
@@ -719,6 +764,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void deleteRoleGroups(long roleId, List<Group> Groups)
 		throws SystemException {
 		rolePersistence.removeGroups(roleId, Groups);
@@ -727,6 +773,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> getRoleGroups(long roleId) throws SystemException {
 		return rolePersistence.getGroups(roleId);
 	}
@@ -734,6 +781,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> getRoleGroups(long roleId, int start, int end)
 		throws SystemException {
 		return rolePersistence.getGroups(roleId, start, end);
@@ -742,6 +790,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> getRoleGroups(long roleId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		return rolePersistence.getGroups(roleId, start, end, orderByComparator);
@@ -750,6 +799,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int getRoleGroupsCount(long roleId) throws SystemException {
 		return rolePersistence.getGroupsSize(roleId);
 	}
@@ -757,6 +807,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean hasRoleGroup(long roleId, long groupId)
 		throws SystemException {
 		return rolePersistence.containsGroup(roleId, groupId);
@@ -765,6 +816,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean hasRoleGroups(long roleId) throws SystemException {
 		return rolePersistence.containsGroups(roleId);
 	}
@@ -772,6 +824,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setRoleGroups(long roleId, long[] groupIds)
 		throws SystemException {
 		rolePersistence.setGroups(roleId, groupIds);
@@ -780,6 +833,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addUserGroupGroup(long userGroupId, long groupId)
 		throws SystemException {
 		userGroupPersistence.addGroup(userGroupId, groupId);
@@ -788,6 +842,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addUserGroupGroup(long userGroupId, Group group)
 		throws SystemException {
 		userGroupPersistence.addGroup(userGroupId, group);
@@ -796,6 +851,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addUserGroupGroups(long userGroupId, long[] groupIds)
 		throws SystemException {
 		userGroupPersistence.addGroups(userGroupId, groupIds);
@@ -804,6 +860,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addUserGroupGroups(long userGroupId, List<Group> Groups)
 		throws SystemException {
 		userGroupPersistence.addGroups(userGroupId, Groups);
@@ -812,6 +869,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void clearUserGroupGroups(long userGroupId)
 		throws SystemException {
 		userGroupPersistence.clearGroups(userGroupId);
@@ -820,6 +878,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void deleteUserGroupGroup(long userGroupId, long groupId)
 		throws SystemException {
 		userGroupPersistence.removeGroup(userGroupId, groupId);
@@ -828,6 +887,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void deleteUserGroupGroup(long userGroupId, Group group)
 		throws SystemException {
 		userGroupPersistence.removeGroup(userGroupId, group);
@@ -836,6 +896,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void deleteUserGroupGroups(long userGroupId, long[] groupIds)
 		throws SystemException {
 		userGroupPersistence.removeGroups(userGroupId, groupIds);
@@ -844,6 +905,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void deleteUserGroupGroups(long userGroupId, List<Group> Groups)
 		throws SystemException {
 		userGroupPersistence.removeGroups(userGroupId, Groups);
@@ -852,6 +914,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> getUserGroupGroups(long userGroupId)
 		throws SystemException {
 		return userGroupPersistence.getGroups(userGroupId);
@@ -860,6 +923,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> getUserGroupGroups(long userGroupId, int start, int end)
 		throws SystemException {
 		return userGroupPersistence.getGroups(userGroupId, start, end);
@@ -868,6 +932,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> getUserGroupGroups(long userGroupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		return userGroupPersistence.getGroups(userGroupId, start, end,
@@ -877,6 +942,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int getUserGroupGroupsCount(long userGroupId)
 		throws SystemException {
 		return userGroupPersistence.getGroupsSize(userGroupId);
@@ -885,6 +951,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean hasUserGroupGroup(long userGroupId, long groupId)
 		throws SystemException {
 		return userGroupPersistence.containsGroup(userGroupId, groupId);
@@ -893,6 +960,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean hasUserGroupGroups(long userGroupId)
 		throws SystemException {
 		return userGroupPersistence.containsGroups(userGroupId);
@@ -901,6 +969,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setUserGroupGroups(long userGroupId, long[] groupIds)
 		throws SystemException {
 		userGroupPersistence.setGroups(userGroupId, groupIds);
@@ -909,6 +978,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addUserGroup(long userId, long groupId)
 		throws SystemException {
 		userPersistence.addGroup(userId, groupId);
@@ -917,6 +987,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addUserGroup(long userId, Group group)
 		throws SystemException {
 		userPersistence.addGroup(userId, group);
@@ -925,6 +996,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addUserGroups(long userId, long[] groupIds)
 		throws SystemException {
 		userPersistence.addGroups(userId, groupIds);
@@ -933,6 +1005,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addUserGroups(long userId, List<Group> Groups)
 		throws SystemException {
 		userPersistence.addGroups(userId, Groups);
@@ -941,6 +1014,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void clearUserGroups(long userId) throws SystemException {
 		userPersistence.clearGroups(userId);
 	}
@@ -948,6 +1022,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void deleteUserGroup(long userId, long groupId)
 		throws SystemException {
 		userPersistence.removeGroup(userId, groupId);
@@ -956,6 +1031,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void deleteUserGroup(long userId, Group group)
 		throws SystemException {
 		userPersistence.removeGroup(userId, group);
@@ -964,6 +1040,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void deleteUserGroups(long userId, long[] groupIds)
 		throws SystemException {
 		userPersistence.removeGroups(userId, groupIds);
@@ -972,6 +1049,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void deleteUserGroups(long userId, List<Group> Groups)
 		throws SystemException {
 		userPersistence.removeGroups(userId, Groups);
@@ -980,6 +1058,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> getUserGroups(long userId) throws SystemException {
 		return userPersistence.getGroups(userId);
 	}
@@ -987,6 +1066,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> getUserGroups(long userId, int start, int end)
 		throws SystemException {
 		return userPersistence.getGroups(userId, start, end);
@@ -996,6 +1076,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @throws PortalException
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> getUserGroups(long userId, int start, int end,
 		OrderByComparator orderByComparator)
 		throws PortalException, SystemException {
@@ -1005,6 +1086,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int getUserGroupsCount(long userId) throws SystemException {
 		return userPersistence.getGroupsSize(userId);
 	}
@@ -1012,6 +1094,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean hasUserGroup(long userId, long groupId)
 		throws SystemException {
 		return userPersistence.containsGroup(userId, groupId);
@@ -1020,6 +1103,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean hasUserGroups(long userId) throws SystemException {
 		return userPersistence.containsGroups(userId);
 	}
@@ -1027,6 +1111,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setUserGroups(long userId, long[] groupIds)
 		throws SystemException {
 		userPersistence.setGroups(userId, groupIds);
@@ -1138,6 +1223,44 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 */
 	public void setAddressPersistence(AddressPersistence addressPersistence) {
 		this.addressPersistence = addressPersistence;
+	}
+
+	/**
+	 * Returns the background task local service.
+	 *
+	 * @return the background task local service
+	 */
+	public BackgroundTaskLocalService getBackgroundTaskLocalService() {
+		return backgroundTaskLocalService;
+	}
+
+	/**
+	 * Sets the background task local service.
+	 *
+	 * @param backgroundTaskLocalService the background task local service
+	 */
+	public void setBackgroundTaskLocalService(
+		BackgroundTaskLocalService backgroundTaskLocalService) {
+		this.backgroundTaskLocalService = backgroundTaskLocalService;
+	}
+
+	/**
+	 * Returns the background task persistence.
+	 *
+	 * @return the background task persistence
+	 */
+	public BackgroundTaskPersistence getBackgroundTaskPersistence() {
+		return backgroundTaskPersistence;
+	}
+
+	/**
+	 * Sets the background task persistence.
+	 *
+	 * @param backgroundTaskPersistence the background task persistence
+	 */
+	public void setBackgroundTaskPersistence(
+		BackgroundTaskPersistence backgroundTaskPersistence) {
+		this.backgroundTaskPersistence = backgroundTaskPersistence;
 	}
 
 	/**
@@ -1746,6 +1869,44 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
+	 * Returns the layout friendly u r l local service.
+	 *
+	 * @return the layout friendly u r l local service
+	 */
+	public LayoutFriendlyURLLocalService getLayoutFriendlyURLLocalService() {
+		return layoutFriendlyURLLocalService;
+	}
+
+	/**
+	 * Sets the layout friendly u r l local service.
+	 *
+	 * @param layoutFriendlyURLLocalService the layout friendly u r l local service
+	 */
+	public void setLayoutFriendlyURLLocalService(
+		LayoutFriendlyURLLocalService layoutFriendlyURLLocalService) {
+		this.layoutFriendlyURLLocalService = layoutFriendlyURLLocalService;
+	}
+
+	/**
+	 * Returns the layout friendly u r l persistence.
+	 *
+	 * @return the layout friendly u r l persistence
+	 */
+	public LayoutFriendlyURLPersistence getLayoutFriendlyURLPersistence() {
+		return layoutFriendlyURLPersistence;
+	}
+
+	/**
+	 * Sets the layout friendly u r l persistence.
+	 *
+	 * @param layoutFriendlyURLPersistence the layout friendly u r l persistence
+	 */
+	public void setLayoutFriendlyURLPersistence(
+		LayoutFriendlyURLPersistence layoutFriendlyURLPersistence) {
+		this.layoutFriendlyURLPersistence = layoutFriendlyURLPersistence;
+	}
+
+	/**
 	 * Returns the layout prototype local service.
 	 *
 	 * @return the layout prototype local service
@@ -1970,25 +2131,6 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	public void setLayoutSetBranchPersistence(
 		LayoutSetBranchPersistence layoutSetBranchPersistence) {
 		this.layoutSetBranchPersistence = layoutSetBranchPersistence;
-	}
-
-	/**
-	 * Returns the layout set branch finder.
-	 *
-	 * @return the layout set branch finder
-	 */
-	public LayoutSetBranchFinder getLayoutSetBranchFinder() {
-		return layoutSetBranchFinder;
-	}
-
-	/**
-	 * Sets the layout set branch finder.
-	 *
-	 * @param layoutSetBranchFinder the layout set branch finder
-	 */
-	public void setLayoutSetBranchFinder(
-		LayoutSetBranchFinder layoutSetBranchFinder) {
-		this.layoutSetBranchFinder = layoutSetBranchFinder;
 	}
 
 	/**
@@ -3557,6 +3699,44 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
+	 * Returns the system event local service.
+	 *
+	 * @return the system event local service
+	 */
+	public SystemEventLocalService getSystemEventLocalService() {
+		return systemEventLocalService;
+	}
+
+	/**
+	 * Sets the system event local service.
+	 *
+	 * @param systemEventLocalService the system event local service
+	 */
+	public void setSystemEventLocalService(
+		SystemEventLocalService systemEventLocalService) {
+		this.systemEventLocalService = systemEventLocalService;
+	}
+
+	/**
+	 * Returns the system event persistence.
+	 *
+	 * @return the system event persistence
+	 */
+	public SystemEventPersistence getSystemEventPersistence() {
+		return systemEventPersistence;
+	}
+
+	/**
+	 * Sets the system event persistence.
+	 *
+	 * @param systemEventPersistence the system event persistence
+	 */
+	public void setSystemEventPersistence(
+		SystemEventPersistence systemEventPersistence) {
+		this.systemEventPersistence = systemEventPersistence;
+	}
+
+	/**
 	 * Returns the team local service.
 	 *
 	 * @return the team local service
@@ -4052,6 +4232,25 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	public void setUserNotificationEventPersistence(
 		UserNotificationEventPersistence userNotificationEventPersistence) {
 		this.userNotificationEventPersistence = userNotificationEventPersistence;
+	}
+
+	/**
+	 * Returns the user notification interpreter local service.
+	 *
+	 * @return the user notification interpreter local service
+	 */
+	public UserNotificationInterpreterLocalService getUserNotificationInterpreterLocalService() {
+		return userNotificationInterpreterLocalService;
+	}
+
+	/**
+	 * Sets the user notification interpreter local service.
+	 *
+	 * @param userNotificationInterpreterLocalService the user notification interpreter local service
+	 */
+	public void setUserNotificationInterpreterLocalService(
+		UserNotificationInterpreterLocalService userNotificationInterpreterLocalService) {
+		this.userNotificationInterpreterLocalService = userNotificationInterpreterLocalService;
 	}
 
 	/**
@@ -5159,44 +5358,6 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
-	 * Returns the journal structure persistence.
-	 *
-	 * @return the journal structure persistence
-	 */
-	public JournalStructurePersistence getJournalStructurePersistence() {
-		return journalStructurePersistence;
-	}
-
-	/**
-	 * Sets the journal structure persistence.
-	 *
-	 * @param journalStructurePersistence the journal structure persistence
-	 */
-	public void setJournalStructurePersistence(
-		JournalStructurePersistence journalStructurePersistence) {
-		this.journalStructurePersistence = journalStructurePersistence;
-	}
-
-	/**
-	 * Returns the journal structure finder.
-	 *
-	 * @return the journal structure finder
-	 */
-	public JournalStructureFinder getJournalStructureFinder() {
-		return journalStructureFinder;
-	}
-
-	/**
-	 * Sets the journal structure finder.
-	 *
-	 * @param journalStructureFinder the journal structure finder
-	 */
-	public void setJournalStructureFinder(
-		JournalStructureFinder journalStructureFinder) {
-		this.journalStructureFinder = journalStructureFinder;
-	}
-
-	/**
 	 * Returns the journal template local service.
 	 *
 	 * @return the journal template local service
@@ -5232,44 +5393,6 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	public void setJournalTemplateService(
 		JournalTemplateService journalTemplateService) {
 		this.journalTemplateService = journalTemplateService;
-	}
-
-	/**
-	 * Returns the journal template persistence.
-	 *
-	 * @return the journal template persistence
-	 */
-	public JournalTemplatePersistence getJournalTemplatePersistence() {
-		return journalTemplatePersistence;
-	}
-
-	/**
-	 * Sets the journal template persistence.
-	 *
-	 * @param journalTemplatePersistence the journal template persistence
-	 */
-	public void setJournalTemplatePersistence(
-		JournalTemplatePersistence journalTemplatePersistence) {
-		this.journalTemplatePersistence = journalTemplatePersistence;
-	}
-
-	/**
-	 * Returns the journal template finder.
-	 *
-	 * @return the journal template finder
-	 */
-	public JournalTemplateFinder getJournalTemplateFinder() {
-		return journalTemplateFinder;
-	}
-
-	/**
-	 * Sets the journal template finder.
-	 *
-	 * @param journalTemplateFinder the journal template finder
-	 */
-	public void setJournalTemplateFinder(
-		JournalTemplateFinder journalTemplateFinder) {
-		this.journalTemplateFinder = journalTemplateFinder;
 	}
 
 	/**
@@ -5815,6 +5938,63 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
+	 * Returns the social activity local service.
+	 *
+	 * @return the social activity local service
+	 */
+	public SocialActivityLocalService getSocialActivityLocalService() {
+		return socialActivityLocalService;
+	}
+
+	/**
+	 * Sets the social activity local service.
+	 *
+	 * @param socialActivityLocalService the social activity local service
+	 */
+	public void setSocialActivityLocalService(
+		SocialActivityLocalService socialActivityLocalService) {
+		this.socialActivityLocalService = socialActivityLocalService;
+	}
+
+	/**
+	 * Returns the social activity persistence.
+	 *
+	 * @return the social activity persistence
+	 */
+	public SocialActivityPersistence getSocialActivityPersistence() {
+		return socialActivityPersistence;
+	}
+
+	/**
+	 * Sets the social activity persistence.
+	 *
+	 * @param socialActivityPersistence the social activity persistence
+	 */
+	public void setSocialActivityPersistence(
+		SocialActivityPersistence socialActivityPersistence) {
+		this.socialActivityPersistence = socialActivityPersistence;
+	}
+
+	/**
+	 * Returns the social activity finder.
+	 *
+	 * @return the social activity finder
+	 */
+	public SocialActivityFinder getSocialActivityFinder() {
+		return socialActivityFinder;
+	}
+
+	/**
+	 * Sets the social activity finder.
+	 *
+	 * @param socialActivityFinder the social activity finder
+	 */
+	public void setSocialActivityFinder(
+		SocialActivityFinder socialActivityFinder) {
+		this.socialActivityFinder = socialActivityFinder;
+	}
+
+	/**
 	 * Returns the social activity setting local service.
 	 *
 	 * @return the social activity setting local service
@@ -6055,6 +6235,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 *
 	 * @return the Spring bean ID for this bean
 	 */
+	@Override
 	public String getBeanIdentifier() {
 		return _beanIdentifier;
 	}
@@ -6064,6 +6245,7 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 *
 	 * @param beanIdentifier the Spring bean ID for this bean
 	 */
+	@Override
 	public void setBeanIdentifier(String beanIdentifier) {
 		_beanIdentifier = beanIdentifier;
 	}
@@ -6107,6 +6289,10 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected AddressService addressService;
 	@BeanReference(type = AddressPersistence.class)
 	protected AddressPersistence addressPersistence;
+	@BeanReference(type = BackgroundTaskLocalService.class)
+	protected BackgroundTaskLocalService backgroundTaskLocalService;
+	@BeanReference(type = BackgroundTaskPersistence.class)
+	protected BackgroundTaskPersistence backgroundTaskPersistence;
 	@BeanReference(type = BrowserTrackerLocalService.class)
 	protected BrowserTrackerLocalService browserTrackerLocalService;
 	@BeanReference(type = BrowserTrackerPersistence.class)
@@ -6173,6 +6359,10 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected LayoutBranchService layoutBranchService;
 	@BeanReference(type = LayoutBranchPersistence.class)
 	protected LayoutBranchPersistence layoutBranchPersistence;
+	@BeanReference(type = LayoutFriendlyURLLocalService.class)
+	protected LayoutFriendlyURLLocalService layoutFriendlyURLLocalService;
+	@BeanReference(type = LayoutFriendlyURLPersistence.class)
+	protected LayoutFriendlyURLPersistence layoutFriendlyURLPersistence;
 	@BeanReference(type = LayoutPrototypeLocalService.class)
 	protected LayoutPrototypeLocalService layoutPrototypeLocalService;
 	@BeanReference(type = LayoutPrototypeService.class)
@@ -6197,8 +6387,6 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected LayoutSetBranchService layoutSetBranchService;
 	@BeanReference(type = LayoutSetBranchPersistence.class)
 	protected LayoutSetBranchPersistence layoutSetBranchPersistence;
-	@BeanReference(type = LayoutSetBranchFinder.class)
-	protected LayoutSetBranchFinder layoutSetBranchFinder;
 	@BeanReference(type = LayoutSetPrototypeLocalService.class)
 	protected LayoutSetPrototypeLocalService layoutSetPrototypeLocalService;
 	@BeanReference(type = LayoutSetPrototypeService.class)
@@ -6367,6 +6555,10 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected SubscriptionLocalService subscriptionLocalService;
 	@BeanReference(type = SubscriptionPersistence.class)
 	protected SubscriptionPersistence subscriptionPersistence;
+	@BeanReference(type = SystemEventLocalService.class)
+	protected SystemEventLocalService systemEventLocalService;
+	@BeanReference(type = SystemEventPersistence.class)
+	protected SystemEventPersistence systemEventPersistence;
 	@BeanReference(type = TeamLocalService.class)
 	protected TeamLocalService teamLocalService;
 	@BeanReference(type = TeamService.class)
@@ -6421,6 +6613,8 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected UserNotificationEventLocalService userNotificationEventLocalService;
 	@BeanReference(type = UserNotificationEventPersistence.class)
 	protected UserNotificationEventPersistence userNotificationEventPersistence;
+	@BeanReference(type = UserNotificationInterpreterLocalService.class)
+	protected UserNotificationInterpreterLocalService userNotificationInterpreterLocalService;
 	@BeanReference(type = UserTrackerLocalService.class)
 	protected UserTrackerLocalService userTrackerLocalService;
 	@BeanReference(type = UserTrackerPersistence.class)
@@ -6539,18 +6733,10 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected JournalStructureLocalService journalStructureLocalService;
 	@BeanReference(type = JournalStructureService.class)
 	protected JournalStructureService journalStructureService;
-	@BeanReference(type = JournalStructurePersistence.class)
-	protected JournalStructurePersistence journalStructurePersistence;
-	@BeanReference(type = JournalStructureFinder.class)
-	protected JournalStructureFinder journalStructureFinder;
 	@BeanReference(type = JournalTemplateLocalService.class)
 	protected JournalTemplateLocalService journalTemplateLocalService;
 	@BeanReference(type = JournalTemplateService.class)
 	protected JournalTemplateService journalTemplateService;
-	@BeanReference(type = JournalTemplatePersistence.class)
-	protected JournalTemplatePersistence journalTemplatePersistence;
-	@BeanReference(type = JournalTemplateFinder.class)
-	protected JournalTemplateFinder journalTemplateFinder;
 	@BeanReference(type = MBBanLocalService.class)
 	protected MBBanLocalService mbBanLocalService;
 	@BeanReference(type = MBBanService.class)
@@ -6609,6 +6795,12 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected ShoppingOrderPersistence shoppingOrderPersistence;
 	@BeanReference(type = ShoppingOrderFinder.class)
 	protected ShoppingOrderFinder shoppingOrderFinder;
+	@BeanReference(type = SocialActivityLocalService.class)
+	protected SocialActivityLocalService socialActivityLocalService;
+	@BeanReference(type = SocialActivityPersistence.class)
+	protected SocialActivityPersistence socialActivityPersistence;
+	@BeanReference(type = SocialActivityFinder.class)
+	protected SocialActivityFinder socialActivityFinder;
 	@BeanReference(type = SocialActivitySettingLocalService.class)
 	protected SocialActivitySettingLocalService socialActivitySettingLocalService;
 	@BeanReference(type = SocialActivitySettingService.class)

@@ -83,6 +83,7 @@ public class BookmarksEntryCacheModel implements CacheModel<BookmarksEntry>,
 		return sb.toString();
 	}
 
+	@Override
 	public BookmarksEntry toEntityModel() {
 		BookmarksEntryImpl bookmarksEntryImpl = new BookmarksEntryImpl();
 
@@ -167,6 +168,7 @@ public class BookmarksEntryCacheModel implements CacheModel<BookmarksEntry>,
 		return bookmarksEntryImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		entryId = objectInput.readLong();
@@ -189,6 +191,7 @@ public class BookmarksEntryCacheModel implements CacheModel<BookmarksEntry>,
 		statusDate = objectInput.readLong();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

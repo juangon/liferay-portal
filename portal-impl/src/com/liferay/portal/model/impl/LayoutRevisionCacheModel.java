@@ -106,6 +106,7 @@ public class LayoutRevisionCacheModel implements CacheModel<LayoutRevision>,
 		return sb.toString();
 	}
 
+	@Override
 	public LayoutRevision toEntityModel() {
 		LayoutRevisionImpl layoutRevisionImpl = new LayoutRevisionImpl();
 
@@ -245,6 +246,7 @@ public class LayoutRevisionCacheModel implements CacheModel<LayoutRevision>,
 		return layoutRevisionImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		layoutRevisionId = objectInput.readLong();
 		groupId = objectInput.readLong();
@@ -279,6 +281,7 @@ public class LayoutRevisionCacheModel implements CacheModel<LayoutRevision>,
 		statusDate = objectInput.readLong();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(layoutRevisionId);

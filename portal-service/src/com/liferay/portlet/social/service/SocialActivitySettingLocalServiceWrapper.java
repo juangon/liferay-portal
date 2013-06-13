@@ -17,12 +17,10 @@ package com.liferay.portlet.social.service;
 import com.liferay.portal.service.ServiceWrapper;
 
 /**
- * <p>
- * This class is a wrapper for {@link SocialActivitySettingLocalService}.
- * </p>
+ * Provides a wrapper for {@link SocialActivitySettingLocalService}.
  *
- * @author    Brian Wing Shun Chan
- * @see       SocialActivitySettingLocalService
+ * @author Brian Wing Shun Chan
+ * @see SocialActivitySettingLocalService
  * @generated
  */
 public class SocialActivitySettingLocalServiceWrapper
@@ -40,6 +38,7 @@ public class SocialActivitySettingLocalServiceWrapper
 	* @return the social activity setting that was added
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.social.model.SocialActivitySetting addSocialActivitySetting(
 		com.liferay.portlet.social.model.SocialActivitySetting socialActivitySetting)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -52,6 +51,7 @@ public class SocialActivitySettingLocalServiceWrapper
 	* @param activitySettingId the primary key for the new social activity setting
 	* @return the new social activity setting
 	*/
+	@Override
 	public com.liferay.portlet.social.model.SocialActivitySetting createSocialActivitySetting(
 		long activitySettingId) {
 		return _socialActivitySettingLocalService.createSocialActivitySetting(activitySettingId);
@@ -65,6 +65,7 @@ public class SocialActivitySettingLocalServiceWrapper
 	* @throws PortalException if a social activity setting with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.social.model.SocialActivitySetting deleteSocialActivitySetting(
 		long activitySettingId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -79,12 +80,14 @@ public class SocialActivitySettingLocalServiceWrapper
 	* @return the social activity setting that was removed
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.social.model.SocialActivitySetting deleteSocialActivitySetting(
 		com.liferay.portlet.social.model.SocialActivitySetting socialActivitySetting)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _socialActivitySettingLocalService.deleteSocialActivitySetting(socialActivitySetting);
 	}
 
+	@Override
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {
 		return _socialActivitySettingLocalService.dynamicQuery();
 	}
@@ -96,6 +99,7 @@ public class SocialActivitySettingLocalServiceWrapper
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -116,6 +120,7 @@ public class SocialActivitySettingLocalServiceWrapper
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -138,6 +143,7 @@ public class SocialActivitySettingLocalServiceWrapper
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -155,12 +161,14 @@ public class SocialActivitySettingLocalServiceWrapper
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _socialActivitySettingLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	@Override
 	public com.liferay.portlet.social.model.SocialActivitySetting fetchSocialActivitySetting(
 		long activitySettingId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -175,6 +183,7 @@ public class SocialActivitySettingLocalServiceWrapper
 	* @throws PortalException if a social activity setting with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.social.model.SocialActivitySetting getSocialActivitySetting(
 		long activitySettingId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -182,6 +191,7 @@ public class SocialActivitySettingLocalServiceWrapper
 		return _socialActivitySettingLocalService.getSocialActivitySetting(activitySettingId);
 	}
 
+	@Override
 	public com.liferay.portal.model.PersistedModel getPersistedModel(
 		java.io.Serializable primaryKeyObj)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -201,6 +211,7 @@ public class SocialActivitySettingLocalServiceWrapper
 	* @return the range of social activity settings
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public java.util.List<com.liferay.portlet.social.model.SocialActivitySetting> getSocialActivitySettings(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -214,6 +225,7 @@ public class SocialActivitySettingLocalServiceWrapper
 	* @return the number of social activity settings
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public int getSocialActivitySettingsCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _socialActivitySettingLocalService.getSocialActivitySettingsCount();
@@ -226,6 +238,7 @@ public class SocialActivitySettingLocalServiceWrapper
 	* @return the social activity setting that was updated
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.social.model.SocialActivitySetting updateSocialActivitySetting(
 		com.liferay.portlet.social.model.SocialActivitySetting socialActivitySetting)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -237,6 +250,7 @@ public class SocialActivitySettingLocalServiceWrapper
 	*
 	* @return the Spring bean ID for this bean
 	*/
+	@Override
 	public java.lang.String getBeanIdentifier() {
 		return _socialActivitySettingLocalService.getBeanIdentifier();
 	}
@@ -246,10 +260,12 @@ public class SocialActivitySettingLocalServiceWrapper
 	*
 	* @param beanIdentifier the Spring bean ID for this bean
 	*/
+	@Override
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		_socialActivitySettingLocalService.setBeanIdentifier(beanIdentifier);
 	}
 
+	@Override
 	public void deleteActivitySetting(long groupId, java.lang.String className,
 		long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -257,11 +273,13 @@ public class SocialActivitySettingLocalServiceWrapper
 			className, classPK);
 	}
 
+	@Override
 	public void deleteActivitySettings(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_socialActivitySettingLocalService.deleteActivitySettings(groupId);
 	}
 
+	@Override
 	public com.liferay.portlet.social.model.SocialActivityDefinition getActivityDefinition(
 		long groupId, java.lang.String className, int activityType)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -269,6 +287,7 @@ public class SocialActivitySettingLocalServiceWrapper
 			className, activityType);
 	}
 
+	@Override
 	public java.util.List<com.liferay.portlet.social.model.SocialActivityDefinition> getActivityDefinitions(
 		long groupId, java.lang.String className)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -276,23 +295,27 @@ public class SocialActivitySettingLocalServiceWrapper
 			className);
 	}
 
+	@Override
 	public java.util.List<com.liferay.portlet.social.model.SocialActivitySetting> getActivitySettings(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _socialActivitySettingLocalService.getActivitySettings(groupId);
 	}
 
+	@Override
 	public boolean isEnabled(long groupId, long classNameId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _socialActivitySettingLocalService.isEnabled(groupId, classNameId);
 	}
 
+	@Override
 	public boolean isEnabled(long groupId, long classNameId, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _socialActivitySettingLocalService.isEnabled(groupId,
 			classNameId, classPK);
 	}
 
+	@Override
 	public void updateActivitySetting(long groupId, java.lang.String className,
 		boolean enabled)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -301,6 +324,7 @@ public class SocialActivitySettingLocalServiceWrapper
 			className, enabled);
 	}
 
+	@Override
 	public void updateActivitySetting(long groupId, java.lang.String className,
 		int activityType,
 		com.liferay.portlet.social.model.SocialActivityCounterDefinition activityCounterDefinition)
@@ -310,6 +334,7 @@ public class SocialActivitySettingLocalServiceWrapper
 			className, activityType, activityCounterDefinition);
 	}
 
+	@Override
 	public void updateActivitySetting(long groupId, java.lang.String className,
 		long classPK, boolean enabled)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -318,6 +343,7 @@ public class SocialActivitySettingLocalServiceWrapper
 			className, classPK, enabled);
 	}
 
+	@Override
 	public void updateActivitySettings(long groupId,
 		java.lang.String className, int activityType,
 		java.util.List<com.liferay.portlet.social.model.SocialActivityCounterDefinition> activityCounterDefinitions)
@@ -342,10 +368,12 @@ public class SocialActivitySettingLocalServiceWrapper
 		_socialActivitySettingLocalService = socialActivitySettingLocalService;
 	}
 
+	@Override
 	public SocialActivitySettingLocalService getWrappedService() {
 		return _socialActivitySettingLocalService;
 	}
 
+	@Override
 	public void setWrappedService(
 		SocialActivitySettingLocalService socialActivitySettingLocalService) {
 		_socialActivitySettingLocalService = socialActivitySettingLocalService;

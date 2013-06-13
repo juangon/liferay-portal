@@ -15,12 +15,9 @@
 package com.liferay.portlet.messageboards.lar;
 
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.lar.BasePortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
-import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.StagedModelDataHandlerUtil;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.util.PropsValues;
@@ -28,15 +25,17 @@ import com.liferay.portlet.messageboards.model.MBBan;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.MBThreadFlag;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
-import com.liferay.portlet.messageboards.service.persistence.MBBanActionableDynamicQuery;
-import com.liferay.portlet.messageboards.service.persistence.MBCategoryActionableDynamicQuery;
-import com.liferay.portlet.messageboards.service.persistence.MBMessageActionableDynamicQuery;
-import com.liferay.portlet.messageboards.service.persistence.MBThreadFlagActionableDynamicQuery;
+import com.liferay.portlet.messageboards.service.permission.MBPermission;
+import com.liferay.portlet.messageboards.service.persistence.MBBanExportActionableDynamicQuery;
+import com.liferay.portlet.messageboards.service.persistence.MBCategoryExportActionableDynamicQuery;
+import com.liferay.portlet.messageboards.service.persistence.MBMessageExportActionableDynamicQuery;
+import com.liferay.portlet.messageboards.service.persistence.MBThreadFlagExportActionableDynamicQuery;
 
 import java.util.List;
 
@@ -52,20 +51,21 @@ public class MBPortletDataHandler extends BasePortletDataHandler {
 	public static final String NAMESPACE = "message_boards";
 
 	public MBPortletDataHandler() {
-		setAlwaysExportable(true);
+		setDeletionSystemEventClassNames(
+			MBBan.class.getName(), MBCategory.class.getName(),
+			MBMessage.class.getName(), MBThread.class.getName(),
+			MBThreadFlag.class.getName());
 		setExportControls(
 			new PortletDataHandlerBoolean(
-				NAMESPACE, "categories-and-messages", true, true),
-			new PortletDataHandlerBoolean(NAMESPACE, "thread-flags"),
-			new PortletDataHandlerBoolean(NAMESPACE, "user-bans"));
-		setExportMetadataControls(
+				NAMESPACE, "messages", true, false, null,
+				MBMessage.class.getName()),
 			new PortletDataHandlerBoolean(
-				NAMESPACE, "message-board-messages", true,
-				new PortletDataHandlerControl[] {
-					new PortletDataHandlerBoolean(NAMESPACE, "attachments"),
-					new PortletDataHandlerBoolean(NAMESPACE, "ratings"),
-					new PortletDataHandlerBoolean(NAMESPACE, "tags")
-				}));
+				NAMESPACE, "thread-flags", true, false, null,
+				MBThreadFlag.class.getName()),
+			new PortletDataHandlerBoolean(
+				NAMESPACE, "user-bans", true, false, null,
+				MBBan.class.getName()));
+		setImportControls(getExportControls());
 		setPublishToLiveByDefault(
 			PropsValues.MESSAGE_BOARDS_PUBLISH_TO_LIVE_BY_DEFAULT);
 	}
@@ -105,119 +105,39 @@ public class MBPortletDataHandler extends BasePortletDataHandler {
 		throws Exception {
 
 		portletDataContext.addPermissions(
-			"com.liferay.portlet.messageboards",
-			portletDataContext.getScopeGroupId());
+			MBPermission.RESOURCE_NAME, portletDataContext.getScopeGroupId());
 
 		Element rootElement = addExportDataRootElement(portletDataContext);
 
 		rootElement.addAttribute(
 			"group-id", String.valueOf(portletDataContext.getScopeGroupId()));
 
-		ActionableDynamicQuery categoriesActionableDynamicQuery =
-			new MBCategoryActionableDynamicQuery() {
+		if (portletDataContext.getBooleanParameter(NAMESPACE, "messages")) {
+			ActionableDynamicQuery categoryActionableDynamicQuery =
+				new MBCategoryExportActionableDynamicQuery(portletDataContext);
 
-			@Override
-			protected void addCriteria(DynamicQuery dynamicQuery) {
-				portletDataContext.addDateRangeCriteria(
-					dynamicQuery, "modifiedDate");
-			}
+			categoryActionableDynamicQuery.performActions();
 
-			@Override
-			protected void performAction(Object object) throws PortalException {
-				MBCategory category = (MBCategory)object;
+			ActionableDynamicQuery messageActionableDynamicQuery =
+				new MBMessageExportActionableDynamicQuery(portletDataContext);
 
-				StagedModelDataHandlerUtil.exportStagedModel(
-					portletDataContext, category);
-			}
-
-		};
-
-		categoriesActionableDynamicQuery.setGroupId(
-			portletDataContext.getScopeGroupId());
-
-		categoriesActionableDynamicQuery.performActions();
-
-		ActionableDynamicQuery messagesActionableDynamicQuery =
-			new MBMessageActionableDynamicQuery() {
-
-			@Override
-			protected void addCriteria(DynamicQuery dynamicQuery) {
-				portletDataContext.addDateRangeCriteria(
-					dynamicQuery, "modifiedDate");
-			}
-
-			@Override
-			protected void performAction(Object object) throws PortalException {
-				MBMessage message = (MBMessage)object;
-
-				StagedModelDataHandlerUtil.exportStagedModel(
-					portletDataContext, message);
-			}
-
-		};
-
-		messagesActionableDynamicQuery.setGroupId(
-			portletDataContext.getScopeGroupId());
-
-		messagesActionableDynamicQuery.performActions();
-
-		if (portletDataContext.getBooleanParameter(
-				MBPortletDataHandler.NAMESPACE, "thread-flags")) {
-
-			ActionableDynamicQuery threadFlagsActionableDynamicQuery =
-				new MBThreadFlagActionableDynamicQuery() {
-
-				@Override
-				protected void addCriteria(DynamicQuery dynamicQuery) {
-					portletDataContext.addDateRangeCriteria(
-						dynamicQuery, "modifiedDate");
-				}
-
-				@Override
-				protected void performAction(Object object)
-					throws PortalException {
-
-					MBThreadFlag message = (MBThreadFlag)object;
-
-					StagedModelDataHandlerUtil.exportStagedModel(
-						portletDataContext, message);
-				}
-
-			};
-
-			threadFlagsActionableDynamicQuery.setGroupId(
-				portletDataContext.getScopeGroupId());
-
-			threadFlagsActionableDynamicQuery.performActions();
+			messageActionableDynamicQuery.performActions();
 		}
 
-		if (!portletDataContext.getBooleanParameter(NAMESPACE, "user-bans")) {
-			return getExportDataRootElementString(rootElement);
+		if (portletDataContext.getBooleanParameter(NAMESPACE, "thread-flags")) {
+			ActionableDynamicQuery threadFlagActionableDynamicQuery =
+				new MBThreadFlagExportActionableDynamicQuery(
+					portletDataContext);
+
+			threadFlagActionableDynamicQuery.performActions();
 		}
 
-		ActionableDynamicQuery userBansActionableDynamicQuery =
-			new MBBanActionableDynamicQuery() {
+		if (portletDataContext.getBooleanParameter(NAMESPACE, "user-bans")) {
+			ActionableDynamicQuery banActionableDynamicQuery =
+				new MBBanExportActionableDynamicQuery(portletDataContext);
 
-			@Override
-			protected void addCriteria(DynamicQuery dynamicQuery) {
-				portletDataContext.addDateRangeCriteria(
-					dynamicQuery, "modifiedDate");
-			}
-
-			@Override
-			protected void performAction(Object object) throws PortalException {
-				MBBan userBan = (MBBan)object;
-
-				StagedModelDataHandlerUtil.exportStagedModel(
-					portletDataContext, userBan);
-			}
-
-		};
-
-		userBansActionableDynamicQuery.setGroupId(
-			portletDataContext.getScopeGroupId());
-
-		userBansActionableDynamicQuery.performActions();
+			banActionableDynamicQuery.performActions();
+		}
 
 		return getExportDataRootElementString(rootElement);
 	}
@@ -229,28 +149,29 @@ public class MBPortletDataHandler extends BasePortletDataHandler {
 		throws Exception {
 
 		portletDataContext.importPermissions(
-			"com.liferay.portlet.messageboards",
-			portletDataContext.getSourceGroupId(),
+			MBPermission.RESOURCE_NAME, portletDataContext.getSourceGroupId(),
 			portletDataContext.getScopeGroupId());
 
-		Element categoriesElement =
-			portletDataContext.getImportDataGroupElement(MBCategory.class);
+		if (portletDataContext.getBooleanParameter(NAMESPACE, "messages")) {
+			Element categoriesElement =
+				portletDataContext.getImportDataGroupElement(MBCategory.class);
 
-		List<Element> categoryElements = categoriesElement.elements();
+			List<Element> categoryElements = categoriesElement.elements();
 
-		for (Element categoryElement : categoryElements) {
-			StagedModelDataHandlerUtil.importStagedModel(
-				portletDataContext, categoryElement);
-		}
+			for (Element categoryElement : categoryElements) {
+				StagedModelDataHandlerUtil.importStagedModel(
+					portletDataContext, categoryElement);
+			}
 
-		Element messagesElement = portletDataContext.getImportDataGroupElement(
-			MBMessage.class);
+			Element messagesElement =
+				portletDataContext.getImportDataGroupElement(MBMessage.class);
 
-		List<Element> messageElements = messagesElement.elements();
+			List<Element> messageElements = messagesElement.elements();
 
-		for (Element messageElement : messageElements) {
-			StagedModelDataHandlerUtil.importStagedModel(
-				portletDataContext, messageElement);
+			for (Element messageElement : messageElements) {
+				StagedModelDataHandlerUtil.importStagedModel(
+					portletDataContext, messageElement);
+			}
 		}
 
 		if (portletDataContext.getBooleanParameter(NAMESPACE, "thread-flags")) {
@@ -279,6 +200,32 @@ public class MBPortletDataHandler extends BasePortletDataHandler {
 		}
 
 		return null;
+	}
+
+	@Override
+	protected void doPrepareManifestSummary(
+			PortletDataContext portletDataContext)
+		throws Exception {
+
+		ActionableDynamicQuery banActionableDynamicQuery =
+			new MBBanExportActionableDynamicQuery(portletDataContext);
+
+		banActionableDynamicQuery.performCount();
+
+		ActionableDynamicQuery categoryActionableDynamicQuery =
+			new MBCategoryExportActionableDynamicQuery(portletDataContext);
+
+		categoryActionableDynamicQuery.performCount();
+
+		ActionableDynamicQuery messageActionableDynamicQuery =
+			new MBMessageExportActionableDynamicQuery(portletDataContext);
+
+		messageActionableDynamicQuery.performCount();
+
+		ActionableDynamicQuery threadFlagActionableDynamicQuery =
+			new MBThreadFlagExportActionableDynamicQuery(portletDataContext);
+
+		threadFlagActionableDynamicQuery.performCount();
 	}
 
 }

@@ -18,11 +18,12 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
- * The utility for the m d r rule group local service. This utility wraps {@link com.liferay.portlet.mobiledevicerules.service.impl.MDRRuleGroupLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
+ * Provides the local service utility for MDRRuleGroup. This utility wraps
+ * {@link com.liferay.portlet.mobiledevicerules.service.impl.MDRRuleGroupLocalServiceImpl} and is the
+ * primary access point for service operations in application layer code running
+ * on the local server. Methods of this service will not have security checks
+ * based on the propagated JAAS credentials because this service can only be
+ * accessed from within the same VM.
  *
  * @author Edward C. Han
  * @see MDRRuleGroupLocalService
@@ -297,18 +298,21 @@ public class MDRRuleGroupLocalServiceUtil {
 	}
 
 	public static void deleteRuleGroup(long ruleGroupId)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteRuleGroup(ruleGroupId);
 	}
 
 	public static void deleteRuleGroup(
 		com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup ruleGroup)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteRuleGroup(ruleGroup);
 	}
 
 	public static void deleteRuleGroups(long groupId)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteRuleGroups(groupId);
 	}
 
@@ -342,12 +346,29 @@ public class MDRRuleGroupLocalServiceUtil {
 		return getService().getRuleGroupsCount(groupId);
 	}
 
+	/**
+	* @deprecated As of 6.2.0, replaced by {@link #search(long, String,
+	LinkedHashMap, boolean, int, int)}
+	*/
 	public static java.util.List<com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup> search(
 		long groupId, java.lang.String name, boolean andOperator, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().search(groupId, name, andOperator, start, end);
 	}
 
+	public static java.util.List<com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup> search(
+		long groupId, java.lang.String name,
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
+		boolean andOperator, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .search(groupId, name, params, andOperator, start, end);
+	}
+
+	/**
+	* @deprecated As of 6.2.0, replaced by {@link #searchByKeywords(long,
+	String, LinkedHashMap, boolean, int, int)}
+	*/
 	public static java.util.List<com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup> searchByKeywords(
 		long groupId, java.lang.String keywords, boolean andOperator,
 		int start, int end)
@@ -356,16 +377,50 @@ public class MDRRuleGroupLocalServiceUtil {
 				   .searchByKeywords(groupId, keywords, andOperator, start, end);
 	}
 
+	public static java.util.List<com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup> searchByKeywords(
+		long groupId, java.lang.String keywords,
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
+		boolean andOperator, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .searchByKeywords(groupId, keywords, params, andOperator,
+			start, end);
+	}
+
+	/**
+	* @deprecated As of 6.2.0, replaced by {@link #searchByKeywordsCount(long,
+	String, LinkedHashMap, boolean)}
+	*/
 	public static int searchByKeywordsCount(long groupId,
 		java.lang.String keywords, boolean andOperator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().searchByKeywordsCount(groupId, keywords, andOperator);
 	}
 
+	public static int searchByKeywordsCount(long groupId,
+		java.lang.String keywords,
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
+		boolean andOperator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .searchByKeywordsCount(groupId, keywords, params, andOperator);
+	}
+
+	/**
+	* @deprecated As of 6.2.0, replaced by {@link #searchCount(long, String,
+	LinkedHashMap, boolean)}
+	*/
 	public static int searchCount(long groupId, java.lang.String name,
 		boolean andOperator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().searchCount(groupId, name, andOperator);
+	}
+
+	public static int searchCount(long groupId, java.lang.String name,
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
+		boolean andOperator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().searchCount(groupId, name, params, andOperator);
 	}
 
 	public static com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup updateRuleGroup(

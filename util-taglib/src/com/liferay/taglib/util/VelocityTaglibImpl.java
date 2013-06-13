@@ -101,6 +101,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		init(servletContext, request, response, pageContext, template);
 	}
 
+	@Override
 	public void actionURL(long plid, String portletName, String queryString)
 		throws Exception {
 
@@ -110,6 +111,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		actionURL(windowState, portletMode, plid, portletName, queryString);
 	}
 
+	@Override
 	public void actionURL(String portletName, String queryString)
 		throws Exception {
 
@@ -121,6 +123,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 	 *             Boolean, Boolean, Boolean, String, long, long, String,
 	 *             Boolean, Boolean, long, long, Boolean, String)}
 	 */
+	@Override
 	public void actionURL(
 			String windowState, String portletMode, Boolean secure,
 			Boolean copyCurrentRenderParameters, Boolean escapeXml, String name,
@@ -135,6 +138,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 			doAsUserId, portletConfiguration, queryString);
 	}
 
+	@Override
 	public void actionURL(
 			String windowState, String portletMode, Boolean secure,
 			Boolean copyCurrentRenderParameters, Boolean escapeXml, String name,
@@ -159,6 +163,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 			removedParameterNames, _pageContext);
 	}
 
+	@Override
 	public void actionURL(
 			String windowState, String portletMode, long plid,
 			String portletName, String queryString)
@@ -181,6 +186,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 			doAsGroupId, doAsUserId, portletConfiguration, queryString);
 	}
 
+	@Override
 	public void actionURL(
 			String windowState, String portletMode, String portletName,
 			String queryString)
@@ -191,6 +197,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 			queryString);
 	}
 
+	@Override
 	public void assetCategoriesSummary(
 			String className, long classPK, String message,
 			PortletURL portletURL)
@@ -209,6 +216,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		assetCategorySummaryTag.runTag();
 	}
 
+	@Override
 	public void assetLinks(long assetEntryId, String className, long classPK)
 		throws Exception {
 
@@ -223,6 +231,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		assetLinksTag.runTag();
 	}
 
+	@Override
 	public void assetTagsSummary(
 			String className, long classPK, String message,
 			String assetTagNames, PortletURL portletURL)
@@ -241,6 +250,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		assetTagsSummaryTag.runTag();
 	}
 
+	@Override
 	public void breadcrumb() throws Exception {
 		BreadcrumbTag breadcrumbTag = new BreadcrumbTag();
 
@@ -249,6 +259,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		breadcrumbTag.runTag();
 	}
 
+	@Override
 	public void breadcrumb(
 			String displayStyle, boolean showGuestGroup,
 			boolean showParentGroups, boolean showLayout,
@@ -259,7 +270,6 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 
 		setUp(breadcrumbTag);
 
-		breadcrumbTag.setDisplayStyle(displayStyle);
 		breadcrumbTag.setShowGuestGroup(showGuestGroup);
 		breadcrumbTag.setShowLayout(showLayout);
 		breadcrumbTag.setShowParentGroups(showParentGroups);
@@ -268,6 +278,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		breadcrumbTag.runTag();
 	}
 
+	@Override
 	public void discussion(
 			String className, long classPK, String formAction, String formName,
 			boolean hideControls, boolean ratingsEnabled, String redirect,
@@ -291,10 +302,12 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		discussionTag.runTag();
 	}
 
+	@Override
 	public void doAsURL(long doAsUserId) throws Exception {
 		DoAsURLTag.doTag(doAsUserId, null, _pageContext);
 	}
 
+	@Override
 	public void flags(
 			String className, long classPK, String contentTitle, boolean label,
 			String message, long reportedUserId)
@@ -314,6 +327,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		flagsTag.runTag();
 	}
 
+	@Override
 	public AssetCategoriesSummaryTag getAssetCategoriesSummaryTag()
 		throws Exception {
 
@@ -325,6 +339,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		return assetCategoriesSummaryTag;
 	}
 
+	@Override
 	public AssetLinksTag getAssetLinksTag() throws Exception {
 		AssetLinksTag assetLinksTag = new AssetLinksTag();
 
@@ -333,6 +348,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		return assetLinksTag;
 	}
 
+	@Override
 	public AssetTagsSummaryTag getAssetTagsSummaryTag() throws Exception {
 		AssetTagsSummaryTag assetTagsSummaryTag = new AssetTagsSummaryTag();
 
@@ -341,6 +357,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		return assetTagsSummaryTag;
 	}
 
+	@Override
 	public BreadcrumbTag getBreadcrumbTag() throws Exception {
 		BreadcrumbTag breadcrumbTag = new BreadcrumbTag();
 
@@ -349,6 +366,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		return breadcrumbTag;
 	}
 
+	@Override
 	public ColumnTag getColumnTag() throws Exception {
 		ColumnTag columnTag = new ColumnTag();
 
@@ -357,6 +375,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		return columnTag;
 	}
 
+	@Override
 	public DiscussionTag getDiscussionTag() throws Exception {
 		DiscussionTag discussionTag = new DiscussionTag();
 
@@ -365,6 +384,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		return discussionTag;
 	}
 
+	@Override
 	public FlagsTag getFlagsTag() throws Exception {
 		FlagsTag flagsTag = new FlagsTag();
 
@@ -373,6 +393,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		return flagsTag;
 	}
 
+	@Override
 	public IconTag getIconTag() throws Exception {
 		IconTag iconTag = new IconTag();
 
@@ -381,6 +402,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		return iconTag;
 	}
 
+	@Override
 	public JournalArticleTag getJournalArticleTag() throws Exception {
 		JournalArticleTag journalArticleTag = new JournalArticleTag();
 
@@ -389,6 +411,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		return journalArticleTag;
 	}
 
+	@Override
 	public LayoutTag getLayoutTag() throws Exception {
 		LayoutTag layoutTag = new LayoutTag();
 
@@ -397,6 +420,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		return layoutTag;
 	}
 
+	@Override
 	public MySitesTag getMySitesTag() throws Exception {
 		MySitesTag mySitesTag = new MySitesTag();
 
@@ -405,6 +429,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		return mySitesTag;
 	}
 
+	@Override
 	public PngImageTag getPngImageTag() throws Exception {
 		PngImageTag pngImageTag = new PngImageTag();
 
@@ -413,6 +438,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		return pngImageTag;
 	}
 
+	@Override
 	public RatingsTag getRatingsTag() throws Exception {
 		RatingsTag ratingsTag = new RatingsTag();
 
@@ -421,6 +447,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		return ratingsTag;
 	}
 
+	@Override
 	public String getSetting(String name) {
 		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -428,10 +455,12 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		return themeDisplay.getThemeSetting(name);
 	}
 
+	@Override
 	public WindowState getWindowState(String windowState) {
 		return new WindowState(windowState);
 	}
 
+	@Override
 	public void icon(String image, boolean label, String message, String url)
 		throws Exception {
 
@@ -447,128 +476,139 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		iconTag.runTag();
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #iconBack}
+	 */
+	@Override
 	public void iconBack() throws Exception {
-		IconBackTag iconBackTag = new IconBackTag();
-
-		setUp(iconBackTag);
-
-		iconBackTag.runTag();
+		portletIconBack();
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #portletIconClose}
+	 */
+	@Override
 	public void iconClose() throws Exception {
-		IconCloseTag iconCloseTag = new IconCloseTag();
-
-		setUp(iconCloseTag);
-
-		iconCloseTag.runTag();
+		portletIconClose();
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #portletIconConfiguration}
+	 */
+	@Override
 	public void iconConfiguration() throws Exception {
-		IconConfigurationTag iconConfigurationTag = new IconConfigurationTag();
-
-		setUp(iconConfigurationTag);
-
-		iconConfigurationTag.runTag();
+		portletIconConfiguration();
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #portletIconEdit}
+	 */
+	@Override
 	public void iconEdit() throws Exception {
-		IconEditTag iconEditTag = new IconEditTag();
-
-		setUp(iconEditTag);
-
-		iconEditTag.runTag();
+		portletIconEdit();
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #portletIconEditDefaults}
+	 */
+	@Override
 	public void iconEditDefaults() throws Exception {
-		IconEditDefaultsTag iconEditDefaultsTag = new IconEditDefaultsTag();
-
-		setUp(iconEditDefaultsTag);
-
-		iconEditDefaultsTag.runTag();
+		portletIconEditDefaults();
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #portletIconEditGuest}
+	 */
+	@Override
 	public void iconEditGuest() throws Exception {
-		IconEditGuestTag iconEditGuestTag = new IconEditGuestTag();
-
-		setUp(iconEditGuestTag);
-
-		iconEditGuestTag.runTag();
+		portletIconEditGuest();
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #portletIconHelp}
+	 */
+	@Override
 	public void iconHelp() throws Exception {
-		IconHelpTag iconHelpTag = new IconHelpTag();
+		portletIconHelp();
+	}
+
+	@Override
+	public void iconHelp(String message) throws Exception {
+		com.liferay.taglib.ui.IconHelpTag iconHelpTag =
+			new com.liferay.taglib.ui.IconHelpTag();
 
 		setUp(iconHelpTag);
+
+		iconHelpTag.setMessage(message);
 
 		iconHelpTag.runTag();
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #portletIconMaximize}
+	 */
+	@Override
 	public void iconMaximize() throws Exception {
-		IconMaximizeTag iconMaximizeTag = new IconMaximizeTag();
-
-		setUp(iconMaximizeTag);
-
-		iconMaximizeTag.runTag();
+		portletIconMaximize();
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #portletIconMinimize}
+	 */
+	@Override
 	public void iconMinimize() throws Exception {
-		IconMinimizeTag iconMinimizeTag = new IconMinimizeTag();
-
-		setUp(iconMinimizeTag);
-
-		iconMinimizeTag.runTag();
+		portletIconMinimize();
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #portletIconOptions}
+	 */
+	@Override
 	public void iconOptions() throws Exception {
-		IconOptionsTag iconOptionsTag = new IconOptionsTag();
-
-		setUp(iconOptionsTag);
-
-		iconOptionsTag.runTag();
+		portletIconOptions();
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #portletIconPortlet}
+	 */
+	@Override
 	public void iconPortlet() throws Exception {
-		IconPortletTag iconPortletTag = new IconPortletTag();
-
-		setUp(iconPortletTag);
-
-		iconPortletTag.runTag();
+		portletIconPortlet();
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #portletIconPortlet(Portlet)}
+	 */
+	@Override
 	public void iconPortlet(Portlet portlet) throws Exception {
-		IconPortletTag iconPortletTag = new IconPortletTag();
-
-		setUp(iconPortletTag);
-
-		iconPortletTag.setPortlet(portlet);
-
-		iconPortletTag.runTag();
+		portletIconPortlet();
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #portletIconPortletCss}
+	 */
+	@Override
 	public void iconPortletCss() throws Exception {
-		IconPortletCssTag iconPortletCssTag = new IconPortletCssTag();
-
-		setUp(iconPortletCssTag);
-
-		iconPortletCssTag.runTag();
+		portletIconPortletCss();
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #portletIconPrint}
+	 */
+	@Override
 	public void iconPrint() throws Exception {
-		IconPrintTag iconPrintTag = new IconPrintTag();
-
-		setUp(iconPrintTag);
-
-		iconPrintTag.runTag();
+		portletIconPrint();
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #portletIconRefresh}
+	 */
+	@Override
 	public void iconRefresh() throws Exception {
-		IconRefreshTag iconRefreshTag = new IconRefreshTag();
-
-		setUp(iconRefreshTag);
-
-		iconRefreshTag.runTag();
+		portletIconRefresh();
 	}
 
+	@Override
 	public void include(ServletContext servletContext, String page)
 		throws Exception {
 
@@ -578,6 +618,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		requestDispatcher.include(_request, _response);
 	}
 
+	@Override
 	public void include(String page) throws Exception {
 		RequestDispatcher requestDispatcher =
 			DirectRequestDispatcherFactoryUtil.getRequestDispatcher(
@@ -586,6 +627,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		requestDispatcher.include(_request, _response);
 	}
 
+	@Override
 	public void journalArticle(
 			String articleId, long groupId, String templateId)
 		throws Exception {
@@ -602,10 +644,12 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		journalArticleTag.runTag();
 	}
 
+	@Override
 	public void journalContentSearch() throws Exception {
 		journalContentSearch(true, null, null);
 	}
 
+	@Override
 	public void journalContentSearch(
 			boolean showListed, String targetPortletId, String type)
 		throws Exception {
@@ -622,6 +666,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		journalContentSearchTag.runTag();
 	}
 
+	@Override
 	public void language() throws Exception {
 		LanguageTag languageTag = new LanguageTag();
 
@@ -630,6 +675,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		languageTag.runTag();
 	}
 
+	@Override
 	public void language(
 			String formName, String formAction, String name, int displayStyle)
 		throws Exception {
@@ -646,6 +692,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		languageTag.runTag();
 	}
 
+	@Override
 	public void language(
 			String formName, String formAction, String name,
 			String[] languageIds, int displayStyle)
@@ -664,10 +711,12 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		languageTag.runTag();
 	}
 
+	@Override
 	public void layoutIcon(Layout layout) throws Exception {
 		LayoutIconTag.doTag(layout, _servletContext, _request, _response);
 	}
 
+	@Override
 	public void metaTags() throws Exception {
 		MetaTagsTag.doTag(_servletContext, _request, _response);
 	}
@@ -675,6 +724,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 	/**
 	 * @deprecated As of 6.2.0, replaced by {@link #mySites}
 	 */
+	@Override
 	public void myPlaces() throws Exception {
 		mySites();
 	}
@@ -682,10 +732,12 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 	/**
 	 * @deprecated As of 6.2.0, replaced by {@link #mySites(int)}
 	 */
+	@Override
 	public void myPlaces(int max) throws Exception {
 		mySites(max);
 	}
 
+	@Override
 	public void mySites() throws Exception {
 		MySitesTag mySitesTag = new MySitesTag();
 
@@ -694,6 +746,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		mySitesTag.runTag();
 	}
 
+	@Override
 	public void mySites(int max) throws Exception {
 		MySitesTag mySitesTag = new MySitesTag();
 
@@ -704,6 +757,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		mySitesTag.runTag();
 	}
 
+	@Override
 	public void permissionsURL(
 			String redirect, String modelResource,
 			String modelResourceDescription, Object resourceGroupId,
@@ -719,6 +773,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 	 * @deprecated As of 6.2.0, replaced by {@link #permissionsURL(String,
 	 *             String, String, long, String, String, int[])}
 	 */
+	@Override
 	public void permissionsURL(
 			String redirect, String modelResource,
 			String modelResourceDescription, String resourcePrimKey,
@@ -730,6 +785,144 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 			resourcePrimKey, windowState, roleTypes);
 	}
 
+	@Override
+	public void portletIconBack() throws Exception {
+		IconBackTag iconBackTag = new IconBackTag();
+
+		setUp(iconBackTag);
+
+		iconBackTag.runTag();
+	}
+
+	@Override
+	public void portletIconClose() throws Exception {
+		IconCloseTag iconCloseTag = new IconCloseTag();
+
+		setUp(iconCloseTag);
+
+		iconCloseTag.runTag();
+	}
+
+	@Override
+	public void portletIconConfiguration() throws Exception {
+		IconConfigurationTag iconConfigurationTag = new IconConfigurationTag();
+
+		setUp(iconConfigurationTag);
+
+		iconConfigurationTag.runTag();
+	}
+
+	@Override
+	public void portletIconEdit() throws Exception {
+		IconEditTag iconEditTag = new IconEditTag();
+
+		setUp(iconEditTag);
+
+		iconEditTag.runTag();
+	}
+
+	@Override
+	public void portletIconEditDefaults() throws Exception {
+		IconEditDefaultsTag iconEditDefaultsTag = new IconEditDefaultsTag();
+
+		setUp(iconEditDefaultsTag);
+
+		iconEditDefaultsTag.runTag();
+	}
+
+	@Override
+	public void portletIconEditGuest() throws Exception {
+		IconEditGuestTag iconEditGuestTag = new IconEditGuestTag();
+
+		setUp(iconEditGuestTag);
+
+		iconEditGuestTag.runTag();
+	}
+
+	@Override
+	public void portletIconHelp() throws Exception {
+		IconHelpTag iconHelpTag = new IconHelpTag();
+
+		setUp(iconHelpTag);
+
+		iconHelpTag.runTag();
+	}
+
+	@Override
+	public void portletIconMaximize() throws Exception {
+		IconMaximizeTag iconMaximizeTag = new IconMaximizeTag();
+
+		setUp(iconMaximizeTag);
+
+		iconMaximizeTag.runTag();
+	}
+
+	@Override
+	public void portletIconMinimize() throws Exception {
+		IconMinimizeTag iconMinimizeTag = new IconMinimizeTag();
+
+		setUp(iconMinimizeTag);
+
+		iconMinimizeTag.runTag();
+	}
+
+	@Override
+	public void portletIconOptions() throws Exception {
+		IconOptionsTag iconOptionsTag = new IconOptionsTag();
+
+		setUp(iconOptionsTag);
+
+		iconOptionsTag.runTag();
+	}
+
+	@Override
+	public void portletIconPortlet() throws Exception {
+		IconPortletTag iconPortletTag = new IconPortletTag();
+
+		setUp(iconPortletTag);
+
+		iconPortletTag.runTag();
+	}
+
+	@Override
+	public void portletIconPortlet(Portlet portlet) throws Exception {
+		IconPortletTag iconPortletTag = new IconPortletTag();
+
+		setUp(iconPortletTag);
+
+		iconPortletTag.setPortlet(portlet);
+
+		iconPortletTag.runTag();
+	}
+
+	@Override
+	public void portletIconPortletCss() throws Exception {
+		IconPortletCssTag iconPortletCssTag = new IconPortletCssTag();
+
+		setUp(iconPortletCssTag);
+
+		iconPortletCssTag.runTag();
+	}
+
+	@Override
+	public void portletIconPrint() throws Exception {
+		IconPrintTag iconPrintTag = new IconPrintTag();
+
+		setUp(iconPrintTag);
+
+		iconPrintTag.runTag();
+	}
+
+	@Override
+	public void portletIconRefresh() throws Exception {
+		IconRefreshTag iconRefreshTag = new IconRefreshTag();
+
+		setUp(iconRefreshTag);
+
+		iconRefreshTag.runTag();
+	}
+
+	@Override
 	public void ratings(
 			String className, long classPK, int numberOfStars, String type,
 			String url)
@@ -748,6 +941,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		ratingsTag.runTag();
 	}
 
+	@Override
 	public void renderURL(long plid, String portletName, String queryString)
 		throws Exception {
 
@@ -757,12 +951,14 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		renderURL(windowState, portletMode, plid, portletName, queryString);
 	}
 
+	@Override
 	public void renderURL(String portletName, String queryString)
 		throws Exception {
 
 		renderURL(LayoutConstants.DEFAULT_PLID, portletName, queryString);
 	}
 
+	@Override
 	public void renderURL(
 			String windowState, String portletMode, Boolean secure,
 			Boolean copyCurrentRenderParameters, Boolean escapeXml, long plid,
@@ -793,6 +989,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 	 *             Boolean, Boolean, Boolean, long, long, String, Boolean,
 	 *             Boolean, long, long, Boolean, String)}
 	 */
+	@Override
 	public void renderURL(
 			String windowState, String portletMode, Boolean secure,
 			Boolean copyCurrentRenderParameters, Boolean escapeXml, long plid,
@@ -808,6 +1005,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 			doAsUserId, portletConfiguration, queryString);
 	}
 
+	@Override
 	public void renderURL(
 			String windowState, String portletMode, long plid,
 			String portletName, String queryString)
@@ -829,6 +1027,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 			doAsGroupId, doAsUserId, portletConfiguration, queryString);
 	}
 
+	@Override
 	public void renderURL(
 			String windowState, String portletMode, String portletName,
 			String queryString)
@@ -839,16 +1038,19 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 			queryString);
 	}
 
+	@Override
 	public void runtime(String portletName) throws Exception {
 		runtime(portletName, null);
 	}
 
+	@Override
 	public void runtime(String portletName, String queryString)
 		throws Exception {
 
 		RuntimeTag.doTag(portletName, queryString, null, _request, _response);
 	}
 
+	@Override
 	public void runtime(
 			String portletName, String queryString, String defaultPreferences)
 		throws Exception {
@@ -858,6 +1060,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 			_response);
 	}
 
+	@Override
 	public void search() throws Exception {
 		SearchTag searchTag = new SearchTag();
 
@@ -866,10 +1069,12 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		searchTag.runTag();
 	}
 
+	@Override
 	public void setTemplate(Template template) {
 		_template = template;
 	}
 
+	@Override
 	public void sitesDirectory() throws Exception {
 		SitesDirectoryTag sitesDirectoryTag = new SitesDirectoryTag();
 
@@ -878,6 +1083,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		sitesDirectoryTag.runTag();
 	}
 
+	@Override
 	public void sitesDirectory(String displayStyle, String sites)
 		throws Exception {
 
@@ -891,6 +1097,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		sitesDirectoryTag.runTag();
 	}
 
+	@Override
 	public void socialBookmarks(
 			String displayStyle, String target, String types, String title,
 			String url)
@@ -909,6 +1116,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		socialBookmarksTag.runTag();
 	}
 
+	@Override
 	public void staging() throws Exception {
 		StagingTag stagingTag = new StagingTag();
 
@@ -917,6 +1125,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		stagingTag.runTag();
 	}
 
+	@Override
 	public void toggle(
 			String id, String showImage, String hideImage, String showMessage,
 			String hideMessage, boolean defaultShowContent)
@@ -927,6 +1136,7 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 			defaultShowContent, null, _servletContext, _request, _response);
 	}
 
+	@Override
 	public String wrapPortlet(String wrapPage, String portletPage)
 		throws Exception {
 

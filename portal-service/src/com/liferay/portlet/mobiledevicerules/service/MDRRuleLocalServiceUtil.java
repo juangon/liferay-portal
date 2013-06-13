@@ -18,11 +18,12 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
- * The utility for the m d r rule local service. This utility wraps {@link com.liferay.portlet.mobiledevicerules.service.impl.MDRRuleLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
+ * Provides the local service utility for MDRRule. This utility wraps
+ * {@link com.liferay.portlet.mobiledevicerules.service.impl.MDRRuleLocalServiceImpl} and is the
+ * primary access point for service operations in application layer code running
+ * on the local server. Methods of this service will not have security checks
+ * based on the propagated JAAS credentials because this service can only be
+ * accessed from within the same VM.
  *
  * @author Edward C. Han
  * @see MDRRuleLocalService
@@ -312,18 +313,21 @@ public class MDRRuleLocalServiceUtil {
 	}
 
 	public static void deleteRule(long ruleId)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteRule(ruleId);
 	}
 
 	public static void deleteRule(
 		com.liferay.portlet.mobiledevicerules.model.MDRRule rule)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteRule(rule);
 	}
 
 	public static void deleteRules(long ruleGroupId)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteRules(ruleGroupId);
 	}
 

@@ -42,12 +42,16 @@ public class PortletPreferencesWrapper
 
 	@Override
 	public boolean equals(Object obj) {
-		PortletPreferencesWrapper portletPreferencesWrapper =
-			(PortletPreferencesWrapper)obj;
-
-		if (this == portletPreferencesWrapper) {
+		if (this == obj) {
 			return true;
 		}
+
+		if (!(obj instanceof PortletPreferencesWrapper)) {
+			return false;
+		}
+
+		PortletPreferencesWrapper portletPreferencesWrapper =
+			(PortletPreferencesWrapper)obj;
 
 		if (getPortletPreferencesImpl().equals(
 				portletPreferencesWrapper.getPortletPreferencesImpl())) {
@@ -59,10 +63,12 @@ public class PortletPreferencesWrapper
 		}
 	}
 
+	@Override
 	public Map<String, String[]> getMap() {
 		return _portletPreferences.getMap();
 	}
 
+	@Override
 	public Enumeration<String> getNames() {
 		return _portletPreferences.getNames();
 	}
@@ -78,10 +84,12 @@ public class PortletPreferencesWrapper
 		return getPortletPreferencesImpl();
 	}
 
+	@Override
 	public String getValue(String key, String def) {
 		return _portletPreferences.getValue(key, def);
 	}
 
+	@Override
 	public String[] getValues(String key, String[] def) {
 		return _portletPreferences.getValues(key, def);
 	}
@@ -91,24 +99,29 @@ public class PortletPreferencesWrapper
 		return _portletPreferences.hashCode();
 	}
 
+	@Override
 	public boolean isReadOnly(String key) {
 		return _portletPreferences.isReadOnly(key);
 	}
 
+	@Override
 	public void reset(String key) throws ReadOnlyException {
 		_portletPreferences.reset(key);
 	}
 
+	@Override
 	public void setValue(String key, String value) throws ReadOnlyException {
 		_portletPreferences.setValue(key, value);
 	}
 
+	@Override
 	public void setValues(String key, String[] values)
 		throws ReadOnlyException {
 
 		_portletPreferences.setValues(key, values);
 	}
 
+	@Override
 	public void store() throws IOException, ValidatorException {
 		if (PropsValues.TCK_URL) {
 

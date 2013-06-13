@@ -119,6 +119,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByUuid(String uuid) throws SystemException {
 		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -136,6 +137,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByUuid(String uuid, int start, int end)
 		throws SystemException {
 		return findByUuid(uuid, start, end, null);
@@ -155,6 +157,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByUuid(String uuid, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -275,6 +278,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByUuid_First(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -304,6 +308,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the first matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByUuid_First(String uuid,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<MBMessage> list = findByUuid(uuid, 0, 1, orderByComparator);
@@ -324,6 +329,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByUuid_Last(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -353,6 +359,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the last matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByUuid_Last(String uuid,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByUuid(uuid);
@@ -377,6 +384,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage[] findByUuid_PrevAndNext(long messageId, String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -532,6 +540,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param uuid the uuid
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByUuid(String uuid) throws SystemException {
 		for (MBMessage mbMessage : findByUuid(uuid, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null)) {
@@ -546,6 +555,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUuid(String uuid) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID;
 
@@ -628,6 +638,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByUUID_G(String uuid, long groupId)
 		throws NoSuchMessageException, SystemException {
 		MBMessage mbMessage = fetchByUUID_G(uuid, groupId);
@@ -663,6 +674,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		return fetchByUUID_G(uuid, groupId, true);
@@ -677,6 +689,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByUUID_G(String uuid, long groupId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, groupId };
@@ -783,6 +796,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the message-boards message that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage removeByUUID_G(String uuid, long groupId)
 		throws NoSuchMessageException, SystemException {
 		MBMessage mbMessage = findByUUID_G(uuid, groupId);
@@ -798,6 +812,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID_G;
@@ -896,6 +911,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		return findByUuid_C(uuid, companyId, QueryUtil.ALL_POS,
@@ -916,6 +932,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByUuid_C(String uuid, long companyId, int start,
 		int end) throws SystemException {
 		return findByUuid_C(uuid, companyId, start, end, null);
@@ -936,6 +953,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByUuid_C(String uuid, long companyId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -1066,6 +1084,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByUuid_C_First(String uuid, long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -1100,6 +1119,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the first matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByUuid_C_First(String uuid, long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<MBMessage> list = findByUuid_C(uuid, companyId, 0, 1,
@@ -1122,6 +1142,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByUuid_C_Last(String uuid, long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -1156,6 +1177,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the last matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByUuid_C_Last(String uuid, long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByUuid_C(uuid, companyId);
@@ -1181,6 +1203,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage[] findByUuid_C_PrevAndNext(long messageId, String uuid,
 		long companyId, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -1341,6 +1364,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param companyId the company ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		for (MBMessage mbMessage : findByUuid_C(uuid, companyId,
@@ -1357,6 +1381,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID_C;
@@ -1453,6 +1478,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByGroupId(long groupId)
 		throws SystemException {
 		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
@@ -1471,6 +1497,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
 		return findByGroupId(groupId, start, end, null);
@@ -1490,6 +1517,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -1596,6 +1624,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByGroupId_First(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -1625,6 +1654,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the first matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByGroupId_First(long groupId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<MBMessage> list = findByGroupId(groupId, 0, 1, orderByComparator);
@@ -1645,6 +1675,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -1674,6 +1705,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the last matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByGroupId(groupId);
@@ -1698,6 +1730,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage[] findByGroupId_PrevAndNext(long messageId, long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -1840,6 +1873,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> filterFindByGroupId(long groupId)
 		throws SystemException {
 		return filterFindByGroupId(groupId, QueryUtil.ALL_POS,
@@ -1859,6 +1893,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> filterFindByGroupId(long groupId, int start, int end)
 		throws SystemException {
 		return filterFindByGroupId(groupId, start, end, null);
@@ -1878,6 +1913,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> filterFindByGroupId(long groupId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -1968,6 +2004,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage[] filterFindByGroupId_PrevAndNext(long messageId,
 		long groupId, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -2149,6 +2186,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param groupId the group ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (MBMessage mbMessage : findByGroupId(groupId, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null)) {
@@ -2163,6 +2201,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByGroupId(long groupId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPID;
 
@@ -2215,6 +2254,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByGroupId(long groupId) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return countByGroupId(groupId);
@@ -2286,6 +2326,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByCompanyId(long companyId)
 		throws SystemException {
 		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -2305,6 +2346,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByCompanyId(long companyId, int start, int end)
 		throws SystemException {
 		return findByCompanyId(companyId, start, end, null);
@@ -2324,6 +2366,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -2430,6 +2473,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -2460,6 +2504,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the first matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<MBMessage> list = findByCompanyId(companyId, 0, 1,
@@ -2481,6 +2526,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -2510,6 +2556,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the last matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByCompanyId(companyId);
@@ -2534,6 +2581,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage[] findByCompanyId_PrevAndNext(long messageId,
 		long companyId, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -2675,6 +2723,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param companyId the company ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (MBMessage mbMessage : findByCompanyId(companyId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -2689,6 +2738,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByCompanyId(long companyId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMPANYID;
 
@@ -2763,6 +2813,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByThreadId(long threadId)
 		throws SystemException {
 		return findByThreadId(threadId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -2782,6 +2833,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByThreadId(long threadId, int start, int end)
 		throws SystemException {
 		return findByThreadId(threadId, start, end, null);
@@ -2801,6 +2853,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByThreadId(long threadId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -2907,6 +2960,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByThreadId_First(long threadId,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -2936,6 +2990,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the first matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByThreadId_First(long threadId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<MBMessage> list = findByThreadId(threadId, 0, 1, orderByComparator);
@@ -2956,6 +3011,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByThreadId_Last(long threadId,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -2985,6 +3041,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the last matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByThreadId_Last(long threadId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByThreadId(threadId);
@@ -3009,6 +3066,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage[] findByThreadId_PrevAndNext(long messageId,
 		long threadId, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -3150,6 +3208,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param threadId the thread ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByThreadId(long threadId) throws SystemException {
 		for (MBMessage mbMessage : findByThreadId(threadId, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null)) {
@@ -3164,6 +3223,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByThreadId(long threadId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_THREADID;
 
@@ -3239,6 +3299,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByThreadReplies(long threadId)
 		throws SystemException {
 		return findByThreadReplies(threadId, QueryUtil.ALL_POS,
@@ -3258,6 +3319,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByThreadReplies(long threadId, int start, int end)
 		throws SystemException {
 		return findByThreadReplies(threadId, start, end, null);
@@ -3277,6 +3339,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByThreadReplies(long threadId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -3383,6 +3446,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByThreadReplies_First(long threadId,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -3413,6 +3477,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the first matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByThreadReplies_First(long threadId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<MBMessage> list = findByThreadReplies(threadId, 0, 1,
@@ -3434,6 +3499,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByThreadReplies_Last(long threadId,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -3464,6 +3530,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the last matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByThreadReplies_Last(long threadId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByThreadReplies(threadId);
@@ -3488,6 +3555,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage[] findByThreadReplies_PrevAndNext(long messageId,
 		long threadId, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -3629,6 +3697,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param threadId the thread ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByThreadReplies(long threadId) throws SystemException {
 		for (MBMessage mbMessage : findByThreadReplies(threadId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -3643,6 +3712,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByThreadReplies(long threadId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_THREADREPLIES;
 
@@ -3717,6 +3787,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByUserId(long userId) throws SystemException {
 		return findByUserId(userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -3734,6 +3805,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByUserId(long userId, int start, int end)
 		throws SystemException {
 		return findByUserId(userId, start, end, null);
@@ -3753,6 +3825,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByUserId(long userId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -3859,6 +3932,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByUserId_First(long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -3888,6 +3962,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the first matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByUserId_First(long userId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<MBMessage> list = findByUserId(userId, 0, 1, orderByComparator);
@@ -3908,6 +3983,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByUserId_Last(long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -3937,6 +4013,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the last matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByUserId_Last(long userId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByUserId(userId);
@@ -3961,6 +4038,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage[] findByUserId_PrevAndNext(long messageId, long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -4102,6 +4180,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param userId the user ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByUserId(long userId) throws SystemException {
 		for (MBMessage mbMessage : findByUserId(userId, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null)) {
@@ -4116,6 +4195,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUserId(long userId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_USERID;
 
@@ -4191,6 +4271,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByG_U(long groupId, long userId)
 		throws SystemException {
 		return findByG_U(groupId, userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -4211,6 +4292,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByG_U(long groupId, long userId, int start,
 		int end) throws SystemException {
 		return findByG_U(groupId, userId, start, end, null);
@@ -4231,6 +4313,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByG_U(long groupId, long userId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -4347,6 +4430,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByG_U_First(long groupId, long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -4381,6 +4465,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the first matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByG_U_First(long groupId, long userId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<MBMessage> list = findByG_U(groupId, userId, 0, 1,
@@ -4403,6 +4488,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByG_U_Last(long groupId, long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -4436,6 +4522,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the last matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByG_U_Last(long groupId, long userId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByG_U(groupId, userId);
@@ -4461,6 +4548,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage[] findByG_U_PrevAndNext(long messageId, long groupId,
 		long userId, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -4608,6 +4696,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> filterFindByG_U(long groupId, long userId)
 		throws SystemException {
 		return filterFindByG_U(groupId, userId, QueryUtil.ALL_POS,
@@ -4628,6 +4717,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> filterFindByG_U(long groupId, long userId,
 		int start, int end) throws SystemException {
 		return filterFindByG_U(groupId, userId, start, end, null);
@@ -4648,6 +4738,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> filterFindByG_U(long groupId, long userId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -4744,6 +4835,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage[] filterFindByG_U_PrevAndNext(long messageId,
 		long groupId, long userId, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -4930,6 +5022,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param userId the user ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByG_U(long groupId, long userId)
 		throws SystemException {
 		for (MBMessage mbMessage : findByG_U(groupId, userId,
@@ -4946,6 +5039,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_U(long groupId, long userId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_U;
 
@@ -5003,6 +5097,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByG_U(long groupId, long userId)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -5080,6 +5175,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByG_C(long groupId, long categoryId)
 		throws SystemException {
 		return findByG_C(groupId, categoryId, QueryUtil.ALL_POS,
@@ -5100,6 +5196,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByG_C(long groupId, long categoryId, int start,
 		int end) throws SystemException {
 		return findByG_C(groupId, categoryId, start, end, null);
@@ -5120,6 +5217,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByG_C(long groupId, long categoryId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -5236,6 +5334,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByG_C_First(long groupId, long categoryId,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -5270,6 +5369,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the first matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByG_C_First(long groupId, long categoryId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<MBMessage> list = findByG_C(groupId, categoryId, 0, 1,
@@ -5292,6 +5392,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByG_C_Last(long groupId, long categoryId,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -5326,6 +5427,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the last matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByG_C_Last(long groupId, long categoryId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByG_C(groupId, categoryId);
@@ -5351,6 +5453,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage[] findByG_C_PrevAndNext(long messageId, long groupId,
 		long categoryId, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -5498,6 +5601,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> filterFindByG_C(long groupId, long categoryId)
 		throws SystemException {
 		return filterFindByG_C(groupId, categoryId, QueryUtil.ALL_POS,
@@ -5518,6 +5622,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> filterFindByG_C(long groupId, long categoryId,
 		int start, int end) throws SystemException {
 		return filterFindByG_C(groupId, categoryId, start, end, null);
@@ -5538,6 +5643,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> filterFindByG_C(long groupId, long categoryId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -5634,6 +5740,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage[] filterFindByG_C_PrevAndNext(long messageId,
 		long groupId, long categoryId, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -5820,6 +5927,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param categoryId the category ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByG_C(long groupId, long categoryId)
 		throws SystemException {
 		for (MBMessage mbMessage : findByG_C(groupId, categoryId,
@@ -5836,6 +5944,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_C(long groupId, long categoryId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_C;
@@ -5894,6 +6003,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByG_C(long groupId, long categoryId)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -5971,6 +6081,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByG_S(long groupId, int status)
 		throws SystemException {
 		return findByG_S(groupId, status, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -5991,6 +6102,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByG_S(long groupId, int status, int start,
 		int end) throws SystemException {
 		return findByG_S(groupId, status, start, end, null);
@@ -6011,6 +6123,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByG_S(long groupId, int status, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -6127,6 +6240,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByG_S_First(long groupId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -6161,6 +6275,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the first matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByG_S_First(long groupId, int status,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<MBMessage> list = findByG_S(groupId, status, 0, 1,
@@ -6183,6 +6298,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByG_S_Last(long groupId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -6216,6 +6332,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the last matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByG_S_Last(long groupId, int status,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByG_S(groupId, status);
@@ -6241,6 +6358,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage[] findByG_S_PrevAndNext(long messageId, long groupId,
 		int status, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -6388,6 +6506,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> filterFindByG_S(long groupId, int status)
 		throws SystemException {
 		return filterFindByG_S(groupId, status, QueryUtil.ALL_POS,
@@ -6408,6 +6527,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> filterFindByG_S(long groupId, int status, int start,
 		int end) throws SystemException {
 		return filterFindByG_S(groupId, status, start, end, null);
@@ -6428,6 +6548,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> filterFindByG_S(long groupId, int status, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -6523,6 +6644,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage[] filterFindByG_S_PrevAndNext(long messageId,
 		long groupId, int status, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -6709,6 +6831,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param status the status
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByG_S(long groupId, int status) throws SystemException {
 		for (MBMessage mbMessage : findByG_S(groupId, status,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -6724,6 +6847,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_S(long groupId, int status) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_S;
 
@@ -6781,6 +6905,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByG_S(long groupId, int status)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -6858,6 +6983,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByC_S(long companyId, int status)
 		throws SystemException {
 		return findByC_S(companyId, status, QueryUtil.ALL_POS,
@@ -6878,6 +7004,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByC_S(long companyId, int status, int start,
 		int end) throws SystemException {
 		return findByC_S(companyId, status, start, end, null);
@@ -6898,6 +7025,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByC_S(long companyId, int status, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -7014,6 +7142,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByC_S_First(long companyId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -7048,6 +7177,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the first matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByC_S_First(long companyId, int status,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<MBMessage> list = findByC_S(companyId, status, 0, 1,
@@ -7070,6 +7200,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByC_S_Last(long companyId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -7104,6 +7235,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the last matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByC_S_Last(long companyId, int status,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByC_S(companyId, status);
@@ -7129,6 +7261,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage[] findByC_S_PrevAndNext(long messageId, long companyId,
 		int status, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -7275,6 +7408,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param status the status
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByC_S(long companyId, int status)
 		throws SystemException {
 		for (MBMessage mbMessage : findByC_S(companyId, status,
@@ -7291,6 +7425,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByC_S(long companyId, int status) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_S;
 
@@ -7375,6 +7510,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByU_C(long userId, long classNameId)
 		throws SystemException {
 		return findByU_C(userId, classNameId, QueryUtil.ALL_POS,
@@ -7395,6 +7531,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByU_C(long userId, long classNameId, int start,
 		int end) throws SystemException {
 		return findByU_C(userId, classNameId, start, end, null);
@@ -7415,6 +7552,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByU_C(long userId, long classNameId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -7531,6 +7669,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByU_C_First(long userId, long classNameId,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -7565,6 +7704,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the first matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByU_C_First(long userId, long classNameId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<MBMessage> list = findByU_C(userId, classNameId, 0, 1,
@@ -7587,6 +7727,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByU_C_Last(long userId, long classNameId,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -7621,6 +7762,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the last matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByU_C_Last(long userId, long classNameId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByU_C(userId, classNameId);
@@ -7646,6 +7788,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage[] findByU_C_PrevAndNext(long messageId, long userId,
 		long classNameId, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -7797,6 +7940,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByU_C(long userId, long[] classNameIds)
 		throws SystemException {
 		return findByU_C(userId, classNameIds, QueryUtil.ALL_POS,
@@ -7817,6 +7961,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByU_C(long userId, long[] classNameIds,
 		int start, int end) throws SystemException {
 		return findByU_C(userId, classNameIds, start, end, null);
@@ -7837,6 +7982,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByU_C(long userId, long[] classNameIds,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -7976,6 +8122,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param classNameId the class name ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByU_C(long userId, long classNameId)
 		throws SystemException {
 		for (MBMessage mbMessage : findByU_C(userId, classNameId,
@@ -7992,6 +8139,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByU_C(long userId, long classNameId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_U_C;
@@ -8050,6 +8198,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByU_C(long userId, long[] classNameIds)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -8165,6 +8314,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByC_C(long classNameId, long classPK)
 		throws SystemException {
 		return findByC_C(classNameId, classPK, QueryUtil.ALL_POS,
@@ -8185,6 +8335,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByC_C(long classNameId, long classPK, int start,
 		int end) throws SystemException {
 		return findByC_C(classNameId, classPK, start, end, null);
@@ -8205,6 +8356,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByC_C(long classNameId, long classPK, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -8321,6 +8473,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByC_C_First(long classNameId, long classPK,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -8355,6 +8508,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the first matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByC_C_First(long classNameId, long classPK,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<MBMessage> list = findByC_C(classNameId, classPK, 0, 1,
@@ -8377,6 +8531,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByC_C_Last(long classNameId, long classPK,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -8411,6 +8566,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the last matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByC_C_Last(long classNameId, long classPK,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByC_C(classNameId, classPK);
@@ -8436,6 +8592,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage[] findByC_C_PrevAndNext(long messageId, long classNameId,
 		long classPK, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -8582,6 +8739,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param classPK the class p k
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByC_C(long classNameId, long classPK)
 		throws SystemException {
 		for (MBMessage mbMessage : findByC_C(classNameId, classPK,
@@ -8598,6 +8756,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByC_C(long classNameId, long classPK)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_C;
@@ -8679,6 +8838,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByT_P(long threadId, long parentMessageId)
 		throws SystemException {
 		return findByT_P(threadId, parentMessageId, QueryUtil.ALL_POS,
@@ -8699,6 +8859,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByT_P(long threadId, long parentMessageId,
 		int start, int end) throws SystemException {
 		return findByT_P(threadId, parentMessageId, start, end, null);
@@ -8719,6 +8880,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByT_P(long threadId, long parentMessageId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -8836,6 +8998,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByT_P_First(long threadId, long parentMessageId,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -8870,6 +9033,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the first matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByT_P_First(long threadId, long parentMessageId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<MBMessage> list = findByT_P(threadId, parentMessageId, 0, 1,
@@ -8892,6 +9056,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByT_P_Last(long threadId, long parentMessageId,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -8926,6 +9091,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the last matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByT_P_Last(long threadId, long parentMessageId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByT_P(threadId, parentMessageId);
@@ -8951,6 +9117,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage[] findByT_P_PrevAndNext(long messageId, long threadId,
 		long parentMessageId, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -9097,6 +9264,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param parentMessageId the parent message ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByT_P(long threadId, long parentMessageId)
 		throws SystemException {
 		for (MBMessage mbMessage : findByT_P(threadId, parentMessageId,
@@ -9113,6 +9281,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByT_P(long threadId, long parentMessageId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_T_P;
@@ -9194,6 +9363,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByT_A(long threadId, boolean answer)
 		throws SystemException {
 		return findByT_A(threadId, answer, QueryUtil.ALL_POS,
@@ -9214,6 +9384,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByT_A(long threadId, boolean answer, int start,
 		int end) throws SystemException {
 		return findByT_A(threadId, answer, start, end, null);
@@ -9234,6 +9405,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByT_A(long threadId, boolean answer, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -9350,6 +9522,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByT_A_First(long threadId, boolean answer,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -9384,6 +9557,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the first matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByT_A_First(long threadId, boolean answer,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<MBMessage> list = findByT_A(threadId, answer, 0, 1,
@@ -9406,6 +9580,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByT_A_Last(long threadId, boolean answer,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -9440,6 +9615,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the last matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByT_A_Last(long threadId, boolean answer,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByT_A(threadId, answer);
@@ -9465,6 +9641,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage[] findByT_A_PrevAndNext(long messageId, long threadId,
 		boolean answer, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -9611,6 +9788,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param answer the answer
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByT_A(long threadId, boolean answer)
 		throws SystemException {
 		for (MBMessage mbMessage : findByT_A(threadId, answer,
@@ -9627,6 +9805,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByT_A(long threadId, boolean answer)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_T_A;
@@ -9708,6 +9887,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByT_S(long threadId, int status)
 		throws SystemException {
 		return findByT_S(threadId, status, QueryUtil.ALL_POS,
@@ -9728,6 +9908,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByT_S(long threadId, int status, int start,
 		int end) throws SystemException {
 		return findByT_S(threadId, status, start, end, null);
@@ -9748,6 +9929,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByT_S(long threadId, int status, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -9864,6 +10046,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByT_S_First(long threadId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -9898,6 +10081,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the first matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByT_S_First(long threadId, int status,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<MBMessage> list = findByT_S(threadId, status, 0, 1,
@@ -9920,6 +10104,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByT_S_Last(long threadId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -9954,6 +10139,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the last matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByT_S_Last(long threadId, int status,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByT_S(threadId, status);
@@ -9979,6 +10165,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage[] findByT_S_PrevAndNext(long messageId, long threadId,
 		int status, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -10125,6 +10312,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param status the status
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByT_S(long threadId, int status)
 		throws SystemException {
 		for (MBMessage mbMessage : findByT_S(threadId, status,
@@ -10141,6 +10329,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByT_S(long threadId, int status) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_T_S;
 
@@ -10221,6 +10410,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByTR_S(long threadId, int status)
 		throws SystemException {
 		return findByTR_S(threadId, status, QueryUtil.ALL_POS,
@@ -10241,6 +10431,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByTR_S(long threadId, int status, int start,
 		int end) throws SystemException {
 		return findByTR_S(threadId, status, start, end, null);
@@ -10261,6 +10452,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByTR_S(long threadId, int status, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -10377,6 +10569,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByTR_S_First(long threadId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -10411,6 +10604,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the first matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByTR_S_First(long threadId, int status,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<MBMessage> list = findByTR_S(threadId, status, 0, 1,
@@ -10433,6 +10627,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByTR_S_Last(long threadId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -10467,6 +10662,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the last matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByTR_S_Last(long threadId, int status,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByTR_S(threadId, status);
@@ -10492,6 +10688,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage[] findByTR_S_PrevAndNext(long messageId, long threadId,
 		int status, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -10638,6 +10835,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param status the status
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByTR_S(long threadId, int status)
 		throws SystemException {
 		for (MBMessage mbMessage : findByTR_S(threadId, status,
@@ -10654,6 +10852,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByTR_S(long threadId, int status) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_TR_S;
 
@@ -10743,6 +10942,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByG_U_S(long groupId, long userId, int status)
 		throws SystemException {
 		return findByG_U_S(groupId, userId, status, QueryUtil.ALL_POS,
@@ -10764,6 +10964,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByG_U_S(long groupId, long userId, int status,
 		int start, int end) throws SystemException {
 		return findByG_U_S(groupId, userId, status, start, end, null);
@@ -10785,6 +10986,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByG_U_S(long groupId, long userId, int status,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -10908,6 +11110,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByG_U_S_First(long groupId, long userId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -10946,6 +11149,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the first matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByG_U_S_First(long groupId, long userId, int status,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<MBMessage> list = findByG_U_S(groupId, userId, status, 0, 1,
@@ -10969,6 +11173,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByG_U_S_Last(long groupId, long userId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -11007,6 +11212,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the last matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByG_U_S_Last(long groupId, long userId, int status,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByG_U_S(groupId, userId, status);
@@ -11033,6 +11239,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage[] findByG_U_S_PrevAndNext(long messageId, long groupId,
 		long userId, int status, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -11185,6 +11392,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> filterFindByG_U_S(long groupId, long userId,
 		int status) throws SystemException {
 		return filterFindByG_U_S(groupId, userId, status, QueryUtil.ALL_POS,
@@ -11206,6 +11414,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> filterFindByG_U_S(long groupId, long userId,
 		int status, int start, int end) throws SystemException {
 		return filterFindByG_U_S(groupId, userId, status, start, end, null);
@@ -11227,6 +11436,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> filterFindByG_U_S(long groupId, long userId,
 		int status, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -11329,6 +11539,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage[] filterFindByG_U_S_PrevAndNext(long messageId,
 		long groupId, long userId, int status,
 		OrderByComparator orderByComparator)
@@ -11521,6 +11732,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param status the status
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByG_U_S(long groupId, long userId, int status)
 		throws SystemException {
 		for (MBMessage mbMessage : findByG_U_S(groupId, userId, status,
@@ -11538,6 +11750,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_U_S(long groupId, long userId, int status)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_U_S;
@@ -11601,6 +11814,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByG_U_S(long groupId, long userId, int status)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -11689,6 +11903,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByG_C_T(long groupId, long categoryId,
 		long threadId) throws SystemException {
 		return findByG_C_T(groupId, categoryId, threadId, QueryUtil.ALL_POS,
@@ -11710,6 +11925,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByG_C_T(long groupId, long categoryId,
 		long threadId, int start, int end) throws SystemException {
 		return findByG_C_T(groupId, categoryId, threadId, start, end, null);
@@ -11731,6 +11947,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByG_C_T(long groupId, long categoryId,
 		long threadId, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -11854,6 +12071,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByG_C_T_First(long groupId, long categoryId,
 		long threadId, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -11892,6 +12110,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the first matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByG_C_T_First(long groupId, long categoryId,
 		long threadId, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -11916,6 +12135,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByG_C_T_Last(long groupId, long categoryId,
 		long threadId, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -11954,6 +12174,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the last matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByG_C_T_Last(long groupId, long categoryId,
 		long threadId, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -11981,6 +12202,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage[] findByG_C_T_PrevAndNext(long messageId, long groupId,
 		long categoryId, long threadId, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -12133,6 +12355,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> filterFindByG_C_T(long groupId, long categoryId,
 		long threadId) throws SystemException {
 		return filterFindByG_C_T(groupId, categoryId, threadId,
@@ -12154,6 +12377,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> filterFindByG_C_T(long groupId, long categoryId,
 		long threadId, int start, int end) throws SystemException {
 		return filterFindByG_C_T(groupId, categoryId, threadId, start, end, null);
@@ -12175,6 +12399,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> filterFindByG_C_T(long groupId, long categoryId,
 		long threadId, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -12277,6 +12502,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage[] filterFindByG_C_T_PrevAndNext(long messageId,
 		long groupId, long categoryId, long threadId,
 		OrderByComparator orderByComparator)
@@ -12469,6 +12695,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param threadId the thread ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByG_C_T(long groupId, long categoryId, long threadId)
 		throws SystemException {
 		for (MBMessage mbMessage : findByG_C_T(groupId, categoryId, threadId,
@@ -12486,6 +12713,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_C_T(long groupId, long categoryId, long threadId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_C_T;
@@ -12549,6 +12777,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByG_C_T(long groupId, long categoryId, long threadId)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -12640,6 +12869,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByG_C_S(long groupId, long categoryId, int status)
 		throws SystemException {
 		return findByG_C_S(groupId, categoryId, status, QueryUtil.ALL_POS,
@@ -12661,6 +12891,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByG_C_S(long groupId, long categoryId,
 		int status, int start, int end) throws SystemException {
 		return findByG_C_S(groupId, categoryId, status, start, end, null);
@@ -12682,6 +12913,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByG_C_S(long groupId, long categoryId,
 		int status, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -12805,6 +13037,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByG_C_S_First(long groupId, long categoryId,
 		int status, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -12843,6 +13076,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the first matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByG_C_S_First(long groupId, long categoryId,
 		int status, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -12867,6 +13101,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByG_C_S_Last(long groupId, long categoryId,
 		int status, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -12905,6 +13140,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the last matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByG_C_S_Last(long groupId, long categoryId,
 		int status, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -12932,6 +13168,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage[] findByG_C_S_PrevAndNext(long messageId, long groupId,
 		long categoryId, int status, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -13084,6 +13321,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> filterFindByG_C_S(long groupId, long categoryId,
 		int status) throws SystemException {
 		return filterFindByG_C_S(groupId, categoryId, status,
@@ -13105,6 +13343,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> filterFindByG_C_S(long groupId, long categoryId,
 		int status, int start, int end) throws SystemException {
 		return filterFindByG_C_S(groupId, categoryId, status, start, end, null);
@@ -13126,6 +13365,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> filterFindByG_C_S(long groupId, long categoryId,
 		int status, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -13228,6 +13468,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage[] filterFindByG_C_S_PrevAndNext(long messageId,
 		long groupId, long categoryId, int status,
 		OrderByComparator orderByComparator)
@@ -13420,6 +13661,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param status the status
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByG_C_S(long groupId, long categoryId, int status)
 		throws SystemException {
 		for (MBMessage mbMessage : findByG_C_S(groupId, categoryId, status,
@@ -13437,6 +13679,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_C_S(long groupId, long categoryId, int status)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_C_S;
@@ -13500,6 +13743,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByG_C_S(long groupId, long categoryId, int status)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -13588,6 +13832,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByU_C_C(long userId, long classNameId,
 		long classPK) throws SystemException {
 		return findByU_C_C(userId, classNameId, classPK, QueryUtil.ALL_POS,
@@ -13609,6 +13854,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByU_C_C(long userId, long classNameId,
 		long classPK, int start, int end) throws SystemException {
 		return findByU_C_C(userId, classNameId, classPK, start, end, null);
@@ -13630,6 +13876,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByU_C_C(long userId, long classNameId,
 		long classPK, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -13753,6 +14000,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByU_C_C_First(long userId, long classNameId,
 		long classPK, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -13791,6 +14039,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the first matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByU_C_C_First(long userId, long classNameId,
 		long classPK, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -13815,6 +14064,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByU_C_C_Last(long userId, long classNameId,
 		long classPK, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -13853,6 +14103,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the last matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByU_C_C_Last(long userId, long classNameId,
 		long classPK, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -13880,6 +14131,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage[] findByU_C_C_PrevAndNext(long messageId, long userId,
 		long classNameId, long classPK, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -14031,6 +14283,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param classPK the class p k
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByU_C_C(long userId, long classNameId, long classPK)
 		throws SystemException {
 		for (MBMessage mbMessage : findByU_C_C(userId, classNameId, classPK,
@@ -14048,6 +14301,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByU_C_C(long userId, long classNameId, long classPK)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_U_C_C;
@@ -14150,6 +14404,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByU_C_S(long userId, long classNameId, int status)
 		throws SystemException {
 		return findByU_C_S(userId, classNameId, status, QueryUtil.ALL_POS,
@@ -14171,6 +14426,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByU_C_S(long userId, long classNameId,
 		int status, int start, int end) throws SystemException {
 		return findByU_C_S(userId, classNameId, status, start, end, null);
@@ -14192,6 +14448,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByU_C_S(long userId, long classNameId,
 		int status, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -14315,6 +14572,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByU_C_S_First(long userId, long classNameId,
 		int status, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -14353,6 +14611,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the first matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByU_C_S_First(long userId, long classNameId,
 		int status, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -14377,6 +14636,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByU_C_S_Last(long userId, long classNameId,
 		int status, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -14415,6 +14675,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the last matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByU_C_S_Last(long userId, long classNameId,
 		int status, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -14442,6 +14703,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage[] findByU_C_S_PrevAndNext(long messageId, long userId,
 		long classNameId, int status, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -14598,6 +14860,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByU_C_S(long userId, long[] classNameIds,
 		int status) throws SystemException {
 		return findByU_C_S(userId, classNameIds, status, QueryUtil.ALL_POS,
@@ -14619,6 +14882,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByU_C_S(long userId, long[] classNameIds,
 		int status, int start, int end) throws SystemException {
 		return findByU_C_S(userId, classNameIds, status, start, end, null);
@@ -14640,6 +14904,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByU_C_S(long userId, long[] classNameIds,
 		int status, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -14793,6 +15058,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param status the status
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByU_C_S(long userId, long classNameId, int status)
 		throws SystemException {
 		for (MBMessage mbMessage : findByU_C_S(userId, classNameId, status,
@@ -14810,6 +15076,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByU_C_S(long userId, long classNameId, int status)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_U_C_S;
@@ -14873,6 +15140,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByU_C_S(long userId, long[] classNameIds, int status)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -15010,6 +15278,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByC_C_S(long classNameId, long classPK,
 		int status) throws SystemException {
 		return findByC_C_S(classNameId, classPK, status, QueryUtil.ALL_POS,
@@ -15031,6 +15300,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByC_C_S(long classNameId, long classPK,
 		int status, int start, int end) throws SystemException {
 		return findByC_C_S(classNameId, classPK, status, start, end, null);
@@ -15052,6 +15322,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByC_C_S(long classNameId, long classPK,
 		int status, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -15175,6 +15446,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByC_C_S_First(long classNameId, long classPK,
 		int status, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -15213,6 +15485,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the first matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByC_C_S_First(long classNameId, long classPK,
 		int status, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -15237,6 +15510,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByC_C_S_Last(long classNameId, long classPK,
 		int status, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -15275,6 +15549,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the last matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByC_C_S_Last(long classNameId, long classPK,
 		int status, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -15302,6 +15577,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage[] findByC_C_S_PrevAndNext(long messageId,
 		long classNameId, long classPK, int status,
 		OrderByComparator orderByComparator)
@@ -15454,6 +15730,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param status the status
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByC_C_S(long classNameId, long classPK, int status)
 		throws SystemException {
 		for (MBMessage mbMessage : findByC_C_S(classNameId, classPK, status,
@@ -15471,6 +15748,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByC_C_S(long classNameId, long classPK, int status)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_C_S;
@@ -15576,6 +15854,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByG_U_C_S(long groupId, long userId,
 		long categoryId, int status) throws SystemException {
 		return findByG_U_C_S(groupId, userId, categoryId, status,
@@ -15598,6 +15877,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByG_U_C_S(long groupId, long userId,
 		long categoryId, int status, int start, int end)
 		throws SystemException {
@@ -15622,6 +15902,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByG_U_C_S(long groupId, long userId,
 		long categoryId, int status, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -15751,6 +16032,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByG_U_C_S_First(long groupId, long userId,
 		long categoryId, int status, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -15793,6 +16075,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the first matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByG_U_C_S_First(long groupId, long userId,
 		long categoryId, int status, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -15818,6 +16101,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByG_U_C_S_Last(long groupId, long userId,
 		long categoryId, int status, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -15860,6 +16144,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the last matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByG_U_C_S_Last(long groupId, long userId,
 		long categoryId, int status, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -15888,6 +16173,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage[] findByG_U_C_S_PrevAndNext(long messageId, long groupId,
 		long userId, long categoryId, int status,
 		OrderByComparator orderByComparator)
@@ -16046,6 +16332,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> filterFindByG_U_C_S(long groupId, long userId,
 		long categoryId, int status) throws SystemException {
 		return filterFindByG_U_C_S(groupId, userId, categoryId, status,
@@ -16068,6 +16355,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> filterFindByG_U_C_S(long groupId, long userId,
 		long categoryId, int status, int start, int end)
 		throws SystemException {
@@ -16092,6 +16380,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> filterFindByG_U_C_S(long groupId, long userId,
 		long categoryId, int status, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -16199,6 +16488,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage[] filterFindByG_U_C_S_PrevAndNext(long messageId,
 		long groupId, long userId, long categoryId, int status,
 		OrderByComparator orderByComparator)
@@ -16398,6 +16688,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> filterFindByG_U_C_S(long groupId, long userId,
 		long[] categoryIds, int status) throws SystemException {
 		return filterFindByG_U_C_S(groupId, userId, categoryIds, status,
@@ -16420,6 +16711,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> filterFindByG_U_C_S(long groupId, long userId,
 		long[] categoryIds, int status, int start, int end)
 		throws SystemException {
@@ -16444,6 +16736,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> filterFindByG_U_C_S(long groupId, long userId,
 		long[] categoryIds, int status, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -16584,6 +16877,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByG_U_C_S(long groupId, long userId,
 		long[] categoryIds, int status) throws SystemException {
 		return findByG_U_C_S(groupId, userId, categoryIds, status,
@@ -16606,6 +16900,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByG_U_C_S(long groupId, long userId,
 		long[] categoryIds, int status, int start, int end)
 		throws SystemException {
@@ -16630,6 +16925,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByG_U_C_S(long groupId, long userId,
 		long[] categoryIds, int status, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -16795,6 +17091,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param status the status
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByG_U_C_S(long groupId, long userId, long categoryId,
 		int status) throws SystemException {
 		for (MBMessage mbMessage : findByG_U_C_S(groupId, userId, categoryId,
@@ -16813,6 +17110,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_U_C_S(long groupId, long userId, long categoryId,
 		int status) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_U_C_S;
@@ -16881,6 +17179,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_U_C_S(long groupId, long userId, long[] categoryIds,
 		int status) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -16991,6 +17290,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByG_U_C_S(long groupId, long userId, long categoryId,
 		int status) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -17055,6 +17355,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByG_U_C_S(long groupId, long userId,
 		long[] categoryIds, int status) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -17202,6 +17503,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByG_C_T_A(long groupId, long categoryId,
 		long threadId, boolean answer) throws SystemException {
 		return findByG_C_T_A(groupId, categoryId, threadId, answer,
@@ -17224,6 +17526,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByG_C_T_A(long groupId, long categoryId,
 		long threadId, boolean answer, int start, int end)
 		throws SystemException {
@@ -17248,6 +17551,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByG_C_T_A(long groupId, long categoryId,
 		long threadId, boolean answer, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -17377,6 +17681,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByG_C_T_A_First(long groupId, long categoryId,
 		long threadId, boolean answer, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -17419,6 +17724,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the first matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByG_C_T_A_First(long groupId, long categoryId,
 		long threadId, boolean answer, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -17444,6 +17750,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByG_C_T_A_Last(long groupId, long categoryId,
 		long threadId, boolean answer, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -17486,6 +17793,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the last matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByG_C_T_A_Last(long groupId, long categoryId,
 		long threadId, boolean answer, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -17514,6 +17822,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage[] findByG_C_T_A_PrevAndNext(long messageId, long groupId,
 		long categoryId, long threadId, boolean answer,
 		OrderByComparator orderByComparator)
@@ -17672,6 +17981,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> filterFindByG_C_T_A(long groupId, long categoryId,
 		long threadId, boolean answer) throws SystemException {
 		return filterFindByG_C_T_A(groupId, categoryId, threadId, answer,
@@ -17694,6 +18004,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> filterFindByG_C_T_A(long groupId, long categoryId,
 		long threadId, boolean answer, int start, int end)
 		throws SystemException {
@@ -17718,6 +18029,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> filterFindByG_C_T_A(long groupId, long categoryId,
 		long threadId, boolean answer, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -17825,6 +18137,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage[] filterFindByG_C_T_A_PrevAndNext(long messageId,
 		long groupId, long categoryId, long threadId, boolean answer,
 		OrderByComparator orderByComparator)
@@ -18024,6 +18337,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param answer the answer
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByG_C_T_A(long groupId, long categoryId, long threadId,
 		boolean answer) throws SystemException {
 		for (MBMessage mbMessage : findByG_C_T_A(groupId, categoryId, threadId,
@@ -18042,6 +18356,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_C_T_A(long groupId, long categoryId, long threadId,
 		boolean answer) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_C_T_A;
@@ -18110,6 +18425,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByG_C_T_A(long groupId, long categoryId,
 		long threadId, boolean answer) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -18209,6 +18525,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByG_C_T_S(long groupId, long categoryId,
 		long threadId, int status) throws SystemException {
 		return findByG_C_T_S(groupId, categoryId, threadId, status,
@@ -18231,6 +18548,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByG_C_T_S(long groupId, long categoryId,
 		long threadId, int status, int start, int end)
 		throws SystemException {
@@ -18255,6 +18573,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByG_C_T_S(long groupId, long categoryId,
 		long threadId, int status, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -18384,6 +18703,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByG_C_T_S_First(long groupId, long categoryId,
 		long threadId, int status, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -18426,6 +18746,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the first matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByG_C_T_S_First(long groupId, long categoryId,
 		long threadId, int status, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -18451,6 +18772,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByG_C_T_S_Last(long groupId, long categoryId,
 		long threadId, int status, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -18493,6 +18815,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the last matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByG_C_T_S_Last(long groupId, long categoryId,
 		long threadId, int status, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -18521,6 +18844,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage[] findByG_C_T_S_PrevAndNext(long messageId, long groupId,
 		long categoryId, long threadId, int status,
 		OrderByComparator orderByComparator)
@@ -18679,6 +19003,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> filterFindByG_C_T_S(long groupId, long categoryId,
 		long threadId, int status) throws SystemException {
 		return filterFindByG_C_T_S(groupId, categoryId, threadId, status,
@@ -18701,6 +19026,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> filterFindByG_C_T_S(long groupId, long categoryId,
 		long threadId, int status, int start, int end)
 		throws SystemException {
@@ -18725,6 +19051,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> filterFindByG_C_T_S(long groupId, long categoryId,
 		long threadId, int status, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -18832,6 +19159,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage[] filterFindByG_C_T_S_PrevAndNext(long messageId,
 		long groupId, long categoryId, long threadId, int status,
 		OrderByComparator orderByComparator)
@@ -19031,6 +19359,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param status the status
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByG_C_T_S(long groupId, long categoryId, long threadId,
 		int status) throws SystemException {
 		for (MBMessage mbMessage : findByG_C_T_S(groupId, categoryId, threadId,
@@ -19049,6 +19378,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_C_T_S(long groupId, long categoryId, long threadId,
 		int status) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_C_T_S;
@@ -19117,6 +19447,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByG_C_T_S(long groupId, long categoryId,
 		long threadId, int status) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -19216,6 +19547,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByU_C_C_S(long userId, long classNameId,
 		long classPK, int status) throws SystemException {
 		return findByU_C_C_S(userId, classNameId, classPK, status,
@@ -19238,6 +19570,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByU_C_C_S(long userId, long classNameId,
 		long classPK, int status, int start, int end) throws SystemException {
 		return findByU_C_C_S(userId, classNameId, classPK, status, start, end,
@@ -19261,6 +19594,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findByU_C_C_S(long userId, long classNameId,
 		long classPK, int status, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -19390,6 +19724,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByU_C_C_S_First(long userId, long classNameId,
 		long classPK, int status, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -19432,6 +19767,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the first matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByU_C_C_S_First(long userId, long classNameId,
 		long classPK, int status, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -19457,6 +19793,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByU_C_C_S_Last(long userId, long classNameId,
 		long classPK, int status, OrderByComparator orderByComparator)
 		throws NoSuchMessageException, SystemException {
@@ -19499,6 +19836,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the last matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByU_C_C_S_Last(long userId, long classNameId,
 		long classPK, int status, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -19527,6 +19865,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage[] findByU_C_C_S_PrevAndNext(long messageId, long userId,
 		long classNameId, long classPK, int status,
 		OrderByComparator orderByComparator)
@@ -19684,6 +20023,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param status the status
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByU_C_C_S(long userId, long classNameId, long classPK,
 		int status) throws SystemException {
 		for (MBMessage mbMessage : findByU_C_C_S(userId, classNameId, classPK,
@@ -19702,6 +20042,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByU_C_C_S(long userId, long classNameId, long classPK,
 		int status) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_U_C_C_S;
@@ -19770,6 +20111,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 *
 	 * @param mbMessage the message-boards message
 	 */
+	@Override
 	public void cacheResult(MBMessage mbMessage) {
 		EntityCacheUtil.putResult(MBMessageModelImpl.ENTITY_CACHE_ENABLED,
 			MBMessageImpl.class, mbMessage.getPrimaryKey(), mbMessage);
@@ -19786,6 +20128,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 *
 	 * @param mbMessages the message-boards messages
 	 */
+	@Override
 	public void cacheResult(List<MBMessage> mbMessages) {
 		for (MBMessage mbMessage : mbMessages) {
 			if (EntityCacheUtil.getResult(
@@ -19904,6 +20247,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param messageId the primary key for the new message-boards message
 	 * @return the new message-boards message
 	 */
+	@Override
 	public MBMessage create(long messageId) {
 		MBMessage mbMessage = new MBMessageImpl();
 
@@ -19925,6 +20269,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage remove(long messageId)
 		throws NoSuchMessageException, SystemException {
 		return remove((Serializable)messageId);
@@ -20730,6 +21075,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByPrimaryKey(long messageId)
 		throws NoSuchMessageException, SystemException {
 		return findByPrimaryKey((Serializable)messageId);
@@ -20790,6 +21136,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the message-boards message, or <code>null</code> if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByPrimaryKey(long messageId)
 		throws SystemException {
 		return fetchByPrimaryKey((Serializable)messageId);
@@ -20801,6 +21148,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -20817,6 +21165,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the range of message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
@@ -20835,6 +21184,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the ordered range of message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBMessage> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -20920,6 +21270,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (MBMessage mbMessage : findAll()) {
 			remove(mbMessage);
@@ -20932,6 +21283,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the number of message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -21035,6 +21387,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		};
 
 	private static CacheModel<MBMessage> _nullMBMessageCacheModel = new CacheModel<MBMessage>() {
+			@Override
 			public MBMessage toEntityModel() {
 				return _nullMBMessage;
 			}

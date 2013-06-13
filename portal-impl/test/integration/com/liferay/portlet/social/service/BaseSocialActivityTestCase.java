@@ -24,6 +24,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.UserTestUtil;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
+import com.liferay.portlet.social.util.SocialActivityHierarchyEntryThreadLocal;
 import com.liferay.portlet.social.util.SocialActivityTestUtil;
 import com.liferay.portlet.social.util.SocialConfigurationUtil;
 
@@ -60,12 +61,16 @@ public class BaseSocialActivityTestCase {
 		_actorUser = UserTestUtil.addUser("actor", _group.getGroupId());
 		_creatorUser = UserTestUtil.addUser("creator", _group.getGroupId());
 
-		_assetEntry = SocialActivityTestUtil.addAsset(
+		_assetEntry = SocialActivityTestUtil.addAssetEntry(
 			_creatorUser, _group, null);
+
+		SocialActivityHierarchyEntryThreadLocal.clear();
 	}
 
 	@After
 	public void tearDown() throws Exception {
+		SocialActivityHierarchyEntryThreadLocal.clear();
+
 		if (_actorUser != null) {
 			UserLocalServiceUtil.deleteUser(_actorUser);
 

@@ -98,7 +98,7 @@ if (pluginType.equals(Plugin.TYPE_PORTLET)) {
 					%>
 
 					<c:if test="<%= rolesCount > maxNumberOfRolesChecked %>">
-						<div class="portlet-msg-alert">
+						<div class="alert alert-block">
 							<%= LanguageUtil.format(pageContext, "the-portal-has-more-roles-than-the-maximum-that-can-be-checked-x", maxNumberOfRolesChecked) %>
 						</div>
 					</c:if>
@@ -131,7 +131,7 @@ if (pluginType.equals(Plugin.TYPE_PORTLET)) {
 									>
 										<liferay-portlet:renderURL portletName="<%= PortletKeys.ROLES_ADMIN %>" var="editURL">
 											<portlet:param name="struts_action" value="/roles_admin/edit_role_permissions" />
-											<portlet:param name="cmd" value="edit" />
+											<portlet:param name="<%= Constants.CMD %>" value="edit" />
 											<portlet:param name="tabs1" value="roles" />
 											<portlet:param name="roleId" value="<%= String.valueOf(role.getRoleId()) %>" />
 											<portlet:param name="portletResource" value="<%= portlet.getPortletId() %>" />
@@ -174,7 +174,7 @@ if (pluginType.equals(Plugin.TYPE_PORTLET)) {
 									>
 										<liferay-portlet:renderURL portletName="<%= PortletKeys.ROLES_ADMIN %>" var="editURL">
 											<portlet:param name="struts_action" value="/roles_admin/edit_role_permissions" />
-											<portlet:param name="cmd" value="edit" />
+											<portlet:param name="<%= Constants.CMD %>" value="edit" />
 											<portlet:param name="tabs1" value="roles" />
 											<portlet:param name="roleId" value="<%= String.valueOf(role.getRoleId()) %>" />
 											<portlet:param name="portletResource" value="<%= portlet.getPortletId() %>" />

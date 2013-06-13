@@ -104,6 +104,7 @@ public class TranslatorUtil {
 			_map = map;
 		}
 
+		@Override
 		public int compare(Object obj1, Object obj2) {
 			String value1 = _map.get(obj1);
 			String value2 = _map.get(obj2);

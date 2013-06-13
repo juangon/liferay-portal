@@ -103,6 +103,7 @@ public class DLFileEntryCacheModel implements CacheModel<DLFileEntry>,
 		return sb.toString();
 	}
 
+	@Override
 	public DLFileEntry toEntityModel() {
 		DLFileEntryImpl dlFileEntryImpl = new DLFileEntryImpl();
 
@@ -217,6 +218,7 @@ public class DLFileEntryCacheModel implements CacheModel<DLFileEntry>,
 		return dlFileEntryImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		fileEntryId = objectInput.readLong();
@@ -249,6 +251,7 @@ public class DLFileEntryCacheModel implements CacheModel<DLFileEntry>,
 		manualCheckInRequired = objectInput.readBoolean();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

@@ -61,6 +61,7 @@ public class TicketCacheModel implements CacheModel<Ticket>, Externalizable {
 		return sb.toString();
 	}
 
+	@Override
 	public Ticket toEntityModel() {
 		TicketImpl ticketImpl = new TicketImpl();
 
@@ -105,6 +106,7 @@ public class TicketCacheModel implements CacheModel<Ticket>, Externalizable {
 		return ticketImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		ticketId = objectInput.readLong();
 		companyId = objectInput.readLong();
@@ -117,6 +119,7 @@ public class TicketCacheModel implements CacheModel<Ticket>, Externalizable {
 		expirationDate = objectInput.readLong();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(ticketId);

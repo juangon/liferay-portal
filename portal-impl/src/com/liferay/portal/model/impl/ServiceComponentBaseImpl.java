@@ -37,6 +37,7 @@ public abstract class ServiceComponentBaseImpl extends ServiceComponentModelImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a service component model instance should use the {@link ServiceComponent} interface instead.
 	 */
+	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
 			ServiceComponentLocalServiceUtil.addServiceComponent(this);

@@ -36,10 +36,12 @@ import java.util.List;
 public class FolderAtomCollectionAdapter
 	extends BaseAtomCollectionAdapter<Folder> {
 
+	@Override
 	public String getCollectionName() {
 		return _COLLECTION_NAME;
 	}
 
+	@Override
 	public List<String> getEntryAuthors(Folder folder) {
 		List<String> authors = new ArrayList<String>();
 
@@ -48,6 +50,7 @@ public class FolderAtomCollectionAdapter
 		return authors;
 	}
 
+	@Override
 	public AtomEntryContent getEntryContent(
 		Folder folder, AtomRequestContext atomRequestContext) {
 
@@ -64,22 +67,27 @@ public class FolderAtomCollectionAdapter
 		return atomEntryContent;
 	}
 
+	@Override
 	public String getEntryId(Folder folder) {
 		return String.valueOf(folder.getPrimaryKey());
 	}
 
+	@Override
 	public String getEntrySummary(Folder folder) {
 		return folder.getDescription();
 	}
 
+	@Override
 	public String getEntryTitle(Folder folder) {
 		return folder.getName();
 	}
 
+	@Override
 	public Date getEntryUpdated(Folder folder) {
 		return folder.getModifiedDate();
 	}
 
+	@Override
 	public String getFeedTitle(AtomRequestContext atomRequestContext) {
 		return AtomUtil.createFeedTitleFromPortletName(
 			atomRequestContext, PortletKeys.DOCUMENT_LIBRARY) + " folders";

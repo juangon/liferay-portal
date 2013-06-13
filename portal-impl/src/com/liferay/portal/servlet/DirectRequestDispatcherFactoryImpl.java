@@ -37,6 +37,7 @@ import javax.servlet.ServletRequest;
 public class DirectRequestDispatcherFactoryImpl
 	implements DirectRequestDispatcherFactory {
 
+	@Override
 	public RequestDispatcher getRequestDispatcher(
 		ServletContext servletContext, String path) {
 
@@ -47,19 +48,15 @@ public class DirectRequestDispatcherFactoryImpl
 			servletContext, requestDispatcher);
 	}
 
+	@Override
 	public RequestDispatcher getRequestDispatcher(
 		ServletRequest servletRequest, String path) {
-
-		if (!PropsValues.DIRECT_SERVLET_CONTEXT_ENABLED) {
-			return servletRequest.getRequestDispatcher(path);
-		}
 
 		ServletContext servletContext =
 			(ServletContext)servletRequest.getAttribute(WebKeys.CTX);
 
 		if (servletContext == null) {
-			throw new IllegalStateException(
-				"Cannot find servlet context in request attributes");
+			return servletRequest.getRequestDispatcher(path);
 		}
 
 		return getRequestDispatcher(servletContext, path);
@@ -127,6 +124,7 @@ public class DirectRequestDispatcherFactoryImpl
 
 	private static class NoPACL implements PACL {
 
+		@Override
 		public RequestDispatcher getRequestDispatcher(
 			ServletContext servletContext,
 			RequestDispatcher requestDispatcher) {

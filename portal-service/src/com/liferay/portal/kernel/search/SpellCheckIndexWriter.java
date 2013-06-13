@@ -19,6 +19,9 @@ package com.liferay.portal.kernel.search;
  */
 public interface SpellCheckIndexWriter {
 
+	public void clearDictionaryIndexes(SearchContext searchContext)
+		throws SearchException;
+
 	public void indexDictionaries(SearchContext searchContext)
 		throws SearchException;
 

@@ -55,7 +55,7 @@ public class VerifyUUID extends VerifyProcess {
 		}
 	}
 
-	public static void verifyModel(
+	protected static void verifyModel(
 			String modelName, String pkColumnName, long pk)
 		throws Exception {
 
@@ -64,8 +64,8 @@ public class VerifyUUID extends VerifyProcess {
 		DB db = DBFactoryUtil.getDB();
 
 		db.runSQL(
-			"update " + modelName + " set uuid_ = '" + uuid +
-				"' where " + pkColumnName + " = " + pk);
+			"update " + modelName + " set uuid_ = '" + uuid + "' where " +
+				pkColumnName + " = " + pk);
 	}
 
 	@Override
@@ -77,10 +77,13 @@ public class VerifyUUID extends VerifyProcess {
 
 	private static final String[][] _MODELS = new String[][] {
 		new String[] {
-			"DLFileRank", "fileRankId"
+			"Address", "addressId"
 		},
 		new String[] {
 			"DLFileVersion", "fileVersionId"
+		},
+		new String[] {
+			"EmailAddress", "emailAddressId"
 		},
 		new String[] {
 			"Group_", "groupId"
@@ -119,6 +122,9 @@ public class VerifyUUID extends VerifyProcess {
 			"PasswordPolicy", "passwordPolicyId"
 		},
 		new String[] {
+			"Phone", "phoneId"
+		},
+		new String[] {
 			"PollsVote", "voteId"
 		},
 		new String[] {
@@ -126,6 +132,9 @@ public class VerifyUUID extends VerifyProcess {
 		},
 		new String[] {
 			"UserGroup", "userGroupId"
+		},
+		new String[] {
+			"Website", "websiteId"
 		},
 		new String[] {
 			"WikiPageResource", "resourcePrimKey"

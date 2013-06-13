@@ -19,13 +19,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>PORTLET_TITLE</td>
+	<td>//h1[@class='portlet-title']/span[@class='portlet-title-text']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>ADD_ENTRY_BUTTON</td>
-	<td>//input[@value='Add Blog Entry']</td>
+	<td>//button[@id='_33_addEntryButton']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>SUCCESS_MESSAGE</td>
-	<td>//div[@class='portlet-msg-success']</td>
+	<td>//div[@class='alert alert-success']</td>
 	<td></td>
 </tr>
 <tr>

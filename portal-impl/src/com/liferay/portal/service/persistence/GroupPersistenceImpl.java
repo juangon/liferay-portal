@@ -117,6 +117,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> findByUuid(String uuid) throws SystemException {
 		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -134,6 +135,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the range of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> findByUuid(String uuid, int start, int end)
 		throws SystemException {
 		return findByUuid(uuid, start, end, null);
@@ -153,6 +155,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the ordered range of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> findByUuid(String uuid, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -273,6 +276,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group findByUuid_First(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchGroupException, SystemException {
@@ -302,6 +306,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the first matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group fetchByUuid_First(String uuid,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<Group> list = findByUuid(uuid, 0, 1, orderByComparator);
@@ -322,6 +327,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group findByUuid_Last(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchGroupException, SystemException {
@@ -351,6 +357,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the last matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group fetchByUuid_Last(String uuid,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByUuid(uuid);
@@ -374,6 +381,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @throws com.liferay.portal.NoSuchGroupException if a group with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group[] findByUuid_PrevAndNext(long groupId, String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchGroupException, SystemException {
@@ -528,6 +536,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param uuid the uuid
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByUuid(String uuid) throws SystemException {
 		for (Group group : findByUuid(uuid, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null)) {
@@ -542,6 +551,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the number of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUuid(String uuid) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID;
 
@@ -624,6 +634,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group findByUUID_G(String uuid, long groupId)
 		throws NoSuchGroupException, SystemException {
 		Group group = fetchByUUID_G(uuid, groupId);
@@ -659,6 +670,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		return fetchByUUID_G(uuid, groupId, true);
@@ -673,6 +685,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group fetchByUUID_G(String uuid, long groupId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, groupId };
@@ -779,6 +792,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the group that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group removeByUUID_G(String uuid, long groupId)
 		throws NoSuchGroupException, SystemException {
 		Group group = findByUUID_G(uuid, groupId);
@@ -794,6 +808,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the number of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID_G;
@@ -892,6 +907,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> findByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		return findByUuid_C(uuid, companyId, QueryUtil.ALL_POS,
@@ -912,6 +928,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the range of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> findByUuid_C(String uuid, long companyId, int start,
 		int end) throws SystemException {
 		return findByUuid_C(uuid, companyId, start, end, null);
@@ -932,6 +949,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the ordered range of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> findByUuid_C(String uuid, long companyId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -1062,6 +1080,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group findByUuid_C_First(String uuid, long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchGroupException, SystemException {
@@ -1095,6 +1114,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the first matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group fetchByUuid_C_First(String uuid, long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<Group> list = findByUuid_C(uuid, companyId, 0, 1, orderByComparator);
@@ -1116,6 +1136,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group findByUuid_C_Last(String uuid, long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchGroupException, SystemException {
@@ -1149,6 +1170,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the last matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group fetchByUuid_C_Last(String uuid, long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByUuid_C(uuid, companyId);
@@ -1174,6 +1196,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @throws com.liferay.portal.NoSuchGroupException if a group with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group[] findByUuid_C_PrevAndNext(long groupId, String uuid,
 		long companyId, OrderByComparator orderByComparator)
 		throws NoSuchGroupException, SystemException {
@@ -1334,6 +1357,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param companyId the company ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		for (Group group : findByUuid_C(uuid, companyId, QueryUtil.ALL_POS,
@@ -1350,6 +1374,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the number of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID_C;
@@ -1447,6 +1472,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> findByCompanyId(long companyId)
 		throws SystemException {
 		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -1466,6 +1492,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the range of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> findByCompanyId(long companyId, int start, int end)
 		throws SystemException {
 		return findByCompanyId(companyId, start, end, null);
@@ -1485,6 +1512,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the ordered range of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -1591,6 +1619,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group findByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchGroupException, SystemException {
@@ -1620,6 +1649,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the first matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group fetchByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<Group> list = findByCompanyId(companyId, 0, 1, orderByComparator);
@@ -1640,6 +1670,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group findByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchGroupException, SystemException {
@@ -1669,6 +1700,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the last matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group fetchByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByCompanyId(companyId);
@@ -1693,6 +1725,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @throws com.liferay.portal.NoSuchGroupException if a group with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group[] findByCompanyId_PrevAndNext(long groupId, long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchGroupException, SystemException {
@@ -1833,6 +1866,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param companyId the company ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (Group group : findByCompanyId(companyId, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null)) {
@@ -1847,6 +1881,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the number of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByCompanyId(long companyId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMPANYID;
 
@@ -1911,6 +1946,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group findByLiveGroupId(long liveGroupId)
 		throws NoSuchGroupException, SystemException {
 		Group group = fetchByLiveGroupId(liveGroupId);
@@ -1942,6 +1978,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group fetchByLiveGroupId(long liveGroupId) throws SystemException {
 		return fetchByLiveGroupId(liveGroupId, true);
 	}
@@ -1954,6 +1991,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group fetchByLiveGroupId(long liveGroupId, boolean retrieveFromCache)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { liveGroupId };
@@ -2045,6 +2083,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the group that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group removeByLiveGroupId(long liveGroupId)
 		throws NoSuchGroupException, SystemException {
 		Group group = findByLiveGroupId(liveGroupId);
@@ -2059,6 +2098,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the number of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByLiveGroupId(long liveGroupId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_LIVEGROUPID;
 
@@ -2134,6 +2174,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> findByC_P(long companyId, long parentGroupId)
 		throws SystemException {
 		return findByC_P(companyId, parentGroupId, QueryUtil.ALL_POS,
@@ -2154,6 +2195,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the range of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> findByC_P(long companyId, long parentGroupId, int start,
 		int end) throws SystemException {
 		return findByC_P(companyId, parentGroupId, start, end, null);
@@ -2174,6 +2216,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the ordered range of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> findByC_P(long companyId, long parentGroupId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -2290,6 +2333,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group findByC_P_First(long companyId, long parentGroupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchGroupException, SystemException {
@@ -2324,6 +2368,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the first matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group fetchByC_P_First(long companyId, long parentGroupId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<Group> list = findByC_P(companyId, parentGroupId, 0, 1,
@@ -2346,6 +2391,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group findByC_P_Last(long companyId, long parentGroupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchGroupException, SystemException {
@@ -2380,6 +2426,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the last matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group fetchByC_P_Last(long companyId, long parentGroupId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByC_P(companyId, parentGroupId);
@@ -2405,6 +2452,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @throws com.liferay.portal.NoSuchGroupException if a group with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group[] findByC_P_PrevAndNext(long groupId, long companyId,
 		long parentGroupId, OrderByComparator orderByComparator)
 		throws NoSuchGroupException, SystemException {
@@ -2551,6 +2599,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param parentGroupId the parent group ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByC_P(long companyId, long parentGroupId)
 		throws SystemException {
 		for (Group group : findByC_P(companyId, parentGroupId,
@@ -2567,6 +2616,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the number of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByC_P(long companyId, long parentGroupId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_P;
@@ -2639,6 +2689,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group findByC_N(long companyId, String name)
 		throws NoSuchGroupException, SystemException {
 		Group group = fetchByC_N(companyId, name);
@@ -2674,6 +2725,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group fetchByC_N(long companyId, String name)
 		throws SystemException {
 		return fetchByC_N(companyId, name, true);
@@ -2688,6 +2740,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group fetchByC_N(long companyId, String name,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, name };
@@ -2794,6 +2847,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the group that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group removeByC_N(long companyId, String name)
 		throws NoSuchGroupException, SystemException {
 		Group group = findByC_N(companyId, name);
@@ -2809,6 +2863,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the number of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByC_N(long companyId, String name)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_N;
@@ -2897,6 +2952,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group findByC_F(long companyId, String friendlyURL)
 		throws NoSuchGroupException, SystemException {
 		Group group = fetchByC_F(companyId, friendlyURL);
@@ -2932,6 +2988,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group fetchByC_F(long companyId, String friendlyURL)
 		throws SystemException {
 		return fetchByC_F(companyId, friendlyURL, true);
@@ -2946,6 +3003,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group fetchByC_F(long companyId, String friendlyURL,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, friendlyURL };
@@ -3052,6 +3110,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the group that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group removeByC_F(long companyId, String friendlyURL)
 		throws NoSuchGroupException, SystemException {
 		Group group = findByC_F(companyId, friendlyURL);
@@ -3067,6 +3126,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the number of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByC_F(long companyId, String friendlyURL)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_F;
@@ -3164,6 +3224,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> findByC_S(long companyId, boolean site)
 		throws SystemException {
 		return findByC_S(companyId, site, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -3184,6 +3245,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the range of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> findByC_S(long companyId, boolean site, int start,
 		int end) throws SystemException {
 		return findByC_S(companyId, site, start, end, null);
@@ -3204,6 +3266,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the ordered range of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> findByC_S(long companyId, boolean site, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -3320,6 +3383,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group findByC_S_First(long companyId, boolean site,
 		OrderByComparator orderByComparator)
 		throws NoSuchGroupException, SystemException {
@@ -3353,6 +3417,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the first matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group fetchByC_S_First(long companyId, boolean site,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<Group> list = findByC_S(companyId, site, 0, 1, orderByComparator);
@@ -3374,6 +3439,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group findByC_S_Last(long companyId, boolean site,
 		OrderByComparator orderByComparator)
 		throws NoSuchGroupException, SystemException {
@@ -3407,6 +3473,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the last matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group fetchByC_S_Last(long companyId, boolean site,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByC_S(companyId, site);
@@ -3432,6 +3499,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @throws com.liferay.portal.NoSuchGroupException if a group with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group[] findByC_S_PrevAndNext(long groupId, long companyId,
 		boolean site, OrderByComparator orderByComparator)
 		throws NoSuchGroupException, SystemException {
@@ -3578,6 +3646,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param site the site
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByC_S(long companyId, boolean site)
 		throws SystemException {
 		for (Group group : findByC_S(companyId, site, QueryUtil.ALL_POS,
@@ -3594,6 +3663,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the number of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByC_S(long companyId, boolean site)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_S;
@@ -3675,6 +3745,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> findByT_A(int type, boolean active)
 		throws SystemException {
 		return findByT_A(type, active, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -3695,6 +3766,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the range of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> findByT_A(int type, boolean active, int start, int end)
 		throws SystemException {
 		return findByT_A(type, active, start, end, null);
@@ -3715,6 +3787,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the ordered range of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> findByT_A(int type, boolean active, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -3830,6 +3903,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group findByT_A_First(int type, boolean active,
 		OrderByComparator orderByComparator)
 		throws NoSuchGroupException, SystemException {
@@ -3863,6 +3937,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the first matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group fetchByT_A_First(int type, boolean active,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<Group> list = findByT_A(type, active, 0, 1, orderByComparator);
@@ -3884,6 +3959,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group findByT_A_Last(int type, boolean active,
 		OrderByComparator orderByComparator)
 		throws NoSuchGroupException, SystemException {
@@ -3917,6 +3993,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the last matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group fetchByT_A_Last(int type, boolean active,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByT_A(type, active);
@@ -3942,6 +4019,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @throws com.liferay.portal.NoSuchGroupException if a group with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group[] findByT_A_PrevAndNext(long groupId, int type,
 		boolean active, OrderByComparator orderByComparator)
 		throws NoSuchGroupException, SystemException {
@@ -4088,6 +4166,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param active the active
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByT_A(int type, boolean active) throws SystemException {
 		for (Group group : findByT_A(type, active, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null)) {
@@ -4103,6 +4182,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the number of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByT_A(int type, boolean active) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_T_A;
 
@@ -4180,6 +4260,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group findByC_C_C(long companyId, long classNameId, long classPK)
 		throws NoSuchGroupException, SystemException {
 		Group group = fetchByC_C_C(companyId, classNameId, classPK);
@@ -4219,6 +4300,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group fetchByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
 		return fetchByC_C_C(companyId, classNameId, classPK, true);
@@ -4234,6 +4316,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group fetchByC_C_C(long companyId, long classNameId, long classPK,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, classNameId, classPK };
@@ -4332,6 +4415,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the group that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group removeByC_C_C(long companyId, long classNameId, long classPK)
 		throws NoSuchGroupException, SystemException {
 		Group group = findByC_C_C(companyId, classNameId, classPK);
@@ -4348,6 +4432,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the number of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_C_C;
@@ -4440,6 +4525,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> findByC_C_P(long companyId, long classNameId,
 		long parentGroupId) throws SystemException {
 		return findByC_C_P(companyId, classNameId, parentGroupId,
@@ -4461,6 +4547,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the range of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> findByC_C_P(long companyId, long classNameId,
 		long parentGroupId, int start, int end) throws SystemException {
 		return findByC_C_P(companyId, classNameId, parentGroupId, start, end,
@@ -4483,6 +4570,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the ordered range of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> findByC_C_P(long companyId, long classNameId,
 		long parentGroupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -4606,6 +4694,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group findByC_C_P_First(long companyId, long classNameId,
 		long parentGroupId, OrderByComparator orderByComparator)
 		throws NoSuchGroupException, SystemException {
@@ -4644,6 +4733,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the first matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group fetchByC_C_P_First(long companyId, long classNameId,
 		long parentGroupId, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -4668,6 +4758,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group findByC_C_P_Last(long companyId, long classNameId,
 		long parentGroupId, OrderByComparator orderByComparator)
 		throws NoSuchGroupException, SystemException {
@@ -4706,6 +4797,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the last matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group fetchByC_C_P_Last(long companyId, long classNameId,
 		long parentGroupId, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -4733,6 +4825,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @throws com.liferay.portal.NoSuchGroupException if a group with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group[] findByC_C_P_PrevAndNext(long groupId, long companyId,
 		long classNameId, long parentGroupId,
 		OrderByComparator orderByComparator)
@@ -4885,6 +4978,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param parentGroupId the parent group ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByC_C_P(long companyId, long classNameId,
 		long parentGroupId) throws SystemException {
 		for (Group group : findByC_C_P(companyId, classNameId, parentGroupId,
@@ -4902,6 +4996,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the number of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByC_C_P(long companyId, long classNameId, long parentGroupId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_C_P;
@@ -4997,6 +5092,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> findByC_P_S(long companyId, long parentGroupId,
 		boolean site) throws SystemException {
 		return findByC_P_S(companyId, parentGroupId, site, QueryUtil.ALL_POS,
@@ -5018,6 +5114,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the range of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> findByC_P_S(long companyId, long parentGroupId,
 		boolean site, int start, int end) throws SystemException {
 		return findByC_P_S(companyId, parentGroupId, site, start, end, null);
@@ -5039,6 +5136,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the ordered range of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> findByC_P_S(long companyId, long parentGroupId,
 		boolean site, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -5162,6 +5260,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group findByC_P_S_First(long companyId, long parentGroupId,
 		boolean site, OrderByComparator orderByComparator)
 		throws NoSuchGroupException, SystemException {
@@ -5200,6 +5299,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the first matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group fetchByC_P_S_First(long companyId, long parentGroupId,
 		boolean site, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -5224,6 +5324,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group findByC_P_S_Last(long companyId, long parentGroupId,
 		boolean site, OrderByComparator orderByComparator)
 		throws NoSuchGroupException, SystemException {
@@ -5262,6 +5363,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the last matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group fetchByC_P_S_Last(long companyId, long parentGroupId,
 		boolean site, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -5289,6 +5391,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @throws com.liferay.portal.NoSuchGroupException if a group with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group[] findByC_P_S_PrevAndNext(long groupId, long companyId,
 		long parentGroupId, boolean site, OrderByComparator orderByComparator)
 		throws NoSuchGroupException, SystemException {
@@ -5440,6 +5543,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param site the site
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByC_P_S(long companyId, long parentGroupId, boolean site)
 		throws SystemException {
 		for (Group group : findByC_P_S(companyId, parentGroupId, site,
@@ -5457,6 +5561,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the number of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByC_P_S(long companyId, long parentGroupId, boolean site)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_P_S;
@@ -5542,6 +5647,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group findByC_L_N(long companyId, long liveGroupId, String name)
 		throws NoSuchGroupException, SystemException {
 		Group group = fetchByC_L_N(companyId, liveGroupId, name);
@@ -5581,6 +5687,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group fetchByC_L_N(long companyId, long liveGroupId, String name)
 		throws SystemException {
 		return fetchByC_L_N(companyId, liveGroupId, name, true);
@@ -5596,6 +5703,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group fetchByC_L_N(long companyId, long liveGroupId, String name,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, liveGroupId, name };
@@ -5709,6 +5817,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the group that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group removeByC_L_N(long companyId, long liveGroupId, String name)
 		throws NoSuchGroupException, SystemException {
 		Group group = findByC_L_N(companyId, liveGroupId, name);
@@ -5725,6 +5834,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the number of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByC_L_N(long companyId, long liveGroupId, String name)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_L_N;
@@ -5828,6 +5938,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group findByC_C_L_N(long companyId, long classNameId,
 		long liveGroupId, String name)
 		throws NoSuchGroupException, SystemException {
@@ -5872,6 +5983,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group fetchByC_C_L_N(long companyId, long classNameId,
 		long liveGroupId, String name) throws SystemException {
 		return fetchByC_C_L_N(companyId, classNameId, liveGroupId, name, true);
@@ -5888,6 +6000,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the matching group, or <code>null</code> if a matching group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group fetchByC_C_L_N(long companyId, long classNameId,
 		long liveGroupId, String name, boolean retrieveFromCache)
 		throws SystemException {
@@ -6011,6 +6124,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the group that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group removeByC_C_L_N(long companyId, long classNameId,
 		long liveGroupId, String name)
 		throws NoSuchGroupException, SystemException {
@@ -6029,6 +6143,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the number of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByC_C_L_N(long companyId, long classNameId,
 		long liveGroupId, String name) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_C_L_N;
@@ -6115,6 +6230,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 *
 	 * @param group the group
 	 */
+	@Override
 	public void cacheResult(Group group) {
 		EntityCacheUtil.putResult(GroupModelImpl.ENTITY_CACHE_ENABLED,
 			GroupImpl.class, group.getPrimaryKey(), group);
@@ -6155,6 +6271,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 *
 	 * @param groups the groups
 	 */
+	@Override
 	public void cacheResult(List<Group> groups) {
 		for (Group group : groups) {
 			if (EntityCacheUtil.getResult(GroupModelImpl.ENTITY_CACHE_ENABLED,
@@ -6488,6 +6605,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param groupId the primary key for the new group
 	 * @return the new group
 	 */
+	@Override
 	public Group create(long groupId) {
 		Group group = new GroupImpl();
 
@@ -6509,6 +6627,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @throws com.liferay.portal.NoSuchGroupException if a group with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group remove(long groupId)
 		throws NoSuchGroupException, SystemException {
 		return remove((Serializable)groupId);
@@ -6903,6 +7022,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @throws com.liferay.portal.NoSuchGroupException if a group with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group findByPrimaryKey(long groupId)
 		throws NoSuchGroupException, SystemException {
 		return findByPrimaryKey((Serializable)groupId);
@@ -6962,6 +7082,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the group, or <code>null</code> if a group with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group fetchByPrimaryKey(long groupId) throws SystemException {
 		return fetchByPrimaryKey((Serializable)groupId);
 	}
@@ -6972,6 +7093,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -6988,6 +7110,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the range of groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> findAll(int start, int end) throws SystemException {
 		return findAll(start, end, null);
 	}
@@ -7005,6 +7128,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the ordered range of groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -7090,6 +7214,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (Group group : findAll()) {
 			remove(group);
@@ -7102,6 +7227,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the number of groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -7140,6 +7266,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the organizations associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portal.model.Organization> getOrganizations(long pk)
 		throws SystemException {
 		return getOrganizations(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
@@ -7158,6 +7285,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the range of organizations associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portal.model.Organization> getOrganizations(
 		long pk, int start, int end) throws SystemException {
 		return getOrganizations(pk, start, end, null);
@@ -7190,6 +7318,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the ordered range of organizations associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portal.model.Organization> getOrganizations(
 		long pk, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -7285,6 +7414,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the number of organizations associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int getOrganizationsSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { pk };
 
@@ -7339,6 +7469,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return <code>true</code> if the organization is associated with the group; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean containsOrganization(long pk, long organizationPK)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { pk, organizationPK };
@@ -7372,6 +7503,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return <code>true</code> if the group has any organizations associated with it; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean containsOrganizations(long pk) throws SystemException {
 		if (getOrganizationsSize(pk) > 0) {
 			return true;
@@ -7388,6 +7520,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param organizationPK the primary key of the organization
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addOrganization(long pk, long organizationPK)
 		throws SystemException {
 		try {
@@ -7408,6 +7541,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param organization the organization
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addOrganization(long pk,
 		com.liferay.portal.model.Organization organization)
 		throws SystemException {
@@ -7429,6 +7563,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param organizationPKs the primary keys of the organizations
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addOrganizations(long pk, long[] organizationPKs)
 		throws SystemException {
 		try {
@@ -7451,6 +7586,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param organizations the organizations
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addOrganizations(long pk,
 		List<com.liferay.portal.model.Organization> organizations)
 		throws SystemException {
@@ -7473,6 +7609,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param pk the primary key of the group to clear the associated organizations from
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void clearOrganizations(long pk) throws SystemException {
 		try {
 			clearOrganizations.clear(pk);
@@ -7492,6 +7629,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param organizationPK the primary key of the organization
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeOrganization(long pk, long organizationPK)
 		throws SystemException {
 		try {
@@ -7512,6 +7650,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param organization the organization
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeOrganization(long pk,
 		com.liferay.portal.model.Organization organization)
 		throws SystemException {
@@ -7533,6 +7672,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param organizationPKs the primary keys of the organizations
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeOrganizations(long pk, long[] organizationPKs)
 		throws SystemException {
 		try {
@@ -7555,6 +7695,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param organizations the organizations
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeOrganizations(long pk,
 		List<com.liferay.portal.model.Organization> organizations)
 		throws SystemException {
@@ -7578,6 +7719,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param organizationPKs the primary keys of the organizations to be associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setOrganizations(long pk, long[] organizationPKs)
 		throws SystemException {
 		try {
@@ -7610,6 +7752,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param organizations the organizations to be associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setOrganizations(long pk,
 		List<com.liferay.portal.model.Organization> organizations)
 		throws SystemException {
@@ -7639,6 +7782,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the roles associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portal.model.Role> getRoles(long pk)
 		throws SystemException {
 		return getRoles(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
@@ -7657,6 +7801,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the range of roles associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portal.model.Role> getRoles(long pk, int start,
 		int end) throws SystemException {
 		return getRoles(pk, start, end, null);
@@ -7689,6 +7834,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the ordered range of roles associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portal.model.Role> getRoles(long pk, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -7782,6 +7928,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the number of roles associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int getRolesSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { pk };
 
@@ -7835,6 +7982,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return <code>true</code> if the role is associated with the group; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean containsRole(long pk, long rolePK) throws SystemException {
 		Object[] finderArgs = new Object[] { pk, rolePK };
 
@@ -7866,6 +8014,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return <code>true</code> if the group has any roles associated with it; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean containsRoles(long pk) throws SystemException {
 		if (getRolesSize(pk) > 0) {
 			return true;
@@ -7882,6 +8031,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param rolePK the primary key of the role
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addRole(long pk, long rolePK) throws SystemException {
 		try {
 			addRole.add(pk, rolePK);
@@ -7901,6 +8051,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param role the role
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addRole(long pk, com.liferay.portal.model.Role role)
 		throws SystemException {
 		try {
@@ -7921,6 +8072,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param rolePKs the primary keys of the roles
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addRoles(long pk, long[] rolePKs) throws SystemException {
 		try {
 			for (long rolePK : rolePKs) {
@@ -7942,6 +8094,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param roles the roles
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addRoles(long pk, List<com.liferay.portal.model.Role> roles)
 		throws SystemException {
 		try {
@@ -7963,6 +8116,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param pk the primary key of the group to clear the associated roles from
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void clearRoles(long pk) throws SystemException {
 		try {
 			clearRoles.clear(pk);
@@ -7982,6 +8136,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param rolePK the primary key of the role
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeRole(long pk, long rolePK) throws SystemException {
 		try {
 			removeRole.remove(pk, rolePK);
@@ -8001,6 +8156,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param role the role
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeRole(long pk, com.liferay.portal.model.Role role)
 		throws SystemException {
 		try {
@@ -8021,6 +8177,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param rolePKs the primary keys of the roles
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeRoles(long pk, long[] rolePKs) throws SystemException {
 		try {
 			for (long rolePK : rolePKs) {
@@ -8042,6 +8199,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param roles the roles
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeRoles(long pk, List<com.liferay.portal.model.Role> roles)
 		throws SystemException {
 		try {
@@ -8064,6 +8222,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param rolePKs the primary keys of the roles to be associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setRoles(long pk, long[] rolePKs) throws SystemException {
 		try {
 			Set<Long> rolePKSet = SetUtil.fromArray(rolePKs);
@@ -8095,6 +8254,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param roles the roles to be associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setRoles(long pk, List<com.liferay.portal.model.Role> roles)
 		throws SystemException {
 		try {
@@ -8123,6 +8283,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the user groups associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portal.model.UserGroup> getUserGroups(long pk)
 		throws SystemException {
 		return getUserGroups(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
@@ -8141,6 +8302,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the range of user groups associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portal.model.UserGroup> getUserGroups(long pk,
 		int start, int end) throws SystemException {
 		return getUserGroups(pk, start, end, null);
@@ -8174,6 +8336,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the ordered range of user groups associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portal.model.UserGroup> getUserGroups(long pk,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -8269,6 +8432,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the number of user groups associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int getUserGroupsSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { pk };
 
@@ -8323,6 +8487,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return <code>true</code> if the user group is associated with the group; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean containsUserGroup(long pk, long userGroupPK)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { pk, userGroupPK };
@@ -8356,6 +8521,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return <code>true</code> if the group has any user groups associated with it; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean containsUserGroups(long pk) throws SystemException {
 		if (getUserGroupsSize(pk) > 0) {
 			return true;
@@ -8372,6 +8538,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param userGroupPK the primary key of the user group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addUserGroup(long pk, long userGroupPK)
 		throws SystemException {
 		try {
@@ -8392,6 +8559,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param userGroup the user group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addUserGroup(long pk,
 		com.liferay.portal.model.UserGroup userGroup) throws SystemException {
 		try {
@@ -8412,6 +8580,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param userGroupPKs the primary keys of the user groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addUserGroups(long pk, long[] userGroupPKs)
 		throws SystemException {
 		try {
@@ -8434,6 +8603,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param userGroups the user groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addUserGroups(long pk,
 		List<com.liferay.portal.model.UserGroup> userGroups)
 		throws SystemException {
@@ -8456,6 +8626,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param pk the primary key of the group to clear the associated user groups from
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void clearUserGroups(long pk) throws SystemException {
 		try {
 			clearUserGroups.clear(pk);
@@ -8475,6 +8646,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param userGroupPK the primary key of the user group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeUserGroup(long pk, long userGroupPK)
 		throws SystemException {
 		try {
@@ -8495,6 +8667,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param userGroup the user group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeUserGroup(long pk,
 		com.liferay.portal.model.UserGroup userGroup) throws SystemException {
 		try {
@@ -8515,6 +8688,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param userGroupPKs the primary keys of the user groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeUserGroups(long pk, long[] userGroupPKs)
 		throws SystemException {
 		try {
@@ -8537,6 +8711,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param userGroups the user groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeUserGroups(long pk,
 		List<com.liferay.portal.model.UserGroup> userGroups)
 		throws SystemException {
@@ -8560,6 +8735,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param userGroupPKs the primary keys of the user groups to be associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setUserGroups(long pk, long[] userGroupPKs)
 		throws SystemException {
 		try {
@@ -8592,6 +8768,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param userGroups the user groups to be associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setUserGroups(long pk,
 		List<com.liferay.portal.model.UserGroup> userGroups)
 		throws SystemException {
@@ -8621,6 +8798,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the users associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portal.model.User> getUsers(long pk)
 		throws SystemException {
 		return getUsers(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
@@ -8639,6 +8817,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the range of users associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portal.model.User> getUsers(long pk, int start,
 		int end) throws SystemException {
 		return getUsers(pk, start, end, null);
@@ -8671,6 +8850,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the ordered range of users associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portal.model.User> getUsers(long pk, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -8764,6 +8944,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return the number of users associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int getUsersSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { pk };
 
@@ -8817,6 +8998,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return <code>true</code> if the user is associated with the group; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean containsUser(long pk, long userPK) throws SystemException {
 		Object[] finderArgs = new Object[] { pk, userPK };
 
@@ -8848,6 +9030,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @return <code>true</code> if the group has any users associated with it; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean containsUsers(long pk) throws SystemException {
 		if (getUsersSize(pk) > 0) {
 			return true;
@@ -8864,6 +9047,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param userPK the primary key of the user
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addUser(long pk, long userPK) throws SystemException {
 		try {
 			addUser.add(pk, userPK);
@@ -8883,6 +9067,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param user the user
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addUser(long pk, com.liferay.portal.model.User user)
 		throws SystemException {
 		try {
@@ -8903,6 +9088,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param userPKs the primary keys of the users
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addUsers(long pk, long[] userPKs) throws SystemException {
 		try {
 			for (long userPK : userPKs) {
@@ -8924,6 +9110,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param users the users
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addUsers(long pk, List<com.liferay.portal.model.User> users)
 		throws SystemException {
 		try {
@@ -8945,6 +9132,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param pk the primary key of the group to clear the associated users from
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void clearUsers(long pk) throws SystemException {
 		try {
 			clearUsers.clear(pk);
@@ -8964,6 +9152,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param userPK the primary key of the user
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeUser(long pk, long userPK) throws SystemException {
 		try {
 			removeUser.remove(pk, userPK);
@@ -8983,6 +9172,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param user the user
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeUser(long pk, com.liferay.portal.model.User user)
 		throws SystemException {
 		try {
@@ -9003,6 +9193,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param userPKs the primary keys of the users
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeUsers(long pk, long[] userPKs) throws SystemException {
 		try {
 			for (long userPK : userPKs) {
@@ -9024,6 +9215,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param users the users
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeUsers(long pk, List<com.liferay.portal.model.User> users)
 		throws SystemException {
 		try {
@@ -9046,6 +9238,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param userPKs the primary keys of the users to be associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setUsers(long pk, long[] userPKs) throws SystemException {
 		try {
 			Set<Long> userPKSet = SetUtil.fromArray(userPKs);
@@ -9077,6 +9270,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * @param users the users to be associated with the group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setUsers(long pk, List<com.liferay.portal.model.User> users)
 		throws SystemException {
 		try {
@@ -9865,6 +10059,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		};
 
 	private static CacheModel<Group> _nullGroupCacheModel = new CacheModel<Group>() {
+			@Override
 			public Group toEntityModel() {
 				return _nullGroup;
 			}

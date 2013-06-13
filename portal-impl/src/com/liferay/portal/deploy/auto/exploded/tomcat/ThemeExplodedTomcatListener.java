@@ -15,6 +15,7 @@
 package com.liferay.portal.deploy.auto.exploded.tomcat;
 
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
+import com.liferay.portal.kernel.deploy.auto.AutoDeployer;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
@@ -31,7 +32,7 @@ public class ThemeExplodedTomcatListener extends BaseExplodedTomcatListener {
 	}
 
 	@Override
-	protected void deploy(File file) throws AutoDeployException {
+	protected int deploy(File file) throws AutoDeployException {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Invoking deploy for " + file.getPath());
 		}
@@ -40,7 +41,7 @@ public class ThemeExplodedTomcatListener extends BaseExplodedTomcatListener {
 			file, "WEB-INF/liferay-look-and-feel.xml");
 
 		if (docBaseDir == null) {
-			return;
+			return AutoDeployer.CODE_NOT_APPLICABLE;
 		}
 
 		if (_log.isInfoEnabled()) {
@@ -55,6 +56,8 @@ public class ThemeExplodedTomcatListener extends BaseExplodedTomcatListener {
 		}
 
 		copyContextFile(file);
+
+		return AutoDeployer.CODE_DEFAULT;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

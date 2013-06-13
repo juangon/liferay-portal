@@ -106,13 +106,24 @@ if (!group.isUser() && selLayout.isTypePortlet()) {
 String[][] categorySections = {mainSections};
 %>
 
-<div class="lfr-header-row title">
-	<div class="lfr-header-row-content">
-		<liferay-util:include page="/html/portlet/layouts_admin/add_layout.jsp" />
+<liferay-util:include page="/html/portlet/layouts_admin/add_layout.jsp" />
 
-		<aui:button-row cssClass="edit-toolbar" id='<%= liferayPortletResponse.getNamespace() + "layoutToolbar" %>' />
-	</div>
-</div>
+<aui:nav-bar>
+	<aui:nav id="layoutsNav">
+		<c:if test="<%= LayoutPermissionUtil.contains(permissionChecker, selPlid, ActionKeys.ADD_LAYOUT) && PortalUtil.isLayoutParentable(selLayout.getType()) %>">
+			<aui:nav-item data-value="add-child-page" iconClass="icon-plus" label="add-child-page" />
+		</c:if>
+		<c:if test="<%= LayoutPermissionUtil.contains(permissionChecker, selPlid, ActionKeys.PERMISSIONS) %>">
+			<aui:nav-item data-value="permissions" iconClass="icon-lock" label="permissions" />
+		</c:if>
+		<c:if test="<%= LayoutPermissionUtil.contains(permissionChecker, selPlid, ActionKeys.DELETE) %>">
+			<aui:nav-item data-value="delete" iconClass="icon-remove" label="delete" />
+		</c:if>
+		<c:if test="<%= LayoutPermissionUtil.contains(permissionChecker, selLayout, ActionKeys.UPDATE) %>">
+			<aui:nav-item data-value="copy-applications" iconClass="icon-list-alt" label="copy-applications" />
+		</c:if>
+	</aui:nav>
+</aui:nav-bar>
 
 <portlet:actionURL var="editLayoutURL">
 	<portlet:param name="struts_action" value="/layouts_admin/edit_layouts" />
@@ -178,7 +189,7 @@ String[][] categorySections = {mainSections};
 						</c:if>
 					</liferay-ui:error>
 
-					<div class="portlet-msg-alert">
+					<div class="alert alert-block">
 						<liferay-ui:message key="the-staging-environment-is-activated-changes-have-to-be-published-to-make-them-available-to-end-users" />
 					</div>
 				</c:if>
@@ -197,12 +208,12 @@ String[][] categorySections = {mainSections};
 
 				<c:choose>
 					<c:when test="<%= !SitesUtil.isLayoutUpdateable(selLayout) %>">
-						<div class="portlet-msg-alert">
+						<div class="alert alert-block">
 							<liferay-ui:message key="this-page-cannot-be-modified-because-it-is-associated-to-a-site-template-does-not-allow-modifications-to-it" />
 						</div>
 					</c:when>
 					<c:when test="<%= !SitesUtil.isLayoutDeleteable(selLayout) %>">
-						<div class="portlet-msg-alert">
+						<div class="alert alert-block">
 							<liferay-ui:message key="this-page-cannot-be-deleted-because-it-is-associated-to-a-site-template" />
 						</div>
 					</c:when>
@@ -214,90 +225,101 @@ String[][] categorySections = {mainSections};
 					UserGroup userGroup = UserGroupLocalServiceUtil.getUserGroup(selLayoutGroup.getClassPK());
 					%>
 
-					<div class="portlet-msg-alert">
+					<div class="alert alert-block">
 						<liferay-ui:message arguments="<%= HtmlUtil.escape(userGroup.getName()) %>" key="this-page-cannot-be-modified-because-it-belongs-to-the-user-group-x" />
 					</div>
 				</c:if>
 
-				<aui:script use="aui-dialog,aui-dialog-iframe,aui-toolbar">
-					var buttonRow = A.one('#<portlet:namespace />layoutToolbar');
+				<aui:script use="liferay-util-window">
+					var content;
+					var popup;
 
-					var popup = null;
+					var clickHandler = function(event) {
+						var dataValue = event.target.ancestor().attr('data-value');
 
-					var layoutToolbarChildren = [];
+						if (dataValue === 'add-child-page') {
+							content = A.one('#<portlet:namespace />addLayout');
 
-					<c:if test="<%= LayoutPermissionUtil.contains(permissionChecker, selPlid, ActionKeys.ADD_LAYOUT) && PortalUtil.isLayoutParentable(selLayout.getType()) %>">
-						layoutToolbarChildren.push(
-							{
-								handler: function(event) {
-									var content = A.one('#<portlet:namespace />addLayout');
-
-									if (!popup) {
-										popup = new A.Dialog(
-											{
-												align: Liferay.Util.Window.ALIGN_CENTER,
-												bodyContent: content.show(),
-												title: '<%= UnicodeLanguageUtil.get(pageContext, "add-child-page") %>',
-												modal: true,
-												width: 500
-											}
-										).render();
+							if (!popup) {
+								popup = Liferay.Util.Window.getWindow(
+									{
+										dialog: {
+											bodyContent: content.show(),
+											zIndex: Liferay.zIndex.WINDOW + 2
+										},
+										title: '<%= UnicodeLanguageUtil.get(pageContext, "add-child-page") %>'
 									}
-
-									popup.show();
-
-									Liferay.Util.focusFormField(content.one('input:text'));
-								},
-								icon: 'add',
-								label: '<%= UnicodeLanguageUtil.get(pageContext, "add-child-page") %>'
+								);
 							}
-						);
-					</c:if>
 
-					<c:if test="<%= LayoutPermissionUtil.contains(permissionChecker, selPlid, ActionKeys.PERMISSIONS) %>">
-						layoutToolbarChildren.push(
-							{
-								handler: function(event) {
-									Liferay.Util.openWindow(
-										{
-											cache: false,
-											dialog: {
-												width: 900
-											},
-											id: '<portlet:namespace /><%= selLayout.getFriendlyURL().substring(1) %>_permissions',
-											title: '<%= UnicodeLanguageUtil.get(pageContext, "permissions") %>',
-											uri: '<%= permissionURL %>'
-										}
-									);
-								},
-								icon: 'permissions',
-								label: '<%= UnicodeLanguageUtil.get(pageContext, "permissions") %>'
-							}
-						);
-					</c:if>
+							popup.show();
 
-					<c:if test="<%= LayoutPermissionUtil.contains(permissionChecker, selPlid, ActionKeys.DELETE) %>">
-						layoutToolbarChildren.push(
-							{
-								handler: function(event) {
-									<portlet:namespace />saveLayout('<%= Constants.DELETE %>');
-								},
-								icon: 'delete',
-								label: '<%= UnicodeLanguageUtil.get(pageContext, "delete") %>'
-							}
-						);
-					</c:if>
-
-					var layoutToolbar = new A.Toolbar(
-						{
-							activeState: false,
-							boundingBox: buttonRow,
-							children: layoutToolbarChildren
+							Liferay.Util.focusFormField(content.one('input:text'));
 						}
-					).render();
+						else if (dataValue === 'permissions') {
+							<liferay-security:permissionsURL
+								modelResource="<%= Layout.class.getName() %>"
+								modelResourceDescription="<%= selLayout.getName(locale) %>"
+								resourcePrimKey="<%= String.valueOf(selLayout.getPlid()) %>"
+								var="permissionURL"
+								windowState="<%= LiferayWindowState.POP_UP.toString() %>"
+							/>
 
-					buttonRow.setData('layoutToolbar', layoutToolbar);
+							Liferay.Util.openWindow(
+								{
+									cache: false,
+									dialog: {
+										zIndex: Liferay.zIndex.WINDOW + 2
+									},
+									id: '<portlet:namespace /><%= selLayout.getFriendlyURL().substring(1) %>_permissions',
+									title: '<%= UnicodeLanguageUtil.get(pageContext, "permissions") %>',
+									uri: '<%= permissionURL %>'
+								}
+							);
+						}
+						else if (dataValue === 'delete') {
+							<portlet:namespace />saveLayout('<%= Constants.DELETE %>');
+						}
+						else if (dataValue == 'copy-applications') {
+							content = A.one('#<portlet:namespace />copyPortletsFromPage');
+
+							popUp = Liferay.Util.Window.getWindow(
+								{
+									dialog: {
+										bodyContent: content.show(),
+										destroyOnHide: true,
+										zIndex: Liferay.zIndex.WINDOW + 2
+									},
+									title: '<%= UnicodeLanguageUtil.get(pageContext, "copy-applications") %>'
+								}
+							);
+
+							popUp.show();
+
+							var submitButton = popUp.get('contentBox').one('#<portlet:namespace />copySubmitButton');
+
+							if (submitButton) {
+								submitButton.on(
+									'click',
+									function(event) {
+										popUp.hide();
+
+										var form = A.one('#<portlet:namespace />fm');
+
+										if (form) {
+											form.append(content);
+										}
+
+										<portlet:namespace />saveLayout();
+									}
+								);
+							}
+						}
+					};
+
+					A.one('#<portlet:namespace />layoutsNav').delegate('click', clickHandler, 'li a');
 				</aui:script>
+
 			</c:if>
 
 			<liferay-ui:form-navigator
@@ -325,9 +347,6 @@ String[][] categorySections = {mainSections};
 				}
 
 				document.<portlet:namespace />fm.<portlet:namespace />redirect.value = '<%= HttpUtil.setParameter(redirectURL.toString(), liferayPortletResponse.getNamespace() + "selPlid", selLayout.getParentPlid()) %>';
-			}
-			else {
-				document.<portlet:namespace />fm.<portlet:namespace />redirect.value += Liferay.Util.getHistoryParam('<portlet:namespace />');
 			}
 
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = action;

@@ -94,26 +94,32 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 	public UserTrackerModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _userTrackerId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setUserTrackerId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _userTrackerId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return UserTracker.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return UserTracker.class.getName();
 	}
@@ -185,18 +191,22 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 		}
 	}
 
+	@Override
 	public long getUserTrackerId() {
 		return _userTrackerId;
 	}
 
+	@Override
 	public void setUserTrackerId(long userTrackerId) {
 		_userTrackerId = userTrackerId;
 	}
 
+	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
@@ -213,10 +223,12 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 		return _originalCompanyId;
 	}
 
+	@Override
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_columnBitmask |= USERID_COLUMN_BITMASK;
 
@@ -229,10 +241,12 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
@@ -241,14 +255,17 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 		return _originalUserId;
 	}
 
+	@Override
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
 	public String getSessionId() {
 		if (_sessionId == null) {
 			return StringPool.BLANK;
@@ -258,6 +275,7 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 		}
 	}
 
+	@Override
 	public void setSessionId(String sessionId) {
 		_columnBitmask |= SESSIONID_COLUMN_BITMASK;
 
@@ -272,6 +290,7 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 		return GetterUtil.getString(_originalSessionId);
 	}
 
+	@Override
 	public String getRemoteAddr() {
 		if (_remoteAddr == null) {
 			return StringPool.BLANK;
@@ -281,10 +300,12 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 		}
 	}
 
+	@Override
 	public void setRemoteAddr(String remoteAddr) {
 		_remoteAddr = remoteAddr;
 	}
 
+	@Override
 	public String getRemoteHost() {
 		if (_remoteHost == null) {
 			return StringPool.BLANK;
@@ -294,10 +315,12 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 		}
 	}
 
+	@Override
 	public void setRemoteHost(String remoteHost) {
 		_remoteHost = remoteHost;
 	}
 
+	@Override
 	public String getUserAgent() {
 		if (_userAgent == null) {
 			return StringPool.BLANK;
@@ -307,6 +330,7 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 		}
 	}
 
+	@Override
 	public void setUserAgent(String userAgent) {
 		_userAgent = userAgent;
 	}
@@ -356,6 +380,7 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 		return userTrackerImpl;
 	}
 
+	@Override
 	public int compareTo(UserTracker userTracker) {
 		long primaryKey = userTracker.getPrimaryKey();
 
@@ -372,18 +397,15 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof UserTracker)) {
 			return false;
 		}
 
-		UserTracker userTracker = null;
-
-		try {
-			userTracker = (UserTracker)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		UserTracker userTracker = (UserTracker)obj;
 
 		long primaryKey = userTracker.getPrimaryKey();
 
@@ -496,6 +518,7 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(28);
 

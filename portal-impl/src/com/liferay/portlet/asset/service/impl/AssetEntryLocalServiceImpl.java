@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.model.SystemEventConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -74,6 +75,7 @@ import java.util.List;
  */
 public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 
+	@Override
 	public void deleteEntry(AssetEntry entry)
 		throws PortalException, SystemException {
 
@@ -83,6 +85,12 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			entry.getEntryId());
 
 		assetEntryPersistence.remove(entry);
+
+		// System event
+
+		systemEventLocalService.addSystemEvent(
+			entry.getGroupId(), entry.getClassName(), entry.getClassPK(),
+			entry.getClassUuid(), SystemEventConstants.TYPE_DELETE);
 
 		// Links
 
@@ -96,12 +104,9 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 					tag.getTagId(), entry.getClassNameId());
 			}
 		}
-
-		// Social
-
-		socialActivityLocalService.deleteActivities(entry);
 	}
 
+	@Override
 	public void deleteEntry(long entryId)
 		throws PortalException, SystemException {
 
@@ -110,6 +115,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		deleteEntry(entry);
 	}
 
+	@Override
 	public void deleteEntry(String className, long classPK)
 		throws PortalException, SystemException {
 
@@ -123,16 +129,19 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		}
 	}
 
+	@Override
 	public AssetEntry fetchEntry(long entryId) throws SystemException {
 		return assetEntryPersistence.fetchByPrimaryKey(entryId);
 	}
 
+	@Override
 	public AssetEntry fetchEntry(long groupId, String classUuid)
 		throws SystemException {
 
 		return assetEntryPersistence.fetchByG_CU(groupId, classUuid);
 	}
 
+	@Override
 	public AssetEntry fetchEntry(String className, long classPK)
 		throws SystemException {
 
@@ -141,6 +150,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		return assetEntryPersistence.fetchByC_C(classNameId, classPK);
 	}
 
+	@Override
 	public List<AssetEntry> getAncestorEntries(long entryId)
 		throws PortalException, SystemException {
 
@@ -157,6 +167,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		return entries;
 	}
 
+	@Override
 	public List<AssetEntry> getChildEntries(long entryId)
 		throws PortalException, SystemException {
 
@@ -174,6 +185,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		return entries;
 	}
 
+	@Override
 	public List<AssetEntry> getCompanyEntries(
 			long companyId, int start, int end)
 		throws SystemException {
@@ -181,34 +193,40 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		return assetEntryPersistence.findByCompanyId(companyId, start, end);
 	}
 
+	@Override
 	public int getCompanyEntriesCount(long companyId) throws SystemException {
 		return assetEntryPersistence.countByCompanyId(companyId);
 	}
 
+	@Override
 	public List<AssetEntry> getEntries(AssetEntryQuery entryQuery)
 		throws SystemException {
 
 		return assetEntryFinder.findEntries(entryQuery);
 	}
 
+	@Override
 	public int getEntriesCount(AssetEntryQuery entryQuery)
 		throws SystemException {
 
 		return assetEntryFinder.countEntries(entryQuery);
 	}
 
+	@Override
 	public AssetEntry getEntry(long entryId)
 		throws PortalException, SystemException {
 
 		return assetEntryPersistence.findByPrimaryKey(entryId);
 	}
 
+	@Override
 	public AssetEntry getEntry(long groupId, String classUuid)
 		throws PortalException, SystemException {
 
 		return assetEntryPersistence.findByG_CU(groupId, classUuid);
 	}
 
+	@Override
 	public AssetEntry getEntry(String className, long classPK)
 		throws PortalException, SystemException {
 
@@ -217,6 +235,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		return assetEntryPersistence.findByC_C(classNameId, classPK);
 	}
 
+	@Override
 	public AssetEntry getNextEntry(long entryId)
 		throws PortalException, SystemException {
 
@@ -254,6 +273,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		throw new NoSuchEntryException();
 	}
 
+	@Override
 	public AssetEntry getParentEntry(long entryId)
 		throws PortalException, SystemException {
 
@@ -269,6 +289,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		return getEntry(link.getEntryId1());
 	}
 
+	@Override
 	public AssetEntry getPreviousEntry(long entryId)
 		throws PortalException, SystemException {
 
@@ -295,6 +316,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		throw new NoSuchEntryException();
 	}
 
+	@Override
 	public List<AssetEntry> getTopViewedEntries(
 			String className, boolean asc, int start, int end)
 		throws SystemException {
@@ -302,6 +324,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		return getTopViewedEntries(new String[] {className}, asc, start, end);
 	}
 
+	@Override
 	public List<AssetEntry> getTopViewedEntries(
 			String[] className, boolean asc, int start, int end)
 		throws SystemException {
@@ -324,6 +347,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		return assetEntryFinder.findEntries(entryQuery);
 	}
 
+	@Override
 	public AssetEntry incrementViewCounter(
 			long userId, String className, long classPK)
 		throws PortalException, SystemException {
@@ -346,6 +370,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 
 	@BufferedIncrement(
 		configuration = "AssetEntry", incrementClass = NumberIncrement.class)
+	@Override
 	public AssetEntry incrementViewCounter(
 			long userId, String className, long classPK, int increment)
 		throws SystemException {
@@ -370,6 +395,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		return entry;
 	}
 
+	@Override
 	public void reindex(List<AssetEntry> entries) throws PortalException {
 		for (AssetEntry entry : entries) {
 			String className = PortalUtil.getClassName(entry.getClassNameId());
@@ -384,6 +410,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 	 * @deprecated As of 6.2.0, replaced by {@link #search(long, long[], long,
 	 *             String, String, int, int, int)}
 	 */
+	@Override
 	public Hits search(
 			long companyId, long[] groupIds, long userId, String className,
 			String keywords, int start, int end)
@@ -394,6 +421,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			WorkflowConstants.STATUS_ANY, start, end);
 	}
 
+	@Override
 	public Hits search(
 			long companyId, long[] groupIds, long userId, String className,
 			String keywords, int status, int start, int end)
@@ -418,7 +446,8 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			searchContext.setAttribute("status", status);
 			searchContext.setCompanyId(companyId);
 			searchContext.setEnd(end);
-			searchContext.setEntryClassNames(getClassNames(className));
+			searchContext.setEntryClassNames(
+				getClassNames(companyId, className));
 			searchContext.setGroupIds(groupIds);
 			searchContext.setKeywords(keywords);
 
@@ -446,6 +475,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 	 *             String, String, String, String, String, String, int, boolean,
 	 *             int, int)}
 	 */
+	@Override
 	public Hits search(
 			long companyId, long[] groupIds, long userId, String className,
 			String userName, String title, String description,
@@ -459,6 +489,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			WorkflowConstants.STATUS_ANY, andSearch, start, end);
 	}
 
+	@Override
 	public Hits search(
 			long companyId, long[] groupIds, long userId, String className,
 			String userName, String title, String description,
@@ -492,7 +523,8 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			searchContext.setAttribute("status", status);
 			searchContext.setCompanyId(companyId);
 			searchContext.setEnd(end);
-			searchContext.setEntryClassNames(getClassNames(className));
+			searchContext.setEntryClassNames(
+				getClassNames(companyId, className));
 			searchContext.setGroupIds(groupIds);
 
 			QueryConfig queryConfig = new QueryConfig();
@@ -518,6 +550,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 	 * @deprecated As of 6.2.0, replaced by {@link #search(long, long[], long,
 	 *             String, String, int, int, int)}
 	 */
+	@Override
 	public Hits search(
 			long companyId, long[] groupIds, String className, String keywords,
 			int start, int end)
@@ -528,6 +561,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			WorkflowConstants.STATUS_ANY, start, end);
 	}
 
+	@Override
 	public AssetEntry updateEntry(
 			long userId, long groupId, Date createDate, Date modifiedDate,
 			String className, long classPK, String classUuid, long classTypeId,
@@ -751,6 +785,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		return entry;
 	}
 
+	@Override
 	public AssetEntry updateEntry(
 			long userId, long groupId, String className, long classPK,
 			long[] categoryIds, String[] tagNames)
@@ -786,6 +821,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 	 *             Date, Date, String, String, String, String, String, String,
 	 *             int, int, Integer, boolean)}
 	 */
+	@Override
 	public AssetEntry updateEntry(
 			long userId, long groupId, String className, long classPK,
 			String classUuid, long classTypeId, long[] categoryIds,
@@ -809,6 +845,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 	 *             boolean, Date, Date, Date, String, String, String, String,
 	 *             String, String, int, int, Integer, boolean)}
 	 */
+	@Override
 	public AssetEntry updateEntry(
 			long userId, long groupId, String className, long classPK,
 			String classUuid, long classTypeId, long[] categoryIds,
@@ -825,6 +862,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			layoutUuid, height, width, priority, sync);
 	}
 
+	@Override
 	public AssetEntry updateEntry(
 			String className, long classPK, Date publishDate, boolean visible)
 		throws PortalException, SystemException {
@@ -843,6 +881,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		return entry;
 	}
 
+	@Override
 	public AssetEntry updateEntry(
 			String className, long classPK, Date publishDate,
 			Date expirationDate, boolean visible)
@@ -863,6 +902,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		return entry;
 	}
 
+	@Override
 	public AssetEntry updateVisible(
 			String className, long classPK, boolean visible)
 		throws PortalException, SystemException {
@@ -879,6 +919,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		return entry;
 	}
 
+	@Override
 	public void validate(
 			long groupId, String className, long[] categoryIds,
 			String[] tagNames)
@@ -894,13 +935,14 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		validator.validate(groupId, className, categoryIds, tagNames);
 	}
 
-	protected String[] getClassNames(String className) {
+	protected String[] getClassNames(long companyId, String className) {
 		if (Validator.isNotNull(className)) {
 			return new String[] {className};
 		}
 		else {
 			List<AssetRendererFactory> rendererFactories =
-				AssetRendererFactoryRegistryUtil.getAssetRendererFactories();
+				AssetRendererFactoryRegistryUtil.getAssetRendererFactories(
+					companyId);
 
 			String[] classNames = new String[rendererFactories.size()];
 

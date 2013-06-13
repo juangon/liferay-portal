@@ -15,6 +15,7 @@
 package com.liferay.portal.deploy.auto.exploded.tomcat;
 
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
+import com.liferay.portal.kernel.deploy.auto.AutoDeployer;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.util.Portal;
@@ -32,7 +33,7 @@ public class PortletExplodedTomcatListener extends BaseExplodedTomcatListener {
 	}
 
 	@Override
-	protected void deploy(File file) throws AutoDeployException {
+	protected int deploy(File file) throws AutoDeployException {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Invoking deploy for " + file.getPath());
 		}
@@ -52,7 +53,7 @@ public class PortletExplodedTomcatListener extends BaseExplodedTomcatListener {
 				deployer = _deployer;
 			}
 			else {
-				return;
+				return AutoDeployer.CODE_NOT_APPLICABLE;
 			}
 		}
 
@@ -68,6 +69,8 @@ public class PortletExplodedTomcatListener extends BaseExplodedTomcatListener {
 		}
 
 		copyContextFile(file);
+
+		return AutoDeployer.CODE_DEFAULT;
 	}
 
 	protected ExplodedTomcatDeployer getPhpDeployer()

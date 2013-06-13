@@ -88,26 +88,32 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource>
 	public WikiPageResourceModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _resourcePrimKey;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setResourcePrimKey(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _resourcePrimKey;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return WikiPageResource.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return WikiPageResource.class.getName();
 	}
@@ -151,6 +157,7 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource>
 		}
 	}
 
+	@Override
 	public String getUuid() {
 		if (_uuid == null) {
 			return StringPool.BLANK;
@@ -160,6 +167,7 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource>
 		}
 	}
 
+	@Override
 	public void setUuid(String uuid) {
 		if (_originalUuid == null) {
 			_originalUuid = _uuid;
@@ -172,18 +180,22 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@Override
 	public long getResourcePrimKey() {
 		return _resourcePrimKey;
 	}
 
+	@Override
 	public void setResourcePrimKey(long resourcePrimKey) {
 		_resourcePrimKey = resourcePrimKey;
 	}
 
+	@Override
 	public long getNodeId() {
 		return _nodeId;
 	}
 
+	@Override
 	public void setNodeId(long nodeId) {
 		_columnBitmask |= NODEID_COLUMN_BITMASK;
 
@@ -200,6 +212,7 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource>
 		return _originalNodeId;
 	}
 
+	@Override
 	public String getTitle() {
 		if (_title == null) {
 			return StringPool.BLANK;
@@ -209,6 +222,7 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource>
 		}
 	}
 
+	@Override
 	public void setTitle(String title) {
 		_columnBitmask |= TITLE_COLUMN_BITMASK;
 
@@ -264,6 +278,7 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource>
 		return wikiPageResourceImpl;
 	}
 
+	@Override
 	public int compareTo(WikiPageResource wikiPageResource) {
 		long primaryKey = wikiPageResource.getPrimaryKey();
 
@@ -280,18 +295,15 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof WikiPageResource)) {
 			return false;
 		}
 
-		WikiPageResource wikiPageResource = null;
-
-		try {
-			wikiPageResource = (WikiPageResource)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		WikiPageResource wikiPageResource = (WikiPageResource)obj;
 
 		long primaryKey = wikiPageResource.getPrimaryKey();
 
@@ -367,6 +379,7 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(16);
 

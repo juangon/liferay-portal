@@ -54,6 +54,7 @@ public class MBStatsUserCacheModel implements CacheModel<MBStatsUser>,
 		return sb.toString();
 	}
 
+	@Override
 	public MBStatsUser toEntityModel() {
 		MBStatsUserImpl mbStatsUserImpl = new MBStatsUserImpl();
 
@@ -74,6 +75,7 @@ public class MBStatsUserCacheModel implements CacheModel<MBStatsUser>,
 		return mbStatsUserImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		statsUserId = objectInput.readLong();
 		groupId = objectInput.readLong();
@@ -82,6 +84,7 @@ public class MBStatsUserCacheModel implements CacheModel<MBStatsUser>,
 		lastPostDate = objectInput.readLong();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(statsUserId);

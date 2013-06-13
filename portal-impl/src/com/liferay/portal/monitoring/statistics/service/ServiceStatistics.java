@@ -102,6 +102,7 @@ public class ServiceStatistics
 		return -1;
 	}
 
+	@Override
 	public void processDataSample(
 		ServiceRequestDataSample serviceRequestDataSample) {
 

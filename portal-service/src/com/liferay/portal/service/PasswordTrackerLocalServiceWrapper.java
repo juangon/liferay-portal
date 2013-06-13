@@ -15,12 +15,10 @@
 package com.liferay.portal.service;
 
 /**
- * <p>
- * This class is a wrapper for {@link PasswordTrackerLocalService}.
- * </p>
+ * Provides a wrapper for {@link PasswordTrackerLocalService}.
  *
- * @author    Brian Wing Shun Chan
- * @see       PasswordTrackerLocalService
+ * @author Brian Wing Shun Chan
+ * @see PasswordTrackerLocalService
  * @generated
  */
 public class PasswordTrackerLocalServiceWrapper
@@ -38,6 +36,7 @@ public class PasswordTrackerLocalServiceWrapper
 	* @return the password tracker that was added
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.PasswordTracker addPasswordTracker(
 		com.liferay.portal.model.PasswordTracker passwordTracker)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -50,6 +49,7 @@ public class PasswordTrackerLocalServiceWrapper
 	* @param passwordTrackerId the primary key for the new password tracker
 	* @return the new password tracker
 	*/
+	@Override
 	public com.liferay.portal.model.PasswordTracker createPasswordTracker(
 		long passwordTrackerId) {
 		return _passwordTrackerLocalService.createPasswordTracker(passwordTrackerId);
@@ -63,6 +63,7 @@ public class PasswordTrackerLocalServiceWrapper
 	* @throws PortalException if a password tracker with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.PasswordTracker deletePasswordTracker(
 		long passwordTrackerId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -77,12 +78,14 @@ public class PasswordTrackerLocalServiceWrapper
 	* @return the password tracker that was removed
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.PasswordTracker deletePasswordTracker(
 		com.liferay.portal.model.PasswordTracker passwordTracker)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _passwordTrackerLocalService.deletePasswordTracker(passwordTracker);
 	}
 
+	@Override
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {
 		return _passwordTrackerLocalService.dynamicQuery();
 	}
@@ -94,6 +97,7 @@ public class PasswordTrackerLocalServiceWrapper
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -114,6 +118,7 @@ public class PasswordTrackerLocalServiceWrapper
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -136,6 +141,7 @@ public class PasswordTrackerLocalServiceWrapper
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -153,12 +159,14 @@ public class PasswordTrackerLocalServiceWrapper
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _passwordTrackerLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	@Override
 	public com.liferay.portal.model.PasswordTracker fetchPasswordTracker(
 		long passwordTrackerId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -173,6 +181,7 @@ public class PasswordTrackerLocalServiceWrapper
 	* @throws PortalException if a password tracker with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.PasswordTracker getPasswordTracker(
 		long passwordTrackerId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -180,6 +189,7 @@ public class PasswordTrackerLocalServiceWrapper
 		return _passwordTrackerLocalService.getPasswordTracker(passwordTrackerId);
 	}
 
+	@Override
 	public com.liferay.portal.model.PersistedModel getPersistedModel(
 		java.io.Serializable primaryKeyObj)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -199,6 +209,7 @@ public class PasswordTrackerLocalServiceWrapper
 	* @return the range of password trackers
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public java.util.List<com.liferay.portal.model.PasswordTracker> getPasswordTrackers(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -211,6 +222,7 @@ public class PasswordTrackerLocalServiceWrapper
 	* @return the number of password trackers
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public int getPasswordTrackersCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _passwordTrackerLocalService.getPasswordTrackersCount();
@@ -223,6 +235,7 @@ public class PasswordTrackerLocalServiceWrapper
 	* @return the password tracker that was updated
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.PasswordTracker updatePasswordTracker(
 		com.liferay.portal.model.PasswordTracker passwordTracker)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -234,6 +247,7 @@ public class PasswordTrackerLocalServiceWrapper
 	*
 	* @return the Spring bean ID for this bean
 	*/
+	@Override
 	public java.lang.String getBeanIdentifier() {
 		return _passwordTrackerLocalService.getBeanIdentifier();
 	}
@@ -243,15 +257,18 @@ public class PasswordTrackerLocalServiceWrapper
 	*
 	* @param beanIdentifier the Spring bean ID for this bean
 	*/
+	@Override
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		_passwordTrackerLocalService.setBeanIdentifier(beanIdentifier);
 	}
 
+	@Override
 	public void deletePasswordTrackers(long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_passwordTrackerLocalService.deletePasswordTrackers(userId);
 	}
 
+	@Override
 	public boolean isSameAsCurrentPassword(long userId,
 		java.lang.String newClearTextPwd)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -260,6 +277,7 @@ public class PasswordTrackerLocalServiceWrapper
 			newClearTextPwd);
 	}
 
+	@Override
 	public boolean isValidPassword(long userId, java.lang.String newClearTextPwd)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -267,6 +285,7 @@ public class PasswordTrackerLocalServiceWrapper
 			newClearTextPwd);
 	}
 
+	@Override
 	public void trackPassword(long userId, java.lang.String encPassword)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -288,10 +307,12 @@ public class PasswordTrackerLocalServiceWrapper
 		_passwordTrackerLocalService = passwordTrackerLocalService;
 	}
 
+	@Override
 	public PasswordTrackerLocalService getWrappedService() {
 		return _passwordTrackerLocalService;
 	}
 
+	@Override
 	public void setWrappedService(
 		PasswordTrackerLocalService passwordTrackerLocalService) {
 		_passwordTrackerLocalService = passwordTrackerLocalService;

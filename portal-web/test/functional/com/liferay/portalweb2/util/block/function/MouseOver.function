@@ -5,6 +5,14 @@
 		<execute selenium="mouseOver" />
 	</command>
 
+	<command name="mouseOverClickNavigation">
+		<execute selenium="clickAt" argument1="//nav[@id='navigation']" argument2="" />
+
+		<execute selenium="waitForElementPresent" argument1="//script[contains(@src,'/aui/sortable/sortable-min.js')]" />
+
+		<execute function="MouseOver#mouseOver" />
+	</command>
+
 	<command name="partialTextMouseOver">
 		<execute function="AssertTextEquals#assertPartialText" />
 
@@ -17,10 +25,10 @@
 		<execute selenium="mouseOver" />
 	</command>
 
-	<command name="textMouseOverClickDockbar">
-		<execute selenium="clickAt" argument1="//div[@id='dockbar']" argument2="" />
+	<command name="textMouseOverClickNavigation">
+		<execute selenium="clickAt" argument1="//nav[@id='navigation']" argument2="" />
 
-		<execute selenium="waitForElementPresent" argument1="//script[contains(@src,'/aui/aui-button-item/aui-button-item-min.js')]" />
+		<execute selenium="waitForElementPresent" argument1="//script[contains(@src,'/aui/sortable/sortable-min.js')]" />
 
 		<execute function="MouseOver#textMouseOver" />
 	</command>

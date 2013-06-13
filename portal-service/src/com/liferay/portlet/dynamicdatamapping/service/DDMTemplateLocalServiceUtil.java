@@ -18,11 +18,12 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
- * The utility for the d d m template local service. This utility wraps {@link com.liferay.portlet.dynamicdatamapping.service.impl.DDMTemplateLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
+ * Provides the local service utility for DDMTemplate. This utility wraps
+ * {@link com.liferay.portlet.dynamicdatamapping.service.impl.DDMTemplateLocalServiceImpl} and is the
+ * primary access point for service operations in application layer code running
+ * on the local server. Methods of this service will not have security checks
+ * based on the propagated JAAS credentials because this service can only be
+ * accessed from within the same VM.
  *
  * @author Brian Wing Shun Chan
  * @see DDMTemplateLocalService
@@ -628,6 +629,13 @@ public class DDMTemplateLocalServiceUtil {
 			includeGlobalTemplates);
 	}
 
+	public static com.liferay.portlet.dynamicdatamapping.model.DDMTemplate getTemplateBySmallImageId(
+		long smallImageId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getTemplateBySmallImageId(smallImageId);
+	}
+
 	/**
 	* Returns all the templates with the class PK.
 	*
@@ -715,18 +723,35 @@ public class DDMTemplateLocalServiceUtil {
 				   .getTemplates(groupId, classNameId, classPK, type, mode);
 	}
 
-	/**
-	* Returns all the templates matching the group and class PK.
-	*
-	* @param groupId the primary key of the group
-	* @param classPK the primary key of the template's related entity
-	* @return the matching templates
-	* @throws SystemException if a system exception occurred
-	*/
 	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMTemplate> getTemplatesByClassPK(
 		long groupId, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getTemplatesByClassPK(groupId, classPK);
+	}
+
+	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMTemplate> getTemplatesByClassPK(
+		long groupId, long classPK, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getTemplatesByClassPK(groupId, classPK, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMTemplate> getTemplatesByClassPK(
+		long[] groupIds, long classPK)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getTemplatesByClassPK(groupIds, classPK);
+	}
+
+	/**
+	* Returns the number of templates matching the group and class PK.
+	*
+	* @param groupId the primary key of the group
+	* @param classPK the primary key of the template's related entity
+	* @return the number of templates belonging to the group and class PK
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int getTemplatesByClassPKCount(long groupId, long classPK)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getTemplatesByClassPKCount(groupId, classPK);
 	}
 
 	/**
@@ -910,7 +935,7 @@ public class DDMTemplateLocalServiceUtil {
 	* @param groupIds the primary keys of the groups
 	* @param classNameIds the primary keys of the entity's instances the
 	templates are related to
-	* @param classPK the primary key of the template's related entity
+	* @param classPKs the primary keys of the template's related entities
 	* @param keywords the keywords (space separated), which may occur in the
 	template's name or description (optionally <code>null</code>)
 	* @param type the template's type (optionally <code>null</code>). For more
@@ -928,13 +953,13 @@ public class DDMTemplateLocalServiceUtil {
 	* @throws SystemException if a system exception occurred
 	*/
 	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMTemplate> search(
-		long companyId, long[] groupIds, long[] classNameIds, long classPK,
+		long companyId, long[] groupIds, long[] classNameIds, long[] classPKs,
 		java.lang.String keywords, java.lang.String type,
 		java.lang.String mode, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .search(companyId, groupIds, classNameIds, classPK,
+				   .search(companyId, groupIds, classNameIds, classPKs,
 			keywords, type, mode, start, end, orderByComparator);
 	}
 
@@ -957,7 +982,7 @@ public class DDMTemplateLocalServiceUtil {
 	* @param groupIds the primary keys of the groups
 	* @param classNameIds the primary keys of the entity's instances the
 	templates are related to
-	* @param classPK the primary key of the template's related entity
+	* @param classPKs the primary keys of the template's related entities
 	* @param name the name keywords (optionally <code>null</code>)
 	* @param description the description keywords (optionally
 	<code>null</code>)
@@ -981,14 +1006,14 @@ public class DDMTemplateLocalServiceUtil {
 	* @throws SystemException if a system exception occurred
 	*/
 	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMTemplate> search(
-		long companyId, long[] groupIds, long[] classNameIds, long classPK,
+		long companyId, long[] groupIds, long[] classNameIds, long[] classPKs,
 		java.lang.String name, java.lang.String description,
 		java.lang.String type, java.lang.String mode,
 		java.lang.String language, boolean andOperator, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .search(companyId, groupIds, classNameIds, classPK, name,
+				   .search(companyId, groupIds, classNameIds, classPKs, name,
 			description, type, mode, language, andOperator, start, end,
 			orderByComparator);
 	}
@@ -1068,7 +1093,7 @@ public class DDMTemplateLocalServiceUtil {
 	* @param groupIds the primary keys of the groups
 	* @param classNameIds the primary keys of the entity's instance the
 	templates are related to
-	* @param classPK the primary key of the template's related entity
+	* @param classPKs the primary keys of the template's related entities
 	* @param keywords the keywords (space separated), which may occur in the
 	template's name or description (optionally <code>null</code>)
 	* @param type the template's type (optionally <code>null</code>). For more
@@ -1081,11 +1106,11 @@ public class DDMTemplateLocalServiceUtil {
 	* @throws SystemException if a system exception occurred
 	*/
 	public static int searchCount(long companyId, long[] groupIds,
-		long[] classNameIds, long classPK, java.lang.String keywords,
+		long[] classNameIds, long[] classPKs, java.lang.String keywords,
 		java.lang.String type, java.lang.String mode)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .searchCount(companyId, groupIds, classNameIds, classPK,
+				   .searchCount(companyId, groupIds, classNameIds, classPKs,
 			keywords, type, mode);
 	}
 
@@ -1097,7 +1122,7 @@ public class DDMTemplateLocalServiceUtil {
 	* @param groupIds the primary keys of the groups
 	* @param classNameIds the primary keys of the entity's instance the
 	templates are related to
-	* @param classPK the primary key of the template's related entity
+	* @param classPKs the primary keys of the template's related entities
 	* @param name the name keywords (optionally <code>null</code>)
 	* @param description the description keywords (optionally
 	<code>null</code>)
@@ -1116,12 +1141,12 @@ public class DDMTemplateLocalServiceUtil {
 	* @throws SystemException if a system exception occurred
 	*/
 	public static int searchCount(long companyId, long[] groupIds,
-		long[] classNameIds, long classPK, java.lang.String name,
+		long[] classNameIds, long[] classPKs, java.lang.String name,
 		java.lang.String description, java.lang.String type,
 		java.lang.String mode, java.lang.String language, boolean andOperator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .searchCount(companyId, groupIds, classNameIds, classPK,
+				   .searchCount(companyId, groupIds, classNameIds, classPKs,
 			name, description, type, mode, language, andOperator);
 	}
 

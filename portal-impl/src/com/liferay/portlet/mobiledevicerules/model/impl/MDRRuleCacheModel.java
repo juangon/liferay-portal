@@ -70,6 +70,7 @@ public class MDRRuleCacheModel implements CacheModel<MDRRule>, Externalizable {
 		return sb.toString();
 	}
 
+	@Override
 	public MDRRule toEntityModel() {
 		MDRRuleImpl mdrRuleImpl = new MDRRuleImpl();
 
@@ -141,6 +142,7 @@ public class MDRRuleCacheModel implements CacheModel<MDRRule>, Externalizable {
 		return mdrRuleImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		ruleId = objectInput.readLong();
@@ -157,6 +159,7 @@ public class MDRRuleCacheModel implements CacheModel<MDRRule>, Externalizable {
 		typeSettings = objectInput.readUTF();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

@@ -55,6 +55,10 @@ request.setAttribute("view.jsp-folderId", String.valueOf(folderId));
 request.setAttribute("view.jsp-viewFolder", Boolean.TRUE.toString());
 
 request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntryQuery));
+
+if (folder != null) {
+	BookmarksUtil.addPortletBreadcrumbEntries(folder, request, renderResponse);
+}
 %>
 
 <portlet:actionURL var="undoTrashURL">
@@ -77,7 +81,7 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 
 	</c:when>
 	<c:when test='<%= topLink.equals("home") %>'>
-		<aui:layout>
+		<aui:row>
 			<c:if test="<%= folder != null %>">
 
 				<%
@@ -105,7 +109,7 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 				/>
 			</c:if>
 
-			<aui:column columnWidth="<%= 75 %>" cssClass="lfr-asset-column lfr-asset-column-details" first="<%= true %>">
+			<aui:col cssClass="lfr-asset-column lfr-asset-column-details" width="<%= 75 %>">
 				<liferay-ui:panel-container extended="<%= false %>" id="bookmarksInfoPanelContainer" persistState="<%= true %>">
 					<c:if test="<%= folder != null %>">
 						<div class="lfr-asset-description">
@@ -174,9 +178,9 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 						<%@ include file="/html/portlet/bookmarks/view_entries.jspf" %>
 					</liferay-ui:panel>
 				</liferay-ui:panel-container>
-			</aui:column>
+			</aui:col>
 
-			<aui:column columnWidth="<%= 25 %>" cssClass="lfr-asset-column lfr-asset-column-actions" last="<%= true %>">
+			<aui:col cssClass="lfr-asset-column lfr-asset-column-actions" last="<%= true %>" width="<%= 25 %>">
 				<div class="lfr-asset-summary">
 					<liferay-ui:icon
 						cssClass="lfr-asset-avatar"
@@ -194,13 +198,11 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 				%>
 
 				<liferay-util:include page="/html/portlet/bookmarks/folder_action.jsp" />
-			</aui:column>
-		</aui:layout>
+			</aui:col>
+		</aui:row>
 
 		<%
 		if (folder != null) {
-			BookmarksUtil.addPortletBreadcrumbEntries(folder, request, renderResponse);
-
 			if (portletName.equals(PortletKeys.BOOKMARKS)) {
 				PortalUtil.setPageSubtitle(folder.getName(), request);
 				PortalUtil.setPageDescription(folder.getDescription(), request);
@@ -210,7 +212,7 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 
 	</c:when>
 	<c:when test='<%= topLink.equals("mine") || topLink.equals("recent") %>'>
-		<aui:layout>
+		<aui:row>
 			<liferay-ui:header
 				title="<%= topLink %>"
 			/>
@@ -261,10 +263,12 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 
 				<liferay-ui:search-iterator />
 			</liferay-ui:search-container>
-		</aui:layout>
+		</aui:row>
 
 		<%
-		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, topLink), currentURL);
+		if (!layout.isTypeControlPanel()) {
+			PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, topLink), currentURL);
+		}
 
 		PortalUtil.setPageSubtitle(LanguageUtil.get(pageContext, StringUtil.replace(topLink, StringPool.UNDERLINE, StringPool.DASH)), request);
 		%>

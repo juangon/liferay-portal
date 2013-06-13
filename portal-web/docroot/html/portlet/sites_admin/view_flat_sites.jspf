@@ -14,9 +14,8 @@
  */
 --%>
 
-
 <liferay-ui:search-container
-	rowChecker="<%= new RowChecker(renderResponse) %>"
+	rowChecker="<%= new SiteChecker(renderResponse) %>"
 	searchContainer="<%= new GroupSearch(renderRequest, portletURL) %>"
 >
 	<aui:input disabled="<%= true %>" name="sitesRedirect" type="hidden" value="<%= portletURL.toString() %>" />
@@ -53,11 +52,7 @@
 
 	</liferay-ui:search-container-results>
 
-	<liferay-ui:search-form
-		page="/html/portlet/users_admin/group_search.jsp"
-		searchContainer="<%= searchContainer %>"
-		showAddButton="<%= false %>"
-	/>
+	<%@ include file="/html/portlet/sites_admin/toolbar.jspf" %>
 
 	<c:if test="<%= !results.isEmpty() %>">
 		<aui:button onClick='<%= renderResponse.getNamespace() + "deleteSites();" %>' value="delete" />
@@ -71,15 +66,18 @@
 		rowIdProperty="friendlyURL"
 		rowVar="row"
 	>
-		<liferay-portlet:renderURL varImpl="rowURL">
-			<portlet:param name="struts_action" value="/sites_admin/view" />
-			<portlet:param name="groupId" value="<%= String.valueOf(curGroup.getGroupId()) %>" />
-			<portlet:param name="sitesListView" value="<%= SiteConstants.LIST_VIEW_TREE %>" />
-		</liferay-portlet:renderURL>
 
 		<%
-		if (!GroupPermissionUtil.contains(permissionChecker, curGroup, ActionKeys.VIEW)) {
-			rowURL = null;
+		String rowURL = null;
+
+		ThemeDisplay siteThemeDisplay = (ThemeDisplay)themeDisplay.clone();
+
+		siteThemeDisplay.setScopeGroupId(curGroup.getGroupId());
+
+		PortletURL siteAdministrationURL = PortalUtil.getSiteAdministrationURL(renderResponse, siteThemeDisplay);
+
+		if (siteAdministrationURL != null) {
+			rowURL = siteAdministrationURL.toString();
 		}
 		%>
 

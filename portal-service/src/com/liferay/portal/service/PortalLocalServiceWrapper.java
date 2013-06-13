@@ -15,12 +15,10 @@
 package com.liferay.portal.service;
 
 /**
- * <p>
- * This class is a wrapper for {@link PortalLocalService}.
- * </p>
+ * Provides a wrapper for {@link PortalLocalService}.
  *
- * @author    Brian Wing Shun Chan
- * @see       PortalLocalService
+ * @author Brian Wing Shun Chan
+ * @see PortalLocalService
  * @generated
  */
 public class PortalLocalServiceWrapper implements PortalLocalService,
@@ -34,6 +32,7 @@ public class PortalLocalServiceWrapper implements PortalLocalService,
 	*
 	* @return the Spring bean ID for this bean
 	*/
+	@Override
 	public java.lang.String getBeanIdentifier() {
 		return _portalLocalService.getBeanIdentifier();
 	}
@@ -43,6 +42,7 @@ public class PortalLocalServiceWrapper implements PortalLocalService,
 	*
 	* @param beanIdentifier the Spring bean ID for this bean
 	*/
+	@Override
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		_portalLocalService.setBeanIdentifier(beanIdentifier);
 	}
@@ -62,10 +62,12 @@ public class PortalLocalServiceWrapper implements PortalLocalService,
 		_portalLocalService = portalLocalService;
 	}
 
+	@Override
 	public PortalLocalService getWrappedService() {
 		return _portalLocalService;
 	}
 
+	@Override
 	public void setWrappedService(PortalLocalService portalLocalService) {
 		_portalLocalService = portalLocalService;
 	}

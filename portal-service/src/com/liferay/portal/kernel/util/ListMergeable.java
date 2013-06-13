@@ -33,6 +33,7 @@ public class ListMergeable<T>
 		return _list.contains(t);
 	}
 
+	@Override
 	public ListMergeable<T> merge(ListMergeable<T> listMergeable) {
 		if ((listMergeable == null) || (listMergeable == this)) {
 			return this;

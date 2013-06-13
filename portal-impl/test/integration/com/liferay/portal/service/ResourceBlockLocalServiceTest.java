@@ -260,13 +260,16 @@ public class ResourceBlockLocalServiceTest {
 
 	private class MockPermissionedModel implements PermissionedModel {
 
+		@Override
 		public long getResourceBlockId() {
 			return _resourceBlockId;
 		}
 
+		@Override
 		public void persist() {
 		}
 
+		@Override
 		public void setResourceBlockId(long resourceBlockId) {
 			_resourceBlockId = resourceBlockId;
 		}
@@ -284,6 +287,7 @@ public class ResourceBlockLocalServiceTest {
 			_semaphore = semaphore;
 		}
 
+		@Override
 		public Void call() throws Exception {
 			if (_semaphore != null) {
 				_semaphore.acquire();
@@ -314,6 +318,7 @@ public class ResourceBlockLocalServiceTest {
 			_semaphore = semaphore;
 		}
 
+		@Override
 		public Void call() throws Exception {
 			while (true) {
 				try {

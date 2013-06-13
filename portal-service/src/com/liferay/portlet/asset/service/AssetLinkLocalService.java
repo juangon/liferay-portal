@@ -23,11 +23,10 @@ import com.liferay.portal.service.BaseLocalService;
 import com.liferay.portal.service.PersistedModelLocalService;
 
 /**
- * The interface for the asset link local service.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
+ * Provides the local service interface for AssetLink. Methods of this
+ * service will not have security checks based on the propagated JAAS
+ * credentials because this service can only be accessed from within the same
+ * VM.
  *
  * @author Brian Wing Shun Chan
  * @see AssetLinkLocalServiceUtil
@@ -170,6 +169,7 @@ public interface AssetLinkLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	@Override
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.PersistedModel getPersistedModel(
 		java.io.Serializable primaryKeyObj)
@@ -375,6 +375,11 @@ public interface AssetLinkLocalService extends BaseLocalService,
 	public java.util.List<com.liferay.portlet.asset.model.AssetLink> getReverseLinks(
 		long entryId, int typeId)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portlet.asset.model.AssetLink updateLink(long userId,
+		long entryId1, long entryId2, int typeId, int weight)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
 	* Updates all links of the asset entry, replacing them with links

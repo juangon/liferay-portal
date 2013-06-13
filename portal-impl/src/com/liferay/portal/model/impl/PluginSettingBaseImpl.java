@@ -37,6 +37,7 @@ public abstract class PluginSettingBaseImpl extends PluginSettingModelImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a plugin setting model instance should use the {@link PluginSetting} interface instead.
 	 */
+	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
 			PluginSettingLocalServiceUtil.addPluginSetting(this);

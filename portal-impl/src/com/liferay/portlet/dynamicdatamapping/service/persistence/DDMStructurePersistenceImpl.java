@@ -120,6 +120,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> findByUuid(String uuid) throws SystemException {
 		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -137,6 +138,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the range of matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> findByUuid(String uuid, int start, int end)
 		throws SystemException {
 		return findByUuid(uuid, start, end, null);
@@ -156,6 +158,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the ordered range of matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> findByUuid(String uuid, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -276,6 +279,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure findByUuid_First(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchStructureException, SystemException {
@@ -305,6 +309,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the first matching d d m structure, or <code>null</code> if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure fetchByUuid_First(String uuid,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<DDMStructure> list = findByUuid(uuid, 0, 1, orderByComparator);
@@ -325,6 +330,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure findByUuid_Last(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchStructureException, SystemException {
@@ -354,6 +360,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the last matching d d m structure, or <code>null</code> if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure fetchByUuid_Last(String uuid,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByUuid(uuid);
@@ -378,6 +385,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a d d m structure with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure[] findByUuid_PrevAndNext(long structureId, String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchStructureException, SystemException {
@@ -533,6 +541,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @param uuid the uuid
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByUuid(String uuid) throws SystemException {
 		for (DDMStructure ddmStructure : findByUuid(uuid, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null)) {
@@ -547,6 +556,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the number of matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUuid(String uuid) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID;
 
@@ -629,6 +639,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure findByUUID_G(String uuid, long groupId)
 		throws NoSuchStructureException, SystemException {
 		DDMStructure ddmStructure = fetchByUUID_G(uuid, groupId);
@@ -664,6 +675,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the matching d d m structure, or <code>null</code> if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		return fetchByUUID_G(uuid, groupId, true);
@@ -678,6 +690,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the matching d d m structure, or <code>null</code> if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure fetchByUUID_G(String uuid, long groupId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, groupId };
@@ -784,6 +797,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the d d m structure that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure removeByUUID_G(String uuid, long groupId)
 		throws NoSuchStructureException, SystemException {
 		DDMStructure ddmStructure = findByUUID_G(uuid, groupId);
@@ -799,6 +813,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the number of matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID_G;
@@ -896,6 +911,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> findByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		return findByUuid_C(uuid, companyId, QueryUtil.ALL_POS,
@@ -916,6 +932,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the range of matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> findByUuid_C(String uuid, long companyId,
 		int start, int end) throws SystemException {
 		return findByUuid_C(uuid, companyId, start, end, null);
@@ -936,6 +953,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the ordered range of matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> findByUuid_C(String uuid, long companyId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1067,6 +1085,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure findByUuid_C_First(String uuid, long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchStructureException, SystemException {
@@ -1101,6 +1120,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the first matching d d m structure, or <code>null</code> if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure fetchByUuid_C_First(String uuid, long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<DDMStructure> list = findByUuid_C(uuid, companyId, 0, 1,
@@ -1123,6 +1143,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure findByUuid_C_Last(String uuid, long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchStructureException, SystemException {
@@ -1157,6 +1178,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the last matching d d m structure, or <code>null</code> if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure fetchByUuid_C_Last(String uuid, long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByUuid_C(uuid, companyId);
@@ -1182,6 +1204,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a d d m structure with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure[] findByUuid_C_PrevAndNext(long structureId,
 		String uuid, long companyId, OrderByComparator orderByComparator)
 		throws NoSuchStructureException, SystemException {
@@ -1342,6 +1365,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @param companyId the company ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		for (DDMStructure ddmStructure : findByUuid_C(uuid, companyId,
@@ -1358,6 +1382,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the number of matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID_C;
@@ -1457,6 +1482,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> findByGroupId(long groupId)
 		throws SystemException {
 		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
@@ -1475,6 +1501,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the range of matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
 		return findByGroupId(groupId, start, end, null);
@@ -1494,6 +1521,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the ordered range of matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> findByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -1600,6 +1628,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure findByGroupId_First(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchStructureException, SystemException {
@@ -1630,6 +1659,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the first matching d d m structure, or <code>null</code> if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure fetchByGroupId_First(long groupId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<DDMStructure> list = findByGroupId(groupId, 0, 1, orderByComparator);
@@ -1650,6 +1680,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure findByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchStructureException, SystemException {
@@ -1680,6 +1711,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the last matching d d m structure, or <code>null</code> if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure fetchByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByGroupId(groupId);
@@ -1704,6 +1736,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a d d m structure with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure[] findByGroupId_PrevAndNext(long structureId,
 		long groupId, OrderByComparator orderByComparator)
 		throws NoSuchStructureException, SystemException {
@@ -1846,6 +1879,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the matching d d m structures that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> filterFindByGroupId(long groupId)
 		throws SystemException {
 		return filterFindByGroupId(groupId, QueryUtil.ALL_POS,
@@ -1865,6 +1899,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the range of matching d d m structures that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> filterFindByGroupId(long groupId, int start,
 		int end) throws SystemException {
 		return filterFindByGroupId(groupId, start, end, null);
@@ -1884,6 +1919,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the ordered range of matching d d m structures that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> filterFindByGroupId(long groupId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -1975,6 +2011,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a d d m structure with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure[] filterFindByGroupId_PrevAndNext(long structureId,
 		long groupId, OrderByComparator orderByComparator)
 		throws NoSuchStructureException, SystemException {
@@ -2157,6 +2194,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the matching d d m structures that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> filterFindByGroupId(long[] groupIds)
 		throws SystemException {
 		return filterFindByGroupId(groupIds, QueryUtil.ALL_POS,
@@ -2176,6 +2214,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the range of matching d d m structures that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> filterFindByGroupId(long[] groupIds, int start,
 		int end) throws SystemException {
 		return filterFindByGroupId(groupIds, start, end, null);
@@ -2195,6 +2234,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the ordered range of matching d d m structures that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> filterFindByGroupId(long[] groupIds, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupIds)) {
@@ -2301,6 +2341,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> findByGroupId(long[] groupIds)
 		throws SystemException {
 		return findByGroupId(groupIds, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -2320,6 +2361,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the range of matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> findByGroupId(long[] groupIds, int start, int end)
 		throws SystemException {
 		return findByGroupId(groupIds, start, end, null);
@@ -2339,6 +2381,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the ordered range of matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> findByGroupId(long[] groupIds, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		if ((groupIds != null) && (groupIds.length == 1)) {
@@ -2463,6 +2506,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @param groupId the group ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (DDMStructure ddmStructure : findByGroupId(groupId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -2477,6 +2521,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the number of matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByGroupId(long groupId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPID;
 
@@ -2529,6 +2574,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the number of matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByGroupId(long[] groupIds) throws SystemException {
 		Object[] finderArgs = new Object[] { StringUtil.merge(groupIds) };
 
@@ -2603,6 +2649,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the number of matching d d m structures that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByGroupId(long groupId) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return countByGroupId(groupId);
@@ -2651,6 +2698,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the number of matching d d m structures that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByGroupId(long[] groupIds) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupIds)) {
 			return countByGroupId(groupIds);
@@ -2717,6 +2765,503 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "ddmStructure.groupId = ?";
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_5 = "(" +
 		removeConjunction(_FINDER_COLUMN_GROUPID_GROUPID_2) + ")";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_PARENTSTRUCTUREID =
+		new FinderPath(DDMStructureModelImpl.ENTITY_CACHE_ENABLED,
+			DDMStructureModelImpl.FINDER_CACHE_ENABLED, DDMStructureImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByParentStructureId",
+			new String[] {
+				Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PARENTSTRUCTUREID =
+		new FinderPath(DDMStructureModelImpl.ENTITY_CACHE_ENABLED,
+			DDMStructureModelImpl.FINDER_CACHE_ENABLED, DDMStructureImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"findByParentStructureId", new String[] { Long.class.getName() },
+			DDMStructureModelImpl.PARENTSTRUCTUREID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_PARENTSTRUCTUREID = new FinderPath(DDMStructureModelImpl.ENTITY_CACHE_ENABLED,
+			DDMStructureModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByParentStructureId", new String[] { Long.class.getName() });
+
+	/**
+	 * Returns all the d d m structures where parentStructureId = &#63;.
+	 *
+	 * @param parentStructureId the parent structure ID
+	 * @return the matching d d m structures
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<DDMStructure> findByParentStructureId(long parentStructureId)
+		throws SystemException {
+		return findByParentStructureId(parentStructureId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the d d m structures where parentStructureId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.portlet.dynamicdatamapping.model.impl.DDMStructureModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param parentStructureId the parent structure ID
+	 * @param start the lower bound of the range of d d m structures
+	 * @param end the upper bound of the range of d d m structures (not inclusive)
+	 * @return the range of matching d d m structures
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<DDMStructure> findByParentStructureId(long parentStructureId,
+		int start, int end) throws SystemException {
+		return findByParentStructureId(parentStructureId, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the d d m structures where parentStructureId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.portlet.dynamicdatamapping.model.impl.DDMStructureModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param parentStructureId the parent structure ID
+	 * @param start the lower bound of the range of d d m structures
+	 * @param end the upper bound of the range of d d m structures (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching d d m structures
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<DDMStructure> findByParentStructureId(long parentStructureId,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PARENTSTRUCTUREID;
+			finderArgs = new Object[] { parentStructureId };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_PARENTSTRUCTUREID;
+			finderArgs = new Object[] {
+					parentStructureId,
+					
+					start, end, orderByComparator
+				};
+		}
+
+		List<DDMStructure> list = (List<DDMStructure>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (DDMStructure ddmStructure : list) {
+				if ((parentStructureId != ddmStructure.getParentStructureId())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_DDMSTRUCTURE_WHERE);
+
+			query.append(_FINDER_COLUMN_PARENTSTRUCTUREID_PARENTSTRUCTUREID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(DDMStructureModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(parentStructureId);
+
+				if (!pagination) {
+					list = (List<DDMStructure>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
+					Collections.sort(list);
+
+					list = new UnmodifiableList<DDMStructure>(list);
+				}
+				else {
+					list = (List<DDMStructure>)QueryUtil.list(q, getDialect(),
+							start, end);
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first d d m structure in the ordered set where parentStructureId = &#63;.
+	 *
+	 * @param parentStructureId the parent structure ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching d d m structure
+	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a matching d d m structure could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DDMStructure findByParentStructureId_First(long parentStructureId,
+		OrderByComparator orderByComparator)
+		throws NoSuchStructureException, SystemException {
+		DDMStructure ddmStructure = fetchByParentStructureId_First(parentStructureId,
+				orderByComparator);
+
+		if (ddmStructure != null) {
+			return ddmStructure;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("parentStructureId=");
+		msg.append(parentStructureId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchStructureException(msg.toString());
+	}
+
+	/**
+	 * Returns the first d d m structure in the ordered set where parentStructureId = &#63;.
+	 *
+	 * @param parentStructureId the parent structure ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching d d m structure, or <code>null</code> if a matching d d m structure could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DDMStructure fetchByParentStructureId_First(long parentStructureId,
+		OrderByComparator orderByComparator) throws SystemException {
+		List<DDMStructure> list = findByParentStructureId(parentStructureId, 0,
+				1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last d d m structure in the ordered set where parentStructureId = &#63;.
+	 *
+	 * @param parentStructureId the parent structure ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching d d m structure
+	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a matching d d m structure could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DDMStructure findByParentStructureId_Last(long parentStructureId,
+		OrderByComparator orderByComparator)
+		throws NoSuchStructureException, SystemException {
+		DDMStructure ddmStructure = fetchByParentStructureId_Last(parentStructureId,
+				orderByComparator);
+
+		if (ddmStructure != null) {
+			return ddmStructure;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("parentStructureId=");
+		msg.append(parentStructureId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchStructureException(msg.toString());
+	}
+
+	/**
+	 * Returns the last d d m structure in the ordered set where parentStructureId = &#63;.
+	 *
+	 * @param parentStructureId the parent structure ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching d d m structure, or <code>null</code> if a matching d d m structure could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DDMStructure fetchByParentStructureId_Last(long parentStructureId,
+		OrderByComparator orderByComparator) throws SystemException {
+		int count = countByParentStructureId(parentStructureId);
+
+		List<DDMStructure> list = findByParentStructureId(parentStructureId,
+				count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the d d m structures before and after the current d d m structure in the ordered set where parentStructureId = &#63;.
+	 *
+	 * @param structureId the primary key of the current d d m structure
+	 * @param parentStructureId the parent structure ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next d d m structure
+	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a d d m structure with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public DDMStructure[] findByParentStructureId_PrevAndNext(
+		long structureId, long parentStructureId,
+		OrderByComparator orderByComparator)
+		throws NoSuchStructureException, SystemException {
+		DDMStructure ddmStructure = findByPrimaryKey(structureId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			DDMStructure[] array = new DDMStructureImpl[3];
+
+			array[0] = getByParentStructureId_PrevAndNext(session,
+					ddmStructure, parentStructureId, orderByComparator, true);
+
+			array[1] = ddmStructure;
+
+			array[2] = getByParentStructureId_PrevAndNext(session,
+					ddmStructure, parentStructureId, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected DDMStructure getByParentStructureId_PrevAndNext(Session session,
+		DDMStructure ddmStructure, long parentStructureId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_DDMSTRUCTURE_WHERE);
+
+		query.append(_FINDER_COLUMN_PARENTSTRUCTUREID_PARENTSTRUCTUREID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(DDMStructureModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(parentStructureId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(ddmStructure);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<DDMStructure> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the d d m structures where parentStructureId = &#63; from the database.
+	 *
+	 * @param parentStructureId the parent structure ID
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void removeByParentStructureId(long parentStructureId)
+		throws SystemException {
+		for (DDMStructure ddmStructure : findByParentStructureId(
+				parentStructureId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(ddmStructure);
+		}
+	}
+
+	/**
+	 * Returns the number of d d m structures where parentStructureId = &#63;.
+	 *
+	 * @param parentStructureId the parent structure ID
+	 * @return the number of matching d d m structures
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByParentStructureId(long parentStructureId)
+		throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_PARENTSTRUCTUREID;
+
+		Object[] finderArgs = new Object[] { parentStructureId };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_DDMSTRUCTURE_WHERE);
+
+			query.append(_FINDER_COLUMN_PARENTSTRUCTUREID_PARENTSTRUCTUREID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(parentStructureId);
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_PARENTSTRUCTUREID_PARENTSTRUCTUREID_2 =
+		"ddmStructure.parentStructureId = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_CLASSNAMEID =
 		new FinderPath(DDMStructureModelImpl.ENTITY_CACHE_ENABLED,
 			DDMStructureModelImpl.FINDER_CACHE_ENABLED, DDMStructureImpl.class,
@@ -2745,6 +3290,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> findByClassNameId(long classNameId)
 		throws SystemException {
 		return findByClassNameId(classNameId, QueryUtil.ALL_POS,
@@ -2764,6 +3310,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the range of matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> findByClassNameId(long classNameId, int start,
 		int end) throws SystemException {
 		return findByClassNameId(classNameId, start, end, null);
@@ -2783,6 +3330,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the ordered range of matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> findByClassNameId(long classNameId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -2889,6 +3437,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure findByClassNameId_First(long classNameId,
 		OrderByComparator orderByComparator)
 		throws NoSuchStructureException, SystemException {
@@ -2919,6 +3468,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the first matching d d m structure, or <code>null</code> if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure fetchByClassNameId_First(long classNameId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<DDMStructure> list = findByClassNameId(classNameId, 0, 1,
@@ -2940,6 +3490,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure findByClassNameId_Last(long classNameId,
 		OrderByComparator orderByComparator)
 		throws NoSuchStructureException, SystemException {
@@ -2970,6 +3521,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the last matching d d m structure, or <code>null</code> if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure fetchByClassNameId_Last(long classNameId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByClassNameId(classNameId);
@@ -2994,6 +3546,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a d d m structure with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure[] findByClassNameId_PrevAndNext(long structureId,
 		long classNameId, OrderByComparator orderByComparator)
 		throws NoSuchStructureException, SystemException {
@@ -3135,6 +3688,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @param classNameId the class name ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByClassNameId(long classNameId) throws SystemException {
 		for (DDMStructure ddmStructure : findByClassNameId(classNameId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -3149,6 +3703,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the number of matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByClassNameId(long classNameId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_CLASSNAMEID;
 
@@ -3223,6 +3778,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> findByStructureKey(String structureKey)
 		throws SystemException {
 		return findByStructureKey(structureKey, QueryUtil.ALL_POS,
@@ -3242,6 +3798,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the range of matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> findByStructureKey(String structureKey,
 		int start, int end) throws SystemException {
 		return findByStructureKey(structureKey, start, end, null);
@@ -3261,6 +3818,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the ordered range of matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> findByStructureKey(String structureKey,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -3387,6 +3945,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure findByStructureKey_First(String structureKey,
 		OrderByComparator orderByComparator)
 		throws NoSuchStructureException, SystemException {
@@ -3417,6 +3976,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the first matching d d m structure, or <code>null</code> if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure fetchByStructureKey_First(String structureKey,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<DDMStructure> list = findByStructureKey(structureKey, 0, 1,
@@ -3438,6 +3998,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure findByStructureKey_Last(String structureKey,
 		OrderByComparator orderByComparator)
 		throws NoSuchStructureException, SystemException {
@@ -3468,6 +4029,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the last matching d d m structure, or <code>null</code> if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure fetchByStructureKey_Last(String structureKey,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByStructureKey(structureKey);
@@ -3492,6 +4054,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a d d m structure with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure[] findByStructureKey_PrevAndNext(long structureId,
 		String structureKey, OrderByComparator orderByComparator)
 		throws NoSuchStructureException, SystemException {
@@ -3647,6 +4210,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @param structureKey the structure key
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByStructureKey(String structureKey)
 		throws SystemException {
 		for (DDMStructure ddmStructure : findByStructureKey(structureKey,
@@ -3662,6 +4226,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the number of matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByStructureKey(String structureKey)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_STRUCTUREKEY;
@@ -3753,6 +4318,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> findByG_P(long groupId, long parentStructureId)
 		throws SystemException {
 		return findByG_P(groupId, parentStructureId, QueryUtil.ALL_POS,
@@ -3773,6 +4339,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the range of matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> findByG_P(long groupId, long parentStructureId,
 		int start, int end) throws SystemException {
 		return findByG_P(groupId, parentStructureId, start, end, null);
@@ -3793,6 +4360,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the ordered range of matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> findByG_P(long groupId, long parentStructureId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -3910,6 +4478,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure findByG_P_First(long groupId, long parentStructureId,
 		OrderByComparator orderByComparator)
 		throws NoSuchStructureException, SystemException {
@@ -3944,6 +4513,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the first matching d d m structure, or <code>null</code> if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure fetchByG_P_First(long groupId, long parentStructureId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<DDMStructure> list = findByG_P(groupId, parentStructureId, 0, 1,
@@ -3966,6 +4536,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure findByG_P_Last(long groupId, long parentStructureId,
 		OrderByComparator orderByComparator)
 		throws NoSuchStructureException, SystemException {
@@ -4000,6 +4571,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the last matching d d m structure, or <code>null</code> if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure fetchByG_P_Last(long groupId, long parentStructureId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByG_P(groupId, parentStructureId);
@@ -4025,6 +4597,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a d d m structure with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure[] findByG_P_PrevAndNext(long structureId, long groupId,
 		long parentStructureId, OrderByComparator orderByComparator)
 		throws NoSuchStructureException, SystemException {
@@ -4172,6 +4745,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the matching d d m structures that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> filterFindByG_P(long groupId,
 		long parentStructureId) throws SystemException {
 		return filterFindByG_P(groupId, parentStructureId, QueryUtil.ALL_POS,
@@ -4192,6 +4766,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the range of matching d d m structures that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> filterFindByG_P(long groupId,
 		long parentStructureId, int start, int end) throws SystemException {
 		return filterFindByG_P(groupId, parentStructureId, start, end, null);
@@ -4212,6 +4787,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the ordered range of matching d d m structures that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> filterFindByG_P(long groupId,
 		long parentStructureId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -4310,6 +4886,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a d d m structure with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure[] filterFindByG_P_PrevAndNext(long structureId,
 		long groupId, long parentStructureId,
 		OrderByComparator orderByComparator)
@@ -4497,6 +5074,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @param parentStructureId the parent structure ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByG_P(long groupId, long parentStructureId)
 		throws SystemException {
 		for (DDMStructure ddmStructure : findByG_P(groupId, parentStructureId,
@@ -4513,6 +5091,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the number of matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_P(long groupId, long parentStructureId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_P;
@@ -4571,6 +5150,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the number of matching d d m structures that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByG_P(long groupId, long parentStructureId)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -4651,6 +5231,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> findByG_C(long groupId, long classNameId)
 		throws SystemException {
 		return findByG_C(groupId, classNameId, QueryUtil.ALL_POS,
@@ -4671,6 +5252,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the range of matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> findByG_C(long groupId, long classNameId,
 		int start, int end) throws SystemException {
 		return findByG_C(groupId, classNameId, start, end, null);
@@ -4691,6 +5273,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the ordered range of matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> findByG_C(long groupId, long classNameId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -4808,6 +5391,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure findByG_C_First(long groupId, long classNameId,
 		OrderByComparator orderByComparator)
 		throws NoSuchStructureException, SystemException {
@@ -4842,6 +5426,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the first matching d d m structure, or <code>null</code> if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure fetchByG_C_First(long groupId, long classNameId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<DDMStructure> list = findByG_C(groupId, classNameId, 0, 1,
@@ -4864,6 +5449,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure findByG_C_Last(long groupId, long classNameId,
 		OrderByComparator orderByComparator)
 		throws NoSuchStructureException, SystemException {
@@ -4898,6 +5484,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the last matching d d m structure, or <code>null</code> if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure fetchByG_C_Last(long groupId, long classNameId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByG_C(groupId, classNameId);
@@ -4923,6 +5510,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a d d m structure with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure[] findByG_C_PrevAndNext(long structureId, long groupId,
 		long classNameId, OrderByComparator orderByComparator)
 		throws NoSuchStructureException, SystemException {
@@ -5070,6 +5658,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the matching d d m structures that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> filterFindByG_C(long groupId, long classNameId)
 		throws SystemException {
 		return filterFindByG_C(groupId, classNameId, QueryUtil.ALL_POS,
@@ -5090,6 +5679,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the range of matching d d m structures that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> filterFindByG_C(long groupId, long classNameId,
 		int start, int end) throws SystemException {
 		return filterFindByG_C(groupId, classNameId, start, end, null);
@@ -5110,6 +5700,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the ordered range of matching d d m structures that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> filterFindByG_C(long groupId, long classNameId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -5207,6 +5798,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a d d m structure with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure[] filterFindByG_C_PrevAndNext(long structureId,
 		long groupId, long classNameId, OrderByComparator orderByComparator)
 		throws NoSuchStructureException, SystemException {
@@ -5394,6 +5986,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the matching d d m structures that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> filterFindByG_C(long[] groupIds, long classNameId)
 		throws SystemException {
 		return filterFindByG_C(groupIds, classNameId, QueryUtil.ALL_POS,
@@ -5414,6 +6007,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the range of matching d d m structures that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> filterFindByG_C(long[] groupIds,
 		long classNameId, int start, int end) throws SystemException {
 		return filterFindByG_C(groupIds, classNameId, start, end, null);
@@ -5434,6 +6028,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the ordered range of matching d d m structures that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> filterFindByG_C(long[] groupIds,
 		long classNameId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -5553,6 +6148,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> findByG_C(long[] groupIds, long classNameId)
 		throws SystemException {
 		return findByG_C(groupIds, classNameId, QueryUtil.ALL_POS,
@@ -5573,6 +6169,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the range of matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> findByG_C(long[] groupIds, long classNameId,
 		int start, int end) throws SystemException {
 		return findByG_C(groupIds, classNameId, start, end, null);
@@ -5593,6 +6190,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the ordered range of matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> findByG_C(long[] groupIds, long classNameId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -5731,6 +6329,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @param classNameId the class name ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByG_C(long groupId, long classNameId)
 		throws SystemException {
 		for (DDMStructure ddmStructure : findByG_C(groupId, classNameId,
@@ -5747,6 +6346,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the number of matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_C(long groupId, long classNameId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_C;
@@ -5805,6 +6405,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the number of matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_C(long[] groupIds, long classNameId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -5893,6 +6494,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the number of matching d d m structures that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByG_C(long groupId, long classNameId)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -5947,6 +6549,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the number of matching d d m structures that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByG_C(long[] groupIds, long classNameId)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupIds)) {
@@ -6055,6 +6658,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> findByC_C(long companyId, long classNameId)
 		throws SystemException {
 		return findByC_C(companyId, classNameId, QueryUtil.ALL_POS,
@@ -6075,6 +6679,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the range of matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> findByC_C(long companyId, long classNameId,
 		int start, int end) throws SystemException {
 		return findByC_C(companyId, classNameId, start, end, null);
@@ -6095,6 +6700,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the ordered range of matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> findByC_C(long companyId, long classNameId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -6212,6 +6818,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure findByC_C_First(long companyId, long classNameId,
 		OrderByComparator orderByComparator)
 		throws NoSuchStructureException, SystemException {
@@ -6246,6 +6853,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the first matching d d m structure, or <code>null</code> if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure fetchByC_C_First(long companyId, long classNameId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<DDMStructure> list = findByC_C(companyId, classNameId, 0, 1,
@@ -6268,6 +6876,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure findByC_C_Last(long companyId, long classNameId,
 		OrderByComparator orderByComparator)
 		throws NoSuchStructureException, SystemException {
@@ -6302,6 +6911,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the last matching d d m structure, or <code>null</code> if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure fetchByC_C_Last(long companyId, long classNameId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByC_C(companyId, classNameId);
@@ -6327,6 +6937,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a d d m structure with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure[] findByC_C_PrevAndNext(long structureId,
 		long companyId, long classNameId, OrderByComparator orderByComparator)
 		throws NoSuchStructureException, SystemException {
@@ -6473,6 +7084,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @param classNameId the class name ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByC_C(long companyId, long classNameId)
 		throws SystemException {
 		for (DDMStructure ddmStructure : findByC_C(companyId, classNameId,
@@ -6489,6 +7101,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the number of matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByC_C(long companyId, long classNameId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_C;
@@ -6569,6 +7182,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure findByG_C_S(long groupId, long classNameId,
 		String structureKey) throws NoSuchStructureException, SystemException {
 		DDMStructure ddmStructure = fetchByG_C_S(groupId, classNameId,
@@ -6609,6 +7223,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the matching d d m structure, or <code>null</code> if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure fetchByG_C_S(long groupId, long classNameId,
 		String structureKey) throws SystemException {
 		return fetchByG_C_S(groupId, classNameId, structureKey, true);
@@ -6624,6 +7239,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the matching d d m structure, or <code>null</code> if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure fetchByG_C_S(long groupId, long classNameId,
 		String structureKey, boolean retrieveFromCache)
 		throws SystemException {
@@ -6739,6 +7355,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the d d m structure that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure removeByG_C_S(long groupId, long classNameId,
 		String structureKey) throws NoSuchStructureException, SystemException {
 		DDMStructure ddmStructure = findByG_C_S(groupId, classNameId,
@@ -6756,6 +7373,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the number of matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_C_S(long groupId, long classNameId, String structureKey)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_C_S;
@@ -6866,6 +7484,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> findByG_N_D(long groupId, String name,
 		String description) throws SystemException {
 		return findByG_N_D(groupId, name, description, QueryUtil.ALL_POS,
@@ -6887,6 +7506,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the range of matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> findByG_N_D(long groupId, String name,
 		String description, int start, int end) throws SystemException {
 		return findByG_N_D(groupId, name, description, start, end, null);
@@ -6908,6 +7528,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the ordered range of matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> findByG_N_D(long groupId, String name,
 		String description, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -7060,6 +7681,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure findByG_N_D_First(long groupId, String name,
 		String description, OrderByComparator orderByComparator)
 		throws NoSuchStructureException, SystemException {
@@ -7098,6 +7720,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the first matching d d m structure, or <code>null</code> if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure fetchByG_N_D_First(long groupId, String name,
 		String description, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -7122,6 +7745,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure findByG_N_D_Last(long groupId, String name,
 		String description, OrderByComparator orderByComparator)
 		throws NoSuchStructureException, SystemException {
@@ -7160,6 +7784,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the last matching d d m structure, or <code>null</code> if a matching d d m structure could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure fetchByG_N_D_Last(long groupId, String name,
 		String description, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -7187,6 +7812,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a d d m structure with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure[] findByG_N_D_PrevAndNext(long structureId,
 		long groupId, String name, String description,
 		OrderByComparator orderByComparator)
@@ -7369,6 +7995,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the matching d d m structures that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> filterFindByG_N_D(long groupId, String name,
 		String description) throws SystemException {
 		return filterFindByG_N_D(groupId, name, description, QueryUtil.ALL_POS,
@@ -7390,6 +8017,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the range of matching d d m structures that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> filterFindByG_N_D(long groupId, String name,
 		String description, int start, int end) throws SystemException {
 		return filterFindByG_N_D(groupId, name, description, start, end, null);
@@ -7411,6 +8039,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the ordered range of matching d d m structures that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> filterFindByG_N_D(long groupId, String name,
 		String description, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -7542,6 +8171,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a d d m structure with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure[] filterFindByG_N_D_PrevAndNext(long structureId,
 		long groupId, String name, String description,
 		OrderByComparator orderByComparator)
@@ -7763,6 +8393,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @param description the description
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByG_N_D(long groupId, String name, String description)
 		throws SystemException {
 		for (DDMStructure ddmStructure : findByG_N_D(groupId, name,
@@ -7780,6 +8411,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the number of matching d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_N_D(long groupId, String name, String description)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_N_D;
@@ -7871,6 +8503,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the number of matching d d m structures that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByG_N_D(long groupId, String name, String description)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -7962,6 +8595,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 *
 	 * @param ddmStructure the d d m structure
 	 */
+	@Override
 	public void cacheResult(DDMStructure ddmStructure) {
 		EntityCacheUtil.putResult(DDMStructureModelImpl.ENTITY_CACHE_ENABLED,
 			DDMStructureImpl.class, ddmStructure.getPrimaryKey(), ddmStructure);
@@ -7984,6 +8618,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 *
 	 * @param ddmStructures the d d m structures
 	 */
+	@Override
 	public void cacheResult(List<DDMStructure> ddmStructures) {
 		for (DDMStructure ddmStructure : ddmStructures) {
 			if (EntityCacheUtil.getResult(
@@ -8147,6 +8782,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @param structureId the primary key for the new d d m structure
 	 * @return the new d d m structure
 	 */
+	@Override
 	public DDMStructure create(long structureId) {
 		DDMStructure ddmStructure = new DDMStructureImpl();
 
@@ -8168,6 +8804,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a d d m structure with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure remove(long structureId)
 		throws NoSuchStructureException, SystemException {
 		return remove((Serializable)structureId);
@@ -8353,6 +8990,25 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 
 				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
 				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
+					args);
+			}
+
+			if ((ddmStructureModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PARENTSTRUCTUREID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						ddmStructureModelImpl.getOriginalParentStructureId()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_PARENTSTRUCTUREID,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PARENTSTRUCTUREID,
+					args);
+
+				args = new Object[] { ddmStructureModelImpl.getParentStructureId() };
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_PARENTSTRUCTUREID,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PARENTSTRUCTUREID,
 					args);
 			}
 
@@ -8553,6 +9209,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a d d m structure with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure findByPrimaryKey(long structureId)
 		throws NoSuchStructureException, SystemException {
 		return findByPrimaryKey((Serializable)structureId);
@@ -8613,6 +9270,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the d d m structure, or <code>null</code> if a d d m structure with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMStructure fetchByPrimaryKey(long structureId)
 		throws SystemException {
 		return fetchByPrimaryKey((Serializable)structureId);
@@ -8624,6 +9282,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -8640,6 +9299,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the range of d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
@@ -8658,6 +9318,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the ordered range of d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DDMStructure> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -8743,6 +9404,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (DDMStructure ddmStructure : findAll()) {
 			remove(ddmStructure);
@@ -8755,6 +9417,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the number of d d m structures
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -8793,6 +9456,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the document library file entry types associated with the d d m structure
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portlet.documentlibrary.model.DLFileEntryType> getDLFileEntryTypes(
 		long pk) throws SystemException {
 		return getDLFileEntryTypes(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
@@ -8811,6 +9475,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the range of document library file entry types associated with the d d m structure
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portlet.documentlibrary.model.DLFileEntryType> getDLFileEntryTypes(
 		long pk, int start, int end) throws SystemException {
 		return getDLFileEntryTypes(pk, start, end, null);
@@ -8844,6 +9509,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the ordered range of document library file entry types associated with the d d m structure
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portlet.documentlibrary.model.DLFileEntryType> getDLFileEntryTypes(
 		long pk, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -8940,6 +9606,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return the number of document library file entry types associated with the d d m structure
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int getDLFileEntryTypesSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { pk };
 
@@ -8995,6 +9662,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return <code>true</code> if the document library file entry type is associated with the d d m structure; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean containsDLFileEntryType(long pk, long dlFileEntryTypePK)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { pk, dlFileEntryTypePK };
@@ -9028,6 +9696,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @return <code>true</code> if the d d m structure has any document library file entry types associated with it; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean containsDLFileEntryTypes(long pk) throws SystemException {
 		if (getDLFileEntryTypesSize(pk) > 0) {
 			return true;
@@ -9044,6 +9713,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @param dlFileEntryTypePK the primary key of the document library file entry type
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addDLFileEntryType(long pk, long dlFileEntryTypePK)
 		throws SystemException {
 		try {
@@ -9064,6 +9734,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @param dlFileEntryType the document library file entry type
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addDLFileEntryType(long pk,
 		com.liferay.portlet.documentlibrary.model.DLFileEntryType dlFileEntryType)
 		throws SystemException {
@@ -9085,6 +9756,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @param dlFileEntryTypePKs the primary keys of the document library file entry types
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addDLFileEntryTypes(long pk, long[] dlFileEntryTypePKs)
 		throws SystemException {
 		try {
@@ -9107,6 +9779,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @param dlFileEntryTypes the document library file entry types
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addDLFileEntryTypes(long pk,
 		List<com.liferay.portlet.documentlibrary.model.DLFileEntryType> dlFileEntryTypes)
 		throws SystemException {
@@ -9129,6 +9802,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @param pk the primary key of the d d m structure to clear the associated document library file entry types from
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void clearDLFileEntryTypes(long pk) throws SystemException {
 		try {
 			clearDLFileEntryTypes.clear(pk);
@@ -9148,6 +9822,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @param dlFileEntryTypePK the primary key of the document library file entry type
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeDLFileEntryType(long pk, long dlFileEntryTypePK)
 		throws SystemException {
 		try {
@@ -9168,6 +9843,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @param dlFileEntryType the document library file entry type
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeDLFileEntryType(long pk,
 		com.liferay.portlet.documentlibrary.model.DLFileEntryType dlFileEntryType)
 		throws SystemException {
@@ -9189,6 +9865,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @param dlFileEntryTypePKs the primary keys of the document library file entry types
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeDLFileEntryTypes(long pk, long[] dlFileEntryTypePKs)
 		throws SystemException {
 		try {
@@ -9211,6 +9888,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @param dlFileEntryTypes the document library file entry types
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeDLFileEntryTypes(long pk,
 		List<com.liferay.portlet.documentlibrary.model.DLFileEntryType> dlFileEntryTypes)
 		throws SystemException {
@@ -9234,6 +9912,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @param dlFileEntryTypePKs the primary keys of the document library file entry types to be associated with the d d m structure
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setDLFileEntryTypes(long pk, long[] dlFileEntryTypePKs)
 		throws SystemException {
 		try {
@@ -9269,6 +9948,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	 * @param dlFileEntryTypes the document library file entry types to be associated with the d d m structure
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setDLFileEntryTypes(long pk,
 		List<com.liferay.portlet.documentlibrary.model.DLFileEntryType> dlFileEntryTypes)
 		throws SystemException {
@@ -9548,6 +10228,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 		};
 
 	private static CacheModel<DDMStructure> _nullDDMStructureCacheModel = new CacheModel<DDMStructure>() {
+			@Override
 			public DDMStructure toEntityModel() {
 				return _nullDDMStructure;
 			}

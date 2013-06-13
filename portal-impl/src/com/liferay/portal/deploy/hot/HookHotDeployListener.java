@@ -45,6 +45,7 @@ import com.liferay.portal.kernel.lock.LockListenerRegistryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
+import com.liferay.portal.kernel.portlet.PortletSecurityUtil;
 import com.liferay.portal.kernel.sanitizer.Sanitizer;
 import com.liferay.portal.kernel.sanitizer.SanitizerUtil;
 import com.liferay.portal.kernel.search.Indexer;
@@ -284,6 +285,7 @@ public class HookHotDeployListener
 		}
 	}
 
+	@Override
 	public void invokeDeploy(HotDeployEvent hotDeployEvent)
 		throws HotDeployException {
 
@@ -296,6 +298,7 @@ public class HookHotDeployListener
 		}
 	}
 
+	@Override
 	public void invokeUndeploy(HotDeployEvent hotDeployEvent)
 		throws HotDeployException {
 
@@ -2469,14 +2472,14 @@ public class HookHotDeployListener
 				portalProperties,
 				PORTLET_ADD_DEFAULT_RESOURCE_CHECK_WHITELIST)) {
 
-			PortalUtil.resetPortletAddDefaultResourceCheckWhitelist();
+			PortletSecurityUtil.resetWhitelist();
 		}
 
 		if (containsKey(
 				portalProperties,
 				PORTLET_ADD_DEFAULT_RESOURCE_CHECK_WHITELIST_ACTIONS)) {
 
-			PortalUtil.resetPortletAddDefaultResourceCheckWhitelistActions();
+			PortletSecurityUtil.resetWhitelistActions();
 		}
 
 		CacheUtil.clearCache();
@@ -3153,6 +3156,7 @@ public class HookHotDeployListener
 			_portalStringArray = PropsUtil.getArray(key);
 		}
 
+		@Override
 		public String[] getStringArray() {
 			List<String> mergedStringList = new UniqueList<String>();
 
@@ -3170,6 +3174,7 @@ public class HookHotDeployListener
 				new String[mergedStringList.size()]);
 		}
 
+		@Override
 		public void setPluginStringArray(
 			String servletContextName, String[] pluginStringArray) {
 
@@ -3237,6 +3242,7 @@ public class HookHotDeployListener
 			_portalStringArray = PropsUtil.getArray(key);
 		}
 
+		@Override
 		public String[] getStringArray() {
 			if (_pluginStringArray != null) {
 				return _pluginStringArray;
@@ -3254,6 +3260,7 @@ public class HookHotDeployListener
 			}
 		}
 
+		@Override
 		public void setPluginStringArray(
 			String servletContextName, String[] pluginStringArray) {
 

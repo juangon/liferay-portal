@@ -98,6 +98,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	 * @throws com.liferay.portal.NoSuchClassNameException if a matching class name could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ClassName findByValue(String value)
 		throws NoSuchClassNameException, SystemException {
 		ClassName className = fetchByValue(value);
@@ -129,6 +130,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	 * @return the matching class name, or <code>null</code> if a matching class name could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ClassName fetchByValue(String value) throws SystemException {
 		return fetchByValue(value, true);
 	}
@@ -141,6 +143,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	 * @return the matching class name, or <code>null</code> if a matching class name could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ClassName fetchByValue(String value, boolean retrieveFromCache)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { value };
@@ -240,6 +243,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	 * @return the class name that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ClassName removeByValue(String value)
 		throws NoSuchClassNameException, SystemException {
 		ClassName className = findByValue(value);
@@ -254,6 +258,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	 * @return the number of matching class names
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByValue(String value) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_VALUE;
 
@@ -322,6 +327,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	 *
 	 * @param className the class name
 	 */
+	@Override
 	public void cacheResult(ClassName className) {
 		EntityCacheUtil.putResult(ClassNameModelImpl.ENTITY_CACHE_ENABLED,
 			ClassNameImpl.class, className.getPrimaryKey(), className);
@@ -337,6 +343,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	 *
 	 * @param classNames the class names
 	 */
+	@Override
 	public void cacheResult(List<ClassName> classNames) {
 		for (ClassName className : classNames) {
 			if (EntityCacheUtil.getResult(
@@ -448,6 +455,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	 * @param classNameId the primary key for the new class name
 	 * @return the new class name
 	 */
+	@Override
 	public ClassName create(long classNameId) {
 		ClassName className = new ClassNameImpl();
 
@@ -465,6 +473,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	 * @throws com.liferay.portal.NoSuchClassNameException if a class name with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ClassName remove(long classNameId)
 		throws NoSuchClassNameException, SystemException {
 		return remove((Serializable)classNameId);
@@ -636,6 +645,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	 * @throws com.liferay.portal.NoSuchClassNameException if a class name with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ClassName findByPrimaryKey(long classNameId)
 		throws NoSuchClassNameException, SystemException {
 		return findByPrimaryKey((Serializable)classNameId);
@@ -696,6 +706,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	 * @return the class name, or <code>null</code> if a class name with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ClassName fetchByPrimaryKey(long classNameId)
 		throws SystemException {
 		return fetchByPrimaryKey((Serializable)classNameId);
@@ -707,6 +718,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	 * @return the class names
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ClassName> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -723,6 +735,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	 * @return the range of class names
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ClassName> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
@@ -741,6 +754,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	 * @return the ordered range of class names
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ClassName> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -826,6 +840,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (ClassName className : findAll()) {
 			remove(className);
@@ -838,6 +853,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	 * @return the number of class names
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -923,6 +939,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 		};
 
 	private static CacheModel<ClassName> _nullClassNameCacheModel = new CacheModel<ClassName>() {
+			@Override
 			public ClassName toEntityModel() {
 				return _nullClassName;
 			}

@@ -28,19 +28,30 @@ public class QNameImpl implements QName {
 
 	@Override
 	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof QNameImpl)) {
+			return false;
+		}
+
 		org.dom4j.QName qName = ((QNameImpl)obj).getWrappedQName();
 
 		return _qName.equals(qName);
 	}
 
+	@Override
 	public String getLocalPart() {
 		return getName();
 	}
 
+	@Override
 	public String getName() {
 		return _qName.getName();
 	}
 
+	@Override
 	public Namespace getNamespace() {
 		org.dom4j.Namespace namespace = _qName.getNamespace();
 
@@ -52,14 +63,17 @@ public class QNameImpl implements QName {
 		}
 	}
 
+	@Override
 	public String getNamespacePrefix() {
 		return _qName.getNamespacePrefix();
 	}
 
+	@Override
 	public String getNamespaceURI() {
 		return _qName.getNamespaceURI();
 	}
 
+	@Override
 	public String getQualifiedName() {
 		return _qName.getQualifiedName();
 	}

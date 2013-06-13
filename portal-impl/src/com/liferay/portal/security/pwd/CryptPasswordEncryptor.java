@@ -32,6 +32,7 @@ import org.vps.crypt.Crypt;
 public class CryptPasswordEncryptor
 	extends BasePasswordEncryptor implements PasswordEncryptor {
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public String[] getSupportedAlgorithmTypes() {
 		return new String[] {
@@ -90,7 +91,7 @@ public class CryptPasswordEncryptor
 	}
 
 	private static final String[] _SALT = ArrayUtil.toStringArray(
-		"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789./"
-			.toCharArray());
+		"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789./".
+			toCharArray());
 
 }

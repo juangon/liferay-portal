@@ -38,6 +38,7 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
+import com.liferay.portal.model.LayoutFriendlyURL;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortletConstants;
 import com.liferay.portal.model.ModelHintsUtil;
@@ -47,6 +48,8 @@ import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.ResourcePermission;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
+import com.liferay.portal.model.Subscription;
+import com.liferay.portal.model.SubscriptionConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.VirtualHost;
 import com.liferay.portal.model.impl.AccountImpl;
@@ -54,11 +57,13 @@ import com.liferay.portal.model.impl.ClassNameImpl;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.model.impl.ContactImpl;
 import com.liferay.portal.model.impl.GroupImpl;
+import com.liferay.portal.model.impl.LayoutFriendlyURLImpl;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.LayoutSetImpl;
 import com.liferay.portal.model.impl.PortletPreferencesImpl;
 import com.liferay.portal.model.impl.ResourcePermissionImpl;
 import com.liferay.portal.model.impl.RoleImpl;
+import com.liferay.portal.model.impl.SubscriptionImpl;
 import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.model.impl.VirtualHostImpl;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
@@ -68,14 +73,19 @@ import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetCategoryConstants;
 import com.liferay.portlet.asset.model.AssetEntry;
+import com.liferay.portlet.asset.model.AssetTag;
+import com.liferay.portlet.asset.model.AssetTagStats;
 import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.portlet.asset.model.impl.AssetCategoryImpl;
 import com.liferay.portlet.asset.model.impl.AssetEntryImpl;
+import com.liferay.portlet.asset.model.impl.AssetTagImpl;
+import com.liferay.portlet.asset.model.impl.AssetTagStatsImpl;
 import com.liferay.portlet.asset.model.impl.AssetVocabularyImpl;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.model.BlogsStatsUser;
 import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
 import com.liferay.portlet.blogs.model.impl.BlogsStatsUserImpl;
+import com.liferay.portlet.blogs.social.BlogsActivityKeys;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryMetadata;
@@ -83,14 +93,11 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntryType;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryTypeConstants;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
-import com.liferay.portlet.documentlibrary.model.DLSync;
-import com.liferay.portlet.documentlibrary.model.DLSyncConstants;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryMetadataImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryTypeImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
-import com.liferay.portlet.documentlibrary.model.impl.DLSyncImpl;
 import com.liferay.portlet.documentlibrary.social.DLActivityKeys;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordConstants;
@@ -108,6 +115,7 @@ import com.liferay.portlet.dynamicdatamapping.model.impl.DDMContentImpl;
 import com.liferay.portlet.dynamicdatamapping.model.impl.DDMStorageLinkImpl;
 import com.liferay.portlet.dynamicdatamapping.model.impl.DDMStructureImpl;
 import com.liferay.portlet.dynamicdatamapping.model.impl.DDMStructureLinkImpl;
+import com.liferay.portlet.dynamicdatamapping.util.DDMImpl;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalArticleConstants;
 import com.liferay.portlet.journal.model.JournalArticleResource;
@@ -124,13 +132,17 @@ import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageConstants;
 import com.liferay.portlet.messageboards.model.MBStatsUser;
 import com.liferay.portlet.messageboards.model.MBThread;
+import com.liferay.portlet.messageboards.model.MBThreadFlag;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 import com.liferay.portlet.messageboards.model.impl.MBDiscussionImpl;
 import com.liferay.portlet.messageboards.model.impl.MBMailingListImpl;
 import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
 import com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl;
+import com.liferay.portlet.messageboards.model.impl.MBThreadFlagImpl;
 import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
+import com.liferay.portlet.messageboards.social.MBActivityKeys;
 import com.liferay.portlet.social.model.SocialActivity;
+import com.liferay.portlet.social.model.SocialActivityConstants;
 import com.liferay.portlet.social.model.impl.SocialActivityImpl;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
@@ -139,6 +151,8 @@ import com.liferay.portlet.wiki.model.WikiPageResource;
 import com.liferay.portlet.wiki.model.impl.WikiNodeImpl;
 import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
 import com.liferay.portlet.wiki.model.impl.WikiPageResourceImpl;
+import com.liferay.portlet.wiki.social.WikiActivityKeys;
+import com.liferay.util.PwdGenerator;
 import com.liferay.util.SimpleCounter;
 
 import java.io.File;
@@ -159,16 +173,24 @@ import java.util.Map;
 public class DataFactory {
 
 	public DataFactory(
-			String baseDir, int maxAssetCategoryCount, int maxBlogsEntryCount,
-			int maxGroupsCount, int maxJournalArticleCount,
-			int maxJournalArticleSize, int maxMBCategoryCount,
-			int maxMBThreadCount, int maxMBMessageCount,
+			String baseDir, int maxAssetCategoryCount,
+			int maxAssetEntryToAssetCategoryCount,
+			int maxAssetEntryToAssetTagCount, int maxAssetTagCount,
+			int maxAssetVocabularyCount, int maxBlogsEntryCount,
+			int maxDDLCustomFieldCount, int maxGroupsCount,
+			int maxJournalArticleCount, int maxJournalArticleSize,
+			int maxMBCategoryCount, int maxMBThreadCount, int maxMBMessageCount,
 			int maxUserToGroupCount)
 		throws Exception {
 
 		_baseDir = baseDir;
 		_maxAssetCategoryCount = maxAssetCategoryCount;
+		_maxAssetEntryToAssetCategoryCount = maxAssetEntryToAssetCategoryCount;
+		_maxAssetEntryToAssetTagCount = maxAssetEntryToAssetTagCount;
+		_maxAssetTagCount = maxAssetTagCount;
+		_maxAssetVocabularyCount = maxAssetVocabularyCount;
 		_maxBlogsEntryCount = maxBlogsEntryCount;
+		_maxDDLCustomFieldCount = maxDDLCustomFieldCount;
 		_maxGroupsCount = maxGroupsCount;
 		_maxJournalArticleCount = maxJournalArticleCount;
 		_maxMBCategoryCount = maxMBCategoryCount;
@@ -177,6 +199,7 @@ public class DataFactory {
 		_maxUserToGroupCount = maxUserToGroupCount;
 
 		_counter = new SimpleCounter(_maxGroupsCount + 1);
+		_timeCounter = new SimpleCounter();
 		_futureDateCounter = new SimpleCounter();
 		_resourcePermissionCounter = new SimpleCounter();
 		_socialActivityCounter = new SimpleCounter();
@@ -212,12 +235,9 @@ public class DataFactory {
 				new File(
 					_baseDir,
 					_DEPENDENCIES_DIR + "ddm_structure_basic_document.xml")));
-		_ddlDDMStructureContent = StringUtil.read(
-			new FileInputStream(
-				new File(
-					_baseDir, _DEPENDENCIES_DIR + "ddm_structure_ddl.xml")));
 
 		initAssetCateogries();
+		initAssetTags();
 		initCompany();
 		initDLFileEntryType();
 		initGroups();
@@ -240,14 +260,65 @@ public class DataFactory {
 		return _assetCategories;
 	}
 
-	public long getAssetCategoryId(long groupId, int currentIndex) {
-		int index = (currentIndex - 1) % _maxAssetCategoryCount;
+	public List<Long> getAssetCategoryIds(long groupId) {
+		SimpleCounter counter = _assetCategoryCounters.get(groupId);
 
-		index = _maxAssetCategoryCount * ((int)groupId - 1) + index;
+		if (counter == null) {
+			counter = new SimpleCounter(0);
 
-		AssetCategory assetCategory = _assetCategories.get(index);
+			_assetCategoryCounters.put(groupId, counter);
+		}
 
-		return assetCategory.getCategoryId();
+		int maxAssetCategoryCount =
+			_maxAssetCategoryCount * _maxAssetVocabularyCount;
+
+		int startIndex = maxAssetCategoryCount * ((int)groupId - 1);
+
+		List<Long> assetCategoryIds = new ArrayList<Long>(
+			_maxAssetEntryToAssetCategoryCount);
+
+		for (int i = 0; i < _maxAssetEntryToAssetCategoryCount; i++) {
+			int index = startIndex + (int)counter.get() % maxAssetCategoryCount;
+
+			AssetCategory assetCategory = _assetCategories.get(index);
+
+			assetCategoryIds.add(assetCategory.getCategoryId());
+		}
+
+		return assetCategoryIds;
+	}
+
+	public List<Long> getAssetTagIds(long groupId) {
+		SimpleCounter counter = _assetTagCounters.get(groupId);
+
+		if (counter == null) {
+			counter = new SimpleCounter(0);
+
+			_assetTagCounters.put(groupId, counter);
+		}
+
+		int startIndex = _maxAssetTagCount * ((int)groupId - 1);
+
+		List<Long> assetTagIds = new ArrayList<Long>(
+			_maxAssetEntryToAssetTagCount);
+
+		for (int i = 0; i < _maxAssetEntryToAssetTagCount; i++) {
+			int index = startIndex + (int)counter.get() % _maxAssetTagCount;
+
+			AssetTag assetTag = _assetTags.get(index);
+
+			assetTagIds.add(assetTag.getTagId());
+		}
+
+		return assetTagIds;
+	}
+
+	public List<AssetTag> getAssetTags() {
+		return _assetTags;
+	}
+
+	public List<AssetTagStats> getAssetTagStatsList() {
+		return _assetTagStatsList;
 	}
 
 	public List<AssetVocabulary> getAssetVocabularies() {
@@ -390,70 +461,86 @@ public class DataFactory {
 		_assetVocabularies = new ArrayList<AssetVocabulary>();
 		_assetCategories = new ArrayList<AssetCategory>();
 
-		StringBundler sb = new StringBundler(5);
-
-		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?><root ");
-		sb.append("available-locales=\"en_US\" default-locale=\"en_US\">");
-		sb.append("<Title language-id=\"en_US\">");
-		sb.append(PropsValues.ASSET_VOCABULARY_DEFAULT);
-		sb.append("</Title></root>");
-
-		String defaultTitle = sb.toString();
-
 		_assetVocabularies.add(
 			newAssetVocabulary(
 				_globalGroupId, _defaultUserId, null,
-				PropsValues.ASSET_VOCABULARY_DEFAULT, defaultTitle));
+				PropsValues.ASSET_VOCABULARY_DEFAULT));
+
+		StringBundler sb = new StringBundler(4);
 
 		for (int i = 1; i <= _maxGroupsCount; i++) {
 			long lastRightCategoryId = 2;
 
-			for (int j = 0; j < _maxAssetCategoryCount; j++) {
-				sb = new StringBundler(4);
+			for (int j = 0; j < _maxAssetVocabularyCount; j++) {
+				sb.setIndex(0);
 
-				sb.append("Test_");
+				sb.append("TestVocabulary_");
 				sb.append(i);
 				sb.append(StringPool.UNDERLINE);
 				sb.append(j);
 
-				String name = sb.toString();
-
-				sb = new StringBundler(5);
-
-				sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?><root ");
-				sb.append(
-					"available-locales=\"en_US\" default-locale=\"en_US\">");
-				sb.append("<Title language-id=\"en_US\">");
-				sb.append(name);
-				sb.append("</Title></root>");
-
-				String title = sb.toString();
-
 				AssetVocabulary assetVocabulary = newAssetVocabulary(
-					i, _sampleUserId, _SAMPLE_USER_NAME, name, title);
+					i, _sampleUserId, _SAMPLE_USER_NAME, sb.toString());
 
 				_assetVocabularies.add(assetVocabulary);
 
-				AssetCategory assetCategory = new AssetCategoryImpl();
+				for (int k = 0; k < _maxAssetCategoryCount; k++) {
+					sb.setIndex(0);
 
-				assetCategory.setUuid(SequentialUUID.generate());
-				assetCategory.setCategoryId(_counter.get());
-				assetCategory.setGroupId(i);
-				assetCategory.setCompanyId(_companyId);
-				assetCategory.setUserId(_sampleUserId);
-				assetCategory.setUserName(_SAMPLE_USER_NAME);
-				assetCategory.setCreateDate(new Date());
-				assetCategory.setModifiedDate(new Date());
-				assetCategory.setParentCategoryId(
-					AssetCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
-				assetCategory.setLeftCategoryId(lastRightCategoryId++);
-				assetCategory.setRightCategoryId(lastRightCategoryId++);
-				assetCategory.setName(name);
-				assetCategory.setTitle(title);
-				assetCategory.setVocabularyId(
-					assetVocabulary.getVocabularyId());
+					sb.append("TestCategory_");
+					sb.append(assetVocabulary.getVocabularyId());
+					sb.append(StringPool.UNDERLINE);
+					sb.append(k);
 
-				_assetCategories.add(assetCategory);
+					AssetCategory assetCategory = newAssetCategory(
+						i, lastRightCategoryId, sb.toString(),
+						assetVocabulary.getVocabularyId());
+
+					lastRightCategoryId += 2;
+
+					_assetCategories.add(assetCategory);
+				}
+			}
+		}
+	}
+
+	public void initAssetTags() {
+		_assetTags = new ArrayList<AssetTag>(_maxAssetTagCount);
+		_assetTagStatsList = new ArrayList<AssetTagStats>(
+			_maxAssetTagCount * 3);
+
+		for (int i = 1; i <= _maxGroupsCount; i++) {
+			for (int j = 0; j < _maxAssetTagCount; j++) {
+				AssetTag assetTag = new AssetTagImpl();
+
+				assetTag.setTagId(_counter.get());
+				assetTag.setGroupId(i);
+				assetTag.setCompanyId(_companyId);
+				assetTag.setUserId(_sampleUserId);
+				assetTag.setUserName(_SAMPLE_USER_NAME);
+				assetTag.setCreateDate(new Date());
+				assetTag.setModifiedDate(new Date());
+				assetTag.setName("TestTag_" + i + "_" + j);
+
+				_assetTags.add(assetTag);
+
+				AssetTagStats assetTagStats = newAssetTagStats(
+					assetTag.getTagId(),
+					_classNamesMap.get(BlogsEntry.class.getName()));
+
+				_assetTagStatsList.add(assetTagStats);
+
+				assetTagStats = newAssetTagStats(
+					assetTag.getTagId(),
+					_classNamesMap.get(JournalArticle.class.getName()));
+
+				_assetTagStatsList.add(assetTagStats);
+
+				assetTagStats = newAssetTagStats(
+					assetTag.getTagId(),
+					_classNamesMap.get(WikiPage.class.getName()));
+
+				_assetTagStatsList.add(assetTagStats);
 			}
 		}
 	}
@@ -485,8 +572,18 @@ public class DataFactory {
 			DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_BASIC_DOCUMENT);
 		_defaultDLFileEntryType.setCreateDate(nextFutureDate());
 		_defaultDLFileEntryType.setModifiedDate(nextFutureDate());
-		_defaultDLFileEntryType.setName(
-			DLFileEntryTypeConstants.NAME_BASIC_DOCUMENT);
+		_defaultDLFileEntryType.setFileEntryTypeKey(
+			DLFileEntryTypeConstants.NAME_BASIC_DOCUMENT.toUpperCase());
+
+		StringBundler sb = new StringBundler(5);
+
+		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?><root ");
+		sb.append("available-locales=\"en_US\" default-locale=\"en_US\">");
+		sb.append("<Name language-id=\"en_US\">");
+		sb.append(DLFileEntryTypeConstants.NAME_BASIC_DOCUMENT);
+		sb.append("</Name></root>");
+
+		_defaultDLFileEntryType.setName(sb.toString());
 
 		_defaultDLDDMStructure = newDDMStructure(
 			_guestGroupId, getDLFileEntryClassNameId(), "TIKARAWMETADATA",
@@ -658,6 +755,15 @@ public class DataFactory {
 			dlFileEntry.getTitle());
 	}
 
+	public AssetEntry newAssetEntry(DLFolder dlFolder) {
+		return newAssetEntry(
+			dlFolder.getGroupId(), dlFolder.getCreateDate(),
+			dlFolder.getModifiedDate(),
+			_classNamesMap.get(DLFolder.class.getName()),
+			dlFolder.getFolderId(), dlFolder.getUuid(), 0, true, null,
+			dlFolder.getName());
+	}
+
 	public AssetEntry newAssetEntry(JournalArticle journalArticle) {
 		return newAssetEntry(
 			journalArticle.getGroupId(), journalArticle.getCreateDate(),
@@ -683,6 +789,15 @@ public class DataFactory {
 			mbMessage.getModifiedDate(), classNameId, mbMessage.getMessageId(),
 			mbMessage.getUuid(), 0, visible, ContentTypes.TEXT_HTML,
 			mbMessage.getSubject());
+	}
+
+	public AssetEntry newAssetEntry(MBThread mbThread) {
+		return newAssetEntry(
+			mbThread.getGroupId(), mbThread.getCreateDate(),
+			mbThread.getModifiedDate(),
+			_classNamesMap.get(MBThread.class.getName()),
+			mbThread.getThreadId(), mbThread.getUuid(), 0, false,
+			StringPool.BLANK, String.valueOf(mbThread.getRootMessageId()));
 	}
 
 	public AssetEntry newAssetEntry(WikiPage wikiPage) {
@@ -782,9 +897,34 @@ public class DataFactory {
 	}
 
 	public DDMStructure newDDLDDMStructure(long groupId) {
+		StringBundler sb = new StringBundler(3 + _maxDDLCustomFieldCount * 10);
+
+		sb.append("<?xml version=\"1.0\"?>");
+		sb.append(
+			"<root available-locales=\"en_US\" default-locale=\"en_US\">");
+
+		for (int i = 0; i < _maxDDLCustomFieldCount; i++) {
+			sb.append(
+				"<dynamic-element dataType=\"string\" indexType=\"keyword\"");
+			sb.append(" name=\"");
+			sb.append(nextDDLCustomFieldName(groupId, i));
+			sb.append(
+				"\" readOnly=\"false\" repeatable=\"false\" required=\"false");
+			sb.append(
+				"\" showLabel=\"true\" type=\"text\" width=\"25\"><meta-data");
+			sb.append(" locale=\"en_US\"><entry name=\"label\"><![CDATA[Text");
+			sb.append(i);
+			sb.append(
+				"]]></entry><entry name=\"predefinedValue\"><![CDATA[]]>");
+			sb.append("</entry><entry name=\"tip\"><![CDATA[]]></entry>");
+			sb.append("</meta-data></dynamic-element>");
+		}
+
+		sb.append("</root>");
+
 		return newDDMStructure(
 			groupId, _classNamesMap.get(DDLRecordSet.class.getName()),
-			"Test DDM Structure", _ddlDDMStructureContent);
+			"Test DDM Structure", sb.toString());
 	}
 
 	public DDLRecord newDDLRecord(DDLRecordSet ddlRecordSet) {
@@ -855,19 +995,39 @@ public class DataFactory {
 		ddlRecordVersion.setRecordId(ddlRecord.getRecordId());
 		ddlRecordVersion.setVersion(ddlRecord.getVersion());
 		ddlRecordVersion.setDisplayIndex(ddlRecord.getDisplayIndex());
-		ddlRecordVersion.setStatus(WorkflowConstants.STATUS_DRAFT);
+		ddlRecordVersion.setStatus(WorkflowConstants.STATUS_APPROVED);
 		ddlRecordVersion.setStatusDate(ddlRecord.getModifiedDate());
 
 		return ddlRecordVersion;
 	}
 
 	public DDMContent newDDMContent(DDLRecord ddlRecord, int currentIndex) {
-		StringBundler sb = new StringBundler(4);
+		StringBundler sb = new StringBundler(3 + _maxDDLCustomFieldCount * 10);
 
-		sb.append("<?xml version=\"1.0\"?><root><dynamic-element ");
-		sb.append("name=\"text2102\"><dynamic-content><![CDATA[Test Record ");
-		sb.append(currentIndex);
-		sb.append("]]></dynamic-content></dynamic-element></root>");
+		sb.append("<?xml version=\"1.0\"?><root>");
+
+		for (int i = 0; i < _maxDDLCustomFieldCount; i++) {
+			sb.append("<dynamic-element default-language-id=\"en_US\" name=\"");
+			sb.append(nextDDLCustomFieldName(ddlRecord.getGroupId(), i));
+			sb.append("\"><dynamic-content language-id=\"en_US\">");
+			sb.append("<![CDATA[Test Record ");
+			sb.append(currentIndex);
+			sb.append("]]></dynamic-content></dynamic-element>");
+		}
+
+		sb.append("<dynamic-element default-language-id=\"en_US\" name=\"_");
+		sb.append(
+			"fieldsDisplay\"><dynamic-content language-id=\"en_US\"><![CDATA[");
+
+		for (int i = 0; i < _maxDDLCustomFieldCount; i++) {
+			sb.append(nextDDLCustomFieldName(ddlRecord.getGroupId(), i));
+			sb.append(DDMImpl.INSTANCE_SEPARATOR);
+			sb.append(PwdGenerator.getPassword(4));
+			sb.append(StringPool.COMMA);
+		}
+
+		sb.setStringAt(
+			"]]></dynamic-content></dynamic-element></root>", sb.index() - 1);
 
 		return newDDMContent(
 			ddlRecord.getDDMStorageId(), ddlRecord.getGroupId(), sb.toString());
@@ -1007,20 +1167,6 @@ public class DataFactory {
 		return dlFolder;
 	}
 
-	public DLSync newDLSync(DLFileEntry dlFileEntry) {
-		return newDLSync(
-			dlFileEntry.getFileEntryId(), dlFileEntry.getUuid(),
-			dlFileEntry.getRepositoryId(), dlFileEntry.getFolderId(),
-			dlFileEntry.getName(), DLSyncConstants.TYPE_FILE);
-	}
-
-	public DLSync newDLSync(DLFolder dLFolder) {
-		return newDLSync(
-			dLFolder.getFolderId(), dLFolder.getUuid(),
-			dLFolder.getRepositoryId(), dLFolder.getParentFolderId(),
-			dLFolder.getName(), DLSyncConstants.TYPE_FOLDER);
-	}
-
 	public Group newGroup(User user) throws Exception {
 		return newGroup(
 			_counter.get(), _classNamesMap.get(User.class.getName()),
@@ -1130,6 +1276,8 @@ public class DataFactory {
 		layout.setPlid(_counter.get());
 		layout.setGroupId(groupId);
 		layout.setCompanyId(_companyId);
+		layout.setUserId(_sampleUserId);
+		layout.setUserName(_SAMPLE_USER_NAME);
 		layout.setCreateDate(new Date());
 		layout.setModifiedDate(new Date());
 		layout.setLayoutId(simpleCounter.get());
@@ -1151,6 +1299,24 @@ public class DataFactory {
 		layout.setTypeSettings(typeSettings);
 
 		return layout;
+	}
+
+	public LayoutFriendlyURL newLayoutFriendlyURL(Layout layout) {
+		LayoutFriendlyURL layoutFriendlyURL = new LayoutFriendlyURLImpl();
+
+		layoutFriendlyURL.setUuid(SequentialUUID.generate());
+		layoutFriendlyURL.setLayoutFriendlyURLId(_counter.get());
+		layoutFriendlyURL.setGroupId(layout.getGroupId());
+		layoutFriendlyURL.setCompanyId(_companyId);
+		layoutFriendlyURL.setUserId(_sampleUserId);
+		layoutFriendlyURL.setUserName(_SAMPLE_USER_NAME);
+		layoutFriendlyURL.setCreateDate(new Date());
+		layoutFriendlyURL.setModifiedDate(new Date());
+		layoutFriendlyURL.setPlid(layout.getPlid());
+		layoutFriendlyURL.setFriendlyURL(layout.getFriendlyURL());
+		layoutFriendlyURL.setLanguageId("en_US");
+
+		return layoutFriendlyURL;
 	}
 
 	public List<LayoutSet> newLayoutSets(
@@ -1260,8 +1426,8 @@ public class DataFactory {
 		if (index == 0) {
 			messageId = mbThread.getRootMessageId();
 			parentMessageId = MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID;
-			subject = StringUtil.valueOf(classPK);
-			body = StringUtil.valueOf(classPK);
+			subject = String.valueOf(classPK);
+			body = String.valueOf(classPK);
 		}
 		else {
 			messageId = _counter.get();
@@ -1306,6 +1472,22 @@ public class DataFactory {
 		return newMBThread(
 			_counter.get(), mbCategory.getGroupId(), mbCategory.getCategoryId(),
 			_counter.get(), _maxMBMessageCount);
+	}
+
+	public MBThreadFlag newMBThreadFlag(MBThread mbThread) {
+		MBThreadFlag mbThreadFlag = new MBThreadFlagImpl();
+
+		mbThreadFlag.setUuid(SequentialUUID.generate());
+		mbThreadFlag.setThreadFlagId(_counter.get());
+		mbThreadFlag.setGroupId(mbThread.getGroupId());
+		mbThreadFlag.setCompanyId(_companyId);
+		mbThreadFlag.setUserId(_sampleUserId);
+		mbThreadFlag.setUserName(_SAMPLE_USER_NAME);
+		mbThreadFlag.setCreateDate(new Date());
+		mbThreadFlag.setModifiedDate(new Date());
+		mbThreadFlag.setThreadId(mbThread.getThreadId());
+
+		return mbThreadFlag;
 	}
 
 	public List<PortletPreferences> newPortletPreferences(long plid) {
@@ -1384,7 +1566,13 @@ public class DataFactory {
 
 		return newResourcePermissions(
 			AssetCategory.class.getName(),
-			StringUtil.valueOf(assetCategory.getCategoryId()), _sampleUserId);
+			String.valueOf(assetCategory.getCategoryId()), _sampleUserId);
+	}
+
+	public List<ResourcePermission> newResourcePermissions(AssetTag assetTag) {
+		return newResourcePermissions(
+			AssetTag.class.getName(), String.valueOf(assetTag.getTagId()),
+			_sampleUserId);
 	}
 
 	public List<ResourcePermission> newResourcePermissions(
@@ -1397,7 +1585,7 @@ public class DataFactory {
 			resourcePermissions.add(
 				newResourcePermission(
 					AssetVocabulary.class.getName(),
-					StringUtil.valueOf(assetVocabulary.getVocabularyId()),
+					String.valueOf(assetVocabulary.getVocabularyId()),
 					_ownerRole.getRoleId(), _defaultUserId));
 
 			return resourcePermissions;
@@ -1405,7 +1593,58 @@ public class DataFactory {
 
 		return newResourcePermissions(
 			AssetVocabulary.class.getName(),
-			StringUtil.valueOf(assetVocabulary.getVocabularyId()),
+			String.valueOf(assetVocabulary.getVocabularyId()), _sampleUserId);
+	}
+
+	public List<ResourcePermission> newResourcePermissions(
+		BlogsEntry blogsEntry) {
+
+		return newResourcePermissions(
+			BlogsEntry.class.getName(), String.valueOf(blogsEntry.getEntryId()),
+			_sampleUserId);
+	}
+
+	public List<ResourcePermission> newResourcePermissions(
+		DDLRecordSet ddlRecordSet) {
+
+		List<ResourcePermission> resourcePermissions =
+			new ArrayList<ResourcePermission>(1);
+
+		resourcePermissions.add(
+			newResourcePermission(
+				DDLRecordSet.class.getName(),
+				String.valueOf(ddlRecordSet.getRecordSetId()),
+				_ownerRole.getRoleId(), _defaultUserId));
+
+		return resourcePermissions;
+	}
+
+	public List<ResourcePermission> newResourcePermissions(
+		DDMStructure ddmStructure) {
+
+		List<ResourcePermission> resourcePermissions =
+			new ArrayList<ResourcePermission>(1);
+
+		resourcePermissions.add(
+			newResourcePermission(
+				DDMStructure.class.getName(),
+				String.valueOf(ddmStructure.getStructureId()),
+				_ownerRole.getRoleId(), _defaultUserId));
+
+		return resourcePermissions;
+	}
+
+	public List<ResourcePermission> newResourcePermissions(
+		DLFileEntry dlFileEntry) {
+
+		return newResourcePermissions(
+			DLFileEntry.class.getName(),
+			String.valueOf(dlFileEntry.getFileEntryId()), _sampleUserId);
+	}
+
+	public List<ResourcePermission> newResourcePermissions(DLFolder dlFolder) {
+		return newResourcePermissions(
+			DLFolder.class.getName(), String.valueOf(dlFolder.getFolderId()),
 			_sampleUserId);
 	}
 
@@ -1414,13 +1653,29 @@ public class DataFactory {
 
 		return newResourcePermissions(
 			JournalArticle.class.getName(),
-			StringUtil.valueOf(journalArticleResource.getResourcePrimKey()),
+			String.valueOf(journalArticleResource.getResourcePrimKey()),
 			_sampleUserId);
 	}
 
 	public List<ResourcePermission> newResourcePermissions(Layout layout) {
 		return newResourcePermissions(
-			Layout.class.getName(), StringUtil.valueOf(layout.getPlid()),
+			Layout.class.getName(), String.valueOf(layout.getPlid()),
+			_sampleUserId);
+	}
+
+	public List<ResourcePermission> newResourcePermissions(
+		MBCategory mbCategory) {
+
+		return newResourcePermissions(
+			MBCategory.class.getName(),
+			String.valueOf(mbCategory.getCategoryId()), _sampleUserId);
+	}
+
+	public List<ResourcePermission> newResourcePermissions(
+		MBMessage mbMessage) {
+
+		return newResourcePermissions(
+			MBMessage.class.getName(), String.valueOf(mbMessage.getMessageId()),
 			_sampleUserId);
 	}
 
@@ -1443,11 +1698,31 @@ public class DataFactory {
 		return newResourcePermissions(name, primKey, 0);
 	}
 
+	public List<ResourcePermission> newResourcePermissions(WikiNode wikiNode) {
+		return newResourcePermissions(
+			WikiNode.class.getName(), String.valueOf(wikiNode.getNodeId()),
+			_sampleUserId);
+	}
+
+	public List<ResourcePermission> newResourcePermissions(WikiPage wikiPage) {
+		return newResourcePermissions(
+			WikiPage.class.getName(),
+			String.valueOf(wikiPage.getResourcePrimKey()), _sampleUserId);
+	}
+
+	public SocialActivity newSocialActivity(BlogsEntry blogsEntry) {
+		return newSocialActivity(
+			blogsEntry.getGroupId(),
+			_classNamesMap.get(BlogsEntry.class.getName()),
+			blogsEntry.getEntryId(), BlogsActivityKeys.ADD_ENTRY,
+			"{\"title\":\""+ blogsEntry.getTitle() +"\"}");
+	}
+
 	public SocialActivity newSocialActivity(DLFileEntry dlFileEntry) {
 		return newSocialActivity(
 			dlFileEntry.getGroupId(), getDLFileEntryClassNameId(),
 			dlFileEntry.getFileEntryId(), DLActivityKeys.ADD_FILE_ENTRY,
-			dlFileEntry.getTitle());
+			StringPool.BLANK);
 	}
 
 	public SocialActivity newSocialActivity(JournalArticle journalArticle) {
@@ -1462,7 +1737,63 @@ public class DataFactory {
 		return newSocialActivity(
 			journalArticle.getGroupId(), getJournalArticleClassNameId(),
 			journalArticle.getResourcePrimKey(), type,
-			journalArticle.getUrlTitle());
+			"{\"title\":\""+ journalArticle.getUrlTitle() +"\"}");
+	}
+
+	public SocialActivity newSocialActivity(MBMessage mbMessage) {
+		long classNameId = mbMessage.getClassNameId();
+		long classPk = mbMessage.getClassPK();
+
+		int type = 0;
+		String extraData = null;
+
+		if (classNameId == _classNamesMap.get(WikiPage.class.getName())) {
+			extraData = "{\"version\":1}";
+
+			type = WikiActivityKeys.ADD_PAGE;
+		}
+		else if (classNameId == 0) {
+			extraData = "{\"title\":\"" + mbMessage.getSubject() + "\"}";
+
+			type = MBActivityKeys.ADD_MESSAGE;
+
+			classNameId = _classNamesMap.get(MBMessage.class.getName());
+			classPk = mbMessage.getMessageId();
+		}
+		else {
+			StringBundler sb = new StringBundler(5);
+
+			sb.append("{\"messageId\":\"");
+			sb.append(mbMessage.getMessageId());
+			sb.append("\", \"title\":");
+			sb.append(mbMessage.getSubject());
+			sb.append("}");
+
+			extraData = sb.toString();
+
+			type = SocialActivityConstants.TYPE_ADD_COMMENT;
+		}
+
+		return newSocialActivity(
+			mbMessage.getGroupId(), classNameId, classPk, type, extraData);
+	}
+
+	public Subscription newSubscription(BlogsEntry blogsEntry) {
+		return newSubscription(
+			_classNamesMap.get(BlogsEntry.class.getName()),
+			blogsEntry.getEntryId());
+	}
+
+	public Subscription newSubscription(MBThread mbThread) {
+		return newSubscription(
+			_classNamesMap.get(MBThread.class.getName()),
+			mbThread.getThreadId());
+	}
+
+	public Subscription newSubscription(WikiPage wikiPage) {
+		return newSubscription(
+			_classNamesMap.get(WikiPage.class.getName()),
+			wikiPage.getResourcePrimKey());
 	}
 
 	public User newUser(int index) {
@@ -1534,6 +1865,41 @@ public class DataFactory {
 		return userName;
 	}
 
+	protected AssetCategory newAssetCategory(
+		long groupId, long lastRightCategoryId, String name,
+		long vocabularyId) {
+
+		AssetCategory assetCategory = new AssetCategoryImpl();
+
+		assetCategory.setUuid(SequentialUUID.generate());
+		assetCategory.setCategoryId(_counter.get());
+		assetCategory.setGroupId(groupId);
+		assetCategory.setCompanyId(_companyId);
+		assetCategory.setUserId(_sampleUserId);
+		assetCategory.setUserName(_SAMPLE_USER_NAME);
+		assetCategory.setCreateDate(new Date());
+		assetCategory.setModifiedDate(new Date());
+		assetCategory.setParentCategoryId(
+			AssetCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
+		assetCategory.setLeftCategoryId(lastRightCategoryId++);
+		assetCategory.setRightCategoryId(lastRightCategoryId++);
+		assetCategory.setName(name);
+
+		StringBundler sb = new StringBundler(5);
+
+		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?><root ");
+		sb.append("available-locales=\"en_US\" default-locale=\"en_US\">");
+		sb.append("<Title language-id=\"en_US\">");
+		sb.append(name);
+		sb.append("</Title></root>");
+
+		assetCategory.setTitle(sb.toString());
+
+		assetCategory.setVocabularyId(vocabularyId);
+
+		return assetCategory;
+	}
+
 	protected AssetEntry newAssetEntry(
 		long groupId, Date createDate, Date modifiedDate, long classNameId,
 		long classPK, String uuid, long classTypeId, boolean visible,
@@ -1563,8 +1929,18 @@ public class DataFactory {
 		return assetEntry;
 	}
 
+	protected AssetTagStats newAssetTagStats(long tagId, long classNameId) {
+		AssetTagStats assetTagStats = new AssetTagStatsImpl();
+
+		assetTagStats.setTagStatsId(_counter.get());
+		assetTagStats.setTagId(tagId);
+		assetTagStats.setClassNameId(classNameId);
+
+		return assetTagStats;
+	}
+
 	protected AssetVocabulary newAssetVocabulary(
-		long grouId, long userId, String userName, String name, String title) {
+		long grouId, long userId, String userName, String name) {
 
 		AssetVocabulary assetVocabulary = new AssetVocabularyImpl();
 
@@ -1577,7 +1953,17 @@ public class DataFactory {
 		assetVocabulary.setCreateDate(new Date());
 		assetVocabulary.setModifiedDate(new Date());
 		assetVocabulary.setName(name);
-		assetVocabulary.setTitle(title);
+
+		StringBundler sb = new StringBundler(5);
+
+		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?><root ");
+		sb.append("available-locales=\"en_US\" default-locale=\"en_US\">");
+		sb.append("<Title language-id=\"en_US\">");
+		sb.append(name);
+		sb.append("</Title></root>");
+
+		assetVocabulary.setTitle(sb.toString());
+
 		assetVocabulary.setSettings(
 			"multiValued=true\\nselectedClassNameIds=0");
 
@@ -1646,27 +2032,6 @@ public class DataFactory {
 		ddmStructureLink.setStructureId(structureId);
 
 		return ddmStructureLink;
-	}
-
-	protected DLSync newDLSync(
-		long fileId, String fileUuid, long repositoryId, long parentFolderId,
-		String name, String type) {
-
-		DLSync dlSync = new DLSyncImpl();
-
-		dlSync.setSyncId(_counter.get());
-		dlSync.setCompanyId(_companyId);
-		dlSync.setCreateDate(nextFutureDate().getTime());
-		dlSync.setModifiedDate(nextFutureDate().getTime());
-		dlSync.setFileId(fileId);
-		dlSync.setFileUuid(fileUuid);
-		dlSync.setRepositoryId(repositoryId);
-		dlSync.setParentFolderId(parentFolderId);
-		dlSync.setName(name);
-		dlSync.setEvent(DLSyncConstants.EVENT_ADD);
-		dlSync.setType(type);
-
-		return dlSync;
 	}
 
 	protected Group newGroup(
@@ -1837,7 +2202,8 @@ public class DataFactory {
 	}
 
 	protected SocialActivity newSocialActivity(
-		long groupId, long classNameId, long classPK, int type, String title) {
+		long groupId, long classNameId, long classPK, int type,
+		String extraData) {
 
 		SocialActivity socialActivity = new SocialActivityImpl();
 
@@ -1845,13 +2211,29 @@ public class DataFactory {
 		socialActivity.setGroupId(groupId);
 		socialActivity.setCompanyId(_companyId);
 		socialActivity.setUserId(_sampleUserId);
-		socialActivity.setCreateDate(System.currentTimeMillis());
+		socialActivity.setCreateDate(_CURRENT_TIME + _timeCounter.get());
 		socialActivity.setClassNameId(classNameId);
 		socialActivity.setClassPK(classPK);
 		socialActivity.setType(type);
-		socialActivity.setExtraData("{\"title\":\""+ title +"\"}");
+		socialActivity.setExtraData(extraData);
 
 		return socialActivity;
+	}
+
+	protected Subscription newSubscription(long classNameId, long classPK) {
+		Subscription subscription = new SubscriptionImpl();
+
+		subscription.setSubscriptionId(_counter.get());
+		subscription.setCompanyId(_companyId);
+		subscription.setUserId(_sampleUserId);
+		subscription.setUserName(_SAMPLE_USER_NAME);
+		subscription.setCreateDate(new Date());
+		subscription.setModifiedDate(new Date());
+		subscription.setClassNameId(classNameId);
+		subscription.setClassPK(classPK);
+		subscription.setFrequency(SubscriptionConstants.FREQUENCY_INSTANT);
+
+		return subscription;
 	}
 
 	protected User newUser(
@@ -1891,10 +2273,25 @@ public class DataFactory {
 		return user;
 	}
 
+	protected String nextDDLCustomFieldName(
+		long groupId, int customFieldIndex) {
+
+		StringBundler sb = new StringBundler(4);
+
+		sb.append("costom_field_text_");
+		sb.append(groupId);
+		sb.append("_");
+		sb.append(customFieldIndex);
+
+		return sb.toString();
+	}
+
 	protected Date nextFutureDate() {
 		return new Date(
 			_FUTURE_TIME + (_futureDateCounter.get() * Time.SECOND));
 	}
+
+	private static final long _CURRENT_TIME = System.currentTimeMillis();
 
 	private static final String _DEPENDENCIES_DIR=
 		"../portal-impl/src/com/liferay/portal/tools/samplesqlbuilder/" +
@@ -1909,6 +2306,12 @@ public class DataFactory {
 	private long _accountId;
 	private Role _administratorRole;
 	private List<AssetCategory> _assetCategories;
+	private Map<Long, SimpleCounter> _assetCategoryCounters =
+		new HashMap<Long, SimpleCounter>();
+	private Map<Long, SimpleCounter> _assetTagCounters =
+		new HashMap<Long, SimpleCounter>();
+	private List<AssetTag> _assetTags;
+	private List<AssetTagStats> _assetTagStatsList;
 	private List<AssetVocabulary> _assetVocabularies;
 	private String _baseDir;
 	private List<ClassName> _classNames;
@@ -1916,7 +2319,6 @@ public class DataFactory {
 	private Company _company;
 	private long _companyId;
 	private SimpleCounter _counter;
-	private String _ddlDDMStructureContent;
 	private DDMStructure _defaultDLDDMStructure;
 	private DLFileEntryType _defaultDLFileEntryType;
 	private User _defaultUser;
@@ -1936,7 +2338,12 @@ public class DataFactory {
 	private Map<Long, SimpleCounter> _layoutCounters =
 		new HashMap<Long, SimpleCounter>();
 	private int _maxAssetCategoryCount;
+	private int _maxAssetEntryToAssetCategoryCount;
+	private int _maxAssetEntryToAssetTagCount;
+	private int _maxAssetTagCount;
+	private int _maxAssetVocabularyCount;
 	private int _maxBlogsEntryCount;
+	private int _maxDDLCustomFieldCount;
 	private int _maxDLFileEntrySize;
 	private int _maxGroupsCount;
 	private int _maxJournalArticleCount;
@@ -1954,6 +2361,7 @@ public class DataFactory {
 		FastDateFormatFactoryUtil.getSimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private Role _siteMemberRole;
 	private SimpleCounter _socialActivityCounter;
+	private SimpleCounter _timeCounter;
 	private Role _userRole;
 	private SimpleCounter _userScreenNameCounter;
 	private VirtualHost _virtualHost;

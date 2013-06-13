@@ -22,8 +22,8 @@ import java.util.Map;
  * This class is a wrapper for {@link ResourceBlock}.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       ResourceBlock
+ * @author Brian Wing Shun Chan
+ * @see ResourceBlock
  * @generated
  */
 public class ResourceBlockWrapper implements ResourceBlock,
@@ -32,14 +32,17 @@ public class ResourceBlockWrapper implements ResourceBlock,
 		_resourceBlock = resourceBlock;
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return ResourceBlock.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return ResourceBlock.class.getName();
 	}
 
+	@Override
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
@@ -53,6 +56,7 @@ public class ResourceBlockWrapper implements ResourceBlock,
 		return attributes;
 	}
 
+	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 		Long resourceBlockId = (Long)attributes.get("resourceBlockId");
 
@@ -96,6 +100,7 @@ public class ResourceBlockWrapper implements ResourceBlock,
 	*
 	* @return the primary key of this resource block
 	*/
+	@Override
 	public long getPrimaryKey() {
 		return _resourceBlock.getPrimaryKey();
 	}
@@ -105,6 +110,7 @@ public class ResourceBlockWrapper implements ResourceBlock,
 	*
 	* @param primaryKey the primary key of this resource block
 	*/
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_resourceBlock.setPrimaryKey(primaryKey);
 	}
@@ -114,6 +120,7 @@ public class ResourceBlockWrapper implements ResourceBlock,
 	*
 	* @return the resource block ID of this resource block
 	*/
+	@Override
 	public long getResourceBlockId() {
 		return _resourceBlock.getResourceBlockId();
 	}
@@ -123,6 +130,7 @@ public class ResourceBlockWrapper implements ResourceBlock,
 	*
 	* @param resourceBlockId the resource block ID of this resource block
 	*/
+	@Override
 	public void setResourceBlockId(long resourceBlockId) {
 		_resourceBlock.setResourceBlockId(resourceBlockId);
 	}
@@ -132,6 +140,7 @@ public class ResourceBlockWrapper implements ResourceBlock,
 	*
 	* @return the company ID of this resource block
 	*/
+	@Override
 	public long getCompanyId() {
 		return _resourceBlock.getCompanyId();
 	}
@@ -141,6 +150,7 @@ public class ResourceBlockWrapper implements ResourceBlock,
 	*
 	* @param companyId the company ID of this resource block
 	*/
+	@Override
 	public void setCompanyId(long companyId) {
 		_resourceBlock.setCompanyId(companyId);
 	}
@@ -150,6 +160,7 @@ public class ResourceBlockWrapper implements ResourceBlock,
 	*
 	* @return the group ID of this resource block
 	*/
+	@Override
 	public long getGroupId() {
 		return _resourceBlock.getGroupId();
 	}
@@ -159,6 +170,7 @@ public class ResourceBlockWrapper implements ResourceBlock,
 	*
 	* @param groupId the group ID of this resource block
 	*/
+	@Override
 	public void setGroupId(long groupId) {
 		_resourceBlock.setGroupId(groupId);
 	}
@@ -168,6 +180,7 @@ public class ResourceBlockWrapper implements ResourceBlock,
 	*
 	* @return the name of this resource block
 	*/
+	@Override
 	public java.lang.String getName() {
 		return _resourceBlock.getName();
 	}
@@ -177,6 +190,7 @@ public class ResourceBlockWrapper implements ResourceBlock,
 	*
 	* @param name the name of this resource block
 	*/
+	@Override
 	public void setName(java.lang.String name) {
 		_resourceBlock.setName(name);
 	}
@@ -186,6 +200,7 @@ public class ResourceBlockWrapper implements ResourceBlock,
 	*
 	* @return the permissions hash of this resource block
 	*/
+	@Override
 	public java.lang.String getPermissionsHash() {
 		return _resourceBlock.getPermissionsHash();
 	}
@@ -195,6 +210,7 @@ public class ResourceBlockWrapper implements ResourceBlock,
 	*
 	* @param permissionsHash the permissions hash of this resource block
 	*/
+	@Override
 	public void setPermissionsHash(java.lang.String permissionsHash) {
 		_resourceBlock.setPermissionsHash(permissionsHash);
 	}
@@ -204,6 +220,7 @@ public class ResourceBlockWrapper implements ResourceBlock,
 	*
 	* @return the reference count of this resource block
 	*/
+	@Override
 	public long getReferenceCount() {
 		return _resourceBlock.getReferenceCount();
 	}
@@ -213,52 +230,64 @@ public class ResourceBlockWrapper implements ResourceBlock,
 	*
 	* @param referenceCount the reference count of this resource block
 	*/
+	@Override
 	public void setReferenceCount(long referenceCount) {
 		_resourceBlock.setReferenceCount(referenceCount);
 	}
 
+	@Override
 	public boolean isNew() {
 		return _resourceBlock.isNew();
 	}
 
+	@Override
 	public void setNew(boolean n) {
 		_resourceBlock.setNew(n);
 	}
 
+	@Override
 	public boolean isCachedModel() {
 		return _resourceBlock.isCachedModel();
 	}
 
+	@Override
 	public void setCachedModel(boolean cachedModel) {
 		_resourceBlock.setCachedModel(cachedModel);
 	}
 
+	@Override
 	public boolean isEscapedModel() {
 		return _resourceBlock.isEscapedModel();
 	}
 
+	@Override
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _resourceBlock.getPrimaryKeyObj();
 	}
 
+	@Override
 	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
 		_resourceBlock.setPrimaryKeyObj(primaryKeyObj);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
 		return _resourceBlock.getExpandoBridge();
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.model.BaseModel<?> baseModel) {
 		_resourceBlock.setExpandoBridgeAttributes(baseModel);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portlet.expando.model.ExpandoBridge expandoBridge) {
 		_resourceBlock.setExpandoBridgeAttributes(expandoBridge);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		_resourceBlock.setExpandoBridgeAttributes(serviceContext);
@@ -269,6 +298,7 @@ public class ResourceBlockWrapper implements ResourceBlock,
 		return new ResourceBlockWrapper((ResourceBlock)_resourceBlock.clone());
 	}
 
+	@Override
 	public int compareTo(com.liferay.portal.model.ResourceBlock resourceBlock) {
 		return _resourceBlock.compareTo(resourceBlock);
 	}
@@ -278,14 +308,17 @@ public class ResourceBlockWrapper implements ResourceBlock,
 		return _resourceBlock.hashCode();
 	}
 
+	@Override
 	public com.liferay.portal.model.CacheModel<com.liferay.portal.model.ResourceBlock> toCacheModel() {
 		return _resourceBlock.toCacheModel();
 	}
 
+	@Override
 	public com.liferay.portal.model.ResourceBlock toEscapedModel() {
 		return new ResourceBlockWrapper(_resourceBlock.toEscapedModel());
 	}
 
+	@Override
 	public com.liferay.portal.model.ResourceBlock toUnescapedModel() {
 		return new ResourceBlockWrapper(_resourceBlock.toUnescapedModel());
 	}
@@ -295,10 +328,12 @@ public class ResourceBlockWrapper implements ResourceBlock,
 		return _resourceBlock.toString();
 	}
 
+	@Override
 	public java.lang.String toXmlString() {
 		return _resourceBlock.toXmlString();
 	}
 
+	@Override
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_resourceBlock.persist();
@@ -311,10 +346,12 @@ public class ResourceBlockWrapper implements ResourceBlock,
 		return _resourceBlock;
 	}
 
+	@Override
 	public ResourceBlock getWrappedModel() {
 		return _resourceBlock;
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		_resourceBlock.resetOriginalValues();
 	}

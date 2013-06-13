@@ -64,9 +64,9 @@ public class SocialActivityFeedEntry {
 		_title = GetterUtil.getString(title);
 	}
 
-	private String _body = StringPool.BLANK;
-	private String _link = StringPool.BLANK;
+	private String _body;
+	private String _link;
 	private String _portletId = StringPool.BLANK;
-	private String _title = StringPool.BLANK;
+	private String _title;
 
 }

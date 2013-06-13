@@ -37,6 +37,7 @@ public abstract class ResourceBlockBaseImpl extends ResourceBlockModelImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a resource block model instance should use the {@link ResourceBlock} interface instead.
 	 */
+	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
 			ResourceBlockLocalServiceUtil.addResourceBlock(this);

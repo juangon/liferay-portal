@@ -91,26 +91,32 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 	public ReleaseModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _releaseId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setReleaseId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _releaseId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return Release.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return Release.class.getName();
 	}
@@ -189,30 +195,37 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 		}
 	}
 
+	@Override
 	public long getReleaseId() {
 		return _releaseId;
 	}
 
+	@Override
 	public void setReleaseId(long releaseId) {
 		_releaseId = releaseId;
 	}
 
+	@Override
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
 	}
 
+	@Override
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
 	public String getServletContextName() {
 		if (_servletContextName == null) {
 			return StringPool.BLANK;
@@ -222,6 +235,7 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 		}
 	}
 
+	@Override
 	public void setServletContextName(String servletContextName) {
 		_columnBitmask |= SERVLETCONTEXTNAME_COLUMN_BITMASK;
 
@@ -236,42 +250,52 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 		return GetterUtil.getString(_originalServletContextName);
 	}
 
+	@Override
 	public int getBuildNumber() {
 		return _buildNumber;
 	}
 
+	@Override
 	public void setBuildNumber(int buildNumber) {
 		_buildNumber = buildNumber;
 	}
 
+	@Override
 	public Date getBuildDate() {
 		return _buildDate;
 	}
 
+	@Override
 	public void setBuildDate(Date buildDate) {
 		_buildDate = buildDate;
 	}
 
+	@Override
 	public boolean getVerified() {
 		return _verified;
 	}
 
+	@Override
 	public boolean isVerified() {
 		return _verified;
 	}
 
+	@Override
 	public void setVerified(boolean verified) {
 		_verified = verified;
 	}
 
+	@Override
 	public int getState() {
 		return _state;
 	}
 
+	@Override
 	public void setState(int state) {
 		_state = state;
 	}
 
+	@Override
 	public String getTestString() {
 		if (_testString == null) {
 			return StringPool.BLANK;
@@ -281,6 +305,7 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 		}
 	}
 
+	@Override
 	public void setTestString(String testString) {
 		_testString = testString;
 	}
@@ -331,6 +356,7 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 		return releaseImpl;
 	}
 
+	@Override
 	public int compareTo(Release release) {
 		long primaryKey = release.getPrimaryKey();
 
@@ -347,18 +373,15 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof Release)) {
 			return false;
 		}
 
-		Release release = null;
-
-		try {
-			release = (Release)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		Release release = (Release)obj;
 
 		long primaryKey = release.getPrimaryKey();
 
@@ -469,6 +492,7 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(31);
 

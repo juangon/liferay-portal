@@ -117,30 +117,30 @@ public class CookieKeys {
 
 		String value = _get(request, name, toUpperCase);
 
-		if ((value != null) && isEncodedCookie(name)) {
-			try {
-				String encodedValue = value;
-				String originalValue = new String(
-					UnicodeFormatter.hexToBytes(encodedValue));
-
-				if (_log.isDebugEnabled()) {
-					_log.debug("Get encoded cookie " + name);
-					_log.debug("Hex encoded value " + encodedValue);
-					_log.debug("Original value " + originalValue);
-				}
-
-				return originalValue;
-			}
-			catch (Exception e) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(e.getMessage());
-				}
-
-				return value;
-			}
+		if ((value == null) || !isEncodedCookie(name)) {
+			return value;
 		}
 
-		return value;
+		try {
+			String encodedValue = value;
+			String originalValue = new String(
+				UnicodeFormatter.hexToBytes(encodedValue));
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Get encoded cookie " + name);
+				_log.debug("Hex encoded value " + encodedValue);
+				_log.debug("Original value " + originalValue);
+			}
+
+			return originalValue;
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e.getMessage());
+			}
+
+			return value;
+		}
 	}
 
 	public static String getDomain(HttpServletRequest request) {
@@ -152,6 +152,10 @@ public class CookieKeys {
 		}
 
 		String host = request.getServerName();
+
+		if (_SESSION_COOKIE_USE_FULL_HOSTNAME) {
+			return host;
+		}
 
 		return getDomain(host);
 	}
@@ -286,6 +290,10 @@ public class CookieKeys {
 
 	private static final String _SESSION_COOKIE_DOMAIN = PropsUtil.get(
 		PropsKeys.SESSION_COOKIE_DOMAIN);
+
+	private static final boolean _SESSION_COOKIE_USE_FULL_HOSTNAME =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.SESSION_COOKIE_USE_FULL_HOSTNAME));
 
 	private static final boolean _SESSION_ENABLE_PERSISTENT_COOKIES =
 		GetterUtil.getBoolean(

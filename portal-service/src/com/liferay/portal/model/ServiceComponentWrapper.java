@@ -22,8 +22,8 @@ import java.util.Map;
  * This class is a wrapper for {@link ServiceComponent}.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       ServiceComponent
+ * @author Brian Wing Shun Chan
+ * @see ServiceComponent
  * @generated
  */
 public class ServiceComponentWrapper implements ServiceComponent,
@@ -32,14 +32,17 @@ public class ServiceComponentWrapper implements ServiceComponent,
 		_serviceComponent = serviceComponent;
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return ServiceComponent.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return ServiceComponent.class.getName();
 	}
 
+	@Override
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
@@ -52,6 +55,7 @@ public class ServiceComponentWrapper implements ServiceComponent,
 		return attributes;
 	}
 
+	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 		Long serviceComponentId = (Long)attributes.get("serviceComponentId");
 
@@ -89,6 +93,7 @@ public class ServiceComponentWrapper implements ServiceComponent,
 	*
 	* @return the primary key of this service component
 	*/
+	@Override
 	public long getPrimaryKey() {
 		return _serviceComponent.getPrimaryKey();
 	}
@@ -98,6 +103,7 @@ public class ServiceComponentWrapper implements ServiceComponent,
 	*
 	* @param primaryKey the primary key of this service component
 	*/
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_serviceComponent.setPrimaryKey(primaryKey);
 	}
@@ -107,6 +113,7 @@ public class ServiceComponentWrapper implements ServiceComponent,
 	*
 	* @return the service component ID of this service component
 	*/
+	@Override
 	public long getServiceComponentId() {
 		return _serviceComponent.getServiceComponentId();
 	}
@@ -116,6 +123,7 @@ public class ServiceComponentWrapper implements ServiceComponent,
 	*
 	* @param serviceComponentId the service component ID of this service component
 	*/
+	@Override
 	public void setServiceComponentId(long serviceComponentId) {
 		_serviceComponent.setServiceComponentId(serviceComponentId);
 	}
@@ -125,6 +133,7 @@ public class ServiceComponentWrapper implements ServiceComponent,
 	*
 	* @return the build namespace of this service component
 	*/
+	@Override
 	public java.lang.String getBuildNamespace() {
 		return _serviceComponent.getBuildNamespace();
 	}
@@ -134,6 +143,7 @@ public class ServiceComponentWrapper implements ServiceComponent,
 	*
 	* @param buildNamespace the build namespace of this service component
 	*/
+	@Override
 	public void setBuildNamespace(java.lang.String buildNamespace) {
 		_serviceComponent.setBuildNamespace(buildNamespace);
 	}
@@ -143,6 +153,7 @@ public class ServiceComponentWrapper implements ServiceComponent,
 	*
 	* @return the build number of this service component
 	*/
+	@Override
 	public long getBuildNumber() {
 		return _serviceComponent.getBuildNumber();
 	}
@@ -152,6 +163,7 @@ public class ServiceComponentWrapper implements ServiceComponent,
 	*
 	* @param buildNumber the build number of this service component
 	*/
+	@Override
 	public void setBuildNumber(long buildNumber) {
 		_serviceComponent.setBuildNumber(buildNumber);
 	}
@@ -161,6 +173,7 @@ public class ServiceComponentWrapper implements ServiceComponent,
 	*
 	* @return the build date of this service component
 	*/
+	@Override
 	public long getBuildDate() {
 		return _serviceComponent.getBuildDate();
 	}
@@ -170,6 +183,7 @@ public class ServiceComponentWrapper implements ServiceComponent,
 	*
 	* @param buildDate the build date of this service component
 	*/
+	@Override
 	public void setBuildDate(long buildDate) {
 		_serviceComponent.setBuildDate(buildDate);
 	}
@@ -179,6 +193,7 @@ public class ServiceComponentWrapper implements ServiceComponent,
 	*
 	* @return the data of this service component
 	*/
+	@Override
 	public java.lang.String getData() {
 		return _serviceComponent.getData();
 	}
@@ -188,52 +203,64 @@ public class ServiceComponentWrapper implements ServiceComponent,
 	*
 	* @param data the data of this service component
 	*/
+	@Override
 	public void setData(java.lang.String data) {
 		_serviceComponent.setData(data);
 	}
 
+	@Override
 	public boolean isNew() {
 		return _serviceComponent.isNew();
 	}
 
+	@Override
 	public void setNew(boolean n) {
 		_serviceComponent.setNew(n);
 	}
 
+	@Override
 	public boolean isCachedModel() {
 		return _serviceComponent.isCachedModel();
 	}
 
+	@Override
 	public void setCachedModel(boolean cachedModel) {
 		_serviceComponent.setCachedModel(cachedModel);
 	}
 
+	@Override
 	public boolean isEscapedModel() {
 		return _serviceComponent.isEscapedModel();
 	}
 
+	@Override
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _serviceComponent.getPrimaryKeyObj();
 	}
 
+	@Override
 	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
 		_serviceComponent.setPrimaryKeyObj(primaryKeyObj);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
 		return _serviceComponent.getExpandoBridge();
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.model.BaseModel<?> baseModel) {
 		_serviceComponent.setExpandoBridgeAttributes(baseModel);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portlet.expando.model.ExpandoBridge expandoBridge) {
 		_serviceComponent.setExpandoBridgeAttributes(expandoBridge);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		_serviceComponent.setExpandoBridgeAttributes(serviceContext);
@@ -244,6 +271,7 @@ public class ServiceComponentWrapper implements ServiceComponent,
 		return new ServiceComponentWrapper((ServiceComponent)_serviceComponent.clone());
 	}
 
+	@Override
 	public int compareTo(
 		com.liferay.portal.model.ServiceComponent serviceComponent) {
 		return _serviceComponent.compareTo(serviceComponent);
@@ -254,14 +282,17 @@ public class ServiceComponentWrapper implements ServiceComponent,
 		return _serviceComponent.hashCode();
 	}
 
+	@Override
 	public com.liferay.portal.model.CacheModel<com.liferay.portal.model.ServiceComponent> toCacheModel() {
 		return _serviceComponent.toCacheModel();
 	}
 
+	@Override
 	public com.liferay.portal.model.ServiceComponent toEscapedModel() {
 		return new ServiceComponentWrapper(_serviceComponent.toEscapedModel());
 	}
 
+	@Override
 	public com.liferay.portal.model.ServiceComponent toUnescapedModel() {
 		return new ServiceComponentWrapper(_serviceComponent.toUnescapedModel());
 	}
@@ -271,23 +302,28 @@ public class ServiceComponentWrapper implements ServiceComponent,
 		return _serviceComponent.toString();
 	}
 
+	@Override
 	public java.lang.String toXmlString() {
 		return _serviceComponent.toXmlString();
 	}
 
+	@Override
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_serviceComponent.persist();
 	}
 
+	@Override
 	public java.lang.String getIndexesSQL() {
 		return _serviceComponent.getIndexesSQL();
 	}
 
+	@Override
 	public java.lang.String getSequencesSQL() {
 		return _serviceComponent.getSequencesSQL();
 	}
 
+	@Override
 	public java.lang.String getTablesSQL() {
 		return _serviceComponent.getTablesSQL();
 	}
@@ -299,10 +335,12 @@ public class ServiceComponentWrapper implements ServiceComponent,
 		return _serviceComponent;
 	}
 
+	@Override
 	public ServiceComponent getWrappedModel() {
 		return _serviceComponent;
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		_serviceComponent.resetOriginalValues();
 	}

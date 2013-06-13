@@ -28,6 +28,7 @@ import java.io.FileInputStream;
 import java.io.FilenameFilter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -81,12 +82,30 @@ public class PluginsEnvironmentBuilder {
 		for (String fileName : directoryScanner.getIncludedFiles()) {
 			String content = _fileUtil.read(dirName + "/" + fileName);
 
-			if (content.contains(
-					"<import file=\"../../build-common-osgi-plugin.xml\" />") ||
-				content.contains(
-					"<import file=\"../build-common-shared.xml\" />")) {
+			boolean osgiProject = content.contains(
+				"<import file=\"../../build-common-osgi-plugin.xml\" />");
+			boolean sharedProject = content.contains(
+				"<import file=\"../build-common-shared.xml\" />");
 
-				setupJarProject(dirName, fileName);
+			List<String> dependencyJars = Collections.emptyList();
+
+			if (osgiProject) {
+				int x = content.indexOf("osgi.plugin.portal.lib.jars");
+
+				if (x != -1) {
+					x = content.indexOf("value=\"", x);
+					x = content.indexOf("\"", x);
+
+					int y = content.indexOf("\"", x + 1);
+
+					dependencyJars = Arrays.asList(
+						StringUtil.split(content.substring(x + 1, y)));
+				}
+			}
+
+			if (osgiProject || sharedProject) {
+				setupJarProject(
+					dirName, fileName, dependencyJars, sharedProject);
 			}
 		}
 	}
@@ -142,7 +161,7 @@ public class PluginsEnvironmentBuilder {
 		int x = content.indexOf("import.shared");
 
 		if (x == -1) {
-			return Collections.emptyList();
+			return new ArrayList<String>();
 		}
 
 		x = content.indexOf("value=\"", x);
@@ -151,13 +170,13 @@ public class PluginsEnvironmentBuilder {
 		int y = content.indexOf("\" />", x);
 
 		if ((x == -1) || (y == -1)) {
-			return Collections.emptyList();
+			return new ArrayList<String>();
 		}
 
 		String[] importShared = StringUtil.split(content.substring(x + 1, y));
 
 		if (importShared.length == 0) {
-			return Collections.emptyList();
+			return new ArrayList<String>();
 		}
 
 		List<String> jars = new ArrayList<String>();
@@ -172,8 +191,8 @@ public class PluginsEnvironmentBuilder {
 				continue;
 			}
 
-			for (File f : currentImportSharedLibDir.listFiles()) {
-				jars.add(f.getName());
+			for (File file : currentImportSharedLibDir.listFiles()) {
+				jars.add(file.getName());
 			}
 		}
 
@@ -210,7 +229,9 @@ public class PluginsEnvironmentBuilder {
 		return jars;
 	}
 
-	protected void setupJarProject(String dirName, String fileName)
+	protected void setupJarProject(
+			String dirName, String fileName, List<String> dependencyJars,
+			boolean sharedProject)
 		throws Exception {
 
 		File buildFile = new File(dirName + "/" + fileName);
@@ -219,11 +240,15 @@ public class PluginsEnvironmentBuilder {
 
 		File libDir = new File(projectDir, "lib");
 
-		List<String> dependencyJars = Collections.emptyList();
-
 		writeEclipseFiles(libDir, projectDir, dependencyJars);
 
 		List<String> importSharedJars = getImportSharedJars(projectDir);
+
+		if (sharedProject) {
+			if (!importSharedJars.contains("portal-compat-shared.jar")) {
+				importSharedJars.add("portal-compat-shared.jar");
+			}
+		}
 
 		File gitignoreFile = new File(
 			projectDir.getCanonicalPath() + "/.gitignore");
@@ -235,7 +260,6 @@ public class PluginsEnvironmentBuilder {
 			String gitIgnore = gitIgnores[i];
 
 			gitIgnore = "/lib/" + gitIgnore;
-			gitIgnore = gitIgnore.replace(".jar", "-*.jar");
 
 			gitIgnores[i] = gitIgnore;
 		}
@@ -280,26 +304,26 @@ public class PluginsEnvironmentBuilder {
 		List<String> ignores = ListUtil.fromFile(
 			libDir.getCanonicalPath() + "/../.gitignore");
 
-		if (!libDirPath.contains("/ext/") && !ignores.contains("/lib")) {
-			File gitignoreFile = new File(
-				libDir.getCanonicalPath() + "/.gitignore");
-
-			System.out.println("Updating " + gitignoreFile);
-
-			String[] gitIgnores = jars.toArray(new String[jars.size()]);
-
-			for (int i = 0; i < gitIgnores.length; i++) {
-				String gitIgnore = gitIgnores[i];
-
-				if (Validator.isNotNull(gitIgnore) &&
-					!gitIgnore.startsWith("/")) {
-
-					gitIgnores[i] = "/" + gitIgnore;
-				}
-			}
-
-			_fileUtil.write(gitignoreFile, StringUtil.merge(gitIgnores, "\n"));
+		if (libDirPath.contains("/ext/") || ignores.contains("/lib")) {
+			return;
 		}
+
+		File gitignoreFile = new File(
+			libDir.getCanonicalPath() + "/.gitignore");
+
+		System.out.println("Updating " + gitignoreFile);
+
+		String[] gitIgnores = jars.toArray(new String[jars.size()]);
+
+		for (int i = 0; i < gitIgnores.length; i++) {
+			String gitIgnore = gitIgnores[i];
+
+			if (Validator.isNotNull(gitIgnore) && !gitIgnore.startsWith("/")) {
+				gitIgnores[i] = "/" + gitIgnore;
+			}
+		}
+
+		_fileUtil.write(gitignoreFile, StringUtil.merge(gitIgnores, "\n"));
 	}
 
 	protected void writeClasspathFile(

@@ -14,6 +14,7 @@
 
 		<antcall target="prepare-common">
 			<param name="database" value="mysql" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -30,6 +31,7 @@
 			${test.ant.script.file.plugin.portlets.properties}
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="skip.rebuild-database" value="true" />
 			<property name="test.database.minimal" value="true" />
 			<property name="test.name" value="${test.ant.script.suite}" />

@@ -30,38 +30,47 @@ public class WebDriverWrapper implements WebDriver {
 		_webDriver = webDriver;
 	}
 
+	@Override
 	public void close() {
 		_webDriver.close();
 	}
 
+	@Override
 	public WebElement findElement(By by) {
 		return _webDriver.findElement(by);
 	}
 
+	@Override
 	public List<WebElement> findElements(By by) {
 		return _webDriver.findElements(by);
 	}
 
+	@Override
 	public void get(String url) {
 		_webDriver.get(url);
 	}
 
+	@Override
 	public String getCurrentUrl() {
 		return _webDriver.getCurrentUrl();
 	}
 
+	@Override
 	public String getPageSource() {
 		return _webDriver.getPageSource();
 	}
 
+	@Override
 	public String getTitle() {
 		return _webDriver.getTitle();
 	}
 
+	@Override
 	public String getWindowHandle() {
 		return _webDriver.getWindowHandle();
 	}
 
+	@Override
 	public Set<String> getWindowHandles() {
 		return _webDriver.getWindowHandles();
 	}
@@ -70,18 +79,22 @@ public class WebDriverWrapper implements WebDriver {
 		return _webDriver;
 	}
 
+	@Override
 	public Options manage() {
 		return _webDriver.manage();
 	}
 
+	@Override
 	public Navigation navigate() {
 		return _webDriver.navigate();
 	}
 
+	@Override
 	public void quit() {
 		_webDriver.quit();
 	}
 
+	@Override
 	public TargetLocator switchTo() {
 		return _webDriver.switchTo();
 	}

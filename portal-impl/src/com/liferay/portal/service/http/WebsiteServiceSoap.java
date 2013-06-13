@@ -21,13 +21,11 @@ import com.liferay.portal.service.WebsiteServiceUtil;
 import java.rmi.RemoteException;
 
 /**
- * <p>
- * This class provides a SOAP utility for the
+ * Provides the SOAP utility for the
  * {@link com.liferay.portal.service.WebsiteServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it is difficult for SOAP to
  * support certain types.
- * </p>
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
@@ -56,19 +54,41 @@ import java.rmi.RemoteException;
  * The SOAP utility is only generated for remote services.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       WebsiteServiceHttp
- * @see       com.liferay.portal.model.WebsiteSoap
- * @see       com.liferay.portal.service.WebsiteServiceUtil
+ * @author Brian Wing Shun Chan
+ * @see WebsiteServiceHttp
+ * @see com.liferay.portal.model.WebsiteSoap
+ * @see com.liferay.portal.service.WebsiteServiceUtil
  * @generated
  */
 public class WebsiteServiceSoap {
+	/**
+	* @deprecated As of 6.2.0, replaced by {@link #addWebsite( String, long,
+	String, int, boolean, ServiceContext)}
+	*/
 	public static com.liferay.portal.model.WebsiteSoap addWebsite(
 		java.lang.String className, long classPK, java.lang.String url,
 		int typeId, boolean primary) throws RemoteException {
 		try {
 			com.liferay.portal.model.Website returnValue = WebsiteServiceUtil.addWebsite(className,
 					classPK, url, typeId, primary);
+
+			return com.liferay.portal.model.WebsiteSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.model.WebsiteSoap addWebsite(
+		java.lang.String className, long classPK, java.lang.String url,
+		int typeId, boolean primary,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portal.model.Website returnValue = WebsiteServiceUtil.addWebsite(className,
+					classPK, url, typeId, primary, serviceContext);
 
 			return com.liferay.portal.model.WebsiteSoap.toSoapModel(returnValue);
 		}

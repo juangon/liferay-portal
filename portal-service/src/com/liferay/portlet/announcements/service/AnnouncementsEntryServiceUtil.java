@@ -18,11 +18,12 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
- * The utility for the announcements entry remote service. This utility wraps {@link com.liferay.portlet.announcements.service.impl.AnnouncementsEntryServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
- *
- * <p>
- * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
- * </p>
+ * Provides the remote service utility for AnnouncementsEntry. This utility wraps
+ * {@link com.liferay.portlet.announcements.service.impl.AnnouncementsEntryServiceImpl} and is the
+ * primary access point for service operations in application layer code running
+ * on a remote server. Methods of this service are expected to have security
+ * checks based on the propagated JAAS credentials because this service can be
+ * accessed remotely.
  *
  * @author Brian Wing Shun Chan
  * @see AnnouncementsEntryService
@@ -59,7 +60,7 @@ public class AnnouncementsEntryServiceUtil {
 		long plid, long classNameId, long classPK, java.lang.String title,
 		java.lang.String content, java.lang.String url, java.lang.String type,
 		int displayDateMonth, int displayDateDay, int displayDateYear,
-		int displayDateHour, int displayDateMinute, boolean autoDisplayDate,
+		int displayDateHour, int displayDateMinute, boolean displayImmediately,
 		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
 		int expirationDateHour, int expirationDateMinute, int priority,
 		boolean alert)
@@ -68,7 +69,7 @@ public class AnnouncementsEntryServiceUtil {
 		return getService()
 				   .addEntry(plid, classNameId, classPK, title, content, url,
 			type, displayDateMonth, displayDateDay, displayDateYear,
-			displayDateHour, displayDateMinute, autoDisplayDate,
+			displayDateHour, displayDateMinute, displayImmediately,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
 			expirationDateHour, expirationDateMinute, priority, alert);
 	}

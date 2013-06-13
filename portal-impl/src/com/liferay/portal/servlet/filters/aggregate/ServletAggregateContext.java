@@ -63,12 +63,20 @@ public class ServletAggregateContext implements AggregateContext {
 		_stack.push(resourcePath);
 	}
 
+	@Override
 	public String getContent(String path) {
 		try {
 			String stackPath = _generatePathFromStack();
 
-			URL resourceURL = _servletContext.getResource(
-				stackPath.concat(path));
+			URL resourceURL = null;
+
+			if (Validator.isUrl(path)) {
+				resourceURL = new URL(path);
+			}
+			else {
+				resourceURL = _servletContext.getResource(
+					stackPath.concat(path));
+			}
 
 			if (resourceURL == null) {
 				return null;
@@ -85,18 +93,21 @@ public class ServletAggregateContext implements AggregateContext {
 		return null;
 	}
 
+	@Override
 	public String getFullPath(String path) {
 		String stackPath = _generatePathFromStack();
 
 		return stackPath.concat(path);
 	}
 
+	@Override
 	public void popPath(String path) {
 		if (Validator.isNotNull(path)) {
 			_stack.pop();
 		}
 	}
 
+	@Override
 	public void pushPath(String path) {
 		if (Validator.isNotNull(path)) {
 			_stack.push(path);

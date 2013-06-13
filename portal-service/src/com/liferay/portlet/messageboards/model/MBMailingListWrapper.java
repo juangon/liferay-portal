@@ -25,8 +25,8 @@ import java.util.Map;
  * This class is a wrapper for {@link MBMailingList}.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       MBMailingList
+ * @author Brian Wing Shun Chan
+ * @see MBMailingList
  * @generated
  */
 public class MBMailingListWrapper implements MBMailingList,
@@ -35,14 +35,17 @@ public class MBMailingListWrapper implements MBMailingList,
 		_mbMailingList = mbMailingList;
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return MBMailingList.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return MBMailingList.class.getName();
 	}
 
+	@Override
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
@@ -76,6 +79,7 @@ public class MBMailingListWrapper implements MBMailingList,
 		return attributes;
 	}
 
+	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 		String uuid = (String)attributes.get("uuid");
 
@@ -239,6 +243,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @return the primary key of this message boards mailing list
 	*/
+	@Override
 	public long getPrimaryKey() {
 		return _mbMailingList.getPrimaryKey();
 	}
@@ -248,6 +253,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @param primaryKey the primary key of this message boards mailing list
 	*/
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_mbMailingList.setPrimaryKey(primaryKey);
 	}
@@ -257,6 +263,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @return the uuid of this message boards mailing list
 	*/
+	@Override
 	public java.lang.String getUuid() {
 		return _mbMailingList.getUuid();
 	}
@@ -266,6 +273,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @param uuid the uuid of this message boards mailing list
 	*/
+	@Override
 	public void setUuid(java.lang.String uuid) {
 		_mbMailingList.setUuid(uuid);
 	}
@@ -275,6 +283,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @return the mailing list ID of this message boards mailing list
 	*/
+	@Override
 	public long getMailingListId() {
 		return _mbMailingList.getMailingListId();
 	}
@@ -284,6 +293,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @param mailingListId the mailing list ID of this message boards mailing list
 	*/
+	@Override
 	public void setMailingListId(long mailingListId) {
 		_mbMailingList.setMailingListId(mailingListId);
 	}
@@ -293,6 +303,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @return the group ID of this message boards mailing list
 	*/
+	@Override
 	public long getGroupId() {
 		return _mbMailingList.getGroupId();
 	}
@@ -302,6 +313,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @param groupId the group ID of this message boards mailing list
 	*/
+	@Override
 	public void setGroupId(long groupId) {
 		_mbMailingList.setGroupId(groupId);
 	}
@@ -311,6 +323,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @return the company ID of this message boards mailing list
 	*/
+	@Override
 	public long getCompanyId() {
 		return _mbMailingList.getCompanyId();
 	}
@@ -320,6 +333,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @param companyId the company ID of this message boards mailing list
 	*/
+	@Override
 	public void setCompanyId(long companyId) {
 		_mbMailingList.setCompanyId(companyId);
 	}
@@ -329,6 +343,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @return the user ID of this message boards mailing list
 	*/
+	@Override
 	public long getUserId() {
 		return _mbMailingList.getUserId();
 	}
@@ -338,6 +353,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @param userId the user ID of this message boards mailing list
 	*/
+	@Override
 	public void setUserId(long userId) {
 		_mbMailingList.setUserId(userId);
 	}
@@ -348,6 +364,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	* @return the user uuid of this message boards mailing list
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public java.lang.String getUserUuid()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbMailingList.getUserUuid();
@@ -358,6 +375,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @param userUuid the user uuid of this message boards mailing list
 	*/
+	@Override
 	public void setUserUuid(java.lang.String userUuid) {
 		_mbMailingList.setUserUuid(userUuid);
 	}
@@ -367,6 +385,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @return the user name of this message boards mailing list
 	*/
+	@Override
 	public java.lang.String getUserName() {
 		return _mbMailingList.getUserName();
 	}
@@ -376,6 +395,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @param userName the user name of this message boards mailing list
 	*/
+	@Override
 	public void setUserName(java.lang.String userName) {
 		_mbMailingList.setUserName(userName);
 	}
@@ -385,6 +405,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @return the create date of this message boards mailing list
 	*/
+	@Override
 	public java.util.Date getCreateDate() {
 		return _mbMailingList.getCreateDate();
 	}
@@ -394,6 +415,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @param createDate the create date of this message boards mailing list
 	*/
+	@Override
 	public void setCreateDate(java.util.Date createDate) {
 		_mbMailingList.setCreateDate(createDate);
 	}
@@ -403,6 +425,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @return the modified date of this message boards mailing list
 	*/
+	@Override
 	public java.util.Date getModifiedDate() {
 		return _mbMailingList.getModifiedDate();
 	}
@@ -412,6 +435,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @param modifiedDate the modified date of this message boards mailing list
 	*/
+	@Override
 	public void setModifiedDate(java.util.Date modifiedDate) {
 		_mbMailingList.setModifiedDate(modifiedDate);
 	}
@@ -421,6 +445,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @return the category ID of this message boards mailing list
 	*/
+	@Override
 	public long getCategoryId() {
 		return _mbMailingList.getCategoryId();
 	}
@@ -430,6 +455,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @param categoryId the category ID of this message boards mailing list
 	*/
+	@Override
 	public void setCategoryId(long categoryId) {
 		_mbMailingList.setCategoryId(categoryId);
 	}
@@ -439,6 +465,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @return the email address of this message boards mailing list
 	*/
+	@Override
 	public java.lang.String getEmailAddress() {
 		return _mbMailingList.getEmailAddress();
 	}
@@ -448,6 +475,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @param emailAddress the email address of this message boards mailing list
 	*/
+	@Override
 	public void setEmailAddress(java.lang.String emailAddress) {
 		_mbMailingList.setEmailAddress(emailAddress);
 	}
@@ -457,6 +485,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @return the in protocol of this message boards mailing list
 	*/
+	@Override
 	public java.lang.String getInProtocol() {
 		return _mbMailingList.getInProtocol();
 	}
@@ -466,6 +495,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @param inProtocol the in protocol of this message boards mailing list
 	*/
+	@Override
 	public void setInProtocol(java.lang.String inProtocol) {
 		_mbMailingList.setInProtocol(inProtocol);
 	}
@@ -475,6 +505,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @return the in server name of this message boards mailing list
 	*/
+	@Override
 	public java.lang.String getInServerName() {
 		return _mbMailingList.getInServerName();
 	}
@@ -484,6 +515,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @param inServerName the in server name of this message boards mailing list
 	*/
+	@Override
 	public void setInServerName(java.lang.String inServerName) {
 		_mbMailingList.setInServerName(inServerName);
 	}
@@ -493,6 +525,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @return the in server port of this message boards mailing list
 	*/
+	@Override
 	public int getInServerPort() {
 		return _mbMailingList.getInServerPort();
 	}
@@ -502,6 +535,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @param inServerPort the in server port of this message boards mailing list
 	*/
+	@Override
 	public void setInServerPort(int inServerPort) {
 		_mbMailingList.setInServerPort(inServerPort);
 	}
@@ -511,6 +545,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @return the in use s s l of this message boards mailing list
 	*/
+	@Override
 	public boolean getInUseSSL() {
 		return _mbMailingList.getInUseSSL();
 	}
@@ -520,6 +555,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @return <code>true</code> if this message boards mailing list is in use s s l; <code>false</code> otherwise
 	*/
+	@Override
 	public boolean isInUseSSL() {
 		return _mbMailingList.isInUseSSL();
 	}
@@ -529,6 +565,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @param inUseSSL the in use s s l of this message boards mailing list
 	*/
+	@Override
 	public void setInUseSSL(boolean inUseSSL) {
 		_mbMailingList.setInUseSSL(inUseSSL);
 	}
@@ -538,6 +575,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @return the in user name of this message boards mailing list
 	*/
+	@Override
 	public java.lang.String getInUserName() {
 		return _mbMailingList.getInUserName();
 	}
@@ -547,6 +585,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @param inUserName the in user name of this message boards mailing list
 	*/
+	@Override
 	public void setInUserName(java.lang.String inUserName) {
 		_mbMailingList.setInUserName(inUserName);
 	}
@@ -556,6 +595,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @return the in password of this message boards mailing list
 	*/
+	@Override
 	public java.lang.String getInPassword() {
 		return _mbMailingList.getInPassword();
 	}
@@ -565,6 +605,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @param inPassword the in password of this message boards mailing list
 	*/
+	@Override
 	public void setInPassword(java.lang.String inPassword) {
 		_mbMailingList.setInPassword(inPassword);
 	}
@@ -574,6 +615,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @return the in read interval of this message boards mailing list
 	*/
+	@Override
 	public int getInReadInterval() {
 		return _mbMailingList.getInReadInterval();
 	}
@@ -583,6 +625,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @param inReadInterval the in read interval of this message boards mailing list
 	*/
+	@Override
 	public void setInReadInterval(int inReadInterval) {
 		_mbMailingList.setInReadInterval(inReadInterval);
 	}
@@ -592,6 +635,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @return the out email address of this message boards mailing list
 	*/
+	@Override
 	public java.lang.String getOutEmailAddress() {
 		return _mbMailingList.getOutEmailAddress();
 	}
@@ -601,6 +645,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @param outEmailAddress the out email address of this message boards mailing list
 	*/
+	@Override
 	public void setOutEmailAddress(java.lang.String outEmailAddress) {
 		_mbMailingList.setOutEmailAddress(outEmailAddress);
 	}
@@ -610,6 +655,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @return the out custom of this message boards mailing list
 	*/
+	@Override
 	public boolean getOutCustom() {
 		return _mbMailingList.getOutCustom();
 	}
@@ -619,6 +665,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @return <code>true</code> if this message boards mailing list is out custom; <code>false</code> otherwise
 	*/
+	@Override
 	public boolean isOutCustom() {
 		return _mbMailingList.isOutCustom();
 	}
@@ -628,6 +675,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @param outCustom the out custom of this message boards mailing list
 	*/
+	@Override
 	public void setOutCustom(boolean outCustom) {
 		_mbMailingList.setOutCustom(outCustom);
 	}
@@ -637,6 +685,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @return the out server name of this message boards mailing list
 	*/
+	@Override
 	public java.lang.String getOutServerName() {
 		return _mbMailingList.getOutServerName();
 	}
@@ -646,6 +695,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @param outServerName the out server name of this message boards mailing list
 	*/
+	@Override
 	public void setOutServerName(java.lang.String outServerName) {
 		_mbMailingList.setOutServerName(outServerName);
 	}
@@ -655,6 +705,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @return the out server port of this message boards mailing list
 	*/
+	@Override
 	public int getOutServerPort() {
 		return _mbMailingList.getOutServerPort();
 	}
@@ -664,6 +715,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @param outServerPort the out server port of this message boards mailing list
 	*/
+	@Override
 	public void setOutServerPort(int outServerPort) {
 		_mbMailingList.setOutServerPort(outServerPort);
 	}
@@ -673,6 +725,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @return the out use s s l of this message boards mailing list
 	*/
+	@Override
 	public boolean getOutUseSSL() {
 		return _mbMailingList.getOutUseSSL();
 	}
@@ -682,6 +735,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @return <code>true</code> if this message boards mailing list is out use s s l; <code>false</code> otherwise
 	*/
+	@Override
 	public boolean isOutUseSSL() {
 		return _mbMailingList.isOutUseSSL();
 	}
@@ -691,6 +745,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @param outUseSSL the out use s s l of this message boards mailing list
 	*/
+	@Override
 	public void setOutUseSSL(boolean outUseSSL) {
 		_mbMailingList.setOutUseSSL(outUseSSL);
 	}
@@ -700,6 +755,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @return the out user name of this message boards mailing list
 	*/
+	@Override
 	public java.lang.String getOutUserName() {
 		return _mbMailingList.getOutUserName();
 	}
@@ -709,6 +765,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @param outUserName the out user name of this message boards mailing list
 	*/
+	@Override
 	public void setOutUserName(java.lang.String outUserName) {
 		_mbMailingList.setOutUserName(outUserName);
 	}
@@ -718,6 +775,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @return the out password of this message boards mailing list
 	*/
+	@Override
 	public java.lang.String getOutPassword() {
 		return _mbMailingList.getOutPassword();
 	}
@@ -727,6 +785,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @param outPassword the out password of this message boards mailing list
 	*/
+	@Override
 	public void setOutPassword(java.lang.String outPassword) {
 		_mbMailingList.setOutPassword(outPassword);
 	}
@@ -736,6 +795,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @return the allow anonymous of this message boards mailing list
 	*/
+	@Override
 	public boolean getAllowAnonymous() {
 		return _mbMailingList.getAllowAnonymous();
 	}
@@ -745,6 +805,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @return <code>true</code> if this message boards mailing list is allow anonymous; <code>false</code> otherwise
 	*/
+	@Override
 	public boolean isAllowAnonymous() {
 		return _mbMailingList.isAllowAnonymous();
 	}
@@ -754,6 +815,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @param allowAnonymous the allow anonymous of this message boards mailing list
 	*/
+	@Override
 	public void setAllowAnonymous(boolean allowAnonymous) {
 		_mbMailingList.setAllowAnonymous(allowAnonymous);
 	}
@@ -763,6 +825,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @return the active of this message boards mailing list
 	*/
+	@Override
 	public boolean getActive() {
 		return _mbMailingList.getActive();
 	}
@@ -772,6 +835,7 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @return <code>true</code> if this message boards mailing list is active; <code>false</code> otherwise
 	*/
+	@Override
 	public boolean isActive() {
 		return _mbMailingList.isActive();
 	}
@@ -781,52 +845,64 @@ public class MBMailingListWrapper implements MBMailingList,
 	*
 	* @param active the active of this message boards mailing list
 	*/
+	@Override
 	public void setActive(boolean active) {
 		_mbMailingList.setActive(active);
 	}
 
+	@Override
 	public boolean isNew() {
 		return _mbMailingList.isNew();
 	}
 
+	@Override
 	public void setNew(boolean n) {
 		_mbMailingList.setNew(n);
 	}
 
+	@Override
 	public boolean isCachedModel() {
 		return _mbMailingList.isCachedModel();
 	}
 
+	@Override
 	public void setCachedModel(boolean cachedModel) {
 		_mbMailingList.setCachedModel(cachedModel);
 	}
 
+	@Override
 	public boolean isEscapedModel() {
 		return _mbMailingList.isEscapedModel();
 	}
 
+	@Override
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _mbMailingList.getPrimaryKeyObj();
 	}
 
+	@Override
 	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
 		_mbMailingList.setPrimaryKeyObj(primaryKeyObj);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
 		return _mbMailingList.getExpandoBridge();
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.model.BaseModel<?> baseModel) {
 		_mbMailingList.setExpandoBridgeAttributes(baseModel);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portlet.expando.model.ExpandoBridge expandoBridge) {
 		_mbMailingList.setExpandoBridgeAttributes(expandoBridge);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		_mbMailingList.setExpandoBridgeAttributes(serviceContext);
@@ -837,6 +913,7 @@ public class MBMailingListWrapper implements MBMailingList,
 		return new MBMailingListWrapper((MBMailingList)_mbMailingList.clone());
 	}
 
+	@Override
 	public int compareTo(
 		com.liferay.portlet.messageboards.model.MBMailingList mbMailingList) {
 		return _mbMailingList.compareTo(mbMailingList);
@@ -847,14 +924,17 @@ public class MBMailingListWrapper implements MBMailingList,
 		return _mbMailingList.hashCode();
 	}
 
+	@Override
 	public com.liferay.portal.model.CacheModel<com.liferay.portlet.messageboards.model.MBMailingList> toCacheModel() {
 		return _mbMailingList.toCacheModel();
 	}
 
+	@Override
 	public com.liferay.portlet.messageboards.model.MBMailingList toEscapedModel() {
 		return new MBMailingListWrapper(_mbMailingList.toEscapedModel());
 	}
 
+	@Override
 	public com.liferay.portlet.messageboards.model.MBMailingList toUnescapedModel() {
 		return new MBMailingListWrapper(_mbMailingList.toUnescapedModel());
 	}
@@ -864,10 +944,12 @@ public class MBMailingListWrapper implements MBMailingList,
 		return _mbMailingList.toString();
 	}
 
+	@Override
 	public java.lang.String toXmlString() {
 		return _mbMailingList.toXmlString();
 	}
 
+	@Override
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_mbMailingList.persist();
@@ -880,10 +962,12 @@ public class MBMailingListWrapper implements MBMailingList,
 		return _mbMailingList;
 	}
 
+	@Override
 	public MBMailingList getWrappedModel() {
 		return _mbMailingList;
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		_mbMailingList.resetOriginalValues();
 	}

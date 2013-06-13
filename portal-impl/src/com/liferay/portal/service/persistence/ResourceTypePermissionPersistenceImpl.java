@@ -111,6 +111,7 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 	 * @return the matching resource type permissions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ResourceTypePermission> findByRoleId(long roleId)
 		throws SystemException {
 		return findByRoleId(roleId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
@@ -129,6 +130,7 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 	 * @return the range of matching resource type permissions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ResourceTypePermission> findByRoleId(long roleId, int start,
 		int end) throws SystemException {
 		return findByRoleId(roleId, start, end, null);
@@ -148,6 +150,7 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 	 * @return the ordered range of matching resource type permissions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ResourceTypePermission> findByRoleId(long roleId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -254,6 +257,7 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 	 * @throws com.liferay.portal.NoSuchResourceTypePermissionException if a matching resource type permission could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourceTypePermission findByRoleId_First(long roleId,
 		OrderByComparator orderByComparator)
 		throws NoSuchResourceTypePermissionException, SystemException {
@@ -284,6 +288,7 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 	 * @return the first matching resource type permission, or <code>null</code> if a matching resource type permission could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourceTypePermission fetchByRoleId_First(long roleId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<ResourceTypePermission> list = findByRoleId(roleId, 0, 1,
@@ -305,6 +310,7 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 	 * @throws com.liferay.portal.NoSuchResourceTypePermissionException if a matching resource type permission could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourceTypePermission findByRoleId_Last(long roleId,
 		OrderByComparator orderByComparator)
 		throws NoSuchResourceTypePermissionException, SystemException {
@@ -335,6 +341,7 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 	 * @return the last matching resource type permission, or <code>null</code> if a matching resource type permission could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourceTypePermission fetchByRoleId_Last(long roleId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByRoleId(roleId);
@@ -359,6 +366,7 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 	 * @throws com.liferay.portal.NoSuchResourceTypePermissionException if a resource type permission with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourceTypePermission[] findByRoleId_PrevAndNext(
 		long resourceTypePermissionId, long roleId,
 		OrderByComparator orderByComparator)
@@ -501,6 +509,7 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 	 * @param roleId the role ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByRoleId(long roleId) throws SystemException {
 		for (ResourceTypePermission resourceTypePermission : findByRoleId(
 				roleId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -515,6 +524,7 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 	 * @return the number of matching resource type permissions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByRoleId(long roleId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_ROLEID;
 
@@ -600,6 +610,7 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 	 * @return the matching resource type permissions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ResourceTypePermission> findByC_N_R(long companyId,
 		String name, long roleId) throws SystemException {
 		return findByC_N_R(companyId, name, roleId, QueryUtil.ALL_POS,
@@ -621,6 +632,7 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 	 * @return the range of matching resource type permissions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ResourceTypePermission> findByC_N_R(long companyId,
 		String name, long roleId, int start, int end) throws SystemException {
 		return findByC_N_R(companyId, name, roleId, start, end, null);
@@ -642,6 +654,7 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 	 * @return the ordered range of matching resource type permissions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ResourceTypePermission> findByC_N_R(long companyId,
 		String name, long roleId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -779,6 +792,7 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 	 * @throws com.liferay.portal.NoSuchResourceTypePermissionException if a matching resource type permission could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourceTypePermission findByC_N_R_First(long companyId,
 		String name, long roleId, OrderByComparator orderByComparator)
 		throws NoSuchResourceTypePermissionException, SystemException {
@@ -817,6 +831,7 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 	 * @return the first matching resource type permission, or <code>null</code> if a matching resource type permission could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourceTypePermission fetchByC_N_R_First(long companyId,
 		String name, long roleId, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -841,6 +856,7 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 	 * @throws com.liferay.portal.NoSuchResourceTypePermissionException if a matching resource type permission could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourceTypePermission findByC_N_R_Last(long companyId, String name,
 		long roleId, OrderByComparator orderByComparator)
 		throws NoSuchResourceTypePermissionException, SystemException {
@@ -879,6 +895,7 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 	 * @return the last matching resource type permission, or <code>null</code> if a matching resource type permission could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourceTypePermission fetchByC_N_R_Last(long companyId,
 		String name, long roleId, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -906,6 +923,7 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 	 * @throws com.liferay.portal.NoSuchResourceTypePermissionException if a resource type permission with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourceTypePermission[] findByC_N_R_PrevAndNext(
 		long resourceTypePermissionId, long companyId, String name,
 		long roleId, OrderByComparator orderByComparator)
@@ -1073,6 +1091,7 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 	 * @param roleId the role ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByC_N_R(long companyId, String name, long roleId)
 		throws SystemException {
 		for (ResourceTypePermission resourceTypePermission : findByC_N_R(
@@ -1091,6 +1110,7 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 	 * @return the number of matching resource type permissions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByC_N_R(long companyId, String name, long roleId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_N_R;
@@ -1195,6 +1215,7 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 	 * @throws com.liferay.portal.NoSuchResourceTypePermissionException if a matching resource type permission could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourceTypePermission findByC_G_N_R(long companyId, long groupId,
 		String name, long roleId)
 		throws NoSuchResourceTypePermissionException, SystemException {
@@ -1240,6 +1261,7 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 	 * @return the matching resource type permission, or <code>null</code> if a matching resource type permission could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourceTypePermission fetchByC_G_N_R(long companyId, long groupId,
 		String name, long roleId) throws SystemException {
 		return fetchByC_G_N_R(companyId, groupId, name, roleId, true);
@@ -1256,6 +1278,7 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 	 * @return the matching resource type permission, or <code>null</code> if a matching resource type permission could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourceTypePermission fetchByC_G_N_R(long companyId, long groupId,
 		String name, long roleId, boolean retrieveFromCache)
 		throws SystemException {
@@ -1377,6 +1400,7 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 	 * @return the resource type permission that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourceTypePermission removeByC_G_N_R(long companyId, long groupId,
 		String name, long roleId)
 		throws NoSuchResourceTypePermissionException, SystemException {
@@ -1396,6 +1420,7 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 	 * @return the number of matching resource type permissions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByC_G_N_R(long companyId, long groupId, String name,
 		long roleId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_G_N_R;
@@ -1480,6 +1505,7 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 	 *
 	 * @param resourceTypePermission the resource type permission
 	 */
+	@Override
 	public void cacheResult(ResourceTypePermission resourceTypePermission) {
 		EntityCacheUtil.putResult(ResourceTypePermissionModelImpl.ENTITY_CACHE_ENABLED,
 			ResourceTypePermissionImpl.class,
@@ -1501,6 +1527,7 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 	 *
 	 * @param resourceTypePermissions the resource type permissions
 	 */
+	@Override
 	public void cacheResult(
 		List<ResourceTypePermission> resourceTypePermissions) {
 		for (ResourceTypePermission resourceTypePermission : resourceTypePermissions) {
@@ -1638,6 +1665,7 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 	 * @param resourceTypePermissionId the primary key for the new resource type permission
 	 * @return the new resource type permission
 	 */
+	@Override
 	public ResourceTypePermission create(long resourceTypePermissionId) {
 		ResourceTypePermission resourceTypePermission = new ResourceTypePermissionImpl();
 
@@ -1655,6 +1683,7 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 	 * @throws com.liferay.portal.NoSuchResourceTypePermissionException if a resource type permission with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourceTypePermission remove(long resourceTypePermissionId)
 		throws NoSuchResourceTypePermissionException, SystemException {
 		return remove((Serializable)resourceTypePermissionId);
@@ -1878,6 +1907,7 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 	 * @throws com.liferay.portal.NoSuchResourceTypePermissionException if a resource type permission with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourceTypePermission findByPrimaryKey(
 		long resourceTypePermissionId)
 		throws NoSuchResourceTypePermissionException, SystemException {
@@ -1940,6 +1970,7 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 	 * @return the resource type permission, or <code>null</code> if a resource type permission with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourceTypePermission fetchByPrimaryKey(
 		long resourceTypePermissionId) throws SystemException {
 		return fetchByPrimaryKey((Serializable)resourceTypePermissionId);
@@ -1951,6 +1982,7 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 	 * @return the resource type permissions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ResourceTypePermission> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1967,6 +1999,7 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 	 * @return the range of resource type permissions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ResourceTypePermission> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
@@ -1985,6 +2018,7 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 	 * @return the ordered range of resource type permissions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ResourceTypePermission> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -2070,6 +2104,7 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (ResourceTypePermission resourceTypePermission : findAll()) {
 			remove(resourceTypePermission);
@@ -2082,6 +2117,7 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 	 * @return the number of resource type permissions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -2168,6 +2204,7 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 
 	private static CacheModel<ResourceTypePermission> _nullResourceTypePermissionCacheModel =
 		new CacheModel<ResourceTypePermission>() {
+			@Override
 			public ResourceTypePermission toEntityModel() {
 				return _nullResourceTypePermission;
 			}

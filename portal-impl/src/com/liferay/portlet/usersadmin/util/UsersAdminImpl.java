@@ -61,6 +61,7 @@ import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.PhoneLocalServiceUtil;
 import com.liferay.portal.service.PhoneServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -111,6 +112,7 @@ import javax.servlet.http.HttpServletRequest;
 @DoPrivileged
 public class UsersAdminImpl implements UsersAdmin {
 
+	@Override
 	public void addPortletBreadcrumbEntries(
 			Organization organization, HttpServletRequest request,
 			RenderResponse renderResponse)
@@ -143,6 +145,7 @@ public class UsersAdminImpl implements UsersAdmin {
 			request, unescapedOrganization.getName(), portletURL.toString());
 	}
 
+	@Override
 	public long[] addRequiredRoles(long userId, long[] roleIds)
 		throws PortalException, SystemException {
 
@@ -151,6 +154,7 @@ public class UsersAdminImpl implements UsersAdmin {
 		return addRequiredRoles(user, roleIds);
 	}
 
+	@Override
 	public long[] addRequiredRoles(User user, long[] roleIds)
 		throws PortalException, SystemException {
 
@@ -181,6 +185,7 @@ public class UsersAdminImpl implements UsersAdmin {
 		return roleIds;
 	}
 
+	@Override
 	public List<Role> filterGroupRoles(
 			PermissionChecker permissionChecker, long groupId, List<Role> roles)
 		throws PortalException, SystemException {
@@ -251,6 +256,7 @@ public class UsersAdminImpl implements UsersAdmin {
 		return filteredGroupRoles;
 	}
 
+	@Override
 	public List<Group> filterGroups(
 			PermissionChecker permissionChecker, List<Group> groups)
 		throws PortalException, SystemException {
@@ -277,6 +283,7 @@ public class UsersAdminImpl implements UsersAdmin {
 		return filteredGroups;
 	}
 
+	@Override
 	public List<Organization> filterOrganizations(
 			PermissionChecker permissionChecker,
 			List<Organization> organizations)
@@ -304,6 +311,7 @@ public class UsersAdminImpl implements UsersAdmin {
 		return filteredOrganizations;
 	}
 
+	@Override
 	public List<Role> filterRoles(
 		PermissionChecker permissionChecker, List<Role> roles) {
 
@@ -346,6 +354,7 @@ public class UsersAdminImpl implements UsersAdmin {
 		return filteredRoles;
 	}
 
+	@Override
 	public long[] filterUnsetGroupUserIds(
 			PermissionChecker permissionChecker, long groupId, long[] userIds)
 		throws PortalException, SystemException {
@@ -363,6 +372,7 @@ public class UsersAdminImpl implements UsersAdmin {
 		return filteredUserIds;
 	}
 
+	@Override
 	public long[] filterUnsetOrganizationUserIds(
 			PermissionChecker permissionChecker, long organizationId,
 			long[] userIds)
@@ -381,6 +391,7 @@ public class UsersAdminImpl implements UsersAdmin {
 		return filteredUserIds;
 	}
 
+	@Override
 	public List<UserGroupRole> filterUserGroupRoles(
 			PermissionChecker permissionChecker,
 			List<UserGroupRole> userGroupRoles)
@@ -425,6 +436,7 @@ public class UsersAdminImpl implements UsersAdmin {
 		return filteredUserGroupRoles;
 	}
 
+	@Override
 	public List<UserGroup> filterUserGroups(
 		PermissionChecker permissionChecker, List<UserGroup> userGroups) {
 
@@ -450,10 +462,12 @@ public class UsersAdminImpl implements UsersAdmin {
 		return filteredUserGroups;
 	}
 
+	@Override
 	public List<Address> getAddresses(ActionRequest actionRequest) {
 		return getAddresses(actionRequest, Collections.<Address>emptyList());
 	}
 
+	@Override
 	public List<Address> getAddresses(
 		ActionRequest actionRequest, List<Address> defaultAddresses) {
 
@@ -527,11 +541,13 @@ public class UsersAdminImpl implements UsersAdmin {
 		return addresses;
 	}
 
+	@Override
 	public List<EmailAddress> getEmailAddresses(ActionRequest actionRequest) {
 		return getEmailAddresses(
 			actionRequest, Collections.<EmailAddress>emptyList());
 	}
 
+	@Override
 	public List<EmailAddress> getEmailAddresses(
 		ActionRequest actionRequest, List<EmailAddress> defaultEmailAddresses) {
 
@@ -583,6 +599,7 @@ public class UsersAdminImpl implements UsersAdmin {
 		return emailAddresses;
 	}
 
+	@Override
 	public OrderByComparator getGroupOrderByComparator(
 		String orderByCol, String orderByType) {
 
@@ -607,6 +624,7 @@ public class UsersAdminImpl implements UsersAdmin {
 		return orderByComparator;
 	}
 
+	@Override
 	public Long[] getOrganizationIds(List<Organization> organizations) {
 		if ((organizations == null) || organizations.isEmpty()) {
 			return new Long[0];
@@ -623,6 +641,7 @@ public class UsersAdminImpl implements UsersAdmin {
 		return organizationIds;
 	}
 
+	@Override
 	public OrderByComparator getOrganizationOrderByComparator(
 		String orderByCol, String orderByType) {
 
@@ -647,6 +666,7 @@ public class UsersAdminImpl implements UsersAdmin {
 		return orderByComparator;
 	}
 
+	@Override
 	public Tuple getOrganizations(Hits hits)
 		throws PortalException, SystemException {
 
@@ -682,6 +702,7 @@ public class UsersAdminImpl implements UsersAdmin {
 		return new Tuple(organizations, corruptIndex);
 	}
 
+	@Override
 	public List<OrgLabor> getOrgLabors(ActionRequest actionRequest) {
 		List<OrgLabor> orgLabors = new ArrayList<OrgLabor>();
 
@@ -753,10 +774,12 @@ public class UsersAdminImpl implements UsersAdmin {
 		return orgLabors;
 	}
 
+	@Override
 	public List<Phone> getPhones(ActionRequest actionRequest) {
 		return getPhones(actionRequest, Collections.<Phone>emptyList());
 	}
 
+	@Override
 	public List<Phone> getPhones(
 		ActionRequest actionRequest, List<Phone> defaultPhones) {
 
@@ -808,6 +831,7 @@ public class UsersAdminImpl implements UsersAdmin {
 		return phones;
 	}
 
+	@Override
 	public OrderByComparator getRoleOrderByComparator(
 		String orderByCol, String orderByType) {
 
@@ -835,6 +859,7 @@ public class UsersAdminImpl implements UsersAdmin {
 		return orderByComparator;
 	}
 
+	@Override
 	public OrderByComparator getUserGroupOrderByComparator(
 		String orderByCol, String orderByType) {
 
@@ -859,6 +884,7 @@ public class UsersAdminImpl implements UsersAdmin {
 		return orderByComparator;
 	}
 
+	@Override
 	public List<UserGroupRole> getUserGroupRoles(PortletRequest portletRequest)
 		throws PortalException, SystemException {
 
@@ -899,6 +925,7 @@ public class UsersAdminImpl implements UsersAdmin {
 		return userGroupRoles;
 	}
 
+	@Override
 	public Tuple getUserGroups(Hits hits)
 		throws PortalException, SystemException {
 
@@ -933,6 +960,7 @@ public class UsersAdminImpl implements UsersAdmin {
 		return new Tuple(userGroups, corruptIndex);
 	}
 
+	@Override
 	public OrderByComparator getUserOrderByComparator(
 		String orderByCol, String orderByType) {
 
@@ -966,6 +994,7 @@ public class UsersAdminImpl implements UsersAdmin {
 		return orderByComparator;
 	}
 
+	@Override
 	public Tuple getUsers(Hits hits) throws PortalException, SystemException {
 		List<User> users = new ArrayList<User>();
 		boolean corruptIndex = false;
@@ -995,10 +1024,12 @@ public class UsersAdminImpl implements UsersAdmin {
 		return new Tuple(users, corruptIndex);
 	}
 
+	@Override
 	public List<Website> getWebsites(ActionRequest actionRequest) {
 		return getWebsites(actionRequest, Collections.<Website>emptyList());
 	}
 
+	@Override
 	public List<Website> getWebsites(
 		ActionRequest actionRequest, List<Website> defaultWebsites) {
 
@@ -1048,6 +1079,7 @@ public class UsersAdminImpl implements UsersAdmin {
 		return websites;
 	}
 
+	@Override
 	public boolean hasUpdateEmailAddress(
 			PermissionChecker permissionChecker, User user)
 		throws PortalException, SystemException {
@@ -1080,6 +1112,7 @@ public class UsersAdminImpl implements UsersAdmin {
 		return false;
 	}
 
+	@Override
 	public boolean hasUpdateScreenName(
 			PermissionChecker permissionChecker, User user)
 		throws PortalException, SystemException {
@@ -1112,6 +1145,7 @@ public class UsersAdminImpl implements UsersAdmin {
 		return false;
 	}
 
+	@Override
 	public long[] removeRequiredRoles(long userId, long[] roleIds)
 		throws PortalException, SystemException {
 
@@ -1120,6 +1154,7 @@ public class UsersAdminImpl implements UsersAdmin {
 		return removeRequiredRoles(user, roleIds);
 	}
 
+	@Override
 	public long[] removeRequiredRoles(User user, long[] roleIds)
 		throws PortalException, SystemException {
 
@@ -1131,6 +1166,7 @@ public class UsersAdminImpl implements UsersAdmin {
 		return roleIds;
 	}
 
+	@Override
 	public void updateAddresses(
 			String className, long classPK, List<Address> addresses)
 		throws PortalException, SystemException {
@@ -1154,7 +1190,8 @@ public class UsersAdminImpl implements UsersAdmin {
 			if (addressId <= 0) {
 				address = AddressServiceUtil.addAddress(
 					className, classPK, street1, street2, street3, city, zip,
-					regionId, countryId, typeId, mailing, primary);
+					regionId, countryId, typeId, mailing, primary,
+					new ServiceContext());
 
 				addressId = address.getAddressId();
 			}
@@ -1176,6 +1213,7 @@ public class UsersAdminImpl implements UsersAdmin {
 		}
 	}
 
+	@Override
 	public void updateEmailAddresses(
 			String className, long classPK, List<EmailAddress> emailAddresses)
 		throws PortalException, SystemException {
@@ -1191,7 +1229,8 @@ public class UsersAdminImpl implements UsersAdmin {
 
 			if (emailAddressId <= 0) {
 				emailAddress = EmailAddressServiceUtil.addEmailAddress(
-					className, classPK, address, typeId, primary);
+					className, classPK, address, typeId, primary,
+					new ServiceContext());
 
 				emailAddressId = emailAddress.getEmailAddressId();
 			}
@@ -1214,6 +1253,7 @@ public class UsersAdminImpl implements UsersAdmin {
 		}
 	}
 
+	@Override
 	public void updateOrgLabors(long classPK, List<OrgLabor> orgLabors)
 		throws PortalException, SystemException {
 
@@ -1265,6 +1305,7 @@ public class UsersAdminImpl implements UsersAdmin {
 		}
 	}
 
+	@Override
 	public void updatePhones(String className, long classPK, List<Phone> phones)
 		throws PortalException, SystemException {
 
@@ -1280,7 +1321,8 @@ public class UsersAdminImpl implements UsersAdmin {
 
 			if (phoneId <= 0) {
 				phone = PhoneServiceUtil.addPhone(
-					className, classPK, number, extension, typeId, primary);
+					className, classPK, number, extension, typeId, primary,
+					new ServiceContext());
 
 				phoneId = phone.getPhoneId();
 			}
@@ -1301,6 +1343,7 @@ public class UsersAdminImpl implements UsersAdmin {
 		}
 	}
 
+	@Override
 	public void updateWebsites(
 			String className, long classPK, List<Website> websites)
 		throws PortalException, SystemException {
@@ -1316,7 +1359,8 @@ public class UsersAdminImpl implements UsersAdmin {
 
 			if (websiteId <= 0) {
 				website = WebsiteServiceUtil.addWebsite(
-					className, classPK, url, typeId, primary);
+					className, classPK, url, typeId, primary,
+					new ServiceContext());
 
 				websiteId = website.getWebsiteId();
 			}

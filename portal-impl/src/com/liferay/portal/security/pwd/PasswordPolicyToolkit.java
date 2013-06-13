@@ -125,58 +125,62 @@ public class PasswordPolicyToolkit extends BasicToolkit {
 				UserPasswordException.PASSWORD_NOT_CHANGEABLE);
 		}
 
-		if (userId != 0) {
-			User user = UserLocalServiceUtil.getUserById(userId);
+		if (userId == 0) {
+			return;
+		}
 
-			Date passwordModfiedDate = user.getPasswordModifiedDate();
+		User user = UserLocalServiceUtil.getUserById(userId);
 
-			if (passwordModfiedDate != null) {
+		Date passwordModfiedDate = user.getPasswordModifiedDate();
 
-				// LEP-2961
+		if (passwordModfiedDate != null) {
 
-				Date now = new Date();
+			// LEP-2961
 
-				long passwordModificationElapsedTime =
-					now.getTime() - passwordModfiedDate.getTime();
+			Date now = new Date();
 
-				long userCreationElapsedTime =
-					now.getTime() - user.getCreateDate().getTime();
+			long passwordModificationElapsedTime =
+				now.getTime() - passwordModfiedDate.getTime();
 
-				long minAge = passwordPolicy.getMinAge() * 1000;
+			long userCreationElapsedTime =
+				now.getTime() - user.getCreateDate().getTime();
 
-				if ((passwordModificationElapsedTime < minAge) &&
-					(userCreationElapsedTime > minAge)) {
+			long minAge = passwordPolicy.getMinAge() * 1000;
 
-					throw new UserPasswordException(
-						UserPasswordException.PASSWORD_TOO_YOUNG);
-				}
+			if ((passwordModificationElapsedTime < minAge) &&
+				(userCreationElapsedTime > minAge)) {
+
+				throw new UserPasswordException(
+					UserPasswordException.PASSWORD_TOO_YOUNG);
 			}
+		}
 
-			if (PasswordTrackerLocalServiceUtil.isSameAsCurrentPassword(
+		if (PasswordTrackerLocalServiceUtil.isSameAsCurrentPassword(
+				userId, password1)) {
+
+			throw new UserPasswordException(
+				UserPasswordException.PASSWORD_SAME_AS_CURRENT);
+		}
+		else if (!PasswordTrackerLocalServiceUtil.isValidPassword(
 					userId, password1)) {
 
-				throw new UserPasswordException(
-					UserPasswordException.PASSWORD_SAME_AS_CURRENT);
-			}
-			else if (!PasswordTrackerLocalServiceUtil.isValidPassword(
-						userId, password1)) {
-
-				throw new UserPasswordException(
-					UserPasswordException.PASSWORD_ALREADY_USED);
-			}
+			throw new UserPasswordException(
+				UserPasswordException.PASSWORD_ALREADY_USED);
 		}
 	}
 
 	protected String generateDynamic(PasswordPolicy passwordPolicy) {
-		int alphanumericMinLength = Math.max(
-			passwordPolicy.getMinAlphanumeric(),
+		int alphanumericActualMinLength =
 			passwordPolicy.getMinLowerCase() + passwordPolicy.getMinNumbers() +
-				passwordPolicy.getMinUpperCase());
+				passwordPolicy.getMinUpperCase();
+
+		int alphanumericMinLength = Math.max(
+			passwordPolicy.getMinAlphanumeric(), alphanumericActualMinLength);
 		int passwordMinLength = Math.max(
 			passwordPolicy.getMinLength(),
 			alphanumericMinLength + passwordPolicy.getMinSymbols());
 
-		StringBundler sb = new StringBundler(passwordMinLength);
+		StringBundler sb = new StringBundler(6);
 
 		if (passwordPolicy.getMinLowerCase() > 0) {
 			sb.append(
@@ -202,9 +206,8 @@ public class PasswordPolicyToolkit extends BasicToolkit {
 					passwordPolicy.getMinUpperCase(), _upperCaseCharsetArray));
 		}
 
-		if (alphanumericMinLength > passwordPolicy.getMinAlphanumeric()) {
-			int count =
-				alphanumericMinLength - passwordPolicy.getMinAlphanumeric();
+		if (alphanumericMinLength > alphanumericActualMinLength) {
+			int count = alphanumericMinLength - alphanumericActualMinLength;
 
 			sb.append(getRandomString(count, _alphanumericCharsetArray));
 		}
@@ -217,6 +220,13 @@ public class PasswordPolicyToolkit extends BasicToolkit {
 					(alphanumericMinLength + passwordPolicy.getMinSymbols());
 
 			sb.append(PwdGenerator.getSecurePassword(_completeCharset, count));
+		}
+
+		if (sb.index() == 0) {
+			sb.append(
+				PwdGenerator.getSecurePassword(
+					_completeCharset,
+					PropsValues.PASSWORDS_DEFAULT_POLICY_MIN_LENGTH));
 		}
 
 		Randomizer randomizer = Randomizer.getInstance();

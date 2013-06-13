@@ -99,6 +99,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 	 * @throws com.liferay.portal.NoSuchWebDAVPropsException if a matching web d a v props could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WebDAVProps findByC_C(long classNameId, long classPK)
 		throws NoSuchWebDAVPropsException, SystemException {
 		WebDAVProps webDAVProps = fetchByC_C(classNameId, classPK);
@@ -134,6 +135,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 	 * @return the matching web d a v props, or <code>null</code> if a matching web d a v props could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WebDAVProps fetchByC_C(long classNameId, long classPK)
 		throws SystemException {
 		return fetchByC_C(classNameId, classPK, true);
@@ -148,6 +150,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 	 * @return the matching web d a v props, or <code>null</code> if a matching web d a v props could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WebDAVProps fetchByC_C(long classNameId, long classPK,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { classNameId, classPK };
@@ -239,6 +242,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 	 * @return the web d a v props that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WebDAVProps removeByC_C(long classNameId, long classPK)
 		throws NoSuchWebDAVPropsException, SystemException {
 		WebDAVProps webDAVProps = findByC_C(classNameId, classPK);
@@ -254,6 +258,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 	 * @return the number of matching web d a v propses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByC_C(long classNameId, long classPK)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_C;
@@ -312,6 +317,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 	 *
 	 * @param webDAVProps the web d a v props
 	 */
+	@Override
 	public void cacheResult(WebDAVProps webDAVProps) {
 		EntityCacheUtil.putResult(WebDAVPropsModelImpl.ENTITY_CACHE_ENABLED,
 			WebDAVPropsImpl.class, webDAVProps.getPrimaryKey(), webDAVProps);
@@ -328,6 +334,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 	 *
 	 * @param webDAVPropses the web d a v propses
 	 */
+	@Override
 	public void cacheResult(List<WebDAVProps> webDAVPropses) {
 		for (WebDAVProps webDAVProps : webDAVPropses) {
 			if (EntityCacheUtil.getResult(
@@ -448,6 +455,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 	 * @param webDavPropsId the primary key for the new web d a v props
 	 * @return the new web d a v props
 	 */
+	@Override
 	public WebDAVProps create(long webDavPropsId) {
 		WebDAVProps webDAVProps = new WebDAVPropsImpl();
 
@@ -465,6 +473,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 	 * @throws com.liferay.portal.NoSuchWebDAVPropsException if a web d a v props with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WebDAVProps remove(long webDavPropsId)
 		throws NoSuchWebDAVPropsException, SystemException {
 		return remove((Serializable)webDavPropsId);
@@ -642,6 +651,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 	 * @throws com.liferay.portal.NoSuchWebDAVPropsException if a web d a v props with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WebDAVProps findByPrimaryKey(long webDavPropsId)
 		throws NoSuchWebDAVPropsException, SystemException {
 		return findByPrimaryKey((Serializable)webDavPropsId);
@@ -702,6 +712,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 	 * @return the web d a v props, or <code>null</code> if a web d a v props with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WebDAVProps fetchByPrimaryKey(long webDavPropsId)
 		throws SystemException {
 		return fetchByPrimaryKey((Serializable)webDavPropsId);
@@ -713,6 +724,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 	 * @return the web d a v propses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WebDAVProps> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -729,6 +741,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 	 * @return the range of web d a v propses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WebDAVProps> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
@@ -747,6 +760,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 	 * @return the ordered range of web d a v propses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WebDAVProps> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -832,6 +846,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (WebDAVProps webDAVProps : findAll()) {
 			remove(webDAVProps);
@@ -844,6 +859,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 	 * @return the number of web d a v propses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -929,6 +945,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 		};
 
 	private static CacheModel<WebDAVProps> _nullWebDAVPropsCacheModel = new CacheModel<WebDAVProps>() {
+			@Override
 			public WebDAVProps toEntityModel() {
 				return _nullWebDAVProps;
 			}

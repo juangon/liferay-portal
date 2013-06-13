@@ -64,6 +64,7 @@ import org.apache.tomcat.jdbc.pool.jmx.ConnectionPool;
 @DoPrivileged
 public class DataSourceFactoryImpl implements DataSourceFactory {
 
+	@Override
 	public void destroyDataSource(DataSource dataSource) throws Exception {
 		while (dataSource instanceof DataSourceWrapper) {
 			DataSourceWrapper dataSourceWrapper = (DataSourceWrapper)dataSource;
@@ -85,6 +86,7 @@ public class DataSourceFactoryImpl implements DataSourceFactory {
 		}
 	}
 
+	@Override
 	public DataSource initDataSource(Properties properties) throws Exception {
 		Properties defaultProperties = PropsUtil.getProperties(
 			"jdbc.default.", true);
@@ -156,6 +158,7 @@ public class DataSourceFactoryImpl implements DataSourceFactory {
 		return _pacl.getDataSource(dataSource);
 	}
 
+	@Override
 	public DataSource initDataSource(
 			String driverClassName, String url, String userName,
 			String password, String jndiName)
@@ -402,6 +405,7 @@ public class DataSourceFactoryImpl implements DataSourceFactory {
 
 	private static class NoPACL implements PACL {
 
+		@Override
 		public DataSource getDataSource(DataSource dataSource) {
 			return dataSource;
 		}

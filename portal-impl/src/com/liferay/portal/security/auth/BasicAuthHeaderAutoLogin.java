@@ -66,10 +66,12 @@ import javax.servlet.http.HttpServletResponse;
 public class BasicAuthHeaderAutoLogin
 	extends BaseAutoLogin implements AuthVerifier {
 
+	@Override
 	public String getAuthType() {
 		return HttpServletRequest.BASIC_AUTH;
 	}
 
+	@Override
 	public AuthVerifierResult verify(
 			AccessControlContext accessControlContext, Properties properties)
 		throws AuthException {
@@ -109,8 +111,8 @@ public class BasicAuthHeaderAutoLogin
 
 			return authVerifierResult;
 		}
-		catch (AutoLoginException e) {
-			throw new AuthException(e);
+		catch (AutoLoginException ale) {
+			throw new AuthException(ale);
 		}
 	}
 

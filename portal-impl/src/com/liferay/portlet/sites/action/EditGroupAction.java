@@ -70,6 +70,7 @@ import com.liferay.portal.service.TeamLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.AssetCategoryException;
 import com.liferay.portlet.asset.AssetTagException;
@@ -83,6 +84,7 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -117,18 +119,35 @@ public class EditGroupAction extends PortletAction {
 				Object[] returnValue = updateGroup(actionRequest);
 
 				Group group = (Group)returnValue[0];
-				String oldFriendlyURL = (String)returnValue[1];
-				String oldStagingFriendlyURL = (String)returnValue[2];
-				long newRefererPlid = (Long)returnValue[3];
 
-				redirect = HttpUtil.setParameter(
-					redirect, "doAsGroupId", group.getGroupId());
-				redirect = HttpUtil.setParameter(
-					redirect, "refererPlid", newRefererPlid);
+				Layout layout = themeDisplay.getLayout();
 
-				closeRedirect = updateCloseRedirect(
-					closeRedirect, group, themeDisplay, oldFriendlyURL,
-					oldStagingFriendlyURL);
+				Group layoutGroup = layout.getGroup();
+
+				if (cmd.equals(Constants.ADD) && layoutGroup.isControlPanel()) {
+					themeDisplay.setScopeGroupId(group.getGroupId());
+
+					PortletURL siteAdministrationURL =
+						PortalUtil.getSiteAdministrationURL(
+							actionResponse, themeDisplay,
+							PortletKeys.SITE_SETTINGS);
+
+					redirect = siteAdministrationURL.toString();
+				}
+				else {
+					String oldFriendlyURL = (String)returnValue[1];
+					String oldStagingFriendlyURL = (String)returnValue[2];
+					long newRefererPlid = (Long)returnValue[3];
+
+					redirect = HttpUtil.setParameter(
+						redirect, "doAsGroupId", group.getGroupId());
+					redirect = HttpUtil.setParameter(
+						redirect, "refererPlid", newRefererPlid);
+
+					closeRedirect = updateCloseRedirect(
+						closeRedirect, group, themeDisplay, oldFriendlyURL,
+						oldStagingFriendlyURL);
+				}
 			}
 			else if (cmd.equals(Constants.DEACTIVATE) ||
 					 cmd.equals(Constants.RESTORE)) {
@@ -287,6 +306,20 @@ public class EditGroupAction extends PortletAction {
 		return teams;
 	}
 
+	/**
+	 * Resets the number of failed merge attempts for the site template, which
+	 * is accessed by retrieving the layout set prototype ID. Once the counter
+	 * is reset, the modified site template is merged back into its linked site,
+	 * which is accessed by retrieving the group ID and private layout set.
+	 *
+	 * <p>
+	 * If the number of failed merge attempts is not equal to zero after the
+	 * merge, an error key is submitted to {@link SessionErrors}.
+	 * </p>
+	 *
+	 * @param  actionRequest the portlet request used to retrieve parameters
+	 * @throws Exception if an exception occurred
+	 */
 	protected void resetMergeFailCountAndMerge(ActionRequest actionRequest)
 		throws Exception {
 

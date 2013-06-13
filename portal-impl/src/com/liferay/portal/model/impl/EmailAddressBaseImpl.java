@@ -37,6 +37,7 @@ public abstract class EmailAddressBaseImpl extends EmailAddressModelImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a email address model instance should use the {@link EmailAddress} interface instead.
 	 */
+	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
 			EmailAddressLocalServiceUtil.addEmailAddress(this);

@@ -24,13 +24,11 @@ import com.liferay.portal.service.http.TunnelUtil;
 import com.liferay.portlet.journal.service.JournalTemplateServiceUtil;
 
 /**
- * <p>
- * This class provides a HTTP utility for the
+ * Provides the HTTP utility for the
  * {@link com.liferay.portlet.journal.service.JournalTemplateServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it requires an additional
  * {@link com.liferay.portal.security.auth.HttpPrincipal} parameter.
- * </p>
  *
  * <p>
  * The benefits of using the HTTP utility is that it is fast and allows for
@@ -47,10 +45,10 @@ import com.liferay.portlet.journal.service.JournalTemplateServiceUtil;
  * The HTTP utility is only generated for remote services.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       JournalTemplateServiceSoap
- * @see       com.liferay.portal.security.auth.HttpPrincipal
- * @see       com.liferay.portlet.journal.service.JournalTemplateServiceUtil
+ * @author Brian Wing Shun Chan
+ * @see JournalTemplateServiceSoap
+ * @see com.liferay.portal.security.auth.HttpPrincipal
+ * @see com.liferay.portlet.journal.service.JournalTemplateServiceUtil
  * @generated
  */
 public class JournalTemplateServiceHttp {
@@ -219,7 +217,8 @@ public class JournalTemplateServiceHttp {
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalTemplate> getStructureTemplates(
 		HttpPrincipal httpPrincipal, long groupId, java.lang.String structureId)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(JournalTemplateServiceUtil.class,
 					"getStructureTemplates",
@@ -234,6 +233,10 @@ public class JournalTemplateServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
 					throw (com.liferay.portal.kernel.exception.SystemException)e;
 				}

@@ -33,6 +33,7 @@ import com.liferay.portal.util.PortalUtil;
 public class PluginSettingLocalServiceImpl
 	extends PluginSettingLocalServiceBaseImpl {
 
+	@Override
 	public void checkPermission(long userId, String pluginId, String pluginType)
 		throws PortalException {
 
@@ -41,6 +42,7 @@ public class PluginSettingLocalServiceImpl
 		}
 	}
 
+	@Override
 	public PluginSetting getDefaultPluginSetting() {
 		PluginSettingImpl pluginSetting = new PluginSettingImpl();
 
@@ -50,6 +52,7 @@ public class PluginSettingLocalServiceImpl
 		return pluginSetting;
 	}
 
+	@Override
 	public PluginSetting getPluginSetting(
 			long companyId, String pluginId, String pluginType)
 		throws SystemException {
@@ -57,35 +60,35 @@ public class PluginSettingLocalServiceImpl
 		PluginSetting pluginSetting = pluginSettingPersistence.fetchByC_I_T(
 			companyId, pluginId, pluginType);
 
-		if (pluginSetting == null) {
-			Plugin plugin = null;
+		if (pluginSetting != null) {
+			return pluginSetting;
+		}
 
-			if (pluginType.equals(Plugin.TYPE_LAYOUT_TEMPLATE)) {
-				plugin = layoutTemplateLocalService.getLayoutTemplate(
-					pluginId, false, null);
-			}
-			else if (pluginType.equals(Plugin.TYPE_THEME)) {
-				boolean wapTheme = true;
+		Plugin plugin = null;
 
-				plugin = themeLocalService.getTheme(
-					companyId, pluginId, wapTheme);
-			}
+		if (pluginType.equals(Plugin.TYPE_LAYOUT_TEMPLATE)) {
+			plugin = layoutTemplateLocalService.getLayoutTemplate(
+				pluginId, false, null);
+		}
+		else if (pluginType.equals(Plugin.TYPE_THEME)) {
+			boolean wapTheme = true;
 
-			if ((plugin == null) ||
-				(plugin.getDefaultPluginSetting() == null)) {
+			plugin = themeLocalService.getTheme(companyId, pluginId, wapTheme);
+		}
 
-				pluginSetting = getDefaultPluginSetting();
+		if ((plugin == null) || (plugin.getDefaultPluginSetting() == null)) {
+			pluginSetting = getDefaultPluginSetting();
 
-				pluginSetting.setCompanyId(companyId);
-			}
-			else {
-				pluginSetting = plugin.getDefaultPluginSetting(companyId);
-			}
+			pluginSetting.setCompanyId(companyId);
+		}
+		else {
+			pluginSetting = plugin.getDefaultPluginSetting(companyId);
 		}
 
 		return pluginSetting;
 	}
 
+	@Override
 	public boolean hasPermission(
 		long userId, String pluginId, String pluginType) {
 
@@ -111,6 +114,7 @@ public class PluginSettingLocalServiceImpl
 		}
 	}
 
+	@Override
 	public PluginSetting updatePluginSetting(
 			long companyId, String pluginId, String pluginType, String roles,
 			boolean active)

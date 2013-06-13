@@ -61,6 +61,7 @@ public class CompanyCacheModel implements CacheModel<Company>, Externalizable {
 		return sb.toString();
 	}
 
+	@Override
 	public Company toEntityModel() {
 		CompanyImpl companyImpl = new CompanyImpl();
 
@@ -109,6 +110,7 @@ public class CompanyCacheModel implements CacheModel<Company>, Externalizable {
 		return companyImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput)
 		throws ClassNotFoundException, IOException {
 		companyId = objectInput.readLong();
@@ -126,6 +128,7 @@ public class CompanyCacheModel implements CacheModel<Company>, Externalizable {
 		_virtualHostname = (java.lang.String)objectInput.readObject();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(companyId);

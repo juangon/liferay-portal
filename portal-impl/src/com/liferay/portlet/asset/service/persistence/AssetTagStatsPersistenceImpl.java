@@ -110,6 +110,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 * @return the matching asset tag statses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetTagStats> findByTagId(long tagId)
 		throws SystemException {
 		return findByTagId(tagId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
@@ -128,6 +129,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 * @return the range of matching asset tag statses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetTagStats> findByTagId(long tagId, int start, int end)
 		throws SystemException {
 		return findByTagId(tagId, start, end, null);
@@ -147,6 +149,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 * @return the ordered range of matching asset tag statses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetTagStats> findByTagId(long tagId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -253,6 +256,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 * @throws com.liferay.portlet.asset.NoSuchTagStatsException if a matching asset tag stats could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTagStats findByTagId_First(long tagId,
 		OrderByComparator orderByComparator)
 		throws NoSuchTagStatsException, SystemException {
@@ -283,6 +287,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 * @return the first matching asset tag stats, or <code>null</code> if a matching asset tag stats could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTagStats fetchByTagId_First(long tagId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<AssetTagStats> list = findByTagId(tagId, 0, 1, orderByComparator);
@@ -303,6 +308,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 * @throws com.liferay.portlet.asset.NoSuchTagStatsException if a matching asset tag stats could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTagStats findByTagId_Last(long tagId,
 		OrderByComparator orderByComparator)
 		throws NoSuchTagStatsException, SystemException {
@@ -332,6 +338,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 * @return the last matching asset tag stats, or <code>null</code> if a matching asset tag stats could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTagStats fetchByTagId_Last(long tagId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByTagId(tagId);
@@ -356,6 +363,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 * @throws com.liferay.portlet.asset.NoSuchTagStatsException if a asset tag stats with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTagStats[] findByTagId_PrevAndNext(long tagStatsId, long tagId,
 		OrderByComparator orderByComparator)
 		throws NoSuchTagStatsException, SystemException {
@@ -497,6 +505,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 * @param tagId the tag ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByTagId(long tagId) throws SystemException {
 		for (AssetTagStats assetTagStats : findByTagId(tagId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -511,6 +520,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 * @return the number of matching asset tag statses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByTagId(long tagId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_TAGID;
 
@@ -587,6 +597,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 * @return the matching asset tag statses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetTagStats> findByClassNameId(long classNameId)
 		throws SystemException {
 		return findByClassNameId(classNameId, QueryUtil.ALL_POS,
@@ -606,6 +617,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 * @return the range of matching asset tag statses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetTagStats> findByClassNameId(long classNameId, int start,
 		int end) throws SystemException {
 		return findByClassNameId(classNameId, start, end, null);
@@ -625,6 +637,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 * @return the ordered range of matching asset tag statses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetTagStats> findByClassNameId(long classNameId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -731,6 +744,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 * @throws com.liferay.portlet.asset.NoSuchTagStatsException if a matching asset tag stats could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTagStats findByClassNameId_First(long classNameId,
 		OrderByComparator orderByComparator)
 		throws NoSuchTagStatsException, SystemException {
@@ -761,6 +775,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 * @return the first matching asset tag stats, or <code>null</code> if a matching asset tag stats could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTagStats fetchByClassNameId_First(long classNameId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<AssetTagStats> list = findByClassNameId(classNameId, 0, 1,
@@ -782,6 +797,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 * @throws com.liferay.portlet.asset.NoSuchTagStatsException if a matching asset tag stats could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTagStats findByClassNameId_Last(long classNameId,
 		OrderByComparator orderByComparator)
 		throws NoSuchTagStatsException, SystemException {
@@ -812,6 +828,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 * @return the last matching asset tag stats, or <code>null</code> if a matching asset tag stats could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTagStats fetchByClassNameId_Last(long classNameId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByClassNameId(classNameId);
@@ -836,6 +853,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 * @throws com.liferay.portlet.asset.NoSuchTagStatsException if a asset tag stats with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTagStats[] findByClassNameId_PrevAndNext(long tagStatsId,
 		long classNameId, OrderByComparator orderByComparator)
 		throws NoSuchTagStatsException, SystemException {
@@ -977,6 +995,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 * @param classNameId the class name ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByClassNameId(long classNameId) throws SystemException {
 		for (AssetTagStats assetTagStats : findByClassNameId(classNameId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -991,6 +1010,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 * @return the number of matching asset tag statses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByClassNameId(long classNameId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_CLASSNAMEID;
 
@@ -1057,6 +1077,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 * @throws com.liferay.portlet.asset.NoSuchTagStatsException if a matching asset tag stats could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTagStats findByT_C(long tagId, long classNameId)
 		throws NoSuchTagStatsException, SystemException {
 		AssetTagStats assetTagStats = fetchByT_C(tagId, classNameId);
@@ -1092,6 +1113,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 * @return the matching asset tag stats, or <code>null</code> if a matching asset tag stats could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTagStats fetchByT_C(long tagId, long classNameId)
 		throws SystemException {
 		return fetchByT_C(tagId, classNameId, true);
@@ -1106,6 +1128,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 * @return the matching asset tag stats, or <code>null</code> if a matching asset tag stats could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTagStats fetchByT_C(long tagId, long classNameId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { tagId, classNameId };
@@ -1197,6 +1220,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 * @return the asset tag stats that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTagStats removeByT_C(long tagId, long classNameId)
 		throws NoSuchTagStatsException, SystemException {
 		AssetTagStats assetTagStats = findByT_C(tagId, classNameId);
@@ -1212,6 +1236,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 * @return the number of matching asset tag statses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByT_C(long tagId, long classNameId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_T_C;
@@ -1270,6 +1295,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 *
 	 * @param assetTagStats the asset tag stats
 	 */
+	@Override
 	public void cacheResult(AssetTagStats assetTagStats) {
 		EntityCacheUtil.putResult(AssetTagStatsModelImpl.ENTITY_CACHE_ENABLED,
 			AssetTagStatsImpl.class, assetTagStats.getPrimaryKey(),
@@ -1288,6 +1314,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 *
 	 * @param assetTagStatses the asset tag statses
 	 */
+	@Override
 	public void cacheResult(List<AssetTagStats> assetTagStatses) {
 		for (AssetTagStats assetTagStats : assetTagStatses) {
 			if (EntityCacheUtil.getResult(
@@ -1408,6 +1435,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 * @param tagStatsId the primary key for the new asset tag stats
 	 * @return the new asset tag stats
 	 */
+	@Override
 	public AssetTagStats create(long tagStatsId) {
 		AssetTagStats assetTagStats = new AssetTagStatsImpl();
 
@@ -1425,6 +1453,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 * @throws com.liferay.portlet.asset.NoSuchTagStatsException if a asset tag stats with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTagStats remove(long tagStatsId)
 		throws NoSuchTagStatsException, SystemException {
 		return remove((Serializable)tagStatsId);
@@ -1640,6 +1669,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 * @throws com.liferay.portlet.asset.NoSuchTagStatsException if a asset tag stats with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTagStats findByPrimaryKey(long tagStatsId)
 		throws NoSuchTagStatsException, SystemException {
 		return findByPrimaryKey((Serializable)tagStatsId);
@@ -1700,6 +1730,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 * @return the asset tag stats, or <code>null</code> if a asset tag stats with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTagStats fetchByPrimaryKey(long tagStatsId)
 		throws SystemException {
 		return fetchByPrimaryKey((Serializable)tagStatsId);
@@ -1711,6 +1742,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 * @return the asset tag statses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetTagStats> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1727,6 +1759,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 * @return the range of asset tag statses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetTagStats> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
@@ -1745,6 +1778,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 * @return the ordered range of asset tag statses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetTagStats> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -1830,6 +1864,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (AssetTagStats assetTagStats : findAll()) {
 			remove(assetTagStats);
@@ -1842,6 +1877,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 * @return the number of asset tag statses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -1927,6 +1963,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 		};
 
 	private static CacheModel<AssetTagStats> _nullAssetTagStatsCacheModel = new CacheModel<AssetTagStats>() {
+			@Override
 			public AssetTagStats toEntityModel() {
 				return _nullAssetTagStats;
 			}

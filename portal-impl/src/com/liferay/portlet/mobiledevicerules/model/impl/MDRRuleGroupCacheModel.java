@@ -65,6 +65,7 @@ public class MDRRuleGroupCacheModel implements CacheModel<MDRRuleGroup>,
 		return sb.toString();
 	}
 
+	@Override
 	public MDRRuleGroup toEntityModel() {
 		MDRRuleGroupImpl mdrRuleGroupImpl = new MDRRuleGroupImpl();
 
@@ -120,6 +121,7 @@ public class MDRRuleGroupCacheModel implements CacheModel<MDRRuleGroup>,
 		return mdrRuleGroupImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		ruleGroupId = objectInput.readLong();
@@ -133,6 +135,7 @@ public class MDRRuleGroupCacheModel implements CacheModel<MDRRuleGroup>,
 		description = objectInput.readUTF();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

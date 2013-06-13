@@ -90,26 +90,32 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 	public SCProductScreenshotModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _productScreenshotId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setProductScreenshotId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _productScreenshotId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return SCProductScreenshot.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return SCProductScreenshot.class.getName();
 	}
@@ -174,34 +180,42 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 		}
 	}
 
+	@Override
 	public long getProductScreenshotId() {
 		return _productScreenshotId;
 	}
 
+	@Override
 	public void setProductScreenshotId(long productScreenshotId) {
 		_productScreenshotId = productScreenshotId;
 	}
 
+	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
+	@Override
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_groupId = groupId;
 	}
 
+	@Override
 	public long getProductEntryId() {
 		return _productEntryId;
 	}
 
+	@Override
 	public void setProductEntryId(long productEntryId) {
 		_columnBitmask = -1L;
 
@@ -218,10 +232,12 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 		return _originalProductEntryId;
 	}
 
+	@Override
 	public long getThumbnailId() {
 		return _thumbnailId;
 	}
 
+	@Override
 	public void setThumbnailId(long thumbnailId) {
 		_columnBitmask |= THUMBNAILID_COLUMN_BITMASK;
 
@@ -238,10 +254,12 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 		return _originalThumbnailId;
 	}
 
+	@Override
 	public long getFullImageId() {
 		return _fullImageId;
 	}
 
+	@Override
 	public void setFullImageId(long fullImageId) {
 		_columnBitmask |= FULLIMAGEID_COLUMN_BITMASK;
 
@@ -258,10 +276,12 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 		return _originalFullImageId;
 	}
 
+	@Override
 	public int getPriority() {
 		return _priority;
 	}
 
+	@Override
 	public void setPriority(int priority) {
 		_columnBitmask = -1L;
 
@@ -322,6 +342,7 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 		return scProductScreenshotImpl;
 	}
 
+	@Override
 	public int compareTo(SCProductScreenshot scProductScreenshot) {
 		int value = 0;
 
@@ -358,18 +379,15 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof SCProductScreenshot)) {
 			return false;
 		}
 
-		SCProductScreenshot scProductScreenshot = null;
-
-		try {
-			scProductScreenshot = (SCProductScreenshot)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		SCProductScreenshot scProductScreenshot = (SCProductScreenshot)obj;
 
 		long primaryKey = scProductScreenshot.getPrimaryKey();
 
@@ -453,6 +471,7 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(25);
 

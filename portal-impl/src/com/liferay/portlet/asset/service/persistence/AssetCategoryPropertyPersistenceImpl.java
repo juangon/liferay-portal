@@ -116,6 +116,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @return the matching asset category properties
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetCategoryProperty> findByCompanyId(long companyId)
 		throws SystemException {
 		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -135,6 +136,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @return the range of matching asset category properties
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetCategoryProperty> findByCompanyId(long companyId,
 		int start, int end) throws SystemException {
 		return findByCompanyId(companyId, start, end, null);
@@ -154,6 +156,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @return the ordered range of matching asset category properties
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetCategoryProperty> findByCompanyId(long companyId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -261,6 +264,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @throws com.liferay.portlet.asset.NoSuchCategoryPropertyException if a matching asset category property could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetCategoryProperty findByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchCategoryPropertyException, SystemException {
@@ -291,6 +295,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @return the first matching asset category property, or <code>null</code> if a matching asset category property could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetCategoryProperty fetchByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<AssetCategoryProperty> list = findByCompanyId(companyId, 0, 1,
@@ -312,6 +317,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @throws com.liferay.portlet.asset.NoSuchCategoryPropertyException if a matching asset category property could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetCategoryProperty findByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchCategoryPropertyException, SystemException {
@@ -342,6 +348,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @return the last matching asset category property, or <code>null</code> if a matching asset category property could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetCategoryProperty fetchByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByCompanyId(companyId);
@@ -366,6 +373,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @throws com.liferay.portlet.asset.NoSuchCategoryPropertyException if a asset category property with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetCategoryProperty[] findByCompanyId_PrevAndNext(
 		long categoryPropertyId, long companyId,
 		OrderByComparator orderByComparator)
@@ -508,6 +516,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @param companyId the company ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (AssetCategoryProperty assetCategoryProperty : findByCompanyId(
 				companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -522,6 +531,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @return the number of matching asset category properties
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByCompanyId(long companyId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMPANYID;
 
@@ -599,6 +609,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @return the matching asset category properties
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetCategoryProperty> findByCategoryId(long categoryId)
 		throws SystemException {
 		return findByCategoryId(categoryId, QueryUtil.ALL_POS,
@@ -618,6 +629,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @return the range of matching asset category properties
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetCategoryProperty> findByCategoryId(long categoryId,
 		int start, int end) throws SystemException {
 		return findByCategoryId(categoryId, start, end, null);
@@ -637,6 +649,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @return the ordered range of matching asset category properties
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetCategoryProperty> findByCategoryId(long categoryId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -744,6 +757,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @throws com.liferay.portlet.asset.NoSuchCategoryPropertyException if a matching asset category property could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetCategoryProperty findByCategoryId_First(long categoryId,
 		OrderByComparator orderByComparator)
 		throws NoSuchCategoryPropertyException, SystemException {
@@ -774,6 +788,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @return the first matching asset category property, or <code>null</code> if a matching asset category property could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetCategoryProperty fetchByCategoryId_First(long categoryId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<AssetCategoryProperty> list = findByCategoryId(categoryId, 0, 1,
@@ -795,6 +810,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @throws com.liferay.portlet.asset.NoSuchCategoryPropertyException if a matching asset category property could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetCategoryProperty findByCategoryId_Last(long categoryId,
 		OrderByComparator orderByComparator)
 		throws NoSuchCategoryPropertyException, SystemException {
@@ -825,6 +841,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @return the last matching asset category property, or <code>null</code> if a matching asset category property could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetCategoryProperty fetchByCategoryId_Last(long categoryId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByCategoryId(categoryId);
@@ -849,6 +866,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @throws com.liferay.portlet.asset.NoSuchCategoryPropertyException if a asset category property with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetCategoryProperty[] findByCategoryId_PrevAndNext(
 		long categoryPropertyId, long categoryId,
 		OrderByComparator orderByComparator)
@@ -991,6 +1009,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @param categoryId the category ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByCategoryId(long categoryId) throws SystemException {
 		for (AssetCategoryProperty assetCategoryProperty : findByCategoryId(
 				categoryId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -1005,6 +1024,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @return the number of matching asset category properties
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByCategoryId(long categoryId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_CATEGORYID;
 
@@ -1081,6 +1101,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @return the matching asset category properties
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetCategoryProperty> findByC_K(long companyId, String key)
 		throws SystemException {
 		return findByC_K(companyId, key, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -1101,6 +1122,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @return the range of matching asset category properties
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetCategoryProperty> findByC_K(long companyId, String key,
 		int start, int end) throws SystemException {
 		return findByC_K(companyId, key, start, end, null);
@@ -1121,6 +1143,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @return the ordered range of matching asset category properties
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetCategoryProperty> findByC_K(long companyId, String key,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1252,6 +1275,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @throws com.liferay.portlet.asset.NoSuchCategoryPropertyException if a matching asset category property could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetCategoryProperty findByC_K_First(long companyId, String key,
 		OrderByComparator orderByComparator)
 		throws NoSuchCategoryPropertyException, SystemException {
@@ -1286,6 +1310,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @return the first matching asset category property, or <code>null</code> if a matching asset category property could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetCategoryProperty fetchByC_K_First(long companyId, String key,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<AssetCategoryProperty> list = findByC_K(companyId, key, 0, 1,
@@ -1308,6 +1333,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @throws com.liferay.portlet.asset.NoSuchCategoryPropertyException if a matching asset category property could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetCategoryProperty findByC_K_Last(long companyId, String key,
 		OrderByComparator orderByComparator)
 		throws NoSuchCategoryPropertyException, SystemException {
@@ -1342,6 +1368,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @return the last matching asset category property, or <code>null</code> if a matching asset category property could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetCategoryProperty fetchByC_K_Last(long companyId, String key,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByC_K(companyId, key);
@@ -1367,6 +1394,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @throws com.liferay.portlet.asset.NoSuchCategoryPropertyException if a asset category property with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetCategoryProperty[] findByC_K_PrevAndNext(
 		long categoryPropertyId, long companyId, String key,
 		OrderByComparator orderByComparator)
@@ -1528,6 +1556,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @param key the key
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByC_K(long companyId, String key)
 		throws SystemException {
 		for (AssetCategoryProperty assetCategoryProperty : findByC_K(
@@ -1544,6 +1573,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @return the number of matching asset category properties
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByC_K(long companyId, String key) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_K;
 
@@ -1632,6 +1662,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @throws com.liferay.portlet.asset.NoSuchCategoryPropertyException if a matching asset category property could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetCategoryProperty findByCA_K(long categoryId, String key)
 		throws NoSuchCategoryPropertyException, SystemException {
 		AssetCategoryProperty assetCategoryProperty = fetchByCA_K(categoryId,
@@ -1668,6 +1699,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @return the matching asset category property, or <code>null</code> if a matching asset category property could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetCategoryProperty fetchByCA_K(long categoryId, String key)
 		throws SystemException {
 		return fetchByCA_K(categoryId, key, true);
@@ -1682,6 +1714,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @return the matching asset category property, or <code>null</code> if a matching asset category property could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetCategoryProperty fetchByCA_K(long categoryId, String key,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { categoryId, key };
@@ -1788,6 +1821,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @return the asset category property that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetCategoryProperty removeByCA_K(long categoryId, String key)
 		throws NoSuchCategoryPropertyException, SystemException {
 		AssetCategoryProperty assetCategoryProperty = findByCA_K(categoryId, key);
@@ -1803,6 +1837,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @return the number of matching asset category properties
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByCA_K(long categoryId, String key)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_CA_K;
@@ -1877,6 +1912,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 *
 	 * @param assetCategoryProperty the asset category property
 	 */
+	@Override
 	public void cacheResult(AssetCategoryProperty assetCategoryProperty) {
 		EntityCacheUtil.putResult(AssetCategoryPropertyModelImpl.ENTITY_CACHE_ENABLED,
 			AssetCategoryPropertyImpl.class,
@@ -1896,6 +1932,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 *
 	 * @param assetCategoryProperties the asset category properties
 	 */
+	@Override
 	public void cacheResult(List<AssetCategoryProperty> assetCategoryProperties) {
 		for (AssetCategoryProperty assetCategoryProperty : assetCategoryProperties) {
 			if (EntityCacheUtil.getResult(
@@ -2024,6 +2061,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @param categoryPropertyId the primary key for the new asset category property
 	 * @return the new asset category property
 	 */
+	@Override
 	public AssetCategoryProperty create(long categoryPropertyId) {
 		AssetCategoryProperty assetCategoryProperty = new AssetCategoryPropertyImpl();
 
@@ -2041,6 +2079,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @throws com.liferay.portlet.asset.NoSuchCategoryPropertyException if a asset category property with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetCategoryProperty remove(long categoryPropertyId)
 		throws NoSuchCategoryPropertyException, SystemException {
 		return remove((Serializable)categoryPropertyId);
@@ -2289,6 +2328,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @throws com.liferay.portlet.asset.NoSuchCategoryPropertyException if a asset category property with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetCategoryProperty findByPrimaryKey(long categoryPropertyId)
 		throws NoSuchCategoryPropertyException, SystemException {
 		return findByPrimaryKey((Serializable)categoryPropertyId);
@@ -2350,6 +2390,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @return the asset category property, or <code>null</code> if a asset category property with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetCategoryProperty fetchByPrimaryKey(long categoryPropertyId)
 		throws SystemException {
 		return fetchByPrimaryKey((Serializable)categoryPropertyId);
@@ -2361,6 +2402,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @return the asset category properties
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetCategoryProperty> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -2377,6 +2419,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @return the range of asset category properties
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetCategoryProperty> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
@@ -2395,6 +2438,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @return the ordered range of asset category properties
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetCategoryProperty> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -2480,6 +2524,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (AssetCategoryProperty assetCategoryProperty : findAll()) {
 			remove(assetCategoryProperty);
@@ -2492,6 +2537,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 * @return the number of asset category properties
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -2586,6 +2632,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 
 	private static CacheModel<AssetCategoryProperty> _nullAssetCategoryPropertyCacheModel =
 		new CacheModel<AssetCategoryProperty>() {
+			@Override
 			public AssetCategoryProperty toEntityModel() {
 				return _nullAssetCategoryProperty;
 			}

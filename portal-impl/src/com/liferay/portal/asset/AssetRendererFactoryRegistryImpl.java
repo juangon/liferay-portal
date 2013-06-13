@@ -29,28 +29,60 @@ import java.util.concurrent.ConcurrentHashMap;
 public class AssetRendererFactoryRegistryImpl
 	implements AssetRendererFactoryRegistry {
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #getAssetRendererFactories(
+	 *             long)}
+	 */
+	@Override
 	public List<AssetRendererFactory> getAssetRendererFactories() {
 		return ListUtil.fromMapValues(_assetRenderFactoriesMapByClassName);
 	}
 
+	@Override
+	public List<AssetRendererFactory> getAssetRendererFactories(
+		long companyId) {
+
+		return ListUtil.fromMapValues(
+			filterAssetRendererFactories(
+				companyId, _assetRenderFactoriesMapByClassName));
+	}
+
+	@Override
 	public AssetRendererFactory getAssetRendererFactoryByClassName(
 		String className) {
 
 		return _assetRenderFactoriesMapByClassName.get(className);
 	}
 
+	@Override
 	public AssetRendererFactory getAssetRendererFactoryByType(String type) {
 		return _assetRenderFactoriesMapByClassType.get(type);
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #getClassNameIds( long)}
+	 */
+	@Override
 	public long[] getClassNameIds() {
-		long[] classNameIds = new long[
-			_assetRenderFactoriesMapByClassName.size()];
+		return getClassNameIds(0);
+	}
+
+	@Override
+	public long[] getClassNameIds(long companyId) {
+		Map<String, AssetRendererFactory> assetRenderFactories =
+			_assetRenderFactoriesMapByClassName;
+
+		if (companyId > 0) {
+			assetRenderFactories = filterAssetRendererFactories(
+				companyId, _assetRenderFactoriesMapByClassName);
+		}
+
+		long[] classNameIds = new long[assetRenderFactories.size()];
 
 		int i = 0;
 
 		for (AssetRendererFactory assetRendererFactory :
-				_assetRenderFactoriesMapByClassName.values()) {
+				assetRenderFactories.values()) {
 
 			classNameIds[i] = assetRendererFactory.getClassNameId();
 
@@ -60,6 +92,7 @@ public class AssetRendererFactoryRegistryImpl
 		return classNameIds;
 	}
 
+	@Override
 	public void register(AssetRendererFactory assetRendererFactory) {
 		_assetRenderFactoriesMapByClassName.put(
 			assetRendererFactory.getClassName(), assetRendererFactory);
@@ -67,11 +100,32 @@ public class AssetRendererFactoryRegistryImpl
 			assetRendererFactory.getType(), assetRendererFactory);
 	}
 
+	@Override
 	public void unregister(AssetRendererFactory assetRendererFactory) {
 		_assetRenderFactoriesMapByClassName.remove(
 			assetRendererFactory.getClassName());
 		_assetRenderFactoriesMapByClassType.remove(
 			assetRendererFactory.getType());
+	}
+
+	private Map<String, AssetRendererFactory> filterAssetRendererFactories(
+		long companyId,
+		Map<String, AssetRendererFactory> assetRendererFactories) {
+
+		Map<String, AssetRendererFactory> filteredAssetRendererFactories =
+			new ConcurrentHashMap<String, AssetRendererFactory>();
+
+		for (String className : assetRendererFactories.keySet()) {
+			AssetRendererFactory assetRendererFactory =
+				assetRendererFactories.get(className);
+
+			if (assetRendererFactory.isActive(companyId)) {
+				filteredAssetRendererFactories.put(
+					className, assetRendererFactory);
+			}
+		}
+
+		return filteredAssetRendererFactories;
 	}
 
 	private Map<String, AssetRendererFactory>

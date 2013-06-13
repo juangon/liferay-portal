@@ -41,6 +41,4 @@ public interface SocialActivity extends SocialActivityModel, PersistedModel {
 
 	public void setAssetEntry(
 		com.liferay.portlet.asset.model.AssetEntry assetEntry);
-
-	public void setExtraData(java.lang.String extraData);
 }

@@ -97,6 +97,7 @@ public class AssetEntryCacheModel implements CacheModel<AssetEntry>,
 		return sb.toString();
 	}
 
+	@Override
 	public AssetEntry toEntityModel() {
 		AssetEntryImpl assetEntryImpl = new AssetEntryImpl();
 
@@ -219,6 +220,7 @@ public class AssetEntryCacheModel implements CacheModel<AssetEntry>,
 		return assetEntryImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		entryId = objectInput.readLong();
 		groupId = objectInput.readLong();
@@ -248,6 +250,7 @@ public class AssetEntryCacheModel implements CacheModel<AssetEntry>,
 		viewCount = objectInput.readInt();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(entryId);

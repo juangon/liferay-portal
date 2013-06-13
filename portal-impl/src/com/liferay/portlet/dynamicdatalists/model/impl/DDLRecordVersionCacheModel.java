@@ -75,6 +75,7 @@ public class DDLRecordVersionCacheModel implements CacheModel<DDLRecordVersion>,
 		return sb.toString();
 	}
 
+	@Override
 	public DDLRecordVersion toEntityModel() {
 		DDLRecordVersionImpl ddlRecordVersionImpl = new DDLRecordVersionImpl();
 
@@ -131,6 +132,7 @@ public class DDLRecordVersionCacheModel implements CacheModel<DDLRecordVersion>,
 		return ddlRecordVersionImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		recordVersionId = objectInput.readLong();
 		groupId = objectInput.readLong();
@@ -149,6 +151,7 @@ public class DDLRecordVersionCacheModel implements CacheModel<DDLRecordVersion>,
 		statusDate = objectInput.readLong();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(recordVersionId);

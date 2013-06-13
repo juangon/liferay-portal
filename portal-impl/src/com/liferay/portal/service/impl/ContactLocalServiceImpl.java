@@ -36,6 +36,7 @@ import java.util.List;
 public class ContactLocalServiceImpl extends ContactLocalServiceBaseImpl {
 
 	@Indexable(type = IndexableType.REINDEX)
+	@Override
 	public Contact addContact(
 			long userId, String className, long classPK, String emailAddress,
 			String firstName, String middleName, String lastName, int prefixId,
@@ -136,6 +137,7 @@ public class ContactLocalServiceImpl extends ContactLocalServiceBaseImpl {
 		return contact;
 	}
 
+	@Override
 	public List<Contact> getContacts(
 			long classNameId, long classPK, int start, int end,
 			OrderByComparator orderByComparator)
@@ -145,6 +147,7 @@ public class ContactLocalServiceImpl extends ContactLocalServiceBaseImpl {
 			classNameId, classPK, start, end, orderByComparator);
 	}
 
+	@Override
 	public int getContactsCount(long classNameId, long classPK)
 		throws SystemException {
 
@@ -152,6 +155,7 @@ public class ContactLocalServiceImpl extends ContactLocalServiceBaseImpl {
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
+	@Override
 	public Contact updateContact(
 			long contactId, String emailAddress, String firstName,
 			String middleName, String lastName, int prefixId, int suffixId,

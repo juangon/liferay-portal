@@ -23,11 +23,10 @@ import com.liferay.portal.service.BaseLocalService;
 import com.liferay.portal.service.PersistedModelLocalService;
 
 /**
- * The interface for the document library file entry type local service.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
+ * Provides the local service interface for DLFileEntryType. Methods of this
+ * service will not have security checks based on the propagated JAAS
+ * credentials because this service can only be accessed from within the same
+ * VM.
  *
  * @author Brian Wing Shun Chan
  * @see DLFileEntryTypeLocalServiceUtil
@@ -172,6 +171,7 @@ public interface DLFileEntryTypeLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	@Override
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.PersistedModel getPersistedModel(
 		java.io.Serializable primaryKeyObj)
@@ -477,6 +477,15 @@ public interface DLFileEntryTypeLocalService extends BaseLocalService,
 	public void setBeanIdentifier(java.lang.String beanIdentifier);
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntryType addFileEntryType(
+		long userId, long groupId, java.lang.String fileEntryTypeKey,
+		java.util.Map<java.util.Locale, java.lang.String> nameMap,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
+		long[] ddmStructureIds,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portlet.documentlibrary.model.DLFileEntryType addFileEntryType(
 		long userId, long groupId, java.lang.String name,
 		java.lang.String description, long[] ddmStructureIds,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -519,7 +528,7 @@ public interface DLFileEntryTypeLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.documentlibrary.model.DLFileEntryType getFileEntryType(
-		long groupId, java.lang.String name)
+		long groupId, java.lang.String fileEntryTypeKey)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -551,6 +560,14 @@ public interface DLFileEntryTypeLocalService extends BaseLocalService,
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntryFileEntryType(
 		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public void updateFileEntryType(long userId, long fileEntryTypeId,
+		java.util.Map<java.util.Locale, java.lang.String> nameMap,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
+		long[] ddmStructureIds,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

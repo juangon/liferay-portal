@@ -91,26 +91,32 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 	public DDMStorageLinkModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _storageLinkId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setStorageLinkId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _storageLinkId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return DDMStorageLink.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return DDMStorageLink.class.getName();
 	}
@@ -161,6 +167,7 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 		}
 	}
 
+	@Override
 	public String getUuid() {
 		if (_uuid == null) {
 			return StringPool.BLANK;
@@ -170,6 +177,7 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 		}
 	}
 
+	@Override
 	public void setUuid(String uuid) {
 		if (_originalUuid == null) {
 			_originalUuid = _uuid;
@@ -182,14 +190,17 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@Override
 	public long getStorageLinkId() {
 		return _storageLinkId;
 	}
 
+	@Override
 	public void setStorageLinkId(long storageLinkId) {
 		_storageLinkId = storageLinkId;
 	}
 
+	@Override
 	public String getClassName() {
 		if (getClassNameId() <= 0) {
 			return StringPool.BLANK;
@@ -198,6 +209,7 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 		return PortalUtil.getClassName(getClassNameId());
 	}
 
+	@Override
 	public void setClassName(String className) {
 		long classNameId = 0;
 
@@ -208,18 +220,22 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 		setClassNameId(classNameId);
 	}
 
+	@Override
 	public long getClassNameId() {
 		return _classNameId;
 	}
 
+	@Override
 	public void setClassNameId(long classNameId) {
 		_classNameId = classNameId;
 	}
 
+	@Override
 	public long getClassPK() {
 		return _classPK;
 	}
 
+	@Override
 	public void setClassPK(long classPK) {
 		_columnBitmask |= CLASSPK_COLUMN_BITMASK;
 
@@ -236,10 +252,12 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 		return _originalClassPK;
 	}
 
+	@Override
 	public long getStructureId() {
 		return _structureId;
 	}
 
+	@Override
 	public void setStructureId(long structureId) {
 		_columnBitmask |= STRUCTUREID_COLUMN_BITMASK;
 
@@ -298,6 +316,7 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 		return ddmStorageLinkImpl;
 	}
 
+	@Override
 	public int compareTo(DDMStorageLink ddmStorageLink) {
 		long primaryKey = ddmStorageLink.getPrimaryKey();
 
@@ -314,18 +333,15 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof DDMStorageLink)) {
 			return false;
 		}
 
-		DDMStorageLink ddmStorageLink = null;
-
-		try {
-			ddmStorageLink = (DDMStorageLink)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		DDMStorageLink ddmStorageLink = (DDMStorageLink)obj;
 
 		long primaryKey = ddmStorageLink.getPrimaryKey();
 
@@ -401,6 +417,7 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(19);
 

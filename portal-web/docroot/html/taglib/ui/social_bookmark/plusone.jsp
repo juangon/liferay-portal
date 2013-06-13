@@ -25,10 +25,23 @@ if (displayStyle.equals("vertical")) {
 %>
 
 <liferay-util:html-bottom outputKey="taglib_ui_social_bookmark_plusone">
-	<script src="https://apis.google.com/js/plusone.js" type="text/javascript">
-		{
-			lang: '<%= locale.getDisplayLanguage() %>'
-		}
+	<script type="text/javascript">
+		window.___gcfg = {
+			lang: '<%= locale.getLanguage() %>-<%= locale.getCountry() %>'
+		};
+
+		(function() {
+			var script = document.createElement('script');
+
+			script.async = true;
+			script.type = 'text/javascript';
+
+			script.src = 'https://apis.google.com/js/plusone.js';
+
+			var firstScript = document.getElementsByTagName('script')[0];
+
+			firstScript.parentNode.insertBefore(script, firstScript);
+		})();
 	</script>
 </liferay-util:html-bottom>
 

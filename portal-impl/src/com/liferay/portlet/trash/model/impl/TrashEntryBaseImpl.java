@@ -38,6 +38,7 @@ public abstract class TrashEntryBaseImpl extends TrashEntryModelImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a trash entry model instance should use the {@link TrashEntry} interface instead.
 	 */
+	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
 			TrashEntryLocalServiceUtil.addTrashEntry(this);

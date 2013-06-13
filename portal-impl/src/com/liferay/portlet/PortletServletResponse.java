@@ -63,8 +63,8 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 	}
 
 	@Override
-	public void addDateHeader(String name, long date) {
-		addHeader(name, String.valueOf(date));
+	public void addDateHeader(String name, long value) {
+		addHeader(name, String.valueOf(value));
 	}
 
 	@Override
@@ -256,7 +256,7 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 	}
 
 	@Override
-	public void sendError(int status, String msg) {
+	public void sendError(int status, String message) {
 	}
 
 	@Override
@@ -282,23 +282,23 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 	}
 
 	@Override
-	public void setCharacterEncoding(String encoding) {
+	public void setCharacterEncoding(String characterEncoding) {
 		if (!_include) {
 			if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 				ResourceResponse resourceResponse = _getResourceResponse();
 
-				resourceResponse.setCharacterEncoding(encoding);
+				resourceResponse.setCharacterEncoding(characterEncoding);
 			}
 		}
 	}
 
 	@Override
-	public void setContentLength(int length) {
+	public void setContentLength(int contentLength) {
 		if (!_include) {
 			if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 				ResourceResponse resourceResponse = _getResourceResponse();
 
-				resourceResponse.setContentLength(length);
+				resourceResponse.setContentLength(contentLength);
 			}
 		}
 	}
@@ -363,7 +363,7 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 	}
 
 	@Override
-	public void setStatus(int status, String msg) {
+	public void setStatus(int status, String message) {
 		setStatus(status);
 	}
 

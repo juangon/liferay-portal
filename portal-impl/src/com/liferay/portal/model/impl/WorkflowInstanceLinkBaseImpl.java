@@ -37,6 +37,7 @@ public abstract class WorkflowInstanceLinkBaseImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a workflow instance link model instance should use the {@link WorkflowInstanceLink} interface instead.
 	 */
+	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
 			WorkflowInstanceLinkLocalServiceUtil.addWorkflowInstanceLink(this);

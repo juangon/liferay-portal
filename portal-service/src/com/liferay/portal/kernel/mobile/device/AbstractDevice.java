@@ -24,6 +24,14 @@ import com.liferay.portal.kernel.util.StringBundler;
  */
 public abstract class AbstractDevice implements Device {
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #getScreenResolution()}
+	 */
+	@Override
+	public Dimensions getScreenSize() {
+		return getScreenResolution();
+	}
+
 	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(23);
@@ -46,8 +54,10 @@ public abstract class AbstractDevice implements Device {
 		sb.append(getPointingMethod());
 		sb.append(", qwertyKeyboard=");
 		sb.append(hasQwertyKeyboard());
-		sb.append(", screenSize=");
-		sb.append(getScreenSize());
+		sb.append(", screenPhysicalSize=");
+		sb.append(getScreenPhysicalSize());
+		sb.append(", screenResolution=");
+		sb.append(getScreenResolution());
 		sb.append(", tablet=");
 		sb.append(isTablet());
 		sb.append("}");

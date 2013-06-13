@@ -25,8 +25,8 @@ import java.util.Map;
  * This class is a wrapper for {@link AssetCategoryProperty}.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       AssetCategoryProperty
+ * @author Brian Wing Shun Chan
+ * @see AssetCategoryProperty
  * @generated
  */
 public class AssetCategoryPropertyWrapper implements AssetCategoryProperty,
@@ -36,14 +36,17 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty,
 		_assetCategoryProperty = assetCategoryProperty;
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return AssetCategoryProperty.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return AssetCategoryProperty.class.getName();
 	}
 
+	@Override
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
@@ -60,6 +63,7 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty,
 		return attributes;
 	}
 
+	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 		Long categoryPropertyId = (Long)attributes.get("categoryPropertyId");
 
@@ -121,6 +125,7 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty,
 	*
 	* @return the primary key of this asset category property
 	*/
+	@Override
 	public long getPrimaryKey() {
 		return _assetCategoryProperty.getPrimaryKey();
 	}
@@ -130,6 +135,7 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty,
 	*
 	* @param primaryKey the primary key of this asset category property
 	*/
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_assetCategoryProperty.setPrimaryKey(primaryKey);
 	}
@@ -139,6 +145,7 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty,
 	*
 	* @return the category property ID of this asset category property
 	*/
+	@Override
 	public long getCategoryPropertyId() {
 		return _assetCategoryProperty.getCategoryPropertyId();
 	}
@@ -148,6 +155,7 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty,
 	*
 	* @param categoryPropertyId the category property ID of this asset category property
 	*/
+	@Override
 	public void setCategoryPropertyId(long categoryPropertyId) {
 		_assetCategoryProperty.setCategoryPropertyId(categoryPropertyId);
 	}
@@ -157,6 +165,7 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty,
 	*
 	* @return the company ID of this asset category property
 	*/
+	@Override
 	public long getCompanyId() {
 		return _assetCategoryProperty.getCompanyId();
 	}
@@ -166,6 +175,7 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty,
 	*
 	* @param companyId the company ID of this asset category property
 	*/
+	@Override
 	public void setCompanyId(long companyId) {
 		_assetCategoryProperty.setCompanyId(companyId);
 	}
@@ -175,6 +185,7 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty,
 	*
 	* @return the user ID of this asset category property
 	*/
+	@Override
 	public long getUserId() {
 		return _assetCategoryProperty.getUserId();
 	}
@@ -184,6 +195,7 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty,
 	*
 	* @param userId the user ID of this asset category property
 	*/
+	@Override
 	public void setUserId(long userId) {
 		_assetCategoryProperty.setUserId(userId);
 	}
@@ -194,6 +206,7 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty,
 	* @return the user uuid of this asset category property
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public java.lang.String getUserUuid()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _assetCategoryProperty.getUserUuid();
@@ -204,6 +217,7 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty,
 	*
 	* @param userUuid the user uuid of this asset category property
 	*/
+	@Override
 	public void setUserUuid(java.lang.String userUuid) {
 		_assetCategoryProperty.setUserUuid(userUuid);
 	}
@@ -213,6 +227,7 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty,
 	*
 	* @return the user name of this asset category property
 	*/
+	@Override
 	public java.lang.String getUserName() {
 		return _assetCategoryProperty.getUserName();
 	}
@@ -222,6 +237,7 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty,
 	*
 	* @param userName the user name of this asset category property
 	*/
+	@Override
 	public void setUserName(java.lang.String userName) {
 		_assetCategoryProperty.setUserName(userName);
 	}
@@ -231,6 +247,7 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty,
 	*
 	* @return the create date of this asset category property
 	*/
+	@Override
 	public java.util.Date getCreateDate() {
 		return _assetCategoryProperty.getCreateDate();
 	}
@@ -240,6 +257,7 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty,
 	*
 	* @param createDate the create date of this asset category property
 	*/
+	@Override
 	public void setCreateDate(java.util.Date createDate) {
 		_assetCategoryProperty.setCreateDate(createDate);
 	}
@@ -249,6 +267,7 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty,
 	*
 	* @return the modified date of this asset category property
 	*/
+	@Override
 	public java.util.Date getModifiedDate() {
 		return _assetCategoryProperty.getModifiedDate();
 	}
@@ -258,6 +277,7 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty,
 	*
 	* @param modifiedDate the modified date of this asset category property
 	*/
+	@Override
 	public void setModifiedDate(java.util.Date modifiedDate) {
 		_assetCategoryProperty.setModifiedDate(modifiedDate);
 	}
@@ -267,6 +287,7 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty,
 	*
 	* @return the category ID of this asset category property
 	*/
+	@Override
 	public long getCategoryId() {
 		return _assetCategoryProperty.getCategoryId();
 	}
@@ -276,6 +297,7 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty,
 	*
 	* @param categoryId the category ID of this asset category property
 	*/
+	@Override
 	public void setCategoryId(long categoryId) {
 		_assetCategoryProperty.setCategoryId(categoryId);
 	}
@@ -285,6 +307,7 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty,
 	*
 	* @return the key of this asset category property
 	*/
+	@Override
 	public java.lang.String getKey() {
 		return _assetCategoryProperty.getKey();
 	}
@@ -294,6 +317,7 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty,
 	*
 	* @param key the key of this asset category property
 	*/
+	@Override
 	public void setKey(java.lang.String key) {
 		_assetCategoryProperty.setKey(key);
 	}
@@ -303,6 +327,7 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty,
 	*
 	* @return the value of this asset category property
 	*/
+	@Override
 	public java.lang.String getValue() {
 		return _assetCategoryProperty.getValue();
 	}
@@ -312,52 +337,64 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty,
 	*
 	* @param value the value of this asset category property
 	*/
+	@Override
 	public void setValue(java.lang.String value) {
 		_assetCategoryProperty.setValue(value);
 	}
 
+	@Override
 	public boolean isNew() {
 		return _assetCategoryProperty.isNew();
 	}
 
+	@Override
 	public void setNew(boolean n) {
 		_assetCategoryProperty.setNew(n);
 	}
 
+	@Override
 	public boolean isCachedModel() {
 		return _assetCategoryProperty.isCachedModel();
 	}
 
+	@Override
 	public void setCachedModel(boolean cachedModel) {
 		_assetCategoryProperty.setCachedModel(cachedModel);
 	}
 
+	@Override
 	public boolean isEscapedModel() {
 		return _assetCategoryProperty.isEscapedModel();
 	}
 
+	@Override
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _assetCategoryProperty.getPrimaryKeyObj();
 	}
 
+	@Override
 	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
 		_assetCategoryProperty.setPrimaryKeyObj(primaryKeyObj);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
 		return _assetCategoryProperty.getExpandoBridge();
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.model.BaseModel<?> baseModel) {
 		_assetCategoryProperty.setExpandoBridgeAttributes(baseModel);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portlet.expando.model.ExpandoBridge expandoBridge) {
 		_assetCategoryProperty.setExpandoBridgeAttributes(expandoBridge);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		_assetCategoryProperty.setExpandoBridgeAttributes(serviceContext);
@@ -368,6 +405,7 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty,
 		return new AssetCategoryPropertyWrapper((AssetCategoryProperty)_assetCategoryProperty.clone());
 	}
 
+	@Override
 	public int compareTo(
 		com.liferay.portlet.asset.model.AssetCategoryProperty assetCategoryProperty) {
 		return _assetCategoryProperty.compareTo(assetCategoryProperty);
@@ -378,14 +416,17 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty,
 		return _assetCategoryProperty.hashCode();
 	}
 
+	@Override
 	public com.liferay.portal.model.CacheModel<com.liferay.portlet.asset.model.AssetCategoryProperty> toCacheModel() {
 		return _assetCategoryProperty.toCacheModel();
 	}
 
+	@Override
 	public com.liferay.portlet.asset.model.AssetCategoryProperty toEscapedModel() {
 		return new AssetCategoryPropertyWrapper(_assetCategoryProperty.toEscapedModel());
 	}
 
+	@Override
 	public com.liferay.portlet.asset.model.AssetCategoryProperty toUnescapedModel() {
 		return new AssetCategoryPropertyWrapper(_assetCategoryProperty.toUnescapedModel());
 	}
@@ -395,10 +436,12 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty,
 		return _assetCategoryProperty.toString();
 	}
 
+	@Override
 	public java.lang.String toXmlString() {
 		return _assetCategoryProperty.toXmlString();
 	}
 
+	@Override
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_assetCategoryProperty.persist();
@@ -411,10 +454,12 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty,
 		return _assetCategoryProperty;
 	}
 
+	@Override
 	public AssetCategoryProperty getWrappedModel() {
 		return _assetCategoryProperty;
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		_assetCategoryProperty.resetOriginalValues();
 	}

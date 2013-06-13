@@ -27,7 +27,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
 	<aui:fieldset>
-		<ul class="lfr-tree lfr-component">
+		<ul class="lfr-tree unstyled">
 			<li class="tree-item">
 				<aui:input label="show-tags-with-zero-assets" name="preferences--showZeroAssetCount--" type="checkbox" value="<%= showZeroAssetCount %>" />
 			</li>
@@ -35,13 +35,13 @@ String redirect = ParamUtil.getString(request, "redirect");
 			<li class="tree-item">
 				<aui:input name="preferences--showAssetCount--" type="checkbox" value="<%= showAssetCount %>" />
 
-				<ul class="lfr-tree lfr-component aui-helper-hidden" id="<portlet:namespace />assetCountOptions">
+				<ul class="lfr-tree hide unstyled" id="<portlet:namespace />assetCountOptions">
 					<li class="tree-item">
 						<aui:select helpMessage="asset-type-asset-count-help" label="asset-type" name="preferences--classNameId--">
 							<aui:option label="any" value="<%= classNameId == 0 %>" />
 
 							<%
-							List<AssetRendererFactory> assetRendererFactories = AssetRendererFactoryRegistryUtil.getAssetRendererFactories();
+							List<AssetRendererFactory> assetRendererFactories = AssetRendererFactoryRegistryUtil.getAssetRendererFactories(company.getCompanyId());
 
 							for (AssetRendererFactory assetRendererFactory : assetRendererFactories) {
 							%>
@@ -58,7 +58,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</li>
 
 			<li class="tree-item">
-				<ul class="lfr-tree lfr-component" id="<portlet:namespace />displayTemplateSettings">
+				<ul class="lfr-tree unstyled" id="<portlet:namespace />displayTemplateSettings">
 					<div class="display-template">
 
 						<%

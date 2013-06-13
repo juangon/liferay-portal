@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.lar.StagedModelDataHandler;
 import com.liferay.portal.kernel.lar.StagedModelDataHandlerRegistryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.notifications.UserNotificationInterpreter;
 import com.liferay.portal.kernel.portlet.PortletBag;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineHelperUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEntry;
@@ -45,7 +46,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.InfrastructureUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -63,6 +63,7 @@ import com.liferay.portal.pop.POPServerUtil;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.ResourceActionLocalServiceUtil;
+import com.liferay.portal.service.UserNotificationInterpreterLocalServiceUtil;
 import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PropsValues;
@@ -115,6 +116,7 @@ import org.apache.portals.bridges.struts.StrutsPortlet;
  */
 public class PortletHotDeployListener extends BaseHotDeployListener {
 
+	@Override
 	public void invokeDeploy(HotDeployEvent hotDeployEvent)
 		throws HotDeployException {
 
@@ -127,6 +129,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		}
 	}
 
+	@Override
 	public void invokeUndeploy(HotDeployEvent hotDeployEvent)
 		throws HotDeployException {
 
@@ -250,6 +253,19 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		SocialRequestInterpreterLocalServiceUtil.deleteRequestInterpreter(
 			portlet.getSocialRequestInterpreterInstance());
+
+		List<UserNotificationInterpreter> userNotificationInterpreters =
+			portlet.getUserNotificationInterpreterInstances();
+
+		if (userNotificationInterpreters != null) {
+			for (UserNotificationInterpreter userNotificationInterpreter :
+					userNotificationInterpreters) {
+
+				UserNotificationInterpreterLocalServiceUtil.
+					deleteUserNotificationInterpreter(
+						userNotificationInterpreter);
+			}
+		}
 
 		WebDAVUtil.deleteStorage(portlet.getWebDAVStorageInstance());
 
@@ -458,9 +474,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		DirectServletRegistryUtil.clearServlets();
 
-		_portlets.put(
-			servletContextName,
-			new ObjectValuePair<long[], List<Portlet>>(companyIds, portlets));
+		_portlets.put(servletContextName, portlets);
 
 		if (_log.isInfoEnabled()) {
 			if (portlets.size() == 1) {
@@ -487,15 +501,11 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			_log.debug("Invoking undeploy for " + servletContextName);
 		}
 
-		ObjectValuePair<long[], List<Portlet>> ovp = _portlets.remove(
-			servletContextName);
+		List<Portlet> portlets = _portlets.remove(servletContextName);
 
-		if (ovp == null) {
+		if (portlets == null) {
 			return;
 		}
-
-		long[] companyIds = ovp.getKey();
-		List<Portlet> portlets = ovp.getValue();
 
 		Set<String> portletIds = new HashSet<String>();
 
@@ -511,7 +521,9 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		ServletContextPool.remove(servletContextName);
 
-		if (portletIds.size() > 0) {
+		if (!portletIds.isEmpty()) {
+			long[] companyIds = PortalInstances.getCompanyIds();
+
 			for (long companyId : companyIds) {
 				PortletCategory portletCategory =
 					(PortletCategory)WebAppPool.get(
@@ -725,8 +737,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 	private static Map<String, Boolean> _dataSourceBindStates =
 		new HashMap<String, Boolean>();
-	private static Map<String, ObjectValuePair<long[], List<Portlet>>>
-		_portlets =
-			new HashMap<String, ObjectValuePair<long[], List<Portlet>>>();
+	private static Map<String, List<Portlet>> _portlets =
+		new HashMap<String, List<Portlet>>();
 
 }

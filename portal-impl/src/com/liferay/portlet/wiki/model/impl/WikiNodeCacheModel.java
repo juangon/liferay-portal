@@ -74,6 +74,7 @@ public class WikiNodeCacheModel implements CacheModel<WikiNode>, Externalizable 
 		return sb.toString();
 	}
 
+	@Override
 	public WikiNode toEntityModel() {
 		WikiNodeImpl wikiNodeImpl = new WikiNodeImpl();
 
@@ -153,6 +154,7 @@ public class WikiNodeCacheModel implements CacheModel<WikiNode>, Externalizable 
 		return wikiNodeImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		nodeId = objectInput.readLong();
@@ -171,6 +173,7 @@ public class WikiNodeCacheModel implements CacheModel<WikiNode>, Externalizable 
 		statusDate = objectInput.readLong();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

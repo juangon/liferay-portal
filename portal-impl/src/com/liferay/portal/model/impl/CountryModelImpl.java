@@ -142,26 +142,32 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 	public CountryModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _countryId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setCountryId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _countryId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return Country.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return Country.class.getName();
 	}
@@ -233,15 +239,18 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 		}
 	}
 
+	@Override
 	@JSON
 	public long getCountryId() {
 		return _countryId;
 	}
 
+	@Override
 	public void setCountryId(long countryId) {
 		_countryId = countryId;
 	}
 
+	@Override
 	@JSON
 	public String getName() {
 		if (_name == null) {
@@ -252,6 +261,7 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 		}
 	}
 
+	@Override
 	public void setName(String name) {
 		_columnBitmask = -1L;
 
@@ -266,6 +276,7 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 		return GetterUtil.getString(_originalName);
 	}
 
+	@Override
 	@JSON
 	public String getA2() {
 		if (_a2 == null) {
@@ -276,6 +287,7 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 		}
 	}
 
+	@Override
 	public void setA2(String a2) {
 		_columnBitmask |= A2_COLUMN_BITMASK;
 
@@ -290,6 +302,7 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 		return GetterUtil.getString(_originalA2);
 	}
 
+	@Override
 	@JSON
 	public String getA3() {
 		if (_a3 == null) {
@@ -300,6 +313,7 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 		}
 	}
 
+	@Override
 	public void setA3(String a3) {
 		_columnBitmask |= A3_COLUMN_BITMASK;
 
@@ -314,6 +328,7 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 		return GetterUtil.getString(_originalA3);
 	}
 
+	@Override
 	@JSON
 	public String getNumber() {
 		if (_number == null) {
@@ -324,10 +339,12 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 		}
 	}
 
+	@Override
 	public void setNumber(String number) {
 		_number = number;
 	}
 
+	@Override
 	@JSON
 	public String getIdd() {
 		if (_idd == null) {
@@ -338,32 +355,39 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 		}
 	}
 
+	@Override
 	public void setIdd(String idd) {
 		_idd = idd;
 	}
 
+	@Override
 	@JSON
 	public boolean getZipRequired() {
 		return _zipRequired;
 	}
 
+	@Override
 	public boolean isZipRequired() {
 		return _zipRequired;
 	}
 
+	@Override
 	public void setZipRequired(boolean zipRequired) {
 		_zipRequired = zipRequired;
 	}
 
+	@Override
 	@JSON
 	public boolean getActive() {
 		return _active;
 	}
 
+	@Override
 	public boolean isActive() {
 		return _active;
 	}
 
+	@Override
 	public void setActive(boolean active) {
 		_columnBitmask |= ACTIVE_COLUMN_BITMASK;
 
@@ -425,6 +449,7 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 		return countryImpl;
 	}
 
+	@Override
 	public int compareTo(Country country) {
 		int value = 0;
 
@@ -439,18 +464,15 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof Country)) {
 			return false;
 		}
 
-		Country country = null;
-
-		try {
-			country = (Country)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		Country country = (Country)obj;
 
 		long primaryKey = country.getPrimaryKey();
 
@@ -562,6 +584,7 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(28);
 

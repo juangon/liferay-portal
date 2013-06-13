@@ -1,23 +1,24 @@
 <definition>
 	<var name="name" value="value" />
+	<var name="name" value="" />
 
 	<command name="name">
 		<var name="name" value="value" />
 
 		<execute action="BaseLiferay#click" locator1="locator1" value1="value1" />
 
-		<execute macro="BlogsEntry#pgAdd" />
+		<execute macro="BlogsEntry#addCP" />
 
-		<execute macro="BlogsEntry#pgAdd">
+		<execute macro="BlogsEntry#addCP">
 			<var name="name" value="value" />
 		</execute>
 
 		<if>
-			<condition action="BaseLiferay#isElementPresent" />
+			<condition action="BaseLiferay#isElementPresent" locator-key1="PAGE_${name}E" />
 			<then>
 				<var name="name" value="value" />
 
-				<execute action="BaseLiferay#click" />
+				<execute action="BaseLiferay#click" locator-key1="PAGE_${name}E" />
 			</then>
 		</if>
 
@@ -26,9 +27,9 @@
 			<then>
 				<var name="name" value="value" />
 
-				<execute macro="BlogsEntry#pgAdd" />
+				<execute macro="BlogsEntry#addCP" />
 
-				<execute macro="BlogsEntry#pgAdd">
+				<execute macro="BlogsEntry#addCP">
 					<var name="name" value="value" />
 				</execute>
 			</then>

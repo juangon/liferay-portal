@@ -6,6 +6,7 @@
 <#assign theme_timestamp = themeDisplay.getTheme().getTimestamp() />
 <#assign theme_settings = themeDisplay.getThemeSettings() />
 
+<#assign root_css_class = "aui " + languageUtil.get(locale, "lang.dir") />
 <#assign css_class = theme_display.getColorScheme().getCssClass() + " yui3-skin-sam" />
 
 <#assign liferay_toggle_controls = sessionClicks.get(request, "liferay_toggle_controls", "visible") />
@@ -339,7 +340,7 @@
 <#assign nav_css_class = "sort-pages modify-pages" />
 
 <#if !has_navigation>
-	<#assign nav_css_class = nav_css_class + " aui-helper-hidden" />
+	<#assign nav_css_class = nav_css_class + " hide" />
 </#if>
 
 <#-- ---------- Staging ---------- -->

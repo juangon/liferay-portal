@@ -18,11 +18,12 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
- * The utility for the social activity achievement local service. This utility wraps {@link com.liferay.portlet.social.service.impl.SocialActivityAchievementLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
+ * Provides the local service utility for SocialActivityAchievement. This utility wraps
+ * {@link com.liferay.portlet.social.service.impl.SocialActivityAchievementLocalServiceImpl} and is the
+ * primary access point for service operations in application layer code running
+ * on the local server. Methods of this service will not have security checks
+ * based on the propagated JAAS credentials because this service can only be
+ * accessed from within the same VM.
  *
  * @author Brian Wing Shun Chan
  * @see SocialActivityAchievementLocalService
@@ -304,16 +305,15 @@ public class SocialActivityAchievementLocalServiceUtil {
 		return getService().getGroupFirstAchievementsCount(groupId);
 	}
 
-	public static int getUserAchievementCount(long userId, long groupId,
-		java.lang.String name)
+	public static java.util.List<com.liferay.portlet.social.model.SocialActivityAchievement> getUserAchievements(
+		long userId, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getUserAchievementCount(userId, groupId, name);
+		return getService().getUserAchievements(userId, groupId);
 	}
 
-	public static java.util.List<com.liferay.portlet.social.model.SocialActivityAchievement> getUserAchievements(
-		long userId, long groupId, java.lang.String name)
+	public static int getUserAchievementsCount(long userId, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getUserAchievements(userId, groupId, name);
+		return getService().getUserAchievementsCount(userId, groupId);
 	}
 
 	public static SocialActivityAchievementLocalService getService() {

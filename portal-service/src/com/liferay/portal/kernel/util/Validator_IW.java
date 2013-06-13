@@ -239,6 +239,10 @@ public class Validator_IW {
 		return Validator.isPhoneNumber(phoneNumber);
 	}
 
+	public boolean isUri(java.lang.String uri) {
+		return Validator.isUri(uri);
+	}
+
 	public boolean isUrl(java.lang.String url) {
 		return Validator.isUrl(url);
 	}

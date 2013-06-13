@@ -35,7 +35,7 @@ if (Validator.isNull(title)) {
 	title = assetRenderer.getTitle(locale);
 }
 
-PortletURL viewFullContentURL = renderResponse.createRenderURL();
+PortletURL viewFullContentURL = liferayPortletResponse.createLiferayPortletURL(plid, portletDisplay.getId(), PortletRequest.RENDER_PHASE, false);
 
 viewFullContentURL.setParameter("struts_action", "/asset_publisher/view_content");
 viewFullContentURL.setParameter("assetEntryId", String.valueOf(assetEntry.getEntryId()));
@@ -111,7 +111,7 @@ viewURL = _checkViewURL(assetEntry, viewInContext, viewURL, currentURL, themeDis
 
 			<c:if test="<%= Validator.isNotNull(viewURL) %>">
 				<div class="asset-more">
-					<a href="<%= viewURL %>"><liferay-ui:message arguments='<%= new Object[] {"aui-helper-hidden-accessible", HtmlUtil.escape(assetRenderer.getTitle(locale))} %>' key="<%= viewURLMessage %>" /> &raquo; </a>
+					<a href="<%= viewURL %>"><liferay-ui:message arguments='<%= new Object[] {"hide-accessible", HtmlUtil.escape(assetRenderer.getTitle(locale))} %>' key="<%= viewURLMessage %>" /> &raquo; </a>
 				</div>
 			</c:if>
 		</div>

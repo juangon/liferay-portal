@@ -159,41 +159,60 @@ public interface MBStatsUserModel extends BaseModel<MBStatsUser> {
 	 */
 	public void setLastPostDate(Date lastPostDate);
 
+	@Override
 	public boolean isNew();
 
+	@Override
 	public void setNew(boolean n);
 
+	@Override
 	public boolean isCachedModel();
 
+	@Override
 	public void setCachedModel(boolean cachedModel);
 
+	@Override
 	public boolean isEscapedModel();
 
+	@Override
 	public Serializable getPrimaryKeyObj();
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
+	@Override
 	public ExpandoBridge getExpandoBridge();
 
+	@Override
 	public void setExpandoBridgeAttributes(BaseModel<?> baseModel);
 
+	@Override
 	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge);
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext);
 
+	@Override
 	public Object clone();
 
+	@Override
 	public int compareTo(MBStatsUser mbStatsUser);
 
+	@Override
 	public int hashCode();
 
+	@Override
 	public CacheModel<MBStatsUser> toCacheModel();
 
+	@Override
 	public MBStatsUser toEscapedModel();
 
+	@Override
 	public MBStatsUser toUnescapedModel();
 
+	@Override
 	public String toString();
 
+	@Override
 	public String toXmlString();
 }

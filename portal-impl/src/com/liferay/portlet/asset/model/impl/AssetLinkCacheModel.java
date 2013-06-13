@@ -63,6 +63,7 @@ public class AssetLinkCacheModel implements CacheModel<AssetLink>,
 		return sb.toString();
 	}
 
+	@Override
 	public AssetLink toEntityModel() {
 		AssetLinkImpl assetLinkImpl = new AssetLinkImpl();
 
@@ -94,6 +95,7 @@ public class AssetLinkCacheModel implements CacheModel<AssetLink>,
 		return assetLinkImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		linkId = objectInput.readLong();
 		companyId = objectInput.readLong();
@@ -106,6 +108,7 @@ public class AssetLinkCacheModel implements CacheModel<AssetLink>,
 		weight = objectInput.readInt();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(linkId);

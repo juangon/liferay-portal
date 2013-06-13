@@ -59,6 +59,7 @@ public class ExpandoValueCacheModel implements CacheModel<ExpandoValue>,
 		return sb.toString();
 	}
 
+	@Override
 	public ExpandoValue toEntityModel() {
 		ExpandoValueImpl expandoValueImpl = new ExpandoValueImpl();
 
@@ -82,6 +83,7 @@ public class ExpandoValueCacheModel implements CacheModel<ExpandoValue>,
 		return expandoValueImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		valueId = objectInput.readLong();
 		companyId = objectInput.readLong();
@@ -93,6 +95,7 @@ public class ExpandoValueCacheModel implements CacheModel<ExpandoValue>,
 		data = objectInput.readUTF();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(valueId);

@@ -43,6 +43,7 @@ public class RoleMembershipPolicyFactoryImpl
 		_roleMembershipPolicy = _originalRoleMembershipPolicy;
 	}
 
+	@Override
 	public RoleMembershipPolicy getRoleMembershipPolicy() {
 		return _roleMembershipPolicy;
 	}
@@ -63,7 +64,7 @@ public class RoleMembershipPolicyFactoryImpl
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
-		RoleMembershipPolicyFactory.class);
+		RoleMembershipPolicyFactoryImpl.class);
 
 	private static RoleMembershipPolicy _originalRoleMembershipPolicy;
 	private static volatile RoleMembershipPolicy _roleMembershipPolicy;

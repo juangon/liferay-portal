@@ -80,6 +80,8 @@ public interface LuceneHelper {
 
 	public Analyzer getAnalyzer();
 
+	public IndexAccessor getIndexAccessor(long companyId);
+
 	public long getLastGeneration(long companyId);
 
 	public InputStream getLoadIndexesInputStreamFromCluster(
@@ -106,6 +108,8 @@ public interface LuceneHelper {
 	public void loadIndexesFromCluster(long companyId) throws SystemException;
 
 	public void shutdown();
+
+	public void shutdown(long companyId);
 
 	public void startup(long companyId);
 

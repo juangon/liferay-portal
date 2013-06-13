@@ -14,6 +14,8 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.tools.sourceformatter.SourceFormatter;
+
 import org.junit.Test;
 
 /**

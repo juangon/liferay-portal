@@ -98,6 +98,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	 * @throws com.liferay.portal.NoSuchShardException if a matching shard could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Shard findByName(String name)
 		throws NoSuchShardException, SystemException {
 		Shard shard = fetchByName(name);
@@ -129,6 +130,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	 * @return the matching shard, or <code>null</code> if a matching shard could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Shard fetchByName(String name) throws SystemException {
 		return fetchByName(name, true);
 	}
@@ -141,6 +143,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	 * @return the matching shard, or <code>null</code> if a matching shard could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Shard fetchByName(String name, boolean retrieveFromCache)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { name };
@@ -247,6 +250,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	 * @return the shard that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Shard removeByName(String name)
 		throws NoSuchShardException, SystemException {
 		Shard shard = findByName(name);
@@ -261,6 +265,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	 * @return the number of matching shards
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByName(String name) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_NAME;
 
@@ -343,6 +348,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	 * @throws com.liferay.portal.NoSuchShardException if a matching shard could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Shard findByC_C(long classNameId, long classPK)
 		throws NoSuchShardException, SystemException {
 		Shard shard = fetchByC_C(classNameId, classPK);
@@ -378,6 +384,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	 * @return the matching shard, or <code>null</code> if a matching shard could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Shard fetchByC_C(long classNameId, long classPK)
 		throws SystemException {
 		return fetchByC_C(classNameId, classPK, true);
@@ -392,6 +399,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	 * @return the matching shard, or <code>null</code> if a matching shard could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Shard fetchByC_C(long classNameId, long classPK,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { classNameId, classPK };
@@ -490,6 +498,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	 * @return the shard that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Shard removeByC_C(long classNameId, long classPK)
 		throws NoSuchShardException, SystemException {
 		Shard shard = findByC_C(classNameId, classPK);
@@ -505,6 +514,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	 * @return the number of matching shards
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByC_C(long classNameId, long classPK)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_C;
@@ -563,6 +573,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	 *
 	 * @param shard the shard
 	 */
+	@Override
 	public void cacheResult(Shard shard) {
 		EntityCacheUtil.putResult(ShardModelImpl.ENTITY_CACHE_ENABLED,
 			ShardImpl.class, shard.getPrimaryKey(), shard);
@@ -581,6 +592,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	 *
 	 * @param shards the shards
 	 */
+	@Override
 	public void cacheResult(List<Shard> shards) {
 		for (Shard shard : shards) {
 			if (EntityCacheUtil.getResult(ShardModelImpl.ENTITY_CACHE_ENABLED,
@@ -722,6 +734,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	 * @param shardId the primary key for the new shard
 	 * @return the new shard
 	 */
+	@Override
 	public Shard create(long shardId) {
 		Shard shard = new ShardImpl();
 
@@ -739,6 +752,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	 * @throws com.liferay.portal.NoSuchShardException if a shard with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Shard remove(long shardId)
 		throws NoSuchShardException, SystemException {
 		return remove((Serializable)shardId);
@@ -910,6 +924,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	 * @throws com.liferay.portal.NoSuchShardException if a shard with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Shard findByPrimaryKey(long shardId)
 		throws NoSuchShardException, SystemException {
 		return findByPrimaryKey((Serializable)shardId);
@@ -969,6 +984,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	 * @return the shard, or <code>null</code> if a shard with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Shard fetchByPrimaryKey(long shardId) throws SystemException {
 		return fetchByPrimaryKey((Serializable)shardId);
 	}
@@ -979,6 +995,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	 * @return the shards
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Shard> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -995,6 +1012,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	 * @return the range of shards
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Shard> findAll(int start, int end) throws SystemException {
 		return findAll(start, end, null);
 	}
@@ -1012,6 +1030,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	 * @return the ordered range of shards
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Shard> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -1097,6 +1116,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (Shard shard : findAll()) {
 			remove(shard);
@@ -1109,6 +1129,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	 * @return the number of shards
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -1194,6 +1215,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 		};
 
 	private static CacheModel<Shard> _nullShardCacheModel = new CacheModel<Shard>() {
+			@Override
 			public Shard toEntityModel() {
 				return _nullShard;
 			}

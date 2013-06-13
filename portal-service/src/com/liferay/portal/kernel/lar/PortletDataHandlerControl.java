@@ -14,8 +14,11 @@
 
 package com.liferay.portal.kernel.lar;
 
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+
+import java.util.Locale;
 
 /**
  * @author Raymond Augé
@@ -42,13 +45,38 @@ public class PortletDataHandlerControl {
 	public PortletDataHandlerControl(
 		String namespace, String controlName, boolean disabled) {
 
+		this(namespace, controlName, disabled, null);
+	}
+
+	public PortletDataHandlerControl(
+		String namespace, String controlName, boolean disabled,
+		String className) {
+
+		this(namespace, controlName, disabled, className, null);
+	}
+
+	public PortletDataHandlerControl(
+		String namespace, String controlName, boolean disabled,
+		String className, String referrerClassName) {
+
 		_namespace = namespace;
 		_controlName = controlName;
 		_disabled = disabled;
+		_className = className;
+		_referrerClassName = referrerClassName;
+	}
+
+	public String getClassName() {
+		return _className;
 	}
 
 	public String getControlName() {
 		return _controlName;
+	}
+
+	public String getHelpMessage(Locale locale, String action) {
+		return LanguageUtil.get(
+			locale, action + "-" + _controlName + "-help", StringPool.BLANK);
 	}
 
 	public String getNamespace() {
@@ -59,6 +87,10 @@ public class PortletDataHandlerControl {
 		return getNamespacedControlName(_namespace, getControlName());
 	}
 
+	public String getReferrerClassName() {
+		return _referrerClassName;
+	}
+
 	public boolean isDisabled() {
 		return _disabled;
 	}
@@ -67,8 +99,10 @@ public class PortletDataHandlerControl {
 		_namespace = namespace;
 	}
 
+	private String _className;
 	private String _controlName;
 	private boolean _disabled;
 	private String _namespace;
+	private String _referrerClassName;
 
 }

@@ -45,6 +45,7 @@ public abstract class BaseIntraband implements Intraband {
 		this.defaultTimeout = defaultTimeout;
 	}
 
+	@Override
 	@SuppressWarnings("unused")
 	public void close() throws InterruptedException, IOException {
 		datagramReceiveHandlersReference.set(null);
@@ -52,6 +53,7 @@ public abstract class BaseIntraband implements Intraband {
 		open = false;
 	}
 
+	@Override
 	public DatagramReceiveHandler[] getDatagramReceiveHandlers() {
 		ensureOpen();
 
@@ -61,10 +63,12 @@ public abstract class BaseIntraband implements Intraband {
 		return datagramReceiveHandlers.clone();
 	}
 
+	@Override
 	public boolean isOpen() {
 		return open;
 	}
 
+	@Override
 	public DatagramReceiveHandler registerDatagramReceiveHandler(
 		byte type, DatagramReceiveHandler datagramReceiveHandler) {
 
@@ -92,6 +96,7 @@ public abstract class BaseIntraband implements Intraband {
 		return oldDatagramReceiveHandler;
 	}
 
+	@Override
 	public void sendDatagram(
 		RegistrationReference registrationReference, Datagram datagram) {
 
@@ -113,6 +118,7 @@ public abstract class BaseIntraband implements Intraband {
 		doSendDatagram(registrationReference, datagram);
 	}
 
+	@Override
 	public <A> void sendDatagram(
 		RegistrationReference registrationReference, Datagram datagram,
 		A attachment, EnumSet<CompletionHandler.CompletionType> completionTypes,
@@ -123,6 +129,7 @@ public abstract class BaseIntraband implements Intraband {
 			completionHandler, defaultTimeout, TimeUnit.MILLISECONDS);
 	}
 
+	@Override
 	public <A> void sendDatagram(
 		RegistrationReference registrationReference, Datagram datagram,
 		A attachment, EnumSet<CompletionType> completionTypes,
@@ -189,6 +196,7 @@ public abstract class BaseIntraband implements Intraband {
 		doSendDatagram(registrationReference, datagram);
 	}
 
+	@Override
 	public Datagram sendSyncDatagram(
 			RegistrationReference registrationReference, Datagram datagram)
 		throws InterruptedException, IOException, TimeoutException {
@@ -198,6 +206,7 @@ public abstract class BaseIntraband implements Intraband {
 			TimeUnit.MILLISECONDS);
 	}
 
+	@Override
 	public Datagram sendSyncDatagram(
 			RegistrationReference registrationReference, Datagram datagram,
 			long timeout, TimeUnit timeUnit)
@@ -232,6 +241,7 @@ public abstract class BaseIntraband implements Intraband {
 		return doSendSyncDatagram(registrationReference, datagram, timeout);
 	}
 
+	@Override
 	public DatagramReceiveHandler unregisterDatagramReceiveHandler(byte type) {
 		return registerDatagramReceiveHandler(type, null);
 	}
@@ -311,9 +321,9 @@ public abstract class BaseIntraband implements Intraband {
 	}
 
 	protected long generateSequenceId() {
-		long sequenceId = sequenceIdGenerator.incrementAndGet();
+		long sequenceId = sequenceIdGenerator.getAndIncrement();
 
-		if (sequenceId <= 0) {
+		if (sequenceId < 0) {
 
 			// We assume a long primitive type can hold enough numbers to keep a
 			// large window time between the earliest and the latest response
@@ -327,20 +337,7 @@ public abstract class BaseIntraband implements Intraband {
 			// themselves, we would need 2^65 byte or 32 EB (exbibyte) of
 			// memory, which is impossible in existing computer systems.
 
-			while (true) {
-				if (sequenceIdGenerator.compareAndSet(sequenceId, 1)) {
-					return 1;
-				}
-
-				sequenceId = sequenceIdGenerator.incrementAndGet();
-
-				// Another concurrent reset just happened
-
-				if (sequenceId > 0) {
-					return sequenceId;
-				}
-
-			}
+			sequenceId += Long.MIN_VALUE;
 		}
 
 		return sequenceId;
@@ -546,9 +543,11 @@ public abstract class BaseIntraband implements Intraband {
 	protected static class SendSyncDatagramCompletionHandler
 		implements CompletionHandler<Object> {
 
+		@Override
 		public void delivered(Object attachment) {
 		}
 
+		@Override
 		public void failed(Object attachment, IOException ioe) {
 
 			// Must set before count down to ensure memory visibility
@@ -558,6 +557,7 @@ public abstract class BaseIntraband implements Intraband {
 			_countDownLatch.countDown();
 		}
 
+		@Override
 		public void replied(Object attachment, Datagram datagram) {
 
 			// Must set before count down to ensure memory visibility
@@ -567,9 +567,11 @@ public abstract class BaseIntraband implements Intraband {
 			_countDownLatch.countDown();
 		}
 
+		@Override
 		public void submitted(Object attachment) {
 		}
 
+		@Override
 		public void timeouted(Object attachment) {
 		}
 

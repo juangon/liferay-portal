@@ -119,6 +119,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @return the matching asset tags
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetTag> findByGroupId(long groupId) throws SystemException {
 		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -136,6 +137,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @return the range of matching asset tags
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetTag> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
 		return findByGroupId(groupId, start, end, null);
@@ -155,6 +157,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @return the ordered range of matching asset tags
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetTag> findByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -261,6 +264,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @throws com.liferay.portlet.asset.NoSuchTagException if a matching asset tag could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTag findByGroupId_First(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchTagException, SystemException {
@@ -290,6 +294,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @return the first matching asset tag, or <code>null</code> if a matching asset tag could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTag fetchByGroupId_First(long groupId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<AssetTag> list = findByGroupId(groupId, 0, 1, orderByComparator);
@@ -310,6 +315,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @throws com.liferay.portlet.asset.NoSuchTagException if a matching asset tag could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTag findByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchTagException, SystemException {
@@ -339,6 +345,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @return the last matching asset tag, or <code>null</code> if a matching asset tag could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTag fetchByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByGroupId(groupId);
@@ -363,6 +370,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @throws com.liferay.portlet.asset.NoSuchTagException if a asset tag with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTag[] findByGroupId_PrevAndNext(long tagId, long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchTagException, SystemException {
@@ -505,6 +513,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @return the matching asset tags that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetTag> filterFindByGroupId(long groupId)
 		throws SystemException {
 		return filterFindByGroupId(groupId, QueryUtil.ALL_POS,
@@ -524,6 +533,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @return the range of matching asset tags that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetTag> filterFindByGroupId(long groupId, int start, int end)
 		throws SystemException {
 		return filterFindByGroupId(groupId, start, end, null);
@@ -543,6 +553,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @return the ordered range of matching asset tags that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetTag> filterFindByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -633,6 +644,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @throws com.liferay.portlet.asset.NoSuchTagException if a asset tag with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTag[] filterFindByGroupId_PrevAndNext(long tagId, long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchTagException, SystemException {
@@ -813,6 +825,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @param groupId the group ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (AssetTag assetTag : findByGroupId(groupId, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null)) {
@@ -827,6 +840,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @return the number of matching asset tags
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByGroupId(long groupId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPID;
 
@@ -879,6 +893,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @return the number of matching asset tags that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByGroupId(long groupId) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return countByGroupId(groupId);
@@ -941,6 +956,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @throws com.liferay.portlet.asset.NoSuchTagException if a matching asset tag could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTag findByG_N(long groupId, String name)
 		throws NoSuchTagException, SystemException {
 		AssetTag assetTag = fetchByG_N(groupId, name);
@@ -976,6 +992,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @return the matching asset tag, or <code>null</code> if a matching asset tag could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTag fetchByG_N(long groupId, String name)
 		throws SystemException {
 		return fetchByG_N(groupId, name, true);
@@ -990,6 +1007,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @return the matching asset tag, or <code>null</code> if a matching asset tag could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTag fetchByG_N(long groupId, String name,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, name };
@@ -1103,6 +1121,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @return the asset tag that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTag removeByG_N(long groupId, String name)
 		throws NoSuchTagException, SystemException {
 		AssetTag assetTag = findByG_N(groupId, name);
@@ -1118,6 +1137,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @return the number of matching asset tags
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_N(long groupId, String name) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_N;
 
@@ -1191,6 +1211,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 *
 	 * @param assetTag the asset tag
 	 */
+	@Override
 	public void cacheResult(AssetTag assetTag) {
 		EntityCacheUtil.putResult(AssetTagModelImpl.ENTITY_CACHE_ENABLED,
 			AssetTagImpl.class, assetTag.getPrimaryKey(), assetTag);
@@ -1206,6 +1227,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 *
 	 * @param assetTags the asset tags
 	 */
+	@Override
 	public void cacheResult(List<AssetTag> assetTags) {
 		for (AssetTag assetTag : assetTags) {
 			if (EntityCacheUtil.getResult(
@@ -1323,6 +1345,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @param tagId the primary key for the new asset tag
 	 * @return the new asset tag
 	 */
+	@Override
 	public AssetTag create(long tagId) {
 		AssetTag assetTag = new AssetTagImpl();
 
@@ -1340,6 +1363,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @throws com.liferay.portlet.asset.NoSuchTagException if a asset tag with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTag remove(long tagId)
 		throws NoSuchTagException, SystemException {
 		return remove((Serializable)tagId);
@@ -1549,6 +1573,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @throws com.liferay.portlet.asset.NoSuchTagException if a asset tag with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTag findByPrimaryKey(long tagId)
 		throws NoSuchTagException, SystemException {
 		return findByPrimaryKey((Serializable)tagId);
@@ -1608,6 +1633,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @return the asset tag, or <code>null</code> if a asset tag with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTag fetchByPrimaryKey(long tagId) throws SystemException {
 		return fetchByPrimaryKey((Serializable)tagId);
 	}
@@ -1618,6 +1644,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @return the asset tags
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetTag> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1634,6 +1661,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @return the range of asset tags
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetTag> findAll(int start, int end) throws SystemException {
 		return findAll(start, end, null);
 	}
@@ -1651,6 +1679,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @return the ordered range of asset tags
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetTag> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -1736,6 +1765,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (AssetTag assetTag : findAll()) {
 			remove(assetTag);
@@ -1748,6 +1778,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @return the number of asset tags
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -1786,6 +1817,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @return the asset entries associated with the asset tag
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portlet.asset.model.AssetEntry> getAssetEntries(
 		long pk) throws SystemException {
 		return getAssetEntries(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
@@ -1804,6 +1836,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @return the range of asset entries associated with the asset tag
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portlet.asset.model.AssetEntry> getAssetEntries(
 		long pk, int start, int end) throws SystemException {
 		return getAssetEntries(pk, start, end, null);
@@ -1837,6 +1870,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @return the ordered range of asset entries associated with the asset tag
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portlet.asset.model.AssetEntry> getAssetEntries(
 		long pk, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1933,6 +1967,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @return the number of asset entries associated with the asset tag
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int getAssetEntriesSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { pk };
 
@@ -1988,6 +2023,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @return <code>true</code> if the asset entry is associated with the asset tag; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean containsAssetEntry(long pk, long assetEntryPK)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { pk, assetEntryPK };
@@ -2021,6 +2057,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @return <code>true</code> if the asset tag has any asset entries associated with it; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean containsAssetEntries(long pk) throws SystemException {
 		if (getAssetEntriesSize(pk) > 0) {
 			return true;
@@ -2037,6 +2074,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @param assetEntryPK the primary key of the asset entry
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addAssetEntry(long pk, long assetEntryPK)
 		throws SystemException {
 		try {
@@ -2057,6 +2095,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @param assetEntry the asset entry
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addAssetEntry(long pk,
 		com.liferay.portlet.asset.model.AssetEntry assetEntry)
 		throws SystemException {
@@ -2078,6 +2117,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @param assetEntryPKs the primary keys of the asset entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addAssetEntries(long pk, long[] assetEntryPKs)
 		throws SystemException {
 		try {
@@ -2100,6 +2140,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @param assetEntries the asset entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addAssetEntries(long pk,
 		List<com.liferay.portlet.asset.model.AssetEntry> assetEntries)
 		throws SystemException {
@@ -2122,6 +2163,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @param pk the primary key of the asset tag to clear the associated asset entries from
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void clearAssetEntries(long pk) throws SystemException {
 		try {
 			clearAssetEntries.clear(pk);
@@ -2141,6 +2183,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @param assetEntryPK the primary key of the asset entry
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAssetEntry(long pk, long assetEntryPK)
 		throws SystemException {
 		try {
@@ -2161,6 +2204,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @param assetEntry the asset entry
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAssetEntry(long pk,
 		com.liferay.portlet.asset.model.AssetEntry assetEntry)
 		throws SystemException {
@@ -2182,6 +2226,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @param assetEntryPKs the primary keys of the asset entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAssetEntries(long pk, long[] assetEntryPKs)
 		throws SystemException {
 		try {
@@ -2204,6 +2249,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @param assetEntries the asset entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAssetEntries(long pk,
 		List<com.liferay.portlet.asset.model.AssetEntry> assetEntries)
 		throws SystemException {
@@ -2227,6 +2273,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @param assetEntryPKs the primary keys of the asset entries to be associated with the asset tag
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setAssetEntries(long pk, long[] assetEntryPKs)
 		throws SystemException {
 		try {
@@ -2259,6 +2306,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @param assetEntries the asset entries to be associated with the asset tag
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setAssetEntries(long pk,
 		List<com.liferay.portlet.asset.model.AssetEntry> assetEntries)
 		throws SystemException {
@@ -2525,6 +2573,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 		};
 
 	private static CacheModel<AssetTag> _nullAssetTagCacheModel = new CacheModel<AssetTag>() {
+			@Override
 			public AssetTag toEntityModel() {
 				return _nullAssetTag;
 			}

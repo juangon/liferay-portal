@@ -38,7 +38,7 @@ List<DLFileEntryType> fileEntryTypes = DLFileEntryTypeLocalServiceUtil.getFolder
 		modelVar="fileEntryType"
 	>
 		<liferay-ui:search-container-column-text name="name">
-			<a class="select-file-entry-type" data-rowId="<%= fileEntryType.getFileEntryTypeId() %>" href="javascript:;"><%= fileEntryType.getName() %></a>
+			<a class="select-file-entry-type" data-rowId="<%= fileEntryType.getFileEntryTypeId() %>" href="javascript:;"><%= fileEntryType.getName(locale) %></a>
 		</liferay-ui:search-container-column-text>
 	</liferay-ui:search-container-row>
 
@@ -53,9 +53,7 @@ List<DLFileEntryType> fileEntryTypes = DLFileEntryTypeLocalServiceUtil.getFolder
 		function(event) {
 			var link = event.currentTarget;
 
-			var portletURL = Liferay.PortletURL.createRenderURL();
-
-			portletURL.setPortletId('<%= portletId %>');
+			var portletURL = Liferay.PortletURL.createURL('<%= PortletURLFactoryUtil.create(request, portletId, themeDisplay.getPlid(), PortletRequest.RENDER_PHASE) %>');
 
 			portletURL.setParameter('<%= Constants.CMD %>', '<%= Constants.ADD %>');
 			portletURL.setParameter('backURL', '<%= HtmlUtil.escape(backURL) %>');

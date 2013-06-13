@@ -65,23 +65,6 @@ public class PermissionImporter {
 		return actions;
 	}
 
-	protected void importLayoutPermissions(
-			LayoutCache layoutCache, long companyId, long groupId, long userId,
-			Layout layout, Element layoutElement, Element parentElement)
-		throws Exception {
-
-		Element permissionsElement = layoutElement.element("permissions");
-
-		if (permissionsElement != null) {
-			String resourceName = Layout.class.getName();
-			String resourcePrimKey = String.valueOf(layout.getPlid());
-
-			importPermissions(
-				layoutCache, companyId, groupId, userId, layout, resourceName,
-				resourcePrimKey, permissionsElement, false);
-		}
-	}
-
 	protected void importPermissions(
 			LayoutCache layoutCache, long companyId, long groupId, long userId,
 			Layout layout, String resourceName, String resourcePrimKey,

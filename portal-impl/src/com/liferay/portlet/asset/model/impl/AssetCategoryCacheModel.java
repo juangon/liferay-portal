@@ -75,6 +75,7 @@ public class AssetCategoryCacheModel implements CacheModel<AssetCategory>,
 		return sb.toString();
 	}
 
+	@Override
 	public AssetCategory toEntityModel() {
 		AssetCategoryImpl assetCategoryImpl = new AssetCategoryImpl();
 
@@ -143,6 +144,7 @@ public class AssetCategoryCacheModel implements CacheModel<AssetCategory>,
 		return assetCategoryImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		categoryId = objectInput.readLong();
@@ -161,6 +163,7 @@ public class AssetCategoryCacheModel implements CacheModel<AssetCategory>,
 		vocabularyId = objectInput.readLong();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

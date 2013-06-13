@@ -25,15 +25,18 @@ import java.util.concurrent.Future;
  */
 class FutureRegistrationReference implements RegistrationReference {
 
+	@Override
 	public void cancelRegistration() {
 		readFuture.cancel(true);
 		writeFuture.cancel(true);
 	}
 
+	@Override
 	public Intraband getIntraband() {
-		return intraBand;
+		return intraband;
 	}
 
+	@Override
 	public boolean isValid() {
 		if (!readFuture.isDone() && !writeFuture.isDone()) {
 			return true;
@@ -43,17 +46,17 @@ class FutureRegistrationReference implements RegistrationReference {
 	}
 
 	protected FutureRegistrationReference(
-		Intraband intraBand, ChannelContext channelContext,
+		Intraband intraband, ChannelContext channelContext,
 		Future<Void> readFuture, Future<Void> writeFuture) {
 
-		this.intraBand = intraBand;
+		this.intraband = intraband;
 		this.channelContext = channelContext;
 		this.readFuture = readFuture;
 		this.writeFuture = writeFuture;
 	}
 
 	protected final ChannelContext channelContext;
-	protected final Intraband intraBand;
+	protected final Intraband intraband;
 	protected final Future<Void> readFuture;
 	protected final Future<Void> writeFuture;
 

@@ -81,28 +81,34 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 	public OrgGroupRoleModelImpl() {
 	}
 
+	@Override
 	public OrgGroupRolePK getPrimaryKey() {
 		return new OrgGroupRolePK(_organizationId, _groupId, _roleId);
 	}
 
+	@Override
 	public void setPrimaryKey(OrgGroupRolePK primaryKey) {
 		setOrganizationId(primaryKey.organizationId);
 		setGroupId(primaryKey.groupId);
 		setRoleId(primaryKey.roleId);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return new OrgGroupRolePK(_organizationId, _groupId, _roleId);
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey((OrgGroupRolePK)primaryKeyObj);
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return OrgGroupRole.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return OrgGroupRole.class.getName();
 	}
@@ -139,18 +145,22 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 		}
 	}
 
+	@Override
 	public long getOrganizationId() {
 		return _organizationId;
 	}
 
+	@Override
 	public void setOrganizationId(long organizationId) {
 		_organizationId = organizationId;
 	}
 
+	@Override
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -167,10 +177,12 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 		return _originalGroupId;
 	}
 
+	@Override
 	public long getRoleId() {
 		return _roleId;
 	}
 
+	@Override
 	public void setRoleId(long roleId) {
 		_columnBitmask |= ROLEID_COLUMN_BITMASK;
 
@@ -214,6 +226,7 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 		return orgGroupRoleImpl;
 	}
 
+	@Override
 	public int compareTo(OrgGroupRole orgGroupRole) {
 		OrgGroupRolePK primaryKey = orgGroupRole.getPrimaryKey();
 
@@ -222,18 +235,15 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof OrgGroupRole)) {
 			return false;
 		}
 
-		OrgGroupRole orgGroupRole = null;
-
-		try {
-			orgGroupRole = (OrgGroupRole)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		OrgGroupRole orgGroupRole = (OrgGroupRole)obj;
 
 		OrgGroupRolePK primaryKey = orgGroupRole.getPrimaryKey();
 
@@ -293,6 +303,7 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(13);
 

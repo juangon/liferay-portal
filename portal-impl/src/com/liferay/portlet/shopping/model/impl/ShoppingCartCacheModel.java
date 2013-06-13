@@ -67,6 +67,7 @@ public class ShoppingCartCacheModel implements CacheModel<ShoppingCart>,
 		return sb.toString();
 	}
 
+	@Override
 	public ShoppingCart toEntityModel() {
 		ShoppingCartImpl shoppingCartImpl = new ShoppingCartImpl();
 
@@ -118,6 +119,7 @@ public class ShoppingCartCacheModel implements CacheModel<ShoppingCart>,
 		return shoppingCartImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		cartId = objectInput.readLong();
 		groupId = objectInput.readLong();
@@ -132,6 +134,7 @@ public class ShoppingCartCacheModel implements CacheModel<ShoppingCart>,
 		insure = objectInput.readBoolean();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(cartId);

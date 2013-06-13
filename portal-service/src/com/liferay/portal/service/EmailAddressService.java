@@ -23,11 +23,9 @@ import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.security.ac.AccessControlled;
 
 /**
- * The interface for the email address remote service.
- *
- * <p>
- * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
- * </p>
+ * Provides the remote service interface for EmailAddress. Methods of this
+ * service are expected to have security checks based on the propagated JAAS
+ * credentials because this service can be accessed remotely.
  *
  * @author Brian Wing Shun Chan
  * @see EmailAddressServiceUtil
@@ -60,9 +58,20 @@ public interface EmailAddressService extends BaseService {
 	*/
 	public void setBeanIdentifier(java.lang.String beanIdentifier);
 
+	/**
+	* @deprecated As of 6.2.0, replaced by {@link #addEmailAddress( String,
+	long, String, int, boolean, ServiceContext)}
+	*/
 	public com.liferay.portal.model.EmailAddress addEmailAddress(
 		java.lang.String className, long classPK, java.lang.String address,
 		int typeId, boolean primary)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.model.EmailAddress addEmailAddress(
+		java.lang.String className, long classPK, java.lang.String address,
+		int typeId, boolean primary,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

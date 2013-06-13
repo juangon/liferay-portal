@@ -21,11 +21,10 @@ import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 
 /**
- * The interface for the address local service.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
+ * Provides the local service interface for Address. Methods of this
+ * service will not have security checks based on the propagated JAAS
+ * credentials because this service can only be accessed from within the same
+ * VM.
  *
  * @author Brian Wing Shun Chan
  * @see AddressLocalServiceUtil
@@ -166,6 +165,7 @@ public interface AddressLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	@Override
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.PersistedModel getPersistedModel(
 		java.io.Serializable primaryKeyObj)
@@ -224,6 +224,11 @@ public interface AddressLocalService extends BaseLocalService,
 	*/
 	public void setBeanIdentifier(java.lang.String beanIdentifier);
 
+	/**
+	* @deprecated As of 6.2.0, replaced by {@link #addAddress(long, String,
+	long, String, String, String, String, String, long, long,
+	int, boolean, boolean, ServiceContext)}
+	*/
 	public com.liferay.portal.model.Address addAddress(long userId,
 		java.lang.String className, long classPK, java.lang.String street1,
 		java.lang.String street2, java.lang.String street3,
@@ -232,8 +237,22 @@ public interface AddressLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	public com.liferay.portal.model.Address addAddress(long userId,
+		java.lang.String className, long classPK, java.lang.String street1,
+		java.lang.String street2, java.lang.String street3,
+		java.lang.String city, java.lang.String zip, long regionId,
+		long countryId, int typeId, boolean mailing, boolean primary,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	public void deleteAddresses(long companyId, java.lang.String className,
 		long classPK)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.model.Address fetchAddressByUuidAndCompanyId(
+		java.lang.String uuid, long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

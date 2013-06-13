@@ -54,6 +54,7 @@ public class PortletPreferencesCacheModel implements CacheModel<PortletPreferenc
 		return sb.toString();
 	}
 
+	@Override
 	public PortletPreferences toEntityModel() {
 		PortletPreferencesImpl portletPreferencesImpl = new PortletPreferencesImpl();
 
@@ -81,6 +82,7 @@ public class PortletPreferencesCacheModel implements CacheModel<PortletPreferenc
 		return portletPreferencesImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		portletPreferencesId = objectInput.readLong();
 		ownerId = objectInput.readLong();
@@ -90,6 +92,7 @@ public class PortletPreferencesCacheModel implements CacheModel<PortletPreferenc
 		preferences = objectInput.readUTF();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(portletPreferencesId);

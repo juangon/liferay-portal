@@ -18,11 +18,12 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
- * The utility for the layout branch local service. This utility wraps {@link com.liferay.portal.service.impl.LayoutBranchLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
+ * Provides the local service utility for LayoutBranch. This utility wraps
+ * {@link com.liferay.portal.service.impl.LayoutBranchLocalServiceImpl} and is the
+ * primary access point for service operations in application layer code running
+ * on the local server. Methods of this service will not have security checks
+ * based on the propagated JAAS credentials because this service can only be
+ * accessed from within the same VM.
  *
  * @author Brian Wing Shun Chan
  * @see LayoutBranchLocalService
@@ -301,6 +302,16 @@ public class LayoutBranchLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getMasterLayoutBranch(layoutSetBranchId, plid);
+	}
+
+	public static com.liferay.portal.model.LayoutBranch getMasterLayoutBranch(
+		long layoutSetBranchId, long plid,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getMasterLayoutBranch(layoutSetBranchId, plid,
+			serviceContext);
 	}
 
 	public static com.liferay.portal.model.LayoutBranch updateLayoutBranch(

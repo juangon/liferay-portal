@@ -157,29 +157,51 @@ if (selUser != null) {
 }
 
 String[][] categorySections = {mainSections, identificationSections, miscellaneousSections};
+
+if (organizations.size() == 1) {
+	UsersAdminUtil.addPortletBreadcrumbEntries(organizations.get(0), request, renderResponse);
+}
+
+if (selUser != null) {
+	if (!portletName.equals(PortletKeys.MY_ACCOUNT)) {
+		PortalUtil.addPortletBreadcrumbEntry(request, selUser.getFullName(), null);
+	}
+}
 %>
 
 <liferay-ui:error exception="<%= CompanyMaxUsersException.class %>" message="unable-to-create-user-account-because-the-maximum-number-of-users-has-been-reached" />
 
 <c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
-	<liferay-util:include page="/html/portlet/users_admin/toolbar.jsp">
-		<liferay-util:param name="toolbarItem" value='<%= (selUser == null) ? "add" : "view" %>' />
-	</liferay-util:include>
+	<aui:nav-bar>
+		<liferay-util:include page="/html/portlet/users_admin/toolbar.jsp">
+			<liferay-util:param name="toolbarItem" value='<%= (selUser == null) ? "add" : "view" %>' />
+		</liferay-util:include>
+	</aui:nav-bar>
+
+	<div id="breadcrumb">
+		<liferay-ui:breadcrumb showCurrentGroup="<%= false %>" showCurrentPortlet="<%= false %>" showGuestGroup="<%= false %>" showLayout="<%= false %>" showPortletBreadcrumb="<%= true %>" />
+	</div>
 </c:if>
 
 <liferay-ui:header
 	backURL="<%= backURL %>"
+	escapeXml="<%= false %>"
 	localizeTitle="<%= (selUser == null) %>"
-	title='<%= (selUser == null) ? "new-user" : selUser.getFullName() %>'
+	title='<%= (selUser == null) ? "add-user" : LanguageUtil.format(pageContext, "edit-user-x", HtmlUtil.escape(selUser.getFullName())) %>'
 />
 
-<%
-String taglibOnSubmit = "event.preventDefault(); " + renderResponse.getNamespace() + "saveUser('" + ((selUser == null) ? Constants.ADD : Constants.UPDATE) + "');";
-%>
+<portlet:actionURL var="editUserActionURL">
+	<portlet:param name="struts_action" value="/users_admin/edit_user" />
+</portlet:actionURL>
 
-<aui:form method="post" name="fm" onSubmit="<%= taglibOnSubmit %>">
-	<aui:input name="<%= Constants.CMD %>" type="hidden" />
-	<aui:input name="redirect" type="hidden" />
+<portlet:renderURL var="editUserRenderURL">
+	<portlet:param name="struts_action" value="/users_admin/edit_user" />
+	<portlet:param name="backURL" value="<%= backURL %>"></portlet:param>
+</portlet:renderURL>
+
+<aui:form action="<%= editUserActionURL %>" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (selUser == null) ? Constants.ADD : Constants.UPDATE %>" />
+	<aui:input name="redirect" type="hidden" value="<%= editUserRenderURL %>" />
 	<aui:input name="backURL" type="hidden" value="<%= backURL %>" />
 	<aui:input name="p_u_i_d" type="hidden" value="<%= (selUser != null) ? selUser.getUserId() : 0 %>" />
 
@@ -229,7 +251,7 @@ String taglibOnSubmit = "event.preventDefault(); " + renderResponse.getNamespace
 	<liferay-util:buffer var="htmlBottom">
 		<c:if test="<%= (selUser != null) && (passwordPolicy != null) && selUser.getLockout() %>">
 			<aui:button-row>
-				<div class="portlet-msg-alert"><liferay-ui:message key="this-user-account-has-been-locked-due-to-excessive-failed-login-attempts" /></div>
+				<div class="alert alert-block"><liferay-ui:message key="this-user-account-has-been-locked-due-to-excessive-failed-login-attempts" /></div>
 
 				<%
 				String taglibOnClick = renderResponse.getNamespace() + "saveUser('unlock');";
@@ -261,35 +283,10 @@ if (selUser != null) {
 		return '<a href="' + href + '"' + (onclick ? ' onclick="' + onclick + '" ' : '') + '>' + value + '</a>';
 	};
 
-	function <portlet:namespace />saveUser(cmd) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
-
-		var redirect = "<portlet:renderURL><portlet:param name="struts_action" value="/users_admin/edit_user" /><portlet:param name="backURL" value="<%= backURL %>"></portlet:param></portlet:renderURL>";
-
-		redirect += Liferay.Util.getHistoryParam('<portlet:namespace />');
-
-		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = redirect;
-
-		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/users_admin/edit_user" /></portlet:actionURL>");
-	}
-
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />screenName);
 	</c:if>
 </aui:script>
-
-<%
-if (selUser != null) {
-	if (!portletName.equals(PortletKeys.MY_ACCOUNT)) {
-		PortalUtil.addPortletBreadcrumbEntry(request, selUser.getFullName(), null);
-	}
-
-	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "edit"), currentURL);
-}
-else {
-	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-user"), currentURL);
-}
-%>
 
 <%!
 private static final String[] _CATEGORY_NAMES = {"user-information", "identification", "miscellaneous"};

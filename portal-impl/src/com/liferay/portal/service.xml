@@ -30,7 +30,7 @@
 		<column name="type" type="String" />
 		<column name="size" type="String" />
 	</entity>
-	<entity name="Address" local-service="true" remote-service="true" persistence-class="com.liferay.portal.service.persistence.AddressPersistenceImpl2">
+	<entity name="Address" uuid="true" local-service="true" remote-service="true" persistence-class="com.liferay.portal.service.persistence.AddressPersistenceImpl2">
 
 		<!-- PK fields -->
 
@@ -93,6 +93,56 @@
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 			<finder-column name="primary" />
+		</finder>
+	</entity>
+	<entity name="BackgroundTask" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="backgroundTaskId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="name" type="String" />
+		<column name="servletContextNames" type="String" />
+		<column name="taskExecutorClassName" type="String" />
+		<column name="taskContext" type="String" />
+		<column name="completed" type="boolean" />
+		<column name="completionDate" type="Date" />
+		<column name="status" type="int" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="createDate" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="G_T" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="taskExecutorClassName" />
+		</finder>
+		<finder name="T_S" return-type="Collection">
+			<finder-column name="taskExecutorClassName" />
+			<finder-column name="status" />
+		</finder>
+		<finder name="G_T_S" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="taskExecutorClassName" />
+			<finder-column name="status" />
 		</finder>
 	</entity>
 	<entity name="BrowserTracker" local-service="true" remote-service="false">
@@ -271,7 +321,7 @@
 			<finder-column name="active" />
 		</finder>
 	</entity>
-	<entity name="EmailAddress" local-service="true" remote-service="true">
+	<entity name="EmailAddress" uuid="true" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 
@@ -441,6 +491,7 @@
 		<reference package-path="com.liferay.portlet.shopping" entity="ShoppingCategory" />
 		<reference package-path="com.liferay.portlet.shopping" entity="ShoppingCoupon" />
 		<reference package-path="com.liferay.portlet.shopping" entity="ShoppingOrder" />
+		<reference package-path="com.liferay.portlet.social" entity="SocialActivity" />
 		<reference package-path="com.liferay.portlet.social" entity="SocialActivitySetting" />
 		<reference package-path="com.liferay.portlet.softwarecatalog" entity="SCFrameworkVersion" />
 		<reference package-path="com.liferay.portlet.softwarecatalog" entity="SCProductEntry" />
@@ -492,6 +543,8 @@
 		<!-- Audit fields -->
 
 		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
 		<column name="modifiedDate" type="Date" />
 
@@ -622,10 +675,66 @@
 			<finder-column name="plid" />
 			<finder-column name="name" />
 		</finder>
-		<finder name="L_P_M" return-type="LayoutBranch">
+		<finder name="L_P_M" return-type="Collection">
 			<finder-column name="layoutSetBranchId" />
 			<finder-column name="plid" />
 			<finder-column name="master" />
+		</finder>
+	</entity>
+	<entity name="LayoutFriendlyURL" uuid="true" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="layoutFriendlyURLId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="plid" type="long" />
+		<column name="privateLayout" type="boolean" />
+		<column name="friendlyURL" type="String" />
+		<column name="languageId" type="String" />
+
+		<!-- Finder methods -->
+
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
+		</finder>
+		<finder name="Plid" return-type="Collection">
+			<finder-column name="plid" />
+		</finder>
+		<finder name="P_F" return-type="Collection">
+			<finder-column name="plid" />
+			<finder-column name="friendlyURL" />
+		</finder>
+		<finder name="P_L" return-type="LayoutFriendlyURL" unique="true">
+			<finder-column name="plid" />
+			<finder-column name="languageId" />
+		</finder>
+		<finder name="G_P_F" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="privateLayout" />
+			<finder-column name="friendlyURL" />
+		</finder>
+		<finder name="G_P_F_L" return-type="LayoutFriendlyURL" unique="true">
+			<finder-column name="groupId" />
+			<finder-column name="privateLayout" />
+			<finder-column name="friendlyURL" />
+			<finder-column name="languageId" />
 		</finder>
 	</entity>
 	<entity name="LayoutPrototype" uuid="true" local-service="true" remote-service="true">
@@ -857,6 +966,11 @@
 			<finder-column name="groupId" />
 			<finder-column name="privateLayout" />
 			<finder-column name="name" />
+		</finder>
+		<finder name="G_P_M" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="privateLayout" />
+			<finder-column name="master" />
 		</finder>
 	</entity>
 	<entity name="LayoutSetPrototype" uuid="true" local-service="true" remote-service="true">
@@ -1159,6 +1273,9 @@
 
 		<!-- Finder methods -->
 
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
+		</finder>
 		<finder name="C_DP" return-type="PasswordPolicy">
 			<finder-column name="companyId" />
 			<finder-column name="defaultPolicy" />
@@ -1219,7 +1336,7 @@
 		</finder>
 	</entity>
 	<entity name="Permission" local-service="false" remote-service="true" />
-	<entity name="Phone" local-service="true" remote-service="true">
+	<entity name="Phone" uuid="true" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 
@@ -1655,6 +1772,9 @@
 
 		<!-- Finder methods -->
 
+		<finder name="RoleId" return-type="Collection">
+			<finder-column name="roleId" />
+		</finder>
 		<finder name="R_R" return-type="ResourceBlockPermission" unique="true">
 			<finder-column name="resourceBlockId" />
 			<finder-column name="roleId" />
@@ -1909,6 +2029,54 @@
 		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
 		<reference package-path="com.liferay.portlet.messageboards" entity="MBThread" />
 		<reference package-path="com.liferay.portlet.social" entity="SocialActivity" />
+	</entity>
+	<entity name="SystemEvent" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="systemEventId" type="long" primary="true" accessor="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="classNameId" type="long" />
+		<column name="classPK" type="long" />
+		<column name="classUuid" type="String" />
+		<column name="type" type="int" />
+		<column name="extraData" type="String" />
+
+		<!-- Order -->
+
+		<order by="desc">
+			<order-column name="createDate" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
+		<finder name="G_C_C" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="classNameId" />
+			<finder-column name="classPK" />
+		</finder>
+		<finder name="G_C_C_T" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="classNameId" />
+			<finder-column name="classPK" />
+			<finder-column name="type" />
+		</finder>
 	</entity>
 	<entity name="Team" local-service="true" remote-service="true">
 
@@ -2267,6 +2435,7 @@
 		<column name="type" type="String" />
 		<column name="timestamp" type="long" />
 		<column name="deliverBy" type="long" />
+		<column name="delivered" type="boolean" />
 		<column name="payload" type="String" />
 		<column name="archived" type="boolean" />
 
@@ -2281,11 +2450,16 @@
 		<finder name="UserId" return-type="Collection">
 			<finder-column name="userId" />
 		</finder>
+		<finder name="U_D" return-type="Collection">
+			<finder-column name="userId" />
+			<finder-column name="delivered" />
+		</finder>
 		<finder name="U_A" return-type="Collection">
 			<finder-column name="userId" />
 			<finder-column name="archived" />
 		</finder>
 	</entity>
+	<entity name="UserNotificationInterpreter" local-service="true" remote-service="false" tx-manager="none" />
 	<entity name="UserTracker" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
@@ -2385,7 +2559,7 @@
 			<finder-column name="classPK" />
 		</finder>
 	</entity>
-	<entity name="Website" local-service="true" remote-service="true">
+	<entity name="Website" uuid="true" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 
@@ -2579,6 +2753,7 @@
 		<exception>LayoutSetVirtualHost</exception>
 		<exception>LayoutType</exception>
 		<exception>MembershipRequestComments</exception>
+		<exception>MissingReference</exception>
 		<exception>OldServiceComponent</exception>
 		<exception>OrganizationId</exception>
 		<exception>OrganizationName</exception>
@@ -2595,6 +2770,7 @@
 		<exception>RegionCode</exception>
 		<exception>RegionName</exception>
 		<exception>RemoteExport</exception>
+		<exception>RequiredCompany</exception>
 		<exception>RequiredGroup</exception>
 		<exception>RequiredLayout</exception>
 		<exception>RequiredLayoutPrototype</exception>

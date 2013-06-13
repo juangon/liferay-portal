@@ -37,6 +37,7 @@ public abstract class ResourceBlockPermissionBaseImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a resource block permission model instance should use the {@link ResourceBlockPermission} interface instead.
 	 */
+	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
 			ResourceBlockPermissionLocalServiceUtil.addResourceBlockPermission(this);

@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.lar.BasePortletDataHandler;
 import com.liferay.portal.kernel.lar.ExportImportPathUtil;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
-import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,6 +32,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
+import com.liferay.portlet.calendar.service.permission.CalendarPermission;
 import com.liferay.portlet.calendar.service.persistence.CalEventUtil;
 
 import java.util.Calendar;
@@ -52,18 +52,11 @@ public class CalendarPortletDataHandler extends BasePortletDataHandler {
 	public static final String NAMESPACE = "calendar";
 
 	public CalendarPortletDataHandler() {
-		setAlwaysExportable(true);
+		setDeletionSystemEventClassNames(CalEvent.class.getName());
 		setExportControls(
-			new PortletDataHandlerBoolean(NAMESPACE, "events", true, true));
-		setExportMetadataControls(
 			new PortletDataHandlerBoolean(
-				NAMESPACE, "events", true,
-				new PortletDataHandlerControl[] {
-					new PortletDataHandlerBoolean(NAMESPACE, "categories"),
-					new PortletDataHandlerBoolean(NAMESPACE, "comments"),
-					new PortletDataHandlerBoolean(NAMESPACE, "ratings"),
-					new PortletDataHandlerBoolean(NAMESPACE, "tags")
-				}));
+				NAMESPACE, "events", true, true, null,
+				CalEvent.class.getName()));
 		setPublishToLiveByDefault(true);
 	}
 
@@ -92,7 +85,7 @@ public class CalendarPortletDataHandler extends BasePortletDataHandler {
 		throws Exception {
 
 		portletDataContext.addPermissions(
-			"com.liferay.portlet.calendar",
+			CalendarPermission.RESOURCE_NAME,
 			portletDataContext.getScopeGroupId());
 
 		Element rootElement = addExportDataRootElement(portletDataContext);
@@ -117,7 +110,7 @@ public class CalendarPortletDataHandler extends BasePortletDataHandler {
 		throws Exception {
 
 		portletDataContext.importPermissions(
-			"com.liferay.portlet.calendar",
+			CalendarPermission.RESOURCE_NAME,
 			portletDataContext.getSourceGroupId(),
 			portletDataContext.getScopeGroupId());
 

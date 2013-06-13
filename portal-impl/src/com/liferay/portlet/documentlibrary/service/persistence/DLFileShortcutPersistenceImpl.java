@@ -116,6 +116,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the matching document library file shortcuts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileShortcut> findByUuid(String uuid)
 		throws SystemException {
 		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
@@ -134,6 +135,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the range of matching document library file shortcuts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileShortcut> findByUuid(String uuid, int start, int end)
 		throws SystemException {
 		return findByUuid(uuid, start, end, null);
@@ -153,6 +155,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the ordered range of matching document library file shortcuts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileShortcut> findByUuid(String uuid, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -273,6 +276,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a matching document library file shortcut could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut findByUuid_First(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileShortcutException, SystemException {
@@ -303,6 +307,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the first matching document library file shortcut, or <code>null</code> if a matching document library file shortcut could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut fetchByUuid_First(String uuid,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<DLFileShortcut> list = findByUuid(uuid, 0, 1, orderByComparator);
@@ -323,6 +328,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a matching document library file shortcut could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut findByUuid_Last(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileShortcutException, SystemException {
@@ -352,6 +358,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the last matching document library file shortcut, or <code>null</code> if a matching document library file shortcut could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut fetchByUuid_Last(String uuid,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByUuid(uuid);
@@ -376,6 +383,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a document library file shortcut with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut[] findByUuid_PrevAndNext(long fileShortcutId,
 		String uuid, OrderByComparator orderByComparator)
 		throws NoSuchFileShortcutException, SystemException {
@@ -531,6 +539,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @param uuid the uuid
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByUuid(String uuid) throws SystemException {
 		for (DLFileShortcut dlFileShortcut : findByUuid(uuid,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -545,6 +554,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the number of matching document library file shortcuts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUuid(String uuid) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID;
 
@@ -628,6 +638,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a matching document library file shortcut could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut findByUUID_G(String uuid, long groupId)
 		throws NoSuchFileShortcutException, SystemException {
 		DLFileShortcut dlFileShortcut = fetchByUUID_G(uuid, groupId);
@@ -663,6 +674,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the matching document library file shortcut, or <code>null</code> if a matching document library file shortcut could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		return fetchByUUID_G(uuid, groupId, true);
@@ -677,6 +689,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the matching document library file shortcut, or <code>null</code> if a matching document library file shortcut could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut fetchByUUID_G(String uuid, long groupId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, groupId };
@@ -783,6 +796,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the document library file shortcut that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut removeByUUID_G(String uuid, long groupId)
 		throws NoSuchFileShortcutException, SystemException {
 		DLFileShortcut dlFileShortcut = findByUUID_G(uuid, groupId);
@@ -798,6 +812,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the number of matching document library file shortcuts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID_G;
@@ -897,6 +912,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the matching document library file shortcuts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileShortcut> findByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		return findByUuid_C(uuid, companyId, QueryUtil.ALL_POS,
@@ -917,6 +933,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the range of matching document library file shortcuts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileShortcut> findByUuid_C(String uuid, long companyId,
 		int start, int end) throws SystemException {
 		return findByUuid_C(uuid, companyId, start, end, null);
@@ -937,6 +954,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the ordered range of matching document library file shortcuts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileShortcut> findByUuid_C(String uuid, long companyId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1068,6 +1086,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a matching document library file shortcut could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut findByUuid_C_First(String uuid, long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileShortcutException, SystemException {
@@ -1102,6 +1121,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the first matching document library file shortcut, or <code>null</code> if a matching document library file shortcut could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut fetchByUuid_C_First(String uuid, long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<DLFileShortcut> list = findByUuid_C(uuid, companyId, 0, 1,
@@ -1124,6 +1144,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a matching document library file shortcut could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut findByUuid_C_Last(String uuid, long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileShortcutException, SystemException {
@@ -1158,6 +1179,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the last matching document library file shortcut, or <code>null</code> if a matching document library file shortcut could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut fetchByUuid_C_Last(String uuid, long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByUuid_C(uuid, companyId);
@@ -1183,6 +1205,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a document library file shortcut with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut[] findByUuid_C_PrevAndNext(long fileShortcutId,
 		String uuid, long companyId, OrderByComparator orderByComparator)
 		throws NoSuchFileShortcutException, SystemException {
@@ -1343,6 +1366,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @param companyId the company ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		for (DLFileShortcut dlFileShortcut : findByUuid_C(uuid, companyId,
@@ -1359,6 +1383,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the number of matching document library file shortcuts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID_C;
@@ -1457,6 +1482,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the matching document library file shortcuts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileShortcut> findByToFileEntryId(long toFileEntryId)
 		throws SystemException {
 		return findByToFileEntryId(toFileEntryId, QueryUtil.ALL_POS,
@@ -1476,6 +1502,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the range of matching document library file shortcuts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileShortcut> findByToFileEntryId(long toFileEntryId,
 		int start, int end) throws SystemException {
 		return findByToFileEntryId(toFileEntryId, start, end, null);
@@ -1495,6 +1522,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the ordered range of matching document library file shortcuts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileShortcut> findByToFileEntryId(long toFileEntryId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1606,6 +1634,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a matching document library file shortcut could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut findByToFileEntryId_First(long toFileEntryId,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileShortcutException, SystemException {
@@ -1636,6 +1665,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the first matching document library file shortcut, or <code>null</code> if a matching document library file shortcut could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut fetchByToFileEntryId_First(long toFileEntryId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<DLFileShortcut> list = findByToFileEntryId(toFileEntryId, 0, 1,
@@ -1657,6 +1687,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a matching document library file shortcut could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut findByToFileEntryId_Last(long toFileEntryId,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileShortcutException, SystemException {
@@ -1687,6 +1718,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the last matching document library file shortcut, or <code>null</code> if a matching document library file shortcut could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut fetchByToFileEntryId_Last(long toFileEntryId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByToFileEntryId(toFileEntryId);
@@ -1711,6 +1743,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a document library file shortcut with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut[] findByToFileEntryId_PrevAndNext(
 		long fileShortcutId, long toFileEntryId,
 		OrderByComparator orderByComparator)
@@ -1853,6 +1886,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @param toFileEntryId the to file entry ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByToFileEntryId(long toFileEntryId)
 		throws SystemException {
 		for (DLFileShortcut dlFileShortcut : findByToFileEntryId(
@@ -1868,6 +1902,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the number of matching document library file shortcuts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByToFileEntryId(long toFileEntryId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_TOFILEENTRYID;
@@ -1945,6 +1980,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the matching document library file shortcuts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileShortcut> findByG_F(long groupId, long folderId)
 		throws SystemException {
 		return findByG_F(groupId, folderId, QueryUtil.ALL_POS,
@@ -1965,6 +2001,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the range of matching document library file shortcuts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileShortcut> findByG_F(long groupId, long folderId,
 		int start, int end) throws SystemException {
 		return findByG_F(groupId, folderId, start, end, null);
@@ -1985,6 +2022,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the ordered range of matching document library file shortcuts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileShortcut> findByG_F(long groupId, long folderId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -2102,6 +2140,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a matching document library file shortcut could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut findByG_F_First(long groupId, long folderId,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileShortcutException, SystemException {
@@ -2136,6 +2175,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the first matching document library file shortcut, or <code>null</code> if a matching document library file shortcut could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut fetchByG_F_First(long groupId, long folderId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<DLFileShortcut> list = findByG_F(groupId, folderId, 0, 1,
@@ -2158,6 +2198,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a matching document library file shortcut could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut findByG_F_Last(long groupId, long folderId,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileShortcutException, SystemException {
@@ -2192,6 +2233,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the last matching document library file shortcut, or <code>null</code> if a matching document library file shortcut could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut fetchByG_F_Last(long groupId, long folderId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByG_F(groupId, folderId);
@@ -2217,6 +2259,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a document library file shortcut with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut[] findByG_F_PrevAndNext(long fileShortcutId,
 		long groupId, long folderId, OrderByComparator orderByComparator)
 		throws NoSuchFileShortcutException, SystemException {
@@ -2364,6 +2407,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the matching document library file shortcuts that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileShortcut> filterFindByG_F(long groupId, long folderId)
 		throws SystemException {
 		return filterFindByG_F(groupId, folderId, QueryUtil.ALL_POS,
@@ -2384,6 +2428,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the range of matching document library file shortcuts that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileShortcut> filterFindByG_F(long groupId, long folderId,
 		int start, int end) throws SystemException {
 		return filterFindByG_F(groupId, folderId, start, end, null);
@@ -2404,6 +2449,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the ordered range of matching document library file shortcuts that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileShortcut> filterFindByG_F(long groupId, long folderId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -2501,6 +2547,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a document library file shortcut with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut[] filterFindByG_F_PrevAndNext(long fileShortcutId,
 		long groupId, long folderId, OrderByComparator orderByComparator)
 		throws NoSuchFileShortcutException, SystemException {
@@ -2687,6 +2734,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @param folderId the folder ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByG_F(long groupId, long folderId)
 		throws SystemException {
 		for (DLFileShortcut dlFileShortcut : findByG_F(groupId, folderId,
@@ -2703,6 +2751,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the number of matching document library file shortcuts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_F(long groupId, long folderId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_F;
@@ -2761,6 +2810,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the number of matching document library file shortcuts that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByG_F(long groupId, long folderId)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -2848,6 +2898,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the matching document library file shortcuts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileShortcut> findByG_F_A(long groupId, long folderId,
 		boolean active) throws SystemException {
 		return findByG_F_A(groupId, folderId, active, QueryUtil.ALL_POS,
@@ -2869,6 +2920,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the range of matching document library file shortcuts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileShortcut> findByG_F_A(long groupId, long folderId,
 		boolean active, int start, int end) throws SystemException {
 		return findByG_F_A(groupId, folderId, active, start, end, null);
@@ -2890,6 +2942,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the ordered range of matching document library file shortcuts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileShortcut> findByG_F_A(long groupId, long folderId,
 		boolean active, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -3013,6 +3066,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a matching document library file shortcut could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut findByG_F_A_First(long groupId, long folderId,
 		boolean active, OrderByComparator orderByComparator)
 		throws NoSuchFileShortcutException, SystemException {
@@ -3051,6 +3105,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the first matching document library file shortcut, or <code>null</code> if a matching document library file shortcut could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut fetchByG_F_A_First(long groupId, long folderId,
 		boolean active, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -3075,6 +3130,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a matching document library file shortcut could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut findByG_F_A_Last(long groupId, long folderId,
 		boolean active, OrderByComparator orderByComparator)
 		throws NoSuchFileShortcutException, SystemException {
@@ -3113,6 +3169,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the last matching document library file shortcut, or <code>null</code> if a matching document library file shortcut could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut fetchByG_F_A_Last(long groupId, long folderId,
 		boolean active, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -3140,6 +3197,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a document library file shortcut with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut[] findByG_F_A_PrevAndNext(long fileShortcutId,
 		long groupId, long folderId, boolean active,
 		OrderByComparator orderByComparator)
@@ -3293,6 +3351,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the matching document library file shortcuts that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileShortcut> filterFindByG_F_A(long groupId, long folderId,
 		boolean active) throws SystemException {
 		return filterFindByG_F_A(groupId, folderId, active, QueryUtil.ALL_POS,
@@ -3314,6 +3373,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the range of matching document library file shortcuts that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileShortcut> filterFindByG_F_A(long groupId, long folderId,
 		boolean active, int start, int end) throws SystemException {
 		return filterFindByG_F_A(groupId, folderId, active, start, end, null);
@@ -3335,6 +3395,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the ordered range of matching document library file shortcuts that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileShortcut> filterFindByG_F_A(long groupId, long folderId,
 		boolean active, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -3438,6 +3499,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a document library file shortcut with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut[] filterFindByG_F_A_PrevAndNext(long fileShortcutId,
 		long groupId, long folderId, boolean active,
 		OrderByComparator orderByComparator)
@@ -3630,6 +3692,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @param active the active
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByG_F_A(long groupId, long folderId, boolean active)
 		throws SystemException {
 		for (DLFileShortcut dlFileShortcut : findByG_F_A(groupId, folderId,
@@ -3647,6 +3710,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the number of matching document library file shortcuts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_F_A(long groupId, long folderId, boolean active)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_F_A;
@@ -3710,6 +3774,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the number of matching document library file shortcuts that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByG_F_A(long groupId, long folderId, boolean active)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -3806,6 +3871,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the matching document library file shortcuts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileShortcut> findByG_F_A_S(long groupId, long folderId,
 		boolean active, int status) throws SystemException {
 		return findByG_F_A_S(groupId, folderId, active, status,
@@ -3828,6 +3894,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the range of matching document library file shortcuts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileShortcut> findByG_F_A_S(long groupId, long folderId,
 		boolean active, int status, int start, int end)
 		throws SystemException {
@@ -3851,6 +3918,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the ordered range of matching document library file shortcuts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileShortcut> findByG_F_A_S(long groupId, long folderId,
 		boolean active, int status, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -3980,6 +4048,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a matching document library file shortcut could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut findByG_F_A_S_First(long groupId, long folderId,
 		boolean active, int status, OrderByComparator orderByComparator)
 		throws NoSuchFileShortcutException, SystemException {
@@ -4022,6 +4091,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the first matching document library file shortcut, or <code>null</code> if a matching document library file shortcut could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut fetchByG_F_A_S_First(long groupId, long folderId,
 		boolean active, int status, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -4047,6 +4117,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a matching document library file shortcut could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut findByG_F_A_S_Last(long groupId, long folderId,
 		boolean active, int status, OrderByComparator orderByComparator)
 		throws NoSuchFileShortcutException, SystemException {
@@ -4089,6 +4160,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the last matching document library file shortcut, or <code>null</code> if a matching document library file shortcut could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut fetchByG_F_A_S_Last(long groupId, long folderId,
 		boolean active, int status, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -4117,6 +4189,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a document library file shortcut with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut[] findByG_F_A_S_PrevAndNext(long fileShortcutId,
 		long groupId, long folderId, boolean active, int status,
 		OrderByComparator orderByComparator)
@@ -4276,6 +4349,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the matching document library file shortcuts that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileShortcut> filterFindByG_F_A_S(long groupId,
 		long folderId, boolean active, int status) throws SystemException {
 		return filterFindByG_F_A_S(groupId, folderId, active, status,
@@ -4298,6 +4372,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the range of matching document library file shortcuts that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileShortcut> filterFindByG_F_A_S(long groupId,
 		long folderId, boolean active, int status, int start, int end)
 		throws SystemException {
@@ -4322,6 +4397,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the ordered range of matching document library file shortcuts that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileShortcut> filterFindByG_F_A_S(long groupId,
 		long folderId, boolean active, int status, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -4430,6 +4506,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a document library file shortcut with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut[] filterFindByG_F_A_S_PrevAndNext(
 		long fileShortcutId, long groupId, long folderId, boolean active,
 		int status, OrderByComparator orderByComparator)
@@ -4628,6 +4705,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @param status the status
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByG_F_A_S(long groupId, long folderId, boolean active,
 		int status) throws SystemException {
 		for (DLFileShortcut dlFileShortcut : findByG_F_A_S(groupId, folderId,
@@ -4646,6 +4724,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the number of matching document library file shortcuts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_F_A_S(long groupId, long folderId, boolean active,
 		int status) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_F_A_S;
@@ -4714,6 +4793,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the number of matching document library file shortcuts that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByG_F_A_S(long groupId, long folderId,
 		boolean active, int status) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -4779,6 +4859,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 *
 	 * @param dlFileShortcut the document library file shortcut
 	 */
+	@Override
 	public void cacheResult(DLFileShortcut dlFileShortcut) {
 		EntityCacheUtil.putResult(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileShortcutImpl.class, dlFileShortcut.getPrimaryKey(),
@@ -4796,6 +4877,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 *
 	 * @param dlFileShortcuts the document library file shortcuts
 	 */
+	@Override
 	public void cacheResult(List<DLFileShortcut> dlFileShortcuts) {
 		for (DLFileShortcut dlFileShortcut : dlFileShortcuts) {
 			if (EntityCacheUtil.getResult(
@@ -4916,6 +4998,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @param fileShortcutId the primary key for the new document library file shortcut
 	 * @return the new document library file shortcut
 	 */
+	@Override
 	public DLFileShortcut create(long fileShortcutId) {
 		DLFileShortcut dlFileShortcut = new DLFileShortcutImpl();
 
@@ -4937,6 +5020,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a document library file shortcut with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut remove(long fileShortcutId)
 		throws NoSuchFileShortcutException, SystemException {
 		return remove((Serializable)fileShortcutId);
@@ -5260,6 +5344,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a document library file shortcut with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut findByPrimaryKey(long fileShortcutId)
 		throws NoSuchFileShortcutException, SystemException {
 		return findByPrimaryKey((Serializable)fileShortcutId);
@@ -5321,6 +5406,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the document library file shortcut, or <code>null</code> if a document library file shortcut with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileShortcut fetchByPrimaryKey(long fileShortcutId)
 		throws SystemException {
 		return fetchByPrimaryKey((Serializable)fileShortcutId);
@@ -5332,6 +5418,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the document library file shortcuts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileShortcut> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -5348,6 +5435,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the range of document library file shortcuts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileShortcut> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
@@ -5366,6 +5454,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the ordered range of document library file shortcuts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileShortcut> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -5451,6 +5540,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (DLFileShortcut dlFileShortcut : findAll()) {
 			remove(dlFileShortcut);
@@ -5463,6 +5553,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 * @return the number of document library file shortcuts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -5566,6 +5657,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		};
 
 	private static CacheModel<DLFileShortcut> _nullDLFileShortcutCacheModel = new CacheModel<DLFileShortcut>() {
+			@Override
 			public DLFileShortcut toEntityModel() {
 				return _nullDLFileShortcut;
 			}

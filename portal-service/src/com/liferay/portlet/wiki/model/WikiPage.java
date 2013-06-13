@@ -81,7 +81,5 @@ public interface WikiPage extends WikiPageModel, PersistedModel {
 
 	public boolean isInTrashContainer();
 
-	public boolean isResourceMain();
-
 	public void setAttachmentsFolderId(long attachmentsFolderId);
 }

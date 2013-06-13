@@ -81,6 +81,7 @@ public interface ShoppingOrderModel extends BaseModel<ShoppingOrder>,
 	 *
 	 * @return the group ID of this shopping order
 	 */
+	@Override
 	public long getGroupId();
 
 	/**
@@ -88,6 +89,7 @@ public interface ShoppingOrderModel extends BaseModel<ShoppingOrder>,
 	 *
 	 * @param groupId the group ID of this shopping order
 	 */
+	@Override
 	public void setGroupId(long groupId);
 
 	/**
@@ -95,6 +97,7 @@ public interface ShoppingOrderModel extends BaseModel<ShoppingOrder>,
 	 *
 	 * @return the company ID of this shopping order
 	 */
+	@Override
 	public long getCompanyId();
 
 	/**
@@ -102,6 +105,7 @@ public interface ShoppingOrderModel extends BaseModel<ShoppingOrder>,
 	 *
 	 * @param companyId the company ID of this shopping order
 	 */
+	@Override
 	public void setCompanyId(long companyId);
 
 	/**
@@ -109,6 +113,7 @@ public interface ShoppingOrderModel extends BaseModel<ShoppingOrder>,
 	 *
 	 * @return the user ID of this shopping order
 	 */
+	@Override
 	public long getUserId();
 
 	/**
@@ -116,6 +121,7 @@ public interface ShoppingOrderModel extends BaseModel<ShoppingOrder>,
 	 *
 	 * @param userId the user ID of this shopping order
 	 */
+	@Override
 	public void setUserId(long userId);
 
 	/**
@@ -124,6 +130,7 @@ public interface ShoppingOrderModel extends BaseModel<ShoppingOrder>,
 	 * @return the user uuid of this shopping order
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public String getUserUuid() throws SystemException;
 
 	/**
@@ -131,6 +138,7 @@ public interface ShoppingOrderModel extends BaseModel<ShoppingOrder>,
 	 *
 	 * @param userUuid the user uuid of this shopping order
 	 */
+	@Override
 	public void setUserUuid(String userUuid);
 
 	/**
@@ -139,6 +147,7 @@ public interface ShoppingOrderModel extends BaseModel<ShoppingOrder>,
 	 * @return the user name of this shopping order
 	 */
 	@AutoEscape
+	@Override
 	public String getUserName();
 
 	/**
@@ -146,6 +155,7 @@ public interface ShoppingOrderModel extends BaseModel<ShoppingOrder>,
 	 *
 	 * @param userName the user name of this shopping order
 	 */
+	@Override
 	public void setUserName(String userName);
 
 	/**
@@ -153,6 +163,7 @@ public interface ShoppingOrderModel extends BaseModel<ShoppingOrder>,
 	 *
 	 * @return the create date of this shopping order
 	 */
+	@Override
 	public Date getCreateDate();
 
 	/**
@@ -160,6 +171,7 @@ public interface ShoppingOrderModel extends BaseModel<ShoppingOrder>,
 	 *
 	 * @param createDate the create date of this shopping order
 	 */
+	@Override
 	public void setCreateDate(Date createDate);
 
 	/**
@@ -167,6 +179,7 @@ public interface ShoppingOrderModel extends BaseModel<ShoppingOrder>,
 	 *
 	 * @return the modified date of this shopping order
 	 */
+	@Override
 	public Date getModifiedDate();
 
 	/**
@@ -174,6 +187,7 @@ public interface ShoppingOrderModel extends BaseModel<ShoppingOrder>,
 	 *
 	 * @param modifiedDate the modified date of this shopping order
 	 */
+	@Override
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
@@ -859,41 +873,60 @@ public interface ShoppingOrderModel extends BaseModel<ShoppingOrder>,
 	 */
 	public void setSendShippingEmail(boolean sendShippingEmail);
 
+	@Override
 	public boolean isNew();
 
+	@Override
 	public void setNew(boolean n);
 
+	@Override
 	public boolean isCachedModel();
 
+	@Override
 	public void setCachedModel(boolean cachedModel);
 
+	@Override
 	public boolean isEscapedModel();
 
+	@Override
 	public Serializable getPrimaryKeyObj();
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
+	@Override
 	public ExpandoBridge getExpandoBridge();
 
+	@Override
 	public void setExpandoBridgeAttributes(BaseModel<?> baseModel);
 
+	@Override
 	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge);
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext);
 
+	@Override
 	public Object clone();
 
+	@Override
 	public int compareTo(ShoppingOrder shoppingOrder);
 
+	@Override
 	public int hashCode();
 
+	@Override
 	public CacheModel<ShoppingOrder> toCacheModel();
 
+	@Override
 	public ShoppingOrder toEscapedModel();
 
+	@Override
 	public ShoppingOrder toUnescapedModel();
 
+	@Override
 	public String toString();
 
+	@Override
 	public String toXmlString();
 }

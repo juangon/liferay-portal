@@ -18,11 +18,12 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
- * The utility for the social activity local service. This utility wraps {@link com.liferay.portlet.social.service.impl.SocialActivityLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
+ * Provides the local service utility for SocialActivity. This utility wraps
+ * {@link com.liferay.portlet.social.service.impl.SocialActivityLocalServiceImpl} and is the
+ * primary access point for service operations in application layer code running
+ * on the local server. Methods of this service will not have security checks
+ * based on the propagated JAAS credentials because this service can only be
+ * accessed from within the same VM.
  *
  * @author Brian Wing Shun Chan
  * @see SocialActivityLocalService
@@ -398,12 +399,18 @@ public class SocialActivityLocalServiceUtil {
 	* @param assetEntry the asset from which to remove stored activities
 	* @throws PortalException if a portal exception occurred
 	* @throws SystemException if a system exception occurred
+	* @deprecated As of 6.2.0, replaced by {@link #deleteActivities(long)}
 	*/
 	public static void deleteActivities(
 		com.liferay.portlet.asset.model.AssetEntry assetEntry)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteActivities(assetEntry);
+	}
+
+	public static void deleteActivities(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteActivities(groupId);
 	}
 
 	/**
@@ -413,6 +420,7 @@ public class SocialActivityLocalServiceUtil {
 	* @param className the target asset's class name
 	* @param classPK the primary key of the target asset
 	* @throws SystemException if a system exception occurred
+	* @deprecated As of 6.2.0, replaced by {@link #deleteActivities(long)}
 	*/
 	public static void deleteActivities(java.lang.String className, long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -426,6 +434,7 @@ public class SocialActivityLocalServiceUtil {
 	* @param activityId the primary key of the stored activity
 	* @throws PortalException if the activity could not be found
 	* @throws SystemException if a system exception occurred
+	* @deprecated As of 6.2.0, replaced by {@link #deleteActivities(long)}
 	*/
 	public static void deleteActivity(long activityId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -438,6 +447,7 @@ public class SocialActivityLocalServiceUtil {
 	*
 	* @param activity the activity to be removed
 	* @throws SystemException if a system exception occurred
+	* @deprecated As of 6.2.0, replaced by {@link #deleteActivities(long)}
 	*/
 	public static void deleteActivity(
 		com.liferay.portlet.social.model.SocialActivity activity)

@@ -57,6 +57,7 @@ public class ExpandoColumnCacheModel implements CacheModel<ExpandoColumn>,
 		return sb.toString();
 	}
 
+	@Override
 	public ExpandoColumn toEntityModel() {
 		ExpandoColumnImpl expandoColumnImpl = new ExpandoColumnImpl();
 
@@ -92,6 +93,7 @@ public class ExpandoColumnCacheModel implements CacheModel<ExpandoColumn>,
 		return expandoColumnImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		columnId = objectInput.readLong();
 		companyId = objectInput.readLong();
@@ -102,6 +104,7 @@ public class ExpandoColumnCacheModel implements CacheModel<ExpandoColumn>,
 		typeSettings = objectInput.readUTF();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(columnId);

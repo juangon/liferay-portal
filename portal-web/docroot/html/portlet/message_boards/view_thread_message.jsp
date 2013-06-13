@@ -148,7 +148,7 @@ MBThread thread = (MBThread)request.getAttribute("edit_message.jsp-thread");
 						/>
 					</div>
 
-					<div class="answer <%= !message.isRoot() && message.isAnswer() ? "" : "aui-helper-hidden" %>" id="<portlet:namespace />deleteAnswerFlag_<%= message.getMessageId() %>">
+					<div class="answer <%= !message.isRoot() && message.isAnswer() ? "" : "hide" %>" id="<portlet:namespace />deleteAnswerFlag_<%= message.getMessageId() %>">
 						<liferay-ui:icon
 							image="checked"
 							label="<%= true %>"
@@ -206,8 +206,8 @@ MBThread thread = (MBThread)request.getAttribute("edit_message.jsp-thread");
 					%>
 
 					<c:if test="<%= showAnswerFlag || hasReplyPermission %>">
-						<ul class="edit-controls lfr-component">
-							<li class="<%= showAnswerFlag ? "" : "aui-helper-hidden" %>" id="<portlet:namespace />addAnswerFlag_<%= message.getMessageId() %>">
+						<ul class="edit-controls unstyled">
+							<li class="<%= showAnswerFlag ? "" : "hide" %>" id="<portlet:namespace />addAnswerFlag_<%= message.getMessageId() %>">
 
 								<%
 								String taglibMarkAsAnswerURL = "javascript:" + renderResponse.getNamespace() + "addAnswerFlag('" + message.getMessageId() + "');";
@@ -414,7 +414,7 @@ MBThread thread = (MBThread)request.getAttribute("edit_message.jsp-thread");
 					/>
 				</div>
 
-				<ul class="edit-controls lfr-component">
+				<ul class="edit-controls unstyled">
 					<li>
 
 						<%
@@ -428,7 +428,7 @@ MBThread thread = (MBThread)request.getAttribute("edit_message.jsp-thread");
 						/>
 					</li>
 
-					<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.UPDATE) && !thread.isLocked() %>">
+					<c:if test="<%= !thread.isLocked() && MBMessagePermission.contains(permissionChecker, message, ActionKeys.UPDATE) %>">
 						<li>
 							<portlet:renderURL var="editURL">
 								<portlet:param name="struts_action" value="/message_boards/edit_message" />
@@ -444,7 +444,7 @@ MBThread thread = (MBThread)request.getAttribute("edit_message.jsp-thread");
 						</li>
 					</c:if>
 
-					<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.PERMISSIONS) && !thread.isLocked() %>">
+					<c:if test="<%= !thread.isLocked() && !message.isRoot() && MBMessagePermission.contains(permissionChecker, message, ActionKeys.PERMISSIONS) %>">
 						<li>
 							<liferay-security:permissionsURL
 								modelResource="<%= MBMessage.class.getName() %>"
@@ -479,7 +479,7 @@ MBThread thread = (MBThread)request.getAttribute("edit_message.jsp-thread");
 						</li>
 					</c:if>
 
-					<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.DELETE) && !thread.isLocked() %>">
+					<c:if test="<%= !thread.isLocked() && MBMessagePermission.contains(permissionChecker, message, ActionKeys.DELETE) %>">
 						<li>
 
 							<%

@@ -35,6 +35,7 @@ public interface ${entity.name} extends
 	<#if entity.hasUuidAccessor()>
 		public static final Accessor<${entity.name}, String> UUID_ACCESSOR = new Accessor<${entity.name}, String>() {
 
+			@Override
 			public String get(${entity.name} ${entity.varName}) {
 				return ${entity.varName}.getUuid();
 			}
@@ -46,6 +47,7 @@ public interface ${entity.name} extends
 		<#if column.isAccessor()>
 			public static final Accessor<${entity.name}, ${serviceBuilder.getPrimitiveObj(column.type)}> ${textFormatter.format(textFormatter.format(column.name, 7), 0)}_ACCESSOR = new Accessor<${entity.name}, ${serviceBuilder.getPrimitiveObj(column.type)}>() {
 
+				@Override
 				public ${serviceBuilder.getPrimitiveObj(column.type)} get(${entity.name} ${entity.varName}) {
 					return ${entity.varName}.get${column.methodName}();
 				}
@@ -58,17 +60,25 @@ public interface ${entity.name} extends
 		<#if !method.isConstructor() && !method.isStatic() && method.isPublic()>
 			${serviceBuilder.getJavadocComment(method)}
 
+			<#assign parameters = method.parameters>
+
 			<#assign annotations = method.annotations>
 
 			<#list annotations as annotation>
 				<#if annotation.type.javaClass.name != "Override">
 					${annotation.toString()}
+				<#else>
+					<#if (method.name == "equals") && (parameters?size == 1)>
+						<#assign firstParameter = parameters?first>
+
+						<#if serviceBuilder.getTypeGenericsName(firstParameter.type) == "java.lang.Object">
+							@Override
+						</#if>
+					</#if>
 				</#if>
 			</#list>
 
 			public ${serviceBuilder.getTypeGenericsName(method.returns)} ${method.name} (
-
-			<#assign parameters = method.parameters>
 
 			<#list parameters as parameter>
 				${serviceBuilder.getTypeGenericsName(parameter.type)} ${parameter.name}

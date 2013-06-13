@@ -115,6 +115,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the matching layout prototypes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<LayoutPrototype> findByUuid(String uuid)
 		throws SystemException {
 		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
@@ -133,6 +134,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the range of matching layout prototypes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<LayoutPrototype> findByUuid(String uuid, int start, int end)
 		throws SystemException {
 		return findByUuid(uuid, start, end, null);
@@ -152,6 +154,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the ordered range of matching layout prototypes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<LayoutPrototype> findByUuid(String uuid, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -272,6 +275,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @throws com.liferay.portal.NoSuchLayoutPrototypeException if a matching layout prototype could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public LayoutPrototype findByUuid_First(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchLayoutPrototypeException, SystemException {
@@ -302,6 +306,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the first matching layout prototype, or <code>null</code> if a matching layout prototype could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public LayoutPrototype fetchByUuid_First(String uuid,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<LayoutPrototype> list = findByUuid(uuid, 0, 1, orderByComparator);
@@ -322,6 +327,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @throws com.liferay.portal.NoSuchLayoutPrototypeException if a matching layout prototype could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public LayoutPrototype findByUuid_Last(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchLayoutPrototypeException, SystemException {
@@ -352,6 +358,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the last matching layout prototype, or <code>null</code> if a matching layout prototype could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public LayoutPrototype fetchByUuid_Last(String uuid,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByUuid(uuid);
@@ -376,6 +383,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @throws com.liferay.portal.NoSuchLayoutPrototypeException if a layout prototype with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public LayoutPrototype[] findByUuid_PrevAndNext(long layoutPrototypeId,
 		String uuid, OrderByComparator orderByComparator)
 		throws NoSuchLayoutPrototypeException, SystemException {
@@ -532,6 +540,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the matching layout prototypes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<LayoutPrototype> filterFindByUuid(String uuid)
 		throws SystemException {
 		return filterFindByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
@@ -550,6 +559,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the range of matching layout prototypes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<LayoutPrototype> filterFindByUuid(String uuid, int start,
 		int end) throws SystemException {
 		return filterFindByUuid(uuid, start, end, null);
@@ -569,6 +579,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the ordered range of matching layout prototypes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<LayoutPrototype> filterFindByUuid(String uuid, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled()) {
@@ -674,6 +685,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @throws com.liferay.portal.NoSuchLayoutPrototypeException if a layout prototype with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public LayoutPrototype[] filterFindByUuid_PrevAndNext(
 		long layoutPrototypeId, String uuid, OrderByComparator orderByComparator)
 		throws NoSuchLayoutPrototypeException, SystemException {
@@ -869,6 +881,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @param uuid the uuid
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByUuid(String uuid) throws SystemException {
 		for (LayoutPrototype layoutPrototype : findByUuid(uuid,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -883,6 +896,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the number of matching layout prototypes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUuid(String uuid) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID;
 
@@ -949,6 +963,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the number of matching layout prototypes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByUuid(String uuid) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled()) {
 			return countByUuid(uuid);
@@ -1041,6 +1056,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the matching layout prototypes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<LayoutPrototype> findByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		return findByUuid_C(uuid, companyId, QueryUtil.ALL_POS,
@@ -1061,6 +1077,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the range of matching layout prototypes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<LayoutPrototype> findByUuid_C(String uuid, long companyId,
 		int start, int end) throws SystemException {
 		return findByUuid_C(uuid, companyId, start, end, null);
@@ -1081,6 +1098,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the ordered range of matching layout prototypes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<LayoutPrototype> findByUuid_C(String uuid, long companyId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1212,6 +1230,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @throws com.liferay.portal.NoSuchLayoutPrototypeException if a matching layout prototype could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public LayoutPrototype findByUuid_C_First(String uuid, long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchLayoutPrototypeException, SystemException {
@@ -1246,6 +1265,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the first matching layout prototype, or <code>null</code> if a matching layout prototype could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public LayoutPrototype fetchByUuid_C_First(String uuid, long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<LayoutPrototype> list = findByUuid_C(uuid, companyId, 0, 1,
@@ -1268,6 +1288,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @throws com.liferay.portal.NoSuchLayoutPrototypeException if a matching layout prototype could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public LayoutPrototype findByUuid_C_Last(String uuid, long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchLayoutPrototypeException, SystemException {
@@ -1302,6 +1323,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the last matching layout prototype, or <code>null</code> if a matching layout prototype could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public LayoutPrototype fetchByUuid_C_Last(String uuid, long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByUuid_C(uuid, companyId);
@@ -1327,6 +1349,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @throws com.liferay.portal.NoSuchLayoutPrototypeException if a layout prototype with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public LayoutPrototype[] findByUuid_C_PrevAndNext(long layoutPrototypeId,
 		String uuid, long companyId, OrderByComparator orderByComparator)
 		throws NoSuchLayoutPrototypeException, SystemException {
@@ -1488,6 +1511,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the matching layout prototypes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<LayoutPrototype> filterFindByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		return filterFindByUuid_C(uuid, companyId, QueryUtil.ALL_POS,
@@ -1508,6 +1532,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the range of matching layout prototypes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<LayoutPrototype> filterFindByUuid_C(String uuid,
 		long companyId, int start, int end) throws SystemException {
 		return filterFindByUuid_C(uuid, companyId, start, end, null);
@@ -1528,6 +1553,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the ordered range of matching layout prototypes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<LayoutPrototype> filterFindByUuid_C(String uuid,
 		long companyId, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1639,6 +1665,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @throws com.liferay.portal.NoSuchLayoutPrototypeException if a layout prototype with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public LayoutPrototype[] filterFindByUuid_C_PrevAndNext(
 		long layoutPrototypeId, String uuid, long companyId,
 		OrderByComparator orderByComparator)
@@ -1840,6 +1867,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @param companyId the company ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		for (LayoutPrototype layoutPrototype : findByUuid_C(uuid, companyId,
@@ -1856,6 +1884,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the number of matching layout prototypes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID_C;
@@ -1928,6 +1957,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the number of matching layout prototypes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled()) {
@@ -2025,6 +2055,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the matching layout prototypes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<LayoutPrototype> findByCompanyId(long companyId)
 		throws SystemException {
 		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -2044,6 +2075,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the range of matching layout prototypes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<LayoutPrototype> findByCompanyId(long companyId, int start,
 		int end) throws SystemException {
 		return findByCompanyId(companyId, start, end, null);
@@ -2063,6 +2095,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the ordered range of matching layout prototypes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<LayoutPrototype> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -2169,6 +2202,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @throws com.liferay.portal.NoSuchLayoutPrototypeException if a matching layout prototype could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public LayoutPrototype findByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchLayoutPrototypeException, SystemException {
@@ -2199,6 +2233,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the first matching layout prototype, or <code>null</code> if a matching layout prototype could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public LayoutPrototype fetchByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<LayoutPrototype> list = findByCompanyId(companyId, 0, 1,
@@ -2220,6 +2255,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @throws com.liferay.portal.NoSuchLayoutPrototypeException if a matching layout prototype could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public LayoutPrototype findByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchLayoutPrototypeException, SystemException {
@@ -2250,6 +2286,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the last matching layout prototype, or <code>null</code> if a matching layout prototype could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public LayoutPrototype fetchByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByCompanyId(companyId);
@@ -2274,6 +2311,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @throws com.liferay.portal.NoSuchLayoutPrototypeException if a layout prototype with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public LayoutPrototype[] findByCompanyId_PrevAndNext(
 		long layoutPrototypeId, long companyId,
 		OrderByComparator orderByComparator)
@@ -2417,6 +2455,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the matching layout prototypes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<LayoutPrototype> filterFindByCompanyId(long companyId)
 		throws SystemException {
 		return filterFindByCompanyId(companyId, QueryUtil.ALL_POS,
@@ -2436,6 +2475,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the range of matching layout prototypes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<LayoutPrototype> filterFindByCompanyId(long companyId,
 		int start, int end) throws SystemException {
 		return filterFindByCompanyId(companyId, start, end, null);
@@ -2455,6 +2495,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the ordered range of matching layout prototypes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<LayoutPrototype> filterFindByCompanyId(long companyId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -2547,6 +2588,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @throws com.liferay.portal.NoSuchLayoutPrototypeException if a layout prototype with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public LayoutPrototype[] filterFindByCompanyId_PrevAndNext(
 		long layoutPrototypeId, long companyId,
 		OrderByComparator orderByComparator)
@@ -2729,6 +2771,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @param companyId the company ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (LayoutPrototype layoutPrototype : findByCompanyId(companyId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -2743,6 +2786,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the number of matching layout prototypes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByCompanyId(long companyId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMPANYID;
 
@@ -2795,6 +2839,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the number of matching layout prototypes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByCompanyId(long companyId) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled()) {
 			return countByCompanyId(companyId);
@@ -2867,6 +2912,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the matching layout prototypes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<LayoutPrototype> findByC_A(long companyId, boolean active)
 		throws SystemException {
 		return findByC_A(companyId, active, QueryUtil.ALL_POS,
@@ -2887,6 +2933,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the range of matching layout prototypes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<LayoutPrototype> findByC_A(long companyId, boolean active,
 		int start, int end) throws SystemException {
 		return findByC_A(companyId, active, start, end, null);
@@ -2907,6 +2954,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the ordered range of matching layout prototypes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<LayoutPrototype> findByC_A(long companyId, boolean active,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -3024,6 +3072,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @throws com.liferay.portal.NoSuchLayoutPrototypeException if a matching layout prototype could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public LayoutPrototype findByC_A_First(long companyId, boolean active,
 		OrderByComparator orderByComparator)
 		throws NoSuchLayoutPrototypeException, SystemException {
@@ -3058,6 +3107,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the first matching layout prototype, or <code>null</code> if a matching layout prototype could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public LayoutPrototype fetchByC_A_First(long companyId, boolean active,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<LayoutPrototype> list = findByC_A(companyId, active, 0, 1,
@@ -3080,6 +3130,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @throws com.liferay.portal.NoSuchLayoutPrototypeException if a matching layout prototype could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public LayoutPrototype findByC_A_Last(long companyId, boolean active,
 		OrderByComparator orderByComparator)
 		throws NoSuchLayoutPrototypeException, SystemException {
@@ -3114,6 +3165,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the last matching layout prototype, or <code>null</code> if a matching layout prototype could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public LayoutPrototype fetchByC_A_Last(long companyId, boolean active,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByC_A(companyId, active);
@@ -3139,6 +3191,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @throws com.liferay.portal.NoSuchLayoutPrototypeException if a layout prototype with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public LayoutPrototype[] findByC_A_PrevAndNext(long layoutPrototypeId,
 		long companyId, boolean active, OrderByComparator orderByComparator)
 		throws NoSuchLayoutPrototypeException, SystemException {
@@ -3286,6 +3339,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the matching layout prototypes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<LayoutPrototype> filterFindByC_A(long companyId, boolean active)
 		throws SystemException {
 		return filterFindByC_A(companyId, active, QueryUtil.ALL_POS,
@@ -3306,6 +3360,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the range of matching layout prototypes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<LayoutPrototype> filterFindByC_A(long companyId,
 		boolean active, int start, int end) throws SystemException {
 		return filterFindByC_A(companyId, active, start, end, null);
@@ -3326,6 +3381,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the ordered range of matching layout prototypes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<LayoutPrototype> filterFindByC_A(long companyId,
 		boolean active, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -3423,6 +3479,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @throws com.liferay.portal.NoSuchLayoutPrototypeException if a layout prototype with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public LayoutPrototype[] filterFindByC_A_PrevAndNext(
 		long layoutPrototypeId, long companyId, boolean active,
 		OrderByComparator orderByComparator)
@@ -3610,6 +3667,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @param active the active
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByC_A(long companyId, boolean active)
 		throws SystemException {
 		for (LayoutPrototype layoutPrototype : findByC_A(companyId, active,
@@ -3626,6 +3684,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the number of matching layout prototypes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByC_A(long companyId, boolean active)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_A;
@@ -3684,6 +3743,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the number of matching layout prototypes that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByC_A(long companyId, boolean active)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled()) {
@@ -3739,6 +3799,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 *
 	 * @param layoutPrototype the layout prototype
 	 */
+	@Override
 	public void cacheResult(LayoutPrototype layoutPrototype) {
 		EntityCacheUtil.putResult(LayoutPrototypeModelImpl.ENTITY_CACHE_ENABLED,
 			LayoutPrototypeImpl.class, layoutPrototype.getPrimaryKey(),
@@ -3752,6 +3813,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 *
 	 * @param layoutPrototypes the layout prototypes
 	 */
+	@Override
 	public void cacheResult(List<LayoutPrototype> layoutPrototypes) {
 		for (LayoutPrototype layoutPrototype : layoutPrototypes) {
 			if (EntityCacheUtil.getResult(
@@ -3819,6 +3881,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @param layoutPrototypeId the primary key for the new layout prototype
 	 * @return the new layout prototype
 	 */
+	@Override
 	public LayoutPrototype create(long layoutPrototypeId) {
 		LayoutPrototype layoutPrototype = new LayoutPrototypeImpl();
 
@@ -3840,6 +3903,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @throws com.liferay.portal.NoSuchLayoutPrototypeException if a layout prototype with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public LayoutPrototype remove(long layoutPrototypeId)
 		throws NoSuchLayoutPrototypeException, SystemException {
 		return remove((Serializable)layoutPrototypeId);
@@ -4107,6 +4171,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @throws com.liferay.portal.NoSuchLayoutPrototypeException if a layout prototype with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public LayoutPrototype findByPrimaryKey(long layoutPrototypeId)
 		throws NoSuchLayoutPrototypeException, SystemException {
 		return findByPrimaryKey((Serializable)layoutPrototypeId);
@@ -4168,6 +4233,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the layout prototype, or <code>null</code> if a layout prototype with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public LayoutPrototype fetchByPrimaryKey(long layoutPrototypeId)
 		throws SystemException {
 		return fetchByPrimaryKey((Serializable)layoutPrototypeId);
@@ -4179,6 +4245,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the layout prototypes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<LayoutPrototype> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -4195,6 +4262,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the range of layout prototypes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<LayoutPrototype> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
@@ -4213,6 +4281,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the ordered range of layout prototypes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<LayoutPrototype> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -4298,6 +4367,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (LayoutPrototype layoutPrototype : findAll()) {
 			remove(layoutPrototype);
@@ -4310,6 +4380,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 * @return the number of layout prototypes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -4413,6 +4484,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 		};
 
 	private static CacheModel<LayoutPrototype> _nullLayoutPrototypeCacheModel = new CacheModel<LayoutPrototype>() {
+			@Override
 			public LayoutPrototype toEntityModel() {
 				return _nullLayoutPrototype;
 			}

@@ -136,7 +136,17 @@ public class ServletResponseUtil {
 			String fileName, byte[] bytes, String contentType)
 		throws IOException {
 
-		setHeaders(request, response, fileName, contentType);
+		sendFile(request, response, fileName, bytes, contentType, null);
+	}
+
+	public static void sendFile(
+			HttpServletRequest request, HttpServletResponse response,
+			String fileName, byte[] bytes, String contentType,
+			String contentDispositionType)
+		throws IOException {
+
+		setHeaders(
+			request, response, fileName, contentType, contentDispositionType);
 
 		write(response, bytes);
 	}
@@ -155,7 +165,17 @@ public class ServletResponseUtil {
 			String contentType)
 		throws IOException {
 
-		setHeaders(request, response, fileName, contentType);
+		sendFile(request, response, fileName, is, 0, contentType, null);
+	}
+
+	public static void sendFile(
+			HttpServletRequest request, HttpServletResponse response,
+			String fileName, InputStream is, long contentLength,
+			String contentType, String contentDispositionType)
+		throws IOException {
+
+		setHeaders(
+			request, response, fileName, contentType, contentDispositionType);
 
 		write(response, is, contentLength);
 	}
@@ -247,7 +267,8 @@ public class ServletResponseUtil {
 
 				response.setContentType(contentType);
 
-				setHeaders(request, response, fileName, contentType, fullRange);
+				setHeaders(
+					request, response, fileName, contentType, null, fullRange);
 
 				copyRange(
 					inputStream, outputStream, fullRange.getStart(),
@@ -262,7 +283,8 @@ public class ServletResponseUtil {
 
 				response.setContentType(contentType);
 
-				setHeaders(request, response, fileName, contentType, range);
+				setHeaders(
+					request, response, fileName, contentType, null, range);
 
 				response.setStatus(HttpServletResponse.SC_PARTIAL_CONTENT);
 
@@ -591,7 +613,7 @@ public class ServletResponseUtil {
 
 	protected static void setHeaders(
 		HttpServletRequest request, HttpServletResponse response,
-		String fileName, String contentType) {
+		String fileName, String contentType, String contentDispositionType) {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Sending file of type " + contentType);
@@ -609,36 +631,39 @@ public class ServletResponseUtil {
 				HttpHeaders.CACHE_CONTROL_PRIVATE_VALUE);
 		}
 
-		if (Validator.isNotNull(fileName)) {
-			String contentDisposition =
-				"attachment; filename=\"" + fileName + "\"";
+		if (Validator.isNull(fileName)) {
+			return;
+		}
 
-			// If necessary for non-ASCII characters, encode based on RFC 2184.
-			// However, not all browsers support RFC 2184. See LEP-3127.
+		String contentDispositionFileName = "filename=\"" + fileName + "\"";
 
-			boolean ascii = true;
+		// If necessary for non-ASCII characters, encode based on RFC 2184.
+		// However, not all browsers support RFC 2184. See LEP-3127.
 
-			for (int i = 0; i < fileName.length(); i++) {
-				if (!Validator.isAscii(fileName.charAt(i))) {
-					ascii = false;
+		boolean ascii = true;
 
-					break;
-				}
+		for (int i = 0; i < fileName.length(); i++) {
+			if (!Validator.isAscii(fileName.charAt(i))) {
+				ascii = false;
+
+				break;
 			}
+		}
 
-			if (!ascii) {
-				String encodedFileName = HttpUtil.encodeURL(fileName, true);
+		if (!ascii) {
+			String encodedFileName = HttpUtil.encodeURL(fileName, true);
 
-				if (BrowserSnifferUtil.isIe(request)) {
-					contentDisposition =
-						"attachment; filename=\"" + encodedFileName + "\"";
-				}
-				else {
-					contentDisposition =
-						"attachment; filename*=UTF-8''" + encodedFileName;
-				}
+			if (BrowserSnifferUtil.isIe(request)) {
+				contentDispositionFileName =
+					"filename=\"" + encodedFileName + "\"";
 			}
+			else {
+				contentDispositionFileName =
+					"filename*=UTF-8''" + encodedFileName;
+			}
+		}
 
+		if (Validator.isNull(contentDispositionType)) {
 			String extension = GetterUtil.getString(
 				FileUtil.getExtension(fileName)).toLowerCase();
 
@@ -655,25 +680,35 @@ public class ServletResponseUtil {
 			if (ArrayUtil.contains(
 					mimeTypesContentDispositionInline, extension)) {
 
-				contentDisposition = StringUtil.replace(
-					contentDisposition, "attachment; ", "inline; ");
+				contentDispositionType = HttpHeaders.CONTENT_DISPOSITION_INLINE;
 			}
-
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Setting content disposition header " + contentDisposition);
+			else {
+				contentDispositionType =
+					HttpHeaders.CONTENT_DISPOSITION_ATTACHMENT;
 			}
-
-			response.setHeader(
-				HttpHeaders.CONTENT_DISPOSITION, contentDisposition);
 		}
+
+		StringBundler sb = new StringBundler(4);
+
+		sb.append(contentDispositionType);
+		sb.append(StringPool.SEMICOLON);
+		sb.append(StringPool.SPACE);
+		sb.append(contentDispositionFileName);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Setting content disposition header " + sb.toString());
+		}
+
+		response.setHeader(HttpHeaders.CONTENT_DISPOSITION, sb.toString());
 	}
 
 	protected static void setHeaders(
 		HttpServletRequest request, HttpServletResponse response,
-		String fileName, String contentType, Range range) {
+		String fileName, String contentType, String contentDispositionType,
+		Range range) {
 
-		setHeaders(request, response, fileName, contentType);
+		setHeaders(
+			request, response, fileName, contentType, contentDispositionType);
 
 		if (range != null) {
 			response.setHeader(

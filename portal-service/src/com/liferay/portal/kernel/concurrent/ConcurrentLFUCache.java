@@ -215,6 +215,7 @@ public class ConcurrentLFUCache<K, V> {
 	private class EntryComparator
 		implements Comparator<Entry<K, ValueWrapper>> {
 
+		@Override
 		public int compare(
 			Entry<K, ValueWrapper> entry1, Entry<K, ValueWrapper> entry2) {
 

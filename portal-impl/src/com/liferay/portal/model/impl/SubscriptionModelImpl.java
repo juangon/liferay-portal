@@ -97,26 +97,32 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 	public SubscriptionModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _subscriptionId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setSubscriptionId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _subscriptionId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return Subscription.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return Subscription.class.getName();
 	}
@@ -195,18 +201,22 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 		}
 	}
 
+	@Override
 	public long getSubscriptionId() {
 		return _subscriptionId;
 	}
 
+	@Override
 	public void setSubscriptionId(long subscriptionId) {
 		_subscriptionId = subscriptionId;
 	}
 
+	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
@@ -223,10 +233,12 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 		return _originalCompanyId;
 	}
 
+	@Override
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_columnBitmask |= USERID_COLUMN_BITMASK;
 
@@ -239,10 +251,12 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
@@ -251,6 +265,7 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 		return _originalUserId;
 	}
 
+	@Override
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -260,26 +275,32 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 		}
 	}
 
+	@Override
 	public void setUserName(String userName) {
 		_userName = userName;
 	}
 
+	@Override
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
 	}
 
+	@Override
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
 	public String getClassName() {
 		if (getClassNameId() <= 0) {
 			return StringPool.BLANK;
@@ -288,6 +309,7 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 		return PortalUtil.getClassName(getClassNameId());
 	}
 
+	@Override
 	public void setClassName(String className) {
 		long classNameId = 0;
 
@@ -298,10 +320,12 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 		setClassNameId(classNameId);
 	}
 
+	@Override
 	public long getClassNameId() {
 		return _classNameId;
 	}
 
+	@Override
 	public void setClassNameId(long classNameId) {
 		_columnBitmask |= CLASSNAMEID_COLUMN_BITMASK;
 
@@ -318,10 +342,12 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 		return _originalClassNameId;
 	}
 
+	@Override
 	public long getClassPK() {
 		return _classPK;
 	}
 
+	@Override
 	public void setClassPK(long classPK) {
 		_columnBitmask |= CLASSPK_COLUMN_BITMASK;
 
@@ -338,6 +364,7 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 		return _originalClassPK;
 	}
 
+	@Override
 	public String getFrequency() {
 		if (_frequency == null) {
 			return StringPool.BLANK;
@@ -347,6 +374,7 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 		}
 	}
 
+	@Override
 	public void setFrequency(String frequency) {
 		_frequency = frequency;
 	}
@@ -397,6 +425,7 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 		return subscriptionImpl;
 	}
 
+	@Override
 	public int compareTo(Subscription subscription) {
 		long primaryKey = subscription.getPrimaryKey();
 
@@ -413,18 +442,15 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof Subscription)) {
 			return false;
 		}
 
-		Subscription subscription = null;
-
-		try {
-			subscription = (Subscription)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		Subscription subscription = (Subscription)obj;
 
 		long primaryKey = subscription.getPrimaryKey();
 
@@ -542,6 +568,7 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(31);
 

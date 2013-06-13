@@ -63,6 +63,7 @@ public class RatingsEntryCacheModel implements CacheModel<RatingsEntry>,
 		return sb.toString();
 	}
 
+	@Override
 	public RatingsEntry toEntityModel() {
 		RatingsEntryImpl ratingsEntryImpl = new RatingsEntryImpl();
 
@@ -100,6 +101,7 @@ public class RatingsEntryCacheModel implements CacheModel<RatingsEntry>,
 		return ratingsEntryImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		entryId = objectInput.readLong();
 		companyId = objectInput.readLong();
@@ -112,6 +114,7 @@ public class RatingsEntryCacheModel implements CacheModel<RatingsEntry>,
 		score = objectInput.readDouble();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(entryId);

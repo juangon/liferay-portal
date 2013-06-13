@@ -61,6 +61,7 @@ public class ParallelDestination extends BaseAsyncDestination {
 		for (final MessageListener messageListener : messageListeners) {
 			Runnable runnable = new MessageRunnable(message) {
 
+				@Override
 				public void run() {
 					try {
 						populateThreadLocalsFromMessage(message);

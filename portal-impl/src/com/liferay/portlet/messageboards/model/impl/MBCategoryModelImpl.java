@@ -171,26 +171,32 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 	public MBCategoryModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _categoryId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setCategoryId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _categoryId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return MBCategory.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return MBCategory.class.getName();
 	}
@@ -339,6 +345,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		}
 	}
 
+	@Override
 	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
@@ -349,6 +356,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		}
 	}
 
+	@Override
 	public void setUuid(String uuid) {
 		if (_originalUuid == null) {
 			_originalUuid = _uuid;
@@ -361,20 +369,24 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@Override
 	@JSON
 	public long getCategoryId() {
 		return _categoryId;
 	}
 
+	@Override
 	public void setCategoryId(long categoryId) {
 		_categoryId = categoryId;
 	}
 
+	@Override
 	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -391,11 +403,13 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		return _originalGroupId;
 	}
 
+	@Override
 	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
@@ -412,23 +426,28 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		return _originalCompanyId;
 	}
 
+	@Override
 	@JSON
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
 
+	@Override
 	@JSON
 	public String getUserName() {
 		if (_userName == null) {
@@ -439,33 +458,40 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		}
 	}
 
+	@Override
 	public void setUserName(String userName) {
 		_userName = userName;
 	}
 
+	@Override
 	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
 	}
 
+	@Override
 	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
 	@JSON
 	public long getParentCategoryId() {
 		return _parentCategoryId;
 	}
 
+	@Override
 	public void setParentCategoryId(long parentCategoryId) {
 		_columnBitmask = -1L;
 
@@ -482,6 +508,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		return _originalParentCategoryId;
 	}
 
+	@Override
 	@JSON
 	public String getName() {
 		if (_name == null) {
@@ -492,12 +519,14 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		}
 	}
 
+	@Override
 	public void setName(String name) {
 		_columnBitmask = -1L;
 
 		_name = name;
 	}
 
+	@Override
 	@JSON
 	public String getDescription() {
 		if (_description == null) {
@@ -508,10 +537,12 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		}
 	}
 
+	@Override
 	public void setDescription(String description) {
 		_description = description;
 	}
 
+	@Override
 	@JSON
 	public String getDisplayStyle() {
 		if (_displayStyle == null) {
@@ -522,42 +553,51 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		}
 	}
 
+	@Override
 	public void setDisplayStyle(String displayStyle) {
 		_displayStyle = displayStyle;
 	}
 
+	@Override
 	@JSON
 	public int getThreadCount() {
 		return _threadCount;
 	}
 
+	@Override
 	public void setThreadCount(int threadCount) {
 		_threadCount = threadCount;
 	}
 
+	@Override
 	@JSON
 	public int getMessageCount() {
 		return _messageCount;
 	}
 
+	@Override
 	public void setMessageCount(int messageCount) {
 		_messageCount = messageCount;
 	}
 
+	@Override
 	@JSON
 	public Date getLastPostDate() {
 		return _lastPostDate;
 	}
 
+	@Override
 	public void setLastPostDate(Date lastPostDate) {
 		_lastPostDate = lastPostDate;
 	}
 
+	@Override
 	@JSON
 	public int getStatus() {
 		return _status;
 	}
 
+	@Override
 	public void setStatus(int status) {
 		_columnBitmask |= STATUS_COLUMN_BITMASK;
 
@@ -574,24 +614,29 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		return _originalStatus;
 	}
 
+	@Override
 	@JSON
 	public long getStatusByUserId() {
 		return _statusByUserId;
 	}
 
+	@Override
 	public void setStatusByUserId(long statusByUserId) {
 		_statusByUserId = statusByUserId;
 	}
 
+	@Override
 	public String getStatusByUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getStatusByUserId(), "uuid",
 			_statusByUserUuid);
 	}
 
+	@Override
 	public void setStatusByUserUuid(String statusByUserUuid) {
 		_statusByUserUuid = statusByUserUuid;
 	}
 
+	@Override
 	@JSON
 	public String getStatusByUserName() {
 		if (_statusByUserName == null) {
@@ -602,35 +647,43 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		}
 	}
 
+	@Override
 	public void setStatusByUserName(String statusByUserName) {
 		_statusByUserName = statusByUserName;
 	}
 
+	@Override
 	@JSON
 	public Date getStatusDate() {
 		return _statusDate;
 	}
 
+	@Override
 	public void setStatusDate(Date statusDate) {
 		_statusDate = statusDate;
 	}
 
+	@Override
 	public long getContainerModelId() {
 		return getCategoryId();
 	}
 
+	@Override
 	public void setContainerModelId(long containerModelId) {
 		_categoryId = containerModelId;
 	}
 
+	@Override
 	public long getParentContainerModelId() {
 		return getParentCategoryId();
 	}
 
+	@Override
 	public void setParentContainerModelId(long parentContainerModelId) {
 		_parentCategoryId = parentContainerModelId;
 	}
 
+	@Override
 	public String getContainerModelName() {
 		return String.valueOf(getName());
 	}
@@ -638,10 +691,12 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #isApproved}
 	 */
+	@Override
 	public boolean getApproved() {
 		return isApproved();
 	}
 
+	@Override
 	public boolean isApproved() {
 		if (getStatus() == WorkflowConstants.STATUS_APPROVED) {
 			return true;
@@ -651,6 +706,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		}
 	}
 
+	@Override
 	public boolean isDenied() {
 		if (getStatus() == WorkflowConstants.STATUS_DENIED) {
 			return true;
@@ -660,6 +716,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		}
 	}
 
+	@Override
 	public boolean isDraft() {
 		if (getStatus() == WorkflowConstants.STATUS_DRAFT) {
 			return true;
@@ -669,6 +726,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		}
 	}
 
+	@Override
 	public boolean isExpired() {
 		if (getStatus() == WorkflowConstants.STATUS_EXPIRED) {
 			return true;
@@ -678,6 +736,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		}
 	}
 
+	@Override
 	public boolean isInactive() {
 		if (getStatus() == WorkflowConstants.STATUS_INACTIVE) {
 			return true;
@@ -687,6 +746,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		}
 	}
 
+	@Override
 	public boolean isIncomplete() {
 		if (getStatus() == WorkflowConstants.STATUS_INCOMPLETE) {
 			return true;
@@ -696,6 +756,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		}
 	}
 
+	@Override
 	public boolean isInTrash() {
 		if (getStatus() == WorkflowConstants.STATUS_IN_TRASH) {
 			return true;
@@ -705,6 +766,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		}
 	}
 
+	@Override
 	public boolean isPending() {
 		if (getStatus() == WorkflowConstants.STATUS_PENDING) {
 			return true;
@@ -714,6 +776,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		}
 	}
 
+	@Override
 	public boolean isScheduled() {
 		if (getStatus() == WorkflowConstants.STATUS_SCHEDULED) {
 			return true;
@@ -779,6 +842,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		return mbCategoryImpl;
 	}
 
+	@Override
 	public int compareTo(MBCategory mbCategory) {
 		int value = 0;
 
@@ -807,18 +871,15 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof MBCategory)) {
 			return false;
 		}
 
-		MBCategory mbCategory = null;
-
-		try {
-			mbCategory = (MBCategory)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		MBCategory mbCategory = (MBCategory)obj;
 
 		long primaryKey = mbCategory.getPrimaryKey();
 
@@ -1016,6 +1077,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(61);
 

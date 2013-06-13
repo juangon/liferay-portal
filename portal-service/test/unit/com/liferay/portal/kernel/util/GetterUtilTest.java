@@ -21,6 +21,24 @@ import com.liferay.portal.kernel.test.TestCase;
  */
 public class GetterUtilTest extends TestCase {
 
+	public void testGetBoolean() {
+		assertFalse(GetterUtil.getBoolean("false"));
+		assertTrue(GetterUtil.getBoolean("true"));
+		assertFalse(GetterUtil.getBoolean(Boolean.FALSE));
+		assertTrue(GetterUtil.getBoolean(Boolean.TRUE));
+		assertFalse(GetterUtil.getBoolean(null, false));
+		assertTrue(GetterUtil.getBoolean(null, true));
+		assertFalse(GetterUtil.getBoolean(StringPool.BLANK));
+		assertFalse(GetterUtil.getBoolean(StringPool.BLANK, false));
+		assertFalse(GetterUtil.getBoolean(StringPool.BLANK, true));
+
+		for (String s : GetterUtil.BOOLEANS) {
+			assertTrue(GetterUtil.getBoolean(s));
+			assertTrue(GetterUtil.getBoolean(s, true));
+			assertTrue(GetterUtil.getBoolean(s, false));
+		}
+	}
+
 	public void testGetInteger() {
 
 		// Wrong first char
@@ -174,6 +192,16 @@ public class GetterUtilTest extends TestCase {
 			Short.toString(Short.MIN_VALUE) + "0", (short)-1);
 
 		assertEquals((short)-1, result);
+	}
+
+	public void testGetString() {
+		assertEquals(
+			StringPool.BLANK,
+			GetterUtil.getString(StringPool.BLANK, "default"));
+		assertEquals(GetterUtil.DEFAULT_STRING, GetterUtil.getString(null));
+		assertEquals("default", GetterUtil.getString(null, "default"));
+		assertEquals("default", GetterUtil.getString(new Object(), "default"));
+		assertEquals("test", GetterUtil.getString("test"));
 	}
 
 }

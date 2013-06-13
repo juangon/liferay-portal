@@ -112,6 +112,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @return the matching journal article images
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<JournalArticleImage> findByGroupId(long groupId)
 		throws SystemException {
 		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
@@ -130,6 +131,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @return the range of matching journal article images
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<JournalArticleImage> findByGroupId(long groupId, int start,
 		int end) throws SystemException {
 		return findByGroupId(groupId, start, end, null);
@@ -149,6 +151,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @return the ordered range of matching journal article images
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<JournalArticleImage> findByGroupId(long groupId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -255,6 +258,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @throws com.liferay.portlet.journal.NoSuchArticleImageException if a matching journal article image could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleImage findByGroupId_First(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchArticleImageException, SystemException {
@@ -285,6 +289,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @return the first matching journal article image, or <code>null</code> if a matching journal article image could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleImage fetchByGroupId_First(long groupId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<JournalArticleImage> list = findByGroupId(groupId, 0, 1,
@@ -306,6 +311,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @throws com.liferay.portlet.journal.NoSuchArticleImageException if a matching journal article image could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleImage findByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchArticleImageException, SystemException {
@@ -336,6 +342,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @return the last matching journal article image, or <code>null</code> if a matching journal article image could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleImage fetchByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByGroupId(groupId);
@@ -360,6 +367,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @throws com.liferay.portlet.journal.NoSuchArticleImageException if a journal article image with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleImage[] findByGroupId_PrevAndNext(
 		long articleImageId, long groupId, OrderByComparator orderByComparator)
 		throws NoSuchArticleImageException, SystemException {
@@ -501,6 +509,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @param groupId the group ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (JournalArticleImage journalArticleImage : findByGroupId(groupId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -515,6 +524,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @return the number of matching journal article images
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByGroupId(long groupId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPID;
 
@@ -591,6 +601,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @return the matching journal article images
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<JournalArticleImage> findByTempImage(boolean tempImage)
 		throws SystemException {
 		return findByTempImage(tempImage, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -610,6 +621,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @return the range of matching journal article images
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<JournalArticleImage> findByTempImage(boolean tempImage,
 		int start, int end) throws SystemException {
 		return findByTempImage(tempImage, start, end, null);
@@ -629,6 +641,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @return the ordered range of matching journal article images
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<JournalArticleImage> findByTempImage(boolean tempImage,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -736,6 +749,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @throws com.liferay.portlet.journal.NoSuchArticleImageException if a matching journal article image could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleImage findByTempImage_First(boolean tempImage,
 		OrderByComparator orderByComparator)
 		throws NoSuchArticleImageException, SystemException {
@@ -766,6 +780,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @return the first matching journal article image, or <code>null</code> if a matching journal article image could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleImage fetchByTempImage_First(boolean tempImage,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<JournalArticleImage> list = findByTempImage(tempImage, 0, 1,
@@ -787,6 +802,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @throws com.liferay.portlet.journal.NoSuchArticleImageException if a matching journal article image could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleImage findByTempImage_Last(boolean tempImage,
 		OrderByComparator orderByComparator)
 		throws NoSuchArticleImageException, SystemException {
@@ -817,6 +833,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @return the last matching journal article image, or <code>null</code> if a matching journal article image could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleImage fetchByTempImage_Last(boolean tempImage,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByTempImage(tempImage);
@@ -841,6 +858,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @throws com.liferay.portlet.journal.NoSuchArticleImageException if a journal article image with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleImage[] findByTempImage_PrevAndNext(
 		long articleImageId, boolean tempImage,
 		OrderByComparator orderByComparator)
@@ -983,6 +1001,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @param tempImage the temp image
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByTempImage(boolean tempImage) throws SystemException {
 		for (JournalArticleImage journalArticleImage : findByTempImage(
 				tempImage, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -997,6 +1016,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @return the number of matching journal article images
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByTempImage(boolean tempImage) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_TEMPIMAGE;
 
@@ -1082,6 +1102,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @return the matching journal article images
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<JournalArticleImage> findByG_A_V(long groupId,
 		String articleId, double version) throws SystemException {
 		return findByG_A_V(groupId, articleId, version, QueryUtil.ALL_POS,
@@ -1103,6 +1124,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @return the range of matching journal article images
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<JournalArticleImage> findByG_A_V(long groupId,
 		String articleId, double version, int start, int end)
 		throws SystemException {
@@ -1125,6 +1147,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @return the ordered range of matching journal article images
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<JournalArticleImage> findByG_A_V(long groupId,
 		String articleId, double version, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -1263,6 +1286,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @throws com.liferay.portlet.journal.NoSuchArticleImageException if a matching journal article image could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleImage findByG_A_V_First(long groupId,
 		String articleId, double version, OrderByComparator orderByComparator)
 		throws NoSuchArticleImageException, SystemException {
@@ -1301,6 +1325,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @return the first matching journal article image, or <code>null</code> if a matching journal article image could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleImage fetchByG_A_V_First(long groupId,
 		String articleId, double version, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1325,6 +1350,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @throws com.liferay.portlet.journal.NoSuchArticleImageException if a matching journal article image could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleImage findByG_A_V_Last(long groupId, String articleId,
 		double version, OrderByComparator orderByComparator)
 		throws NoSuchArticleImageException, SystemException {
@@ -1363,6 +1389,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @return the last matching journal article image, or <code>null</code> if a matching journal article image could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleImage fetchByG_A_V_Last(long groupId,
 		String articleId, double version, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1390,6 +1417,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @throws com.liferay.portlet.journal.NoSuchArticleImageException if a journal article image with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleImage[] findByG_A_V_PrevAndNext(long articleImageId,
 		long groupId, String articleId, double version,
 		OrderByComparator orderByComparator)
@@ -1557,6 +1585,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @param version the version
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByG_A_V(long groupId, String articleId, double version)
 		throws SystemException {
 		for (JournalArticleImage journalArticleImage : findByG_A_V(groupId,
@@ -1574,6 +1603,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @return the number of matching journal article images
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_A_V(long groupId, String articleId, double version)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_A_V;
@@ -1684,6 +1714,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @throws com.liferay.portlet.journal.NoSuchArticleImageException if a matching journal article image could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleImage findByG_A_V_E_E_L(long groupId,
 		String articleId, double version, String elInstanceId, String elName,
 		String languageId) throws NoSuchArticleImageException, SystemException {
@@ -1737,6 +1768,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @return the matching journal article image, or <code>null</code> if a matching journal article image could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleImage fetchByG_A_V_E_E_L(long groupId,
 		String articleId, double version, String elInstanceId, String elName,
 		String languageId) throws SystemException {
@@ -1757,6 +1789,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @return the matching journal article image, or <code>null</code> if a matching journal article image could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleImage fetchByG_A_V_E_E_L(long groupId,
 		String articleId, double version, String elInstanceId, String elName,
 		String languageId, boolean retrieveFromCache) throws SystemException {
@@ -1944,6 +1977,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @return the journal article image that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleImage removeByG_A_V_E_E_L(long groupId,
 		String articleId, double version, String elInstanceId, String elName,
 		String languageId) throws NoSuchArticleImageException, SystemException {
@@ -1965,6 +1999,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @return the number of matching journal article images
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_A_V_E_E_L(long groupId, String articleId,
 		double version, String elInstanceId, String elName, String languageId)
 		throws SystemException {
@@ -2110,6 +2145,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 *
 	 * @param journalArticleImage the journal article image
 	 */
+	@Override
 	public void cacheResult(JournalArticleImage journalArticleImage) {
 		EntityCacheUtil.putResult(JournalArticleImageModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleImageImpl.class, journalArticleImage.getPrimaryKey(),
@@ -2133,6 +2169,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 *
 	 * @param journalArticleImages the journal article images
 	 */
+	@Override
 	public void cacheResult(List<JournalArticleImage> journalArticleImages) {
 		for (JournalArticleImage journalArticleImage : journalArticleImages) {
 			if (EntityCacheUtil.getResult(
@@ -2276,6 +2313,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @param articleImageId the primary key for the new journal article image
 	 * @return the new journal article image
 	 */
+	@Override
 	public JournalArticleImage create(long articleImageId) {
 		JournalArticleImage journalArticleImage = new JournalArticleImageImpl();
 
@@ -2293,6 +2331,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @throws com.liferay.portlet.journal.NoSuchArticleImageException if a journal article image with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleImage remove(long articleImageId)
 		throws NoSuchArticleImageException, SystemException {
 		return remove((Serializable)articleImageId);
@@ -2536,6 +2575,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @throws com.liferay.portlet.journal.NoSuchArticleImageException if a journal article image with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleImage findByPrimaryKey(long articleImageId)
 		throws NoSuchArticleImageException, SystemException {
 		return findByPrimaryKey((Serializable)articleImageId);
@@ -2597,6 +2637,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @return the journal article image, or <code>null</code> if a journal article image with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleImage fetchByPrimaryKey(long articleImageId)
 		throws SystemException {
 		return fetchByPrimaryKey((Serializable)articleImageId);
@@ -2608,6 +2649,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @return the journal article images
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<JournalArticleImage> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -2624,6 +2666,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @return the range of journal article images
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<JournalArticleImage> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
@@ -2642,6 +2685,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @return the ordered range of journal article images
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<JournalArticleImage> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -2727,6 +2771,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (JournalArticleImage journalArticleImage : findAll()) {
 			remove(journalArticleImage);
@@ -2739,6 +2784,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * @return the number of journal article images
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -2825,6 +2871,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 
 	private static CacheModel<JournalArticleImage> _nullJournalArticleImageCacheModel =
 		new CacheModel<JournalArticleImage>() {
+			@Override
 			public JournalArticleImage toEntityModel() {
 				return _nullJournalArticleImage;
 			}

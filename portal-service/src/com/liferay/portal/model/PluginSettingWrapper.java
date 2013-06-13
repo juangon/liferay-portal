@@ -22,8 +22,8 @@ import java.util.Map;
  * This class is a wrapper for {@link PluginSetting}.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       PluginSetting
+ * @author Brian Wing Shun Chan
+ * @see PluginSetting
  * @generated
  */
 public class PluginSettingWrapper implements PluginSetting,
@@ -32,14 +32,17 @@ public class PluginSettingWrapper implements PluginSetting,
 		_pluginSetting = pluginSetting;
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return PluginSetting.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return PluginSetting.class.getName();
 	}
 
+	@Override
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
@@ -53,6 +56,7 @@ public class PluginSettingWrapper implements PluginSetting,
 		return attributes;
 	}
 
+	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 		Long pluginSettingId = (Long)attributes.get("pluginSettingId");
 
@@ -96,6 +100,7 @@ public class PluginSettingWrapper implements PluginSetting,
 	*
 	* @return the primary key of this plugin setting
 	*/
+	@Override
 	public long getPrimaryKey() {
 		return _pluginSetting.getPrimaryKey();
 	}
@@ -105,6 +110,7 @@ public class PluginSettingWrapper implements PluginSetting,
 	*
 	* @param primaryKey the primary key of this plugin setting
 	*/
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_pluginSetting.setPrimaryKey(primaryKey);
 	}
@@ -114,6 +120,7 @@ public class PluginSettingWrapper implements PluginSetting,
 	*
 	* @return the plugin setting ID of this plugin setting
 	*/
+	@Override
 	public long getPluginSettingId() {
 		return _pluginSetting.getPluginSettingId();
 	}
@@ -123,6 +130,7 @@ public class PluginSettingWrapper implements PluginSetting,
 	*
 	* @param pluginSettingId the plugin setting ID of this plugin setting
 	*/
+	@Override
 	public void setPluginSettingId(long pluginSettingId) {
 		_pluginSetting.setPluginSettingId(pluginSettingId);
 	}
@@ -132,6 +140,7 @@ public class PluginSettingWrapper implements PluginSetting,
 	*
 	* @return the company ID of this plugin setting
 	*/
+	@Override
 	public long getCompanyId() {
 		return _pluginSetting.getCompanyId();
 	}
@@ -141,6 +150,7 @@ public class PluginSettingWrapper implements PluginSetting,
 	*
 	* @param companyId the company ID of this plugin setting
 	*/
+	@Override
 	public void setCompanyId(long companyId) {
 		_pluginSetting.setCompanyId(companyId);
 	}
@@ -150,6 +160,7 @@ public class PluginSettingWrapper implements PluginSetting,
 	*
 	* @return the plugin ID of this plugin setting
 	*/
+	@Override
 	public java.lang.String getPluginId() {
 		return _pluginSetting.getPluginId();
 	}
@@ -159,6 +170,7 @@ public class PluginSettingWrapper implements PluginSetting,
 	*
 	* @param pluginId the plugin ID of this plugin setting
 	*/
+	@Override
 	public void setPluginId(java.lang.String pluginId) {
 		_pluginSetting.setPluginId(pluginId);
 	}
@@ -168,6 +180,7 @@ public class PluginSettingWrapper implements PluginSetting,
 	*
 	* @return the plugin type of this plugin setting
 	*/
+	@Override
 	public java.lang.String getPluginType() {
 		return _pluginSetting.getPluginType();
 	}
@@ -177,6 +190,7 @@ public class PluginSettingWrapper implements PluginSetting,
 	*
 	* @param pluginType the plugin type of this plugin setting
 	*/
+	@Override
 	public void setPluginType(java.lang.String pluginType) {
 		_pluginSetting.setPluginType(pluginType);
 	}
@@ -186,6 +200,7 @@ public class PluginSettingWrapper implements PluginSetting,
 	*
 	* @return the roles of this plugin setting
 	*/
+	@Override
 	public java.lang.String getRoles() {
 		return _pluginSetting.getRoles();
 	}
@@ -195,6 +210,7 @@ public class PluginSettingWrapper implements PluginSetting,
 	*
 	* @param roles the roles of this plugin setting
 	*/
+	@Override
 	public void setRoles(java.lang.String roles) {
 		_pluginSetting.setRoles(roles);
 	}
@@ -204,6 +220,7 @@ public class PluginSettingWrapper implements PluginSetting,
 	*
 	* @return the active of this plugin setting
 	*/
+	@Override
 	public boolean getActive() {
 		return _pluginSetting.getActive();
 	}
@@ -213,6 +230,7 @@ public class PluginSettingWrapper implements PluginSetting,
 	*
 	* @return <code>true</code> if this plugin setting is active; <code>false</code> otherwise
 	*/
+	@Override
 	public boolean isActive() {
 		return _pluginSetting.isActive();
 	}
@@ -222,52 +240,64 @@ public class PluginSettingWrapper implements PluginSetting,
 	*
 	* @param active the active of this plugin setting
 	*/
+	@Override
 	public void setActive(boolean active) {
 		_pluginSetting.setActive(active);
 	}
 
+	@Override
 	public boolean isNew() {
 		return _pluginSetting.isNew();
 	}
 
+	@Override
 	public void setNew(boolean n) {
 		_pluginSetting.setNew(n);
 	}
 
+	@Override
 	public boolean isCachedModel() {
 		return _pluginSetting.isCachedModel();
 	}
 
+	@Override
 	public void setCachedModel(boolean cachedModel) {
 		_pluginSetting.setCachedModel(cachedModel);
 	}
 
+	@Override
 	public boolean isEscapedModel() {
 		return _pluginSetting.isEscapedModel();
 	}
 
+	@Override
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _pluginSetting.getPrimaryKeyObj();
 	}
 
+	@Override
 	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
 		_pluginSetting.setPrimaryKeyObj(primaryKeyObj);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
 		return _pluginSetting.getExpandoBridge();
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.model.BaseModel<?> baseModel) {
 		_pluginSetting.setExpandoBridgeAttributes(baseModel);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portlet.expando.model.ExpandoBridge expandoBridge) {
 		_pluginSetting.setExpandoBridgeAttributes(expandoBridge);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		_pluginSetting.setExpandoBridgeAttributes(serviceContext);
@@ -278,6 +308,7 @@ public class PluginSettingWrapper implements PluginSetting,
 		return new PluginSettingWrapper((PluginSetting)_pluginSetting.clone());
 	}
 
+	@Override
 	public int compareTo(com.liferay.portal.model.PluginSetting pluginSetting) {
 		return _pluginSetting.compareTo(pluginSetting);
 	}
@@ -287,14 +318,17 @@ public class PluginSettingWrapper implements PluginSetting,
 		return _pluginSetting.hashCode();
 	}
 
+	@Override
 	public com.liferay.portal.model.CacheModel<com.liferay.portal.model.PluginSetting> toCacheModel() {
 		return _pluginSetting.toCacheModel();
 	}
 
+	@Override
 	public com.liferay.portal.model.PluginSetting toEscapedModel() {
 		return new PluginSettingWrapper(_pluginSetting.toEscapedModel());
 	}
 
+	@Override
 	public com.liferay.portal.model.PluginSetting toUnescapedModel() {
 		return new PluginSettingWrapper(_pluginSetting.toUnescapedModel());
 	}
@@ -304,10 +338,12 @@ public class PluginSettingWrapper implements PluginSetting,
 		return _pluginSetting.toString();
 	}
 
+	@Override
 	public java.lang.String toXmlString() {
 		return _pluginSetting.toXmlString();
 	}
 
+	@Override
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_pluginSetting.persist();
@@ -316,6 +352,7 @@ public class PluginSettingWrapper implements PluginSetting,
 	/**
 	* Adds a role to the list of roles.
 	*/
+	@Override
 	public void addRole(java.lang.String role) {
 		_pluginSetting.addRole(role);
 	}
@@ -325,6 +362,7 @@ public class PluginSettingWrapper implements PluginSetting,
 	*
 	* @return an array of required roles of the plugin
 	*/
+	@Override
 	public java.lang.String[] getRolesArray() {
 		return _pluginSetting.getRolesArray();
 	}
@@ -335,6 +373,7 @@ public class PluginSettingWrapper implements PluginSetting,
 	* @param userId the primary key of the user
 	* @return <code>true</code> if the user has permission to use this plugin
 	*/
+	@Override
 	public boolean hasPermission(long userId) {
 		return _pluginSetting.hasPermission(userId);
 	}
@@ -347,6 +386,7 @@ public class PluginSettingWrapper implements PluginSetting,
 	* @return <code>true</code> if the plugin has a role with the specified
 	name
 	*/
+	@Override
 	public boolean hasRoleWithName(java.lang.String roleName) {
 		return _pluginSetting.hasRoleWithName(roleName);
 	}
@@ -354,6 +394,7 @@ public class PluginSettingWrapper implements PluginSetting,
 	/**
 	* Sets an array of required roles of the plugin.
 	*/
+	@Override
 	public void setRolesArray(java.lang.String[] rolesArray) {
 		_pluginSetting.setRolesArray(rolesArray);
 	}
@@ -365,10 +406,12 @@ public class PluginSettingWrapper implements PluginSetting,
 		return _pluginSetting;
 	}
 
+	@Override
 	public PluginSetting getWrappedModel() {
 		return _pluginSetting;
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		_pluginSetting.resetOriginalValues();
 	}

@@ -58,6 +58,7 @@ public class WebDAVPropsCacheModel implements CacheModel<WebDAVProps>,
 		return sb.toString();
 	}
 
+	@Override
 	public WebDAVProps toEntityModel() {
 		WebDAVPropsImpl webDAVPropsImpl = new WebDAVPropsImpl();
 
@@ -93,6 +94,7 @@ public class WebDAVPropsCacheModel implements CacheModel<WebDAVProps>,
 		return webDAVPropsImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		webDavPropsId = objectInput.readLong();
 		companyId = objectInput.readLong();
@@ -103,6 +105,7 @@ public class WebDAVPropsCacheModel implements CacheModel<WebDAVProps>,
 		props = objectInput.readUTF();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(webDavPropsId);

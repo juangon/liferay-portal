@@ -69,9 +69,10 @@ public class SocialActivitySetModelImpl extends BaseModelImpl<SocialActivitySet>
 			{ "classNameId", Types.BIGINT },
 			{ "classPK", Types.BIGINT },
 			{ "type_", Types.INTEGER },
+			{ "extraData", Types.VARCHAR },
 			{ "activityCount", Types.INTEGER }
 		};
-	public static final String TABLE_SQL_CREATE = "create table SocialActivitySet (activitySetId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate LONG,modifiedDate LONG,classNameId LONG,classPK LONG,type_ INTEGER,activityCount INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table SocialActivitySet (activitySetId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate LONG,modifiedDate LONG,classNameId LONG,classPK LONG,type_ INTEGER,extraData STRING null,activityCount INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table SocialActivitySet";
 	public static final String ORDER_BY_JPQL = " ORDER BY socialActivitySet.modifiedDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY SocialActivitySet.modifiedDate DESC";
@@ -99,26 +100,32 @@ public class SocialActivitySetModelImpl extends BaseModelImpl<SocialActivitySet>
 	public SocialActivitySetModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _activitySetId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setActivitySetId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _activitySetId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return SocialActivitySet.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return SocialActivitySet.class.getName();
 	}
@@ -136,6 +143,7 @@ public class SocialActivitySetModelImpl extends BaseModelImpl<SocialActivitySet>
 		attributes.put("classNameId", getClassNameId());
 		attributes.put("classPK", getClassPK());
 		attributes.put("type", getType());
+		attributes.put("extraData", getExtraData());
 		attributes.put("activityCount", getActivityCount());
 
 		return attributes;
@@ -197,6 +205,12 @@ public class SocialActivitySetModelImpl extends BaseModelImpl<SocialActivitySet>
 			setType(type);
 		}
 
+		String extraData = (String)attributes.get("extraData");
+
+		if (extraData != null) {
+			setExtraData(extraData);
+		}
+
 		Integer activityCount = (Integer)attributes.get("activityCount");
 
 		if (activityCount != null) {
@@ -204,18 +218,22 @@ public class SocialActivitySetModelImpl extends BaseModelImpl<SocialActivitySet>
 		}
 	}
 
+	@Override
 	public long getActivitySetId() {
 		return _activitySetId;
 	}
 
+	@Override
 	public void setActivitySetId(long activitySetId) {
 		_activitySetId = activitySetId;
 	}
 
+	@Override
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -232,18 +250,22 @@ public class SocialActivitySetModelImpl extends BaseModelImpl<SocialActivitySet>
 		return _originalGroupId;
 	}
 
+	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
+	@Override
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_columnBitmask |= USERID_COLUMN_BITMASK;
 
@@ -256,10 +278,12 @@ public class SocialActivitySetModelImpl extends BaseModelImpl<SocialActivitySet>
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
@@ -268,24 +292,29 @@ public class SocialActivitySetModelImpl extends BaseModelImpl<SocialActivitySet>
 		return _originalUserId;
 	}
 
+	@Override
 	public long getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(long createDate) {
 		_createDate = createDate;
 	}
 
+	@Override
 	public long getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(long modifiedDate) {
 		_columnBitmask = -1L;
 
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
 	public String getClassName() {
 		if (getClassNameId() <= 0) {
 			return StringPool.BLANK;
@@ -294,6 +323,7 @@ public class SocialActivitySetModelImpl extends BaseModelImpl<SocialActivitySet>
 		return PortalUtil.getClassName(getClassNameId());
 	}
 
+	@Override
 	public void setClassName(String className) {
 		long classNameId = 0;
 
@@ -304,10 +334,12 @@ public class SocialActivitySetModelImpl extends BaseModelImpl<SocialActivitySet>
 		setClassNameId(classNameId);
 	}
 
+	@Override
 	public long getClassNameId() {
 		return _classNameId;
 	}
 
+	@Override
 	public void setClassNameId(long classNameId) {
 		_columnBitmask |= CLASSNAMEID_COLUMN_BITMASK;
 
@@ -324,10 +356,12 @@ public class SocialActivitySetModelImpl extends BaseModelImpl<SocialActivitySet>
 		return _originalClassNameId;
 	}
 
+	@Override
 	public long getClassPK() {
 		return _classPK;
 	}
 
+	@Override
 	public void setClassPK(long classPK) {
 		_columnBitmask |= CLASSPK_COLUMN_BITMASK;
 
@@ -344,10 +378,12 @@ public class SocialActivitySetModelImpl extends BaseModelImpl<SocialActivitySet>
 		return _originalClassPK;
 	}
 
+	@Override
 	public int getType() {
 		return _type;
 	}
 
+	@Override
 	public void setType(int type) {
 		_columnBitmask |= TYPE_COLUMN_BITMASK;
 
@@ -364,10 +400,27 @@ public class SocialActivitySetModelImpl extends BaseModelImpl<SocialActivitySet>
 		return _originalType;
 	}
 
+	@Override
+	public String getExtraData() {
+		if (_extraData == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _extraData;
+		}
+	}
+
+	@Override
+	public void setExtraData(String extraData) {
+		_extraData = extraData;
+	}
+
+	@Override
 	public int getActivityCount() {
 		return _activityCount;
 	}
 
+	@Override
 	public void setActivityCount(int activityCount) {
 		_activityCount = activityCount;
 	}
@@ -412,6 +465,7 @@ public class SocialActivitySetModelImpl extends BaseModelImpl<SocialActivitySet>
 		socialActivitySetImpl.setClassNameId(getClassNameId());
 		socialActivitySetImpl.setClassPK(getClassPK());
 		socialActivitySetImpl.setType(getType());
+		socialActivitySetImpl.setExtraData(getExtraData());
 		socialActivitySetImpl.setActivityCount(getActivityCount());
 
 		socialActivitySetImpl.resetOriginalValues();
@@ -419,6 +473,7 @@ public class SocialActivitySetModelImpl extends BaseModelImpl<SocialActivitySet>
 		return socialActivitySetImpl;
 	}
 
+	@Override
 	public int compareTo(SocialActivitySet socialActivitySet) {
 		int value = 0;
 
@@ -443,18 +498,15 @@ public class SocialActivitySetModelImpl extends BaseModelImpl<SocialActivitySet>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof SocialActivitySet)) {
 			return false;
 		}
 
-		SocialActivitySet socialActivitySet = null;
-
-		try {
-			socialActivitySet = (SocialActivitySet)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		SocialActivitySet socialActivitySet = (SocialActivitySet)obj;
 
 		long primaryKey = socialActivitySet.getPrimaryKey();
 
@@ -520,6 +572,14 @@ public class SocialActivitySetModelImpl extends BaseModelImpl<SocialActivitySet>
 
 		socialActivitySetCacheModel.type = getType();
 
+		socialActivitySetCacheModel.extraData = getExtraData();
+
+		String extraData = socialActivitySetCacheModel.extraData;
+
+		if ((extraData != null) && (extraData.length() == 0)) {
+			socialActivitySetCacheModel.extraData = null;
+		}
+
 		socialActivitySetCacheModel.activityCount = getActivityCount();
 
 		return socialActivitySetCacheModel;
@@ -527,7 +587,7 @@ public class SocialActivitySetModelImpl extends BaseModelImpl<SocialActivitySet>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(23);
 
 		sb.append("{activitySetId=");
 		sb.append(getActivitySetId());
@@ -547,6 +607,8 @@ public class SocialActivitySetModelImpl extends BaseModelImpl<SocialActivitySet>
 		sb.append(getClassPK());
 		sb.append(", type=");
 		sb.append(getType());
+		sb.append(", extraData=");
+		sb.append(getExtraData());
 		sb.append(", activityCount=");
 		sb.append(getActivityCount());
 		sb.append("}");
@@ -554,8 +616,9 @@ public class SocialActivitySetModelImpl extends BaseModelImpl<SocialActivitySet>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(34);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.social.model.SocialActivitySet");
@@ -598,6 +661,10 @@ public class SocialActivitySetModelImpl extends BaseModelImpl<SocialActivitySet>
 		sb.append(getType());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>extraData</column-name><column-value><![CDATA[");
+		sb.append(getExtraData());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>activityCount</column-name><column-value><![CDATA[");
 		sb.append(getActivityCount());
 		sb.append("]]></column-value></column>");
@@ -631,6 +698,7 @@ public class SocialActivitySetModelImpl extends BaseModelImpl<SocialActivitySet>
 	private int _type;
 	private int _originalType;
 	private boolean _setOriginalType;
+	private String _extraData;
 	private int _activityCount;
 	private long _columnBitmask;
 	private SocialActivitySet _escapedModel;

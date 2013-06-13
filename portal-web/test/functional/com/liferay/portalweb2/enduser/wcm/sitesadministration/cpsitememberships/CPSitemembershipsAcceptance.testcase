@@ -1,0 +1,54 @@
+<definition>
+	<set-up>
+		<execute macro="User#pgFirstLogin" />
+	</set-up>
+
+	<command name="AddMember">
+		<var name="siteName" value="Site Name" />
+		<var name="userEmailAddress" value="userea@liferay.com" />
+		<var name="userFirstName" value="userfn" />
+		<var name="userLastName" value="userln" />
+		<var name="userScreenName" value="usersn" />
+
+		<execute macro="User#addCP">
+			<var name="userEmailAddress" value="${userEmailAddress}" />
+			<var name="userFirstName" value="${userFirstName}" />
+			<var name="userLastName" value="${userLastName}" />
+			<var name="userScreenName" value="${userScreenName}" />
+		</execute>
+
+		<execute macro="Site#addBlankCP">
+			<var name="siteName" value="${siteName}" />
+		</execute>
+
+		<execute macro="Site#addMemberCP">
+			<var name="siteName" value="${siteName}" />
+			<var name="siteScopeName" value="${siteName}" />
+			<var name="userFirstName" value="${userFirstName}" />
+			<var name="userLastName" value="${userLastName}" />
+			<var name="userScreenName" value="${userScreenName}" />
+		</execute>
+	</command>
+
+	<command name="AddTeam">
+		<var name="siteName" value="Site Name" />
+		<var name="teamName" value="Site Team Name" />
+		<var name="teamDescription" value="Site Team Description" />
+
+		<execute macro="Site#addBlankCP">
+			<var name="siteName" value="${siteName}" />
+		</execute>
+
+		<execute macro="Team#addCP">
+			<var name="siteScopeName" value="${siteName}" />
+			<var name="teamName" value="${teamName}" />
+			<var name="teamDescription" value="${teamDescription}" />
+		</execute>
+	</command>
+
+	<tear-down>
+		<execute macro="Site#tearDownCP" />
+
+		<execute macro="User#tearDownCP" />
+	</tear-down>
+</definition>

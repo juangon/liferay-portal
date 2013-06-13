@@ -154,10 +154,6 @@ public interface DDMStructure extends DDMStructureModel, PersistedModel {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void prepareLocalizedFieldsForImport(
-		java.util.Locale defaultImportLocale)
-		throws com.liferay.portal.LocaleException;
-
 	public void setDocument(com.liferay.portal.kernel.xml.Document document);
 
 	public void setLocalizedFieldsMap(
@@ -165,6 +161,4 @@ public interface DDMStructure extends DDMStructureModel, PersistedModel {
 
 	public void setLocalizedTransientFieldsMap(
 		java.util.Map<java.lang.String, java.util.Map<java.lang.String, java.util.Map<java.lang.String, java.lang.String>>> localizedTransientFieldsMap);
-
-	public void setXsd(java.lang.String xsd);
 }

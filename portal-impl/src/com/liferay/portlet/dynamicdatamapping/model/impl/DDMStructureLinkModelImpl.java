@@ -90,26 +90,32 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 	public DDMStructureLinkModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _structureLinkId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setStructureLinkId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _structureLinkId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return DDMStructureLink.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return DDMStructureLink.class.getName();
 	}
@@ -153,14 +159,17 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 		}
 	}
 
+	@Override
 	public long getStructureLinkId() {
 		return _structureLinkId;
 	}
 
+	@Override
 	public void setStructureLinkId(long structureLinkId) {
 		_structureLinkId = structureLinkId;
 	}
 
+	@Override
 	public String getClassName() {
 		if (getClassNameId() <= 0) {
 			return StringPool.BLANK;
@@ -169,6 +178,7 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 		return PortalUtil.getClassName(getClassNameId());
 	}
 
+	@Override
 	public void setClassName(String className) {
 		long classNameId = 0;
 
@@ -179,10 +189,12 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 		setClassNameId(classNameId);
 	}
 
+	@Override
 	public long getClassNameId() {
 		return _classNameId;
 	}
 
+	@Override
 	public void setClassNameId(long classNameId) {
 		_columnBitmask |= CLASSNAMEID_COLUMN_BITMASK;
 
@@ -199,10 +211,12 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 		return _originalClassNameId;
 	}
 
+	@Override
 	public long getClassPK() {
 		return _classPK;
 	}
 
+	@Override
 	public void setClassPK(long classPK) {
 		_columnBitmask |= CLASSPK_COLUMN_BITMASK;
 
@@ -219,10 +233,12 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 		return _originalClassPK;
 	}
 
+	@Override
 	public long getStructureId() {
 		return _structureId;
 	}
 
+	@Override
 	public void setStructureId(long structureId) {
 		_columnBitmask |= STRUCTUREID_COLUMN_BITMASK;
 
@@ -280,6 +296,7 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 		return ddmStructureLinkImpl;
 	}
 
+	@Override
 	public int compareTo(DDMStructureLink ddmStructureLink) {
 		long primaryKey = ddmStructureLink.getPrimaryKey();
 
@@ -296,18 +313,15 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof DDMStructureLink)) {
 			return false;
 		}
 
-		DDMStructureLink ddmStructureLink = null;
-
-		try {
-			ddmStructureLink = (DDMStructureLink)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		DDMStructureLink ddmStructureLink = (DDMStructureLink)obj;
 
 		long primaryKey = ddmStructureLink.getPrimaryKey();
 
@@ -375,6 +389,7 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(16);
 

@@ -35,13 +35,13 @@ rowChecker.setRowIds("removeEmbeddedPortletIds");
 		rowChecker = null;
 		%>
 
-		<div class="portlet-msg-info">
+		<div class="alert alert-info">
 			<liferay-ui:message key="layout-inherits-from-a-prototype-portlets-cannot-be-manipulated" />
 		</div>
 	</c:when>
 	<c:otherwise>
-		<div class="portlet-msg-alert">
-			<liferay-ui:message key="warning-selected-portlets-will-be-removed" />
+		<div class="alert alert-block">
+			<liferay-ui:message key="warning-preferences-of-selected-portlets-will-be-reset-or-deleted" />
 		</div>
 	</c:otherwise>
 </c:choose>

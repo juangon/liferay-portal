@@ -44,6 +44,7 @@ public class SocketTest {
 			try {
 				Runnable runnable = new Runnable() {
 
+					@Override
 					public void run() {
 						Socket socket = new Socket();
 
@@ -98,6 +99,7 @@ public class SocketTest {
 			try {
 				Runnable runnable = new Runnable() {
 
+					@Override
 					public void run() {
 						Socket socket = new Socket();
 

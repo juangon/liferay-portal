@@ -37,6 +37,7 @@ public abstract class WebsiteBaseImpl extends WebsiteModelImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a website model instance should use the {@link Website} interface instead.
 	 */
+	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
 			WebsiteLocalServiceUtil.addWebsite(this);

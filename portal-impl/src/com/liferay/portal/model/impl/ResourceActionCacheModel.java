@@ -50,6 +50,7 @@ public class ResourceActionCacheModel implements CacheModel<ResourceAction>,
 		return sb.toString();
 	}
 
+	@Override
 	public ResourceAction toEntityModel() {
 		ResourceActionImpl resourceActionImpl = new ResourceActionImpl();
 
@@ -76,6 +77,7 @@ public class ResourceActionCacheModel implements CacheModel<ResourceAction>,
 		return resourceActionImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		resourceActionId = objectInput.readLong();
 		name = objectInput.readUTF();
@@ -83,6 +85,7 @@ public class ResourceActionCacheModel implements CacheModel<ResourceAction>,
 		bitwiseValue = objectInput.readLong();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(resourceActionId);

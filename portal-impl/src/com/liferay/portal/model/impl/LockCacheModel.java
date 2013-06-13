@@ -65,6 +65,7 @@ public class LockCacheModel implements CacheModel<Lock>, Externalizable {
 		return sb.toString();
 	}
 
+	@Override
 	public Lock toEntityModel() {
 		LockImpl lockImpl = new LockImpl();
 
@@ -128,6 +129,7 @@ public class LockCacheModel implements CacheModel<Lock>, Externalizable {
 		return lockImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		lockId = objectInput.readLong();
@@ -142,6 +144,7 @@ public class LockCacheModel implements CacheModel<Lock>, Externalizable {
 		expirationDate = objectInput.readLong();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

@@ -38,6 +38,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import jodd.typeconverter.TypeConverterManager;
+
 /**
  * @author Raymond Augé
  * @author Brian Wing Shun Chan
@@ -46,6 +48,7 @@ import java.util.Map;
 public class ExpandoValueLocalServiceImpl
 	extends ExpandoValueLocalServiceBaseImpl {
 
+	@Override
 	public ExpandoValue addValue(
 			long classNameId, long tableId, long columnId, long classPK,
 			String data)
@@ -58,6 +61,7 @@ public class ExpandoValueLocalServiceImpl
 			data);
 	}
 
+	@Override
 	public ExpandoValue addValue(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, boolean data)
@@ -80,6 +84,7 @@ public class ExpandoValueLocalServiceImpl
 			classPK, value.getData());
 	}
 
+	@Override
 	public ExpandoValue addValue(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, boolean[] data)
@@ -102,6 +107,7 @@ public class ExpandoValueLocalServiceImpl
 			classPK, value.getData());
 	}
 
+	@Override
 	public ExpandoValue addValue(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, Date data)
@@ -124,6 +130,7 @@ public class ExpandoValueLocalServiceImpl
 			classPK, value.getData());
 	}
 
+	@Override
 	public ExpandoValue addValue(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, Date[] data)
@@ -146,6 +153,7 @@ public class ExpandoValueLocalServiceImpl
 			classPK, value.getData());
 	}
 
+	@Override
 	public ExpandoValue addValue(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, double data)
@@ -168,6 +176,7 @@ public class ExpandoValueLocalServiceImpl
 			classPK, value.getData());
 	}
 
+	@Override
 	public ExpandoValue addValue(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, double[] data)
@@ -190,6 +199,7 @@ public class ExpandoValueLocalServiceImpl
 			classPK, value.getData());
 	}
 
+	@Override
 	public ExpandoValue addValue(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, float data)
@@ -212,6 +222,7 @@ public class ExpandoValueLocalServiceImpl
 			classPK, value.getData());
 	}
 
+	@Override
 	public ExpandoValue addValue(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, float[] data)
@@ -234,6 +245,7 @@ public class ExpandoValueLocalServiceImpl
 			classPK, value.getData());
 	}
 
+	@Override
 	public ExpandoValue addValue(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, int data)
@@ -256,6 +268,7 @@ public class ExpandoValueLocalServiceImpl
 			classPK, value.getData());
 	}
 
+	@Override
 	public ExpandoValue addValue(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, int[] data)
@@ -278,6 +291,7 @@ public class ExpandoValueLocalServiceImpl
 			classPK, value.getData());
 	}
 
+	@Override
 	public ExpandoValue addValue(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, long data)
@@ -300,6 +314,7 @@ public class ExpandoValueLocalServiceImpl
 			classPK, value.getData());
 	}
 
+	@Override
 	public ExpandoValue addValue(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, long[] data)
@@ -322,6 +337,7 @@ public class ExpandoValueLocalServiceImpl
 			classPK, value.getData());
 	}
 
+	@Override
 	public ExpandoValue addValue(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, Map<Locale, ?> dataMap,
@@ -354,6 +370,7 @@ public class ExpandoValueLocalServiceImpl
 			classPK, value.getData());
 	}
 
+	@Override
 	public ExpandoValue addValue(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, Number data)
@@ -376,6 +393,7 @@ public class ExpandoValueLocalServiceImpl
 			classPK, value.getData());
 	}
 
+	@Override
 	public ExpandoValue addValue(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, Number[] data)
@@ -398,6 +416,7 @@ public class ExpandoValueLocalServiceImpl
 			classPK, value.getData());
 	}
 
+	@Override
 	public ExpandoValue addValue(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, Object data)
@@ -419,14 +438,16 @@ public class ExpandoValueLocalServiceImpl
 				(boolean[])data);
 		}
 		else if (type == ExpandoColumnConstants.DATE) {
+			Date date = TypeConverterManager.convertType(data, Date.class);
+
 			return expandoValueLocalService.addValue(
-				companyId, className, tableName, columnName, classPK,
-				(Date)data);
+				companyId, className, tableName, columnName, classPK, date);
 		}
 		else if (type == ExpandoColumnConstants.DATE_ARRAY) {
+			Date[] dates = TypeConverterManager.convertType(data, Date[].class);
+
 			return expandoValueLocalService.addValue(
-				companyId, className, tableName, columnName, classPK,
-				(Date[])data);
+				companyId, className, tableName, columnName, classPK, dates);
 		}
 		else if (type == ExpandoColumnConstants.DOUBLE) {
 			return expandoValueLocalService.addValue(
@@ -505,6 +526,7 @@ public class ExpandoValueLocalServiceImpl
 		}
 	}
 
+	@Override
 	public ExpandoValue addValue(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, short data)
@@ -527,6 +549,7 @@ public class ExpandoValueLocalServiceImpl
 			classPK, value.getData());
 	}
 
+	@Override
 	public ExpandoValue addValue(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, short[] data)
@@ -549,6 +572,7 @@ public class ExpandoValueLocalServiceImpl
 			classPK, value.getData());
 	}
 
+	@Override
 	public ExpandoValue addValue(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, String data)
@@ -571,6 +595,7 @@ public class ExpandoValueLocalServiceImpl
 			classPK, value.getData());
 	}
 
+	@Override
 	public ExpandoValue addValue(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, String[] data)
@@ -597,6 +622,7 @@ public class ExpandoValueLocalServiceImpl
 	 * @deprecated As of 6.1.0, replaced by {@link #addValue(long, String,
 	 *             String, String, long, boolean[])}
 	 */
+	@Override
 	public ExpandoValue addValue(
 			String className, String tableName, String columnName, long classPK,
 			boolean data)
@@ -612,6 +638,7 @@ public class ExpandoValueLocalServiceImpl
 	 * @deprecated As of 6.1.0, replaced by {@link #addValue(long, String,
 	 *             String, String, long, boolean[])}
 	 */
+	@Override
 	public ExpandoValue addValue(
 			String className, String tableName, String columnName, long classPK,
 			boolean[] data)
@@ -627,6 +654,7 @@ public class ExpandoValueLocalServiceImpl
 	 * @deprecated As of 6.1.0, replaced by {@link #addValue(long, String,
 	 *             String, String, long, Date[])}
 	 */
+	@Override
 	public ExpandoValue addValue(
 			String className, String tableName, String columnName, long classPK,
 			Date data)
@@ -642,6 +670,7 @@ public class ExpandoValueLocalServiceImpl
 	 * @deprecated As of 6.1.0, replaced by {@link #addValue(long, String,
 	 *             String, String, long, Date[])}
 	 */
+	@Override
 	public ExpandoValue addValue(
 			String className, String tableName, String columnName, long classPK,
 			Date[] data)
@@ -657,6 +686,7 @@ public class ExpandoValueLocalServiceImpl
 	 * @deprecated As of 6.1.0, replaced by {@link #addValue(long, String,
 	 *             String, String, long, double[])}
 	 */
+	@Override
 	public ExpandoValue addValue(
 			String className, String tableName, String columnName, long classPK,
 			double data)
@@ -672,6 +702,7 @@ public class ExpandoValueLocalServiceImpl
 	 * @deprecated As of 6.1.0, replaced by {@link #addValue(long, String,
 	 *             String, String, long, double[])}
 	 */
+	@Override
 	public ExpandoValue addValue(
 			String className, String tableName, String columnName, long classPK,
 			double[] data)
@@ -687,6 +718,7 @@ public class ExpandoValueLocalServiceImpl
 	 * @deprecated As of 6.1.0, replaced by {@link #addValue(long, String,
 	 *             String, String, long, float[])}
 	 */
+	@Override
 	public ExpandoValue addValue(
 			String className, String tableName, String columnName, long classPK,
 			float data)
@@ -702,6 +734,7 @@ public class ExpandoValueLocalServiceImpl
 	 * @deprecated As of 6.1.0, replaced by {@link #addValue(long, String,
 	 *             String, String, long, float[])}
 	 */
+	@Override
 	public ExpandoValue addValue(
 			String className, String tableName, String columnName, long classPK,
 			float[] data)
@@ -717,6 +750,7 @@ public class ExpandoValueLocalServiceImpl
 	 * @deprecated As of 6.1.0, replaced by {@link #addValue(long, String,
 	 *             String, String, long, int[])}
 	 */
+	@Override
 	public ExpandoValue addValue(
 			String className, String tableName, String columnName, long classPK,
 			int data)
@@ -732,6 +766,7 @@ public class ExpandoValueLocalServiceImpl
 	 * @deprecated As of 6.1.0, replaced by {@link #addValue(long, String,
 	 *             String, String, long, int[])}
 	 */
+	@Override
 	public ExpandoValue addValue(
 			String className, String tableName, String columnName, long classPK,
 			int[] data)
@@ -747,6 +782,7 @@ public class ExpandoValueLocalServiceImpl
 	 * @deprecated As of 6.1.0, replaced by {@link #addValue(long, String,
 	 *             String, String, long, long[])}
 	 */
+	@Override
 	public ExpandoValue addValue(
 			String className, String tableName, String columnName, long classPK,
 			long data)
@@ -762,6 +798,7 @@ public class ExpandoValueLocalServiceImpl
 	 * @deprecated As of 6.1.0, replaced by {@link #addValue(long, String,
 	 *             String, String, long, long[])}
 	 */
+	@Override
 	public ExpandoValue addValue(
 			String className, String tableName, String columnName, long classPK,
 			long[] data)
@@ -777,6 +814,7 @@ public class ExpandoValueLocalServiceImpl
 	 * @deprecated As of 6.1.0, replaced by {@link #addValue(long, String,
 	 *             String, String, long, Object)}
 	 */
+	@Override
 	public ExpandoValue addValue(
 			String className, String tableName, String columnName, long classPK,
 			Object data)
@@ -792,6 +830,7 @@ public class ExpandoValueLocalServiceImpl
 	 * @deprecated As of 6.1.0, replaced by {@link #addValue(long, String,
 	 *             String, String, long, short[])}
 	 */
+	@Override
 	public ExpandoValue addValue(
 			String className, String tableName, String columnName, long classPK,
 			short data)
@@ -807,6 +846,7 @@ public class ExpandoValueLocalServiceImpl
 	 * @deprecated As of 6.1.0, replaced by {@link #addValue(long, String,
 	 *             String, String, long, short[])}
 	 */
+	@Override
 	public ExpandoValue addValue(
 			String className, String tableName, String columnName, long classPK,
 			short[] data)
@@ -822,6 +862,7 @@ public class ExpandoValueLocalServiceImpl
 	 * @deprecated As of 6.1.0, replaced by {@link #addValue(long, String,
 	 *             String, String, long, String[])}
 	 */
+	@Override
 	public ExpandoValue addValue(
 			String className, String tableName, String columnName, long classPK,
 			String data)
@@ -837,6 +878,7 @@ public class ExpandoValueLocalServiceImpl
 	 * @deprecated As of 6.1.0, replaced by {@link #addValue(long, String,
 	 *             String, String, long, String[])}
 	 */
+	@Override
 	public ExpandoValue addValue(
 			String className, String tableName, String columnName, long classPK,
 			String[] data)
@@ -848,6 +890,7 @@ public class ExpandoValueLocalServiceImpl
 			companyId, className, tableName, columnName, classPK, data);
 	}
 
+	@Override
 	public void addValues(
 			long classNameId, long tableId, List<ExpandoColumn> columns,
 			long classPK, Map<String, String> data)
@@ -912,6 +955,7 @@ public class ExpandoValueLocalServiceImpl
 		}
 	}
 
+	@Override
 	public void addValues(
 			long companyId, long classNameId, String tableName, long classPK,
 			Map<String, Serializable> attributes)
@@ -995,6 +1039,7 @@ public class ExpandoValueLocalServiceImpl
 		}
 	}
 
+	@Override
 	public void addValues(
 			long companyId, String className, String tableName, long classPK,
 			Map<String, Serializable> attributes)
@@ -1005,6 +1050,7 @@ public class ExpandoValueLocalServiceImpl
 		addValues(companyId, classNameId, tableName, classPK, attributes);
 	}
 
+	@Override
 	public void deleteColumnValues(long columnId) throws SystemException {
 		List<ExpandoValue> values = expandoValuePersistence.findByColumnId(
 			columnId);
@@ -1014,6 +1060,7 @@ public class ExpandoValueLocalServiceImpl
 		}
 	}
 
+	@Override
 	public void deleteRowValues(long rowId) throws SystemException {
 		List<ExpandoValue> values = expandoValuePersistence.findByRowId(rowId);
 
@@ -1022,6 +1069,7 @@ public class ExpandoValueLocalServiceImpl
 		}
 	}
 
+	@Override
 	public void deleteTableValues(long tableId) throws SystemException {
 		List<ExpandoValue> values = expandoValuePersistence.findByTableId(
 			tableId);
@@ -1031,10 +1079,12 @@ public class ExpandoValueLocalServiceImpl
 		}
 	}
 
+	@Override
 	public void deleteValue(ExpandoValue value) throws SystemException {
 		expandoValuePersistence.remove(value);
 	}
 
+	@Override
 	public void deleteValue(long valueId)
 		throws PortalException, SystemException {
 
@@ -1043,6 +1093,7 @@ public class ExpandoValueLocalServiceImpl
 		deleteValue(value);
 	}
 
+	@Override
 	public void deleteValue(long columnId, long rowId)
 		throws PortalException, SystemException {
 
@@ -1051,6 +1102,7 @@ public class ExpandoValueLocalServiceImpl
 		deleteValue(value);
 	}
 
+	@Override
 	public void deleteValue(
 			long companyId, long classNameId, String tableName,
 			String columnName, long classPK)
@@ -1078,6 +1130,7 @@ public class ExpandoValueLocalServiceImpl
 		}
 	}
 
+	@Override
 	public void deleteValue(
 			long companyId, String className, String tableName,
 			String columnName, long classPK)
@@ -1089,6 +1142,7 @@ public class ExpandoValueLocalServiceImpl
 			companyId, classNameId, tableName, columnName, classPK);
 	}
 
+	@Override
 	public void deleteValues(long classNameId, long classPK)
 		throws SystemException {
 
@@ -1100,6 +1154,7 @@ public class ExpandoValueLocalServiceImpl
 		}
 	}
 
+	@Override
 	public void deleteValues(String className, long classPK)
 		throws SystemException {
 
@@ -1108,12 +1163,14 @@ public class ExpandoValueLocalServiceImpl
 		expandoValueLocalService.deleteValues(classNameId, classPK);
 	}
 
+	@Override
 	public List<ExpandoValue> getColumnValues(long columnId, int start, int end)
 		throws SystemException {
 
 		return expandoValuePersistence.findByColumnId(columnId, start, end);
 	}
 
+	@Override
 	public List<ExpandoValue> getColumnValues(
 			long companyId, long classNameId, String tableName,
 			String columnName, int start, int end)
@@ -1123,6 +1180,7 @@ public class ExpandoValueLocalServiceImpl
 			companyId, classNameId, tableName, columnName, null, start, end);
 	}
 
+	@Override
 	public List<ExpandoValue> getColumnValues(
 			long companyId, long classNameId, String tableName,
 			String columnName, String data, int start, int end)
@@ -1152,6 +1210,7 @@ public class ExpandoValueLocalServiceImpl
 		}
 	}
 
+	@Override
 	public List<ExpandoValue> getColumnValues(
 			long companyId, String className, String tableName,
 			String columnName, int start, int end)
@@ -1163,6 +1222,7 @@ public class ExpandoValueLocalServiceImpl
 			companyId, classNameId, tableName, columnName, start, end);
 	}
 
+	@Override
 	public List<ExpandoValue> getColumnValues(
 			long companyId, String className, String tableName,
 			String columnName, String data, int start, int end)
@@ -1178,6 +1238,7 @@ public class ExpandoValueLocalServiceImpl
 	 * @deprecated As of 6.1.0, replaced by {@link #getColumnValues(long,
 	 *             String, String, String, String, int, int)}
 	 */
+	@Override
 	public List<ExpandoValue> getColumnValues(
 			String className, String tableName, String columnName, String data,
 			int start, int end)
@@ -1189,10 +1250,12 @@ public class ExpandoValueLocalServiceImpl
 			companyId, className, tableName, columnName, data, start, end);
 	}
 
+	@Override
 	public int getColumnValuesCount(long columnId) throws SystemException {
 		return expandoValuePersistence.countByColumnId(columnId);
 	}
 
+	@Override
 	public int getColumnValuesCount(
 			long companyId, long classNameId, String tableName,
 			String columnName)
@@ -1202,6 +1265,7 @@ public class ExpandoValueLocalServiceImpl
 			companyId, classNameId, tableName, columnName, null);
 	}
 
+	@Override
 	public int getColumnValuesCount(
 			long companyId, long classNameId, String tableName,
 			String columnName, String data)
@@ -1231,6 +1295,7 @@ public class ExpandoValueLocalServiceImpl
 		}
 	}
 
+	@Override
 	public int getColumnValuesCount(
 			long companyId, String className, String tableName,
 			String columnName)
@@ -1242,6 +1307,7 @@ public class ExpandoValueLocalServiceImpl
 			companyId, classNameId, tableName, columnName);
 	}
 
+	@Override
 	public int getColumnValuesCount(
 			long companyId, String className, String tableName,
 			String columnName, String data)
@@ -1257,6 +1323,7 @@ public class ExpandoValueLocalServiceImpl
 	 * @deprecated As of 6.1.0, replaced by {@link #getColumnValuesCount(long,
 	 *             String, String, String, String)}
 	 */
+	@Override
 	public int getColumnValuesCount(
 			String className, String tableName, String columnName, String data)
 		throws SystemException {
@@ -1267,6 +1334,7 @@ public class ExpandoValueLocalServiceImpl
 			companyId, className, tableName, columnName, data);
 	}
 
+	@Override
 	public Map<String, Serializable> getData(
 			long companyId, String className, String tableName,
 			Collection<String> columnNames, long classPK)
@@ -1294,6 +1362,7 @@ public class ExpandoValueLocalServiceImpl
 		return attributeValues;
 	}
 
+	@Override
 	public Serializable getData(
 			long companyId, String className, String tableName,
 			String columnName, long classPK)
@@ -1312,6 +1381,7 @@ public class ExpandoValueLocalServiceImpl
 			column.getType());
 	}
 
+	@Override
 	public boolean getData(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, boolean defaultData)
@@ -1328,6 +1398,7 @@ public class ExpandoValueLocalServiceImpl
 		}
 	}
 
+	@Override
 	public boolean[] getData(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, boolean[] defaultData)
@@ -1344,6 +1415,7 @@ public class ExpandoValueLocalServiceImpl
 		}
 	}
 
+	@Override
 	public Date getData(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, Date defaultData)
@@ -1360,6 +1432,7 @@ public class ExpandoValueLocalServiceImpl
 		}
 	}
 
+	@Override
 	public Date[] getData(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, Date[] defaultData)
@@ -1376,6 +1449,7 @@ public class ExpandoValueLocalServiceImpl
 		}
 	}
 
+	@Override
 	public double getData(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, double defaultData)
@@ -1392,6 +1466,7 @@ public class ExpandoValueLocalServiceImpl
 		}
 	}
 
+	@Override
 	public double[] getData(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, double[] defaultData)
@@ -1408,6 +1483,7 @@ public class ExpandoValueLocalServiceImpl
 		}
 	}
 
+	@Override
 	public float getData(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, float defaultData)
@@ -1424,6 +1500,7 @@ public class ExpandoValueLocalServiceImpl
 		}
 	}
 
+	@Override
 	public float[] getData(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, float[] defaultData)
@@ -1440,6 +1517,7 @@ public class ExpandoValueLocalServiceImpl
 		}
 	}
 
+	@Override
 	public int getData(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, int defaultData)
@@ -1456,6 +1534,7 @@ public class ExpandoValueLocalServiceImpl
 		}
 	}
 
+	@Override
 	public int[] getData(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, int[] defaultData)
@@ -1472,6 +1551,7 @@ public class ExpandoValueLocalServiceImpl
 		}
 	}
 
+	@Override
 	public long getData(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, long defaultData)
@@ -1488,6 +1568,7 @@ public class ExpandoValueLocalServiceImpl
 		}
 	}
 
+	@Override
 	public long[] getData(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, long[] defaultData)
@@ -1504,6 +1585,7 @@ public class ExpandoValueLocalServiceImpl
 		}
 	}
 
+	@Override
 	public Map<?, ?> getData(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, Map<?, ?> defaultData)
@@ -1528,6 +1610,7 @@ public class ExpandoValueLocalServiceImpl
 		}
 	}
 
+	@Override
 	public Number getData(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, Number defaultData)
@@ -1544,6 +1627,7 @@ public class ExpandoValueLocalServiceImpl
 		}
 	}
 
+	@Override
 	public Number[] getData(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, Number[] defaultData)
@@ -1560,6 +1644,7 @@ public class ExpandoValueLocalServiceImpl
 		}
 	}
 
+	@Override
 	public short getData(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, short defaultData)
@@ -1576,6 +1661,7 @@ public class ExpandoValueLocalServiceImpl
 		}
 	}
 
+	@Override
 	public short[] getData(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, short[] defaultData)
@@ -1592,6 +1678,7 @@ public class ExpandoValueLocalServiceImpl
 		}
 	}
 
+	@Override
 	public String getData(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, String defaultData)
@@ -1608,6 +1695,7 @@ public class ExpandoValueLocalServiceImpl
 		}
 	}
 
+	@Override
 	public String[] getData(
 			long companyId, String className, String tableName,
 			String columnName, long classPK, String[] defaultData)
@@ -1628,6 +1716,7 @@ public class ExpandoValueLocalServiceImpl
 	 * @deprecated As of 6.1.0, replaced by {@link #getData(long, String,
 	 *             String, String, long)}
 	 */
+	@Override
 	public Serializable getData(
 			String className, String tableName, String columnName, long classPK)
 		throws PortalException, SystemException {
@@ -1642,6 +1731,7 @@ public class ExpandoValueLocalServiceImpl
 	 * @deprecated As of 6.1.0, replaced by {@link #getData(long, String,
 	 *             String, String, long, boolean[])}
 	 */
+	@Override
 	public boolean getData(
 			String className, String tableName, String columnName, long classPK,
 			boolean defaultData)
@@ -1657,6 +1747,7 @@ public class ExpandoValueLocalServiceImpl
 	 * @deprecated As of 6.1.0, replaced by {@link #getData(long, String,
 	 *             String, String, long, boolean[])}
 	 */
+	@Override
 	public boolean[] getData(
 			String className, String tableName, String columnName, long classPK,
 			boolean[] defaultData)
@@ -1672,6 +1763,7 @@ public class ExpandoValueLocalServiceImpl
 	 * @deprecated As of 6.1.0, replaced by {@link #getData(long, String,
 	 *             String, String, long, Date[])}
 	 */
+	@Override
 	public Date getData(
 			String className, String tableName, String columnName, long classPK,
 			Date defaultData)
@@ -1687,6 +1779,7 @@ public class ExpandoValueLocalServiceImpl
 	 * @deprecated As of 6.1.0, replaced by {@link #getData(long, String,
 	 *             String, String, long, Date[])}
 	 */
+	@Override
 	public Date[] getData(
 			String className, String tableName, String columnName, long classPK,
 			Date[] defaultData)
@@ -1702,6 +1795,7 @@ public class ExpandoValueLocalServiceImpl
 	 * @deprecated As of 6.1.0, replaced by {@link #getData(long, String,
 	 *             String, String, long, double[])}
 	 */
+	@Override
 	public double getData(
 			String className, String tableName, String columnName, long classPK,
 			double defaultData)
@@ -1717,6 +1811,7 @@ public class ExpandoValueLocalServiceImpl
 	 * @deprecated As of 6.1.0, replaced by {@link #getData(long, String,
 	 *             String, String, long, double[])}
 	 */
+	@Override
 	public double[] getData(
 			String className, String tableName, String columnName, long classPK,
 			double[] defaultData)
@@ -1732,6 +1827,7 @@ public class ExpandoValueLocalServiceImpl
 	 * @deprecated As of 6.1.0, replaced by {@link #getData(long, String,
 	 *             String, String, long, float[])}
 	 */
+	@Override
 	public float getData(
 			String className, String tableName, String columnName, long classPK,
 			float defaultData)
@@ -1747,6 +1843,7 @@ public class ExpandoValueLocalServiceImpl
 	 * @deprecated As of 6.1.0, replaced by {@link #getData(long, String,
 	 *             String, String, long, float[])}
 	 */
+	@Override
 	public float[] getData(
 			String className, String tableName, String columnName, long classPK,
 			float[] defaultData)
@@ -1762,6 +1859,7 @@ public class ExpandoValueLocalServiceImpl
 	 * @deprecated As of 6.1.0, replaced by {@link #getData(long, String,
 	 *             String, String, long, int[])}
 	 */
+	@Override
 	public int getData(
 			String className, String tableName, String columnName, long classPK,
 			int defaultData)
@@ -1777,6 +1875,7 @@ public class ExpandoValueLocalServiceImpl
 	 * @deprecated As of 6.1.0, replaced by {@link #getData(long, String,
 	 *             String, String, long, int[])}
 	 */
+	@Override
 	public int[] getData(
 			String className, String tableName, String columnName, long classPK,
 			int[] defaultData)
@@ -1792,6 +1891,7 @@ public class ExpandoValueLocalServiceImpl
 	 * @deprecated As of 6.1.0, replaced by {@link #getData(long, String,
 	 *             String, String, long, long[])}
 	 */
+	@Override
 	public long getData(
 			String className, String tableName, String columnName, long classPK,
 			long defaultData)
@@ -1807,6 +1907,7 @@ public class ExpandoValueLocalServiceImpl
 	 * @deprecated As of 6.1.0, replaced by {@link #getData(long, String,
 	 *             String, String, long, long[])}
 	 */
+	@Override
 	public long[] getData(
 			String className, String tableName, String columnName, long classPK,
 			long[] defaultData)
@@ -1822,6 +1923,7 @@ public class ExpandoValueLocalServiceImpl
 	 * @deprecated As of 6.1.0, replaced by {@link #getData(long, String,
 	 *             String, String, long, short[])}
 	 */
+	@Override
 	public short getData(
 			String className, String tableName, String columnName, long classPK,
 			short defaultData)
@@ -1837,6 +1939,7 @@ public class ExpandoValueLocalServiceImpl
 	 * @deprecated As of 6.1.0, replaced by {@link #getData(long, String,
 	 *             String, String, long, short[])}
 	 */
+	@Override
 	public short[] getData(
 			String className, String tableName, String columnName, long classPK,
 			short[] defaultData)
@@ -1852,6 +1955,7 @@ public class ExpandoValueLocalServiceImpl
 	 * @deprecated As of 6.1.0, replaced by {@link #getData(long, String,
 	 *             String, String, long, String[])}
 	 */
+	@Override
 	public String getData(
 			String className, String tableName, String columnName, long classPK,
 			String defaultData)
@@ -1867,6 +1971,7 @@ public class ExpandoValueLocalServiceImpl
 	 * @deprecated As of 6.1.0, replaced by {@link #getData(long, String,
 	 *             String, String, long, String[])}
 	 */
+	@Override
 	public String[] getData(
 			String className, String tableName, String columnName, long classPK,
 			String[] defaultData)
@@ -1878,6 +1983,7 @@ public class ExpandoValueLocalServiceImpl
 			companyId, className, tableName, columnName, classPK, defaultData);
 	}
 
+	@Override
 	public List<ExpandoValue> getDefaultTableColumnValues(
 			long companyId, long classNameId, String columnName, int start,
 			int end)
@@ -1888,6 +1994,7 @@ public class ExpandoValueLocalServiceImpl
 			columnName, start, end);
 	}
 
+	@Override
 	public List<ExpandoValue> getDefaultTableColumnValues(
 			long companyId, String className, String columnName, int start,
 			int end)
@@ -1899,6 +2006,7 @@ public class ExpandoValueLocalServiceImpl
 			companyId, classNameId, columnName, start, end);
 	}
 
+	@Override
 	public int getDefaultTableColumnValuesCount(
 			long companyId, long classNameId, String columnName)
 		throws SystemException {
@@ -1908,6 +2016,7 @@ public class ExpandoValueLocalServiceImpl
 			columnName);
 	}
 
+	@Override
 	public int getDefaultTableColumnValuesCount(
 			long companyId, String className, String columnName)
 		throws SystemException {
@@ -1918,16 +2027,19 @@ public class ExpandoValueLocalServiceImpl
 			companyId, classNameId, columnName);
 	}
 
+	@Override
 	public List<ExpandoValue> getRowValues(long rowId) throws SystemException {
 		return expandoValuePersistence.findByRowId(rowId);
 	}
 
+	@Override
 	public List<ExpandoValue> getRowValues(long rowId, int start, int end)
 		throws SystemException {
 
 		return expandoValuePersistence.findByRowId(rowId, start, end);
 	}
 
+	@Override
 	public List<ExpandoValue> getRowValues(
 			long companyId, long classNameId, String tableName, long classPK,
 			int start, int end)
@@ -1944,6 +2056,7 @@ public class ExpandoValueLocalServiceImpl
 			table.getTableId(), classPK, start, end);
 	}
 
+	@Override
 	public List<ExpandoValue> getRowValues(
 			long companyId, String className, String tableName, long classPK,
 			int start, int end)
@@ -1955,10 +2068,12 @@ public class ExpandoValueLocalServiceImpl
 			companyId, classNameId, tableName, classPK, start, end);
 	}
 
+	@Override
 	public int getRowValuesCount(long rowId) throws SystemException {
 		return expandoValuePersistence.countByRowId(rowId);
 	}
 
+	@Override
 	public int getRowValuesCount(
 			long companyId, long classNameId, String tableName, long classPK)
 		throws SystemException {
@@ -1974,6 +2089,7 @@ public class ExpandoValueLocalServiceImpl
 			table.getTableId(), classPK);
 	}
 
+	@Override
 	public int getRowValuesCount(
 			long companyId, String className, String tableName, long classPK)
 		throws SystemException {
@@ -1984,24 +2100,28 @@ public class ExpandoValueLocalServiceImpl
 			companyId, classNameId, tableName, classPK);
 	}
 
+	@Override
 	public ExpandoValue getValue(long valueId)
 		throws PortalException, SystemException {
 
 		return expandoValuePersistence.findByPrimaryKey(valueId);
 	}
 
+	@Override
 	public ExpandoValue getValue(long columnId, long rowId)
 		throws PortalException, SystemException {
 
 		return expandoValuePersistence.findByC_R(columnId, rowId);
 	}
 
+	@Override
 	public ExpandoValue getValue(long tableId, long columnId, long classPK)
 		throws SystemException {
 
 		return expandoValuePersistence.fetchByT_C_C(tableId, columnId, classPK);
 	}
 
+	@Override
 	public ExpandoValue getValue(
 			long companyId, long classNameId, String tableName,
 			String columnName, long classPK)
@@ -2029,6 +2149,7 @@ public class ExpandoValueLocalServiceImpl
 	 * @deprecated As of 6.1.0, replaced by {@link #getValue(long, long, String,
 	 *             String, long)}
 	 */
+	@Override
 	public ExpandoValue getValue(
 			long classNameId, String tableName, String columnName, long classPK)
 		throws SystemException {
@@ -2039,6 +2160,7 @@ public class ExpandoValueLocalServiceImpl
 			companyId, classNameId, tableName, columnName, classPK);
 	}
 
+	@Override
 	public ExpandoValue getValue(
 			long companyId, String className, String tableName,
 			String columnName, long classPK)
@@ -2054,6 +2176,7 @@ public class ExpandoValueLocalServiceImpl
 	 * @deprecated As of 6.1.0, replaced by {@link #getValue(long, String,
 	 *             String, String, long)}
 	 */
+	@Override
 	public ExpandoValue getValue(
 			String className, String tableName, String columnName, long classPK)
 		throws SystemException {

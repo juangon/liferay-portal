@@ -47,6 +47,7 @@ public class BrowserTrackerCacheModel implements CacheModel<BrowserTracker>,
 		return sb.toString();
 	}
 
+	@Override
 	public BrowserTracker toEntityModel() {
 		BrowserTrackerImpl browserTrackerImpl = new BrowserTrackerImpl();
 
@@ -59,12 +60,14 @@ public class BrowserTrackerCacheModel implements CacheModel<BrowserTracker>,
 		return browserTrackerImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		browserTrackerId = objectInput.readLong();
 		userId = objectInput.readLong();
 		browserKey = objectInput.readLong();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(browserTrackerId);

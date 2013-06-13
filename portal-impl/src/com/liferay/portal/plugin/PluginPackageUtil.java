@@ -1419,6 +1419,7 @@ public class PluginPackageUtil {
 
 	private class UpdateAvailableRunner implements Runnable {
 
+		@Override
 		public void run() {
 			try {
 				setUpdateAvailable();

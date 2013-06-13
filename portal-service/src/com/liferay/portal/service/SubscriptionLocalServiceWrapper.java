@@ -15,12 +15,10 @@
 package com.liferay.portal.service;
 
 /**
- * <p>
- * This class is a wrapper for {@link SubscriptionLocalService}.
- * </p>
+ * Provides a wrapper for {@link SubscriptionLocalService}.
  *
- * @author    Brian Wing Shun Chan
- * @see       SubscriptionLocalService
+ * @author Brian Wing Shun Chan
+ * @see SubscriptionLocalService
  * @generated
  */
 public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService,
@@ -37,6 +35,7 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	* @return the subscription that was added
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.Subscription addSubscription(
 		com.liferay.portal.model.Subscription subscription)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -49,6 +48,7 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	* @param subscriptionId the primary key for the new subscription
 	* @return the new subscription
 	*/
+	@Override
 	public com.liferay.portal.model.Subscription createSubscription(
 		long subscriptionId) {
 		return _subscriptionLocalService.createSubscription(subscriptionId);
@@ -62,6 +62,7 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	* @throws PortalException if a subscription with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.Subscription deleteSubscription(
 		long subscriptionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -77,6 +78,7 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	* @throws PortalException
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.Subscription deleteSubscription(
 		com.liferay.portal.model.Subscription subscription)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -84,6 +86,7 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 		return _subscriptionLocalService.deleteSubscription(subscription);
 	}
 
+	@Override
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {
 		return _subscriptionLocalService.dynamicQuery();
 	}
@@ -95,6 +98,7 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -115,6 +119,7 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -136,6 +141,7 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -153,12 +159,14 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _subscriptionLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	@Override
 	public com.liferay.portal.model.Subscription fetchSubscription(
 		long subscriptionId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -173,6 +181,7 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	* @throws PortalException if a subscription with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.Subscription getSubscription(
 		long subscriptionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -180,6 +189,7 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 		return _subscriptionLocalService.getSubscription(subscriptionId);
 	}
 
+	@Override
 	public com.liferay.portal.model.PersistedModel getPersistedModel(
 		java.io.Serializable primaryKeyObj)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -199,6 +209,7 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	* @return the range of subscriptions
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public java.util.List<com.liferay.portal.model.Subscription> getSubscriptions(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -211,6 +222,7 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	* @return the number of subscriptions
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public int getSubscriptionsCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _subscriptionLocalService.getSubscriptionsCount();
@@ -223,6 +235,7 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	* @return the subscription that was updated
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.Subscription updateSubscription(
 		com.liferay.portal.model.Subscription subscription)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -234,6 +247,7 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	*
 	* @return the Spring bean ID for this bean
 	*/
+	@Override
 	public java.lang.String getBeanIdentifier() {
 		return _subscriptionLocalService.getBeanIdentifier();
 	}
@@ -243,6 +257,7 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	*
 	* @param beanIdentifier the Spring bean ID for this bean
 	*/
+	@Override
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		_subscriptionLocalService.setBeanIdentifier(beanIdentifier);
 	}
@@ -270,6 +285,7 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	* @throws PortalException if a matching user or group could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.Subscription addSubscription(long userId,
 		long groupId, java.lang.String className, long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -301,6 +317,7 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	* @throws PortalException if a matching user or group could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.Subscription addSubscription(long userId,
 		long groupId, java.lang.String className, long classPK,
 		java.lang.String frequency)
@@ -321,6 +338,7 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void deleteSubscription(long userId, java.lang.String className,
 		long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -335,6 +353,7 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	* @throws PortalException if a portal exception occurred
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void deleteSubscriptions(long userId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -350,6 +369,7 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	* @throws PortalException if a portal exception occurred
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void deleteSubscriptions(long companyId, java.lang.String className,
 		long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -369,6 +389,7 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	* @throws PortalException if a matching subscription could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.Subscription getSubscription(
 		long companyId, long userId, java.lang.String className, long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -387,6 +408,7 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	* @return the subscriptions of the user to the entities
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public java.util.List<com.liferay.portal.model.Subscription> getSubscriptions(
 		long companyId, long userId, java.lang.String className, long[] classPKs)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -403,6 +425,7 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	* @return the subscriptions to the entity
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public java.util.List<com.liferay.portal.model.Subscription> getSubscriptions(
 		long companyId, java.lang.String className, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -419,6 +442,7 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	* @return the range of subscriptions of the user
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public java.util.List<com.liferay.portal.model.Subscription> getUserSubscriptions(
 		long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -436,6 +460,7 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	* @return the subscriptions of the user to the entities with the class name
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public java.util.List<com.liferay.portal.model.Subscription> getUserSubscriptions(
 		long userId, java.lang.String className)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -449,6 +474,7 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	* @return the number of subscriptions of the user
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public int getUserSubscriptionsCount(long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _subscriptionLocalService.getUserSubscriptionsCount(userId);
@@ -465,6 +491,7 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	<code>false</code> otherwise
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public boolean isSubscribed(long companyId, long userId,
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -484,6 +511,7 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	entities; <code>false</code> otherwise
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public boolean isSubscribed(long companyId, long userId,
 		java.lang.String className, long[] classPKs)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -506,10 +534,12 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 		_subscriptionLocalService = subscriptionLocalService;
 	}
 
+	@Override
 	public SubscriptionLocalService getWrappedService() {
 		return _subscriptionLocalService;
 	}
 
+	@Override
 	public void setWrappedService(
 		SubscriptionLocalService subscriptionLocalService) {
 		_subscriptionLocalService = subscriptionLocalService;

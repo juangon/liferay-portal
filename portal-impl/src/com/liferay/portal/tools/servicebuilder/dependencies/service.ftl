@@ -14,30 +14,33 @@ import com.liferay.portal.service.PersistedModelLocalService;
 
 <#if sessionTypeName == "Local">
 /**
- * The interface for the ${entity.humanName} local service.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
+ * Provides the local service interface for ${entity.name}. Methods of this
+ * service will not have security checks based on the propagated JAAS
+ * credentials because this service can only be accessed from within the same
+ * VM.
  *
  * @author ${author}
  * @see ${entity.name}LocalServiceUtil
  * @see ${packagePath}.service.base.${entity.name}LocalServiceBaseImpl
  * @see ${packagePath}.service.impl.${entity.name}LocalServiceImpl
+<#if classDeprecated>
+ * @deprecated ${classDeprecatedComment}
+</#if>
  * @generated
  */
 <#else>
 /**
- * The interface for the ${entity.humanName} remote service.
- *
- * <p>
- * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
- * </p>
+ * Provides the remote service interface for ${entity.name}. Methods of this
+ * service are expected to have security checks based on the propagated JAAS
+ * credentials because this service can be accessed remotely.
  *
  * @author ${author}
  * @see ${entity.name}ServiceUtil
  * @see ${packagePath}.service.base.${entity.name}ServiceBaseImpl
  * @see ${packagePath}.service.impl.${entity.name}ServiceImpl
+<#if classDeprecated>
+ * @deprecated ${classDeprecatedComment}
+</#if>
  * @generated
  */
 </#if>
@@ -51,8 +54,12 @@ import com.liferay.portal.service.PersistedModelLocalService;
 public interface ${entity.name}${sessionTypeName}Service
 	extends Base${sessionTypeName}Service
 
+	<#assign overrideMethodNames = []>
+
 	<#if pluginName != "">
 		, Invokable${sessionTypeName}Service
+
+		<#assign overrideMethodNames = overrideMethodNames + ["invokeMethod"]>
 	</#if>
 
 	<#if (sessionTypeName == "Local") && entity.hasColumns()>
@@ -61,6 +68,8 @@ public interface ${entity.name}${sessionTypeName}Service
 		<#else>
 			, PersistedModelLocalService
 		</#if>
+
+		<#assign overrideMethodNames = overrideMethodNames + ["getPersistedModel"]>
 	</#if>
 
 	{
@@ -78,6 +87,10 @@ public interface ${entity.name}${sessionTypeName}Service
 	<#list methods as method>
 		<#if !method.isConstructor() && !method.isStatic() && method.isPublic() && serviceBuilder.isCustomMethod(method) && !serviceBuilder.isDuplicateMethod(method, tempMap)>
 			${serviceBuilder.getJavadocComment(method)}
+
+			<#if overrideMethodNames?seq_index_of(method.name) != -1>
+				@Override
+			</#if>
 
 			<#if method.name = "dynamicQuery" && (method.parameters?size != 0)>
 				@SuppressWarnings("rawtypes")

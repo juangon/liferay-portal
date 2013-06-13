@@ -58,12 +58,13 @@ public abstract class BaseExplodedTomcatListener implements AutoDeployListener {
 		}
 	}
 
-	public void deploy(AutoDeploymentContext autoDeploymentContext)
+	@Override
+	public int deploy(AutoDeploymentContext autoDeploymentContext)
 		throws AutoDeployException {
 
 		File file = autoDeploymentContext.getFile();
 
-		deploy(file);
+		return deploy(file);
 	}
 
 	public File getDocBaseDir(File file, String checkXmlFile)
@@ -146,7 +147,7 @@ public abstract class BaseExplodedTomcatListener implements AutoDeployListener {
 		}
 	}
 
-	protected abstract void deploy(File file) throws AutoDeployException;
+	protected abstract int deploy(File file) throws AutoDeployException;
 
 	private static Log _log = LogFactoryUtil.getLog(
 		BaseExplodedTomcatListener.class);

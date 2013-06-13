@@ -35,6 +35,7 @@ public class ShoppingCartItemImpl implements ShoppingCartItem {
 		_fields = fields;
 	}
 
+	@Override
 	public int compareTo(ShoppingCartItem cartItem) {
 		if (cartItem == null) {
 			return -1;
@@ -51,7 +52,11 @@ public class ShoppingCartItemImpl implements ShoppingCartItem {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ShoppingCartItem)) {
 			return false;
 		}
 
@@ -67,6 +72,7 @@ public class ShoppingCartItemImpl implements ShoppingCartItem {
 		}
 	}
 
+	@Override
 	public String getCartItemId() {
 		long itemId = getItem().getItemId();
 
@@ -78,14 +84,17 @@ public class ShoppingCartItemImpl implements ShoppingCartItem {
 		}
 	}
 
+	@Override
 	public String getFields() {
 		return _fields;
 	}
 
+	@Override
 	public String[] getFieldsArray() {
 		return getFieldsArray(_fields);
 	}
 
+	@Override
 	public ShoppingItem getItem() {
 		return _item;
 	}

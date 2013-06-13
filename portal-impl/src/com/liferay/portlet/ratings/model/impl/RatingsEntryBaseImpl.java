@@ -38,6 +38,7 @@ public abstract class RatingsEntryBaseImpl extends RatingsEntryModelImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a ratings entry model instance should use the {@link RatingsEntry} interface instead.
 	 */
+	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
 			RatingsEntryLocalServiceUtil.addRatingsEntry(this);

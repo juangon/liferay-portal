@@ -93,26 +93,32 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 	public JournalContentSearchModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _contentSearchId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setContentSearchId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _contentSearchId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return JournalContentSearch.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return JournalContentSearch.class.getName();
 	}
@@ -177,18 +183,22 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 		}
 	}
 
+	@Override
 	public long getContentSearchId() {
 		return _contentSearchId;
 	}
 
+	@Override
 	public void setContentSearchId(long contentSearchId) {
 		_contentSearchId = contentSearchId;
 	}
 
+	@Override
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -205,22 +215,27 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 		return _originalGroupId;
 	}
 
+	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
+	@Override
 	public boolean getPrivateLayout() {
 		return _privateLayout;
 	}
 
+	@Override
 	public boolean isPrivateLayout() {
 		return _privateLayout;
 	}
 
+	@Override
 	public void setPrivateLayout(boolean privateLayout) {
 		_columnBitmask |= PRIVATELAYOUT_COLUMN_BITMASK;
 
@@ -237,10 +252,12 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 		return _originalPrivateLayout;
 	}
 
+	@Override
 	public long getLayoutId() {
 		return _layoutId;
 	}
 
+	@Override
 	public void setLayoutId(long layoutId) {
 		_columnBitmask |= LAYOUTID_COLUMN_BITMASK;
 
@@ -257,6 +274,7 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 		return _originalLayoutId;
 	}
 
+	@Override
 	public String getPortletId() {
 		if (_portletId == null) {
 			return StringPool.BLANK;
@@ -266,6 +284,7 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 		}
 	}
 
+	@Override
 	public void setPortletId(String portletId) {
 		_columnBitmask |= PORTLETID_COLUMN_BITMASK;
 
@@ -280,6 +299,7 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 		return GetterUtil.getString(_originalPortletId);
 	}
 
+	@Override
 	public String getArticleId() {
 		if (_articleId == null) {
 			return StringPool.BLANK;
@@ -289,6 +309,7 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 		}
 	}
 
+	@Override
 	public void setArticleId(String articleId) {
 		_columnBitmask |= ARTICLEID_COLUMN_BITMASK;
 
@@ -347,6 +368,7 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 		return journalContentSearchImpl;
 	}
 
+	@Override
 	public int compareTo(JournalContentSearch journalContentSearch) {
 		long primaryKey = journalContentSearch.getPrimaryKey();
 
@@ -363,18 +385,15 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof JournalContentSearch)) {
 			return false;
 		}
 
-		JournalContentSearch journalContentSearch = null;
-
-		try {
-			journalContentSearch = (JournalContentSearch)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		JournalContentSearch journalContentSearch = (JournalContentSearch)obj;
 
 		long primaryKey = journalContentSearch.getPrimaryKey();
 
@@ -470,6 +489,7 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(25);
 

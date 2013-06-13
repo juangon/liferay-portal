@@ -70,6 +70,7 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 * @return the uuid of this journal folder
 	 */
 	@AutoEscape
+	@Override
 	public String getUuid();
 
 	/**
@@ -77,6 +78,7 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 *
 	 * @param uuid the uuid of this journal folder
 	 */
+	@Override
 	public void setUuid(String uuid);
 
 	/**
@@ -98,6 +100,7 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 *
 	 * @return the group ID of this journal folder
 	 */
+	@Override
 	public long getGroupId();
 
 	/**
@@ -105,6 +108,7 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 *
 	 * @param groupId the group ID of this journal folder
 	 */
+	@Override
 	public void setGroupId(long groupId);
 
 	/**
@@ -112,6 +116,7 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 *
 	 * @return the company ID of this journal folder
 	 */
+	@Override
 	public long getCompanyId();
 
 	/**
@@ -119,6 +124,7 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 *
 	 * @param companyId the company ID of this journal folder
 	 */
+	@Override
 	public void setCompanyId(long companyId);
 
 	/**
@@ -126,6 +132,7 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 *
 	 * @return the user ID of this journal folder
 	 */
+	@Override
 	public long getUserId();
 
 	/**
@@ -133,6 +140,7 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 *
 	 * @param userId the user ID of this journal folder
 	 */
+	@Override
 	public void setUserId(long userId);
 
 	/**
@@ -141,6 +149,7 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 * @return the user uuid of this journal folder
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public String getUserUuid() throws SystemException;
 
 	/**
@@ -148,6 +157,7 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 *
 	 * @param userUuid the user uuid of this journal folder
 	 */
+	@Override
 	public void setUserUuid(String userUuid);
 
 	/**
@@ -156,6 +166,7 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 * @return the user name of this journal folder
 	 */
 	@AutoEscape
+	@Override
 	public String getUserName();
 
 	/**
@@ -163,6 +174,7 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 *
 	 * @param userName the user name of this journal folder
 	 */
+	@Override
 	public void setUserName(String userName);
 
 	/**
@@ -170,6 +182,7 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 *
 	 * @return the create date of this journal folder
 	 */
+	@Override
 	public Date getCreateDate();
 
 	/**
@@ -177,6 +190,7 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 *
 	 * @param createDate the create date of this journal folder
 	 */
+	@Override
 	public void setCreateDate(Date createDate);
 
 	/**
@@ -184,6 +198,7 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 *
 	 * @return the modified date of this journal folder
 	 */
+	@Override
 	public Date getModifiedDate();
 
 	/**
@@ -191,6 +206,7 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 *
 	 * @param modifiedDate the modified date of this journal folder
 	 */
+	@Override
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
@@ -242,6 +258,7 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 *
 	 * @return the status of this journal folder
 	 */
+	@Override
 	public int getStatus();
 
 	/**
@@ -249,6 +266,7 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 *
 	 * @param status the status of this journal folder
 	 */
+	@Override
 	public void setStatus(int status);
 
 	/**
@@ -256,6 +274,7 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 *
 	 * @return the status by user ID of this journal folder
 	 */
+	@Override
 	public long getStatusByUserId();
 
 	/**
@@ -263,6 +282,7 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 *
 	 * @param statusByUserId the status by user ID of this journal folder
 	 */
+	@Override
 	public void setStatusByUserId(long statusByUserId);
 
 	/**
@@ -271,6 +291,7 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 * @return the status by user uuid of this journal folder
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public String getStatusByUserUuid() throws SystemException;
 
 	/**
@@ -278,6 +299,7 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 *
 	 * @param statusByUserUuid the status by user uuid of this journal folder
 	 */
+	@Override
 	public void setStatusByUserUuid(String statusByUserUuid);
 
 	/**
@@ -286,6 +308,7 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 * @return the status by user name of this journal folder
 	 */
 	@AutoEscape
+	@Override
 	public String getStatusByUserName();
 
 	/**
@@ -293,6 +316,7 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 *
 	 * @param statusByUserName the status by user name of this journal folder
 	 */
+	@Override
 	public void setStatusByUserName(String statusByUserName);
 
 	/**
@@ -300,6 +324,7 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 *
 	 * @return the status date of this journal folder
 	 */
+	@Override
 	public Date getStatusDate();
 
 	/**
@@ -307,11 +332,13 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 *
 	 * @param statusDate the status date of this journal folder
 	 */
+	@Override
 	public void setStatusDate(Date statusDate);
 
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #isApproved()}
 	 */
+	@Override
 	public boolean getApproved();
 
 	/**
@@ -319,6 +346,7 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 *
 	 * @return <code>true</code> if this journal folder is approved; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isApproved();
 
 	/**
@@ -326,6 +354,7 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 *
 	 * @return <code>true</code> if this journal folder is denied; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isDenied();
 
 	/**
@@ -333,6 +362,7 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 *
 	 * @return <code>true</code> if this journal folder is a draft; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isDraft();
 
 	/**
@@ -340,6 +370,7 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 *
 	 * @return <code>true</code> if this journal folder is expired; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isExpired();
 
 	/**
@@ -347,6 +378,7 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 *
 	 * @return <code>true</code> if this journal folder is inactive; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isInactive();
 
 	/**
@@ -354,6 +386,7 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 *
 	 * @return <code>true</code> if this journal folder is incomplete; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isIncomplete();
 
 	/**
@@ -361,6 +394,7 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 *
 	 * @return <code>true</code> if this journal folder is in the Recycle Bin; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isInTrash();
 
 	/**
@@ -368,6 +402,7 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 *
 	 * @return <code>true</code> if this journal folder is pending; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isPending();
 
 	/**
@@ -375,6 +410,7 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 *
 	 * @return <code>true</code> if this journal folder is scheduled; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isScheduled();
 
 	/**
@@ -382,6 +418,7 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 *
 	 * @return the container model ID of this journal folder
 	 */
+	@Override
 	public long getContainerModelId();
 
 	/**
@@ -389,6 +426,7 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 *
 	 * @param container model ID of this journal folder
 	 */
+	@Override
 	public void setContainerModelId(long containerModelId);
 
 	/**
@@ -396,6 +434,7 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 *
 	 * @return the container name of this journal folder
 	 */
+	@Override
 	public String getContainerModelName();
 
 	/**
@@ -403,6 +442,7 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 *
 	 * @return the parent container model ID of this journal folder
 	 */
+	@Override
 	public long getParentContainerModelId();
 
 	/**
@@ -410,43 +450,63 @@ public interface JournalFolderModel extends BaseModel<JournalFolder>,
 	 *
 	 * @param parent container model ID of this journal folder
 	 */
+	@Override
 	public void setParentContainerModelId(long parentContainerModelId);
 
+	@Override
 	public boolean isNew();
 
+	@Override
 	public void setNew(boolean n);
 
+	@Override
 	public boolean isCachedModel();
 
+	@Override
 	public void setCachedModel(boolean cachedModel);
 
+	@Override
 	public boolean isEscapedModel();
 
+	@Override
 	public Serializable getPrimaryKeyObj();
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
+	@Override
 	public ExpandoBridge getExpandoBridge();
 
+	@Override
 	public void setExpandoBridgeAttributes(BaseModel<?> baseModel);
 
+	@Override
 	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge);
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext);
 
+	@Override
 	public Object clone();
 
+	@Override
 	public int compareTo(JournalFolder journalFolder);
 
+	@Override
 	public int hashCode();
 
+	@Override
 	public CacheModel<JournalFolder> toCacheModel();
 
+	@Override
 	public JournalFolder toEscapedModel();
 
+	@Override
 	public JournalFolder toUnescapedModel();
 
+	@Override
 	public String toString();
 
+	@Override
 	public String toXmlString();
 }

@@ -15,12 +15,10 @@
 package com.liferay.portal.service;
 
 /**
- * <p>
- * This class is a wrapper for {@link CompanyService}.
- * </p>
+ * Provides a wrapper for {@link CompanyService}.
  *
- * @author    Brian Wing Shun Chan
- * @see       CompanyService
+ * @author Brian Wing Shun Chan
+ * @see CompanyService
  * @generated
  */
 public class CompanyServiceWrapper implements CompanyService,
@@ -34,6 +32,7 @@ public class CompanyServiceWrapper implements CompanyService,
 	*
 	* @return the Spring bean ID for this bean
 	*/
+	@Override
 	public java.lang.String getBeanIdentifier() {
 		return _companyService.getBeanIdentifier();
 	}
@@ -43,6 +42,7 @@ public class CompanyServiceWrapper implements CompanyService,
 	*
 	* @param beanIdentifier the Spring bean ID for this bean
 	*/
+	@Override
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		_companyService.setBeanIdentifier(beanIdentifier);
 	}
@@ -64,6 +64,7 @@ public class CompanyServiceWrapper implements CompanyService,
 	administrator
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.Company addCompany(java.lang.String webId,
 		java.lang.String virtualHost, java.lang.String mx,
 		java.lang.String shardName, boolean system, int maxUsers, boolean active)
@@ -82,6 +83,7 @@ public class CompanyServiceWrapper implements CompanyService,
 	was not an administrator
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void deleteLogo(long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -97,6 +99,7 @@ public class CompanyServiceWrapper implements CompanyService,
 	found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.Company getCompanyById(long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -111,6 +114,7 @@ public class CompanyServiceWrapper implements CompanyService,
 	* @throws PortalException if the company with the logo could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.Company getCompanyByLogoId(long logoId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -126,6 +130,7 @@ public class CompanyServiceWrapper implements CompanyService,
 	found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.Company getCompanyByMx(java.lang.String mx)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -142,6 +147,7 @@ public class CompanyServiceWrapper implements CompanyService,
 	company
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.Company getCompanyByVirtualHost(
 		java.lang.String virtualHost)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -158,6 +164,7 @@ public class CompanyServiceWrapper implements CompanyService,
 	found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.Company getCompanyByWebId(
 		java.lang.String webId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -177,6 +184,7 @@ public class CompanyServiceWrapper implements CompanyService,
 	* @throws PortalException if the user was not an administrator
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void removePreferences(long companyId, java.lang.String[] keys)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -198,6 +206,7 @@ public class CompanyServiceWrapper implements CompanyService,
 	not a universal administrator
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.Company updateCompany(long companyId,
 		java.lang.String virtualHost, java.lang.String mx, int maxUsers,
 		boolean active)
@@ -235,6 +244,7 @@ public class CompanyServiceWrapper implements CompanyService,
 	not an administrator
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.Company updateCompany(long companyId,
 		java.lang.String virtualHost, java.lang.String mx,
 		java.lang.String homeURL, java.lang.String name,
@@ -284,6 +294,7 @@ public class CompanyServiceWrapper implements CompanyService,
 	not an administrator
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.Company updateCompany(long companyId,
 		java.lang.String virtualHost, java.lang.String mx,
 		java.lang.String homeURL, java.lang.String name,
@@ -315,6 +326,7 @@ public class CompanyServiceWrapper implements CompanyService,
 	or if the user was not an administrator
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void updateDisplay(long companyId, java.lang.String languageId,
 		java.lang.String timeZoneId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -333,6 +345,7 @@ public class CompanyServiceWrapper implements CompanyService,
 	administrator
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.Company updateLogo(long companyId,
 		byte[] bytes)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -351,6 +364,7 @@ public class CompanyServiceWrapper implements CompanyService,
 	administrator
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.Company updateLogo(long companyId,
 		java.io.InputStream inputStream)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -368,6 +382,7 @@ public class CompanyServiceWrapper implements CompanyService,
 	* @throws PortalException if the user was not an administrator
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void updatePreferences(long companyId,
 		com.liferay.portal.kernel.util.UnicodeProperties properties)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -395,6 +410,7 @@ public class CompanyServiceWrapper implements CompanyService,
 	* @throws PortalException if the user was not an administrator
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void updateSecurity(long companyId, java.lang.String authType,
 		boolean autoLogin, boolean sendPassword, boolean strangers,
 		boolean strangersWithMx, boolean strangersVerify, boolean siteLogo)
@@ -418,10 +434,12 @@ public class CompanyServiceWrapper implements CompanyService,
 		_companyService = companyService;
 	}
 
+	@Override
 	public CompanyService getWrappedService() {
 		return _companyService;
 	}
 
+	@Override
 	public void setWrappedService(CompanyService companyService) {
 		_companyService = companyService;
 	}

@@ -1,0 +1,162 @@
+<html>
+<head>
+<title>PGAssetpublisher</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">PGAssetpublisher</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>PAGE_NAME</td>
+	<td></td>
+	<td>PGAssetpublisher</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>OPTIONS_WRENCH_ICON</td>
+	<td>//a[@title='Options']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>MINIMIZE</td>
+	<td>//img[@title='Minimize']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>MAXIMIZE</td>
+	<td>//img[@title='Maximize']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>REMOVE</td>
+	<td>//img[@title='Remove']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ADD_DROPDOWN</td>
+	<td>//div[contains(@class,'add-asset-selector')]/div/div/div/ul/li/a[contains(@class,'dropdown-toggle')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>INFO_MESSAGE</td>
+	<td>//div[@class='alert alert-info']</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--OPTIONS_MENULIST-->
+<tr>
+	<td>OPTIONS_MENULIST_LOOK_AND_FEEL</td>
+	<td>//ul[@class='dropdown-menu lfr-menu-list direction-down']/li/a[contains(.,'Look and Feel')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>OPTIONS_MENULIST_CONFIGURATION</td>
+	<td>//ul[@class='dropdown-menu lfr-menu-list direction-down']/li/a[contains(.,'Configuration')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>OPTIONS_MENULIST_EXPORT_IMPORT</td>
+	<td>//ul[@class='dropdown-menu lfr-menu-list direction-down']/li/a[contains(.,'Export / Import')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--ADD_MENULIST-->
+<tr>
+	<td>ADD_MENULIST_BLOGS_ENTRY</td>
+	<td>//ul[@class='dropdown-menu']/li/a[contains(.,'Blogs Entry')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ADD_MENULIST_BOOKMARKS_ENTRY</td>
+	<td>//ul[@class='dropdown-menu']/li/a[contains(.,'Bookmarks Entry')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ADD_MENULIST_CALENDAR_EVENT</td>
+	<td>//ul[@class='dropdown-menu']/li/a[contains(.,'Calendar Event')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ADD_MENULIST_BASIC_DOCUMENT</td>
+	<td>//ul[@class='dropdown-menu']/li/a[contains(.,'Basic Document')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ADD_MENULIST_WEB_CONTENT</td>
+	<td>//ul[@class='dropdown-menu']/li/a[contains(.,'Web Content')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ADD_MENULIST_CONTRACT</td>
+	<td>//ul[@class='dropdown-menu']/li/a[contains(.,'Contract')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ADD_MENULIST_MARKETING_BANNER</td>
+	<td>//ul[@class='dropdown-menu']/li/a[contains(.,'Marketing Banner')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ADD_MENULIST_ONLINE_TRAINING</td>
+	<td>//ul[@class='dropdown-menu']/li/a[contains(.,'Online Training')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ADD_MENULIST_SALES_PRESENTATION</td>
+	<td>//ul[@class='dropdown-menu']/li/a[contains(.,'Sales Presentation')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--ASSET_1-->
+<tr>
+	<td>ASSET_TITLE_1</td>
+	<td>xpath=(//h3[@class='asset-title']/a)[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ASSET_EDIT_1</td>
+	<td>xpath=(//div/div/span/a/span[contains(.,'Edit')])[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ASSET_THUMBNAIL_1</td>
+	<td>xpath=(//div[@class='asset-resource-info']/div/img)[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ASSET_DESCRIPTION_1</td>
+	<td>xpath=(//p[@class='asset-description'])[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ASSET_SUMMARY_1</td>
+	<td>xpath=(//div[@class='asset-summary'])[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ASSET_READ_MORE_1</td>
+	<td>xpath=(//div[@class='asset-more'])[1]</td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

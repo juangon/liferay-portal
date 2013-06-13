@@ -47,11 +47,13 @@ public class BaseTestCase extends LiferaySeleneseTestCase {
 
 		String className = clazz.getName();
 
-		if (className.contains(".evaluatelog.")) {
+		if (className.contains("evaluatelog")) {
 			return;
 		}
 
 		selenium = SeleniumUtil.getSelenium();
+
+		selenium.startLogger();
 	}
 
 	@Override

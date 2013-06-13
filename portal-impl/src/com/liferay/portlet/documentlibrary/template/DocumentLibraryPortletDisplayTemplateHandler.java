@@ -38,10 +38,12 @@ import java.util.Map;
 public class DocumentLibraryPortletDisplayTemplateHandler
 	extends BasePortletDisplayTemplateHandler {
 
+	@Override
 	public String getClassName() {
 		return FileEntry.class.getName();
 	}
 
+	@Override
 	public String getName(Locale locale) {
 		String portletTitle = PortalUtil.getPortletTitle(
 			PortletKeys.DOCUMENT_LIBRARY, locale);
@@ -50,17 +52,18 @@ public class DocumentLibraryPortletDisplayTemplateHandler
 			LanguageUtil.get(locale, "template"));
 	}
 
+	@Override
 	public String getResourceName() {
 		return "com.liferay.portlet.documentlibrary";
 	}
 
 	@Override
 	public Map<String, TemplateVariableGroup> getTemplateVariableGroups(
-			long classPK, Locale locale)
+			long classPK, String language, Locale locale)
 		throws Exception {
 
 		Map<String, TemplateVariableGroup> templateVariableGroups =
-			super.getTemplateVariableGroups(classPK, locale);
+			super.getTemplateVariableGroups(classPK, language, locale);
 
 		TemplateVariableGroup templateVariableGroup =
 			templateVariableGroups.get("fields");

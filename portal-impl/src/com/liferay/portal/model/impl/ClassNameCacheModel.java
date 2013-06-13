@@ -46,6 +46,7 @@ public class ClassNameCacheModel implements CacheModel<ClassName>,
 		return sb.toString();
 	}
 
+	@Override
 	public ClassName toEntityModel() {
 		ClassNameImpl classNameImpl = new ClassNameImpl();
 
@@ -63,11 +64,13 @@ public class ClassNameCacheModel implements CacheModel<ClassName>,
 		return classNameImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		classNameId = objectInput.readLong();
 		value = objectInput.readUTF();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(classNameId);

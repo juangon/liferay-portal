@@ -47,6 +47,7 @@ public class ListTypeCacheModel implements CacheModel<ListType>, Externalizable 
 		return sb.toString();
 	}
 
+	@Override
 	public ListType toEntityModel() {
 		ListTypeImpl listTypeImpl = new ListTypeImpl();
 
@@ -71,12 +72,14 @@ public class ListTypeCacheModel implements CacheModel<ListType>, Externalizable 
 		return listTypeImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		listTypeId = objectInput.readInt();
 		name = objectInput.readUTF();
 		type = objectInput.readUTF();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeInt(listTypeId);

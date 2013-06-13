@@ -72,6 +72,7 @@ public class JournalXSLURIResolver implements Externalizable, XSLURIResolver {
 		return false;
 	}
 
+	@Override
 	public String getLanguageId() {
 		return _languageId;
 	}
@@ -83,6 +84,7 @@ public class JournalXSLURIResolver implements Externalizable, XSLURIResolver {
 		return HashUtil.hash(hashCode, _tokens);
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput)
 		throws ClassNotFoundException, IOException {
 
@@ -95,6 +97,7 @@ public class JournalXSLURIResolver implements Externalizable, XSLURIResolver {
 		_tokens = (Map<String, String>)objectInput.readObject();
 	}
 
+	@Override
 	public Source resolve(String href, String base) {
 		try {
 			String content = null;
@@ -102,14 +105,16 @@ public class JournalXSLURIResolver implements Externalizable, XSLURIResolver {
 			int templatePathIndex = href.indexOf(_PATH_GET_TEMPLATE);
 
 			if (templatePathIndex >= 0) {
+				long articleGroupId = GetterUtil.getLong(
+					_tokens.get("article_group_id"));
+
 				int templateIdIndex =
 					templatePathIndex + _PATH_GET_TEMPLATE.length();
 
-				long groupId = GetterUtil.getLong(_tokens.get("group_id"));
 				String templateId = href.substring(templateIdIndex);
 
 				content = JournalUtil.getTemplateScript(
-					groupId, templateId, _tokens, _languageId);
+					articleGroupId, templateId, _tokens, _languageId);
 			}
 			else {
 				content = HttpUtil.URLtoString(href);
@@ -124,6 +129,7 @@ public class JournalXSLURIResolver implements Externalizable, XSLURIResolver {
 		}
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		if (_languageId == null) {
 			objectOutput.writeUTF(StringPool.BLANK);

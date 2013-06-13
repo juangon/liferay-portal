@@ -41,6 +41,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ResourceActionLocalServiceImpl
 	extends ResourceActionLocalServiceBaseImpl {
 
+	@Override
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public void checkResourceActions() throws SystemException {
 		List<ResourceAction> resourceActions =
@@ -54,12 +55,14 @@ public class ResourceActionLocalServiceImpl
 		}
 	}
 
+	@Override
 	public void checkResourceActions(String name, List<String> actionIds)
 		throws SystemException {
 
 		checkResourceActions(name, actionIds, false);
 	}
 
+	@Override
 	public void checkResourceActions(
 			String name, List<String> actionIds, boolean addDefaultActions)
 		throws SystemException {
@@ -125,51 +128,54 @@ public class ResourceActionLocalServiceImpl
 			_resourceActions.put(key, resourceAction);
 		}
 
-		if (addDefaultActions && (newResourceActions != null)) {
-			List<String> groupDefaultActions =
-				ResourceActionsUtil.getModelResourceGroupDefaultActions(name);
+		if (!addDefaultActions || (newResourceActions == null)) {
+			return;
+		}
 
-			List<String> guestDefaultActions =
-				ResourceActionsUtil.getModelResourceGuestDefaultActions(name);
+		List<String> groupDefaultActions =
+			ResourceActionsUtil.getModelResourceGroupDefaultActions(name);
 
-			long guestBitwiseValue = 0;
-			long ownerBitwiseValue = 0;
-			long siteMemberBitwiseValue = 0;
+		List<String> guestDefaultActions =
+			ResourceActionsUtil.getModelResourceGuestDefaultActions(name);
 
-			for (ResourceAction resourceAction : newResourceActions) {
-				String actionId = resourceAction.getActionId();
+		long guestBitwiseValue = 0;
+		long ownerBitwiseValue = 0;
+		long siteMemberBitwiseValue = 0;
 
-				if (guestDefaultActions.contains(actionId)) {
-					guestBitwiseValue |= resourceAction.getBitwiseValue();
-				}
+		for (ResourceAction resourceAction : newResourceActions) {
+			String actionId = resourceAction.getActionId();
 
-				ownerBitwiseValue |= resourceAction.getBitwiseValue();
-
-				if (groupDefaultActions.contains(actionId)) {
-					siteMemberBitwiseValue |= resourceAction.getBitwiseValue();
-				}
+			if (guestDefaultActions.contains(actionId)) {
+				guestBitwiseValue |= resourceAction.getBitwiseValue();
 			}
 
-			if (guestBitwiseValue > 0) {
-				resourcePermissionLocalService.addResourcePermissions(
-					name, RoleConstants.GUEST,
-					ResourceConstants.SCOPE_INDIVIDUAL, guestBitwiseValue);
-			}
+			ownerBitwiseValue |= resourceAction.getBitwiseValue();
 
-			if (ownerBitwiseValue > 0) {
-				resourcePermissionLocalService.addResourcePermissions(
-					name, RoleConstants.OWNER,
-					ResourceConstants.SCOPE_INDIVIDUAL, ownerBitwiseValue);
+			if (groupDefaultActions.contains(actionId)) {
+				siteMemberBitwiseValue |= resourceAction.getBitwiseValue();
 			}
+		}
 
-			if (siteMemberBitwiseValue > 0) {
-				resourcePermissionLocalService.addResourcePermissions(
-					name, RoleConstants.SITE_MEMBER,
-					ResourceConstants.SCOPE_INDIVIDUAL, siteMemberBitwiseValue);
-			}
+		if (guestBitwiseValue > 0) {
+			resourcePermissionLocalService.addResourcePermissions(
+				name, RoleConstants.GUEST, ResourceConstants.SCOPE_INDIVIDUAL,
+				guestBitwiseValue);
+		}
+
+		if (ownerBitwiseValue > 0) {
+			resourcePermissionLocalService.addResourcePermissions(
+				name, RoleConstants.OWNER, ResourceConstants.SCOPE_INDIVIDUAL,
+				ownerBitwiseValue);
+		}
+
+		if (siteMemberBitwiseValue > 0) {
+			resourcePermissionLocalService.addResourcePermissions(
+				name, RoleConstants.SITE_MEMBER,
+				ResourceConstants.SCOPE_INDIVIDUAL, siteMemberBitwiseValue);
 		}
 	}
 
+	@Override
 	@Skip
 	public ResourceAction fetchResourceAction(String name, String actionId) {
 		String key = encodeKey(name, actionId);
@@ -177,6 +183,7 @@ public class ResourceActionLocalServiceImpl
 		return _resourceActions.get(key);
 	}
 
+	@Override
 	@Skip
 	public ResourceAction getResourceAction(String name, String actionId)
 		throws PortalException {
@@ -192,6 +199,7 @@ public class ResourceActionLocalServiceImpl
 		return resourceAction;
 	}
 
+	@Override
 	public List<ResourceAction> getResourceActions(String name)
 		throws SystemException {
 

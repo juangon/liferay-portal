@@ -85,26 +85,32 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow>
 	public ExpandoRowModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _rowId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setRowId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _rowId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return ExpandoRow.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return ExpandoRow.class.getName();
 	}
@@ -155,34 +161,42 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow>
 		}
 	}
 
+	@Override
 	public long getRowId() {
 		return _rowId;
 	}
 
+	@Override
 	public void setRowId(long rowId) {
 		_rowId = rowId;
 	}
 
+	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
+	@Override
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
 	public long getTableId() {
 		return _tableId;
 	}
 
+	@Override
 	public void setTableId(long tableId) {
 		_columnBitmask |= TABLEID_COLUMN_BITMASK;
 
@@ -199,10 +213,12 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow>
 		return _originalTableId;
 	}
 
+	@Override
 	public long getClassPK() {
 		return _classPK;
 	}
 
+	@Override
 	public void setClassPK(long classPK) {
 		_columnBitmask |= CLASSPK_COLUMN_BITMASK;
 
@@ -248,6 +264,7 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow>
 		return expandoRowImpl;
 	}
 
+	@Override
 	public int compareTo(ExpandoRow expandoRow) {
 		long primaryKey = expandoRow.getPrimaryKey();
 
@@ -264,18 +281,15 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ExpandoRow)) {
 			return false;
 		}
 
-		ExpandoRow expandoRow = null;
-
-		try {
-			expandoRow = (ExpandoRow)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		ExpandoRow expandoRow = (ExpandoRow)obj;
 
 		long primaryKey = expandoRow.getPrimaryKey();
 
@@ -350,6 +364,7 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(19);
 

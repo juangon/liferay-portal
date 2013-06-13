@@ -61,6 +61,7 @@ public class ReleaseCacheModel implements CacheModel<Release>, Externalizable {
 		return sb.toString();
 	}
 
+	@Override
 	public Release toEntityModel() {
 		ReleaseImpl releaseImpl = new ReleaseImpl();
 
@@ -111,6 +112,7 @@ public class ReleaseCacheModel implements CacheModel<Release>, Externalizable {
 		return releaseImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		releaseId = objectInput.readLong();
 		createDate = objectInput.readLong();
@@ -123,6 +125,7 @@ public class ReleaseCacheModel implements CacheModel<Release>, Externalizable {
 		testString = objectInput.readUTF();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(releaseId);

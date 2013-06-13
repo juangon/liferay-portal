@@ -15,6 +15,8 @@
 package com.liferay.portal.kernel.util;
 
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 import java.util.Arrays;
@@ -683,7 +685,7 @@ public class Validator {
 	}
 
 	public static boolean isFilePath(String path, boolean isParentDirAllowed) {
-		if (Validator.isNull(path)) {
+		if (isNull(path)) {
 			return false;
 		}
 
@@ -1210,6 +1212,20 @@ public class Validator {
 		return isNumber(StringUtil.extractDigits(phoneNumber));
 	}
 
+	public static boolean isUri(String uri) {
+		if (isNotNull(uri)) {
+			try {
+				new URI(uri);
+
+				return true;
+			}
+			catch (URISyntaxException urise) {
+			}
+		}
+
+		return false;
+	}
+
 	/**
 	 * Returns <code>true</code> if the string is a valid URL based on the rules
 	 * in {@link java.net.URL}.
@@ -1219,7 +1235,7 @@ public class Validator {
 	 *         <code>false</code> otherwise
 	 */
 	public static boolean isUrl(String url) {
-		if (Validator.isNotNull(url)) {
+		if (isNotNull(url)) {
 			if (url.indexOf(CharPool.COLON) == -1) {
 				return false;
 			}

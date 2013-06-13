@@ -35,10 +35,6 @@ public interface DLFileVersion extends DLFileVersionModel, PersistedModel {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge();
-
-	public java.lang.String getExtraSettings();
-
 	public com.liferay.portal.kernel.util.UnicodeProperties getExtraSettingsProperties();
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry()
@@ -52,8 +48,6 @@ public interface DLFileVersion extends DLFileVersionModel, PersistedModel {
 	public com.liferay.portlet.documentlibrary.model.DLFolder getTrashContainer();
 
 	public boolean isInTrashContainer();
-
-	public void setExtraSettings(java.lang.String extraSettings);
 
 	public void setExtraSettingsProperties(
 		com.liferay.portal.kernel.util.UnicodeProperties extraSettingsProperties);

@@ -64,6 +64,7 @@ public class BookmarksEntryLocalServiceImpl
 	extends BookmarksEntryLocalServiceBaseImpl {
 
 	@Indexable(type = IndexableType.REINDEX)
+	@Override
 	public BookmarksEntry addEntry(
 			long userId, long groupId, long folderId, String name, String url,
 			String description, ServiceContext serviceContext)
@@ -128,12 +129,14 @@ public class BookmarksEntryLocalServiceImpl
 		return entry;
 	}
 
+	@Override
 	public void deleteEntries(long groupId, long folderId)
 		throws PortalException, SystemException {
 
 		deleteEntries(groupId, folderId, true);
 	}
 
+	@Override
 	public void deleteEntries(
 			long groupId, long folderId, boolean includeTrashedEntries)
 		throws PortalException, SystemException {
@@ -149,6 +152,7 @@ public class BookmarksEntryLocalServiceImpl
 	}
 
 	@Indexable(type = IndexableType.DELETE)
+	@Override
 	public BookmarksEntry deleteEntry(BookmarksEntry entry)
 		throws PortalException, SystemException {
 
@@ -186,6 +190,7 @@ public class BookmarksEntryLocalServiceImpl
 	}
 
 	@Indexable(type = IndexableType.DELETE)
+	@Override
 	public BookmarksEntry deleteEntry(long entryId)
 		throws PortalException, SystemException {
 
@@ -195,6 +200,7 @@ public class BookmarksEntryLocalServiceImpl
 		return deleteEntry(entry);
 	}
 
+	@Override
 	public List<BookmarksEntry> getEntries(
 			long groupId, long folderId, int start, int end)
 		throws SystemException {
@@ -203,6 +209,7 @@ public class BookmarksEntryLocalServiceImpl
 			groupId, folderId, WorkflowConstants.STATUS_APPROVED, start, end);
 	}
 
+	@Override
 	public List<BookmarksEntry> getEntries(
 			long groupId, long folderId, int start, int end,
 			OrderByComparator orderByComparator)
@@ -213,6 +220,7 @@ public class BookmarksEntryLocalServiceImpl
 			orderByComparator);
 	}
 
+	@Override
 	public int getEntriesCount(long groupId, long folderId)
 		throws SystemException {
 
@@ -220,12 +228,14 @@ public class BookmarksEntryLocalServiceImpl
 			groupId, folderId, WorkflowConstants.STATUS_APPROVED);
 	}
 
+	@Override
 	public BookmarksEntry getEntry(long entryId)
 		throws PortalException, SystemException {
 
 		return bookmarksEntryPersistence.findByPrimaryKey(entryId);
 	}
 
+	@Override
 	public int getFoldersEntriesCount(long groupId, List<Long> folderIds)
 		throws SystemException {
 
@@ -235,6 +245,7 @@ public class BookmarksEntryLocalServiceImpl
 			WorkflowConstants.STATUS_APPROVED);
 	}
 
+	@Override
 	public List<BookmarksEntry> getGroupEntries(
 			long groupId, int start, int end)
 		throws SystemException {
@@ -244,6 +255,7 @@ public class BookmarksEntryLocalServiceImpl
 			new EntryModifiedDateComparator());
 	}
 
+	@Override
 	public List<BookmarksEntry> getGroupEntries(
 			long groupId, long userId, int start, int end)
 		throws SystemException {
@@ -262,11 +274,13 @@ public class BookmarksEntryLocalServiceImpl
 		}
 	}
 
+	@Override
 	public int getGroupEntriesCount(long groupId) throws SystemException {
 		return bookmarksEntryPersistence.countByG_S(
 			groupId, WorkflowConstants.STATUS_APPROVED);
 	}
 
+	@Override
 	public int getGroupEntriesCount(long groupId, long userId)
 		throws SystemException {
 
@@ -279,11 +293,13 @@ public class BookmarksEntryLocalServiceImpl
 		}
 	}
 
+	@Override
 	public List<BookmarksEntry> getNoAssetEntries() throws SystemException {
 		return bookmarksEntryFinder.findByNoAssets();
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
+	@Override
 	public BookmarksEntry moveEntry(long entryId, long parentFolderId)
 		throws PortalException, SystemException {
 
@@ -296,6 +312,7 @@ public class BookmarksEntryLocalServiceImpl
 		return entry;
 	}
 
+	@Override
 	public BookmarksEntry moveEntryFromTrash(
 			long userId, long entryId, long parentFolderId)
 		throws PortalException, SystemException {
@@ -313,6 +330,7 @@ public class BookmarksEntryLocalServiceImpl
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
+	@Override
 	public BookmarksEntry moveEntryToTrash(long userId, BookmarksEntry entry)
 		throws PortalException, SystemException {
 
@@ -320,6 +338,7 @@ public class BookmarksEntryLocalServiceImpl
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
+	@Override
 	public BookmarksEntry moveEntryToTrash(long userId, long entryId)
 		throws PortalException, SystemException {
 
@@ -328,6 +347,7 @@ public class BookmarksEntryLocalServiceImpl
 		return moveEntryToTrash(userId, entry);
 	}
 
+	@Override
 	public BookmarksEntry openEntry(long userId, BookmarksEntry entry)
 		throws SystemException {
 
@@ -341,6 +361,7 @@ public class BookmarksEntryLocalServiceImpl
 		return entry;
 	}
 
+	@Override
 	public BookmarksEntry openEntry(long userId, long entryId)
 		throws PortalException, SystemException {
 
@@ -351,6 +372,7 @@ public class BookmarksEntryLocalServiceImpl
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
+	@Override
 	public BookmarksEntry restoreEntryFromTrash(long userId, long entryId)
 		throws PortalException, SystemException {
 
@@ -363,6 +385,7 @@ public class BookmarksEntryLocalServiceImpl
 		return updateStatus(userId, entry, trashEntry.getStatus());
 	}
 
+	@Override
 	public void subscribeEntry(long userId, long entryId)
 		throws PortalException, SystemException {
 
@@ -374,6 +397,7 @@ public class BookmarksEntryLocalServiceImpl
 			entryId);
 	}
 
+	@Override
 	public void unsubscribeEntry(long userId, long entryId)
 		throws PortalException, SystemException {
 
@@ -381,6 +405,7 @@ public class BookmarksEntryLocalServiceImpl
 			userId, BookmarksEntry.class.getName(), entryId);
 	}
 
+	@Override
 	public void updateAsset(
 			long userId, BookmarksEntry entry, long[] assetCategoryIds,
 			String[] assetTagNames, long[] assetLinkEntryIds)
@@ -400,6 +425,7 @@ public class BookmarksEntryLocalServiceImpl
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
+	@Override
 	public BookmarksEntry updateEntry(
 			long userId, long entryId, long groupId, long folderId, String name,
 			String url, String description, ServiceContext serviceContext)
@@ -450,6 +476,7 @@ public class BookmarksEntryLocalServiceImpl
 		return entry;
 	}
 
+	@Override
 	public BookmarksEntry updateStatus(
 			long userId, BookmarksEntry entry, int status)
 		throws PortalException, SystemException {

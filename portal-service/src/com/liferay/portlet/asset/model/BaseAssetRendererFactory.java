@@ -25,8 +25,10 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
+import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
@@ -49,24 +51,28 @@ import javax.portlet.PortletURL;
  */
 public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 
+	@Override
 	public AssetEntry getAssetEntry(long assetEntryId)
 		throws PortalException, SystemException {
 
 		return AssetEntryLocalServiceUtil.getEntry(assetEntryId);
 	}
 
+	@Override
 	public AssetEntry getAssetEntry(String className, long classPK)
 		throws PortalException, SystemException {
 
 		return AssetEntryLocalServiceUtil.getEntry(className, classPK);
 	}
 
+	@Override
 	public AssetRenderer getAssetRenderer(long classPK)
 		throws PortalException, SystemException {
 
 		return getAssetRenderer(classPK, TYPE_LATEST_APPROVED);
 	}
 
+	@Override
 	@SuppressWarnings("unused")
 	public AssetRenderer getAssetRenderer(long groupId, String urlTitle)
 		throws PortalException, SystemException {
@@ -74,10 +80,12 @@ public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 		return null;
 	}
 
+	@Override
 	public long getClassNameId() {
 		return PortalUtil.getClassNameId(_className);
 	}
 
+	@Override
 	public List<Tuple> getClassTypeFieldNames(
 			long classTypeId, Locale locale, int start, int end)
 		throws Exception {
@@ -85,18 +93,21 @@ public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 		return Collections.emptyList();
 	}
 
+	@Override
 	public int getClassTypeFieldNamesCount(long classTypeId, Locale locale)
 		throws Exception {
 
 		return 0;
 	}
 
+	@Override
 	public Map<Long, String> getClassTypes(long[] groupId, Locale locale)
 		throws Exception {
 
 		return Collections.emptyMap();
 	}
 
+	@Override
 	public String getIconPath(PortletRequest portletRequest) {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -104,14 +115,17 @@ public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 		return getIconPath(themeDisplay);
 	}
 
+	@Override
 	public String getPortletId() {
 		return _portletId;
 	}
 
+	@Override
 	public String getTypeName(Locale locale, boolean hasSubtypes) {
 		return ResourceActionsUtil.getModelResource(locale, getClassName());
 	}
 
+	@Override
 	@SuppressWarnings("unused")
 	public PortletURL getURLAdd(
 			LiferayPortletRequest liferayPortletRequest,
@@ -121,6 +135,7 @@ public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 		return null;
 	}
 
+	@Override
 	public boolean hasClassTypeFieldNames(long classTypeId, Locale locale)
 		throws Exception {
 
@@ -130,6 +145,7 @@ public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 		return !classTypeFieldNames.isEmpty();
 	}
 
+	@Override
 	public boolean hasPermission(
 			PermissionChecker permissionChecker, long classPK, String actionId)
 		throws Exception {
@@ -137,22 +153,50 @@ public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 		return _PERMISSION;
 	}
 
+	@Override
+	public boolean isActive(long companyId) {
+		if (Validator.isNull(getPortletId())) {
+			return true;
+		}
+
+		Portlet portlet = null;
+
+		try {
+			portlet = PortletLocalServiceUtil.getPortletById(
+				companyId, getPortletId());
+		}
+		catch (SystemException se) {
+			portlet = PortletLocalServiceUtil.getPortletById(getPortletId());
+		}
+
+		if (portlet == null) {
+			return false;
+		}
+
+		return portlet.isActive();
+	}
+
+	@Override
 	public boolean isCategorizable() {
 		return true;
 	}
 
+	@Override
 	public boolean isLinkable() {
 		return _LINKABLE;
 	}
 
+	@Override
 	public boolean isSelectable() {
 		return _SELECTABLE;
 	}
 
+	@Override
 	public void setClassName(String className) {
 		_className = className;
 	}
 
+	@Override
 	public void setPortletId(String portletId) {
 		_portletId = portletId;
 	}

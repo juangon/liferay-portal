@@ -175,7 +175,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 			for (int i = 0; i < CalEventConstants.TYPES.length; i++) {
 			%>
 
-				<aui:option value="<%= HtmlUtil.escapeAttribute(CalEventConstants.TYPES[i]) %>"><%= HtmlUtil.escape(CalEventConstants.TYPES[i]) %></aui:option>
+				<aui:option label="<%= HtmlUtil.escape(CalEventConstants.TYPES[i]) %>" value="<%= HtmlUtil.escapeAttribute(CalEventConstants.TYPES[i]) %>" />
 
 			<%
 			}
@@ -204,7 +204,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 	<br />
 
 	<liferay-ui:panel-container cssClass="calendar-event-details" extended="<%= true %>" id="calendarEventDetailsPanelContainer" persistState="<%= true %>">
-		<liferay-ui:panel collapsible="<%= true %>" defaultState="closed" extended="<%= false %>" id="calendarEventCateogrizationPanel" persistState="<%= true %>" title="categorization">
+		<liferay-ui:panel collapsible="<%= true %>" defaultState="closed" extended="<%= false %>" id="calendarEventCategorizationPanel" persistState="<%= true %>" title="categorization">
 			<aui:fieldset>
 				<aui:input name="categories" type="assetCategories" />
 
@@ -226,7 +226,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 			<liferay-ui:input-repeat event="<%= event %>" />
 
-			<aui:fieldset cssClass='<%= recurrenceType == Recurrence.NO_RECURRENCE ? "aui-helper-hidden" : StringPool.BLANK %>' id="repeatUntilOptions">
+			<aui:fieldset cssClass='<%= recurrenceType == Recurrence.NO_RECURRENCE ? "hide" : StringPool.BLANK %>' id="repeatUntilOptions">
 				<aui:field-wrapper cssClass="end-date-field" label="repeat-until" name="endDateType">
 					<aui:input checked="<%= endDateType == CalEventConstants.END_DATE_TYPE_NONE %>" cssClass="input-container" label="no-end-date" name="endDateType" type="radio" value="<%= CalEventConstants.END_DATE_TYPE_NONE %>" />
 
@@ -243,7 +243,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="calendarRemindersPanel" persistState="<%= true %>" title="reminders">
 			<aui:fieldset>
-				<span class="aui-field-row">
+				<span class="field-row">
 					<aui:select inlineField="<%= true %>" inlineLabel="left" label="remind-me" name="firstReminder">
 
 						<%

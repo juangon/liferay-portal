@@ -14,13 +14,17 @@
 
 package com.liferay.portlet.documentlibrary.model.impl;
 
+import com.liferay.portal.LocaleException;
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
@@ -40,6 +44,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -73,10 +78,11 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 			{ "userName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
+			{ "fileEntryTypeKey", Types.VARCHAR },
 			{ "name", Types.VARCHAR },
 			{ "description", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DLFileEntryType (uuid_ VARCHAR(75) null,fileEntryTypeId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,description STRING null)";
+	public static final String TABLE_SQL_CREATE = "create table DLFileEntryType (uuid_ VARCHAR(75) null,fileEntryTypeId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,fileEntryTypeKey VARCHAR(75) null,name STRING null,description STRING null)";
 	public static final String TABLE_SQL_DROP = "drop table DLFileEntryType";
 	public static final String ORDER_BY_JPQL = " ORDER BY dlFileEntryType.fileEntryTypeId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY DLFileEntryType.fileEntryTypeId ASC";
@@ -93,8 +99,8 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 				"value.object.column.bitmask.enabled.com.liferay.portlet.documentlibrary.model.DLFileEntryType"),
 			true);
 	public static long COMPANYID_COLUMN_BITMASK = 1L;
-	public static long GROUPID_COLUMN_BITMASK = 2L;
-	public static long NAME_COLUMN_BITMASK = 4L;
+	public static long FILEENTRYTYPEKEY_COLUMN_BITMASK = 2L;
+	public static long GROUPID_COLUMN_BITMASK = 4L;
 	public static long UUID_COLUMN_BITMASK = 8L;
 	public static long FILEENTRYTYPEID_COLUMN_BITMASK = 16L;
 
@@ -119,6 +125,7 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setFileEntryTypeKey(soapModel.getFileEntryTypeKey());
 		model.setName(soapModel.getName());
 		model.setDescription(soapModel.getDescription());
 
@@ -165,7 +172,7 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 			{ "structureId", Types.BIGINT }
 		};
 	public static final String MAPPING_TABLE_DLFILEENTRYTYPES_DDMSTRUCTURES_SQL_CREATE =
-		"create table DLFileEntryTypes_DDMStructures (fileEntryTypeId LONG not null,structureId LONG not null,primary key (fileEntryTypeId, structureId))";
+		"create table DLFileEntryTypes_DDMStructures (structureId LONG not null,fileEntryTypeId LONG not null,primary key (structureId, fileEntryTypeId))";
 	public static final boolean FINDER_CACHE_ENABLED_DLFILEENTRYTYPES_DDMSTRUCTURES =
 		GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.DLFileEntryTypes_DDMStructures"),
@@ -176,26 +183,32 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 	public DLFileEntryTypeModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _fileEntryTypeId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setFileEntryTypeId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _fileEntryTypeId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return DLFileEntryType.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return DLFileEntryType.class.getName();
 	}
@@ -212,6 +225,7 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
+		attributes.put("fileEntryTypeKey", getFileEntryTypeKey());
 		attributes.put("name", getName());
 		attributes.put("description", getDescription());
 
@@ -268,6 +282,12 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 			setModifiedDate(modifiedDate);
 		}
 
+		String fileEntryTypeKey = (String)attributes.get("fileEntryTypeKey");
+
+		if (fileEntryTypeKey != null) {
+			setFileEntryTypeKey(fileEntryTypeKey);
+		}
+
 		String name = (String)attributes.get("name");
 
 		if (name != null) {
@@ -281,6 +301,7 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 		}
 	}
 
+	@Override
 	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
@@ -291,6 +312,7 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 		}
 	}
 
+	@Override
 	public void setUuid(String uuid) {
 		if (_originalUuid == null) {
 			_originalUuid = _uuid;
@@ -303,20 +325,24 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@Override
 	@JSON
 	public long getFileEntryTypeId() {
 		return _fileEntryTypeId;
 	}
 
+	@Override
 	public void setFileEntryTypeId(long fileEntryTypeId) {
 		_fileEntryTypeId = fileEntryTypeId;
 	}
 
+	@Override
 	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -333,11 +359,13 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 		return _originalGroupId;
 	}
 
+	@Override
 	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
@@ -354,23 +382,28 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 		return _originalCompanyId;
 	}
 
+	@Override
 	@JSON
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
 
+	@Override
 	@JSON
 	public String getUserName() {
 		if (_userName == null) {
@@ -381,28 +414,60 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 		}
 	}
 
+	@Override
 	public void setUserName(String userName) {
 		_userName = userName;
 	}
 
+	@Override
 	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
 	}
 
+	@Override
 	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
+	@JSON
+	public String getFileEntryTypeKey() {
+		if (_fileEntryTypeKey == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _fileEntryTypeKey;
+		}
+	}
+
+	@Override
+	public void setFileEntryTypeKey(String fileEntryTypeKey) {
+		_columnBitmask |= FILEENTRYTYPEKEY_COLUMN_BITMASK;
+
+		if (_originalFileEntryTypeKey == null) {
+			_originalFileEntryTypeKey = _fileEntryTypeKey;
+		}
+
+		_fileEntryTypeKey = fileEntryTypeKey;
+	}
+
+	public String getOriginalFileEntryTypeKey() {
+		return GetterUtil.getString(_originalFileEntryTypeKey);
+	}
+
+	@Override
 	@JSON
 	public String getName() {
 		if (_name == null) {
@@ -413,20 +478,95 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 		}
 	}
 
+	@Override
+	public String getName(Locale locale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getName(languageId);
+	}
+
+	@Override
+	public String getName(Locale locale, boolean useDefault) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getName(languageId, useDefault);
+	}
+
+	@Override
+	public String getName(String languageId) {
+		return LocalizationUtil.getLocalization(getName(), languageId);
+	}
+
+	@Override
+	public String getName(String languageId, boolean useDefault) {
+		return LocalizationUtil.getLocalization(getName(), languageId,
+			useDefault);
+	}
+
+	@Override
+	public String getNameCurrentLanguageId() {
+		return _nameCurrentLanguageId;
+	}
+
+	@JSON
+	@Override
+	public String getNameCurrentValue() {
+		Locale locale = getLocale(_nameCurrentLanguageId);
+
+		return getName(locale);
+	}
+
+	@Override
+	public Map<Locale, String> getNameMap() {
+		return LocalizationUtil.getLocalizationMap(getName());
+	}
+
+	@Override
 	public void setName(String name) {
-		_columnBitmask |= NAME_COLUMN_BITMASK;
-
-		if (_originalName == null) {
-			_originalName = _name;
-		}
-
 		_name = name;
 	}
 
-	public String getOriginalName() {
-		return GetterUtil.getString(_originalName);
+	@Override
+	public void setName(String name, Locale locale) {
+		setName(name, locale, LocaleUtil.getDefault());
 	}
 
+	@Override
+	public void setName(String name, Locale locale, Locale defaultLocale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
+
+		if (Validator.isNotNull(name)) {
+			setName(LocalizationUtil.updateLocalization(getName(), "Name",
+					name, languageId, defaultLanguageId));
+		}
+		else {
+			setName(LocalizationUtil.removeLocalization(getName(), "Name",
+					languageId));
+		}
+	}
+
+	@Override
+	public void setNameCurrentLanguageId(String languageId) {
+		_nameCurrentLanguageId = languageId;
+	}
+
+	@Override
+	public void setNameMap(Map<Locale, String> nameMap) {
+		setNameMap(nameMap, LocaleUtil.getDefault());
+	}
+
+	@Override
+	public void setNameMap(Map<Locale, String> nameMap, Locale defaultLocale) {
+		if (nameMap == null) {
+			return;
+		}
+
+		setName(LocalizationUtil.updateLocalization(nameMap, getName(), "Name",
+				LocaleUtil.toLanguageId(defaultLocale)));
+	}
+
+	@Override
 	@JSON
 	public String getDescription() {
 		if (_description == null) {
@@ -437,8 +577,96 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 		}
 	}
 
+	@Override
+	public String getDescription(Locale locale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getDescription(languageId);
+	}
+
+	@Override
+	public String getDescription(Locale locale, boolean useDefault) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getDescription(languageId, useDefault);
+	}
+
+	@Override
+	public String getDescription(String languageId) {
+		return LocalizationUtil.getLocalization(getDescription(), languageId);
+	}
+
+	@Override
+	public String getDescription(String languageId, boolean useDefault) {
+		return LocalizationUtil.getLocalization(getDescription(), languageId,
+			useDefault);
+	}
+
+	@Override
+	public String getDescriptionCurrentLanguageId() {
+		return _descriptionCurrentLanguageId;
+	}
+
+	@JSON
+	@Override
+	public String getDescriptionCurrentValue() {
+		Locale locale = getLocale(_descriptionCurrentLanguageId);
+
+		return getDescription(locale);
+	}
+
+	@Override
+	public Map<Locale, String> getDescriptionMap() {
+		return LocalizationUtil.getLocalizationMap(getDescription());
+	}
+
+	@Override
 	public void setDescription(String description) {
 		_description = description;
+	}
+
+	@Override
+	public void setDescription(String description, Locale locale) {
+		setDescription(description, locale, LocaleUtil.getDefault());
+	}
+
+	@Override
+	public void setDescription(String description, Locale locale,
+		Locale defaultLocale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
+
+		if (Validator.isNotNull(description)) {
+			setDescription(LocalizationUtil.updateLocalization(
+					getDescription(), "Description", description, languageId,
+					defaultLanguageId));
+		}
+		else {
+			setDescription(LocalizationUtil.removeLocalization(
+					getDescription(), "Description", languageId));
+		}
+	}
+
+	@Override
+	public void setDescriptionCurrentLanguageId(String languageId) {
+		_descriptionCurrentLanguageId = languageId;
+	}
+
+	@Override
+	public void setDescriptionMap(Map<Locale, String> descriptionMap) {
+		setDescriptionMap(descriptionMap, LocaleUtil.getDefault());
+	}
+
+	@Override
+	public void setDescriptionMap(Map<Locale, String> descriptionMap,
+		Locale defaultLocale) {
+		if (descriptionMap == null) {
+			return;
+		}
+
+		setDescription(LocalizationUtil.updateLocalization(descriptionMap,
+				getDescription(), "Description",
+				LocaleUtil.toLanguageId(defaultLocale)));
 	}
 
 	public long getColumnBitmask() {
@@ -456,6 +684,16 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 		ExpandoBridge expandoBridge = getExpandoBridge();
 
 		expandoBridge.setAttributes(serviceContext);
+	}
+
+	@Override
+	@SuppressWarnings("unused")
+	public void prepareLocalizedFieldsForImport(Locale defaultImportLocale)
+		throws LocaleException {
+		setName(getName(defaultImportLocale), defaultImportLocale,
+			defaultImportLocale);
+		setDescription(getDescription(defaultImportLocale),
+			defaultImportLocale, defaultImportLocale);
 	}
 
 	@Override
@@ -480,6 +718,7 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 		dlFileEntryTypeImpl.setUserName(getUserName());
 		dlFileEntryTypeImpl.setCreateDate(getCreateDate());
 		dlFileEntryTypeImpl.setModifiedDate(getModifiedDate());
+		dlFileEntryTypeImpl.setFileEntryTypeKey(getFileEntryTypeKey());
 		dlFileEntryTypeImpl.setName(getName());
 		dlFileEntryTypeImpl.setDescription(getDescription());
 
@@ -488,6 +727,7 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 		return dlFileEntryTypeImpl;
 	}
 
+	@Override
 	public int compareTo(DLFileEntryType dlFileEntryType) {
 		long primaryKey = dlFileEntryType.getPrimaryKey();
 
@@ -504,18 +744,15 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof DLFileEntryType)) {
 			return false;
 		}
 
-		DLFileEntryType dlFileEntryType = null;
-
-		try {
-			dlFileEntryType = (DLFileEntryType)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		DLFileEntryType dlFileEntryType = (DLFileEntryType)obj;
 
 		long primaryKey = dlFileEntryType.getPrimaryKey();
 
@@ -546,7 +783,7 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 
 		dlFileEntryTypeModelImpl._setOriginalCompanyId = false;
 
-		dlFileEntryTypeModelImpl._originalName = dlFileEntryTypeModelImpl._name;
+		dlFileEntryTypeModelImpl._originalFileEntryTypeKey = dlFileEntryTypeModelImpl._fileEntryTypeKey;
 
 		dlFileEntryTypeModelImpl._columnBitmask = 0;
 	}
@@ -597,6 +834,14 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 			dlFileEntryTypeCacheModel.modifiedDate = Long.MIN_VALUE;
 		}
 
+		dlFileEntryTypeCacheModel.fileEntryTypeKey = getFileEntryTypeKey();
+
+		String fileEntryTypeKey = dlFileEntryTypeCacheModel.fileEntryTypeKey;
+
+		if ((fileEntryTypeKey != null) && (fileEntryTypeKey.length() == 0)) {
+			dlFileEntryTypeCacheModel.fileEntryTypeKey = null;
+		}
+
 		dlFileEntryTypeCacheModel.name = getName();
 
 		String name = dlFileEntryTypeCacheModel.name;
@@ -618,7 +863,7 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(23);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -636,6 +881,8 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
+		sb.append(", fileEntryTypeKey=");
+		sb.append(getFileEntryTypeKey());
 		sb.append(", name=");
 		sb.append(getName());
 		sb.append(", description=");
@@ -645,8 +892,9 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(34);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.documentlibrary.model.DLFileEntryType");
@@ -685,6 +933,10 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>fileEntryTypeKey</column-name><column-value><![CDATA[");
+		sb.append(getFileEntryTypeKey());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
 		sb.append(getName());
 		sb.append("]]></column-value></column>");
@@ -716,9 +968,12 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private String _fileEntryTypeKey;
+	private String _originalFileEntryTypeKey;
 	private String _name;
-	private String _originalName;
+	private String _nameCurrentLanguageId;
 	private String _description;
+	private String _descriptionCurrentLanguageId;
 	private long _columnBitmask;
 	private DLFileEntryType _escapedModel;
 }

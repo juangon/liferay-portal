@@ -55,6 +55,7 @@ public class SerialDestination extends BaseAsyncDestination {
 
 		Runnable runnable = new MessageRunnable(message) {
 
+			@Override
 			public void run() {
 				try {
 					populateThreadLocalsFromMessage(message);

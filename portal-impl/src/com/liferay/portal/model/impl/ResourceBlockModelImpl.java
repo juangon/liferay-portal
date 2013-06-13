@@ -139,26 +139,32 @@ public class ResourceBlockModelImpl extends BaseModelImpl<ResourceBlock>
 	public ResourceBlockModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _resourceBlockId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setResourceBlockId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _resourceBlockId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return ResourceBlock.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return ResourceBlock.class.getName();
 	}
@@ -216,20 +222,24 @@ public class ResourceBlockModelImpl extends BaseModelImpl<ResourceBlock>
 		}
 	}
 
+	@Override
 	@JSON
 	public long getResourceBlockId() {
 		return _resourceBlockId;
 	}
 
+	@Override
 	public void setResourceBlockId(long resourceBlockId) {
 		_resourceBlockId = resourceBlockId;
 	}
 
+	@Override
 	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
@@ -246,11 +256,13 @@ public class ResourceBlockModelImpl extends BaseModelImpl<ResourceBlock>
 		return _originalCompanyId;
 	}
 
+	@Override
 	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -267,6 +279,7 @@ public class ResourceBlockModelImpl extends BaseModelImpl<ResourceBlock>
 		return _originalGroupId;
 	}
 
+	@Override
 	@JSON
 	public String getName() {
 		if (_name == null) {
@@ -277,6 +290,7 @@ public class ResourceBlockModelImpl extends BaseModelImpl<ResourceBlock>
 		}
 	}
 
+	@Override
 	public void setName(String name) {
 		_columnBitmask |= NAME_COLUMN_BITMASK;
 
@@ -291,6 +305,7 @@ public class ResourceBlockModelImpl extends BaseModelImpl<ResourceBlock>
 		return GetterUtil.getString(_originalName);
 	}
 
+	@Override
 	@JSON
 	public String getPermissionsHash() {
 		if (_permissionsHash == null) {
@@ -301,6 +316,7 @@ public class ResourceBlockModelImpl extends BaseModelImpl<ResourceBlock>
 		}
 	}
 
+	@Override
 	public void setPermissionsHash(String permissionsHash) {
 		_columnBitmask |= PERMISSIONSHASH_COLUMN_BITMASK;
 
@@ -315,11 +331,13 @@ public class ResourceBlockModelImpl extends BaseModelImpl<ResourceBlock>
 		return GetterUtil.getString(_originalPermissionsHash);
 	}
 
+	@Override
 	@JSON
 	public long getReferenceCount() {
 		return _referenceCount;
 	}
 
+	@Override
 	public void setReferenceCount(long referenceCount) {
 		_referenceCount = referenceCount;
 	}
@@ -367,6 +385,7 @@ public class ResourceBlockModelImpl extends BaseModelImpl<ResourceBlock>
 		return resourceBlockImpl;
 	}
 
+	@Override
 	public int compareTo(ResourceBlock resourceBlock) {
 		long primaryKey = resourceBlock.getPrimaryKey();
 
@@ -383,18 +402,15 @@ public class ResourceBlockModelImpl extends BaseModelImpl<ResourceBlock>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ResourceBlock)) {
 			return false;
 		}
 
-		ResourceBlock resourceBlock = null;
-
-		try {
-			resourceBlock = (ResourceBlock)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		ResourceBlock resourceBlock = (ResourceBlock)obj;
 
 		long primaryKey = resourceBlock.getPrimaryKey();
 
@@ -482,6 +498,7 @@ public class ResourceBlockModelImpl extends BaseModelImpl<ResourceBlock>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(22);
 

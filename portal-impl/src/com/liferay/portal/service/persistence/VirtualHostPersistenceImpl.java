@@ -98,6 +98,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	 * @throws com.liferay.portal.NoSuchVirtualHostException if a matching virtual host could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public VirtualHost findByHostname(String hostname)
 		throws NoSuchVirtualHostException, SystemException {
 		VirtualHost virtualHost = fetchByHostname(hostname);
@@ -129,6 +130,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	 * @return the matching virtual host, or <code>null</code> if a matching virtual host could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public VirtualHost fetchByHostname(String hostname)
 		throws SystemException {
 		return fetchByHostname(hostname, true);
@@ -142,6 +144,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	 * @return the matching virtual host, or <code>null</code> if a matching virtual host could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public VirtualHost fetchByHostname(String hostname,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { hostname };
@@ -241,6 +244,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	 * @return the virtual host that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public VirtualHost removeByHostname(String hostname)
 		throws NoSuchVirtualHostException, SystemException {
 		VirtualHost virtualHost = findByHostname(hostname);
@@ -255,6 +259,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	 * @return the number of matching virtual hosts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByHostname(String hostname) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_HOSTNAME;
 
@@ -337,6 +342,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	 * @throws com.liferay.portal.NoSuchVirtualHostException if a matching virtual host could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public VirtualHost findByC_L(long companyId, long layoutSetId)
 		throws NoSuchVirtualHostException, SystemException {
 		VirtualHost virtualHost = fetchByC_L(companyId, layoutSetId);
@@ -372,6 +378,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	 * @return the matching virtual host, or <code>null</code> if a matching virtual host could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public VirtualHost fetchByC_L(long companyId, long layoutSetId)
 		throws SystemException {
 		return fetchByC_L(companyId, layoutSetId, true);
@@ -386,6 +393,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	 * @return the matching virtual host, or <code>null</code> if a matching virtual host could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public VirtualHost fetchByC_L(long companyId, long layoutSetId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, layoutSetId };
@@ -477,6 +485,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	 * @return the virtual host that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public VirtualHost removeByC_L(long companyId, long layoutSetId)
 		throws NoSuchVirtualHostException, SystemException {
 		VirtualHost virtualHost = findByC_L(companyId, layoutSetId);
@@ -492,6 +501,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	 * @return the number of matching virtual hosts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByC_L(long companyId, long layoutSetId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_L;
@@ -550,6 +560,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	 *
 	 * @param virtualHost the virtual host
 	 */
+	@Override
 	public void cacheResult(VirtualHost virtualHost) {
 		EntityCacheUtil.putResult(VirtualHostModelImpl.ENTITY_CACHE_ENABLED,
 			VirtualHostImpl.class, virtualHost.getPrimaryKey(), virtualHost);
@@ -570,6 +581,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	 *
 	 * @param virtualHosts the virtual hosts
 	 */
+	@Override
 	public void cacheResult(List<VirtualHost> virtualHosts) {
 		for (VirtualHost virtualHost : virtualHosts) {
 			if (EntityCacheUtil.getResult(
@@ -720,6 +732,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	 * @param virtualHostId the primary key for the new virtual host
 	 * @return the new virtual host
 	 */
+	@Override
 	public VirtualHost create(long virtualHostId) {
 		VirtualHost virtualHost = new VirtualHostImpl();
 
@@ -737,6 +750,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	 * @throws com.liferay.portal.NoSuchVirtualHostException if a virtual host with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public VirtualHost remove(long virtualHostId)
 		throws NoSuchVirtualHostException, SystemException {
 		return remove((Serializable)virtualHostId);
@@ -911,6 +925,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	 * @throws com.liferay.portal.NoSuchVirtualHostException if a virtual host with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public VirtualHost findByPrimaryKey(long virtualHostId)
 		throws NoSuchVirtualHostException, SystemException {
 		return findByPrimaryKey((Serializable)virtualHostId);
@@ -971,6 +986,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	 * @return the virtual host, or <code>null</code> if a virtual host with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public VirtualHost fetchByPrimaryKey(long virtualHostId)
 		throws SystemException {
 		return fetchByPrimaryKey((Serializable)virtualHostId);
@@ -982,6 +998,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	 * @return the virtual hosts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<VirtualHost> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -998,6 +1015,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	 * @return the range of virtual hosts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<VirtualHost> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
@@ -1016,6 +1034,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	 * @return the ordered range of virtual hosts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<VirtualHost> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -1101,6 +1120,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (VirtualHost virtualHost : findAll()) {
 			remove(virtualHost);
@@ -1113,6 +1133,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	 * @return the number of virtual hosts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -1198,6 +1219,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 		};
 
 	private static CacheModel<VirtualHost> _nullVirtualHostCacheModel = new CacheModel<VirtualHost>() {
+			@Override
 			public VirtualHost toEntityModel() {
 				return _nullVirtualHost;
 			}

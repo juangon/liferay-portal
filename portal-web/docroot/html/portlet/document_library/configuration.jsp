@@ -27,8 +27,11 @@ String tabs2 = ParamUtil.getString(request, "tabs2", "display-settings");
 
 String redirect = ParamUtil.getString(request, "redirect");
 
-String emailFromName = ParamUtil.getString(request, "emailFromName", DLUtil.getEmailFromName(preferences, company.getCompanyId()));
-String emailFromAddress = ParamUtil.getString(request, "emailFromAddress", DLUtil.getEmailFromAddress(preferences, company.getCompanyId()));
+String emailFromName = ParamUtil.getString(request, "preferences--emailFromName--", DLUtil.getEmailFromName(preferences, company.getCompanyId()));
+String emailFromAddress = ParamUtil.getString(request, "preferences--emailFromAddress--", DLUtil.getEmailFromAddress(preferences, company.getCompanyId()));
+
+boolean emailFileEntryAddedEnabled = ParamUtil.getBoolean(request, "preferences--emailFileEntryAddedEnabled--", DLUtil.getEmailFileEntryAddedEnabled(preferences));
+boolean emailFileEntryUpdatedEnabled = ParamUtil.getBoolean(request, "preferences--emailFileEntryUpdatedEnabled--", DLUtil.getEmailFileEntryUpdatedEnabled(preferences));
 
 String emailParam = StringPool.BLANK;
 String defaultEmailSubject = StringPool.BLANK;
@@ -47,11 +50,11 @@ else if (tabs2.equals("document-updated-email")) {
 
 String currentLanguageId = LanguageUtil.getLanguageId(request);
 
-String emailSubject = PrefsParamUtil.getString(preferences, request, emailParam + "Subject_" + currentLanguageId, defaultEmailSubject);
-String emailBody = PrefsParamUtil.getString(preferences, request, emailParam + "Body_" + currentLanguageId, defaultEmailBody);
+String emailSubjectParam = emailParam + "Subject_" + currentLanguageId;
+String emailBodyParam = emailParam + "Body_" + currentLanguageId;
 
-String editorParam = emailParam + "Body_" + currentLanguageId;
-String editorContent = emailBody;
+String emailSubject = PrefsParamUtil.getString(preferences, request, emailSubjectParam, defaultEmailSubject);
+String emailBody = PrefsParamUtil.getString(preferences, request, emailBodyParam, defaultEmailBody);
 %>
 
 <liferay-portlet:renderURL portletConfiguration="true" var="portletURL">
@@ -232,13 +235,12 @@ String editorContent = emailBody;
 						Liferay.Util.selectEntity(
 							{
 								dialog: {
-									align: Liferay.Util.Window.ALIGN_CENTER,
 									constrain: true,
 									modal: true,
-									stack: true,
+									zIndex: Liferay.zIndex.WINDOW + 2,
 									width: 600
 								},
-								id: '_<%= portletResource %>_selectFolder',
+								id: '_<%= HtmlUtil.escapeJS(portletResource) %>_selectFolder',
 								title: '<%= UnicodeLanguageUtil.format(pageContext, "select-x", "folder") %>',
 								uri: '<%= selectFolderURL.toString() %>'
 							},
@@ -323,10 +325,10 @@ String editorContent = emailBody;
 			<aui:fieldset>
 				<c:choose>
 					<c:when test='<%= tabs2.equals("document-added-email") %>'>
-						<aui:input label="enabled" name="preferences--emailFileEntryAddedEnabled--" type="checkbox" value="<%= DLUtil.getEmailFileEntryAddedEnabled(preferences) %>" />
+						<aui:input label="enabled" name="preferences--emailFileEntryAddedEnabled--" type="checkbox" value="<%= emailFileEntryAddedEnabled %>" />
 					</c:when>
 					<c:when test='<%= tabs2.equals("document-updated-email") %>'>
-						<aui:input label="enabled" name="preferences--emailFileEntryUpdatedEnabled--" type="checkbox" value="<%= DLUtil.getEmailFileEntryUpdatedEnabled(preferences) %>" />
+						<aui:input label="enabled" name="preferences--emailFileEntryUpdatedEnabled--" type="checkbox" value="<%= emailFileEntryUpdatedEnabled %>" />
 					</c:when>
 				</c:choose>
 
@@ -353,12 +355,12 @@ String editorContent = emailBody;
 
 				</aui:select>
 
-				<aui:input cssClass="lfr-input-text-container" label="subject" name='<%= "preferences--" + emailParam + "Subject_" + currentLanguageId + "--" %>' value="<%= emailSubject %>" />
+				<aui:input cssClass="lfr-input-text-container" label="subject" name='<%= "preferences--" + emailSubjectParam + "--" %>' value="<%= emailSubject %>" />
 
 				<aui:field-wrapper label="body">
 					<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
 
-					<aui:input name='<%= "preferences--" + editorParam + "--" %>' type="hidden" />
+					<aui:input name='<%= "preferences--" + emailBodyParam + "--" %>' type="hidden" />
 				</aui:field-wrapper>
 			</aui:fieldset>
 
@@ -467,7 +469,7 @@ String editorContent = emailBody;
 
 <aui:script>
 	function <portlet:namespace />initEditor() {
-		return "<%= UnicodeFormatter.toString(editorContent) %>";
+		return "<%= UnicodeFormatter.toString(emailBody) %>";
 	}
 
 	function <portlet:namespace />updateLanguage() {
@@ -481,7 +483,7 @@ String editorContent = emailBody;
 		function() {
 			<c:choose>
 				<c:when test='<%= tabs2.startsWith("document-") %>'>
-					document.<portlet:namespace />fm.<portlet:namespace /><%= editorParam %>.value = window.<portlet:namespace />editor.getHTML();
+					document.<portlet:namespace />fm.<portlet:namespace /><%= emailBodyParam %>.value = window.<portlet:namespace />editor.getHTML();
 				</c:when>
 				<c:when test='<%= tabs2.equals("display-settings") %>'>
 					document.<portlet:namespace />fm.<portlet:namespace />displayViews.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentDisplayViews);

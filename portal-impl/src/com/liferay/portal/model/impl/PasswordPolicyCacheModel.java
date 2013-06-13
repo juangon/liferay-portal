@@ -112,6 +112,7 @@ public class PasswordPolicyCacheModel implements CacheModel<PasswordPolicy>,
 		return sb.toString();
 	}
 
+	@Override
 	public PasswordPolicy toEntityModel() {
 		PasswordPolicyImpl passwordPolicyImpl = new PasswordPolicyImpl();
 
@@ -200,6 +201,7 @@ public class PasswordPolicyCacheModel implements CacheModel<PasswordPolicy>,
 		return passwordPolicyImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		passwordPolicyId = objectInput.readLong();
@@ -237,6 +239,7 @@ public class PasswordPolicyCacheModel implements CacheModel<PasswordPolicy>,
 		resetTicketMaxAge = objectInput.readLong();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

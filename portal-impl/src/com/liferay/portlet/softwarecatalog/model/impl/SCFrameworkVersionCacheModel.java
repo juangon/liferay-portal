@@ -67,6 +67,7 @@ public class SCFrameworkVersionCacheModel implements CacheModel<SCFrameworkVersi
 		return sb.toString();
 	}
 
+	@Override
 	public SCFrameworkVersion toEntityModel() {
 		SCFrameworkVersionImpl scFrameworkVersionImpl = new SCFrameworkVersionImpl();
 
@@ -118,6 +119,7 @@ public class SCFrameworkVersionCacheModel implements CacheModel<SCFrameworkVersi
 		return scFrameworkVersionImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		frameworkVersionId = objectInput.readLong();
 		groupId = objectInput.readLong();
@@ -132,6 +134,7 @@ public class SCFrameworkVersionCacheModel implements CacheModel<SCFrameworkVersi
 		priority = objectInput.readInt();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(frameworkVersionId);

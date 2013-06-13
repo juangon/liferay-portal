@@ -37,7 +37,7 @@ import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.UniqueList;
+import com.liferay.portal.kernel.util.SystemProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.module.framework.ModuleFramework;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -54,6 +54,9 @@ import java.io.InputStream;
 import java.net.JarURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+
+import java.security.CodeSource;
+import java.security.ProtectionDomain;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -99,10 +102,12 @@ import org.springframework.context.ApplicationContext;
  */
 public class ModuleFrameworkImpl implements ModuleFramework {
 
+	@Override
 	public Object addBundle(String location) throws PortalException {
 		return addBundle(location, null);
 	}
 
+	@Override
 	public Object addBundle(String location, InputStream inputStream)
 		throws PortalException {
 
@@ -141,6 +146,11 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 		}
 	}
 
+	/**
+	 * @see {@link
+	 *      com.liferay.modulesadmin.portlet.ModulesAdminPortlet#getBundle(
+	 *      BundleContext, InputStream)}
+	 */
 	public Bundle getBundle(
 			BundleContext bundleContext, InputStream inputStream)
 		throws PortalException {
@@ -211,10 +221,12 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 		return bundleContext.getBundle(bundleId);
 	}
 
+	@Override
 	public Map<String, List<URL>> getExtraPackageMap() {
 		return _extraPackageMap;
 	}
 
+	@Override
 	public List<URL> getExtraPackageURLs() {
 		if (_extraPackageURLs != null) {
 			return _extraPackageURLs;
@@ -238,10 +250,12 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 		return _extraPackageURLs;
 	}
 
+	@Override
 	public Framework getFramework() {
 		return _framework;
 	}
 
+	@Override
 	public String getState(long bundleId) throws PortalException {
 		_checkPermission();
 
@@ -276,6 +290,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 		}
 	}
 
+	@Override
 	public void registerContext(Object context) {
 		if (context == null) {
 			return;
@@ -295,6 +310,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 		}
 	}
 
+	@Override
 	public void setBundleStartLevel(long bundleId, int startLevel)
 		throws PortalException {
 
@@ -330,10 +346,12 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 		}
 	}
 
+	@Override
 	public void startBundle(long bundleId) throws PortalException {
 		startBundle(bundleId, 0);
 	}
 
+	@Override
 	public void startBundle(long bundleId, int options) throws PortalException {
 		Bundle bundle = getBundle(bundleId);
 
@@ -344,6 +362,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 		startBundle(bundle, 0, true);
 	}
 
+	@Override
 	public void startFramework() throws Exception {
 		ServiceLoaderCondition serviceLoaderCondition =
 			new ModuleFrameworkServiceLoaderCondition();
@@ -357,7 +376,8 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 
 		FrameworkFactory frameworkFactory = frameworkFactories.get(0);
 
-		Map<String, String> properties = _buildFrameworkProperties();
+		Map<String, String> properties = _buildFrameworkProperties(
+			frameworkFactory.getClass());
 
 		_framework = frameworkFactory.newFramework(properties);
 
@@ -368,6 +388,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 		_setupInitialBundles();
 	}
 
+	@Override
 	public void startRuntime() throws Exception {
 		if (_framework == null) {
 			return;
@@ -380,10 +401,12 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 			PropsValues.MODULE_FRAMEWORK_RUNTIME_START_LEVEL);
 	}
 
+	@Override
 	public void stopBundle(long bundleId) throws PortalException {
 		stopBundle(bundleId, 0);
 	}
 
+	@Override
 	public void stopBundle(long bundleId, int options) throws PortalException {
 		_checkPermission();
 
@@ -403,6 +426,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 		}
 	}
 
+	@Override
 	public void stopFramework() throws Exception {
 		if (_framework == null) {
 			return;
@@ -411,6 +435,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 		_framework.stop();
 	}
 
+	@Override
 	public void stopRuntime() throws Exception {
 		if (_framework == null) {
 			return;
@@ -423,6 +448,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 			PropsValues.MODULE_FRAMEWORK_BEGINNING_START_LEVEL);
 	}
 
+	@Override
 	public void uninstallBundle(long bundleId) throws PortalException {
 		_checkPermission();
 
@@ -442,10 +468,12 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 		}
 	}
 
+	@Override
 	public void updateBundle(long bundleId) throws PortalException {
 		updateBundle(bundleId, null);
 	}
 
+	@Override
 	public void updateBundle(long bundleId, InputStream inputStream)
 		throws PortalException {
 
@@ -467,7 +495,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 		}
 	}
 
-	private Map<String, String> _buildFrameworkProperties() {
+	private Map<String, String> _buildFrameworkProperties(Class<?> clazz) {
 		Map<String, String> properties = new HashMap<String, String>();
 
 		properties.put(
@@ -486,7 +514,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 			String.valueOf(PropsValues.MODULE_FRAMEWORK_AUTO_DEPLOY_INTERVAL));
 		properties.put(
 			FrameworkPropsKeys.FELIX_FILEINSTALL_TMPDIR,
-			System.getProperty("java.io.tmpdir"));
+			SystemProperties.get(SystemProperties.TMP_DIR));
 		properties.put(
 			Constants.FRAMEWORK_BEGINNING_STARTLEVEL,
 			String.valueOf(PropsValues.MODULE_FRAMEWORK_BEGINNING_START_LEVEL));
@@ -496,6 +524,20 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 		properties.put(
 			Constants.FRAMEWORK_STORAGE,
 			PropsValues.MODULE_FRAMEWORK_STATE_DIR);
+
+		ProtectionDomain protectionDomain = clazz.getProtectionDomain();
+
+		CodeSource codeSource = protectionDomain.getCodeSource();
+
+		URL codeSourceURL = codeSource.getLocation();
+
+		properties.put(
+			FrameworkPropsKeys.OSGI_FRAMEWORK, codeSourceURL.toExternalForm());
+
+		File frameworkFile = new File(codeSourceURL.getFile());
+
+		properties.put(
+			FrameworkPropsKeys.OSGI_INSTALL_AREA, frameworkFile.getParent());
 
 		Properties extraProperties = PropsUtil.getProperties(
 			PropsKeys.MODULE_FRAMEWORK_PROPERTIES, true);
@@ -678,8 +720,6 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 			sb.append(StringPool.COMMA);
 		}
 
-		List<URL> urls = new UniqueList<URL>();
-
 		ClassLoader classLoader = ClassLoaderUtil.getPortalClassLoader();
 
 		try {
@@ -689,17 +729,14 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 			while (enu.hasMoreElements()) {
 				URL url = enu.nextElement();
 
-				urls.add(url);
+				_processURL(
+					sb, url,
+					PropsValues.
+						MODULE_FRAMEWORK_SYSTEM_BUNDLE_IGNORED_FRAGMENTS);
 			}
 		}
 		catch (IOException ioe) {
 			_log.error(ioe, ioe);
-		}
-
-		for (URL url : urls) {
-			_processURL(
-				sb, url,
-				PropsValues.MODULE_FRAMEWORK_SYSTEM_BUNDLE_IGNORED_FRAGMENTS);
 		}
 
 		_extraPackageMap = Collections.unmodifiableMap(_extraPackageMap);
@@ -1039,6 +1076,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 	private class ModuleFrameworkServiceLoaderCondition
 		implements ServiceLoaderCondition {
 
+		@Override
 		public boolean isLoad(URL url) {
 			String path = url.getPath();
 
@@ -1057,6 +1095,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 			_lazyActivationBundles = lazyActivationBundles;
 		}
 
+		@Override
 		public void frameworkEvent(FrameworkEvent frameworkEvent) {
 			if (frameworkEvent.getType() != FrameworkEvent.PACKAGES_REFRESHED) {
 				return;

@@ -33,6 +33,14 @@
 						(repeating = [$TRUE$]) AND
 						(endDate >= ? OR endDate IS NULL)
 					)
+				) AND
+				EXISTS (
+					SELECT
+						1
+					FROM
+						User_
+					WHERE
+						User_.userId = CalEvent.userId
 				)
 		]]>
 	</sql>

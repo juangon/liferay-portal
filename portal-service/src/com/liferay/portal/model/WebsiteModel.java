@@ -37,8 +37,8 @@ import java.util.Date;
  * @see com.liferay.portal.model.impl.WebsiteModelImpl
  * @generated
  */
-public interface WebsiteModel extends AttachedModel, AuditedModel,
-	BaseModel<Website> {
+public interface WebsiteModel extends AttachedModel, BaseModel<Website>,
+	StagedAuditedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -60,6 +60,23 @@ public interface WebsiteModel extends AttachedModel, AuditedModel,
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the uuid of this website.
+	 *
+	 * @return the uuid of this website
+	 */
+	@AutoEscape
+	@Override
+	public String getUuid();
+
+	/**
+	 * Sets the uuid of this website.
+	 *
+	 * @param uuid the uuid of this website
+	 */
+	@Override
+	public void setUuid(String uuid);
+
+	/**
 	 * Returns the website ID of this website.
 	 *
 	 * @return the website ID of this website
@@ -78,6 +95,7 @@ public interface WebsiteModel extends AttachedModel, AuditedModel,
 	 *
 	 * @return the company ID of this website
 	 */
+	@Override
 	public long getCompanyId();
 
 	/**
@@ -85,6 +103,7 @@ public interface WebsiteModel extends AttachedModel, AuditedModel,
 	 *
 	 * @param companyId the company ID of this website
 	 */
+	@Override
 	public void setCompanyId(long companyId);
 
 	/**
@@ -92,6 +111,7 @@ public interface WebsiteModel extends AttachedModel, AuditedModel,
 	 *
 	 * @return the user ID of this website
 	 */
+	@Override
 	public long getUserId();
 
 	/**
@@ -99,6 +119,7 @@ public interface WebsiteModel extends AttachedModel, AuditedModel,
 	 *
 	 * @param userId the user ID of this website
 	 */
+	@Override
 	public void setUserId(long userId);
 
 	/**
@@ -107,6 +128,7 @@ public interface WebsiteModel extends AttachedModel, AuditedModel,
 	 * @return the user uuid of this website
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public String getUserUuid() throws SystemException;
 
 	/**
@@ -114,6 +136,7 @@ public interface WebsiteModel extends AttachedModel, AuditedModel,
 	 *
 	 * @param userUuid the user uuid of this website
 	 */
+	@Override
 	public void setUserUuid(String userUuid);
 
 	/**
@@ -122,6 +145,7 @@ public interface WebsiteModel extends AttachedModel, AuditedModel,
 	 * @return the user name of this website
 	 */
 	@AutoEscape
+	@Override
 	public String getUserName();
 
 	/**
@@ -129,6 +153,7 @@ public interface WebsiteModel extends AttachedModel, AuditedModel,
 	 *
 	 * @param userName the user name of this website
 	 */
+	@Override
 	public void setUserName(String userName);
 
 	/**
@@ -136,6 +161,7 @@ public interface WebsiteModel extends AttachedModel, AuditedModel,
 	 *
 	 * @return the create date of this website
 	 */
+	@Override
 	public Date getCreateDate();
 
 	/**
@@ -143,6 +169,7 @@ public interface WebsiteModel extends AttachedModel, AuditedModel,
 	 *
 	 * @param createDate the create date of this website
 	 */
+	@Override
 	public void setCreateDate(Date createDate);
 
 	/**
@@ -150,6 +177,7 @@ public interface WebsiteModel extends AttachedModel, AuditedModel,
 	 *
 	 * @return the modified date of this website
 	 */
+	@Override
 	public Date getModifiedDate();
 
 	/**
@@ -157,6 +185,7 @@ public interface WebsiteModel extends AttachedModel, AuditedModel,
 	 *
 	 * @param modifiedDate the modified date of this website
 	 */
+	@Override
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
@@ -164,6 +193,7 @@ public interface WebsiteModel extends AttachedModel, AuditedModel,
 	 *
 	 * @return the fully qualified class name of this website
 	 */
+	@Override
 	public String getClassName();
 
 	public void setClassName(String className);
@@ -173,6 +203,7 @@ public interface WebsiteModel extends AttachedModel, AuditedModel,
 	 *
 	 * @return the class name ID of this website
 	 */
+	@Override
 	public long getClassNameId();
 
 	/**
@@ -180,6 +211,7 @@ public interface WebsiteModel extends AttachedModel, AuditedModel,
 	 *
 	 * @param classNameId the class name ID of this website
 	 */
+	@Override
 	public void setClassNameId(long classNameId);
 
 	/**
@@ -187,6 +219,7 @@ public interface WebsiteModel extends AttachedModel, AuditedModel,
 	 *
 	 * @return the class p k of this website
 	 */
+	@Override
 	public long getClassPK();
 
 	/**
@@ -194,6 +227,7 @@ public interface WebsiteModel extends AttachedModel, AuditedModel,
 	 *
 	 * @param classPK the class p k of this website
 	 */
+	@Override
 	public void setClassPK(long classPK);
 
 	/**
@@ -246,41 +280,60 @@ public interface WebsiteModel extends AttachedModel, AuditedModel,
 	 */
 	public void setPrimary(boolean primary);
 
+	@Override
 	public boolean isNew();
 
+	@Override
 	public void setNew(boolean n);
 
+	@Override
 	public boolean isCachedModel();
 
+	@Override
 	public void setCachedModel(boolean cachedModel);
 
+	@Override
 	public boolean isEscapedModel();
 
+	@Override
 	public Serializable getPrimaryKeyObj();
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
+	@Override
 	public ExpandoBridge getExpandoBridge();
 
+	@Override
 	public void setExpandoBridgeAttributes(BaseModel<?> baseModel);
 
+	@Override
 	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge);
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext);
 
+	@Override
 	public Object clone();
 
+	@Override
 	public int compareTo(Website website);
 
+	@Override
 	public int hashCode();
 
+	@Override
 	public CacheModel<Website> toCacheModel();
 
+	@Override
 	public Website toEscapedModel();
 
+	@Override
 	public Website toUnescapedModel();
 
+	@Override
 	public String toString();
 
+	@Override
 	public String toXmlString();
 }

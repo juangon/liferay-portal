@@ -32,13 +32,16 @@ public class BlockingPortalCache<K extends Serializable, V>
 		_portalCache = portalCache;
 	}
 
+	@Override
 	public void destroy() {
 	}
 
+	@Override
 	public Collection<V> get(Collection<K> keys) {
 		return _portalCache.get(keys);
 	}
 
+	@Override
 	public V get(K key) {
 		V value = _portalCache.get(key);
 
@@ -84,10 +87,12 @@ public class BlockingPortalCache<K extends Serializable, V>
 		return value;
 	}
 
+	@Override
 	public String getName() {
 		return _portalCache.getName();
 	}
 
+	@Override
 	public void put(K key, V value) {
 		if (key == null) {
 			throw new IllegalArgumentException("Key is null");
@@ -110,6 +115,7 @@ public class BlockingPortalCache<K extends Serializable, V>
 		_competeLatchMap.remove(key);
 	}
 
+	@Override
 	public void put(K key, V value, int timeToLive) {
 		if (key == null) {
 			throw new IllegalArgumentException("Key is null");
@@ -132,10 +138,12 @@ public class BlockingPortalCache<K extends Serializable, V>
 		_competeLatchMap.remove(key);
 	}
 
+	@Override
 	public void registerCacheListener(CacheListener<K, V> cacheListener) {
 		_portalCache.registerCacheListener(cacheListener);
 	}
 
+	@Override
 	public void registerCacheListener(
 		CacheListener<K, V> cacheListener,
 		CacheListenerScope cacheListenerScope) {
@@ -143,6 +151,7 @@ public class BlockingPortalCache<K extends Serializable, V>
 		_portalCache.registerCacheListener(cacheListener, cacheListenerScope);
 	}
 
+	@Override
 	public void remove(K key) {
 		_portalCache.remove(key);
 
@@ -153,21 +162,25 @@ public class BlockingPortalCache<K extends Serializable, V>
 		}
 	}
 
+	@Override
 	public void removeAll() {
 		_portalCache.removeAll();
 		_competeLatchMap.clear();
 	}
 
+	@Override
 	public void unregisterCacheListener(CacheListener<K, V> cacheListener) {
 		_portalCache.unregisterCacheListener(cacheListener);
 	}
 
+	@Override
 	public void unregisterCacheListeners() {
 		_portalCache.unregisterCacheListeners();
 	}
 
 	private static ThreadLocal<CompeteLatch> _competeLatch =
 		new ThreadLocal<CompeteLatch>();
+
 	private final ConcurrentMap<K, CompeteLatch> _competeLatchMap =
 		new ConcurrentHashMap<K, CompeteLatch>();
 	private final PortalCache<K, V> _portalCache;

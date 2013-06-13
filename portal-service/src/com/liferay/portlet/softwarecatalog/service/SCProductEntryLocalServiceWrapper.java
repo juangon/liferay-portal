@@ -17,12 +17,10 @@ package com.liferay.portlet.softwarecatalog.service;
 import com.liferay.portal.service.ServiceWrapper;
 
 /**
- * <p>
- * This class is a wrapper for {@link SCProductEntryLocalService}.
- * </p>
+ * Provides a wrapper for {@link SCProductEntryLocalService}.
  *
- * @author    Brian Wing Shun Chan
- * @see       SCProductEntryLocalService
+ * @author Brian Wing Shun Chan
+ * @see SCProductEntryLocalService
  * @generated
  */
 public class SCProductEntryLocalServiceWrapper
@@ -40,6 +38,7 @@ public class SCProductEntryLocalServiceWrapper
 	* @return the s c product entry that was added
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry addSCProductEntry(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -52,6 +51,7 @@ public class SCProductEntryLocalServiceWrapper
 	* @param productEntryId the primary key for the new s c product entry
 	* @return the new s c product entry
 	*/
+	@Override
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry createSCProductEntry(
 		long productEntryId) {
 		return _scProductEntryLocalService.createSCProductEntry(productEntryId);
@@ -65,6 +65,7 @@ public class SCProductEntryLocalServiceWrapper
 	* @throws PortalException if a s c product entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry deleteSCProductEntry(
 		long productEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -79,12 +80,14 @@ public class SCProductEntryLocalServiceWrapper
 	* @return the s c product entry that was removed
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry deleteSCProductEntry(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _scProductEntryLocalService.deleteSCProductEntry(scProductEntry);
 	}
 
+	@Override
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {
 		return _scProductEntryLocalService.dynamicQuery();
 	}
@@ -96,6 +99,7 @@ public class SCProductEntryLocalServiceWrapper
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -116,6 +120,7 @@ public class SCProductEntryLocalServiceWrapper
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -137,6 +142,7 @@ public class SCProductEntryLocalServiceWrapper
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -154,12 +160,14 @@ public class SCProductEntryLocalServiceWrapper
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _scProductEntryLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	@Override
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry fetchSCProductEntry(
 		long productEntryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -174,6 +182,7 @@ public class SCProductEntryLocalServiceWrapper
 	* @throws PortalException if a s c product entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry getSCProductEntry(
 		long productEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -181,6 +190,7 @@ public class SCProductEntryLocalServiceWrapper
 		return _scProductEntryLocalService.getSCProductEntry(productEntryId);
 	}
 
+	@Override
 	public com.liferay.portal.model.PersistedModel getPersistedModel(
 		java.io.Serializable primaryKeyObj)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -200,6 +210,7 @@ public class SCProductEntryLocalServiceWrapper
 	* @return the range of s c product entries
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getSCProductEntries(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -212,6 +223,7 @@ public class SCProductEntryLocalServiceWrapper
 	* @return the number of s c product entries
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public int getSCProductEntriesCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _scProductEntryLocalService.getSCProductEntriesCount();
@@ -224,6 +236,7 @@ public class SCProductEntryLocalServiceWrapper
 	* @return the s c product entry that was updated
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry updateSCProductEntry(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -233,6 +246,7 @@ public class SCProductEntryLocalServiceWrapper
 	/**
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void addSCLicenseSCProductEntry(long licenseId, long productEntryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_scProductEntryLocalService.addSCLicenseSCProductEntry(licenseId,
@@ -242,6 +256,7 @@ public class SCProductEntryLocalServiceWrapper
 	/**
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void addSCLicenseSCProductEntry(long licenseId,
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -252,6 +267,7 @@ public class SCProductEntryLocalServiceWrapper
 	/**
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void addSCLicenseSCProductEntries(long licenseId,
 		long[] productEntryIds)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -262,6 +278,7 @@ public class SCProductEntryLocalServiceWrapper
 	/**
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void addSCLicenseSCProductEntries(long licenseId,
 		java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> SCProductEntries)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -272,6 +289,7 @@ public class SCProductEntryLocalServiceWrapper
 	/**
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void clearSCLicenseSCProductEntries(long licenseId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_scProductEntryLocalService.clearSCLicenseSCProductEntries(licenseId);
@@ -280,6 +298,7 @@ public class SCProductEntryLocalServiceWrapper
 	/**
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void deleteSCLicenseSCProductEntry(long licenseId,
 		long productEntryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -290,6 +309,7 @@ public class SCProductEntryLocalServiceWrapper
 	/**
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void deleteSCLicenseSCProductEntry(long licenseId,
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -300,6 +320,7 @@ public class SCProductEntryLocalServiceWrapper
 	/**
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void deleteSCLicenseSCProductEntries(long licenseId,
 		long[] productEntryIds)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -310,6 +331,7 @@ public class SCProductEntryLocalServiceWrapper
 	/**
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void deleteSCLicenseSCProductEntries(long licenseId,
 		java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> SCProductEntries)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -320,6 +342,7 @@ public class SCProductEntryLocalServiceWrapper
 	/**
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getSCLicenseSCProductEntries(
 		long licenseId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -329,6 +352,7 @@ public class SCProductEntryLocalServiceWrapper
 	/**
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getSCLicenseSCProductEntries(
 		long licenseId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -339,6 +363,7 @@ public class SCProductEntryLocalServiceWrapper
 	/**
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getSCLicenseSCProductEntries(
 		long licenseId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -350,6 +375,7 @@ public class SCProductEntryLocalServiceWrapper
 	/**
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public int getSCLicenseSCProductEntriesCount(long licenseId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _scProductEntryLocalService.getSCLicenseSCProductEntriesCount(licenseId);
@@ -358,6 +384,7 @@ public class SCProductEntryLocalServiceWrapper
 	/**
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public boolean hasSCLicenseSCProductEntry(long licenseId,
 		long productEntryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -368,6 +395,7 @@ public class SCProductEntryLocalServiceWrapper
 	/**
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public boolean hasSCLicenseSCProductEntries(long licenseId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _scProductEntryLocalService.hasSCLicenseSCProductEntries(licenseId);
@@ -376,6 +404,7 @@ public class SCProductEntryLocalServiceWrapper
 	/**
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void setSCLicenseSCProductEntries(long licenseId,
 		long[] productEntryIds)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -388,6 +417,7 @@ public class SCProductEntryLocalServiceWrapper
 	*
 	* @return the Spring bean ID for this bean
 	*/
+	@Override
 	public java.lang.String getBeanIdentifier() {
 		return _scProductEntryLocalService.getBeanIdentifier();
 	}
@@ -397,10 +427,12 @@ public class SCProductEntryLocalServiceWrapper
 	*
 	* @param beanIdentifier the Spring bean ID for this bean
 	*/
+	@Override
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		_scProductEntryLocalService.setBeanIdentifier(beanIdentifier);
 	}
 
+	@Override
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry addProductEntry(
 		long userId, java.lang.String name, java.lang.String type,
 		java.lang.String tags, java.lang.String shortDescription,
@@ -417,6 +449,7 @@ public class SCProductEntryLocalServiceWrapper
 			serviceContext);
 	}
 
+	@Override
 	public void addProductEntryResources(long productEntryId,
 		boolean addGroupPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -425,6 +458,7 @@ public class SCProductEntryLocalServiceWrapper
 			addGroupPermissions, addGuestPermissions);
 	}
 
+	@Override
 	public void addProductEntryResources(long productEntryId,
 		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -433,6 +467,7 @@ public class SCProductEntryLocalServiceWrapper
 			groupPermissions, guestPermissions);
 	}
 
+	@Override
 	public void addProductEntryResources(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry productEntry,
 		boolean addGroupPermissions, boolean addGuestPermissions)
@@ -442,6 +477,7 @@ public class SCProductEntryLocalServiceWrapper
 			addGroupPermissions, addGuestPermissions);
 	}
 
+	@Override
 	public void addProductEntryResources(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry productEntry,
 		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
@@ -451,12 +487,14 @@ public class SCProductEntryLocalServiceWrapper
 			groupPermissions, guestPermissions);
 	}
 
+	@Override
 	public void deleteProductEntries(long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_scProductEntryLocalService.deleteProductEntries(groupId);
 	}
 
+	@Override
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry deleteProductEntry(
 		long productEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -464,6 +502,7 @@ public class SCProductEntryLocalServiceWrapper
 		return _scProductEntryLocalService.deleteProductEntry(productEntryId);
 	}
 
+	@Override
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry deleteProductEntry(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry productEntry)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -471,6 +510,7 @@ public class SCProductEntryLocalServiceWrapper
 		return _scProductEntryLocalService.deleteProductEntry(productEntry);
 	}
 
+	@Override
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getCompanyProductEntries(
 		long companyId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -478,17 +518,20 @@ public class SCProductEntryLocalServiceWrapper
 			start, end);
 	}
 
+	@Override
 	public int getCompanyProductEntriesCount(long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _scProductEntryLocalService.getCompanyProductEntriesCount(companyId);
 	}
 
+	@Override
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getProductEntries(
 		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _scProductEntryLocalService.getProductEntries(groupId, start, end);
 	}
 
+	@Override
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getProductEntries(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
@@ -497,6 +540,7 @@ public class SCProductEntryLocalServiceWrapper
 			end, obc);
 	}
 
+	@Override
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getProductEntries(
 		long groupId, long userId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -504,6 +548,7 @@ public class SCProductEntryLocalServiceWrapper
 			start, end);
 	}
 
+	@Override
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getProductEntries(
 		long groupId, long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
@@ -512,17 +557,20 @@ public class SCProductEntryLocalServiceWrapper
 			start, end, obc);
 	}
 
+	@Override
 	public int getProductEntriesCount(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _scProductEntryLocalService.getProductEntriesCount(groupId);
 	}
 
+	@Override
 	public int getProductEntriesCount(long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _scProductEntryLocalService.getProductEntriesCount(groupId,
 			userId);
 	}
 
+	@Override
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry getProductEntry(
 		long productEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -530,6 +578,7 @@ public class SCProductEntryLocalServiceWrapper
 		return _scProductEntryLocalService.getProductEntry(productEntryId);
 	}
 
+	@Override
 	public java.lang.String getRepositoryXML(long groupId,
 		java.lang.String baseImageURL, java.util.Date oldestDate,
 		int maxNumOfVersions, java.util.Properties repoSettings)
@@ -538,6 +587,7 @@ public class SCProductEntryLocalServiceWrapper
 			baseImageURL, oldestDate, maxNumOfVersions, repoSettings);
 	}
 
+	@Override
 	public java.lang.String getRepositoryXML(long groupId,
 		java.lang.String version, java.lang.String baseImageURL,
 		java.util.Date oldestDate, int maxNumOfVersions,
@@ -547,6 +597,7 @@ public class SCProductEntryLocalServiceWrapper
 			baseImageURL, oldestDate, maxNumOfVersions, repoSettings);
 	}
 
+	@Override
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry updateProductEntry(
 		long productEntryId, java.lang.String name, java.lang.String type,
 		java.lang.String tags, java.lang.String shortDescription,
@@ -577,10 +628,12 @@ public class SCProductEntryLocalServiceWrapper
 		_scProductEntryLocalService = scProductEntryLocalService;
 	}
 
+	@Override
 	public SCProductEntryLocalService getWrappedService() {
 		return _scProductEntryLocalService;
 	}
 
+	@Override
 	public void setWrappedService(
 		SCProductEntryLocalService scProductEntryLocalService) {
 		_scProductEntryLocalService = scProductEntryLocalService;

@@ -214,26 +214,32 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 	public JournalArticleModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _id;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _id;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return JournalArticle.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return JournalArticle.class.getName();
 	}
@@ -480,6 +486,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		}
 	}
 
+	@Override
 	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
@@ -490,6 +497,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		}
 	}
 
+	@Override
 	public void setUuid(String uuid) {
 		if (_originalUuid == null) {
 			_originalUuid = _uuid;
@@ -502,20 +510,24 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@Override
 	@JSON
 	public long getId() {
 		return _id;
 	}
 
+	@Override
 	public void setId(long id) {
 		_id = id;
 	}
 
+	@Override
 	@JSON
 	public long getResourcePrimKey() {
 		return _resourcePrimKey;
 	}
 
+	@Override
 	public void setResourcePrimKey(long resourcePrimKey) {
 		_columnBitmask |= RESOURCEPRIMKEY_COLUMN_BITMASK;
 
@@ -528,6 +540,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		_resourcePrimKey = resourcePrimKey;
 	}
 
+	@Override
 	public boolean isResourceMain() {
 		return true;
 	}
@@ -536,11 +549,13 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		return _originalResourcePrimKey;
 	}
 
+	@Override
 	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -557,11 +572,13 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		return _originalGroupId;
 	}
 
+	@Override
 	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
@@ -578,11 +595,13 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		return _originalCompanyId;
 	}
 
+	@Override
 	@JSON
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_columnBitmask |= USERID_COLUMN_BITMASK;
 
@@ -595,10 +614,12 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
@@ -607,6 +628,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		return _originalUserId;
 	}
 
+	@Override
 	@JSON
 	public String getUserName() {
 		if (_userName == null) {
@@ -617,33 +639,40 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		}
 	}
 
+	@Override
 	public void setUserName(String userName) {
 		_userName = userName;
 	}
 
+	@Override
 	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
 	}
 
+	@Override
 	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
 	@JSON
 	public long getFolderId() {
 		return _folderId;
 	}
 
+	@Override
 	public void setFolderId(long folderId) {
 		_columnBitmask |= FOLDERID_COLUMN_BITMASK;
 
@@ -660,6 +689,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		return _originalFolderId;
 	}
 
+	@Override
 	public String getClassName() {
 		if (getClassNameId() <= 0) {
 			return StringPool.BLANK;
@@ -668,6 +698,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		return PortalUtil.getClassName(getClassNameId());
 	}
 
+	@Override
 	public void setClassName(String className) {
 		long classNameId = 0;
 
@@ -678,11 +709,13 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		setClassNameId(classNameId);
 	}
 
+	@Override
 	@JSON
 	public long getClassNameId() {
 		return _classNameId;
 	}
 
+	@Override
 	public void setClassNameId(long classNameId) {
 		_columnBitmask |= CLASSNAMEID_COLUMN_BITMASK;
 
@@ -699,11 +732,13 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		return _originalClassNameId;
 	}
 
+	@Override
 	@JSON
 	public long getClassPK() {
 		return _classPK;
 	}
 
+	@Override
 	public void setClassPK(long classPK) {
 		_columnBitmask |= CLASSPK_COLUMN_BITMASK;
 
@@ -720,6 +755,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		return _originalClassPK;
 	}
 
+	@Override
 	@JSON
 	public String getArticleId() {
 		if (_articleId == null) {
@@ -730,6 +766,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		}
 	}
 
+	@Override
 	public void setArticleId(String articleId) {
 		_columnBitmask = -1L;
 
@@ -744,11 +781,13 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		return GetterUtil.getString(_originalArticleId);
 	}
 
+	@Override
 	@JSON
 	public double getVersion() {
 		return _version;
 	}
 
+	@Override
 	public void setVersion(double version) {
 		_columnBitmask = -1L;
 
@@ -765,6 +804,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		return _originalVersion;
 	}
 
+	@Override
 	@JSON
 	public String getTitle() {
 		if (_title == null) {
@@ -775,50 +815,60 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		}
 	}
 
+	@Override
 	public String getTitle(Locale locale) {
 		String languageId = LocaleUtil.toLanguageId(locale);
 
 		return getTitle(languageId);
 	}
 
+	@Override
 	public String getTitle(Locale locale, boolean useDefault) {
 		String languageId = LocaleUtil.toLanguageId(locale);
 
 		return getTitle(languageId, useDefault);
 	}
 
+	@Override
 	public String getTitle(String languageId) {
 		return LocalizationUtil.getLocalization(getTitle(), languageId);
 	}
 
+	@Override
 	public String getTitle(String languageId, boolean useDefault) {
 		return LocalizationUtil.getLocalization(getTitle(), languageId,
 			useDefault);
 	}
 
+	@Override
 	public String getTitleCurrentLanguageId() {
 		return _titleCurrentLanguageId;
 	}
 
 	@JSON
+	@Override
 	public String getTitleCurrentValue() {
 		Locale locale = getLocale(_titleCurrentLanguageId);
 
 		return getTitle(locale);
 	}
 
+	@Override
 	public Map<Locale, String> getTitleMap() {
 		return LocalizationUtil.getLocalizationMap(getTitle());
 	}
 
+	@Override
 	public void setTitle(String title) {
 		_title = title;
 	}
 
+	@Override
 	public void setTitle(String title, Locale locale) {
 		setTitle(title, locale, LocaleUtil.getDefault());
 	}
 
+	@Override
 	public void setTitle(String title, Locale locale, Locale defaultLocale) {
 		String languageId = LocaleUtil.toLanguageId(locale);
 		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
@@ -833,14 +883,17 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		}
 	}
 
+	@Override
 	public void setTitleCurrentLanguageId(String languageId) {
 		_titleCurrentLanguageId = languageId;
 	}
 
+	@Override
 	public void setTitleMap(Map<Locale, String> titleMap) {
 		setTitleMap(titleMap, LocaleUtil.getDefault());
 	}
 
+	@Override
 	public void setTitleMap(Map<Locale, String> titleMap, Locale defaultLocale) {
 		if (titleMap == null) {
 			return;
@@ -850,6 +903,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 				"Title", LocaleUtil.toLanguageId(defaultLocale)));
 	}
 
+	@Override
 	@JSON
 	public String getUrlTitle() {
 		if (_urlTitle == null) {
@@ -860,6 +914,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		}
 	}
 
+	@Override
 	public void setUrlTitle(String urlTitle) {
 		_columnBitmask |= URLTITLE_COLUMN_BITMASK;
 
@@ -874,6 +929,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		return GetterUtil.getString(_originalUrlTitle);
 	}
 
+	@Override
 	@JSON
 	public String getDescription() {
 		if (_description == null) {
@@ -884,50 +940,60 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		}
 	}
 
+	@Override
 	public String getDescription(Locale locale) {
 		String languageId = LocaleUtil.toLanguageId(locale);
 
 		return getDescription(languageId);
 	}
 
+	@Override
 	public String getDescription(Locale locale, boolean useDefault) {
 		String languageId = LocaleUtil.toLanguageId(locale);
 
 		return getDescription(languageId, useDefault);
 	}
 
+	@Override
 	public String getDescription(String languageId) {
 		return LocalizationUtil.getLocalization(getDescription(), languageId);
 	}
 
+	@Override
 	public String getDescription(String languageId, boolean useDefault) {
 		return LocalizationUtil.getLocalization(getDescription(), languageId,
 			useDefault);
 	}
 
+	@Override
 	public String getDescriptionCurrentLanguageId() {
 		return _descriptionCurrentLanguageId;
 	}
 
 	@JSON
+	@Override
 	public String getDescriptionCurrentValue() {
 		Locale locale = getLocale(_descriptionCurrentLanguageId);
 
 		return getDescription(locale);
 	}
 
+	@Override
 	public Map<Locale, String> getDescriptionMap() {
 		return LocalizationUtil.getLocalizationMap(getDescription());
 	}
 
+	@Override
 	public void setDescription(String description) {
 		_description = description;
 	}
 
+	@Override
 	public void setDescription(String description, Locale locale) {
 		setDescription(description, locale, LocaleUtil.getDefault());
 	}
 
+	@Override
 	public void setDescription(String description, Locale locale,
 		Locale defaultLocale) {
 		String languageId = LocaleUtil.toLanguageId(locale);
@@ -944,14 +1010,17 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		}
 	}
 
+	@Override
 	public void setDescriptionCurrentLanguageId(String languageId) {
 		_descriptionCurrentLanguageId = languageId;
 	}
 
+	@Override
 	public void setDescriptionMap(Map<Locale, String> descriptionMap) {
 		setDescriptionMap(descriptionMap, LocaleUtil.getDefault());
 	}
 
+	@Override
 	public void setDescriptionMap(Map<Locale, String> descriptionMap,
 		Locale defaultLocale) {
 		if (descriptionMap == null) {
@@ -963,6 +1032,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 				LocaleUtil.toLanguageId(defaultLocale)));
 	}
 
+	@Override
 	@JSON
 	public String getContent() {
 		if (_content == null) {
@@ -973,10 +1043,12 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		}
 	}
 
+	@Override
 	public void setContent(String content) {
 		_content = content;
 	}
 
+	@Override
 	@JSON
 	public String getType() {
 		if (_type == null) {
@@ -987,10 +1059,12 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		}
 	}
 
+	@Override
 	public void setType(String type) {
 		_type = type;
 	}
 
+	@Override
 	@JSON
 	public String getStructureId() {
 		if (_structureId == null) {
@@ -1001,6 +1075,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		}
 	}
 
+	@Override
 	public void setStructureId(String structureId) {
 		_columnBitmask |= STRUCTUREID_COLUMN_BITMASK;
 
@@ -1015,6 +1090,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		return GetterUtil.getString(_originalStructureId);
 	}
 
+	@Override
 	@JSON
 	public String getTemplateId() {
 		if (_templateId == null) {
@@ -1025,6 +1101,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		}
 	}
 
+	@Override
 	public void setTemplateId(String templateId) {
 		_columnBitmask |= TEMPLATEID_COLUMN_BITMASK;
 
@@ -1039,6 +1116,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		return GetterUtil.getString(_originalTemplateId);
 	}
 
+	@Override
 	@JSON
 	public String getLayoutUuid() {
 		if (_layoutUuid == null) {
@@ -1049,6 +1127,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		}
 	}
 
+	@Override
 	public void setLayoutUuid(String layoutUuid) {
 		_columnBitmask |= LAYOUTUUID_COLUMN_BITMASK;
 
@@ -1063,64 +1142,78 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		return GetterUtil.getString(_originalLayoutUuid);
 	}
 
+	@Override
 	@JSON
 	public Date getDisplayDate() {
 		return _displayDate;
 	}
 
+	@Override
 	public void setDisplayDate(Date displayDate) {
 		_displayDate = displayDate;
 	}
 
+	@Override
 	@JSON
 	public Date getExpirationDate() {
 		return _expirationDate;
 	}
 
+	@Override
 	public void setExpirationDate(Date expirationDate) {
 		_expirationDate = expirationDate;
 	}
 
+	@Override
 	@JSON
 	public Date getReviewDate() {
 		return _reviewDate;
 	}
 
+	@Override
 	public void setReviewDate(Date reviewDate) {
 		_reviewDate = reviewDate;
 	}
 
+	@Override
 	@JSON
 	public boolean getIndexable() {
 		return _indexable;
 	}
 
+	@Override
 	public boolean isIndexable() {
 		return _indexable;
 	}
 
+	@Override
 	public void setIndexable(boolean indexable) {
 		_indexable = indexable;
 	}
 
+	@Override
 	@JSON
 	public boolean getSmallImage() {
 		return _smallImage;
 	}
 
+	@Override
 	public boolean isSmallImage() {
 		return _smallImage;
 	}
 
+	@Override
 	public void setSmallImage(boolean smallImage) {
 		_smallImage = smallImage;
 	}
 
+	@Override
 	@JSON
 	public long getSmallImageId() {
 		return _smallImageId;
 	}
 
+	@Override
 	public void setSmallImageId(long smallImageId) {
 		_columnBitmask |= SMALLIMAGEID_COLUMN_BITMASK;
 
@@ -1137,6 +1230,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		return _originalSmallImageId;
 	}
 
+	@Override
 	@JSON
 	public String getSmallImageURL() {
 		if (_smallImageURL == null) {
@@ -1147,15 +1241,18 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		}
 	}
 
+	@Override
 	public void setSmallImageURL(String smallImageURL) {
 		_smallImageURL = smallImageURL;
 	}
 
+	@Override
 	@JSON
 	public int getStatus() {
 		return _status;
 	}
 
+	@Override
 	public void setStatus(int status) {
 		_columnBitmask |= STATUS_COLUMN_BITMASK;
 
@@ -1172,24 +1269,29 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		return _originalStatus;
 	}
 
+	@Override
 	@JSON
 	public long getStatusByUserId() {
 		return _statusByUserId;
 	}
 
+	@Override
 	public void setStatusByUserId(long statusByUserId) {
 		_statusByUserId = statusByUserId;
 	}
 
+	@Override
 	public String getStatusByUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getStatusByUserId(), "uuid",
 			_statusByUserUuid);
 	}
 
+	@Override
 	public void setStatusByUserUuid(String statusByUserUuid) {
 		_statusByUserUuid = statusByUserUuid;
 	}
 
+	@Override
 	@JSON
 	public String getStatusByUserName() {
 		if (_statusByUserName == null) {
@@ -1200,15 +1302,18 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		}
 	}
 
+	@Override
 	public void setStatusByUserName(String statusByUserName) {
 		_statusByUserName = statusByUserName;
 	}
 
+	@Override
 	@JSON
 	public Date getStatusDate() {
 		return _statusDate;
 	}
 
+	@Override
 	public void setStatusDate(Date statusDate) {
 		_statusDate = statusDate;
 	}
@@ -1216,10 +1321,12 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #isApproved}
 	 */
+	@Override
 	public boolean getApproved() {
 		return isApproved();
 	}
 
+	@Override
 	public boolean isApproved() {
 		if (getStatus() == WorkflowConstants.STATUS_APPROVED) {
 			return true;
@@ -1229,6 +1336,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		}
 	}
 
+	@Override
 	public boolean isDenied() {
 		if (getStatus() == WorkflowConstants.STATUS_DENIED) {
 			return true;
@@ -1238,6 +1346,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		}
 	}
 
+	@Override
 	public boolean isDraft() {
 		if (getStatus() == WorkflowConstants.STATUS_DRAFT) {
 			return true;
@@ -1247,6 +1356,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		}
 	}
 
+	@Override
 	public boolean isExpired() {
 		if (getStatus() == WorkflowConstants.STATUS_EXPIRED) {
 			return true;
@@ -1256,6 +1366,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		}
 	}
 
+	@Override
 	public boolean isInactive() {
 		if (getStatus() == WorkflowConstants.STATUS_INACTIVE) {
 			return true;
@@ -1265,6 +1376,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		}
 	}
 
+	@Override
 	public boolean isIncomplete() {
 		if (getStatus() == WorkflowConstants.STATUS_INCOMPLETE) {
 			return true;
@@ -1274,6 +1386,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		}
 	}
 
+	@Override
 	public boolean isInTrash() {
 		if (getStatus() == WorkflowConstants.STATUS_IN_TRASH) {
 			return true;
@@ -1283,6 +1396,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		}
 	}
 
+	@Override
 	public boolean isPending() {
 		if (getStatus() == WorkflowConstants.STATUS_PENDING) {
 			return true;
@@ -1292,6 +1406,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		}
 	}
 
+	@Override
 	public boolean isScheduled() {
 		if (getStatus() == WorkflowConstants.STATUS_SCHEDULED) {
 			return true;
@@ -1318,6 +1433,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		expandoBridge.setAttributes(serviceContext);
 	}
 
+	@Override
 	@SuppressWarnings("unused")
 	public void prepareLocalizedFieldsForImport(Locale defaultImportLocale)
 		throws LocaleException {
@@ -1380,6 +1496,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		return journalArticleImpl;
 	}
 
+	@Override
 	public int compareTo(JournalArticle journalArticle) {
 		int value = 0;
 
@@ -1410,18 +1527,15 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof JournalArticle)) {
 			return false;
 		}
 
-		JournalArticle journalArticle = null;
-
-		try {
-			journalArticle = (JournalArticle)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		JournalArticle journalArticle = (JournalArticle)obj;
 
 		long primaryKey = journalArticle.getPrimaryKey();
 
@@ -1765,6 +1879,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(103);
 

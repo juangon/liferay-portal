@@ -1,12 +1,33 @@
 <definition>
 	<command name="click">
-		<case comparator="startsWith" locator-key1="PAGE_DELETE">
-			<execute function="Click#textClick" value1="X" />
+		<case locator-key1="PAGE_1_CHILD_PAGE_1">
+			<execute function="Click#textClickAtAndWait" />
 		</case>
-		<case comparator="startsWith" locator1="link=">
+		<case locator-key1="PAGE_1_CHILD_PAGE_2">
+			<execute function="Click#textClickAtAndWait" />
+		</case>
+		<case locator-key1="PAGE_1_CHILD_PAGE_3">
+			<execute function="Click#textClickAtAndWait" />
+		</case>
+		<case locator-key1="PAGE_DELETE">
+			<execute function="Click#click" />
+		</case>
+		<case comparator="startsWith" locator1="//li[contains(@class,'lfr-nav-updateable')]/a[.='">
 			<execute function="Click#clickAtAndWait" />
 		</case>
 		<case comparator="startsWith" locator1="//a[@role='menuitem' and contains(.,">
+			<execute function="Click#clickAtAndWait" />
+		</case>
+		<case comparator="startsWith" locator1="//div[@class='navbar control-panel-bar-main']//a[contains(.,">
+			<execute function="Click#clickAtAndWait" />
+		</case>
+		<case comparator="startsWith" locator1="//ul[@class='nav control-panel-bar-secondary nav-pills']//a[contains(.,">
+			<execute function="Click#clickAtAndWait" />
+		</case>
+		<case comparator="startsWith" locator1="//ul[@class='category-portlets']/li[contains(.,">
+			<execute function="Click#clickAtAndWait" />
+		</case>
+		<case comparator="startsWith" locator1="link" >
 			<execute function="Click#clickAtAndWait" />
 		</case>
 	</command>
@@ -14,6 +35,18 @@
 	<command name="confirm">
 		<case locator-key1="PAGE_CONFIRM">
 			<execute function="Confirm#waitForConfirmation" />
+		</case>
+	</command>
+
+	<command name="mouseOver">
+		<case locator-key1="PAGE_1">
+			<execute function="MouseOver#mouseOverClickNavigation" />
+		</case>
+		<case locator-key1="PAGE_2">
+			<execute function="MouseOver#mouseOverClickNavigation" />
+		</case>
+		<case locator-key1="PAGE_3">
+			<execute function="MouseOver#mouseOverClickNavigation" />
 		</case>
 	</command>
 

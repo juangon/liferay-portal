@@ -25,6 +25,7 @@ page import="com.liferay.portal.kernel.xml.Document" %><%@
 page import="com.liferay.portal.kernel.xml.Element" %><%@
 page import="com.liferay.portal.kernel.xml.SAXReaderUtil" %><%@
 page import="com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil" %><%@
+page import="com.liferay.portlet.asset.DuplicateQueryRuleException" %><%@
 page import="com.liferay.portlet.asset.NoSuchEntryException" %><%@
 page import="com.liferay.portlet.asset.NoSuchTagException" %><%@
 page import="com.liferay.portlet.asset.NoSuchTagPropertyException" %><%@
@@ -51,6 +52,8 @@ page import="com.liferay.portlet.documentlibrary.util.DocumentConversionUtil" %>
 page import="com.liferay.portlet.dynamicdatamapping.model.DDMStructure" %><%@
 page import="com.liferay.portlet.dynamicdatamapping.util.DDMImpl" %><%@
 page import="com.liferay.portlet.dynamicdatamapping.util.DDMIndexerUtil" %><%@
+page import="com.liferay.portlet.messageboards.model.MBDiscussion" %><%@
+page import="com.liferay.portlet.messageboards.model.MBMessage" %><%@
 page import="com.liferay.portlet.portletdisplaytemplate.util.PortletDisplayTemplateConstants" %><%@
 page import="com.liferay.portlet.portletdisplaytemplate.util.PortletDisplayTemplateUtil" %><%@
 page import="com.liferay.util.RSSUtil" %><%@
@@ -73,7 +76,7 @@ if (Validator.isNull(selectionStyle)) {
 
 long[] groupIds = AssetPublisherUtil.getGroupIds(preferences, scopeGroupId, layout);
 
-long[] availableClassNameIds = AssetRendererFactoryRegistryUtil.getClassNameIds();
+long[] availableClassNameIds = AssetRendererFactoryRegistryUtil.getClassNameIds(company.getCompanyId());
 
 for (long classNameId : availableClassNameIds) {
 	AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(PortalUtil.getClassName(classNameId));

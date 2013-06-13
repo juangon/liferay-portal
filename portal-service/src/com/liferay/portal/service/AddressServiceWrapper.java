@@ -15,12 +15,10 @@
 package com.liferay.portal.service;
 
 /**
- * <p>
- * This class is a wrapper for {@link AddressService}.
- * </p>
+ * Provides a wrapper for {@link AddressService}.
  *
- * @author    Brian Wing Shun Chan
- * @see       AddressService
+ * @author Brian Wing Shun Chan
+ * @see AddressService
  * @generated
  */
 public class AddressServiceWrapper implements AddressService,
@@ -34,6 +32,7 @@ public class AddressServiceWrapper implements AddressService,
 	*
 	* @return the Spring bean ID for this bean
 	*/
+	@Override
 	public java.lang.String getBeanIdentifier() {
 		return _addressService.getBeanIdentifier();
 	}
@@ -43,10 +42,17 @@ public class AddressServiceWrapper implements AddressService,
 	*
 	* @param beanIdentifier the Spring bean ID for this bean
 	*/
+	@Override
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		_addressService.setBeanIdentifier(beanIdentifier);
 	}
 
+	/**
+	* @deprecated As of 6.2.0, replaced by {@link #addAddress( String, long,
+	String, String, String, String, String, long, long, int,
+	boolean, boolean, ServiceContext)}
+	*/
+	@Override
 	public com.liferay.portal.model.Address addAddress(
 		java.lang.String className, long classPK, java.lang.String street1,
 		java.lang.String street2, java.lang.String street3,
@@ -58,18 +64,35 @@ public class AddressServiceWrapper implements AddressService,
 			street3, city, zip, regionId, countryId, typeId, mailing, primary);
 	}
 
+	@Override
+	public com.liferay.portal.model.Address addAddress(
+		java.lang.String className, long classPK, java.lang.String street1,
+		java.lang.String street2, java.lang.String street3,
+		java.lang.String city, java.lang.String zip, long regionId,
+		long countryId, int typeId, boolean mailing, boolean primary,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _addressService.addAddress(className, classPK, street1, street2,
+			street3, city, zip, regionId, countryId, typeId, mailing, primary,
+			serviceContext);
+	}
+
+	@Override
 	public void deleteAddress(long addressId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_addressService.deleteAddress(addressId);
 	}
 
+	@Override
 	public com.liferay.portal.model.Address getAddress(long addressId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _addressService.getAddress(addressId);
 	}
 
+	@Override
 	public java.util.List<com.liferay.portal.model.Address> getAddresses(
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -77,6 +100,7 @@ public class AddressServiceWrapper implements AddressService,
 		return _addressService.getAddresses(className, classPK);
 	}
 
+	@Override
 	public com.liferay.portal.model.Address updateAddress(long addressId,
 		java.lang.String street1, java.lang.String street2,
 		java.lang.String street3, java.lang.String city, java.lang.String zip,
@@ -102,10 +126,12 @@ public class AddressServiceWrapper implements AddressService,
 		_addressService = addressService;
 	}
 
+	@Override
 	public AddressService getWrappedService() {
 		return _addressService;
 	}
 
+	@Override
 	public void setWrappedService(AddressService addressService) {
 		_addressService = addressService;
 	}

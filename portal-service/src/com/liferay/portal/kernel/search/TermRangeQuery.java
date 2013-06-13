@@ -29,6 +29,7 @@ public interface TermRangeQuery extends Query {
 
 	public boolean includesUpper();
 
+	@Override
 	public String toString();
 
 }

@@ -22,8 +22,8 @@ import java.util.Map;
  * This class is a wrapper for {@link Country}.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       Country
+ * @author Brian Wing Shun Chan
+ * @see Country
  * @generated
  */
 public class CountryWrapper implements Country, ModelWrapper<Country> {
@@ -31,14 +31,17 @@ public class CountryWrapper implements Country, ModelWrapper<Country> {
 		_country = country;
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return Country.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return Country.class.getName();
 	}
 
+	@Override
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
@@ -54,6 +57,7 @@ public class CountryWrapper implements Country, ModelWrapper<Country> {
 		return attributes;
 	}
 
+	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 		Long countryId = (Long)attributes.get("countryId");
 
@@ -109,6 +113,7 @@ public class CountryWrapper implements Country, ModelWrapper<Country> {
 	*
 	* @return the primary key of this country
 	*/
+	@Override
 	public long getPrimaryKey() {
 		return _country.getPrimaryKey();
 	}
@@ -118,6 +123,7 @@ public class CountryWrapper implements Country, ModelWrapper<Country> {
 	*
 	* @param primaryKey the primary key of this country
 	*/
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_country.setPrimaryKey(primaryKey);
 	}
@@ -127,6 +133,7 @@ public class CountryWrapper implements Country, ModelWrapper<Country> {
 	*
 	* @return the country ID of this country
 	*/
+	@Override
 	public long getCountryId() {
 		return _country.getCountryId();
 	}
@@ -136,6 +143,7 @@ public class CountryWrapper implements Country, ModelWrapper<Country> {
 	*
 	* @param countryId the country ID of this country
 	*/
+	@Override
 	public void setCountryId(long countryId) {
 		_country.setCountryId(countryId);
 	}
@@ -145,6 +153,7 @@ public class CountryWrapper implements Country, ModelWrapper<Country> {
 	*
 	* @return the name of this country
 	*/
+	@Override
 	public java.lang.String getName() {
 		return _country.getName();
 	}
@@ -154,6 +163,7 @@ public class CountryWrapper implements Country, ModelWrapper<Country> {
 	*
 	* @param name the name of this country
 	*/
+	@Override
 	public void setName(java.lang.String name) {
 		_country.setName(name);
 	}
@@ -163,6 +173,7 @@ public class CountryWrapper implements Country, ModelWrapper<Country> {
 	*
 	* @return the a2 of this country
 	*/
+	@Override
 	public java.lang.String getA2() {
 		return _country.getA2();
 	}
@@ -172,6 +183,7 @@ public class CountryWrapper implements Country, ModelWrapper<Country> {
 	*
 	* @param a2 the a2 of this country
 	*/
+	@Override
 	public void setA2(java.lang.String a2) {
 		_country.setA2(a2);
 	}
@@ -181,6 +193,7 @@ public class CountryWrapper implements Country, ModelWrapper<Country> {
 	*
 	* @return the a3 of this country
 	*/
+	@Override
 	public java.lang.String getA3() {
 		return _country.getA3();
 	}
@@ -190,6 +203,7 @@ public class CountryWrapper implements Country, ModelWrapper<Country> {
 	*
 	* @param a3 the a3 of this country
 	*/
+	@Override
 	public void setA3(java.lang.String a3) {
 		_country.setA3(a3);
 	}
@@ -199,6 +213,7 @@ public class CountryWrapper implements Country, ModelWrapper<Country> {
 	*
 	* @return the number of this country
 	*/
+	@Override
 	public java.lang.String getNumber() {
 		return _country.getNumber();
 	}
@@ -208,6 +223,7 @@ public class CountryWrapper implements Country, ModelWrapper<Country> {
 	*
 	* @param number the number of this country
 	*/
+	@Override
 	public void setNumber(java.lang.String number) {
 		_country.setNumber(number);
 	}
@@ -217,6 +233,7 @@ public class CountryWrapper implements Country, ModelWrapper<Country> {
 	*
 	* @return the idd of this country
 	*/
+	@Override
 	public java.lang.String getIdd() {
 		return _country.getIdd();
 	}
@@ -226,6 +243,7 @@ public class CountryWrapper implements Country, ModelWrapper<Country> {
 	*
 	* @param idd the idd of this country
 	*/
+	@Override
 	public void setIdd(java.lang.String idd) {
 		_country.setIdd(idd);
 	}
@@ -235,6 +253,7 @@ public class CountryWrapper implements Country, ModelWrapper<Country> {
 	*
 	* @return the zip required of this country
 	*/
+	@Override
 	public boolean getZipRequired() {
 		return _country.getZipRequired();
 	}
@@ -244,6 +263,7 @@ public class CountryWrapper implements Country, ModelWrapper<Country> {
 	*
 	* @return <code>true</code> if this country is zip required; <code>false</code> otherwise
 	*/
+	@Override
 	public boolean isZipRequired() {
 		return _country.isZipRequired();
 	}
@@ -253,6 +273,7 @@ public class CountryWrapper implements Country, ModelWrapper<Country> {
 	*
 	* @param zipRequired the zip required of this country
 	*/
+	@Override
 	public void setZipRequired(boolean zipRequired) {
 		_country.setZipRequired(zipRequired);
 	}
@@ -262,6 +283,7 @@ public class CountryWrapper implements Country, ModelWrapper<Country> {
 	*
 	* @return the active of this country
 	*/
+	@Override
 	public boolean getActive() {
 		return _country.getActive();
 	}
@@ -271,6 +293,7 @@ public class CountryWrapper implements Country, ModelWrapper<Country> {
 	*
 	* @return <code>true</code> if this country is active; <code>false</code> otherwise
 	*/
+	@Override
 	public boolean isActive() {
 		return _country.isActive();
 	}
@@ -280,52 +303,64 @@ public class CountryWrapper implements Country, ModelWrapper<Country> {
 	*
 	* @param active the active of this country
 	*/
+	@Override
 	public void setActive(boolean active) {
 		_country.setActive(active);
 	}
 
+	@Override
 	public boolean isNew() {
 		return _country.isNew();
 	}
 
+	@Override
 	public void setNew(boolean n) {
 		_country.setNew(n);
 	}
 
+	@Override
 	public boolean isCachedModel() {
 		return _country.isCachedModel();
 	}
 
+	@Override
 	public void setCachedModel(boolean cachedModel) {
 		_country.setCachedModel(cachedModel);
 	}
 
+	@Override
 	public boolean isEscapedModel() {
 		return _country.isEscapedModel();
 	}
 
+	@Override
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _country.getPrimaryKeyObj();
 	}
 
+	@Override
 	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
 		_country.setPrimaryKeyObj(primaryKeyObj);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
 		return _country.getExpandoBridge();
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.model.BaseModel<?> baseModel) {
 		_country.setExpandoBridgeAttributes(baseModel);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portlet.expando.model.ExpandoBridge expandoBridge) {
 		_country.setExpandoBridgeAttributes(expandoBridge);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		_country.setExpandoBridgeAttributes(serviceContext);
@@ -336,6 +371,7 @@ public class CountryWrapper implements Country, ModelWrapper<Country> {
 		return new CountryWrapper((Country)_country.clone());
 	}
 
+	@Override
 	public int compareTo(com.liferay.portal.model.Country country) {
 		return _country.compareTo(country);
 	}
@@ -345,14 +381,17 @@ public class CountryWrapper implements Country, ModelWrapper<Country> {
 		return _country.hashCode();
 	}
 
+	@Override
 	public com.liferay.portal.model.CacheModel<com.liferay.portal.model.Country> toCacheModel() {
 		return _country.toCacheModel();
 	}
 
+	@Override
 	public com.liferay.portal.model.Country toEscapedModel() {
 		return new CountryWrapper(_country.toEscapedModel());
 	}
 
+	@Override
 	public com.liferay.portal.model.Country toUnescapedModel() {
 		return new CountryWrapper(_country.toUnescapedModel());
 	}
@@ -362,22 +401,27 @@ public class CountryWrapper implements Country, ModelWrapper<Country> {
 		return _country.toString();
 	}
 
+	@Override
 	public java.lang.String toXmlString() {
 		return _country.toXmlString();
 	}
 
+	@Override
 	public java.lang.String getName(java.util.Locale locale) {
 		return _country.getName(locale);
 	}
 
+	@Override
 	public java.lang.String getNameCurrentLanguageId() {
 		return _country.getNameCurrentLanguageId();
 	}
 
+	@Override
 	public java.lang.String getNameCurrentValue() {
 		return _country.getNameCurrentValue();
 	}
 
+	@Override
 	public void setNameCurrentLanguageId(java.lang.String languageId) {
 		_country.setNameCurrentLanguageId(languageId);
 	}
@@ -389,10 +433,12 @@ public class CountryWrapper implements Country, ModelWrapper<Country> {
 		return _country;
 	}
 
+	@Override
 	public Country getWrappedModel() {
 		return _country;
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		_country.resetOriginalValues();
 	}

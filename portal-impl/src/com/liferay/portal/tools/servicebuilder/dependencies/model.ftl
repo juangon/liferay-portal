@@ -14,6 +14,7 @@ import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.ContainerModel;
 import com.liferay.portal.model.GroupedModel;
 import com.liferay.portal.model.ResourcedModel;
+import com.liferay.portal.model.StagedAuditedModel;
 import com.liferay.portal.model.StagedGroupedModel;
 import com.liferay.portal.model.StagedModel;
 import com.liferay.portal.model.WorkflowedModel;
@@ -43,12 +44,18 @@ import java.util.Map;
  * @generated
  */
 public interface ${entity.name}Model extends
+	<#assign overrideColumnNames = []>
+
 	<#if entity.isAttachedModel()>
 		AttachedModel,
+
+		<#assign overrideColumnNames = overrideColumnNames + ["className", "classNameId", "classPK"]>
 	</#if>
 
-	<#if entity.isAuditedModel() && !entity.isGroupedModel() && !entity.isStagedModel()>
+	<#if entity.isAuditedModel() && !entity.isGroupedModel() && !entity.isStagedAuditedModel()>
 		AuditedModel,
+
+		<#assign overrideColumnNames = overrideColumnNames + ["companyId", "createDate", "modifiedDate", "userId", "userName", "userUuid"]>
 	</#if>
 
 	BaseModel<${entity.name}>
@@ -59,22 +66,38 @@ public interface ${entity.name}Model extends
 
 	<#if entity.isGroupedModel() && !entity.isStagedGroupedModel()>
 		, GroupedModel
+
+		<#assign overrideColumnNames = overrideColumnNames + ["companyId", "createDate", "groupId", "modifiedDate", "userId", "userName", "userUuid"]>
 	</#if>
 
 	<#if entity.isResourcedModel()>
 		, ResourcedModel
+
+		<#assign overrideColumnNames = overrideColumnNames + ["resourcePrimKey"]>
 	</#if>
 
 	<#if entity.isStagedGroupedModel()>
 		, StagedGroupedModel
+
+		<#assign overrideColumnNames = overrideColumnNames + ["companyId", "createDate", "groupId", "modifiedDate", "userId", "userName", "userUuid", "uuid"]>
 	</#if>
 
-	<#if !entity.isStagedGroupedModel()&& entity.isStagedModel()>
+	<#if entity.isStagedAuditedModel() && !entity.isStagedGroupedModel()>
+		, StagedAuditedModel
+
+		<#assign overrideColumnNames = overrideColumnNames + ["companyId", "createDate", "modifiedDate", "userId", "userName", "userUuid", "uuid"]>
+	</#if>
+
+	<#if !entity.isStagedAuditedModel() && !entity.isStagedGroupedModel() && entity.isStagedModel()>
 		, StagedModel
+
+		<#assign overrideColumnNames = overrideColumnNames + ["companyId", "createDate", "modifiedDate", "uuid"]>
 	</#if>
 
 	<#if entity.isWorkflowEnabled()>
 		, WorkflowedModel
+
+		<#assign overrideColumnNames = overrideColumnNames + ["status", "statusByUserId", "statusByUserName", "statusByUserUuid", "statusDate"]>
 	</#if>
 
 	{
@@ -106,6 +129,11 @@ public interface ${entity.name}Model extends
 			 *
 			 * @return the fully qualified class name of this ${entity.humanName}
 			 */
+
+			<#if overrideColumnNames?seq_index_of(column.name) != -1>
+				@Override
+			</#if>
+
 			public String getClassName();
 
 			public void setClassName(String className);
@@ -132,9 +160,15 @@ public interface ${entity.name}Model extends
 		 *
 		 * @return the ${column.humanName} of this ${entity.humanName}
 		 */
-		<#if autoEscape && (column.type == "String") && (column.localized == false) >
+
+		<#if autoEscape && (column.type == "String") && (column.localized == false)>
 			@AutoEscape
 		</#if>
+
+		<#if overrideColumnNames?seq_index_of(column.name) != -1>
+			@Override
+		</#if>
+
 		public ${column.type} get${column.methodName}();
 
 		<#if column.localized>
@@ -208,6 +242,9 @@ public interface ${entity.name}Model extends
 		 *
 		 * @param ${column.name} the ${column.humanName} of this ${entity.humanName}
 		 */
+		<#if overrideColumnNames?seq_index_of(column.name) != -1>
+			@Override
+		</#if>
 		public void set${column.methodName}(${column.type} ${column.name});
 
 		<#if column.localized>
@@ -247,6 +284,7 @@ public interface ${entity.name}Model extends
 		</#if>
 
 		<#if (column.name == "resourcePrimKey") && entity.isResourcedModel()>
+			@Override
 			public boolean isResourceMain();
 		</#if>
 
@@ -257,6 +295,11 @@ public interface ${entity.name}Model extends
 			 * @return the ${column.userUuidHumanName} of this ${entity.humanName}
 			 * @throws SystemException if a system exception occurred
 			 */
+
+			<#if overrideColumnNames?seq_index_of(column.userUuidName) != -1>
+				@Override
+			</#if>
+
 			public String get${column.methodUserUuidName}() throws SystemException;
 
 			/**
@@ -264,6 +307,11 @@ public interface ${entity.name}Model extends
 			 *
 			 * @param ${column.userUuidName} the ${column.userUuidHumanName} of this ${entity.humanName}
 			 */
+
+			<#if overrideColumnNames?seq_index_of(column.userUuidName) != -1>
+				@Override
+			</#if>
+
 			public void set${column.methodUserUuidName}(String ${column.userUuidName});
 		</#if>
 	</#list>
@@ -272,6 +320,7 @@ public interface ${entity.name}Model extends
 		/**
 		 * @deprecated As of 6.1.0, replaced by {@link #isApproved()}
 		 */
+		@Override
 		public boolean getApproved();
 
 		/**
@@ -279,6 +328,7 @@ public interface ${entity.name}Model extends
 		 *
 		 * @return <code>true</code> if this ${entity.humanName} is approved; <code>false</code> otherwise
 		 */
+		@Override
 		public boolean isApproved();
 
 		/**
@@ -286,6 +336,7 @@ public interface ${entity.name}Model extends
 		 *
 		 * @return <code>true</code> if this ${entity.humanName} is denied; <code>false</code> otherwise
 		 */
+		@Override
 		public boolean isDenied();
 
 		/**
@@ -293,6 +344,7 @@ public interface ${entity.name}Model extends
 		 *
 		 * @return <code>true</code> if this ${entity.humanName} is a draft; <code>false</code> otherwise
 		 */
+		@Override
 		public boolean isDraft();
 
 		/**
@@ -300,6 +352,7 @@ public interface ${entity.name}Model extends
 		 *
 		 * @return <code>true</code> if this ${entity.humanName} is expired; <code>false</code> otherwise
 		 */
+		@Override
 		public boolean isExpired();
 
 		/**
@@ -307,6 +360,7 @@ public interface ${entity.name}Model extends
 		 *
 		 * @return <code>true</code> if this ${entity.humanName} is inactive; <code>false</code> otherwise
 		 */
+		@Override
 		public boolean isInactive();
 
 		/**
@@ -314,6 +368,7 @@ public interface ${entity.name}Model extends
 		 *
 		 * @return <code>true</code> if this ${entity.humanName} is incomplete; <code>false</code> otherwise
 		 */
+		@Override
 		public boolean isIncomplete();
 
 		/**
@@ -321,6 +376,7 @@ public interface ${entity.name}Model extends
 		 *
 		 * @return <code>true</code> if this ${entity.humanName} is in the Recycle Bin; <code>false</code> otherwise
 		 */
+		@Override
 		public boolean isInTrash();
 
 		/**
@@ -328,6 +384,7 @@ public interface ${entity.name}Model extends
 		 *
 		 * @return <code>true</code> if this ${entity.humanName} is pending; <code>false</code> otherwise
 		 */
+		@Override
 		public boolean isPending();
 
 		/**
@@ -335,6 +392,7 @@ public interface ${entity.name}Model extends
 		 *
 		 * @return <code>true</code> if this ${entity.humanName} is scheduled; <code>false</code> otherwise
 		 */
+		@Override
 		public boolean isScheduled();
 	</#if>
 
@@ -345,6 +403,7 @@ public interface ${entity.name}Model extends
 			 *
 			 * @return the container model ID of this ${entity.humanName}
 			 */
+			@Override
 			public long getContainerModelId();
 
 			/**
@@ -352,6 +411,7 @@ public interface ${entity.name}Model extends
 			 *
 			 * @param container model ID of this ${entity.humanName}
 			 */
+			@Override
 			public void setContainerModelId(long containerModelId);
 		</#if>
 
@@ -360,6 +420,7 @@ public interface ${entity.name}Model extends
 		 *
 		 * @return the container name of this ${entity.humanName}
 		 */
+		@Override
 		public String getContainerModelName();
 
 		<#if !entity.hasColumn("parentContainerModelId")>
@@ -368,6 +429,7 @@ public interface ${entity.name}Model extends
 			 *
 			 * @return the parent container model ID of this ${entity.humanName}
 			 */
+			@Override
 			public long getParentContainerModelId();
 
 			/**
@@ -375,6 +437,7 @@ public interface ${entity.name}Model extends
 			 *
 			 * @param parent container model ID of this ${entity.humanName}
 			 */
+			@Override
 			public void setParentContainerModelId(long parentContainerModelId);
 		</#if>
 	</#if>
@@ -384,46 +447,65 @@ public interface ${entity.name}Model extends
 	correctly generate wrappers.
 	-->
 
+	@Override
 	public boolean isNew();
 
+	@Override
 	public void setNew(boolean n);
 
+	@Override
 	public boolean isCachedModel();
 
+	@Override
 	public void setCachedModel(boolean cachedModel);
 
+	@Override
 	public boolean isEscapedModel();
 
+	@Override
 	public Serializable getPrimaryKeyObj();
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
+	@Override
 	public ExpandoBridge getExpandoBridge();
 
+	@Override
 	public void setExpandoBridgeAttributes(BaseModel<?> baseModel);
 
+	@Override
 	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge);
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext);
 
 	<#if entity.hasLocalizedColumn()>
 		public void prepareLocalizedFieldsForImport(Locale defaultImportLocale) throws LocaleException;
 	</#if>
 
+	@Override
 	public Object clone();
 
+	@Override
 	public int compareTo(${entity.name} ${entity.varName});
 
+	@Override
 	public int hashCode();
 
+	@Override
 	public CacheModel<${entity.name}> toCacheModel();
 
+	@Override
 	public ${entity.name} toEscapedModel();
 
+	@Override
 	public ${entity.name} toUnescapedModel();
 
+	@Override
 	public String toString();
 
+	@Override
 	public String toXmlString();
 
 }

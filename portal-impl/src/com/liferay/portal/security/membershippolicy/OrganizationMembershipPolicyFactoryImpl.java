@@ -43,6 +43,7 @@ public class OrganizationMembershipPolicyFactoryImpl
 		_organizationMembershipPolicy = _originalOrganizationMembershipPolicy;
 	}
 
+	@Override
 	public OrganizationMembershipPolicy getOrganizationMembershipPolicy() {
 		return _organizationMembershipPolicy;
 	}
@@ -65,7 +66,7 @@ public class OrganizationMembershipPolicyFactoryImpl
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
-		OrganizationMembershipPolicyFactory.class);
+		OrganizationMembershipPolicyFactoryImpl.class);
 
 	private static volatile OrganizationMembershipPolicy
 		_organizationMembershipPolicy;

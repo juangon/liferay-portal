@@ -120,6 +120,7 @@ public class RubyExecutor extends BaseScriptingExecutor {
 			classLoaders);
 	}
 
+	@Override
 	public Map<String, Object> eval(
 			Set<String> allowedClasses, Map<String, Object> inputObjects,
 			Set<String> outputNames, String script, ClassLoader... classLoaders)
@@ -130,6 +131,7 @@ public class RubyExecutor extends BaseScriptingExecutor {
 			classLoaders);
 	}
 
+	@Override
 	public String getLanguage() {
 		return LANGUAGE;
 	}
@@ -325,6 +327,7 @@ public class RubyExecutor extends BaseScriptingExecutor {
 			_classLoaders = classLoaders;
 		}
 
+		@Override
 		public Map<String, Object> call() throws Exception {
 			return doEval(
 				_allowedClasses, _inputObjects, _outputNames, _scriptFile,

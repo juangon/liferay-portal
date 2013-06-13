@@ -23,11 +23,10 @@ import com.liferay.portal.service.BaseLocalService;
 import com.liferay.portal.service.PersistedModelLocalService;
 
 /**
- * The interface for the m d r rule group local service.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
+ * Provides the local service interface for MDRRuleGroup. Methods of this
+ * service will not have security checks based on the propagated JAAS
+ * credentials because this service can only be accessed from within the same
+ * VM.
  *
  * @author Edward C. Han
  * @see MDRRuleGroupLocalServiceUtil
@@ -172,6 +171,7 @@ public interface MDRRuleGroupLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	@Override
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.PersistedModel getPersistedModel(
 		java.io.Serializable primaryKeyObj)
@@ -266,14 +266,17 @@ public interface MDRRuleGroupLocalService extends BaseLocalService,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void deleteRuleGroup(long ruleGroupId)
-		throws com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public void deleteRuleGroup(
 		com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup ruleGroup)
-		throws com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public void deleteRuleGroups(long groupId)
-		throws com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup fetchRuleGroup(
@@ -300,11 +303,26 @@ public interface MDRRuleGroupLocalService extends BaseLocalService,
 	public int getRuleGroupsCount(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* @deprecated As of 6.2.0, replaced by {@link #search(long, String,
+	LinkedHashMap, boolean, int, int)}
+	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup> search(
 		long groupId, java.lang.String name, boolean andOperator, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup> search(
+		long groupId, java.lang.String name,
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
+		boolean andOperator, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* @deprecated As of 6.2.0, replaced by {@link #searchByKeywords(long,
+	String, LinkedHashMap, boolean, int, int)}
+	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup> searchByKeywords(
 		long groupId, java.lang.String keywords, boolean andOperator,
@@ -312,12 +330,39 @@ public interface MDRRuleGroupLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup> searchByKeywords(
+		long groupId, java.lang.String keywords,
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
+		boolean andOperator, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* @deprecated As of 6.2.0, replaced by {@link #searchByKeywordsCount(long,
+	String, LinkedHashMap, boolean)}
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int searchByKeywordsCount(long groupId, java.lang.String keywords,
 		boolean andOperator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int searchByKeywordsCount(long groupId, java.lang.String keywords,
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
+		boolean andOperator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* @deprecated As of 6.2.0, replaced by {@link #searchCount(long, String,
+	LinkedHashMap, boolean)}
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int searchCount(long groupId, java.lang.String name,
+		boolean andOperator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int searchCount(long groupId, java.lang.String name,
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
 		boolean andOperator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 

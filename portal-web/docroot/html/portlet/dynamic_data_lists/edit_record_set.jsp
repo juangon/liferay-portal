@@ -141,11 +141,10 @@ if (ddmStructureId > 0) {
 	function <portlet:namespace />openDDMStructureSelector() {
 		Liferay.Util.openDDMPortlet(
 			{
-				classNameId: '<%= PortalUtil.getClassNameId(DDMStructure.class) %>',
+				basePortletURL: '<%= PortletURLFactoryUtil.create(request, PortletKeys.DYNAMIC_DATA_MAPPING, themeDisplay.getPlid(), PortletRequest.RENDER_PHASE) %>',
 				classPK: <%= ddmStructureId %>,
-				ddmResource: '<%= ddmResource %>',
 				dialog: {
-					width: 820
+					destroyOnHide: true
 				},
 				eventName: '<portlet:namespace />selectDDMStructure',
 				groupId: <%= groupId %>,
@@ -154,11 +153,8 @@ if (ddmStructureId > 0) {
 				Portlet portlet = PortletLocalServiceUtil.getPortletById(portletDisplay.getId());
 				%>
 
+				refererPortletName: '<%= portlet.getPortletName() %>',
 				refererWebDAVToken: '<%= portlet.getWebDAVStorageToken() %>',
-
-				storageType: '<%= PropsValues.DYNAMIC_DATA_LISTS_STORAGE_TYPE %>',
-				structureName: 'data-definition',
-				structureType: 'com.liferay.portlet.dynamicdatalists.model.DDLRecordSet',
 				struts_action: '/dynamic_data_mapping/select_structure',
 				title: '<%= UnicodeLanguageUtil.get(pageContext, "data-definitions") %>'
 			},

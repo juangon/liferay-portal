@@ -249,7 +249,9 @@ ArticleSearch searchContainer = new ArticleSearch(liferayPortletRequest, entryEn
 
 						total = hits.getLength();
 
-						if (searchContainer.recalculateCur(total)) {
+						searchContainer.setTotal(total);
+
+						if (searchContainer.isRecalculateCur()) {
 							searchContext.setEnd(searchContainer.getEnd());
 							searchContext.setStart(searchContainer.getStart());
 
@@ -425,7 +427,7 @@ ArticleSearch searchContainer = new ArticleSearch(liferayPortletRequest, entryEn
 				</c:choose>
 
 				<c:if test="<%= emptySearchResults %>">
-					<div class="portlet-msg-info">
+					<div class="alert alert-info">
 
 						<%
 						String message = LanguageUtil.get(pageContext, "no-articles-were-found-that-matched-the-specified-filters");
@@ -460,8 +462,8 @@ ArticleSearch searchContainer = new ArticleSearch(liferayPortletRequest, entryEn
 		Liferay.fire(
 			'<portlet:namespace />pageLoaded',
 			{
-				paginator: {
-					name: 'entryPaginator',
+				pagination: {
+					name: 'entryPagination',
 					state: {
 						page: <%= searchContainer.getCur() %>,
 						rowsPerPage: <%= searchContainer.getDelta() %>,

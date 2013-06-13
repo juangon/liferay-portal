@@ -57,6 +57,7 @@ public class DLContentCacheModel implements CacheModel<DLContent>,
 		return sb.toString();
 	}
 
+	@Override
 	public DLContent toEntityModel() {
 		DLContentImpl dlContentImpl = new DLContentImpl();
 
@@ -86,6 +87,7 @@ public class DLContentCacheModel implements CacheModel<DLContent>,
 		return dlContentImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		contentId = objectInput.readLong();
 		groupId = objectInput.readLong();
@@ -96,6 +98,7 @@ public class DLContentCacheModel implements CacheModel<DLContent>,
 		size = objectInput.readLong();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(contentId);

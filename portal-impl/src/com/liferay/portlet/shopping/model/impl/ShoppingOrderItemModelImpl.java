@@ -94,26 +94,32 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 	public ShoppingOrderItemModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _orderItemId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setOrderItemId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _orderItemId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return ShoppingOrderItem.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return ShoppingOrderItem.class.getName();
 	}
@@ -199,18 +205,22 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 		}
 	}
 
+	@Override
 	public long getOrderItemId() {
 		return _orderItemId;
 	}
 
+	@Override
 	public void setOrderItemId(long orderItemId) {
 		_orderItemId = orderItemId;
 	}
 
+	@Override
 	public long getOrderId() {
 		return _orderId;
 	}
 
+	@Override
 	public void setOrderId(long orderId) {
 		_columnBitmask |= ORDERID_COLUMN_BITMASK;
 
@@ -227,6 +237,7 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 		return _originalOrderId;
 	}
 
+	@Override
 	public String getItemId() {
 		if (_itemId == null) {
 			return StringPool.BLANK;
@@ -236,10 +247,12 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 		}
 	}
 
+	@Override
 	public void setItemId(String itemId) {
 		_itemId = itemId;
 	}
 
+	@Override
 	public String getSku() {
 		if (_sku == null) {
 			return StringPool.BLANK;
@@ -249,10 +262,12 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 		}
 	}
 
+	@Override
 	public void setSku(String sku) {
 		_sku = sku;
 	}
 
+	@Override
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -262,12 +277,14 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 		}
 	}
 
+	@Override
 	public void setName(String name) {
 		_columnBitmask = -1L;
 
 		_name = name;
 	}
 
+	@Override
 	public String getDescription() {
 		if (_description == null) {
 			return StringPool.BLANK;
@@ -277,12 +294,14 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 		}
 	}
 
+	@Override
 	public void setDescription(String description) {
 		_columnBitmask = -1L;
 
 		_description = description;
 	}
 
+	@Override
 	public String getProperties() {
 		if (_properties == null) {
 			return StringPool.BLANK;
@@ -292,30 +311,37 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 		}
 	}
 
+	@Override
 	public void setProperties(String properties) {
 		_properties = properties;
 	}
 
+	@Override
 	public double getPrice() {
 		return _price;
 	}
 
+	@Override
 	public void setPrice(double price) {
 		_price = price;
 	}
 
+	@Override
 	public int getQuantity() {
 		return _quantity;
 	}
 
+	@Override
 	public void setQuantity(int quantity) {
 		_quantity = quantity;
 	}
 
+	@Override
 	public Date getShippedDate() {
 		return _shippedDate;
 	}
 
+	@Override
 	public void setShippedDate(Date shippedDate) {
 		_shippedDate = shippedDate;
 	}
@@ -367,6 +393,7 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 		return shoppingOrderItemImpl;
 	}
 
+	@Override
 	public int compareTo(ShoppingOrderItem shoppingOrderItem) {
 		int value = 0;
 
@@ -387,18 +414,15 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ShoppingOrderItem)) {
 			return false;
 		}
 
-		ShoppingOrderItem shoppingOrderItem = null;
-
-		try {
-			shoppingOrderItem = (ShoppingOrderItem)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		ShoppingOrderItem shoppingOrderItem = (ShoppingOrderItem)obj;
 
 		long primaryKey = shoppingOrderItem.getPrimaryKey();
 
@@ -519,6 +543,7 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(34);
 

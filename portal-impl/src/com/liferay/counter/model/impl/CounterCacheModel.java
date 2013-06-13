@@ -46,6 +46,7 @@ public class CounterCacheModel implements CacheModel<Counter>, Externalizable {
 		return sb.toString();
 	}
 
+	@Override
 	public Counter toEntityModel() {
 		CounterImpl counterImpl = new CounterImpl();
 
@@ -63,11 +64,13 @@ public class CounterCacheModel implements CacheModel<Counter>, Externalizable {
 		return counterImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		name = objectInput.readUTF();
 		currentId = objectInput.readLong();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (name == null) {

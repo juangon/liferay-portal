@@ -23,11 +23,10 @@ import com.liferay.portal.service.BaseLocalService;
 import com.liferay.portal.service.PersistedModelLocalService;
 
 /**
- * The interface for the announcements entry local service.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
+ * Provides the local service interface for AnnouncementsEntry. Methods of this
+ * service will not have security checks based on the propagated JAAS
+ * credentials because this service can only be accessed from within the same
+ * VM.
  *
  * @author Brian Wing Shun Chan
  * @see AnnouncementsEntryLocalServiceUtil
@@ -172,6 +171,7 @@ public interface AnnouncementsEntryLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	@Override
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.PersistedModel getPersistedModel(
 		java.io.Serializable primaryKeyObj)
@@ -234,7 +234,7 @@ public interface AnnouncementsEntryLocalService extends BaseLocalService,
 		long userId, long classNameId, long classPK, java.lang.String title,
 		java.lang.String content, java.lang.String url, java.lang.String type,
 		int displayDateMonth, int displayDateDay, int displayDateYear,
-		int displayDateHour, int displayDateMinute, boolean autoDisplayDate,
+		int displayDateHour, int displayDateMinute, boolean displayImmediately,
 		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
 		int expirationDateHour, int expirationDateMinute, int priority,
 		boolean alert)

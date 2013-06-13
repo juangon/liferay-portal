@@ -38,6 +38,7 @@ public abstract class BookmarksEntryBaseImpl extends BookmarksEntryModelImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a bookmarks entry model instance should use the {@link BookmarksEntry} interface instead.
 	 */
+	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
 			BookmarksEntryLocalServiceUtil.addBookmarksEntry(this);

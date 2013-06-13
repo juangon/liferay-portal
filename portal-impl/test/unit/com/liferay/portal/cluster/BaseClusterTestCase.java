@@ -101,23 +101,29 @@ public class BaseClusterTestCase {
 
 	protected class MockAddress implements org.jgroups.Address {
 
+		@Override
 		public int compareTo(org.jgroups.Address jGroupsAddress) {
 			return 0;
 		}
 
+		@Override
 		public void readExternal(ObjectInput objectInput) {
 		}
 
+		@Override
 		public void readFrom(DataInput dataInput) throws Exception {
 		}
 
+		@Override
 		public int size() {
 			return 0;
 		}
 
+		@Override
 		public void writeExternal(ObjectOutput objectOutput) {
 		}
 
+		@Override
 		public void writeTo(DataOutput dataOutput) throws Exception {
 		}
 

@@ -61,11 +61,6 @@ public interface PluginSetting extends PluginSettingModel, PersistedModel {
 	public boolean hasRoleWithName(java.lang.String roleName);
 
 	/**
-	* Sets a string of ordered comma delimited plugin IDs.
-	*/
-	public void setRoles(java.lang.String roles);
-
-	/**
 	* Sets an array of required roles of the plugin.
 	*/
 	public void setRolesArray(java.lang.String[] rolesArray);

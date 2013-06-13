@@ -71,7 +71,7 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 			{ "portletId", Types.VARCHAR },
 			{ "classNameId", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table PortletItem (portletItemId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,portletId VARCHAR(75) null,classNameId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table PortletItem (portletItemId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,portletId VARCHAR(200) null,classNameId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table PortletItem";
 	public static final String ORDER_BY_JPQL = " ORDER BY portletItem.portletItemId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY PortletItem.portletItemId ASC";
@@ -98,26 +98,32 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 	public PortletItemModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _portletItemId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setPortletItemId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _portletItemId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return PortletItem.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return PortletItem.class.getName();
 	}
@@ -203,18 +209,22 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 		}
 	}
 
+	@Override
 	public long getPortletItemId() {
 		return _portletItemId;
 	}
 
+	@Override
 	public void setPortletItemId(long portletItemId) {
 		_portletItemId = portletItemId;
 	}
 
+	@Override
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -231,30 +241,37 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 		return _originalGroupId;
 	}
 
+	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
+	@Override
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
 
+	@Override
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -264,26 +281,32 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 		}
 	}
 
+	@Override
 	public void setUserName(String userName) {
 		_userName = userName;
 	}
 
+	@Override
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
 	}
 
+	@Override
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -293,6 +316,7 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 		}
 	}
 
+	@Override
 	public void setName(String name) {
 		_columnBitmask |= NAME_COLUMN_BITMASK;
 
@@ -307,6 +331,7 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 		return GetterUtil.getString(_originalName);
 	}
 
+	@Override
 	public String getPortletId() {
 		if (_portletId == null) {
 			return StringPool.BLANK;
@@ -316,6 +341,7 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 		}
 	}
 
+	@Override
 	public void setPortletId(String portletId) {
 		_columnBitmask |= PORTLETID_COLUMN_BITMASK;
 
@@ -330,6 +356,7 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 		return GetterUtil.getString(_originalPortletId);
 	}
 
+	@Override
 	public String getClassName() {
 		if (getClassNameId() <= 0) {
 			return StringPool.BLANK;
@@ -338,6 +365,7 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 		return PortalUtil.getClassName(getClassNameId());
 	}
 
+	@Override
 	public void setClassName(String className) {
 		long classNameId = 0;
 
@@ -348,10 +376,12 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 		setClassNameId(classNameId);
 	}
 
+	@Override
 	public long getClassNameId() {
 		return _classNameId;
 	}
 
+	@Override
 	public void setClassNameId(long classNameId) {
 		_columnBitmask |= CLASSNAMEID_COLUMN_BITMASK;
 
@@ -415,6 +445,7 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 		return portletItemImpl;
 	}
 
+	@Override
 	public int compareTo(PortletItem portletItem) {
 		long primaryKey = portletItem.getPrimaryKey();
 
@@ -431,18 +462,15 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof PortletItem)) {
 			return false;
 		}
 
-		PortletItem portletItem = null;
-
-		try {
-			portletItem = (PortletItem)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		PortletItem portletItem = (PortletItem)obj;
 
 		long primaryKey = portletItem.getPrimaryKey();
 
@@ -566,6 +594,7 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(34);
 

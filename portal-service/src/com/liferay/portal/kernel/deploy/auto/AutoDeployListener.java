@@ -23,7 +23,7 @@ import com.liferay.portal.kernel.deploy.auto.context.AutoDeploymentContext;
  */
 public interface AutoDeployListener {
 
-	public void deploy(AutoDeploymentContext autoDeploymentContext)
+	public int deploy(AutoDeploymentContext autoDeploymentContext)
 		throws AutoDeployException;
 
 }

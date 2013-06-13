@@ -114,6 +114,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @return the matching journal article resources
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<JournalArticleResource> findByUuid(String uuid)
 		throws SystemException {
 		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
@@ -132,6 +133,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @return the range of matching journal article resources
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<JournalArticleResource> findByUuid(String uuid, int start,
 		int end) throws SystemException {
 		return findByUuid(uuid, start, end, null);
@@ -151,6 +153,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @return the ordered range of matching journal article resources
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<JournalArticleResource> findByUuid(String uuid, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -271,6 +274,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @throws com.liferay.portlet.journal.NoSuchArticleResourceException if a matching journal article resource could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleResource findByUuid_First(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchArticleResourceException, SystemException {
@@ -301,6 +305,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @return the first matching journal article resource, or <code>null</code> if a matching journal article resource could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleResource fetchByUuid_First(String uuid,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<JournalArticleResource> list = findByUuid(uuid, 0, 1,
@@ -322,6 +327,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @throws com.liferay.portlet.journal.NoSuchArticleResourceException if a matching journal article resource could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleResource findByUuid_Last(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchArticleResourceException, SystemException {
@@ -352,6 +358,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @return the last matching journal article resource, or <code>null</code> if a matching journal article resource could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleResource fetchByUuid_Last(String uuid,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByUuid(uuid);
@@ -376,6 +383,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @throws com.liferay.portlet.journal.NoSuchArticleResourceException if a journal article resource with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleResource[] findByUuid_PrevAndNext(
 		long resourcePrimKey, String uuid, OrderByComparator orderByComparator)
 		throws NoSuchArticleResourceException, SystemException {
@@ -531,6 +539,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @param uuid the uuid
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByUuid(String uuid) throws SystemException {
 		for (JournalArticleResource journalArticleResource : findByUuid(uuid,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -545,6 +554,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @return the number of matching journal article resources
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUuid(String uuid) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID;
 
@@ -628,6 +638,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @throws com.liferay.portlet.journal.NoSuchArticleResourceException if a matching journal article resource could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleResource findByUUID_G(String uuid, long groupId)
 		throws NoSuchArticleResourceException, SystemException {
 		JournalArticleResource journalArticleResource = fetchByUUID_G(uuid,
@@ -664,6 +675,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @return the matching journal article resource, or <code>null</code> if a matching journal article resource could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleResource fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		return fetchByUUID_G(uuid, groupId, true);
@@ -678,6 +690,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @return the matching journal article resource, or <code>null</code> if a matching journal article resource could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleResource fetchByUUID_G(String uuid, long groupId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, groupId };
@@ -784,6 +797,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @return the journal article resource that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleResource removeByUUID_G(String uuid, long groupId)
 		throws NoSuchArticleResourceException, SystemException {
 		JournalArticleResource journalArticleResource = findByUUID_G(uuid,
@@ -800,6 +814,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @return the number of matching journal article resources
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID_G;
@@ -897,6 +912,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @return the matching journal article resources
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<JournalArticleResource> findByGroupId(long groupId)
 		throws SystemException {
 		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
@@ -915,6 +931,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @return the range of matching journal article resources
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<JournalArticleResource> findByGroupId(long groupId, int start,
 		int end) throws SystemException {
 		return findByGroupId(groupId, start, end, null);
@@ -934,6 +951,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @return the ordered range of matching journal article resources
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<JournalArticleResource> findByGroupId(long groupId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -1040,6 +1058,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @throws com.liferay.portlet.journal.NoSuchArticleResourceException if a matching journal article resource could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleResource findByGroupId_First(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchArticleResourceException, SystemException {
@@ -1070,6 +1089,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @return the first matching journal article resource, or <code>null</code> if a matching journal article resource could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleResource fetchByGroupId_First(long groupId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<JournalArticleResource> list = findByGroupId(groupId, 0, 1,
@@ -1091,6 +1111,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @throws com.liferay.portlet.journal.NoSuchArticleResourceException if a matching journal article resource could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleResource findByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchArticleResourceException, SystemException {
@@ -1121,6 +1142,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @return the last matching journal article resource, or <code>null</code> if a matching journal article resource could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleResource fetchByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByGroupId(groupId);
@@ -1145,6 +1167,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @throws com.liferay.portlet.journal.NoSuchArticleResourceException if a journal article resource with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleResource[] findByGroupId_PrevAndNext(
 		long resourcePrimKey, long groupId, OrderByComparator orderByComparator)
 		throws NoSuchArticleResourceException, SystemException {
@@ -1286,6 +1309,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @param groupId the group ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (JournalArticleResource journalArticleResource : findByGroupId(
 				groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -1300,6 +1324,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @return the number of matching journal article resources
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByGroupId(long groupId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPID;
 
@@ -1367,6 +1392,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @throws com.liferay.portlet.journal.NoSuchArticleResourceException if a matching journal article resource could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleResource findByG_A(long groupId, String articleId)
 		throws NoSuchArticleResourceException, SystemException {
 		JournalArticleResource journalArticleResource = fetchByG_A(groupId,
@@ -1403,6 +1429,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @return the matching journal article resource, or <code>null</code> if a matching journal article resource could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleResource fetchByG_A(long groupId, String articleId)
 		throws SystemException {
 		return fetchByG_A(groupId, articleId, true);
@@ -1417,6 +1444,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @return the matching journal article resource, or <code>null</code> if a matching journal article resource could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleResource fetchByG_A(long groupId, String articleId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, articleId };
@@ -1525,6 +1553,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @return the journal article resource that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleResource removeByG_A(long groupId, String articleId)
 		throws NoSuchArticleResourceException, SystemException {
 		JournalArticleResource journalArticleResource = findByG_A(groupId,
@@ -1541,6 +1570,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @return the number of matching journal article resources
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_A(long groupId, String articleId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_A;
@@ -1615,6 +1645,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 *
 	 * @param journalArticleResource the journal article resource
 	 */
+	@Override
 	public void cacheResult(JournalArticleResource journalArticleResource) {
 		EntityCacheUtil.putResult(JournalArticleResourceModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleResourceImpl.class,
@@ -1640,6 +1671,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 *
 	 * @param journalArticleResources the journal article resources
 	 */
+	@Override
 	public void cacheResult(
 		List<JournalArticleResource> journalArticleResources) {
 		for (JournalArticleResource journalArticleResource : journalArticleResources) {
@@ -1811,6 +1843,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @param resourcePrimKey the primary key for the new journal article resource
 	 * @return the new journal article resource
 	 */
+	@Override
 	public JournalArticleResource create(long resourcePrimKey) {
 		JournalArticleResource journalArticleResource = new JournalArticleResourceImpl();
 
@@ -1832,6 +1865,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @throws com.liferay.portlet.journal.NoSuchArticleResourceException if a journal article resource with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleResource remove(long resourcePrimKey)
 		throws NoSuchArticleResourceException, SystemException {
 		return remove((Serializable)resourcePrimKey);
@@ -2053,6 +2087,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @throws com.liferay.portlet.journal.NoSuchArticleResourceException if a journal article resource with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleResource findByPrimaryKey(long resourcePrimKey)
 		throws NoSuchArticleResourceException, SystemException {
 		return findByPrimaryKey((Serializable)resourcePrimKey);
@@ -2114,6 +2149,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @return the journal article resource, or <code>null</code> if a journal article resource with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleResource fetchByPrimaryKey(long resourcePrimKey)
 		throws SystemException {
 		return fetchByPrimaryKey((Serializable)resourcePrimKey);
@@ -2125,6 +2161,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @return the journal article resources
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<JournalArticleResource> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -2141,6 +2178,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @return the range of journal article resources
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<JournalArticleResource> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
@@ -2159,6 +2197,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @return the ordered range of journal article resources
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<JournalArticleResource> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -2244,6 +2283,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (JournalArticleResource journalArticleResource : findAll()) {
 			remove(journalArticleResource);
@@ -2256,6 +2296,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @return the number of journal article resources
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -2350,6 +2391,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 
 	private static CacheModel<JournalArticleResource> _nullJournalArticleResourceCacheModel =
 		new CacheModel<JournalArticleResource>() {
+			@Override
 			public JournalArticleResource toEntityModel() {
 				return _nullJournalArticleResource;
 			}

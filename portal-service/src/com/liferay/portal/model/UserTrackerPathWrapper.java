@@ -23,8 +23,8 @@ import java.util.Map;
  * This class is a wrapper for {@link UserTrackerPath}.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       UserTrackerPath
+ * @author Brian Wing Shun Chan
+ * @see UserTrackerPath
  * @generated
  */
 public class UserTrackerPathWrapper implements UserTrackerPath,
@@ -33,14 +33,17 @@ public class UserTrackerPathWrapper implements UserTrackerPath,
 		_userTrackerPath = userTrackerPath;
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return UserTrackerPath.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return UserTrackerPath.class.getName();
 	}
 
+	@Override
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
@@ -52,6 +55,7 @@ public class UserTrackerPathWrapper implements UserTrackerPath,
 		return attributes;
 	}
 
+	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 		Long userTrackerPathId = (Long)attributes.get("userTrackerPathId");
 
@@ -83,6 +87,7 @@ public class UserTrackerPathWrapper implements UserTrackerPath,
 	*
 	* @return the primary key of this user tracker path
 	*/
+	@Override
 	public long getPrimaryKey() {
 		return _userTrackerPath.getPrimaryKey();
 	}
@@ -92,6 +97,7 @@ public class UserTrackerPathWrapper implements UserTrackerPath,
 	*
 	* @param primaryKey the primary key of this user tracker path
 	*/
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_userTrackerPath.setPrimaryKey(primaryKey);
 	}
@@ -101,6 +107,7 @@ public class UserTrackerPathWrapper implements UserTrackerPath,
 	*
 	* @return the user tracker path ID of this user tracker path
 	*/
+	@Override
 	public long getUserTrackerPathId() {
 		return _userTrackerPath.getUserTrackerPathId();
 	}
@@ -110,6 +117,7 @@ public class UserTrackerPathWrapper implements UserTrackerPath,
 	*
 	* @param userTrackerPathId the user tracker path ID of this user tracker path
 	*/
+	@Override
 	public void setUserTrackerPathId(long userTrackerPathId) {
 		_userTrackerPath.setUserTrackerPathId(userTrackerPathId);
 	}
@@ -119,6 +127,7 @@ public class UserTrackerPathWrapper implements UserTrackerPath,
 	*
 	* @return the user tracker ID of this user tracker path
 	*/
+	@Override
 	public long getUserTrackerId() {
 		return _userTrackerPath.getUserTrackerId();
 	}
@@ -128,6 +137,7 @@ public class UserTrackerPathWrapper implements UserTrackerPath,
 	*
 	* @param userTrackerId the user tracker ID of this user tracker path
 	*/
+	@Override
 	public void setUserTrackerId(long userTrackerId) {
 		_userTrackerPath.setUserTrackerId(userTrackerId);
 	}
@@ -137,6 +147,7 @@ public class UserTrackerPathWrapper implements UserTrackerPath,
 	*
 	* @return the path of this user tracker path
 	*/
+	@Override
 	public java.lang.String getPath() {
 		return _userTrackerPath.getPath();
 	}
@@ -146,6 +157,7 @@ public class UserTrackerPathWrapper implements UserTrackerPath,
 	*
 	* @param path the path of this user tracker path
 	*/
+	@Override
 	public void setPath(java.lang.String path) {
 		_userTrackerPath.setPath(path);
 	}
@@ -155,6 +167,7 @@ public class UserTrackerPathWrapper implements UserTrackerPath,
 	*
 	* @return the path date of this user tracker path
 	*/
+	@Override
 	public java.util.Date getPathDate() {
 		return _userTrackerPath.getPathDate();
 	}
@@ -164,52 +177,64 @@ public class UserTrackerPathWrapper implements UserTrackerPath,
 	*
 	* @param pathDate the path date of this user tracker path
 	*/
+	@Override
 	public void setPathDate(java.util.Date pathDate) {
 		_userTrackerPath.setPathDate(pathDate);
 	}
 
+	@Override
 	public boolean isNew() {
 		return _userTrackerPath.isNew();
 	}
 
+	@Override
 	public void setNew(boolean n) {
 		_userTrackerPath.setNew(n);
 	}
 
+	@Override
 	public boolean isCachedModel() {
 		return _userTrackerPath.isCachedModel();
 	}
 
+	@Override
 	public void setCachedModel(boolean cachedModel) {
 		_userTrackerPath.setCachedModel(cachedModel);
 	}
 
+	@Override
 	public boolean isEscapedModel() {
 		return _userTrackerPath.isEscapedModel();
 	}
 
+	@Override
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _userTrackerPath.getPrimaryKeyObj();
 	}
 
+	@Override
 	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
 		_userTrackerPath.setPrimaryKeyObj(primaryKeyObj);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
 		return _userTrackerPath.getExpandoBridge();
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.model.BaseModel<?> baseModel) {
 		_userTrackerPath.setExpandoBridgeAttributes(baseModel);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portlet.expando.model.ExpandoBridge expandoBridge) {
 		_userTrackerPath.setExpandoBridgeAttributes(expandoBridge);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		_userTrackerPath.setExpandoBridgeAttributes(serviceContext);
@@ -220,6 +245,7 @@ public class UserTrackerPathWrapper implements UserTrackerPath,
 		return new UserTrackerPathWrapper((UserTrackerPath)_userTrackerPath.clone());
 	}
 
+	@Override
 	public int compareTo(
 		com.liferay.portal.model.UserTrackerPath userTrackerPath) {
 		return _userTrackerPath.compareTo(userTrackerPath);
@@ -230,14 +256,17 @@ public class UserTrackerPathWrapper implements UserTrackerPath,
 		return _userTrackerPath.hashCode();
 	}
 
+	@Override
 	public com.liferay.portal.model.CacheModel<com.liferay.portal.model.UserTrackerPath> toCacheModel() {
 		return _userTrackerPath.toCacheModel();
 	}
 
+	@Override
 	public com.liferay.portal.model.UserTrackerPath toEscapedModel() {
 		return new UserTrackerPathWrapper(_userTrackerPath.toEscapedModel());
 	}
 
+	@Override
 	public com.liferay.portal.model.UserTrackerPath toUnescapedModel() {
 		return new UserTrackerPathWrapper(_userTrackerPath.toUnescapedModel());
 	}
@@ -247,10 +276,12 @@ public class UserTrackerPathWrapper implements UserTrackerPath,
 		return _userTrackerPath.toString();
 	}
 
+	@Override
 	public java.lang.String toXmlString() {
 		return _userTrackerPath.toXmlString();
 	}
 
+	@Override
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_userTrackerPath.persist();
@@ -263,10 +294,12 @@ public class UserTrackerPathWrapper implements UserTrackerPath,
 		return _userTrackerPath;
 	}
 
+	@Override
 	public UserTrackerPath getWrappedModel() {
 		return _userTrackerPath;
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		_userTrackerPath.resetOriginalValues();
 	}

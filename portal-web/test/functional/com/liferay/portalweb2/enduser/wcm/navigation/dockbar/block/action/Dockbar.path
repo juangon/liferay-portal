@@ -21,12 +21,12 @@
 <!--ADD-->
 <tr>
 	<td>ADD</td>
-	<td>//li[@id='_145_addContent']/a/span</td>
+	<td>//li[@id='_145_addContent']/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>ADD_PAGE</td>
-	<td>//a[@id='addPage']</td>
+	<td>//a[@id='_145_addPage']</td>
 	<td></td>
 </tr>
 <tr>
@@ -42,12 +42,12 @@
 <!--ADD_CONTENT-->
 <tr>
 	<td>ADD_CONTENT_LINK</td>
-	<td>//span[@class='aui-tab-content']/a[contains(.,'Content')]</td>
+	<td>//div[@id='_145_addPanelContainer']/ul/li/a[contains(.,'Content')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>ADD_CONTENT_SEARCH_FIELD</td>
-	<td>//input[@id='layout_configuration_content']</td>
+	<td>//input[@id='_145_searchContentInput']</td>
 	<td></td>
 </tr>
 <tr>
@@ -58,12 +58,17 @@
 <!--ADD_APPLICATION-->
 <tr>
 	<td>ADD_APPLICATION_LINK</td>
-	<td>//span[@class='aui-tab-content']/a[contains(.,'Applications')]</td>
+	<td>//div[@id='_145_addPanelContainer']/ul/li/a[contains(.,'Applications')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>ADD_APPLICATION_SEARCH_FIELD</td>
-	<td>//input[@id='layout_configuration_content']</td>
+	<td>//input[@id='_145_searchApplication']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ADD_APPLICATION_COLLAPSED_CATEGORY</td>
+	<td>//div[contains(@class,'toggler-header-collapsed')]/div</td>
 	<td></td>
 </tr>
 <tr>
@@ -71,30 +76,46 @@
 	<td></td>
 	<td></td>
 </tr>
-<!--MANAGE-->
+<!--EDIT-->
 <tr>
-	<td>MANAGE</td>
-	<td>//li[@id='_145_manageContent']/a/span</td>
+	<td>EDIT</td>
+	<td>//li[@id='_145_manageContent']/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>MANAGE_PAGE</td>
-	<td>//li[contains(@class,'manage-page')]/a[@title='Manage Page']</td>
+	<td>EDIT_PAGE</td>
+	<td>//a[@title='Manage Page']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>MANAGE_PAGE_LAYOUT</td>
+	<td>EDIT_PAGE_LAYOUT</td>
 	<td>//li[contains(@class,'page-layout')]/a[@title='Manage Page']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>MANAGE_PAGE_CUSTOMIZATIONS</td>
+	<td>EDIT_PAGE_CUSTOMIZATIONS</td>
 	<td>//a[@id='_145_manageCustomization']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>MANAGE_SITE</td>
-	<td>//li[contains(@class,'settings')]/a[@title='Manage Site']</td>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--ADMIN-->
+<tr>
+	<td>ADMIN</td>
+	<td>//li[@id='_145_adminLinks']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ADMIN_SITE_ADMINISTRATION</td>
+	<td>//li[@id='_145_adminLinks']/ul/li/a[contains(.,'Site Administration')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ADMIN_CONTROL_PANEL</td>
+	<td>//li[@id='_145_adminLinks']/ul/li/a[contains(.,'Control Panel')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -102,25 +123,20 @@
 	<td></td>
 	<td></td>
 </tr>
-<!--GO_TO-->
+<!--MY_SITES-->
 <tr>
-	<td>GO_TO</td>
+	<td>MY_SITES</td>
 	<td>//li[@id='_145_mySites']/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>GO_TO_CONTROL_PANEL</td>
-	<td>link=Control Panel</td>
+	<td>MY_SITES_MY_PUBLIC_PAGES</td>
+	<td>//span[@class='site-name' and contains(.,'My Public Pages')]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>GO_TO_MY_PUBLIC_PAGES</td>
-	<td>link=My Public Pages</td>
-	<td></td>
-</tr>
-<tr>
-	<td>GO_TO_MY_PRIVATE_PAGES</td>
-	<td>link=My Private Pages</td>
+	<td>MY_SITES_MY_PRIVATE_PAGES</td>
+	<td>//span[@class='site-name' and contains(.,'My Private Pages')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -136,7 +152,7 @@
 </tr>
 <tr>
 	<td>USER_SIGN_OUT</td>
-	<td>//span[@class='sign-out']/a</td>
+	<td>//li[@class='sign-out']/a</td>
 	<td></td>
 </tr>
 </tbody>

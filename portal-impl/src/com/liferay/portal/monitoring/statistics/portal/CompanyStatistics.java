@@ -79,6 +79,7 @@ public class CompanyStatistics
 		return _webId;
 	}
 
+	@Override
 	public void processDataSample(
 		PortalRequestDataSample portalRequestDataSample) {
 

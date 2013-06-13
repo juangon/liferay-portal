@@ -113,6 +113,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	 * @return the matching password trackers
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<PasswordTracker> findByUserId(long userId)
 		throws SystemException {
 		return findByUserId(userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
@@ -131,6 +132,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	 * @return the range of matching password trackers
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<PasswordTracker> findByUserId(long userId, int start, int end)
 		throws SystemException {
 		return findByUserId(userId, start, end, null);
@@ -150,6 +152,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	 * @return the ordered range of matching password trackers
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<PasswordTracker> findByUserId(long userId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -256,6 +259,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	 * @throws com.liferay.portal.NoSuchPasswordTrackerException if a matching password tracker could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PasswordTracker findByUserId_First(long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchPasswordTrackerException, SystemException {
@@ -286,6 +290,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	 * @return the first matching password tracker, or <code>null</code> if a matching password tracker could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PasswordTracker fetchByUserId_First(long userId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<PasswordTracker> list = findByUserId(userId, 0, 1,
@@ -307,6 +312,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	 * @throws com.liferay.portal.NoSuchPasswordTrackerException if a matching password tracker could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PasswordTracker findByUserId_Last(long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchPasswordTrackerException, SystemException {
@@ -337,6 +343,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	 * @return the last matching password tracker, or <code>null</code> if a matching password tracker could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PasswordTracker fetchByUserId_Last(long userId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByUserId(userId);
@@ -361,6 +368,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	 * @throws com.liferay.portal.NoSuchPasswordTrackerException if a password tracker with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PasswordTracker[] findByUserId_PrevAndNext(long passwordTrackerId,
 		long userId, OrderByComparator orderByComparator)
 		throws NoSuchPasswordTrackerException, SystemException {
@@ -502,6 +510,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	 * @param userId the user ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByUserId(long userId) throws SystemException {
 		for (PasswordTracker passwordTracker : findByUserId(userId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -516,6 +525,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	 * @return the number of matching password trackers
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUserId(long userId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_USERID;
 
@@ -568,6 +578,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	 *
 	 * @param passwordTracker the password tracker
 	 */
+	@Override
 	public void cacheResult(PasswordTracker passwordTracker) {
 		EntityCacheUtil.putResult(PasswordTrackerModelImpl.ENTITY_CACHE_ENABLED,
 			PasswordTrackerImpl.class, passwordTracker.getPrimaryKey(),
@@ -581,6 +592,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	 *
 	 * @param passwordTrackers the password trackers
 	 */
+	@Override
 	public void cacheResult(List<PasswordTracker> passwordTrackers) {
 		for (PasswordTracker passwordTracker : passwordTrackers) {
 			if (EntityCacheUtil.getResult(
@@ -648,6 +660,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	 * @param passwordTrackerId the primary key for the new password tracker
 	 * @return the new password tracker
 	 */
+	@Override
 	public PasswordTracker create(long passwordTrackerId) {
 		PasswordTracker passwordTracker = new PasswordTrackerImpl();
 
@@ -665,6 +678,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	 * @throws com.liferay.portal.NoSuchPasswordTrackerException if a password tracker with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PasswordTracker remove(long passwordTrackerId)
 		throws NoSuchPasswordTrackerException, SystemException {
 		return remove((Serializable)passwordTrackerId);
@@ -858,6 +872,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	 * @throws com.liferay.portal.NoSuchPasswordTrackerException if a password tracker with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PasswordTracker findByPrimaryKey(long passwordTrackerId)
 		throws NoSuchPasswordTrackerException, SystemException {
 		return findByPrimaryKey((Serializable)passwordTrackerId);
@@ -919,6 +934,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	 * @return the password tracker, or <code>null</code> if a password tracker with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PasswordTracker fetchByPrimaryKey(long passwordTrackerId)
 		throws SystemException {
 		return fetchByPrimaryKey((Serializable)passwordTrackerId);
@@ -930,6 +946,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	 * @return the password trackers
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<PasswordTracker> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -946,6 +963,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	 * @return the range of password trackers
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<PasswordTracker> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
@@ -964,6 +982,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	 * @return the ordered range of password trackers
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<PasswordTracker> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -1049,6 +1068,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (PasswordTracker passwordTracker : findAll()) {
 			remove(passwordTracker);
@@ -1061,6 +1081,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	 * @return the number of password trackers
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -1154,6 +1175,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 		};
 
 	private static CacheModel<PasswordTracker> _nullPasswordTrackerCacheModel = new CacheModel<PasswordTracker>() {
+			@Override
 			public PasswordTracker toEntityModel() {
 				return _nullPasswordTracker;
 			}

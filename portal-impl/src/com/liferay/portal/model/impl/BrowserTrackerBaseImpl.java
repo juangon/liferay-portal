@@ -37,6 +37,7 @@ public abstract class BrowserTrackerBaseImpl extends BrowserTrackerModelImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a browser tracker model instance should use the {@link BrowserTracker} interface instead.
 	 */
+	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
 			BrowserTrackerLocalServiceUtil.addBrowserTracker(this);

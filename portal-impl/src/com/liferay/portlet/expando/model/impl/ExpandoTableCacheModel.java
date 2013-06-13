@@ -51,6 +51,7 @@ public class ExpandoTableCacheModel implements CacheModel<ExpandoTable>,
 		return sb.toString();
 	}
 
+	@Override
 	public ExpandoTable toEntityModel() {
 		ExpandoTableImpl expandoTableImpl = new ExpandoTableImpl();
 
@@ -70,6 +71,7 @@ public class ExpandoTableCacheModel implements CacheModel<ExpandoTable>,
 		return expandoTableImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		tableId = objectInput.readLong();
 		companyId = objectInput.readLong();
@@ -77,6 +79,7 @@ public class ExpandoTableCacheModel implements CacheModel<ExpandoTable>,
 		name = objectInput.readUTF();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(tableId);

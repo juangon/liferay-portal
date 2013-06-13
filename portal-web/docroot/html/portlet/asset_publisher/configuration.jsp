@@ -31,7 +31,8 @@ String emailParam = "emailAssetEntryAdded";
 
 String currentLanguageId = LanguageUtil.getLanguageId(request);
 
-String editorParam = emailParam + "Body_" + currentLanguageId;
+String emailSubjectParam = emailParam + "Subject_" + currentLanguageId;
+String emailBodyParam = emailParam + "Body_" + currentLanguageId;
 %>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationActionURL" />
@@ -101,14 +102,14 @@ String editorParam = emailParam + "Body_" + currentLanguageId;
 					>
 						<liferay-ui:icon
 							label="<%= true %>"
-							message="<%= _getName(themeDisplay, group) %>"
+							message="<%= group.getScopeDescriptiveName(themeDisplay) %>"
 							src="<%= group.getIconURL(themeDisplay) %>"
 						/>
 					</liferay-ui:search-container-column-text>
 
 					<liferay-ui:search-container-column-text
 						name="type"
-						value="<%= LanguageUtil.get(pageContext, _getType(themeDisplay, group)) %>"
+						value="<%= LanguageUtil.get(pageContext, group.getScopeLabel(themeDisplay)) %>"
 					/>
 
 					<liferay-ui:search-container-column-text
@@ -131,7 +132,7 @@ String editorParam = emailParam + "Body_" + currentLanguageId;
 			</liferay-ui:search-container>
 
 			<div class="select-asset-selector">
-				<liferay-ui:icon-menu align="left" cssClass="select-existing-selector" icon='<%= themeDisplay.getPathThemeImages() + "/common/add.png" %>' message="select" showWhenSingleIcon="<%= true %>">
+				<liferay-ui:icon-menu cssClass="select-existing-selector" direction="right" icon='<%= themeDisplay.getPathThemeImages() + "/common/add.png" %>' message="select" showWhenSingleIcon="<%= true %>">
 
 					<%
 					for (Group group : availableGroups) {
@@ -148,7 +149,7 @@ String editorParam = emailParam + "Body_" + currentLanguageId;
 
 						<liferay-ui:icon
 							id='<%= "scope" + group.getGroupId() %>'
-							message="<%= _getName(themeDisplay, group) %>"
+							message="<%= group.getScopeDescriptiveName(themeDisplay) %>"
 							method="post"
 							src="<%= group.getIconURL(themeDisplay) %>"
 							url="<%= addScopeURL %>"
@@ -172,15 +173,15 @@ String editorParam = emailParam + "Body_" + currentLanguageId;
 						layoutSiteBrowserURL.setWindowState(LiferayWindowState.POP_UP);
 
 						String layoutSiteBrowserURLString = HttpUtil.addParameter(layoutSiteBrowserURL.toString(), "doAsGroupId", scopeGroupId);
-
-						String taglibLayoutSiteBrowserURL = "javascript:Liferay.Util.openWindow({dialog: {align: Liferay.Util.Window.ALIGN_CENTER, width: 960}, id: '" + liferayPortletResponse.getNamespace() + "selectGroup', title: '" + LanguageUtil.get(pageContext, "select-pages") + "', uri: '" + HtmlUtil.escapeURL(layoutSiteBrowserURLString) + "'});";
 						%>
 
 						<liferay-ui:icon
-							cssClass="highlited"
+							cssClass="highlited scope-selector"
+							id="selectGroup"
 							image="add"
 							message='<%= LanguageUtil.get(pageContext, "pages") + StringPool.TRIPLE_PERIOD %>'
-							url="<%= taglibLayoutSiteBrowserURL %>"
+							method="get"
+							url="<%= layoutSiteBrowserURLString %>"
 						/>
 					</c:if>
 
@@ -203,15 +204,15 @@ String editorParam = emailParam + "Body_" + currentLanguageId;
 						parentSiteBrowserURL.setWindowState(LiferayWindowState.POP_UP);
 
 						String parentSiteBrowserURLString = HttpUtil.addParameter(parentSiteBrowserURL.toString(), "doAsGroupId", scopeGroupId);
-
-						String taglibParentSiteBrowserURL = "javascript:Liferay.Util.openWindow({dialog: {align: Liferay.Util.Window.ALIGN_CENTER, width: 960}, id: '" + liferayPortletResponse.getNamespace() + "selectGroup', title: '" + LanguageUtil.get(pageContext, "select-parent-site") + "', uri: '" + HtmlUtil.escapeURL(parentSiteBrowserURLString) + "'});";
 						%>
 
 						<liferay-ui:icon
-							cssClass="highlited"
+							cssClass="highlited scope-selector"
+							id="selectGroup"
 							image="add"
 							message='<%= LanguageUtil.get(pageContext, "parent-site") + StringPool.TRIPLE_PERIOD %>'
-							url="<%= taglibParentSiteBrowserURL %>"
+							method="get"
+							url="<%= parentSiteBrowserURLString %>"
 						/>
 					</c:if>
 
@@ -229,39 +230,42 @@ String editorParam = emailParam + "Body_" + currentLanguageId;
 						childrenSiteBrowserURL.setWindowState(LiferayWindowState.POP_UP);
 
 						String childrenSiteBrowserURLString = HttpUtil.addParameter(childrenSiteBrowserURL.toString(), "doAsGroupId", scopeGroupId);
-
-						String taglibChildrenSiteBrowserURL = "javascript:Liferay.Util.openWindow({dialog: {align: Liferay.Util.Window.ALIGN_CENTER, width: 960}, id: '" + liferayPortletResponse.getNamespace() + "selectGroup', title: '" + LanguageUtil.get(pageContext, "select-child-site") + "', uri: '" + HtmlUtil.escapeURL(childrenSiteBrowserURLString) + "'});";
 						%>
 
 						<liferay-ui:icon
-							cssClass="highlited"
+							cssClass="highlited scope-selector"
+							id="selectChildGroup"
 							image="add"
 							message='<%= LanguageUtil.get(pageContext, "child-site") + StringPool.TRIPLE_PERIOD %>'
-							url="<%= taglibChildrenSiteBrowserURL %>"
+							method="get"
+							url="<%= childrenSiteBrowserURLString %>"
 						/>
 					</c:if>
 
-					<%
-					PortletURL siteBrowserURL = PortletURLFactoryUtil.create(request, PortletKeys.SITE_BROWSER, PortalUtil.getControlPanelPlid(company.getCompanyId()), PortletRequest.RENDER_PHASE);
+					<c:if test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.SITES_CONTENT_SHARING_THROUGH_ADMINISTRATORS_ENABLED) %>">
 
-					siteBrowserURL.setParameter("struts_action", "/site_browser/view");
-					siteBrowserURL.setParameter("selectedGroupIds", StringUtil.merge(groupIds));
-					siteBrowserURL.setParameter("type", "manageable-sites");
-					siteBrowserURL.setParameter("callback", liferayPortletResponse.getNamespace() + "selectGroup");
-					siteBrowserURL.setPortletMode(PortletMode.VIEW);
-					siteBrowserURL.setWindowState(LiferayWindowState.POP_UP);
+						<%
+						PortletURL siteBrowserURL = PortletURLFactoryUtil.create(request, PortletKeys.SITE_BROWSER, PortalUtil.getControlPanelPlid(company.getCompanyId()), PortletRequest.RENDER_PHASE);
 
-					String siteBrowserURLString = HttpUtil.addParameter(siteBrowserURL.toString(), "doAsGroupId", scopeGroupId);
+						siteBrowserURL.setParameter("struts_action", "/site_browser/view");
+						siteBrowserURL.setParameter("selectedGroupIds", StringUtil.merge(groupIds));
+						siteBrowserURL.setParameter("type", "manageable-sites");
+						siteBrowserURL.setParameter("callback", liferayPortletResponse.getNamespace() + "selectGroup");
+						siteBrowserURL.setPortletMode(PortletMode.VIEW);
+						siteBrowserURL.setWindowState(LiferayWindowState.POP_UP);
 
-					String taglibSiteBrowserURL = "javascript:Liferay.Util.openWindow({dialog: {align: Liferay.Util.Window.ALIGN_CENTER, width: 960}, id: '" + liferayPortletResponse.getNamespace() + "selectGroup', title: '" + LanguageUtil.get(pageContext, "select-site") + "', uri: '" + HtmlUtil.escapeURL(siteBrowserURLString) + "'});";
-					%>
+						String siteBrowserURLString = HttpUtil.addParameter(siteBrowserURL.toString(), "doAsGroupId", scopeGroupId);
+						%>
 
-					<liferay-ui:icon
-						cssClass="highlited"
-						image="add"
-						message='<%= LanguageUtil.get(pageContext, "site") + StringPool.TRIPLE_PERIOD %>'
-						url="<%= taglibSiteBrowserURL %>"
-					/>
+						<liferay-ui:icon
+							cssClass="highlited scope-selector"
+							id="selectManageableGroup"
+							image="add"
+							message='<%= LanguageUtil.get(pageContext, "site") + StringPool.TRIPLE_PERIOD %>'
+							method="get"
+							url="<%= siteBrowserURLString %>"
+						/>
+					</c:if>
 				</liferay-ui:icon-menu>
 			</div>
 		</div>
@@ -270,8 +274,9 @@ String editorParam = emailParam + "Body_" + currentLanguageId;
 	<%
 	request.setAttribute("configuration.jsp-classTypesAssetRendererFactories", classTypesAssetRendererFactories);
 	request.setAttribute("configuration.jsp-configurationRenderURL", configurationRenderURL);
-	request.setAttribute("configuration.jsp-editorParam", editorParam);
+	request.setAttribute("configuration.jsp-emailBodyParam", emailBodyParam);
 	request.setAttribute("configuration.jsp-emailParam", emailParam);
+	request.setAttribute("configuration.jsp-emailSubjectParam", emailSubjectParam);
 	request.setAttribute("configuration.jsp-redirect", redirect);
 	request.setAttribute("configuration.jsp-rootPortletId", rootPortletId);
 	request.setAttribute("configuration.jsp-selectScope", selectScope);
@@ -287,6 +292,29 @@ String editorParam = emailParam + "Body_" + currentLanguageId;
 		</c:when>
 	</c:choose>
 </aui:form>
+
+<aui:script use="aui-base">
+	A.getBody().delegate(
+		'click',
+		function (event) {
+			event.preventDefault();
+
+			var link = event.currentTarget;
+
+			Liferay.Util.openWindow(
+				{
+					dialog: {
+						zIndex: Liferay.zIndex.WINDOW + 2
+					},
+					id: link.attr('id'),
+					title: link.html(),
+					uri: link.attr('href')
+				}
+			);
+		},
+		'.scope-selector a'
+	);
+</aui:script>
 
 <aui:script>
 	function <portlet:namespace />chooseSelectionStyle() {
@@ -346,7 +374,7 @@ String editorParam = emailParam + "Body_" + currentLanguageId;
 			%>
 
 			document.<portlet:namespace />fm.<portlet:namespace />metadataFields.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentMetadataFields);
-			document.<portlet:namespace />fm.<portlet:namespace /><%= editorParam %>.value = window.<portlet:namespace />editor.getHTML();
+			document.<portlet:namespace />fm.<portlet:namespace /><%= emailBodyParam %>.value = window.<portlet:namespace />editor.getHTML();
 
 			submitForm(document.<portlet:namespace />fm);
 		},
@@ -357,66 +385,3 @@ String editorParam = emailParam + "Body_" + currentLanguageId;
 
 	Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />selectionStyle);
 </aui:script>
-
-<%!
-private String _getName(ThemeDisplay themeDisplay, Group group) throws Exception {
-	String name = null;
-
-	if (group.getGroupId() == themeDisplay.getScopeGroupId()) {
-		StringBundler sb = new StringBundler(5);
-
-		sb.append(LanguageUtil.get(themeDisplay.getLocale(), "current-site"));
-		sb.append(StringPool.SPACE);
-		sb.append(StringPool.OPEN_PARENTHESIS);
-		sb.append(HtmlUtil.escape(group.getDescriptiveName(themeDisplay.getLocale())));
-		sb.append(StringPool.CLOSE_PARENTHESIS);
-
-		name = sb.toString();
-	}
-	else if (group.isLayout() && (group.getClassPK() == themeDisplay.getPlid())) {
-		StringBundler sb = new StringBundler(5);
-
-		sb.append(LanguageUtil.get(themeDisplay.getLocale(), "current-page"));
-		sb.append(StringPool.SPACE);
-		sb.append(StringPool.OPEN_PARENTHESIS);
-		sb.append(HtmlUtil.escape(group.getDescriptiveName(themeDisplay.getLocale())));
-		sb.append(StringPool.CLOSE_PARENTHESIS);
-
-		name = sb.toString();
-	}
-	else if (group.isLayoutPrototype()) {
-		name = LanguageUtil.get(themeDisplay.getLocale(), "default");
-	}
-	else {
-		name = HtmlUtil.escape(group.getDescriptiveName(themeDisplay.getLocale()));
-	}
-
-	return name;
-}
-
-private String _getType(ThemeDisplay themeDisplay, Group group) {
-	String type = "site";
-
-	if (group.getGroupId() == themeDisplay.getScopeGroupId()) {
-		type = "current-site";
-	}
-	else if (group.getGroupId() == themeDisplay.getCompanyGroupId()) {
-		type = "global";
-	}
-	else if (group.isLayout()) {
-		type = "page";
-	}
-	else {
-		Group scopeGroup = themeDisplay.getScopeGroup();
-
-		if (scopeGroup.hasAncestor(group.getGroupId())) {
-			type = "parent-site";
-		}
-		else if (group.hasAncestor(scopeGroup.getGroupId())) {
-			type = "child-site";
-		}
-	}
-
-	return type;
-}
-%>

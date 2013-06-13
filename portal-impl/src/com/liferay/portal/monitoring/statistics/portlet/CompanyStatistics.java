@@ -187,6 +187,7 @@ public class CompanyStatistics
 		return _webId;
 	}
 
+	@Override
 	public void processDataSample(
 			PortletRequestDataSample portletRequestDataSample)
 		throws MonitoringException {

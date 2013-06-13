@@ -18,11 +18,12 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
- * The utility for the m d r action local service. This utility wraps {@link com.liferay.portlet.mobiledevicerules.service.impl.MDRActionLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
+ * Provides the local service utility for MDRAction. This utility wraps
+ * {@link com.liferay.portlet.mobiledevicerules.service.impl.MDRActionLocalServiceImpl} and is the
+ * primary access point for service operations in application layer code running
+ * on the local server. Methods of this service will not have security checks
+ * based on the propagated JAAS credentials because this service can only be
+ * accessed from within the same VM.
  *
  * @author Edward C. Han
  * @see MDRActionLocalService
@@ -296,18 +297,21 @@ public class MDRActionLocalServiceUtil {
 	}
 
 	public static void deleteAction(long actionId)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteAction(actionId);
 	}
 
 	public static void deleteAction(
 		com.liferay.portlet.mobiledevicerules.model.MDRAction action)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteAction(action);
 	}
 
 	public static void deleteActions(long ruleGroupInstanceId)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteActions(ruleGroupInstanceId);
 	}
 

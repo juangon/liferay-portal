@@ -128,28 +128,34 @@ public class UserGroupGroupRoleModelImpl extends BaseModelImpl<UserGroupGroupRol
 	public UserGroupGroupRoleModelImpl() {
 	}
 
+	@Override
 	public UserGroupGroupRolePK getPrimaryKey() {
 		return new UserGroupGroupRolePK(_userGroupId, _groupId, _roleId);
 	}
 
+	@Override
 	public void setPrimaryKey(UserGroupGroupRolePK primaryKey) {
 		setUserGroupId(primaryKey.userGroupId);
 		setGroupId(primaryKey.groupId);
 		setRoleId(primaryKey.roleId);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return new UserGroupGroupRolePK(_userGroupId, _groupId, _roleId);
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey((UserGroupGroupRolePK)primaryKeyObj);
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return UserGroupGroupRole.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return UserGroupGroupRole.class.getName();
 	}
@@ -186,11 +192,13 @@ public class UserGroupGroupRoleModelImpl extends BaseModelImpl<UserGroupGroupRol
 		}
 	}
 
+	@Override
 	@JSON
 	public long getUserGroupId() {
 		return _userGroupId;
 	}
 
+	@Override
 	public void setUserGroupId(long userGroupId) {
 		_columnBitmask |= USERGROUPID_COLUMN_BITMASK;
 
@@ -207,11 +215,13 @@ public class UserGroupGroupRoleModelImpl extends BaseModelImpl<UserGroupGroupRol
 		return _originalUserGroupId;
 	}
 
+	@Override
 	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -228,11 +238,13 @@ public class UserGroupGroupRoleModelImpl extends BaseModelImpl<UserGroupGroupRol
 		return _originalGroupId;
 	}
 
+	@Override
 	@JSON
 	public long getRoleId() {
 		return _roleId;
 	}
 
+	@Override
 	public void setRoleId(long roleId) {
 		_columnBitmask |= ROLEID_COLUMN_BITMASK;
 
@@ -276,6 +288,7 @@ public class UserGroupGroupRoleModelImpl extends BaseModelImpl<UserGroupGroupRol
 		return userGroupGroupRoleImpl;
 	}
 
+	@Override
 	public int compareTo(UserGroupGroupRole userGroupGroupRole) {
 		UserGroupGroupRolePK primaryKey = userGroupGroupRole.getPrimaryKey();
 
@@ -284,18 +297,15 @@ public class UserGroupGroupRoleModelImpl extends BaseModelImpl<UserGroupGroupRol
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof UserGroupGroupRole)) {
 			return false;
 		}
 
-		UserGroupGroupRole userGroupGroupRole = null;
-
-		try {
-			userGroupGroupRole = (UserGroupGroupRole)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		UserGroupGroupRole userGroupGroupRole = (UserGroupGroupRole)obj;
 
 		UserGroupGroupRolePK primaryKey = userGroupGroupRole.getPrimaryKey();
 
@@ -359,6 +369,7 @@ public class UserGroupGroupRoleModelImpl extends BaseModelImpl<UserGroupGroupRol
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(13);
 

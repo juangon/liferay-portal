@@ -29,11 +29,7 @@ public interface Repository extends RepositoryModel, PersistedModel {
 	 *
 	 * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.RepositoryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public java.lang.String getTypeSettings();
-
 	public com.liferay.portal.kernel.util.UnicodeProperties getTypeSettingsProperties();
-
-	public void setTypeSettings(java.lang.String typeSettings);
 
 	public void setTypeSettingsProperties(
 		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties);

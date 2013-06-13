@@ -86,6 +86,7 @@ public class MBThreadCacheModel implements CacheModel<MBThread>, Externalizable 
 		return sb.toString();
 	}
 
+	@Override
 	public MBThread toEntityModel() {
 		MBThreadImpl mbThreadImpl = new MBThreadImpl();
 
@@ -160,6 +161,7 @@ public class MBThreadCacheModel implements CacheModel<MBThread>, Externalizable 
 		return mbThreadImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		threadId = objectInput.readLong();
@@ -184,6 +186,7 @@ public class MBThreadCacheModel implements CacheModel<MBThread>, Externalizable 
 		statusDate = objectInput.readLong();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

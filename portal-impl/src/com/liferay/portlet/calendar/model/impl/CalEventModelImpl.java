@@ -181,26 +181,32 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 	public CalEventModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _eventId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setEventId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _eventId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return CalEvent.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return CalEvent.class.getName();
 	}
@@ -377,6 +383,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		}
 	}
 
+	@Override
 	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
@@ -387,6 +394,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		}
 	}
 
+	@Override
 	public void setUuid(String uuid) {
 		if (_originalUuid == null) {
 			_originalUuid = _uuid;
@@ -399,20 +407,24 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@Override
 	@JSON
 	public long getEventId() {
 		return _eventId;
 	}
 
+	@Override
 	public void setEventId(long eventId) {
 		_eventId = eventId;
 	}
 
+	@Override
 	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -429,11 +441,13 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		return _originalGroupId;
 	}
 
+	@Override
 	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
@@ -450,23 +464,28 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		return _originalCompanyId;
 	}
 
+	@Override
 	@JSON
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
 
+	@Override
 	@JSON
 	public String getUserName() {
 		if (_userName == null) {
@@ -477,28 +496,34 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		}
 	}
 
+	@Override
 	public void setUserName(String userName) {
 		_userName = userName;
 	}
 
+	@Override
 	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
 	}
 
+	@Override
 	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
 	@JSON
 	public String getTitle() {
 		if (_title == null) {
@@ -509,12 +534,14 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		}
 	}
 
+	@Override
 	public void setTitle(String title) {
 		_columnBitmask = -1L;
 
 		_title = title;
 	}
 
+	@Override
 	@JSON
 	public String getDescription() {
 		if (_description == null) {
@@ -525,10 +552,12 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		}
 	}
 
+	@Override
 	public void setDescription(String description) {
 		_description = description;
 	}
 
+	@Override
 	@JSON
 	public String getLocation() {
 		if (_location == null) {
@@ -539,74 +568,90 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		}
 	}
 
+	@Override
 	public void setLocation(String location) {
 		_location = location;
 	}
 
+	@Override
 	@JSON
 	public Date getStartDate() {
 		return _startDate;
 	}
 
+	@Override
 	public void setStartDate(Date startDate) {
 		_columnBitmask = -1L;
 
 		_startDate = startDate;
 	}
 
+	@Override
 	@JSON
 	public Date getEndDate() {
 		return _endDate;
 	}
 
+	@Override
 	public void setEndDate(Date endDate) {
 		_endDate = endDate;
 	}
 
+	@Override
 	@JSON
 	public int getDurationHour() {
 		return _durationHour;
 	}
 
+	@Override
 	public void setDurationHour(int durationHour) {
 		_durationHour = durationHour;
 	}
 
+	@Override
 	@JSON
 	public int getDurationMinute() {
 		return _durationMinute;
 	}
 
+	@Override
 	public void setDurationMinute(int durationMinute) {
 		_durationMinute = durationMinute;
 	}
 
+	@Override
 	@JSON
 	public boolean getAllDay() {
 		return _allDay;
 	}
 
+	@Override
 	public boolean isAllDay() {
 		return _allDay;
 	}
 
+	@Override
 	public void setAllDay(boolean allDay) {
 		_allDay = allDay;
 	}
 
+	@Override
 	@JSON
 	public boolean getTimeZoneSensitive() {
 		return _timeZoneSensitive;
 	}
 
+	@Override
 	public boolean isTimeZoneSensitive() {
 		return _timeZoneSensitive;
 	}
 
+	@Override
 	public void setTimeZoneSensitive(boolean timeZoneSensitive) {
 		_timeZoneSensitive = timeZoneSensitive;
 	}
 
+	@Override
 	@JSON
 	public String getType() {
 		if (_type == null) {
@@ -617,6 +662,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		}
 	}
 
+	@Override
 	public void setType(String type) {
 		_columnBitmask |= TYPE_COLUMN_BITMASK;
 
@@ -631,15 +677,18 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		return GetterUtil.getString(_originalType);
 	}
 
+	@Override
 	@JSON
 	public boolean getRepeating() {
 		return _repeating;
 	}
 
+	@Override
 	public boolean isRepeating() {
 		return _repeating;
 	}
 
+	@Override
 	public void setRepeating(boolean repeating) {
 		_columnBitmask |= REPEATING_COLUMN_BITMASK;
 
@@ -656,6 +705,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		return _originalRepeating;
 	}
 
+	@Override
 	@JSON
 	public String getRecurrence() {
 		if (_recurrence == null) {
@@ -666,15 +716,18 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		}
 	}
 
+	@Override
 	public void setRecurrence(String recurrence) {
 		_recurrence = recurrence;
 	}
 
+	@Override
 	@JSON
 	public int getRemindBy() {
 		return _remindBy;
 	}
 
+	@Override
 	public void setRemindBy(int remindBy) {
 		_columnBitmask |= REMINDBY_COLUMN_BITMASK;
 
@@ -691,20 +744,24 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		return _originalRemindBy;
 	}
 
+	@Override
 	@JSON
 	public int getFirstReminder() {
 		return _firstReminder;
 	}
 
+	@Override
 	public void setFirstReminder(int firstReminder) {
 		_firstReminder = firstReminder;
 	}
 
+	@Override
 	@JSON
 	public int getSecondReminder() {
 		return _secondReminder;
 	}
 
+	@Override
 	public void setSecondReminder(int secondReminder) {
 		_secondReminder = secondReminder;
 	}
@@ -769,6 +826,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		return calEventImpl;
 	}
 
+	@Override
 	public int compareTo(CalEvent calEvent) {
 		int value = 0;
 
@@ -789,18 +847,15 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof CalEvent)) {
 			return false;
 		}
 
-		CalEvent calEvent = null;
-
-		try {
-			calEvent = (CalEvent)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		CalEvent calEvent = (CalEvent)obj;
 
 		long primaryKey = calEvent.getPrimaryKey();
 
@@ -1022,6 +1077,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(73);
 

@@ -100,7 +100,9 @@ public class JSONWebServiceServiceAction extends JSONServiceAction {
 			return JSONFactoryUtil.serializeThrowable(throwable);
 		}
 		catch (Exception e) {
-			_log.error(e, e);
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
 
 			return JSONFactoryUtil.serializeException(e);
 		}

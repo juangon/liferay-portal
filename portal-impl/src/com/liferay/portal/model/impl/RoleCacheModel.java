@@ -71,6 +71,7 @@ public class RoleCacheModel implements CacheModel<Role>, Externalizable {
 		return sb.toString();
 	}
 
+	@Override
 	public Role toEntityModel() {
 		RoleImpl roleImpl = new RoleImpl();
 
@@ -144,6 +145,7 @@ public class RoleCacheModel implements CacheModel<Role>, Externalizable {
 		return roleImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		roleId = objectInput.readLong();
@@ -161,6 +163,7 @@ public class RoleCacheModel implements CacheModel<Role>, Externalizable {
 		subtype = objectInput.readUTF();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

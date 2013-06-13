@@ -65,6 +65,7 @@ public class VersionableName
 		_versions.add(version);
 	}
 
+	@Override
 	public int compareTo(VersionableName versionableName) {
 		return _name.toUpperCase().compareTo(
 			versionableName.getName().toUpperCase());
@@ -83,7 +84,6 @@ public class VersionableName
 		VersionableName versionableName = (VersionableName)obj;
 
 		if (Validator.equals(_name, versionableName._name)) {
-
 			return true;
 		}
 

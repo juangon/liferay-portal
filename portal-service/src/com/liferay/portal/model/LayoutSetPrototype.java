@@ -42,8 +42,6 @@ public interface LayoutSetPrototype extends LayoutSetPrototypeModel,
 
 	public java.lang.String getSettingsProperty(java.lang.String key);
 
-	public void setSettings(java.lang.String settings);
-
 	public void setSettingsProperties(
 		com.liferay.portal.kernel.util.UnicodeProperties settingsProperties);
 }

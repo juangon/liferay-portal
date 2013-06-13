@@ -59,6 +59,7 @@ public class JournalArticleImageCacheModel implements CacheModel<JournalArticleI
 		return sb.toString();
 	}
 
+	@Override
 	public JournalArticleImage toEntityModel() {
 		JournalArticleImageImpl journalArticleImageImpl = new JournalArticleImageImpl();
 
@@ -102,6 +103,7 @@ public class JournalArticleImageCacheModel implements CacheModel<JournalArticleI
 		return journalArticleImageImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		articleImageId = objectInput.readLong();
 		groupId = objectInput.readLong();
@@ -113,6 +115,7 @@ public class JournalArticleImageCacheModel implements CacheModel<JournalArticleI
 		tempImage = objectInput.readBoolean();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(articleImageId);

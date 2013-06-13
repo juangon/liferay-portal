@@ -41,11 +41,13 @@ public class FuseMailHook implements Hook {
 		_client = new HttpClient();
 	}
 
+	@Override
 	public void addForward(
 		long companyId, long userId, List<Filter> filters,
 		List<String> emailAddresses, boolean leaveCopy) {
 	}
 
+	@Override
 	public void addUser(
 		long companyId, long userId, String password, String firstName,
 		String middleName, String lastName, String emailAddress) {
@@ -71,11 +73,13 @@ public class FuseMailHook implements Hook {
 		}
 	}
 
+	@Override
 	public void addVacationMessage(
 		long companyId, long userId, String emailAddress,
 		String vacationMessage) {
 	}
 
+	@Override
 	public void deleteEmailAddress(long companyId, long userId) {
 		try {
 			User user = UserLocalServiceUtil.getUserById(userId);
@@ -95,6 +99,7 @@ public class FuseMailHook implements Hook {
 		}
 	}
 
+	@Override
 	public void deleteUser(long companyId, long userId) {
 		try {
 			String mailUserId = getMailUserId(companyId, userId);
@@ -111,10 +116,12 @@ public class FuseMailHook implements Hook {
 		}
 	}
 
+	@Override
 	public void updateBlocked(
 		long companyId, long userId, List<String> blocked) {
 	}
 
+	@Override
 	public void updateEmailAddress(
 		long companyId, long userId, String emailAddress) {
 
@@ -136,6 +143,7 @@ public class FuseMailHook implements Hook {
 		}
 	}
 
+	@Override
 	public void updatePassword(long companyId, long userId, String password) {
 		try {
 			String mailUserId = getMailUserId(companyId, userId);
@@ -158,28 +166,30 @@ public class FuseMailHook implements Hook {
 
 		int status = client.executeMethod(method);
 
-		if (_log.isDebugEnabled()) {
-			_log.debug("Posting to URI: " + method.getURI());
+		if (!_log.isDebugEnabled()) {
+			return status;
+		}
 
-			NameValuePair[] pairs = method.getParameters();
+		_log.debug("Posting to URI: " + method.getURI());
 
-			if (pairs.length > 0) {
-				StringBundler sb = new StringBundler(pairs.length * 3 + 1);
+		NameValuePair[] pairs = method.getParameters();
 
-				sb.append("With parameters:\n");
+		if (pairs.length > 0) {
+			StringBundler sb = new StringBundler(pairs.length * 3 + 1);
 
-				for (int i = 0; i < pairs.length; i++) {
-					sb.append("\t");
-					sb.append(pairs[i]);
-					sb.append("\n");
-				}
+			sb.append("With parameters:\n");
 
-				_log.debug(sb.toString());
+			for (int i = 0; i < pairs.length; i++) {
+				sb.append("\t");
+				sb.append(pairs[i]);
+				sb.append("\n");
 			}
 
-			_log.debug("Status: " + status);
-			_log.debug("Response body: " + method.getResponseBodyAsString());
+			_log.debug(sb.toString());
 		}
+
+		_log.debug("Status: " + status);
+		_log.debug("Response body: " + method.getResponseBodyAsString());
 
 		return status;
 	}

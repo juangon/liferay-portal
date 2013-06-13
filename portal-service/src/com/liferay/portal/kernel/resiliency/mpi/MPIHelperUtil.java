@@ -381,19 +381,11 @@ public class MPIHelperUtil {
 
 		@Override
 		public boolean equals(Object obj) {
-			if (this == obj) {
-				return true;
-			}
-
-			if (!(obj instanceof SPIKey)) {
-				return false;
-			}
-
-			SPIKey clusterNode = (SPIKey)obj;
+			SPIKey spiKey = (SPIKey)obj;
 
 			if (Validator.equals(
-					_spiProviderName, clusterNode._spiProviderName) &&
-				Validator.equals(_spiId, clusterNode._spiId)) {
+					_spiProviderName, spiKey._spiProviderName) &&
+				Validator.equals(_spiId, spiKey._spiId)) {
 
 				return true;
 			}
@@ -403,9 +395,7 @@ public class MPIHelperUtil {
 
 		@Override
 		public int hashCode() {
-			String string = toString();
-
-			return string.hashCode();
+			return _spiProviderName.hashCode() * 11 + _spiId.hashCode();
 		}
 
 		@Override

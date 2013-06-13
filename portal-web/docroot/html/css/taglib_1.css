@@ -1,6 +1,5 @@
 @import url(taglib/app_view_common.css);
 @import url(taglib/app_view_entry.css);
-@import url(taglib/app_view_navigation.css);
 @import url(taglib/app_view_navigation_item.css);
 @import url(taglib/app_view_search_entry.css);
 @import url(taglib/app_view_toolbar.css);
@@ -20,5 +19,6 @@
 @import url(taglib/icon_help.css);
 @import url(taglib/icon_list.css);
 @import url(taglib/icon_menu.css);
+@import url(taglib/input_date.css);
 @import url(taglib/input_localized.css);
 @import url(taglib/input_move_boxes.css);

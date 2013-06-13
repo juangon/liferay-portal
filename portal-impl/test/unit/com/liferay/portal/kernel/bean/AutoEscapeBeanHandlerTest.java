@@ -71,14 +71,17 @@ public class AutoEscapeBeanHandlerTest {
 			_unescapedAttribute = attribute;
 		}
 
+		@Override
 		public String getAttribute() {
 			return _attribute;
 		}
 
+		@Override
 		public String getUnescapedAttribute() {
 			return _unescapedAttribute;
 		}
 
+		@Override
 		public Bean toEscapedBean() {
 			Class<?> clazz = getClass();
 

@@ -103,26 +103,32 @@ public class SocialActivityCounterModelImpl extends BaseModelImpl<SocialActivity
 	public SocialActivityCounterModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _activityCounterId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setActivityCounterId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _activityCounterId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return SocialActivityCounter.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return SocialActivityCounter.class.getName();
 	}
@@ -229,18 +235,22 @@ public class SocialActivityCounterModelImpl extends BaseModelImpl<SocialActivity
 		}
 	}
 
+	@Override
 	public long getActivityCounterId() {
 		return _activityCounterId;
 	}
 
+	@Override
 	public void setActivityCounterId(long activityCounterId) {
 		_activityCounterId = activityCounterId;
 	}
 
+	@Override
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -257,14 +267,17 @@ public class SocialActivityCounterModelImpl extends BaseModelImpl<SocialActivity
 		return _originalGroupId;
 	}
 
+	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
+	@Override
 	public String getClassName() {
 		if (getClassNameId() <= 0) {
 			return StringPool.BLANK;
@@ -273,6 +286,7 @@ public class SocialActivityCounterModelImpl extends BaseModelImpl<SocialActivity
 		return PortalUtil.getClassName(getClassNameId());
 	}
 
+	@Override
 	public void setClassName(String className) {
 		long classNameId = 0;
 
@@ -283,10 +297,12 @@ public class SocialActivityCounterModelImpl extends BaseModelImpl<SocialActivity
 		setClassNameId(classNameId);
 	}
 
+	@Override
 	public long getClassNameId() {
 		return _classNameId;
 	}
 
+	@Override
 	public void setClassNameId(long classNameId) {
 		_columnBitmask |= CLASSNAMEID_COLUMN_BITMASK;
 
@@ -303,10 +319,12 @@ public class SocialActivityCounterModelImpl extends BaseModelImpl<SocialActivity
 		return _originalClassNameId;
 	}
 
+	@Override
 	public long getClassPK() {
 		return _classPK;
 	}
 
+	@Override
 	public void setClassPK(long classPK) {
 		_columnBitmask |= CLASSPK_COLUMN_BITMASK;
 
@@ -323,6 +341,7 @@ public class SocialActivityCounterModelImpl extends BaseModelImpl<SocialActivity
 		return _originalClassPK;
 	}
 
+	@Override
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -332,6 +351,7 @@ public class SocialActivityCounterModelImpl extends BaseModelImpl<SocialActivity
 		}
 	}
 
+	@Override
 	public void setName(String name) {
 		_columnBitmask |= NAME_COLUMN_BITMASK;
 
@@ -346,10 +366,12 @@ public class SocialActivityCounterModelImpl extends BaseModelImpl<SocialActivity
 		return GetterUtil.getString(_originalName);
 	}
 
+	@Override
 	public int getOwnerType() {
 		return _ownerType;
 	}
 
+	@Override
 	public void setOwnerType(int ownerType) {
 		_columnBitmask |= OWNERTYPE_COLUMN_BITMASK;
 
@@ -366,34 +388,42 @@ public class SocialActivityCounterModelImpl extends BaseModelImpl<SocialActivity
 		return _originalOwnerType;
 	}
 
+	@Override
 	public int getCurrentValue() {
 		return _currentValue;
 	}
 
+	@Override
 	public void setCurrentValue(int currentValue) {
 		_currentValue = currentValue;
 	}
 
+	@Override
 	public int getTotalValue() {
 		return _totalValue;
 	}
 
+	@Override
 	public void setTotalValue(int totalValue) {
 		_totalValue = totalValue;
 	}
 
+	@Override
 	public int getGraceValue() {
 		return _graceValue;
 	}
 
+	@Override
 	public void setGraceValue(int graceValue) {
 		_graceValue = graceValue;
 	}
 
+	@Override
 	public int getStartPeriod() {
 		return _startPeriod;
 	}
 
+	@Override
 	public void setStartPeriod(int startPeriod) {
 		_columnBitmask |= STARTPERIOD_COLUMN_BITMASK;
 
@@ -410,10 +440,12 @@ public class SocialActivityCounterModelImpl extends BaseModelImpl<SocialActivity
 		return _originalStartPeriod;
 	}
 
+	@Override
 	public int getEndPeriod() {
 		return _endPeriod;
 	}
 
+	@Override
 	public void setEndPeriod(int endPeriod) {
 		_columnBitmask |= ENDPERIOD_COLUMN_BITMASK;
 
@@ -430,14 +462,17 @@ public class SocialActivityCounterModelImpl extends BaseModelImpl<SocialActivity
 		return _originalEndPeriod;
 	}
 
+	@Override
 	public boolean getActive() {
 		return _active;
 	}
 
+	@Override
 	public boolean isActive() {
 		return _active;
 	}
 
+	@Override
 	public void setActive(boolean active) {
 		_active = active;
 	}
@@ -492,6 +527,7 @@ public class SocialActivityCounterModelImpl extends BaseModelImpl<SocialActivity
 		return socialActivityCounterImpl;
 	}
 
+	@Override
 	public int compareTo(SocialActivityCounter socialActivityCounter) {
 		long primaryKey = socialActivityCounter.getPrimaryKey();
 
@@ -508,18 +544,15 @@ public class SocialActivityCounterModelImpl extends BaseModelImpl<SocialActivity
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof SocialActivityCounter)) {
 			return false;
 		}
 
-		SocialActivityCounter socialActivityCounter = null;
-
-		try {
-			socialActivityCounter = (SocialActivityCounter)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		SocialActivityCounter socialActivityCounter = (SocialActivityCounter)obj;
 
 		long primaryKey = socialActivityCounter.getPrimaryKey();
 
@@ -643,6 +676,7 @@ public class SocialActivityCounterModelImpl extends BaseModelImpl<SocialActivity
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(43);
 

@@ -16,6 +16,8 @@
 
 <%@ include file="/html/taglib/ui/breadcrumb/init.jsp" %>
 
-<c:if test="<%= layout != null %>">
-	<liferay-util:include page='<%= "/html/taglib/ui/breadcrumb/display_style_" + displayStyle + ".jsp" %>' />
+<c:if test="<%= Validator.isNotNull(breadcrumbString) %>">
+	<ul class="breadcrumb">
+		<%= breadcrumbString %>
+	</ul>
 </c:if>

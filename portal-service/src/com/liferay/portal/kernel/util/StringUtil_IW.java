@@ -106,7 +106,7 @@ public class StringUtil_IW {
 	}
 
 	/**
-	 * @deprecated As of 6.1.0
+	 * @deprecated
 	 */
 	public java.lang.String highlight(java.lang.String s,
 		java.lang.String keywords) {
@@ -114,7 +114,7 @@ public class StringUtil_IW {
 	}
 
 	/**
-	 * @deprecated As of 6.1.0
+	 * @deprecated
 	 */
 	public java.lang.String highlight(java.lang.String s,
 		java.lang.String keywords, java.lang.String highlight1,
@@ -133,9 +133,63 @@ public class StringUtil_IW {
 		return StringUtil.highlight(s, queryTerms, highlight1, highlight2);
 	}
 
+	public int indexOfAny(java.lang.String s, char[] chars) {
+		return StringUtil.indexOfAny(s, chars);
+	}
+
+	public int indexOfAny(java.lang.String s, char[] chars, int fromIndex) {
+		return StringUtil.indexOfAny(s, chars, fromIndex);
+	}
+
+	public int indexOfAny(java.lang.String s, char[] chars, int fromIndex,
+		int toIndex) {
+		return StringUtil.indexOfAny(s, chars, fromIndex, toIndex);
+	}
+
+	public int indexOfAny(java.lang.String s, java.lang.String[] texts) {
+		return StringUtil.indexOfAny(s, texts);
+	}
+
+	public int indexOfAny(java.lang.String s, java.lang.String[] texts,
+		int fromIndex) {
+		return StringUtil.indexOfAny(s, texts, fromIndex);
+	}
+
+	public int indexOfAny(java.lang.String s, java.lang.String[] texts,
+		int fromIndex, int toIndex) {
+		return StringUtil.indexOfAny(s, texts, fromIndex, toIndex);
+	}
+
 	public java.lang.String insert(java.lang.String s, java.lang.String insert,
 		int offset) {
 		return StringUtil.insert(s, insert, offset);
+	}
+
+	public int lastIndexOfAny(java.lang.String s, char[] chars) {
+		return StringUtil.lastIndexOfAny(s, chars);
+	}
+
+	public int lastIndexOfAny(java.lang.String s, char[] chars, int toIndex) {
+		return StringUtil.lastIndexOfAny(s, chars, toIndex);
+	}
+
+	public int lastIndexOfAny(java.lang.String s, char[] chars, int fromIndex,
+		int toIndex) {
+		return StringUtil.lastIndexOfAny(s, chars, fromIndex, toIndex);
+	}
+
+	public int lastIndexOfAny(java.lang.String s, java.lang.String[] texts) {
+		return StringUtil.lastIndexOfAny(s, texts);
+	}
+
+	public int lastIndexOfAny(java.lang.String s, java.lang.String[] texts,
+		int toIndex) {
+		return StringUtil.lastIndexOfAny(s, texts, toIndex);
+	}
+
+	public int lastIndexOfAny(java.lang.String s, java.lang.String[] texts,
+		int fromIndex, int toIndex) {
+		return StringUtil.lastIndexOfAny(s, texts, fromIndex, toIndex);
 	}
 
 	public java.lang.String lowerCase(java.lang.String s) {

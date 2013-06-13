@@ -110,6 +110,7 @@ public class PACLExecutionTestListener extends AbstractExecutionTestListener {
 			_classLoader = classLoader;
 		}
 
+		@Override
 		public Resource getResource(String location) {
 			ClassLoader classLoader = getClassLoader();
 
@@ -118,6 +119,7 @@ public class PACLExecutionTestListener extends AbstractExecutionTestListener {
 				classLoader);
 		}
 
+		@Override
 		public ClassLoader getClassLoader() {
 			return _classLoader;
 		}

@@ -28,20 +28,27 @@ import com.liferay.portlet.social.service.base.SocialActivityLimitLocalServiceBa
 public class SocialActivityLimitLocalServiceImpl
 	extends SocialActivityLimitLocalServiceBaseImpl {
 
-	@Transactional(
-		propagation = Propagation.REQUIRES_NEW,
-		rollbackFor = {PortalException.class, SystemException.class})
+	@Override
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public SocialActivityLimit addActivityLimit(
 			long userId, long groupId, long classNameId, long classPK,
 			int activityType, String activityCounterName, int limitPeriod)
 		throws PortalException, SystemException {
 
+		SocialActivityLimit activityLimit =
+			socialActivityLimitPersistence.fetchByG_U_C_C_A_A(
+				groupId, userId, classNameId, classPK, activityType,
+				activityCounterName, false);
+
+		if (activityLimit != null) {
+			return activityLimit;
+		}
+
 		User user = userPersistence.findByPrimaryKey(userId);
 
 		long activityLimitId = counterLocalService.increment();
 
-		SocialActivityLimit activityLimit =
-			socialActivityLimitPersistence.create(activityLimitId);
+		activityLimit = socialActivityLimitPersistence.create(activityLimitId);
 
 		activityLimit.setGroupId(groupId);
 		activityLimit.setCompanyId(user.getCompanyId());
@@ -57,6 +64,7 @@ public class SocialActivityLimitLocalServiceImpl
 		return activityLimit;
 	}
 
+	@Override
 	public SocialActivityLimit fetchActivityLimit(
 			long groupId, long userId, long classNameId, long classPK,
 			int activityType, String activityCounterName)

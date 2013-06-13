@@ -241,21 +241,21 @@ public class ThemeDisplay
 	}
 
 	/**
-	 * @deprecated As of 6.2 renamed to {@link #getSiteGroup}
+	 * @deprecated As of 6.2.0 renamed to {@link #getSiteGroup}
 	 */
 	public Group getParentGroup() {
 		return getSiteGroup();
 	}
 
 	/**
-	 * @deprecated As of 6.2 renamed to {@link #getSiteGroupId}
+	 * @deprecated As of 6.2.0 renamed to {@link #getSiteGroupId}
 	 */
 	public long getParentGroupId() {
 		return getSiteGroupId();
 	}
 
 	/**
-	 * @deprecated As of 6.2 renamed to {@link #getSiteGroupName}
+	 * @deprecated As of 6.2.0 renamed to {@link #getSiteGroupName}
 	 */
 	public String getParentGroupName() throws PortalException, SystemException {
 		return getSiteGroupName();
@@ -404,7 +404,7 @@ public class ThemeDisplay
 	}
 
 	/**
-	 * @deprecated As of 6.2 renamed to {@link #getSiteGroupIdOrLiveGroupId}
+	 * @deprecated As of 6.2.0 renamed to {@link #getSiteGroupIdOrLiveGroupId}
 	 */
 	public long getScopeGroupIdOrLiveGroupId()
 		throws PortalException, SystemException {
@@ -553,10 +553,9 @@ public class ThemeDisplay
 		return _urlLayoutTemplates;
 	}
 
-	public String getURLManageSite() {
-		return _urlManageSite;
-	}
-
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #getURLSiteAdministration()}
+	 */
 	public PortletURL getURLManageSiteMemberships() {
 		return _urlManageSiteMemberships;
 	}
@@ -585,17 +584,28 @@ public class ThemeDisplay
 		return _urlSignOut;
 	}
 
-	/**
-	 * @deprecated As of 6.2.0, replaced by {@link #getURLManageSite()}
-	 */
-	public String getURLSiteContent() {
-		return getURLManageSite();
+	public String getURLSiteAdministration() {
+		return _urlSiteAdministration;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #getURLSiteAdministration()}
+	 */
+	public String getURLSiteContent() {
+		return getURLSiteAdministration();
+	}
+
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link
+	 *             #isShowSiteAdministrationIcon()}
+	 */
 	public PortletURL getURLSiteMapSettings() {
 		return _urlSiteMapSettings;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #getURLSiteAdministration()}
+	 */
 	public PortletURL getURLSiteSettings() {
 		return _urlSiteSettings;
 	}
@@ -702,10 +712,10 @@ public class ThemeDisplay
 		return _showLayoutTemplatesIcon;
 	}
 
-	public boolean isShowManageSiteIcon() {
-		return _showManageSiteIcon;
-	}
-
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link
+	 *             #isShowSiteAdministrationIcon()}
+	 */
 	public boolean isShowManageSiteMembershipsIcon() {
 		return _showManageSiteMembershipsIcon;
 	}
@@ -734,17 +744,30 @@ public class ThemeDisplay
 		return _showSignOutIcon;
 	}
 
-	/**
-	 * @deprecated As of 6.2.0, replaced by {@link #isShowManageSiteIcon()}
-	 */
-	public boolean isShowSiteContentIcon() {
-		return isShowManageSiteIcon();
+	public boolean isShowSiteAdministrationIcon() {
+		return _showSiteAdministrationIcon;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link
+	 *             #isShowSiteAdministrationIcon()}
+	 */
+	public boolean isShowSiteContentIcon() {
+		return isShowSiteAdministrationIcon();
+	}
+
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link
+	 *             #isShowSiteAdministrationIcon()}
+	 */
 	public boolean isShowSiteMapSettingsIcon() {
 		return _showSiteMapSettingsIcon;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link
+	 *             #isShowSiteAdministrationIcon()}
+	 */
 	public boolean isShowSiteSettingsIcon() {
 		return _showSiteSettingsIcon;
 	}
@@ -797,6 +820,7 @@ public class ThemeDisplay
 		return _widget;
 	}
 
+	@Override
 	public ThemeDisplay merge(ThemeDisplay themeDisplay) {
 		if ((themeDisplay == null) || (themeDisplay == this)) {
 			return this;
@@ -972,46 +996,56 @@ public class ThemeDisplay
 		_theme = theme;
 		_colorScheme = colorScheme;
 
-		if ((theme != null) && (colorScheme != null)) {
-			String themeStaticResourcePath = theme.getStaticResourcePath();
+		if ((theme == null) || (colorScheme == null)) {
+			return;
+		}
 
-			String cdnBaseURL = getCDNBaseURL();
+		String themeStaticResourcePath = theme.getStaticResourcePath();
 
-			setPathColorSchemeImages(
-				cdnBaseURL + themeStaticResourcePath +
-					colorScheme.getColorSchemeImagesPath());
+		String cdnBaseURL = getCDNBaseURL();
 
-			String dynamicResourcesHost = getCDNDynamicResourcesHost();
+		setPathColorSchemeImages(
+			cdnBaseURL + themeStaticResourcePath +
+				colorScheme.getColorSchemeImagesPath());
 
-			if (Validator.isNull(dynamicResourcesHost)) {
-				String portalURL = getPortalURL();
+		String dynamicResourcesHost = getCDNDynamicResourcesHost();
 
-				if (getServerName() != null) {
-					try {
-						portalURL = PortalUtil.getPortalURL(getLayout(), this);
-					}
-					catch (Exception e) {
-						_log.error(e, e);
-					}
+		if (Validator.isNull(dynamicResourcesHost)) {
+			String portalURL = getPortalURL();
+
+			if (getServerName() != null) {
+				try {
+					portalURL = PortalUtil.getPortalURL(getLayout(), this);
 				}
-
-				dynamicResourcesHost = portalURL;
+				catch (Exception e) {
+					_log.error(e, e);
+				}
 			}
 
-			setPathThemeCss(
-				dynamicResourcesHost + themeStaticResourcePath +
-					theme.getCssPath());
-
-			setPathThemeImages(
-				cdnBaseURL + themeStaticResourcePath + theme.getImagesPath());
-			setPathThemeJavaScript(
-				cdnBaseURL + themeStaticResourcePath +
-					theme.getJavaScriptPath());
-			setPathThemeRoot(themeStaticResourcePath + theme.getRootPath());
-			setPathThemeTemplates(
-				cdnBaseURL + themeStaticResourcePath +
-					theme.getTemplatesPath());
+			dynamicResourcesHost = portalURL;
 		}
+
+		setPathThemeCss(
+			dynamicResourcesHost + themeStaticResourcePath +
+				theme.getCssPath());
+
+		setPathThemeImages(
+			cdnBaseURL + themeStaticResourcePath + theme.getImagesPath());
+		setPathThemeJavaScript(
+			cdnBaseURL + themeStaticResourcePath +
+				theme.getJavaScriptPath());
+
+		String rootPath = theme.getRootPath();
+
+		if (rootPath.equals(StringPool.SLASH)) {
+			setPathThemeRoot(themeStaticResourcePath);
+		}
+		else {
+			setPathThemeRoot(themeStaticResourcePath + rootPath);
+		}
+
+		setPathThemeTemplates(
+			cdnBaseURL + themeStaticResourcePath + theme.getTemplatesPath());
 	}
 
 	public void setMDRRuleGroupInstance(
@@ -1021,7 +1055,7 @@ public class ThemeDisplay
 	}
 
 	/**
-	 * @deprecated As of 6.2 renamed to {@link #setSiteGroupId(long)}
+	 * @deprecated As of 6.2.0 renamed to {@link #setSiteGroupId(long)}
 	 */
 	public void setParentGroupId(long parentGroupId) {
 		setSiteGroupId(parentGroupId);
@@ -1201,10 +1235,6 @@ public class ThemeDisplay
 		_showLayoutTemplatesIcon = showLayoutTemplatesIcon;
 	}
 
-	public void setShowManageSiteIcon(boolean showManageSiteIcon) {
-		_showManageSiteIcon = showManageSiteIcon;
-	}
-
 	public void setShowManageSiteMembershipsIcon(
 		boolean showManageSiteMembershipsIcon) {
 
@@ -1237,12 +1267,18 @@ public class ThemeDisplay
 		_showSignOutIcon = showSignOutIcon;
 	}
 
+	public void setShowSiteAdministrationIcon(
+		boolean showSiteAdministrationIcon) {
+
+		_showSiteAdministrationIcon = showSiteAdministrationIcon;
+	}
+
 	/**
 	 * @deprecated As of 6.2.0, replaced by {@link
-	 *             #setShowManageSiteIcon(boolean)}
+	 *             #setShowSiteAdministrationIcon(boolean)}
 	 */
 	public void setShowSiteContentIcon(boolean showSiteContentIcon) {
-		setShowManageSiteIcon(showSiteContentIcon);
+		setShowSiteAdministrationIcon(showSiteContentIcon);
 	}
 
 	public void setShowSiteMapSettingsIcon(boolean showSiteMapSettingsIcon) {
@@ -1344,10 +1380,6 @@ public class ThemeDisplay
 		_urlLayoutTemplates = urlLayoutTemplates;
 	}
 
-	public void setURLManageSite(String urlManageSite) {
-		_urlManageSite = urlManageSite;
-	}
-
 	public void setURLManageSiteMemberships(
 		PortletURL urlManageSiteMemberships) {
 
@@ -1378,11 +1410,16 @@ public class ThemeDisplay
 		_urlSignOut = urlSignOut;
 	}
 
+	public void setURLSiteAdministration(String urlSiteAdministration) {
+		_urlSiteAdministration = urlSiteAdministration;
+	}
+
 	/**
-	 * @deprecated As of 6.2.0, replaced by {@link #setURLManageSite(String)}
+	 * @deprecated As of 6.2.0, replaced by {@link
+	 *             #setURLSiteAdministration(String)}
 	 */
 	public void setURLSiteContent(String urlSiteContent) {
-		setURLManageSite(urlSiteContent);
+		setURLSiteAdministration(urlSiteContent);
 	}
 
 	public void setURLSiteMapSettings(PortletURL urlSiteMapSettings) {
@@ -1501,7 +1538,6 @@ public class ThemeDisplay
 	private boolean _showControlPanelIcon;
 	private boolean _showHomeIcon;
 	private boolean _showLayoutTemplatesIcon;
-	private boolean _showManageSiteIcon;
 	private boolean _showManageSiteMembershipsIcon;
 	private boolean _showMyAccountIcon;
 	private boolean _showPageCustomizationIcon;
@@ -1509,6 +1545,7 @@ public class ThemeDisplay
 	private boolean _showPortalIcon;
 	private boolean _showSignInIcon;
 	private boolean _showSignOutIcon;
+	private boolean _showSiteAdministrationIcon;
 	private boolean _showSiteMapSettingsIcon;
 	private boolean _showSiteSettingsIcon;
 	private boolean _showStagingIcon;
@@ -1533,7 +1570,6 @@ public class ThemeDisplay
 	private String _urlCurrent = StringPool.BLANK;
 	private String _urlHome = StringPool.BLANK;
 	private String _urlLayoutTemplates = StringPool.BLANK;
-	private String _urlManageSite = StringPool.BLANK;
 	private transient PortletURL _urlManageSiteMemberships = null;
 	private transient PortletURL _urlMyAccount = null;
 	private transient PortletURL _urlPageSettings = null;
@@ -1541,6 +1577,7 @@ public class ThemeDisplay
 	private transient PortletURL _urlPublishToLive = null;
 	private String _urlSignIn = StringPool.BLANK;
 	private String _urlSignOut = StringPool.BLANK;
+	private String _urlSiteAdministration = StringPool.BLANK;
 	private transient PortletURL _urlSiteMapSettings = null;
 	private transient PortletURL _urlSiteSettings = null;
 	private transient PortletURL _urlUpdateManager = null;

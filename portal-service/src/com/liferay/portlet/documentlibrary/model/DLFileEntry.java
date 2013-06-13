@@ -41,10 +41,6 @@ public interface DLFileEntry extends DLFileEntryModel, PersistedModel {
 
 	public long getDataRepositoryId();
 
-	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge();
-
-	public java.lang.String getExtraSettings();
-
 	public com.liferay.portal.kernel.util.UnicodeProperties getExtraSettingsProperties();
 
 	public java.util.Map<java.lang.String, com.liferay.portlet.dynamicdatamapping.storage.Fields> getFieldsMap(
@@ -89,8 +85,6 @@ public interface DLFileEntry extends DLFileEntryModel, PersistedModel {
 	public boolean isInHiddenFolder();
 
 	public boolean isInTrashContainer();
-
-	public void setExtraSettings(java.lang.String extraSettings);
 
 	public void setExtraSettingsProperties(
 		com.liferay.portal.kernel.util.UnicodeProperties extraSettingsProperties);

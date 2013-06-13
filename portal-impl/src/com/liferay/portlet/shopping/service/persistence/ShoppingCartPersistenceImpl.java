@@ -107,6 +107,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * @return the matching shopping carts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ShoppingCart> findByGroupId(long groupId)
 		throws SystemException {
 		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
@@ -125,6 +126,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * @return the range of matching shopping carts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ShoppingCart> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
 		return findByGroupId(groupId, start, end, null);
@@ -144,6 +146,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * @return the ordered range of matching shopping carts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ShoppingCart> findByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -250,6 +253,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * @throws com.liferay.portlet.shopping.NoSuchCartException if a matching shopping cart could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ShoppingCart findByGroupId_First(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchCartException, SystemException {
@@ -280,6 +284,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * @return the first matching shopping cart, or <code>null</code> if a matching shopping cart could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ShoppingCart fetchByGroupId_First(long groupId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<ShoppingCart> list = findByGroupId(groupId, 0, 1, orderByComparator);
@@ -300,6 +305,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * @throws com.liferay.portlet.shopping.NoSuchCartException if a matching shopping cart could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ShoppingCart findByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchCartException, SystemException {
@@ -330,6 +336,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * @return the last matching shopping cart, or <code>null</code> if a matching shopping cart could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ShoppingCart fetchByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByGroupId(groupId);
@@ -354,6 +361,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * @throws com.liferay.portlet.shopping.NoSuchCartException if a shopping cart with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ShoppingCart[] findByGroupId_PrevAndNext(long cartId, long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchCartException, SystemException {
@@ -495,6 +503,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * @param groupId the group ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (ShoppingCart shoppingCart : findByGroupId(groupId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -509,6 +518,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * @return the number of matching shopping carts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByGroupId(long groupId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPID;
 
@@ -582,6 +592,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * @return the matching shopping carts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ShoppingCart> findByUserId(long userId)
 		throws SystemException {
 		return findByUserId(userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
@@ -600,6 +611,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * @return the range of matching shopping carts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ShoppingCart> findByUserId(long userId, int start, int end)
 		throws SystemException {
 		return findByUserId(userId, start, end, null);
@@ -619,6 +631,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * @return the ordered range of matching shopping carts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ShoppingCart> findByUserId(long userId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -725,6 +738,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * @throws com.liferay.portlet.shopping.NoSuchCartException if a matching shopping cart could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ShoppingCart findByUserId_First(long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchCartException, SystemException {
@@ -755,6 +769,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * @return the first matching shopping cart, or <code>null</code> if a matching shopping cart could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ShoppingCart fetchByUserId_First(long userId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<ShoppingCart> list = findByUserId(userId, 0, 1, orderByComparator);
@@ -775,6 +790,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * @throws com.liferay.portlet.shopping.NoSuchCartException if a matching shopping cart could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ShoppingCart findByUserId_Last(long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchCartException, SystemException {
@@ -804,6 +820,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * @return the last matching shopping cart, or <code>null</code> if a matching shopping cart could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ShoppingCart fetchByUserId_Last(long userId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByUserId(userId);
@@ -828,6 +845,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * @throws com.liferay.portlet.shopping.NoSuchCartException if a shopping cart with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ShoppingCart[] findByUserId_PrevAndNext(long cartId, long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchCartException, SystemException {
@@ -969,6 +987,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * @param userId the user ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByUserId(long userId) throws SystemException {
 		for (ShoppingCart shoppingCart : findByUserId(userId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -983,6 +1002,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * @return the number of matching shopping carts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUserId(long userId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_USERID;
 
@@ -1049,6 +1069,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * @throws com.liferay.portlet.shopping.NoSuchCartException if a matching shopping cart could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ShoppingCart findByG_U(long groupId, long userId)
 		throws NoSuchCartException, SystemException {
 		ShoppingCart shoppingCart = fetchByG_U(groupId, userId);
@@ -1084,6 +1105,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * @return the matching shopping cart, or <code>null</code> if a matching shopping cart could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ShoppingCart fetchByG_U(long groupId, long userId)
 		throws SystemException {
 		return fetchByG_U(groupId, userId, true);
@@ -1098,6 +1120,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * @return the matching shopping cart, or <code>null</code> if a matching shopping cart could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ShoppingCart fetchByG_U(long groupId, long userId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, userId };
@@ -1189,6 +1212,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * @return the shopping cart that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ShoppingCart removeByG_U(long groupId, long userId)
 		throws NoSuchCartException, SystemException {
 		ShoppingCart shoppingCart = findByG_U(groupId, userId);
@@ -1204,6 +1228,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * @return the number of matching shopping carts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_U(long groupId, long userId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_U;
 
@@ -1261,6 +1286,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 *
 	 * @param shoppingCart the shopping cart
 	 */
+	@Override
 	public void cacheResult(ShoppingCart shoppingCart) {
 		EntityCacheUtil.putResult(ShoppingCartModelImpl.ENTITY_CACHE_ENABLED,
 			ShoppingCartImpl.class, shoppingCart.getPrimaryKey(), shoppingCart);
@@ -1277,6 +1303,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 *
 	 * @param shoppingCarts the shopping carts
 	 */
+	@Override
 	public void cacheResult(List<ShoppingCart> shoppingCarts) {
 		for (ShoppingCart shoppingCart : shoppingCarts) {
 			if (EntityCacheUtil.getResult(
@@ -1397,6 +1424,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * @param cartId the primary key for the new shopping cart
 	 * @return the new shopping cart
 	 */
+	@Override
 	public ShoppingCart create(long cartId) {
 		ShoppingCart shoppingCart = new ShoppingCartImpl();
 
@@ -1414,6 +1442,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * @throws com.liferay.portlet.shopping.NoSuchCartException if a shopping cart with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ShoppingCart remove(long cartId)
 		throws NoSuchCartException, SystemException {
 		return remove((Serializable)cartId);
@@ -1633,6 +1662,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * @throws com.liferay.portlet.shopping.NoSuchCartException if a shopping cart with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ShoppingCart findByPrimaryKey(long cartId)
 		throws NoSuchCartException, SystemException {
 		return findByPrimaryKey((Serializable)cartId);
@@ -1693,6 +1723,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * @return the shopping cart, or <code>null</code> if a shopping cart with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ShoppingCart fetchByPrimaryKey(long cartId)
 		throws SystemException {
 		return fetchByPrimaryKey((Serializable)cartId);
@@ -1704,6 +1735,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * @return the shopping carts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ShoppingCart> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1720,6 +1752,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * @return the range of shopping carts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ShoppingCart> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
@@ -1738,6 +1771,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * @return the ordered range of shopping carts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ShoppingCart> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -1823,6 +1857,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (ShoppingCart shoppingCart : findAll()) {
 			remove(shoppingCart);
@@ -1835,6 +1870,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * @return the number of shopping carts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -1920,6 +1956,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 		};
 
 	private static CacheModel<ShoppingCart> _nullShoppingCartCacheModel = new CacheModel<ShoppingCart>() {
+			@Override
 			public ShoppingCart toEntityModel() {
 				return _nullShoppingCart;
 			}

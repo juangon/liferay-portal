@@ -146,6 +146,7 @@ public class PortletApplicationContext extends XmlWebApplicationContext {
 
 	private static class NoPACL implements PACL {
 
+		@Override
 		public ClassLoader getBeanClassLoader() {
 			ClassLoader beanClassLoader =
 				AggregateClassLoader.getAggregateClassLoader(

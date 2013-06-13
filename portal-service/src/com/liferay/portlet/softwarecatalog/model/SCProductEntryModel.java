@@ -81,6 +81,7 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry>,
 	 *
 	 * @return the group ID of this s c product entry
 	 */
+	@Override
 	public long getGroupId();
 
 	/**
@@ -88,6 +89,7 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry>,
 	 *
 	 * @param groupId the group ID of this s c product entry
 	 */
+	@Override
 	public void setGroupId(long groupId);
 
 	/**
@@ -95,6 +97,7 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry>,
 	 *
 	 * @return the company ID of this s c product entry
 	 */
+	@Override
 	public long getCompanyId();
 
 	/**
@@ -102,6 +105,7 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry>,
 	 *
 	 * @param companyId the company ID of this s c product entry
 	 */
+	@Override
 	public void setCompanyId(long companyId);
 
 	/**
@@ -109,6 +113,7 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry>,
 	 *
 	 * @return the user ID of this s c product entry
 	 */
+	@Override
 	public long getUserId();
 
 	/**
@@ -116,6 +121,7 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry>,
 	 *
 	 * @param userId the user ID of this s c product entry
 	 */
+	@Override
 	public void setUserId(long userId);
 
 	/**
@@ -124,6 +130,7 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry>,
 	 * @return the user uuid of this s c product entry
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public String getUserUuid() throws SystemException;
 
 	/**
@@ -131,6 +138,7 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry>,
 	 *
 	 * @param userUuid the user uuid of this s c product entry
 	 */
+	@Override
 	public void setUserUuid(String userUuid);
 
 	/**
@@ -139,6 +147,7 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry>,
 	 * @return the user name of this s c product entry
 	 */
 	@AutoEscape
+	@Override
 	public String getUserName();
 
 	/**
@@ -146,6 +155,7 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry>,
 	 *
 	 * @param userName the user name of this s c product entry
 	 */
+	@Override
 	public void setUserName(String userName);
 
 	/**
@@ -153,6 +163,7 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry>,
 	 *
 	 * @return the create date of this s c product entry
 	 */
+	@Override
 	public Date getCreateDate();
 
 	/**
@@ -160,6 +171,7 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry>,
 	 *
 	 * @param createDate the create date of this s c product entry
 	 */
+	@Override
 	public void setCreateDate(Date createDate);
 
 	/**
@@ -167,6 +179,7 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry>,
 	 *
 	 * @return the modified date of this s c product entry
 	 */
+	@Override
 	public Date getModifiedDate();
 
 	/**
@@ -174,6 +187,7 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry>,
 	 *
 	 * @param modifiedDate the modified date of this s c product entry
 	 */
+	@Override
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
@@ -311,41 +325,60 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry>,
 	 */
 	public void setRepoArtifactId(String repoArtifactId);
 
+	@Override
 	public boolean isNew();
 
+	@Override
 	public void setNew(boolean n);
 
+	@Override
 	public boolean isCachedModel();
 
+	@Override
 	public void setCachedModel(boolean cachedModel);
 
+	@Override
 	public boolean isEscapedModel();
 
+	@Override
 	public Serializable getPrimaryKeyObj();
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
+	@Override
 	public ExpandoBridge getExpandoBridge();
 
+	@Override
 	public void setExpandoBridgeAttributes(BaseModel<?> baseModel);
 
+	@Override
 	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge);
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext);
 
+	@Override
 	public Object clone();
 
+	@Override
 	public int compareTo(SCProductEntry scProductEntry);
 
+	@Override
 	public int hashCode();
 
+	@Override
 	public CacheModel<SCProductEntry> toCacheModel();
 
+	@Override
 	public SCProductEntry toEscapedModel();
 
+	@Override
 	public SCProductEntry toUnescapedModel();
 
+	@Override
 	public String toString();
 
+	@Override
 	public String toXmlString();
 }

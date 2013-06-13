@@ -23,8 +23,8 @@ import java.util.Map;
  * This class is a wrapper for {@link PasswordPolicy}.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       PasswordPolicy
+ * @author Brian Wing Shun Chan
+ * @see PasswordPolicy
  * @generated
  */
 public class PasswordPolicyWrapper implements PasswordPolicy,
@@ -33,14 +33,17 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 		_passwordPolicy = passwordPolicy;
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return PasswordPolicy.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return PasswordPolicy.class.getName();
 	}
 
+	@Override
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
@@ -82,6 +85,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 		return attributes;
 	}
 
+	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 		String uuid = (String)attributes.get("uuid");
 
@@ -294,6 +298,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return the primary key of this password policy
 	*/
+	@Override
 	public long getPrimaryKey() {
 		return _passwordPolicy.getPrimaryKey();
 	}
@@ -303,6 +308,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @param primaryKey the primary key of this password policy
 	*/
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_passwordPolicy.setPrimaryKey(primaryKey);
 	}
@@ -312,6 +318,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return the uuid of this password policy
 	*/
+	@Override
 	public java.lang.String getUuid() {
 		return _passwordPolicy.getUuid();
 	}
@@ -321,6 +328,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @param uuid the uuid of this password policy
 	*/
+	@Override
 	public void setUuid(java.lang.String uuid) {
 		_passwordPolicy.setUuid(uuid);
 	}
@@ -330,6 +338,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return the password policy ID of this password policy
 	*/
+	@Override
 	public long getPasswordPolicyId() {
 		return _passwordPolicy.getPasswordPolicyId();
 	}
@@ -339,6 +348,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @param passwordPolicyId the password policy ID of this password policy
 	*/
+	@Override
 	public void setPasswordPolicyId(long passwordPolicyId) {
 		_passwordPolicy.setPasswordPolicyId(passwordPolicyId);
 	}
@@ -348,6 +358,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return the company ID of this password policy
 	*/
+	@Override
 	public long getCompanyId() {
 		return _passwordPolicy.getCompanyId();
 	}
@@ -357,6 +368,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @param companyId the company ID of this password policy
 	*/
+	@Override
 	public void setCompanyId(long companyId) {
 		_passwordPolicy.setCompanyId(companyId);
 	}
@@ -366,6 +378,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return the user ID of this password policy
 	*/
+	@Override
 	public long getUserId() {
 		return _passwordPolicy.getUserId();
 	}
@@ -375,6 +388,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @param userId the user ID of this password policy
 	*/
+	@Override
 	public void setUserId(long userId) {
 		_passwordPolicy.setUserId(userId);
 	}
@@ -385,6 +399,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	* @return the user uuid of this password policy
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public java.lang.String getUserUuid()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _passwordPolicy.getUserUuid();
@@ -395,6 +410,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @param userUuid the user uuid of this password policy
 	*/
+	@Override
 	public void setUserUuid(java.lang.String userUuid) {
 		_passwordPolicy.setUserUuid(userUuid);
 	}
@@ -404,6 +420,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return the user name of this password policy
 	*/
+	@Override
 	public java.lang.String getUserName() {
 		return _passwordPolicy.getUserName();
 	}
@@ -413,6 +430,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @param userName the user name of this password policy
 	*/
+	@Override
 	public void setUserName(java.lang.String userName) {
 		_passwordPolicy.setUserName(userName);
 	}
@@ -422,6 +440,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return the create date of this password policy
 	*/
+	@Override
 	public java.util.Date getCreateDate() {
 		return _passwordPolicy.getCreateDate();
 	}
@@ -431,6 +450,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @param createDate the create date of this password policy
 	*/
+	@Override
 	public void setCreateDate(java.util.Date createDate) {
 		_passwordPolicy.setCreateDate(createDate);
 	}
@@ -440,6 +460,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return the modified date of this password policy
 	*/
+	@Override
 	public java.util.Date getModifiedDate() {
 		return _passwordPolicy.getModifiedDate();
 	}
@@ -449,6 +470,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @param modifiedDate the modified date of this password policy
 	*/
+	@Override
 	public void setModifiedDate(java.util.Date modifiedDate) {
 		_passwordPolicy.setModifiedDate(modifiedDate);
 	}
@@ -458,6 +480,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return the default policy of this password policy
 	*/
+	@Override
 	public boolean getDefaultPolicy() {
 		return _passwordPolicy.getDefaultPolicy();
 	}
@@ -467,6 +490,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return <code>true</code> if this password policy is default policy; <code>false</code> otherwise
 	*/
+	@Override
 	public boolean isDefaultPolicy() {
 		return _passwordPolicy.isDefaultPolicy();
 	}
@@ -476,6 +500,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @param defaultPolicy the default policy of this password policy
 	*/
+	@Override
 	public void setDefaultPolicy(boolean defaultPolicy) {
 		_passwordPolicy.setDefaultPolicy(defaultPolicy);
 	}
@@ -485,6 +510,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return the name of this password policy
 	*/
+	@Override
 	public java.lang.String getName() {
 		return _passwordPolicy.getName();
 	}
@@ -494,6 +520,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @param name the name of this password policy
 	*/
+	@Override
 	public void setName(java.lang.String name) {
 		_passwordPolicy.setName(name);
 	}
@@ -503,6 +530,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return the description of this password policy
 	*/
+	@Override
 	public java.lang.String getDescription() {
 		return _passwordPolicy.getDescription();
 	}
@@ -512,6 +540,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @param description the description of this password policy
 	*/
+	@Override
 	public void setDescription(java.lang.String description) {
 		_passwordPolicy.setDescription(description);
 	}
@@ -521,6 +550,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return the changeable of this password policy
 	*/
+	@Override
 	public boolean getChangeable() {
 		return _passwordPolicy.getChangeable();
 	}
@@ -530,6 +560,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return <code>true</code> if this password policy is changeable; <code>false</code> otherwise
 	*/
+	@Override
 	public boolean isChangeable() {
 		return _passwordPolicy.isChangeable();
 	}
@@ -539,6 +570,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @param changeable the changeable of this password policy
 	*/
+	@Override
 	public void setChangeable(boolean changeable) {
 		_passwordPolicy.setChangeable(changeable);
 	}
@@ -548,6 +580,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return the change required of this password policy
 	*/
+	@Override
 	public boolean getChangeRequired() {
 		return _passwordPolicy.getChangeRequired();
 	}
@@ -557,6 +590,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return <code>true</code> if this password policy is change required; <code>false</code> otherwise
 	*/
+	@Override
 	public boolean isChangeRequired() {
 		return _passwordPolicy.isChangeRequired();
 	}
@@ -566,6 +600,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @param changeRequired the change required of this password policy
 	*/
+	@Override
 	public void setChangeRequired(boolean changeRequired) {
 		_passwordPolicy.setChangeRequired(changeRequired);
 	}
@@ -575,6 +610,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return the min age of this password policy
 	*/
+	@Override
 	public long getMinAge() {
 		return _passwordPolicy.getMinAge();
 	}
@@ -584,6 +620,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @param minAge the min age of this password policy
 	*/
+	@Override
 	public void setMinAge(long minAge) {
 		_passwordPolicy.setMinAge(minAge);
 	}
@@ -593,6 +630,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return the check syntax of this password policy
 	*/
+	@Override
 	public boolean getCheckSyntax() {
 		return _passwordPolicy.getCheckSyntax();
 	}
@@ -602,6 +640,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return <code>true</code> if this password policy is check syntax; <code>false</code> otherwise
 	*/
+	@Override
 	public boolean isCheckSyntax() {
 		return _passwordPolicy.isCheckSyntax();
 	}
@@ -611,6 +650,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @param checkSyntax the check syntax of this password policy
 	*/
+	@Override
 	public void setCheckSyntax(boolean checkSyntax) {
 		_passwordPolicy.setCheckSyntax(checkSyntax);
 	}
@@ -620,6 +660,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return the allow dictionary words of this password policy
 	*/
+	@Override
 	public boolean getAllowDictionaryWords() {
 		return _passwordPolicy.getAllowDictionaryWords();
 	}
@@ -629,6 +670,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return <code>true</code> if this password policy is allow dictionary words; <code>false</code> otherwise
 	*/
+	@Override
 	public boolean isAllowDictionaryWords() {
 		return _passwordPolicy.isAllowDictionaryWords();
 	}
@@ -638,6 +680,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @param allowDictionaryWords the allow dictionary words of this password policy
 	*/
+	@Override
 	public void setAllowDictionaryWords(boolean allowDictionaryWords) {
 		_passwordPolicy.setAllowDictionaryWords(allowDictionaryWords);
 	}
@@ -647,6 +690,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return the min alphanumeric of this password policy
 	*/
+	@Override
 	public int getMinAlphanumeric() {
 		return _passwordPolicy.getMinAlphanumeric();
 	}
@@ -656,6 +700,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @param minAlphanumeric the min alphanumeric of this password policy
 	*/
+	@Override
 	public void setMinAlphanumeric(int minAlphanumeric) {
 		_passwordPolicy.setMinAlphanumeric(minAlphanumeric);
 	}
@@ -665,6 +710,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return the min length of this password policy
 	*/
+	@Override
 	public int getMinLength() {
 		return _passwordPolicy.getMinLength();
 	}
@@ -674,6 +720,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @param minLength the min length of this password policy
 	*/
+	@Override
 	public void setMinLength(int minLength) {
 		_passwordPolicy.setMinLength(minLength);
 	}
@@ -683,6 +730,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return the min lower case of this password policy
 	*/
+	@Override
 	public int getMinLowerCase() {
 		return _passwordPolicy.getMinLowerCase();
 	}
@@ -692,6 +740,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @param minLowerCase the min lower case of this password policy
 	*/
+	@Override
 	public void setMinLowerCase(int minLowerCase) {
 		_passwordPolicy.setMinLowerCase(minLowerCase);
 	}
@@ -701,6 +750,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return the min numbers of this password policy
 	*/
+	@Override
 	public int getMinNumbers() {
 		return _passwordPolicy.getMinNumbers();
 	}
@@ -710,6 +760,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @param minNumbers the min numbers of this password policy
 	*/
+	@Override
 	public void setMinNumbers(int minNumbers) {
 		_passwordPolicy.setMinNumbers(minNumbers);
 	}
@@ -719,6 +770,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return the min symbols of this password policy
 	*/
+	@Override
 	public int getMinSymbols() {
 		return _passwordPolicy.getMinSymbols();
 	}
@@ -728,6 +780,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @param minSymbols the min symbols of this password policy
 	*/
+	@Override
 	public void setMinSymbols(int minSymbols) {
 		_passwordPolicy.setMinSymbols(minSymbols);
 	}
@@ -737,6 +790,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return the min upper case of this password policy
 	*/
+	@Override
 	public int getMinUpperCase() {
 		return _passwordPolicy.getMinUpperCase();
 	}
@@ -746,6 +800,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @param minUpperCase the min upper case of this password policy
 	*/
+	@Override
 	public void setMinUpperCase(int minUpperCase) {
 		_passwordPolicy.setMinUpperCase(minUpperCase);
 	}
@@ -755,6 +810,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return the regex of this password policy
 	*/
+	@Override
 	public java.lang.String getRegex() {
 		return _passwordPolicy.getRegex();
 	}
@@ -764,6 +820,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @param regex the regex of this password policy
 	*/
+	@Override
 	public void setRegex(java.lang.String regex) {
 		_passwordPolicy.setRegex(regex);
 	}
@@ -773,6 +830,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return the history of this password policy
 	*/
+	@Override
 	public boolean getHistory() {
 		return _passwordPolicy.getHistory();
 	}
@@ -782,6 +840,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return <code>true</code> if this password policy is history; <code>false</code> otherwise
 	*/
+	@Override
 	public boolean isHistory() {
 		return _passwordPolicy.isHistory();
 	}
@@ -791,6 +850,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @param history the history of this password policy
 	*/
+	@Override
 	public void setHistory(boolean history) {
 		_passwordPolicy.setHistory(history);
 	}
@@ -800,6 +860,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return the history count of this password policy
 	*/
+	@Override
 	public int getHistoryCount() {
 		return _passwordPolicy.getHistoryCount();
 	}
@@ -809,6 +870,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @param historyCount the history count of this password policy
 	*/
+	@Override
 	public void setHistoryCount(int historyCount) {
 		_passwordPolicy.setHistoryCount(historyCount);
 	}
@@ -818,6 +880,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return the expireable of this password policy
 	*/
+	@Override
 	public boolean getExpireable() {
 		return _passwordPolicy.getExpireable();
 	}
@@ -827,6 +890,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return <code>true</code> if this password policy is expireable; <code>false</code> otherwise
 	*/
+	@Override
 	public boolean isExpireable() {
 		return _passwordPolicy.isExpireable();
 	}
@@ -836,6 +900,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @param expireable the expireable of this password policy
 	*/
+	@Override
 	public void setExpireable(boolean expireable) {
 		_passwordPolicy.setExpireable(expireable);
 	}
@@ -845,6 +910,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return the max age of this password policy
 	*/
+	@Override
 	public long getMaxAge() {
 		return _passwordPolicy.getMaxAge();
 	}
@@ -854,6 +920,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @param maxAge the max age of this password policy
 	*/
+	@Override
 	public void setMaxAge(long maxAge) {
 		_passwordPolicy.setMaxAge(maxAge);
 	}
@@ -863,6 +930,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return the warning time of this password policy
 	*/
+	@Override
 	public long getWarningTime() {
 		return _passwordPolicy.getWarningTime();
 	}
@@ -872,6 +940,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @param warningTime the warning time of this password policy
 	*/
+	@Override
 	public void setWarningTime(long warningTime) {
 		_passwordPolicy.setWarningTime(warningTime);
 	}
@@ -881,6 +950,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return the grace limit of this password policy
 	*/
+	@Override
 	public int getGraceLimit() {
 		return _passwordPolicy.getGraceLimit();
 	}
@@ -890,6 +960,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @param graceLimit the grace limit of this password policy
 	*/
+	@Override
 	public void setGraceLimit(int graceLimit) {
 		_passwordPolicy.setGraceLimit(graceLimit);
 	}
@@ -899,6 +970,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return the lockout of this password policy
 	*/
+	@Override
 	public boolean getLockout() {
 		return _passwordPolicy.getLockout();
 	}
@@ -908,6 +980,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return <code>true</code> if this password policy is lockout; <code>false</code> otherwise
 	*/
+	@Override
 	public boolean isLockout() {
 		return _passwordPolicy.isLockout();
 	}
@@ -917,6 +990,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @param lockout the lockout of this password policy
 	*/
+	@Override
 	public void setLockout(boolean lockout) {
 		_passwordPolicy.setLockout(lockout);
 	}
@@ -926,6 +1000,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return the max failure of this password policy
 	*/
+	@Override
 	public int getMaxFailure() {
 		return _passwordPolicy.getMaxFailure();
 	}
@@ -935,6 +1010,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @param maxFailure the max failure of this password policy
 	*/
+	@Override
 	public void setMaxFailure(int maxFailure) {
 		_passwordPolicy.setMaxFailure(maxFailure);
 	}
@@ -944,6 +1020,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return the lockout duration of this password policy
 	*/
+	@Override
 	public long getLockoutDuration() {
 		return _passwordPolicy.getLockoutDuration();
 	}
@@ -953,6 +1030,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @param lockoutDuration the lockout duration of this password policy
 	*/
+	@Override
 	public void setLockoutDuration(long lockoutDuration) {
 		_passwordPolicy.setLockoutDuration(lockoutDuration);
 	}
@@ -962,6 +1040,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return the require unlock of this password policy
 	*/
+	@Override
 	public boolean getRequireUnlock() {
 		return _passwordPolicy.getRequireUnlock();
 	}
@@ -971,6 +1050,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return <code>true</code> if this password policy is require unlock; <code>false</code> otherwise
 	*/
+	@Override
 	public boolean isRequireUnlock() {
 		return _passwordPolicy.isRequireUnlock();
 	}
@@ -980,6 +1060,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @param requireUnlock the require unlock of this password policy
 	*/
+	@Override
 	public void setRequireUnlock(boolean requireUnlock) {
 		_passwordPolicy.setRequireUnlock(requireUnlock);
 	}
@@ -989,6 +1070,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return the reset failure count of this password policy
 	*/
+	@Override
 	public long getResetFailureCount() {
 		return _passwordPolicy.getResetFailureCount();
 	}
@@ -998,6 +1080,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @param resetFailureCount the reset failure count of this password policy
 	*/
+	@Override
 	public void setResetFailureCount(long resetFailureCount) {
 		_passwordPolicy.setResetFailureCount(resetFailureCount);
 	}
@@ -1007,6 +1090,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @return the reset ticket max age of this password policy
 	*/
+	@Override
 	public long getResetTicketMaxAge() {
 		return _passwordPolicy.getResetTicketMaxAge();
 	}
@@ -1016,52 +1100,64 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	*
 	* @param resetTicketMaxAge the reset ticket max age of this password policy
 	*/
+	@Override
 	public void setResetTicketMaxAge(long resetTicketMaxAge) {
 		_passwordPolicy.setResetTicketMaxAge(resetTicketMaxAge);
 	}
 
+	@Override
 	public boolean isNew() {
 		return _passwordPolicy.isNew();
 	}
 
+	@Override
 	public void setNew(boolean n) {
 		_passwordPolicy.setNew(n);
 	}
 
+	@Override
 	public boolean isCachedModel() {
 		return _passwordPolicy.isCachedModel();
 	}
 
+	@Override
 	public void setCachedModel(boolean cachedModel) {
 		_passwordPolicy.setCachedModel(cachedModel);
 	}
 
+	@Override
 	public boolean isEscapedModel() {
 		return _passwordPolicy.isEscapedModel();
 	}
 
+	@Override
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _passwordPolicy.getPrimaryKeyObj();
 	}
 
+	@Override
 	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
 		_passwordPolicy.setPrimaryKeyObj(primaryKeyObj);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
 		return _passwordPolicy.getExpandoBridge();
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.model.BaseModel<?> baseModel) {
 		_passwordPolicy.setExpandoBridgeAttributes(baseModel);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portlet.expando.model.ExpandoBridge expandoBridge) {
 		_passwordPolicy.setExpandoBridgeAttributes(expandoBridge);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		_passwordPolicy.setExpandoBridgeAttributes(serviceContext);
@@ -1072,6 +1168,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 		return new PasswordPolicyWrapper((PasswordPolicy)_passwordPolicy.clone());
 	}
 
+	@Override
 	public int compareTo(com.liferay.portal.model.PasswordPolicy passwordPolicy) {
 		return _passwordPolicy.compareTo(passwordPolicy);
 	}
@@ -1081,14 +1178,17 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 		return _passwordPolicy.hashCode();
 	}
 
+	@Override
 	public com.liferay.portal.model.CacheModel<com.liferay.portal.model.PasswordPolicy> toCacheModel() {
 		return _passwordPolicy.toCacheModel();
 	}
 
+	@Override
 	public com.liferay.portal.model.PasswordPolicy toEscapedModel() {
 		return new PasswordPolicyWrapper(_passwordPolicy.toEscapedModel());
 	}
 
+	@Override
 	public com.liferay.portal.model.PasswordPolicy toUnescapedModel() {
 		return new PasswordPolicyWrapper(_passwordPolicy.toUnescapedModel());
 	}
@@ -1098,10 +1198,12 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 		return _passwordPolicy.toString();
 	}
 
+	@Override
 	public java.lang.String toXmlString() {
 		return _passwordPolicy.toXmlString();
 	}
 
+	@Override
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_passwordPolicy.persist();
@@ -1114,10 +1216,12 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 		return _passwordPolicy;
 	}
 
+	@Override
 	public PasswordPolicy getWrappedModel() {
 		return _passwordPolicy;
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		_passwordPolicy.resetOriginalValues();
 	}

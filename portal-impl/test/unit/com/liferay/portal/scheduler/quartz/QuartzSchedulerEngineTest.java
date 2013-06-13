@@ -691,6 +691,7 @@ public class QuartzSchedulerEngineTest {
 
 	public static class TestMessageListener implements MessageListener {
 
+		@Override
 		public void receive(Message message) {
 		}
 
@@ -785,58 +786,71 @@ public class QuartzSchedulerEngineTest {
 				jobKey, new Tuple(jobDetail, trigger, TriggerState.NORMAL));
 		}
 
+		@Override
 		public void addCalendar(
 			String name, Calendar calendar, boolean replace,
 			boolean updateTriggers) {
 		}
 
+		@Override
 		public void addJob(JobDetail jobDetail, boolean replace) {
 			_jobs.put(
 				jobDetail.getKey(),
 				new Tuple(jobDetail, null, TriggerState.UNSCHEDULED));
 		}
 
+		@Override
 		public boolean checkExists(JobKey jobkey) {
 			return false;
 		}
 
+		@Override
 		public boolean checkExists(TriggerKey triggerKey) {
 			return false;
 		}
 
+		@Override
 		public void clear() {
 		}
 
+		@Override
 		public boolean deleteCalendar(String name) {
 			return false;
 		}
 
+		@Override
 		public boolean deleteJob(JobKey jobKey) {
 			_jobs.remove(jobKey);
 
 			return true;
 		}
 
+		@Override
 		public boolean deleteJobs(List<JobKey> jobKeys) {
 			return false;
 		}
 
+		@Override
 		public Calendar getCalendar(String name) {
 			return null;
 		}
 
+		@Override
 		public List<String> getCalendarNames() {
 			return Collections.emptyList();
 		}
 
+		@Override
 		public SchedulerContext getContext() {
 			return null;
 		}
 
+		@Override
 		public List<JobExecutionContext> getCurrentlyExecutingJobs() {
 			return Collections.emptyList();
 		}
 
+		@Override
 		public JobDetail getJobDetail(JobKey jobKey) {
 			Tuple tuple = _jobs.get(jobKey);
 
@@ -847,6 +861,7 @@ public class QuartzSchedulerEngineTest {
 			return (JobDetail)tuple.getObject(0);
 		}
 
+		@Override
 		public List<String> getJobGroupNames() {
 			List<String> groupNames = new ArrayList<String>();
 
@@ -859,13 +874,13 @@ public class QuartzSchedulerEngineTest {
 			return groupNames;
 		}
 
+		@Override
 		public Set<JobKey> getJobKeys(GroupMatcher<JobKey> groupMatcher) {
 			String groupName = groupMatcher.getCompareToValue();
 
 			Set<JobKey> jobKeys = new HashSet<JobKey>();
 
 			for (JobKey jobKey : _jobs.keySet()) {
-
 				if (jobKey.getGroup().equals(groupName)) {
 					jobKeys.add(jobKey);
 				}
@@ -874,26 +889,32 @@ public class QuartzSchedulerEngineTest {
 			return jobKeys;
 		}
 
+		@Override
 		public ListenerManager getListenerManager() {
 			return null;
 		}
 
+		@Override
 		public SchedulerMetaData getMetaData() {
 			return null;
 		}
 
+		@Override
 		public Set<String> getPausedTriggerGroups() {
 			return null;
 		}
 
+		@Override
 		public String getSchedulerInstanceId() {
 			return null;
 		}
 
+		@Override
 		public String getSchedulerName() {
 			return null;
 		}
 
+		@Override
 		public org.quartz.Trigger getTrigger(TriggerKey triggerKey) {
 			Tuple tuple = _jobs.get(
 				new JobKey(triggerKey.getName(), triggerKey.getGroup()));
@@ -905,48 +926,58 @@ public class QuartzSchedulerEngineTest {
 			return (org.quartz.Trigger)tuple.getObject(1);
 		}
 
+		@Override
 		public List<String> getTriggerGroupNames() {
 			return Collections.emptyList();
 		}
 
+		@Override
 		public Set<TriggerKey> getTriggerKeys(
 			GroupMatcher<TriggerKey> groupMatcher) {
 
 			return null;
 		}
 
+		@Override
 		public List<? extends org.quartz.Trigger> getTriggersOfJob(
 			JobKey jobkey) {
 
 			return Collections.emptyList();
 		}
 
+		@Override
 		public org.quartz.Trigger.TriggerState getTriggerState(
 			TriggerKey triggerKey) {
 
 			return null;
 		}
 
+		@Override
 		public boolean interrupt(JobKey jobkey) {
 			return false;
 		}
 
+		@Override
 		public boolean interrupt(String fireInstanceId) {
 			return false;
 		}
 
+		@Override
 		public boolean isInStandbyMode() {
 			return false;
 		}
 
+		@Override
 		public boolean isShutdown() {
 			return _ready == false;
 		}
 
+		@Override
 		public boolean isStarted() {
 			return _ready;
 		}
 
+		@Override
 		public Date rescheduleJob(
 			TriggerKey triggerKey, org.quartz.Trigger trigger) {
 
@@ -966,9 +997,11 @@ public class QuartzSchedulerEngineTest {
 			return null;
 		}
 
+		@Override
 		public void resumeAll() {
 		}
 
+		@Override
 		public void resumeJob(JobKey jobKey) {
 			Tuple tuple = _jobs.get(jobKey);
 
@@ -983,26 +1016,30 @@ public class QuartzSchedulerEngineTest {
 					TriggerState.NORMAL));
 		}
 
+		@Override
 		public void resumeJobs(GroupMatcher<JobKey> groupMatcher) {
 			String groupName = groupMatcher.getCompareToValue();
 
 			for (JobKey jobKey : _jobs.keySet()) {
-
 				if (jobKey.getGroup().equals(groupName)) {
 					resumeJob(jobKey);
 				}
 			}
 		}
 
+		@Override
 		public void resumeTrigger(TriggerKey triggerKey) {
 		}
 
+		@Override
 		public void resumeTriggers(GroupMatcher<TriggerKey> groupMatcher) {
 		}
 
+		@Override
 		public void pauseAll() {
 		}
 
+		@Override
 		public void pauseJob(JobKey jobKey) {
 			Tuple tuple = _jobs.get(jobKey);
 
@@ -1017,23 +1054,26 @@ public class QuartzSchedulerEngineTest {
 					TriggerState.PAUSED));
 		}
 
+		@Override
 		public void pauseJobs(GroupMatcher<JobKey> groupMatcher) {
 			String groupName = groupMatcher.getCompareToValue();
 
 			for (JobKey jobKey : _jobs.keySet()) {
-
 				if (jobKey.getGroup().equals(groupName)) {
 					pauseJob(jobKey);
 				}
 			}
 		}
 
+		@Override
 		public void pauseTrigger(TriggerKey triggerKey) {
 		}
 
+		@Override
 		public void pauseTriggers(GroupMatcher<TriggerKey> groupMatcher) {
 		}
 
+		@Override
 		public Date scheduleJob(
 			JobDetail jobDetail, org.quartz.Trigger trigger) {
 
@@ -1044,41 +1084,52 @@ public class QuartzSchedulerEngineTest {
 			return null;
 		}
 
+		@Override
 		public Date scheduleJob(org.quartz.Trigger trigger) {
 			return null;
 		}
 
+		@Override
 		public void scheduleJobs(
 			Map<JobDetail, List<org.quartz.Trigger>> map, boolean replace) {
 		}
 
+		@Override
 		public void setJobFactory(JobFactory jobFactory) {
 		}
 
+		@Override
 		public void shutdown() {
 			_ready = false;
 		}
 
+		@Override
 		public void shutdown(boolean waitForJobsToComplete) {
 			_ready = false;
 		}
 
+		@Override
 		public void standby() {
 		}
 
+		@Override
 		public void start() {
 			_ready = true;
 		}
 
+		@Override
 		public void startDelayed(int seconds) {
 		}
 
+		@Override
 		public void triggerJob(JobKey jobkey) {
 		}
 
+		@Override
 		public void triggerJob(JobKey jobkey, JobDataMap jobDataMap) {
 		}
 
+		@Override
 		public boolean unscheduleJob(TriggerKey triggerKey) {
 			_jobs.remove(
 				new JobKey(triggerKey.getName(), triggerKey.getGroup()));
@@ -1086,6 +1137,7 @@ public class QuartzSchedulerEngineTest {
 			return true;
 		}
 
+		@Override
 		public boolean unscheduleJobs(List<TriggerKey> list) {
 			return false;
 		}

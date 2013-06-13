@@ -21,16 +21,17 @@ url-encoder-class?, portlet-data-handler-class?,
 staged-model-data-handler-class*, template-handler?,
 portlet-layout-listener-class?, poller-processor-class?,
 pop-message-listener-class?, social-activity-interpreter-class*,
-social-request-interpreter-class?, webdav-storage-token?, webdav-storage-class?,
-xml-rpc-method-class?, control-panel-entry-category?,
-control-panel-entry-weight?, control-panel-entry-class?,
-asset-renderer-factory*, atom-collection-adapter*, custom-attributes-display*,
-permission-propagator?, trash-handler*, workflow-handler*,
-preferences-company-wide?, preferences-unique-per-layout?,
-preferences-owned-by-group?, use-default-template?, show-portlet-access-denied?,
-show-portlet-inactive?, action-url-redirect?, restore-current-view?,
-maximize-edit?, maximize-help?, pop-up-print?, layout-cacheable?, instanceable?,
-remoteable?, scopeable?, user-principal-strategy?, private-request-attributes?,
+social-request-interpreter-class?, user-notification-interpreter-class*,
+webdav-storage-token?, webdav-storage-class?, xml-rpc-method-class?,
+control-panel-entry-category?, control-panel-entry-weight?,
+control-panel-entry-class?, asset-renderer-factory*, atom-collection-adapter*,
+custom-attributes-display*, ddm-display?, permission-propagator?,
+trash-handler*, workflow-handler*, preferences-company-wide?,
+preferences-unique-per-layout?, preferences-owned-by-group?,
+use-default-template?, show-portlet-access-denied?, show-portlet-inactive?,
+action-url-redirect?, restore-current-view?, maximize-edit?, maximize-help?,
+pop-up-print?, layout-cacheable?, instanceable?, remoteable?, scopeable?,
+user-principal-strategy?, private-request-attributes?,
 private-session-attributes?, autopropagated-parameters?, action-timeout?,
 render-timeout?, render-weight?, ajaxable?, header-portal-css*,
 header-portlet-css*, header-portal-javascript*, header-portlet-javascript*,
@@ -313,6 +314,18 @@ http://docs.liferay.com/portal/6.2/javadocs/portal-service/com/liferay/portlet/s
 <!ELEMENT social-request-interpreter-class (#PCDATA)>
 
 <!--
+The user-notification-interpreter-class value must be a class that implements
+com.liferay.portal.kernel.notifications.UserNotificationInterpreter and is
+called to interpret requests into friendly messages that are easily
+understandable by a human being.
+
+See:
+
+http://docs.liferay.com/portal/6.2/javadocs/portal-service/com/liferay/portal/kernel/notifications/UserNotificationInterpreter.html
+-->
+<!ELEMENT user-notification-interpreter-class (#PCDATA)>
+
+<!--
 The webdav-storage-token value is the WebDAV directory name for data managed by
 this portlet.
 
@@ -345,9 +358,15 @@ http://docs.liferay.com/portal/6.2/javadocs/portal-impl/com/liferay/portlet/blog
 <!ELEMENT xml-rpc-method-class (#PCDATA)>
 
 <!--
-Set the control-panel-entry-category value to "my", "content", "portal" or
-"server" to make this portlet available in the Control Panel under that
-category.
+Set the control-panel-entry-category value to "my" to make this portlet
+available within the My Account administration of the user. Set the value to
+"apps", "configuration", "sites", or "users" to make it available in the Control
+Panel under that category. Set the value to "site_administration.configuration",
+"site_administration.content", or "site_administration.main" to make it
+available in the Site Administration under that category. Legacy values from
+previous versions of Liferay will be automatically mapped to the new values:
+"content" to "site_administration.content", "portal" to "users", and "server" to
+"apps".
 -->
 <!ELEMENT control-panel-entry-category (#PCDATA)>
 
@@ -397,6 +416,13 @@ See:
 http://docs.liferay.com/portal/6.2/javadocs/portal-service/com/liferay/portlet/expando/model/CustomAttributesDisplay.html
 -->
 <!ELEMENT custom-attributes-display (#PCDATA)>
+
+<!--
+The ddm-display value must be a class that implements
+com.liferay.portlet.dynamicdatamapping.util.DDMDisplay and is called when
+displaying the portlet.
+-->
+<!ELEMENT ddm-display (#PCDATA)>
 
 <!--
 The permission-propagator value must be a class that implements

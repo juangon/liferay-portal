@@ -40,12 +40,21 @@ public class ProcessingInstructionImpl
 
 	@Override
 	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ProcessingInstructionImpl)) {
+			return false;
+		}
+
 		org.dom4j.ProcessingInstruction processingInstruction =
 			((ProcessingInstructionImpl)obj).getWrappedProcessingInstruction();
 
 		return _processingInstruction.equals(processingInstruction);
 	}
 
+	@Override
 	public String getTarget() {
 		return _processingInstruction.getTarget();
 	}
@@ -55,10 +64,12 @@ public class ProcessingInstructionImpl
 		return _processingInstruction.getText();
 	}
 
+	@Override
 	public String getValue(String name) {
 		return _processingInstruction.getValue(name);
 	}
 
+	@Override
 	public Map<String, String> getValues() {
 		return _processingInstruction.getValues();
 	}
@@ -72,18 +83,22 @@ public class ProcessingInstructionImpl
 		return _processingInstruction.hashCode();
 	}
 
+	@Override
 	public boolean removeValue(String name) {
 		return _processingInstruction.removeValue(name);
 	}
 
+	@Override
 	public void setTarget(String target) {
 		_processingInstruction.setTarget(target);
 	}
 
+	@Override
 	public void setValue(String name, String value) {
 		_processingInstruction.setValue(name, value);
 	}
 
+	@Override
 	public void setValues(Map<String, String> data) {
 		_processingInstruction.setValues(data);
 	}

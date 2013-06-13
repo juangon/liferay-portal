@@ -36,6 +36,7 @@ public abstract class RoleBaseImpl extends RoleModelImpl implements Role {
 	 *
 	 * Never modify or reference this class directly. All methods that expect a role model instance should use the {@link Role} interface instead.
 	 */
+	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
 			RoleLocalServiceUtil.addRole(this);

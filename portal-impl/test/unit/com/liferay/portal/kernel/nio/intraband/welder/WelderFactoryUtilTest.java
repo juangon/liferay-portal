@@ -164,10 +164,12 @@ public class WelderFactoryUtilTest {
 
 	protected static class MockWelder implements Welder {
 
+		@Override
 		public void destroy() {
 		}
 
-		public RegistrationReference weld(Intraband intraBand) {
+		@Override
+		public RegistrationReference weld(Intraband intraband) {
 			return null;
 		}
 
@@ -175,10 +177,12 @@ public class WelderFactoryUtilTest {
 
 	private static class PrivateMockWelder implements Welder {
 
+		@Override
 		public void destroy() {
 		}
 
-		public RegistrationReference weld(Intraband intraBand) {
+		@Override
+		public RegistrationReference weld(Intraband intraband) {
 			return null;
 		}
 

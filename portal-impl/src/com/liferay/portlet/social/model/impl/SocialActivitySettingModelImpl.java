@@ -146,26 +146,32 @@ public class SocialActivitySettingModelImpl extends BaseModelImpl<SocialActivity
 	public SocialActivitySettingModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _activitySettingId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setActivitySettingId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _activitySettingId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return SocialActivitySetting.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return SocialActivitySetting.class.getName();
 	}
@@ -230,20 +236,24 @@ public class SocialActivitySettingModelImpl extends BaseModelImpl<SocialActivity
 		}
 	}
 
+	@Override
 	@JSON
 	public long getActivitySettingId() {
 		return _activitySettingId;
 	}
 
+	@Override
 	public void setActivitySettingId(long activitySettingId) {
 		_activitySettingId = activitySettingId;
 	}
 
+	@Override
 	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -260,15 +270,18 @@ public class SocialActivitySettingModelImpl extends BaseModelImpl<SocialActivity
 		return _originalGroupId;
 	}
 
+	@Override
 	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
+	@Override
 	public String getClassName() {
 		if (getClassNameId() <= 0) {
 			return StringPool.BLANK;
@@ -277,6 +290,7 @@ public class SocialActivitySettingModelImpl extends BaseModelImpl<SocialActivity
 		return PortalUtil.getClassName(getClassNameId());
 	}
 
+	@Override
 	public void setClassName(String className) {
 		long classNameId = 0;
 
@@ -287,11 +301,13 @@ public class SocialActivitySettingModelImpl extends BaseModelImpl<SocialActivity
 		setClassNameId(classNameId);
 	}
 
+	@Override
 	@JSON
 	public long getClassNameId() {
 		return _classNameId;
 	}
 
+	@Override
 	public void setClassNameId(long classNameId) {
 		_columnBitmask |= CLASSNAMEID_COLUMN_BITMASK;
 
@@ -308,11 +324,13 @@ public class SocialActivitySettingModelImpl extends BaseModelImpl<SocialActivity
 		return _originalClassNameId;
 	}
 
+	@Override
 	@JSON
 	public int getActivityType() {
 		return _activityType;
 	}
 
+	@Override
 	public void setActivityType(int activityType) {
 		_columnBitmask |= ACTIVITYTYPE_COLUMN_BITMASK;
 
@@ -329,6 +347,7 @@ public class SocialActivitySettingModelImpl extends BaseModelImpl<SocialActivity
 		return _originalActivityType;
 	}
 
+	@Override
 	@JSON
 	public String getName() {
 		if (_name == null) {
@@ -339,6 +358,7 @@ public class SocialActivitySettingModelImpl extends BaseModelImpl<SocialActivity
 		}
 	}
 
+	@Override
 	public void setName(String name) {
 		_columnBitmask |= NAME_COLUMN_BITMASK;
 
@@ -353,6 +373,7 @@ public class SocialActivitySettingModelImpl extends BaseModelImpl<SocialActivity
 		return GetterUtil.getString(_originalName);
 	}
 
+	@Override
 	@JSON
 	public String getValue() {
 		if (_value == null) {
@@ -363,6 +384,7 @@ public class SocialActivitySettingModelImpl extends BaseModelImpl<SocialActivity
 		}
 	}
 
+	@Override
 	public void setValue(String value) {
 		_value = value;
 	}
@@ -411,6 +433,7 @@ public class SocialActivitySettingModelImpl extends BaseModelImpl<SocialActivity
 		return socialActivitySettingImpl;
 	}
 
+	@Override
 	public int compareTo(SocialActivitySetting socialActivitySetting) {
 		long primaryKey = socialActivitySetting.getPrimaryKey();
 
@@ -427,18 +450,15 @@ public class SocialActivitySettingModelImpl extends BaseModelImpl<SocialActivity
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof SocialActivitySetting)) {
 			return false;
 		}
 
-		SocialActivitySetting socialActivitySetting = null;
-
-		try {
-			socialActivitySetting = (SocialActivitySetting)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		SocialActivitySetting socialActivitySetting = (SocialActivitySetting)obj;
 
 		long primaryKey = socialActivitySetting.getPrimaryKey();
 
@@ -532,6 +552,7 @@ public class SocialActivitySettingModelImpl extends BaseModelImpl<SocialActivity
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(25);
 

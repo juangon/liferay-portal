@@ -56,10 +56,12 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 		_jsonWebServiceActionParameters = jsonWebServiceActionParameters;
 	}
 
+	@Override
 	public JSONWebServiceActionMapping getJSONWebServiceActionMapping() {
 		return _jsonWebServiceActionConfig;
 	}
 
+	@Override
 	public Object invoke() throws Exception {
 		JSONRPCRequest jsonRPCRequest =
 			_jsonWebServiceActionParameters.getJSONRPCRequest();
@@ -192,7 +194,6 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 				stringValue = stringValue.trim();
 
 				if (!stringValue.startsWith(StringPool.OPEN_CURLY_BRACE)) {
-
 					throw cce;
 				}
 

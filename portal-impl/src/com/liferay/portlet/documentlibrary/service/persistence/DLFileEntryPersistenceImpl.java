@@ -115,6 +115,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByUuid(String uuid) throws SystemException {
 		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -132,6 +133,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the range of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByUuid(String uuid, int start, int end)
 		throws SystemException {
 		return findByUuid(uuid, start, end, null);
@@ -151,6 +153,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the ordered range of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByUuid(String uuid, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -271,6 +274,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry findByUuid_First(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileEntryException, SystemException {
@@ -300,6 +304,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the first matching document library file entry, or <code>null</code> if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry fetchByUuid_First(String uuid,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<DLFileEntry> list = findByUuid(uuid, 0, 1, orderByComparator);
@@ -320,6 +325,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry findByUuid_Last(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileEntryException, SystemException {
@@ -349,6 +355,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the last matching document library file entry, or <code>null</code> if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry fetchByUuid_Last(String uuid,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByUuid(uuid);
@@ -373,6 +380,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a document library file entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry[] findByUuid_PrevAndNext(long fileEntryId, String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileEntryException, SystemException {
@@ -528,6 +536,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @param uuid the uuid
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByUuid(String uuid) throws SystemException {
 		for (DLFileEntry dlFileEntry : findByUuid(uuid, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null)) {
@@ -542,6 +551,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the number of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUuid(String uuid) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID;
 
@@ -624,6 +634,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry findByUUID_G(String uuid, long groupId)
 		throws NoSuchFileEntryException, SystemException {
 		DLFileEntry dlFileEntry = fetchByUUID_G(uuid, groupId);
@@ -659,6 +670,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the matching document library file entry, or <code>null</code> if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		return fetchByUUID_G(uuid, groupId, true);
@@ -673,6 +685,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the matching document library file entry, or <code>null</code> if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry fetchByUUID_G(String uuid, long groupId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, groupId };
@@ -779,6 +792,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the document library file entry that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry removeByUUID_G(String uuid, long groupId)
 		throws NoSuchFileEntryException, SystemException {
 		DLFileEntry dlFileEntry = findByUUID_G(uuid, groupId);
@@ -794,6 +808,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the number of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID_G;
@@ -893,6 +908,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		return findByUuid_C(uuid, companyId, QueryUtil.ALL_POS,
@@ -913,6 +929,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the range of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByUuid_C(String uuid, long companyId,
 		int start, int end) throws SystemException {
 		return findByUuid_C(uuid, companyId, start, end, null);
@@ -933,6 +950,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the ordered range of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByUuid_C(String uuid, long companyId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1064,6 +1082,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry findByUuid_C_First(String uuid, long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileEntryException, SystemException {
@@ -1098,6 +1117,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the first matching document library file entry, or <code>null</code> if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry fetchByUuid_C_First(String uuid, long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<DLFileEntry> list = findByUuid_C(uuid, companyId, 0, 1,
@@ -1120,6 +1140,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry findByUuid_C_Last(String uuid, long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileEntryException, SystemException {
@@ -1154,6 +1175,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the last matching document library file entry, or <code>null</code> if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry fetchByUuid_C_Last(String uuid, long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByUuid_C(uuid, companyId);
@@ -1179,6 +1201,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a document library file entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry[] findByUuid_C_PrevAndNext(long fileEntryId,
 		String uuid, long companyId, OrderByComparator orderByComparator)
 		throws NoSuchFileEntryException, SystemException {
@@ -1339,6 +1362,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @param companyId the company ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		for (DLFileEntry dlFileEntry : findByUuid_C(uuid, companyId,
@@ -1355,6 +1379,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the number of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID_C;
@@ -1452,6 +1477,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByGroupId(long groupId)
 		throws SystemException {
 		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
@@ -1470,6 +1496,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the range of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
 		return findByGroupId(groupId, start, end, null);
@@ -1489,6 +1516,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the ordered range of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -1595,6 +1623,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry findByGroupId_First(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileEntryException, SystemException {
@@ -1625,6 +1654,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the first matching document library file entry, or <code>null</code> if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry fetchByGroupId_First(long groupId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<DLFileEntry> list = findByGroupId(groupId, 0, 1, orderByComparator);
@@ -1645,6 +1675,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry findByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileEntryException, SystemException {
@@ -1674,6 +1705,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the last matching document library file entry, or <code>null</code> if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry fetchByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByGroupId(groupId);
@@ -1698,6 +1730,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a document library file entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry[] findByGroupId_PrevAndNext(long fileEntryId,
 		long groupId, OrderByComparator orderByComparator)
 		throws NoSuchFileEntryException, SystemException {
@@ -1840,6 +1873,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the matching document library file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> filterFindByGroupId(long groupId)
 		throws SystemException {
 		return filterFindByGroupId(groupId, QueryUtil.ALL_POS,
@@ -1859,6 +1893,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the range of matching document library file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> filterFindByGroupId(long groupId, int start,
 		int end) throws SystemException {
 		return filterFindByGroupId(groupId, start, end, null);
@@ -1878,6 +1913,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the ordered range of matching document library file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> filterFindByGroupId(long groupId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -1968,6 +2004,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a document library file entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry[] filterFindByGroupId_PrevAndNext(long fileEntryId,
 		long groupId, OrderByComparator orderByComparator)
 		throws NoSuchFileEntryException, SystemException {
@@ -2149,6 +2186,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @param groupId the group ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (DLFileEntry dlFileEntry : findByGroupId(groupId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -2163,6 +2201,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the number of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByGroupId(long groupId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPID;
 
@@ -2215,6 +2254,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the number of matching document library file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByGroupId(long groupId) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return countByGroupId(groupId);
@@ -2287,6 +2327,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByCompanyId(long companyId)
 		throws SystemException {
 		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -2306,6 +2347,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the range of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByCompanyId(long companyId, int start, int end)
 		throws SystemException {
 		return findByCompanyId(companyId, start, end, null);
@@ -2325,6 +2367,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the ordered range of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -2431,6 +2474,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry findByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileEntryException, SystemException {
@@ -2461,6 +2505,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the first matching document library file entry, or <code>null</code> if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry fetchByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<DLFileEntry> list = findByCompanyId(companyId, 0, 1,
@@ -2482,6 +2527,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry findByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileEntryException, SystemException {
@@ -2512,6 +2558,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the last matching document library file entry, or <code>null</code> if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry fetchByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByCompanyId(companyId);
@@ -2536,6 +2583,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a document library file entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry[] findByCompanyId_PrevAndNext(long fileEntryId,
 		long companyId, OrderByComparator orderByComparator)
 		throws NoSuchFileEntryException, SystemException {
@@ -2677,6 +2725,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @param companyId the company ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (DLFileEntry dlFileEntry : findByCompanyId(companyId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -2691,6 +2740,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the number of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByCompanyId(long companyId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMPANYID;
 
@@ -2766,6 +2816,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByMimeType(String mimeType)
 		throws SystemException {
 		return findByMimeType(mimeType, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -2785,6 +2836,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the range of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByMimeType(String mimeType, int start, int end)
 		throws SystemException {
 		return findByMimeType(mimeType, start, end, null);
@@ -2804,6 +2856,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the ordered range of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByMimeType(String mimeType, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -2924,6 +2977,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry findByMimeType_First(String mimeType,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileEntryException, SystemException {
@@ -2954,6 +3008,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the first matching document library file entry, or <code>null</code> if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry fetchByMimeType_First(String mimeType,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<DLFileEntry> list = findByMimeType(mimeType, 0, 1,
@@ -2975,6 +3030,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry findByMimeType_Last(String mimeType,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileEntryException, SystemException {
@@ -3005,6 +3061,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the last matching document library file entry, or <code>null</code> if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry fetchByMimeType_Last(String mimeType,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByMimeType(mimeType);
@@ -3029,6 +3086,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a document library file entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry[] findByMimeType_PrevAndNext(long fileEntryId,
 		String mimeType, OrderByComparator orderByComparator)
 		throws NoSuchFileEntryException, SystemException {
@@ -3184,6 +3242,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @param mimeType the mime type
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByMimeType(String mimeType) throws SystemException {
 		for (DLFileEntry dlFileEntry : findByMimeType(mimeType,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -3198,6 +3257,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the number of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByMimeType(String mimeType) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_MIMETYPE;
 
@@ -3288,6 +3348,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByF_N(long folderId, String name)
 		throws SystemException {
 		return findByF_N(folderId, name, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -3308,6 +3369,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the range of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByF_N(long folderId, String name, int start,
 		int end) throws SystemException {
 		return findByF_N(folderId, name, start, end, null);
@@ -3328,6 +3390,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the ordered range of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByF_N(long folderId, String name, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -3458,6 +3521,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry findByF_N_First(long folderId, String name,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileEntryException, SystemException {
@@ -3492,6 +3556,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the first matching document library file entry, or <code>null</code> if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry fetchByF_N_First(long folderId, String name,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<DLFileEntry> list = findByF_N(folderId, name, 0, 1,
@@ -3514,6 +3579,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry findByF_N_Last(long folderId, String name,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileEntryException, SystemException {
@@ -3548,6 +3614,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the last matching document library file entry, or <code>null</code> if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry fetchByF_N_Last(long folderId, String name,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByF_N(folderId, name);
@@ -3573,6 +3640,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a document library file entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry[] findByF_N_PrevAndNext(long fileEntryId, long folderId,
 		String name, OrderByComparator orderByComparator)
 		throws NoSuchFileEntryException, SystemException {
@@ -3733,6 +3801,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @param name the name
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByF_N(long folderId, String name)
 		throws SystemException {
 		for (DLFileEntry dlFileEntry : findByF_N(folderId, name,
@@ -3749,6 +3818,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the number of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByF_N(long folderId, String name) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_F_N;
 
@@ -3846,6 +3916,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByG_U(long groupId, long userId)
 		throws SystemException {
 		return findByG_U(groupId, userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -3866,6 +3937,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the range of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByG_U(long groupId, long userId, int start,
 		int end) throws SystemException {
 		return findByG_U(groupId, userId, start, end, null);
@@ -3886,6 +3958,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the ordered range of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByG_U(long groupId, long userId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -4002,6 +4075,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry findByG_U_First(long groupId, long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileEntryException, SystemException {
@@ -4036,6 +4110,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the first matching document library file entry, or <code>null</code> if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry fetchByG_U_First(long groupId, long userId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<DLFileEntry> list = findByG_U(groupId, userId, 0, 1,
@@ -4058,6 +4133,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry findByG_U_Last(long groupId, long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileEntryException, SystemException {
@@ -4092,6 +4168,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the last matching document library file entry, or <code>null</code> if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry fetchByG_U_Last(long groupId, long userId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByG_U(groupId, userId);
@@ -4117,6 +4194,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a document library file entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry[] findByG_U_PrevAndNext(long fileEntryId, long groupId,
 		long userId, OrderByComparator orderByComparator)
 		throws NoSuchFileEntryException, SystemException {
@@ -4264,6 +4342,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the matching document library file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> filterFindByG_U(long groupId, long userId)
 		throws SystemException {
 		return filterFindByG_U(groupId, userId, QueryUtil.ALL_POS,
@@ -4284,6 +4363,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the range of matching document library file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> filterFindByG_U(long groupId, long userId,
 		int start, int end) throws SystemException {
 		return filterFindByG_U(groupId, userId, start, end, null);
@@ -4304,6 +4384,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the ordered range of matching document library file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> filterFindByG_U(long groupId, long userId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -4400,6 +4481,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a document library file entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry[] filterFindByG_U_PrevAndNext(long fileEntryId,
 		long groupId, long userId, OrderByComparator orderByComparator)
 		throws NoSuchFileEntryException, SystemException {
@@ -4586,6 +4668,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @param userId the user ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByG_U(long groupId, long userId)
 		throws SystemException {
 		for (DLFileEntry dlFileEntry : findByG_U(groupId, userId,
@@ -4602,6 +4685,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the number of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_U(long groupId, long userId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_U;
 
@@ -4659,6 +4743,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the number of matching document library file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByG_U(long groupId, long userId)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -4740,6 +4825,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByG_F(long groupId, long folderId)
 		throws SystemException {
 		return findByG_F(groupId, folderId, QueryUtil.ALL_POS,
@@ -4760,6 +4846,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the range of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByG_F(long groupId, long folderId, int start,
 		int end) throws SystemException {
 		return findByG_F(groupId, folderId, start, end, null);
@@ -4780,6 +4867,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the ordered range of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByG_F(long groupId, long folderId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -4896,6 +4984,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry findByG_F_First(long groupId, long folderId,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileEntryException, SystemException {
@@ -4930,6 +5019,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the first matching document library file entry, or <code>null</code> if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry fetchByG_F_First(long groupId, long folderId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<DLFileEntry> list = findByG_F(groupId, folderId, 0, 1,
@@ -4952,6 +5042,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry findByG_F_Last(long groupId, long folderId,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileEntryException, SystemException {
@@ -4986,6 +5077,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the last matching document library file entry, or <code>null</code> if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry fetchByG_F_Last(long groupId, long folderId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByG_F(groupId, folderId);
@@ -5011,6 +5103,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a document library file entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry[] findByG_F_PrevAndNext(long fileEntryId, long groupId,
 		long folderId, OrderByComparator orderByComparator)
 		throws NoSuchFileEntryException, SystemException {
@@ -5158,6 +5251,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the matching document library file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> filterFindByG_F(long groupId, long folderId)
 		throws SystemException {
 		return filterFindByG_F(groupId, folderId, QueryUtil.ALL_POS,
@@ -5178,6 +5272,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the range of matching document library file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> filterFindByG_F(long groupId, long folderId,
 		int start, int end) throws SystemException {
 		return filterFindByG_F(groupId, folderId, start, end, null);
@@ -5198,6 +5293,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the ordered range of matching document library file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> filterFindByG_F(long groupId, long folderId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -5294,6 +5390,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a document library file entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry[] filterFindByG_F_PrevAndNext(long fileEntryId,
 		long groupId, long folderId, OrderByComparator orderByComparator)
 		throws NoSuchFileEntryException, SystemException {
@@ -5481,6 +5578,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the matching document library file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> filterFindByG_F(long groupId, long[] folderIds)
 		throws SystemException {
 		return filterFindByG_F(groupId, folderIds, QueryUtil.ALL_POS,
@@ -5501,6 +5599,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the range of matching document library file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> filterFindByG_F(long groupId, long[] folderIds,
 		int start, int end) throws SystemException {
 		return filterFindByG_F(groupId, folderIds, start, end, null);
@@ -5521,6 +5620,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the ordered range of matching document library file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> filterFindByG_F(long groupId, long[] folderIds,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -5638,6 +5738,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByG_F(long groupId, long[] folderIds)
 		throws SystemException {
 		return findByG_F(groupId, folderIds, QueryUtil.ALL_POS,
@@ -5658,6 +5759,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the range of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByG_F(long groupId, long[] folderIds,
 		int start, int end) throws SystemException {
 		return findByG_F(groupId, folderIds, start, end, null);
@@ -5678,6 +5780,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the ordered range of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByG_F(long groupId, long[] folderIds,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -5816,6 +5919,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @param folderId the folder ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByG_F(long groupId, long folderId)
 		throws SystemException {
 		for (DLFileEntry dlFileEntry : findByG_F(groupId, folderId,
@@ -5832,6 +5936,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the number of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_F(long groupId, long folderId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_F;
@@ -5890,6 +5995,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the number of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_F(long groupId, long[] folderIds)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, StringUtil.merge(folderIds) };
@@ -5976,6 +6082,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the number of matching document library file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByG_F(long groupId, long folderId)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -6030,6 +6137,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the number of matching document library file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByG_F(long groupId, long[] folderIds)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -6151,6 +6259,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByG_U_F(long groupId, long userId,
 		long folderId) throws SystemException {
 		return findByG_U_F(groupId, userId, folderId, QueryUtil.ALL_POS,
@@ -6172,6 +6281,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the range of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByG_U_F(long groupId, long userId,
 		long folderId, int start, int end) throws SystemException {
 		return findByG_U_F(groupId, userId, folderId, start, end, null);
@@ -6193,6 +6303,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the ordered range of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByG_U_F(long groupId, long userId,
 		long folderId, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -6316,6 +6427,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry findByG_U_F_First(long groupId, long userId,
 		long folderId, OrderByComparator orderByComparator)
 		throws NoSuchFileEntryException, SystemException {
@@ -6354,6 +6466,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the first matching document library file entry, or <code>null</code> if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry fetchByG_U_F_First(long groupId, long userId,
 		long folderId, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -6378,6 +6491,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry findByG_U_F_Last(long groupId, long userId,
 		long folderId, OrderByComparator orderByComparator)
 		throws NoSuchFileEntryException, SystemException {
@@ -6416,6 +6530,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the last matching document library file entry, or <code>null</code> if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry fetchByG_U_F_Last(long groupId, long userId,
 		long folderId, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -6443,6 +6558,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a document library file entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry[] findByG_U_F_PrevAndNext(long fileEntryId,
 		long groupId, long userId, long folderId,
 		OrderByComparator orderByComparator)
@@ -6596,6 +6712,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the matching document library file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> filterFindByG_U_F(long groupId, long userId,
 		long folderId) throws SystemException {
 		return filterFindByG_U_F(groupId, userId, folderId, QueryUtil.ALL_POS,
@@ -6617,6 +6734,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the range of matching document library file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> filterFindByG_U_F(long groupId, long userId,
 		long folderId, int start, int end) throws SystemException {
 		return filterFindByG_U_F(groupId, userId, folderId, start, end, null);
@@ -6638,6 +6756,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the ordered range of matching document library file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> filterFindByG_U_F(long groupId, long userId,
 		long folderId, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -6740,6 +6859,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a document library file entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry[] filterFindByG_U_F_PrevAndNext(long fileEntryId,
 		long groupId, long userId, long folderId,
 		OrderByComparator orderByComparator)
@@ -6933,6 +7053,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the matching document library file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> filterFindByG_U_F(long groupId, long userId,
 		long[] folderIds) throws SystemException {
 		return filterFindByG_U_F(groupId, userId, folderIds, QueryUtil.ALL_POS,
@@ -6954,6 +7075,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the range of matching document library file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> filterFindByG_U_F(long groupId, long userId,
 		long[] folderIds, int start, int end) throws SystemException {
 		return filterFindByG_U_F(groupId, userId, folderIds, start, end, null);
@@ -6975,6 +7097,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the ordered range of matching document library file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> filterFindByG_U_F(long groupId, long userId,
 		long[] folderIds, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -7104,6 +7227,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByG_U_F(long groupId, long userId,
 		long[] folderIds) throws SystemException {
 		return findByG_U_F(groupId, userId, folderIds, QueryUtil.ALL_POS,
@@ -7125,6 +7249,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the range of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByG_U_F(long groupId, long userId,
 		long[] folderIds, int start, int end) throws SystemException {
 		return findByG_U_F(groupId, userId, folderIds, start, end, null);
@@ -7146,6 +7271,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the ordered range of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByG_U_F(long groupId, long userId,
 		long[] folderIds, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -7298,6 +7424,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @param folderId the folder ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByG_U_F(long groupId, long userId, long folderId)
 		throws SystemException {
 		for (DLFileEntry dlFileEntry : findByG_U_F(groupId, userId, folderId,
@@ -7315,6 +7442,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the number of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_U_F(long groupId, long userId, long folderId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_U_F;
@@ -7378,6 +7506,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the number of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_U_F(long groupId, long userId, long[] folderIds)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -7477,6 +7606,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the number of matching document library file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByG_U_F(long groupId, long userId, long folderId)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -7536,6 +7666,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the number of matching document library file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByG_U_F(long groupId, long userId, long[] folderIds)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -7657,6 +7788,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry findByG_F_N(long groupId, long folderId, String name)
 		throws NoSuchFileEntryException, SystemException {
 		DLFileEntry dlFileEntry = fetchByG_F_N(groupId, folderId, name);
@@ -7696,6 +7828,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the matching document library file entry, or <code>null</code> if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry fetchByG_F_N(long groupId, long folderId, String name)
 		throws SystemException {
 		return fetchByG_F_N(groupId, folderId, name, true);
@@ -7711,6 +7844,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the matching document library file entry, or <code>null</code> if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry fetchByG_F_N(long groupId, long folderId, String name,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, folderId, name };
@@ -7824,6 +7958,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the document library file entry that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry removeByG_F_N(long groupId, long folderId, String name)
 		throws NoSuchFileEntryException, SystemException {
 		DLFileEntry dlFileEntry = findByG_F_N(groupId, folderId, name);
@@ -7840,6 +7975,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the number of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_F_N(long groupId, long folderId, String name)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_F_N;
@@ -7941,6 +8077,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry findByG_F_T(long groupId, long folderId, String title)
 		throws NoSuchFileEntryException, SystemException {
 		DLFileEntry dlFileEntry = fetchByG_F_T(groupId, folderId, title);
@@ -7980,6 +8117,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the matching document library file entry, or <code>null</code> if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry fetchByG_F_T(long groupId, long folderId, String title)
 		throws SystemException {
 		return fetchByG_F_T(groupId, folderId, title, true);
@@ -7995,6 +8133,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the matching document library file entry, or <code>null</code> if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry fetchByG_F_T(long groupId, long folderId, String title,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, folderId, title };
@@ -8108,6 +8247,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the document library file entry that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry removeByG_F_T(long groupId, long folderId, String title)
 		throws NoSuchFileEntryException, SystemException {
 		DLFileEntry dlFileEntry = findByG_F_T(groupId, folderId, title);
@@ -8124,6 +8264,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the number of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_F_T(long groupId, long folderId, String title)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_F_T;
@@ -8238,6 +8379,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByG_F_F(long groupId, long folderId,
 		long fileEntryTypeId) throws SystemException {
 		return findByG_F_F(groupId, folderId, fileEntryTypeId,
@@ -8259,6 +8401,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the range of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByG_F_F(long groupId, long folderId,
 		long fileEntryTypeId, int start, int end) throws SystemException {
 		return findByG_F_F(groupId, folderId, fileEntryTypeId, start, end, null);
@@ -8280,6 +8423,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the ordered range of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByG_F_F(long groupId, long folderId,
 		long fileEntryTypeId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -8403,6 +8547,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry findByG_F_F_First(long groupId, long folderId,
 		long fileEntryTypeId, OrderByComparator orderByComparator)
 		throws NoSuchFileEntryException, SystemException {
@@ -8441,6 +8586,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the first matching document library file entry, or <code>null</code> if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry fetchByG_F_F_First(long groupId, long folderId,
 		long fileEntryTypeId, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -8465,6 +8611,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry findByG_F_F_Last(long groupId, long folderId,
 		long fileEntryTypeId, OrderByComparator orderByComparator)
 		throws NoSuchFileEntryException, SystemException {
@@ -8503,6 +8650,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the last matching document library file entry, or <code>null</code> if a matching document library file entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry fetchByG_F_F_Last(long groupId, long folderId,
 		long fileEntryTypeId, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -8530,6 +8678,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a document library file entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry[] findByG_F_F_PrevAndNext(long fileEntryId,
 		long groupId, long folderId, long fileEntryTypeId,
 		OrderByComparator orderByComparator)
@@ -8684,6 +8833,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the matching document library file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> filterFindByG_F_F(long groupId, long folderId,
 		long fileEntryTypeId) throws SystemException {
 		return filterFindByG_F_F(groupId, folderId, fileEntryTypeId,
@@ -8705,6 +8855,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the range of matching document library file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> filterFindByG_F_F(long groupId, long folderId,
 		long fileEntryTypeId, int start, int end) throws SystemException {
 		return filterFindByG_F_F(groupId, folderId, fileEntryTypeId, start,
@@ -8727,6 +8878,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the ordered range of matching document library file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> filterFindByG_F_F(long groupId, long folderId,
 		long fileEntryTypeId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -8829,6 +8981,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a document library file entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry[] filterFindByG_F_F_PrevAndNext(long fileEntryId,
 		long groupId, long folderId, long fileEntryTypeId,
 		OrderByComparator orderByComparator)
@@ -9023,6 +9176,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the matching document library file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> filterFindByG_F_F(long groupId, long[] folderIds,
 		long fileEntryTypeId) throws SystemException {
 		return filterFindByG_F_F(groupId, folderIds, fileEntryTypeId,
@@ -9044,6 +9198,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the range of matching document library file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> filterFindByG_F_F(long groupId, long[] folderIds,
 		long fileEntryTypeId, int start, int end) throws SystemException {
 		return filterFindByG_F_F(groupId, folderIds, fileEntryTypeId, start,
@@ -9066,6 +9221,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the ordered range of matching document library file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> filterFindByG_F_F(long groupId, long[] folderIds,
 		long fileEntryTypeId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -9195,6 +9351,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByG_F_F(long groupId, long[] folderIds,
 		long fileEntryTypeId) throws SystemException {
 		return findByG_F_F(groupId, folderIds, fileEntryTypeId,
@@ -9216,6 +9373,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the range of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByG_F_F(long groupId, long[] folderIds,
 		long fileEntryTypeId, int start, int end) throws SystemException {
 		return findByG_F_F(groupId, folderIds, fileEntryTypeId, start, end, null);
@@ -9237,6 +9395,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the ordered range of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findByG_F_F(long groupId, long[] folderIds,
 		long fileEntryTypeId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -9389,6 +9548,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @param fileEntryTypeId the file entry type ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByG_F_F(long groupId, long folderId, long fileEntryTypeId)
 		throws SystemException {
 		for (DLFileEntry dlFileEntry : findByG_F_F(groupId, folderId,
@@ -9406,6 +9566,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the number of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_F_F(long groupId, long folderId, long fileEntryTypeId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_F_F;
@@ -9469,6 +9630,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the number of matching document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_F_F(long groupId, long[] folderIds, long fileEntryTypeId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -9568,6 +9730,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the number of matching document library file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByG_F_F(long groupId, long folderId,
 		long fileEntryTypeId) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -9627,6 +9790,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the number of matching document library file entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByG_F_F(long groupId, long[] folderIds,
 		long fileEntryTypeId) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -9726,6 +9890,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 *
 	 * @param dlFileEntry the document library file entry
 	 */
+	@Override
 	public void cacheResult(DLFileEntry dlFileEntry) {
 		EntityCacheUtil.putResult(DLFileEntryModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileEntryImpl.class, dlFileEntry.getPrimaryKey(), dlFileEntry);
@@ -9754,6 +9919,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 *
 	 * @param dlFileEntries the document library file entries
 	 */
+	@Override
 	public void cacheResult(List<DLFileEntry> dlFileEntries) {
 		for (DLFileEntry dlFileEntry : dlFileEntries) {
 			if (EntityCacheUtil.getResult(
@@ -9960,6 +10126,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @param fileEntryId the primary key for the new document library file entry
 	 * @return the new document library file entry
 	 */
+	@Override
 	public DLFileEntry create(long fileEntryId) {
 		DLFileEntry dlFileEntry = new DLFileEntryImpl();
 
@@ -9981,6 +10148,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a document library file entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry remove(long fileEntryId)
 		throws NoSuchFileEntryException, SystemException {
 		return remove((Serializable)fileEntryId);
@@ -10390,6 +10558,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a document library file entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry findByPrimaryKey(long fileEntryId)
 		throws NoSuchFileEntryException, SystemException {
 		return findByPrimaryKey((Serializable)fileEntryId);
@@ -10450,6 +10619,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the document library file entry, or <code>null</code> if a document library file entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileEntry fetchByPrimaryKey(long fileEntryId)
 		throws SystemException {
 		return fetchByPrimaryKey((Serializable)fileEntryId);
@@ -10461,6 +10631,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -10477,6 +10648,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the range of document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
@@ -10495,6 +10667,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the ordered range of document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileEntry> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -10580,6 +10753,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (DLFileEntry dlFileEntry : findAll()) {
 			remove(dlFileEntry);
@@ -10592,6 +10766,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 * @return the number of document library file entries
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -10695,6 +10870,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 		};
 
 	private static CacheModel<DLFileEntry> _nullDLFileEntryCacheModel = new CacheModel<DLFileEntry>() {
+			@Override
 			public DLFileEntry toEntityModel() {
 				return _nullDLFileEntry;
 			}

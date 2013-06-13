@@ -90,26 +90,32 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper>
 	public UserIdMapperModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _userIdMapperId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setUserIdMapperId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _userIdMapperId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return UserIdMapper.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return UserIdMapper.class.getName();
 	}
@@ -160,18 +166,22 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper>
 		}
 	}
 
+	@Override
 	public long getUserIdMapperId() {
 		return _userIdMapperId;
 	}
 
+	@Override
 	public void setUserIdMapperId(long userIdMapperId) {
 		_userIdMapperId = userIdMapperId;
 	}
 
+	@Override
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_columnBitmask |= USERID_COLUMN_BITMASK;
 
@@ -184,10 +194,12 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper>
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
@@ -196,6 +208,7 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper>
 		return _originalUserId;
 	}
 
+	@Override
 	public String getType() {
 		if (_type == null) {
 			return StringPool.BLANK;
@@ -205,6 +218,7 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper>
 		}
 	}
 
+	@Override
 	public void setType(String type) {
 		_columnBitmask |= TYPE_COLUMN_BITMASK;
 
@@ -219,6 +233,7 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper>
 		return GetterUtil.getString(_originalType);
 	}
 
+	@Override
 	public String getDescription() {
 		if (_description == null) {
 			return StringPool.BLANK;
@@ -228,10 +243,12 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper>
 		}
 	}
 
+	@Override
 	public void setDescription(String description) {
 		_description = description;
 	}
 
+	@Override
 	public String getExternalUserId() {
 		if (_externalUserId == null) {
 			return StringPool.BLANK;
@@ -241,6 +258,7 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper>
 		}
 	}
 
+	@Override
 	public void setExternalUserId(String externalUserId) {
 		_columnBitmask |= EXTERNALUSERID_COLUMN_BITMASK;
 
@@ -297,6 +315,7 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper>
 		return userIdMapperImpl;
 	}
 
+	@Override
 	public int compareTo(UserIdMapper userIdMapper) {
 		long primaryKey = userIdMapper.getPrimaryKey();
 
@@ -313,18 +332,15 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof UserIdMapper)) {
 			return false;
 		}
 
-		UserIdMapper userIdMapper = null;
-
-		try {
-			userIdMapper = (UserIdMapper)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		UserIdMapper userIdMapper = (UserIdMapper)obj;
 
 		long primaryKey = userIdMapper.getPrimaryKey();
 
@@ -410,6 +426,7 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(19);
 

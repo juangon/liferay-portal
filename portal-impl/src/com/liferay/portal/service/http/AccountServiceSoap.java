@@ -15,13 +15,11 @@
 package com.liferay.portal.service.http;
 
 /**
- * <p>
- * This class provides a SOAP utility for the
+ * Provides the SOAP utility for the
  * {@link com.liferay.portal.service.AccountServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it is difficult for SOAP to
  * support certain types.
- * </p>
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
@@ -50,10 +48,10 @@ package com.liferay.portal.service.http;
  * The SOAP utility is only generated for remote services.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       AccountServiceHttp
- * @see       com.liferay.portal.model.AccountSoap
- * @see       com.liferay.portal.service.AccountServiceUtil
+ * @author Brian Wing Shun Chan
+ * @see AccountServiceHttp
+ * @see com.liferay.portal.model.AccountSoap
+ * @see com.liferay.portal.service.AccountServiceUtil
  * @generated
  */
 public class AccountServiceSoap {

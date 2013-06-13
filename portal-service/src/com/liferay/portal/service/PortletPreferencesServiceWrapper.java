@@ -15,12 +15,10 @@
 package com.liferay.portal.service;
 
 /**
- * <p>
- * This class is a wrapper for {@link PortletPreferencesService}.
- * </p>
+ * Provides a wrapper for {@link PortletPreferencesService}.
  *
- * @author    Brian Wing Shun Chan
- * @see       PortletPreferencesService
+ * @author Brian Wing Shun Chan
+ * @see PortletPreferencesService
  * @generated
  */
 public class PortletPreferencesServiceWrapper
@@ -36,6 +34,7 @@ public class PortletPreferencesServiceWrapper
 	*
 	* @return the Spring bean ID for this bean
 	*/
+	@Override
 	public java.lang.String getBeanIdentifier() {
 		return _portletPreferencesService.getBeanIdentifier();
 	}
@@ -45,16 +44,19 @@ public class PortletPreferencesServiceWrapper
 	*
 	* @param beanIdentifier the Spring bean ID for this bean
 	*/
+	@Override
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		_portletPreferencesService.setBeanIdentifier(beanIdentifier);
 	}
 
+	@Override
 	public void deleteArchivedPreferences(long portletItemId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_portletPreferencesService.deleteArchivedPreferences(portletItemId);
 	}
 
+	@Override
 	public void restoreArchivedPreferences(long groupId,
 		com.liferay.portal.model.Layout layout, java.lang.String portletId,
 		long portletItemId, javax.portlet.PortletPreferences preferences)
@@ -64,6 +66,7 @@ public class PortletPreferencesServiceWrapper
 			portletId, portletItemId, preferences);
 	}
 
+	@Override
 	public void restoreArchivedPreferences(long groupId,
 		com.liferay.portal.model.Layout layout, java.lang.String portletId,
 		com.liferay.portal.model.PortletItem portletItem,
@@ -74,6 +77,7 @@ public class PortletPreferencesServiceWrapper
 			portletId, portletItem, preferences);
 	}
 
+	@Override
 	public void restoreArchivedPreferences(long groupId, java.lang.String name,
 		com.liferay.portal.model.Layout layout, java.lang.String portletId,
 		javax.portlet.PortletPreferences preferences)
@@ -83,6 +87,7 @@ public class PortletPreferencesServiceWrapper
 			layout, portletId, preferences);
 	}
 
+	@Override
 	public void updateArchivePreferences(long userId, long groupId,
 		java.lang.String name, java.lang.String portletId,
 		javax.portlet.PortletPreferences preferences)
@@ -107,10 +112,12 @@ public class PortletPreferencesServiceWrapper
 		_portletPreferencesService = portletPreferencesService;
 	}
 
+	@Override
 	public PortletPreferencesService getWrappedService() {
 		return _portletPreferencesService;
 	}
 
+	@Override
 	public void setWrappedService(
 		PortletPreferencesService portletPreferencesService) {
 		_portletPreferencesService = portletPreferencesService;

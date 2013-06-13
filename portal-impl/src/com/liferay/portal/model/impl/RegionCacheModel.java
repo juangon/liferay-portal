@@ -51,6 +51,7 @@ public class RegionCacheModel implements CacheModel<Region>, Externalizable {
 		return sb.toString();
 	}
 
+	@Override
 	public Region toEntityModel() {
 		RegionImpl regionImpl = new RegionImpl();
 
@@ -78,6 +79,7 @@ public class RegionCacheModel implements CacheModel<Region>, Externalizable {
 		return regionImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		regionId = objectInput.readLong();
 		countryId = objectInput.readLong();
@@ -86,6 +88,7 @@ public class RegionCacheModel implements CacheModel<Region>, Externalizable {
 		active = objectInput.readBoolean();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(regionId);

@@ -194,7 +194,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 			{ "categoryId", Types.BIGINT }
 		};
 	public static final String MAPPING_TABLE_ASSETENTRIES_ASSETCATEGORIES_SQL_CREATE =
-		"create table AssetEntries_AssetCategories (entryId LONG not null,categoryId LONG not null,primary key (entryId, categoryId))";
+		"create table AssetEntries_AssetCategories (categoryId LONG not null,entryId LONG not null,primary key (categoryId, entryId))";
 	public static final boolean FINDER_CACHE_ENABLED_ASSETENTRIES_ASSETCATEGORIES =
 		GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.AssetEntries_AssetCategories"),
@@ -214,26 +214,32 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 	public AssetEntryModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _entryId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setEntryId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _entryId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return AssetEntry.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return AssetEntry.class.getName();
 	}
@@ -431,20 +437,24 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		}
 	}
 
+	@Override
 	@JSON
 	public long getEntryId() {
 		return _entryId;
 	}
 
+	@Override
 	public void setEntryId(long entryId) {
 		_entryId = entryId;
 	}
 
+	@Override
 	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -461,11 +471,13 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		return _originalGroupId;
 	}
 
+	@Override
 	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
@@ -482,23 +494,28 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		return _originalCompanyId;
 	}
 
+	@Override
 	@JSON
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
 
+	@Override
 	@JSON
 	public String getUserName() {
 		if (_userName == null) {
@@ -509,28 +526,34 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		}
 	}
 
+	@Override
 	public void setUserName(String userName) {
 		_userName = userName;
 	}
 
+	@Override
 	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
 	}
 
+	@Override
 	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
 	public String getClassName() {
 		if (getClassNameId() <= 0) {
 			return StringPool.BLANK;
@@ -539,6 +562,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		return PortalUtil.getClassName(getClassNameId());
 	}
 
+	@Override
 	public void setClassName(String className) {
 		long classNameId = 0;
 
@@ -549,11 +573,13 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		setClassNameId(classNameId);
 	}
 
+	@Override
 	@JSON
 	public long getClassNameId() {
 		return _classNameId;
 	}
 
+	@Override
 	public void setClassNameId(long classNameId) {
 		_columnBitmask |= CLASSNAMEID_COLUMN_BITMASK;
 
@@ -570,11 +596,13 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		return _originalClassNameId;
 	}
 
+	@Override
 	@JSON
 	public long getClassPK() {
 		return _classPK;
 	}
 
+	@Override
 	public void setClassPK(long classPK) {
 		_columnBitmask |= CLASSPK_COLUMN_BITMASK;
 
@@ -591,6 +619,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		return _originalClassPK;
 	}
 
+	@Override
 	@JSON
 	public String getClassUuid() {
 		if (_classUuid == null) {
@@ -601,6 +630,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		}
 	}
 
+	@Override
 	public void setClassUuid(String classUuid) {
 		_columnBitmask |= CLASSUUID_COLUMN_BITMASK;
 
@@ -615,24 +645,29 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		return GetterUtil.getString(_originalClassUuid);
 	}
 
+	@Override
 	@JSON
 	public long getClassTypeId() {
 		return _classTypeId;
 	}
 
+	@Override
 	public void setClassTypeId(long classTypeId) {
 		_classTypeId = classTypeId;
 	}
 
+	@Override
 	@JSON
 	public boolean getVisible() {
 		return _visible;
 	}
 
+	@Override
 	public boolean isVisible() {
 		return _visible;
 	}
 
+	@Override
 	public void setVisible(boolean visible) {
 		_columnBitmask |= VISIBLE_COLUMN_BITMASK;
 
@@ -649,29 +684,35 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		return _originalVisible;
 	}
 
+	@Override
 	@JSON
 	public Date getStartDate() {
 		return _startDate;
 	}
 
+	@Override
 	public void setStartDate(Date startDate) {
 		_startDate = startDate;
 	}
 
+	@Override
 	@JSON
 	public Date getEndDate() {
 		return _endDate;
 	}
 
+	@Override
 	public void setEndDate(Date endDate) {
 		_endDate = endDate;
 	}
 
+	@Override
 	@JSON
 	public Date getPublishDate() {
 		return _publishDate;
 	}
 
+	@Override
 	public void setPublishDate(Date publishDate) {
 		_columnBitmask |= PUBLISHDATE_COLUMN_BITMASK;
 
@@ -686,11 +727,13 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		return _originalPublishDate;
 	}
 
+	@Override
 	@JSON
 	public Date getExpirationDate() {
 		return _expirationDate;
 	}
 
+	@Override
 	public void setExpirationDate(Date expirationDate) {
 		_columnBitmask |= EXPIRATIONDATE_COLUMN_BITMASK;
 
@@ -705,6 +748,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		return _originalExpirationDate;
 	}
 
+	@Override
 	@JSON
 	public String getMimeType() {
 		if (_mimeType == null) {
@@ -715,10 +759,12 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		}
 	}
 
+	@Override
 	public void setMimeType(String mimeType) {
 		_mimeType = mimeType;
 	}
 
+	@Override
 	@JSON
 	public String getTitle() {
 		if (_title == null) {
@@ -729,50 +775,60 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		}
 	}
 
+	@Override
 	public String getTitle(Locale locale) {
 		String languageId = LocaleUtil.toLanguageId(locale);
 
 		return getTitle(languageId);
 	}
 
+	@Override
 	public String getTitle(Locale locale, boolean useDefault) {
 		String languageId = LocaleUtil.toLanguageId(locale);
 
 		return getTitle(languageId, useDefault);
 	}
 
+	@Override
 	public String getTitle(String languageId) {
 		return LocalizationUtil.getLocalization(getTitle(), languageId);
 	}
 
+	@Override
 	public String getTitle(String languageId, boolean useDefault) {
 		return LocalizationUtil.getLocalization(getTitle(), languageId,
 			useDefault);
 	}
 
+	@Override
 	public String getTitleCurrentLanguageId() {
 		return _titleCurrentLanguageId;
 	}
 
 	@JSON
+	@Override
 	public String getTitleCurrentValue() {
 		Locale locale = getLocale(_titleCurrentLanguageId);
 
 		return getTitle(locale);
 	}
 
+	@Override
 	public Map<Locale, String> getTitleMap() {
 		return LocalizationUtil.getLocalizationMap(getTitle());
 	}
 
+	@Override
 	public void setTitle(String title) {
 		_title = title;
 	}
 
+	@Override
 	public void setTitle(String title, Locale locale) {
 		setTitle(title, locale, LocaleUtil.getDefault());
 	}
 
+	@Override
 	public void setTitle(String title, Locale locale, Locale defaultLocale) {
 		String languageId = LocaleUtil.toLanguageId(locale);
 		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
@@ -787,14 +843,17 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		}
 	}
 
+	@Override
 	public void setTitleCurrentLanguageId(String languageId) {
 		_titleCurrentLanguageId = languageId;
 	}
 
+	@Override
 	public void setTitleMap(Map<Locale, String> titleMap) {
 		setTitleMap(titleMap, LocaleUtil.getDefault());
 	}
 
+	@Override
 	public void setTitleMap(Map<Locale, String> titleMap, Locale defaultLocale) {
 		if (titleMap == null) {
 			return;
@@ -804,6 +863,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 				"Title", LocaleUtil.toLanguageId(defaultLocale)));
 	}
 
+	@Override
 	@JSON
 	public String getDescription() {
 		if (_description == null) {
@@ -814,50 +874,60 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		}
 	}
 
+	@Override
 	public String getDescription(Locale locale) {
 		String languageId = LocaleUtil.toLanguageId(locale);
 
 		return getDescription(languageId);
 	}
 
+	@Override
 	public String getDescription(Locale locale, boolean useDefault) {
 		String languageId = LocaleUtil.toLanguageId(locale);
 
 		return getDescription(languageId, useDefault);
 	}
 
+	@Override
 	public String getDescription(String languageId) {
 		return LocalizationUtil.getLocalization(getDescription(), languageId);
 	}
 
+	@Override
 	public String getDescription(String languageId, boolean useDefault) {
 		return LocalizationUtil.getLocalization(getDescription(), languageId,
 			useDefault);
 	}
 
+	@Override
 	public String getDescriptionCurrentLanguageId() {
 		return _descriptionCurrentLanguageId;
 	}
 
 	@JSON
+	@Override
 	public String getDescriptionCurrentValue() {
 		Locale locale = getLocale(_descriptionCurrentLanguageId);
 
 		return getDescription(locale);
 	}
 
+	@Override
 	public Map<Locale, String> getDescriptionMap() {
 		return LocalizationUtil.getLocalizationMap(getDescription());
 	}
 
+	@Override
 	public void setDescription(String description) {
 		_description = description;
 	}
 
+	@Override
 	public void setDescription(String description, Locale locale) {
 		setDescription(description, locale, LocaleUtil.getDefault());
 	}
 
+	@Override
 	public void setDescription(String description, Locale locale,
 		Locale defaultLocale) {
 		String languageId = LocaleUtil.toLanguageId(locale);
@@ -874,14 +944,17 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		}
 	}
 
+	@Override
 	public void setDescriptionCurrentLanguageId(String languageId) {
 		_descriptionCurrentLanguageId = languageId;
 	}
 
+	@Override
 	public void setDescriptionMap(Map<Locale, String> descriptionMap) {
 		setDescriptionMap(descriptionMap, LocaleUtil.getDefault());
 	}
 
+	@Override
 	public void setDescriptionMap(Map<Locale, String> descriptionMap,
 		Locale defaultLocale) {
 		if (descriptionMap == null) {
@@ -893,6 +966,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 				LocaleUtil.toLanguageId(defaultLocale)));
 	}
 
+	@Override
 	@JSON
 	public String getSummary() {
 		if (_summary == null) {
@@ -903,50 +977,60 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		}
 	}
 
+	@Override
 	public String getSummary(Locale locale) {
 		String languageId = LocaleUtil.toLanguageId(locale);
 
 		return getSummary(languageId);
 	}
 
+	@Override
 	public String getSummary(Locale locale, boolean useDefault) {
 		String languageId = LocaleUtil.toLanguageId(locale);
 
 		return getSummary(languageId, useDefault);
 	}
 
+	@Override
 	public String getSummary(String languageId) {
 		return LocalizationUtil.getLocalization(getSummary(), languageId);
 	}
 
+	@Override
 	public String getSummary(String languageId, boolean useDefault) {
 		return LocalizationUtil.getLocalization(getSummary(), languageId,
 			useDefault);
 	}
 
+	@Override
 	public String getSummaryCurrentLanguageId() {
 		return _summaryCurrentLanguageId;
 	}
 
 	@JSON
+	@Override
 	public String getSummaryCurrentValue() {
 		Locale locale = getLocale(_summaryCurrentLanguageId);
 
 		return getSummary(locale);
 	}
 
+	@Override
 	public Map<Locale, String> getSummaryMap() {
 		return LocalizationUtil.getLocalizationMap(getSummary());
 	}
 
+	@Override
 	public void setSummary(String summary) {
 		_summary = summary;
 	}
 
+	@Override
 	public void setSummary(String summary, Locale locale) {
 		setSummary(summary, locale, LocaleUtil.getDefault());
 	}
 
+	@Override
 	public void setSummary(String summary, Locale locale, Locale defaultLocale) {
 		String languageId = LocaleUtil.toLanguageId(locale);
 		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
@@ -961,14 +1045,17 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		}
 	}
 
+	@Override
 	public void setSummaryCurrentLanguageId(String languageId) {
 		_summaryCurrentLanguageId = languageId;
 	}
 
+	@Override
 	public void setSummaryMap(Map<Locale, String> summaryMap) {
 		setSummaryMap(summaryMap, LocaleUtil.getDefault());
 	}
 
+	@Override
 	public void setSummaryMap(Map<Locale, String> summaryMap,
 		Locale defaultLocale) {
 		if (summaryMap == null) {
@@ -979,6 +1066,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 				getSummary(), "Summary", LocaleUtil.toLanguageId(defaultLocale)));
 	}
 
+	@Override
 	@JSON
 	public String getUrl() {
 		if (_url == null) {
@@ -989,10 +1077,12 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		}
 	}
 
+	@Override
 	public void setUrl(String url) {
 		_url = url;
 	}
 
+	@Override
 	@JSON
 	public String getLayoutUuid() {
 		if (_layoutUuid == null) {
@@ -1003,6 +1093,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		}
 	}
 
+	@Override
 	public void setLayoutUuid(String layoutUuid) {
 		_columnBitmask |= LAYOUTUUID_COLUMN_BITMASK;
 
@@ -1017,38 +1108,46 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		return GetterUtil.getString(_originalLayoutUuid);
 	}
 
+	@Override
 	@JSON
 	public int getHeight() {
 		return _height;
 	}
 
+	@Override
 	public void setHeight(int height) {
 		_height = height;
 	}
 
+	@Override
 	@JSON
 	public int getWidth() {
 		return _width;
 	}
 
+	@Override
 	public void setWidth(int width) {
 		_width = width;
 	}
 
+	@Override
 	@JSON
 	public double getPriority() {
 		return _priority;
 	}
 
+	@Override
 	public void setPriority(double priority) {
 		_priority = priority;
 	}
 
+	@Override
 	@JSON
 	public int getViewCount() {
 		return _viewCount;
 	}
 
+	@Override
 	public void setViewCount(int viewCount) {
 		_viewCount = viewCount;
 	}
@@ -1070,6 +1169,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		expandoBridge.setAttributes(serviceContext);
 	}
 
+	@Override
 	@SuppressWarnings("unused")
 	public void prepareLocalizedFieldsForImport(Locale defaultImportLocale)
 		throws LocaleException {
@@ -1127,6 +1227,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		return assetEntryImpl;
 	}
 
+	@Override
 	public int compareTo(AssetEntry assetEntry) {
 		long primaryKey = assetEntry.getPrimaryKey();
 
@@ -1143,18 +1244,15 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof AssetEntry)) {
 			return false;
 		}
 
-		AssetEntry assetEntry = null;
-
-		try {
-			assetEntry = (AssetEntry)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		AssetEntry assetEntry = (AssetEntry)obj;
 
 		long primaryKey = assetEntry.getPrimaryKey();
 
@@ -1416,6 +1514,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(82);
 

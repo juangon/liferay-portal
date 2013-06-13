@@ -178,26 +178,32 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 	public MBThreadModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _threadId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setThreadId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _threadId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return MBThread.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return MBThread.class.getName();
 	}
@@ -360,6 +366,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		}
 	}
 
+	@Override
 	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
@@ -370,6 +377,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		}
 	}
 
+	@Override
 	public void setUuid(String uuid) {
 		if (_originalUuid == null) {
 			_originalUuid = _uuid;
@@ -382,20 +390,24 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@Override
 	@JSON
 	public long getThreadId() {
 		return _threadId;
 	}
 
+	@Override
 	public void setThreadId(long threadId) {
 		_threadId = threadId;
 	}
 
+	@Override
 	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -412,11 +424,13 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		return _originalGroupId;
 	}
 
+	@Override
 	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
@@ -433,23 +447,28 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		return _originalCompanyId;
 	}
 
+	@Override
 	@JSON
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
 
+	@Override
 	@JSON
 	public String getUserName() {
 		if (_userName == null) {
@@ -460,33 +479,40 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		}
 	}
 
+	@Override
 	public void setUserName(String userName) {
 		_userName = userName;
 	}
 
+	@Override
 	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
 	}
 
+	@Override
 	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
 	@JSON
 	public long getCategoryId() {
 		return _categoryId;
 	}
 
+	@Override
 	public void setCategoryId(long categoryId) {
 		_columnBitmask |= CATEGORYID_COLUMN_BITMASK;
 
@@ -503,11 +529,13 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		return _originalCategoryId;
 	}
 
+	@Override
 	@JSON
 	public long getRootMessageId() {
 		return _rootMessageId;
 	}
 
+	@Override
 	public void setRootMessageId(long rootMessageId) {
 		_columnBitmask |= ROOTMESSAGEID_COLUMN_BITMASK;
 
@@ -524,65 +552,79 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		return _originalRootMessageId;
 	}
 
+	@Override
 	@JSON
 	public long getRootMessageUserId() {
 		return _rootMessageUserId;
 	}
 
+	@Override
 	public void setRootMessageUserId(long rootMessageUserId) {
 		_rootMessageUserId = rootMessageUserId;
 	}
 
+	@Override
 	public String getRootMessageUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getRootMessageUserId(), "uuid",
 			_rootMessageUserUuid);
 	}
 
+	@Override
 	public void setRootMessageUserUuid(String rootMessageUserUuid) {
 		_rootMessageUserUuid = rootMessageUserUuid;
 	}
 
+	@Override
 	@JSON
 	public int getMessageCount() {
 		return _messageCount;
 	}
 
+	@Override
 	public void setMessageCount(int messageCount) {
 		_messageCount = messageCount;
 	}
 
+	@Override
 	@JSON
 	public int getViewCount() {
 		return _viewCount;
 	}
 
+	@Override
 	public void setViewCount(int viewCount) {
 		_viewCount = viewCount;
 	}
 
+	@Override
 	@JSON
 	public long getLastPostByUserId() {
 		return _lastPostByUserId;
 	}
 
+	@Override
 	public void setLastPostByUserId(long lastPostByUserId) {
 		_lastPostByUserId = lastPostByUserId;
 	}
 
+	@Override
 	public String getLastPostByUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getLastPostByUserId(), "uuid",
 			_lastPostByUserUuid);
 	}
 
+	@Override
 	public void setLastPostByUserUuid(String lastPostByUserUuid) {
 		_lastPostByUserUuid = lastPostByUserUuid;
 	}
 
+	@Override
 	@JSON
 	public Date getLastPostDate() {
 		return _lastPostDate;
 	}
 
+	@Override
 	public void setLastPostDate(Date lastPostDate) {
 		_columnBitmask = -1L;
 
@@ -597,11 +639,13 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		return _originalLastPostDate;
 	}
 
+	@Override
 	@JSON
 	public double getPriority() {
 		return _priority;
 	}
 
+	@Override
 	public void setPriority(double priority) {
 		_columnBitmask = -1L;
 
@@ -618,24 +662,29 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		return _originalPriority;
 	}
 
+	@Override
 	@JSON
 	public boolean getQuestion() {
 		return _question;
 	}
 
+	@Override
 	public boolean isQuestion() {
 		return _question;
 	}
 
+	@Override
 	public void setQuestion(boolean question) {
 		_question = question;
 	}
 
+	@Override
 	@JSON
 	public int getStatus() {
 		return _status;
 	}
 
+	@Override
 	public void setStatus(int status) {
 		_columnBitmask |= STATUS_COLUMN_BITMASK;
 
@@ -652,24 +701,29 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		return _originalStatus;
 	}
 
+	@Override
 	@JSON
 	public long getStatusByUserId() {
 		return _statusByUserId;
 	}
 
+	@Override
 	public void setStatusByUserId(long statusByUserId) {
 		_statusByUserId = statusByUserId;
 	}
 
+	@Override
 	public String getStatusByUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getStatusByUserId(), "uuid",
 			_statusByUserUuid);
 	}
 
+	@Override
 	public void setStatusByUserUuid(String statusByUserUuid) {
 		_statusByUserUuid = statusByUserUuid;
 	}
 
+	@Override
 	@JSON
 	public String getStatusByUserName() {
 		if (_statusByUserName == null) {
@@ -680,35 +734,43 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		}
 	}
 
+	@Override
 	public void setStatusByUserName(String statusByUserName) {
 		_statusByUserName = statusByUserName;
 	}
 
+	@Override
 	@JSON
 	public Date getStatusDate() {
 		return _statusDate;
 	}
 
+	@Override
 	public void setStatusDate(Date statusDate) {
 		_statusDate = statusDate;
 	}
 
+	@Override
 	public long getContainerModelId() {
 		return getThreadId();
 	}
 
+	@Override
 	public void setContainerModelId(long containerModelId) {
 		_threadId = containerModelId;
 	}
 
+	@Override
 	public long getParentContainerModelId() {
 		return getCategoryId();
 	}
 
+	@Override
 	public void setParentContainerModelId(long parentContainerModelId) {
 		_categoryId = parentContainerModelId;
 	}
 
+	@Override
 	public String getContainerModelName() {
 		return String.valueOf(getContainerModelId());
 	}
@@ -716,10 +778,12 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #isApproved}
 	 */
+	@Override
 	public boolean getApproved() {
 		return isApproved();
 	}
 
+	@Override
 	public boolean isApproved() {
 		if (getStatus() == WorkflowConstants.STATUS_APPROVED) {
 			return true;
@@ -729,6 +793,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		}
 	}
 
+	@Override
 	public boolean isDenied() {
 		if (getStatus() == WorkflowConstants.STATUS_DENIED) {
 			return true;
@@ -738,6 +803,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		}
 	}
 
+	@Override
 	public boolean isDraft() {
 		if (getStatus() == WorkflowConstants.STATUS_DRAFT) {
 			return true;
@@ -747,6 +813,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		}
 	}
 
+	@Override
 	public boolean isExpired() {
 		if (getStatus() == WorkflowConstants.STATUS_EXPIRED) {
 			return true;
@@ -756,6 +823,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		}
 	}
 
+	@Override
 	public boolean isInactive() {
 		if (getStatus() == WorkflowConstants.STATUS_INACTIVE) {
 			return true;
@@ -765,6 +833,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		}
 	}
 
+	@Override
 	public boolean isIncomplete() {
 		if (getStatus() == WorkflowConstants.STATUS_INCOMPLETE) {
 			return true;
@@ -774,6 +843,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		}
 	}
 
+	@Override
 	public boolean isInTrash() {
 		if (getStatus() == WorkflowConstants.STATUS_IN_TRASH) {
 			return true;
@@ -783,6 +853,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		}
 	}
 
+	@Override
 	public boolean isPending() {
 		if (getStatus() == WorkflowConstants.STATUS_PENDING) {
 			return true;
@@ -792,6 +863,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		}
 	}
 
+	@Override
 	public boolean isScheduled() {
 		if (getStatus() == WorkflowConstants.STATUS_SCHEDULED) {
 			return true;
@@ -859,6 +931,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		return mbThreadImpl;
 	}
 
+	@Override
 	public int compareTo(MBThread mbThread) {
 		int value = 0;
 
@@ -891,18 +964,15 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof MBThread)) {
 			return false;
 		}
 
-		MBThread mbThread = null;
-
-		try {
-			mbThread = (MBThread)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		MBThread mbThread = (MBThread)obj;
 
 		long primaryKey = mbThread.getPrimaryKey();
 
@@ -1100,6 +1170,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(67);
 

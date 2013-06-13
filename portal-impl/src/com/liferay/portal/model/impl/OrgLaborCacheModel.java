@@ -74,6 +74,7 @@ public class OrgLaborCacheModel implements CacheModel<OrgLabor>, Externalizable 
 		return sb.toString();
 	}
 
+	@Override
 	public OrgLabor toEntityModel() {
 		OrgLaborImpl orgLaborImpl = new OrgLaborImpl();
 
@@ -100,6 +101,7 @@ public class OrgLaborCacheModel implements CacheModel<OrgLabor>, Externalizable 
 		return orgLaborImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		orgLaborId = objectInput.readLong();
 		organizationId = objectInput.readLong();
@@ -120,6 +122,7 @@ public class OrgLaborCacheModel implements CacheModel<OrgLabor>, Externalizable 
 		satClose = objectInput.readInt();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(orgLaborId);

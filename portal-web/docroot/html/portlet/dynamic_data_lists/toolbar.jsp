@@ -20,51 +20,46 @@
 String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
 %>
 
-<div class="lfr-portlet-toolbar">
-	<portlet:renderURL var="viewRecordsURL">
-		<portlet:param name="struts_action" value="/dynamic_data_lists/view" />
-	</portlet:renderURL>
-
-	<span class="lfr-toolbar-button view-button <%= toolbarItem.equals("view-all") ? "current" : StringPool.BLANK %>">
-		<a href="<%= viewRecordsURL %>"><liferay-ui:message key="view-all" /></a>
-	</span>
-
-	<c:if test="<%= DDLPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_RECORD_SET) %>">
-		<portlet:renderURL var="addRecordSetURL">
-			<portlet:param name="struts_action" value="/dynamic_data_lists/edit_record_set" />
-			<portlet:param name="redirect" value="<%= viewRecordsURL %>" />
-			<portlet:param name="backURL" value="<%= viewRecordsURL %>" />
+<aui:nav-bar>
+	<aui:nav>
+		<portlet:renderURL var="viewRecordsURL">
+			<portlet:param name="struts_action" value="/dynamic_data_lists/view" />
 		</portlet:renderURL>
 
-		<span class="lfr-toolbar-button add-button <%= toolbarItem.equals("add") ? "current" : StringPool.BLANK %>">
-			<a href="<%= addRecordSetURL %>"><liferay-ui:message key="add" /></a>
-		</span>
+		<aui:nav-item href="<%= viewRecordsURL %>" label="view-all" selected='<%= toolbarItem.equals("view-all") %>' />
 
-		<span class="lfr-toolbar-button view-structures <%= toolbarItem.equals("manage-data-definitions") ? "current" : StringPool.BLANK %>">
-			<a href="javascript:void(0);" id="<portlet:namespace />manageDDMStructuresLink"><liferay-ui:message key="manage-data-definitions" /></a>
-		</span>
-	</c:if>
-</div>
+		<c:if test="<%= DDLPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_RECORD_SET) %>">
+			<portlet:renderURL var="addRecordSetURL">
+				<portlet:param name="struts_action" value="/dynamic_data_lists/edit_record_set" />
+				<portlet:param name="redirect" value="<%= viewRecordsURL %>" />
+				<portlet:param name="backURL" value="<%= viewRecordsURL %>" />
+			</portlet:renderURL>
+
+			<aui:nav-item href="<%= addRecordSetURL %>" iconClass="icon-plus" label="add" selected='<%= toolbarItem.equals("add") %>' />
+
+			<aui:nav-item anchorId="manageDDMStructuresLink" iconClass="icon-cog" label="manage-data-definitions" selected='<%= toolbarItem.equals("manage-data-definitions") %>' />
+		</c:if>
+	</aui:nav>
+
+	<aui:nav-bar-search cssClass="pull-right" file="/html/portlet/dynamic_data_lists/record_set_search.jsp" />
+</aui:nav-bar>
 
 <c:if test="<%= DDLPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_RECORD_SET) %>">
 	<aui:script use="aui-base">
 			A.one('#<portlet:namespace />manageDDMStructuresLink').on('click', function() {
 				Liferay.Util.openDDMPortlet(
 					{
-						ddmResource: '<%= ddmResource %>',
+						basePortletURL: '<%= PortletURLFactoryUtil.create(request, PortletKeys.DYNAMIC_DATA_MAPPING, themeDisplay.getPlid(), PortletRequest.RENDER_PHASE) %>',
 						dialog: {
-							width: 820
+							destroyOnHide: true
 						},
 
 						<%
 						Portlet portlet = PortletLocalServiceUtil.getPortletById(portletDisplay.getId());
 						%>
 
+						refererPortletName: '<%= portlet.getPortletName() %>',
 						refererWebDAVToken: '<%= portlet.getWebDAVStorageToken() %>',
-
-						storageType: '<%= PropsValues.DYNAMIC_DATA_LISTS_STORAGE_TYPE %>',
-						structureName: 'data-definition',
-						structureType: 'com.liferay.portlet.dynamicdatalists.model.DDLRecordSet',
 						title: '<%= UnicodeLanguageUtil.get(pageContext, "data-definitions") %>'
 					}
 				);

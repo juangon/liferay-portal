@@ -176,26 +176,32 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 	public JournalFeedModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _id;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _id;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return JournalFeed.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return JournalFeed.class.getName();
 	}
@@ -373,6 +379,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		}
 	}
 
+	@Override
 	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
@@ -383,6 +390,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		}
 	}
 
+	@Override
 	public void setUuid(String uuid) {
 		if (_originalUuid == null) {
 			_originalUuid = _uuid;
@@ -395,20 +403,24 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@Override
 	@JSON
 	public long getId() {
 		return _id;
 	}
 
+	@Override
 	public void setId(long id) {
 		_id = id;
 	}
 
+	@Override
 	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -425,11 +437,13 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		return _originalGroupId;
 	}
 
+	@Override
 	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
@@ -446,23 +460,28 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		return _originalCompanyId;
 	}
 
+	@Override
 	@JSON
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
 
+	@Override
 	@JSON
 	public String getUserName() {
 		if (_userName == null) {
@@ -473,28 +492,34 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		}
 	}
 
+	@Override
 	public void setUserName(String userName) {
 		_userName = userName;
 	}
 
+	@Override
 	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
 	}
 
+	@Override
 	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
 	@JSON
 	public String getFeedId() {
 		if (_feedId == null) {
@@ -505,6 +530,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		}
 	}
 
+	@Override
 	public void setFeedId(String feedId) {
 		_columnBitmask = -1L;
 
@@ -519,6 +545,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		return GetterUtil.getString(_originalFeedId);
 	}
 
+	@Override
 	@JSON
 	public String getName() {
 		if (_name == null) {
@@ -529,10 +556,12 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		}
 	}
 
+	@Override
 	public void setName(String name) {
 		_name = name;
 	}
 
+	@Override
 	@JSON
 	public String getDescription() {
 		if (_description == null) {
@@ -543,10 +572,12 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		}
 	}
 
+	@Override
 	public void setDescription(String description) {
 		_description = description;
 	}
 
+	@Override
 	@JSON
 	public String getType() {
 		if (_type == null) {
@@ -557,10 +588,12 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		}
 	}
 
+	@Override
 	public void setType(String type) {
 		_type = type;
 	}
 
+	@Override
 	@JSON
 	public String getStructureId() {
 		if (_structureId == null) {
@@ -571,10 +604,12 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		}
 	}
 
+	@Override
 	public void setStructureId(String structureId) {
 		_structureId = structureId;
 	}
 
+	@Override
 	@JSON
 	public String getTemplateId() {
 		if (_templateId == null) {
@@ -585,10 +620,12 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		}
 	}
 
+	@Override
 	public void setTemplateId(String templateId) {
 		_templateId = templateId;
 	}
 
+	@Override
 	@JSON
 	public String getRendererTemplateId() {
 		if (_rendererTemplateId == null) {
@@ -599,19 +636,23 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		}
 	}
 
+	@Override
 	public void setRendererTemplateId(String rendererTemplateId) {
 		_rendererTemplateId = rendererTemplateId;
 	}
 
+	@Override
 	@JSON
 	public int getDelta() {
 		return _delta;
 	}
 
+	@Override
 	public void setDelta(int delta) {
 		_delta = delta;
 	}
 
+	@Override
 	@JSON
 	public String getOrderByCol() {
 		if (_orderByCol == null) {
@@ -622,10 +663,12 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		}
 	}
 
+	@Override
 	public void setOrderByCol(String orderByCol) {
 		_orderByCol = orderByCol;
 	}
 
+	@Override
 	@JSON
 	public String getOrderByType() {
 		if (_orderByType == null) {
@@ -636,10 +679,12 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		}
 	}
 
+	@Override
 	public void setOrderByType(String orderByType) {
 		_orderByType = orderByType;
 	}
 
+	@Override
 	@JSON
 	public String getTargetLayoutFriendlyUrl() {
 		if (_targetLayoutFriendlyUrl == null) {
@@ -650,10 +695,12 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		}
 	}
 
+	@Override
 	public void setTargetLayoutFriendlyUrl(String targetLayoutFriendlyUrl) {
 		_targetLayoutFriendlyUrl = targetLayoutFriendlyUrl;
 	}
 
+	@Override
 	@JSON
 	public String getTargetPortletId() {
 		if (_targetPortletId == null) {
@@ -664,10 +711,12 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		}
 	}
 
+	@Override
 	public void setTargetPortletId(String targetPortletId) {
 		_targetPortletId = targetPortletId;
 	}
 
+	@Override
 	@JSON
 	public String getContentField() {
 		if (_contentField == null) {
@@ -678,10 +727,12 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		}
 	}
 
+	@Override
 	public void setContentField(String contentField) {
 		_contentField = contentField;
 	}
 
+	@Override
 	@JSON
 	public String getFeedFormat() {
 		if (_feedFormat == null) {
@@ -692,15 +743,18 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		}
 	}
 
+	@Override
 	public void setFeedFormat(String feedFormat) {
 		_feedFormat = feedFormat;
 	}
 
+	@Override
 	@JSON
 	public double getFeedVersion() {
 		return _feedVersion;
 	}
 
+	@Override
 	public void setFeedVersion(double feedVersion) {
 		_feedVersion = feedVersion;
 	}
@@ -765,6 +819,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		return journalFeedImpl;
 	}
 
+	@Override
 	public int compareTo(JournalFeed journalFeed) {
 		int value = 0;
 
@@ -779,18 +834,15 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof JournalFeed)) {
 			return false;
 		}
 
-		JournalFeed journalFeed = null;
-
-		try {
-			journalFeed = (JournalFeed)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		JournalFeed journalFeed = (JournalFeed)obj;
 
 		long primaryKey = journalFeed.getPrimaryKey();
 
@@ -1039,6 +1091,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(73);
 

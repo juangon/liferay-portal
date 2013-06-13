@@ -47,6 +47,7 @@ public class OrgGroupRoleCacheModel implements CacheModel<OrgGroupRole>,
 		return sb.toString();
 	}
 
+	@Override
 	public OrgGroupRole toEntityModel() {
 		OrgGroupRoleImpl orgGroupRoleImpl = new OrgGroupRoleImpl();
 
@@ -59,12 +60,14 @@ public class OrgGroupRoleCacheModel implements CacheModel<OrgGroupRole>,
 		return orgGroupRoleImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		organizationId = objectInput.readLong();
 		groupId = objectInput.readLong();
 		roleId = objectInput.readLong();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(organizationId);

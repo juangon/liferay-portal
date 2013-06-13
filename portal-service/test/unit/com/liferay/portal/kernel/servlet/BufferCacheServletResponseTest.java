@@ -698,30 +698,37 @@ public class BufferCacheServletResponseTest {
 		PropsUtil.setProps(
 			new Props() {
 
+				@Override
 				public boolean contains(String key) {
 					return false;
 				}
 
+				@Override
 				public String get(String key) {
 					return null;
 				}
 
+				@Override
 				public String get(String key, Filter filter) {
 					return null;
 				}
 
+				@Override
 				public String[] getArray(String key) {
 					return null;
 				}
 
+				@Override
 				public String[] getArray(String key, Filter filter) {
 					return null;
 				}
 
+				@Override
 				public Properties getProperties() {
 					return null;
 				}
 
+				@Override
 				public Properties getProperties(
 					String prefix, boolean removePrefix) {
 

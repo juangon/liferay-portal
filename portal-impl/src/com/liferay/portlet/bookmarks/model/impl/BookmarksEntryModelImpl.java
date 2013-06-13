@@ -173,26 +173,32 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 	public BookmarksEntryModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _entryId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setEntryId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _entryId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return BookmarksEntry.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return BookmarksEntry.class.getName();
 	}
@@ -341,6 +347,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		}
 	}
 
+	@Override
 	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
@@ -351,6 +358,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		}
 	}
 
+	@Override
 	public void setUuid(String uuid) {
 		if (_originalUuid == null) {
 			_originalUuid = _uuid;
@@ -363,20 +371,24 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@Override
 	@JSON
 	public long getEntryId() {
 		return _entryId;
 	}
 
+	@Override
 	public void setEntryId(long entryId) {
 		_entryId = entryId;
 	}
 
+	@Override
 	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -393,11 +405,13 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		return _originalGroupId;
 	}
 
+	@Override
 	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
@@ -414,11 +428,13 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		return _originalCompanyId;
 	}
 
+	@Override
 	@JSON
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_columnBitmask |= USERID_COLUMN_BITMASK;
 
@@ -431,10 +447,12 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
@@ -443,6 +461,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		return _originalUserId;
 	}
 
+	@Override
 	@JSON
 	public String getUserName() {
 		if (_userName == null) {
@@ -453,33 +472,40 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		}
 	}
 
+	@Override
 	public void setUserName(String userName) {
 		_userName = userName;
 	}
 
+	@Override
 	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
 	}
 
+	@Override
 	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
 	@JSON
 	public long getResourceBlockId() {
 		return _resourceBlockId;
 	}
 
+	@Override
 	public void setResourceBlockId(long resourceBlockId) {
 		_columnBitmask |= RESOURCEBLOCKID_COLUMN_BITMASK;
 
@@ -496,11 +522,13 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		return _originalResourceBlockId;
 	}
 
+	@Override
 	@JSON
 	public long getFolderId() {
 		return _folderId;
 	}
 
+	@Override
 	public void setFolderId(long folderId) {
 		_columnBitmask = -1L;
 
@@ -517,6 +545,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		return _originalFolderId;
 	}
 
+	@Override
 	@JSON
 	public String getName() {
 		if (_name == null) {
@@ -527,12 +556,14 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		}
 	}
 
+	@Override
 	public void setName(String name) {
 		_columnBitmask = -1L;
 
 		_name = name;
 	}
 
+	@Override
 	@JSON
 	public String getUrl() {
 		if (_url == null) {
@@ -543,10 +574,12 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		}
 	}
 
+	@Override
 	public void setUrl(String url) {
 		_url = url;
 	}
 
+	@Override
 	@JSON
 	public String getDescription() {
 		if (_description == null) {
@@ -557,33 +590,40 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		}
 	}
 
+	@Override
 	public void setDescription(String description) {
 		_description = description;
 	}
 
+	@Override
 	@JSON
 	public int getVisits() {
 		return _visits;
 	}
 
+	@Override
 	public void setVisits(int visits) {
 		_visits = visits;
 	}
 
+	@Override
 	@JSON
 	public int getPriority() {
 		return _priority;
 	}
 
+	@Override
 	public void setPriority(int priority) {
 		_priority = priority;
 	}
 
+	@Override
 	@JSON
 	public int getStatus() {
 		return _status;
 	}
 
+	@Override
 	public void setStatus(int status) {
 		_columnBitmask |= STATUS_COLUMN_BITMASK;
 
@@ -600,24 +640,29 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		return _originalStatus;
 	}
 
+	@Override
 	@JSON
 	public long getStatusByUserId() {
 		return _statusByUserId;
 	}
 
+	@Override
 	public void setStatusByUserId(long statusByUserId) {
 		_statusByUserId = statusByUserId;
 	}
 
+	@Override
 	public String getStatusByUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getStatusByUserId(), "uuid",
 			_statusByUserUuid);
 	}
 
+	@Override
 	public void setStatusByUserUuid(String statusByUserUuid) {
 		_statusByUserUuid = statusByUserUuid;
 	}
 
+	@Override
 	@JSON
 	public String getStatusByUserName() {
 		if (_statusByUserName == null) {
@@ -628,15 +673,18 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		}
 	}
 
+	@Override
 	public void setStatusByUserName(String statusByUserName) {
 		_statusByUserName = statusByUserName;
 	}
 
+	@Override
 	@JSON
 	public Date getStatusDate() {
 		return _statusDate;
 	}
 
+	@Override
 	public void setStatusDate(Date statusDate) {
 		_statusDate = statusDate;
 	}
@@ -644,10 +692,12 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #isApproved}
 	 */
+	@Override
 	public boolean getApproved() {
 		return isApproved();
 	}
 
+	@Override
 	public boolean isApproved() {
 		if (getStatus() == WorkflowConstants.STATUS_APPROVED) {
 			return true;
@@ -657,6 +707,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		}
 	}
 
+	@Override
 	public boolean isDenied() {
 		if (getStatus() == WorkflowConstants.STATUS_DENIED) {
 			return true;
@@ -666,6 +717,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		}
 	}
 
+	@Override
 	public boolean isDraft() {
 		if (getStatus() == WorkflowConstants.STATUS_DRAFT) {
 			return true;
@@ -675,6 +727,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		}
 	}
 
+	@Override
 	public boolean isExpired() {
 		if (getStatus() == WorkflowConstants.STATUS_EXPIRED) {
 			return true;
@@ -684,6 +737,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		}
 	}
 
+	@Override
 	public boolean isInactive() {
 		if (getStatus() == WorkflowConstants.STATUS_INACTIVE) {
 			return true;
@@ -693,6 +747,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		}
 	}
 
+	@Override
 	public boolean isIncomplete() {
 		if (getStatus() == WorkflowConstants.STATUS_INCOMPLETE) {
 			return true;
@@ -702,6 +757,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		}
 	}
 
+	@Override
 	public boolean isInTrash() {
 		if (getStatus() == WorkflowConstants.STATUS_IN_TRASH) {
 			return true;
@@ -711,6 +767,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		}
 	}
 
+	@Override
 	public boolean isPending() {
 		if (getStatus() == WorkflowConstants.STATUS_PENDING) {
 			return true;
@@ -720,6 +777,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		}
 	}
 
+	@Override
 	public boolean isScheduled() {
 		if (getStatus() == WorkflowConstants.STATUS_SCHEDULED) {
 			return true;
@@ -785,6 +843,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		return bookmarksEntryImpl;
 	}
 
+	@Override
 	public int compareTo(BookmarksEntry bookmarksEntry) {
 		int value = 0;
 
@@ -813,18 +872,15 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof BookmarksEntry)) {
 			return false;
 		}
 
-		BookmarksEntry bookmarksEntry = null;
-
-		try {
-			bookmarksEntry = (BookmarksEntry)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		BookmarksEntry bookmarksEntry = (BookmarksEntry)obj;
 
 		long primaryKey = bookmarksEntry.getPrimaryKey();
 
@@ -1023,6 +1079,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(61);
 

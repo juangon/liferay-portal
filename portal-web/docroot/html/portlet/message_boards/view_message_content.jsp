@@ -167,6 +167,32 @@ MBThreadFlag threadFlag = MBThreadFlagLocalServiceUtil.getThreadFlag(themeDispla
 				/>
 			</c:if>
 
+			<c:if test="<%= !thread.isLocked() && MBMessagePermission.contains(permissionChecker, message, ActionKeys.PERMISSIONS) %>">
+
+				<%
+				MBMessage rootMessage = null;
+
+				if (message.isRoot()) {
+					rootMessage = message;
+				}
+				else {
+					rootMessage = MBMessageLocalServiceUtil.getMessage(message.getRootMessageId());
+				}
+				%>
+
+				<liferay-security:permissionsURL
+					modelResource="<%= MBMessage.class.getName() %>"
+					modelResourceDescription="<%= rootMessage.getSubject() %>"
+					resourcePrimKey="<%= String.valueOf(thread.getRootMessageId()) %>"
+					var="permissionsURL"
+				/>
+
+				<liferay-ui:icon
+					image="permissions"
+					url="<%= permissionsURL %>"
+				/>
+			</c:if>
+
 			<c:if test="<%= enableRSS && MBMessagePermission.contains(permissionChecker, message, ActionKeys.VIEW) %>">
 
 				<%
@@ -357,7 +383,7 @@ MBThreadFlag threadFlag = MBThreadFlagLocalServiceUtil.getThreadFlag(themeDispla
 	</c:choose>
 
 	<c:if test="<%= !viewableThread %>">
-		<div class="portlet-msg-error">
+		<div class="alert alert-error">
 			<liferay-ui:message key="you-do-not-have-permission-to-access-the-requested-resource" />
 		</div>
 	</c:if>

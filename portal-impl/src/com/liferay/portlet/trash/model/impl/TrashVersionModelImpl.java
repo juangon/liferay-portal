@@ -91,26 +91,32 @@ public class TrashVersionModelImpl extends BaseModelImpl<TrashVersion>
 	public TrashVersionModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _versionId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setVersionId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _versionId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return TrashVersion.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return TrashVersion.class.getName();
 	}
@@ -161,18 +167,22 @@ public class TrashVersionModelImpl extends BaseModelImpl<TrashVersion>
 		}
 	}
 
+	@Override
 	public long getVersionId() {
 		return _versionId;
 	}
 
+	@Override
 	public void setVersionId(long versionId) {
 		_versionId = versionId;
 	}
 
+	@Override
 	public long getEntryId() {
 		return _entryId;
 	}
 
+	@Override
 	public void setEntryId(long entryId) {
 		_columnBitmask |= ENTRYID_COLUMN_BITMASK;
 
@@ -189,6 +199,7 @@ public class TrashVersionModelImpl extends BaseModelImpl<TrashVersion>
 		return _originalEntryId;
 	}
 
+	@Override
 	public String getClassName() {
 		if (getClassNameId() <= 0) {
 			return StringPool.BLANK;
@@ -197,6 +208,7 @@ public class TrashVersionModelImpl extends BaseModelImpl<TrashVersion>
 		return PortalUtil.getClassName(getClassNameId());
 	}
 
+	@Override
 	public void setClassName(String className) {
 		long classNameId = 0;
 
@@ -207,10 +219,12 @@ public class TrashVersionModelImpl extends BaseModelImpl<TrashVersion>
 		setClassNameId(classNameId);
 	}
 
+	@Override
 	public long getClassNameId() {
 		return _classNameId;
 	}
 
+	@Override
 	public void setClassNameId(long classNameId) {
 		_columnBitmask |= CLASSNAMEID_COLUMN_BITMASK;
 
@@ -227,10 +241,12 @@ public class TrashVersionModelImpl extends BaseModelImpl<TrashVersion>
 		return _originalClassNameId;
 	}
 
+	@Override
 	public long getClassPK() {
 		return _classPK;
 	}
 
+	@Override
 	public void setClassPK(long classPK) {
 		_columnBitmask |= CLASSPK_COLUMN_BITMASK;
 
@@ -247,10 +263,12 @@ public class TrashVersionModelImpl extends BaseModelImpl<TrashVersion>
 		return _originalClassPK;
 	}
 
+	@Override
 	public int getStatus() {
 		return _status;
 	}
 
+	@Override
 	public void setStatus(int status) {
 		_status = status;
 	}
@@ -297,6 +315,7 @@ public class TrashVersionModelImpl extends BaseModelImpl<TrashVersion>
 		return trashVersionImpl;
 	}
 
+	@Override
 	public int compareTo(TrashVersion trashVersion) {
 		long primaryKey = trashVersion.getPrimaryKey();
 
@@ -313,18 +332,15 @@ public class TrashVersionModelImpl extends BaseModelImpl<TrashVersion>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof TrashVersion)) {
 			return false;
 		}
 
-		TrashVersion trashVersion = null;
-
-		try {
-			trashVersion = (TrashVersion)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		TrashVersion trashVersion = (TrashVersion)obj;
 
 		long primaryKey = trashVersion.getPrimaryKey();
 
@@ -396,6 +412,7 @@ public class TrashVersionModelImpl extends BaseModelImpl<TrashVersion>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(19);
 

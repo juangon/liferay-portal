@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import java.util.Collection;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -40,6 +41,7 @@ public class SynchronizedIndexAccessorImpl implements IndexAccessor {
 		_writeLock = readWriteLock.writeLock();
 	}
 
+	@Override
 	public void addDocument(Document document) throws IOException {
 		_readLock.lock();
 
@@ -51,6 +53,21 @@ public class SynchronizedIndexAccessorImpl implements IndexAccessor {
 		}
 	}
 
+	@Override
+	public void addDocuments(Collection<Document> documents)
+		throws IOException {
+
+		_readLock.lock();
+
+		try {
+			_indexAccessor.addDocuments(documents);
+		}
+		finally {
+			_readLock.unlock();
+		}
+	}
+
+	@Override
 	public void close() {
 		_readLock.lock();
 
@@ -62,6 +79,7 @@ public class SynchronizedIndexAccessorImpl implements IndexAccessor {
 		}
 	}
 
+	@Override
 	public void delete() {
 		_writeLock.lock();
 
@@ -73,6 +91,7 @@ public class SynchronizedIndexAccessorImpl implements IndexAccessor {
 		}
 	}
 
+	@Override
 	public void deleteDocuments(Term term) throws IOException {
 		_readLock.lock();
 
@@ -84,6 +103,7 @@ public class SynchronizedIndexAccessorImpl implements IndexAccessor {
 		}
 	}
 
+	@Override
 	public void dumpIndex(OutputStream outputStream) throws IOException {
 		_readLock.lock();
 
@@ -95,18 +115,22 @@ public class SynchronizedIndexAccessorImpl implements IndexAccessor {
 		}
 	}
 
+	@Override
 	public long getCompanyId() {
 		return _indexAccessor.getCompanyId();
 	}
 
+	@Override
 	public long getLastGeneration() {
 		return _indexAccessor.getLastGeneration();
 	}
 
+	@Override
 	public Directory getLuceneDir() {
 		return _indexAccessor.getLuceneDir();
 	}
 
+	@Override
 	public void loadIndex(InputStream inputStream) throws IOException {
 		_writeLock.lock();
 
@@ -118,6 +142,7 @@ public class SynchronizedIndexAccessorImpl implements IndexAccessor {
 		}
 	}
 
+	@Override
 	public void updateDocument(Term term, Document document)
 		throws IOException {
 

@@ -50,9 +50,11 @@ public class PortalMessageBusPermission extends BasicPermission {
 
 	private static class NoPACL implements PACL {
 
+		@Override
 		public void checkListen(String destinationName) {
 		}
 
+		@Override
 		public void checkSend(String destinationName) {
 		}
 

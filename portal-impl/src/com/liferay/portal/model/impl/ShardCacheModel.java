@@ -49,6 +49,7 @@ public class ShardCacheModel implements CacheModel<Shard>, Externalizable {
 		return sb.toString();
 	}
 
+	@Override
 	public Shard toEntityModel() {
 		ShardImpl shardImpl = new ShardImpl();
 
@@ -68,6 +69,7 @@ public class ShardCacheModel implements CacheModel<Shard>, Externalizable {
 		return shardImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		shardId = objectInput.readLong();
 		classNameId = objectInput.readLong();
@@ -75,6 +77,7 @@ public class ShardCacheModel implements CacheModel<Shard>, Externalizable {
 		name = objectInput.readUTF();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(shardId);

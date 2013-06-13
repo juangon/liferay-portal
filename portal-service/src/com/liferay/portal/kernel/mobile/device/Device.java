@@ -42,6 +42,13 @@ public interface Device extends Serializable {
 
 	public String getPointingMethod();
 
+	public Dimensions getScreenPhysicalSize();
+
+	public Dimensions getScreenResolution();
+
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #getScreenResolution()}
+	 */
 	public Dimensions getScreenSize();
 
 	public boolean hasQwertyKeyboard();

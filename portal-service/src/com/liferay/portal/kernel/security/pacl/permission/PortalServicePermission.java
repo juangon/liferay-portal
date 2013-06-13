@@ -118,6 +118,7 @@ public class PortalServicePermission extends BasicPermission {
 
 	private static class NoPACL implements PACL {
 
+		@Override
 		public void checkService(
 			Object object, Method method, Object[] arguments) {
 		}

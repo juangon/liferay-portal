@@ -55,7 +55,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 		title="search"
 	/>
 
-	<span class="aui-search-bar">
+	<span class="form-search">
 		<aui:input inlineField="<%= true %>" label="" name="keywords" size="30" title="search-messages" type="text" value="<%= keywords %>" />
 
 		<aui:button type="submit" value="search" />
@@ -107,7 +107,9 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 			total = hits.getLength();
 
-			if (searchContainer.recalculateCur(total)) {
+			searchContainer.setTotal(total);
+
+			if (searchContainer.isRecalculateCur()) {
 				searchContext.setStart(searchContainer.getStart());
 				searchContext.setEnd(searchContainer.getEnd());
 

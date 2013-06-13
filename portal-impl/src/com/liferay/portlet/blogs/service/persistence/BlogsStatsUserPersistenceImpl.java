@@ -115,6 +115,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the matching blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<BlogsStatsUser> findByGroupId(long groupId)
 		throws SystemException {
 		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
@@ -133,6 +134,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the range of matching blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<BlogsStatsUser> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
 		return findByGroupId(groupId, start, end, null);
@@ -152,6 +154,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the ordered range of matching blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<BlogsStatsUser> findByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -258,6 +261,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @throws com.liferay.portlet.blogs.NoSuchStatsUserException if a matching blogs stats user could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BlogsStatsUser findByGroupId_First(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchStatsUserException, SystemException {
@@ -288,6 +292,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the first matching blogs stats user, or <code>null</code> if a matching blogs stats user could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BlogsStatsUser fetchByGroupId_First(long groupId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<BlogsStatsUser> list = findByGroupId(groupId, 0, 1,
@@ -309,6 +314,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @throws com.liferay.portlet.blogs.NoSuchStatsUserException if a matching blogs stats user could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BlogsStatsUser findByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchStatsUserException, SystemException {
@@ -339,6 +345,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the last matching blogs stats user, or <code>null</code> if a matching blogs stats user could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BlogsStatsUser fetchByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByGroupId(groupId);
@@ -363,6 +370,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @throws com.liferay.portlet.blogs.NoSuchStatsUserException if a blogs stats user with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BlogsStatsUser[] findByGroupId_PrevAndNext(long statsUserId,
 		long groupId, OrderByComparator orderByComparator)
 		throws NoSuchStatsUserException, SystemException {
@@ -504,6 +512,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @param groupId the group ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (BlogsStatsUser blogsStatsUser : findByGroupId(groupId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -518,6 +527,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the number of matching blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByGroupId(long groupId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPID;
 
@@ -594,6 +604,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the matching blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<BlogsStatsUser> findByUserId(long userId)
 		throws SystemException {
 		return findByUserId(userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
@@ -612,6 +623,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the range of matching blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<BlogsStatsUser> findByUserId(long userId, int start, int end)
 		throws SystemException {
 		return findByUserId(userId, start, end, null);
@@ -631,6 +643,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the ordered range of matching blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<BlogsStatsUser> findByUserId(long userId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -737,6 +750,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @throws com.liferay.portlet.blogs.NoSuchStatsUserException if a matching blogs stats user could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BlogsStatsUser findByUserId_First(long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchStatsUserException, SystemException {
@@ -767,6 +781,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the first matching blogs stats user, or <code>null</code> if a matching blogs stats user could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BlogsStatsUser fetchByUserId_First(long userId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<BlogsStatsUser> list = findByUserId(userId, 0, 1, orderByComparator);
@@ -787,6 +802,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @throws com.liferay.portlet.blogs.NoSuchStatsUserException if a matching blogs stats user could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BlogsStatsUser findByUserId_Last(long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchStatsUserException, SystemException {
@@ -817,6 +833,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the last matching blogs stats user, or <code>null</code> if a matching blogs stats user could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BlogsStatsUser fetchByUserId_Last(long userId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByUserId(userId);
@@ -841,6 +858,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @throws com.liferay.portlet.blogs.NoSuchStatsUserException if a blogs stats user with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BlogsStatsUser[] findByUserId_PrevAndNext(long statsUserId,
 		long userId, OrderByComparator orderByComparator)
 		throws NoSuchStatsUserException, SystemException {
@@ -982,6 +1000,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @param userId the user ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByUserId(long userId) throws SystemException {
 		for (BlogsStatsUser blogsStatsUser : findByUserId(userId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -996,6 +1015,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the number of matching blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUserId(long userId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_USERID;
 
@@ -1062,6 +1082,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @throws com.liferay.portlet.blogs.NoSuchStatsUserException if a matching blogs stats user could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BlogsStatsUser findByG_U(long groupId, long userId)
 		throws NoSuchStatsUserException, SystemException {
 		BlogsStatsUser blogsStatsUser = fetchByG_U(groupId, userId);
@@ -1097,6 +1118,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the matching blogs stats user, or <code>null</code> if a matching blogs stats user could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BlogsStatsUser fetchByG_U(long groupId, long userId)
 		throws SystemException {
 		return fetchByG_U(groupId, userId, true);
@@ -1111,6 +1133,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the matching blogs stats user, or <code>null</code> if a matching blogs stats user could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BlogsStatsUser fetchByG_U(long groupId, long userId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, userId };
@@ -1202,6 +1225,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the blogs stats user that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BlogsStatsUser removeByG_U(long groupId, long userId)
 		throws NoSuchStatsUserException, SystemException {
 		BlogsStatsUser blogsStatsUser = findByG_U(groupId, userId);
@@ -1217,6 +1241,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the number of matching blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_U(long groupId, long userId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_U;
 
@@ -1291,6 +1316,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the matching blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<BlogsStatsUser> findByG_NotE(long groupId, int entryCount)
 		throws SystemException {
 		return findByG_NotE(groupId, entryCount, QueryUtil.ALL_POS,
@@ -1311,6 +1337,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the range of matching blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<BlogsStatsUser> findByG_NotE(long groupId, int entryCount,
 		int start, int end) throws SystemException {
 		return findByG_NotE(groupId, entryCount, start, end, null);
@@ -1331,6 +1358,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the ordered range of matching blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<BlogsStatsUser> findByG_NotE(long groupId, int entryCount,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1440,6 +1468,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @throws com.liferay.portlet.blogs.NoSuchStatsUserException if a matching blogs stats user could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BlogsStatsUser findByG_NotE_First(long groupId, int entryCount,
 		OrderByComparator orderByComparator)
 		throws NoSuchStatsUserException, SystemException {
@@ -1474,6 +1503,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the first matching blogs stats user, or <code>null</code> if a matching blogs stats user could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BlogsStatsUser fetchByG_NotE_First(long groupId, int entryCount,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<BlogsStatsUser> list = findByG_NotE(groupId, entryCount, 0, 1,
@@ -1496,6 +1526,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @throws com.liferay.portlet.blogs.NoSuchStatsUserException if a matching blogs stats user could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BlogsStatsUser findByG_NotE_Last(long groupId, int entryCount,
 		OrderByComparator orderByComparator)
 		throws NoSuchStatsUserException, SystemException {
@@ -1530,6 +1561,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the last matching blogs stats user, or <code>null</code> if a matching blogs stats user could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BlogsStatsUser fetchByG_NotE_Last(long groupId, int entryCount,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByG_NotE(groupId, entryCount);
@@ -1555,6 +1587,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @throws com.liferay.portlet.blogs.NoSuchStatsUserException if a blogs stats user with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BlogsStatsUser[] findByG_NotE_PrevAndNext(long statsUserId,
 		long groupId, int entryCount, OrderByComparator orderByComparator)
 		throws NoSuchStatsUserException, SystemException {
@@ -1701,6 +1734,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @param entryCount the entry count
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByG_NotE(long groupId, int entryCount)
 		throws SystemException {
 		for (BlogsStatsUser blogsStatsUser : findByG_NotE(groupId, entryCount,
@@ -1717,6 +1751,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the number of matching blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_NotE(long groupId, int entryCount)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_WITH_PAGINATION_COUNT_BY_G_NOTE;
@@ -1792,6 +1827,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the matching blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<BlogsStatsUser> findByC_NotE(long companyId, int entryCount)
 		throws SystemException {
 		return findByC_NotE(companyId, entryCount, QueryUtil.ALL_POS,
@@ -1812,6 +1848,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the range of matching blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<BlogsStatsUser> findByC_NotE(long companyId, int entryCount,
 		int start, int end) throws SystemException {
 		return findByC_NotE(companyId, entryCount, start, end, null);
@@ -1832,6 +1869,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the ordered range of matching blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<BlogsStatsUser> findByC_NotE(long companyId, int entryCount,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1941,6 +1979,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @throws com.liferay.portlet.blogs.NoSuchStatsUserException if a matching blogs stats user could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BlogsStatsUser findByC_NotE_First(long companyId, int entryCount,
 		OrderByComparator orderByComparator)
 		throws NoSuchStatsUserException, SystemException {
@@ -1975,6 +2014,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the first matching blogs stats user, or <code>null</code> if a matching blogs stats user could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BlogsStatsUser fetchByC_NotE_First(long companyId, int entryCount,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<BlogsStatsUser> list = findByC_NotE(companyId, entryCount, 0, 1,
@@ -1997,6 +2037,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @throws com.liferay.portlet.blogs.NoSuchStatsUserException if a matching blogs stats user could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BlogsStatsUser findByC_NotE_Last(long companyId, int entryCount,
 		OrderByComparator orderByComparator)
 		throws NoSuchStatsUserException, SystemException {
@@ -2031,6 +2072,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the last matching blogs stats user, or <code>null</code> if a matching blogs stats user could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BlogsStatsUser fetchByC_NotE_Last(long companyId, int entryCount,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByC_NotE(companyId, entryCount);
@@ -2056,6 +2098,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @throws com.liferay.portlet.blogs.NoSuchStatsUserException if a blogs stats user with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BlogsStatsUser[] findByC_NotE_PrevAndNext(long statsUserId,
 		long companyId, int entryCount, OrderByComparator orderByComparator)
 		throws NoSuchStatsUserException, SystemException {
@@ -2202,6 +2245,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @param entryCount the entry count
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByC_NotE(long companyId, int entryCount)
 		throws SystemException {
 		for (BlogsStatsUser blogsStatsUser : findByC_NotE(companyId,
@@ -2218,6 +2262,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the number of matching blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByC_NotE(long companyId, int entryCount)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_WITH_PAGINATION_COUNT_BY_C_NOTE;
@@ -2301,6 +2346,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the matching blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<BlogsStatsUser> findByU_L(long userId, Date lastPostDate)
 		throws SystemException {
 		return findByU_L(userId, lastPostDate, QueryUtil.ALL_POS,
@@ -2321,6 +2367,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the range of matching blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<BlogsStatsUser> findByU_L(long userId, Date lastPostDate,
 		int start, int end) throws SystemException {
 		return findByU_L(userId, lastPostDate, start, end, null);
@@ -2341,6 +2388,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the ordered range of matching blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<BlogsStatsUser> findByU_L(long userId, Date lastPostDate,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -2470,6 +2518,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @throws com.liferay.portlet.blogs.NoSuchStatsUserException if a matching blogs stats user could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BlogsStatsUser findByU_L_First(long userId, Date lastPostDate,
 		OrderByComparator orderByComparator)
 		throws NoSuchStatsUserException, SystemException {
@@ -2504,6 +2553,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the first matching blogs stats user, or <code>null</code> if a matching blogs stats user could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BlogsStatsUser fetchByU_L_First(long userId, Date lastPostDate,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<BlogsStatsUser> list = findByU_L(userId, lastPostDate, 0, 1,
@@ -2526,6 +2576,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @throws com.liferay.portlet.blogs.NoSuchStatsUserException if a matching blogs stats user could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BlogsStatsUser findByU_L_Last(long userId, Date lastPostDate,
 		OrderByComparator orderByComparator)
 		throws NoSuchStatsUserException, SystemException {
@@ -2560,6 +2611,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the last matching blogs stats user, or <code>null</code> if a matching blogs stats user could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BlogsStatsUser fetchByU_L_Last(long userId, Date lastPostDate,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByU_L(userId, lastPostDate);
@@ -2585,6 +2637,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @throws com.liferay.portlet.blogs.NoSuchStatsUserException if a blogs stats user with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BlogsStatsUser[] findByU_L_PrevAndNext(long statsUserId,
 		long userId, Date lastPostDate, OrderByComparator orderByComparator)
 		throws NoSuchStatsUserException, SystemException {
@@ -2742,6 +2795,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @param lastPostDate the last post date
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByU_L(long userId, Date lastPostDate)
 		throws SystemException {
 		for (BlogsStatsUser blogsStatsUser : findByU_L(userId, lastPostDate,
@@ -2758,6 +2812,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the number of matching blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByU_L(long userId, Date lastPostDate)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_U_L;
@@ -2828,6 +2883,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 *
 	 * @param blogsStatsUser the blogs stats user
 	 */
+	@Override
 	public void cacheResult(BlogsStatsUser blogsStatsUser) {
 		EntityCacheUtil.putResult(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
 			BlogsStatsUserImpl.class, blogsStatsUser.getPrimaryKey(),
@@ -2845,6 +2901,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 *
 	 * @param blogsStatsUsers the blogs stats users
 	 */
+	@Override
 	public void cacheResult(List<BlogsStatsUser> blogsStatsUsers) {
 		for (BlogsStatsUser blogsStatsUser : blogsStatsUsers) {
 			if (EntityCacheUtil.getResult(
@@ -2965,6 +3022,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @param statsUserId the primary key for the new blogs stats user
 	 * @return the new blogs stats user
 	 */
+	@Override
 	public BlogsStatsUser create(long statsUserId) {
 		BlogsStatsUser blogsStatsUser = new BlogsStatsUserImpl();
 
@@ -2982,6 +3040,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @throws com.liferay.portlet.blogs.NoSuchStatsUserException if a blogs stats user with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BlogsStatsUser remove(long statsUserId)
 		throws NoSuchStatsUserException, SystemException {
 		return remove((Serializable)statsUserId);
@@ -3221,6 +3280,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @throws com.liferay.portlet.blogs.NoSuchStatsUserException if a blogs stats user with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BlogsStatsUser findByPrimaryKey(long statsUserId)
 		throws NoSuchStatsUserException, SystemException {
 		return findByPrimaryKey((Serializable)statsUserId);
@@ -3282,6 +3342,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the blogs stats user, or <code>null</code> if a blogs stats user with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BlogsStatsUser fetchByPrimaryKey(long statsUserId)
 		throws SystemException {
 		return fetchByPrimaryKey((Serializable)statsUserId);
@@ -3293,6 +3354,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<BlogsStatsUser> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -3309,6 +3371,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the range of blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<BlogsStatsUser> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
@@ -3327,6 +3390,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the ordered range of blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<BlogsStatsUser> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -3412,6 +3476,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (BlogsStatsUser blogsStatsUser : findAll()) {
 			remove(blogsStatsUser);
@@ -3424,6 +3489,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the number of blogs stats users
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -3509,6 +3575,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		};
 
 	private static CacheModel<BlogsStatsUser> _nullBlogsStatsUserCacheModel = new CacheModel<BlogsStatsUser>() {
+			@Override
 			public BlogsStatsUser toEntityModel() {
 				return _nullBlogsStatsUser;
 			}

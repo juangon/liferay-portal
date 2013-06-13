@@ -75,6 +75,7 @@ public class AccountCacheModel implements CacheModel<Account>, Externalizable {
 		return sb.toString();
 	}
 
+	@Override
 	public Account toEntityModel() {
 		AccountImpl accountImpl = new AccountImpl();
 
@@ -173,6 +174,7 @@ public class AccountCacheModel implements CacheModel<Account>, Externalizable {
 		return accountImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		accountId = objectInput.readLong();
 		companyId = objectInput.readLong();
@@ -192,6 +194,7 @@ public class AccountCacheModel implements CacheModel<Account>, Externalizable {
 		size = objectInput.readUTF();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(accountId);

@@ -117,6 +117,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the matching asset vocabularies
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetVocabulary> findByUuid(String uuid)
 		throws SystemException {
 		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
@@ -135,6 +136,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the range of matching asset vocabularies
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetVocabulary> findByUuid(String uuid, int start, int end)
 		throws SystemException {
 		return findByUuid(uuid, start, end, null);
@@ -154,6 +156,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the ordered range of matching asset vocabularies
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetVocabulary> findByUuid(String uuid, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -274,6 +277,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @throws com.liferay.portlet.asset.NoSuchVocabularyException if a matching asset vocabulary could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetVocabulary findByUuid_First(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchVocabularyException, SystemException {
@@ -304,6 +308,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the first matching asset vocabulary, or <code>null</code> if a matching asset vocabulary could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetVocabulary fetchByUuid_First(String uuid,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<AssetVocabulary> list = findByUuid(uuid, 0, 1, orderByComparator);
@@ -324,6 +329,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @throws com.liferay.portlet.asset.NoSuchVocabularyException if a matching asset vocabulary could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetVocabulary findByUuid_Last(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchVocabularyException, SystemException {
@@ -354,6 +360,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the last matching asset vocabulary, or <code>null</code> if a matching asset vocabulary could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetVocabulary fetchByUuid_Last(String uuid,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByUuid(uuid);
@@ -378,6 +385,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @throws com.liferay.portlet.asset.NoSuchVocabularyException if a asset vocabulary with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetVocabulary[] findByUuid_PrevAndNext(long vocabularyId,
 		String uuid, OrderByComparator orderByComparator)
 		throws NoSuchVocabularyException, SystemException {
@@ -533,6 +541,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @param uuid the uuid
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByUuid(String uuid) throws SystemException {
 		for (AssetVocabulary assetVocabulary : findByUuid(uuid,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -547,6 +556,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the number of matching asset vocabularies
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUuid(String uuid) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID;
 
@@ -630,6 +640,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @throws com.liferay.portlet.asset.NoSuchVocabularyException if a matching asset vocabulary could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetVocabulary findByUUID_G(String uuid, long groupId)
 		throws NoSuchVocabularyException, SystemException {
 		AssetVocabulary assetVocabulary = fetchByUUID_G(uuid, groupId);
@@ -665,6 +676,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the matching asset vocabulary, or <code>null</code> if a matching asset vocabulary could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetVocabulary fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		return fetchByUUID_G(uuid, groupId, true);
@@ -679,6 +691,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the matching asset vocabulary, or <code>null</code> if a matching asset vocabulary could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetVocabulary fetchByUUID_G(String uuid, long groupId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, groupId };
@@ -785,6 +798,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the asset vocabulary that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetVocabulary removeByUUID_G(String uuid, long groupId)
 		throws NoSuchVocabularyException, SystemException {
 		AssetVocabulary assetVocabulary = findByUUID_G(uuid, groupId);
@@ -800,6 +814,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the number of matching asset vocabularies
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID_G;
@@ -900,6 +915,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the matching asset vocabularies
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetVocabulary> findByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		return findByUuid_C(uuid, companyId, QueryUtil.ALL_POS,
@@ -920,6 +936,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the range of matching asset vocabularies
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetVocabulary> findByUuid_C(String uuid, long companyId,
 		int start, int end) throws SystemException {
 		return findByUuid_C(uuid, companyId, start, end, null);
@@ -940,6 +957,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the ordered range of matching asset vocabularies
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetVocabulary> findByUuid_C(String uuid, long companyId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1071,6 +1089,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @throws com.liferay.portlet.asset.NoSuchVocabularyException if a matching asset vocabulary could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetVocabulary findByUuid_C_First(String uuid, long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchVocabularyException, SystemException {
@@ -1105,6 +1124,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the first matching asset vocabulary, or <code>null</code> if a matching asset vocabulary could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetVocabulary fetchByUuid_C_First(String uuid, long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<AssetVocabulary> list = findByUuid_C(uuid, companyId, 0, 1,
@@ -1127,6 +1147,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @throws com.liferay.portlet.asset.NoSuchVocabularyException if a matching asset vocabulary could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetVocabulary findByUuid_C_Last(String uuid, long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchVocabularyException, SystemException {
@@ -1161,6 +1182,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the last matching asset vocabulary, or <code>null</code> if a matching asset vocabulary could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetVocabulary fetchByUuid_C_Last(String uuid, long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByUuid_C(uuid, companyId);
@@ -1186,6 +1208,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @throws com.liferay.portlet.asset.NoSuchVocabularyException if a asset vocabulary with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetVocabulary[] findByUuid_C_PrevAndNext(long vocabularyId,
 		String uuid, long companyId, OrderByComparator orderByComparator)
 		throws NoSuchVocabularyException, SystemException {
@@ -1346,6 +1369,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @param companyId the company ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		for (AssetVocabulary assetVocabulary : findByUuid_C(uuid, companyId,
@@ -1362,6 +1386,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the number of matching asset vocabularies
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID_C;
@@ -1460,6 +1485,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the matching asset vocabularies
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetVocabulary> findByGroupId(long groupId)
 		throws SystemException {
 		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
@@ -1478,6 +1504,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the range of matching asset vocabularies
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetVocabulary> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
 		return findByGroupId(groupId, start, end, null);
@@ -1497,6 +1524,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the ordered range of matching asset vocabularies
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetVocabulary> findByGroupId(long groupId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -1603,6 +1631,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @throws com.liferay.portlet.asset.NoSuchVocabularyException if a matching asset vocabulary could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetVocabulary findByGroupId_First(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchVocabularyException, SystemException {
@@ -1633,6 +1662,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the first matching asset vocabulary, or <code>null</code> if a matching asset vocabulary could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetVocabulary fetchByGroupId_First(long groupId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<AssetVocabulary> list = findByGroupId(groupId, 0, 1,
@@ -1654,6 +1684,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @throws com.liferay.portlet.asset.NoSuchVocabularyException if a matching asset vocabulary could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetVocabulary findByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchVocabularyException, SystemException {
@@ -1684,6 +1715,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the last matching asset vocabulary, or <code>null</code> if a matching asset vocabulary could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetVocabulary fetchByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByGroupId(groupId);
@@ -1708,6 +1740,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @throws com.liferay.portlet.asset.NoSuchVocabularyException if a asset vocabulary with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetVocabulary[] findByGroupId_PrevAndNext(long vocabularyId,
 		long groupId, OrderByComparator orderByComparator)
 		throws NoSuchVocabularyException, SystemException {
@@ -1850,6 +1883,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the matching asset vocabularies that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetVocabulary> filterFindByGroupId(long groupId)
 		throws SystemException {
 		return filterFindByGroupId(groupId, QueryUtil.ALL_POS,
@@ -1869,6 +1903,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the range of matching asset vocabularies that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetVocabulary> filterFindByGroupId(long groupId, int start,
 		int end) throws SystemException {
 		return filterFindByGroupId(groupId, start, end, null);
@@ -1888,6 +1923,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the ordered range of matching asset vocabularies that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetVocabulary> filterFindByGroupId(long groupId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -1979,6 +2015,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @throws com.liferay.portlet.asset.NoSuchVocabularyException if a asset vocabulary with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetVocabulary[] filterFindByGroupId_PrevAndNext(
 		long vocabularyId, long groupId, OrderByComparator orderByComparator)
 		throws NoSuchVocabularyException, SystemException {
@@ -2160,6 +2197,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @param groupId the group ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (AssetVocabulary assetVocabulary : findByGroupId(groupId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -2174,6 +2212,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the number of matching asset vocabularies
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByGroupId(long groupId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPID;
 
@@ -2226,6 +2265,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the number of matching asset vocabularies that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByGroupId(long groupId) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return countByGroupId(groupId);
@@ -2299,6 +2339,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the matching asset vocabularies
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetVocabulary> findByCompanyId(long companyId)
 		throws SystemException {
 		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -2318,6 +2359,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the range of matching asset vocabularies
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetVocabulary> findByCompanyId(long companyId, int start,
 		int end) throws SystemException {
 		return findByCompanyId(companyId, start, end, null);
@@ -2337,6 +2379,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the ordered range of matching asset vocabularies
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetVocabulary> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -2443,6 +2486,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @throws com.liferay.portlet.asset.NoSuchVocabularyException if a matching asset vocabulary could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetVocabulary findByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchVocabularyException, SystemException {
@@ -2473,6 +2517,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the first matching asset vocabulary, or <code>null</code> if a matching asset vocabulary could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetVocabulary fetchByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<AssetVocabulary> list = findByCompanyId(companyId, 0, 1,
@@ -2494,6 +2539,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @throws com.liferay.portlet.asset.NoSuchVocabularyException if a matching asset vocabulary could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetVocabulary findByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchVocabularyException, SystemException {
@@ -2524,6 +2570,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the last matching asset vocabulary, or <code>null</code> if a matching asset vocabulary could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetVocabulary fetchByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByCompanyId(companyId);
@@ -2548,6 +2595,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @throws com.liferay.portlet.asset.NoSuchVocabularyException if a asset vocabulary with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetVocabulary[] findByCompanyId_PrevAndNext(long vocabularyId,
 		long companyId, OrderByComparator orderByComparator)
 		throws NoSuchVocabularyException, SystemException {
@@ -2689,6 +2737,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @param companyId the company ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (AssetVocabulary assetVocabulary : findByCompanyId(companyId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -2703,6 +2752,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the number of matching asset vocabularies
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByCompanyId(long companyId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMPANYID;
 
@@ -2769,6 +2819,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @throws com.liferay.portlet.asset.NoSuchVocabularyException if a matching asset vocabulary could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetVocabulary findByG_N(long groupId, String name)
 		throws NoSuchVocabularyException, SystemException {
 		AssetVocabulary assetVocabulary = fetchByG_N(groupId, name);
@@ -2804,6 +2855,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the matching asset vocabulary, or <code>null</code> if a matching asset vocabulary could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetVocabulary fetchByG_N(long groupId, String name)
 		throws SystemException {
 		return fetchByG_N(groupId, name, true);
@@ -2818,6 +2870,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the matching asset vocabulary, or <code>null</code> if a matching asset vocabulary could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetVocabulary fetchByG_N(long groupId, String name,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, name };
@@ -2924,6 +2977,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the asset vocabulary that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetVocabulary removeByG_N(long groupId, String name)
 		throws NoSuchVocabularyException, SystemException {
 		AssetVocabulary assetVocabulary = findByG_N(groupId, name);
@@ -2939,6 +2993,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the number of matching asset vocabularies
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_N(long groupId, String name) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_N;
 
@@ -3012,6 +3067,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 *
 	 * @param assetVocabulary the asset vocabulary
 	 */
+	@Override
 	public void cacheResult(AssetVocabulary assetVocabulary) {
 		EntityCacheUtil.putResult(AssetVocabularyModelImpl.ENTITY_CACHE_ENABLED,
 			AssetVocabularyImpl.class, assetVocabulary.getPrimaryKey(),
@@ -3033,6 +3089,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 *
 	 * @param assetVocabularies the asset vocabularies
 	 */
+	@Override
 	public void cacheResult(List<AssetVocabulary> assetVocabularies) {
 		for (AssetVocabulary assetVocabulary : assetVocabularies) {
 			if (EntityCacheUtil.getResult(
@@ -3193,6 +3250,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @param vocabularyId the primary key for the new asset vocabulary
 	 * @return the new asset vocabulary
 	 */
+	@Override
 	public AssetVocabulary create(long vocabularyId) {
 		AssetVocabulary assetVocabulary = new AssetVocabularyImpl();
 
@@ -3214,6 +3272,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @throws com.liferay.portlet.asset.NoSuchVocabularyException if a asset vocabulary with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetVocabulary remove(long vocabularyId)
 		throws NoSuchVocabularyException, SystemException {
 		return remove((Serializable)vocabularyId);
@@ -3481,6 +3540,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @throws com.liferay.portlet.asset.NoSuchVocabularyException if a asset vocabulary with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetVocabulary findByPrimaryKey(long vocabularyId)
 		throws NoSuchVocabularyException, SystemException {
 		return findByPrimaryKey((Serializable)vocabularyId);
@@ -3542,6 +3602,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the asset vocabulary, or <code>null</code> if a asset vocabulary with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetVocabulary fetchByPrimaryKey(long vocabularyId)
 		throws SystemException {
 		return fetchByPrimaryKey((Serializable)vocabularyId);
@@ -3553,6 +3614,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the asset vocabularies
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetVocabulary> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -3569,6 +3631,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the range of asset vocabularies
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetVocabulary> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
@@ -3587,6 +3650,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the ordered range of asset vocabularies
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetVocabulary> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -3672,6 +3736,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (AssetVocabulary assetVocabulary : findAll()) {
 			remove(assetVocabulary);
@@ -3684,6 +3749,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 * @return the number of asset vocabularies
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -3787,6 +3853,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		};
 
 	private static CacheModel<AssetVocabulary> _nullAssetVocabularyCacheModel = new CacheModel<AssetVocabulary>() {
+			@Override
 			public AssetVocabulary toEntityModel() {
 				return _nullAssetVocabulary;
 			}

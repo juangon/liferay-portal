@@ -20,7 +20,7 @@
 boolean collapsible = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:panel:collapsible"));
 String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:panel:cssClass"));
 String defaultState = (String)request.getAttribute("liferay-ui:panel:defaultState");
-boolean extended = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:panel:extended"));
+Boolean extended = (Boolean)request.getAttribute("liferay-ui:panel:extended");
 String helpMessage = (String)request.getAttribute("liferay-ui:panel:helpMessage");
 String id = (String)request.getAttribute("liferay-ui:panel:id");
 String parentId = (String)request.getAttribute("liferay-ui:panel:parentId");
@@ -32,27 +32,34 @@ IntegerWrapper panelCount = (IntegerWrapper)request.getAttribute("liferay-ui:pan
 if (panelCount != null) {
 	panelCount.increment();
 
-	Boolean panelContainerExtended = (Boolean)request.getAttribute("liferay-ui:panel-container:extended");
+	if (extended == null) {
+		Boolean panelContainerExtended = (Boolean)request.getAttribute("liferay-ui:panel-container:extended");
 
-	if (panelContainerExtended != null) {
-		extended = panelContainerExtended.booleanValue();
+		if (panelContainerExtended != null) {
+			extended = panelContainerExtended;
+		}
 	}
 }
 
+if ((extended != null) && extended) {
+	cssClass += " lfr-panel-extended";
+}
+
+String contentCssClass = StringPool.BLANK;
+String headerCssClass = StringPool.BLANK;
 String panelState = GetterUtil.getString(SessionClicks.get(request, id, null), defaultState);
 
 if (collapsible) {
-	cssClass += " lfr-collapsible";
+	contentCssClass += "toggler-content";
+	headerCssClass += "toggler-header";
 }
 
-if (!panelState.equals("open")) {
-	cssClass += " lfr-collapsed";
-}
-
-if (extended) {
-	cssClass += " lfr-extended";
+if (panelState.equals("open")) {
+	contentCssClass += " toggler-content-expanded";
+	headerCssClass += " toggler-header-expanded";
 }
 else {
-	cssClass += " lfr-panel-basic";
+	contentCssClass += " toggler-content-collapsed";
+	headerCssClass += " toggler-header-collapsed";
 }
 %>

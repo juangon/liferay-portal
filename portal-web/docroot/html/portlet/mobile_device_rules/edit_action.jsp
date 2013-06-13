@@ -27,13 +27,37 @@ String editorJSP = (String)renderRequest.getAttribute(WebKeys.MOBILE_DEVICE_RULE
 String type = (String)renderRequest.getAttribute(WebKeys.MOBILE_DEVICE_RULES_RULE_GROUP_ACTION_TYPE);
 
 MDRRuleGroupInstance ruleGroupInstance = (MDRRuleGroupInstance)renderRequest.getAttribute(WebKeys.MOBILE_DEVICE_RULES_RULE_GROUP_INSTANCE);
+MDRRuleGroup ruleGroup = (MDRRuleGroup)renderRequest.getAttribute(WebKeys.MOBILE_DEVICE_RULES_RULE_GROUP);
+
+String title = null;
+
+if (action == null) {
+	title = LanguageUtil.format(pageContext, "new-action-for-x", ruleGroup.getName(locale), false);
+}
+else {
+	StringBundler sb = new StringBundler(5);
+
+	sb.append(action.getName(locale));
+	sb.append(StringPool.SPACE);
+	sb.append(StringPool.OPEN_PARENTHESIS);
+	sb.append(ruleGroup.getName(locale));
+	sb.append(StringPool.CLOSE_PARENTHESIS);
+
+	title = sb.toString();
+}
 %>
 
 <liferay-ui:header
 	backURL="<%= redirect %>"
 	localizeTitle="<%= (action == null) %>"
-	title='<%= (action == null) ? "new-action" : action.getName(locale) %>'
+	title="<%= title %>"
 />
+
+<c:if test="<%= action == null %>">
+	<div class="alert alert-info">
+		<liferay-ui:message key="action-help" />
+	</div>
+</c:if>
 
 <portlet:actionURL var="editActionURL">
 	<portlet:param name="struts_action" value="/mobile_device_rules/edit_action" />
@@ -45,6 +69,7 @@ MDRRuleGroupInstance ruleGroupInstance = (MDRRuleGroupInstance)renderRequest.get
 	<aui:input name="actionId" type="hidden" value="<%= actionId %>" />
 	<aui:input name="ruleGroupInstanceId" type="hidden" value="<%= ruleGroupInstance.getRuleGroupInstanceId() %>" />
 
+	<liferay-ui:error exception="<%= ActionTypeException.class %>" message="please-select-a-valid-action-type" />
 	<liferay-ui:error exception="<%= NoSuchActionException.class %>" message="action-does-not-exist" />
 	<liferay-ui:error exception="<%= NoSuchRuleGroupException.class %>" message="rule-group-does-not-exist" />
 	<liferay-ui:error exception="<%= NoSuchRuleGroupInstanceException.class %>" message="rule-group-instance-does-not-exist" />
@@ -56,8 +81,7 @@ MDRRuleGroupInstance ruleGroupInstance = (MDRRuleGroupInstance)renderRequest.get
 
 		<aui:input name="description" />
 
-		<aui:select changesContext="<%= true %>" name="type" onChange='<%= renderResponse.getNamespace() + "changeType();" %>'>
-			<aui:option disabled="<%= true %>" label="select-an-action-type" selected="<%= Validator.isNull(type) %>" />
+		<aui:select changesContext="<%= true %>" name="type" onChange='<%= renderResponse.getNamespace() + "changeType();" %>' showEmptyOption="<%= true %>">
 
 			<%
 			for (ActionHandler actionHandler : ActionHandlerManagerUtil.getActionHandlers()) {

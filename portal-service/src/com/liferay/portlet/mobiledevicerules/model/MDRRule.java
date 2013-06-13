@@ -33,8 +33,6 @@ public interface MDRRule extends MDRRuleModel, PersistedModel {
 	 */
 	public com.liferay.portal.kernel.util.UnicodeProperties getTypeSettingsProperties();
 
-	public void setTypeSettings(java.lang.String typeSettings);
-
 	public void setTypeSettingsProperties(
 		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties);
 }

@@ -17,12 +17,10 @@ package com.liferay.portlet.mobiledevicerules.service;
 import com.liferay.portal.service.ServiceWrapper;
 
 /**
- * <p>
- * This class is a wrapper for {@link MDRActionService}.
- * </p>
+ * Provides a wrapper for {@link MDRActionService}.
  *
- * @author    Edward C. Han
- * @see       MDRActionService
+ * @author Edward C. Han
+ * @see MDRActionService
  * @generated
  */
 public class MDRActionServiceWrapper implements MDRActionService,
@@ -36,6 +34,7 @@ public class MDRActionServiceWrapper implements MDRActionService,
 	*
 	* @return the Spring bean ID for this bean
 	*/
+	@Override
 	public java.lang.String getBeanIdentifier() {
 		return _mdrActionService.getBeanIdentifier();
 	}
@@ -45,10 +44,12 @@ public class MDRActionServiceWrapper implements MDRActionService,
 	*
 	* @param beanIdentifier the Spring bean ID for this bean
 	*/
+	@Override
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		_mdrActionService.setBeanIdentifier(beanIdentifier);
 	}
 
+	@Override
 	public com.liferay.portlet.mobiledevicerules.model.MDRAction addAction(
 		long ruleGroupInstanceId,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
@@ -61,6 +62,7 @@ public class MDRActionServiceWrapper implements MDRActionService,
 			descriptionMap, type, typeSettings, serviceContext);
 	}
 
+	@Override
 	public com.liferay.portlet.mobiledevicerules.model.MDRAction addAction(
 		long ruleGroupInstanceId,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
@@ -74,12 +76,14 @@ public class MDRActionServiceWrapper implements MDRActionService,
 			descriptionMap, type, typeSettingsProperties, serviceContext);
 	}
 
+	@Override
 	public void deleteAction(long actionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_mdrActionService.deleteAction(actionId);
 	}
 
+	@Override
 	public com.liferay.portlet.mobiledevicerules.model.MDRAction fetchAction(
 		long actionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -87,6 +91,7 @@ public class MDRActionServiceWrapper implements MDRActionService,
 		return _mdrActionService.fetchAction(actionId);
 	}
 
+	@Override
 	public com.liferay.portlet.mobiledevicerules.model.MDRAction getAction(
 		long actionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -94,6 +99,7 @@ public class MDRActionServiceWrapper implements MDRActionService,
 		return _mdrActionService.getAction(actionId);
 	}
 
+	@Override
 	public com.liferay.portlet.mobiledevicerules.model.MDRAction updateAction(
 		long actionId,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
@@ -106,6 +112,7 @@ public class MDRActionServiceWrapper implements MDRActionService,
 			descriptionMap, type, typeSettings, serviceContext);
 	}
 
+	@Override
 	public com.liferay.portlet.mobiledevicerules.model.MDRAction updateAction(
 		long actionId,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
@@ -133,10 +140,12 @@ public class MDRActionServiceWrapper implements MDRActionService,
 		_mdrActionService = mdrActionService;
 	}
 
+	@Override
 	public MDRActionService getWrappedService() {
 		return _mdrActionService;
 	}
 
+	@Override
 	public void setWrappedService(MDRActionService mdrActionService) {
 		_mdrActionService = mdrActionService;
 	}

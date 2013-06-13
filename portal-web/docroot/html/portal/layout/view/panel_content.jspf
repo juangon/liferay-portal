@@ -15,7 +15,7 @@
 --%>
 
 <%
-if (!denyAccess && (themeDisplay.isStatePopUp() || (layoutTypePortlet.hasStateMax() && (portlet != null)) || Validator.isNotNull(controlPanelCategory))) {
+if (themeDisplay.isStatePopUp() || (layoutTypePortlet.hasStateMax() && (portlet != null)) || Validator.isNotNull(controlPanelCategory)) {
 	String velocityTemplateId = null;
 
 	String content = null;
@@ -26,14 +26,10 @@ if (!denyAccess && (themeDisplay.isStatePopUp() || (layoutTypePortlet.hasStateMa
 		content = LayoutTemplateLocalServiceUtil.getContent("pop_up", true, theme.getThemeId());
 	}
 	else if (layoutTypePortlet.hasStateMax()) {
-		String portletTitle = PortalUtil.getPortletTitle(portlet, application, locale);
-
 		PortletURL portletURL = new PortletURLImpl(request, ppid, plid, PortletRequest.RENDER_PHASE);
 
 		portletURL.setPortletMode(PortletMode.VIEW);
 		portletURL.setWindowState(WindowState.MAXIMIZED);
-
-		PortalUtil.addPortletBreadcrumbEntry(request, portletTitle, portletURL.toString());
 
 		ppid = StringUtil.split(layoutTypePortlet.getStateMax())[0];
 
@@ -52,43 +48,16 @@ if (!denyAccess && (themeDisplay.isStatePopUp() || (layoutTypePortlet.hasStateMa
 	if (Validator.isNotNull(velocityTemplateId) && Validator.isNotNull(content)) {
 		sb = RuntimePageUtil.getProcessedTemplate(pageContext, ppid, new StringTemplateResource(velocityTemplateId, content));
 	}
-	%>
 
-	<c:if test="<%= controlPanelCategory.equals(StringPool.BLANK) || controlPanelCategory.equals(StringPool.CONTENT) %>">
-		<div class="site-breadcrumbs" id="breadcrumbs">
-			<h1>
-				<span>
-					<liferay-ui:message key="breadcrumb" />
-				</span>
-			</h1>
-
-			<liferay-ui:breadcrumb />
-		</div>
-	</c:if>
-
-	<%
 	if (sb != null) {
 		sb.writeTo(pageContext.getOut());
 	}
 }
 else {
-	String description = StringPool.BLANK;
-
-	String className = "portlet-msg-info";
-
-	if (denyAccess) {
-		description = LanguageUtil.get(pageContext, "you-do-not-have-the-required-permissions-to-access-this-application");
-
-		className = "portlet-msg-error";
-	}
-
-	if (Validator.isNull(description)) {
-		description = LanguageUtil.get(pageContext, "please-select-a-tool-from-the-left-menu");
-	}
 %>
 
-	<div class="<%= className %>">
-		<%= description %>
+	<div class="portlet-msg-info">
+		<%= LanguageUtil.get(pageContext, "please-select-a-tool-from-the-left-menu") %>
 	</div>
 
 <%

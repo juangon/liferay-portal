@@ -38,6 +38,7 @@ public abstract class SocialActivityBaseImpl extends SocialActivityModelImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a social activity model instance should use the {@link SocialActivity} interface instead.
 	 */
+	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
 			SocialActivityLocalServiceUtil.addSocialActivity(this);

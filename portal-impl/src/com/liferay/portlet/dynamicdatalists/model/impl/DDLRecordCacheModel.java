@@ -73,6 +73,7 @@ public class DDLRecordCacheModel implements CacheModel<DDLRecord>,
 		return sb.toString();
 	}
 
+	@Override
 	public DDLRecord toEntityModel() {
 		DDLRecordImpl ddlRecordImpl = new DDLRecordImpl();
 
@@ -135,6 +136,7 @@ public class DDLRecordCacheModel implements CacheModel<DDLRecord>,
 		return ddlRecordImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		recordId = objectInput.readLong();
@@ -152,6 +154,7 @@ public class DDLRecordCacheModel implements CacheModel<DDLRecord>,
 		displayIndex = objectInput.readInt();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

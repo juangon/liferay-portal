@@ -25,8 +25,8 @@ import java.util.Map;
  * This class is a wrapper for {@link CalEvent}.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       CalEvent
+ * @author Brian Wing Shun Chan
+ * @see CalEvent
  * @generated
  */
 public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
@@ -34,14 +34,17 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 		_calEvent = calEvent;
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return CalEvent.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return CalEvent.class.getName();
 	}
 
+	@Override
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
@@ -72,6 +75,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 		return attributes;
 	}
 
+	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 		String uuid = (String)attributes.get("uuid");
 
@@ -217,6 +221,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @return the primary key of this cal event
 	*/
+	@Override
 	public long getPrimaryKey() {
 		return _calEvent.getPrimaryKey();
 	}
@@ -226,6 +231,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @param primaryKey the primary key of this cal event
 	*/
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_calEvent.setPrimaryKey(primaryKey);
 	}
@@ -235,6 +241,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @return the uuid of this cal event
 	*/
+	@Override
 	public java.lang.String getUuid() {
 		return _calEvent.getUuid();
 	}
@@ -244,6 +251,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @param uuid the uuid of this cal event
 	*/
+	@Override
 	public void setUuid(java.lang.String uuid) {
 		_calEvent.setUuid(uuid);
 	}
@@ -253,6 +261,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @return the event ID of this cal event
 	*/
+	@Override
 	public long getEventId() {
 		return _calEvent.getEventId();
 	}
@@ -262,6 +271,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @param eventId the event ID of this cal event
 	*/
+	@Override
 	public void setEventId(long eventId) {
 		_calEvent.setEventId(eventId);
 	}
@@ -271,6 +281,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @return the group ID of this cal event
 	*/
+	@Override
 	public long getGroupId() {
 		return _calEvent.getGroupId();
 	}
@@ -280,6 +291,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @param groupId the group ID of this cal event
 	*/
+	@Override
 	public void setGroupId(long groupId) {
 		_calEvent.setGroupId(groupId);
 	}
@@ -289,6 +301,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @return the company ID of this cal event
 	*/
+	@Override
 	public long getCompanyId() {
 		return _calEvent.getCompanyId();
 	}
@@ -298,6 +311,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @param companyId the company ID of this cal event
 	*/
+	@Override
 	public void setCompanyId(long companyId) {
 		_calEvent.setCompanyId(companyId);
 	}
@@ -307,6 +321,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @return the user ID of this cal event
 	*/
+	@Override
 	public long getUserId() {
 		return _calEvent.getUserId();
 	}
@@ -316,6 +331,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @param userId the user ID of this cal event
 	*/
+	@Override
 	public void setUserId(long userId) {
 		_calEvent.setUserId(userId);
 	}
@@ -326,6 +342,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	* @return the user uuid of this cal event
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public java.lang.String getUserUuid()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _calEvent.getUserUuid();
@@ -336,6 +353,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @param userUuid the user uuid of this cal event
 	*/
+	@Override
 	public void setUserUuid(java.lang.String userUuid) {
 		_calEvent.setUserUuid(userUuid);
 	}
@@ -345,6 +363,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @return the user name of this cal event
 	*/
+	@Override
 	public java.lang.String getUserName() {
 		return _calEvent.getUserName();
 	}
@@ -354,6 +373,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @param userName the user name of this cal event
 	*/
+	@Override
 	public void setUserName(java.lang.String userName) {
 		_calEvent.setUserName(userName);
 	}
@@ -363,6 +383,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @return the create date of this cal event
 	*/
+	@Override
 	public java.util.Date getCreateDate() {
 		return _calEvent.getCreateDate();
 	}
@@ -372,6 +393,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @param createDate the create date of this cal event
 	*/
+	@Override
 	public void setCreateDate(java.util.Date createDate) {
 		_calEvent.setCreateDate(createDate);
 	}
@@ -381,6 +403,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @return the modified date of this cal event
 	*/
+	@Override
 	public java.util.Date getModifiedDate() {
 		return _calEvent.getModifiedDate();
 	}
@@ -390,6 +413,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @param modifiedDate the modified date of this cal event
 	*/
+	@Override
 	public void setModifiedDate(java.util.Date modifiedDate) {
 		_calEvent.setModifiedDate(modifiedDate);
 	}
@@ -399,6 +423,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @return the title of this cal event
 	*/
+	@Override
 	public java.lang.String getTitle() {
 		return _calEvent.getTitle();
 	}
@@ -408,6 +433,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @param title the title of this cal event
 	*/
+	@Override
 	public void setTitle(java.lang.String title) {
 		_calEvent.setTitle(title);
 	}
@@ -417,6 +443,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @return the description of this cal event
 	*/
+	@Override
 	public java.lang.String getDescription() {
 		return _calEvent.getDescription();
 	}
@@ -426,6 +453,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @param description the description of this cal event
 	*/
+	@Override
 	public void setDescription(java.lang.String description) {
 		_calEvent.setDescription(description);
 	}
@@ -435,6 +463,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @return the location of this cal event
 	*/
+	@Override
 	public java.lang.String getLocation() {
 		return _calEvent.getLocation();
 	}
@@ -444,6 +473,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @param location the location of this cal event
 	*/
+	@Override
 	public void setLocation(java.lang.String location) {
 		_calEvent.setLocation(location);
 	}
@@ -453,6 +483,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @return the start date of this cal event
 	*/
+	@Override
 	public java.util.Date getStartDate() {
 		return _calEvent.getStartDate();
 	}
@@ -462,6 +493,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @param startDate the start date of this cal event
 	*/
+	@Override
 	public void setStartDate(java.util.Date startDate) {
 		_calEvent.setStartDate(startDate);
 	}
@@ -471,6 +503,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @return the end date of this cal event
 	*/
+	@Override
 	public java.util.Date getEndDate() {
 		return _calEvent.getEndDate();
 	}
@@ -480,6 +513,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @param endDate the end date of this cal event
 	*/
+	@Override
 	public void setEndDate(java.util.Date endDate) {
 		_calEvent.setEndDate(endDate);
 	}
@@ -489,6 +523,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @return the duration hour of this cal event
 	*/
+	@Override
 	public int getDurationHour() {
 		return _calEvent.getDurationHour();
 	}
@@ -498,6 +533,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @param durationHour the duration hour of this cal event
 	*/
+	@Override
 	public void setDurationHour(int durationHour) {
 		_calEvent.setDurationHour(durationHour);
 	}
@@ -507,6 +543,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @return the duration minute of this cal event
 	*/
+	@Override
 	public int getDurationMinute() {
 		return _calEvent.getDurationMinute();
 	}
@@ -516,6 +553,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @param durationMinute the duration minute of this cal event
 	*/
+	@Override
 	public void setDurationMinute(int durationMinute) {
 		_calEvent.setDurationMinute(durationMinute);
 	}
@@ -525,6 +563,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @return the all day of this cal event
 	*/
+	@Override
 	public boolean getAllDay() {
 		return _calEvent.getAllDay();
 	}
@@ -534,6 +573,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @return <code>true</code> if this cal event is all day; <code>false</code> otherwise
 	*/
+	@Override
 	public boolean isAllDay() {
 		return _calEvent.isAllDay();
 	}
@@ -543,6 +583,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @param allDay the all day of this cal event
 	*/
+	@Override
 	public void setAllDay(boolean allDay) {
 		_calEvent.setAllDay(allDay);
 	}
@@ -552,6 +593,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @return the time zone sensitive of this cal event
 	*/
+	@Override
 	public boolean getTimeZoneSensitive() {
 		return _calEvent.getTimeZoneSensitive();
 	}
@@ -561,6 +603,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @return <code>true</code> if this cal event is time zone sensitive; <code>false</code> otherwise
 	*/
+	@Override
 	public boolean isTimeZoneSensitive() {
 		return _calEvent.isTimeZoneSensitive();
 	}
@@ -570,6 +613,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @param timeZoneSensitive the time zone sensitive of this cal event
 	*/
+	@Override
 	public void setTimeZoneSensitive(boolean timeZoneSensitive) {
 		_calEvent.setTimeZoneSensitive(timeZoneSensitive);
 	}
@@ -579,6 +623,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @return the type of this cal event
 	*/
+	@Override
 	public java.lang.String getType() {
 		return _calEvent.getType();
 	}
@@ -588,6 +633,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @param type the type of this cal event
 	*/
+	@Override
 	public void setType(java.lang.String type) {
 		_calEvent.setType(type);
 	}
@@ -597,6 +643,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @return the repeating of this cal event
 	*/
+	@Override
 	public boolean getRepeating() {
 		return _calEvent.getRepeating();
 	}
@@ -606,6 +653,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @return <code>true</code> if this cal event is repeating; <code>false</code> otherwise
 	*/
+	@Override
 	public boolean isRepeating() {
 		return _calEvent.isRepeating();
 	}
@@ -615,6 +663,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @param repeating the repeating of this cal event
 	*/
+	@Override
 	public void setRepeating(boolean repeating) {
 		_calEvent.setRepeating(repeating);
 	}
@@ -624,6 +673,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @return the recurrence of this cal event
 	*/
+	@Override
 	public java.lang.String getRecurrence() {
 		return _calEvent.getRecurrence();
 	}
@@ -633,6 +683,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @param recurrence the recurrence of this cal event
 	*/
+	@Override
 	public void setRecurrence(java.lang.String recurrence) {
 		_calEvent.setRecurrence(recurrence);
 	}
@@ -642,6 +693,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @return the remind by of this cal event
 	*/
+	@Override
 	public int getRemindBy() {
 		return _calEvent.getRemindBy();
 	}
@@ -651,6 +703,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @param remindBy the remind by of this cal event
 	*/
+	@Override
 	public void setRemindBy(int remindBy) {
 		_calEvent.setRemindBy(remindBy);
 	}
@@ -660,6 +713,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @return the first reminder of this cal event
 	*/
+	@Override
 	public int getFirstReminder() {
 		return _calEvent.getFirstReminder();
 	}
@@ -669,6 +723,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @param firstReminder the first reminder of this cal event
 	*/
+	@Override
 	public void setFirstReminder(int firstReminder) {
 		_calEvent.setFirstReminder(firstReminder);
 	}
@@ -678,6 +733,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @return the second reminder of this cal event
 	*/
+	@Override
 	public int getSecondReminder() {
 		return _calEvent.getSecondReminder();
 	}
@@ -687,52 +743,64 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	*
 	* @param secondReminder the second reminder of this cal event
 	*/
+	@Override
 	public void setSecondReminder(int secondReminder) {
 		_calEvent.setSecondReminder(secondReminder);
 	}
 
+	@Override
 	public boolean isNew() {
 		return _calEvent.isNew();
 	}
 
+	@Override
 	public void setNew(boolean n) {
 		_calEvent.setNew(n);
 	}
 
+	@Override
 	public boolean isCachedModel() {
 		return _calEvent.isCachedModel();
 	}
 
+	@Override
 	public void setCachedModel(boolean cachedModel) {
 		_calEvent.setCachedModel(cachedModel);
 	}
 
+	@Override
 	public boolean isEscapedModel() {
 		return _calEvent.isEscapedModel();
 	}
 
+	@Override
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _calEvent.getPrimaryKeyObj();
 	}
 
+	@Override
 	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
 		_calEvent.setPrimaryKeyObj(primaryKeyObj);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
 		return _calEvent.getExpandoBridge();
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.model.BaseModel<?> baseModel) {
 		_calEvent.setExpandoBridgeAttributes(baseModel);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portlet.expando.model.ExpandoBridge expandoBridge) {
 		_calEvent.setExpandoBridgeAttributes(expandoBridge);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		_calEvent.setExpandoBridgeAttributes(serviceContext);
@@ -743,6 +811,7 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 		return new CalEventWrapper((CalEvent)_calEvent.clone());
 	}
 
+	@Override
 	public int compareTo(com.liferay.portlet.calendar.model.CalEvent calEvent) {
 		return _calEvent.compareTo(calEvent);
 	}
@@ -752,14 +821,17 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 		return _calEvent.hashCode();
 	}
 
+	@Override
 	public com.liferay.portal.model.CacheModel<com.liferay.portlet.calendar.model.CalEvent> toCacheModel() {
 		return _calEvent.toCacheModel();
 	}
 
+	@Override
 	public com.liferay.portlet.calendar.model.CalEvent toEscapedModel() {
 		return new CalEventWrapper(_calEvent.toEscapedModel());
 	}
 
+	@Override
 	public com.liferay.portlet.calendar.model.CalEvent toUnescapedModel() {
 		return new CalEventWrapper(_calEvent.toUnescapedModel());
 	}
@@ -769,19 +841,23 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 		return _calEvent.toString();
 	}
 
+	@Override
 	public java.lang.String toXmlString() {
 		return _calEvent.toXmlString();
 	}
 
+	@Override
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_calEvent.persist();
 	}
 
+	@Override
 	public com.liferay.portal.kernel.cal.TZSRecurrence getRecurrenceObj() {
 		return _calEvent.getRecurrenceObj();
 	}
 
+	@Override
 	public void setRecurrenceObj(
 		com.liferay.portal.kernel.cal.TZSRecurrence recurrenceObj) {
 		_calEvent.setRecurrenceObj(recurrenceObj);
@@ -794,10 +870,12 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 		return _calEvent;
 	}
 
+	@Override
 	public CalEvent getWrappedModel() {
 		return _calEvent;
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		_calEvent.resetOriginalValues();
 	}

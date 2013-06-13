@@ -27,6 +27,9 @@ import com.liferay.portlet.dynamicdatamapping.storage.StorageEngineUtil;
 
 import java.io.Serializable;
 
+import java.util.List;
+import java.util.Locale;
+
 /**
  * @author Brian Wing Shun Chan
  * @author Eduardo Lundgren
@@ -36,12 +39,14 @@ public class DDLRecordImpl extends DDLRecordBaseImpl {
 	public DDLRecordImpl() {
 	}
 
+	@Override
 	public Field getField(String fieldName) throws PortalException {
 		Fields fields = getFields();
 
 		return fields.get(fieldName);
 	}
 
+	@Override
 	public Serializable getFieldDataType(String fieldName)
 		throws PortalException, SystemException {
 
@@ -52,10 +57,12 @@ public class DDLRecordImpl extends DDLRecordBaseImpl {
 		return ddmStructure.getFieldDataType(fieldName);
 	}
 
+	@Override
 	public Fields getFields() throws PortalException {
 		return StorageEngineUtil.getFields(getDDMStorageId());
 	}
 
+	@Override
 	public Serializable getFieldType(String fieldName) throws Exception {
 		DDLRecordSet recordSet = getRecordSet();
 
@@ -64,28 +71,50 @@ public class DDLRecordImpl extends DDLRecordBaseImpl {
 		return ddmStructure.getFieldType(fieldName);
 	}
 
+	@Override
 	public Serializable getFieldValue(String fieldName) throws PortalException {
 		Field field = getField(fieldName);
+
+		if (field == null) {
+			return null;
+		}
 
 		return field.getValue();
 	}
 
+	@Override
+	public List<Serializable> getFieldValues(String fieldName, Locale locale)
+		throws PortalException {
+
+		Field field = getField(fieldName);
+
+		if (field == null) {
+			return null;
+		}
+
+		return field.getValues(locale);
+	}
+
+	@Override
 	public DDLRecordVersion getLatestRecordVersion()
 		throws PortalException, SystemException {
 
 		return DDLRecordLocalServiceUtil.getLatestRecordVersion(getRecordId());
 	}
 
+	@Override
 	public DDLRecordSet getRecordSet() throws PortalException, SystemException {
 		return DDLRecordSetLocalServiceUtil.getRecordSet(getRecordSetId());
 	}
 
+	@Override
 	public DDLRecordVersion getRecordVersion()
 		throws PortalException, SystemException {
 
 		return getRecordVersion(getVersion());
 	}
 
+	@Override
 	public DDLRecordVersion getRecordVersion(String version)
 		throws PortalException, SystemException {
 
@@ -93,6 +122,7 @@ public class DDLRecordImpl extends DDLRecordBaseImpl {
 			getRecordId(), version);
 	}
 
+	@Override
 	public int getStatus() throws PortalException, SystemException {
 		DDLRecordVersion recordVersion = getRecordVersion();
 

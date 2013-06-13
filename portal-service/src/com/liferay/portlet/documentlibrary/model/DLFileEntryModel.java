@@ -69,6 +69,7 @@ public interface DLFileEntryModel extends AttachedModel, BaseModel<DLFileEntry>,
 	 * @return the uuid of this document library file entry
 	 */
 	@AutoEscape
+	@Override
 	public String getUuid();
 
 	/**
@@ -76,6 +77,7 @@ public interface DLFileEntryModel extends AttachedModel, BaseModel<DLFileEntry>,
 	 *
 	 * @param uuid the uuid of this document library file entry
 	 */
+	@Override
 	public void setUuid(String uuid);
 
 	/**
@@ -97,6 +99,7 @@ public interface DLFileEntryModel extends AttachedModel, BaseModel<DLFileEntry>,
 	 *
 	 * @return the group ID of this document library file entry
 	 */
+	@Override
 	public long getGroupId();
 
 	/**
@@ -104,6 +107,7 @@ public interface DLFileEntryModel extends AttachedModel, BaseModel<DLFileEntry>,
 	 *
 	 * @param groupId the group ID of this document library file entry
 	 */
+	@Override
 	public void setGroupId(long groupId);
 
 	/**
@@ -111,6 +115,7 @@ public interface DLFileEntryModel extends AttachedModel, BaseModel<DLFileEntry>,
 	 *
 	 * @return the company ID of this document library file entry
 	 */
+	@Override
 	public long getCompanyId();
 
 	/**
@@ -118,6 +123,7 @@ public interface DLFileEntryModel extends AttachedModel, BaseModel<DLFileEntry>,
 	 *
 	 * @param companyId the company ID of this document library file entry
 	 */
+	@Override
 	public void setCompanyId(long companyId);
 
 	/**
@@ -125,6 +131,7 @@ public interface DLFileEntryModel extends AttachedModel, BaseModel<DLFileEntry>,
 	 *
 	 * @return the user ID of this document library file entry
 	 */
+	@Override
 	public long getUserId();
 
 	/**
@@ -132,6 +139,7 @@ public interface DLFileEntryModel extends AttachedModel, BaseModel<DLFileEntry>,
 	 *
 	 * @param userId the user ID of this document library file entry
 	 */
+	@Override
 	public void setUserId(long userId);
 
 	/**
@@ -140,6 +148,7 @@ public interface DLFileEntryModel extends AttachedModel, BaseModel<DLFileEntry>,
 	 * @return the user uuid of this document library file entry
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public String getUserUuid() throws SystemException;
 
 	/**
@@ -147,6 +156,7 @@ public interface DLFileEntryModel extends AttachedModel, BaseModel<DLFileEntry>,
 	 *
 	 * @param userUuid the user uuid of this document library file entry
 	 */
+	@Override
 	public void setUserUuid(String userUuid);
 
 	/**
@@ -155,6 +165,7 @@ public interface DLFileEntryModel extends AttachedModel, BaseModel<DLFileEntry>,
 	 * @return the user name of this document library file entry
 	 */
 	@AutoEscape
+	@Override
 	public String getUserName();
 
 	/**
@@ -162,6 +173,7 @@ public interface DLFileEntryModel extends AttachedModel, BaseModel<DLFileEntry>,
 	 *
 	 * @param userName the user name of this document library file entry
 	 */
+	@Override
 	public void setUserName(String userName);
 
 	/**
@@ -213,6 +225,7 @@ public interface DLFileEntryModel extends AttachedModel, BaseModel<DLFileEntry>,
 	 *
 	 * @return the create date of this document library file entry
 	 */
+	@Override
 	public Date getCreateDate();
 
 	/**
@@ -220,6 +233,7 @@ public interface DLFileEntryModel extends AttachedModel, BaseModel<DLFileEntry>,
 	 *
 	 * @param createDate the create date of this document library file entry
 	 */
+	@Override
 	public void setCreateDate(Date createDate);
 
 	/**
@@ -227,6 +241,7 @@ public interface DLFileEntryModel extends AttachedModel, BaseModel<DLFileEntry>,
 	 *
 	 * @return the modified date of this document library file entry
 	 */
+	@Override
 	public Date getModifiedDate();
 
 	/**
@@ -234,6 +249,7 @@ public interface DLFileEntryModel extends AttachedModel, BaseModel<DLFileEntry>,
 	 *
 	 * @param modifiedDate the modified date of this document library file entry
 	 */
+	@Override
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
@@ -241,6 +257,7 @@ public interface DLFileEntryModel extends AttachedModel, BaseModel<DLFileEntry>,
 	 *
 	 * @return the fully qualified class name of this document library file entry
 	 */
+	@Override
 	public String getClassName();
 
 	public void setClassName(String className);
@@ -250,6 +267,7 @@ public interface DLFileEntryModel extends AttachedModel, BaseModel<DLFileEntry>,
 	 *
 	 * @return the class name ID of this document library file entry
 	 */
+	@Override
 	public long getClassNameId();
 
 	/**
@@ -257,6 +275,7 @@ public interface DLFileEntryModel extends AttachedModel, BaseModel<DLFileEntry>,
 	 *
 	 * @param classNameId the class name ID of this document library file entry
 	 */
+	@Override
 	public void setClassNameId(long classNameId);
 
 	/**
@@ -264,6 +283,7 @@ public interface DLFileEntryModel extends AttachedModel, BaseModel<DLFileEntry>,
 	 *
 	 * @return the class p k of this document library file entry
 	 */
+	@Override
 	public long getClassPK();
 
 	/**
@@ -271,6 +291,7 @@ public interface DLFileEntryModel extends AttachedModel, BaseModel<DLFileEntry>,
 	 *
 	 * @param classPK the class p k of this document library file entry
 	 */
+	@Override
 	public void setClassPK(long classPK);
 
 	/**
@@ -525,41 +546,60 @@ public interface DLFileEntryModel extends AttachedModel, BaseModel<DLFileEntry>,
 	 */
 	public void setManualCheckInRequired(boolean manualCheckInRequired);
 
+	@Override
 	public boolean isNew();
 
+	@Override
 	public void setNew(boolean n);
 
+	@Override
 	public boolean isCachedModel();
 
+	@Override
 	public void setCachedModel(boolean cachedModel);
 
+	@Override
 	public boolean isEscapedModel();
 
+	@Override
 	public Serializable getPrimaryKeyObj();
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
+	@Override
 	public ExpandoBridge getExpandoBridge();
 
+	@Override
 	public void setExpandoBridgeAttributes(BaseModel<?> baseModel);
 
+	@Override
 	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge);
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext);
 
+	@Override
 	public Object clone();
 
+	@Override
 	public int compareTo(DLFileEntry dlFileEntry);
 
+	@Override
 	public int hashCode();
 
+	@Override
 	public CacheModel<DLFileEntry> toCacheModel();
 
+	@Override
 	public DLFileEntry toEscapedModel();
 
+	@Override
 	public DLFileEntry toUnescapedModel();
 
+	@Override
 	public String toString();
 
+	@Override
 	public String toXmlString();
 }

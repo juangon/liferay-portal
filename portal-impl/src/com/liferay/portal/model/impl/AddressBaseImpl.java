@@ -37,6 +37,7 @@ public abstract class AddressBaseImpl extends AddressModelImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a address model instance should use the {@link Address} interface instead.
 	 */
+	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
 			AddressLocalServiceUtil.addAddress(this);

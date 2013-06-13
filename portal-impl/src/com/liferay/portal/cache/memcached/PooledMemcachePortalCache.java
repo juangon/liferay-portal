@@ -44,6 +44,7 @@ public class PooledMemcachePortalCache<V> implements PortalCache<String, V> {
 		_timeoutTimeUnit = timeoutTimeUnit;
 	}
 
+	@Override
 	public void destroy() {
 		try {
 			_memcachedClientFactory.close();
@@ -52,6 +53,7 @@ public class PooledMemcachePortalCache<V> implements PortalCache<String, V> {
 		}
 	}
 
+	@Override
 	public Collection<V> get(Collection<String> keys) {
 		MemcachedClientIF memcachedClient = null;
 
@@ -104,6 +106,7 @@ public class PooledMemcachePortalCache<V> implements PortalCache<String, V> {
 		return (Collection<V>)values.values();
 	}
 
+	@Override
 	public V get(String key) {
 		MemcachedClientIF memcachedClient = null;
 
@@ -144,14 +147,17 @@ public class PooledMemcachePortalCache<V> implements PortalCache<String, V> {
 		}
 	}
 
+	@Override
 	public String getName() {
 		return _name;
 	}
 
+	@Override
 	public void put(String key, V value) {
 		put(key, value, _timeToLive);
 	}
 
+	@Override
 	public void put(String key, V value, int timeToLive) {
 		MemcachedClientIF memcachedClient = null;
 
@@ -177,10 +183,12 @@ public class PooledMemcachePortalCache<V> implements PortalCache<String, V> {
 		}
 	}
 
+	@Override
 	public void registerCacheListener(CacheListener<String, V> cacheListener) {
 		registerCacheListener(cacheListener, CacheListenerScope.ALL);
 	}
 
+	@Override
 	public void registerCacheListener(
 		CacheListener<String, V> cacheListener,
 		CacheListenerScope cacheListenerScope) {
@@ -188,6 +196,7 @@ public class PooledMemcachePortalCache<V> implements PortalCache<String, V> {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void remove(String key) {
 		MemcachedClientIF memcachedClient = null;
 
@@ -213,6 +222,7 @@ public class PooledMemcachePortalCache<V> implements PortalCache<String, V> {
 		}
 	}
 
+	@Override
 	public void removeAll() {
 		MemcachedClientIF memcachedClient = null;
 
@@ -235,10 +245,12 @@ public class PooledMemcachePortalCache<V> implements PortalCache<String, V> {
 		_timeToLive = timeToLive;
 	}
 
+	@Override
 	public void unregisterCacheListener(
 		CacheListener<String, V> cacheListener) {
 	}
 
+	@Override
 	public void unregisterCacheListeners() {
 	}
 
@@ -250,7 +262,8 @@ public class PooledMemcachePortalCache<V> implements PortalCache<String, V> {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(MemcachePortalCache.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		PooledMemcachePortalCache.class);
 
 	private MemcachedClientFactory _memcachedClientFactory;
 	private String _name;

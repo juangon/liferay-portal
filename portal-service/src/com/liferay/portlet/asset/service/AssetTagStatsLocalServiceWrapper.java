@@ -17,12 +17,10 @@ package com.liferay.portlet.asset.service;
 import com.liferay.portal.service.ServiceWrapper;
 
 /**
- * <p>
- * This class is a wrapper for {@link AssetTagStatsLocalService}.
- * </p>
+ * Provides a wrapper for {@link AssetTagStatsLocalService}.
  *
- * @author    Brian Wing Shun Chan
- * @see       AssetTagStatsLocalService
+ * @author Brian Wing Shun Chan
+ * @see AssetTagStatsLocalService
  * @generated
  */
 public class AssetTagStatsLocalServiceWrapper
@@ -40,6 +38,7 @@ public class AssetTagStatsLocalServiceWrapper
 	* @return the asset tag stats that was added
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.asset.model.AssetTagStats addAssetTagStats(
 		com.liferay.portlet.asset.model.AssetTagStats assetTagStats)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -52,6 +51,7 @@ public class AssetTagStatsLocalServiceWrapper
 	* @param tagStatsId the primary key for the new asset tag stats
 	* @return the new asset tag stats
 	*/
+	@Override
 	public com.liferay.portlet.asset.model.AssetTagStats createAssetTagStats(
 		long tagStatsId) {
 		return _assetTagStatsLocalService.createAssetTagStats(tagStatsId);
@@ -65,6 +65,7 @@ public class AssetTagStatsLocalServiceWrapper
 	* @throws PortalException if a asset tag stats with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.asset.model.AssetTagStats deleteAssetTagStats(
 		long tagStatsId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -79,12 +80,14 @@ public class AssetTagStatsLocalServiceWrapper
 	* @return the asset tag stats that was removed
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.asset.model.AssetTagStats deleteAssetTagStats(
 		com.liferay.portlet.asset.model.AssetTagStats assetTagStats)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _assetTagStatsLocalService.deleteAssetTagStats(assetTagStats);
 	}
 
+	@Override
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {
 		return _assetTagStatsLocalService.dynamicQuery();
 	}
@@ -96,6 +99,7 @@ public class AssetTagStatsLocalServiceWrapper
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -116,6 +120,7 @@ public class AssetTagStatsLocalServiceWrapper
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -137,6 +142,7 @@ public class AssetTagStatsLocalServiceWrapper
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -154,12 +160,14 @@ public class AssetTagStatsLocalServiceWrapper
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _assetTagStatsLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	@Override
 	public com.liferay.portlet.asset.model.AssetTagStats fetchAssetTagStats(
 		long tagStatsId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -174,6 +182,7 @@ public class AssetTagStatsLocalServiceWrapper
 	* @throws PortalException if a asset tag stats with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.asset.model.AssetTagStats getAssetTagStats(
 		long tagStatsId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -181,6 +190,7 @@ public class AssetTagStatsLocalServiceWrapper
 		return _assetTagStatsLocalService.getAssetTagStats(tagStatsId);
 	}
 
+	@Override
 	public com.liferay.portal.model.PersistedModel getPersistedModel(
 		java.io.Serializable primaryKeyObj)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -200,6 +210,7 @@ public class AssetTagStatsLocalServiceWrapper
 	* @return the range of asset tag statses
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public java.util.List<com.liferay.portlet.asset.model.AssetTagStats> getAssetTagStatses(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -212,6 +223,7 @@ public class AssetTagStatsLocalServiceWrapper
 	* @return the number of asset tag statses
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public int getAssetTagStatsesCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _assetTagStatsLocalService.getAssetTagStatsesCount();
@@ -224,6 +236,7 @@ public class AssetTagStatsLocalServiceWrapper
 	* @return the asset tag stats that was updated
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.asset.model.AssetTagStats updateAssetTagStats(
 		com.liferay.portlet.asset.model.AssetTagStats assetTagStats)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -235,6 +248,7 @@ public class AssetTagStatsLocalServiceWrapper
 	*
 	* @return the Spring bean ID for this bean
 	*/
+	@Override
 	public java.lang.String getBeanIdentifier() {
 		return _assetTagStatsLocalService.getBeanIdentifier();
 	}
@@ -244,6 +258,7 @@ public class AssetTagStatsLocalServiceWrapper
 	*
 	* @param beanIdentifier the Spring bean ID for this bean
 	*/
+	@Override
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		_assetTagStatsLocalService.setBeanIdentifier(beanIdentifier);
 	}
@@ -256,6 +271,7 @@ public class AssetTagStatsLocalServiceWrapper
 	* @return the asset tag statistics instance
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.asset.model.AssetTagStats addTagStats(
 		long tagId, long classNameId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -268,6 +284,7 @@ public class AssetTagStatsLocalServiceWrapper
 	* @param tagStats the asset tag statistics instance
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void deleteTagStats(
 		com.liferay.portlet.asset.model.AssetTagStats tagStats)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -282,6 +299,7 @@ public class AssetTagStatsLocalServiceWrapper
 	not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void deleteTagStats(long tagStatsId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -295,6 +313,7 @@ public class AssetTagStatsLocalServiceWrapper
 	* @param classNameId the asset entry's class name ID
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void deleteTagStatsByClassNameId(long classNameId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_assetTagStatsLocalService.deleteTagStatsByClassNameId(classNameId);
@@ -306,6 +325,7 @@ public class AssetTagStatsLocalServiceWrapper
 	* @param tagId the primary key of the tag
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void deleteTagStatsByTagId(long tagId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_assetTagStatsLocalService.deleteTagStatsByTagId(tagId);
@@ -332,6 +352,7 @@ public class AssetTagStatsLocalServiceWrapper
 	matching the class name ID
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public java.util.List<com.liferay.portlet.asset.model.AssetTagStats> getTagStats(
 		long classNameId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -348,6 +369,7 @@ public class AssetTagStatsLocalServiceWrapper
 	entry  matching the class name ID
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.asset.model.AssetTagStats getTagStats(
 		long tagId, long classNameId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -364,6 +386,7 @@ public class AssetTagStatsLocalServiceWrapper
 	found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.asset.model.AssetTagStats updateTagStats(
 		long tagId, long classNameId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -386,10 +409,12 @@ public class AssetTagStatsLocalServiceWrapper
 		_assetTagStatsLocalService = assetTagStatsLocalService;
 	}
 
+	@Override
 	public AssetTagStatsLocalService getWrappedService() {
 		return _assetTagStatsLocalService;
 	}
 
+	@Override
 	public void setWrappedService(
 		AssetTagStatsLocalService assetTagStatsLocalService) {
 		_assetTagStatsLocalService = assetTagStatsLocalService;

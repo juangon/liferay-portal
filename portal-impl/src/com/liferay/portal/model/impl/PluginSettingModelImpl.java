@@ -138,26 +138,32 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 	public PluginSettingModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _pluginSettingId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setPluginSettingId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _pluginSettingId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return PluginSetting.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return PluginSetting.class.getName();
 	}
@@ -215,20 +221,24 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 		}
 	}
 
+	@Override
 	@JSON
 	public long getPluginSettingId() {
 		return _pluginSettingId;
 	}
 
+	@Override
 	public void setPluginSettingId(long pluginSettingId) {
 		_pluginSettingId = pluginSettingId;
 	}
 
+	@Override
 	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
@@ -245,6 +255,7 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 		return _originalCompanyId;
 	}
 
+	@Override
 	@JSON
 	public String getPluginId() {
 		if (_pluginId == null) {
@@ -255,6 +266,7 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 		}
 	}
 
+	@Override
 	public void setPluginId(String pluginId) {
 		_columnBitmask |= PLUGINID_COLUMN_BITMASK;
 
@@ -269,6 +281,7 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 		return GetterUtil.getString(_originalPluginId);
 	}
 
+	@Override
 	@JSON
 	public String getPluginType() {
 		if (_pluginType == null) {
@@ -279,6 +292,7 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 		}
 	}
 
+	@Override
 	public void setPluginType(String pluginType) {
 		_columnBitmask |= PLUGINTYPE_COLUMN_BITMASK;
 
@@ -293,6 +307,7 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 		return GetterUtil.getString(_originalPluginType);
 	}
 
+	@Override
 	@JSON
 	public String getRoles() {
 		if (_roles == null) {
@@ -303,19 +318,23 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 		}
 	}
 
+	@Override
 	public void setRoles(String roles) {
 		_roles = roles;
 	}
 
+	@Override
 	@JSON
 	public boolean getActive() {
 		return _active;
 	}
 
+	@Override
 	public boolean isActive() {
 		return _active;
 	}
 
+	@Override
 	public void setActive(boolean active) {
 		_active = active;
 	}
@@ -363,6 +382,7 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 		return pluginSettingImpl;
 	}
 
+	@Override
 	public int compareTo(PluginSetting pluginSetting) {
 		long primaryKey = pluginSetting.getPrimaryKey();
 
@@ -379,18 +399,15 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof PluginSetting)) {
 			return false;
 		}
 
-		PluginSetting pluginSetting = null;
-
-		try {
-			pluginSetting = (PluginSetting)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		PluginSetting pluginSetting = (PluginSetting)obj;
 
 		long primaryKey = pluginSetting.getPrimaryKey();
 
@@ -480,6 +497,7 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(22);
 

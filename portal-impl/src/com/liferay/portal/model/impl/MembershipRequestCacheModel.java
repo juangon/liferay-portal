@@ -64,6 +64,7 @@ public class MembershipRequestCacheModel implements CacheModel<MembershipRequest
 		return sb.toString();
 	}
 
+	@Override
 	public MembershipRequest toEntityModel() {
 		MembershipRequestImpl membershipRequestImpl = new MembershipRequestImpl();
 
@@ -108,6 +109,7 @@ public class MembershipRequestCacheModel implements CacheModel<MembershipRequest
 		return membershipRequestImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		membershipRequestId = objectInput.readLong();
 		groupId = objectInput.readLong();
@@ -121,6 +123,7 @@ public class MembershipRequestCacheModel implements CacheModel<MembershipRequest
 		statusId = objectInput.readInt();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(membershipRequestId);

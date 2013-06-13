@@ -53,24 +53,11 @@ DDMTemplate template = (DDMTemplate)row.getObject();
 		/>
 	</c:if>
 
-	<%
-	ddmResourceActionId = ActionKeys.ADD_TEMPLATE;
-
-	if (portletName.equals(PortletKeys.PORTLET_DISPLAY_TEMPLATES)) {
-		TemplateHandler templateHandler = TemplateHandlerRegistryUtil.getTemplateHandler(template.getClassNameId());
-
-		ddmResource = templateHandler.getResourceName();
-		ddmResourceActionId = ActionKeys.ADD_PORTLET_DISPLAY_TEMPLATE;
-	}
-	%>
-
-	<c:if test="<%= DDMPermission.contains(permissionChecker, scopeGroupId, ddmResource, ddmResourceActionId) %>">
+	<c:if test="<%= DDMPermission.contains(permissionChecker, scopeGroupId, ddmDisplay.getResourceName(template.getClassNameId()), ddmDisplay.getAddTemplateActionId()) %>">
 		<portlet:renderURL var="copyURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 			<portlet:param name="closeRedirect" value="<%= HttpUtil.encodeURL(currentURL) %>" />
 			<portlet:param name="struts_action" value="/dynamic_data_mapping/copy_template" />
 			<portlet:param name="templateId" value="<%= String.valueOf(template.getTemplateId()) %>" />
-			<portlet:param name="ddmResource" value="<%= ddmResource %>" />
-			<portlet:param name="ddmResourceActionId" value="<%= ddmResourceActionId %>" />
 		</portlet:renderURL>
 
 		<%

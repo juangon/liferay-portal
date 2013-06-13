@@ -24,11 +24,9 @@ import com.liferay.portal.security.ac.AccessControlled;
 import com.liferay.portal.service.BaseService;
 
 /**
- * The interface for the document library file entry type remote service.
- *
- * <p>
- * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
- * </p>
+ * Provides the remote service interface for DLFileEntryType. Methods of this
+ * service are expected to have security checks based on the propagated JAAS
+ * credentials because this service can be accessed remotely.
  *
  * @author Brian Wing Shun Chan
  * @see DLFileEntryTypeServiceUtil
@@ -60,6 +58,15 @@ public interface DLFileEntryTypeService extends BaseService {
 	* @param beanIdentifier the Spring bean ID for this bean
 	*/
 	public void setBeanIdentifier(java.lang.String beanIdentifier);
+
+	public com.liferay.portlet.documentlibrary.model.DLFileEntryType addFileEntryType(
+		long groupId, java.lang.String fileEntryTypeKey,
+		java.util.Map<java.util.Locale, java.lang.String> nameMap,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
+		long[] ddmStructureIds,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntryType addFileEntryType(
 		long groupId, java.lang.String name, java.lang.String description,
@@ -104,6 +111,14 @@ public interface DLFileEntryTypeService extends BaseService {
 	public int searchCount(long companyId, long[] groupIds,
 		java.lang.String keywords, boolean includeBasicFileEntryType)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void updateFileEntryType(long fileEntryTypeId,
+		java.util.Map<java.util.Locale, java.lang.String> nameMap,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
+		long[] ddmStructureIds,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public void updateFileEntryType(long fileEntryTypeId,
 		java.lang.String name, java.lang.String description,

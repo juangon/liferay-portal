@@ -75,6 +75,7 @@ public class JournalFolderCacheModel implements CacheModel<JournalFolder>,
 		return sb.toString();
 	}
 
+	@Override
 	public JournalFolder toEntityModel() {
 		JournalFolderImpl journalFolderImpl = new JournalFolderImpl();
 
@@ -149,6 +150,7 @@ public class JournalFolderCacheModel implements CacheModel<JournalFolder>,
 		return journalFolderImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		folderId = objectInput.readLong();
@@ -167,6 +169,7 @@ public class JournalFolderCacheModel implements CacheModel<JournalFolder>,
 		statusDate = objectInput.readLong();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

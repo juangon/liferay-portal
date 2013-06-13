@@ -30,6 +30,7 @@ public class DoubleWrapper
 		_value = value;
 	}
 
+	@Override
 	public int compareTo(DoubleWrapper doubleWrapper) {
 		if (doubleWrapper == null) {
 			return 1;

@@ -57,6 +57,7 @@ public class JournalContentSearchCacheModel implements CacheModel<JournalContent
 		return sb.toString();
 	}
 
+	@Override
 	public JournalContentSearch toEntityModel() {
 		JournalContentSearchImpl journalContentSearchImpl = new JournalContentSearchImpl();
 
@@ -85,6 +86,7 @@ public class JournalContentSearchCacheModel implements CacheModel<JournalContent
 		return journalContentSearchImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		contentSearchId = objectInput.readLong();
 		groupId = objectInput.readLong();
@@ -95,6 +97,7 @@ public class JournalContentSearchCacheModel implements CacheModel<JournalContent
 		articleId = objectInput.readUTF();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(contentSearchId);

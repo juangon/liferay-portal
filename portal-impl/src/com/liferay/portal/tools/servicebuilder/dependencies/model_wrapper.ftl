@@ -17,8 +17,8 @@ import java.util.Map;
  * This class is a wrapper for {@link ${entity.name}}.
  * </p>
  *
- * @author    ${author}
- * @see       ${entity.name}
+ * @author ${author}
+ * @see ${entity.name}
  * @generated
  */
 public class ${entity.name}Wrapper implements ${entity.name}, ModelWrapper<${entity.name}> {
@@ -27,14 +27,17 @@ public class ${entity.name}Wrapper implements ${entity.name}, ModelWrapper<${ent
 		_${entity.varName} = ${entity.varName};
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return ${entity.name}.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return ${entity.name}.class.getName();
 	}
 
+	@Override
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
@@ -45,6 +48,7 @@ public class ${entity.name}Wrapper implements ${entity.name}, ModelWrapper<${ent
 		return attributes;
 	}
 
+	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 		<#list entity.regularColList as column>
 			<#if column.isPrimitiveType()>
@@ -74,9 +78,7 @@ public class ${entity.name}Wrapper implements ${entity.name}, ModelWrapper<${ent
 			<#assign parameters = method.parameters>
 
 			${serviceBuilder.getJavadocComment(method)}
-			<#if (method.name == "clone" || method.name == "hashCode" || method.name == "toString") && (parameters?size == 0)>
-				@Override
-			</#if>
+			@Override
 			public ${serviceBuilder.getTypeGenericsName(method.returns)} ${method.name} (
 
 			<#list parameters as parameter>
@@ -134,10 +136,12 @@ public class ${entity.name}Wrapper implements ${entity.name}, ModelWrapper<${ent
 		return _${entity.varName};
 	}
 
+	@Override
 	public ${entity.name} getWrappedModel() {
 		return _${entity.varName};
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		_${entity.varName}.resetOriginalValues();
 	}

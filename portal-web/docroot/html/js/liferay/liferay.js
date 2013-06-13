@@ -14,7 +14,7 @@ Liferay = window.Liferay || {};
 	Liferay.namespace = A.namespace;
 
 	A.mix(
-		AUI.defaults.io,
+		A.namespace('config.io'),
 		{
 			method: 'POST',
 			uriFormatter: function(value) {
@@ -57,24 +57,6 @@ Liferay = window.Liferay || {};
 				args.unshift(Liferay.Service, Liferay);
 
 				return A.bind.apply(A, args);
-			},
-
-			invoke: function(payload, ioConfig) {
-				var instance = this;
-
-				return A.io.request(
-					instance.URL_INVOKE,
-					A.merge(
-						{
-							data: {
-								cmd: A.JSON.stringify(payload),
-								p_auth: Liferay.authToken
-							},
-							dataType: 'json'
-						},
-						ioConfig
-					)
-				);
 			},
 
 			parseInvokeArgs: function(args) {
@@ -177,6 +159,29 @@ Liferay = window.Liferay || {};
 			}
 		},
 		true
+	);
+
+	Liferay.provide(
+		Service,
+		'invoke',
+		function(payload, ioConfig) {
+			var instance = this;
+
+			A.io.request(
+				instance.URL_INVOKE,
+				A.merge(
+					{
+						data: {
+							cmd: A.JSON.stringify(payload),
+							p_auth: Liferay.authToken
+						},
+						dataType: 'json'
+					},
+					ioConfig
+				)
+			);
+		},
+		['aui-io-request']
 	);
 
 	A.each(

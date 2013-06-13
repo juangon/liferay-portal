@@ -66,6 +66,7 @@ public class RepositoryEntryCacheModel implements CacheModel<RepositoryEntry>,
 		return sb.toString();
 	}
 
+	@Override
 	public RepositoryEntry toEntityModel() {
 		RepositoryEntryImpl repositoryEntryImpl = new RepositoryEntryImpl();
 
@@ -118,6 +119,7 @@ public class RepositoryEntryCacheModel implements CacheModel<RepositoryEntry>,
 		return repositoryEntryImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		repositoryEntryId = objectInput.readLong();
@@ -132,6 +134,7 @@ public class RepositoryEntryCacheModel implements CacheModel<RepositoryEntry>,
 		manualCheckInRequired = objectInput.readBoolean();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

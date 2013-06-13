@@ -1439,6 +1439,7 @@ public class SeleneseToJavaBuilder {
 	private class TestHtmlCountComparator
 		implements Comparator<ObjectValuePair<String, IntegerWrapper>> {
 
+		@Override
 		public int compare(
 			ObjectValuePair<String, IntegerWrapper> object1,
 			ObjectValuePair<String, IntegerWrapper> object2) {

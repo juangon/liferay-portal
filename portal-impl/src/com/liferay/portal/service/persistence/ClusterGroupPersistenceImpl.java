@@ -83,6 +83,7 @@ public class ClusterGroupPersistenceImpl extends BasePersistenceImpl<ClusterGrou
 	 *
 	 * @param clusterGroup the cluster group
 	 */
+	@Override
 	public void cacheResult(ClusterGroup clusterGroup) {
 		EntityCacheUtil.putResult(ClusterGroupModelImpl.ENTITY_CACHE_ENABLED,
 			ClusterGroupImpl.class, clusterGroup.getPrimaryKey(), clusterGroup);
@@ -95,6 +96,7 @@ public class ClusterGroupPersistenceImpl extends BasePersistenceImpl<ClusterGrou
 	 *
 	 * @param clusterGroups the cluster groups
 	 */
+	@Override
 	public void cacheResult(List<ClusterGroup> clusterGroups) {
 		for (ClusterGroup clusterGroup : clusterGroups) {
 			if (EntityCacheUtil.getResult(
@@ -161,6 +163,7 @@ public class ClusterGroupPersistenceImpl extends BasePersistenceImpl<ClusterGrou
 	 * @param clusterGroupId the primary key for the new cluster group
 	 * @return the new cluster group
 	 */
+	@Override
 	public ClusterGroup create(long clusterGroupId) {
 		ClusterGroup clusterGroup = new ClusterGroupImpl();
 
@@ -178,6 +181,7 @@ public class ClusterGroupPersistenceImpl extends BasePersistenceImpl<ClusterGrou
 	 * @throws com.liferay.portal.NoSuchClusterGroupException if a cluster group with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ClusterGroup remove(long clusterGroupId)
 		throws NoSuchClusterGroupException, SystemException {
 		return remove((Serializable)clusterGroupId);
@@ -349,6 +353,7 @@ public class ClusterGroupPersistenceImpl extends BasePersistenceImpl<ClusterGrou
 	 * @throws com.liferay.portal.NoSuchClusterGroupException if a cluster group with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ClusterGroup findByPrimaryKey(long clusterGroupId)
 		throws NoSuchClusterGroupException, SystemException {
 		return findByPrimaryKey((Serializable)clusterGroupId);
@@ -409,6 +414,7 @@ public class ClusterGroupPersistenceImpl extends BasePersistenceImpl<ClusterGrou
 	 * @return the cluster group, or <code>null</code> if a cluster group with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ClusterGroup fetchByPrimaryKey(long clusterGroupId)
 		throws SystemException {
 		return fetchByPrimaryKey((Serializable)clusterGroupId);
@@ -420,6 +426,7 @@ public class ClusterGroupPersistenceImpl extends BasePersistenceImpl<ClusterGrou
 	 * @return the cluster groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ClusterGroup> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -436,6 +443,7 @@ public class ClusterGroupPersistenceImpl extends BasePersistenceImpl<ClusterGrou
 	 * @return the range of cluster groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ClusterGroup> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
@@ -454,6 +462,7 @@ public class ClusterGroupPersistenceImpl extends BasePersistenceImpl<ClusterGrou
 	 * @return the ordered range of cluster groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ClusterGroup> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -539,6 +548,7 @@ public class ClusterGroupPersistenceImpl extends BasePersistenceImpl<ClusterGrou
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (ClusterGroup clusterGroup : findAll()) {
 			remove(clusterGroup);
@@ -551,6 +561,7 @@ public class ClusterGroupPersistenceImpl extends BasePersistenceImpl<ClusterGrou
 	 * @return the number of cluster groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -633,6 +644,7 @@ public class ClusterGroupPersistenceImpl extends BasePersistenceImpl<ClusterGrou
 		};
 
 	private static CacheModel<ClusterGroup> _nullClusterGroupCacheModel = new CacheModel<ClusterGroup>() {
+			@Override
 			public ClusterGroup toEntityModel() {
 				return _nullClusterGroup;
 			}

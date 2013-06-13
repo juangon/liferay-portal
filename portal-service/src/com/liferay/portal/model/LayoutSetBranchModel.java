@@ -78,6 +78,7 @@ public interface LayoutSetBranchModel extends BaseModel<LayoutSetBranch>,
 	 *
 	 * @return the group ID of this layout set branch
 	 */
+	@Override
 	public long getGroupId();
 
 	/**
@@ -85,6 +86,7 @@ public interface LayoutSetBranchModel extends BaseModel<LayoutSetBranch>,
 	 *
 	 * @param groupId the group ID of this layout set branch
 	 */
+	@Override
 	public void setGroupId(long groupId);
 
 	/**
@@ -92,6 +94,7 @@ public interface LayoutSetBranchModel extends BaseModel<LayoutSetBranch>,
 	 *
 	 * @return the company ID of this layout set branch
 	 */
+	@Override
 	public long getCompanyId();
 
 	/**
@@ -99,6 +102,7 @@ public interface LayoutSetBranchModel extends BaseModel<LayoutSetBranch>,
 	 *
 	 * @param companyId the company ID of this layout set branch
 	 */
+	@Override
 	public void setCompanyId(long companyId);
 
 	/**
@@ -106,6 +110,7 @@ public interface LayoutSetBranchModel extends BaseModel<LayoutSetBranch>,
 	 *
 	 * @return the user ID of this layout set branch
 	 */
+	@Override
 	public long getUserId();
 
 	/**
@@ -113,6 +118,7 @@ public interface LayoutSetBranchModel extends BaseModel<LayoutSetBranch>,
 	 *
 	 * @param userId the user ID of this layout set branch
 	 */
+	@Override
 	public void setUserId(long userId);
 
 	/**
@@ -121,6 +127,7 @@ public interface LayoutSetBranchModel extends BaseModel<LayoutSetBranch>,
 	 * @return the user uuid of this layout set branch
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public String getUserUuid() throws SystemException;
 
 	/**
@@ -128,6 +135,7 @@ public interface LayoutSetBranchModel extends BaseModel<LayoutSetBranch>,
 	 *
 	 * @param userUuid the user uuid of this layout set branch
 	 */
+	@Override
 	public void setUserUuid(String userUuid);
 
 	/**
@@ -136,6 +144,7 @@ public interface LayoutSetBranchModel extends BaseModel<LayoutSetBranch>,
 	 * @return the user name of this layout set branch
 	 */
 	@AutoEscape
+	@Override
 	public String getUserName();
 
 	/**
@@ -143,6 +152,7 @@ public interface LayoutSetBranchModel extends BaseModel<LayoutSetBranch>,
 	 *
 	 * @param userName the user name of this layout set branch
 	 */
+	@Override
 	public void setUserName(String userName);
 
 	/**
@@ -150,6 +160,7 @@ public interface LayoutSetBranchModel extends BaseModel<LayoutSetBranch>,
 	 *
 	 * @return the create date of this layout set branch
 	 */
+	@Override
 	public Date getCreateDate();
 
 	/**
@@ -157,6 +168,7 @@ public interface LayoutSetBranchModel extends BaseModel<LayoutSetBranch>,
 	 *
 	 * @param createDate the create date of this layout set branch
 	 */
+	@Override
 	public void setCreateDate(Date createDate);
 
 	/**
@@ -164,6 +176,7 @@ public interface LayoutSetBranchModel extends BaseModel<LayoutSetBranch>,
 	 *
 	 * @return the modified date of this layout set branch
 	 */
+	@Override
 	public Date getModifiedDate();
 
 	/**
@@ -171,6 +184,7 @@ public interface LayoutSetBranchModel extends BaseModel<LayoutSetBranch>,
 	 *
 	 * @param modifiedDate the modified date of this layout set branch
 	 */
+	@Override
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
@@ -407,41 +421,60 @@ public interface LayoutSetBranchModel extends BaseModel<LayoutSetBranch>,
 	public void setLayoutSetPrototypeLinkEnabled(
 		boolean layoutSetPrototypeLinkEnabled);
 
+	@Override
 	public boolean isNew();
 
+	@Override
 	public void setNew(boolean n);
 
+	@Override
 	public boolean isCachedModel();
 
+	@Override
 	public void setCachedModel(boolean cachedModel);
 
+	@Override
 	public boolean isEscapedModel();
 
+	@Override
 	public Serializable getPrimaryKeyObj();
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
+	@Override
 	public ExpandoBridge getExpandoBridge();
 
+	@Override
 	public void setExpandoBridgeAttributes(BaseModel<?> baseModel);
 
+	@Override
 	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge);
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext);
 
+	@Override
 	public Object clone();
 
+	@Override
 	public int compareTo(LayoutSetBranch layoutSetBranch);
 
+	@Override
 	public int hashCode();
 
+	@Override
 	public CacheModel<LayoutSetBranch> toCacheModel();
 
+	@Override
 	public LayoutSetBranch toEscapedModel();
 
+	@Override
 	public LayoutSetBranch toUnescapedModel();
 
+	@Override
 	public String toString();
 
+	@Override
 	public String toXmlString();
 }

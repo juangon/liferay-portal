@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.search.facet.Facet;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Layout;
 
 import java.io.Serializable;
 
@@ -115,6 +116,14 @@ public class SearchContext implements Serializable {
 		return _keywords;
 	}
 
+	public String getLanguageId() {
+		return LocaleUtil.toLanguageId(_locale);
+	}
+
+	public Layout getLayout() {
+		return _layout;
+	}
+
 	public Locale getLocale() {
 		return _locale;
 	}
@@ -137,6 +146,10 @@ public class SearchContext implements Serializable {
 		}
 
 		return _queryConfig;
+	}
+
+	public float getScoresThreshold() {
+		return _scoresThreshold;
 	}
 
 	public String getSearchEngineId() {
@@ -288,6 +301,10 @@ public class SearchContext implements Serializable {
 		_keywords = keywords;
 	}
 
+	public void setLayout(Layout layout) {
+		_layout = layout;
+	}
+
 	public void setLike(boolean like) {
 		_like = like;
 	}
@@ -316,6 +333,10 @@ public class SearchContext implements Serializable {
 
 	public void setScopeStrict(boolean scopeStrict) {
 		_scopeStrict = scopeStrict;
+	}
+
+	public void setScoresThreshold(float scoresThreshold) {
+		_scoresThreshold = scoresThreshold;
 	}
 
 	public void setSearchEngineId(String searchEngineId) {
@@ -358,6 +379,7 @@ public class SearchContext implements Serializable {
 	private boolean _includeLiveGroups = true;
 	private boolean _includeStagingGroups = true;
 	private String _keywords;
+	private Layout _layout;
 	private boolean _like;
 	private Locale _locale = LocaleUtil.getMostRelevantLocale();
 	private long[] _nodeIds;
@@ -366,6 +388,7 @@ public class SearchContext implements Serializable {
 	private String[] _portletIds;
 	private QueryConfig _queryConfig;
 	private boolean _scopeStrict = true;
+	private float _scoresThreshold;
 	private String _searchEngineId;
 	private Sort[] _sorts;
 	private int _start = QueryUtil.ALL_POS;

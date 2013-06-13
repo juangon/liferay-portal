@@ -51,6 +51,7 @@ public class WikiPageResourceCacheModel implements CacheModel<WikiPageResource>,
 		return sb.toString();
 	}
 
+	@Override
 	public WikiPageResource toEntityModel() {
 		WikiPageResourceImpl wikiPageResourceImpl = new WikiPageResourceImpl();
 
@@ -76,6 +77,7 @@ public class WikiPageResourceCacheModel implements CacheModel<WikiPageResource>,
 		return wikiPageResourceImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		resourcePrimKey = objectInput.readLong();
@@ -83,6 +85,7 @@ public class WikiPageResourceCacheModel implements CacheModel<WikiPageResource>,
 		title = objectInput.readUTF();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.template.StringTemplateResource;
 import com.liferay.portal.kernel.template.TemplateConstants;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateResource;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.template.AbstractTemplate;
 import com.liferay.portal.template.TemplateContextHelper;
 import com.liferay.portal.template.TemplateResourceThreadLocal;
@@ -32,6 +33,7 @@ import java.security.PrivilegedExceptionAction;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
+import org.apache.velocity.context.Context;
 import org.apache.velocity.exception.ParseErrorException;
 
 /**
@@ -60,14 +62,27 @@ public class VelocityTemplate extends AbstractTemplate {
 		_velocityEngine = velocityEngine;
 	}
 
+	@Override
 	public Object get(String key) {
 		return _velocityContext.get(key);
 	}
 
+	@Override
 	public String[] getKeys() {
-		return (String[])_velocityContext.getKeys();
+		Object[] keyObjects = _velocityContext.getKeys();
+
+		Context context = _velocityContext.getChainedContext();
+
+		Object[] innerKeyObjects = context.getKeys();
+
+		String[] keys = new String[keyObjects.length + innerKeyObjects.length];
+
+		ArrayUtil.combine(keyObjects, innerKeyObjects, keys);
+
+		return keys;
 	}
 
+	@Override
 	public void put(String key, Object value) {
 		if (value == null) {
 			return;
@@ -142,6 +157,7 @@ public class VelocityTemplate extends AbstractTemplate {
 			_templateResource = templateResource;
 		}
 
+		@Override
 		public Template run() throws Exception {
 			return _velocityEngine.getTemplate(
 				getTemplateResourceUUID(_templateResource),

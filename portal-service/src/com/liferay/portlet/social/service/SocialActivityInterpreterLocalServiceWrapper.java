@@ -17,12 +17,10 @@ package com.liferay.portlet.social.service;
 import com.liferay.portal.service.ServiceWrapper;
 
 /**
- * <p>
- * This class is a wrapper for {@link SocialActivityInterpreterLocalService}.
- * </p>
+ * Provides a wrapper for {@link SocialActivityInterpreterLocalService}.
  *
- * @author    Brian Wing Shun Chan
- * @see       SocialActivityInterpreterLocalService
+ * @author Brian Wing Shun Chan
+ * @see SocialActivityInterpreterLocalService
  * @generated
  */
 public class SocialActivityInterpreterLocalServiceWrapper
@@ -38,6 +36,7 @@ public class SocialActivityInterpreterLocalServiceWrapper
 	*
 	* @return the Spring bean ID for this bean
 	*/
+	@Override
 	public java.lang.String getBeanIdentifier() {
 		return _socialActivityInterpreterLocalService.getBeanIdentifier();
 	}
@@ -47,6 +46,7 @@ public class SocialActivityInterpreterLocalServiceWrapper
 	*
 	* @param beanIdentifier the Spring bean ID for this bean
 	*/
+	@Override
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		_socialActivityInterpreterLocalService.setBeanIdentifier(beanIdentifier);
 	}
@@ -56,6 +56,7 @@ public class SocialActivityInterpreterLocalServiceWrapper
 	*
 	* @param activityInterpreter the activity interpreter
 	*/
+	@Override
 	public void addActivityInterpreter(
 		com.liferay.portlet.social.model.SocialActivityInterpreter activityInterpreter) {
 		_socialActivityInterpreterLocalService.addActivityInterpreter(activityInterpreter);
@@ -66,11 +67,13 @@ public class SocialActivityInterpreterLocalServiceWrapper
 	*
 	* @param activityInterpreter the activity interpreter
 	*/
+	@Override
 	public void deleteActivityInterpreter(
 		com.liferay.portlet.social.model.SocialActivityInterpreter activityInterpreter) {
 		_socialActivityInterpreterLocalService.deleteActivityInterpreter(activityInterpreter);
 	}
 
+	@Override
 	public java.util.Map<java.lang.String, java.util.List<com.liferay.portlet.social.model.SocialActivityInterpreter>> getActivityInterpreters() {
 		return _socialActivityInterpreterLocalService.getActivityInterpreters();
 	}
@@ -79,6 +82,7 @@ public class SocialActivityInterpreterLocalServiceWrapper
 	* @deprecated As of 6.2.0, replaced by {@link #interpret(String,
 	SocialActivity, ServiceContext)}
 	*/
+	@Override
 	public com.liferay.portlet.social.model.SocialActivityFeedEntry interpret(
 		com.liferay.portlet.social.model.SocialActivity activity,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay) {
@@ -101,6 +105,7 @@ public class SocialActivityInterpreterLocalServiceWrapper
 	record or <code>null</code> if a compatible interpreter is not
 	found
 	*/
+	@Override
 	public com.liferay.portlet.social.model.SocialActivityFeedEntry interpret(
 		java.lang.String selector,
 		com.liferay.portlet.social.model.SocialActivity activity,
@@ -109,6 +114,7 @@ public class SocialActivityInterpreterLocalServiceWrapper
 			activity, serviceContext);
 	}
 
+	@Override
 	public com.liferay.portlet.social.model.SocialActivityFeedEntry interpret(
 		java.lang.String selector,
 		com.liferay.portlet.social.model.SocialActivitySet activitySet,
@@ -117,6 +123,7 @@ public class SocialActivityInterpreterLocalServiceWrapper
 			activitySet, serviceContext);
 	}
 
+	@Override
 	public void updateActivitySet(long activityId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -138,10 +145,12 @@ public class SocialActivityInterpreterLocalServiceWrapper
 		_socialActivityInterpreterLocalService = socialActivityInterpreterLocalService;
 	}
 
+	@Override
 	public SocialActivityInterpreterLocalService getWrappedService() {
 		return _socialActivityInterpreterLocalService;
 	}
 
+	@Override
 	public void setWrappedService(
 		SocialActivityInterpreterLocalService socialActivityInterpreterLocalService) {
 		_socialActivityInterpreterLocalService = socialActivityInterpreterLocalService;

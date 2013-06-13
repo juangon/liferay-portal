@@ -25,6 +25,8 @@
 		<column name="mirrorActivityId" type="long" />
 		<column name="classNameId" type="long" />
 		<column name="classPK" type="long" />
+		<column name="parentClassNameId" type="long" />
+		<column name="parentClassPK" type="long" />
 		<column name="type" type="int" />
 		<column name="extraData" type="String" />
 		<column name="receiverUserId" type="long" />
@@ -178,6 +180,9 @@
 
 		<!-- Finder methods -->
 
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
 		<finder name="C_C" return-type="Collection">
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
@@ -237,6 +242,9 @@
 
 		<!-- Finder methods -->
 
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
 		<finder name="UserId" return-type="Collection">
 			<finder-column name="userId" />
 		</finder>
@@ -279,6 +287,7 @@
 		<column name="classNameId" type="long" />
 		<column name="classPK" type="long" />
 		<column name="type" type="int" />
+		<column name="extraData" type="String" />
 		<column name="activityCount" type="int" />
 
 		<!-- Order -->
@@ -289,6 +298,9 @@
 
 		<!-- Finder methods -->
 
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
 		<finder name="G_U_T" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="userId" />
@@ -297,6 +309,12 @@
 		<finder name="C_C_T" return-type="Collection">
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
+			<finder-column name="type" />
+		</finder>
+		<finder name="G_U_C_T" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="userId" />
+			<finder-column name="classNameId" />
 			<finder-column name="type" />
 		</finder>
 		<finder name="U_C_C_T" return-type="Collection">

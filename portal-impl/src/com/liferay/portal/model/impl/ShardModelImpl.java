@@ -88,26 +88,32 @@ public class ShardModelImpl extends BaseModelImpl<Shard> implements ShardModel {
 	public ShardModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _shardId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setShardId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _shardId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return Shard.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return Shard.class.getName();
 	}
@@ -151,14 +157,17 @@ public class ShardModelImpl extends BaseModelImpl<Shard> implements ShardModel {
 		}
 	}
 
+	@Override
 	public long getShardId() {
 		return _shardId;
 	}
 
+	@Override
 	public void setShardId(long shardId) {
 		_shardId = shardId;
 	}
 
+	@Override
 	public String getClassName() {
 		if (getClassNameId() <= 0) {
 			return StringPool.BLANK;
@@ -167,6 +176,7 @@ public class ShardModelImpl extends BaseModelImpl<Shard> implements ShardModel {
 		return PortalUtil.getClassName(getClassNameId());
 	}
 
+	@Override
 	public void setClassName(String className) {
 		long classNameId = 0;
 
@@ -177,10 +187,12 @@ public class ShardModelImpl extends BaseModelImpl<Shard> implements ShardModel {
 		setClassNameId(classNameId);
 	}
 
+	@Override
 	public long getClassNameId() {
 		return _classNameId;
 	}
 
+	@Override
 	public void setClassNameId(long classNameId) {
 		_columnBitmask |= CLASSNAMEID_COLUMN_BITMASK;
 
@@ -197,10 +209,12 @@ public class ShardModelImpl extends BaseModelImpl<Shard> implements ShardModel {
 		return _originalClassNameId;
 	}
 
+	@Override
 	public long getClassPK() {
 		return _classPK;
 	}
 
+	@Override
 	public void setClassPK(long classPK) {
 		_columnBitmask |= CLASSPK_COLUMN_BITMASK;
 
@@ -217,6 +231,7 @@ public class ShardModelImpl extends BaseModelImpl<Shard> implements ShardModel {
 		return _originalClassPK;
 	}
 
+	@Override
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -226,6 +241,7 @@ public class ShardModelImpl extends BaseModelImpl<Shard> implements ShardModel {
 		}
 	}
 
+	@Override
 	public void setName(String name) {
 		_columnBitmask |= NAME_COLUMN_BITMASK;
 
@@ -281,6 +297,7 @@ public class ShardModelImpl extends BaseModelImpl<Shard> implements ShardModel {
 		return shardImpl;
 	}
 
+	@Override
 	public int compareTo(Shard shard) {
 		long primaryKey = shard.getPrimaryKey();
 
@@ -297,18 +314,15 @@ public class ShardModelImpl extends BaseModelImpl<Shard> implements ShardModel {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof Shard)) {
 			return false;
 		}
 
-		Shard shard = null;
-
-		try {
-			shard = (Shard)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		Shard shard = (Shard)obj;
 
 		long primaryKey = shard.getPrimaryKey();
 
@@ -380,6 +394,7 @@ public class ShardModelImpl extends BaseModelImpl<Shard> implements ShardModel {
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(16);
 

@@ -21,9 +21,11 @@ import com.liferay.portal.kernel.test.ExecutionTestListeners;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutPrototype;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
@@ -36,6 +38,7 @@ import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.MainServletExecutionTestListener;
 import com.liferay.portal.test.TransactionalCallbackAwareExecutionTestListener;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.GroupTestUtil;
 import com.liferay.portal.util.LayoutTestUtil;
 import com.liferay.portal.util.TestPropsValues;
@@ -55,6 +58,7 @@ import org.junit.runner.RunWith;
 
 /**
  * @author Julio Camarero
+ * @author Roberto Díaz
  */
 @ExecutionTestListeners(
 	listeners = {
@@ -156,6 +160,153 @@ public class GroupServiceTest {
 		Assert.assertNull(
 			BlogsEntryLocalServiceUtil.fetchBlogsEntry(
 				blogsEntry.getEntryId()));
+	}
+
+	@Test
+	public void testGroupHasCurrentPageScopeDescriptiveName() throws Exception {
+		ThemeDisplay themeDisplay = new ThemeDisplay();
+
+		Group group = addGroup(false, true, false);
+
+		themeDisplay.setPlid(group.getClassPK());
+
+		themeDisplay.setScopeGroupId(TestPropsValues.getGroupId());
+
+		String scopeDescriptiveName = group.getScopeDescriptiveName(
+			themeDisplay);
+
+		Assert.assertTrue(scopeDescriptiveName.contains("current-page"));
+	}
+
+	@Test
+	public void testGroupHasCurrentSiteScopeDescriptiveName() throws Exception {
+		ThemeDisplay themeDisplay = new ThemeDisplay();
+
+		Group group = addGroup(true, false, false);
+
+		themeDisplay.setScopeGroupId(group.getGroupId());
+
+		String scopeDescriptiveName = group.getScopeDescriptiveName(
+			themeDisplay);
+
+		Assert.assertTrue(scopeDescriptiveName.contains("current-site"));
+	}
+
+	@Test
+	public void testGroupHasDefaultScopeDescriptiveName() throws Exception {
+		ThemeDisplay themeDisplay = new ThemeDisplay();
+
+		Group group = addGroup(false, false, true);
+
+		themeDisplay.setScopeGroupId(TestPropsValues.getGroupId());
+
+		String scopeDescriptiveName = group.getScopeDescriptiveName(
+			themeDisplay);
+
+		Assert.assertTrue(scopeDescriptiveName.contains("default"));
+	}
+
+	@Test
+	public void testGroupHasLocalizedName() throws Exception {
+		ThemeDisplay themeDisplay = new ThemeDisplay();
+
+		Group group = GroupTestUtil.addGroup("Localized Name");
+
+		String scopeDescriptiveName = group.getScopeDescriptiveName(
+			themeDisplay);
+
+		Assert.assertTrue(scopeDescriptiveName.equals("Localized Name"));
+	}
+
+	@Test
+	public void testGroupIsChildSiteScopeLabel() throws Exception {
+		ThemeDisplay themeDisplay = new ThemeDisplay();
+
+		Group group = GroupTestUtil.addGroup();
+
+		themeDisplay.setScopeGroupId(group.getGroupId());
+
+		Group subgroup = GroupTestUtil.addGroup(
+			group.getGroupId(), ServiceTestUtil.randomString());
+
+		String scopeLabel = subgroup.getScopeLabel(themeDisplay);
+
+		Assert.assertEquals("child-site", scopeLabel);
+	}
+
+	@Test
+	public void testGroupIsCurrentSiteScopeLabel() throws Exception {
+		ThemeDisplay themeDisplay = new ThemeDisplay();
+
+		Group group = addGroup(true, false, false);
+
+		themeDisplay.setScopeGroupId(group.getGroupId());
+
+		String scopeLabel = group.getScopeLabel(themeDisplay);
+
+		Assert.assertEquals(scopeLabel, "current-site");
+	}
+
+	@Test
+	public void testGroupIsGlobalScopeLabel() throws Exception {
+		ThemeDisplay themeDisplay = new ThemeDisplay();
+
+		Group group  = addGroup(false, false, false);
+
+		Company company = CompanyLocalServiceUtil.getCompany(
+			group.getCompanyId());
+
+		themeDisplay.setCompany(company);
+
+		Group companyGroup = company.getGroup();
+
+		String scopeLabel = companyGroup.getScopeLabel(themeDisplay);
+
+		Assert.assertEquals("global", scopeLabel);
+	}
+
+	@Test
+	public void testGroupIsPageScopeLabel() throws Exception {
+		ThemeDisplay themeDisplay = new ThemeDisplay();
+
+		Group group = addGroup(false, true, false);
+
+		themeDisplay.setPlid(group.getClassPK());
+
+		themeDisplay.setScopeGroupId(TestPropsValues.getGroupId());
+
+		String scopeLabel = group.getScopeLabel(themeDisplay);
+
+		Assert.assertEquals("page", scopeLabel);
+	}
+
+	@Test
+	public void testGroupIsParentSiteScopeLabel() throws Exception {
+		ThemeDisplay themeDisplay = new ThemeDisplay();
+
+		Group group = GroupTestUtil.addGroup();
+
+		Group subgroup = GroupTestUtil.addGroup(
+			group.getGroupId(), ServiceTestUtil.randomString());
+
+		themeDisplay.setScopeGroupId(subgroup.getGroupId());
+
+		String scopeLabel = group.getScopeLabel(themeDisplay);
+
+		Assert.assertEquals("parent-site", scopeLabel);
+	}
+
+	@Test
+	public void testGroupIsSiteScopeLabel() throws Exception {
+		ThemeDisplay themeDisplay = new ThemeDisplay();
+
+		Group group = GroupTestUtil.addGroup();
+
+		themeDisplay.setScopeGroupId(TestPropsValues.getGroupId());
+
+		String scopeLabel = group.getScopeLabel(themeDisplay);
+
+		Assert.assertEquals("site", scopeLabel);
 	}
 
 	@Test
@@ -359,6 +510,40 @@ public class GroupServiceTest {
 		testGroup(
 			user, group1, group11, null, false, true, false, true, false, true,
 			true);
+	}
+
+	protected Group addGroup(
+			boolean site, boolean layout, boolean layoutPrototype)
+		throws Exception {
+
+		if (site) {
+			return GroupTestUtil.addGroup(ServiceTestUtil.randomString());
+		}
+		else if (layout) {
+			Group group = GroupTestUtil.addGroup(
+				ServiceTestUtil.randomString());
+
+			Layout scopeLayout = LayoutTestUtil.addLayout(
+				group.getGroupId(), ServiceTestUtil.randomString());
+
+			return GroupLocalServiceUtil.addGroup(
+				TestPropsValues.getUserId(),
+				GroupConstants.DEFAULT_PARENT_GROUP_ID, Layout.class.getName(),
+				scopeLayout.getPlid(), GroupConstants.DEFAULT_LIVE_GROUP_ID,
+				ServiceTestUtil.randomString(), null, 0, null, false, true,
+				null);
+		}
+		else if (layoutPrototype) {
+			Group group = GroupTestUtil.addGroup(
+				ServiceTestUtil.randomString());
+
+			group.setClassName(LayoutPrototype.class.getName());
+
+			return group;
+		}
+		else {
+			return GroupTestUtil.addGroup();
+		}
 	}
 
 	protected void givePermissionToManageSubsites(User user, Group group)

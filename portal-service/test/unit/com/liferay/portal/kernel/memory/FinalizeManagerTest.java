@@ -143,6 +143,7 @@ public class FinalizeManagerTest {
 
 	private class MarkFinalizeAction implements FinalizeAction {
 
+		@Override
 		public void doFinalize() {
 			_marked = true;
 		}

@@ -38,6 +38,7 @@ public abstract class ShoppingItemBaseImpl extends ShoppingItemModelImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a shopping item model instance should use the {@link ShoppingItem} interface instead.
 	 */
+	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
 			ShoppingItemLocalServiceUtil.addShoppingItem(this);

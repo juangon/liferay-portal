@@ -56,6 +56,7 @@ public class SCProductScreenshotCacheModel implements CacheModel<SCProductScreen
 		return sb.toString();
 	}
 
+	@Override
 	public SCProductScreenshot toEntityModel() {
 		SCProductScreenshotImpl scProductScreenshotImpl = new SCProductScreenshotImpl();
 
@@ -72,6 +73,7 @@ public class SCProductScreenshotCacheModel implements CacheModel<SCProductScreen
 		return scProductScreenshotImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		productScreenshotId = objectInput.readLong();
 		companyId = objectInput.readLong();
@@ -82,6 +84,7 @@ public class SCProductScreenshotCacheModel implements CacheModel<SCProductScreen
 		priority = objectInput.readInt();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(productScreenshotId);

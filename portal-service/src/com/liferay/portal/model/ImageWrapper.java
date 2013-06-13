@@ -23,8 +23,8 @@ import java.util.Map;
  * This class is a wrapper for {@link Image}.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       Image
+ * @author Brian Wing Shun Chan
+ * @see Image
  * @generated
  */
 public class ImageWrapper implements Image, ModelWrapper<Image> {
@@ -32,14 +32,17 @@ public class ImageWrapper implements Image, ModelWrapper<Image> {
 		_image = image;
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return Image.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return Image.class.getName();
 	}
 
+	@Override
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
@@ -53,6 +56,7 @@ public class ImageWrapper implements Image, ModelWrapper<Image> {
 		return attributes;
 	}
 
+	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 		Long imageId = (Long)attributes.get("imageId");
 
@@ -96,6 +100,7 @@ public class ImageWrapper implements Image, ModelWrapper<Image> {
 	*
 	* @return the primary key of this image
 	*/
+	@Override
 	public long getPrimaryKey() {
 		return _image.getPrimaryKey();
 	}
@@ -105,6 +110,7 @@ public class ImageWrapper implements Image, ModelWrapper<Image> {
 	*
 	* @param primaryKey the primary key of this image
 	*/
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_image.setPrimaryKey(primaryKey);
 	}
@@ -114,6 +120,7 @@ public class ImageWrapper implements Image, ModelWrapper<Image> {
 	*
 	* @return the image ID of this image
 	*/
+	@Override
 	public long getImageId() {
 		return _image.getImageId();
 	}
@@ -123,6 +130,7 @@ public class ImageWrapper implements Image, ModelWrapper<Image> {
 	*
 	* @param imageId the image ID of this image
 	*/
+	@Override
 	public void setImageId(long imageId) {
 		_image.setImageId(imageId);
 	}
@@ -132,6 +140,7 @@ public class ImageWrapper implements Image, ModelWrapper<Image> {
 	*
 	* @return the modified date of this image
 	*/
+	@Override
 	public java.util.Date getModifiedDate() {
 		return _image.getModifiedDate();
 	}
@@ -141,6 +150,7 @@ public class ImageWrapper implements Image, ModelWrapper<Image> {
 	*
 	* @param modifiedDate the modified date of this image
 	*/
+	@Override
 	public void setModifiedDate(java.util.Date modifiedDate) {
 		_image.setModifiedDate(modifiedDate);
 	}
@@ -150,6 +160,7 @@ public class ImageWrapper implements Image, ModelWrapper<Image> {
 	*
 	* @return the type of this image
 	*/
+	@Override
 	public java.lang.String getType() {
 		return _image.getType();
 	}
@@ -159,6 +170,7 @@ public class ImageWrapper implements Image, ModelWrapper<Image> {
 	*
 	* @param type the type of this image
 	*/
+	@Override
 	public void setType(java.lang.String type) {
 		_image.setType(type);
 	}
@@ -168,6 +180,7 @@ public class ImageWrapper implements Image, ModelWrapper<Image> {
 	*
 	* @return the height of this image
 	*/
+	@Override
 	public int getHeight() {
 		return _image.getHeight();
 	}
@@ -177,6 +190,7 @@ public class ImageWrapper implements Image, ModelWrapper<Image> {
 	*
 	* @param height the height of this image
 	*/
+	@Override
 	public void setHeight(int height) {
 		_image.setHeight(height);
 	}
@@ -186,6 +200,7 @@ public class ImageWrapper implements Image, ModelWrapper<Image> {
 	*
 	* @return the width of this image
 	*/
+	@Override
 	public int getWidth() {
 		return _image.getWidth();
 	}
@@ -195,6 +210,7 @@ public class ImageWrapper implements Image, ModelWrapper<Image> {
 	*
 	* @param width the width of this image
 	*/
+	@Override
 	public void setWidth(int width) {
 		_image.setWidth(width);
 	}
@@ -204,6 +220,7 @@ public class ImageWrapper implements Image, ModelWrapper<Image> {
 	*
 	* @return the size of this image
 	*/
+	@Override
 	public int getSize() {
 		return _image.getSize();
 	}
@@ -213,52 +230,64 @@ public class ImageWrapper implements Image, ModelWrapper<Image> {
 	*
 	* @param size the size of this image
 	*/
+	@Override
 	public void setSize(int size) {
 		_image.setSize(size);
 	}
 
+	@Override
 	public boolean isNew() {
 		return _image.isNew();
 	}
 
+	@Override
 	public void setNew(boolean n) {
 		_image.setNew(n);
 	}
 
+	@Override
 	public boolean isCachedModel() {
 		return _image.isCachedModel();
 	}
 
+	@Override
 	public void setCachedModel(boolean cachedModel) {
 		_image.setCachedModel(cachedModel);
 	}
 
+	@Override
 	public boolean isEscapedModel() {
 		return _image.isEscapedModel();
 	}
 
+	@Override
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _image.getPrimaryKeyObj();
 	}
 
+	@Override
 	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
 		_image.setPrimaryKeyObj(primaryKeyObj);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
 		return _image.getExpandoBridge();
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.model.BaseModel<?> baseModel) {
 		_image.setExpandoBridgeAttributes(baseModel);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portlet.expando.model.ExpandoBridge expandoBridge) {
 		_image.setExpandoBridgeAttributes(expandoBridge);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		_image.setExpandoBridgeAttributes(serviceContext);
@@ -269,6 +298,7 @@ public class ImageWrapper implements Image, ModelWrapper<Image> {
 		return new ImageWrapper((Image)_image.clone());
 	}
 
+	@Override
 	public int compareTo(com.liferay.portal.model.Image image) {
 		return _image.compareTo(image);
 	}
@@ -278,14 +308,17 @@ public class ImageWrapper implements Image, ModelWrapper<Image> {
 		return _image.hashCode();
 	}
 
+	@Override
 	public com.liferay.portal.model.CacheModel<com.liferay.portal.model.Image> toCacheModel() {
 		return _image.toCacheModel();
 	}
 
+	@Override
 	public com.liferay.portal.model.Image toEscapedModel() {
 		return new ImageWrapper(_image.toEscapedModel());
 	}
 
+	@Override
 	public com.liferay.portal.model.Image toUnescapedModel() {
 		return new ImageWrapper(_image.toUnescapedModel());
 	}
@@ -295,19 +328,23 @@ public class ImageWrapper implements Image, ModelWrapper<Image> {
 		return _image.toString();
 	}
 
+	@Override
 	public java.lang.String toXmlString() {
 		return _image.toXmlString();
 	}
 
+	@Override
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_image.persist();
 	}
 
+	@Override
 	public byte[] getTextObj() {
 		return _image.getTextObj();
 	}
 
+	@Override
 	public void setTextObj(byte[] textObj) {
 		_image.setTextObj(textObj);
 	}
@@ -319,10 +356,12 @@ public class ImageWrapper implements Image, ModelWrapper<Image> {
 		return _image;
 	}
 
+	@Override
 	public Image getWrappedModel() {
 		return _image;
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		_image.resetOriginalValues();
 	}

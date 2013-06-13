@@ -113,6 +113,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	 * @return the matching announcements flags
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AnnouncementsFlag> findByEntryId(long entryId)
 		throws SystemException {
 		return findByEntryId(entryId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
@@ -131,6 +132,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	 * @return the range of matching announcements flags
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AnnouncementsFlag> findByEntryId(long entryId, int start,
 		int end) throws SystemException {
 		return findByEntryId(entryId, start, end, null);
@@ -150,6 +152,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	 * @return the ordered range of matching announcements flags
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AnnouncementsFlag> findByEntryId(long entryId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -256,6 +259,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	 * @throws com.liferay.portlet.announcements.NoSuchFlagException if a matching announcements flag could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AnnouncementsFlag findByEntryId_First(long entryId,
 		OrderByComparator orderByComparator)
 		throws NoSuchFlagException, SystemException {
@@ -286,6 +290,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	 * @return the first matching announcements flag, or <code>null</code> if a matching announcements flag could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AnnouncementsFlag fetchByEntryId_First(long entryId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<AnnouncementsFlag> list = findByEntryId(entryId, 0, 1,
@@ -307,6 +312,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	 * @throws com.liferay.portlet.announcements.NoSuchFlagException if a matching announcements flag could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AnnouncementsFlag findByEntryId_Last(long entryId,
 		OrderByComparator orderByComparator)
 		throws NoSuchFlagException, SystemException {
@@ -337,6 +343,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	 * @return the last matching announcements flag, or <code>null</code> if a matching announcements flag could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AnnouncementsFlag fetchByEntryId_Last(long entryId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByEntryId(entryId);
@@ -361,6 +368,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	 * @throws com.liferay.portlet.announcements.NoSuchFlagException if a announcements flag with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AnnouncementsFlag[] findByEntryId_PrevAndNext(long flagId,
 		long entryId, OrderByComparator orderByComparator)
 		throws NoSuchFlagException, SystemException {
@@ -502,6 +510,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	 * @param entryId the entry ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByEntryId(long entryId) throws SystemException {
 		for (AnnouncementsFlag announcementsFlag : findByEntryId(entryId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -516,6 +525,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	 * @return the number of matching announcements flags
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByEntryId(long entryId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_ENTRYID;
 
@@ -591,6 +601,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	 * @throws com.liferay.portlet.announcements.NoSuchFlagException if a matching announcements flag could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AnnouncementsFlag findByU_E_V(long userId, long entryId, int value)
 		throws NoSuchFlagException, SystemException {
 		AnnouncementsFlag announcementsFlag = fetchByU_E_V(userId, entryId,
@@ -631,6 +642,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	 * @return the matching announcements flag, or <code>null</code> if a matching announcements flag could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AnnouncementsFlag fetchByU_E_V(long userId, long entryId, int value)
 		throws SystemException {
 		return fetchByU_E_V(userId, entryId, value, true);
@@ -646,6 +658,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	 * @return the matching announcements flag, or <code>null</code> if a matching announcements flag could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AnnouncementsFlag fetchByU_E_V(long userId, long entryId, int value,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { userId, entryId, value };
@@ -744,6 +757,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	 * @return the announcements flag that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AnnouncementsFlag removeByU_E_V(long userId, long entryId, int value)
 		throws NoSuchFlagException, SystemException {
 		AnnouncementsFlag announcementsFlag = findByU_E_V(userId, entryId, value);
@@ -760,6 +774,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	 * @return the number of matching announcements flags
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByU_E_V(long userId, long entryId, int value)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_U_E_V;
@@ -823,6 +838,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	 *
 	 * @param announcementsFlag the announcements flag
 	 */
+	@Override
 	public void cacheResult(AnnouncementsFlag announcementsFlag) {
 		EntityCacheUtil.putResult(AnnouncementsFlagModelImpl.ENTITY_CACHE_ENABLED,
 			AnnouncementsFlagImpl.class, announcementsFlag.getPrimaryKey(),
@@ -842,6 +858,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	 *
 	 * @param announcementsFlags the announcements flags
 	 */
+	@Override
 	public void cacheResult(List<AnnouncementsFlag> announcementsFlags) {
 		for (AnnouncementsFlag announcementsFlag : announcementsFlags) {
 			if (EntityCacheUtil.getResult(
@@ -968,6 +985,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	 * @param flagId the primary key for the new announcements flag
 	 * @return the new announcements flag
 	 */
+	@Override
 	public AnnouncementsFlag create(long flagId) {
 		AnnouncementsFlag announcementsFlag = new AnnouncementsFlagImpl();
 
@@ -985,6 +1003,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	 * @throws com.liferay.portlet.announcements.NoSuchFlagException if a announcements flag with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AnnouncementsFlag remove(long flagId)
 		throws NoSuchFlagException, SystemException {
 		return remove((Serializable)flagId);
@@ -1183,6 +1202,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	 * @throws com.liferay.portlet.announcements.NoSuchFlagException if a announcements flag with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AnnouncementsFlag findByPrimaryKey(long flagId)
 		throws NoSuchFlagException, SystemException {
 		return findByPrimaryKey((Serializable)flagId);
@@ -1244,6 +1264,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	 * @return the announcements flag, or <code>null</code> if a announcements flag with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AnnouncementsFlag fetchByPrimaryKey(long flagId)
 		throws SystemException {
 		return fetchByPrimaryKey((Serializable)flagId);
@@ -1255,6 +1276,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	 * @return the announcements flags
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AnnouncementsFlag> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1271,6 +1293,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	 * @return the range of announcements flags
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AnnouncementsFlag> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
@@ -1289,6 +1312,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	 * @return the ordered range of announcements flags
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AnnouncementsFlag> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -1374,6 +1398,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (AnnouncementsFlag announcementsFlag : findAll()) {
 			remove(announcementsFlag);
@@ -1386,6 +1411,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	 * @return the number of announcements flags
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -1472,6 +1498,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 
 	private static CacheModel<AnnouncementsFlag> _nullAnnouncementsFlagCacheModel =
 		new CacheModel<AnnouncementsFlag>() {
+			@Override
 			public AnnouncementsFlag toEntityModel() {
 				return _nullAnnouncementsFlag;
 			}

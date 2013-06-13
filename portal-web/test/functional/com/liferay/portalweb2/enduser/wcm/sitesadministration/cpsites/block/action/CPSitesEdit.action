@@ -7,7 +7,7 @@
 
 	<command name="click">
 		<case locator-key1="MENU_SAVE">
-			<execute function="Click#valueClickAtAndWait" value1="Save" />
+			<execute function="Click#textClickAtAndWait" value1="Save" />
 		</case>
 	</command>
 </definition>

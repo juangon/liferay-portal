@@ -44,6 +44,7 @@ public class PortletURLMatcher extends CallbackMatcher {
 
 	private Callback _callBack = new Callback() {
 
+		@Override
 		public String foundMatch(MatchResult matchResult) {
 			String portletURLString = _portletURL.toString();
 

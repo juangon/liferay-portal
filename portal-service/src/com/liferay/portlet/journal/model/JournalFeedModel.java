@@ -68,6 +68,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>,
 	 * @return the uuid of this journal feed
 	 */
 	@AutoEscape
+	@Override
 	public String getUuid();
 
 	/**
@@ -75,6 +76,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>,
 	 *
 	 * @param uuid the uuid of this journal feed
 	 */
+	@Override
 	public void setUuid(String uuid);
 
 	/**
@@ -96,6 +98,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>,
 	 *
 	 * @return the group ID of this journal feed
 	 */
+	@Override
 	public long getGroupId();
 
 	/**
@@ -103,6 +106,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>,
 	 *
 	 * @param groupId the group ID of this journal feed
 	 */
+	@Override
 	public void setGroupId(long groupId);
 
 	/**
@@ -110,6 +114,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>,
 	 *
 	 * @return the company ID of this journal feed
 	 */
+	@Override
 	public long getCompanyId();
 
 	/**
@@ -117,6 +122,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>,
 	 *
 	 * @param companyId the company ID of this journal feed
 	 */
+	@Override
 	public void setCompanyId(long companyId);
 
 	/**
@@ -124,6 +130,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>,
 	 *
 	 * @return the user ID of this journal feed
 	 */
+	@Override
 	public long getUserId();
 
 	/**
@@ -131,6 +138,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>,
 	 *
 	 * @param userId the user ID of this journal feed
 	 */
+	@Override
 	public void setUserId(long userId);
 
 	/**
@@ -139,6 +147,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>,
 	 * @return the user uuid of this journal feed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public String getUserUuid() throws SystemException;
 
 	/**
@@ -146,6 +155,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>,
 	 *
 	 * @param userUuid the user uuid of this journal feed
 	 */
+	@Override
 	public void setUserUuid(String userUuid);
 
 	/**
@@ -154,6 +164,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>,
 	 * @return the user name of this journal feed
 	 */
 	@AutoEscape
+	@Override
 	public String getUserName();
 
 	/**
@@ -161,6 +172,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>,
 	 *
 	 * @param userName the user name of this journal feed
 	 */
+	@Override
 	public void setUserName(String userName);
 
 	/**
@@ -168,6 +180,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>,
 	 *
 	 * @return the create date of this journal feed
 	 */
+	@Override
 	public Date getCreateDate();
 
 	/**
@@ -175,6 +188,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>,
 	 *
 	 * @param createDate the create date of this journal feed
 	 */
+	@Override
 	public void setCreateDate(Date createDate);
 
 	/**
@@ -182,6 +196,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>,
 	 *
 	 * @return the modified date of this journal feed
 	 */
+	@Override
 	public Date getModifiedDate();
 
 	/**
@@ -189,6 +204,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>,
 	 *
 	 * @param modifiedDate the modified date of this journal feed
 	 */
+	@Override
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
@@ -411,41 +427,60 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>,
 	 */
 	public void setFeedVersion(double feedVersion);
 
+	@Override
 	public boolean isNew();
 
+	@Override
 	public void setNew(boolean n);
 
+	@Override
 	public boolean isCachedModel();
 
+	@Override
 	public void setCachedModel(boolean cachedModel);
 
+	@Override
 	public boolean isEscapedModel();
 
+	@Override
 	public Serializable getPrimaryKeyObj();
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
+	@Override
 	public ExpandoBridge getExpandoBridge();
 
+	@Override
 	public void setExpandoBridgeAttributes(BaseModel<?> baseModel);
 
+	@Override
 	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge);
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext);
 
+	@Override
 	public Object clone();
 
+	@Override
 	public int compareTo(JournalFeed journalFeed);
 
+	@Override
 	public int hashCode();
 
+	@Override
 	public CacheModel<JournalFeed> toCacheModel();
 
+	@Override
 	public JournalFeed toEscapedModel();
 
+	@Override
 	public JournalFeed toUnescapedModel();
 
+	@Override
 	public String toString();
 
+	@Override
 	public String toXmlString();
 }

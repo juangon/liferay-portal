@@ -57,6 +57,7 @@ public class SocialActivityAchievementCacheModel implements CacheModel<SocialAct
 		return sb.toString();
 	}
 
+	@Override
 	public SocialActivityAchievement toEntityModel() {
 		SocialActivityAchievementImpl socialActivityAchievementImpl = new SocialActivityAchievementImpl();
 
@@ -80,6 +81,7 @@ public class SocialActivityAchievementCacheModel implements CacheModel<SocialAct
 		return socialActivityAchievementImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		activityAchievementId = objectInput.readLong();
 		groupId = objectInput.readLong();
@@ -90,6 +92,7 @@ public class SocialActivityAchievementCacheModel implements CacheModel<SocialAct
 		firstInGroup = objectInput.readBoolean();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(activityAchievementId);

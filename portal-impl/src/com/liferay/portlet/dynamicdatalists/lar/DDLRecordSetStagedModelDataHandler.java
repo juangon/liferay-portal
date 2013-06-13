@@ -44,6 +44,11 @@ public class DDLRecordSetStagedModelDataHandler
 	}
 
 	@Override
+	public String getDisplayName(DDLRecordSet recordSet) {
+		return recordSet.getNameCurrentValue();
+	}
+
+	@Override
 	protected void doExportStagedModel(
 			PortletDataContext portletDataContext, DDLRecordSet recordSet)
 		throws Exception {
@@ -63,7 +68,8 @@ public class DDLRecordSetStagedModelDataHandler
 				portletDataContext, ddmTemplate);
 
 			portletDataContext.addReferenceElement(
-				recordSetElement, ddmTemplate);
+				recordSet, recordSetElement, ddmTemplate,
+				PortletDataContext.REFERENCE_TYPE_STRONG, false);
 		}
 
 		portletDataContext.addClassedModel(
@@ -78,10 +84,6 @@ public class DDLRecordSetStagedModelDataHandler
 
 		long userId = portletDataContext.getUserId(recordSet.getUserUuid());
 
-		Map<Long, Long> ddmStructureIds =
-			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
-				DDMStructure.class);
-
 		String structurePath = ExportImportPathUtil.getModelPath(
 			portletDataContext, DDMStructure.class.getName(),
 			recordSet.getDDMStructureId());
@@ -91,6 +93,10 @@ public class DDLRecordSetStagedModelDataHandler
 
 		StagedModelDataHandlerUtil.importStagedModel(
 			portletDataContext, ddmStructure);
+
+		Map<Long, Long> ddmStructureIds =
+			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
+				DDMStructure.class);
 
 		long ddmStructureId = MapUtil.getLong(
 			ddmStructureIds, recordSet.getDDMStructureId(),

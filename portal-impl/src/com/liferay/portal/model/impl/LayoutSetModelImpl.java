@@ -161,26 +161,32 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 	public LayoutSetModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _layoutSetId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setLayoutSetId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _layoutSetId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return LayoutSet.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return LayoutSet.class.getName();
 	}
@@ -318,20 +324,24 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 		}
 	}
 
+	@Override
 	@JSON
 	public long getLayoutSetId() {
 		return _layoutSetId;
 	}
 
+	@Override
 	public void setLayoutSetId(long layoutSetId) {
 		_layoutSetId = layoutSetId;
 	}
 
+	@Override
 	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -348,42 +358,51 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 		return _originalGroupId;
 	}
 
+	@Override
 	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
+	@Override
 	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
 	}
 
+	@Override
 	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
 	@JSON
 	public boolean getPrivateLayout() {
 		return _privateLayout;
 	}
 
+	@Override
 	public boolean isPrivateLayout() {
 		return _privateLayout;
 	}
 
+	@Override
 	public void setPrivateLayout(boolean privateLayout) {
 		_columnBitmask |= PRIVATELAYOUT_COLUMN_BITMASK;
 
@@ -400,28 +419,34 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 		return _originalPrivateLayout;
 	}
 
+	@Override
 	@JSON
 	public boolean getLogo() {
 		return _logo;
 	}
 
+	@Override
 	public boolean isLogo() {
 		return _logo;
 	}
 
+	@Override
 	public void setLogo(boolean logo) {
 		_logo = logo;
 	}
 
+	@Override
 	@JSON
 	public long getLogoId() {
 		return _logoId;
 	}
 
+	@Override
 	public void setLogoId(long logoId) {
 		_logoId = logoId;
 	}
 
+	@Override
 	@JSON
 	public String getThemeId() {
 		if (_themeId == null) {
@@ -432,10 +457,12 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 		}
 	}
 
+	@Override
 	public void setThemeId(String themeId) {
 		_themeId = themeId;
 	}
 
+	@Override
 	@JSON
 	public String getColorSchemeId() {
 		if (_colorSchemeId == null) {
@@ -446,10 +473,12 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 		}
 	}
 
+	@Override
 	public void setColorSchemeId(String colorSchemeId) {
 		_colorSchemeId = colorSchemeId;
 	}
 
+	@Override
 	@JSON
 	public String getWapThemeId() {
 		if (_wapThemeId == null) {
@@ -460,10 +489,12 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 		}
 	}
 
+	@Override
 	public void setWapThemeId(String wapThemeId) {
 		_wapThemeId = wapThemeId;
 	}
 
+	@Override
 	@JSON
 	public String getWapColorSchemeId() {
 		if (_wapColorSchemeId == null) {
@@ -474,10 +505,12 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 		}
 	}
 
+	@Override
 	public void setWapColorSchemeId(String wapColorSchemeId) {
 		_wapColorSchemeId = wapColorSchemeId;
 	}
 
+	@Override
 	@JSON
 	public String getCss() {
 		if (_css == null) {
@@ -488,19 +521,23 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 		}
 	}
 
+	@Override
 	public void setCss(String css) {
 		_css = css;
 	}
 
+	@Override
 	@JSON
 	public int getPageCount() {
 		return _pageCount;
 	}
 
+	@Override
 	public void setPageCount(int pageCount) {
 		_pageCount = pageCount;
 	}
 
+	@Override
 	@JSON
 	public String getSettings() {
 		if (_settings == null) {
@@ -511,10 +548,12 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 		}
 	}
 
+	@Override
 	public void setSettings(String settings) {
 		_settings = settings;
 	}
 
+	@Override
 	@JSON
 	public String getLayoutSetPrototypeUuid() {
 		if (_layoutSetPrototypeUuid == null) {
@@ -525,6 +564,7 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 		}
 	}
 
+	@Override
 	public void setLayoutSetPrototypeUuid(String layoutSetPrototypeUuid) {
 		_columnBitmask |= LAYOUTSETPROTOTYPEUUID_COLUMN_BITMASK;
 
@@ -539,15 +579,18 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 		return GetterUtil.getString(_originalLayoutSetPrototypeUuid);
 	}
 
+	@Override
 	@JSON
 	public boolean getLayoutSetPrototypeLinkEnabled() {
 		return _layoutSetPrototypeLinkEnabled;
 	}
 
+	@Override
 	public boolean isLayoutSetPrototypeLinkEnabled() {
 		return _layoutSetPrototypeLinkEnabled;
 	}
 
+	@Override
 	public void setLayoutSetPrototypeLinkEnabled(
 		boolean layoutSetPrototypeLinkEnabled) {
 		_layoutSetPrototypeLinkEnabled = layoutSetPrototypeLinkEnabled;
@@ -614,6 +657,7 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 		return layoutSetImpl;
 	}
 
+	@Override
 	public int compareTo(LayoutSet layoutSet) {
 		long primaryKey = layoutSet.getPrimaryKey();
 
@@ -630,18 +674,15 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof LayoutSet)) {
 			return false;
 		}
 
-		LayoutSet layoutSet = null;
-
-		try {
-			layoutSet = (LayoutSet)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		LayoutSet layoutSet = (LayoutSet)obj;
 
 		long primaryKey = layoutSet.getPrimaryKey();
 
@@ -818,6 +859,7 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(55);
 

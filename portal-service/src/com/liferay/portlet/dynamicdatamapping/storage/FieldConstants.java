@@ -40,8 +40,6 @@ public class FieldConstants {
 
 	public static final String EDITABLE = "editable";
 
-	public static final String FILE_UPLOAD = "file-upload";
-
 	public static final String FLOAT = "float";
 
 	public static final String HTML = "html";
@@ -59,6 +57,8 @@ public class FieldConstants {
 	public static final String NUMBER = "number";
 
 	public static final String PREDEFINED_VALUE = "predefinedValue";
+
+	public static final String PRIVATE = "private";
 
 	public static final String REQUIRED = "required";
 

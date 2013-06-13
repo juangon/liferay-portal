@@ -24,13 +24,11 @@ import com.liferay.portal.service.http.TunnelUtil;
 import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
 
 /**
- * <p>
- * This class provides a HTTP utility for the
+ * Provides the HTTP utility for the
  * {@link com.liferay.portlet.blogs.service.BlogsEntryServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it requires an additional
  * {@link com.liferay.portal.security.auth.HttpPrincipal} parameter.
- * </p>
  *
  * <p>
  * The benefits of using the HTTP utility is that it is fast and allows for
@@ -47,10 +45,10 @@ import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
  * The HTTP utility is only generated for remote services.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       BlogsEntryServiceSoap
- * @see       com.liferay.portal.security.auth.HttpPrincipal
- * @see       com.liferay.portlet.blogs.service.BlogsEntryServiceUtil
+ * @author Brian Wing Shun Chan
+ * @see BlogsEntryServiceSoap
+ * @see com.liferay.portal.security.auth.HttpPrincipal
+ * @see com.liferay.portlet.blogs.service.BlogsEntryServiceUtil
  * @generated
  */
 public class BlogsEntryServiceHttp {

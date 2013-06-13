@@ -13,7 +13,16 @@
 			<execute function="Click#textClickAtAndWait" value1="Add" />
 		</case>
 		<case locator-key1="DELETE_BUTTON">
-			<execute function="Click#valueClickAtAndWait" value1="Delete" />
+			<execute function="Click#textClickAtAndWait" value1="Delete" />
+		</case>
+		<case locator-key1="USER_GROUP_MENULIST_EDIT">
+			<execute function="Click#textClickAtAndWait" value1="Edit" />
+		</case>
+		<case locator-key1="USER_GROUP_MENULIST_DELETE">
+			<execute function="Click#textClickAtAndWait" value1="Delete" />
+		</case>
+		<case locator-key1="USER_GROUP_TABLE_ACTIONS_1">
+			<execute function="Click#textClickAt" value1="Actions" />
 		</case>
 	</command>
 </definition>

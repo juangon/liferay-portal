@@ -118,6 +118,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> findByUuid(String uuid) throws SystemException {
 		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -135,6 +136,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the range of matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> findByUuid(String uuid, int start, int end)
 		throws SystemException {
 		return findByUuid(uuid, start, end, null);
@@ -154,6 +156,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the ordered range of matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> findByUuid(String uuid, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -274,6 +277,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role findByUuid_First(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
@@ -303,6 +307,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the first matching role, or <code>null</code> if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role fetchByUuid_First(String uuid,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<Role> list = findByUuid(uuid, 0, 1, orderByComparator);
@@ -323,6 +328,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role findByUuid_Last(String uuid, OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
 		Role role = fetchByUuid_Last(uuid, orderByComparator);
@@ -351,6 +357,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the last matching role, or <code>null</code> if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role fetchByUuid_Last(String uuid,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByUuid(uuid);
@@ -374,6 +381,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role[] findByUuid_PrevAndNext(long roleId, String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
@@ -529,6 +537,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> filterFindByUuid(String uuid) throws SystemException {
 		return filterFindByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -546,6 +555,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the range of matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> filterFindByUuid(String uuid, int start, int end)
 		throws SystemException {
 		return filterFindByUuid(uuid, start, end, null);
@@ -565,6 +575,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the ordered range of matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> filterFindByUuid(String uuid, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled()) {
@@ -668,6 +679,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role[] filterFindByUuid_PrevAndNext(long roleId, String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
@@ -860,6 +872,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @param uuid the uuid
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByUuid(String uuid) throws SystemException {
 		for (Role role : findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 				null)) {
@@ -874,6 +887,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the number of matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUuid(String uuid) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID;
 
@@ -940,6 +954,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the number of matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByUuid(String uuid) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled()) {
 			return countByUuid(uuid);
@@ -1030,6 +1045,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> findByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		return findByUuid_C(uuid, companyId, QueryUtil.ALL_POS,
@@ -1050,6 +1066,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the range of matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> findByUuid_C(String uuid, long companyId, int start,
 		int end) throws SystemException {
 		return findByUuid_C(uuid, companyId, start, end, null);
@@ -1070,6 +1087,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the ordered range of matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> findByUuid_C(String uuid, long companyId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -1200,6 +1218,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role findByUuid_C_First(String uuid, long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
@@ -1233,6 +1252,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the first matching role, or <code>null</code> if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role fetchByUuid_C_First(String uuid, long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<Role> list = findByUuid_C(uuid, companyId, 0, 1, orderByComparator);
@@ -1254,6 +1274,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role findByUuid_C_Last(String uuid, long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
@@ -1287,6 +1308,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the last matching role, or <code>null</code> if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role fetchByUuid_C_Last(String uuid, long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByUuid_C(uuid, companyId);
@@ -1312,6 +1334,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role[] findByUuid_C_PrevAndNext(long roleId, String uuid,
 		long companyId, OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
@@ -1473,6 +1496,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> filterFindByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		return filterFindByUuid_C(uuid, companyId, QueryUtil.ALL_POS,
@@ -1493,6 +1517,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the range of matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> filterFindByUuid_C(String uuid, long companyId,
 		int start, int end) throws SystemException {
 		return filterFindByUuid_C(uuid, companyId, start, end, null);
@@ -1513,6 +1538,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the ordered range of matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> filterFindByUuid_C(String uuid, long companyId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1622,6 +1648,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role[] filterFindByUuid_C_PrevAndNext(long roleId, String uuid,
 		long companyId, OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
@@ -1821,6 +1848,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @param companyId the company ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		for (Role role : findByUuid_C(uuid, companyId, QueryUtil.ALL_POS,
@@ -1837,6 +1865,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the number of matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID_C;
@@ -1909,6 +1938,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the number of matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled()) {
@@ -2004,6 +2034,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> findByCompanyId(long companyId) throws SystemException {
 		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
@@ -2022,6 +2053,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the range of matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> findByCompanyId(long companyId, int start, int end)
 		throws SystemException {
 		return findByCompanyId(companyId, start, end, null);
@@ -2041,6 +2073,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the ordered range of matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -2147,6 +2180,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role findByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
@@ -2176,6 +2210,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the first matching role, or <code>null</code> if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role fetchByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<Role> list = findByCompanyId(companyId, 0, 1, orderByComparator);
@@ -2196,6 +2231,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role findByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
@@ -2225,6 +2261,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the last matching role, or <code>null</code> if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role fetchByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByCompanyId(companyId);
@@ -2249,6 +2286,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role[] findByCompanyId_PrevAndNext(long roleId, long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
@@ -2390,6 +2428,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> filterFindByCompanyId(long companyId)
 		throws SystemException {
 		return filterFindByCompanyId(companyId, QueryUtil.ALL_POS,
@@ -2409,6 +2448,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the range of matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> filterFindByCompanyId(long companyId, int start, int end)
 		throws SystemException {
 		return filterFindByCompanyId(companyId, start, end, null);
@@ -2428,6 +2468,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the ordered range of matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> filterFindByCompanyId(long companyId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled()) {
@@ -2517,6 +2558,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role[] filterFindByCompanyId_PrevAndNext(long roleId,
 		long companyId, OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
@@ -2696,6 +2738,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @param companyId the company ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (Role role : findByCompanyId(companyId, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null)) {
@@ -2710,6 +2753,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the number of matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByCompanyId(long companyId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMPANYID;
 
@@ -2762,6 +2806,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the number of matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByCompanyId(long companyId) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled()) {
 			return countByCompanyId(companyId);
@@ -2829,6 +2874,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> findByName(String name) throws SystemException {
 		return findByName(name, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -2846,6 +2892,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the range of matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> findByName(String name, int start, int end)
 		throws SystemException {
 		return findByName(name, start, end, null);
@@ -2865,6 +2912,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the ordered range of matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> findByName(String name, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -2985,6 +3033,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role findByName_First(String name,
 		OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
@@ -3014,6 +3063,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the first matching role, or <code>null</code> if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role fetchByName_First(String name,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<Role> list = findByName(name, 0, 1, orderByComparator);
@@ -3034,6 +3084,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role findByName_Last(String name, OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
 		Role role = fetchByName_Last(name, orderByComparator);
@@ -3062,6 +3113,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the last matching role, or <code>null</code> if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role fetchByName_Last(String name,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByName(name);
@@ -3085,6 +3137,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role[] findByName_PrevAndNext(long roleId, String name,
 		OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
@@ -3240,6 +3293,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> filterFindByName(String name) throws SystemException {
 		return filterFindByName(name, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -3257,6 +3311,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the range of matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> filterFindByName(String name, int start, int end)
 		throws SystemException {
 		return filterFindByName(name, start, end, null);
@@ -3276,6 +3331,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the ordered range of matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> filterFindByName(String name, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled()) {
@@ -3379,6 +3435,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role[] filterFindByName_PrevAndNext(long roleId, String name,
 		OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
@@ -3571,6 +3628,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @param name the name
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByName(String name) throws SystemException {
 		for (Role role : findByName(name, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 				null)) {
@@ -3585,6 +3643,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the number of matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByName(String name) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_NAME;
 
@@ -3651,6 +3710,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the number of matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByName(String name) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled()) {
 			return countByName(name);
@@ -3735,6 +3795,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> findByType(int type) throws SystemException {
 		return findByType(type, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -3752,6 +3813,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the range of matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> findByType(int type, int start, int end)
 		throws SystemException {
 		return findByType(type, start, end, null);
@@ -3771,6 +3833,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the ordered range of matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> findByType(int type, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -3877,6 +3940,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role findByType_First(int type, OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
 		Role role = fetchByType_First(type, orderByComparator);
@@ -3905,6 +3969,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the first matching role, or <code>null</code> if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role fetchByType_First(int type, OrderByComparator orderByComparator)
 		throws SystemException {
 		List<Role> list = findByType(type, 0, 1, orderByComparator);
@@ -3925,6 +3990,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role findByType_Last(int type, OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
 		Role role = fetchByType_Last(type, orderByComparator);
@@ -3953,6 +4019,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the last matching role, or <code>null</code> if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role fetchByType_Last(int type, OrderByComparator orderByComparator)
 		throws SystemException {
 		int count = countByType(type);
@@ -3976,6 +4043,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role[] findByType_PrevAndNext(long roleId, int type,
 		OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
@@ -4117,6 +4185,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> filterFindByType(int type) throws SystemException {
 		return filterFindByType(type, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -4134,6 +4203,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the range of matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> filterFindByType(int type, int start, int end)
 		throws SystemException {
 		return filterFindByType(type, start, end, null);
@@ -4153,6 +4223,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the ordered range of matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> filterFindByType(int type, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled()) {
@@ -4242,6 +4313,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role[] filterFindByType_PrevAndNext(long roleId, int type,
 		OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
@@ -4420,6 +4492,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @param type the type
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByType(int type) throws SystemException {
 		for (Role role : findByType(type, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 				null)) {
@@ -4434,6 +4507,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the number of matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByType(int type) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_TYPE;
 
@@ -4486,6 +4560,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the number of matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByType(int type) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled()) {
 			return countByType(type);
@@ -4556,6 +4631,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> findBySubtype(String subtype) throws SystemException {
 		return findBySubtype(subtype, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -4573,6 +4649,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the range of matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> findBySubtype(String subtype, int start, int end)
 		throws SystemException {
 		return findBySubtype(subtype, start, end, null);
@@ -4592,6 +4669,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the ordered range of matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> findBySubtype(String subtype, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -4712,6 +4790,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role findBySubtype_First(String subtype,
 		OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
@@ -4741,6 +4820,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the first matching role, or <code>null</code> if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role fetchBySubtype_First(String subtype,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<Role> list = findBySubtype(subtype, 0, 1, orderByComparator);
@@ -4761,6 +4841,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role findBySubtype_Last(String subtype,
 		OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
@@ -4790,6 +4871,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the last matching role, or <code>null</code> if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role fetchBySubtype_Last(String subtype,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countBySubtype(subtype);
@@ -4814,6 +4896,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role[] findBySubtype_PrevAndNext(long roleId, String subtype,
 		OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
@@ -4969,6 +5052,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> filterFindBySubtype(String subtype)
 		throws SystemException {
 		return filterFindBySubtype(subtype, QueryUtil.ALL_POS,
@@ -4988,6 +5072,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the range of matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> filterFindBySubtype(String subtype, int start, int end)
 		throws SystemException {
 		return filterFindBySubtype(subtype, start, end, null);
@@ -5007,6 +5092,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the ordered range of matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> filterFindBySubtype(String subtype, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled()) {
@@ -5110,6 +5196,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role[] filterFindBySubtype_PrevAndNext(long roleId, String subtype,
 		OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
@@ -5302,6 +5389,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @param subtype the subtype
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeBySubtype(String subtype) throws SystemException {
 		for (Role role : findBySubtype(subtype, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null)) {
@@ -5316,6 +5404,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the number of matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countBySubtype(String subtype) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_SUBTYPE;
 
@@ -5382,6 +5471,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the number of matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountBySubtype(String subtype) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled()) {
 			return countBySubtype(subtype);
@@ -5459,6 +5549,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role findByC_N(long companyId, String name)
 		throws NoSuchRoleException, SystemException {
 		Role role = fetchByC_N(companyId, name);
@@ -5494,6 +5585,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the matching role, or <code>null</code> if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role fetchByC_N(long companyId, String name)
 		throws SystemException {
 		return fetchByC_N(companyId, name, true);
@@ -5508,6 +5600,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the matching role, or <code>null</code> if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role fetchByC_N(long companyId, String name,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, name };
@@ -5614,6 +5707,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the role that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role removeByC_N(long companyId, String name)
 		throws NoSuchRoleException, SystemException {
 		Role role = findByC_N(companyId, name);
@@ -5629,6 +5723,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the number of matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByC_N(long companyId, String name)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_N;
@@ -5726,6 +5821,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> findByT_S(int type, String subtype)
 		throws SystemException {
 		return findByT_S(type, subtype, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -5746,6 +5842,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the range of matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> findByT_S(int type, String subtype, int start, int end)
 		throws SystemException {
 		return findByT_S(type, subtype, start, end, null);
@@ -5766,6 +5863,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the ordered range of matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> findByT_S(int type, String subtype, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -5896,6 +5994,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role findByT_S_First(int type, String subtype,
 		OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
@@ -5929,6 +6028,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the first matching role, or <code>null</code> if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role fetchByT_S_First(int type, String subtype,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<Role> list = findByT_S(type, subtype, 0, 1, orderByComparator);
@@ -5950,6 +6050,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role findByT_S_Last(int type, String subtype,
 		OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
@@ -5983,6 +6084,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the last matching role, or <code>null</code> if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role fetchByT_S_Last(int type, String subtype,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByT_S(type, subtype);
@@ -6008,6 +6110,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role[] findByT_S_PrevAndNext(long roleId, int type, String subtype,
 		OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
@@ -6168,6 +6271,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> filterFindByT_S(int type, String subtype)
 		throws SystemException {
 		return filterFindByT_S(type, subtype, QueryUtil.ALL_POS,
@@ -6188,6 +6292,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the range of matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> filterFindByT_S(int type, String subtype, int start,
 		int end) throws SystemException {
 		return filterFindByT_S(type, subtype, start, end, null);
@@ -6208,6 +6313,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the ordered range of matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> filterFindByT_S(int type, String subtype, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled()) {
@@ -6316,6 +6422,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role[] filterFindByT_S_PrevAndNext(long roleId, int type,
 		String subtype, OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
@@ -6515,6 +6622,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @param subtype the subtype
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByT_S(int type, String subtype) throws SystemException {
 		for (Role role : findByT_S(type, subtype, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null)) {
@@ -6530,6 +6638,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the number of matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByT_S(int type, String subtype) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_T_S;
 
@@ -6601,6 +6710,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the number of matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByT_S(int type, String subtype)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled()) {
@@ -6691,6 +6801,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role findByC_C_C(long companyId, long classNameId, long classPK)
 		throws NoSuchRoleException, SystemException {
 		Role role = fetchByC_C_C(companyId, classNameId, classPK);
@@ -6730,6 +6841,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the matching role, or <code>null</code> if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role fetchByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
 		return fetchByC_C_C(companyId, classNameId, classPK, true);
@@ -6745,6 +6857,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the matching role, or <code>null</code> if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role fetchByC_C_C(long companyId, long classNameId, long classPK,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, classNameId, classPK };
@@ -6843,6 +6956,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the role that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role removeByC_C_C(long companyId, long classNameId, long classPK)
 		throws NoSuchRoleException, SystemException {
 		Role role = findByC_C_C(companyId, classNameId, classPK);
@@ -6859,6 +6973,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the number of matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_C_C;
@@ -6922,6 +7037,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 *
 	 * @param role the role
 	 */
+	@Override
 	public void cacheResult(Role role) {
 		EntityCacheUtil.putResult(RoleModelImpl.ENTITY_CACHE_ENABLED,
 			RoleImpl.class, role.getPrimaryKey(), role);
@@ -6942,6 +7058,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 *
 	 * @param roles the roles
 	 */
+	@Override
 	public void cacheResult(List<Role> roles) {
 		for (Role role : roles) {
 			if (EntityCacheUtil.getResult(RoleModelImpl.ENTITY_CACHE_ENABLED,
@@ -7093,6 +7210,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @param roleId the primary key for the new role
 	 * @return the new role
 	 */
+	@Override
 	public Role create(long roleId) {
 		Role role = new RoleImpl();
 
@@ -7114,6 +7232,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role remove(long roleId) throws NoSuchRoleException, SystemException {
 		return remove((Serializable)roleId);
 	}
@@ -7442,6 +7561,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role findByPrimaryKey(long roleId)
 		throws NoSuchRoleException, SystemException {
 		return findByPrimaryKey((Serializable)roleId);
@@ -7501,6 +7621,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the role, or <code>null</code> if a role with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Role fetchByPrimaryKey(long roleId) throws SystemException {
 		return fetchByPrimaryKey((Serializable)roleId);
 	}
@@ -7511,6 +7632,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the roles
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -7527,6 +7649,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the range of roles
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> findAll(int start, int end) throws SystemException {
 		return findAll(start, end, null);
 	}
@@ -7544,6 +7667,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the ordered range of roles
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Role> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -7629,6 +7753,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (Role role : findAll()) {
 			remove(role);
@@ -7641,6 +7766,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the number of roles
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -7679,6 +7805,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the groups associated with the role
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portal.model.Group> getGroups(long pk)
 		throws SystemException {
 		return getGroups(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
@@ -7697,6 +7824,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the range of groups associated with the role
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portal.model.Group> getGroups(long pk, int start,
 		int end) throws SystemException {
 		return getGroups(pk, start, end, null);
@@ -7729,6 +7857,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the ordered range of groups associated with the role
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portal.model.Group> getGroups(long pk, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -7822,6 +7951,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the number of groups associated with the role
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int getGroupsSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { pk };
 
@@ -7875,6 +8005,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return <code>true</code> if the group is associated with the role; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean containsGroup(long pk, long groupPK)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { pk, groupPK };
@@ -7907,6 +8038,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return <code>true</code> if the role has any groups associated with it; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean containsGroups(long pk) throws SystemException {
 		if (getGroupsSize(pk) > 0) {
 			return true;
@@ -7923,6 +8055,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @param groupPK the primary key of the group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addGroup(long pk, long groupPK) throws SystemException {
 		try {
 			addGroup.add(pk, groupPK);
@@ -7942,6 +8075,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @param group the group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addGroup(long pk, com.liferay.portal.model.Group group)
 		throws SystemException {
 		try {
@@ -7962,6 +8096,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @param groupPKs the primary keys of the groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addGroups(long pk, long[] groupPKs) throws SystemException {
 		try {
 			for (long groupPK : groupPKs) {
@@ -7983,6 +8118,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @param groups the groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addGroups(long pk, List<com.liferay.portal.model.Group> groups)
 		throws SystemException {
 		try {
@@ -8004,6 +8140,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @param pk the primary key of the role to clear the associated groups from
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void clearGroups(long pk) throws SystemException {
 		try {
 			clearGroups.clear(pk);
@@ -8023,6 +8160,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @param groupPK the primary key of the group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeGroup(long pk, long groupPK) throws SystemException {
 		try {
 			removeGroup.remove(pk, groupPK);
@@ -8042,6 +8180,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @param group the group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeGroup(long pk, com.liferay.portal.model.Group group)
 		throws SystemException {
 		try {
@@ -8062,6 +8201,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @param groupPKs the primary keys of the groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeGroups(long pk, long[] groupPKs)
 		throws SystemException {
 		try {
@@ -8084,6 +8224,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @param groups the groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeGroups(long pk,
 		List<com.liferay.portal.model.Group> groups) throws SystemException {
 		try {
@@ -8106,6 +8247,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @param groupPKs the primary keys of the groups to be associated with the role
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setGroups(long pk, long[] groupPKs) throws SystemException {
 		try {
 			Set<Long> groupPKSet = SetUtil.fromArray(groupPKs);
@@ -8137,6 +8279,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @param groups the groups to be associated with the role
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setGroups(long pk, List<com.liferay.portal.model.Group> groups)
 		throws SystemException {
 		try {
@@ -8165,6 +8308,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the users associated with the role
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portal.model.User> getUsers(long pk)
 		throws SystemException {
 		return getUsers(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
@@ -8183,6 +8327,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the range of users associated with the role
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portal.model.User> getUsers(long pk, int start,
 		int end) throws SystemException {
 		return getUsers(pk, start, end, null);
@@ -8215,6 +8360,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the ordered range of users associated with the role
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<com.liferay.portal.model.User> getUsers(long pk, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -8308,6 +8454,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return the number of users associated with the role
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int getUsersSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { pk };
 
@@ -8361,6 +8508,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return <code>true</code> if the user is associated with the role; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean containsUser(long pk, long userPK) throws SystemException {
 		Object[] finderArgs = new Object[] { pk, userPK };
 
@@ -8392,6 +8540,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @return <code>true</code> if the role has any users associated with it; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean containsUsers(long pk) throws SystemException {
 		if (getUsersSize(pk) > 0) {
 			return true;
@@ -8408,6 +8557,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @param userPK the primary key of the user
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addUser(long pk, long userPK) throws SystemException {
 		try {
 			addUser.add(pk, userPK);
@@ -8427,6 +8577,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @param user the user
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addUser(long pk, com.liferay.portal.model.User user)
 		throws SystemException {
 		try {
@@ -8447,6 +8598,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @param userPKs the primary keys of the users
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addUsers(long pk, long[] userPKs) throws SystemException {
 		try {
 			for (long userPK : userPKs) {
@@ -8468,6 +8620,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @param users the users
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addUsers(long pk, List<com.liferay.portal.model.User> users)
 		throws SystemException {
 		try {
@@ -8489,6 +8642,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @param pk the primary key of the role to clear the associated users from
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void clearUsers(long pk) throws SystemException {
 		try {
 			clearUsers.clear(pk);
@@ -8508,6 +8662,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @param userPK the primary key of the user
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeUser(long pk, long userPK) throws SystemException {
 		try {
 			removeUser.remove(pk, userPK);
@@ -8527,6 +8682,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @param user the user
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeUser(long pk, com.liferay.portal.model.User user)
 		throws SystemException {
 		try {
@@ -8547,6 +8703,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @param userPKs the primary keys of the users
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeUsers(long pk, long[] userPKs) throws SystemException {
 		try {
 			for (long userPK : userPKs) {
@@ -8568,6 +8725,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @param users the users
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeUsers(long pk, List<com.liferay.portal.model.User> users)
 		throws SystemException {
 		try {
@@ -8590,6 +8748,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @param userPKs the primary keys of the users to be associated with the role
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setUsers(long pk, long[] userPKs) throws SystemException {
 		try {
 			Set<Long> userPKSet = SetUtil.fromArray(userPKs);
@@ -8621,6 +8780,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @param users the users to be associated with the role
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setUsers(long pk, List<com.liferay.portal.model.User> users)
 		throws SystemException {
 		try {
@@ -9059,6 +9219,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		};
 
 	private static CacheModel<Role> _nullRoleCacheModel = new CacheModel<Role>() {
+			@Override
 			public Role toEntityModel() {
 				return _nullRole;
 			}

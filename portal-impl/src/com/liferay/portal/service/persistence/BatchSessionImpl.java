@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.dao.orm.ORMException;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.util.InitialThreadLocal;
 import com.liferay.portal.model.BaseModel;
-import com.liferay.portal.model.ClassedModel;
 
 /**
  * @author     Raymond Augé
@@ -27,27 +26,31 @@ import com.liferay.portal.model.ClassedModel;
  */
 public class BatchSessionImpl implements BatchSession {
 
+	@Override
 	public void delete(Session session, BaseModel<?> model)
 		throws ORMException {
 
 		if (!session.contains(model)) {
-			ClassedModel classedModel = model;
-
 			model = (BaseModel<?>)session.get(
-				classedModel.getModelClass(), model.getPrimaryKeyObj());
+				model.getClass(), model.getPrimaryKeyObj());
 		}
 
-		session.delete(model);
+		if (model != null) {
+			session.delete(model);
+		}
 	}
 
+	@Override
 	public boolean isEnabled() {
 		return _enabled.get();
 	}
 
+	@Override
 	public void setEnabled(boolean enabled) {
 		_enabled.set(enabled);
 	}
 
+	@Override
 	public void update(Session session, BaseModel<?> model, boolean merge)
 		throws ORMException {
 

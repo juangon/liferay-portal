@@ -11,7 +11,7 @@
 	<property name="manifest.bundle.symbolic.name" value="portal-impl;singleton:=true" />
 	<property name="service.file" value="service.xml" />
 
-	<target name="build-alloy-taglib">
+	<target name="build-alloy-taglib-jar">
 		<if>
 			<not>
 				<isset property="alloy.taglibs.dir" />
@@ -32,6 +32,80 @@ svn://svn.liferay.com/repos/public/alloy/trunk/sandbox/taglibs.
 		<copy todir="${project.dir}/lib/portal">
 			<fileset file="${alloy.taglibs.dir}/alloy-taglib/alloy-taglib.jar" />
 		</copy>
+	</target>
+
+	<target name="build-axis-jar">
+		<get
+			dest="axis-1.4-sources.zip"
+			src="http://search.maven.org/remotecontent?filepath=axis/axis/1.4/axis-1.4-sources.jar"
+		/>
+
+		<tstamp>
+			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
+		</tstamp>
+
+		<unzip
+			dest="${tstamp.value}"
+			src="axis-1.4-sources.zip"
+		>
+			<patternset>
+				<include name="**/AxisEngine.java" />
+				<include name="**/EngineConfiguration.java" />
+				<include name="**/JavaServiceDesc.java" />
+				<include name="**/MapDeserializer.java" />
+				<include name="**/Session.java" />
+				<include name="**/Types.java" />
+			</patternset>
+		</unzip>
+
+		<delete file="axis-1.4-sources.zip" />
+
+		<patch
+			dir="${tstamp.value}"
+			patchfile="${project.dir}/lib/portal/axis/AXIS-2585.patch"
+			strip="1"
+		/>
+
+		<patch
+			dir="${tstamp.value}"
+			patchfile="${project.dir}/lib/portal/axis/LPS-28561.patch"
+			strip="1"
+		/>
+
+		<patch
+			dir="${tstamp.value}"
+			patchfile="${project.dir}/lib/portal/axis/LPS-34308.patch"
+			strip="1"
+		/>
+
+		<patch
+			dir="${tstamp.value}"
+			patchfile="${project.dir}/lib/portal/axis/LPS-35125.patch"
+			strip="1"
+		/>
+
+		<patch
+			dir="${tstamp.value}"
+			patchfile="${project.dir}/lib/portal/axis/LPS-36160.patch"
+			strip="1"
+		/>
+
+		<antcall target="compile-java">
+			<param name="javac.classpathref" value="project.classpath" />
+			<param name="javac.destdir" value="${tstamp.value}" />
+			<param name="javac.srcdir" value="${tstamp.value}" />
+		</antcall>
+
+		<get
+			dest="${project.dir}/lib/portal/axis.jar.new"
+			src="http://search.maven.org/remotecontent?filepath=axis/axis/1.4/axis-1.4.jar"
+		/>
+
+		<jar destfile="${project.dir}/lib/portal/axis.jar.new" update="true">
+			<zipfileset dir="${tstamp.value}" includes="**/*.class" />
+		</jar>
+
+		<delete dir="${tstamp.value}" />
 	</target>
 
 	<!--<target name="build-copy-interface">
@@ -112,7 +186,57 @@ public class Creole10Parser]]></replacevalue>
 		<ant dir="../sql" target="build-db" />
 	</target>
 
-	<target name="build-icu4j">
+	<target name="build-freemarker-jar">
+        <get
+            dest="freemarker-2.3.17-sources.zip"
+            src="http://search.maven.org/remotecontent?filepath=org/freemarker/freemarker/2.3.17/freemarker-2.3.17-sources.jar"
+        />
+
+        <tstamp>
+            <format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
+        </tstamp>
+
+        <unzip
+            dest="${tstamp.value}"
+            src="freemarker-2.3.17-sources.zip"
+        >
+            <patternset>
+                <include name="**/DebugBreak.java" />
+                <include name="**/EnvironmentSuspendedEvent.java" />
+                <include name="**/DebuggerServer.java" />
+                <include name="**/DebuggerService.java" />
+                <include name="**/RmiDebuggedEnvironmentImpl.java" />
+            	<include name="**/RmiDebuggerService.java" />
+            </patternset>
+        </unzip>
+
+        <delete file="freemarker-2.3.17-sources.zip" />
+
+        <patch
+            dir="${tstamp.value}"
+            patchfile="${project.dir}/lib/portal/freemarker/LPS-35775.patch"
+            strip="1"
+        />
+
+        <antcall target="compile-java">
+            <param name="javac.classpathref" value="project.classpath" />
+            <param name="javac.destdir" value="${tstamp.value}" />
+            <param name="javac.srcdir" value="${tstamp.value}" />
+        </antcall>
+
+		<get
+            dest="${project.dir}/lib/portal/freemarker.jar.new"
+            src="http://search.maven.org/remotecontent?filepath=org/freemarker/freemarker/2.3.17/freemarker-2.3.17.jar"
+        />
+
+        <jar destfile="${project.dir}/lib/portal/freemarker.jar.new" update="true">
+            <zipfileset dir="${tstamp.value}" includes="**/*.class" />
+        </jar>
+
+        <delete dir="${tstamp.value}" />
+    </target>
+
+	<target name="build-icu4j-jar">
 		<tstamp>
 			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
 		</tstamp>
@@ -160,7 +284,7 @@ public class Creole10Parser]]></replacevalue>
 		</java>
 	</target>
 
-	<target name="build-json-java">
+	<target name="build-json-java-jar">
 		<get
 			dest="json-java.zip"
 			src="https://github.com/douglascrockford/JSON-java/zipball/master"
@@ -332,7 +456,7 @@ public class Creole10Parser]]></replacevalue>
 		</java>
 	</target>
 
-	<target name="build-ruby-gems">
+	<target name="build-ruby-gems-jar">
 		<tstamp>
 			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
 		</tstamp>
@@ -355,6 +479,49 @@ public class Creole10Parser]]></replacevalue>
 			basedir="${tstamp.value}/output"
 			jarfile="${project.dir}/lib/portal/ruby-gems.jar"
 		/>
+
+		<delete dir="${tstamp.value}" />
+	</target>
+
+	<target name="build-selenium-java-jar">
+		<get
+			dest="selenium-firefox-driver-2.33.0-sources.jar"
+			src="http://search.maven.org/remotecontent?filepath=org/seleniumhq/selenium/selenium-firefox-driver/2.33.0/selenium-firefox-driver-2.33.0-sources.jar"
+		/>
+
+		<tstamp>
+			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
+		</tstamp>
+
+		<unzip
+			dest="${tstamp.value}"
+			src="selenium-firefox-driver-2.33.0-sources.jar"
+		>
+			<patternset>
+				<include name="**/FirefoxDriver.java" />
+			</patternset>
+		</unzip>
+
+		<delete file="selenium-firefox-driver-2.33.0-sources.jar" />
+
+		<replace file="${tstamp.value}/org/openqa/selenium/firefox/FirefoxDriver.java">
+			<replacefilter token="localhost" value="127.0.0.1" />
+		</replace>
+
+		<antcall target="compile-java">
+			<param name="javac.classpathref" value="project.classpath" />
+			<param name="javac.destdir" value="${tstamp.value}" />
+			<param name="javac.srcdir" value="${tstamp.value}" />
+		</antcall>
+
+		<copy
+			file="${project.dir}/lib/development/selenium-java.jar"
+			tofile="${project.dir}/lib/development/selenium-java.jar.new"
+		/>
+
+		<jar destfile="${project.dir}/lib/development/selenium-java.jar.new" update="true">
+			<zipfileset dir="${tstamp.value}" includes="**/*.class" />
+		</jar>
 
 		<delete dir="${tstamp.value}" />
 	</target>
@@ -391,7 +558,7 @@ public class Creole10Parser]]></replacevalue>
 		<ant dir="../portal-web" target="build-selenium-new-test-suite" />
 	</target>
 
-	<target name="build-selenium-server">
+	<target name="build-selenium-server-jar">
 		<tstamp>
 			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
 		</tstamp>
@@ -742,29 +909,10 @@ public class Creole10Parser]]></replacevalue>
 		<antcall target="build-service-portlets" />
 	</target>
 
-	<target name="build-struts">
+	<target name="build-struts-jar">
 		<get
-			dest="struts-1.2.9-bin.zip"
-			src="http://archive.apache.org/dist/struts/binaries/struts-1.2.9-bin.zip"
-		/>
-
-		<unzip
-			dest="."
-			src="struts-1.2.9-bin.zip"
-		>
-			<patternset
-				includes="**/struts.jar"
-			/>
-			<flattenmapper />
-		</unzip>
-
-		<move file="struts.jar" tofile="${project.dir}/lib/portal/struts.jar.new" />
-
-		<delete file="struts-1.2.9-bin.zip" />
-
-		<get
-			dest="struts-1.2.9-src.zip"
-			src="http://archive.apache.org/dist/struts/source/struts-1.2.9-src.zip"
+			dest="struts-1.2.9-sources.zip"
+			src="http://search.maven.org/remotecontent?filepath=struts/struts/1.2.9/struts-1.2.9-sources.jar"
 		/>
 
 		<tstamp>
@@ -772,20 +920,18 @@ public class Creole10Parser]]></replacevalue>
 		</tstamp>
 
 		<unzip
-			dest="${tstamp.value}/org/apache/struts/tiles/xmlDefinition"
-			src="struts-1.2.9-src.zip"
+			dest="${tstamp.value}"
+			src="struts-1.2.9-sources.zip"
 		>
-			<patternset
-				includes="**/I18nFactorySet.java"
-			/>
-			<flattenmapper />
+			<patternset>
+				<include name="**/I18nFactorySet.java" />
+			</patternset>
 		</unzip>
 
-		<delete file="struts-1.2.9-src.zip" />
+		<delete file="struts-1.2.9-sources.zip" />
 
 		<replace file="${tstamp.value}/org/apache/struts/tiles/xmlDefinition/I18nFactorySet.java">
 			<replacefilter token="private XmlDefinitionsSet " value="protected XmlDefinitionsSet " />
-			<replacefilter token="com/ibm" value="com/liferay/ibm" />
 		</replace>
 
 		<antcall target="compile-java">
@@ -794,11 +940,14 @@ public class Creole10Parser]]></replacevalue>
 			<param name="javac.srcdir" value="${tstamp.value}" />
 		</antcall>
 
-		<zip
-			basedir="${tstamp.value}"
-			destfile="${project.dir}/lib/portal/struts.jar.new"
-			update="yes"
+		<get
+			dest="${project.dir}/lib/portal/struts.jar.new"
+			src="http://search.maven.org/remotecontent?filepath=struts/struts/1.2.9/struts-1.2.9.jar"
 		/>
+
+		<jar destfile="${project.dir}/lib/portal/struts.jar.new" update="true">
+			<zipfileset dir="${tstamp.value}" includes="**/*.class" />
+		</jar>
 
 		<delete dir="${tstamp.value}" />
 	</target>
@@ -879,33 +1028,6 @@ public class Creole10Parser]]></replacevalue>
 				</java>
 			</then>
 		</if>
-	</target>
-
-	<target name="build-velocity">
-		<tstamp>
-			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
-		</tstamp>
-
-		<unzip
-			dest="${tstamp.value}"
-			src="${project.dir}/tools/velocity-1.6.3.zip"
-		/>
-
-		<replace file="${tstamp.value}/velocity-1.6.3/src/java/org/apache/velocity/Template.java">
-			<replacetoken><![CDATA[BufferedReader br = new BufferedReader( new InputStreamReader( is, encoding ) );]]></replacetoken>
-			<replacevalue></replacevalue>
-		</replace>
-
-		<replace file="${tstamp.value}/velocity-1.6.3/src/java/org/apache/velocity/Template.java">
-			<replacetoken><![CDATA[data = rsvc.parse( br, name);]]></replacetoken>
-			<replacevalue><![CDATA[data = rsvc.parse( new InputStreamReader( is, encoding ), name);]]></replacevalue>
-		</replace>
-
-		<ant dir="${tstamp.value}/velocity-1.6.3" antfile="build/build.xml" target="jar" inheritAll="false" />
-
-		<move file="${tstamp.value}/velocity-1.6.3/bin/velocity-1.6.3.jar" tofile="${project.dir}/lib/portal/velocity.jar.new" />
-
-		<delete dir="${tstamp.value}" />
 	</target>
 
 	<target name="build-wsdd" depends="compile">
@@ -1079,7 +1201,7 @@ public class Creole10Parser]]></replacevalue>
 		<antcall target="build-wsdd-portlets" />
 	</target>
 
-	<target name="build-yui-compressor">
+	<target name="build-yui-compressor-jar">
 		<jarjar jarfile="${project.dir}/lib/portal/liferay-yui-compressor.jar.new">
 			<rule pattern="org.mozilla.**" result="com.yahoo.platform.yui.mozilla.@1" />
 			<zipfileset src="${project.dir}/tools/yuicompressor-2.4.7.jar" />
@@ -1270,7 +1392,7 @@ public class Creole10Parser]]></replacevalue>
 		</copy>
 
 		<java
-			classname="com.liferay.portal.tools.SourceFormatter"
+			classname="com.liferay.portal.tools.sourceformatter.SourceFormatter"
 			classpathref="project.classpath"
 			dir="${project.dir}"
 			fork="true"
@@ -1278,6 +1400,7 @@ public class Creole10Parser]]></replacevalue>
 		>
 			<jvmarg value="-Xmx512m" />
 			<jvmarg value="-Xss2048k" />
+			<jvmarg value="-Dsource.formatter.check.unprocessed.exceptions=${source.formatter.check.unprocessed.exceptions}" />
 			<jvmarg value="-Dsource.formatter.excludes=${source.formatter.excludes}" />
 		</java>
 
@@ -1513,6 +1636,9 @@ security-manager-awt-operations=\
 		<replace file="test/integration/com/liferay/portal/security/pacl/test/dependencies/WEB-INF/liferay-plugin-package.properties">
 			<replacetoken>security-manager-files-read=</replacetoken>
 			<replacevalue>security-manager-files-read=\
+    ${env:JAVA_HOME}${/},\
+    ${java.home}${/}bin${/}java,\
+    ${java.home}${/}bin${/}java.exe,\
     ${liferay.home}${/}pacl-test${/},\
     ${liferay.home}${/}pacl-test${/}-,</replacevalue>
 		</replace>
@@ -1580,7 +1706,7 @@ security-manager-sockets-accept=\</replacevalue>
 
 		<replace file="test/integration/com/liferay/portal/security/pacl/test/dependencies/WEB-INF/classes/META-INF/hibernate-spring.xml">
 			<replacetoken><![CDATA[<bean id="liferayHibernateSessionFactory" class="com.liferay.portal.kernel.spring.util.SpringFactoryUtil" factory-method="newBean">]]></replacetoken>
-			<replacevalue><![CDATA[<bean id="liferayHibernateSessionFactory" class="com.liferay.portal.spring.hibernate.PortalHibernateConfiguration">
+			<replacevalue><![CDATA[<bean id="liferayHibernateSessionFactory" class="com.liferay.portal.spring.hibernate.PortletHibernateConfiguration">
 		<property name="dataSource" ref="liferayDataSource" />
 	</bean>]]></replacevalue>
 		</replace>

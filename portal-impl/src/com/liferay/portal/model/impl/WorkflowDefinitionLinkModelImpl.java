@@ -102,26 +102,32 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 	public WorkflowDefinitionLinkModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _workflowDefinitionLinkId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setWorkflowDefinitionLinkId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _workflowDefinitionLinkId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return WorkflowDefinitionLink.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return WorkflowDefinitionLink.class.getName();
 	}
@@ -225,18 +231,22 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 		}
 	}
 
+	@Override
 	public long getWorkflowDefinitionLinkId() {
 		return _workflowDefinitionLinkId;
 	}
 
+	@Override
 	public void setWorkflowDefinitionLinkId(long workflowDefinitionLinkId) {
 		_workflowDefinitionLinkId = workflowDefinitionLinkId;
 	}
 
+	@Override
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -253,10 +263,12 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 		return _originalGroupId;
 	}
 
+	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
@@ -273,22 +285,27 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 		return _originalCompanyId;
 	}
 
+	@Override
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
 
+	@Override
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -298,26 +315,32 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 		}
 	}
 
+	@Override
 	public void setUserName(String userName) {
 		_userName = userName;
 	}
 
+	@Override
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
 	}
 
+	@Override
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
 	public String getClassName() {
 		if (getClassNameId() <= 0) {
 			return StringPool.BLANK;
@@ -326,6 +349,7 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 		return PortalUtil.getClassName(getClassNameId());
 	}
 
+	@Override
 	public void setClassName(String className) {
 		long classNameId = 0;
 
@@ -336,10 +360,12 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 		setClassNameId(classNameId);
 	}
 
+	@Override
 	public long getClassNameId() {
 		return _classNameId;
 	}
 
+	@Override
 	public void setClassNameId(long classNameId) {
 		_columnBitmask |= CLASSNAMEID_COLUMN_BITMASK;
 
@@ -356,10 +382,12 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 		return _originalClassNameId;
 	}
 
+	@Override
 	public long getClassPK() {
 		return _classPK;
 	}
 
+	@Override
 	public void setClassPK(long classPK) {
 		_columnBitmask |= CLASSPK_COLUMN_BITMASK;
 
@@ -376,10 +404,12 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 		return _originalClassPK;
 	}
 
+	@Override
 	public long getTypePK() {
 		return _typePK;
 	}
 
+	@Override
 	public void setTypePK(long typePK) {
 		_columnBitmask |= TYPEPK_COLUMN_BITMASK;
 
@@ -396,6 +426,7 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 		return _originalTypePK;
 	}
 
+	@Override
 	public String getWorkflowDefinitionName() {
 		if (_workflowDefinitionName == null) {
 			return StringPool.BLANK;
@@ -405,6 +436,7 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 		}
 	}
 
+	@Override
 	public void setWorkflowDefinitionName(String workflowDefinitionName) {
 		_columnBitmask = -1L;
 
@@ -419,10 +451,12 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 		return GetterUtil.getString(_originalWorkflowDefinitionName);
 	}
 
+	@Override
 	public int getWorkflowDefinitionVersion() {
 		return _workflowDefinitionVersion;
 	}
 
+	@Override
 	public void setWorkflowDefinitionVersion(int workflowDefinitionVersion) {
 		_columnBitmask |= WORKFLOWDEFINITIONVERSION_COLUMN_BITMASK;
 
@@ -488,6 +522,7 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 		return workflowDefinitionLinkImpl;
 	}
 
+	@Override
 	public int compareTo(WorkflowDefinitionLink workflowDefinitionLink) {
 		int value = 0;
 
@@ -503,18 +538,15 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof WorkflowDefinitionLink)) {
 			return false;
 		}
 
-		WorkflowDefinitionLink workflowDefinitionLink = null;
-
-		try {
-			workflowDefinitionLink = (WorkflowDefinitionLink)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		WorkflowDefinitionLink workflowDefinitionLink = (WorkflowDefinitionLink)obj;
 
 		long primaryKey = workflowDefinitionLink.getPrimaryKey();
 
@@ -655,6 +687,7 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(40);
 

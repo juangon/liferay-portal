@@ -69,6 +69,7 @@ public class AssetVocabularyCacheModel implements CacheModel<AssetVocabulary>,
 		return sb.toString();
 	}
 
+	@Override
 	public AssetVocabulary toEntityModel() {
 		AssetVocabularyImpl assetVocabularyImpl = new AssetVocabularyImpl();
 
@@ -138,6 +139,7 @@ public class AssetVocabularyCacheModel implements CacheModel<AssetVocabulary>,
 		return assetVocabularyImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		vocabularyId = objectInput.readLong();
@@ -153,6 +155,7 @@ public class AssetVocabularyCacheModel implements CacheModel<AssetVocabulary>,
 		settings = objectInput.readUTF();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

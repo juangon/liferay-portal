@@ -235,26 +235,32 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 	public ShoppingOrderModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _orderId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setOrderId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _orderId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return ShoppingOrder.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return ShoppingOrder.class.getName();
 	}
@@ -629,20 +635,24 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		}
 	}
 
+	@Override
 	@JSON
 	public long getOrderId() {
 		return _orderId;
 	}
 
+	@Override
 	public void setOrderId(long orderId) {
 		_orderId = orderId;
 	}
 
+	@Override
 	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -659,20 +669,24 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		return _originalGroupId;
 	}
 
+	@Override
 	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
+	@Override
 	@JSON
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_columnBitmask |= USERID_COLUMN_BITMASK;
 
@@ -685,10 +699,12 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
@@ -697,6 +713,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		return _originalUserId;
 	}
 
+	@Override
 	@JSON
 	public String getUserName() {
 		if (_userName == null) {
@@ -707,30 +724,36 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		}
 	}
 
+	@Override
 	public void setUserName(String userName) {
 		_userName = userName;
 	}
 
+	@Override
 	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_columnBitmask = -1L;
 
 		_createDate = createDate;
 	}
 
+	@Override
 	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
 	@JSON
 	public String getNumber() {
 		if (_number == null) {
@@ -741,6 +764,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		}
 	}
 
+	@Override
 	public void setNumber(String number) {
 		_columnBitmask |= NUMBER_COLUMN_BITMASK;
 
@@ -755,24 +779,29 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		return GetterUtil.getString(_originalNumber);
 	}
 
+	@Override
 	@JSON
 	public double getTax() {
 		return _tax;
 	}
 
+	@Override
 	public void setTax(double tax) {
 		_tax = tax;
 	}
 
+	@Override
 	@JSON
 	public double getShipping() {
 		return _shipping;
 	}
 
+	@Override
 	public void setShipping(double shipping) {
 		_shipping = shipping;
 	}
 
+	@Override
 	@JSON
 	public String getAltShipping() {
 		if (_altShipping == null) {
@@ -783,45 +812,55 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		}
 	}
 
+	@Override
 	public void setAltShipping(String altShipping) {
 		_altShipping = altShipping;
 	}
 
+	@Override
 	@JSON
 	public boolean getRequiresShipping() {
 		return _requiresShipping;
 	}
 
+	@Override
 	public boolean isRequiresShipping() {
 		return _requiresShipping;
 	}
 
+	@Override
 	public void setRequiresShipping(boolean requiresShipping) {
 		_requiresShipping = requiresShipping;
 	}
 
+	@Override
 	@JSON
 	public boolean getInsure() {
 		return _insure;
 	}
 
+	@Override
 	public boolean isInsure() {
 		return _insure;
 	}
 
+	@Override
 	public void setInsure(boolean insure) {
 		_insure = insure;
 	}
 
+	@Override
 	@JSON
 	public double getInsurance() {
 		return _insurance;
 	}
 
+	@Override
 	public void setInsurance(double insurance) {
 		_insurance = insurance;
 	}
 
+	@Override
 	@JSON
 	public String getCouponCodes() {
 		if (_couponCodes == null) {
@@ -832,19 +871,23 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		}
 	}
 
+	@Override
 	public void setCouponCodes(String couponCodes) {
 		_couponCodes = couponCodes;
 	}
 
+	@Override
 	@JSON
 	public double getCouponDiscount() {
 		return _couponDiscount;
 	}
 
+	@Override
 	public void setCouponDiscount(double couponDiscount) {
 		_couponDiscount = couponDiscount;
 	}
 
+	@Override
 	@JSON
 	public String getBillingFirstName() {
 		if (_billingFirstName == null) {
@@ -855,10 +898,12 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		}
 	}
 
+	@Override
 	public void setBillingFirstName(String billingFirstName) {
 		_billingFirstName = billingFirstName;
 	}
 
+	@Override
 	@JSON
 	public String getBillingLastName() {
 		if (_billingLastName == null) {
@@ -869,10 +914,12 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		}
 	}
 
+	@Override
 	public void setBillingLastName(String billingLastName) {
 		_billingLastName = billingLastName;
 	}
 
+	@Override
 	@JSON
 	public String getBillingEmailAddress() {
 		if (_billingEmailAddress == null) {
@@ -883,10 +930,12 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		}
 	}
 
+	@Override
 	public void setBillingEmailAddress(String billingEmailAddress) {
 		_billingEmailAddress = billingEmailAddress;
 	}
 
+	@Override
 	@JSON
 	public String getBillingCompany() {
 		if (_billingCompany == null) {
@@ -897,10 +946,12 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		}
 	}
 
+	@Override
 	public void setBillingCompany(String billingCompany) {
 		_billingCompany = billingCompany;
 	}
 
+	@Override
 	@JSON
 	public String getBillingStreet() {
 		if (_billingStreet == null) {
@@ -911,10 +962,12 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		}
 	}
 
+	@Override
 	public void setBillingStreet(String billingStreet) {
 		_billingStreet = billingStreet;
 	}
 
+	@Override
 	@JSON
 	public String getBillingCity() {
 		if (_billingCity == null) {
@@ -925,10 +978,12 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		}
 	}
 
+	@Override
 	public void setBillingCity(String billingCity) {
 		_billingCity = billingCity;
 	}
 
+	@Override
 	@JSON
 	public String getBillingState() {
 		if (_billingState == null) {
@@ -939,10 +994,12 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		}
 	}
 
+	@Override
 	public void setBillingState(String billingState) {
 		_billingState = billingState;
 	}
 
+	@Override
 	@JSON
 	public String getBillingZip() {
 		if (_billingZip == null) {
@@ -953,10 +1010,12 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		}
 	}
 
+	@Override
 	public void setBillingZip(String billingZip) {
 		_billingZip = billingZip;
 	}
 
+	@Override
 	@JSON
 	public String getBillingCountry() {
 		if (_billingCountry == null) {
@@ -967,10 +1026,12 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		}
 	}
 
+	@Override
 	public void setBillingCountry(String billingCountry) {
 		_billingCountry = billingCountry;
 	}
 
+	@Override
 	@JSON
 	public String getBillingPhone() {
 		if (_billingPhone == null) {
@@ -981,23 +1042,28 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		}
 	}
 
+	@Override
 	public void setBillingPhone(String billingPhone) {
 		_billingPhone = billingPhone;
 	}
 
+	@Override
 	@JSON
 	public boolean getShipToBilling() {
 		return _shipToBilling;
 	}
 
+	@Override
 	public boolean isShipToBilling() {
 		return _shipToBilling;
 	}
 
+	@Override
 	public void setShipToBilling(boolean shipToBilling) {
 		_shipToBilling = shipToBilling;
 	}
 
+	@Override
 	@JSON
 	public String getShippingFirstName() {
 		if (_shippingFirstName == null) {
@@ -1008,10 +1074,12 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		}
 	}
 
+	@Override
 	public void setShippingFirstName(String shippingFirstName) {
 		_shippingFirstName = shippingFirstName;
 	}
 
+	@Override
 	@JSON
 	public String getShippingLastName() {
 		if (_shippingLastName == null) {
@@ -1022,10 +1090,12 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		}
 	}
 
+	@Override
 	public void setShippingLastName(String shippingLastName) {
 		_shippingLastName = shippingLastName;
 	}
 
+	@Override
 	@JSON
 	public String getShippingEmailAddress() {
 		if (_shippingEmailAddress == null) {
@@ -1036,10 +1106,12 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		}
 	}
 
+	@Override
 	public void setShippingEmailAddress(String shippingEmailAddress) {
 		_shippingEmailAddress = shippingEmailAddress;
 	}
 
+	@Override
 	@JSON
 	public String getShippingCompany() {
 		if (_shippingCompany == null) {
@@ -1050,10 +1122,12 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		}
 	}
 
+	@Override
 	public void setShippingCompany(String shippingCompany) {
 		_shippingCompany = shippingCompany;
 	}
 
+	@Override
 	@JSON
 	public String getShippingStreet() {
 		if (_shippingStreet == null) {
@@ -1064,10 +1138,12 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		}
 	}
 
+	@Override
 	public void setShippingStreet(String shippingStreet) {
 		_shippingStreet = shippingStreet;
 	}
 
+	@Override
 	@JSON
 	public String getShippingCity() {
 		if (_shippingCity == null) {
@@ -1078,10 +1154,12 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		}
 	}
 
+	@Override
 	public void setShippingCity(String shippingCity) {
 		_shippingCity = shippingCity;
 	}
 
+	@Override
 	@JSON
 	public String getShippingState() {
 		if (_shippingState == null) {
@@ -1092,10 +1170,12 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		}
 	}
 
+	@Override
 	public void setShippingState(String shippingState) {
 		_shippingState = shippingState;
 	}
 
+	@Override
 	@JSON
 	public String getShippingZip() {
 		if (_shippingZip == null) {
@@ -1106,10 +1186,12 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		}
 	}
 
+	@Override
 	public void setShippingZip(String shippingZip) {
 		_shippingZip = shippingZip;
 	}
 
+	@Override
 	@JSON
 	public String getShippingCountry() {
 		if (_shippingCountry == null) {
@@ -1120,10 +1202,12 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		}
 	}
 
+	@Override
 	public void setShippingCountry(String shippingCountry) {
 		_shippingCountry = shippingCountry;
 	}
 
+	@Override
 	@JSON
 	public String getShippingPhone() {
 		if (_shippingPhone == null) {
@@ -1134,10 +1218,12 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		}
 	}
 
+	@Override
 	public void setShippingPhone(String shippingPhone) {
 		_shippingPhone = shippingPhone;
 	}
 
+	@Override
 	@JSON
 	public String getCcName() {
 		if (_ccName == null) {
@@ -1148,10 +1234,12 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		}
 	}
 
+	@Override
 	public void setCcName(String ccName) {
 		_ccName = ccName;
 	}
 
+	@Override
 	@JSON
 	public String getCcType() {
 		if (_ccType == null) {
@@ -1162,10 +1250,12 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		}
 	}
 
+	@Override
 	public void setCcType(String ccType) {
 		_ccType = ccType;
 	}
 
+	@Override
 	@JSON
 	public String getCcNumber() {
 		if (_ccNumber == null) {
@@ -1176,28 +1266,34 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		}
 	}
 
+	@Override
 	public void setCcNumber(String ccNumber) {
 		_ccNumber = ccNumber;
 	}
 
+	@Override
 	@JSON
 	public int getCcExpMonth() {
 		return _ccExpMonth;
 	}
 
+	@Override
 	public void setCcExpMonth(int ccExpMonth) {
 		_ccExpMonth = ccExpMonth;
 	}
 
+	@Override
 	@JSON
 	public int getCcExpYear() {
 		return _ccExpYear;
 	}
 
+	@Override
 	public void setCcExpYear(int ccExpYear) {
 		_ccExpYear = ccExpYear;
 	}
 
+	@Override
 	@JSON
 	public String getCcVerNumber() {
 		if (_ccVerNumber == null) {
@@ -1208,10 +1304,12 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		}
 	}
 
+	@Override
 	public void setCcVerNumber(String ccVerNumber) {
 		_ccVerNumber = ccVerNumber;
 	}
 
+	@Override
 	@JSON
 	public String getComments() {
 		if (_comments == null) {
@@ -1222,10 +1320,12 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		}
 	}
 
+	@Override
 	public void setComments(String comments) {
 		_comments = comments;
 	}
 
+	@Override
 	@JSON
 	public String getPpTxnId() {
 		if (_ppTxnId == null) {
@@ -1236,6 +1336,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		}
 	}
 
+	@Override
 	public void setPpTxnId(String ppTxnId) {
 		_columnBitmask |= PPTXNID_COLUMN_BITMASK;
 
@@ -1250,6 +1351,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		return GetterUtil.getString(_originalPpTxnId);
 	}
 
+	@Override
 	@JSON
 	public String getPpPaymentStatus() {
 		if (_ppPaymentStatus == null) {
@@ -1260,6 +1362,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		}
 	}
 
+	@Override
 	public void setPpPaymentStatus(String ppPaymentStatus) {
 		_columnBitmask |= PPPAYMENTSTATUS_COLUMN_BITMASK;
 
@@ -1274,15 +1377,18 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		return GetterUtil.getString(_originalPpPaymentStatus);
 	}
 
+	@Override
 	@JSON
 	public double getPpPaymentGross() {
 		return _ppPaymentGross;
 	}
 
+	@Override
 	public void setPpPaymentGross(double ppPaymentGross) {
 		_ppPaymentGross = ppPaymentGross;
 	}
 
+	@Override
 	@JSON
 	public String getPpReceiverEmail() {
 		if (_ppReceiverEmail == null) {
@@ -1293,10 +1399,12 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		}
 	}
 
+	@Override
 	public void setPpReceiverEmail(String ppReceiverEmail) {
 		_ppReceiverEmail = ppReceiverEmail;
 	}
 
+	@Override
 	@JSON
 	public String getPpPayerEmail() {
 		if (_ppPayerEmail == null) {
@@ -1307,32 +1415,39 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		}
 	}
 
+	@Override
 	public void setPpPayerEmail(String ppPayerEmail) {
 		_ppPayerEmail = ppPayerEmail;
 	}
 
+	@Override
 	@JSON
 	public boolean getSendOrderEmail() {
 		return _sendOrderEmail;
 	}
 
+	@Override
 	public boolean isSendOrderEmail() {
 		return _sendOrderEmail;
 	}
 
+	@Override
 	public void setSendOrderEmail(boolean sendOrderEmail) {
 		_sendOrderEmail = sendOrderEmail;
 	}
 
+	@Override
 	@JSON
 	public boolean getSendShippingEmail() {
 		return _sendShippingEmail;
 	}
 
+	@Override
 	public boolean isSendShippingEmail() {
 		return _sendShippingEmail;
 	}
 
+	@Override
 	public void setSendShippingEmail(boolean sendShippingEmail) {
 		_sendShippingEmail = sendShippingEmail;
 	}
@@ -1425,6 +1540,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		return shoppingOrderImpl;
 	}
 
+	@Override
 	public int compareTo(ShoppingOrder shoppingOrder) {
 		int value = 0;
 
@@ -1442,18 +1558,15 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ShoppingOrder)) {
 			return false;
 		}
 
-		ShoppingOrder shoppingOrder = null;
-
-		try {
-			shoppingOrder = (ShoppingOrder)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		ShoppingOrder shoppingOrder = (ShoppingOrder)obj;
 
 		long primaryKey = shoppingOrder.getPrimaryKey();
 
@@ -1925,6 +2038,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(157);
 

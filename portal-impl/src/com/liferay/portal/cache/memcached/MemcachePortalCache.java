@@ -44,10 +44,12 @@ public class MemcachePortalCache<V> implements PortalCache<String, V> {
 		_timeoutTimeUnit = timeoutTimeUnit;
 	}
 
+	@Override
 	public void destroy() {
 		_memcachedClient.shutdown();
 	}
 
+	@Override
 	public Collection<V> get(Collection<String> keys) {
 		List<String> processedKeys = new ArrayList<String>(keys.size());
 
@@ -90,6 +92,7 @@ public class MemcachePortalCache<V> implements PortalCache<String, V> {
 		return null;
 	}
 
+	@Override
 	public V get(String key) {
 		String processedKey = _name.concat(key);
 
@@ -122,14 +125,17 @@ public class MemcachePortalCache<V> implements PortalCache<String, V> {
 		return (V)value;
 	}
 
+	@Override
 	public String getName() {
 		return _name;
 	}
 
+	@Override
 	public void put(String key, V value) {
 		put(key, value, _timeToLive);
 	}
 
+	@Override
 	public void put(String key, V value, int timeToLive) {
 		String processedKey = _name.concat(key);
 
@@ -143,10 +149,12 @@ public class MemcachePortalCache<V> implements PortalCache<String, V> {
 		}
 	}
 
+	@Override
 	public void registerCacheListener(CacheListener<String, V> cacheListener) {
 		registerCacheListener(cacheListener, CacheListenerScope.ALL);
 	}
 
+	@Override
 	public void registerCacheListener(
 		CacheListener<String, V> cacheListener,
 		CacheListenerScope cacheListenerScope) {
@@ -154,6 +162,7 @@ public class MemcachePortalCache<V> implements PortalCache<String, V> {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void remove(String key) {
 		String processedKey = _name.concat(key);
 
@@ -167,6 +176,7 @@ public class MemcachePortalCache<V> implements PortalCache<String, V> {
 		}
 	}
 
+	@Override
 	public void removeAll() {
 		_memcachedClient.flush();
 	}
@@ -175,10 +185,12 @@ public class MemcachePortalCache<V> implements PortalCache<String, V> {
 		_timeToLive = timeToLive;
 	}
 
+	@Override
 	public void unregisterCacheListener(
 		CacheListener<String, V> cacheListener) {
 	}
 
+	@Override
 	public void unregisterCacheListeners() {
 	}
 

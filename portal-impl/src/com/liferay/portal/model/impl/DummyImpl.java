@@ -32,18 +32,22 @@ public class DummyImpl extends BaseModelImpl<Dummy> implements Dummy {
 		return new DummyImpl();
 	}
 
+	@Override
 	public int compareTo(Dummy dummy) {
 		return 0;
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return DummyImpl.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return DummyImpl.class.getName();
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return StringPool.BLANK;
 	}
@@ -52,9 +56,11 @@ public class DummyImpl extends BaseModelImpl<Dummy> implements Dummy {
 	public void resetOriginalValues() {
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 	}
 
+	@Override
 	public String toXmlString() {
 		return StringPool.BLANK;
 	}

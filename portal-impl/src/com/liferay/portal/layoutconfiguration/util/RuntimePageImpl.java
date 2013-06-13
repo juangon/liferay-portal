@@ -24,7 +24,6 @@ import com.liferay.portal.kernel.servlet.PluginContextListener;
 import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.kernel.template.Template;
 import com.liferay.portal.kernel.template.TemplateConstants;
-import com.liferay.portal.kernel.template.TemplateContextType;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.template.TemplateResource;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -88,6 +87,7 @@ import org.apache.commons.lang.time.StopWatch;
 @DoPrivileged
 public class RuntimePageImpl implements RuntimePage {
 
+	@Override
 	public StringBundler getProcessedTemplate(
 			PageContext pageContext, String portletId,
 			TemplateResource templateResource)
@@ -96,6 +96,7 @@ public class RuntimePageImpl implements RuntimePage {
 		return doDispatch(pageContext, portletId, templateResource, true);
 	}
 
+	@Override
 	public void processCustomizationSettings(
 			PageContext pageContext, TemplateResource templateResource)
 		throws Exception {
@@ -103,6 +104,7 @@ public class RuntimePageImpl implements RuntimePage {
 		doDispatch(pageContext, null, templateResource, false);
 	}
 
+	@Override
 	public void processTemplate(
 			PageContext pageContext, String portletId,
 			TemplateResource templateResource)
@@ -114,6 +116,7 @@ public class RuntimePageImpl implements RuntimePage {
 		sb.writeTo(pageContext.getOut());
 	}
 
+	@Override
 	public void processTemplate(
 			PageContext pageContext, TemplateResource templateResource)
 		throws Exception {
@@ -121,6 +124,7 @@ public class RuntimePageImpl implements RuntimePage {
 		processTemplate(pageContext, null, templateResource);
 	}
 
+	@Override
 	public String processXML(
 			HttpServletRequest request, HttpServletResponse response,
 			String content)
@@ -147,6 +151,7 @@ public class RuntimePageImpl implements RuntimePage {
 		return content;
 	}
 
+	@Override
 	public String processXML(
 			HttpServletRequest request, String content,
 			RuntimeLogic runtimeLogic)
@@ -269,13 +274,11 @@ public class RuntimePageImpl implements RuntimePage {
 
 			if (processTemplate) {
 				return doProcessTemplate(
-					pageContext, portletId, templateResource,
-					TemplateContextType.STANDARD);
+					pageContext, portletId, templateResource, false);
 			}
 			else {
 				doProcessCustomizationSettings(
-					pageContext, templateResource,
-					TemplateContextType.STANDARD);
+					pageContext, templateResource, false);
 
 				return null;
 			}
@@ -291,7 +294,7 @@ public class RuntimePageImpl implements RuntimePage {
 
 	protected void doProcessCustomizationSettings(
 			PageContext pageContext, TemplateResource templateResource,
-			TemplateContextType templateContextType)
+			boolean restricted)
 		throws Exception {
 
 		HttpServletRequest request =
@@ -301,8 +304,7 @@ public class RuntimePageImpl implements RuntimePage {
 			new CustomizationSettingsProcessor(pageContext);
 
 		Template template = TemplateManagerUtil.getTemplate(
-			TemplateConstants.LANG_TYPE_VM, templateResource,
-			templateContextType);
+			TemplateConstants.LANG_TYPE_VM, templateResource, restricted);
 
 		template.put("processor", processor);
 
@@ -329,8 +331,7 @@ public class RuntimePageImpl implements RuntimePage {
 
 	protected StringBundler doProcessTemplate(
 			PageContext pageContext, String portletId,
-			TemplateResource templateResource,
-			TemplateContextType templateContextType)
+			TemplateResource templateResource, boolean restricted)
 		throws Exception {
 
 		HttpServletRequest request =
@@ -342,8 +343,7 @@ public class RuntimePageImpl implements RuntimePage {
 			request, response, portletId);
 
 		Template template = TemplateManagerUtil.getTemplate(
-			TemplateConstants.LANG_TYPE_VM, templateResource,
-			templateContextType);
+			TemplateConstants.LANG_TYPE_VM, templateResource, restricted);
 
 		template.put("processor", processor);
 

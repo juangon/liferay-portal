@@ -65,9 +65,11 @@ import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 import javax.portlet.PortletURL;
 
@@ -77,6 +79,7 @@ import javax.portlet.PortletURL;
  * @author Bruno Farache
  * @author Raymond Augé
  * @author Hugo Huijser
+ * @author Tibor Lipusz
  */
 public class JournalArticleIndexer extends BaseIndexer {
 
@@ -89,10 +92,12 @@ public class JournalArticleIndexer extends BaseIndexer {
 		setPermissionAware(true);
 	}
 
+	@Override
 	public String[] getClassNames() {
 		return CLASS_NAMES;
 	}
 
+	@Override
 	public String getPortletId() {
 		return PORTLET_ID;
 	}
@@ -329,6 +334,9 @@ public class JournalArticleIndexer extends BaseIndexer {
 		document.addUID(
 			PORTLET_ID, article.getGroupId(), article.getArticleId());
 
+		String articleDefaultLanguageId = LocalizationUtil.getDefaultLocale(
+			article.getContent());
+
 		Locale defaultLocale = LocaleUtil.getDefault();
 
 		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
@@ -339,20 +347,30 @@ public class JournalArticleIndexer extends BaseIndexer {
 		for (String languageId : languageIds) {
 			String content = extractContent(article, languageId);
 
-			if (languageId.equals(defaultLanguageId)) {
+			String description = article.getDescription(languageId);
+
+			String title = article.getTitle(languageId);
+
+			if (languageId.equals(articleDefaultLanguageId)) {
 				document.addText(Field.CONTENT, content);
+				document.addText(Field.DESCRIPTION, description);
+				document.addText(Field.TITLE, title);
+				document.addText("defaultLanguageId", languageId);
 			}
 
 			document.addText(
 				Field.CONTENT.concat(StringPool.UNDERLINE).concat(languageId),
 				content);
+			document.addText(
+				Field.DESCRIPTION.concat(StringPool.UNDERLINE).concat(
+					languageId), description);
+			document.addText(
+				Field.TITLE.concat(StringPool.UNDERLINE).concat(languageId),
+				title);
 		}
 
-		document.addLocalizedText(
-			Field.DESCRIPTION, article.getDescriptionMap());
 		document.addKeyword(Field.FOLDER_ID, article.getFolderId());
 		document.addKeyword(Field.LAYOUT_UUID, article.getLayoutUuid());
-		document.addLocalizedText(Field.TITLE, article.getTitleMap());
 		document.addKeyword(Field.TYPE, article.getType());
 		document.addKeyword(Field.VERSION, article.getVersion());
 
@@ -413,6 +431,11 @@ public class JournalArticleIndexer extends BaseIndexer {
 
 		Locale snippetLocale = getSnippetLocale(document, locale);
 
+		if (snippetLocale == null) {
+			snippetLocale = LocaleUtil.fromLanguageId(
+				document.get("defaultLanguageId"));
+		}
+
 		String prefix = Field.SNIPPET + StringPool.UNDERLINE;
 
 		String title = document.get(
@@ -422,11 +445,8 @@ public class JournalArticleIndexer extends BaseIndexer {
 			snippetLocale, prefix + Field.DESCRIPTION, prefix + Field.CONTENT);
 
 		if (Validator.isBlank(content)) {
-			content = document.get(locale, Field.DESCRIPTION, Field.CONTENT);
-
-			if (Validator.isBlank(content)) {
-				content = document.get(Field.DESCRIPTION, Field.CONTENT);
-			}
+			content = document.get(
+				snippetLocale, Field.DESCRIPTION, Field.CONTENT);
 		}
 
 		if (content.length() > 200) {
@@ -547,6 +567,8 @@ public class JournalArticleIndexer extends BaseIndexer {
 
 		final Collection<Document> documents = new ArrayList<Document>();
 
+		final Set<String> latestArticleIds = new HashSet<String>();
+
 		ActionableDynamicQuery actionableDynamicQuery =
 			new JournalArticleActionableDynamicQuery() {
 
@@ -599,9 +621,15 @@ public class JournalArticleIndexer extends BaseIndexer {
 							article.getResourcePrimKey(),
 							WorkflowConstants.STATUS_APPROVED);
 
-					if (!latestArticle.isIndexable()) {
+					String latestArticleId = latestArticle.getArticleId();
+
+					if (latestArticleIds.contains(latestArticleId)) {
 						return;
 					}
+
+					latestArticleIds.add(latestArticleId);
+
+					article = latestArticle;
 				}
 
 				Document document = getDocument(article);

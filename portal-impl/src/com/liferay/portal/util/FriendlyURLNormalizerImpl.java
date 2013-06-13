@@ -33,10 +33,12 @@ import java.util.Arrays;
 @DoPrivileged
 public class FriendlyURLNormalizerImpl implements FriendlyURLNormalizer {
 
+	@Override
 	public String normalize(String friendlyURL) {
 		return normalize(friendlyURL, null);
 	}
 
+	@Override
 	public String normalize(String friendlyURL, char[] replaceChars) {
 		if (Validator.isNull(friendlyURL)) {
 			return friendlyURL;
@@ -100,8 +102,8 @@ public class FriendlyURLNormalizerImpl implements FriendlyURLNormalizer {
 	static {
 		char[] replaceChars = new char[] {
 			' ', ',', '\\', '\'', '\"', '(', ')', '[', ']', '{', '}', '?', '#',
-			'@', '+', '~', ';', '$', '%', '!', '=', ':', '&', '\u2018',
-			'\u2019', '\u201c', '\u201d'
+			'@', '+', '~', ';', '$', '%', '!', '=', ':', '&', '\u00a3',
+			'\u2018', '\u2019', '\u201c', '\u201d'
 		};
 
 		Arrays.sort(replaceChars);

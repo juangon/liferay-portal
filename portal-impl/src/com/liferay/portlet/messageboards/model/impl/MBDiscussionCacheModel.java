@@ -67,6 +67,7 @@ public class MBDiscussionCacheModel implements CacheModel<MBDiscussion>,
 		return sb.toString();
 	}
 
+	@Override
 	public MBDiscussion toEntityModel() {
 		MBDiscussionImpl mbDiscussionImpl = new MBDiscussionImpl();
 
@@ -112,6 +113,7 @@ public class MBDiscussionCacheModel implements CacheModel<MBDiscussion>,
 		return mbDiscussionImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		discussionId = objectInput.readLong();
@@ -126,6 +128,7 @@ public class MBDiscussionCacheModel implements CacheModel<MBDiscussion>,
 		threadId = objectInput.readLong();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

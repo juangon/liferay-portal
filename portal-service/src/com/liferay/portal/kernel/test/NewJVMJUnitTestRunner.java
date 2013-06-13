@@ -62,6 +62,7 @@ public class NewJVMJUnitTestRunner extends BlockJUnit4ClassRunner {
 				message, 1000,
 				new ProcessExecutor.ShutdownHook() {
 
+					@Override
 					public boolean shutdown(
 						int shutdownCode, Throwable shutdownThrowable) {
 
@@ -168,6 +169,7 @@ public class NewJVMJUnitTestRunner extends BlockJUnit4ClassRunner {
 			_afterMethodKeys = afterMethodKeys;
 		}
 
+		@Override
 		public Serializable call() throws ProcessException {
 			attachProcess("Attached " + toString());
 

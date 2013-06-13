@@ -86,6 +86,7 @@ public class LayoutSetBranchCacheModel implements CacheModel<LayoutSetBranch>,
 		return sb.toString();
 	}
 
+	@Override
 	public LayoutSetBranch toEntityModel() {
 		LayoutSetBranchImpl layoutSetBranchImpl = new LayoutSetBranchImpl();
 
@@ -191,6 +192,7 @@ public class LayoutSetBranchCacheModel implements CacheModel<LayoutSetBranch>,
 		return layoutSetBranchImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		layoutSetBranchId = objectInput.readLong();
 		groupId = objectInput.readLong();
@@ -215,6 +217,7 @@ public class LayoutSetBranchCacheModel implements CacheModel<LayoutSetBranch>,
 		layoutSetPrototypeLinkEnabled = objectInput.readBoolean();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(layoutSetBranchId);

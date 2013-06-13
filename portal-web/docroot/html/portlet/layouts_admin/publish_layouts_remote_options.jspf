@@ -14,24 +14,30 @@
  */
 --%>
 
-<div class="portlet-msg-info">
-	<liferay-ui:message key="export-the-selected-data-to-the-site-of-a-remote-portal-or-to-another-site-in-the-same-portal" />
+<div class="selected-labels" id="<portlet:namespace />selectedRemote"></div>
+
+<aui:a cssClass="modify-link" href="javascript:;" id="remoteLink" label="change" method="get" />
+
+<div class="hide" id="<portlet:namespace />remote">
+	<div class="alert alert-info">
+		<liferay-ui:message key="export-the-selected-data-to-the-site-of-a-remote-portal-or-to-another-site-in-the-same-portal" />
+	</div>
+
+	<aui:fieldset>
+		<aui:input label="remote-host-ip" name="remoteAddress" size="20" type="text" value='<%= liveGroupTypeSettings.getProperty("remoteAddress") %>' />
+
+		<aui:input label="remote-port" name="remotePort" size="10" type="text" value='<%= liveGroupTypeSettings.getProperty("remotePort") %>' />
+
+		<aui:input label="remote-path-context" name="remotePathContext" size="10" type="text" value='<%= liveGroupTypeSettings.getProperty("remotePathContext") %>' />
+
+		<aui:input label='<%= LanguageUtil.get(pageContext, "remote-site-id" ) %>' name="remoteGroupId" size="10" type="text" value='<%= liveGroupTypeSettings.getProperty("remoteGroupId") %>' />
+
+		<aui:input name="remotePrivateLayout" type="hidden" value="<%= privateLayout %>" />
+	</aui:fieldset>
+
+	<aui:fieldset>
+		<aui:input label="use-a-secure-network-connection" name="secureConnection" type="checkbox" value='<%= liveGroupTypeSettings.getProperty("secureConnection") %>' />
+
+		<aui:input helpMessage="delete-portlet-data-help" id="remoteDeletePortletData" label="delete-portlet-data-before-importing" name="<%= PortletDataHandlerKeys.DELETE_PORTLET_DATA %>" type="checkbox" />
+	</aui:fieldset>
 </div>
-
-<aui:fieldset>
-	<aui:input label="remote-host-ip" name="remoteAddress" size="20" type="text" value='<%= liveGroupTypeSettings.getProperty("remoteAddress") %>' />
-
-	<aui:input label="remote-port" name="remotePort" size="10" type="text" value='<%= liveGroupTypeSettings.getProperty("remotePort") %>' />
-
-	<aui:input label="remote-path-context" name="remotePathContext" size="10" type="text" value='<%= liveGroupTypeSettings.getProperty("remotePathContext") %>' />
-
-	<aui:input label='<%= LanguageUtil.get(pageContext, "remote-site-id" ) %>' name="remoteGroupId" size="10" type="text" value='<%= liveGroupTypeSettings.getProperty("remoteGroupId") %>' />
-
-	<aui:input name="remotePrivateLayout" type="hidden" value="<%= privateLayout %>" />
-</aui:fieldset>
-
-<aui:fieldset>
-	<aui:input label="use-a-secure-network-connection" name="secureConnection" type="checkbox" value='<%= liveGroupTypeSettings.getProperty("secureConnection") %>' />
-
-	<aui:input helpMessage="delete-portlet-data-help" label="delete-portlet-data-before-importing" name="<%= PortletDataHandlerKeys.DELETE_PORTLET_DATA %>" type="checkbox" />
-</aui:fieldset>

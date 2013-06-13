@@ -14,6 +14,7 @@
 
 package com.liferay.util.bridges.php;
 
+import com.caucho.quercus.servlet.QuercusServlet;
 import com.caucho.vfs.Path;
 import com.caucho.vfs.SchemeMap;
 import com.caucho.vfs.Vfs;
@@ -28,6 +29,7 @@ import com.liferay.portal.kernel.servlet.ServletObjectsFactory;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.bridges.common.ScriptPostProcess;
 
 import java.io.IOException;
@@ -49,7 +51,6 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import javax.servlet.ServletConfig;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -165,7 +166,7 @@ public class PHPPortlet extends GenericPortlet {
 
 			Path.setDefaultSchemeMap(schemeMap);
 
-			quercusServlet = (HttpServlet)InstanceFactory.newInstance(
+			quercusServlet = (QuercusServlet)InstanceFactory.newInstance(
 				_QUERCUS_SERVLET);
 
 			Map<String, String> params = new HashMap<String, String>();
@@ -181,6 +182,13 @@ public class PHPPortlet extends GenericPortlet {
 			}
 
 			servletConfig = new DynamicServletConfig(servletConfig, params);
+
+			QuercusServlet.PhpIni phpIni = quercusServlet.createPhpIni();
+
+			phpIni.setProperty("unicode.http_input_encoding", StringPool.UTF8);
+			phpIni.setProperty("unicode.output_encoding", StringPool.UTF8);
+			phpIni.setProperty("unicode.runtime_encoding", StringPool.UTF8);
+			phpIni.setProperty("unicode.semantics", Boolean.TRUE.toString());
 
 			quercusServlet.init(servletConfig);
 		}
@@ -247,7 +255,7 @@ public class PHPPortlet extends GenericPortlet {
 	protected boolean addPortletParams;
 	protected String editUri;
 	protected String helpUri;
-	protected HttpServlet quercusServlet;
+	protected QuercusServlet quercusServlet;
 	protected ServletObjectsFactory servletObjectsFactory;
 	protected String viewUri;
 

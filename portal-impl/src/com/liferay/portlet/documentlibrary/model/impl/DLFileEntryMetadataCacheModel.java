@@ -57,6 +57,7 @@ public class DLFileEntryMetadataCacheModel implements CacheModel<DLFileEntryMeta
 		return sb.toString();
 	}
 
+	@Override
 	public DLFileEntryMetadata toEntityModel() {
 		DLFileEntryMetadataImpl dlFileEntryMetadataImpl = new DLFileEntryMetadataImpl();
 
@@ -79,6 +80,7 @@ public class DLFileEntryMetadataCacheModel implements CacheModel<DLFileEntryMeta
 		return dlFileEntryMetadataImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		fileEntryMetadataId = objectInput.readLong();
@@ -89,6 +91,7 @@ public class DLFileEntryMetadataCacheModel implements CacheModel<DLFileEntryMeta
 		fileVersionId = objectInput.readLong();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

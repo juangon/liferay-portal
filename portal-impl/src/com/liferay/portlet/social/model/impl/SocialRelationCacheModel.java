@@ -57,6 +57,7 @@ public class SocialRelationCacheModel implements CacheModel<SocialRelation>,
 		return sb.toString();
 	}
 
+	@Override
 	public SocialRelation toEntityModel() {
 		SocialRelationImpl socialRelationImpl = new SocialRelationImpl();
 
@@ -79,6 +80,7 @@ public class SocialRelationCacheModel implements CacheModel<SocialRelation>,
 		return socialRelationImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		relationId = objectInput.readLong();
@@ -89,6 +91,7 @@ public class SocialRelationCacheModel implements CacheModel<SocialRelation>,
 		type = objectInput.readInt();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

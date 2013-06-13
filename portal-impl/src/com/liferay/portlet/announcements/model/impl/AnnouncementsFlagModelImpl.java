@@ -141,26 +141,32 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 	public AnnouncementsFlagModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _flagId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setFlagId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _flagId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return AnnouncementsFlag.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return AnnouncementsFlag.class.getName();
 	}
@@ -211,20 +217,24 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 		}
 	}
 
+	@Override
 	@JSON
 	public long getFlagId() {
 		return _flagId;
 	}
 
+	@Override
 	public void setFlagId(long flagId) {
 		_flagId = flagId;
 	}
 
+	@Override
 	@JSON
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_columnBitmask = -1L;
 
@@ -237,10 +247,12 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
@@ -249,22 +261,26 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 		return _originalUserId;
 	}
 
+	@Override
 	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_columnBitmask = -1L;
 
 		_createDate = createDate;
 	}
 
+	@Override
 	@JSON
 	public long getEntryId() {
 		return _entryId;
 	}
 
+	@Override
 	public void setEntryId(long entryId) {
 		_columnBitmask |= ENTRYID_COLUMN_BITMASK;
 
@@ -281,11 +297,13 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 		return _originalEntryId;
 	}
 
+	@Override
 	@JSON
 	public int getValue() {
 		return _value;
 	}
 
+	@Override
 	public void setValue(int value) {
 		_columnBitmask |= VALUE_COLUMN_BITMASK;
 
@@ -344,6 +362,7 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 		return announcementsFlagImpl;
 	}
 
+	@Override
 	public int compareTo(AnnouncementsFlag announcementsFlag) {
 		int value = 0;
 
@@ -373,18 +392,15 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof AnnouncementsFlag)) {
 			return false;
 		}
 
-		AnnouncementsFlag announcementsFlag = null;
-
-		try {
-			announcementsFlag = (AnnouncementsFlag)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		AnnouncementsFlag announcementsFlag = (AnnouncementsFlag)obj;
 
 		long primaryKey = announcementsFlag.getPrimaryKey();
 
@@ -463,6 +479,7 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(19);
 

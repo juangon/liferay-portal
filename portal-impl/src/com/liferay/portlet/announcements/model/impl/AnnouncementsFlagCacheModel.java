@@ -54,6 +54,7 @@ public class AnnouncementsFlagCacheModel implements CacheModel<AnnouncementsFlag
 		return sb.toString();
 	}
 
+	@Override
 	public AnnouncementsFlag toEntityModel() {
 		AnnouncementsFlagImpl announcementsFlagImpl = new AnnouncementsFlagImpl();
 
@@ -75,6 +76,7 @@ public class AnnouncementsFlagCacheModel implements CacheModel<AnnouncementsFlag
 		return announcementsFlagImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		flagId = objectInput.readLong();
 		userId = objectInput.readLong();
@@ -83,6 +85,7 @@ public class AnnouncementsFlagCacheModel implements CacheModel<AnnouncementsFlag
 		value = objectInput.readInt();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(flagId);

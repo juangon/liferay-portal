@@ -97,26 +97,32 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 	public ShoppingCartModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _cartId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setCartId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _cartId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return ShoppingCart.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return ShoppingCart.class.getName();
 	}
@@ -209,18 +215,22 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 		}
 	}
 
+	@Override
 	public long getCartId() {
 		return _cartId;
 	}
 
+	@Override
 	public void setCartId(long cartId) {
 		_cartId = cartId;
 	}
 
+	@Override
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -237,18 +247,22 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 		return _originalGroupId;
 	}
 
+	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
+	@Override
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_columnBitmask |= USERID_COLUMN_BITMASK;
 
@@ -261,10 +275,12 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
@@ -273,6 +289,7 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 		return _originalUserId;
 	}
 
+	@Override
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -282,26 +299,32 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 		}
 	}
 
+	@Override
 	public void setUserName(String userName) {
 		_userName = userName;
 	}
 
+	@Override
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
 	}
 
+	@Override
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
 	public String getItemIds() {
 		if (_itemIds == null) {
 			return StringPool.BLANK;
@@ -311,10 +334,12 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 		}
 	}
 
+	@Override
 	public void setItemIds(String itemIds) {
 		_itemIds = itemIds;
 	}
 
+	@Override
 	public String getCouponCodes() {
 		if (_couponCodes == null) {
 			return StringPool.BLANK;
@@ -324,26 +349,32 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 		}
 	}
 
+	@Override
 	public void setCouponCodes(String couponCodes) {
 		_couponCodes = couponCodes;
 	}
 
+	@Override
 	public int getAltShipping() {
 		return _altShipping;
 	}
 
+	@Override
 	public void setAltShipping(int altShipping) {
 		_altShipping = altShipping;
 	}
 
+	@Override
 	public boolean getInsure() {
 		return _insure;
 	}
 
+	@Override
 	public boolean isInsure() {
 		return _insure;
 	}
 
+	@Override
 	public void setInsure(boolean insure) {
 		_insure = insure;
 	}
@@ -396,6 +427,7 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 		return shoppingCartImpl;
 	}
 
+	@Override
 	public int compareTo(ShoppingCart shoppingCart) {
 		long primaryKey = shoppingCart.getPrimaryKey();
 
@@ -412,18 +444,15 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ShoppingCart)) {
 			return false;
 		}
 
-		ShoppingCart shoppingCart = null;
-
-		try {
-			shoppingCart = (ShoppingCart)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		ShoppingCart shoppingCart = (ShoppingCart)obj;
 
 		long primaryKey = shoppingCart.getPrimaryKey();
 
@@ -547,6 +576,7 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(37);
 

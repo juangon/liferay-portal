@@ -53,6 +53,7 @@ public class ShoppingItemFieldCacheModel implements CacheModel<ShoppingItemField
 		return sb.toString();
 	}
 
+	@Override
 	public ShoppingItemField toEntityModel() {
 		ShoppingItemFieldImpl shoppingItemFieldImpl = new ShoppingItemFieldImpl();
 
@@ -85,6 +86,7 @@ public class ShoppingItemFieldCacheModel implements CacheModel<ShoppingItemField
 		return shoppingItemFieldImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		itemFieldId = objectInput.readLong();
 		itemId = objectInput.readLong();
@@ -93,6 +95,7 @@ public class ShoppingItemFieldCacheModel implements CacheModel<ShoppingItemField
 		description = objectInput.readUTF();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(itemFieldId);

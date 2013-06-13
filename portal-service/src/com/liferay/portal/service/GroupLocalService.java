@@ -21,11 +21,10 @@ import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 
 /**
- * The interface for the group local service.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
+ * Provides the local service interface for Group. Methods of this
+ * service will not have security checks based on the propagated JAAS
+ * credentials because this service can only be accessed from within the same
+ * VM.
  *
  * @author Brian Wing Shun Chan
  * @see GroupLocalServiceUtil
@@ -168,6 +167,7 @@ public interface GroupLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	@Override
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.PersistedModel getPersistedModel(
 		java.io.Serializable primaryKeyObj)
@@ -744,6 +744,78 @@ public interface GroupLocalService extends BaseLocalService,
 		long parentGroupId, java.lang.String className, long classPK,
 		java.lang.String name, java.lang.String description, int type,
 		java.lang.String friendlyURL, boolean site, boolean active,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Adds a group.
+	*
+	* @param userId the primary key of the group's creator/owner
+	* @param className the entity's class name
+	* @param classPK the primary key of the entity's instance
+	* @param liveGroupId the primary key of the live group
+	* @param name the entity's name
+	* @param description the group's description (optionally
+	<code>null</code>)
+	* @param type the group's type. For more information see {@link
+	com.liferay.portal.model.GroupConstants}
+	* @param friendlyURL the group's friendlyURL (optionally
+	<code>null</code>)
+	* @param site whether the group is to be associated with a main site
+	* @param active whether the group is active
+	* @param serviceContext the service context to be applied (optionally
+	<code>null</code>). Can set asset category IDs and asset tag
+	names for the group, and whether the group is for staging.
+	* @return the group
+	* @throws PortalException if a creator could not be found, if the
+	group's information was invalid, if a layout could not be
+	found, or if a valid friendly URL could not be created for
+	the group
+	* @throws SystemException if a system exception occurred
+	* @deprecated As of 6.2.0, replaced by {@link #addGroup(long, long, String,
+	long, long, String, String, int, String, boolean, boolean,
+	ServiceContext)}
+	*/
+	public com.liferay.portal.model.Group addGroup(long userId,
+		java.lang.String className, long classPK, long liveGroupId,
+		java.lang.String name, java.lang.String description, int type,
+		java.lang.String friendlyURL, boolean site, boolean active,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Adds the group using the default live group.
+	*
+	* @param userId the primary key of the group's creator/owner
+	* @param className the entity's class name
+	* @param classPK the primary key of the entity's instance
+	* @param name the entity's name
+	* @param description the group's description (optionally
+	<code>null</code>)
+	* @param type the group's type. For more information see {@link
+	com.liferay.portal.model.GroupConstants}
+	* @param friendlyURL the group's friendlyURL
+	* @param site whether the group is to be associated with a main site
+	* @param active whether the group is active
+	* @param serviceContext the service context to be applied (optionally
+	<code>null</code>). Can set asset category IDs and asset tag
+	names for the group, and whether the group is for staging.
+	* @return the group
+	* @throws PortalException if a creator could not be found, if the
+	group's information was invalid, if a layout could not be
+	found, or if a valid friendly URL could not be created for
+	the group
+	* @throws SystemException if a system exception occurred
+	* @deprecated As of 6.2.0, replaced by {@link #addGroup(long, long, String,
+	long, long, String, String, int, String, boolean, boolean,
+	ServiceContext)}
+	*/
+	public com.liferay.portal.model.Group addGroup(long userId,
+		java.lang.String className, long classPK, java.lang.String name,
+		java.lang.String description, int type, java.lang.String friendlyURL,
+		boolean site, boolean active,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -1346,6 +1418,12 @@ public interface GroupLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Group> getUserOrganizationsGroups(
 		long userId, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.model.Group getUserPersonalSiteGroup(
+		long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

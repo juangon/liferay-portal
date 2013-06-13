@@ -71,6 +71,7 @@ public interface DDMContentModel extends BaseModel<DDMContent>,
 	 * @return the uuid of this d d m content
 	 */
 	@AutoEscape
+	@Override
 	public String getUuid();
 
 	/**
@@ -78,6 +79,7 @@ public interface DDMContentModel extends BaseModel<DDMContent>,
 	 *
 	 * @param uuid the uuid of this d d m content
 	 */
+	@Override
 	public void setUuid(String uuid);
 
 	/**
@@ -99,6 +101,7 @@ public interface DDMContentModel extends BaseModel<DDMContent>,
 	 *
 	 * @return the group ID of this d d m content
 	 */
+	@Override
 	public long getGroupId();
 
 	/**
@@ -106,6 +109,7 @@ public interface DDMContentModel extends BaseModel<DDMContent>,
 	 *
 	 * @param groupId the group ID of this d d m content
 	 */
+	@Override
 	public void setGroupId(long groupId);
 
 	/**
@@ -113,6 +117,7 @@ public interface DDMContentModel extends BaseModel<DDMContent>,
 	 *
 	 * @return the company ID of this d d m content
 	 */
+	@Override
 	public long getCompanyId();
 
 	/**
@@ -120,6 +125,7 @@ public interface DDMContentModel extends BaseModel<DDMContent>,
 	 *
 	 * @param companyId the company ID of this d d m content
 	 */
+	@Override
 	public void setCompanyId(long companyId);
 
 	/**
@@ -127,6 +133,7 @@ public interface DDMContentModel extends BaseModel<DDMContent>,
 	 *
 	 * @return the user ID of this d d m content
 	 */
+	@Override
 	public long getUserId();
 
 	/**
@@ -134,6 +141,7 @@ public interface DDMContentModel extends BaseModel<DDMContent>,
 	 *
 	 * @param userId the user ID of this d d m content
 	 */
+	@Override
 	public void setUserId(long userId);
 
 	/**
@@ -142,6 +150,7 @@ public interface DDMContentModel extends BaseModel<DDMContent>,
 	 * @return the user uuid of this d d m content
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public String getUserUuid() throws SystemException;
 
 	/**
@@ -149,6 +158,7 @@ public interface DDMContentModel extends BaseModel<DDMContent>,
 	 *
 	 * @param userUuid the user uuid of this d d m content
 	 */
+	@Override
 	public void setUserUuid(String userUuid);
 
 	/**
@@ -157,6 +167,7 @@ public interface DDMContentModel extends BaseModel<DDMContent>,
 	 * @return the user name of this d d m content
 	 */
 	@AutoEscape
+	@Override
 	public String getUserName();
 
 	/**
@@ -164,6 +175,7 @@ public interface DDMContentModel extends BaseModel<DDMContent>,
 	 *
 	 * @param userName the user name of this d d m content
 	 */
+	@Override
 	public void setUserName(String userName);
 
 	/**
@@ -171,6 +183,7 @@ public interface DDMContentModel extends BaseModel<DDMContent>,
 	 *
 	 * @return the create date of this d d m content
 	 */
+	@Override
 	public Date getCreateDate();
 
 	/**
@@ -178,6 +191,7 @@ public interface DDMContentModel extends BaseModel<DDMContent>,
 	 *
 	 * @param createDate the create date of this d d m content
 	 */
+	@Override
 	public void setCreateDate(Date createDate);
 
 	/**
@@ -185,6 +199,7 @@ public interface DDMContentModel extends BaseModel<DDMContent>,
 	 *
 	 * @return the modified date of this d d m content
 	 */
+	@Override
 	public Date getModifiedDate();
 
 	/**
@@ -192,6 +207,7 @@ public interface DDMContentModel extends BaseModel<DDMContent>,
 	 *
 	 * @param modifiedDate the modified date of this d d m content
 	 */
+	@Override
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
@@ -323,44 +339,63 @@ public interface DDMContentModel extends BaseModel<DDMContent>,
 	 */
 	public void setXml(String xml);
 
+	@Override
 	public boolean isNew();
 
+	@Override
 	public void setNew(boolean n);
 
+	@Override
 	public boolean isCachedModel();
 
+	@Override
 	public void setCachedModel(boolean cachedModel);
 
+	@Override
 	public boolean isEscapedModel();
 
+	@Override
 	public Serializable getPrimaryKeyObj();
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
+	@Override
 	public ExpandoBridge getExpandoBridge();
 
+	@Override
 	public void setExpandoBridgeAttributes(BaseModel<?> baseModel);
 
+	@Override
 	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge);
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext);
 
 	public void prepareLocalizedFieldsForImport(Locale defaultImportLocale)
 		throws LocaleException;
 
+	@Override
 	public Object clone();
 
+	@Override
 	public int compareTo(DDMContent ddmContent);
 
+	@Override
 	public int hashCode();
 
+	@Override
 	public CacheModel<DDMContent> toCacheModel();
 
+	@Override
 	public DDMContent toEscapedModel();
 
+	@Override
 	public DDMContent toUnescapedModel();
 
+	@Override
 	public String toString();
 
+	@Override
 	public String toXmlString();
 }

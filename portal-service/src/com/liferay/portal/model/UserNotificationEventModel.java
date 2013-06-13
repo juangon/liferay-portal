@@ -172,6 +172,27 @@ public interface UserNotificationEventModel extends BaseModel<UserNotificationEv
 	public void setDeliverBy(long deliverBy);
 
 	/**
+	 * Returns the delivered of this user notification event.
+	 *
+	 * @return the delivered of this user notification event
+	 */
+	public boolean getDelivered();
+
+	/**
+	 * Returns <code>true</code> if this user notification event is delivered.
+	 *
+	 * @return <code>true</code> if this user notification event is delivered; <code>false</code> otherwise
+	 */
+	public boolean isDelivered();
+
+	/**
+	 * Sets whether this user notification event is delivered.
+	 *
+	 * @param delivered the delivered of this user notification event
+	 */
+	public void setDelivered(boolean delivered);
+
+	/**
 	 * Returns the payload of this user notification event.
 	 *
 	 * @return the payload of this user notification event
@@ -207,41 +228,60 @@ public interface UserNotificationEventModel extends BaseModel<UserNotificationEv
 	 */
 	public void setArchived(boolean archived);
 
+	@Override
 	public boolean isNew();
 
+	@Override
 	public void setNew(boolean n);
 
+	@Override
 	public boolean isCachedModel();
 
+	@Override
 	public void setCachedModel(boolean cachedModel);
 
+	@Override
 	public boolean isEscapedModel();
 
+	@Override
 	public Serializable getPrimaryKeyObj();
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
+	@Override
 	public ExpandoBridge getExpandoBridge();
 
+	@Override
 	public void setExpandoBridgeAttributes(BaseModel<?> baseModel);
 
+	@Override
 	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge);
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext);
 
+	@Override
 	public Object clone();
 
+	@Override
 	public int compareTo(UserNotificationEvent userNotificationEvent);
 
+	@Override
 	public int hashCode();
 
+	@Override
 	public CacheModel<UserNotificationEvent> toCacheModel();
 
+	@Override
 	public UserNotificationEvent toEscapedModel();
 
+	@Override
 	public UserNotificationEvent toUnescapedModel();
 
+	@Override
 	public String toString();
 
+	@Override
 	public String toXmlString();
 }

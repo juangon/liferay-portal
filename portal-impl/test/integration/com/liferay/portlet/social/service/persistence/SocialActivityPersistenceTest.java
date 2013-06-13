@@ -129,6 +129,10 @@ public class SocialActivityPersistenceTest {
 
 		newSocialActivity.setClassPK(ServiceTestUtil.nextLong());
 
+		newSocialActivity.setParentClassNameId(ServiceTestUtil.nextLong());
+
+		newSocialActivity.setParentClassPK(ServiceTestUtil.nextLong());
+
 		newSocialActivity.setType(ServiceTestUtil.nextInt());
 
 		newSocialActivity.setExtraData(ServiceTestUtil.randomString());
@@ -157,6 +161,10 @@ public class SocialActivityPersistenceTest {
 			newSocialActivity.getClassNameId());
 		Assert.assertEquals(existingSocialActivity.getClassPK(),
 			newSocialActivity.getClassPK());
+		Assert.assertEquals(existingSocialActivity.getParentClassNameId(),
+			newSocialActivity.getParentClassNameId());
+		Assert.assertEquals(existingSocialActivity.getParentClassPK(),
+			newSocialActivity.getParentClassPK());
 		Assert.assertEquals(existingSocialActivity.getType(),
 			newSocialActivity.getType());
 		Assert.assertEquals(existingSocialActivity.getExtraData(),
@@ -203,7 +211,8 @@ public class SocialActivityPersistenceTest {
 			"activityId", true, "groupId", true, "companyId", true, "userId",
 			true, "createDate", true, "activitySetId", true,
 			"mirrorActivityId", true, "classNameId", true, "classPK", true,
-			"type", true, "extraData", true, "receiverUserId", true);
+			"parentClassNameId", true, "parentClassPK", true, "type", true,
+			"extraData", true, "receiverUserId", true);
 	}
 
 	@Test
@@ -367,6 +376,10 @@ public class SocialActivityPersistenceTest {
 		socialActivity.setClassNameId(ServiceTestUtil.nextLong());
 
 		socialActivity.setClassPK(ServiceTestUtil.nextLong());
+
+		socialActivity.setParentClassNameId(ServiceTestUtil.nextLong());
+
+		socialActivity.setParentClassPK(ServiceTestUtil.nextLong());
 
 		socialActivity.setType(ServiceTestUtil.nextInt());
 

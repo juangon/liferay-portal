@@ -15,13 +15,11 @@
 package com.liferay.portal.service.http;
 
 /**
- * <p>
- * This class provides a HTTP utility for the
+ * Provides the HTTP utility for the
  * {@link com.liferay.portal.service.AccountServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it requires an additional
  * {@link com.liferay.portal.security.auth.HttpPrincipal} parameter.
- * </p>
  *
  * <p>
  * The benefits of using the HTTP utility is that it is fast and allows for
@@ -38,10 +36,10 @@ package com.liferay.portal.service.http;
  * The HTTP utility is only generated for remote services.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       AccountServiceSoap
- * @see       com.liferay.portal.security.auth.HttpPrincipal
- * @see       com.liferay.portal.service.AccountServiceUtil
+ * @author Brian Wing Shun Chan
+ * @see AccountServiceSoap
+ * @see com.liferay.portal.security.auth.HttpPrincipal
+ * @see com.liferay.portal.service.AccountServiceUtil
  * @generated
  */
 public class AccountServiceHttp {

@@ -1102,14 +1102,6 @@ public class ClusterSchedulerEngineTest {
 
 		@Override
 		public boolean equals(Object obj) {
-			if (this == obj) {
-				return true;
-			}
-
-			if (!(obj instanceof MockAddress)) {
-				return false;
-			}
-
 			MockAddress mockAddress = (MockAddress)obj;
 
 			if (_timestamp == mockAddress.getTimestamp()) {
@@ -1119,6 +1111,7 @@ public class ClusterSchedulerEngineTest {
 			return false;
 		}
 
+		@Override
 		public int compareTo(org.jgroups.Address jGroupsAddress) {
 			return 0;
 		}
@@ -1127,24 +1120,29 @@ public class ClusterSchedulerEngineTest {
 			return _timestamp;
 		}
 
+		@Override
 		public void readExternal(ObjectInput objectInput) throws IOException {
 			_timestamp = objectInput.readLong();
 		}
 
+		@Override
 		public void readFrom(DataInput dataInput) throws Exception {
 			_timestamp = dataInput.readLong();
 		}
 
+		@Override
 		public int size() {
 			return 0;
 		}
 
+		@Override
 		public void writeExternal(ObjectOutput objectOutput)
 			throws IOException {
 
 			objectOutput.writeLong(_timestamp);
 		}
 
+		@Override
 		public void writeTo(DataOutput dataOutput) throws Exception {
 			dataOutput.writeLong(_timestamp);
 		}
@@ -1182,16 +1180,19 @@ public class ClusterSchedulerEngineTest {
 			_addresses.add(_anotherAddress);
 		}
 
+		@Override
 		public void addClusterEventListener(
 			ClusterEventListener clusterEventListener) {
 
 			_clusterEventListeners.add(clusterEventListener);
 		}
 
+		@Override
 		public void destroy() {
 			_addresses.clear();
 		}
 
+		@Override
 		public FutureClusterResponses execute(ClusterRequest clusterRequest) {
 			List<Address> addresses = new ArrayList<Address>();
 
@@ -1236,6 +1237,7 @@ public class ClusterSchedulerEngineTest {
 			return futureClusterResponses;
 		}
 
+		@Override
 		public void execute(
 			ClusterRequest clusterRequest,
 			ClusterResponseCallback clusterResponseCallback) {
@@ -1250,6 +1252,7 @@ public class ClusterSchedulerEngineTest {
 			}
 		}
 
+		@Override
 		public void execute(
 			ClusterRequest clusterRequest,
 			ClusterResponseCallback clusterResponseCallback, long timeout,
@@ -1266,41 +1269,51 @@ public class ClusterSchedulerEngineTest {
 			}
 		}
 
+		@Override
 		public List<ClusterEventListener> getClusterEventListeners() {
 			return Collections.unmodifiableList(_clusterEventListeners);
 		}
 
+		@Override
 		public List<Address> getClusterNodeAddresses() {
 			return Collections.unmodifiableList(_addresses);
 		}
 
+		@Override
 		public List<ClusterNode> getClusterNodes() {
 			return Collections.emptyList();
 		}
 
+		@Override
 		public ClusterNode getLocalClusterNode() {
 			return null;
 		}
 
+		@Override
 		public Address getLocalClusterNodeAddress() {
 			return _localAddress;
 		}
 
+		@Override
 		public void initialize() {
 		}
 
+		@Override
 		public boolean isClusterNodeAlive(Address address) {
 			return _addresses.contains(address);
 		}
 
+		@Override
 		public boolean isClusterNodeAlive(String clusterNodeId) {
 			return false;
 		}
 
+		@Override
 		public boolean isEnabled() {
 			return _enabled;
 		}
 
+		@Override
 		public void removeClusterEventListener(
 			ClusterEventListener clusterEventListener) {
 
@@ -1442,6 +1455,7 @@ public class ClusterSchedulerEngineTest {
 			}
 		}
 
+		@Override
 		public void delete(String groupName) throws SchedulerException {
 			boolean removed = false;
 
@@ -1470,6 +1484,7 @@ public class ClusterSchedulerEngineTest {
 			throw new SchedulerException("No jobs in group " + groupName);
 		}
 
+		@Override
 		public void delete(String jobName, String groupName)
 			throws SchedulerException {
 
@@ -1484,6 +1499,7 @@ public class ClusterSchedulerEngineTest {
 				"No jobs with name " + jobName + "in group " + groupName);
 		}
 
+		@Override
 		public SchedulerResponse getScheduledJob(
 				String jobName, String groupName)
 			throws SchedulerException {
@@ -1499,6 +1515,7 @@ public class ClusterSchedulerEngineTest {
 				"No jobs with name " + jobName + "in group " + groupName);
 		}
 
+		@Override
 		public List<SchedulerResponse> getScheduledJobs()
 			throws SchedulerException {
 
@@ -1509,6 +1526,7 @@ public class ClusterSchedulerEngineTest {
 			return new ArrayList<SchedulerResponse>(_defaultJobs.values());
 		}
 
+		@Override
 		public List<SchedulerResponse> getScheduledJobs(String groupName)
 			throws SchedulerException {
 
@@ -1548,6 +1566,7 @@ public class ClusterSchedulerEngineTest {
 			return schedulerResponses;
 		}
 
+		@Override
 		public void pause(String groupName) throws SchedulerException {
 			List<SchedulerResponse> schedulerResponses = getScheduledJobs(
 				groupName);
@@ -1561,6 +1580,7 @@ public class ClusterSchedulerEngineTest {
 			}
 		}
 
+		@Override
 		public void pause(String jobName, String groupName)
 			throws SchedulerException {
 
@@ -1573,6 +1593,7 @@ public class ClusterSchedulerEngineTest {
 				SchedulerEngine.JOB_STATE, new JobState(TriggerState.PAUSED));
 		}
 
+		@Override
 		public void resume(String groupName) throws SchedulerException {
 			List<SchedulerResponse> schedulerResponses = getScheduledJobs(
 				groupName);
@@ -1586,6 +1607,7 @@ public class ClusterSchedulerEngineTest {
 			}
 		}
 
+		@Override
 		public void resume(String jobName, String groupName)
 			throws SchedulerException {
 
@@ -1598,6 +1620,7 @@ public class ClusterSchedulerEngineTest {
 				SchedulerEngine.JOB_STATE, new JobState(TriggerState.NORMAL));
 		}
 
+		@Override
 		public void schedule(
 				Trigger trigger, String description, String destinationName,
 				Message message)
@@ -1617,13 +1640,16 @@ public class ClusterSchedulerEngineTest {
 				trigger.getJobName(), groupName, storageType, trigger, message);
 		}
 
+		@Override
 		public void shutdown() {
 			_defaultJobs.clear();
 		}
 
+		@Override
 		public void start() {
 		}
 
+		@Override
 		public void suppressError(String jobName, String groupName)
 			throws SchedulerException {
 
@@ -1635,6 +1661,7 @@ public class ClusterSchedulerEngineTest {
 			message.put(_SUPPRESS_ERROR, Boolean.TRUE);
 		}
 
+		@Override
 		public void unschedule(String groupName) throws SchedulerException {
 			List<SchedulerResponse> schedulerResponses = getScheduledJobs(
 				groupName);
@@ -1648,6 +1675,7 @@ public class ClusterSchedulerEngineTest {
 			}
 		}
 
+		@Override
 		public void unschedule(String jobName, String groupName)
 			throws SchedulerException {
 
@@ -1661,6 +1689,7 @@ public class ClusterSchedulerEngineTest {
 				new JobState(TriggerState.UNSCHEDULED));
 		}
 
+		@Override
 		public void update(Trigger trigger) throws SchedulerException {
 			SchedulerResponse schedulerResponse = getScheduledJob(
 				trigger.getJobName(), trigger.getGroupName());

@@ -78,6 +78,7 @@ public interface JSONObject {
 
 	public Object remove(String key);
 
+	@Override
 	public String toString();
 
 	public String toString(int indentFactor) throws JSONException;

@@ -24,11 +24,9 @@ import com.liferay.portal.security.ac.AccessControlled;
 import com.liferay.portal.service.BaseService;
 
 /**
- * The interface for the announcements entry remote service.
- *
- * <p>
- * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
- * </p>
+ * Provides the remote service interface for AnnouncementsEntry. Methods of this
+ * service are expected to have security checks based on the propagated JAAS
+ * credentials because this service can be accessed remotely.
  *
  * @author Brian Wing Shun Chan
  * @see AnnouncementsEntryServiceUtil
@@ -65,7 +63,7 @@ public interface AnnouncementsEntryService extends BaseService {
 		long plid, long classNameId, long classPK, java.lang.String title,
 		java.lang.String content, java.lang.String url, java.lang.String type,
 		int displayDateMonth, int displayDateDay, int displayDateYear,
-		int displayDateHour, int displayDateMinute, boolean autoDisplayDate,
+		int displayDateHour, int displayDateMinute, boolean displayImmediately,
 		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
 		int expirationDateHour, int expirationDateMinute, int priority,
 		boolean alert)

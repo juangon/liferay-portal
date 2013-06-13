@@ -69,6 +69,7 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry>,
 	 * @return the uuid of this blogs entry
 	 */
 	@AutoEscape
+	@Override
 	public String getUuid();
 
 	/**
@@ -76,6 +77,7 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry>,
 	 *
 	 * @param uuid the uuid of this blogs entry
 	 */
+	@Override
 	public void setUuid(String uuid);
 
 	/**
@@ -97,6 +99,7 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry>,
 	 *
 	 * @return the group ID of this blogs entry
 	 */
+	@Override
 	public long getGroupId();
 
 	/**
@@ -104,6 +107,7 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry>,
 	 *
 	 * @param groupId the group ID of this blogs entry
 	 */
+	@Override
 	public void setGroupId(long groupId);
 
 	/**
@@ -111,6 +115,7 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry>,
 	 *
 	 * @return the company ID of this blogs entry
 	 */
+	@Override
 	public long getCompanyId();
 
 	/**
@@ -118,6 +123,7 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry>,
 	 *
 	 * @param companyId the company ID of this blogs entry
 	 */
+	@Override
 	public void setCompanyId(long companyId);
 
 	/**
@@ -125,6 +131,7 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry>,
 	 *
 	 * @return the user ID of this blogs entry
 	 */
+	@Override
 	public long getUserId();
 
 	/**
@@ -132,6 +139,7 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry>,
 	 *
 	 * @param userId the user ID of this blogs entry
 	 */
+	@Override
 	public void setUserId(long userId);
 
 	/**
@@ -140,6 +148,7 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry>,
 	 * @return the user uuid of this blogs entry
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public String getUserUuid() throws SystemException;
 
 	/**
@@ -147,6 +156,7 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry>,
 	 *
 	 * @param userUuid the user uuid of this blogs entry
 	 */
+	@Override
 	public void setUserUuid(String userUuid);
 
 	/**
@@ -155,6 +165,7 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry>,
 	 * @return the user name of this blogs entry
 	 */
 	@AutoEscape
+	@Override
 	public String getUserName();
 
 	/**
@@ -162,6 +173,7 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry>,
 	 *
 	 * @param userName the user name of this blogs entry
 	 */
+	@Override
 	public void setUserName(String userName);
 
 	/**
@@ -169,6 +181,7 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry>,
 	 *
 	 * @return the create date of this blogs entry
 	 */
+	@Override
 	public Date getCreateDate();
 
 	/**
@@ -176,6 +189,7 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry>,
 	 *
 	 * @param createDate the create date of this blogs entry
 	 */
+	@Override
 	public void setCreateDate(Date createDate);
 
 	/**
@@ -183,6 +197,7 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry>,
 	 *
 	 * @return the modified date of this blogs entry
 	 */
+	@Override
 	public Date getModifiedDate();
 
 	/**
@@ -190,6 +205,7 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry>,
 	 *
 	 * @param modifiedDate the modified date of this blogs entry
 	 */
+	@Override
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
@@ -378,6 +394,7 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry>,
 	 *
 	 * @return the status of this blogs entry
 	 */
+	@Override
 	public int getStatus();
 
 	/**
@@ -385,6 +402,7 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry>,
 	 *
 	 * @param status the status of this blogs entry
 	 */
+	@Override
 	public void setStatus(int status);
 
 	/**
@@ -392,6 +410,7 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry>,
 	 *
 	 * @return the status by user ID of this blogs entry
 	 */
+	@Override
 	public long getStatusByUserId();
 
 	/**
@@ -399,6 +418,7 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry>,
 	 *
 	 * @param statusByUserId the status by user ID of this blogs entry
 	 */
+	@Override
 	public void setStatusByUserId(long statusByUserId);
 
 	/**
@@ -407,6 +427,7 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry>,
 	 * @return the status by user uuid of this blogs entry
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public String getStatusByUserUuid() throws SystemException;
 
 	/**
@@ -414,6 +435,7 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry>,
 	 *
 	 * @param statusByUserUuid the status by user uuid of this blogs entry
 	 */
+	@Override
 	public void setStatusByUserUuid(String statusByUserUuid);
 
 	/**
@@ -422,6 +444,7 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry>,
 	 * @return the status by user name of this blogs entry
 	 */
 	@AutoEscape
+	@Override
 	public String getStatusByUserName();
 
 	/**
@@ -429,6 +452,7 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry>,
 	 *
 	 * @param statusByUserName the status by user name of this blogs entry
 	 */
+	@Override
 	public void setStatusByUserName(String statusByUserName);
 
 	/**
@@ -436,6 +460,7 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry>,
 	 *
 	 * @return the status date of this blogs entry
 	 */
+	@Override
 	public Date getStatusDate();
 
 	/**
@@ -443,11 +468,13 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry>,
 	 *
 	 * @param statusDate the status date of this blogs entry
 	 */
+	@Override
 	public void setStatusDate(Date statusDate);
 
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #isApproved()}
 	 */
+	@Override
 	public boolean getApproved();
 
 	/**
@@ -455,6 +482,7 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry>,
 	 *
 	 * @return <code>true</code> if this blogs entry is approved; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isApproved();
 
 	/**
@@ -462,6 +490,7 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry>,
 	 *
 	 * @return <code>true</code> if this blogs entry is denied; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isDenied();
 
 	/**
@@ -469,6 +498,7 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry>,
 	 *
 	 * @return <code>true</code> if this blogs entry is a draft; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isDraft();
 
 	/**
@@ -476,6 +506,7 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry>,
 	 *
 	 * @return <code>true</code> if this blogs entry is expired; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isExpired();
 
 	/**
@@ -483,6 +514,7 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry>,
 	 *
 	 * @return <code>true</code> if this blogs entry is inactive; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isInactive();
 
 	/**
@@ -490,6 +522,7 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry>,
 	 *
 	 * @return <code>true</code> if this blogs entry is incomplete; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isIncomplete();
 
 	/**
@@ -497,6 +530,7 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry>,
 	 *
 	 * @return <code>true</code> if this blogs entry is in the Recycle Bin; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isInTrash();
 
 	/**
@@ -504,6 +538,7 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry>,
 	 *
 	 * @return <code>true</code> if this blogs entry is pending; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isPending();
 
 	/**
@@ -511,43 +546,63 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry>,
 	 *
 	 * @return <code>true</code> if this blogs entry is scheduled; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isScheduled();
 
+	@Override
 	public boolean isNew();
 
+	@Override
 	public void setNew(boolean n);
 
+	@Override
 	public boolean isCachedModel();
 
+	@Override
 	public void setCachedModel(boolean cachedModel);
 
+	@Override
 	public boolean isEscapedModel();
 
+	@Override
 	public Serializable getPrimaryKeyObj();
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
+	@Override
 	public ExpandoBridge getExpandoBridge();
 
+	@Override
 	public void setExpandoBridgeAttributes(BaseModel<?> baseModel);
 
+	@Override
 	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge);
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext);
 
+	@Override
 	public Object clone();
 
+	@Override
 	public int compareTo(BlogsEntry blogsEntry);
 
+	@Override
 	public int hashCode();
 
+	@Override
 	public CacheModel<BlogsEntry> toCacheModel();
 
+	@Override
 	public BlogsEntry toEscapedModel();
 
+	@Override
 	public BlogsEntry toUnescapedModel();
 
+	@Override
 	public String toString();
 
+	@Override
 	public String toXmlString();
 }

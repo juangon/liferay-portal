@@ -19,8 +19,10 @@ import com.liferay.portal.kernel.bean.BeanLocatorException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.test.ExecutionTestListeners;
+import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.uuid.PortalUUID;
 import com.liferay.portal.kernel.xml.SAXReader;
+import com.liferay.portal.security.auth.AuthTokenUtil;
 import com.liferay.portal.security.pacl.PACLExecutionTestListener;
 import com.liferay.portal.security.pacl.PACLIntegrationJUnitTestRunner;
 
@@ -192,24 +194,29 @@ public class BeanLocatorTest {
 			PortalBeanLocatorUtil.setBeanLocator(
 				new BeanLocator() {
 
+					@Override
 					public ClassLoader getClassLoader() {
 						return null;
 					}
 
+					@Override
 					public String[] getNames() {
 						return null;
 					}
 
+					@Override
 					public Class<?> getType(String name) {
 						return null;
 					}
 
+					@Override
 					public <T> Map<String, T> locate(Class<T> clazz)
 						throws BeanLocatorException {
 
 						return null;
 					}
 
+					@Override
 					public Object locate(String name) {
 						return null;
 					}
@@ -218,6 +225,20 @@ public class BeanLocatorTest {
 			);
 
 			Assert.fail();
+		}
+		catch (SecurityException se) {
+		}
+	}
+
+	@Test
+	public void testPortal8() throws Exception {
+		try {
+			AuthTokenUtil authTokenUtil =
+				(AuthTokenUtil)PortalBeanLocatorUtil.locate(
+					AuthTokenUtil.class.getName());
+
+			Assert.assertFalse(
+				ProxyUtil.isProxyClass(authTokenUtil.getClass()));
 		}
 		catch (SecurityException se) {
 		}

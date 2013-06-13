@@ -42,6 +42,7 @@ public class DirectTagMatcher extends CallbackMatcher {
 
 	private Callback _callBack = new Callback() {
 
+		@Override
 		public String foundMatch(MatchResult matchResult) {
 			String fileName = matchResult.group(1);
 

@@ -25,10 +25,12 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.model.AssetEntry;
-import com.liferay.portlet.social.NoSuchActivityException;
 import com.liferay.portlet.social.model.SocialActivity;
+import com.liferay.portlet.social.model.SocialActivityConstants;
 import com.liferay.portlet.social.model.SocialActivityDefinition;
 import com.liferay.portlet.social.service.base.SocialActivityLocalServiceBaseImpl;
+import com.liferay.portlet.social.util.SocialActivityHierarchyEntry;
+import com.liferay.portlet.social.util.SocialActivityHierarchyEntryThreadLocal;
 
 import java.util.Date;
 import java.util.List;
@@ -93,6 +95,7 @@ public class SocialActivityLocalServiceImpl
 	 * @throws PortalException if the user or group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addActivity(
 			long userId, long groupId, Date createDate, String className,
 			long classPK, int type, String extraData, long receiverUserId)
@@ -125,6 +128,16 @@ public class SocialActivityLocalServiceImpl
 		activity.setMirrorActivityId(0);
 		activity.setClassNameId(classNameId);
 		activity.setClassPK(classPK);
+
+		SocialActivityHierarchyEntry activityHierarchyEntry =
+			SocialActivityHierarchyEntryThreadLocal.peek();
+
+		if (activityHierarchyEntry != null) {
+			activity.setParentClassNameId(
+				activityHierarchyEntry.getClassNameId());
+			activity.setParentClassPK(activityHierarchyEntry.getClassPK());
+		}
+
 		activity.setType(type);
 		activity.setExtraData(extraData);
 		activity.setReceiverUserId(receiverUserId);
@@ -145,6 +158,14 @@ public class SocialActivityLocalServiceImpl
 			mirrorActivity.setCreateDate(createDate.getTime());
 			mirrorActivity.setClassNameId(classNameId);
 			mirrorActivity.setClassPK(classPK);
+
+			if (activityHierarchyEntry != null) {
+				mirrorActivity.setParentClassNameId(
+					activityHierarchyEntry.getClassNameId());
+				mirrorActivity.setParentClassPK(
+					activityHierarchyEntry.getClassPK());
+			}
+
 			mirrorActivity.setType(type);
 			mirrorActivity.setExtraData(extraData);
 			mirrorActivity.setReceiverUserId(user.getUserId());
@@ -168,6 +189,7 @@ public class SocialActivityLocalServiceImpl
 	 * @throws PortalException if the user or group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addActivity(
 			long userId, long groupId, String className, long classPK, int type,
 			String extraData, long receiverUserId)
@@ -201,6 +223,7 @@ public class SocialActivityLocalServiceImpl
 	}
 
 	@Async
+	@Override
 	public void addActivity(
 			SocialActivity activity, SocialActivity mirrorActivity)
 		throws PortalException, SystemException {
@@ -217,15 +240,7 @@ public class SocialActivityLocalServiceImpl
 				"Activity and mirror activity must not have primary keys set");
 		}
 
-		SocialActivityDefinition activityDefinition =
-			socialActivitySettingLocalService.getActivityDefinition(
-				activity.getGroupId(), activity.getClassName(),
-				activity.getType());
-
-		if (((activityDefinition == null) && (activity.getType() < 10000)) ||
-			((activityDefinition != null) &&
-			 activityDefinition.isLogActivity())) {
-
+		if (isLogActivity(activity)) {
 			long activityId = counterLocalService.increment(
 				SocialActivity.class.getName());
 
@@ -272,6 +287,7 @@ public class SocialActivityLocalServiceImpl
 	 * @throws PortalException if the user or group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addUniqueActivity(
 			long userId, long groupId, Date createDate, String className,
 			long classPK, int type, String extraData, long receiverUserId)
@@ -312,6 +328,7 @@ public class SocialActivityLocalServiceImpl
 	 * @throws PortalException if the user or group could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addUniqueActivity(
 			long userId, long groupId, String className, long classPK, int type,
 			String extraData, long receiverUserId)
@@ -334,83 +351,70 @@ public class SocialActivityLocalServiceImpl
 	/**
 	 * Removes stored activities for the asset.
 	 *
-	 * @param  assetEntry the asset from which to remove stored activities
-	 * @throws PortalException if a portal exception occurred
-	 * @throws SystemException if a system exception occurred
+	 * @param      assetEntry the asset from which to remove stored activities
+	 * @throws     PortalException if a portal exception occurred
+	 * @throws     SystemException if a system exception occurred
+	 * @deprecated As of 6.2.0, replaced by {@link #deleteActivities(long)}
 	 */
+	@Override
 	public void deleteActivities(AssetEntry assetEntry)
 		throws PortalException, SystemException {
+	}
 
-		socialActivityPersistence.removeByC_C(
-			assetEntry.getClassNameId(), assetEntry.getClassPK());
-
-		socialActivityCounterLocalService.deleteActivityCounters(assetEntry);
-
+	@Override
+	public void deleteActivities(long groupId) throws SystemException {
 		if (PropsValues.SOCIAL_ACTIVITY_SETS_ENABLED) {
-			socialActivitySetLocalService.decrementActivityCount(
-				assetEntry.getClassNameId(), assetEntry.getClassPK());
+			socialActivitySetPersistence.removeByGroupId(groupId);
 		}
+
+		socialActivityPersistence.removeByGroupId(groupId);
+
+		socialActivityCounterPersistence.removeByGroupId(groupId);
+
+		socialActivityLimitPersistence.removeByGroupId(groupId);
+
+		socialActivitySettingPersistence.removeByGroupId(groupId);
 	}
 
 	/**
 	 * Removes stored activities for the asset identified by the class name and
 	 * class primary key.
 	 *
-	 * @param  className the target asset's class name
-	 * @param  classPK the primary key of the target asset
-	 * @throws SystemException if a system exception occurred
+	 * @param      className the target asset's class name
+	 * @param      classPK the primary key of the target asset
+	 * @throws     SystemException if a system exception occurred
+	 * @deprecated As of 6.2.0, replaced by {@link #deleteActivities(long)}
 	 */
+	@Override
+	@SuppressWarnings("unused")
 	public void deleteActivities(String className, long classPK)
 		throws PortalException, SystemException {
-
-		long classNameId = PortalUtil.getClassNameId(className);
-
-		socialActivityPersistence.removeByC_C(classNameId, classPK);
-
-		if (PropsValues.SOCIAL_ACTIVITY_SETS_ENABLED) {
-			socialActivitySetLocalService.decrementActivityCount(
-				classNameId, classPK);
-		}
 	}
 
 	/**
 	 * Removes the stored activity from the database.
 	 *
-	 * @param  activityId the primary key of the stored activity
-	 * @throws PortalException if the activity could not be found
-	 * @throws SystemException if a system exception occurred
+	 * @param      activityId the primary key of the stored activity
+	 * @throws     PortalException if the activity could not be found
+	 * @throws     SystemException if a system exception occurred
+	 * @deprecated As of 6.2.0, replaced by {@link #deleteActivities(long)}
 	 */
+	@Override
 	public void deleteActivity(long activityId)
 		throws PortalException, SystemException {
-
-		SocialActivity activity = socialActivityPersistence.findByPrimaryKey(
-			activityId);
-
-		deleteActivity(activity);
 	}
 
 	/**
 	 * Removes the stored activity and its mirror activity from the database.
 	 *
-	 * @param  activity the activity to be removed
-	 * @throws SystemException if a system exception occurred
+	 * @param      activity the activity to be removed
+	 * @throws     SystemException if a system exception occurred
+	 * @deprecated As of 6.2.0, replaced by {@link #deleteActivities(long)}
 	 */
+	@Override
+	@SuppressWarnings("unused")
 	public void deleteActivity(SocialActivity activity)
 		throws PortalException, SystemException {
-
-		socialActivityPersistence.remove(activity);
-
-		try {
-			socialActivityPersistence.removeByMirrorActivityId(
-				activity.getActivityId());
-		}
-		catch (NoSuchActivityException nsae) {
-		}
-
-		if (PropsValues.SOCIAL_ACTIVITY_SETS_ENABLED) {
-			socialActivitySetLocalService.decrementActivityCount(
-				activity.getActivitySetId());
-		}
 	}
 
 	/**
@@ -426,6 +430,7 @@ public class SocialActivityLocalServiceImpl
 	 *         deleted
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void deleteUserActivities(long userId)
 		throws PortalException, SystemException {
 
@@ -434,30 +439,31 @@ public class SocialActivityLocalServiceImpl
 				userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		for (SocialActivity activity : activities) {
-			socialActivityPersistence.remove(activity);
-
 			if (PropsValues.SOCIAL_ACTIVITY_SETS_ENABLED) {
 				socialActivitySetLocalService.decrementActivityCount(
 					activity.getActivitySetId());
 			}
+
+			socialActivityPersistence.remove(activity);
 		}
 
 		activities = socialActivityPersistence.findByReceiverUserId(
 			userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		for (SocialActivity activity : activities) {
-			socialActivityPersistence.remove(activity);
-
 			if (PropsValues.SOCIAL_ACTIVITY_SETS_ENABLED) {
 				socialActivitySetLocalService.decrementActivityCount(
 					activity.getActivitySetId());
 			}
+
+			socialActivityPersistence.remove(activity);
 		}
 
 		socialActivityCounterLocalService.deleteActivityCounters(
 			User.class.getName(), userId);
 	}
 
+	@Override
 	public SocialActivity fetchFirstActivity(
 			String className, long classPK, int type)
 		throws SystemException {
@@ -488,6 +494,7 @@ public class SocialActivityLocalServiceImpl
 	 * @return the range of matching activities
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<SocialActivity> getActivities(
 			long classNameId, int start, int end)
 		throws SystemException {
@@ -519,6 +526,7 @@ public class SocialActivityLocalServiceImpl
 	 * @return the range of matching activities
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<SocialActivity> getActivities(
 			long mirrorActivityId, long classNameId, long classPK, int start,
 			int end)
@@ -551,6 +559,7 @@ public class SocialActivityLocalServiceImpl
 	 * @return the range of matching activities
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<SocialActivity> getActivities(
 			long mirrorActivityId, String className, long classPK, int start,
 			int end)
@@ -582,6 +591,7 @@ public class SocialActivityLocalServiceImpl
 	 * @return the range of matching activities
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<SocialActivity> getActivities(
 			String className, int start, int end)
 		throws SystemException {
@@ -599,6 +609,7 @@ public class SocialActivityLocalServiceImpl
 	 * @return the number of matching activities
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int getActivitiesCount(long classNameId) throws SystemException {
 		return socialActivityPersistence.countByClassNameId(classNameId);
 	}
@@ -614,6 +625,7 @@ public class SocialActivityLocalServiceImpl
 	 * @return the number of matching activities
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int getActivitiesCount(
 			long mirrorActivityId, long classNameId, long classPK)
 		throws SystemException {
@@ -633,6 +645,7 @@ public class SocialActivityLocalServiceImpl
 	 * @return the number of matching activities
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int getActivitiesCount(
 			long mirrorActivityId, String className, long classPK)
 		throws SystemException {
@@ -649,6 +662,7 @@ public class SocialActivityLocalServiceImpl
 	 * @return the number of matching activities
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int getActivitiesCount(String className) throws SystemException {
 		long classNameId = PortalUtil.getClassNameId(className);
 
@@ -663,12 +677,14 @@ public class SocialActivityLocalServiceImpl
 	 * @throws PortalException if the activity could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SocialActivity getActivity(long activityId)
 		throws PortalException, SystemException {
 
 		return socialActivityPersistence.findByPrimaryKey(activityId);
 	}
 
+	@Override
 	public List<SocialActivity> getActivitySetActivities(
 			long activitySetId, int start, int end)
 		throws SystemException {
@@ -700,6 +716,7 @@ public class SocialActivityLocalServiceImpl
 	 * @return the range of matching activities
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<SocialActivity> getGroupActivities(
 			long groupId, int start, int end)
 		throws SystemException {
@@ -718,6 +735,7 @@ public class SocialActivityLocalServiceImpl
 	 * @return the number of matching activities
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int getGroupActivitiesCount(long groupId) throws SystemException {
 		return socialActivityFinder.countByGroupId(groupId);
 	}
@@ -746,6 +764,7 @@ public class SocialActivityLocalServiceImpl
 	 * @return the range of matching activities
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<SocialActivity> getGroupUsersActivities(
 			long groupId, int start, int end)
 		throws SystemException {
@@ -765,6 +784,7 @@ public class SocialActivityLocalServiceImpl
 	 * @return the number of matching activities
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int getGroupUsersActivitiesCount(long groupId)
 		throws SystemException {
 
@@ -779,6 +799,7 @@ public class SocialActivityLocalServiceImpl
 	 * @throws PortalException if the mirror activity could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SocialActivity getMirrorActivity(long mirrorActivityId)
 		throws PortalException, SystemException {
 
@@ -806,6 +827,7 @@ public class SocialActivityLocalServiceImpl
 	 * @return the range of matching activities
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<SocialActivity> getOrganizationActivities(
 			long organizationId, int start, int end)
 		throws SystemException {
@@ -822,6 +844,7 @@ public class SocialActivityLocalServiceImpl
 	 * @return the number of matching activities
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int getOrganizationActivitiesCount(long organizationId)
 		throws SystemException {
 
@@ -848,6 +871,7 @@ public class SocialActivityLocalServiceImpl
 	 * @return the range of matching activities
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<SocialActivity> getOrganizationUsersActivities(
 			long organizationId, int start, int end)
 		throws SystemException {
@@ -864,6 +888,7 @@ public class SocialActivityLocalServiceImpl
 	 * @return the number of matching activities
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int getOrganizationUsersActivitiesCount(long organizationId)
 		throws SystemException {
 
@@ -890,6 +915,7 @@ public class SocialActivityLocalServiceImpl
 	 * @return the range of matching activities
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<SocialActivity> getRelationActivities(
 			long userId, int start, int end)
 		throws SystemException {
@@ -919,6 +945,7 @@ public class SocialActivityLocalServiceImpl
 	 * @return the range of matching activities
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<SocialActivity> getRelationActivities(
 			long userId, int type, int start, int end)
 		throws SystemException {
@@ -935,6 +962,7 @@ public class SocialActivityLocalServiceImpl
 	 * @return the number of matching activities
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int getRelationActivitiesCount(long userId) throws SystemException {
 		return socialActivityFinder.countByRelation(userId);
 	}
@@ -949,6 +977,7 @@ public class SocialActivityLocalServiceImpl
 	 * @return the number of matching activities
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int getRelationActivitiesCount(long userId, int type)
 		throws SystemException {
 
@@ -974,6 +1003,7 @@ public class SocialActivityLocalServiceImpl
 	 * @return the range of matching activities
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<SocialActivity> getUserActivities(
 			long userId, int start, int end)
 		throws SystemException {
@@ -988,6 +1018,7 @@ public class SocialActivityLocalServiceImpl
 	 * @return the number of matching activities
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int getUserActivitiesCount(long userId) throws SystemException {
 		return socialActivityPersistence.countByUserId(userId);
 	}
@@ -1012,6 +1043,7 @@ public class SocialActivityLocalServiceImpl
 	 * @return the range of matching activities
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<SocialActivity> getUserGroupsActivities(
 			long userId, int start, int end)
 		throws SystemException {
@@ -1027,6 +1059,7 @@ public class SocialActivityLocalServiceImpl
 	 * @return the number of matching activities
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int getUserGroupsActivitiesCount(long userId)
 		throws SystemException {
 
@@ -1053,6 +1086,7 @@ public class SocialActivityLocalServiceImpl
 	 * @return the range of matching activities
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<SocialActivity> getUserGroupsAndOrganizationsActivities(
 			long userId, int start, int end)
 		throws SystemException {
@@ -1069,6 +1103,7 @@ public class SocialActivityLocalServiceImpl
 	 * @return the number of matching activities
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int getUserGroupsAndOrganizationsActivitiesCount(long userId)
 		throws SystemException {
 
@@ -1095,6 +1130,7 @@ public class SocialActivityLocalServiceImpl
 	 * @return the range of matching activities
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<SocialActivity> getUserOrganizationsActivities(
 			long userId, int start, int end)
 		throws SystemException {
@@ -1110,10 +1146,38 @@ public class SocialActivityLocalServiceImpl
 	 * @return the number of matching activities
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int getUserOrganizationsActivitiesCount(long userId)
 		throws SystemException {
 
 		return socialActivityFinder.countByUserOrganizations(userId);
+	}
+
+	protected boolean isLogActivity(SocialActivity activity)
+		throws SystemException {
+
+		if (activity.getType() == SocialActivityConstants.TYPE_DELETE) {
+			if (activity.getParentClassPK() == 0) {
+				return true;
+			}
+
+			return false;
+		}
+
+		SocialActivityDefinition activityDefinition =
+			socialActivitySettingLocalService.getActivityDefinition(
+				activity.getGroupId(), activity.getClassName(),
+				activity.getType());
+
+		if (activityDefinition != null) {
+			return activityDefinition.isLogActivity();
+		}
+
+		if (activity.getType() < SocialActivityConstants.TYPE_VIEW) {
+			return true;
+		}
+
+		return false;
 	}
 
 }

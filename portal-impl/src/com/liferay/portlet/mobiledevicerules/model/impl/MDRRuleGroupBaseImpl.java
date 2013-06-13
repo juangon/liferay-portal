@@ -38,6 +38,7 @@ public abstract class MDRRuleGroupBaseImpl extends MDRRuleGroupModelImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a m d r rule group model instance should use the {@link MDRRuleGroup} interface instead.
 	 */
+	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
 			MDRRuleGroupLocalServiceUtil.addMDRRuleGroup(this);

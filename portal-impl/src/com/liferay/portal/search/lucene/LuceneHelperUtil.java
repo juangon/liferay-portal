@@ -310,6 +310,10 @@ public class LuceneHelperUtil {
 		return getLuceneHelper().getAnalyzer();
 	}
 
+	public static IndexAccessor getIndexAccessor(long companyId) {
+		return getLuceneHelper().getIndexAccessor(companyId);
+	}
+
 	public static long getLastGeneration(long companyId) {
 		return getLuceneHelper().getLastGeneration(companyId);
 	}
@@ -384,6 +388,10 @@ public class LuceneHelperUtil {
 
 	public static void shutdown() {
 		getLuceneHelper().shutdown();
+	}
+
+	public static void shutdown(long companyId) {
+		getLuceneHelper().shutdown(companyId);
 	}
 
 	public static void startup(long companyId) {

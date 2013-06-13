@@ -64,6 +64,7 @@ public class WorkflowInstanceLinkCacheModel implements CacheModel<WorkflowInstan
 		return sb.toString();
 	}
 
+	@Override
 	public WorkflowInstanceLink toEntityModel() {
 		WorkflowInstanceLinkImpl workflowInstanceLinkImpl = new WorkflowInstanceLinkImpl();
 
@@ -102,6 +103,7 @@ public class WorkflowInstanceLinkCacheModel implements CacheModel<WorkflowInstan
 		return workflowInstanceLinkImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		workflowInstanceLinkId = objectInput.readLong();
 		groupId = objectInput.readLong();
@@ -115,6 +117,7 @@ public class WorkflowInstanceLinkCacheModel implements CacheModel<WorkflowInstan
 		workflowInstanceId = objectInput.readLong();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(workflowInstanceLinkId);

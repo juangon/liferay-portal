@@ -71,6 +71,7 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory>,
 	 * @return the uuid of this asset category
 	 */
 	@AutoEscape
+	@Override
 	public String getUuid();
 
 	/**
@@ -78,6 +79,7 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory>,
 	 *
 	 * @param uuid the uuid of this asset category
 	 */
+	@Override
 	public void setUuid(String uuid);
 
 	/**
@@ -99,6 +101,7 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory>,
 	 *
 	 * @return the group ID of this asset category
 	 */
+	@Override
 	public long getGroupId();
 
 	/**
@@ -106,6 +109,7 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory>,
 	 *
 	 * @param groupId the group ID of this asset category
 	 */
+	@Override
 	public void setGroupId(long groupId);
 
 	/**
@@ -113,6 +117,7 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory>,
 	 *
 	 * @return the company ID of this asset category
 	 */
+	@Override
 	public long getCompanyId();
 
 	/**
@@ -120,6 +125,7 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory>,
 	 *
 	 * @param companyId the company ID of this asset category
 	 */
+	@Override
 	public void setCompanyId(long companyId);
 
 	/**
@@ -127,6 +133,7 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory>,
 	 *
 	 * @return the user ID of this asset category
 	 */
+	@Override
 	public long getUserId();
 
 	/**
@@ -134,6 +141,7 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory>,
 	 *
 	 * @param userId the user ID of this asset category
 	 */
+	@Override
 	public void setUserId(long userId);
 
 	/**
@@ -142,6 +150,7 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory>,
 	 * @return the user uuid of this asset category
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public String getUserUuid() throws SystemException;
 
 	/**
@@ -149,6 +158,7 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory>,
 	 *
 	 * @param userUuid the user uuid of this asset category
 	 */
+	@Override
 	public void setUserUuid(String userUuid);
 
 	/**
@@ -157,6 +167,7 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory>,
 	 * @return the user name of this asset category
 	 */
 	@AutoEscape
+	@Override
 	public String getUserName();
 
 	/**
@@ -164,6 +175,7 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory>,
 	 *
 	 * @param userName the user name of this asset category
 	 */
+	@Override
 	public void setUserName(String userName);
 
 	/**
@@ -171,6 +183,7 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory>,
 	 *
 	 * @return the create date of this asset category
 	 */
+	@Override
 	public Date getCreateDate();
 
 	/**
@@ -178,6 +191,7 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory>,
 	 *
 	 * @param createDate the create date of this asset category
 	 */
+	@Override
 	public void setCreateDate(Date createDate);
 
 	/**
@@ -185,6 +199,7 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory>,
 	 *
 	 * @return the modified date of this asset category
 	 */
+	@Override
 	public Date getModifiedDate();
 
 	/**
@@ -192,6 +207,7 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory>,
 	 *
 	 * @param modifiedDate the modified date of this asset category
 	 */
+	@Override
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
@@ -465,44 +481,63 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory>,
 	 */
 	public void setVocabularyId(long vocabularyId);
 
+	@Override
 	public boolean isNew();
 
+	@Override
 	public void setNew(boolean n);
 
+	@Override
 	public boolean isCachedModel();
 
+	@Override
 	public void setCachedModel(boolean cachedModel);
 
+	@Override
 	public boolean isEscapedModel();
 
+	@Override
 	public Serializable getPrimaryKeyObj();
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
+	@Override
 	public ExpandoBridge getExpandoBridge();
 
+	@Override
 	public void setExpandoBridgeAttributes(BaseModel<?> baseModel);
 
+	@Override
 	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge);
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext);
 
 	public void prepareLocalizedFieldsForImport(Locale defaultImportLocale)
 		throws LocaleException;
 
+	@Override
 	public Object clone();
 
+	@Override
 	public int compareTo(AssetCategory assetCategory);
 
+	@Override
 	public int hashCode();
 
+	@Override
 	public CacheModel<AssetCategory> toCacheModel();
 
+	@Override
 	public AssetCategory toEscapedModel();
 
+	@Override
 	public AssetCategory toUnescapedModel();
 
+	@Override
 	public String toString();
 
+	@Override
 	public String toXmlString();
 }

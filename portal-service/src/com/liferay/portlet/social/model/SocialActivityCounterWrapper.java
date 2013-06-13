@@ -24,8 +24,8 @@ import java.util.Map;
  * This class is a wrapper for {@link SocialActivityCounter}.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       SocialActivityCounter
+ * @author Brian Wing Shun Chan
+ * @see SocialActivityCounter
  * @generated
  */
 public class SocialActivityCounterWrapper implements SocialActivityCounter,
@@ -35,14 +35,17 @@ public class SocialActivityCounterWrapper implements SocialActivityCounter,
 		_socialActivityCounter = socialActivityCounter;
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return SocialActivityCounter.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return SocialActivityCounter.class.getName();
 	}
 
+	@Override
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
@@ -63,6 +66,7 @@ public class SocialActivityCounterWrapper implements SocialActivityCounter,
 		return attributes;
 	}
 
+	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 		Long activityCounterId = (Long)attributes.get("activityCounterId");
 
@@ -148,6 +152,7 @@ public class SocialActivityCounterWrapper implements SocialActivityCounter,
 	*
 	* @return the primary key of this social activity counter
 	*/
+	@Override
 	public long getPrimaryKey() {
 		return _socialActivityCounter.getPrimaryKey();
 	}
@@ -157,6 +162,7 @@ public class SocialActivityCounterWrapper implements SocialActivityCounter,
 	*
 	* @param primaryKey the primary key of this social activity counter
 	*/
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_socialActivityCounter.setPrimaryKey(primaryKey);
 	}
@@ -166,6 +172,7 @@ public class SocialActivityCounterWrapper implements SocialActivityCounter,
 	*
 	* @return the activity counter ID of this social activity counter
 	*/
+	@Override
 	public long getActivityCounterId() {
 		return _socialActivityCounter.getActivityCounterId();
 	}
@@ -175,6 +182,7 @@ public class SocialActivityCounterWrapper implements SocialActivityCounter,
 	*
 	* @param activityCounterId the activity counter ID of this social activity counter
 	*/
+	@Override
 	public void setActivityCounterId(long activityCounterId) {
 		_socialActivityCounter.setActivityCounterId(activityCounterId);
 	}
@@ -184,6 +192,7 @@ public class SocialActivityCounterWrapper implements SocialActivityCounter,
 	*
 	* @return the group ID of this social activity counter
 	*/
+	@Override
 	public long getGroupId() {
 		return _socialActivityCounter.getGroupId();
 	}
@@ -193,6 +202,7 @@ public class SocialActivityCounterWrapper implements SocialActivityCounter,
 	*
 	* @param groupId the group ID of this social activity counter
 	*/
+	@Override
 	public void setGroupId(long groupId) {
 		_socialActivityCounter.setGroupId(groupId);
 	}
@@ -202,6 +212,7 @@ public class SocialActivityCounterWrapper implements SocialActivityCounter,
 	*
 	* @return the company ID of this social activity counter
 	*/
+	@Override
 	public long getCompanyId() {
 		return _socialActivityCounter.getCompanyId();
 	}
@@ -211,6 +222,7 @@ public class SocialActivityCounterWrapper implements SocialActivityCounter,
 	*
 	* @param companyId the company ID of this social activity counter
 	*/
+	@Override
 	public void setCompanyId(long companyId) {
 		_socialActivityCounter.setCompanyId(companyId);
 	}
@@ -220,10 +232,12 @@ public class SocialActivityCounterWrapper implements SocialActivityCounter,
 	*
 	* @return the fully qualified class name of this social activity counter
 	*/
+	@Override
 	public java.lang.String getClassName() {
 		return _socialActivityCounter.getClassName();
 	}
 
+	@Override
 	public void setClassName(java.lang.String className) {
 		_socialActivityCounter.setClassName(className);
 	}
@@ -233,6 +247,7 @@ public class SocialActivityCounterWrapper implements SocialActivityCounter,
 	*
 	* @return the class name ID of this social activity counter
 	*/
+	@Override
 	public long getClassNameId() {
 		return _socialActivityCounter.getClassNameId();
 	}
@@ -242,6 +257,7 @@ public class SocialActivityCounterWrapper implements SocialActivityCounter,
 	*
 	* @param classNameId the class name ID of this social activity counter
 	*/
+	@Override
 	public void setClassNameId(long classNameId) {
 		_socialActivityCounter.setClassNameId(classNameId);
 	}
@@ -251,6 +267,7 @@ public class SocialActivityCounterWrapper implements SocialActivityCounter,
 	*
 	* @return the class p k of this social activity counter
 	*/
+	@Override
 	public long getClassPK() {
 		return _socialActivityCounter.getClassPK();
 	}
@@ -260,6 +277,7 @@ public class SocialActivityCounterWrapper implements SocialActivityCounter,
 	*
 	* @param classPK the class p k of this social activity counter
 	*/
+	@Override
 	public void setClassPK(long classPK) {
 		_socialActivityCounter.setClassPK(classPK);
 	}
@@ -269,6 +287,7 @@ public class SocialActivityCounterWrapper implements SocialActivityCounter,
 	*
 	* @return the name of this social activity counter
 	*/
+	@Override
 	public java.lang.String getName() {
 		return _socialActivityCounter.getName();
 	}
@@ -278,6 +297,7 @@ public class SocialActivityCounterWrapper implements SocialActivityCounter,
 	*
 	* @param name the name of this social activity counter
 	*/
+	@Override
 	public void setName(java.lang.String name) {
 		_socialActivityCounter.setName(name);
 	}
@@ -287,6 +307,7 @@ public class SocialActivityCounterWrapper implements SocialActivityCounter,
 	*
 	* @return the owner type of this social activity counter
 	*/
+	@Override
 	public int getOwnerType() {
 		return _socialActivityCounter.getOwnerType();
 	}
@@ -296,6 +317,7 @@ public class SocialActivityCounterWrapper implements SocialActivityCounter,
 	*
 	* @param ownerType the owner type of this social activity counter
 	*/
+	@Override
 	public void setOwnerType(int ownerType) {
 		_socialActivityCounter.setOwnerType(ownerType);
 	}
@@ -305,6 +327,7 @@ public class SocialActivityCounterWrapper implements SocialActivityCounter,
 	*
 	* @return the current value of this social activity counter
 	*/
+	@Override
 	public int getCurrentValue() {
 		return _socialActivityCounter.getCurrentValue();
 	}
@@ -314,6 +337,7 @@ public class SocialActivityCounterWrapper implements SocialActivityCounter,
 	*
 	* @param currentValue the current value of this social activity counter
 	*/
+	@Override
 	public void setCurrentValue(int currentValue) {
 		_socialActivityCounter.setCurrentValue(currentValue);
 	}
@@ -323,6 +347,7 @@ public class SocialActivityCounterWrapper implements SocialActivityCounter,
 	*
 	* @return the total value of this social activity counter
 	*/
+	@Override
 	public int getTotalValue() {
 		return _socialActivityCounter.getTotalValue();
 	}
@@ -332,6 +357,7 @@ public class SocialActivityCounterWrapper implements SocialActivityCounter,
 	*
 	* @param totalValue the total value of this social activity counter
 	*/
+	@Override
 	public void setTotalValue(int totalValue) {
 		_socialActivityCounter.setTotalValue(totalValue);
 	}
@@ -341,6 +367,7 @@ public class SocialActivityCounterWrapper implements SocialActivityCounter,
 	*
 	* @return the grace value of this social activity counter
 	*/
+	@Override
 	public int getGraceValue() {
 		return _socialActivityCounter.getGraceValue();
 	}
@@ -350,6 +377,7 @@ public class SocialActivityCounterWrapper implements SocialActivityCounter,
 	*
 	* @param graceValue the grace value of this social activity counter
 	*/
+	@Override
 	public void setGraceValue(int graceValue) {
 		_socialActivityCounter.setGraceValue(graceValue);
 	}
@@ -359,6 +387,7 @@ public class SocialActivityCounterWrapper implements SocialActivityCounter,
 	*
 	* @return the start period of this social activity counter
 	*/
+	@Override
 	public int getStartPeriod() {
 		return _socialActivityCounter.getStartPeriod();
 	}
@@ -368,6 +397,7 @@ public class SocialActivityCounterWrapper implements SocialActivityCounter,
 	*
 	* @param startPeriod the start period of this social activity counter
 	*/
+	@Override
 	public void setStartPeriod(int startPeriod) {
 		_socialActivityCounter.setStartPeriod(startPeriod);
 	}
@@ -377,6 +407,7 @@ public class SocialActivityCounterWrapper implements SocialActivityCounter,
 	*
 	* @return the end period of this social activity counter
 	*/
+	@Override
 	public int getEndPeriod() {
 		return _socialActivityCounter.getEndPeriod();
 	}
@@ -386,6 +417,7 @@ public class SocialActivityCounterWrapper implements SocialActivityCounter,
 	*
 	* @param endPeriod the end period of this social activity counter
 	*/
+	@Override
 	public void setEndPeriod(int endPeriod) {
 		_socialActivityCounter.setEndPeriod(endPeriod);
 	}
@@ -395,6 +427,7 @@ public class SocialActivityCounterWrapper implements SocialActivityCounter,
 	*
 	* @return the active of this social activity counter
 	*/
+	@Override
 	public boolean getActive() {
 		return _socialActivityCounter.getActive();
 	}
@@ -404,6 +437,7 @@ public class SocialActivityCounterWrapper implements SocialActivityCounter,
 	*
 	* @return <code>true</code> if this social activity counter is active; <code>false</code> otherwise
 	*/
+	@Override
 	public boolean isActive() {
 		return _socialActivityCounter.isActive();
 	}
@@ -413,52 +447,64 @@ public class SocialActivityCounterWrapper implements SocialActivityCounter,
 	*
 	* @param active the active of this social activity counter
 	*/
+	@Override
 	public void setActive(boolean active) {
 		_socialActivityCounter.setActive(active);
 	}
 
+	@Override
 	public boolean isNew() {
 		return _socialActivityCounter.isNew();
 	}
 
+	@Override
 	public void setNew(boolean n) {
 		_socialActivityCounter.setNew(n);
 	}
 
+	@Override
 	public boolean isCachedModel() {
 		return _socialActivityCounter.isCachedModel();
 	}
 
+	@Override
 	public void setCachedModel(boolean cachedModel) {
 		_socialActivityCounter.setCachedModel(cachedModel);
 	}
 
+	@Override
 	public boolean isEscapedModel() {
 		return _socialActivityCounter.isEscapedModel();
 	}
 
+	@Override
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _socialActivityCounter.getPrimaryKeyObj();
 	}
 
+	@Override
 	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
 		_socialActivityCounter.setPrimaryKeyObj(primaryKeyObj);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
 		return _socialActivityCounter.getExpandoBridge();
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.model.BaseModel<?> baseModel) {
 		_socialActivityCounter.setExpandoBridgeAttributes(baseModel);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portlet.expando.model.ExpandoBridge expandoBridge) {
 		_socialActivityCounter.setExpandoBridgeAttributes(expandoBridge);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		_socialActivityCounter.setExpandoBridgeAttributes(serviceContext);
@@ -469,6 +515,7 @@ public class SocialActivityCounterWrapper implements SocialActivityCounter,
 		return new SocialActivityCounterWrapper((SocialActivityCounter)_socialActivityCounter.clone());
 	}
 
+	@Override
 	public int compareTo(
 		com.liferay.portlet.social.model.SocialActivityCounter socialActivityCounter) {
 		return _socialActivityCounter.compareTo(socialActivityCounter);
@@ -479,14 +526,17 @@ public class SocialActivityCounterWrapper implements SocialActivityCounter,
 		return _socialActivityCounter.hashCode();
 	}
 
+	@Override
 	public com.liferay.portal.model.CacheModel<com.liferay.portlet.social.model.SocialActivityCounter> toCacheModel() {
 		return _socialActivityCounter.toCacheModel();
 	}
 
+	@Override
 	public com.liferay.portlet.social.model.SocialActivityCounter toEscapedModel() {
 		return new SocialActivityCounterWrapper(_socialActivityCounter.toEscapedModel());
 	}
 
+	@Override
 	public com.liferay.portlet.social.model.SocialActivityCounter toUnescapedModel() {
 		return new SocialActivityCounterWrapper(_socialActivityCounter.toUnescapedModel());
 	}
@@ -496,15 +546,18 @@ public class SocialActivityCounterWrapper implements SocialActivityCounter,
 		return _socialActivityCounter.toString();
 	}
 
+	@Override
 	public java.lang.String toXmlString() {
 		return _socialActivityCounter.toXmlString();
 	}
 
+	@Override
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_socialActivityCounter.persist();
 	}
 
+	@Override
 	public boolean isActivePeriod(int periodLength) {
 		return _socialActivityCounter.isActivePeriod(periodLength);
 	}
@@ -516,10 +569,12 @@ public class SocialActivityCounterWrapper implements SocialActivityCounter,
 		return _socialActivityCounter;
 	}
 
+	@Override
 	public SocialActivityCounter getWrappedModel() {
 		return _socialActivityCounter;
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		_socialActivityCounter.resetOriginalValues();
 	}

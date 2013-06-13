@@ -40,8 +40,6 @@ public interface LayoutSetBranch extends LayoutSetBranchModel, PersistedModel {
 
 	public long getLiveLogoId();
 
-	public java.lang.String getSettings();
-
 	public com.liferay.portal.kernel.util.UnicodeProperties getSettingsProperties();
 
 	public java.lang.String getSettingsProperty(java.lang.String key);
@@ -60,8 +58,6 @@ public interface LayoutSetBranch extends LayoutSetBranchModel, PersistedModel {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public boolean isLayoutSetPrototypeLinkActive();
-
-	public void setSettings(java.lang.String settings);
 
 	public void setSettingsProperties(
 		com.liferay.portal.kernel.util.UnicodeProperties settingsProperties);

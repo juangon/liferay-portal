@@ -89,26 +89,32 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker>
 	public PasswordTrackerModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _passwordTrackerId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setPasswordTrackerId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _passwordTrackerId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return PasswordTracker.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return PasswordTracker.class.getName();
 	}
@@ -152,18 +158,22 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker>
 		}
 	}
 
+	@Override
 	public long getPasswordTrackerId() {
 		return _passwordTrackerId;
 	}
 
+	@Override
 	public void setPasswordTrackerId(long passwordTrackerId) {
 		_passwordTrackerId = passwordTrackerId;
 	}
 
+	@Override
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_columnBitmask = -1L;
 
@@ -176,10 +186,12 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker>
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
@@ -188,16 +200,19 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker>
 		return _originalUserId;
 	}
 
+	@Override
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_columnBitmask = -1L;
 
 		_createDate = createDate;
 	}
 
+	@Override
 	public String getPassword() {
 		if (_password == null) {
 			return StringPool.BLANK;
@@ -207,6 +222,7 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker>
 		}
 	}
 
+	@Override
 	public void setPassword(String password) {
 		_password = password;
 	}
@@ -252,6 +268,7 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker>
 		return passwordTrackerImpl;
 	}
 
+	@Override
 	public int compareTo(PasswordTracker passwordTracker) {
 		int value = 0;
 
@@ -285,18 +302,15 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof PasswordTracker)) {
 			return false;
 		}
 
-		PasswordTracker passwordTracker = null;
-
-		try {
-			passwordTracker = (PasswordTracker)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		PasswordTracker passwordTracker = (PasswordTracker)obj;
 
 		long primaryKey = passwordTracker.getPrimaryKey();
 
@@ -369,6 +383,7 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(16);
 

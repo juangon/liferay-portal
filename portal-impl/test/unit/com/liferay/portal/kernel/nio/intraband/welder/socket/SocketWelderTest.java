@@ -126,6 +126,7 @@ public class SocketWelderTest {
 			new FutureTask<MockRegistrationReference>(
 				new Callable<MockRegistrationReference>() {
 
+					@Override
 					public MockRegistrationReference call() throws Exception {
 						return (MockRegistrationReference)
 							serverSocketWelder.weld(new MockIntraband());
@@ -140,6 +141,7 @@ public class SocketWelderTest {
 			new FutureTask<MockRegistrationReference>(
 				new Callable<MockRegistrationReference>() {
 
+					@Override
 					public MockRegistrationReference call() throws Exception {
 						return (MockRegistrationReference)
 							clientSocketWelder.weld(new MockIntraband());

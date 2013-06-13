@@ -85,26 +85,32 @@ public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker>
 	public BrowserTrackerModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _browserTrackerId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setBrowserTrackerId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _browserTrackerId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return BrowserTracker.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return BrowserTracker.class.getName();
 	}
@@ -141,18 +147,22 @@ public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker>
 		}
 	}
 
+	@Override
 	public long getBrowserTrackerId() {
 		return _browserTrackerId;
 	}
 
+	@Override
 	public void setBrowserTrackerId(long browserTrackerId) {
 		_browserTrackerId = browserTrackerId;
 	}
 
+	@Override
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_columnBitmask |= USERID_COLUMN_BITMASK;
 
@@ -165,10 +175,12 @@ public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker>
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
@@ -177,10 +189,12 @@ public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker>
 		return _originalUserId;
 	}
 
+	@Override
 	public long getBrowserKey() {
 		return _browserKey;
 	}
 
+	@Override
 	public void setBrowserKey(long browserKey) {
 		_browserKey = browserKey;
 	}
@@ -225,6 +239,7 @@ public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker>
 		return browserTrackerImpl;
 	}
 
+	@Override
 	public int compareTo(BrowserTracker browserTracker) {
 		long primaryKey = browserTracker.getPrimaryKey();
 
@@ -241,18 +256,15 @@ public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof BrowserTracker)) {
 			return false;
 		}
 
-		BrowserTracker browserTracker = null;
-
-		try {
-			browserTracker = (BrowserTracker)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		BrowserTracker browserTracker = (BrowserTracker)obj;
 
 		long primaryKey = browserTracker.getPrimaryKey();
 
@@ -308,6 +320,7 @@ public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(13);
 

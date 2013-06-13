@@ -102,6 +102,7 @@ public class PortalPreferencesPersistenceImpl extends BasePersistenceImpl<Portal
 	 * @throws com.liferay.portal.NoSuchPreferencesException if a matching portal preferences could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PortalPreferences findByO_O(long ownerId, int ownerType)
 		throws NoSuchPreferencesException, SystemException {
 		PortalPreferences portalPreferences = fetchByO_O(ownerId, ownerType);
@@ -137,6 +138,7 @@ public class PortalPreferencesPersistenceImpl extends BasePersistenceImpl<Portal
 	 * @return the matching portal preferences, or <code>null</code> if a matching portal preferences could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PortalPreferences fetchByO_O(long ownerId, int ownerType)
 		throws SystemException {
 		return fetchByO_O(ownerId, ownerType, true);
@@ -151,6 +153,7 @@ public class PortalPreferencesPersistenceImpl extends BasePersistenceImpl<Portal
 	 * @return the matching portal preferences, or <code>null</code> if a matching portal preferences could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PortalPreferences fetchByO_O(long ownerId, int ownerType,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { ownerId, ownerType };
@@ -249,6 +252,7 @@ public class PortalPreferencesPersistenceImpl extends BasePersistenceImpl<Portal
 	 * @return the portal preferences that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PortalPreferences removeByO_O(long ownerId, int ownerType)
 		throws NoSuchPreferencesException, SystemException {
 		PortalPreferences portalPreferences = findByO_O(ownerId, ownerType);
@@ -264,6 +268,7 @@ public class PortalPreferencesPersistenceImpl extends BasePersistenceImpl<Portal
 	 * @return the number of matching portal preferenceses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByO_O(long ownerId, int ownerType)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_O_O;
@@ -322,6 +327,7 @@ public class PortalPreferencesPersistenceImpl extends BasePersistenceImpl<Portal
 	 *
 	 * @param portalPreferences the portal preferences
 	 */
+	@Override
 	public void cacheResult(PortalPreferences portalPreferences) {
 		EntityCacheUtil.putResult(PortalPreferencesModelImpl.ENTITY_CACHE_ENABLED,
 			PortalPreferencesImpl.class, portalPreferences.getPrimaryKey(),
@@ -340,6 +346,7 @@ public class PortalPreferencesPersistenceImpl extends BasePersistenceImpl<Portal
 	 *
 	 * @param portalPreferenceses the portal preferenceses
 	 */
+	@Override
 	public void cacheResult(List<PortalPreferences> portalPreferenceses) {
 		for (PortalPreferences portalPreferences : portalPreferenceses) {
 			if (EntityCacheUtil.getResult(
@@ -463,6 +470,7 @@ public class PortalPreferencesPersistenceImpl extends BasePersistenceImpl<Portal
 	 * @param portalPreferencesId the primary key for the new portal preferences
 	 * @return the new portal preferences
 	 */
+	@Override
 	public PortalPreferences create(long portalPreferencesId) {
 		PortalPreferences portalPreferences = new PortalPreferencesImpl();
 
@@ -480,6 +488,7 @@ public class PortalPreferencesPersistenceImpl extends BasePersistenceImpl<Portal
 	 * @throws com.liferay.portal.NoSuchPreferencesException if a portal preferences with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PortalPreferences remove(long portalPreferencesId)
 		throws NoSuchPreferencesException, SystemException {
 		return remove((Serializable)portalPreferencesId);
@@ -656,6 +665,7 @@ public class PortalPreferencesPersistenceImpl extends BasePersistenceImpl<Portal
 	 * @throws com.liferay.portal.NoSuchPreferencesException if a portal preferences with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PortalPreferences findByPrimaryKey(long portalPreferencesId)
 		throws NoSuchPreferencesException, SystemException {
 		return findByPrimaryKey((Serializable)portalPreferencesId);
@@ -717,6 +727,7 @@ public class PortalPreferencesPersistenceImpl extends BasePersistenceImpl<Portal
 	 * @return the portal preferences, or <code>null</code> if a portal preferences with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PortalPreferences fetchByPrimaryKey(long portalPreferencesId)
 		throws SystemException {
 		return fetchByPrimaryKey((Serializable)portalPreferencesId);
@@ -728,6 +739,7 @@ public class PortalPreferencesPersistenceImpl extends BasePersistenceImpl<Portal
 	 * @return the portal preferenceses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<PortalPreferences> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -744,6 +756,7 @@ public class PortalPreferencesPersistenceImpl extends BasePersistenceImpl<Portal
 	 * @return the range of portal preferenceses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<PortalPreferences> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
@@ -762,6 +775,7 @@ public class PortalPreferencesPersistenceImpl extends BasePersistenceImpl<Portal
 	 * @return the ordered range of portal preferenceses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<PortalPreferences> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -847,6 +861,7 @@ public class PortalPreferencesPersistenceImpl extends BasePersistenceImpl<Portal
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (PortalPreferences portalPreferences : findAll()) {
 			remove(portalPreferences);
@@ -859,6 +874,7 @@ public class PortalPreferencesPersistenceImpl extends BasePersistenceImpl<Portal
 	 * @return the number of portal preferenceses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -945,6 +961,7 @@ public class PortalPreferencesPersistenceImpl extends BasePersistenceImpl<Portal
 
 	private static CacheModel<PortalPreferences> _nullPortalPreferencesCacheModel =
 		new CacheModel<PortalPreferences>() {
+			@Override
 			public PortalPreferences toEntityModel() {
 				return _nullPortalPreferences;
 			}

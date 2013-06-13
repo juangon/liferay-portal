@@ -130,26 +130,32 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName>
 	public ClassNameModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _classNameId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setClassNameId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _classNameId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return ClassName.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return ClassName.class.getName();
 	}
@@ -179,6 +185,7 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName>
 		}
 	}
 
+	@Override
 	public String getClassName() {
 		if (getClassNameId() <= 0) {
 			return StringPool.BLANK;
@@ -187,6 +194,7 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName>
 		return PortalUtil.getClassName(getClassNameId());
 	}
 
+	@Override
 	public void setClassName(String className) {
 		long classNameId = 0;
 
@@ -197,15 +205,18 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName>
 		setClassNameId(classNameId);
 	}
 
+	@Override
 	@JSON
 	public long getClassNameId() {
 		return _classNameId;
 	}
 
+	@Override
 	public void setClassNameId(long classNameId) {
 		_classNameId = classNameId;
 	}
 
+	@Override
 	@JSON
 	public String getValue() {
 		if (_value == null) {
@@ -216,6 +227,7 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName>
 		}
 	}
 
+	@Override
 	public void setValue(String value) {
 		_columnBitmask |= VALUE_COLUMN_BITMASK;
 
@@ -269,6 +281,7 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName>
 		return classNameImpl;
 	}
 
+	@Override
 	public int compareTo(ClassName className) {
 		long primaryKey = className.getPrimaryKey();
 
@@ -285,18 +298,15 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ClassName)) {
 			return false;
 		}
 
-		ClassName className = null;
-
-		try {
-			className = (ClassName)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		ClassName className = (ClassName)obj;
 
 		long primaryKey = className.getPrimaryKey();
 
@@ -352,6 +362,7 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(10);
 

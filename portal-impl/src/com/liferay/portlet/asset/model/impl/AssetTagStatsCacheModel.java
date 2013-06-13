@@ -50,6 +50,7 @@ public class AssetTagStatsCacheModel implements CacheModel<AssetTagStats>,
 		return sb.toString();
 	}
 
+	@Override
 	public AssetTagStats toEntityModel() {
 		AssetTagStatsImpl assetTagStatsImpl = new AssetTagStatsImpl();
 
@@ -63,6 +64,7 @@ public class AssetTagStatsCacheModel implements CacheModel<AssetTagStats>,
 		return assetTagStatsImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		tagStatsId = objectInput.readLong();
 		tagId = objectInput.readLong();
@@ -70,6 +72,7 @@ public class AssetTagStatsCacheModel implements CacheModel<AssetTagStats>,
 		assetCount = objectInput.readInt();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(tagStatsId);

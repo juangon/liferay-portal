@@ -32,6 +32,14 @@ public class InvokerMessageListener implements MessageListener {
 
 	@Override
 	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof InvokerMessageListener)) {
+			return false;
+		}
+
 		InvokerMessageListener messageListenerInvoker =
 			(InvokerMessageListener)obj;
 
@@ -52,6 +60,7 @@ public class InvokerMessageListener implements MessageListener {
 		return _messageListener.hashCode();
 	}
 
+	@Override
 	public void receive(Message message) throws MessageListenerException {
 		Thread currentThread = Thread.currentThread();
 

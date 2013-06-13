@@ -144,26 +144,32 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 	public AnnouncementsDeliveryModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _deliveryId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setDeliveryId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _deliveryId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return AnnouncementsDelivery.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return AnnouncementsDelivery.class.getName();
 	}
@@ -228,29 +234,35 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 		}
 	}
 
+	@Override
 	@JSON
 	public long getDeliveryId() {
 		return _deliveryId;
 	}
 
+	@Override
 	public void setDeliveryId(long deliveryId) {
 		_deliveryId = deliveryId;
 	}
 
+	@Override
 	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
+	@Override
 	@JSON
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_columnBitmask |= USERID_COLUMN_BITMASK;
 
@@ -263,10 +275,12 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
@@ -275,6 +289,7 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 		return _originalUserId;
 	}
 
+	@Override
 	@JSON
 	public String getType() {
 		if (_type == null) {
@@ -285,6 +300,7 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 		}
 	}
 
+	@Override
 	public void setType(String type) {
 		_columnBitmask |= TYPE_COLUMN_BITMASK;
 
@@ -299,41 +315,50 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 		return GetterUtil.getString(_originalType);
 	}
 
+	@Override
 	@JSON
 	public boolean getEmail() {
 		return _email;
 	}
 
+	@Override
 	public boolean isEmail() {
 		return _email;
 	}
 
+	@Override
 	public void setEmail(boolean email) {
 		_email = email;
 	}
 
+	@Override
 	@JSON
 	public boolean getSms() {
 		return _sms;
 	}
 
+	@Override
 	public boolean isSms() {
 		return _sms;
 	}
 
+	@Override
 	public void setSms(boolean sms) {
 		_sms = sms;
 	}
 
+	@Override
 	@JSON
 	public boolean getWebsite() {
 		return _website;
 	}
 
+	@Override
 	public boolean isWebsite() {
 		return _website;
 	}
 
+	@Override
 	public void setWebsite(boolean website) {
 		_website = website;
 	}
@@ -382,6 +407,7 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 		return announcementsDeliveryImpl;
 	}
 
+	@Override
 	public int compareTo(AnnouncementsDelivery announcementsDelivery) {
 		long primaryKey = announcementsDelivery.getPrimaryKey();
 
@@ -398,18 +424,15 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof AnnouncementsDelivery)) {
 			return false;
 		}
 
-		AnnouncementsDelivery announcementsDelivery = null;
-
-		try {
-			announcementsDelivery = (AnnouncementsDelivery)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		AnnouncementsDelivery announcementsDelivery = (AnnouncementsDelivery)obj;
 
 		long primaryKey = announcementsDelivery.getPrimaryKey();
 
@@ -489,6 +512,7 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(25);
 

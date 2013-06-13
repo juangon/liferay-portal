@@ -96,26 +96,32 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	public JournalArticleImageModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _articleImageId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setArticleImageId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _articleImageId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return JournalArticleImage.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return JournalArticleImage.class.getName();
 	}
@@ -187,18 +193,22 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 		}
 	}
 
+	@Override
 	public long getArticleImageId() {
 		return _articleImageId;
 	}
 
+	@Override
 	public void setArticleImageId(long articleImageId) {
 		_articleImageId = articleImageId;
 	}
 
+	@Override
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -215,6 +225,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 		return _originalGroupId;
 	}
 
+	@Override
 	public String getArticleId() {
 		if (_articleId == null) {
 			return StringPool.BLANK;
@@ -224,6 +235,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 		}
 	}
 
+	@Override
 	public void setArticleId(String articleId) {
 		_columnBitmask |= ARTICLEID_COLUMN_BITMASK;
 
@@ -238,10 +250,12 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 		return GetterUtil.getString(_originalArticleId);
 	}
 
+	@Override
 	public double getVersion() {
 		return _version;
 	}
 
+	@Override
 	public void setVersion(double version) {
 		_columnBitmask |= VERSION_COLUMN_BITMASK;
 
@@ -258,6 +272,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 		return _originalVersion;
 	}
 
+	@Override
 	public String getElInstanceId() {
 		if (_elInstanceId == null) {
 			return StringPool.BLANK;
@@ -267,6 +282,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 		}
 	}
 
+	@Override
 	public void setElInstanceId(String elInstanceId) {
 		_columnBitmask |= ELINSTANCEID_COLUMN_BITMASK;
 
@@ -281,6 +297,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 		return GetterUtil.getString(_originalElInstanceId);
 	}
 
+	@Override
 	public String getElName() {
 		if (_elName == null) {
 			return StringPool.BLANK;
@@ -290,6 +307,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 		}
 	}
 
+	@Override
 	public void setElName(String elName) {
 		_columnBitmask |= ELNAME_COLUMN_BITMASK;
 
@@ -304,6 +322,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 		return GetterUtil.getString(_originalElName);
 	}
 
+	@Override
 	public String getLanguageId() {
 		if (_languageId == null) {
 			return StringPool.BLANK;
@@ -313,6 +332,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 		}
 	}
 
+	@Override
 	public void setLanguageId(String languageId) {
 		_columnBitmask |= LANGUAGEID_COLUMN_BITMASK;
 
@@ -327,14 +347,17 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 		return GetterUtil.getString(_originalLanguageId);
 	}
 
+	@Override
 	public boolean getTempImage() {
 		return _tempImage;
 	}
 
+	@Override
 	public boolean isTempImage() {
 		return _tempImage;
 	}
 
+	@Override
 	public void setTempImage(boolean tempImage) {
 		_columnBitmask |= TEMPIMAGE_COLUMN_BITMASK;
 
@@ -396,6 +419,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 		return journalArticleImageImpl;
 	}
 
+	@Override
 	public int compareTo(JournalArticleImage journalArticleImage) {
 		long primaryKey = journalArticleImage.getPrimaryKey();
 
@@ -412,18 +436,15 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof JournalArticleImage)) {
 			return false;
 		}
 
-		JournalArticleImage journalArticleImage = null;
-
-		try {
-			journalArticleImage = (JournalArticleImage)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		JournalArticleImage journalArticleImage = (JournalArticleImage)obj;
 
 		long primaryKey = journalArticleImage.getPrimaryKey();
 
@@ -539,6 +560,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(28);
 

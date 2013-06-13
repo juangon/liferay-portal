@@ -12,12 +12,7 @@
 }
 
 .theme-title {
-	display: block;
-	font-weight: bold;
-	margin: 0;
-	padding: 2px;
-
-	.aui-field-content {
+	.field-content {
 		margin: 0;
 	}
 }
@@ -36,7 +31,7 @@
 		border-bottom: 1px solid #CCC;
 		font-size: 1.5em;
 
-		.aui-field-content {
+		.field-content {
 			display: inline-block;
 		}
 	}
@@ -92,10 +87,6 @@
 
 	.lfr-theme-list {
 		margin-top: 0.7em;
-	}
-
-	.header-title {
-		float: left;
 	}
 
 	.install-themes {
@@ -169,4 +160,8 @@
 
 .rule-group-instance-dragging:hover {
 	background-color: #F5F8FB;
+}
+
+.screen-physical-size-field, screen-resolution-field {
+	width: 50px;
 }

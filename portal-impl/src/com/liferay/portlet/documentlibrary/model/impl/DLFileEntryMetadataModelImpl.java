@@ -93,26 +93,32 @@ public class DLFileEntryMetadataModelImpl extends BaseModelImpl<DLFileEntryMetad
 	public DLFileEntryMetadataModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _fileEntryMetadataId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setFileEntryMetadataId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _fileEntryMetadataId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return DLFileEntryMetadata.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return DLFileEntryMetadata.class.getName();
 	}
@@ -177,6 +183,7 @@ public class DLFileEntryMetadataModelImpl extends BaseModelImpl<DLFileEntryMetad
 		}
 	}
 
+	@Override
 	public String getUuid() {
 		if (_uuid == null) {
 			return StringPool.BLANK;
@@ -186,6 +193,7 @@ public class DLFileEntryMetadataModelImpl extends BaseModelImpl<DLFileEntryMetad
 		}
 	}
 
+	@Override
 	public void setUuid(String uuid) {
 		if (_originalUuid == null) {
 			_originalUuid = _uuid;
@@ -198,26 +206,32 @@ public class DLFileEntryMetadataModelImpl extends BaseModelImpl<DLFileEntryMetad
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@Override
 	public long getFileEntryMetadataId() {
 		return _fileEntryMetadataId;
 	}
 
+	@Override
 	public void setFileEntryMetadataId(long fileEntryMetadataId) {
 		_fileEntryMetadataId = fileEntryMetadataId;
 	}
 
+	@Override
 	public long getDDMStorageId() {
 		return _DDMStorageId;
 	}
 
+	@Override
 	public void setDDMStorageId(long DDMStorageId) {
 		_DDMStorageId = DDMStorageId;
 	}
 
+	@Override
 	public long getDDMStructureId() {
 		return _DDMStructureId;
 	}
 
+	@Override
 	public void setDDMStructureId(long DDMStructureId) {
 		_columnBitmask |= DDMSTRUCTUREID_COLUMN_BITMASK;
 
@@ -234,10 +248,12 @@ public class DLFileEntryMetadataModelImpl extends BaseModelImpl<DLFileEntryMetad
 		return _originalDDMStructureId;
 	}
 
+	@Override
 	public long getFileEntryTypeId() {
 		return _fileEntryTypeId;
 	}
 
+	@Override
 	public void setFileEntryTypeId(long fileEntryTypeId) {
 		_columnBitmask |= FILEENTRYTYPEID_COLUMN_BITMASK;
 
@@ -254,10 +270,12 @@ public class DLFileEntryMetadataModelImpl extends BaseModelImpl<DLFileEntryMetad
 		return _originalFileEntryTypeId;
 	}
 
+	@Override
 	public long getFileEntryId() {
 		return _fileEntryId;
 	}
 
+	@Override
 	public void setFileEntryId(long fileEntryId) {
 		_columnBitmask |= FILEENTRYID_COLUMN_BITMASK;
 
@@ -274,10 +292,12 @@ public class DLFileEntryMetadataModelImpl extends BaseModelImpl<DLFileEntryMetad
 		return _originalFileEntryId;
 	}
 
+	@Override
 	public long getFileVersionId() {
 		return _fileVersionId;
 	}
 
+	@Override
 	public void setFileVersionId(long fileVersionId) {
 		_columnBitmask |= FILEVERSIONID_COLUMN_BITMASK;
 
@@ -338,6 +358,7 @@ public class DLFileEntryMetadataModelImpl extends BaseModelImpl<DLFileEntryMetad
 		return dlFileEntryMetadataImpl;
 	}
 
+	@Override
 	public int compareTo(DLFileEntryMetadata dlFileEntryMetadata) {
 		long primaryKey = dlFileEntryMetadata.getPrimaryKey();
 
@@ -354,18 +375,15 @@ public class DLFileEntryMetadataModelImpl extends BaseModelImpl<DLFileEntryMetad
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof DLFileEntryMetadata)) {
 			return false;
 		}
 
-		DLFileEntryMetadata dlFileEntryMetadata = null;
-
-		try {
-			dlFileEntryMetadata = (DLFileEntryMetadata)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		DLFileEntryMetadata dlFileEntryMetadata = (DLFileEntryMetadata)obj;
 
 		long primaryKey = dlFileEntryMetadata.getPrimaryKey();
 
@@ -457,6 +475,7 @@ public class DLFileEntryMetadataModelImpl extends BaseModelImpl<DLFileEntryMetad
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(25);
 

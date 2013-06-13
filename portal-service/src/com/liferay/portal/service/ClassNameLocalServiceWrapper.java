@@ -15,12 +15,10 @@
 package com.liferay.portal.service;
 
 /**
- * <p>
- * This class is a wrapper for {@link ClassNameLocalService}.
- * </p>
+ * Provides a wrapper for {@link ClassNameLocalService}.
  *
- * @author    Brian Wing Shun Chan
- * @see       ClassNameLocalService
+ * @author Brian Wing Shun Chan
+ * @see ClassNameLocalService
  * @generated
  */
 public class ClassNameLocalServiceWrapper implements ClassNameLocalService,
@@ -37,6 +35,7 @@ public class ClassNameLocalServiceWrapper implements ClassNameLocalService,
 	* @return the class name that was added
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.ClassName addClassName(
 		com.liferay.portal.model.ClassName className)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -49,6 +48,7 @@ public class ClassNameLocalServiceWrapper implements ClassNameLocalService,
 	* @param classNameId the primary key for the new class name
 	* @return the new class name
 	*/
+	@Override
 	public com.liferay.portal.model.ClassName createClassName(long classNameId) {
 		return _classNameLocalService.createClassName(classNameId);
 	}
@@ -61,6 +61,7 @@ public class ClassNameLocalServiceWrapper implements ClassNameLocalService,
 	* @throws PortalException if a class name with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.ClassName deleteClassName(long classNameId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -74,12 +75,14 @@ public class ClassNameLocalServiceWrapper implements ClassNameLocalService,
 	* @return the class name that was removed
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.ClassName deleteClassName(
 		com.liferay.portal.model.ClassName className)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _classNameLocalService.deleteClassName(className);
 	}
 
+	@Override
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {
 		return _classNameLocalService.dynamicQuery();
 	}
@@ -91,6 +94,7 @@ public class ClassNameLocalServiceWrapper implements ClassNameLocalService,
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -111,6 +115,7 @@ public class ClassNameLocalServiceWrapper implements ClassNameLocalService,
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -132,6 +137,7 @@ public class ClassNameLocalServiceWrapper implements ClassNameLocalService,
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -149,12 +155,14 @@ public class ClassNameLocalServiceWrapper implements ClassNameLocalService,
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _classNameLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	@Override
 	public com.liferay.portal.model.ClassName fetchClassName(long classNameId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _classNameLocalService.fetchClassName(classNameId);
@@ -168,12 +176,14 @@ public class ClassNameLocalServiceWrapper implements ClassNameLocalService,
 	* @throws PortalException if a class name with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.ClassName getClassName(long classNameId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _classNameLocalService.getClassName(classNameId);
 	}
 
+	@Override
 	public com.liferay.portal.model.PersistedModel getPersistedModel(
 		java.io.Serializable primaryKeyObj)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -193,6 +203,7 @@ public class ClassNameLocalServiceWrapper implements ClassNameLocalService,
 	* @return the range of class names
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public java.util.List<com.liferay.portal.model.ClassName> getClassNames(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -205,6 +216,7 @@ public class ClassNameLocalServiceWrapper implements ClassNameLocalService,
 	* @return the number of class names
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public int getClassNamesCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _classNameLocalService.getClassNamesCount();
@@ -217,6 +229,7 @@ public class ClassNameLocalServiceWrapper implements ClassNameLocalService,
 	* @return the class name that was updated
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.ClassName updateClassName(
 		com.liferay.portal.model.ClassName className)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -228,6 +241,7 @@ public class ClassNameLocalServiceWrapper implements ClassNameLocalService,
 	*
 	* @return the Spring bean ID for this bean
 	*/
+	@Override
 	public java.lang.String getBeanIdentifier() {
 		return _classNameLocalService.getBeanIdentifier();
 	}
@@ -237,53 +251,64 @@ public class ClassNameLocalServiceWrapper implements ClassNameLocalService,
 	*
 	* @param beanIdentifier the Spring bean ID for this bean
 	*/
+	@Override
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		_classNameLocalService.setBeanIdentifier(beanIdentifier);
 	}
 
+	@Override
 	public com.liferay.portal.model.ClassName addClassName(
 		java.lang.String value)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _classNameLocalService.addClassName(value);
 	}
 
+	@Override
 	public void checkClassNames()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_classNameLocalService.checkClassNames();
 	}
 
+	@Override
 	public com.liferay.portal.model.ClassName fetchClassName(
 		java.lang.String value)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _classNameLocalService.fetchClassName(value);
 	}
 
+	@Override
 	public long fetchClassNameId(java.lang.Class<?> clazz) {
 		return _classNameLocalService.fetchClassNameId(clazz);
 	}
 
+	@Override
 	public long fetchClassNameId(java.lang.String value) {
 		return _classNameLocalService.fetchClassNameId(value);
 	}
 
+	@Override
 	public com.liferay.portal.model.ClassName getClassName(
 		java.lang.String value)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _classNameLocalService.getClassName(value);
 	}
 
+	@Override
 	public long getClassNameId(java.lang.Class<?> clazz) {
 		return _classNameLocalService.getClassNameId(clazz);
 	}
 
+	@Override
 	public long getClassNameId(java.lang.String value) {
 		return _classNameLocalService.getClassNameId(value);
 	}
 
+	@Override
 	public java.lang.String getRegistryName() {
 		return _classNameLocalService.getRegistryName();
 	}
 
+	@Override
 	public void invalidate() {
 		_classNameLocalService.invalidate();
 	}
@@ -303,10 +328,12 @@ public class ClassNameLocalServiceWrapper implements ClassNameLocalService,
 		_classNameLocalService = classNameLocalService;
 	}
 
+	@Override
 	public ClassNameLocalService getWrappedService() {
 		return _classNameLocalService;
 	}
 
+	@Override
 	public void setWrappedService(ClassNameLocalService classNameLocalService) {
 		_classNameLocalService = classNameLocalService;
 	}

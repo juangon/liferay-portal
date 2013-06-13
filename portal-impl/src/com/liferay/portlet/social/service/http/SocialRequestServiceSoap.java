@@ -15,13 +15,11 @@
 package com.liferay.portlet.social.service.http;
 
 /**
- * <p>
- * This class provides a SOAP utility for the
+ * Provides the SOAP utility for the
  * {@link com.liferay.portlet.social.service.SocialRequestServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it is difficult for SOAP to
  * support certain types.
- * </p>
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
@@ -50,10 +48,10 @@ package com.liferay.portlet.social.service.http;
  * The SOAP utility is only generated for remote services.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       SocialRequestServiceHttp
- * @see       com.liferay.portlet.social.model.SocialRequestSoap
- * @see       com.liferay.portlet.social.service.SocialRequestServiceUtil
+ * @author Brian Wing Shun Chan
+ * @see SocialRequestServiceHttp
+ * @see com.liferay.portlet.social.model.SocialRequestSoap
+ * @see com.liferay.portlet.social.service.SocialRequestServiceUtil
  * @generated
  */
 public class SocialRequestServiceSoap {

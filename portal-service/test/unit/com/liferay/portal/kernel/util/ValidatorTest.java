@@ -24,6 +24,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 /**
  * @author Shuyang Zhou
  * @author Shinn Lok
+ * @author Igor Beslic
  */
 @RunWith(PowerMockRunner.class)
 public class ValidatorTest extends PowerMockito {
@@ -493,6 +494,65 @@ public class ValidatorTest extends PowerMockito {
 		for (String invalidIPv6Address : invalidIPv6Addresses) {
 			if (Validator.isIPv6Address(invalidIPv6Address)) {
 				Assert.fail(invalidIPv6Address);
+			}
+		}
+	}
+
+	@Test
+	public void testIsValidUri() throws Exception {
+		String[] validUris = {
+			"ftp://ftp.liferay.com/file.txt",
+			"gopher://gopher.liferay.com/California/Los%20Angeles",
+			"http://liferay.com:valid", "http://www.ietf.org/rfc/rfc2396.txt",
+			"mailto:info@liferay.com.broken",
+			"my-androidapp://liferay.com/authorize",
+			"myiosapp://liferay.com/application-page/.app",
+			"news:comp.infosystems.www.servers.unix", "telnet://in.liferay.com/"
+		};
+
+		for (String validUri : validUris) {
+			if (!Validator.isUri(validUri)) {
+				Assert.fail(validUri);
+			}
+		}
+
+		String[] invalidUris = {
+			"android-app://test.lif>ray.com", "android-app:|test(@lifray.com",
+			"ios@app://liferay.com/authorize"
+		};
+
+		for (String invalidUri : invalidUris) {
+			if (Validator.isUri(invalidUri)) {
+				Assert.fail(invalidUri);
+			}
+		}
+	}
+
+	@Test
+	public void testIsValidUrl() throws Exception {
+		String[] validUrls = {
+			"ftp://ftp.liferay.com/file.txt",
+			"http://liferay.com:4444/authorize",
+			"HTTP://liferay.com/Los%20Angeles",
+			"http://liferay.com/web/guest/home?life=345&ray=12",
+			"http://www.ietf.org/rfc/rfc1738.txt",
+			"mailto:info@liferay.com.broken"
+		};
+
+		for (String validUrl : validUrls) {
+			if (!Validator.isUrl(validUrl)) {
+				Assert.fail(validUrl);
+			}
+		}
+
+		String[] invalidUrls = {
+			"-test://liferay.com", "gopher://liferay.com", "htt<p://lifray.com",
+			"http://liferay.com:valid", "my@iosapp://liferay.com/authorize"
+		};
+
+		for (String invalidUrl : invalidUrls) {
+			if (Validator.isUrl(invalidUrl)) {
+				Assert.fail(invalidUrl);
 			}
 		}
 	}

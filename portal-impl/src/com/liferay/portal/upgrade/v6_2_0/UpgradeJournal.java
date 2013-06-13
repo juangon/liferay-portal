@@ -255,18 +255,19 @@ public class UpgradeJournal extends BaseUpgradePortletPreferences {
 			long oldPrimKey, long newPrimKey)
 		throws Exception {
 
-		StringBundler sb = new StringBundler(10);
+		StringBundler sb = new StringBundler(11);
 
 		sb.append("update ResourcePermission set name = '");
 		sb.append(newClassName);
-		sb.append("', primKey = ");
+		sb.append("', primKey = '");
 		sb.append(newPrimKey);
-		sb.append(" where companyId = ");
+		sb.append("' where companyId = ");
 		sb.append(companyId);
 		sb.append(" and name = '");
 		sb.append(oldClassName);
-		sb.append("' and primKey = ");
+		sb.append("' and primKey = '");
 		sb.append(oldPrimKey);
+		sb.append("'");
 
 		runSQL(sb.toString());
 	}

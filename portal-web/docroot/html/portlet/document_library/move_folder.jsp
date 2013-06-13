@@ -32,7 +32,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 <liferay-util:include page="/html/portlet/document_library/top_links.jsp" />
 
 <c:if test="<%= cmd.equals(Constants.MOVE_FROM_TRASH) %>">
-	<div class="portlet-msg-alert">
+	<div class="alert alert-block">
 		<liferay-ui:message arguments="<%= folder.getName() %>" key="the-original-folder-does-not-exist-anymore" />
 	</div>
 </c:if>
@@ -120,10 +120,9 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 			Liferay.Util.selectEntity(
 				{
 					dialog: {
-						align: Liferay.Util.Window.ALIGN_CENTER,
 						constrain: true,
 						modal: true,
-						stack: true,
+						zIndex: Liferay.zIndex.WINDOW + 2,
 						width: 680
 					},
 					id: '<portlet:namespace />selectFolder',

@@ -112,6 +112,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the matching expando values
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ExpandoValue> findByTableId(long tableId)
 		throws SystemException {
 		return findByTableId(tableId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
@@ -130,6 +131,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the range of matching expando values
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ExpandoValue> findByTableId(long tableId, int start, int end)
 		throws SystemException {
 		return findByTableId(tableId, start, end, null);
@@ -149,6 +151,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the ordered range of matching expando values
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ExpandoValue> findByTableId(long tableId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -255,6 +258,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue findByTableId_First(long tableId,
 		OrderByComparator orderByComparator)
 		throws NoSuchValueException, SystemException {
@@ -285,6 +289,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the first matching expando value, or <code>null</code> if a matching expando value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue fetchByTableId_First(long tableId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<ExpandoValue> list = findByTableId(tableId, 0, 1, orderByComparator);
@@ -305,6 +310,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue findByTableId_Last(long tableId,
 		OrderByComparator orderByComparator)
 		throws NoSuchValueException, SystemException {
@@ -335,6 +341,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the last matching expando value, or <code>null</code> if a matching expando value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue fetchByTableId_Last(long tableId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByTableId(tableId);
@@ -359,6 +366,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @throws com.liferay.portlet.expando.NoSuchValueException if a expando value with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue[] findByTableId_PrevAndNext(long valueId, long tableId,
 		OrderByComparator orderByComparator)
 		throws NoSuchValueException, SystemException {
@@ -500,6 +508,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @param tableId the table ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByTableId(long tableId) throws SystemException {
 		for (ExpandoValue expandoValue : findByTableId(tableId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -514,6 +523,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the number of matching expando values
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByTableId(long tableId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_TABLEID;
 
@@ -589,6 +599,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the matching expando values
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ExpandoValue> findByColumnId(long columnId)
 		throws SystemException {
 		return findByColumnId(columnId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -608,6 +619,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the range of matching expando values
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ExpandoValue> findByColumnId(long columnId, int start, int end)
 		throws SystemException {
 		return findByColumnId(columnId, start, end, null);
@@ -627,6 +639,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the ordered range of matching expando values
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ExpandoValue> findByColumnId(long columnId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -733,6 +746,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue findByColumnId_First(long columnId,
 		OrderByComparator orderByComparator)
 		throws NoSuchValueException, SystemException {
@@ -763,6 +777,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the first matching expando value, or <code>null</code> if a matching expando value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue fetchByColumnId_First(long columnId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<ExpandoValue> list = findByColumnId(columnId, 0, 1,
@@ -784,6 +799,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue findByColumnId_Last(long columnId,
 		OrderByComparator orderByComparator)
 		throws NoSuchValueException, SystemException {
@@ -814,6 +830,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the last matching expando value, or <code>null</code> if a matching expando value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue fetchByColumnId_Last(long columnId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByColumnId(columnId);
@@ -838,6 +855,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @throws com.liferay.portlet.expando.NoSuchValueException if a expando value with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue[] findByColumnId_PrevAndNext(long valueId,
 		long columnId, OrderByComparator orderByComparator)
 		throws NoSuchValueException, SystemException {
@@ -979,6 +997,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @param columnId the column ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByColumnId(long columnId) throws SystemException {
 		for (ExpandoValue expandoValue : findByColumnId(columnId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -993,6 +1012,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the number of matching expando values
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByColumnId(long columnId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_COLUMNID;
 
@@ -1067,6 +1087,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the matching expando values
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ExpandoValue> findByRowId(long rowId) throws SystemException {
 		return findByRowId(rowId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1084,6 +1105,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the range of matching expando values
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ExpandoValue> findByRowId(long rowId, int start, int end)
 		throws SystemException {
 		return findByRowId(rowId, start, end, null);
@@ -1103,6 +1125,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the ordered range of matching expando values
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ExpandoValue> findByRowId(long rowId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -1209,6 +1232,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue findByRowId_First(long rowId,
 		OrderByComparator orderByComparator)
 		throws NoSuchValueException, SystemException {
@@ -1238,6 +1262,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the first matching expando value, or <code>null</code> if a matching expando value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue fetchByRowId_First(long rowId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<ExpandoValue> list = findByRowId(rowId, 0, 1, orderByComparator);
@@ -1258,6 +1283,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue findByRowId_Last(long rowId,
 		OrderByComparator orderByComparator)
 		throws NoSuchValueException, SystemException {
@@ -1287,6 +1313,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the last matching expando value, or <code>null</code> if a matching expando value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue fetchByRowId_Last(long rowId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByRowId(rowId);
@@ -1311,6 +1338,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @throws com.liferay.portlet.expando.NoSuchValueException if a expando value with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue[] findByRowId_PrevAndNext(long valueId, long rowId,
 		OrderByComparator orderByComparator)
 		throws NoSuchValueException, SystemException {
@@ -1452,6 +1480,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @param rowId the row ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByRowId(long rowId) throws SystemException {
 		for (ExpandoValue expandoValue : findByRowId(rowId, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null)) {
@@ -1466,6 +1495,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the number of matching expando values
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByRowId(long rowId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_ROWID;
 
@@ -1541,6 +1571,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the matching expando values
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ExpandoValue> findByT_C(long tableId, long columnId)
 		throws SystemException {
 		return findByT_C(tableId, columnId, QueryUtil.ALL_POS,
@@ -1561,6 +1592,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the range of matching expando values
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ExpandoValue> findByT_C(long tableId, long columnId, int start,
 		int end) throws SystemException {
 		return findByT_C(tableId, columnId, start, end, null);
@@ -1581,6 +1613,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the ordered range of matching expando values
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ExpandoValue> findByT_C(long tableId, long columnId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -1697,6 +1730,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue findByT_C_First(long tableId, long columnId,
 		OrderByComparator orderByComparator)
 		throws NoSuchValueException, SystemException {
@@ -1731,6 +1765,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the first matching expando value, or <code>null</code> if a matching expando value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue fetchByT_C_First(long tableId, long columnId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<ExpandoValue> list = findByT_C(tableId, columnId, 0, 1,
@@ -1753,6 +1788,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue findByT_C_Last(long tableId, long columnId,
 		OrderByComparator orderByComparator)
 		throws NoSuchValueException, SystemException {
@@ -1787,6 +1823,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the last matching expando value, or <code>null</code> if a matching expando value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue fetchByT_C_Last(long tableId, long columnId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByT_C(tableId, columnId);
@@ -1812,6 +1849,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @throws com.liferay.portlet.expando.NoSuchValueException if a expando value with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue[] findByT_C_PrevAndNext(long valueId, long tableId,
 		long columnId, OrderByComparator orderByComparator)
 		throws NoSuchValueException, SystemException {
@@ -1958,6 +1996,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @param columnId the column ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByT_C(long tableId, long columnId)
 		throws SystemException {
 		for (ExpandoValue expandoValue : findByT_C(tableId, columnId,
@@ -1974,6 +2013,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the number of matching expando values
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByT_C(long tableId, long columnId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_T_C;
@@ -2056,6 +2096,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the matching expando values
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ExpandoValue> findByT_CPK(long tableId, long classPK)
 		throws SystemException {
 		return findByT_CPK(tableId, classPK, QueryUtil.ALL_POS,
@@ -2076,6 +2117,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the range of matching expando values
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ExpandoValue> findByT_CPK(long tableId, long classPK,
 		int start, int end) throws SystemException {
 		return findByT_CPK(tableId, classPK, start, end, null);
@@ -2096,6 +2138,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the ordered range of matching expando values
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ExpandoValue> findByT_CPK(long tableId, long classPK,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -2213,6 +2256,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue findByT_CPK_First(long tableId, long classPK,
 		OrderByComparator orderByComparator)
 		throws NoSuchValueException, SystemException {
@@ -2247,6 +2291,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the first matching expando value, or <code>null</code> if a matching expando value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue fetchByT_CPK_First(long tableId, long classPK,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<ExpandoValue> list = findByT_CPK(tableId, classPK, 0, 1,
@@ -2269,6 +2314,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue findByT_CPK_Last(long tableId, long classPK,
 		OrderByComparator orderByComparator)
 		throws NoSuchValueException, SystemException {
@@ -2303,6 +2349,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the last matching expando value, or <code>null</code> if a matching expando value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue fetchByT_CPK_Last(long tableId, long classPK,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByT_CPK(tableId, classPK);
@@ -2328,6 +2375,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @throws com.liferay.portlet.expando.NoSuchValueException if a expando value with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue[] findByT_CPK_PrevAndNext(long valueId, long tableId,
 		long classPK, OrderByComparator orderByComparator)
 		throws NoSuchValueException, SystemException {
@@ -2474,6 +2522,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @param classPK the class p k
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByT_CPK(long tableId, long classPK)
 		throws SystemException {
 		for (ExpandoValue expandoValue : findByT_CPK(tableId, classPK,
@@ -2490,6 +2539,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the number of matching expando values
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByT_CPK(long tableId, long classPK)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_T_CPK;
@@ -2571,6 +2621,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the matching expando values
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ExpandoValue> findByT_R(long tableId, long rowId)
 		throws SystemException {
 		return findByT_R(tableId, rowId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -2591,6 +2642,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the range of matching expando values
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ExpandoValue> findByT_R(long tableId, long rowId, int start,
 		int end) throws SystemException {
 		return findByT_R(tableId, rowId, start, end, null);
@@ -2611,6 +2663,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the ordered range of matching expando values
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ExpandoValue> findByT_R(long tableId, long rowId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -2727,6 +2780,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue findByT_R_First(long tableId, long rowId,
 		OrderByComparator orderByComparator)
 		throws NoSuchValueException, SystemException {
@@ -2761,6 +2815,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the first matching expando value, or <code>null</code> if a matching expando value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue fetchByT_R_First(long tableId, long rowId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<ExpandoValue> list = findByT_R(tableId, rowId, 0, 1,
@@ -2783,6 +2838,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue findByT_R_Last(long tableId, long rowId,
 		OrderByComparator orderByComparator)
 		throws NoSuchValueException, SystemException {
@@ -2817,6 +2873,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the last matching expando value, or <code>null</code> if a matching expando value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue fetchByT_R_Last(long tableId, long rowId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByT_R(tableId, rowId);
@@ -2842,6 +2899,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @throws com.liferay.portlet.expando.NoSuchValueException if a expando value with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue[] findByT_R_PrevAndNext(long valueId, long tableId,
 		long rowId, OrderByComparator orderByComparator)
 		throws NoSuchValueException, SystemException {
@@ -2988,6 +3046,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @param rowId the row ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByT_R(long tableId, long rowId) throws SystemException {
 		for (ExpandoValue expandoValue : findByT_R(tableId, rowId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -3003,6 +3062,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the number of matching expando values
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByT_R(long tableId, long rowId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_T_R;
 
@@ -3074,6 +3134,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue findByC_R(long columnId, long rowId)
 		throws NoSuchValueException, SystemException {
 		ExpandoValue expandoValue = fetchByC_R(columnId, rowId);
@@ -3109,6 +3170,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the matching expando value, or <code>null</code> if a matching expando value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue fetchByC_R(long columnId, long rowId)
 		throws SystemException {
 		return fetchByC_R(columnId, rowId, true);
@@ -3123,6 +3185,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the matching expando value, or <code>null</code> if a matching expando value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue fetchByC_R(long columnId, long rowId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { columnId, rowId };
@@ -3214,6 +3277,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the expando value that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue removeByC_R(long columnId, long rowId)
 		throws NoSuchValueException, SystemException {
 		ExpandoValue expandoValue = findByC_R(columnId, rowId);
@@ -3229,6 +3293,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the number of matching expando values
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByC_R(long columnId, long rowId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_R;
 
@@ -3311,6 +3376,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the matching expando values
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ExpandoValue> findByC_C(long classNameId, long classPK)
 		throws SystemException {
 		return findByC_C(classNameId, classPK, QueryUtil.ALL_POS,
@@ -3331,6 +3397,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the range of matching expando values
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ExpandoValue> findByC_C(long classNameId, long classPK,
 		int start, int end) throws SystemException {
 		return findByC_C(classNameId, classPK, start, end, null);
@@ -3351,6 +3418,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the ordered range of matching expando values
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ExpandoValue> findByC_C(long classNameId, long classPK,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -3468,6 +3536,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue findByC_C_First(long classNameId, long classPK,
 		OrderByComparator orderByComparator)
 		throws NoSuchValueException, SystemException {
@@ -3502,6 +3571,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the first matching expando value, or <code>null</code> if a matching expando value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue fetchByC_C_First(long classNameId, long classPK,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<ExpandoValue> list = findByC_C(classNameId, classPK, 0, 1,
@@ -3524,6 +3594,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue findByC_C_Last(long classNameId, long classPK,
 		OrderByComparator orderByComparator)
 		throws NoSuchValueException, SystemException {
@@ -3558,6 +3629,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the last matching expando value, or <code>null</code> if a matching expando value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue fetchByC_C_Last(long classNameId, long classPK,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByC_C(classNameId, classPK);
@@ -3583,6 +3655,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @throws com.liferay.portlet.expando.NoSuchValueException if a expando value with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue[] findByC_C_PrevAndNext(long valueId, long classNameId,
 		long classPK, OrderByComparator orderByComparator)
 		throws NoSuchValueException, SystemException {
@@ -3729,6 +3802,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @param classPK the class p k
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByC_C(long classNameId, long classPK)
 		throws SystemException {
 		for (ExpandoValue expandoValue : findByC_C(classNameId, classPK,
@@ -3745,6 +3819,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the number of matching expando values
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByC_C(long classNameId, long classPK)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_C;
@@ -3823,6 +3898,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue findByT_C_C(long tableId, long columnId, long classPK)
 		throws NoSuchValueException, SystemException {
 		ExpandoValue expandoValue = fetchByT_C_C(tableId, columnId, classPK);
@@ -3862,6 +3938,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the matching expando value, or <code>null</code> if a matching expando value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue fetchByT_C_C(long tableId, long columnId, long classPK)
 		throws SystemException {
 		return fetchByT_C_C(tableId, columnId, classPK, true);
@@ -3877,6 +3954,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the matching expando value, or <code>null</code> if a matching expando value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue fetchByT_C_C(long tableId, long columnId, long classPK,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { tableId, columnId, classPK };
@@ -3975,6 +4053,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the expando value that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue removeByT_C_C(long tableId, long columnId, long classPK)
 		throws NoSuchValueException, SystemException {
 		ExpandoValue expandoValue = findByT_C_C(tableId, columnId, classPK);
@@ -3991,6 +4070,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the number of matching expando values
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByT_C_C(long tableId, long columnId, long classPK)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_T_C_C;
@@ -4086,6 +4166,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the matching expando values
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ExpandoValue> findByT_C_D(long tableId, long columnId,
 		String data) throws SystemException {
 		return findByT_C_D(tableId, columnId, data, QueryUtil.ALL_POS,
@@ -4107,6 +4188,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the range of matching expando values
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ExpandoValue> findByT_C_D(long tableId, long columnId,
 		String data, int start, int end) throws SystemException {
 		return findByT_C_D(tableId, columnId, data, start, end, null);
@@ -4128,6 +4210,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the ordered range of matching expando values
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ExpandoValue> findByT_C_D(long tableId, long columnId,
 		String data, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -4265,6 +4348,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue findByT_C_D_First(long tableId, long columnId,
 		String data, OrderByComparator orderByComparator)
 		throws NoSuchValueException, SystemException {
@@ -4303,6 +4387,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the first matching expando value, or <code>null</code> if a matching expando value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue fetchByT_C_D_First(long tableId, long columnId,
 		String data, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -4327,6 +4412,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue findByT_C_D_Last(long tableId, long columnId,
 		String data, OrderByComparator orderByComparator)
 		throws NoSuchValueException, SystemException {
@@ -4365,6 +4451,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the last matching expando value, or <code>null</code> if a matching expando value could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue fetchByT_C_D_Last(long tableId, long columnId,
 		String data, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -4392,6 +4479,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @throws com.liferay.portlet.expando.NoSuchValueException if a expando value with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue[] findByT_C_D_PrevAndNext(long valueId, long tableId,
 		long columnId, String data, OrderByComparator orderByComparator)
 		throws NoSuchValueException, SystemException {
@@ -4557,6 +4645,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @param data the data
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByT_C_D(long tableId, long columnId, String data)
 		throws SystemException {
 		for (ExpandoValue expandoValue : findByT_C_D(tableId, columnId, data,
@@ -4574,6 +4663,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the number of matching expando values
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByT_C_D(long tableId, long columnId, String data)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_T_C_D;
@@ -4653,6 +4743,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 *
 	 * @param expandoValue the expando value
 	 */
+	@Override
 	public void cacheResult(ExpandoValue expandoValue) {
 		EntityCacheUtil.putResult(ExpandoValueModelImpl.ENTITY_CACHE_ENABLED,
 			ExpandoValueImpl.class, expandoValue.getPrimaryKey(), expandoValue);
@@ -4675,6 +4766,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 *
 	 * @param expandoValues the expando values
 	 */
+	@Override
 	public void cacheResult(List<ExpandoValue> expandoValues) {
 		for (ExpandoValue expandoValue : expandoValues) {
 			if (EntityCacheUtil.getResult(
@@ -4838,6 +4930,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @param valueId the primary key for the new expando value
 	 * @return the new expando value
 	 */
+	@Override
 	public ExpandoValue create(long valueId) {
 		ExpandoValue expandoValue = new ExpandoValueImpl();
 
@@ -4855,6 +4948,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @throws com.liferay.portlet.expando.NoSuchValueException if a expando value with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue remove(long valueId)
 		throws NoSuchValueException, SystemException {
 		return remove((Serializable)valueId);
@@ -5195,6 +5289,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @throws com.liferay.portlet.expando.NoSuchValueException if a expando value with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue findByPrimaryKey(long valueId)
 		throws NoSuchValueException, SystemException {
 		return findByPrimaryKey((Serializable)valueId);
@@ -5255,6 +5350,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the expando value, or <code>null</code> if a expando value with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoValue fetchByPrimaryKey(long valueId)
 		throws SystemException {
 		return fetchByPrimaryKey((Serializable)valueId);
@@ -5266,6 +5362,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the expando values
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ExpandoValue> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -5282,6 +5379,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the range of expando values
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ExpandoValue> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
@@ -5300,6 +5398,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the ordered range of expando values
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ExpandoValue> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -5385,6 +5484,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (ExpandoValue expandoValue : findAll()) {
 			remove(expandoValue);
@@ -5397,6 +5497,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 * @return the number of expando values
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -5490,6 +5591,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		};
 
 	private static CacheModel<ExpandoValue> _nullExpandoValueCacheModel = new CacheModel<ExpandoValue>() {
+			@Override
 			public ExpandoValue toEntityModel() {
 				return _nullExpandoValue;
 			}

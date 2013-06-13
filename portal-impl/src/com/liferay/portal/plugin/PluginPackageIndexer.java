@@ -59,10 +59,12 @@ public class PluginPackageIndexer extends BaseIndexer {
 		setStagingAware(false);
 	}
 
+	@Override
 	public String[] getClassNames() {
 		return CLASS_NAMES;
 	}
 
+	@Override
 	public String getPortletId() {
 		return PORTLET_ID;
 	}
@@ -285,26 +287,27 @@ public class PluginPackageIndexer extends BaseIndexer {
 
 		String status = (String)searchContext.getAttribute(Field.STATUS);
 
-		if (Validator.isNotNull(status) && !status.equals("all")) {
-			BooleanQuery searchQuery = BooleanQueryFactoryUtil.create(
-				searchContext);
-
-			if (status.equals(
-					PluginPackageImpl.
-						STATUS_NOT_INSTALLED_OR_OLDER_VERSION_INSTALLED)) {
-
-				searchQuery.addExactTerm(
-					Field.STATUS, PluginPackageImpl.STATUS_NOT_INSTALLED);
-				searchQuery.addExactTerm(
-					Field.STATUS,
-					PluginPackageImpl.STATUS_OLDER_VERSION_INSTALLED);
-			}
-			else {
-				searchQuery.addExactTerm(Field.STATUS, status);
-			}
-
-			fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
+		if (Validator.isNull(status) || status.equals("all")) {
+			return;
 		}
+
+		BooleanQuery searchQuery = BooleanQueryFactoryUtil.create(
+			searchContext);
+
+		if (status.equals(
+				PluginPackageImpl.
+					STATUS_NOT_INSTALLED_OR_OLDER_VERSION_INSTALLED)) {
+
+			searchQuery.addExactTerm(
+				Field.STATUS, PluginPackageImpl.STATUS_NOT_INSTALLED);
+			searchQuery.addExactTerm(
+				Field.STATUS, PluginPackageImpl.STATUS_OLDER_VERSION_INSTALLED);
+		}
+		else {
+			searchQuery.addExactTerm(Field.STATUS, status);
+		}
+
+		fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
 	}
 
 }

@@ -17,12 +17,10 @@ package com.liferay.portlet.shopping.service;
 import com.liferay.portal.service.ServiceWrapper;
 
 /**
- * <p>
- * This class is a wrapper for {@link ShoppingItemService}.
- * </p>
+ * Provides a wrapper for {@link ShoppingItemService}.
  *
- * @author    Brian Wing Shun Chan
- * @see       ShoppingItemService
+ * @author Brian Wing Shun Chan
+ * @see ShoppingItemService
  * @generated
  */
 public class ShoppingItemServiceWrapper implements ShoppingItemService,
@@ -36,6 +34,7 @@ public class ShoppingItemServiceWrapper implements ShoppingItemService,
 	*
 	* @return the Spring bean ID for this bean
 	*/
+	@Override
 	public java.lang.String getBeanIdentifier() {
 		return _shoppingItemService.getBeanIdentifier();
 	}
@@ -45,10 +44,12 @@ public class ShoppingItemServiceWrapper implements ShoppingItemService,
 	*
 	* @param beanIdentifier the Spring bean ID for this bean
 	*/
+	@Override
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		_shoppingItemService.setBeanIdentifier(beanIdentifier);
 	}
 
+	@Override
 	public void addBookItems(long groupId, long categoryId,
 		java.lang.String[] isbns)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -56,6 +57,7 @@ public class ShoppingItemServiceWrapper implements ShoppingItemService,
 		_shoppingItemService.addBookItems(groupId, categoryId, isbns);
 	}
 
+	@Override
 	public com.liferay.portlet.shopping.model.ShoppingItem addItem(
 		long groupId, long categoryId, java.lang.String sku,
 		java.lang.String name, java.lang.String description,
@@ -78,30 +80,35 @@ public class ShoppingItemServiceWrapper implements ShoppingItemService,
 			largeImageURL, largeFile, itemFields, itemPrices, serviceContext);
 	}
 
+	@Override
 	public void deleteItem(long itemId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_shoppingItemService.deleteItem(itemId);
 	}
 
+	@Override
 	public int getCategoriesItemsCount(long groupId,
 		java.util.List<java.lang.Long> categoryIds)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _shoppingItemService.getCategoriesItemsCount(groupId, categoryIds);
 	}
 
+	@Override
 	public com.liferay.portlet.shopping.model.ShoppingItem getItem(long itemId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _shoppingItemService.getItem(itemId);
 	}
 
+	@Override
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> getItems(
 		long groupId, long categoryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _shoppingItemService.getItems(groupId, categoryId);
 	}
 
+	@Override
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> getItems(
 		long groupId, long categoryId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
@@ -110,11 +117,13 @@ public class ShoppingItemServiceWrapper implements ShoppingItemService,
 			obc);
 	}
 
+	@Override
 	public int getItemsCount(long groupId, long categoryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _shoppingItemService.getItemsCount(groupId, categoryId);
 	}
 
+	@Override
 	public com.liferay.portlet.shopping.model.ShoppingItem[] getItemsPrevAndNext(
 		long itemId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -122,6 +131,7 @@ public class ShoppingItemServiceWrapper implements ShoppingItemService,
 		return _shoppingItemService.getItemsPrevAndNext(itemId, obc);
 	}
 
+	@Override
 	public com.liferay.portlet.shopping.model.ShoppingItem updateItem(
 		long itemId, long groupId, long categoryId, java.lang.String sku,
 		java.lang.String name, java.lang.String description,
@@ -160,10 +170,12 @@ public class ShoppingItemServiceWrapper implements ShoppingItemService,
 		_shoppingItemService = shoppingItemService;
 	}
 
+	@Override
 	public ShoppingItemService getWrappedService() {
 		return _shoppingItemService;
 	}
 
+	@Override
 	public void setWrappedService(ShoppingItemService shoppingItemService) {
 		_shoppingItemService = shoppingItemService;
 	}

@@ -77,26 +77,32 @@ public class CounterModelImpl extends BaseModelImpl<Counter>
 	public CounterModelImpl() {
 	}
 
+	@Override
 	public String getPrimaryKey() {
 		return _name;
 	}
 
+	@Override
 	public void setPrimaryKey(String primaryKey) {
 		setName(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _name;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey((String)primaryKeyObj);
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return Counter.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return Counter.class.getName();
 	}
@@ -126,6 +132,7 @@ public class CounterModelImpl extends BaseModelImpl<Counter>
 		}
 	}
 
+	@Override
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -135,14 +142,17 @@ public class CounterModelImpl extends BaseModelImpl<Counter>
 		}
 	}
 
+	@Override
 	public void setName(String name) {
 		_name = name;
 	}
 
+	@Override
 	public long getCurrentId() {
 		return _currentId;
 	}
 
+	@Override
 	public void setCurrentId(long currentId) {
 		_currentId = currentId;
 	}
@@ -169,6 +179,7 @@ public class CounterModelImpl extends BaseModelImpl<Counter>
 		return counterImpl;
 	}
 
+	@Override
 	public int compareTo(Counter counter) {
 		String primaryKey = counter.getPrimaryKey();
 
@@ -177,18 +188,15 @@ public class CounterModelImpl extends BaseModelImpl<Counter>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof Counter)) {
 			return false;
 		}
 
-		Counter counter = null;
-
-		try {
-			counter = (Counter)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		Counter counter = (Counter)obj;
 
 		String primaryKey = counter.getPrimaryKey();
 
@@ -239,6 +247,7 @@ public class CounterModelImpl extends BaseModelImpl<Counter>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(10);
 

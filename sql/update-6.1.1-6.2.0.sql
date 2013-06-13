@@ -1,3 +1,5 @@
+alter table Address add uuid_ VARCHAR(75) null;
+
 update BlogsEntry set status = 2 where status = 9;
 
 alter table BookmarksEntry add status INTEGER;
@@ -23,6 +25,23 @@ update BookmarksFolder set status = 0;
 update BookmarksFolder set statusByUserId = userId;
 update BookmarksFolder set statusByUserName = userName;
 update BookmarksFolder set statusDate = modifiedDate;
+
+create table BackgroundTask (
+	backgroundTaskId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	name VARCHAR(75) null,
+	servletContextNames VARCHAR(255) null,
+	taskExecutorClassName VARCHAR(200) null,
+	taskContext TEXT null,
+	completed BOOLEAN,
+	completionDate DATE null,
+	status INTEGER
+);
 
 alter table Contact_ add classNameId LONG;
 alter table Contact_ add classPK LONG;
@@ -283,6 +302,8 @@ insert into Country (countryId, name, a2, a3, number_, idd_, zipRequired, active
 
 alter table DDMStructure add parentStructureId LONG;
 
+drop index IX_490E7A1E on DDMStructure;
+
 alter table DDMTemplate add cacheable BOOLEAN;
 alter table DDMTemplate add smallImage BOOLEAN;
 alter table DDMTemplate add smallImageId LONG;
@@ -295,7 +316,6 @@ alter table DLFileEntry add classNameId LONG;
 alter table DLFileEntry add classPK LONG;
 alter table DLFileEntry add manualCheckInRequired BOOLEAN;
 
-alter table DLFileRank add uuid_ VARCHAR(75) null;
 alter table DLFileRank add active_ BOOLEAN;
 
 COMMIT_TRANSACTION;
@@ -324,6 +344,8 @@ update DLFolder set statusByUserId = userId;
 update DLFolder set statusByUserName = userName;
 update DLFolder set statusDate = modifiedDate;
 
+alter table EmailAddress add uuid_ VARCHAR(75) null;
+
 alter table ExpandoRow add modifiedDate DATE null;
 
 COMMIT_TRANSACTION;
@@ -334,6 +356,7 @@ alter table Group_ add uuid_ VARCHAR(75) null;
 alter table Group_ add treePath STRING null;
 
 update Group_ set site = FALSE where name = 'Control Panel';
+update Group_ set site = TRUE where friendlyURL = '/global';
 
 drop table Groups_Permissions;
 
@@ -357,6 +380,24 @@ create table JournalFolder (
 	statusByUserId LONG,
 	statusByUserName VARCHAR(75) null,
 	statusDate DATE null
+);
+
+alter table Layout add userId LONG;
+alter table Layout add userName VARCHAR(75) null;
+
+create table LayoutFriendlyURL (
+	uuid_ VARCHAR(75) null,
+	layoutFriendlyURLId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	plid LONG,
+	privateLayout BOOLEAN,
+	friendlyURL VARCHAR(255) null,
+	languageId VARCHAR(75) null
 );
 
 alter table LayoutPrototype add userId LONG;
@@ -424,6 +465,8 @@ drop index IX_ED7CF243 on PasswordPolicyRel;
 
 drop table Permission_;
 
+alter table Phone add uuid_ VARCHAR(75) null;
+
 alter table PollsChoice add groupId LONG;
 alter table PollsChoice add companyId LONG;
 alter table PollsChoice add userId LONG;
@@ -460,6 +503,8 @@ alter table Role_ add modifiedDate DATE null;
 drop table Roles_Permissions;
 
 alter table SocialActivity add activitySetId LONG;
+alter table SocialActivity add parentClassNameId LONG;
+alter table SocialActivity add parentClassPK LONG;
 
 alter table SocialActivityCounter add active_ BOOLEAN;
 
@@ -477,7 +522,22 @@ create table SocialActivitySet (
 	classNameId LONG,
 	classPK LONG,
 	type_ INTEGER,
+	extraData STRING null,
 	activityCount INTEGER
+);
+
+create table SystemEvent (
+	systemEventId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	classNameId LONG,
+	classPK LONG,
+	classUuid VARCHAR(75) null,
+	type_ INTEGER,
+	extraData TEXT null
 );
 
 create table TrashEntry (
@@ -513,7 +573,11 @@ alter table UserGroup add userName VARCHAR(75) null;
 alter table UserGroup add createDate DATE null;
 alter table UserGroup add modifiedDate DATE null;
 
+alter table UserNotificationEvent add delivered BOOLEAN;
+
 drop table Users_Permissions;
+
+alter table Website add uuid_ VARCHAR(75) null;
 
 alter table WikiNode add status INTEGER;
 alter table WikiNode add statusByUserId LONG;

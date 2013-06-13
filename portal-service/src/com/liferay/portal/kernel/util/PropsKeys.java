@@ -221,6 +221,10 @@ public interface PropsKeys {
 
 	public static final String AUTO_DEPLOY_WEBSPHERE_WSADMIN_APP_MANAGER_QUERY = "auto.deploy.websphere.wsadmin.app.manager.query";
 
+	public static final String AUTO_DEPLOY_WEBSPHERE_WSADMIN_APP_NAME_SUFFIX = "auto.deploy.websphere.wsadmin.app.name.suffix";
+
+	public static final String AUTO_DEPLOY_WEBSPHERE_WSADMIN_PROPERTIES_FILE = "auto.deploy.websphere.wsadmin.properties.file.name";
+
 	public static final String AUTO_LOGIN_HOOKS = "auto.login.hooks";
 
 	public static final String AUTO_LOGIN_IGNORE_HOSTS = "auto.login.ignore.hosts";
@@ -464,6 +468,8 @@ public interface PropsKeys {
 	public static final String COMPANY_SETTINGS_FORM_MISCELLANEOUS = "company.settings.form.miscellaneous";
 
 	public static final String CONTROL_PANEL_DEFAULT_ENTRY_CLASS = "control.panel.default.entry.class";
+
+	public static final String CONTROL_PANEL_HOME_PORTLET_ID = "control.panel.home.portlet.id";
 
 	public static final String CONTROL_PANEL_LAYOUT_FRIENDLY_URL = "control.panel.layout.friendly.url";
 
@@ -758,8 +764,6 @@ public interface PropsKeys {
 	public static final String DYNAMIC_DATA_LISTS_RECORD_SET_FORCE_AUTOGENERATE_KEY = "dynamic.data.lists.record.set.force.autogenerate.key";
 
 	public static final String DYNAMIC_DATA_LISTS_STORAGE_TYPE = "dynamic.data.lists.storage.type";
-
-	public static final String DYNAMIC_DATA_LISTS_TRANSFORMER_LISTENER = "dynamic.data.lists.transformer.listener";
 
 	public static final String DYNAMIC_DATA_MAPPING_IMAGE_EXTENSIONS = "dynamic.data.mapping.image.extensions";
 
@@ -1419,6 +1423,8 @@ public interface PropsKeys {
 
 	public static final String LUCENE_ANALYZER_MAX_TOKENS = "lucene.analyzer.max.tokens";
 
+	public static final String LUCENE_BOOLEAN_QUERY_CLAUSE_MAX_SIZE = "lucene.boolean.query.clause.max.size";
+
 	public static final String LUCENE_BUFFER_SIZE = "lucene.buffer.size";
 
 	public static final String LUCENE_CLUSTER_INDEX_LOADING_SYNC_TIMEOUT = "lucene.cluster.index.loading.sync.timeout";
@@ -1438,6 +1444,10 @@ public interface PropsKeys {
 	public static final String LUCENE_MERGE_POLICY = "lucene.merge.policy";
 
 	public static final String LUCENE_REPLICATE_WRITE = "lucene.replicate.write";
+
+	public static final String LUCENE_SPELL_CHECKER_DICTIONARY = "lucene.spell.checker.dictionary";
+
+	public static final String LUCENE_SPELL_CHECKER_SUPPORTED_LOCALES = "lucene.spell.checker.supported.locales";
 
 	public static final String LUCENE_STORE_TYPE = "lucene.store.type";
 
@@ -1891,8 +1901,6 @@ public interface PropsKeys {
 
 	public static final String POP_SERVER_SUBDOMAIN = "pop.server.subdomain";
 
-	public static final String PORTAL_CTX = "portal.ctx";
-
 	public static final String PORTAL_IMPERSONATION_ENABLE = "portal.impersonation.enable";
 
 	public static final String PORTAL_INSTANCE_HTTP_PORT = "portal.instance.http.port";
@@ -1907,6 +1915,12 @@ public interface PropsKeys {
 
 	public static final String PORTAL_PROXY_PATH = "portal.proxy.path";
 
+	public static final String PORTAL_RESILIENCY_ENABLED = "portal.resiliency.enabled";
+
+	public static final String PORTAL_RESILIENCY_PORTLET_SHOW_FOOTER = "portal.resiliency.portlet.show.footer";
+
+	public static final String PORTAL_RESILIENCY_SPI_AGENT_CLIENT_POOL_MAX_SIZE = "portal.resiliency.spi.agent.client.pool.max.size";
+
 	public static final String PORTAL_SECURITY_MANAGER_FILE_CHECKER_DEFAULT_READ_PATHS = "portal.security.manager.file.checker.default.read.paths";
 
 	public static final String PORTAL_SECURITY_MANAGER_PRELOAD_CLASSLOADER_CLASSES = "portal.security.manager.preload.classloader.classes";
@@ -1920,6 +1934,8 @@ public interface PropsKeys {
 	public static final String PORTLET_ADD_DEFAULT_RESOURCE_CHECK_WHITELIST_ACTIONS = "portlet.add.default.resource.check.whitelist.actions";
 
 	public static final String PORTLET_CONTAINER_RESTRICT = "portlet.container.restrict";
+
+	public static final String PORTLET_CROSS_LAYOUT_INVOCATION_MODE = "portlet.cross.layout.invocation.mode";
 
 	public static final String PORTLET_CSS_ENABLED = "portlet.css.enabled";
 
@@ -1938,6 +1954,8 @@ public interface PropsKeys {
 	public static final String PORTLET_URL_APPEND_PARAMETERS = "portlet.url.append.parameters";
 
 	public static final String PORTLET_URL_ESCAPE_XML = "portlet.url.escape.xml";
+
+	public static final String PORTLET_URL_GENERATE_BY_PATH_ENABLED = "portlet.url.generate.by.path.enabled";
 
 	public static final String PORTLET_URL_REFRESH_URL_RESERVED_PARAMETERS = "portlet.url.refresh.url.reserved.parameters";
 
@@ -2069,6 +2087,8 @@ public interface PropsKeys {
 
 	public static final String SESSION_COOKIE_DOMAIN = "session.cookie.domain";
 
+	public static final String SESSION_COOKIE_USE_FULL_HOSTNAME = "session.cookie.use.full.hostname";
+
 	public static final String SESSION_DISABLED = "session.disabled";
 
 	public static final String SESSION_ENABLE_PERSISTENT_COOKIES = "session.enable.persistent.cookies";
@@ -2173,6 +2193,8 @@ public interface PropsKeys {
 
 	public static final String SITEMINDER_USER_HEADER = "siteminder.user.header";
 
+	public static final String SITES_CONTENT_SHARING_THROUGH_ADMINISTRATORS_ENABLED = "sites.content.sharing.through.administrators.enabled";
+
 	public static final String SITES_CONTENT_SHARING_WITH_CHILDREN_ENABLED = "sites.content.sharing.with.children.enabled";
 
 	public static final String SITES_CONTROL_PANEL_MEMBERS_VISIBLE = "sites.control.panel.members.visible";
@@ -2213,11 +2235,11 @@ public interface PropsKeys {
 
 	public static final String SOCIAL_ACTIVITY_CONTRIBUTION_LIMIT_VALUES = "social.activity.contribution.limit.values";
 
-	public static final String SOCIAL_ACTIVITY_COUNTER_LOCK_RETRY_DELAY = "social.activity.counter.lock.retry.delay";
-
-	public static final String SOCIAL_ACTIVITY_COUNTER_LOCK_TIMEOUT = "social.activity.counter.lock.timeout";
-
 	public static final String SOCIAL_ACTIVITY_COUNTER_PERIOD_LENGTH = "social.activity.counter.period.length";
+
+	public static final String SOCIAL_ACTIVITY_LOCK_RETRY_DELAY = "social.activity.lock.retry.delay";
+
+	public static final String SOCIAL_ACTIVITY_LOCK_TIMEOUT = "social.activity.lock.timeout";
 
 	public static final String SOCIAL_ACTIVITY_PARTICIPATION_INCREMENTS = "social.activity.participation.increments";
 

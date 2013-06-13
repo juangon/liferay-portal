@@ -109,6 +109,7 @@ public class ContactCacheModel implements CacheModel<Contact>, Externalizable {
 		return sb.toString();
 	}
 
+	@Override
 	public Contact toEntityModel() {
 		ContactImpl contactImpl = new ContactImpl();
 
@@ -291,6 +292,7 @@ public class ContactCacheModel implements CacheModel<Contact>, Externalizable {
 		return contactImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		contactId = objectInput.readLong();
 		companyId = objectInput.readLong();
@@ -327,6 +329,7 @@ public class ContactCacheModel implements CacheModel<Contact>, Externalizable {
 		hoursOfOperation = objectInput.readUTF();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(contactId);

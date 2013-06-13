@@ -110,6 +110,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	 * @return the matching portlets
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Portlet> findByCompanyId(long companyId)
 		throws SystemException {
 		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -129,6 +130,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	 * @return the range of matching portlets
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Portlet> findByCompanyId(long companyId, int start, int end)
 		throws SystemException {
 		return findByCompanyId(companyId, start, end, null);
@@ -148,6 +150,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	 * @return the ordered range of matching portlets
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Portlet> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -254,6 +257,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	 * @throws com.liferay.portal.NoSuchPortletException if a matching portlet could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Portlet findByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchPortletException, SystemException {
@@ -283,6 +287,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	 * @return the first matching portlet, or <code>null</code> if a matching portlet could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Portlet fetchByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<Portlet> list = findByCompanyId(companyId, 0, 1, orderByComparator);
@@ -303,6 +308,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	 * @throws com.liferay.portal.NoSuchPortletException if a matching portlet could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Portlet findByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchPortletException, SystemException {
@@ -332,6 +338,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	 * @return the last matching portlet, or <code>null</code> if a matching portlet could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Portlet fetchByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByCompanyId(companyId);
@@ -356,6 +363,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	 * @throws com.liferay.portal.NoSuchPortletException if a portlet with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Portlet[] findByCompanyId_PrevAndNext(long id, long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchPortletException, SystemException {
@@ -497,6 +505,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	 * @param companyId the company ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (Portlet portlet : findByCompanyId(companyId, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null)) {
@@ -511,6 +520,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	 * @return the number of matching portlets
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByCompanyId(long companyId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMPANYID;
 
@@ -577,6 +587,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	 * @throws com.liferay.portal.NoSuchPortletException if a matching portlet could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Portlet findByC_P(long companyId, String portletId)
 		throws NoSuchPortletException, SystemException {
 		Portlet portlet = fetchByC_P(companyId, portletId);
@@ -612,6 +623,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	 * @return the matching portlet, or <code>null</code> if a matching portlet could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Portlet fetchByC_P(long companyId, String portletId)
 		throws SystemException {
 		return fetchByC_P(companyId, portletId, true);
@@ -626,6 +638,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	 * @return the matching portlet, or <code>null</code> if a matching portlet could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Portlet fetchByC_P(long companyId, String portletId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, portletId };
@@ -732,6 +745,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	 * @return the portlet that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Portlet removeByC_P(long companyId, String portletId)
 		throws NoSuchPortletException, SystemException {
 		Portlet portlet = findByC_P(companyId, portletId);
@@ -747,6 +761,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	 * @return the number of matching portlets
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByC_P(long companyId, String portletId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_P;
@@ -821,6 +836,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	 *
 	 * @param portlet the portlet
 	 */
+	@Override
 	public void cacheResult(Portlet portlet) {
 		EntityCacheUtil.putResult(PortletModelImpl.ENTITY_CACHE_ENABLED,
 			PortletImpl.class, portlet.getPrimaryKey(), portlet);
@@ -837,6 +853,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	 *
 	 * @param portlets the portlets
 	 */
+	@Override
 	public void cacheResult(List<Portlet> portlets) {
 		for (Portlet portlet : portlets) {
 			if (EntityCacheUtil.getResult(
@@ -956,6 +973,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	 * @param id the primary key for the new portlet
 	 * @return the new portlet
 	 */
+	@Override
 	public Portlet create(long id) {
 		Portlet portlet = new PortletImpl();
 
@@ -973,6 +991,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	 * @throws com.liferay.portal.NoSuchPortletException if a portlet with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Portlet remove(long id)
 		throws NoSuchPortletException, SystemException {
 		return remove((Serializable)id);
@@ -1168,6 +1187,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	 * @throws com.liferay.portal.NoSuchPortletException if a portlet with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Portlet findByPrimaryKey(long id)
 		throws NoSuchPortletException, SystemException {
 		return findByPrimaryKey((Serializable)id);
@@ -1227,6 +1247,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	 * @return the portlet, or <code>null</code> if a portlet with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Portlet fetchByPrimaryKey(long id) throws SystemException {
 		return fetchByPrimaryKey((Serializable)id);
 	}
@@ -1237,6 +1258,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	 * @return the portlets
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Portlet> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1253,6 +1275,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	 * @return the range of portlets
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Portlet> findAll(int start, int end) throws SystemException {
 		return findAll(start, end, null);
 	}
@@ -1270,6 +1293,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	 * @return the ordered range of portlets
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Portlet> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -1355,6 +1379,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (Portlet portlet : findAll()) {
 			remove(portlet);
@@ -1367,6 +1392,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	 * @return the number of portlets
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -1460,6 +1486,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 		};
 
 	private static CacheModel<Portlet> _nullPortletCacheModel = new CacheModel<Portlet>() {
+			@Override
 			public Portlet toEntityModel() {
 				return _nullPortlet;
 			}

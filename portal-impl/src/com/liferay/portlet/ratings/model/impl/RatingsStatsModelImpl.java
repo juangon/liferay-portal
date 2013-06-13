@@ -91,26 +91,32 @@ public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats>
 	public RatingsStatsModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _statsId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setStatsId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _statsId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return RatingsStats.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return RatingsStats.class.getName();
 	}
@@ -168,14 +174,17 @@ public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats>
 		}
 	}
 
+	@Override
 	public long getStatsId() {
 		return _statsId;
 	}
 
+	@Override
 	public void setStatsId(long statsId) {
 		_statsId = statsId;
 	}
 
+	@Override
 	public String getClassName() {
 		if (getClassNameId() <= 0) {
 			return StringPool.BLANK;
@@ -184,6 +193,7 @@ public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats>
 		return PortalUtil.getClassName(getClassNameId());
 	}
 
+	@Override
 	public void setClassName(String className) {
 		long classNameId = 0;
 
@@ -194,10 +204,12 @@ public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats>
 		setClassNameId(classNameId);
 	}
 
+	@Override
 	public long getClassNameId() {
 		return _classNameId;
 	}
 
+	@Override
 	public void setClassNameId(long classNameId) {
 		_columnBitmask |= CLASSNAMEID_COLUMN_BITMASK;
 
@@ -214,10 +226,12 @@ public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats>
 		return _originalClassNameId;
 	}
 
+	@Override
 	public long getClassPK() {
 		return _classPK;
 	}
 
+	@Override
 	public void setClassPK(long classPK) {
 		_columnBitmask |= CLASSPK_COLUMN_BITMASK;
 
@@ -234,26 +248,32 @@ public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats>
 		return _originalClassPK;
 	}
 
+	@Override
 	public int getTotalEntries() {
 		return _totalEntries;
 	}
 
+	@Override
 	public void setTotalEntries(int totalEntries) {
 		_totalEntries = totalEntries;
 	}
 
+	@Override
 	public double getTotalScore() {
 		return _totalScore;
 	}
 
+	@Override
 	public void setTotalScore(double totalScore) {
 		_totalScore = totalScore;
 	}
 
+	@Override
 	public double getAverageScore() {
 		return _averageScore;
 	}
 
+	@Override
 	public void setAverageScore(double averageScore) {
 		_averageScore = averageScore;
 	}
@@ -301,6 +321,7 @@ public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats>
 		return ratingsStatsImpl;
 	}
 
+	@Override
 	public int compareTo(RatingsStats ratingsStats) {
 		long primaryKey = ratingsStats.getPrimaryKey();
 
@@ -317,18 +338,15 @@ public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof RatingsStats)) {
 			return false;
 		}
 
-		RatingsStats ratingsStats = null;
-
-		try {
-			ratingsStats = (RatingsStats)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		RatingsStats ratingsStats = (RatingsStats)obj;
 
 		long primaryKey = ratingsStats.getPrimaryKey();
 
@@ -400,6 +418,7 @@ public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(22);
 

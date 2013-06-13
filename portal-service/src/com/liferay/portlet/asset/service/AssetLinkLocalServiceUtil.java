@@ -18,11 +18,12 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
- * The utility for the asset link local service. This utility wraps {@link com.liferay.portlet.asset.service.impl.AssetLinkLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
+ * Provides the local service utility for AssetLink. This utility wraps
+ * {@link com.liferay.portlet.asset.service.impl.AssetLinkLocalServiceImpl} and is the
+ * primary access point for service operations in application layer code running
+ * on the local server. Methods of this service will not have security checks
+ * based on the propagated JAAS credentials because this service can only be
+ * accessed from within the same VM.
  *
  * @author Brian Wing Shun Chan
  * @see AssetLinkLocalService
@@ -413,6 +414,14 @@ public class AssetLinkLocalServiceUtil {
 		long entryId, int typeId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getReverseLinks(entryId, typeId);
+	}
+
+	public static com.liferay.portlet.asset.model.AssetLink updateLink(
+		long userId, long entryId1, long entryId2, int typeId, int weight)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .updateLink(userId, entryId1, entryId2, typeId, weight);
 	}
 
 	/**

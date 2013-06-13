@@ -30,6 +30,7 @@ public class LongWrapper
 		_value = value;
 	}
 
+	@Override
 	public int compareTo(LongWrapper longWrapper) {
 		if (longWrapper == null) {
 			return 1;

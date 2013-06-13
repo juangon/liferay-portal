@@ -26,6 +26,8 @@ public class SocialActivityConstants {
 
 	public static final int TYPE_ADD_VOTE = 10004;
 
+	public static final int TYPE_DELETE = 10000;
+
 	public static final int TYPE_MOVE_ATTACHMENT_TO_TRASH = 10009;
 
 	public static final int TYPE_MOVE_TO_TRASH = 10007;
@@ -38,6 +40,11 @@ public class SocialActivityConstants {
 
 	public static final int TYPE_UNSUBSCRIBE = 10003;
 
+	/**
+	 * @see {@link
+	 *      com.liferay.portlet.social.service.impl.SocialActivityLocalServiceImpl#isLogActivity(
+	 *      SocialActivity)}
+	 */
 	public static final int TYPE_VIEW = 10001;
 
 }

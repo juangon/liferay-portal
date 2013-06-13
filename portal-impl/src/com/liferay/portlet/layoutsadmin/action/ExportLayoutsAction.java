@@ -15,39 +15,34 @@
 package com.liferay.portlet.layoutsadmin.action;
 
 import com.liferay.portal.NoSuchGroupException;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.lar.ExportImportUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.DateRange;
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
-import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.sites.action.ActionUtil;
 
 import java.io.File;
 import java.io.FileInputStream;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -76,12 +71,11 @@ public class ExportLayoutsAction extends PortletAction {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
+
 		File file = null;
 
 		try {
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
-
 			long groupId = ParamUtil.getLong(actionRequest, "groupId");
 			boolean privateLayout = ParamUtil.getBoolean(
 				actionRequest, "privateLayout");
@@ -90,93 +84,40 @@ public class ExportLayoutsAction extends PortletAction {
 				ParamUtil.getString(actionRequest, "layoutIds"));
 			String fileName = ParamUtil.getString(
 				actionRequest, "exportFileName");
-			String range = ParamUtil.getString(actionRequest, "range");
 
-			Date startDate = null;
-			Date endDate = null;
+			DateRange dateRange = ExportImportUtil.getDateRange(
+				actionRequest, groupId, privateLayout, 0, null);
 
-			if (range.equals("dateRange")) {
-				int startDateMonth = ParamUtil.getInteger(
-					actionRequest, "startDateMonth");
-				int startDateDay = ParamUtil.getInteger(
-					actionRequest, "startDateDay");
-				int startDateYear = ParamUtil.getInteger(
-					actionRequest, "startDateYear");
-				int startDateHour = ParamUtil.getInteger(
-					actionRequest, "startDateHour");
-				int startDateMinute = ParamUtil.getInteger(
-					actionRequest, "startDateMinute");
-				int startDateAmPm = ParamUtil.getInteger(
-					actionRequest, "startDateAmPm");
+			Date startDate = dateRange.getStartDate();
+			Date endDate = dateRange.getEndDate();
 
-				if (startDateAmPm == Calendar.PM) {
-					startDateHour += 12;
+			if (Validator.isNotNull(cmd)) {
+				file = LayoutServiceUtil.exportLayoutsAsFile(
+					groupId, privateLayout, layoutIds,
+					actionRequest.getParameterMap(), startDate, endDate);
+
+				HttpServletRequest request = PortalUtil.getHttpServletRequest(
+					actionRequest);
+				HttpServletResponse response =
+					PortalUtil.getHttpServletResponse(actionResponse);
+
+				ServletResponseUtil.sendFile(
+					request, response, fileName, new FileInputStream(file),
+					ContentTypes.APPLICATION_ZIP);
+
+				setForward(actionRequest, ActionConstants.COMMON_NULL);
+			}
+			else {
+				if (startDate != null) {
+					actionResponse.setRenderParameter(
+						"startDate", String.valueOf(startDate.getTime()));
 				}
 
-				startDate = PortalUtil.getDate(
-					startDateMonth, startDateDay, startDateYear, startDateHour,
-					startDateMinute, themeDisplay.getTimeZone(),
-					PortalException.class);
-
-				int endDateMonth = ParamUtil.getInteger(
-					actionRequest, "endDateMonth");
-				int endDateDay = ParamUtil.getInteger(
-					actionRequest, "endDateDay");
-				int endDateYear = ParamUtil.getInteger(
-					actionRequest, "endDateYear");
-				int endDateHour = ParamUtil.getInteger(
-					actionRequest, "endDateHour");
-				int endDateMinute = ParamUtil.getInteger(
-					actionRequest, "endDateMinute");
-				int endDateAmPm = ParamUtil.getInteger(
-					actionRequest, "endDateAmPm");
-
-				if (endDateAmPm == Calendar.PM) {
-					endDateHour += 12;
-				}
-
-				endDate = PortalUtil.getDate(
-					endDateMonth, endDateDay, endDateYear, endDateHour,
-					endDateMinute, themeDisplay.getTimeZone(),
-					PortalException.class);
-			}
-			else if (range.equals("fromLastPublishDate")) {
-				LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
-					groupId, privateLayout);
-
-				long lastPublishDate = GetterUtil.getLong(
-					layoutSet.getSettingsProperty("last-publish-date"));
-
-				if (lastPublishDate > 0) {
-					endDate = new Date();
-
-					startDate = new Date(lastPublishDate);
+				if (endDate != null) {
+					actionResponse.setRenderParameter(
+						"endDate", String.valueOf(endDate.getTime()));
 				}
 			}
-			else if (range.equals("last")) {
-				int rangeLast = ParamUtil.getInteger(actionRequest, "last");
-
-				Date now = new Date();
-
-				startDate = new Date(now.getTime() - (rangeLast * Time.HOUR));
-
-				endDate = now;
-			}
-
-			file = LayoutServiceUtil.exportLayoutsAsFile(
-				groupId, privateLayout, layoutIds,
-				actionRequest.getParameterMap(), startDate, endDate);
-
-			HttpServletRequest request = PortalUtil.getHttpServletRequest(
-				actionRequest);
-			HttpServletResponse response = PortalUtil.getHttpServletResponse(
-				actionResponse);
-
-			ServletResponseUtil.sendFile(
-				request, response, fileName, new FileInputStream(file),
-				ContentTypes.APPLICATION_ZIP);
-
-			setForward(actionRequest, ActionConstants.COMMON_NULL);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

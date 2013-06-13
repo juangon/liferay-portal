@@ -53,6 +53,7 @@ import java.util.List;
 public class JournalFolderLocalServiceImpl
 	extends JournalFolderLocalServiceBaseImpl {
 
+	@Override
 	public JournalFolder addFolder(
 			long userId, long groupId, long parentFolderId, String name,
 			String description, ServiceContext serviceContext)
@@ -99,6 +100,7 @@ public class JournalFolderLocalServiceImpl
 	}
 
 	@Indexable(type = IndexableType.DELETE)
+	@Override
 	public JournalFolder deleteFolder(JournalFolder folder)
 		throws PortalException, SystemException {
 
@@ -106,6 +108,7 @@ public class JournalFolderLocalServiceImpl
 	}
 
 	@Indexable(type = IndexableType.DELETE)
+	@Override
 	public JournalFolder deleteFolder(
 			JournalFolder folder, boolean includeTrashedEntries)
 		throws PortalException, SystemException {
@@ -154,6 +157,7 @@ public class JournalFolderLocalServiceImpl
 	}
 
 	@Indexable(type = IndexableType.DELETE)
+	@Override
 	public JournalFolder deleteFolder(long folderId)
 		throws PortalException, SystemException {
 
@@ -164,6 +168,7 @@ public class JournalFolderLocalServiceImpl
 	}
 
 	@Indexable(type = IndexableType.DELETE)
+	@Override
 	public JournalFolder deleteFolder(
 			long folderId, boolean includeTrashedEntries)
 		throws PortalException, SystemException {
@@ -174,6 +179,7 @@ public class JournalFolderLocalServiceImpl
 		return deleteFolder(folder, includeTrashedEntries);
 	}
 
+	@Override
 	public void deleteFolders(long groupId)
 		throws PortalException, SystemException {
 
@@ -185,6 +191,7 @@ public class JournalFolderLocalServiceImpl
 		}
 	}
 
+	@Override
 	public JournalFolder fetchFolder(
 			long groupId, long parentFolderId, String name)
 		throws SystemException {
@@ -193,12 +200,14 @@ public class JournalFolderLocalServiceImpl
 				groupId, parentFolderId, name);
 	}
 
+	@Override
 	public JournalFolder fetchFolder(long groupId, String name)
 		throws SystemException {
 
 		return journalFolderPersistence.fetchByG_N(groupId, name);
 	}
 
+	@Override
 	public List<JournalFolder> getCompanyFolders(
 			long companyId, int start, int end)
 		throws SystemException {
@@ -206,20 +215,24 @@ public class JournalFolderLocalServiceImpl
 		return journalFolderPersistence.findByCompanyId(companyId, start, end);
 	}
 
+	@Override
 	public int getCompanyFoldersCount(long companyId) throws SystemException {
 		return journalFolderPersistence.countByCompanyId(companyId);
 	}
 
+	@Override
 	public JournalFolder getFolder(long folderId)
 		throws PortalException, SystemException {
 
 		return journalFolderPersistence.findByPrimaryKey(folderId);
 	}
 
+	@Override
 	public List<JournalFolder> getFolders(long groupId) throws SystemException {
 		return journalFolderPersistence.findByGroupId(groupId);
 	}
 
+	@Override
 	public List<JournalFolder> getFolders(long groupId, long parentFolderId)
 		throws SystemException {
 
@@ -227,6 +240,7 @@ public class JournalFolderLocalServiceImpl
 			groupId, parentFolderId, WorkflowConstants.STATUS_APPROVED);
 	}
 
+	@Override
 	public List<JournalFolder> getFolders(
 			long groupId, long parentFolderId, int status)
 		throws SystemException {
@@ -235,6 +249,7 @@ public class JournalFolderLocalServiceImpl
 			groupId, parentFolderId, status);
 	}
 
+	@Override
 	public List<JournalFolder> getFolders(
 			long groupId, long parentFolderId, int start, int end)
 		throws SystemException {
@@ -244,6 +259,7 @@ public class JournalFolderLocalServiceImpl
 			end);
 	}
 
+	@Override
 	public List<JournalFolder> getFolders(
 			long groupId, long parentFolderId, int status, int start, int end)
 		throws SystemException {
@@ -252,6 +268,7 @@ public class JournalFolderLocalServiceImpl
 				groupId, parentFolderId, status, start, end);
 	}
 
+	@Override
 	public List<Object> getFoldersAndArticles(long groupId, long folderId)
 		throws SystemException {
 
@@ -262,6 +279,7 @@ public class JournalFolderLocalServiceImpl
 			groupId, folderId, queryDefinition);
 	}
 
+	@Override
 	public List<Object> getFoldersAndArticles(
 			long groupId, long folderId, int start, int end,
 			OrderByComparator obc)
@@ -274,6 +292,7 @@ public class JournalFolderLocalServiceImpl
 			groupId, folderId, queryDefinition);
 	}
 
+	@Override
 	public int getFoldersAndArticlesCount(
 			long groupId, List<Long> folderIds, int status)
 		throws SystemException {
@@ -300,6 +319,7 @@ public class JournalFolderLocalServiceImpl
 		}
 	}
 
+	@Override
 	public int getFoldersAndArticlesCount(long groupId, long folderId)
 		throws SystemException {
 
@@ -308,6 +328,7 @@ public class JournalFolderLocalServiceImpl
 			new QueryDefinition(WorkflowConstants.STATUS_ANY));
 	}
 
+	@Override
 	public int getFoldersCount(long groupId, long parentFolderId)
 		throws SystemException {
 
@@ -315,6 +336,7 @@ public class JournalFolderLocalServiceImpl
 			groupId, parentFolderId, WorkflowConstants.STATUS_APPROVED);
 	}
 
+	@Override
 	public int getFoldersCount(long groupId, long parentFolderId, int status)
 		throws SystemException {
 
@@ -322,10 +344,12 @@ public class JournalFolderLocalServiceImpl
 			groupId, parentFolderId, status);
 	}
 
+	@Override
 	public List<JournalFolder> getNoAssetFolders() throws SystemException {
 		return journalFolderFinder.findF_ByNoAssets();
 	}
 
+	@Override
 	public void getSubfolderIds(
 			List<Long> folderIds, long groupId, long folderId)
 		throws SystemException {
@@ -342,6 +366,7 @@ public class JournalFolderLocalServiceImpl
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
+	@Override
 	public JournalFolder moveFolder(
 			long folderId, long parentFolderId, ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -364,6 +389,7 @@ public class JournalFolderLocalServiceImpl
 		return folder;
 	}
 
+	@Override
 	public JournalFolder moveFolderFromTrash(
 			long userId, long folderId, long parentFolderId,
 			ServiceContext serviceContext)
@@ -383,6 +409,7 @@ public class JournalFolderLocalServiceImpl
 			folderId, parentFolderId, serviceContext);
 	}
 
+	@Override
 	public void moveFolderToTrash(long userId, long folderId)
 		throws PortalException, SystemException {
 
@@ -412,6 +439,7 @@ public class JournalFolderLocalServiceImpl
 			StringPool.BLANK, 0);
 	}
 
+	@Override
 	public void restoreFolderFromTrash(long userId, long folderId)
 		throws PortalException, SystemException {
 
@@ -439,6 +467,7 @@ public class JournalFolderLocalServiceImpl
 			0);
 	}
 
+	@Override
 	public void updateAsset(
 			long userId, JournalFolder folder, long[] assetCategoryIds,
 			String[] assetTagNames, long[] assetLinkEntryIds)
@@ -458,6 +487,7 @@ public class JournalFolderLocalServiceImpl
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
+	@Override
 	public JournalFolder updateFolder(
 			long userId, long folderId, long parentFolderId, String name,
 			String description, boolean mergeWithParentFolder,
@@ -499,6 +529,7 @@ public class JournalFolderLocalServiceImpl
 		return folder;
 	}
 
+	@Override
 	public JournalFolder updateStatus(
 			long userId, JournalFolder folder, int status)
 		throws PortalException, SystemException {

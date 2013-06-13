@@ -24,8 +24,8 @@ import java.util.Map;
  * This class is a wrapper for {@link JournalArticleImage}.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       JournalArticleImage
+ * @author Brian Wing Shun Chan
+ * @see JournalArticleImage
  * @generated
  */
 public class JournalArticleImageWrapper implements JournalArticleImage,
@@ -34,14 +34,17 @@ public class JournalArticleImageWrapper implements JournalArticleImage,
 		_journalArticleImage = journalArticleImage;
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return JournalArticleImage.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return JournalArticleImage.class.getName();
 	}
 
+	@Override
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
@@ -57,6 +60,7 @@ public class JournalArticleImageWrapper implements JournalArticleImage,
 		return attributes;
 	}
 
+	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 		Long articleImageId = (Long)attributes.get("articleImageId");
 
@@ -112,6 +116,7 @@ public class JournalArticleImageWrapper implements JournalArticleImage,
 	*
 	* @return the primary key of this journal article image
 	*/
+	@Override
 	public long getPrimaryKey() {
 		return _journalArticleImage.getPrimaryKey();
 	}
@@ -121,6 +126,7 @@ public class JournalArticleImageWrapper implements JournalArticleImage,
 	*
 	* @param primaryKey the primary key of this journal article image
 	*/
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_journalArticleImage.setPrimaryKey(primaryKey);
 	}
@@ -130,6 +136,7 @@ public class JournalArticleImageWrapper implements JournalArticleImage,
 	*
 	* @return the article image ID of this journal article image
 	*/
+	@Override
 	public long getArticleImageId() {
 		return _journalArticleImage.getArticleImageId();
 	}
@@ -139,6 +146,7 @@ public class JournalArticleImageWrapper implements JournalArticleImage,
 	*
 	* @param articleImageId the article image ID of this journal article image
 	*/
+	@Override
 	public void setArticleImageId(long articleImageId) {
 		_journalArticleImage.setArticleImageId(articleImageId);
 	}
@@ -148,6 +156,7 @@ public class JournalArticleImageWrapper implements JournalArticleImage,
 	*
 	* @return the group ID of this journal article image
 	*/
+	@Override
 	public long getGroupId() {
 		return _journalArticleImage.getGroupId();
 	}
@@ -157,6 +166,7 @@ public class JournalArticleImageWrapper implements JournalArticleImage,
 	*
 	* @param groupId the group ID of this journal article image
 	*/
+	@Override
 	public void setGroupId(long groupId) {
 		_journalArticleImage.setGroupId(groupId);
 	}
@@ -166,6 +176,7 @@ public class JournalArticleImageWrapper implements JournalArticleImage,
 	*
 	* @return the article ID of this journal article image
 	*/
+	@Override
 	public java.lang.String getArticleId() {
 		return _journalArticleImage.getArticleId();
 	}
@@ -175,6 +186,7 @@ public class JournalArticleImageWrapper implements JournalArticleImage,
 	*
 	* @param articleId the article ID of this journal article image
 	*/
+	@Override
 	public void setArticleId(java.lang.String articleId) {
 		_journalArticleImage.setArticleId(articleId);
 	}
@@ -184,6 +196,7 @@ public class JournalArticleImageWrapper implements JournalArticleImage,
 	*
 	* @return the version of this journal article image
 	*/
+	@Override
 	public double getVersion() {
 		return _journalArticleImage.getVersion();
 	}
@@ -193,6 +206,7 @@ public class JournalArticleImageWrapper implements JournalArticleImage,
 	*
 	* @param version the version of this journal article image
 	*/
+	@Override
 	public void setVersion(double version) {
 		_journalArticleImage.setVersion(version);
 	}
@@ -202,6 +216,7 @@ public class JournalArticleImageWrapper implements JournalArticleImage,
 	*
 	* @return the el instance ID of this journal article image
 	*/
+	@Override
 	public java.lang.String getElInstanceId() {
 		return _journalArticleImage.getElInstanceId();
 	}
@@ -211,6 +226,7 @@ public class JournalArticleImageWrapper implements JournalArticleImage,
 	*
 	* @param elInstanceId the el instance ID of this journal article image
 	*/
+	@Override
 	public void setElInstanceId(java.lang.String elInstanceId) {
 		_journalArticleImage.setElInstanceId(elInstanceId);
 	}
@@ -220,6 +236,7 @@ public class JournalArticleImageWrapper implements JournalArticleImage,
 	*
 	* @return the el name of this journal article image
 	*/
+	@Override
 	public java.lang.String getElName() {
 		return _journalArticleImage.getElName();
 	}
@@ -229,6 +246,7 @@ public class JournalArticleImageWrapper implements JournalArticleImage,
 	*
 	* @param elName the el name of this journal article image
 	*/
+	@Override
 	public void setElName(java.lang.String elName) {
 		_journalArticleImage.setElName(elName);
 	}
@@ -238,6 +256,7 @@ public class JournalArticleImageWrapper implements JournalArticleImage,
 	*
 	* @return the language ID of this journal article image
 	*/
+	@Override
 	public java.lang.String getLanguageId() {
 		return _journalArticleImage.getLanguageId();
 	}
@@ -247,6 +266,7 @@ public class JournalArticleImageWrapper implements JournalArticleImage,
 	*
 	* @param languageId the language ID of this journal article image
 	*/
+	@Override
 	public void setLanguageId(java.lang.String languageId) {
 		_journalArticleImage.setLanguageId(languageId);
 	}
@@ -256,6 +276,7 @@ public class JournalArticleImageWrapper implements JournalArticleImage,
 	*
 	* @return the temp image of this journal article image
 	*/
+	@Override
 	public boolean getTempImage() {
 		return _journalArticleImage.getTempImage();
 	}
@@ -265,6 +286,7 @@ public class JournalArticleImageWrapper implements JournalArticleImage,
 	*
 	* @return <code>true</code> if this journal article image is temp image; <code>false</code> otherwise
 	*/
+	@Override
 	public boolean isTempImage() {
 		return _journalArticleImage.isTempImage();
 	}
@@ -274,52 +296,64 @@ public class JournalArticleImageWrapper implements JournalArticleImage,
 	*
 	* @param tempImage the temp image of this journal article image
 	*/
+	@Override
 	public void setTempImage(boolean tempImage) {
 		_journalArticleImage.setTempImage(tempImage);
 	}
 
+	@Override
 	public boolean isNew() {
 		return _journalArticleImage.isNew();
 	}
 
+	@Override
 	public void setNew(boolean n) {
 		_journalArticleImage.setNew(n);
 	}
 
+	@Override
 	public boolean isCachedModel() {
 		return _journalArticleImage.isCachedModel();
 	}
 
+	@Override
 	public void setCachedModel(boolean cachedModel) {
 		_journalArticleImage.setCachedModel(cachedModel);
 	}
 
+	@Override
 	public boolean isEscapedModel() {
 		return _journalArticleImage.isEscapedModel();
 	}
 
+	@Override
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _journalArticleImage.getPrimaryKeyObj();
 	}
 
+	@Override
 	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
 		_journalArticleImage.setPrimaryKeyObj(primaryKeyObj);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
 		return _journalArticleImage.getExpandoBridge();
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.model.BaseModel<?> baseModel) {
 		_journalArticleImage.setExpandoBridgeAttributes(baseModel);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portlet.expando.model.ExpandoBridge expandoBridge) {
 		_journalArticleImage.setExpandoBridgeAttributes(expandoBridge);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		_journalArticleImage.setExpandoBridgeAttributes(serviceContext);
@@ -330,6 +364,7 @@ public class JournalArticleImageWrapper implements JournalArticleImage,
 		return new JournalArticleImageWrapper((JournalArticleImage)_journalArticleImage.clone());
 	}
 
+	@Override
 	public int compareTo(
 		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage) {
 		return _journalArticleImage.compareTo(journalArticleImage);
@@ -340,14 +375,17 @@ public class JournalArticleImageWrapper implements JournalArticleImage,
 		return _journalArticleImage.hashCode();
 	}
 
+	@Override
 	public com.liferay.portal.model.CacheModel<com.liferay.portlet.journal.model.JournalArticleImage> toCacheModel() {
 		return _journalArticleImage.toCacheModel();
 	}
 
+	@Override
 	public com.liferay.portlet.journal.model.JournalArticleImage toEscapedModel() {
 		return new JournalArticleImageWrapper(_journalArticleImage.toEscapedModel());
 	}
 
+	@Override
 	public com.liferay.portlet.journal.model.JournalArticleImage toUnescapedModel() {
 		return new JournalArticleImageWrapper(_journalArticleImage.toUnescapedModel());
 	}
@@ -357,10 +395,12 @@ public class JournalArticleImageWrapper implements JournalArticleImage,
 		return _journalArticleImage.toString();
 	}
 
+	@Override
 	public java.lang.String toXmlString() {
 		return _journalArticleImage.toXmlString();
 	}
 
+	@Override
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_journalArticleImage.persist();
@@ -373,10 +413,12 @@ public class JournalArticleImageWrapper implements JournalArticleImage,
 		return _journalArticleImage;
 	}
 
+	@Override
 	public JournalArticleImage getWrappedModel() {
 		return _journalArticleImage;
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		_journalArticleImage.resetOriginalValues();
 	}

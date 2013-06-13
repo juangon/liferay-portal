@@ -17,12 +17,10 @@ package com.liferay.portlet.polls.service;
 import com.liferay.portal.service.ServiceWrapper;
 
 /**
- * <p>
- * This class is a wrapper for {@link PollsChoiceService}.
- * </p>
+ * Provides a wrapper for {@link PollsChoiceService}.
  *
- * @author    Brian Wing Shun Chan
- * @see       PollsChoiceService
+ * @author Brian Wing Shun Chan
+ * @see PollsChoiceService
  * @generated
  */
 public class PollsChoiceServiceWrapper implements PollsChoiceService,
@@ -36,6 +34,7 @@ public class PollsChoiceServiceWrapper implements PollsChoiceService,
 	*
 	* @return the Spring bean ID for this bean
 	*/
+	@Override
 	public java.lang.String getBeanIdentifier() {
 		return _pollsChoiceService.getBeanIdentifier();
 	}
@@ -45,6 +44,7 @@ public class PollsChoiceServiceWrapper implements PollsChoiceService,
 	*
 	* @param beanIdentifier the Spring bean ID for this bean
 	*/
+	@Override
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		_pollsChoiceService.setBeanIdentifier(beanIdentifier);
 	}
@@ -64,10 +64,12 @@ public class PollsChoiceServiceWrapper implements PollsChoiceService,
 		_pollsChoiceService = pollsChoiceService;
 	}
 
+	@Override
 	public PollsChoiceService getWrappedService() {
 		return _pollsChoiceService;
 	}
 
+	@Override
 	public void setWrappedService(PollsChoiceService pollsChoiceService) {
 		_pollsChoiceService = pollsChoiceService;
 	}

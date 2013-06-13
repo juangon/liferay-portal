@@ -38,6 +38,7 @@ public abstract class AssetTagBaseImpl extends AssetTagModelImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a asset tag model instance should use the {@link AssetTag} interface instead.
 	 */
+	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
 			AssetTagLocalServiceUtil.addAssetTag(this);

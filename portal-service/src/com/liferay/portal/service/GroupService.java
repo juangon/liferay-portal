@@ -23,11 +23,9 @@ import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.security.ac.AccessControlled;
 
 /**
- * The interface for the group remote service.
- *
- * <p>
- * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
- * </p>
+ * Provides the remote service interface for Group. Methods of this
+ * service are expected to have security checks based on the propagated JAAS
+ * credentials because this service can be accessed remotely.
  *
  * @author Brian Wing Shun Chan
  * @see GroupServiceUtil
@@ -183,6 +181,19 @@ public interface GroupService extends BaseService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Returns the company group.
+	*
+	* @param companyId the primary key of the company
+	* @return the group associated with the company
+	* @throws PortalException if a matching group could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.model.Group getCompanyGroup(long companyId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Returns the group with the primary key.
 	*
 	* @param groupId the primary key of the group
@@ -210,6 +221,22 @@ public interface GroupService extends BaseService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Group getGroup(long companyId,
 		java.lang.String name)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns all the groups that are direct children of the parent group.
+	*
+	* @param companyId the primary key of the company
+	* @param parentGroupId the primary key of the parent group
+	* @param site whether the group is to be associated with a main site
+	* @return the matching groups, or <code>null</code> if no matches were
+	found
+	* @throws SystemException if a system exception occurred
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portal.model.Group> getGroups(
+		long companyId, long parentGroupId, boolean site)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

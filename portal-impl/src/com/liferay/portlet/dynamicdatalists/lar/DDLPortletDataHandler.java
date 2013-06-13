@@ -15,15 +15,15 @@
 package com.liferay.portlet.dynamicdatalists.lar;
 
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.lar.BasePortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataContext;
+import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.StagedModelDataHandlerUtil;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordSetLocalServiceUtil;
-import com.liferay.portlet.dynamicdatalists.service.persistence.DDLRecordSetActionableDynamicQuery;
+import com.liferay.portlet.dynamicdatalists.service.permission.DDLPermission;
+import com.liferay.portlet.dynamicdatalists.service.persistence.DDLRecordSetExportActionableDynamicQuery;
 
 import java.util.List;
 
@@ -37,8 +37,13 @@ public class DDLPortletDataHandler extends BasePortletDataHandler {
 	public static final String NAMESPACE = "dynamic_data_lists";
 
 	public DDLPortletDataHandler() {
-		setAlwaysExportable(true);
+		setDeletionSystemEventClassNames(DDLRecordSet.class.getName());
 		setDataLocalized(true);
+		setExportControls(
+			new PortletDataHandlerBoolean(
+				NAMESPACE, "record-sets", true, false, null,
+				DDLRecordSet.class.getName()));
+		setImportControls(getExportControls());
 	}
 
 	@Override
@@ -65,32 +70,17 @@ public class DDLPortletDataHandler extends BasePortletDataHandler {
 			PortletPreferences portletPreferences)
 		throws Exception {
 
-		portletDataContext.addPermissions(
-			"com.liferay.portlet.dynamicdatalist",
-			portletDataContext.getScopeGroupId());
-
 		Element rootElement = addExportDataRootElement(portletDataContext);
 
+		if (!portletDataContext.getBooleanParameter(NAMESPACE, "record-sets")) {
+			return getExportDataRootElementString(rootElement);
+		}
+
+		portletDataContext.addPermissions(
+			DDLPermission.RESOURCE_NAME, portletDataContext.getScopeGroupId());
+
 		ActionableDynamicQuery actionableDynamicQuery =
-			new DDLRecordSetActionableDynamicQuery() {
-
-			@Override
-			protected void addCriteria(DynamicQuery dynamicQuery) {
-				portletDataContext.addDateRangeCriteria(
-					dynamicQuery, "modifiedDate");
-			}
-
-			@Override
-			protected void performAction(Object object) throws PortalException {
-				DDLRecordSet recordSet = (DDLRecordSet)object;
-
-				StagedModelDataHandlerUtil.exportStagedModel(
-					portletDataContext, recordSet);
-			}
-
-		};
-
-		actionableDynamicQuery.setGroupId(portletDataContext.getScopeGroupId());
+			new DDLRecordSetExportActionableDynamicQuery(portletDataContext);
 
 		actionableDynamicQuery.performActions();
 
@@ -103,9 +93,12 @@ public class DDLPortletDataHandler extends BasePortletDataHandler {
 			PortletPreferences portletPreferences, String data)
 		throws Exception {
 
+		if (!portletDataContext.getBooleanParameter(NAMESPACE, "record-sets")) {
+			return null;
+		}
+
 		portletDataContext.importPermissions(
-			"com.liferay.portlet.dynamicdatalist",
-			portletDataContext.getSourceGroupId(),
+			DDLPermission.RESOURCE_NAME, portletDataContext.getSourceGroupId(),
 			portletDataContext.getScopeGroupId());
 
 		Element recordSetsElement =
@@ -119,6 +112,17 @@ public class DDLPortletDataHandler extends BasePortletDataHandler {
 		}
 
 		return portletPreferences;
+	}
+
+	@Override
+	protected void doPrepareManifestSummary(
+			PortletDataContext portletDataContext)
+		throws Exception {
+
+		ActionableDynamicQuery actionableDynamicQuery =
+			new DDLRecordSetExportActionableDynamicQuery(portletDataContext);
+
+		actionableDynamicQuery.performCount();
 	}
 
 }

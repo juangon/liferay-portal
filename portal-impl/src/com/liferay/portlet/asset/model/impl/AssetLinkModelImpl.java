@@ -96,26 +96,32 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 	public AssetLinkModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _linkId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setLinkId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _linkId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return AssetLink.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return AssetLink.class.getName();
 	}
@@ -194,38 +200,47 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 		}
 	}
 
+	@Override
 	public long getLinkId() {
 		return _linkId;
 	}
 
+	@Override
 	public void setLinkId(long linkId) {
 		_linkId = linkId;
 	}
 
+	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
+	@Override
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
 
+	@Override
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -235,22 +250,27 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 		}
 	}
 
+	@Override
 	public void setUserName(String userName) {
 		_userName = userName;
 	}
 
+	@Override
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
 	}
 
+	@Override
 	public long getEntryId1() {
 		return _entryId1;
 	}
 
+	@Override
 	public void setEntryId1(long entryId1) {
 		_columnBitmask |= ENTRYID1_COLUMN_BITMASK;
 
@@ -267,10 +287,12 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 		return _originalEntryId1;
 	}
 
+	@Override
 	public long getEntryId2() {
 		return _entryId2;
 	}
 
+	@Override
 	public void setEntryId2(long entryId2) {
 		_columnBitmask |= ENTRYID2_COLUMN_BITMASK;
 
@@ -287,10 +309,12 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 		return _originalEntryId2;
 	}
 
+	@Override
 	public int getType() {
 		return _type;
 	}
 
+	@Override
 	public void setType(int type) {
 		_columnBitmask |= TYPE_COLUMN_BITMASK;
 
@@ -307,10 +331,12 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 		return _originalType;
 	}
 
+	@Override
 	public int getWeight() {
 		return _weight;
 	}
 
+	@Override
 	public void setWeight(int weight) {
 		_columnBitmask = -1L;
 
@@ -363,6 +389,7 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 		return assetLinkImpl;
 	}
 
+	@Override
 	public int compareTo(AssetLink assetLink) {
 		int value = 0;
 
@@ -385,18 +412,15 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof AssetLink)) {
 			return false;
 		}
 
-		AssetLink assetLink = null;
-
-		try {
-			assetLink = (AssetLink)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		AssetLink assetLink = (AssetLink)obj;
 
 		long primaryKey = assetLink.getPrimaryKey();
 
@@ -497,6 +521,7 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(31);
 

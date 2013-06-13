@@ -38,6 +38,7 @@ public abstract class DLFolderBaseImpl extends DLFolderModelImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a document library folder model instance should use the {@link DLFolder} interface instead.
 	 */
+	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
 			DLFolderLocalServiceUtil.addDLFolder(this);

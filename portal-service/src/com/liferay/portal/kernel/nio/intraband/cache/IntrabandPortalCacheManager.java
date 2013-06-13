@@ -52,18 +52,21 @@ public class IntrabandPortalCacheManager
 	public IntrabandPortalCacheManager(
 		RegistrationReference registrationReference) {
 
-		_intraBand = registrationReference.getIntraband();
+		_intraband = registrationReference.getIntraband();
 		_registrationReference = registrationReference;
 	}
 
+	@Override
 	public void clearAll() {
 		_portalCaches.clear();
 	}
 
+	@Override
 	public PortalCache<K, V> getCache(String name) {
 		return getCache(name, false);
 	}
 
+	@Override
 	public PortalCache<K, V> getCache(String name, boolean blocking) {
 		PortalCache<K, V> portalCache = _portalCaches.get(name);
 
@@ -77,6 +80,7 @@ public class IntrabandPortalCacheManager
 		return portalCache;
 	}
 
+	@Override
 	public void reconfigureCaches(URL configurationURL) {
 		Serializer serializer = new Serializer();
 
@@ -85,12 +89,13 @@ public class IntrabandPortalCacheManager
 
 		SystemDataType systemDataType = SystemDataType.PORTAL_CACHE;
 
-		_intraBand.sendDatagram(
+		_intraband.sendDatagram(
 			_registrationReference,
 			Datagram.createRequestDatagram(
 				systemDataType.getValue(), serializer.toByteBuffer()));
 	}
 
+	@Override
 	public void removeCache(String name) {
 		_portalCaches.remove(name);
 	}
@@ -98,7 +103,7 @@ public class IntrabandPortalCacheManager
 	private static PortalCacheManager
 		<? extends Serializable, ? extends Serializable> _portalCacheManager;
 
-	private final Intraband _intraBand;
+	private final Intraband _intraband;
 	private final Map<String, PortalCache<K, V>> _portalCaches =
 		new ConcurrentHashMap<String, PortalCache<K, V>>();
 	private final RegistrationReference _registrationReference;

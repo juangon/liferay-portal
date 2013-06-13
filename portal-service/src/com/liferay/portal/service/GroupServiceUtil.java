@@ -18,11 +18,12 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
- * The utility for the group remote service. This utility wraps {@link com.liferay.portal.service.impl.GroupServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
- *
- * <p>
- * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
- * </p>
+ * Provides the remote service utility for Group. This utility wraps
+ * {@link com.liferay.portal.service.impl.GroupServiceImpl} and is the
+ * primary access point for service operations in application layer code running
+ * on a remote server. Methods of this service are expected to have security
+ * checks based on the propagated JAAS credentials because this service can be
+ * accessed remotely.
  *
  * @author Brian Wing Shun Chan
  * @see GroupService
@@ -196,6 +197,20 @@ public class GroupServiceUtil {
 	}
 
 	/**
+	* Returns the company group.
+	*
+	* @param companyId the primary key of the company
+	* @return the group associated with the company
+	* @throws PortalException if a matching group could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portal.model.Group getCompanyGroup(long companyId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getCompanyGroup(companyId);
+	}
+
+	/**
 	* Returns the group with the primary key.
 	*
 	* @param groupId the primary key of the group
@@ -226,6 +241,23 @@ public class GroupServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getGroup(companyId, name);
+	}
+
+	/**
+	* Returns all the groups that are direct children of the parent group.
+	*
+	* @param companyId the primary key of the company
+	* @param parentGroupId the primary key of the parent group
+	* @param site whether the group is to be associated with a main site
+	* @return the matching groups, or <code>null</code> if no matches were
+	found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portal.model.Group> getGroups(
+		long companyId, long parentGroupId, boolean site)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getGroups(companyId, parentGroupId, site);
 	}
 
 	/**

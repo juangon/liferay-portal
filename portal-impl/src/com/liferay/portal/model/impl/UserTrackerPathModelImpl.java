@@ -86,26 +86,32 @@ public class UserTrackerPathModelImpl extends BaseModelImpl<UserTrackerPath>
 	public UserTrackerPathModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _userTrackerPathId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setUserTrackerPathId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _userTrackerPathId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return UserTrackerPath.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return UserTrackerPath.class.getName();
 	}
@@ -149,18 +155,22 @@ public class UserTrackerPathModelImpl extends BaseModelImpl<UserTrackerPath>
 		}
 	}
 
+	@Override
 	public long getUserTrackerPathId() {
 		return _userTrackerPathId;
 	}
 
+	@Override
 	public void setUserTrackerPathId(long userTrackerPathId) {
 		_userTrackerPathId = userTrackerPathId;
 	}
 
+	@Override
 	public long getUserTrackerId() {
 		return _userTrackerId;
 	}
 
+	@Override
 	public void setUserTrackerId(long userTrackerId) {
 		_columnBitmask |= USERTRACKERID_COLUMN_BITMASK;
 
@@ -177,6 +187,7 @@ public class UserTrackerPathModelImpl extends BaseModelImpl<UserTrackerPath>
 		return _originalUserTrackerId;
 	}
 
+	@Override
 	public String getPath() {
 		if (_path == null) {
 			return StringPool.BLANK;
@@ -186,14 +197,17 @@ public class UserTrackerPathModelImpl extends BaseModelImpl<UserTrackerPath>
 		}
 	}
 
+	@Override
 	public void setPath(String path) {
 		_path = path;
 	}
 
+	@Override
 	public Date getPathDate() {
 		return _pathDate;
 	}
 
+	@Override
 	public void setPathDate(Date pathDate) {
 		_pathDate = pathDate;
 	}
@@ -239,6 +253,7 @@ public class UserTrackerPathModelImpl extends BaseModelImpl<UserTrackerPath>
 		return userTrackerPathImpl;
 	}
 
+	@Override
 	public int compareTo(UserTrackerPath userTrackerPath) {
 		long primaryKey = userTrackerPath.getPrimaryKey();
 
@@ -255,18 +270,15 @@ public class UserTrackerPathModelImpl extends BaseModelImpl<UserTrackerPath>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof UserTrackerPath)) {
 			return false;
 		}
 
-		UserTrackerPath userTrackerPath = null;
-
-		try {
-			userTrackerPath = (UserTrackerPath)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		UserTrackerPath userTrackerPath = (UserTrackerPath)obj;
 
 		long primaryKey = userTrackerPath.getPrimaryKey();
 
@@ -339,6 +351,7 @@ public class UserTrackerPathModelImpl extends BaseModelImpl<UserTrackerPath>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(16);
 

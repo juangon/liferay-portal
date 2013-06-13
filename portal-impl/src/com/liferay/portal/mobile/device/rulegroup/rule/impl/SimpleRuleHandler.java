@@ -15,6 +15,7 @@
 package com.liferay.portal.mobile.device.rulegroup.rule.impl;
 
 import com.liferay.portal.kernel.mobile.device.Device;
+import com.liferay.portal.kernel.mobile.device.Dimensions;
 import com.liferay.portal.kernel.mobile.device.rulegroup.rule.RuleHandler;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -30,13 +31,43 @@ import java.util.Collections;
 
 /**
  * @author Edward Han
+ * @author Milen Daynkov
  */
 public class SimpleRuleHandler implements RuleHandler {
+
+	public static final String PROPERTY_OS = "os";
+
+	public static final String PROPERTY_SCREEN_PHYSICAL_HEIGHT_MAX =
+		"screen-physical-height-max";
+
+	public static final String PROPERTY_SCREEN_PHYSICAL_HEIGHT_MIN =
+		"screen-physical-height-min";
+
+	public static final String PROPERTY_SCREEN_PHYSICAL_WIDTH_MAX =
+		"screen-physical-width-max";
+
+	public static final String PROPERTY_SCREEN_PHYSICAL_WIDTH_MIN =
+		"screen-physical-width-min";
+
+	public static final String PROPERTY_SCREEN_RESOLUTION_HEIGHT_MAX =
+		"screen-resolution-height-max";
+
+	public static final String PROPERTY_SCREEN_RESOLUTION_HEIGHT_MIN =
+		"screen-resolution-height-min";
+
+	public static final String PROPERTY_SCREEN_RESOLUTION_WIDTH_MAX =
+		"screen-resolution-width-max";
+
+	public static final String PROPERTY_SCREEN_RESOLUTION_WIDTH_MIN =
+		"screen-resolution-width-min";
+
+	public static final String PROPERTY_TABLET = "tablet";
 
 	public static String getHandlerType() {
 		return SimpleRuleHandler.class.getName();
 	}
 
+	@Override
 	public boolean evaluateRule(MDRRule mdrRule, ThemeDisplay themeDisplay) {
 		Device device = themeDisplay.getDevice();
 
@@ -47,52 +78,122 @@ public class SimpleRuleHandler implements RuleHandler {
 		UnicodeProperties typeSettingsProperties =
 			mdrRule.getTypeSettingsProperties();
 
-		boolean result = true;
-
-		String os = typeSettingsProperties.get("os");
+		String os = typeSettingsProperties.get(PROPERTY_OS);
 
 		if (Validator.isNotNull(os)) {
 			String[] operatingSystems = StringUtil.split(os);
 
-			if (ArrayUtil.contains(operatingSystems, device.getOS())) {
-				result = true;
-			}
-			else {
-				result = false;
+			if (!ArrayUtil.contains(operatingSystems, device.getOS())) {
+				return false;
 			}
 		}
 
-		String tablet = typeSettingsProperties.get("tablet");
+		String tablet = typeSettingsProperties.get(PROPERTY_TABLET);
 
 		if (Validator.isNotNull(tablet)) {
 			boolean tabletBoolean = GetterUtil.getBoolean(tablet);
 
-			if (result && (tabletBoolean == device.isTablet())) {
-				result = true;
-			}
-			else {
-				result = false;
+			if (tabletBoolean != device.isTablet()) {
+				return false;
 			}
 		}
 
-		return result;
+		Dimensions screenPhysicalSize = device.getScreenPhysicalSize();
+
+		if (!isValidValue(
+				screenPhysicalSize.getHeight(),
+				typeSettingsProperties.get(
+					PROPERTY_SCREEN_PHYSICAL_HEIGHT_MAX),
+				typeSettingsProperties.get(
+					PROPERTY_SCREEN_PHYSICAL_HEIGHT_MIN))) {
+
+			return false;
+		}
+
+		if (!isValidValue(
+				screenPhysicalSize.getWidth(),
+				typeSettingsProperties.get(
+					PROPERTY_SCREEN_PHYSICAL_WIDTH_MAX),
+				typeSettingsProperties.get(
+					PROPERTY_SCREEN_PHYSICAL_WIDTH_MIN))) {
+
+			return false;
+		}
+
+		Dimensions screenResolution = device.getScreenResolution();
+
+		if (!isValidValue(
+				screenResolution.getHeight(),
+				typeSettingsProperties.get(
+					PROPERTY_SCREEN_RESOLUTION_HEIGHT_MAX),
+				typeSettingsProperties.get(
+					PROPERTY_SCREEN_RESOLUTION_HEIGHT_MIN))) {
+
+			return false;
+		}
+
+		if (!isValidValue(
+				screenResolution.getWidth(),
+				typeSettingsProperties.get(
+					PROPERTY_SCREEN_RESOLUTION_WIDTH_MAX),
+				typeSettingsProperties.get(
+					PROPERTY_SCREEN_RESOLUTION_WIDTH_MIN))) {
+
+			return false;
+		}
+
+		return true;
 	}
 
+	@Override
 	public Collection<String> getPropertyNames() {
 		return _propertyNames;
 	}
 
+	@Override
 	public String getType() {
 		return getHandlerType();
+	}
+
+	protected boolean isValidValue(float value, String max, String min) {
+		if (Validator.isNull(max) && Validator.isNull(min)) {
+			return true;
+		}
+
+		if (Validator.isNotNull(max)) {
+			float maxFloat = GetterUtil.getFloat(max);
+
+			if (value > maxFloat) {
+				return false;
+			}
+		}
+
+		if (Validator.isNotNull(min)) {
+			float minFLoat = GetterUtil.getFloat(min);
+
+			if (value < minFLoat) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	private static Collection<String> _propertyNames;
 
 	static {
-		_propertyNames = new ArrayList<String>(2);
+		_propertyNames = new ArrayList<String>(10);
 
-		_propertyNames.add("os");
-		_propertyNames.add("tablet");
+		_propertyNames.add(PROPERTY_OS);
+		_propertyNames.add(PROPERTY_SCREEN_PHYSICAL_WIDTH_MAX);
+		_propertyNames.add(PROPERTY_SCREEN_PHYSICAL_WIDTH_MIN);
+		_propertyNames.add(PROPERTY_SCREEN_PHYSICAL_HEIGHT_MAX);
+		_propertyNames.add(PROPERTY_SCREEN_PHYSICAL_HEIGHT_MIN);
+		_propertyNames.add(PROPERTY_SCREEN_RESOLUTION_WIDTH_MAX);
+		_propertyNames.add(PROPERTY_SCREEN_RESOLUTION_WIDTH_MIN);
+		_propertyNames.add(PROPERTY_SCREEN_RESOLUTION_HEIGHT_MAX);
+		_propertyNames.add(PROPERTY_SCREEN_RESOLUTION_HEIGHT_MIN);
+		_propertyNames.add(PROPERTY_TABLET);
 
 		_propertyNames = Collections.unmodifiableCollection(_propertyNames);
 	}

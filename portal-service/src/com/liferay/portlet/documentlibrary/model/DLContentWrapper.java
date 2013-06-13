@@ -26,8 +26,8 @@ import java.util.Map;
  * This class is a wrapper for {@link DLContent}.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       DLContent
+ * @author Brian Wing Shun Chan
+ * @see DLContent
  * @generated
  */
 public class DLContentWrapper implements DLContent, ModelWrapper<DLContent> {
@@ -35,14 +35,17 @@ public class DLContentWrapper implements DLContent, ModelWrapper<DLContent> {
 		_dlContent = dlContent;
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return DLContent.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return DLContent.class.getName();
 	}
 
+	@Override
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
@@ -58,6 +61,7 @@ public class DLContentWrapper implements DLContent, ModelWrapper<DLContent> {
 		return attributes;
 	}
 
+	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 		Long contentId = (Long)attributes.get("contentId");
 
@@ -113,6 +117,7 @@ public class DLContentWrapper implements DLContent, ModelWrapper<DLContent> {
 	*
 	* @return the primary key of this document library content
 	*/
+	@Override
 	public long getPrimaryKey() {
 		return _dlContent.getPrimaryKey();
 	}
@@ -122,6 +127,7 @@ public class DLContentWrapper implements DLContent, ModelWrapper<DLContent> {
 	*
 	* @param primaryKey the primary key of this document library content
 	*/
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_dlContent.setPrimaryKey(primaryKey);
 	}
@@ -131,6 +137,7 @@ public class DLContentWrapper implements DLContent, ModelWrapper<DLContent> {
 	*
 	* @return the content ID of this document library content
 	*/
+	@Override
 	public long getContentId() {
 		return _dlContent.getContentId();
 	}
@@ -140,6 +147,7 @@ public class DLContentWrapper implements DLContent, ModelWrapper<DLContent> {
 	*
 	* @param contentId the content ID of this document library content
 	*/
+	@Override
 	public void setContentId(long contentId) {
 		_dlContent.setContentId(contentId);
 	}
@@ -149,6 +157,7 @@ public class DLContentWrapper implements DLContent, ModelWrapper<DLContent> {
 	*
 	* @return the group ID of this document library content
 	*/
+	@Override
 	public long getGroupId() {
 		return _dlContent.getGroupId();
 	}
@@ -158,6 +167,7 @@ public class DLContentWrapper implements DLContent, ModelWrapper<DLContent> {
 	*
 	* @param groupId the group ID of this document library content
 	*/
+	@Override
 	public void setGroupId(long groupId) {
 		_dlContent.setGroupId(groupId);
 	}
@@ -167,6 +177,7 @@ public class DLContentWrapper implements DLContent, ModelWrapper<DLContent> {
 	*
 	* @return the company ID of this document library content
 	*/
+	@Override
 	public long getCompanyId() {
 		return _dlContent.getCompanyId();
 	}
@@ -176,6 +187,7 @@ public class DLContentWrapper implements DLContent, ModelWrapper<DLContent> {
 	*
 	* @param companyId the company ID of this document library content
 	*/
+	@Override
 	public void setCompanyId(long companyId) {
 		_dlContent.setCompanyId(companyId);
 	}
@@ -185,6 +197,7 @@ public class DLContentWrapper implements DLContent, ModelWrapper<DLContent> {
 	*
 	* @return the repository ID of this document library content
 	*/
+	@Override
 	public long getRepositoryId() {
 		return _dlContent.getRepositoryId();
 	}
@@ -194,6 +207,7 @@ public class DLContentWrapper implements DLContent, ModelWrapper<DLContent> {
 	*
 	* @param repositoryId the repository ID of this document library content
 	*/
+	@Override
 	public void setRepositoryId(long repositoryId) {
 		_dlContent.setRepositoryId(repositoryId);
 	}
@@ -203,6 +217,7 @@ public class DLContentWrapper implements DLContent, ModelWrapper<DLContent> {
 	*
 	* @return the path of this document library content
 	*/
+	@Override
 	public java.lang.String getPath() {
 		return _dlContent.getPath();
 	}
@@ -212,6 +227,7 @@ public class DLContentWrapper implements DLContent, ModelWrapper<DLContent> {
 	*
 	* @param path the path of this document library content
 	*/
+	@Override
 	public void setPath(java.lang.String path) {
 		_dlContent.setPath(path);
 	}
@@ -221,6 +237,7 @@ public class DLContentWrapper implements DLContent, ModelWrapper<DLContent> {
 	*
 	* @return the version of this document library content
 	*/
+	@Override
 	public java.lang.String getVersion() {
 		return _dlContent.getVersion();
 	}
@@ -230,6 +247,7 @@ public class DLContentWrapper implements DLContent, ModelWrapper<DLContent> {
 	*
 	* @param version the version of this document library content
 	*/
+	@Override
 	public void setVersion(java.lang.String version) {
 		_dlContent.setVersion(version);
 	}
@@ -239,6 +257,7 @@ public class DLContentWrapper implements DLContent, ModelWrapper<DLContent> {
 	*
 	* @return the data of this document library content
 	*/
+	@Override
 	public java.sql.Blob getData() {
 		return _dlContent.getData();
 	}
@@ -248,6 +267,7 @@ public class DLContentWrapper implements DLContent, ModelWrapper<DLContent> {
 	*
 	* @param data the data of this document library content
 	*/
+	@Override
 	public void setData(java.sql.Blob data) {
 		_dlContent.setData(data);
 	}
@@ -257,6 +277,7 @@ public class DLContentWrapper implements DLContent, ModelWrapper<DLContent> {
 	*
 	* @return the size of this document library content
 	*/
+	@Override
 	public long getSize() {
 		return _dlContent.getSize();
 	}
@@ -266,52 +287,64 @@ public class DLContentWrapper implements DLContent, ModelWrapper<DLContent> {
 	*
 	* @param size the size of this document library content
 	*/
+	@Override
 	public void setSize(long size) {
 		_dlContent.setSize(size);
 	}
 
+	@Override
 	public boolean isNew() {
 		return _dlContent.isNew();
 	}
 
+	@Override
 	public void setNew(boolean n) {
 		_dlContent.setNew(n);
 	}
 
+	@Override
 	public boolean isCachedModel() {
 		return _dlContent.isCachedModel();
 	}
 
+	@Override
 	public void setCachedModel(boolean cachedModel) {
 		_dlContent.setCachedModel(cachedModel);
 	}
 
+	@Override
 	public boolean isEscapedModel() {
 		return _dlContent.isEscapedModel();
 	}
 
+	@Override
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _dlContent.getPrimaryKeyObj();
 	}
 
+	@Override
 	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
 		_dlContent.setPrimaryKeyObj(primaryKeyObj);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
 		return _dlContent.getExpandoBridge();
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.model.BaseModel<?> baseModel) {
 		_dlContent.setExpandoBridgeAttributes(baseModel);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portlet.expando.model.ExpandoBridge expandoBridge) {
 		_dlContent.setExpandoBridgeAttributes(expandoBridge);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		_dlContent.setExpandoBridgeAttributes(serviceContext);
@@ -322,6 +355,7 @@ public class DLContentWrapper implements DLContent, ModelWrapper<DLContent> {
 		return new DLContentWrapper((DLContent)_dlContent.clone());
 	}
 
+	@Override
 	public int compareTo(
 		com.liferay.portlet.documentlibrary.model.DLContent dlContent) {
 		return _dlContent.compareTo(dlContent);
@@ -332,14 +366,17 @@ public class DLContentWrapper implements DLContent, ModelWrapper<DLContent> {
 		return _dlContent.hashCode();
 	}
 
+	@Override
 	public com.liferay.portal.model.CacheModel<com.liferay.portlet.documentlibrary.model.DLContent> toCacheModel() {
 		return _dlContent.toCacheModel();
 	}
 
+	@Override
 	public com.liferay.portlet.documentlibrary.model.DLContent toEscapedModel() {
 		return new DLContentWrapper(_dlContent.toEscapedModel());
 	}
 
+	@Override
 	public com.liferay.portlet.documentlibrary.model.DLContent toUnescapedModel() {
 		return new DLContentWrapper(_dlContent.toUnescapedModel());
 	}
@@ -349,10 +386,12 @@ public class DLContentWrapper implements DLContent, ModelWrapper<DLContent> {
 		return _dlContent.toString();
 	}
 
+	@Override
 	public java.lang.String toXmlString() {
 		return _dlContent.toXmlString();
 	}
 
+	@Override
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_dlContent.persist();
@@ -365,10 +404,12 @@ public class DLContentWrapper implements DLContent, ModelWrapper<DLContent> {
 		return _dlContent;
 	}
 
+	@Override
 	public DLContent getWrappedModel() {
 		return _dlContent;
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		_dlContent.resetOriginalValues();
 	}

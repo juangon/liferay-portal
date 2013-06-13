@@ -37,12 +37,14 @@ public class DatabaseUtil {
 
 		_database = new Database() {
 
+			@Override
 			public String getType() {
 				DB db = DBFactoryUtil.getDB();
 
 				return db.getType();
 			}
 
+			@Override
 			public void runSQLTemplate(String path)
 				throws IOException, NamingException, SQLException {
 
@@ -51,6 +53,7 @@ public class DatabaseUtil {
 				db.runSQLTemplate(path);
 			}
 
+			@Override
 			public void runSQLTemplate(String path, boolean failOnError)
 				throws IOException, NamingException, SQLException {
 

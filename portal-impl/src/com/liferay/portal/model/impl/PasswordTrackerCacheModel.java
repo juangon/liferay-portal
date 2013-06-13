@@ -52,6 +52,7 @@ public class PasswordTrackerCacheModel implements CacheModel<PasswordTracker>,
 		return sb.toString();
 	}
 
+	@Override
 	public PasswordTracker toEntityModel() {
 		PasswordTrackerImpl passwordTrackerImpl = new PasswordTrackerImpl();
 
@@ -77,6 +78,7 @@ public class PasswordTrackerCacheModel implements CacheModel<PasswordTracker>,
 		return passwordTrackerImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		passwordTrackerId = objectInput.readLong();
 		userId = objectInput.readLong();
@@ -84,6 +86,7 @@ public class PasswordTrackerCacheModel implements CacheModel<PasswordTracker>,
 		password = objectInput.readUTF();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(passwordTrackerId);

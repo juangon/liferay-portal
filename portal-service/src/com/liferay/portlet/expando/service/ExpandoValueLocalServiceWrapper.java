@@ -17,12 +17,10 @@ package com.liferay.portlet.expando.service;
 import com.liferay.portal.service.ServiceWrapper;
 
 /**
- * <p>
- * This class is a wrapper for {@link ExpandoValueLocalService}.
- * </p>
+ * Provides a wrapper for {@link ExpandoValueLocalService}.
  *
- * @author    Brian Wing Shun Chan
- * @see       ExpandoValueLocalService
+ * @author Brian Wing Shun Chan
+ * @see ExpandoValueLocalService
  * @generated
  */
 public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService,
@@ -39,6 +37,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @return the expando value that was added
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addExpandoValue(
 		com.liferay.portlet.expando.model.ExpandoValue expandoValue)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -51,6 +50,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @param valueId the primary key for the new expando value
 	* @return the new expando value
 	*/
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue createExpandoValue(
 		long valueId) {
 		return _expandoValueLocalService.createExpandoValue(valueId);
@@ -64,6 +64,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @throws PortalException if a expando value with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue deleteExpandoValue(
 		long valueId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -78,12 +79,14 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @return the expando value that was removed
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue deleteExpandoValue(
 		com.liferay.portlet.expando.model.ExpandoValue expandoValue)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _expandoValueLocalService.deleteExpandoValue(expandoValue);
 	}
 
+	@Override
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {
 		return _expandoValueLocalService.dynamicQuery();
 	}
@@ -95,6 +98,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -115,6 +119,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -136,6 +141,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -153,12 +159,14 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _expandoValueLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue fetchExpandoValue(
 		long valueId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -173,6 +181,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @throws PortalException if a expando value with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue getExpandoValue(
 		long valueId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -180,6 +189,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 		return _expandoValueLocalService.getExpandoValue(valueId);
 	}
 
+	@Override
 	public com.liferay.portal.model.PersistedModel getPersistedModel(
 		java.io.Serializable primaryKeyObj)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -199,6 +209,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @return the range of expando values
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getExpandoValues(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -211,6 +222,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @return the number of expando values
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public int getExpandoValuesCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _expandoValueLocalService.getExpandoValuesCount();
@@ -223,6 +235,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @return the expando value that was updated
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue updateExpandoValue(
 		com.liferay.portlet.expando.model.ExpandoValue expandoValue)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -234,6 +247,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	*
 	* @return the Spring bean ID for this bean
 	*/
+	@Override
 	public java.lang.String getBeanIdentifier() {
 		return _expandoValueLocalService.getBeanIdentifier();
 	}
@@ -243,10 +257,12 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	*
 	* @param beanIdentifier the Spring bean ID for this bean
 	*/
+	@Override
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		_expandoValueLocalService.setBeanIdentifier(beanIdentifier);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		long classNameId, long tableId, long columnId, long classPK,
 		java.lang.String data)
@@ -256,6 +272,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			columnId, classPK, data);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		long companyId, java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, boolean data)
@@ -265,6 +282,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK, data);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		long companyId, java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, boolean[] data)
@@ -274,6 +292,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK, data);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		long companyId, java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, java.util.Date data)
@@ -283,6 +302,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK, data);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		long companyId, java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, java.util.Date[] data)
@@ -292,6 +312,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK, data);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		long companyId, java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, double data)
@@ -301,6 +322,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK, data);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		long companyId, java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, double[] data)
@@ -310,6 +332,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK, data);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		long companyId, java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, float data)
@@ -319,6 +342,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK, data);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		long companyId, java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, float[] data)
@@ -328,6 +352,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK, data);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		long companyId, java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, int data)
@@ -337,6 +362,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK, data);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		long companyId, java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, int[] data)
@@ -346,6 +372,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK, data);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		long companyId, java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, long data)
@@ -355,6 +382,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK, data);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		long companyId, java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, long[] data)
@@ -364,6 +392,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK, data);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		long companyId, java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK,
@@ -375,6 +404,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK, dataMap, defautlLocale);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		long companyId, java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, java.lang.Number data)
@@ -384,6 +414,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK, data);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		long companyId, java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, java.lang.Number[] data)
@@ -393,6 +424,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK, data);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		long companyId, java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, java.lang.Object data)
@@ -402,6 +434,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK, data);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		long companyId, java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, short data)
@@ -411,6 +444,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK, data);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		long companyId, java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, short[] data)
@@ -420,6 +454,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK, data);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		long companyId, java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, java.lang.String data)
@@ -429,6 +464,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK, data);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		long companyId, java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, java.lang.String[] data)
@@ -442,6 +478,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @deprecated As of 6.1.0, replaced by {@link #addValue(long, String,
 	String, String, long, boolean[])}
 	*/
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, boolean data)
@@ -455,6 +492,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @deprecated As of 6.1.0, replaced by {@link #addValue(long, String,
 	String, String, long, boolean[])}
 	*/
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, boolean[] data)
@@ -468,6 +506,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @deprecated As of 6.1.0, replaced by {@link #addValue(long, String,
 	String, String, long, Date[])}
 	*/
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, java.util.Date data)
@@ -481,6 +520,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @deprecated As of 6.1.0, replaced by {@link #addValue(long, String,
 	String, String, long, Date[])}
 	*/
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, java.util.Date[] data)
@@ -494,6 +534,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @deprecated As of 6.1.0, replaced by {@link #addValue(long, String,
 	String, String, long, double[])}
 	*/
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, double data)
@@ -507,6 +548,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @deprecated As of 6.1.0, replaced by {@link #addValue(long, String,
 	String, String, long, double[])}
 	*/
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, double[] data)
@@ -520,6 +562,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @deprecated As of 6.1.0, replaced by {@link #addValue(long, String,
 	String, String, long, float[])}
 	*/
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, float data)
@@ -533,6 +576,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @deprecated As of 6.1.0, replaced by {@link #addValue(long, String,
 	String, String, long, float[])}
 	*/
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, float[] data)
@@ -546,6 +590,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @deprecated As of 6.1.0, replaced by {@link #addValue(long, String,
 	String, String, long, int[])}
 	*/
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, int data)
@@ -559,6 +604,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @deprecated As of 6.1.0, replaced by {@link #addValue(long, String,
 	String, String, long, int[])}
 	*/
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, int[] data)
@@ -572,6 +618,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @deprecated As of 6.1.0, replaced by {@link #addValue(long, String,
 	String, String, long, long[])}
 	*/
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, long data)
@@ -585,6 +632,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @deprecated As of 6.1.0, replaced by {@link #addValue(long, String,
 	String, String, long, long[])}
 	*/
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, long[] data)
@@ -598,6 +646,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @deprecated As of 6.1.0, replaced by {@link #addValue(long, String,
 	String, String, long, Object)}
 	*/
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, java.lang.Object data)
@@ -611,6 +660,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @deprecated As of 6.1.0, replaced by {@link #addValue(long, String,
 	String, String, long, short[])}
 	*/
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, short data)
@@ -624,6 +674,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @deprecated As of 6.1.0, replaced by {@link #addValue(long, String,
 	String, String, long, short[])}
 	*/
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, short[] data)
@@ -637,6 +688,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @deprecated As of 6.1.0, replaced by {@link #addValue(long, String,
 	String, String, long, String[])}
 	*/
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, java.lang.String data)
@@ -650,6 +702,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @deprecated As of 6.1.0, replaced by {@link #addValue(long, String,
 	String, String, long, String[])}
 	*/
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
 		java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, java.lang.String[] data)
@@ -659,6 +712,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			columnName, classPK, data);
 	}
 
+	@Override
 	public void addValues(long classNameId, long tableId,
 		java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> columns,
 		long classPK, java.util.Map<java.lang.String, java.lang.String> data)
@@ -668,6 +722,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			classPK, data);
 	}
 
+	@Override
 	public void addValues(long companyId, long classNameId,
 		java.lang.String tableName, long classPK,
 		java.util.Map<java.lang.String, java.io.Serializable> attributes)
@@ -677,6 +732,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			classPK, attributes);
 	}
 
+	@Override
 	public void addValues(long companyId, java.lang.String className,
 		java.lang.String tableName, long classPK,
 		java.util.Map<java.lang.String, java.io.Serializable> attributes)
@@ -686,39 +742,46 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			classPK, attributes);
 	}
 
+	@Override
 	public void deleteColumnValues(long columnId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_expandoValueLocalService.deleteColumnValues(columnId);
 	}
 
+	@Override
 	public void deleteRowValues(long rowId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_expandoValueLocalService.deleteRowValues(rowId);
 	}
 
+	@Override
 	public void deleteTableValues(long tableId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_expandoValueLocalService.deleteTableValues(tableId);
 	}
 
+	@Override
 	public void deleteValue(
 		com.liferay.portlet.expando.model.ExpandoValue value)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_expandoValueLocalService.deleteValue(value);
 	}
 
+	@Override
 	public void deleteValue(long valueId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_expandoValueLocalService.deleteValue(valueId);
 	}
 
+	@Override
 	public void deleteValue(long columnId, long rowId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_expandoValueLocalService.deleteValue(columnId, rowId);
 	}
 
+	@Override
 	public void deleteValue(long companyId, long classNameId,
 		java.lang.String tableName, java.lang.String columnName, long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -727,6 +790,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK);
 	}
 
+	@Override
 	public void deleteValue(long companyId, java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -735,22 +799,26 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			columnName, classPK);
 	}
 
+	@Override
 	public void deleteValues(long classNameId, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_expandoValueLocalService.deleteValues(classNameId, classPK);
 	}
 
+	@Override
 	public void deleteValues(java.lang.String className, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_expandoValueLocalService.deleteValues(className, classPK);
 	}
 
+	@Override
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getColumnValues(
 		long columnId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _expandoValueLocalService.getColumnValues(columnId, start, end);
 	}
 
+	@Override
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getColumnValues(
 		long companyId, long classNameId, java.lang.String tableName,
 		java.lang.String columnName, int start, int end)
@@ -759,6 +827,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			classNameId, tableName, columnName, start, end);
 	}
 
+	@Override
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getColumnValues(
 		long companyId, long classNameId, java.lang.String tableName,
 		java.lang.String columnName, java.lang.String data, int start, int end)
@@ -767,6 +836,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			classNameId, tableName, columnName, data, start, end);
 	}
 
+	@Override
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getColumnValues(
 		long companyId, java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, int start, int end)
@@ -775,6 +845,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, start, end);
 	}
 
+	@Override
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getColumnValues(
 		long companyId, java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, java.lang.String data, int start, int end)
@@ -787,6 +858,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @deprecated As of 6.1.0, replaced by {@link #getColumnValues(long,
 	String, String, String, String, int, int)}
 	*/
+	@Override
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getColumnValues(
 		java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, java.lang.String data, int start, int end)
@@ -795,11 +867,13 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			columnName, data, start, end);
 	}
 
+	@Override
 	public int getColumnValuesCount(long columnId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _expandoValueLocalService.getColumnValuesCount(columnId);
 	}
 
+	@Override
 	public int getColumnValuesCount(long companyId, long classNameId,
 		java.lang.String tableName, java.lang.String columnName)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -807,6 +881,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			classNameId, tableName, columnName);
 	}
 
+	@Override
 	public int getColumnValuesCount(long companyId, long classNameId,
 		java.lang.String tableName, java.lang.String columnName,
 		java.lang.String data)
@@ -815,6 +890,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			classNameId, tableName, columnName, data);
 	}
 
+	@Override
 	public int getColumnValuesCount(long companyId, java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -822,6 +898,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			className, tableName, columnName);
 	}
 
+	@Override
 	public int getColumnValuesCount(long companyId, java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName,
 		java.lang.String data)
@@ -834,6 +911,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @deprecated As of 6.1.0, replaced by {@link #getColumnValuesCount(long,
 	String, String, String, String)}
 	*/
+	@Override
 	public int getColumnValuesCount(java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName,
 		java.lang.String data)
@@ -842,6 +920,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, data);
 	}
 
+	@Override
 	public java.util.Map<java.lang.String, java.io.Serializable> getData(
 		long companyId, java.lang.String className, java.lang.String tableName,
 		java.util.Collection<java.lang.String> columnNames, long classPK)
@@ -851,6 +930,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnNames, classPK);
 	}
 
+	@Override
 	public java.io.Serializable getData(long companyId,
 		java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK)
@@ -860,6 +940,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK);
 	}
 
+	@Override
 	public boolean getData(long companyId, java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK,
 		boolean defaultData)
@@ -869,6 +950,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK, defaultData);
 	}
 
+	@Override
 	public boolean[] getData(long companyId, java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK,
 		boolean[] defaultData)
@@ -878,6 +960,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK, defaultData);
 	}
 
+	@Override
 	public java.util.Date getData(long companyId, java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK,
 		java.util.Date defaultData)
@@ -887,6 +970,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK, defaultData);
 	}
 
+	@Override
 	public java.util.Date[] getData(long companyId, java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK,
 		java.util.Date[] defaultData)
@@ -896,6 +980,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK, defaultData);
 	}
 
+	@Override
 	public double getData(long companyId, java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK,
 		double defaultData)
@@ -905,6 +990,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK, defaultData);
 	}
 
+	@Override
 	public double[] getData(long companyId, java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK,
 		double[] defaultData)
@@ -914,6 +1000,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK, defaultData);
 	}
 
+	@Override
 	public float getData(long companyId, java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK,
 		float defaultData)
@@ -923,6 +1010,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK, defaultData);
 	}
 
+	@Override
 	public float[] getData(long companyId, java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK,
 		float[] defaultData)
@@ -932,6 +1020,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK, defaultData);
 	}
 
+	@Override
 	public int getData(long companyId, java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK,
 		int defaultData)
@@ -941,6 +1030,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK, defaultData);
 	}
 
+	@Override
 	public int[] getData(long companyId, java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK,
 		int[] defaultData)
@@ -950,6 +1040,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK, defaultData);
 	}
 
+	@Override
 	public long getData(long companyId, java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK,
 		long defaultData)
@@ -959,6 +1050,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK, defaultData);
 	}
 
+	@Override
 	public long[] getData(long companyId, java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK,
 		long[] defaultData)
@@ -968,6 +1060,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK, defaultData);
 	}
 
+	@Override
 	public java.util.Map<?, ?> getData(long companyId,
 		java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK,
@@ -978,6 +1071,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK, defaultData);
 	}
 
+	@Override
 	public java.lang.Number getData(long companyId, java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK,
 		java.lang.Number defaultData)
@@ -987,6 +1081,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK, defaultData);
 	}
 
+	@Override
 	public java.lang.Number[] getData(long companyId,
 		java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK,
@@ -997,6 +1092,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK, defaultData);
 	}
 
+	@Override
 	public short getData(long companyId, java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK,
 		short defaultData)
@@ -1006,6 +1102,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK, defaultData);
 	}
 
+	@Override
 	public short[] getData(long companyId, java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK,
 		short[] defaultData)
@@ -1015,6 +1112,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK, defaultData);
 	}
 
+	@Override
 	public java.lang.String getData(long companyId, java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK,
 		java.lang.String defaultData)
@@ -1024,6 +1122,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK, defaultData);
 	}
 
+	@Override
 	public java.lang.String[] getData(long companyId,
 		java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK,
@@ -1038,6 +1137,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @deprecated As of 6.1.0, replaced by {@link #getData(long, String,
 	String, String, long)}
 	*/
+	@Override
 	public java.io.Serializable getData(java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -1050,6 +1150,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @deprecated As of 6.1.0, replaced by {@link #getData(long, String,
 	String, String, long, boolean[])}
 	*/
+	@Override
 	public boolean getData(java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK,
 		boolean defaultData)
@@ -1063,6 +1164,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @deprecated As of 6.1.0, replaced by {@link #getData(long, String,
 	String, String, long, boolean[])}
 	*/
+	@Override
 	public boolean[] getData(java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK,
 		boolean[] defaultData)
@@ -1076,6 +1178,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @deprecated As of 6.1.0, replaced by {@link #getData(long, String,
 	String, String, long, Date[])}
 	*/
+	@Override
 	public java.util.Date getData(java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK,
 		java.util.Date defaultData)
@@ -1089,6 +1192,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @deprecated As of 6.1.0, replaced by {@link #getData(long, String,
 	String, String, long, Date[])}
 	*/
+	@Override
 	public java.util.Date[] getData(java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK,
 		java.util.Date[] defaultData)
@@ -1102,6 +1206,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @deprecated As of 6.1.0, replaced by {@link #getData(long, String,
 	String, String, long, double[])}
 	*/
+	@Override
 	public double getData(java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK,
 		double defaultData)
@@ -1115,6 +1220,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @deprecated As of 6.1.0, replaced by {@link #getData(long, String,
 	String, String, long, double[])}
 	*/
+	@Override
 	public double[] getData(java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK,
 		double[] defaultData)
@@ -1128,6 +1234,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @deprecated As of 6.1.0, replaced by {@link #getData(long, String,
 	String, String, long, float[])}
 	*/
+	@Override
 	public float getData(java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK,
 		float defaultData)
@@ -1141,6 +1248,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @deprecated As of 6.1.0, replaced by {@link #getData(long, String,
 	String, String, long, float[])}
 	*/
+	@Override
 	public float[] getData(java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK,
 		float[] defaultData)
@@ -1154,6 +1262,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @deprecated As of 6.1.0, replaced by {@link #getData(long, String,
 	String, String, long, int[])}
 	*/
+	@Override
 	public int getData(java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, int defaultData)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -1166,6 +1275,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @deprecated As of 6.1.0, replaced by {@link #getData(long, String,
 	String, String, long, int[])}
 	*/
+	@Override
 	public int[] getData(java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK,
 		int[] defaultData)
@@ -1179,6 +1289,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @deprecated As of 6.1.0, replaced by {@link #getData(long, String,
 	String, String, long, long[])}
 	*/
+	@Override
 	public long getData(java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK, long defaultData)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -1191,6 +1302,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @deprecated As of 6.1.0, replaced by {@link #getData(long, String,
 	String, String, long, long[])}
 	*/
+	@Override
 	public long[] getData(java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK,
 		long[] defaultData)
@@ -1204,6 +1316,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @deprecated As of 6.1.0, replaced by {@link #getData(long, String,
 	String, String, long, short[])}
 	*/
+	@Override
 	public short getData(java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK,
 		short defaultData)
@@ -1217,6 +1330,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @deprecated As of 6.1.0, replaced by {@link #getData(long, String,
 	String, String, long, short[])}
 	*/
+	@Override
 	public short[] getData(java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK,
 		short[] defaultData)
@@ -1230,6 +1344,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @deprecated As of 6.1.0, replaced by {@link #getData(long, String,
 	String, String, long, String[])}
 	*/
+	@Override
 	public java.lang.String getData(java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK,
 		java.lang.String defaultData)
@@ -1243,6 +1358,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @deprecated As of 6.1.0, replaced by {@link #getData(long, String,
 	String, String, long, String[])}
 	*/
+	@Override
 	public java.lang.String[] getData(java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK,
 		java.lang.String[] defaultData)
@@ -1252,6 +1368,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			columnName, classPK, defaultData);
 	}
 
+	@Override
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getDefaultTableColumnValues(
 		long companyId, long classNameId, java.lang.String columnName,
 		int start, int end)
@@ -1260,6 +1377,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			classNameId, columnName, start, end);
 	}
 
+	@Override
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getDefaultTableColumnValues(
 		long companyId, java.lang.String className,
 		java.lang.String columnName, int start, int end)
@@ -1268,6 +1386,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			className, columnName, start, end);
 	}
 
+	@Override
 	public int getDefaultTableColumnValuesCount(long companyId,
 		long classNameId, java.lang.String columnName)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -1275,6 +1394,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			classNameId, columnName);
 	}
 
+	@Override
 	public int getDefaultTableColumnValuesCount(long companyId,
 		java.lang.String className, java.lang.String columnName)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -1282,17 +1402,20 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			className, columnName);
 	}
 
+	@Override
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getRowValues(
 		long rowId) throws com.liferay.portal.kernel.exception.SystemException {
 		return _expandoValueLocalService.getRowValues(rowId);
 	}
 
+	@Override
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getRowValues(
 		long rowId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _expandoValueLocalService.getRowValues(rowId, start, end);
 	}
 
+	@Override
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getRowValues(
 		long companyId, long classNameId, java.lang.String tableName,
 		long classPK, int start, int end)
@@ -1301,6 +1424,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, classPK, start, end);
 	}
 
+	@Override
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getRowValues(
 		long companyId, java.lang.String className, java.lang.String tableName,
 		long classPK, int start, int end)
@@ -1309,11 +1433,13 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, classPK, start, end);
 	}
 
+	@Override
 	public int getRowValuesCount(long rowId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _expandoValueLocalService.getRowValuesCount(rowId);
 	}
 
+	@Override
 	public int getRowValuesCount(long companyId, long classNameId,
 		java.lang.String tableName, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -1321,6 +1447,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			classNameId, tableName, classPK);
 	}
 
+	@Override
 	public int getRowValuesCount(long companyId, java.lang.String className,
 		java.lang.String tableName, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -1328,12 +1455,14 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			className, tableName, classPK);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue getValue(long valueId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _expandoValueLocalService.getValue(valueId);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue getValue(
 		long columnId, long rowId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -1341,12 +1470,14 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 		return _expandoValueLocalService.getValue(columnId, rowId);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue getValue(
 		long tableId, long columnId, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _expandoValueLocalService.getValue(tableId, columnId, classPK);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue getValue(
 		long companyId, long classNameId, java.lang.String tableName,
 		java.lang.String columnName, long classPK)
@@ -1359,6 +1490,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @deprecated As of 6.1.0, replaced by {@link #getValue(long, long, String,
 	String, long)}
 	*/
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue getValue(
 		long classNameId, java.lang.String tableName,
 		java.lang.String columnName, long classPK)
@@ -1367,6 +1499,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			columnName, classPK);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue getValue(
 		long companyId, java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK)
@@ -1379,6 +1512,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	* @deprecated As of 6.1.0, replaced by {@link #getValue(long, String,
 	String, String, long)}
 	*/
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoValue getValue(
 		java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK)
@@ -1402,10 +1536,12 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 		_expandoValueLocalService = expandoValueLocalService;
 	}
 
+	@Override
 	public ExpandoValueLocalService getWrappedService() {
 		return _expandoValueLocalService;
 	}
 
+	@Override
 	public void setWrappedService(
 		ExpandoValueLocalService expandoValueLocalService) {
 		_expandoValueLocalService = expandoValueLocalService;

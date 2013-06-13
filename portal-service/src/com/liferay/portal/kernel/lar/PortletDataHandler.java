@@ -65,6 +65,8 @@ public interface PortletDataHandler {
 			PortletPreferences portletPreferences)
 		throws PortletDataException;
 
+	public DataLevel getDataLevel();
+
 	/**
 	 * Returns an array of the portlet preferences that reference data. These
 	 * preferences should only be updated if the referenced data is imported.
@@ -72,6 +74,8 @@ public interface PortletDataHandler {
 	 * @return A String array
 	 */
 	public String[] getDataPortletPreferences();
+
+	public String[] getDeletionEventClassNames();
 
 	/**
 	 * Returns an array of the controls defined for this data handler. These
@@ -96,6 +100,8 @@ public interface PortletDataHandler {
 	public PortletDataHandlerControl[] getExportMetadataControls()
 		throws PortletDataException;
 
+	public long getExportModelCount(ManifestSummary manifestSummary);
+
 	/**
 	 * Returns an array of the controls defined for this data handler. These
 	 * controls enable the developer to create fine grained controls over import
@@ -119,6 +125,8 @@ public interface PortletDataHandler {
 	public PortletDataHandlerControl[] getImportMetadataControls()
 		throws PortletDataException;
 
+	public String getPortletId();
+
 	/**
 	 * Handles any special processing of the data when the portlet is imported
 	 * into a new layout. Can optionally return a modified version of
@@ -139,18 +147,13 @@ public interface PortletDataHandler {
 			PortletPreferences portletPreferences, String data)
 		throws PortletDataException;
 
-	/**
-	 * Returns <code>true</code> to allow the user to export data for this
-	 * portlet even though it may not belong to any pages. See LPS-1624.
-	 *
-	 * @return <code>true</code> to allow the user to export data for this
-	 *         portlet even though it may not belong to any pages
-	 */
-	public boolean isAlwaysExportable();
-
-	public boolean isAlwaysStaged();
-
 	public boolean isDataLocalized();
+
+	public boolean isDataPortalLevel();
+
+	public boolean isDataPortletInstanceLevel();
+
+	public boolean isDataSiteLevel();
 
 	/**
 	 * Returns whether the data exported by this handler should be included by
@@ -162,5 +165,10 @@ public interface PortletDataHandler {
 	 * @return <code>true</code> to publish to live by default
 	 */
 	public boolean isPublishToLiveByDefault();
+
+	public void prepareManifestSummary(PortletDataContext portletDataContext)
+		throws PortletDataException;
+
+	public void setPortletId(String portletId);
 
 }

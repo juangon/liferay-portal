@@ -52,6 +52,7 @@ public class ServiceComponentCacheModel implements CacheModel<ServiceComponent>,
 		return sb.toString();
 	}
 
+	@Override
 	public ServiceComponent toEntityModel() {
 		ServiceComponentImpl serviceComponentImpl = new ServiceComponentImpl();
 
@@ -79,6 +80,7 @@ public class ServiceComponentCacheModel implements CacheModel<ServiceComponent>,
 		return serviceComponentImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		serviceComponentId = objectInput.readLong();
 		buildNamespace = objectInput.readUTF();
@@ -87,6 +89,7 @@ public class ServiceComponentCacheModel implements CacheModel<ServiceComponent>,
 		data = objectInput.readUTF();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(serviceComponentId);

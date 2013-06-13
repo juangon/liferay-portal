@@ -15,12 +15,10 @@
 package com.liferay.portal.service;
 
 /**
- * <p>
- * This class is a wrapper for {@link ContactService}.
- * </p>
+ * Provides a wrapper for {@link ContactService}.
  *
- * @author    Brian Wing Shun Chan
- * @see       ContactService
+ * @author Brian Wing Shun Chan
+ * @see ContactService
  * @generated
  */
 public class ContactServiceWrapper implements ContactService,
@@ -34,6 +32,7 @@ public class ContactServiceWrapper implements ContactService,
 	*
 	* @return the Spring bean ID for this bean
 	*/
+	@Override
 	public java.lang.String getBeanIdentifier() {
 		return _contactService.getBeanIdentifier();
 	}
@@ -43,16 +42,19 @@ public class ContactServiceWrapper implements ContactService,
 	*
 	* @param beanIdentifier the Spring bean ID for this bean
 	*/
+	@Override
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		_contactService.setBeanIdentifier(beanIdentifier);
 	}
 
+	@Override
 	public com.liferay.portal.model.Contact getContact(long contactId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _contactService.getContact(contactId);
 	}
 
+	@Override
 	public java.util.List<com.liferay.portal.model.Contact> getContacts(
 		long classNameId, long classPK, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -62,6 +64,7 @@ public class ContactServiceWrapper implements ContactService,
 			orderByComparator);
 	}
 
+	@Override
 	public int getContactsCount(long classNameId, long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -82,10 +85,12 @@ public class ContactServiceWrapper implements ContactService,
 		_contactService = contactService;
 	}
 
+	@Override
 	public ContactService getWrappedService() {
 		return _contactService;
 	}
 
+	@Override
 	public void setWrappedService(ContactService contactService) {
 		_contactService = contactService;
 	}

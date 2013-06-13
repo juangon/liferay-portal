@@ -1,3 +1,9 @@
 <definition>
+	<execute test-case="CPSitemembershipsAcceptance" />
+
+	<execute test-case="CPSitepagesAcceptance" />
+
 	<execute test-case="CPSitesAcceptance" />
+
+	<execute test-case="DockbarAcceptance" />
 </definition>

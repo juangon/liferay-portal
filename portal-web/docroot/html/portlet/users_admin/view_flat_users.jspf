@@ -91,7 +91,47 @@ if (!ParamUtil.getBoolean(renderRequest, "advancedSearch")) {
 		catch (NoSuchUserGroupException nsuge) {
 		}
 	}
+
+	if (role != null) {
+		PortalUtil.addPortletBreadcrumbEntry(request, role.getName(), null);
+		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "view-users"), currentURL);
+	}
+
+	if (userGroup != null) {
+		PortalUtil.addPortletBreadcrumbEntry(request, userGroup.getName(), null);
+		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "view-users"), currentURL);
+	}
 	%>
+
+	<c:if test="<%= usersListView.equals(UserConstants.LIST_VIEW_FLAT_USERS) && (role != null) && (userGroup != null) %>">
+
+		<%
+		if (userOrganization != null) {
+			UsersAdminUtil.addPortletBreadcrumbEntries(userOrganization, request, renderResponse);
+
+			PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "view-users"), currentURL);
+		}
+		%>
+
+
+		<c:if test="<%= layout.isTypeControlPanel() %>">
+			<div id="breadcrumb">
+				<liferay-ui:breadcrumb showCurrentGroup="<%= false %>" showCurrentPortlet="<%= false %>" showGuestGroup="<%= false %>" showLayout="<%= false %>" showPortletBreadcrumb="<%= true %>" />
+			</div>
+		</c:if>
+
+		<aui:nav-bar>
+			<liferay-util:include page="/html/portlet/users_admin/toolbar.jsp" />
+
+			<c:if test="<%= userOrganization == null %>">
+				<aui:nav-bar-search cssClass="pull-right">
+					<liferay-ui:search-form
+						page="/html/portlet/users_admin/user_search.jsp"
+					/>
+				</aui:nav-bar-search>
+			</c:if>
+		</aui:nav-bar>
+	</c:if>
 
 	<c:if test="<%= userOrganization != null %>">
 		<aui:input name="<%= UserDisplayTerms.ORGANIZATION_ID %>" type="hidden" value="<%= userOrganization.getOrganizationId() %>" />
@@ -102,13 +142,6 @@ if (!ParamUtil.getBoolean(renderRequest, "advancedSearch")) {
 				localizeTitle="<%= false %>"
 				title="<%= userOrganization.getName() %>"
 			/>
-
-			<%
-			UsersAdminUtil.addPortletBreadcrumbEntries(userOrganization, request, renderResponse);
-
-			PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "view-users"), currentURL);
-			%>
-
 		</c:if>
 	</c:if>
 
@@ -120,12 +153,6 @@ if (!ParamUtil.getBoolean(renderRequest, "advancedSearch")) {
 			localizeTitle="<%= false %>"
 			title="<%= role.getTitle(locale) %>"
 		/>
-
-		<%
-		PortalUtil.addPortletBreadcrumbEntry(request, role.getName(), null);
-		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "view-users"), currentURL);
-		%>
-
 	</c:if>
 
 	<c:if test="<%= userGroup != null %>">
@@ -135,18 +162,6 @@ if (!ParamUtil.getBoolean(renderRequest, "advancedSearch")) {
 			backURL="<%= backURL %>"
 			localizeTitle="<%= false %>"
 			title="<%= userGroup.getName() %>"
-		/>
-
-		<%
-		PortalUtil.addPortletBreadcrumbEntry(request, userGroup.getName(), null);
-		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "view-users"), currentURL);
-		%>
-
-	</c:if>
-
-	<c:if test="<%= (usersListView.equals(UserConstants.LIST_VIEW_FLAT_USERS)) && (userOrganization == null) %>">
-		<liferay-ui:search-form
-			page="/html/portlet/users_admin/user_search.jsp"
 		/>
 	</c:if>
 

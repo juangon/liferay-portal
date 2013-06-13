@@ -65,6 +65,7 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 	 */
 	public static final String TABLE_NAME = "Phone";
 	public static final Object[][] TABLE_COLUMNS = {
+			{ "uuid_", Types.VARCHAR },
 			{ "phoneId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
@@ -78,7 +79,7 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 			{ "typeId", Types.INTEGER },
 			{ "primary_", Types.BOOLEAN }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Phone (phoneId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,number_ VARCHAR(75) null,extension VARCHAR(75) null,typeId INTEGER,primary_ BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table Phone (uuid_ VARCHAR(75) null,phoneId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,number_ VARCHAR(75) null,extension VARCHAR(75) null,typeId INTEGER,primary_ BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table Phone";
 	public static final String ORDER_BY_JPQL = " ORDER BY phone.createDate ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Phone.createDate ASC";
@@ -99,7 +100,8 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 	public static long COMPANYID_COLUMN_BITMASK = 4L;
 	public static long PRIMARY_COLUMN_BITMASK = 8L;
 	public static long USERID_COLUMN_BITMASK = 16L;
-	public static long CREATEDATE_COLUMN_BITMASK = 32L;
+	public static long UUID_COLUMN_BITMASK = 32L;
+	public static long CREATEDATE_COLUMN_BITMASK = 64L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -114,6 +116,7 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 
 		Phone model = new PhoneImpl();
 
+		model.setUuid(soapModel.getUuid());
 		model.setPhoneId(soapModel.getPhoneId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
@@ -156,26 +159,32 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 	public PhoneModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _phoneId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setPhoneId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _phoneId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return Phone.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return Phone.class.getName();
 	}
@@ -184,6 +193,7 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("uuid", getUuid());
 		attributes.put("phoneId", getPhoneId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
@@ -202,6 +212,12 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		String uuid = (String)attributes.get("uuid");
+
+		if (uuid != null) {
+			setUuid(uuid);
+		}
+
 		Long phoneId = (Long)attributes.get("phoneId");
 
 		if (phoneId != null) {
@@ -275,20 +291,48 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 		}
 	}
 
+	@Override
+	@JSON
+	public String getUuid() {
+		if (_uuid == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _uuid;
+		}
+	}
+
+	@Override
+	public void setUuid(String uuid) {
+		if (_originalUuid == null) {
+			_originalUuid = _uuid;
+		}
+
+		_uuid = uuid;
+	}
+
+	public String getOriginalUuid() {
+		return GetterUtil.getString(_originalUuid);
+	}
+
+	@Override
 	@JSON
 	public long getPhoneId() {
 		return _phoneId;
 	}
 
+	@Override
 	public void setPhoneId(long phoneId) {
 		_phoneId = phoneId;
 	}
 
+	@Override
 	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
@@ -305,11 +349,13 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 		return _originalCompanyId;
 	}
 
+	@Override
 	@JSON
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_columnBitmask |= USERID_COLUMN_BITMASK;
 
@@ -322,10 +368,12 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
@@ -334,6 +382,7 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 		return _originalUserId;
 	}
 
+	@Override
 	@JSON
 	public String getUserName() {
 		if (_userName == null) {
@@ -344,30 +393,36 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 		}
 	}
 
+	@Override
 	public void setUserName(String userName) {
 		_userName = userName;
 	}
 
+	@Override
 	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_columnBitmask = -1L;
 
 		_createDate = createDate;
 	}
 
+	@Override
 	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
 	public String getClassName() {
 		if (getClassNameId() <= 0) {
 			return StringPool.BLANK;
@@ -376,6 +431,7 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 		return PortalUtil.getClassName(getClassNameId());
 	}
 
+	@Override
 	public void setClassName(String className) {
 		long classNameId = 0;
 
@@ -386,11 +442,13 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 		setClassNameId(classNameId);
 	}
 
+	@Override
 	@JSON
 	public long getClassNameId() {
 		return _classNameId;
 	}
 
+	@Override
 	public void setClassNameId(long classNameId) {
 		_columnBitmask |= CLASSNAMEID_COLUMN_BITMASK;
 
@@ -407,11 +465,13 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 		return _originalClassNameId;
 	}
 
+	@Override
 	@JSON
 	public long getClassPK() {
 		return _classPK;
 	}
 
+	@Override
 	public void setClassPK(long classPK) {
 		_columnBitmask |= CLASSPK_COLUMN_BITMASK;
 
@@ -428,6 +488,7 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 		return _originalClassPK;
 	}
 
+	@Override
 	@JSON
 	public String getNumber() {
 		if (_number == null) {
@@ -438,10 +499,12 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 		}
 	}
 
+	@Override
 	public void setNumber(String number) {
 		_number = number;
 	}
 
+	@Override
 	@JSON
 	public String getExtension() {
 		if (_extension == null) {
@@ -452,28 +515,34 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 		}
 	}
 
+	@Override
 	public void setExtension(String extension) {
 		_extension = extension;
 	}
 
+	@Override
 	@JSON
 	public int getTypeId() {
 		return _typeId;
 	}
 
+	@Override
 	public void setTypeId(int typeId) {
 		_typeId = typeId;
 	}
 
+	@Override
 	@JSON
 	public boolean getPrimary() {
 		return _primary;
 	}
 
+	@Override
 	public boolean isPrimary() {
 		return _primary;
 	}
 
+	@Override
 	public void setPrimary(boolean primary) {
 		_columnBitmask |= PRIMARY_COLUMN_BITMASK;
 
@@ -521,6 +590,7 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 	public Object clone() {
 		PhoneImpl phoneImpl = new PhoneImpl();
 
+		phoneImpl.setUuid(getUuid());
 		phoneImpl.setPhoneId(getPhoneId());
 		phoneImpl.setCompanyId(getCompanyId());
 		phoneImpl.setUserId(getUserId());
@@ -539,6 +609,7 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 		return phoneImpl;
 	}
 
+	@Override
 	public int compareTo(Phone phone) {
 		int value = 0;
 
@@ -553,18 +624,15 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof Phone)) {
 			return false;
 		}
 
-		Phone phone = null;
-
-		try {
-			phone = (Phone)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		Phone phone = (Phone)obj;
 
 		long primaryKey = phone.getPrimaryKey();
 
@@ -584,6 +652,8 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 	@Override
 	public void resetOriginalValues() {
 		PhoneModelImpl phoneModelImpl = this;
+
+		phoneModelImpl._originalUuid = phoneModelImpl._uuid;
 
 		phoneModelImpl._originalCompanyId = phoneModelImpl._companyId;
 
@@ -611,6 +681,14 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 	@Override
 	public CacheModel<Phone> toCacheModel() {
 		PhoneCacheModel phoneCacheModel = new PhoneCacheModel();
+
+		phoneCacheModel.uuid = getUuid();
+
+		String uuid = phoneCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
+			phoneCacheModel.uuid = null;
+		}
 
 		phoneCacheModel.phoneId = getPhoneId();
 
@@ -673,9 +751,11 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(27);
 
-		sb.append("{phoneId=");
+		sb.append("{uuid=");
+		sb.append(getUuid());
+		sb.append(", phoneId=");
 		sb.append(getPhoneId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
@@ -704,13 +784,18 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(40);
+		StringBundler sb = new StringBundler(43);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.Phone");
 		sb.append("</model-name>");
 
+		sb.append(
+			"<column><column-name>uuid</column-name><column-value><![CDATA[");
+		sb.append(getUuid());
+		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>phoneId</column-name><column-value><![CDATA[");
 		sb.append(getPhoneId());
@@ -767,6 +852,8 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 
 	private static ClassLoader _classLoader = Phone.class.getClassLoader();
 	private static Class<?>[] _escapedModelInterfaces = new Class[] { Phone.class };
+	private String _uuid;
+	private String _originalUuid;
 	private long _phoneId;
 	private long _companyId;
 	private long _originalCompanyId;

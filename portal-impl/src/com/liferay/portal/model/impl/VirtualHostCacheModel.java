@@ -50,6 +50,7 @@ public class VirtualHostCacheModel implements CacheModel<VirtualHost>,
 		return sb.toString();
 	}
 
+	@Override
 	public VirtualHost toEntityModel() {
 		VirtualHostImpl virtualHostImpl = new VirtualHostImpl();
 
@@ -69,6 +70,7 @@ public class VirtualHostCacheModel implements CacheModel<VirtualHost>,
 		return virtualHostImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		virtualHostId = objectInput.readLong();
 		companyId = objectInput.readLong();
@@ -76,6 +78,7 @@ public class VirtualHostCacheModel implements CacheModel<VirtualHost>,
 		hostname = objectInput.readUTF();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(virtualHostId);

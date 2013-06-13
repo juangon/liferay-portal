@@ -38,6 +38,7 @@ public class ActionCommandCache {
 
 	public static final ActionCommand EMPTY = new ActionCommand() {
 
+		@Override
 		public boolean processCommand(
 			PortletRequest portletRequest, PortletResponse portletResponse) {
 

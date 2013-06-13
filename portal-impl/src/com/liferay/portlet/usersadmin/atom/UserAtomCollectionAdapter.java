@@ -38,10 +38,12 @@ import java.util.List;
  */
 public class UserAtomCollectionAdapter extends BaseAtomCollectionAdapter<User> {
 
+	@Override
 	public String getCollectionName() {
 		return _COLLECTION_NAME;
 	}
 
+	@Override
 	public List<String> getEntryAuthors(User user) {
 		List<String> authors = new ArrayList<String>();
 
@@ -50,6 +52,7 @@ public class UserAtomCollectionAdapter extends BaseAtomCollectionAdapter<User> {
 		return authors;
 	}
 
+	@Override
 	public AtomEntryContent getEntryContent(
 		User user, AtomRequestContext atomRequestContext) {
 
@@ -82,22 +85,27 @@ public class UserAtomCollectionAdapter extends BaseAtomCollectionAdapter<User> {
 		return new AtomEntryContent(content.toString());
 	}
 
+	@Override
 	public String getEntryId(User user) {
 		return String.valueOf(user.getUserId());
 	}
 
+	@Override
 	public String getEntrySummary(User user) {
 		return user.getFullName();
 	}
 
+	@Override
 	public String getEntryTitle(User user) {
 		return user.getScreenName();
 	}
 
+	@Override
 	public Date getEntryUpdated(User user) {
 		return user.getModifiedDate();
 	}
 
+	@Override
 	public String getFeedTitle(AtomRequestContext atomRequestContext) {
 		return AtomUtil.createFeedTitleFromPortletName(
 			atomRequestContext, PortletKeys.USERS_ADMIN);

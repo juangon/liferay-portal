@@ -54,10 +54,12 @@ public class JSONWebServiceDiscoverAction implements JSONWebServiceAction {
 		_discover = StringUtil.split(discover);
 	}
 
+	@Override
 	public JSONWebServiceActionMapping getJSONWebServiceActionMapping() {
 		return null;
 	}
 
+	@Override
 	public Object invoke() throws Exception {
 		Map<String, Object> resultsMap = new LinkedHashMap<String, Object>();
 
@@ -115,8 +117,8 @@ public class JSONWebServiceDiscoverAction implements JSONWebServiceAction {
 				try {
 					genericTypes = methodParameter.getGenericTypes();
 				}
-				catch (ClassNotFoundException e) {
-					throw new PortalException(e);
+				catch (ClassNotFoundException cnfe) {
+					throw new PortalException(cnfe);
 				}
 
 				parameterMap.put(

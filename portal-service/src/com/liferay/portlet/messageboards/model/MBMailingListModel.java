@@ -68,6 +68,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	 * @return the uuid of this message boards mailing list
 	 */
 	@AutoEscape
+	@Override
 	public String getUuid();
 
 	/**
@@ -75,6 +76,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	 *
 	 * @param uuid the uuid of this message boards mailing list
 	 */
+	@Override
 	public void setUuid(String uuid);
 
 	/**
@@ -96,6 +98,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	 *
 	 * @return the group ID of this message boards mailing list
 	 */
+	@Override
 	public long getGroupId();
 
 	/**
@@ -103,6 +106,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	 *
 	 * @param groupId the group ID of this message boards mailing list
 	 */
+	@Override
 	public void setGroupId(long groupId);
 
 	/**
@@ -110,6 +114,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	 *
 	 * @return the company ID of this message boards mailing list
 	 */
+	@Override
 	public long getCompanyId();
 
 	/**
@@ -117,6 +122,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	 *
 	 * @param companyId the company ID of this message boards mailing list
 	 */
+	@Override
 	public void setCompanyId(long companyId);
 
 	/**
@@ -124,6 +130,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	 *
 	 * @return the user ID of this message boards mailing list
 	 */
+	@Override
 	public long getUserId();
 
 	/**
@@ -131,6 +138,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	 *
 	 * @param userId the user ID of this message boards mailing list
 	 */
+	@Override
 	public void setUserId(long userId);
 
 	/**
@@ -139,6 +147,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	 * @return the user uuid of this message boards mailing list
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public String getUserUuid() throws SystemException;
 
 	/**
@@ -146,6 +155,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	 *
 	 * @param userUuid the user uuid of this message boards mailing list
 	 */
+	@Override
 	public void setUserUuid(String userUuid);
 
 	/**
@@ -154,6 +164,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	 * @return the user name of this message boards mailing list
 	 */
 	@AutoEscape
+	@Override
 	public String getUserName();
 
 	/**
@@ -161,6 +172,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	 *
 	 * @param userName the user name of this message boards mailing list
 	 */
+	@Override
 	public void setUserName(String userName);
 
 	/**
@@ -168,6 +180,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	 *
 	 * @return the create date of this message boards mailing list
 	 */
+	@Override
 	public Date getCreateDate();
 
 	/**
@@ -175,6 +188,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	 *
 	 * @param createDate the create date of this message boards mailing list
 	 */
+	@Override
 	public void setCreateDate(Date createDate);
 
 	/**
@@ -182,6 +196,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	 *
 	 * @return the modified date of this message boards mailing list
 	 */
+	@Override
 	public Date getModifiedDate();
 
 	/**
@@ -189,6 +204,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	 *
 	 * @param modifiedDate the modified date of this message boards mailing list
 	 */
+	@Override
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
@@ -487,41 +503,60 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	 */
 	public void setActive(boolean active);
 
+	@Override
 	public boolean isNew();
 
+	@Override
 	public void setNew(boolean n);
 
+	@Override
 	public boolean isCachedModel();
 
+	@Override
 	public void setCachedModel(boolean cachedModel);
 
+	@Override
 	public boolean isEscapedModel();
 
+	@Override
 	public Serializable getPrimaryKeyObj();
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
+	@Override
 	public ExpandoBridge getExpandoBridge();
 
+	@Override
 	public void setExpandoBridgeAttributes(BaseModel<?> baseModel);
 
+	@Override
 	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge);
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext);
 
+	@Override
 	public Object clone();
 
+	@Override
 	public int compareTo(MBMailingList mbMailingList);
 
+	@Override
 	public int hashCode();
 
+	@Override
 	public CacheModel<MBMailingList> toCacheModel();
 
+	@Override
 	public MBMailingList toEscapedModel();
 
+	@Override
 	public MBMailingList toUnescapedModel();
 
+	@Override
 	public String toString();
 
+	@Override
 	public String toXmlString();
 }

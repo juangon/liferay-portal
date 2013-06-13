@@ -52,6 +52,10 @@ public class PatcherUtil {
 		return getPatcher().getProperties();
 	}
 
+	public static boolean isConfigured() {
+		return getPatcher().isConfigured();
+	}
+
 	public void setPatcher(Patcher patcher) {
 		PortalRuntimePermission.checkSetBeanProperty(getClass());
 

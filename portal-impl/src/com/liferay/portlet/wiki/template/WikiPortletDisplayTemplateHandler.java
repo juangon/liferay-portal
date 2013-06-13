@@ -37,10 +37,12 @@ import java.util.Map;
 public class WikiPortletDisplayTemplateHandler
 	extends BasePortletDisplayTemplateHandler {
 
+	@Override
 	public String getClassName() {
 		return WikiPage.class.getName();
 	}
 
+	@Override
 	public String getName(Locale locale) {
 		String portletTitle = PortalUtil.getPortletTitle(
 			PortletKeys.WIKI, locale);
@@ -49,17 +51,18 @@ public class WikiPortletDisplayTemplateHandler
 			LanguageUtil.get(locale, "template"));
 	}
 
+	@Override
 	public String getResourceName() {
 		return "com.liferay.portlet.wiki";
 	}
 
 	@Override
 	public Map<String, TemplateVariableGroup> getTemplateVariableGroups(
-			long classPK, Locale locale)
+			long classPK, String language, Locale locale)
 		throws Exception {
 
 		Map<String, TemplateVariableGroup> templateVariableGroups =
-			super.getTemplateVariableGroups(classPK, locale);
+			super.getTemplateVariableGroups(classPK, language, locale);
 
 		TemplateVariableGroup fieldsTemplateVariableGroup =
 			templateVariableGroups.get("fields");

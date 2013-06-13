@@ -63,6 +63,7 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		_name = name;
 	}
 
+	@Override
 	public void addSetting(
 		String key, String value, boolean configurable, String type,
 		String[] options, String script) {
@@ -73,24 +74,22 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		_themeSettingsMap.put(key, themeSetting);
 	}
 
+	@Override
 	public int compareTo(Theme theme) {
 		return getName().compareTo(theme.getName());
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof Theme)) {
 			return false;
 		}
 
-		Theme theme = null;
-
-		try {
-			theme = (Theme)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		Theme theme = (Theme)obj;
 
 		String themeId = theme.getThemeId();
 
@@ -102,6 +101,7 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		}
 	}
 
+	@Override
 	public List<ColorScheme> getColorSchemes() {
 		List<ColorScheme> colorSchemes = ListUtil.fromMapValues(
 			_colorSchemesMap);
@@ -109,10 +109,12 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		return ListUtil.sort(colorSchemes);
 	}
 
+	@Override
 	public Map<String, ColorScheme> getColorSchemesMap() {
 		return _colorSchemesMap;
 	}
 
+	@Override
 	public Map<String, ThemeSetting> getConfigurableSettings() {
 		Map<String, ThemeSetting> configurableSettings =
 			new LinkedHashMap<String, ThemeSetting>();
@@ -130,6 +132,7 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		return configurableSettings;
 	}
 
+	@Override
 	public String getContextPath() {
 		if (!isWARFile()) {
 			return PortalUtil.getPathContext();
@@ -147,10 +150,12 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		return StringPool.SLASH.concat(servletContextName);
 	}
 
+	@Override
 	public String getCssPath() {
 		return _cssPath;
 	}
 
+	@Override
 	public String getDevice() {
 		if (isWapTheme()) {
 			return "wap";
@@ -160,6 +165,7 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		}
 	}
 
+	@Override
 	public String getFreeMarkerTemplateLoader() {
 		if (_loadFromServletContext) {
 			return TemplateConstants.SERVLET_SEPARATOR;
@@ -169,30 +175,37 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		}
 	}
 
+	@Override
 	public String getImagesPath() {
 		return _imagesPath;
 	}
 
+	@Override
 	public String getJavaScriptPath() {
 		return _javaScriptPath;
 	}
 
+	@Override
 	public boolean getLoadFromServletContext() {
 		return _loadFromServletContext;
 	}
 
+	@Override
 	public String getName() {
 		return _name;
 	}
 
+	@Override
 	public String getPluginId() {
 		return getThemeId();
 	}
 
+	@Override
 	public String getPluginType() {
 		return Plugin.TYPE_THEME;
 	}
 
+	@Override
 	public String getResourcePath(
 		ServletContext servletContext, String portletId, String path) {
 
@@ -221,14 +234,17 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		return resourcePath;
 	}
 
+	@Override
 	public String getRootPath() {
 		return _rootPath;
 	}
 
+	@Override
 	public String getServletContextName() {
 		return _servletContextName;
 	}
 
+	@Override
 	public String getSetting(String key) {
 		String value = null;
 
@@ -241,6 +257,7 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		return value;
 	}
 
+	@Override
 	public String[] getSettingOptions(String key) {
 		String[] options = null;
 
@@ -253,10 +270,12 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		return options;
 	}
 
+	@Override
 	public Map<String, ThemeSetting> getSettings() {
 		return _themeSettingsMap;
 	}
 
+	@Override
 	public Properties getSettingsProperties() {
 		Properties properties = new Properties();
 
@@ -271,10 +290,12 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		return properties;
 	}
 
+	@Override
 	public SpriteImage getSpriteImage(String fileName) {
 		return _spriteImagesMap.get(fileName);
 	}
 
+	@Override
 	public String getStaticResourcePath() {
 		String proxyPath = PortalUtil.getPathProxy();
 
@@ -293,30 +314,37 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		return proxyPath.concat(contextPath);
 	}
 
+	@Override
 	public String getTemplateExtension() {
 		return _templateExtension;
 	}
 
+	@Override
 	public String getTemplatesPath() {
 		return _templatesPath;
 	}
 
+	@Override
 	public ThemeCompanyLimit getThemeCompanyLimit() {
 		return _themeCompanyLimit;
 	}
 
+	@Override
 	public ThemeGroupLimit getThemeGroupLimit() {
 		return _themeGroupLimit;
 	}
 
+	@Override
 	public String getThemeId() {
 		return _themeId;
 	}
 
+	@Override
 	public long getTimestamp() {
 		return _timestamp;
 	}
 
+	@Override
 	public String getVelocityResourceListener() {
 		if (_loadFromServletContext) {
 			return TemplateConstants.SERVLET_SEPARATOR;
@@ -326,18 +354,22 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		}
 	}
 
+	@Override
 	public String getVirtualPath() {
 		return _virtualPath;
 	}
 
+	@Override
 	public boolean getWapTheme() {
 		return _wapTheme;
 	}
 
+	@Override
 	public boolean getWARFile() {
 		return _warFile;
 	}
 
+	@Override
 	public boolean hasColorSchemes() {
 		if (_colorSchemesMap.size() > 0) {
 			return true;
@@ -352,26 +384,32 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		return _themeId.hashCode();
 	}
 
+	@Override
 	public boolean isCompanyAvailable(long companyId) {
 		return isAvailable(getThemeCompanyLimit(), companyId);
 	}
 
+	@Override
 	public boolean isGroupAvailable(long groupId) {
 		return isAvailable(getThemeGroupLimit(), groupId);
 	}
 
+	@Override
 	public boolean isLoadFromServletContext() {
 		return _loadFromServletContext;
 	}
 
+	@Override
 	public boolean isWapTheme() {
 		return _wapTheme;
 	}
 
+	@Override
 	public boolean isWARFile() {
 		return _warFile;
 	}
 
+	@Override
 	public boolean resourceExists(
 			ServletContext servletContext, String portletId, String path)
 		throws Exception {
@@ -405,30 +443,37 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		return resourceExists;
 	}
 
+	@Override
 	public void setCssPath(String cssPath) {
 		_cssPath = cssPath;
 	}
 
+	@Override
 	public void setImagesPath(String imagesPath) {
 		_imagesPath = imagesPath;
 	}
 
+	@Override
 	public void setJavaScriptPath(String javaScriptPath) {
 		_javaScriptPath = javaScriptPath;
 	}
 
+	@Override
 	public void setLoadFromServletContext(boolean loadFromServletContext) {
 		_loadFromServletContext = loadFromServletContext;
 	}
 
+	@Override
 	public void setName(String name) {
 		_name = name;
 	}
 
+	@Override
 	public void setRootPath(String rootPath) {
 		_rootPath = rootPath;
 	}
 
+	@Override
 	public void setServletContextName(String servletContextName) {
 		_servletContextName = servletContextName;
 
@@ -440,6 +485,7 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		}
 	}
 
+	@Override
 	public void setSetting(String key, String value) {
 		ThemeSetting themeSetting = _themeSettingsMap.get(key);
 
@@ -451,6 +497,7 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		}
 	}
 
+	@Override
 	public void setSpriteImages(
 		String spriteFileName, Properties spriteProperties) {
 
@@ -471,26 +518,32 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		}
 	}
 
+	@Override
 	public void setTemplateExtension(String templateExtension) {
 		_templateExtension = templateExtension;
 	}
 
+	@Override
 	public void setTemplatesPath(String templatesPath) {
 		_templatesPath = templatesPath;
 	}
 
+	@Override
 	public void setThemeCompanyLimit(ThemeCompanyLimit themeCompanyLimit) {
 		_themeCompanyLimit = themeCompanyLimit;
 	}
 
+	@Override
 	public void setThemeGroupLimit(ThemeGroupLimit themeGroupLimit) {
 		_themeGroupLimit = themeGroupLimit;
 	}
 
+	@Override
 	public void setTimestamp(long timestamp) {
 		_timestamp = timestamp;
 	}
 
+	@Override
 	public void setVirtualPath(String virtualPath) {
 		if (_warFile && Validator.isNull(virtualPath)) {
 			virtualPath = PropsValues.THEME_VIRTUAL_PATH;
@@ -499,6 +552,7 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		_virtualPath = virtualPath;
 	}
 
+	@Override
 	public void setWapTheme(boolean wapTheme) {
 		_wapTheme = wapTheme;
 	}

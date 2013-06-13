@@ -14,6 +14,7 @@
 
 		<antcall target="prepare-common">
 			<param name="database" value="mysql" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -23,6 +24,7 @@
 			${test.ant.script.file.legacy.plugins}
 			${test.ant.script.file.legacy.version}
 			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite}" />
 		</ant>
 	</target>

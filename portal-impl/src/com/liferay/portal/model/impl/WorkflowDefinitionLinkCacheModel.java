@@ -68,6 +68,7 @@ public class WorkflowDefinitionLinkCacheModel implements CacheModel<WorkflowDefi
 		return sb.toString();
 	}
 
+	@Override
 	public WorkflowDefinitionLink toEntityModel() {
 		WorkflowDefinitionLinkImpl workflowDefinitionLinkImpl = new WorkflowDefinitionLinkImpl();
 
@@ -115,6 +116,7 @@ public class WorkflowDefinitionLinkCacheModel implements CacheModel<WorkflowDefi
 		return workflowDefinitionLinkImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		workflowDefinitionLinkId = objectInput.readLong();
 		groupId = objectInput.readLong();
@@ -130,6 +132,7 @@ public class WorkflowDefinitionLinkCacheModel implements CacheModel<WorkflowDefi
 		workflowDefinitionVersion = objectInput.readInt();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(workflowDefinitionLinkId);

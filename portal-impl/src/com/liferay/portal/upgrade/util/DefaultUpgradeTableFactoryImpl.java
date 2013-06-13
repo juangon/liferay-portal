@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactory;
 @DoPrivileged
 public class DefaultUpgradeTableFactoryImpl implements UpgradeTableFactory {
 
+	@Override
 	public UpgradeTable getUpgradeTable(
 		String tableName, Object[][] columns, UpgradeColumn... upgradeColumns) {
 

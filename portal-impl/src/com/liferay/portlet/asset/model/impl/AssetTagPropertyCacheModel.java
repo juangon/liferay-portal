@@ -63,6 +63,7 @@ public class AssetTagPropertyCacheModel implements CacheModel<AssetTagProperty>,
 		return sb.toString();
 	}
 
+	@Override
 	public AssetTagProperty toEntityModel() {
 		AssetTagPropertyImpl assetTagPropertyImpl = new AssetTagPropertyImpl();
 
@@ -112,6 +113,7 @@ public class AssetTagPropertyCacheModel implements CacheModel<AssetTagProperty>,
 		return assetTagPropertyImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		tagPropertyId = objectInput.readLong();
 		companyId = objectInput.readLong();
@@ -124,6 +126,7 @@ public class AssetTagPropertyCacheModel implements CacheModel<AssetTagProperty>,
 		value = objectInput.readUTF();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(tagPropertyId);

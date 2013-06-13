@@ -16,6 +16,7 @@ package com.liferay.portlet.documentlibrary.lar;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.repository.liferayrepository.model.LiferayFileEntry;
 import com.liferay.portal.repository.liferayrepository.util.LiferayBase;
@@ -101,10 +102,15 @@ public class FileEntryUtil extends LiferayBase {
 
 		String name = ((DLFileEntry)fileEntry.getModel()).getName();
 
-		return DLStoreUtil.getFileAsStream(
+		InputStream is = DLStoreUtil.getFileAsStream(
 			fileEntry.getCompanyId(), repositoryId, name,
 			fileEntry.getVersion());
 
+		if (is == null) {
+			is = new UnsyncByteArrayInputStream(new byte[0]);
+		}
+
+		return is;
 	}
 
 	private static FileEntryUtil _instance = new FileEntryUtil();

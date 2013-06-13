@@ -91,6 +91,7 @@ public class BlogsEntryCacheModel implements CacheModel<BlogsEntry>,
 		return sb.toString();
 	}
 
+	@Override
 	public BlogsEntry toEntityModel() {
 		BlogsEntryImpl blogsEntryImpl = new BlogsEntryImpl();
 
@@ -204,6 +205,7 @@ public class BlogsEntryCacheModel implements CacheModel<BlogsEntry>,
 		return blogsEntryImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		entryId = objectInput.readLong();
@@ -230,6 +232,7 @@ public class BlogsEntryCacheModel implements CacheModel<BlogsEntry>,
 		statusDate = objectInput.readLong();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

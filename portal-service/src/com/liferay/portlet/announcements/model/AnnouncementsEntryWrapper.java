@@ -25,8 +25,8 @@ import java.util.Map;
  * This class is a wrapper for {@link AnnouncementsEntry}.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       AnnouncementsEntry
+ * @author Brian Wing Shun Chan
+ * @see AnnouncementsEntry
  * @generated
  */
 public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
@@ -35,14 +35,17 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 		_announcementsEntry = announcementsEntry;
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return AnnouncementsEntry.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return AnnouncementsEntry.class.getName();
 	}
 
+	@Override
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
@@ -67,6 +70,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 		return attributes;
 	}
 
+	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 		String uuid = (String)attributes.get("uuid");
 
@@ -176,6 +180,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @return the primary key of this announcements entry
 	*/
+	@Override
 	public long getPrimaryKey() {
 		return _announcementsEntry.getPrimaryKey();
 	}
@@ -185,6 +190,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @param primaryKey the primary key of this announcements entry
 	*/
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_announcementsEntry.setPrimaryKey(primaryKey);
 	}
@@ -194,6 +200,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @return the uuid of this announcements entry
 	*/
+	@Override
 	public java.lang.String getUuid() {
 		return _announcementsEntry.getUuid();
 	}
@@ -203,6 +210,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @param uuid the uuid of this announcements entry
 	*/
+	@Override
 	public void setUuid(java.lang.String uuid) {
 		_announcementsEntry.setUuid(uuid);
 	}
@@ -212,6 +220,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @return the entry ID of this announcements entry
 	*/
+	@Override
 	public long getEntryId() {
 		return _announcementsEntry.getEntryId();
 	}
@@ -221,6 +230,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @param entryId the entry ID of this announcements entry
 	*/
+	@Override
 	public void setEntryId(long entryId) {
 		_announcementsEntry.setEntryId(entryId);
 	}
@@ -230,6 +240,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @return the company ID of this announcements entry
 	*/
+	@Override
 	public long getCompanyId() {
 		return _announcementsEntry.getCompanyId();
 	}
@@ -239,6 +250,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @param companyId the company ID of this announcements entry
 	*/
+	@Override
 	public void setCompanyId(long companyId) {
 		_announcementsEntry.setCompanyId(companyId);
 	}
@@ -248,6 +260,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @return the user ID of this announcements entry
 	*/
+	@Override
 	public long getUserId() {
 		return _announcementsEntry.getUserId();
 	}
@@ -257,6 +270,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @param userId the user ID of this announcements entry
 	*/
+	@Override
 	public void setUserId(long userId) {
 		_announcementsEntry.setUserId(userId);
 	}
@@ -267,6 +281,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	* @return the user uuid of this announcements entry
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public java.lang.String getUserUuid()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _announcementsEntry.getUserUuid();
@@ -277,6 +292,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @param userUuid the user uuid of this announcements entry
 	*/
+	@Override
 	public void setUserUuid(java.lang.String userUuid) {
 		_announcementsEntry.setUserUuid(userUuid);
 	}
@@ -286,6 +302,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @return the user name of this announcements entry
 	*/
+	@Override
 	public java.lang.String getUserName() {
 		return _announcementsEntry.getUserName();
 	}
@@ -295,6 +312,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @param userName the user name of this announcements entry
 	*/
+	@Override
 	public void setUserName(java.lang.String userName) {
 		_announcementsEntry.setUserName(userName);
 	}
@@ -304,6 +322,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @return the create date of this announcements entry
 	*/
+	@Override
 	public java.util.Date getCreateDate() {
 		return _announcementsEntry.getCreateDate();
 	}
@@ -313,6 +332,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @param createDate the create date of this announcements entry
 	*/
+	@Override
 	public void setCreateDate(java.util.Date createDate) {
 		_announcementsEntry.setCreateDate(createDate);
 	}
@@ -322,6 +342,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @return the modified date of this announcements entry
 	*/
+	@Override
 	public java.util.Date getModifiedDate() {
 		return _announcementsEntry.getModifiedDate();
 	}
@@ -331,6 +352,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @param modifiedDate the modified date of this announcements entry
 	*/
+	@Override
 	public void setModifiedDate(java.util.Date modifiedDate) {
 		_announcementsEntry.setModifiedDate(modifiedDate);
 	}
@@ -340,10 +362,12 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @return the fully qualified class name of this announcements entry
 	*/
+	@Override
 	public java.lang.String getClassName() {
 		return _announcementsEntry.getClassName();
 	}
 
+	@Override
 	public void setClassName(java.lang.String className) {
 		_announcementsEntry.setClassName(className);
 	}
@@ -353,6 +377,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @return the class name ID of this announcements entry
 	*/
+	@Override
 	public long getClassNameId() {
 		return _announcementsEntry.getClassNameId();
 	}
@@ -362,6 +387,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @param classNameId the class name ID of this announcements entry
 	*/
+	@Override
 	public void setClassNameId(long classNameId) {
 		_announcementsEntry.setClassNameId(classNameId);
 	}
@@ -371,6 +397,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @return the class p k of this announcements entry
 	*/
+	@Override
 	public long getClassPK() {
 		return _announcementsEntry.getClassPK();
 	}
@@ -380,6 +407,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @param classPK the class p k of this announcements entry
 	*/
+	@Override
 	public void setClassPK(long classPK) {
 		_announcementsEntry.setClassPK(classPK);
 	}
@@ -389,6 +417,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @return the title of this announcements entry
 	*/
+	@Override
 	public java.lang.String getTitle() {
 		return _announcementsEntry.getTitle();
 	}
@@ -398,6 +427,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @param title the title of this announcements entry
 	*/
+	@Override
 	public void setTitle(java.lang.String title) {
 		_announcementsEntry.setTitle(title);
 	}
@@ -407,6 +437,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @return the content of this announcements entry
 	*/
+	@Override
 	public java.lang.String getContent() {
 		return _announcementsEntry.getContent();
 	}
@@ -416,6 +447,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @param content the content of this announcements entry
 	*/
+	@Override
 	public void setContent(java.lang.String content) {
 		_announcementsEntry.setContent(content);
 	}
@@ -425,6 +457,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @return the url of this announcements entry
 	*/
+	@Override
 	public java.lang.String getUrl() {
 		return _announcementsEntry.getUrl();
 	}
@@ -434,6 +467,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @param url the url of this announcements entry
 	*/
+	@Override
 	public void setUrl(java.lang.String url) {
 		_announcementsEntry.setUrl(url);
 	}
@@ -443,6 +477,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @return the type of this announcements entry
 	*/
+	@Override
 	public java.lang.String getType() {
 		return _announcementsEntry.getType();
 	}
@@ -452,6 +487,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @param type the type of this announcements entry
 	*/
+	@Override
 	public void setType(java.lang.String type) {
 		_announcementsEntry.setType(type);
 	}
@@ -461,6 +497,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @return the display date of this announcements entry
 	*/
+	@Override
 	public java.util.Date getDisplayDate() {
 		return _announcementsEntry.getDisplayDate();
 	}
@@ -470,6 +507,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @param displayDate the display date of this announcements entry
 	*/
+	@Override
 	public void setDisplayDate(java.util.Date displayDate) {
 		_announcementsEntry.setDisplayDate(displayDate);
 	}
@@ -479,6 +517,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @return the expiration date of this announcements entry
 	*/
+	@Override
 	public java.util.Date getExpirationDate() {
 		return _announcementsEntry.getExpirationDate();
 	}
@@ -488,6 +527,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @param expirationDate the expiration date of this announcements entry
 	*/
+	@Override
 	public void setExpirationDate(java.util.Date expirationDate) {
 		_announcementsEntry.setExpirationDate(expirationDate);
 	}
@@ -497,6 +537,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @return the priority of this announcements entry
 	*/
+	@Override
 	public int getPriority() {
 		return _announcementsEntry.getPriority();
 	}
@@ -506,6 +547,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @param priority the priority of this announcements entry
 	*/
+	@Override
 	public void setPriority(int priority) {
 		_announcementsEntry.setPriority(priority);
 	}
@@ -515,6 +557,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @return the alert of this announcements entry
 	*/
+	@Override
 	public boolean getAlert() {
 		return _announcementsEntry.getAlert();
 	}
@@ -524,6 +567,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @return <code>true</code> if this announcements entry is alert; <code>false</code> otherwise
 	*/
+	@Override
 	public boolean isAlert() {
 		return _announcementsEntry.isAlert();
 	}
@@ -533,52 +577,64 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 	*
 	* @param alert the alert of this announcements entry
 	*/
+	@Override
 	public void setAlert(boolean alert) {
 		_announcementsEntry.setAlert(alert);
 	}
 
+	@Override
 	public boolean isNew() {
 		return _announcementsEntry.isNew();
 	}
 
+	@Override
 	public void setNew(boolean n) {
 		_announcementsEntry.setNew(n);
 	}
 
+	@Override
 	public boolean isCachedModel() {
 		return _announcementsEntry.isCachedModel();
 	}
 
+	@Override
 	public void setCachedModel(boolean cachedModel) {
 		_announcementsEntry.setCachedModel(cachedModel);
 	}
 
+	@Override
 	public boolean isEscapedModel() {
 		return _announcementsEntry.isEscapedModel();
 	}
 
+	@Override
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _announcementsEntry.getPrimaryKeyObj();
 	}
 
+	@Override
 	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
 		_announcementsEntry.setPrimaryKeyObj(primaryKeyObj);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
 		return _announcementsEntry.getExpandoBridge();
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.model.BaseModel<?> baseModel) {
 		_announcementsEntry.setExpandoBridgeAttributes(baseModel);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portlet.expando.model.ExpandoBridge expandoBridge) {
 		_announcementsEntry.setExpandoBridgeAttributes(expandoBridge);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		_announcementsEntry.setExpandoBridgeAttributes(serviceContext);
@@ -589,6 +645,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 		return new AnnouncementsEntryWrapper((AnnouncementsEntry)_announcementsEntry.clone());
 	}
 
+	@Override
 	public int compareTo(
 		com.liferay.portlet.announcements.model.AnnouncementsEntry announcementsEntry) {
 		return _announcementsEntry.compareTo(announcementsEntry);
@@ -599,14 +656,17 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 		return _announcementsEntry.hashCode();
 	}
 
+	@Override
 	public com.liferay.portal.model.CacheModel<com.liferay.portlet.announcements.model.AnnouncementsEntry> toCacheModel() {
 		return _announcementsEntry.toCacheModel();
 	}
 
+	@Override
 	public com.liferay.portlet.announcements.model.AnnouncementsEntry toEscapedModel() {
 		return new AnnouncementsEntryWrapper(_announcementsEntry.toEscapedModel());
 	}
 
+	@Override
 	public com.liferay.portlet.announcements.model.AnnouncementsEntry toUnescapedModel() {
 		return new AnnouncementsEntryWrapper(_announcementsEntry.toUnescapedModel());
 	}
@@ -616,15 +676,18 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 		return _announcementsEntry.toString();
 	}
 
+	@Override
 	public java.lang.String toXmlString() {
 		return _announcementsEntry.toXmlString();
 	}
 
+	@Override
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_announcementsEntry.persist();
 	}
 
+	@Override
 	public long getGroupId()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -638,10 +701,12 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry,
 		return _announcementsEntry;
 	}
 
+	@Override
 	public AnnouncementsEntry getWrappedModel() {
 		return _announcementsEntry;
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		_announcementsEntry.resetOriginalValues();
 	}

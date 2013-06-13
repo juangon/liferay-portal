@@ -38,6 +38,7 @@ public abstract class SocialActivityCounterBaseImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a social activity counter model instance should use the {@link SocialActivityCounter} interface instead.
 	 */
+	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
 			SocialActivityCounterLocalServiceUtil.addSocialActivityCounter(this);

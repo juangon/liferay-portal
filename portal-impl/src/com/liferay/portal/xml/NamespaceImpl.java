@@ -35,20 +35,31 @@ public class NamespaceImpl extends NodeImpl implements Namespace {
 
 	@Override
 	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof NamespaceImpl)) {
+			return false;
+		}
+
 		org.dom4j.Namespace namespace =
 			((NamespaceImpl)obj).getWrappedNamespace();
 
 		return _namespace.equals(namespace);
 	}
 
+	@Override
 	public short getNodeType() {
 		return _namespace.getNodeType();
 	}
 
+	@Override
 	public String getPrefix() {
 		return _namespace.getPrefix();
 	}
 
+	@Override
 	public String getURI() {
 		return _namespace.getURI();
 	}
@@ -57,6 +68,7 @@ public class NamespaceImpl extends NodeImpl implements Namespace {
 		return _namespace;
 	}
 
+	@Override
 	public String getXPathNameStep() {
 		return _namespace.getXPathNameStep();
 	}

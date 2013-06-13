@@ -79,6 +79,7 @@ public class LiferayResourceBundle extends ResourceBundle {
 		return new Enumeration<String>() {
 			String next = null;
 
+			@Override
 			public boolean hasMoreElements() {
 				if (next == null) {
 					if (itr.hasNext()) {
@@ -103,6 +104,7 @@ public class LiferayResourceBundle extends ResourceBundle {
 				}
 			}
 
+			@Override
 			public String nextElement() {
 				if (hasMoreElements()) {
 					String result = next;

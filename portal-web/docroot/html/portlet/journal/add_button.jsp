@@ -24,33 +24,27 @@ long folderId = GetterUtil.getLong((String)request.getAttribute("view.jsp-folder
 List<DDMStructure> ddmStructures = DDMStructureLocalServiceUtil.getStructures(PortalUtil.getSiteAndCompanyGroupIds(themeDisplay), PortalUtil.getClassNameId(JournalArticle.class));
 %>
 
-<liferay-ui:icon-menu align="left" direction="down" icon="" message="add" showExpanded="<%= false %>" showWhenSingleIcon="<%= true %>">
+<aui:nav-item dropdown="<%= true %>" id="addButtonContainer" label="add">
 	<c:if test="<%= JournalFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER) %>">
 		<portlet:renderURL var="addFolderURL">
 			<portlet:param name="struts_action" value="/journal/edit_folder" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="groupId" value="<%= String.valueOf(scopeGroupId) %>" />
 			<portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon
-			image="folder"
-			message='<%= (folder != null) ? "subfolder" : "folder" %>'
-			url="<%= addFolderURL %>"
-		/>
+		<aui:nav-item href="<%= addFolderURL %>" iconClass="icon-folder-open" label='<%= (folder != null) ? "subfolder" : "folder" %>' />
 	</c:if>
 
 	<c:if test="<%= JournalFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_ARTICLE) %>">
 		<liferay-portlet:renderURL var="addArticleURL" windowState="<%= LiferayWindowState.MAXIMIZED.toString() %>">
 			<portlet:param name="struts_action" value="/journal/edit_article" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="groupId" value="<%= String.valueOf(scopeGroupId) %>" />
 			<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 		</liferay-portlet:renderURL>
 
-		<liferay-ui:icon
-			message="basic-web-content"
-			src='<%= themeDisplay.getPathThemeImages() + "/common/history.png" %>'
-			url="<%= addArticleURL.toString() %>"
-		/>
+		<aui:nav-item href="<%= addArticleURL %>" label="basic-web-content" />
 
 		<%
 		for (DDMStructure ddmStructure : ddmStructures) {
@@ -59,19 +53,16 @@ List<DDMStructure> ddmStructures = DDMStructureLocalServiceUtil.getStructures(Po
 			<liferay-portlet:renderURL var="addArticleURL" windowState="<%= LiferayWindowState.MAXIMIZED.toString() %>">
 				<portlet:param name="struts_action" value="/journal/edit_article" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="groupId" value="<%= String.valueOf(scopeGroupId) %>" />
 				<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 				<portlet:param name="structureId" value="<%= ddmStructure.getStructureKey() %>" />
 			</liferay-portlet:renderURL>
 
-			<liferay-ui:icon
-				message="<%= HtmlUtil.escape(ddmStructure.getName(themeDisplay.getLocale())) %>"
-				src='<%= themeDisplay.getPathThemeImages() + "/common/history.png" %>'
-				url="<%= addArticleURL.toString() %>"
-			/>
+			<aui:nav-item href="<%= addArticleURL %>" label="<%= HtmlUtil.escape(ddmStructure.getName(themeDisplay.getLocale())) %>" />
 
 		<%
 		}
 		%>
 
 	</c:if>
-</liferay-ui:icon-menu>
+</aui:nav-item>

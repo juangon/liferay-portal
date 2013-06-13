@@ -194,26 +194,32 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 	public DLFileEntryModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _fileEntryId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setFileEntryId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _fileEntryId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return DLFileEntry.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return DLFileEntry.class.getName();
 	}
@@ -433,6 +439,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		}
 	}
 
+	@Override
 	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
@@ -443,6 +450,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		}
 	}
 
+	@Override
 	public void setUuid(String uuid) {
 		if (_originalUuid == null) {
 			_originalUuid = _uuid;
@@ -455,20 +463,24 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@Override
 	@JSON
 	public long getFileEntryId() {
 		return _fileEntryId;
 	}
 
+	@Override
 	public void setFileEntryId(long fileEntryId) {
 		_fileEntryId = fileEntryId;
 	}
 
+	@Override
 	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -485,11 +497,13 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		return _originalGroupId;
 	}
 
+	@Override
 	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
@@ -506,11 +520,13 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		return _originalCompanyId;
 	}
 
+	@Override
 	@JSON
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_columnBitmask |= USERID_COLUMN_BITMASK;
 
@@ -523,10 +539,12 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
@@ -535,6 +553,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		return _originalUserId;
 	}
 
+	@Override
 	@JSON
 	public String getUserName() {
 		if (_userName == null) {
@@ -545,28 +564,34 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		}
 	}
 
+	@Override
 	public void setUserName(String userName) {
 		_userName = userName;
 	}
 
+	@Override
 	@JSON
 	public long getVersionUserId() {
 		return _versionUserId;
 	}
 
+	@Override
 	public void setVersionUserId(long versionUserId) {
 		_versionUserId = versionUserId;
 	}
 
+	@Override
 	public String getVersionUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getVersionUserId(), "uuid",
 			_versionUserUuid);
 	}
 
+	@Override
 	public void setVersionUserUuid(String versionUserUuid) {
 		_versionUserUuid = versionUserUuid;
 	}
 
+	@Override
 	@JSON
 	public String getVersionUserName() {
 		if (_versionUserName == null) {
@@ -577,28 +602,34 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		}
 	}
 
+	@Override
 	public void setVersionUserName(String versionUserName) {
 		_versionUserName = versionUserName;
 	}
 
+	@Override
 	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
 	}
 
+	@Override
 	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
 	public String getClassName() {
 		if (getClassNameId() <= 0) {
 			return StringPool.BLANK;
@@ -607,6 +638,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		return PortalUtil.getClassName(getClassNameId());
 	}
 
+	@Override
 	public void setClassName(String className) {
 		long classNameId = 0;
 
@@ -617,38 +649,46 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		setClassNameId(classNameId);
 	}
 
+	@Override
 	@JSON
 	public long getClassNameId() {
 		return _classNameId;
 	}
 
+	@Override
 	public void setClassNameId(long classNameId) {
 		_classNameId = classNameId;
 	}
 
+	@Override
 	@JSON
 	public long getClassPK() {
 		return _classPK;
 	}
 
+	@Override
 	public void setClassPK(long classPK) {
 		_classPK = classPK;
 	}
 
+	@Override
 	@JSON
 	public long getRepositoryId() {
 		return _repositoryId;
 	}
 
+	@Override
 	public void setRepositoryId(long repositoryId) {
 		_repositoryId = repositoryId;
 	}
 
+	@Override
 	@JSON
 	public long getFolderId() {
 		return _folderId;
 	}
 
+	@Override
 	public void setFolderId(long folderId) {
 		_columnBitmask = -1L;
 
@@ -665,6 +705,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		return _originalFolderId;
 	}
 
+	@Override
 	@JSON
 	public String getName() {
 		if (_name == null) {
@@ -675,6 +716,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		}
 	}
 
+	@Override
 	public void setName(String name) {
 		_columnBitmask = -1L;
 
@@ -689,6 +731,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		return GetterUtil.getString(_originalName);
 	}
 
+	@Override
 	@JSON
 	public String getExtension() {
 		if (_extension == null) {
@@ -699,10 +742,12 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		}
 	}
 
+	@Override
 	public void setExtension(String extension) {
 		_extension = extension;
 	}
 
+	@Override
 	@JSON
 	public String getMimeType() {
 		if (_mimeType == null) {
@@ -713,6 +758,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		}
 	}
 
+	@Override
 	public void setMimeType(String mimeType) {
 		_columnBitmask |= MIMETYPE_COLUMN_BITMASK;
 
@@ -727,6 +773,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		return GetterUtil.getString(_originalMimeType);
 	}
 
+	@Override
 	@JSON
 	public String getTitle() {
 		if (_title == null) {
@@ -737,6 +784,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		}
 	}
 
+	@Override
 	public void setTitle(String title) {
 		_columnBitmask |= TITLE_COLUMN_BITMASK;
 
@@ -751,6 +799,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		return GetterUtil.getString(_originalTitle);
 	}
 
+	@Override
 	@JSON
 	public String getDescription() {
 		if (_description == null) {
@@ -761,10 +810,12 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		}
 	}
 
+	@Override
 	public void setDescription(String description) {
 		_description = description;
 	}
 
+	@Override
 	@JSON
 	public String getExtraSettings() {
 		if (_extraSettings == null) {
@@ -775,15 +826,18 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		}
 	}
 
+	@Override
 	public void setExtraSettings(String extraSettings) {
 		_extraSettings = extraSettings;
 	}
 
+	@Override
 	@JSON
 	public long getFileEntryTypeId() {
 		return _fileEntryTypeId;
 	}
 
+	@Override
 	public void setFileEntryTypeId(long fileEntryTypeId) {
 		_columnBitmask |= FILEENTRYTYPEID_COLUMN_BITMASK;
 
@@ -800,6 +854,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		return _originalFileEntryTypeId;
 	}
 
+	@Override
 	@JSON
 	public String getVersion() {
 		if (_version == null) {
@@ -810,73 +865,89 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		}
 	}
 
+	@Override
 	public void setVersion(String version) {
 		_version = version;
 	}
 
+	@Override
 	@JSON
 	public long getSize() {
 		return _size;
 	}
 
+	@Override
 	public void setSize(long size) {
 		_size = size;
 	}
 
+	@Override
 	@JSON
 	public int getReadCount() {
 		return _readCount;
 	}
 
+	@Override
 	public void setReadCount(int readCount) {
 		_readCount = readCount;
 	}
 
+	@Override
 	@JSON
 	public long getSmallImageId() {
 		return _smallImageId;
 	}
 
+	@Override
 	public void setSmallImageId(long smallImageId) {
 		_smallImageId = smallImageId;
 	}
 
+	@Override
 	@JSON
 	public long getLargeImageId() {
 		return _largeImageId;
 	}
 
+	@Override
 	public void setLargeImageId(long largeImageId) {
 		_largeImageId = largeImageId;
 	}
 
+	@Override
 	@JSON
 	public long getCustom1ImageId() {
 		return _custom1ImageId;
 	}
 
+	@Override
 	public void setCustom1ImageId(long custom1ImageId) {
 		_custom1ImageId = custom1ImageId;
 	}
 
+	@Override
 	@JSON
 	public long getCustom2ImageId() {
 		return _custom2ImageId;
 	}
 
+	@Override
 	public void setCustom2ImageId(long custom2ImageId) {
 		_custom2ImageId = custom2ImageId;
 	}
 
+	@Override
 	@JSON
 	public boolean getManualCheckInRequired() {
 		return _manualCheckInRequired;
 	}
 
+	@Override
 	public boolean isManualCheckInRequired() {
 		return _manualCheckInRequired;
 	}
 
+	@Override
 	public void setManualCheckInRequired(boolean manualCheckInRequired) {
 		_manualCheckInRequired = manualCheckInRequired;
 	}
@@ -947,6 +1018,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		return dlFileEntryImpl;
 	}
 
+	@Override
 	public int compareTo(DLFileEntry dlFileEntry) {
 		int value = 0;
 
@@ -975,18 +1047,15 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof DLFileEntry)) {
 			return false;
 		}
 
-		DLFileEntry dlFileEntry = null;
-
-		try {
-			dlFileEntry = (DLFileEntry)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		DLFileEntry dlFileEntry = (DLFileEntry)obj;
 
 		long primaryKey = dlFileEntry.getPrimaryKey();
 
@@ -1244,6 +1313,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(91);
 

@@ -37,6 +37,7 @@ public abstract class UserGroupGroupRoleBaseImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a user group group role model instance should use the {@link UserGroupGroupRole} interface instead.
 	 */
+	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
 			UserGroupGroupRoleLocalServiceUtil.addUserGroupGroupRole(this);

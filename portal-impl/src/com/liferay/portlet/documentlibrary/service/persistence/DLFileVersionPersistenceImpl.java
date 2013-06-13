@@ -115,6 +115,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the matching document library file versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileVersion> findByUuid(String uuid)
 		throws SystemException {
 		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
@@ -133,6 +134,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the range of matching document library file versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileVersion> findByUuid(String uuid, int start, int end)
 		throws SystemException {
 		return findByUuid(uuid, start, end, null);
@@ -152,6 +154,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the ordered range of matching document library file versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileVersion> findByUuid(String uuid, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -272,6 +275,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a matching document library file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion findByUuid_First(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileVersionException, SystemException {
@@ -301,6 +305,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the first matching document library file version, or <code>null</code> if a matching document library file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion fetchByUuid_First(String uuid,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<DLFileVersion> list = findByUuid(uuid, 0, 1, orderByComparator);
@@ -321,6 +326,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a matching document library file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion findByUuid_Last(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileVersionException, SystemException {
@@ -350,6 +356,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the last matching document library file version, or <code>null</code> if a matching document library file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion fetchByUuid_Last(String uuid,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByUuid(uuid);
@@ -374,6 +381,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a document library file version with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion[] findByUuid_PrevAndNext(long fileVersionId,
 		String uuid, OrderByComparator orderByComparator)
 		throws NoSuchFileVersionException, SystemException {
@@ -529,6 +537,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @param uuid the uuid
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByUuid(String uuid) throws SystemException {
 		for (DLFileVersion dlFileVersion : findByUuid(uuid, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null)) {
@@ -543,6 +552,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the number of matching document library file versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUuid(String uuid) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID;
 
@@ -625,6 +635,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a matching document library file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion findByUUID_G(String uuid, long groupId)
 		throws NoSuchFileVersionException, SystemException {
 		DLFileVersion dlFileVersion = fetchByUUID_G(uuid, groupId);
@@ -660,6 +671,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the matching document library file version, or <code>null</code> if a matching document library file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		return fetchByUUID_G(uuid, groupId, true);
@@ -674,6 +686,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the matching document library file version, or <code>null</code> if a matching document library file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion fetchByUUID_G(String uuid, long groupId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, groupId };
@@ -780,6 +793,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the document library file version that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion removeByUUID_G(String uuid, long groupId)
 		throws NoSuchFileVersionException, SystemException {
 		DLFileVersion dlFileVersion = findByUUID_G(uuid, groupId);
@@ -795,6 +809,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the number of matching document library file versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID_G;
@@ -896,6 +911,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the matching document library file versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileVersion> findByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		return findByUuid_C(uuid, companyId, QueryUtil.ALL_POS,
@@ -916,6 +932,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the range of matching document library file versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileVersion> findByUuid_C(String uuid, long companyId,
 		int start, int end) throws SystemException {
 		return findByUuid_C(uuid, companyId, start, end, null);
@@ -936,6 +953,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the ordered range of matching document library file versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileVersion> findByUuid_C(String uuid, long companyId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1067,6 +1085,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a matching document library file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion findByUuid_C_First(String uuid, long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileVersionException, SystemException {
@@ -1101,6 +1120,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the first matching document library file version, or <code>null</code> if a matching document library file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion fetchByUuid_C_First(String uuid, long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<DLFileVersion> list = findByUuid_C(uuid, companyId, 0, 1,
@@ -1123,6 +1143,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a matching document library file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion findByUuid_C_Last(String uuid, long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileVersionException, SystemException {
@@ -1157,6 +1178,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the last matching document library file version, or <code>null</code> if a matching document library file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion fetchByUuid_C_Last(String uuid, long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByUuid_C(uuid, companyId);
@@ -1182,6 +1204,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a document library file version with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion[] findByUuid_C_PrevAndNext(long fileVersionId,
 		String uuid, long companyId, OrderByComparator orderByComparator)
 		throws NoSuchFileVersionException, SystemException {
@@ -1342,6 +1365,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @param companyId the company ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		for (DLFileVersion dlFileVersion : findByUuid_C(uuid, companyId,
@@ -1358,6 +1382,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the number of matching document library file versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID_C;
@@ -1456,6 +1481,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the matching document library file versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileVersion> findByFileEntryId(long fileEntryId)
 		throws SystemException {
 		return findByFileEntryId(fileEntryId, QueryUtil.ALL_POS,
@@ -1475,6 +1501,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the range of matching document library file versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileVersion> findByFileEntryId(long fileEntryId, int start,
 		int end) throws SystemException {
 		return findByFileEntryId(fileEntryId, start, end, null);
@@ -1494,6 +1521,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the ordered range of matching document library file versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileVersion> findByFileEntryId(long fileEntryId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -1600,6 +1628,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a matching document library file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion findByFileEntryId_First(long fileEntryId,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileVersionException, SystemException {
@@ -1630,6 +1659,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the first matching document library file version, or <code>null</code> if a matching document library file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion fetchByFileEntryId_First(long fileEntryId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<DLFileVersion> list = findByFileEntryId(fileEntryId, 0, 1,
@@ -1651,6 +1681,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a matching document library file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion findByFileEntryId_Last(long fileEntryId,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileVersionException, SystemException {
@@ -1681,6 +1712,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the last matching document library file version, or <code>null</code> if a matching document library file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion fetchByFileEntryId_Last(long fileEntryId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByFileEntryId(fileEntryId);
@@ -1705,6 +1737,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a document library file version with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion[] findByFileEntryId_PrevAndNext(long fileVersionId,
 		long fileEntryId, OrderByComparator orderByComparator)
 		throws NoSuchFileVersionException, SystemException {
@@ -1846,6 +1879,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @param fileEntryId the file entry ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByFileEntryId(long fileEntryId) throws SystemException {
 		for (DLFileVersion dlFileVersion : findByFileEntryId(fileEntryId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -1860,6 +1894,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the number of matching document library file versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByFileEntryId(long fileEntryId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_FILEENTRYID;
 
@@ -1936,6 +1971,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the matching document library file versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileVersion> findByMimeType(String mimeType)
 		throws SystemException {
 		return findByMimeType(mimeType, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -1955,6 +1991,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the range of matching document library file versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileVersion> findByMimeType(String mimeType, int start,
 		int end) throws SystemException {
 		return findByMimeType(mimeType, start, end, null);
@@ -1974,6 +2011,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the ordered range of matching document library file versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileVersion> findByMimeType(String mimeType, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -2094,6 +2132,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a matching document library file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion findByMimeType_First(String mimeType,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileVersionException, SystemException {
@@ -2124,6 +2163,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the first matching document library file version, or <code>null</code> if a matching document library file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion fetchByMimeType_First(String mimeType,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<DLFileVersion> list = findByMimeType(mimeType, 0, 1,
@@ -2145,6 +2185,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a matching document library file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion findByMimeType_Last(String mimeType,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileVersionException, SystemException {
@@ -2175,6 +2216,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the last matching document library file version, or <code>null</code> if a matching document library file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion fetchByMimeType_Last(String mimeType,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByMimeType(mimeType);
@@ -2199,6 +2241,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a document library file version with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion[] findByMimeType_PrevAndNext(long fileVersionId,
 		String mimeType, OrderByComparator orderByComparator)
 		throws NoSuchFileVersionException, SystemException {
@@ -2354,6 +2397,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @param mimeType the mime type
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByMimeType(String mimeType) throws SystemException {
 		for (DLFileVersion dlFileVersion : findByMimeType(mimeType,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -2368,6 +2412,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the number of matching document library file versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByMimeType(String mimeType) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_MIMETYPE;
 
@@ -2450,6 +2495,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a matching document library file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion findByF_V(long fileEntryId, String version)
 		throws NoSuchFileVersionException, SystemException {
 		DLFileVersion dlFileVersion = fetchByF_V(fileEntryId, version);
@@ -2485,6 +2531,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the matching document library file version, or <code>null</code> if a matching document library file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion fetchByF_V(long fileEntryId, String version)
 		throws SystemException {
 		return fetchByF_V(fileEntryId, version, true);
@@ -2499,6 +2546,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the matching document library file version, or <code>null</code> if a matching document library file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion fetchByF_V(long fileEntryId, String version,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { fileEntryId, version };
@@ -2605,6 +2653,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the document library file version that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion removeByF_V(long fileEntryId, String version)
 		throws NoSuchFileVersionException, SystemException {
 		DLFileVersion dlFileVersion = findByF_V(fileEntryId, version);
@@ -2620,6 +2669,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the number of matching document library file versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByF_V(long fileEntryId, String version)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_F_V;
@@ -2719,6 +2769,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the matching document library file versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileVersion> findByF_S(long fileEntryId, int status)
 		throws SystemException {
 		return findByF_S(fileEntryId, status, QueryUtil.ALL_POS,
@@ -2739,6 +2790,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the range of matching document library file versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileVersion> findByF_S(long fileEntryId, int status,
 		int start, int end) throws SystemException {
 		return findByF_S(fileEntryId, status, start, end, null);
@@ -2759,6 +2811,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the ordered range of matching document library file versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileVersion> findByF_S(long fileEntryId, int status,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -2876,6 +2929,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a matching document library file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion findByF_S_First(long fileEntryId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileVersionException, SystemException {
@@ -2910,6 +2964,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the first matching document library file version, or <code>null</code> if a matching document library file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion fetchByF_S_First(long fileEntryId, int status,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<DLFileVersion> list = findByF_S(fileEntryId, status, 0, 1,
@@ -2932,6 +2987,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a matching document library file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion findByF_S_Last(long fileEntryId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileVersionException, SystemException {
@@ -2966,6 +3022,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the last matching document library file version, or <code>null</code> if a matching document library file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion fetchByF_S_Last(long fileEntryId, int status,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByF_S(fileEntryId, status);
@@ -2991,6 +3048,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a document library file version with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion[] findByF_S_PrevAndNext(long fileVersionId,
 		long fileEntryId, int status, OrderByComparator orderByComparator)
 		throws NoSuchFileVersionException, SystemException {
@@ -3137,6 +3195,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @param status the status
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByF_S(long fileEntryId, int status)
 		throws SystemException {
 		for (DLFileVersion dlFileVersion : findByF_S(fileEntryId, status,
@@ -3153,6 +3212,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the number of matching document library file versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByF_S(long fileEntryId, int status)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_F_S;
@@ -3246,6 +3306,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the matching document library file versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileVersion> findByG_F_S(long groupId, long folderId,
 		int status) throws SystemException {
 		return findByG_F_S(groupId, folderId, status, QueryUtil.ALL_POS,
@@ -3267,6 +3328,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the range of matching document library file versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileVersion> findByG_F_S(long groupId, long folderId,
 		int status, int start, int end) throws SystemException {
 		return findByG_F_S(groupId, folderId, status, start, end, null);
@@ -3288,6 +3350,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the ordered range of matching document library file versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileVersion> findByG_F_S(long groupId, long folderId,
 		int status, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -3411,6 +3474,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a matching document library file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion findByG_F_S_First(long groupId, long folderId,
 		int status, OrderByComparator orderByComparator)
 		throws NoSuchFileVersionException, SystemException {
@@ -3449,6 +3513,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the first matching document library file version, or <code>null</code> if a matching document library file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion fetchByG_F_S_First(long groupId, long folderId,
 		int status, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -3473,6 +3538,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a matching document library file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion findByG_F_S_Last(long groupId, long folderId,
 		int status, OrderByComparator orderByComparator)
 		throws NoSuchFileVersionException, SystemException {
@@ -3511,6 +3577,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the last matching document library file version, or <code>null</code> if a matching document library file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion fetchByG_F_S_Last(long groupId, long folderId,
 		int status, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -3538,6 +3605,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a document library file version with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion[] findByG_F_S_PrevAndNext(long fileVersionId,
 		long groupId, long folderId, int status,
 		OrderByComparator orderByComparator)
@@ -3690,6 +3758,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @param status the status
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByG_F_S(long groupId, long folderId, int status)
 		throws SystemException {
 		for (DLFileVersion dlFileVersion : findByG_F_S(groupId, folderId,
@@ -3707,6 +3776,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the number of matching document library file versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_F_S(long groupId, long folderId, int status)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_F_S;
@@ -3808,6 +3878,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the matching document library file versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileVersion> findByG_F_T_V(long groupId, long folderId,
 		String title, String version) throws SystemException {
 		return findByG_F_T_V(groupId, folderId, title, version,
@@ -3830,6 +3901,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the range of matching document library file versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileVersion> findByG_F_T_V(long groupId, long folderId,
 		String title, String version, int start, int end)
 		throws SystemException {
@@ -3853,6 +3925,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the ordered range of matching document library file versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileVersion> findByG_F_T_V(long groupId, long folderId,
 		String title, String version, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -4010,6 +4083,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a matching document library file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion findByG_F_T_V_First(long groupId, long folderId,
 		String title, String version, OrderByComparator orderByComparator)
 		throws NoSuchFileVersionException, SystemException {
@@ -4052,6 +4126,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the first matching document library file version, or <code>null</code> if a matching document library file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion fetchByG_F_T_V_First(long groupId, long folderId,
 		String title, String version, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -4077,6 +4152,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a matching document library file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion findByG_F_T_V_Last(long groupId, long folderId,
 		String title, String version, OrderByComparator orderByComparator)
 		throws NoSuchFileVersionException, SystemException {
@@ -4119,6 +4195,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the last matching document library file version, or <code>null</code> if a matching document library file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion fetchByG_F_T_V_Last(long groupId, long folderId,
 		String title, String version, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -4147,6 +4224,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a document library file version with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion[] findByG_F_T_V_PrevAndNext(long fileVersionId,
 		long groupId, long folderId, String title, String version,
 		OrderByComparator orderByComparator)
@@ -4332,6 +4410,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @param version the version
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByG_F_T_V(long groupId, long folderId, String title,
 		String version) throws SystemException {
 		for (DLFileVersion dlFileVersion : findByG_F_T_V(groupId, folderId,
@@ -4350,6 +4429,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the number of matching document library file versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_F_T_V(long groupId, long folderId, String title,
 		String version) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_F_T_V;
@@ -4450,6 +4530,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 *
 	 * @param dlFileVersion the document library file version
 	 */
+	@Override
 	public void cacheResult(DLFileVersion dlFileVersion) {
 		EntityCacheUtil.putResult(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileVersionImpl.class, dlFileVersion.getPrimaryKey(),
@@ -4472,6 +4553,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 *
 	 * @param dlFileVersions the document library file versions
 	 */
+	@Override
 	public void cacheResult(List<DLFileVersion> dlFileVersions) {
 		for (DLFileVersion dlFileVersion : dlFileVersions) {
 			if (EntityCacheUtil.getResult(
@@ -4632,6 +4714,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @param fileVersionId the primary key for the new document library file version
 	 * @return the new document library file version
 	 */
+	@Override
 	public DLFileVersion create(long fileVersionId) {
 		DLFileVersion dlFileVersion = new DLFileVersionImpl();
 
@@ -4653,6 +4736,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a document library file version with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion remove(long fileVersionId)
 		throws NoSuchFileVersionException, SystemException {
 		return remove((Serializable)fileVersionId);
@@ -5002,6 +5086,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a document library file version with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion findByPrimaryKey(long fileVersionId)
 		throws NoSuchFileVersionException, SystemException {
 		return findByPrimaryKey((Serializable)fileVersionId);
@@ -5062,6 +5147,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the document library file version, or <code>null</code> if a document library file version with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLFileVersion fetchByPrimaryKey(long fileVersionId)
 		throws SystemException {
 		return fetchByPrimaryKey((Serializable)fileVersionId);
@@ -5073,6 +5159,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the document library file versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileVersion> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -5089,6 +5176,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the range of document library file versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileVersion> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
@@ -5107,6 +5195,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the ordered range of document library file versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLFileVersion> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -5192,6 +5281,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (DLFileVersion dlFileVersion : findAll()) {
 			remove(dlFileVersion);
@@ -5204,6 +5294,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the number of document library file versions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -5297,6 +5388,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		};
 
 	private static CacheModel<DLFileVersion> _nullDLFileVersionCacheModel = new CacheModel<DLFileVersion>() {
+			@Override
 			public DLFileVersion toEntityModel() {
 				return _nullDLFileVersion;
 			}

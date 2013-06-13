@@ -238,7 +238,7 @@ List updatablePackageIds = new ArrayList();
 						}
 					%>
 
-						<div class="portlet-msg-error">
+						<div class="alert alert-error">
 							<liferay-ui:message key="an-error-occurred-while-retrieving-available-plugins" />
 						</div>
 
@@ -261,14 +261,6 @@ List updatablePackageIds = new ArrayList();
 		<liferay-util:include page="/html/portal/portlet_access_denied.jsp" />
 	</c:otherwise>
 </c:choose>
-
-<aui:script use="aui-base">
-	var description = A.one('#cpContextPanelTemplate');
-
-	if (description) {
-		description.append('<span class="warn"><liferay-ui:message key="warning-x-will-be-replaced-with-liferay-marketplace" arguments="<%= portletDisplay.getTitle() %>" /></span>');
-	}
-</aui:script>
 
 <%!
 private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.update_manager.view_jsp");

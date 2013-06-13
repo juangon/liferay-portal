@@ -37,6 +37,7 @@ public abstract class SubscriptionBaseImpl extends SubscriptionModelImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a subscription model instance should use the {@link Subscription} interface instead.
 	 */
+	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
 			SubscriptionLocalServiceUtil.addSubscription(this);

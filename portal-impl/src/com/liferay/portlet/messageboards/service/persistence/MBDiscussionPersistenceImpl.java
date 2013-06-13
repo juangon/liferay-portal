@@ -110,6 +110,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @return the matching message boards discussions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBDiscussion> findByUuid(String uuid) throws SystemException {
 		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -127,6 +128,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @return the range of matching message boards discussions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBDiscussion> findByUuid(String uuid, int start, int end)
 		throws SystemException {
 		return findByUuid(uuid, start, end, null);
@@ -146,6 +148,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @return the ordered range of matching message boards discussions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBDiscussion> findByUuid(String uuid, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -266,6 +269,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @throws com.liferay.portlet.messageboards.NoSuchDiscussionException if a matching message boards discussion could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBDiscussion findByUuid_First(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchDiscussionException, SystemException {
@@ -295,6 +299,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @return the first matching message boards discussion, or <code>null</code> if a matching message boards discussion could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBDiscussion fetchByUuid_First(String uuid,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<MBDiscussion> list = findByUuid(uuid, 0, 1, orderByComparator);
@@ -315,6 +320,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @throws com.liferay.portlet.messageboards.NoSuchDiscussionException if a matching message boards discussion could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBDiscussion findByUuid_Last(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchDiscussionException, SystemException {
@@ -344,6 +350,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @return the last matching message boards discussion, or <code>null</code> if a matching message boards discussion could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBDiscussion fetchByUuid_Last(String uuid,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByUuid(uuid);
@@ -368,6 +375,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @throws com.liferay.portlet.messageboards.NoSuchDiscussionException if a message boards discussion with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBDiscussion[] findByUuid_PrevAndNext(long discussionId,
 		String uuid, OrderByComparator orderByComparator)
 		throws NoSuchDiscussionException, SystemException {
@@ -523,6 +531,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @param uuid the uuid
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByUuid(String uuid) throws SystemException {
 		for (MBDiscussion mbDiscussion : findByUuid(uuid, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null)) {
@@ -537,6 +546,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @return the number of matching message boards discussions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUuid(String uuid) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID;
 
@@ -619,6 +629,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @throws com.liferay.portlet.messageboards.NoSuchDiscussionException if a matching message boards discussion could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBDiscussion findByUUID_G(String uuid, long groupId)
 		throws NoSuchDiscussionException, SystemException {
 		MBDiscussion mbDiscussion = fetchByUUID_G(uuid, groupId);
@@ -654,6 +665,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @return the matching message boards discussion, or <code>null</code> if a matching message boards discussion could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBDiscussion fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		return fetchByUUID_G(uuid, groupId, true);
@@ -668,6 +680,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @return the matching message boards discussion, or <code>null</code> if a matching message boards discussion could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBDiscussion fetchByUUID_G(String uuid, long groupId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, groupId };
@@ -774,6 +787,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @return the message boards discussion that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBDiscussion removeByUUID_G(String uuid, long groupId)
 		throws NoSuchDiscussionException, SystemException {
 		MBDiscussion mbDiscussion = findByUUID_G(uuid, groupId);
@@ -789,6 +803,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @return the number of matching message boards discussions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID_G;
@@ -886,6 +901,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @return the matching message boards discussions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBDiscussion> findByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		return findByUuid_C(uuid, companyId, QueryUtil.ALL_POS,
@@ -906,6 +922,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @return the range of matching message boards discussions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBDiscussion> findByUuid_C(String uuid, long companyId,
 		int start, int end) throws SystemException {
 		return findByUuid_C(uuid, companyId, start, end, null);
@@ -926,6 +943,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @return the ordered range of matching message boards discussions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBDiscussion> findByUuid_C(String uuid, long companyId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1057,6 +1075,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @throws com.liferay.portlet.messageboards.NoSuchDiscussionException if a matching message boards discussion could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBDiscussion findByUuid_C_First(String uuid, long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchDiscussionException, SystemException {
@@ -1091,6 +1110,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @return the first matching message boards discussion, or <code>null</code> if a matching message boards discussion could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBDiscussion fetchByUuid_C_First(String uuid, long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<MBDiscussion> list = findByUuid_C(uuid, companyId, 0, 1,
@@ -1113,6 +1133,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @throws com.liferay.portlet.messageboards.NoSuchDiscussionException if a matching message boards discussion could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBDiscussion findByUuid_C_Last(String uuid, long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchDiscussionException, SystemException {
@@ -1147,6 +1168,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @return the last matching message boards discussion, or <code>null</code> if a matching message boards discussion could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBDiscussion fetchByUuid_C_Last(String uuid, long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByUuid_C(uuid, companyId);
@@ -1172,6 +1194,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @throws com.liferay.portlet.messageboards.NoSuchDiscussionException if a message boards discussion with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBDiscussion[] findByUuid_C_PrevAndNext(long discussionId,
 		String uuid, long companyId, OrderByComparator orderByComparator)
 		throws NoSuchDiscussionException, SystemException {
@@ -1332,6 +1355,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @param companyId the company ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		for (MBDiscussion mbDiscussion : findByUuid_C(uuid, companyId,
@@ -1348,6 +1372,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @return the number of matching message boards discussions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID_C;
@@ -1444,6 +1469,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @return the matching message boards discussions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBDiscussion> findByClassNameId(long classNameId)
 		throws SystemException {
 		return findByClassNameId(classNameId, QueryUtil.ALL_POS,
@@ -1463,6 +1489,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @return the range of matching message boards discussions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBDiscussion> findByClassNameId(long classNameId, int start,
 		int end) throws SystemException {
 		return findByClassNameId(classNameId, start, end, null);
@@ -1482,6 +1509,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @return the ordered range of matching message boards discussions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBDiscussion> findByClassNameId(long classNameId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -1588,6 +1616,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @throws com.liferay.portlet.messageboards.NoSuchDiscussionException if a matching message boards discussion could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBDiscussion findByClassNameId_First(long classNameId,
 		OrderByComparator orderByComparator)
 		throws NoSuchDiscussionException, SystemException {
@@ -1618,6 +1647,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @return the first matching message boards discussion, or <code>null</code> if a matching message boards discussion could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBDiscussion fetchByClassNameId_First(long classNameId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<MBDiscussion> list = findByClassNameId(classNameId, 0, 1,
@@ -1639,6 +1669,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @throws com.liferay.portlet.messageboards.NoSuchDiscussionException if a matching message boards discussion could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBDiscussion findByClassNameId_Last(long classNameId,
 		OrderByComparator orderByComparator)
 		throws NoSuchDiscussionException, SystemException {
@@ -1669,6 +1700,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @return the last matching message boards discussion, or <code>null</code> if a matching message boards discussion could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBDiscussion fetchByClassNameId_Last(long classNameId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByClassNameId(classNameId);
@@ -1693,6 +1725,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @throws com.liferay.portlet.messageboards.NoSuchDiscussionException if a message boards discussion with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBDiscussion[] findByClassNameId_PrevAndNext(long discussionId,
 		long classNameId, OrderByComparator orderByComparator)
 		throws NoSuchDiscussionException, SystemException {
@@ -1834,6 +1867,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @param classNameId the class name ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByClassNameId(long classNameId) throws SystemException {
 		for (MBDiscussion mbDiscussion : findByClassNameId(classNameId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -1848,6 +1882,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @return the number of matching message boards discussions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByClassNameId(long classNameId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_CLASSNAMEID;
 
@@ -1912,6 +1947,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @throws com.liferay.portlet.messageboards.NoSuchDiscussionException if a matching message boards discussion could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBDiscussion findByThreadId(long threadId)
 		throws NoSuchDiscussionException, SystemException {
 		MBDiscussion mbDiscussion = fetchByThreadId(threadId);
@@ -1943,6 +1979,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @return the matching message boards discussion, or <code>null</code> if a matching message boards discussion could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBDiscussion fetchByThreadId(long threadId)
 		throws SystemException {
 		return fetchByThreadId(threadId, true);
@@ -1956,6 +1993,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @return the matching message boards discussion, or <code>null</code> if a matching message boards discussion could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBDiscussion fetchByThreadId(long threadId, boolean retrieveFromCache)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { threadId };
@@ -2040,6 +2078,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @return the message boards discussion that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBDiscussion removeByThreadId(long threadId)
 		throws NoSuchDiscussionException, SystemException {
 		MBDiscussion mbDiscussion = findByThreadId(threadId);
@@ -2054,6 +2093,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @return the number of matching message boards discussions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByThreadId(long threadId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_THREADID;
 
@@ -2120,6 +2160,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @throws com.liferay.portlet.messageboards.NoSuchDiscussionException if a matching message boards discussion could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBDiscussion findByC_C(long classNameId, long classPK)
 		throws NoSuchDiscussionException, SystemException {
 		MBDiscussion mbDiscussion = fetchByC_C(classNameId, classPK);
@@ -2155,6 +2196,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @return the matching message boards discussion, or <code>null</code> if a matching message boards discussion could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBDiscussion fetchByC_C(long classNameId, long classPK)
 		throws SystemException {
 		return fetchByC_C(classNameId, classPK, true);
@@ -2169,6 +2211,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @return the matching message boards discussion, or <code>null</code> if a matching message boards discussion could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBDiscussion fetchByC_C(long classNameId, long classPK,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { classNameId, classPK };
@@ -2260,6 +2303,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @return the message boards discussion that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBDiscussion removeByC_C(long classNameId, long classPK)
 		throws NoSuchDiscussionException, SystemException {
 		MBDiscussion mbDiscussion = findByC_C(classNameId, classPK);
@@ -2275,6 +2319,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @return the number of matching message boards discussions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByC_C(long classNameId, long classPK)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_C;
@@ -2333,6 +2378,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 *
 	 * @param mbDiscussion the message boards discussion
 	 */
+	@Override
 	public void cacheResult(MBDiscussion mbDiscussion) {
 		EntityCacheUtil.putResult(MBDiscussionModelImpl.ENTITY_CACHE_ENABLED,
 			MBDiscussionImpl.class, mbDiscussion.getPrimaryKey(), mbDiscussion);
@@ -2357,6 +2403,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 *
 	 * @param mbDiscussions the message boards discussions
 	 */
+	@Override
 	public void cacheResult(List<MBDiscussion> mbDiscussions) {
 		for (MBDiscussion mbDiscussion : mbDiscussions) {
 			if (EntityCacheUtil.getResult(
@@ -2546,6 +2593,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @param discussionId the primary key for the new message boards discussion
 	 * @return the new message boards discussion
 	 */
+	@Override
 	public MBDiscussion create(long discussionId) {
 		MBDiscussion mbDiscussion = new MBDiscussionImpl();
 
@@ -2567,6 +2615,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @throws com.liferay.portlet.messageboards.NoSuchDiscussionException if a message boards discussion with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBDiscussion remove(long discussionId)
 		throws NoSuchDiscussionException, SystemException {
 		return remove((Serializable)discussionId);
@@ -2815,6 +2864,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @throws com.liferay.portlet.messageboards.NoSuchDiscussionException if a message boards discussion with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBDiscussion findByPrimaryKey(long discussionId)
 		throws NoSuchDiscussionException, SystemException {
 		return findByPrimaryKey((Serializable)discussionId);
@@ -2875,6 +2925,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @return the message boards discussion, or <code>null</code> if a message boards discussion with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBDiscussion fetchByPrimaryKey(long discussionId)
 		throws SystemException {
 		return fetchByPrimaryKey((Serializable)discussionId);
@@ -2886,6 +2937,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @return the message boards discussions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBDiscussion> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -2902,6 +2954,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @return the range of message boards discussions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBDiscussion> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
@@ -2920,6 +2973,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @return the ordered range of message boards discussions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<MBDiscussion> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -3005,6 +3059,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (MBDiscussion mbDiscussion : findAll()) {
 			remove(mbDiscussion);
@@ -3017,6 +3072,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 * @return the number of message boards discussions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -3110,6 +3166,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 		};
 
 	private static CacheModel<MBDiscussion> _nullMBDiscussionCacheModel = new CacheModel<MBDiscussion>() {
+			@Override
 			public MBDiscussion toEntityModel() {
 				return _nullMBDiscussion;
 			}

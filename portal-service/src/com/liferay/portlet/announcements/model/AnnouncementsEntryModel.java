@@ -19,7 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.AttachedModel;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
-import com.liferay.portal.model.StagedModel;
+import com.liferay.portal.model.StagedAuditedModel;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -42,7 +42,7 @@ import java.util.Date;
  * @generated
  */
 public interface AnnouncementsEntryModel extends AttachedModel,
-	BaseModel<AnnouncementsEntry>, StagedModel {
+	BaseModel<AnnouncementsEntry>, StagedAuditedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -69,6 +69,7 @@ public interface AnnouncementsEntryModel extends AttachedModel,
 	 * @return the uuid of this announcements entry
 	 */
 	@AutoEscape
+	@Override
 	public String getUuid();
 
 	/**
@@ -76,6 +77,7 @@ public interface AnnouncementsEntryModel extends AttachedModel,
 	 *
 	 * @param uuid the uuid of this announcements entry
 	 */
+	@Override
 	public void setUuid(String uuid);
 
 	/**
@@ -97,6 +99,7 @@ public interface AnnouncementsEntryModel extends AttachedModel,
 	 *
 	 * @return the company ID of this announcements entry
 	 */
+	@Override
 	public long getCompanyId();
 
 	/**
@@ -104,6 +107,7 @@ public interface AnnouncementsEntryModel extends AttachedModel,
 	 *
 	 * @param companyId the company ID of this announcements entry
 	 */
+	@Override
 	public void setCompanyId(long companyId);
 
 	/**
@@ -111,6 +115,7 @@ public interface AnnouncementsEntryModel extends AttachedModel,
 	 *
 	 * @return the user ID of this announcements entry
 	 */
+	@Override
 	public long getUserId();
 
 	/**
@@ -118,6 +123,7 @@ public interface AnnouncementsEntryModel extends AttachedModel,
 	 *
 	 * @param userId the user ID of this announcements entry
 	 */
+	@Override
 	public void setUserId(long userId);
 
 	/**
@@ -126,6 +132,7 @@ public interface AnnouncementsEntryModel extends AttachedModel,
 	 * @return the user uuid of this announcements entry
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public String getUserUuid() throws SystemException;
 
 	/**
@@ -133,6 +140,7 @@ public interface AnnouncementsEntryModel extends AttachedModel,
 	 *
 	 * @param userUuid the user uuid of this announcements entry
 	 */
+	@Override
 	public void setUserUuid(String userUuid);
 
 	/**
@@ -141,6 +149,7 @@ public interface AnnouncementsEntryModel extends AttachedModel,
 	 * @return the user name of this announcements entry
 	 */
 	@AutoEscape
+	@Override
 	public String getUserName();
 
 	/**
@@ -148,6 +157,7 @@ public interface AnnouncementsEntryModel extends AttachedModel,
 	 *
 	 * @param userName the user name of this announcements entry
 	 */
+	@Override
 	public void setUserName(String userName);
 
 	/**
@@ -155,6 +165,7 @@ public interface AnnouncementsEntryModel extends AttachedModel,
 	 *
 	 * @return the create date of this announcements entry
 	 */
+	@Override
 	public Date getCreateDate();
 
 	/**
@@ -162,6 +173,7 @@ public interface AnnouncementsEntryModel extends AttachedModel,
 	 *
 	 * @param createDate the create date of this announcements entry
 	 */
+	@Override
 	public void setCreateDate(Date createDate);
 
 	/**
@@ -169,6 +181,7 @@ public interface AnnouncementsEntryModel extends AttachedModel,
 	 *
 	 * @return the modified date of this announcements entry
 	 */
+	@Override
 	public Date getModifiedDate();
 
 	/**
@@ -176,6 +189,7 @@ public interface AnnouncementsEntryModel extends AttachedModel,
 	 *
 	 * @param modifiedDate the modified date of this announcements entry
 	 */
+	@Override
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
@@ -183,6 +197,7 @@ public interface AnnouncementsEntryModel extends AttachedModel,
 	 *
 	 * @return the fully qualified class name of this announcements entry
 	 */
+	@Override
 	public String getClassName();
 
 	public void setClassName(String className);
@@ -192,6 +207,7 @@ public interface AnnouncementsEntryModel extends AttachedModel,
 	 *
 	 * @return the class name ID of this announcements entry
 	 */
+	@Override
 	public long getClassNameId();
 
 	/**
@@ -199,6 +215,7 @@ public interface AnnouncementsEntryModel extends AttachedModel,
 	 *
 	 * @param classNameId the class name ID of this announcements entry
 	 */
+	@Override
 	public void setClassNameId(long classNameId);
 
 	/**
@@ -206,6 +223,7 @@ public interface AnnouncementsEntryModel extends AttachedModel,
 	 *
 	 * @return the class p k of this announcements entry
 	 */
+	@Override
 	public long getClassPK();
 
 	/**
@@ -213,6 +231,7 @@ public interface AnnouncementsEntryModel extends AttachedModel,
 	 *
 	 * @param classPK the class p k of this announcements entry
 	 */
+	@Override
 	public void setClassPK(long classPK);
 
 	/**
@@ -338,41 +357,60 @@ public interface AnnouncementsEntryModel extends AttachedModel,
 	 */
 	public void setAlert(boolean alert);
 
+	@Override
 	public boolean isNew();
 
+	@Override
 	public void setNew(boolean n);
 
+	@Override
 	public boolean isCachedModel();
 
+	@Override
 	public void setCachedModel(boolean cachedModel);
 
+	@Override
 	public boolean isEscapedModel();
 
+	@Override
 	public Serializable getPrimaryKeyObj();
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
+	@Override
 	public ExpandoBridge getExpandoBridge();
 
+	@Override
 	public void setExpandoBridgeAttributes(BaseModel<?> baseModel);
 
+	@Override
 	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge);
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext);
 
+	@Override
 	public Object clone();
 
+	@Override
 	public int compareTo(AnnouncementsEntry announcementsEntry);
 
+	@Override
 	public int hashCode();
 
+	@Override
 	public CacheModel<AnnouncementsEntry> toCacheModel();
 
+	@Override
 	public AnnouncementsEntry toEscapedModel();
 
+	@Override
 	public AnnouncementsEntry toUnescapedModel();
 
+	@Override
 	public String toString();
 
+	@Override
 	public String toXmlString();
 }

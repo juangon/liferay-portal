@@ -227,6 +227,7 @@ public class LiferayResourceManager extends ResourceManagerImpl {
 			_encoding = encoding;
 		}
 
+		@Override
 		public Resource run() throws Exception {
 			return doGetResource(_resourceName, _resourceType, _encoding);
 		}

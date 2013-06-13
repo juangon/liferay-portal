@@ -62,6 +62,7 @@ public class ShoppingItemPriceCacheModel implements CacheModel<ShoppingItemPrice
 		return sb.toString();
 	}
 
+	@Override
 	public ShoppingItemPrice toEntityModel() {
 		ShoppingItemPriceImpl shoppingItemPriceImpl = new ShoppingItemPriceImpl();
 
@@ -81,6 +82,7 @@ public class ShoppingItemPriceCacheModel implements CacheModel<ShoppingItemPrice
 		return shoppingItemPriceImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		itemPriceId = objectInput.readLong();
 		itemId = objectInput.readLong();
@@ -94,6 +96,7 @@ public class ShoppingItemPriceCacheModel implements CacheModel<ShoppingItemPrice
 		status = objectInput.readInt();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(itemPriceId);

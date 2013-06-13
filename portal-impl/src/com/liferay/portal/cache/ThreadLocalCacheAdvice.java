@@ -124,10 +124,12 @@ public class ThreadLocalCacheAdvice
 	private static ThreadLocalCachable _nullThreadLocalCacheable =
 		new ThreadLocalCachable() {
 
+			@Override
 			public Class<? extends Annotation> annotationType() {
 				return ThreadLocalCachable.class;
 			}
 
+			@Override
 			public Lifecycle scope() {
 				return null;
 			}

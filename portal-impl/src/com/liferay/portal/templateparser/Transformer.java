@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.mobile.device.UnknownDevice;
 import com.liferay.portal.kernel.template.StringTemplateResource;
 import com.liferay.portal.kernel.template.Template;
 import com.liferay.portal.kernel.template.TemplateConstants;
-import com.liferay.portal.kernel.template.TemplateContextType;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.template.TemplateResource;
 import com.liferay.portal.kernel.template.URLTemplateResource;
@@ -63,6 +62,7 @@ import java.net.URL;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -79,13 +79,7 @@ import java.util.Set;
  */
 public class Transformer {
 
-	public Transformer(
-		String transformerListenerPropertyKey, String errorTemplatePropertyKey,
-		TemplateContextType defaultTemplateContextType) {
-
-		_transformerListenerClassNames = SetUtil.fromArray(
-			PropsUtil.getArray(transformerListenerPropertyKey));
-
+	public Transformer(String errorTemplatePropertyKey, boolean restricted) {
 		Set<String> langTypes = TemplateManagerUtil.getSupportedLanguageTypes(
 			errorTemplatePropertyKey);
 
@@ -98,7 +92,17 @@ public class Transformer {
 			}
 		}
 
-		_defaultTemplateContextType = defaultTemplateContextType;
+		_restricted = restricted;
+	}
+
+	public Transformer(
+		String transformerListenerPropertyKey, String errorTemplatePropertyKey,
+		boolean restricted) {
+
+		this(errorTemplatePropertyKey, restricted);
+
+		_transformerListenerClassNames = SetUtil.fromArray(
+			PropsUtil.getArray(transformerListenerPropertyKey));
 	}
 
 	public String transform(
@@ -112,24 +116,28 @@ public class Transformer {
 
 		long companyId = 0;
 		long companyGroupId = 0;
-		long groupId = 0;
+		long scopeGroupId = 0;
+		long siteGroupId = 0;
 
 		if (themeDisplay != null) {
 			companyId = themeDisplay.getCompanyId();
 			companyGroupId = themeDisplay.getCompanyGroupId();
-			groupId = themeDisplay.getScopeGroupId();
+			scopeGroupId = themeDisplay.getScopeGroupId();
+			siteGroupId = themeDisplay.getSiteGroupId();
 		}
 
 		String templateId = String.valueOf(contextObjects.get("template_id"));
 
 		templateId = getTemplateId(
-			templateId, companyId, companyGroupId, groupId);
+			templateId, companyId, companyGroupId, scopeGroupId);
 
 		Template template = getTemplate(templateId, script, langType);
 
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
 		try {
+			prepareTemplate(themeDisplay, template);
+
 			if (contextObjects != null) {
 				for (String key : contextObjects.keySet()) {
 					template.put(key, contextObjects.get(key));
@@ -139,9 +147,8 @@ public class Transformer {
 			template.put("company", getCompany(themeDisplay, companyId));
 			template.put("companyId", companyId);
 			template.put("device", getDevice(themeDisplay));
-			template.put("groupId", groupId);
 
-			String templatesPath = getTemplatesPath(companyId, groupId);
+			String templatesPath = getTemplatesPath(companyId, scopeGroupId);
 
 			template.put("journalTemplatesPath", templatesPath);
 			template.put(
@@ -151,7 +158,13 @@ public class Transformer {
 				"randomNamespace",
 				PwdGenerator.getPassword(PwdGenerator.KEY3, 4) +
 					StringPool.UNDERLINE);
+			template.put("scopeGroupId", scopeGroupId);
+			template.put("siteGroupId", siteGroupId);
 			template.put("templatesPath", templatesPath);
+
+			// Deprecated variables
+
+			template.put("groupId", scopeGroupId);
 
 			mergeTemplate(template, unsyncStringWriter);
 		}
@@ -256,24 +269,30 @@ public class Transformer {
 		else {
 			long companyId = 0;
 			long companyGroupId = 0;
-			long groupId = 0;
+			long articleGroupId = 0;
+
+			if (tokens != null) {
+				companyId = GetterUtil.getLong(tokens.get("company_id"));
+				companyGroupId = GetterUtil.getLong(
+					tokens.get("company_group_id"));
+				articleGroupId = GetterUtil.getLong(
+					tokens.get("article_group_id"));
+			}
+
+			long scopeGroupId = 0;
+			long siteGroupId = 0;
 
 			if (themeDisplay != null) {
 				companyId = themeDisplay.getCompanyId();
 				companyGroupId = themeDisplay.getCompanyGroupId();
-				groupId = themeDisplay.getScopeGroupId();
-			}
-			else if (tokens != null) {
-				companyId = GetterUtil.getLong(tokens.get("company_id"));
-				companyGroupId = GetterUtil.getLong(
-					tokens.get("company_group_id"));
-				groupId = GetterUtil.getLong(tokens.get("group_id"));
+				scopeGroupId = themeDisplay.getScopeGroupId();
+				siteGroupId = themeDisplay.getSiteGroupId();
 			}
 
 			String templateId = tokens.get("template_id");
 
 			templateId = getTemplateId(
-				templateId, companyId, companyGroupId, groupId);
+				templateId, companyId, companyGroupId, articleGroupId);
 
 			Template template = getTemplate(
 				templateId, tokens, languageId, xml, script, langType);
@@ -303,12 +322,13 @@ public class Transformer {
 					template.put("xmlRequest", requestElement.asXML());
 				}
 
+				template.put("articleGroupId", articleGroupId);
 				template.put("company", getCompany(themeDisplay, companyId));
 				template.put("companyId", companyId);
 				template.put("device", getDevice(themeDisplay));
-				template.put("groupId", groupId);
 
-				String templatesPath = getTemplatesPath(companyId, groupId);
+				String templatesPath = getTemplatesPath(
+					companyId, articleGroupId);
 
 				template.put("journalTemplatesPath", templatesPath);
 
@@ -323,8 +343,14 @@ public class Transformer {
 					"randomNamespace",
 					PwdGenerator.getPassword(PwdGenerator.KEY3, 4) +
 						StringPool.UNDERLINE);
+				template.put("scopeGroupId", scopeGroupId);
+				template.put("siteGroupId", siteGroupId);
 				template.put("templatesPath", templatesPath);
 				template.put("viewMode", viewMode);
+
+				// Deprecated variables
+
+				template.put("groupId", articleGroupId);
 
 				mergeTemplate(template, unsyncStringWriter);
 			}
@@ -428,12 +454,8 @@ public class Transformer {
 		TemplateResource errorTemplateResource = getErrorTemplateResource(
 			langType);
 
-		TemplateContextType templateContextType = getTemplateContextType(
-			langType);
-
 		return TemplateManagerUtil.getTemplate(
-			langType, templateResource, errorTemplateResource,
-			templateContextType);
+			langType, templateResource, errorTemplateResource, _restricted);
 	}
 
 	protected Template getTemplate(
@@ -446,20 +468,8 @@ public class Transformer {
 		TemplateResource errorTemplateResource = getErrorTemplateResource(
 			langType);
 
-		TemplateContextType templateContextType = getTemplateContextType(
-			langType);
-
 		return TemplateManagerUtil.getTemplate(
-			langType, templateResource, errorTemplateResource,
-			templateContextType);
-	}
-
-	protected TemplateContextType getTemplateContextType(String langType) {
-		if (langType.equals(TemplateConstants.LANG_TYPE_XSL)) {
-			return TemplateContextType.EMPTY;
-		}
-
-		return _defaultTemplateContextType;
+			langType, templateResource, errorTemplateResource, _restricted);
 	}
 
 	protected String getTemplateId(
@@ -629,6 +639,16 @@ public class Transformer {
 		template.processTemplate(unsyncStringWriter);
 	}
 
+	protected void prepareTemplate(ThemeDisplay themeDisplay, Template template)
+		throws Exception {
+
+		if (themeDisplay == null) {
+			return;
+		}
+
+		template.prepare(themeDisplay.getRequest());
+	}
+
 	protected String stripCDATA(String s) {
 		if (s.startsWith(StringPool.CDATA_OPEN) &&
 			s.endsWith(StringPool.CDATA_CLOSE)) {
@@ -662,9 +682,9 @@ public class Transformer {
 	private static Log _logXmlBeforeListener = LogFactoryUtil.getLog(
 		Transformer.class.getName() + ".XmlBeforeListener");
 
-	private TemplateContextType _defaultTemplateContextType;
 	private Map<String, String> _errorTemplateIds =
 		new HashMap<String, String>();
-	private Set<String> _transformerListenerClassNames;
+	private boolean _restricted;
+	private Set<String> _transformerListenerClassNames = new HashSet<String>();
 
 }

@@ -17,12 +17,10 @@ package com.liferay.portlet.asset.service;
 import com.liferay.portal.service.ServiceWrapper;
 
 /**
- * <p>
- * This class is a wrapper for {@link AssetCategoryPropertyLocalService}.
- * </p>
+ * Provides a wrapper for {@link AssetCategoryPropertyLocalService}.
  *
- * @author    Brian Wing Shun Chan
- * @see       AssetCategoryPropertyLocalService
+ * @author Brian Wing Shun Chan
+ * @see AssetCategoryPropertyLocalService
  * @generated
  */
 public class AssetCategoryPropertyLocalServiceWrapper
@@ -40,6 +38,7 @@ public class AssetCategoryPropertyLocalServiceWrapper
 	* @return the asset category property that was added
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.asset.model.AssetCategoryProperty addAssetCategoryProperty(
 		com.liferay.portlet.asset.model.AssetCategoryProperty assetCategoryProperty)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -52,6 +51,7 @@ public class AssetCategoryPropertyLocalServiceWrapper
 	* @param categoryPropertyId the primary key for the new asset category property
 	* @return the new asset category property
 	*/
+	@Override
 	public com.liferay.portlet.asset.model.AssetCategoryProperty createAssetCategoryProperty(
 		long categoryPropertyId) {
 		return _assetCategoryPropertyLocalService.createAssetCategoryProperty(categoryPropertyId);
@@ -65,6 +65,7 @@ public class AssetCategoryPropertyLocalServiceWrapper
 	* @throws PortalException if a asset category property with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.asset.model.AssetCategoryProperty deleteAssetCategoryProperty(
 		long categoryPropertyId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -79,12 +80,14 @@ public class AssetCategoryPropertyLocalServiceWrapper
 	* @return the asset category property that was removed
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.asset.model.AssetCategoryProperty deleteAssetCategoryProperty(
 		com.liferay.portlet.asset.model.AssetCategoryProperty assetCategoryProperty)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _assetCategoryPropertyLocalService.deleteAssetCategoryProperty(assetCategoryProperty);
 	}
 
+	@Override
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {
 		return _assetCategoryPropertyLocalService.dynamicQuery();
 	}
@@ -96,6 +99,7 @@ public class AssetCategoryPropertyLocalServiceWrapper
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -116,6 +120,7 @@ public class AssetCategoryPropertyLocalServiceWrapper
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -138,6 +143,7 @@ public class AssetCategoryPropertyLocalServiceWrapper
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -155,12 +161,14 @@ public class AssetCategoryPropertyLocalServiceWrapper
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _assetCategoryPropertyLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	@Override
 	public com.liferay.portlet.asset.model.AssetCategoryProperty fetchAssetCategoryProperty(
 		long categoryPropertyId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -175,6 +183,7 @@ public class AssetCategoryPropertyLocalServiceWrapper
 	* @throws PortalException if a asset category property with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.asset.model.AssetCategoryProperty getAssetCategoryProperty(
 		long categoryPropertyId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -182,6 +191,7 @@ public class AssetCategoryPropertyLocalServiceWrapper
 		return _assetCategoryPropertyLocalService.getAssetCategoryProperty(categoryPropertyId);
 	}
 
+	@Override
 	public com.liferay.portal.model.PersistedModel getPersistedModel(
 		java.io.Serializable primaryKeyObj)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -201,6 +211,7 @@ public class AssetCategoryPropertyLocalServiceWrapper
 	* @return the range of asset category properties
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public java.util.List<com.liferay.portlet.asset.model.AssetCategoryProperty> getAssetCategoryProperties(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -214,6 +225,7 @@ public class AssetCategoryPropertyLocalServiceWrapper
 	* @return the number of asset category properties
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public int getAssetCategoryPropertiesCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _assetCategoryPropertyLocalService.getAssetCategoryPropertiesCount();
@@ -226,6 +238,7 @@ public class AssetCategoryPropertyLocalServiceWrapper
 	* @return the asset category property that was updated
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.asset.model.AssetCategoryProperty updateAssetCategoryProperty(
 		com.liferay.portlet.asset.model.AssetCategoryProperty assetCategoryProperty)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -237,6 +250,7 @@ public class AssetCategoryPropertyLocalServiceWrapper
 	*
 	* @return the Spring bean ID for this bean
 	*/
+	@Override
 	public java.lang.String getBeanIdentifier() {
 		return _assetCategoryPropertyLocalService.getBeanIdentifier();
 	}
@@ -246,10 +260,12 @@ public class AssetCategoryPropertyLocalServiceWrapper
 	*
 	* @param beanIdentifier the Spring bean ID for this bean
 	*/
+	@Override
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		_assetCategoryPropertyLocalService.setBeanIdentifier(beanIdentifier);
 	}
 
+	@Override
 	public com.liferay.portlet.asset.model.AssetCategoryProperty addCategoryProperty(
 		long userId, long categoryId, java.lang.String key,
 		java.lang.String value)
@@ -259,34 +275,40 @@ public class AssetCategoryPropertyLocalServiceWrapper
 			categoryId, key, value);
 	}
 
+	@Override
 	public void deleteCategoryProperties(long entryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_assetCategoryPropertyLocalService.deleteCategoryProperties(entryId);
 	}
 
+	@Override
 	public void deleteCategoryProperty(
 		com.liferay.portlet.asset.model.AssetCategoryProperty categoryProperty)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_assetCategoryPropertyLocalService.deleteCategoryProperty(categoryProperty);
 	}
 
+	@Override
 	public void deleteCategoryProperty(long categoryPropertyId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_assetCategoryPropertyLocalService.deleteCategoryProperty(categoryPropertyId);
 	}
 
+	@Override
 	public java.util.List<com.liferay.portlet.asset.model.AssetCategoryProperty> getCategoryProperties()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _assetCategoryPropertyLocalService.getCategoryProperties();
 	}
 
+	@Override
 	public java.util.List<com.liferay.portlet.asset.model.AssetCategoryProperty> getCategoryProperties(
 		long entryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _assetCategoryPropertyLocalService.getCategoryProperties(entryId);
 	}
 
+	@Override
 	public com.liferay.portlet.asset.model.AssetCategoryProperty getCategoryProperty(
 		long categoryPropertyId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -294,6 +316,7 @@ public class AssetCategoryPropertyLocalServiceWrapper
 		return _assetCategoryPropertyLocalService.getCategoryProperty(categoryPropertyId);
 	}
 
+	@Override
 	public com.liferay.portlet.asset.model.AssetCategoryProperty getCategoryProperty(
 		long categoryId, java.lang.String key)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -302,6 +325,7 @@ public class AssetCategoryPropertyLocalServiceWrapper
 			key);
 	}
 
+	@Override
 	public java.util.List<com.liferay.portlet.asset.model.AssetCategoryProperty> getCategoryPropertyValues(
 		long groupId, java.lang.String key)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -309,6 +333,7 @@ public class AssetCategoryPropertyLocalServiceWrapper
 			key);
 	}
 
+	@Override
 	public com.liferay.portlet.asset.model.AssetCategoryProperty updateCategoryProperty(
 		long categoryPropertyId, java.lang.String key, java.lang.String value)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -332,10 +357,12 @@ public class AssetCategoryPropertyLocalServiceWrapper
 		_assetCategoryPropertyLocalService = assetCategoryPropertyLocalService;
 	}
 
+	@Override
 	public AssetCategoryPropertyLocalService getWrappedService() {
 		return _assetCategoryPropertyLocalService;
 	}
 
+	@Override
 	public void setWrappedService(
 		AssetCategoryPropertyLocalService assetCategoryPropertyLocalService) {
 		_assetCategoryPropertyLocalService = assetCategoryPropertyLocalService;

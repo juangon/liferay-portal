@@ -24,13 +24,11 @@ import com.liferay.portal.service.http.TunnelUtil;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil;
 
 /**
- * <p>
- * This class provides a HTTP utility for the
+ * Provides the HTTP utility for the
  * {@link com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it requires an additional
  * {@link com.liferay.portal.security.auth.HttpPrincipal} parameter.
- * </p>
  *
  * <p>
  * The benefits of using the HTTP utility is that it is fast and allows for
@@ -47,10 +45,10 @@ import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil;
  * The HTTP utility is only generated for remote services.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       BookmarksEntryServiceSoap
- * @see       com.liferay.portal.security.auth.HttpPrincipal
- * @see       com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil
+ * @author Brian Wing Shun Chan
+ * @see BookmarksEntryServiceSoap
+ * @see com.liferay.portal.security.auth.HttpPrincipal
+ * @see com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil
  * @generated
  */
 public class BookmarksEntryServiceHttp {

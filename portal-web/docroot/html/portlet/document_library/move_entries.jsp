@@ -113,7 +113,7 @@ for (DLFileShortcut curFileShortcut : fileShortcuts) {
 		</div>
 
 		<div class="move-list">
-			<ul class="lfr-component">
+			<ul class="unstyled">
 
 				<%
 				for (Folder folder : validMoveFolders) {
@@ -139,7 +139,7 @@ for (DLFileShortcut curFileShortcut : fileShortcuts) {
 		</div>
 
 		<div class="move-list">
-			<ul class="lfr-component">
+			<ul class="unstyled">
 
 				<%
 				for (Folder folder : invalidMoveFolders) {
@@ -178,7 +178,7 @@ for (DLFileShortcut curFileShortcut : fileShortcuts) {
 		</div>
 
 		<div class="move-list">
-			<ul class="lfr-component">
+			<ul class="unstyled">
 
 				<%
 				for (FileEntry validMoveFileEntry : validMoveFileEntries) {
@@ -204,7 +204,7 @@ for (DLFileShortcut curFileShortcut : fileShortcuts) {
 		</div>
 
 		<div class="move-list">
-			<ul class="lfr-component">
+			<ul class="unstyled">
 
 				<%
 				for (FileEntry invalidMoveFileEntry : invalidMoveFileEntries) {
@@ -244,7 +244,7 @@ for (DLFileShortcut curFileShortcut : fileShortcuts) {
 		</div>
 
 		<div class="move-list">
-			<ul class="lfr-component">
+			<ul class="unstyled">
 
 				<%
 				for (DLFileShortcut fileShortcut : validShortcutEntries) {
@@ -270,7 +270,7 @@ for (DLFileShortcut curFileShortcut : fileShortcuts) {
 		</div>
 
 		<div class="move-list">
-			<ul class="lfr-component">
+			<ul class="unstyled">
 
 				<%
 				for (DLFileShortcut fileShortcut : invalidShortcutEntries) {
@@ -344,10 +344,9 @@ for (DLFileShortcut curFileShortcut : fileShortcuts) {
 			Liferay.Util.selectEntity(
 				{
 					dialog: {
-						align: Liferay.Util.Window.ALIGN_CENTER,
 						constrain: true,
 						modal: true,
-						stack: true,
+						zIndex: Liferay.zIndex.WINDOW + 2,
 						width: 680
 					},
 					id: '<portlet:namespace />selectFolder',

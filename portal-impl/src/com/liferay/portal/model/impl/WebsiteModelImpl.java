@@ -66,6 +66,7 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 	 */
 	public static final String TABLE_NAME = "Website";
 	public static final Object[][] TABLE_COLUMNS = {
+			{ "uuid_", Types.VARCHAR },
 			{ "websiteId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
@@ -78,7 +79,7 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 			{ "typeId", Types.INTEGER },
 			{ "primary_", Types.BOOLEAN }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Website (websiteId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,url STRING null,typeId INTEGER,primary_ BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table Website (uuid_ VARCHAR(75) null,websiteId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,url STRING null,typeId INTEGER,primary_ BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table Website";
 	public static final String ORDER_BY_JPQL = " ORDER BY website.createDate ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Website.createDate ASC";
@@ -99,7 +100,8 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 	public static long COMPANYID_COLUMN_BITMASK = 4L;
 	public static long PRIMARY_COLUMN_BITMASK = 8L;
 	public static long USERID_COLUMN_BITMASK = 16L;
-	public static long CREATEDATE_COLUMN_BITMASK = 32L;
+	public static long UUID_COLUMN_BITMASK = 32L;
+	public static long CREATEDATE_COLUMN_BITMASK = 64L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -114,6 +116,7 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 
 		Website model = new WebsiteImpl();
 
+		model.setUuid(soapModel.getUuid());
 		model.setWebsiteId(soapModel.getWebsiteId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
@@ -155,26 +158,32 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 	public WebsiteModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _websiteId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setWebsiteId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _websiteId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return Website.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return Website.class.getName();
 	}
@@ -183,6 +192,7 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("uuid", getUuid());
 		attributes.put("websiteId", getWebsiteId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
@@ -200,6 +210,12 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		String uuid = (String)attributes.get("uuid");
+
+		if (uuid != null) {
+			setUuid(uuid);
+		}
+
 		Long websiteId = (Long)attributes.get("websiteId");
 
 		if (websiteId != null) {
@@ -267,20 +283,48 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 		}
 	}
 
+	@Override
+	@JSON
+	public String getUuid() {
+		if (_uuid == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _uuid;
+		}
+	}
+
+	@Override
+	public void setUuid(String uuid) {
+		if (_originalUuid == null) {
+			_originalUuid = _uuid;
+		}
+
+		_uuid = uuid;
+	}
+
+	public String getOriginalUuid() {
+		return GetterUtil.getString(_originalUuid);
+	}
+
+	@Override
 	@JSON
 	public long getWebsiteId() {
 		return _websiteId;
 	}
 
+	@Override
 	public void setWebsiteId(long websiteId) {
 		_websiteId = websiteId;
 	}
 
+	@Override
 	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
@@ -297,11 +341,13 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 		return _originalCompanyId;
 	}
 
+	@Override
 	@JSON
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_columnBitmask |= USERID_COLUMN_BITMASK;
 
@@ -314,10 +360,12 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
@@ -326,6 +374,7 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 		return _originalUserId;
 	}
 
+	@Override
 	@JSON
 	public String getUserName() {
 		if (_userName == null) {
@@ -336,30 +385,36 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 		}
 	}
 
+	@Override
 	public void setUserName(String userName) {
 		_userName = userName;
 	}
 
+	@Override
 	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_columnBitmask = -1L;
 
 		_createDate = createDate;
 	}
 
+	@Override
 	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
 	public String getClassName() {
 		if (getClassNameId() <= 0) {
 			return StringPool.BLANK;
@@ -368,6 +423,7 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 		return PortalUtil.getClassName(getClassNameId());
 	}
 
+	@Override
 	public void setClassName(String className) {
 		long classNameId = 0;
 
@@ -378,11 +434,13 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 		setClassNameId(classNameId);
 	}
 
+	@Override
 	@JSON
 	public long getClassNameId() {
 		return _classNameId;
 	}
 
+	@Override
 	public void setClassNameId(long classNameId) {
 		_columnBitmask |= CLASSNAMEID_COLUMN_BITMASK;
 
@@ -399,11 +457,13 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 		return _originalClassNameId;
 	}
 
+	@Override
 	@JSON
 	public long getClassPK() {
 		return _classPK;
 	}
 
+	@Override
 	public void setClassPK(long classPK) {
 		_columnBitmask |= CLASSPK_COLUMN_BITMASK;
 
@@ -420,6 +480,7 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 		return _originalClassPK;
 	}
 
+	@Override
 	@JSON
 	public String getUrl() {
 		if (_url == null) {
@@ -430,28 +491,34 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 		}
 	}
 
+	@Override
 	public void setUrl(String url) {
 		_url = url;
 	}
 
+	@Override
 	@JSON
 	public int getTypeId() {
 		return _typeId;
 	}
 
+	@Override
 	public void setTypeId(int typeId) {
 		_typeId = typeId;
 	}
 
+	@Override
 	@JSON
 	public boolean getPrimary() {
 		return _primary;
 	}
 
+	@Override
 	public boolean isPrimary() {
 		return _primary;
 	}
 
+	@Override
 	public void setPrimary(boolean primary) {
 		_columnBitmask |= PRIMARY_COLUMN_BITMASK;
 
@@ -499,6 +566,7 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 	public Object clone() {
 		WebsiteImpl websiteImpl = new WebsiteImpl();
 
+		websiteImpl.setUuid(getUuid());
 		websiteImpl.setWebsiteId(getWebsiteId());
 		websiteImpl.setCompanyId(getCompanyId());
 		websiteImpl.setUserId(getUserId());
@@ -516,6 +584,7 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 		return websiteImpl;
 	}
 
+	@Override
 	public int compareTo(Website website) {
 		int value = 0;
 
@@ -530,18 +599,15 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof Website)) {
 			return false;
 		}
 
-		Website website = null;
-
-		try {
-			website = (Website)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		Website website = (Website)obj;
 
 		long primaryKey = website.getPrimaryKey();
 
@@ -561,6 +627,8 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 	@Override
 	public void resetOriginalValues() {
 		WebsiteModelImpl websiteModelImpl = this;
+
+		websiteModelImpl._originalUuid = websiteModelImpl._uuid;
 
 		websiteModelImpl._originalCompanyId = websiteModelImpl._companyId;
 
@@ -588,6 +656,14 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 	@Override
 	public CacheModel<Website> toCacheModel() {
 		WebsiteCacheModel websiteCacheModel = new WebsiteCacheModel();
+
+		websiteCacheModel.uuid = getUuid();
+
+		String uuid = websiteCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
+			websiteCacheModel.uuid = null;
+		}
 
 		websiteCacheModel.websiteId = getWebsiteId();
 
@@ -642,9 +718,11 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(25);
 
-		sb.append("{websiteId=");
+		sb.append("{uuid=");
+		sb.append(getUuid());
+		sb.append(", websiteId=");
 		sb.append(getWebsiteId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
@@ -671,13 +749,18 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(40);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.Website");
 		sb.append("</model-name>");
 
+		sb.append(
+			"<column><column-name>uuid</column-name><column-value><![CDATA[");
+		sb.append(getUuid());
+		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>websiteId</column-name><column-value><![CDATA[");
 		sb.append(getWebsiteId());
@@ -732,6 +815,8 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			Website.class
 		};
+	private String _uuid;
+	private String _originalUuid;
 	private long _websiteId;
 	private long _companyId;
 	private long _originalCompanyId;

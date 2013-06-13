@@ -15,6 +15,7 @@
 package com.liferay.portlet.expando.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -47,6 +48,7 @@ import java.util.Map;
  * @see com.liferay.portlet.expando.model.ExpandoTableModel
  * @generated
  */
+@JSON(strict = true)
 public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 	implements ExpandoTableModel {
 	/*
@@ -87,26 +89,32 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 	public ExpandoTableModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _tableId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setTableId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _tableId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return ExpandoTable.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return ExpandoTable.class.getName();
 	}
@@ -150,18 +158,24 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 		}
 	}
 
+	@Override
+	@JSON
 	public long getTableId() {
 		return _tableId;
 	}
 
+	@Override
 	public void setTableId(long tableId) {
 		_tableId = tableId;
 	}
 
+	@Override
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
@@ -178,6 +192,7 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 		return _originalCompanyId;
 	}
 
+	@Override
 	public String getClassName() {
 		if (getClassNameId() <= 0) {
 			return StringPool.BLANK;
@@ -186,6 +201,7 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 		return PortalUtil.getClassName(getClassNameId());
 	}
 
+	@Override
 	public void setClassName(String className) {
 		long classNameId = 0;
 
@@ -196,10 +212,13 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 		setClassNameId(classNameId);
 	}
 
+	@Override
+	@JSON
 	public long getClassNameId() {
 		return _classNameId;
 	}
 
+	@Override
 	public void setClassNameId(long classNameId) {
 		_columnBitmask |= CLASSNAMEID_COLUMN_BITMASK;
 
@@ -216,6 +235,8 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 		return _originalClassNameId;
 	}
 
+	@Override
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -225,6 +246,7 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 		}
 	}
 
+	@Override
 	public void setName(String name) {
 		_columnBitmask |= NAME_COLUMN_BITMASK;
 
@@ -267,6 +289,7 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 		return expandoTableImpl;
 	}
 
+	@Override
 	public int compareTo(ExpandoTable expandoTable) {
 		long primaryKey = expandoTable.getPrimaryKey();
 
@@ -283,18 +306,15 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ExpandoTable)) {
 			return false;
 		}
 
-		ExpandoTable expandoTable = null;
-
-		try {
-			expandoTable = (ExpandoTable)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		ExpandoTable expandoTable = (ExpandoTable)obj;
 
 		long primaryKey = expandoTable.getPrimaryKey();
 
@@ -366,6 +386,7 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(16);
 

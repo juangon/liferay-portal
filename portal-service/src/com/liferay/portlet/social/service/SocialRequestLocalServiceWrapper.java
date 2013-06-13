@@ -17,12 +17,10 @@ package com.liferay.portlet.social.service;
 import com.liferay.portal.service.ServiceWrapper;
 
 /**
- * <p>
- * This class is a wrapper for {@link SocialRequestLocalService}.
- * </p>
+ * Provides a wrapper for {@link SocialRequestLocalService}.
  *
- * @author    Brian Wing Shun Chan
- * @see       SocialRequestLocalService
+ * @author Brian Wing Shun Chan
+ * @see SocialRequestLocalService
  * @generated
  */
 public class SocialRequestLocalServiceWrapper
@@ -40,6 +38,7 @@ public class SocialRequestLocalServiceWrapper
 	* @return the social request that was added
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.social.model.SocialRequest addSocialRequest(
 		com.liferay.portlet.social.model.SocialRequest socialRequest)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -52,6 +51,7 @@ public class SocialRequestLocalServiceWrapper
 	* @param requestId the primary key for the new social request
 	* @return the new social request
 	*/
+	@Override
 	public com.liferay.portlet.social.model.SocialRequest createSocialRequest(
 		long requestId) {
 		return _socialRequestLocalService.createSocialRequest(requestId);
@@ -65,6 +65,7 @@ public class SocialRequestLocalServiceWrapper
 	* @throws PortalException if a social request with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.social.model.SocialRequest deleteSocialRequest(
 		long requestId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -79,12 +80,14 @@ public class SocialRequestLocalServiceWrapper
 	* @return the social request that was removed
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.social.model.SocialRequest deleteSocialRequest(
 		com.liferay.portlet.social.model.SocialRequest socialRequest)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _socialRequestLocalService.deleteSocialRequest(socialRequest);
 	}
 
+	@Override
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {
 		return _socialRequestLocalService.dynamicQuery();
 	}
@@ -96,6 +99,7 @@ public class SocialRequestLocalServiceWrapper
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -116,6 +120,7 @@ public class SocialRequestLocalServiceWrapper
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -137,6 +142,7 @@ public class SocialRequestLocalServiceWrapper
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -154,12 +160,14 @@ public class SocialRequestLocalServiceWrapper
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _socialRequestLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	@Override
 	public com.liferay.portlet.social.model.SocialRequest fetchSocialRequest(
 		long requestId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -174,6 +182,7 @@ public class SocialRequestLocalServiceWrapper
 	* @throws PortalException if a social request with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.social.model.SocialRequest getSocialRequest(
 		long requestId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -181,6 +190,7 @@ public class SocialRequestLocalServiceWrapper
 		return _socialRequestLocalService.getSocialRequest(requestId);
 	}
 
+	@Override
 	public com.liferay.portal.model.PersistedModel getPersistedModel(
 		java.io.Serializable primaryKeyObj)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -197,6 +207,7 @@ public class SocialRequestLocalServiceWrapper
 	* @throws PortalException if a matching social request could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.social.model.SocialRequest getSocialRequestByUuidAndGroupId(
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -217,6 +228,7 @@ public class SocialRequestLocalServiceWrapper
 	* @return the range of social requests
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public java.util.List<com.liferay.portlet.social.model.SocialRequest> getSocialRequests(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -229,6 +241,7 @@ public class SocialRequestLocalServiceWrapper
 	* @return the number of social requests
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public int getSocialRequestsCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _socialRequestLocalService.getSocialRequestsCount();
@@ -241,6 +254,7 @@ public class SocialRequestLocalServiceWrapper
 	* @return the social request that was updated
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.social.model.SocialRequest updateSocialRequest(
 		com.liferay.portlet.social.model.SocialRequest socialRequest)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -252,6 +266,7 @@ public class SocialRequestLocalServiceWrapper
 	*
 	* @return the Spring bean ID for this bean
 	*/
+	@Override
 	public java.lang.String getBeanIdentifier() {
 		return _socialRequestLocalService.getBeanIdentifier();
 	}
@@ -261,6 +276,7 @@ public class SocialRequestLocalServiceWrapper
 	*
 	* @param beanIdentifier the Spring bean ID for this bean
 	*/
+	@Override
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		_socialRequestLocalService.setBeanIdentifier(beanIdentifier);
 	}
@@ -289,6 +305,7 @@ public class SocialRequestLocalServiceWrapper
 	default user
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.social.model.SocialRequest addRequest(
 		long userId, long groupId, java.lang.String className, long classPK,
 		int type, java.lang.String extraData, long receiverUserId)
@@ -304,6 +321,7 @@ public class SocialRequestLocalServiceWrapper
 	* @param receiverUserId the primary key of the receiving user
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void deleteReceiverUserRequests(long receiverUserId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_socialRequestLocalService.deleteReceiverUserRequests(receiverUserId);
@@ -317,6 +335,7 @@ public class SocialRequestLocalServiceWrapper
 	* @throws PortalException if the social request could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void deleteRequest(long requestId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -329,6 +348,7 @@ public class SocialRequestLocalServiceWrapper
 	* @param request the social request to be removed
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void deleteRequest(
 		com.liferay.portlet.social.model.SocialRequest request)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -341,6 +361,7 @@ public class SocialRequestLocalServiceWrapper
 	* @param userId the primary key of the requesting user
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public void deleteUserRequests(long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_socialRequestLocalService.deleteUserRequests(userId);
@@ -365,6 +386,7 @@ public class SocialRequestLocalServiceWrapper
 	* @return the range of matching social requests
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public java.util.List<com.liferay.portlet.social.model.SocialRequest> getReceiverUserRequests(
 		long receiverUserId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -393,6 +415,7 @@ public class SocialRequestLocalServiceWrapper
 	* @return the range of matching social requests
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public java.util.List<com.liferay.portlet.social.model.SocialRequest> getReceiverUserRequests(
 		long receiverUserId, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -407,6 +430,7 @@ public class SocialRequestLocalServiceWrapper
 	* @return the number of matching social requests
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public int getReceiverUserRequestsCount(long receiverUserId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _socialRequestLocalService.getReceiverUserRequestsCount(receiverUserId);
@@ -421,6 +445,7 @@ public class SocialRequestLocalServiceWrapper
 	* @return the number of matching social requests
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public int getReceiverUserRequestsCount(long receiverUserId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _socialRequestLocalService.getReceiverUserRequestsCount(receiverUserId,
@@ -446,6 +471,7 @@ public class SocialRequestLocalServiceWrapper
 	* @return the range of matching social requests
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public java.util.List<com.liferay.portlet.social.model.SocialRequest> getUserRequests(
 		long userId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -473,6 +499,7 @@ public class SocialRequestLocalServiceWrapper
 	* @return the range of matching social requests
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public java.util.List<com.liferay.portlet.social.model.SocialRequest> getUserRequests(
 		long userId, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -487,6 +514,7 @@ public class SocialRequestLocalServiceWrapper
 	* @return the number of matching social requests
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public int getUserRequestsCount(long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _socialRequestLocalService.getUserRequestsCount(userId);
@@ -501,6 +529,7 @@ public class SocialRequestLocalServiceWrapper
 	* @return the number of matching social request
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public int getUserRequestsCount(long userId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _socialRequestLocalService.getUserRequestsCount(userId, status);
@@ -521,6 +550,7 @@ public class SocialRequestLocalServiceWrapper
 	otherwise
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public boolean hasRequest(long userId, java.lang.String className,
 		long classPK, int type, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -544,6 +574,7 @@ public class SocialRequestLocalServiceWrapper
 	<code>false</code> otherwise
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public boolean hasRequest(long userId, java.lang.String className,
 		long classPK, int type, long receiverUserId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -574,6 +605,7 @@ public class SocialRequestLocalServiceWrapper
 	* @throws PortalException if the social request could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.social.model.SocialRequest updateRequest(
 		long requestId, int status,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
@@ -598,10 +630,12 @@ public class SocialRequestLocalServiceWrapper
 		_socialRequestLocalService = socialRequestLocalService;
 	}
 
+	@Override
 	public SocialRequestLocalService getWrappedService() {
 		return _socialRequestLocalService;
 	}
 
+	@Override
 	public void setWrappedService(
 		SocialRequestLocalService socialRequestLocalService) {
 		_socialRequestLocalService = socialRequestLocalService;

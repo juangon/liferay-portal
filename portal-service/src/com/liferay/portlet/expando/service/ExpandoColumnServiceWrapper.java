@@ -17,12 +17,10 @@ package com.liferay.portlet.expando.service;
 import com.liferay.portal.service.ServiceWrapper;
 
 /**
- * <p>
- * This class is a wrapper for {@link ExpandoColumnService}.
- * </p>
+ * Provides a wrapper for {@link ExpandoColumnService}.
  *
- * @author    Brian Wing Shun Chan
- * @see       ExpandoColumnService
+ * @author Brian Wing Shun Chan
+ * @see ExpandoColumnService
  * @generated
  */
 public class ExpandoColumnServiceWrapper implements ExpandoColumnService,
@@ -37,6 +35,7 @@ public class ExpandoColumnServiceWrapper implements ExpandoColumnService,
 	*
 	* @return the Spring bean ID for this bean
 	*/
+	@Override
 	public java.lang.String getBeanIdentifier() {
 		return _expandoColumnService.getBeanIdentifier();
 	}
@@ -46,10 +45,12 @@ public class ExpandoColumnServiceWrapper implements ExpandoColumnService,
 	*
 	* @param beanIdentifier the Spring bean ID for this bean
 	*/
+	@Override
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		_expandoColumnService.setBeanIdentifier(beanIdentifier);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoColumn addColumn(
 		long tableId, java.lang.String name, int type)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -57,6 +58,7 @@ public class ExpandoColumnServiceWrapper implements ExpandoColumnService,
 		return _expandoColumnService.addColumn(tableId, name, type);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoColumn addColumn(
 		long tableId, java.lang.String name, int type,
 		java.lang.Object defaultData)
@@ -65,12 +67,14 @@ public class ExpandoColumnServiceWrapper implements ExpandoColumnService,
 		return _expandoColumnService.addColumn(tableId, name, type, defaultData);
 	}
 
+	@Override
 	public void deleteColumn(long columnId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_expandoColumnService.deleteColumn(columnId);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoColumn updateColumn(
 		long columnId, java.lang.String name, int type)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -78,6 +82,7 @@ public class ExpandoColumnServiceWrapper implements ExpandoColumnService,
 		return _expandoColumnService.updateColumn(columnId, name, type);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoColumn updateColumn(
 		long columnId, java.lang.String name, int type,
 		java.lang.Object defaultData)
@@ -87,6 +92,7 @@ public class ExpandoColumnServiceWrapper implements ExpandoColumnService,
 			defaultData);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoColumn updateTypeSettings(
 		long columnId, java.lang.String typeSettings)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -109,10 +115,12 @@ public class ExpandoColumnServiceWrapper implements ExpandoColumnService,
 		_expandoColumnService = expandoColumnService;
 	}
 
+	@Override
 	public ExpandoColumnService getWrappedService() {
 		return _expandoColumnService;
 	}
 
+	@Override
 	public void setWrappedService(ExpandoColumnService expandoColumnService) {
 		_expandoColumnService = expandoColumnService;
 	}

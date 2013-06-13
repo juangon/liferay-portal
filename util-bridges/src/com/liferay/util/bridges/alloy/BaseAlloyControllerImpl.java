@@ -37,6 +37,7 @@ import com.liferay.portal.kernel.scheduler.CronTrigger;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineHelperUtil;
 import com.liferay.portal.kernel.scheduler.StorageType;
 import com.liferay.portal.kernel.scheduler.Trigger;
+import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
@@ -109,6 +110,7 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 	public static final String TOUCH =
 		BaseAlloyControllerImpl.class.getName() + "#TOUCH#";
 
+	@Override
 	public void afterPropertiesSet() {
 		initClass();
 		initServletVariables();
@@ -120,6 +122,7 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 		initScheduler();
 	}
 
+	@Override
 	public void execute() throws Exception {
 		Method method = getMethod(actionPath);
 
@@ -147,26 +150,32 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 		}
 	}
 
+	@Override
 	public Portlet getPortlet() {
 		return portlet;
 	}
 
+	@Override
 	public HttpServletRequest getRequest() {
 		return request;
 	}
 
+	@Override
 	public ThemeDisplay getThemeDisplay() {
 		return themeDisplay;
 	}
 
+	@Override
 	public long increment() throws Exception {
 		return CounterLocalServiceUtil.increment();
 	}
 
+	@Override
 	public void setPageContext(PageContext pageContext) {
 		this.pageContext = pageContext;
 	}
 
+	@Override
 	public void updateModel(BaseModel<?> baseModel) throws Exception {
 		BeanPropertiesUtil.setProperties(baseModel, request);
 
@@ -188,6 +197,14 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 			indexerClassName.equals(baseModel.getModelClassName())) {
 
 			indexer.reindex(baseModel);
+		}
+		else {
+			Indexer baseModelIndexer = IndexerRegistryUtil.nullSafeGetIndexer(
+				baseModel.getModelClass());
+
+			if (baseModelIndexer != null) {
+				baseModelIndexer.reindex(baseModel);
+			}
 		}
 	}
 
@@ -276,27 +293,28 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 		Boolean touch = (Boolean)portletContext.getAttribute(
 			TOUCH + portlet.getRootPortletId());
 
-		if (touch == null) {
-			String touchPath =
-				"/WEB-INF/jsp/" + portlet.getFriendlyURLMapping() +
-					"/views/touch.jsp";
+		if (touch != null) {
+			return;
+		}
 
-			if (log.isDebugEnabled()) {
-				log.debug(
-					"Touch " + portlet.getRootPortletId() + " by including " +
-						touchPath);
-			}
+		String touchPath =
+			"/WEB-INF/jsp/" + portlet.getFriendlyURLMapping() +
+				"/views/touch.jsp";
 
-			portletContext.setAttribute(
-				TOUCH + portlet.getRootPortletId(), Boolean.FALSE);
+		if (log.isDebugEnabled()) {
+			log.debug(
+				"Touch " + portlet.getRootPortletId() + " by including " +
+					touchPath);
+		}
 
-			portletRequestDispatcher = portletContext.getRequestDispatcher(
-				touchPath);
+		portletContext.setAttribute(
+			TOUCH + portlet.getRootPortletId(), Boolean.FALSE);
 
-			if (portletRequestDispatcher != null) {
-				portletRequestDispatcher.include(
-					portletRequest, portletResponse);
-			}
+		portletRequestDispatcher = portletContext.getRequestDispatcher(
+			touchPath);
+
+		if (portletRequestDispatcher != null) {
+			portletRequestDispatcher.include(portletRequest, portletResponse);
 		}
 	}
 
@@ -699,6 +717,15 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 		}
 
 		searchContext.setEnd(searchContainer.getEnd());
+
+		Class<?> indexerClass = Class.forName(indexerClassName);
+
+		try {
+			indexerClass.getField(Field.GROUP_ID);
+		}
+		catch (Exception e) {
+			searchContext.setGroupIds(null);
+		}
 
 		if (Validator.isNotNull(keywords)) {
 			searchContext.setKeywords(keywords);

@@ -39,6 +39,7 @@ import org.osgi.util.tracker.ServiceTrackerCustomizer;
 public class ModuleFrameworkServlet extends HttpServlet
 	implements ServiceTrackerCustomizer<HttpServlet, HttpServlet> {
 
+	@Override
 	public HttpServlet addingService(
 		ServiceReference<HttpServlet> serviceReference) {
 
@@ -85,6 +86,7 @@ public class ModuleFrameworkServlet extends HttpServlet
 		}
 	}
 
+	@Override
 	public void modifiedService(
 		ServiceReference<HttpServlet> serviceReference,
 		HttpServlet httpService) {
@@ -92,6 +94,7 @@ public class ModuleFrameworkServlet extends HttpServlet
 		_httpServlet = _bundleContext.getService(serviceReference);
 	}
 
+	@Override
 	public void removedService(
 		ServiceReference<HttpServlet> serviceReference,
 		HttpServlet httpService) {

@@ -118,6 +118,7 @@ public interface WebDAVPropsModel extends AttachedModel, BaseModel<WebDAVProps> 
 	 *
 	 * @return the fully qualified class name of this web d a v props
 	 */
+	@Override
 	public String getClassName();
 
 	public void setClassName(String className);
@@ -127,6 +128,7 @@ public interface WebDAVPropsModel extends AttachedModel, BaseModel<WebDAVProps> 
 	 *
 	 * @return the class name ID of this web d a v props
 	 */
+	@Override
 	public long getClassNameId();
 
 	/**
@@ -134,6 +136,7 @@ public interface WebDAVPropsModel extends AttachedModel, BaseModel<WebDAVProps> 
 	 *
 	 * @param classNameId the class name ID of this web d a v props
 	 */
+	@Override
 	public void setClassNameId(long classNameId);
 
 	/**
@@ -141,6 +144,7 @@ public interface WebDAVPropsModel extends AttachedModel, BaseModel<WebDAVProps> 
 	 *
 	 * @return the class p k of this web d a v props
 	 */
+	@Override
 	public long getClassPK();
 
 	/**
@@ -148,6 +152,7 @@ public interface WebDAVPropsModel extends AttachedModel, BaseModel<WebDAVProps> 
 	 *
 	 * @param classPK the class p k of this web d a v props
 	 */
+	@Override
 	public void setClassPK(long classPK);
 
 	/**
@@ -165,41 +170,60 @@ public interface WebDAVPropsModel extends AttachedModel, BaseModel<WebDAVProps> 
 	 */
 	public void setProps(String props);
 
+	@Override
 	public boolean isNew();
 
+	@Override
 	public void setNew(boolean n);
 
+	@Override
 	public boolean isCachedModel();
 
+	@Override
 	public void setCachedModel(boolean cachedModel);
 
+	@Override
 	public boolean isEscapedModel();
 
+	@Override
 	public Serializable getPrimaryKeyObj();
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
+	@Override
 	public ExpandoBridge getExpandoBridge();
 
+	@Override
 	public void setExpandoBridgeAttributes(BaseModel<?> baseModel);
 
+	@Override
 	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge);
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext);
 
+	@Override
 	public Object clone();
 
+	@Override
 	public int compareTo(WebDAVProps webDAVProps);
 
+	@Override
 	public int hashCode();
 
+	@Override
 	public CacheModel<WebDAVProps> toCacheModel();
 
+	@Override
 	public WebDAVProps toEscapedModel();
 
+	@Override
 	public WebDAVProps toUnescapedModel();
 
+	@Override
 	public String toString();
 
+	@Override
 	public String toXmlString();
 }

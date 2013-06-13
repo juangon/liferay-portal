@@ -17,12 +17,10 @@ package com.liferay.portlet.calendar.service;
 import com.liferay.portal.service.ServiceWrapper;
 
 /**
- * <p>
- * This class is a wrapper for {@link CalEventService}.
- * </p>
+ * Provides a wrapper for {@link CalEventService}.
  *
- * @author    Brian Wing Shun Chan
- * @see       CalEventService
+ * @author Brian Wing Shun Chan
+ * @see CalEventService
  * @generated
  */
 public class CalEventServiceWrapper implements CalEventService,
@@ -36,6 +34,7 @@ public class CalEventServiceWrapper implements CalEventService,
 	*
 	* @return the Spring bean ID for this bean
 	*/
+	@Override
 	public java.lang.String getBeanIdentifier() {
 		return _calEventService.getBeanIdentifier();
 	}
@@ -45,10 +44,12 @@ public class CalEventServiceWrapper implements CalEventService,
 	*
 	* @param beanIdentifier the Spring bean ID for this bean
 	*/
+	@Override
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		_calEventService.setBeanIdentifier(beanIdentifier);
 	}
 
+	@Override
 	public com.liferay.portlet.calendar.model.CalEvent addEvent(
 		java.lang.String title, java.lang.String description,
 		java.lang.String location, int startDateMonth, int startDateDay,
@@ -73,6 +74,7 @@ public class CalEventServiceWrapper implements CalEventService,
 	String, boolean, TZSRecurrence, int, int, int,
 	ServiceContext)}
 	*/
+	@Override
 	public com.liferay.portlet.calendar.model.CalEvent addEvent(
 		java.lang.String title, java.lang.String description,
 		java.lang.String location, int startDateMonth, int startDateDay,
@@ -93,18 +95,21 @@ public class CalEventServiceWrapper implements CalEventService,
 			serviceContext);
 	}
 
+	@Override
 	public void deleteEvent(long eventId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_calEventService.deleteEvent(eventId);
 	}
 
+	@Override
 	public java.io.File exportEvent(long eventId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _calEventService.exportEvent(eventId);
 	}
 
+	@Override
 	public java.io.File exportEvents(
 		java.util.List<com.liferay.portlet.calendar.model.CalEvent> events,
 		java.lang.String fileName)
@@ -113,6 +118,7 @@ public class CalEventServiceWrapper implements CalEventService,
 		return _calEventService.exportEvents(events, fileName);
 	}
 
+	@Override
 	public java.io.File exportGroupEvents(long groupId,
 		java.lang.String fileName)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -120,12 +126,14 @@ public class CalEventServiceWrapper implements CalEventService,
 		return _calEventService.exportGroupEvents(groupId, fileName);
 	}
 
+	@Override
 	public com.liferay.portlet.calendar.model.CalEvent getEvent(long eventId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _calEventService.getEvent(eventId);
 	}
 
+	@Override
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
 		long groupId, java.util.Calendar cal, java.lang.String type)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -133,6 +141,7 @@ public class CalEventServiceWrapper implements CalEventService,
 		return _calEventService.getEvents(groupId, cal, type);
 	}
 
+	@Override
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
 		long groupId, java.util.Calendar cal, java.lang.String[] types)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -140,34 +149,40 @@ public class CalEventServiceWrapper implements CalEventService,
 		return _calEventService.getEvents(groupId, cal, types);
 	}
 
+	@Override
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
 		long groupId, java.lang.String type, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _calEventService.getEvents(groupId, type, start, end);
 	}
 
+	@Override
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
 		long groupId, java.lang.String[] types, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _calEventService.getEvents(groupId, types, start, end);
 	}
 
+	@Override
 	public int getEventsCount(long groupId, java.lang.String type)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _calEventService.getEventsCount(groupId, type);
 	}
 
+	@Override
 	public int getEventsCount(long groupId, java.lang.String[] types)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _calEventService.getEventsCount(groupId, types);
 	}
 
+	@Override
 	public boolean hasEvents(long groupId, java.util.Calendar cal)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _calEventService.hasEvents(groupId, cal);
 	}
 
+	@Override
 	public boolean hasEvents(long groupId, java.util.Calendar cal,
 		java.lang.String type)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -175,6 +190,7 @@ public class CalEventServiceWrapper implements CalEventService,
 		return _calEventService.hasEvents(groupId, cal, type);
 	}
 
+	@Override
 	public boolean hasEvents(long groupId, java.util.Calendar cal,
 		java.lang.String[] types)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -182,12 +198,14 @@ public class CalEventServiceWrapper implements CalEventService,
 		return _calEventService.hasEvents(groupId, cal, types);
 	}
 
+	@Override
 	public void importICal4j(long groupId, java.io.InputStream inputStream)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_calEventService.importICal4j(groupId, inputStream);
 	}
 
+	@Override
 	public com.liferay.portlet.calendar.model.CalEvent updateEvent(
 		long eventId, java.lang.String title, java.lang.String description,
 		java.lang.String location, int startDateMonth, int startDateDay,
@@ -212,6 +230,7 @@ public class CalEventServiceWrapper implements CalEventService,
 	boolean, String, boolean, TZSRecurrence, int, int, int,
 	ServiceContext)}
 	*/
+	@Override
 	public com.liferay.portlet.calendar.model.CalEvent updateEvent(
 		long eventId, java.lang.String title, java.lang.String description,
 		java.lang.String location, int startDateMonth, int startDateDay,
@@ -246,10 +265,12 @@ public class CalEventServiceWrapper implements CalEventService,
 		_calEventService = calEventService;
 	}
 
+	@Override
 	public CalEventService getWrappedService() {
 		return _calEventService;
 	}
 
+	@Override
 	public void setWrappedService(CalEventService calEventService) {
 		_calEventService = calEventService;
 	}

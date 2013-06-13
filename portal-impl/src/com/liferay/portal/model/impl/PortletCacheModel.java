@@ -51,6 +51,7 @@ public class PortletCacheModel implements CacheModel<Portlet>, Externalizable {
 		return sb.toString();
 	}
 
+	@Override
 	public Portlet toEntityModel() {
 		PortletImpl portletImpl = new PortletImpl();
 
@@ -78,6 +79,7 @@ public class PortletCacheModel implements CacheModel<Portlet>, Externalizable {
 		return portletImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		id = objectInput.readLong();
 		companyId = objectInput.readLong();
@@ -86,6 +88,7 @@ public class PortletCacheModel implements CacheModel<Portlet>, Externalizable {
 		active = objectInput.readBoolean();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(id);

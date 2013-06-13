@@ -154,18 +154,15 @@ groupId = ParamUtil.getLong(request, "groupId", groupId);
 	function <portlet:namespace />openStructureSelector() {
 		Liferay.Util.openDDMPortlet(
 			{
-				availableFields: 'Liferay.FormBuilder.AVAILABLE_FIELDS.WCM_STRUCTURE',
-				classNameId: '<%= PortalUtil.getClassNameId(DDMStructure.class) %>',
+				basePortletURL: '<%= PortletURLFactoryUtil.create(request, PortletKeys.DYNAMIC_DATA_MAPPING, themeDisplay.getPlid(), PortletRequest.RENDER_PHASE) %>',
 				classPK: <%= (ddmStructure != null) ? ddmStructure.getPrimaryKey() : 0 %>,
-				ddmResource: '<%= ddmResource %>',
 				dialog: {
-					width: 820
+					destroyOnHide: true,
+					zIndex: (++Liferay.zIndex.WINDOW)
 				},
 				eventName: '<portlet:namespace />selectStructure',
 				groupId: <%= groupId %>,
-				storageType: '<%= PropsValues.JOURNAL_ARTICLE_STORAGE_TYPE %>',
-				structureName: 'structure',
-				structureType: 'com.liferay.portlet.journal.model.JournalArticle',
+				refererPortletName: '<%= PortletKeys.JOURNAL %>',
 				struts_action: '/dynamic_data_mapping/select_structure',
 				title: '<%= UnicodeLanguageUtil.get(pageContext, "structures") %>'
 			},

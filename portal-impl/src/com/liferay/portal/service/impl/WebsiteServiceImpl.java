@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.WebsiteServiceBaseImpl;
 import com.liferay.portal.service.permission.CommonPermissionUtil;
 
@@ -29,6 +30,11 @@ import java.util.List;
  */
 public class WebsiteServiceImpl extends WebsiteServiceBaseImpl {
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #addWebsite( String, long,
+	 *             String, int, boolean, ServiceContext)}
+	 */
+	@Override
 	public Website addWebsite(
 			String className, long classPK, String url, int typeId,
 			boolean primary)
@@ -41,6 +47,21 @@ public class WebsiteServiceImpl extends WebsiteServiceBaseImpl {
 			getUserId(), className, classPK, url, typeId, primary);
 	}
 
+	@Override
+	public Website addWebsite(
+			String className, long classPK, String url, int typeId,
+			boolean primary, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		CommonPermissionUtil.check(
+			getPermissionChecker(), className, classPK, ActionKeys.UPDATE);
+
+		return websiteLocalService.addWebsite(
+			getUserId(), className, classPK, url, typeId, primary,
+			serviceContext);
+	}
+
+	@Override
 	public void deleteWebsite(long websiteId)
 		throws PortalException, SystemException {
 
@@ -53,6 +74,7 @@ public class WebsiteServiceImpl extends WebsiteServiceBaseImpl {
 		websiteLocalService.deleteWebsite(websiteId);
 	}
 
+	@Override
 	public Website getWebsite(long websiteId)
 		throws PortalException, SystemException {
 
@@ -65,6 +87,7 @@ public class WebsiteServiceImpl extends WebsiteServiceBaseImpl {
 		return website;
 	}
 
+	@Override
 	public List<Website> getWebsites(String className, long classPK)
 		throws PortalException, SystemException {
 
@@ -77,6 +100,7 @@ public class WebsiteServiceImpl extends WebsiteServiceBaseImpl {
 			user.getCompanyId(), className, classPK);
 	}
 
+	@Override
 	public Website updateWebsite(
 			long websiteId, String url, int typeId, boolean primary)
 		throws PortalException, SystemException {

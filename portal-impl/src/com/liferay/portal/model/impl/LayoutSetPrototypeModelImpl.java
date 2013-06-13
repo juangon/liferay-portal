@@ -157,26 +157,32 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 	public LayoutSetPrototypeModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _layoutSetPrototypeId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setLayoutSetPrototypeId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _layoutSetPrototypeId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return LayoutSetPrototype.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return LayoutSetPrototype.class.getName();
 	}
@@ -269,6 +275,7 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 		}
 	}
 
+	@Override
 	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
@@ -279,6 +286,7 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 		}
 	}
 
+	@Override
 	public void setUuid(String uuid) {
 		if (_originalUuid == null) {
 			_originalUuid = _uuid;
@@ -291,20 +299,24 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@Override
 	@JSON
 	public long getLayoutSetPrototypeId() {
 		return _layoutSetPrototypeId;
 	}
 
+	@Override
 	public void setLayoutSetPrototypeId(long layoutSetPrototypeId) {
 		_layoutSetPrototypeId = layoutSetPrototypeId;
 	}
 
+	@Override
 	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
@@ -321,23 +333,28 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 		return _originalCompanyId;
 	}
 
+	@Override
 	@JSON
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
 
+	@Override
 	@JSON
 	public String getUserName() {
 		if (_userName == null) {
@@ -348,28 +365,34 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 		}
 	}
 
+	@Override
 	public void setUserName(String userName) {
 		_userName = userName;
 	}
 
+	@Override
 	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
 	}
 
+	@Override
 	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
 	@JSON
 	public String getName() {
 		if (_name == null) {
@@ -380,50 +403,60 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 		}
 	}
 
+	@Override
 	public String getName(Locale locale) {
 		String languageId = LocaleUtil.toLanguageId(locale);
 
 		return getName(languageId);
 	}
 
+	@Override
 	public String getName(Locale locale, boolean useDefault) {
 		String languageId = LocaleUtil.toLanguageId(locale);
 
 		return getName(languageId, useDefault);
 	}
 
+	@Override
 	public String getName(String languageId) {
 		return LocalizationUtil.getLocalization(getName(), languageId);
 	}
 
+	@Override
 	public String getName(String languageId, boolean useDefault) {
 		return LocalizationUtil.getLocalization(getName(), languageId,
 			useDefault);
 	}
 
+	@Override
 	public String getNameCurrentLanguageId() {
 		return _nameCurrentLanguageId;
 	}
 
 	@JSON
+	@Override
 	public String getNameCurrentValue() {
 		Locale locale = getLocale(_nameCurrentLanguageId);
 
 		return getName(locale);
 	}
 
+	@Override
 	public Map<Locale, String> getNameMap() {
 		return LocalizationUtil.getLocalizationMap(getName());
 	}
 
+	@Override
 	public void setName(String name) {
 		_name = name;
 	}
 
+	@Override
 	public void setName(String name, Locale locale) {
 		setName(name, locale, LocaleUtil.getDefault());
 	}
 
+	@Override
 	public void setName(String name, Locale locale, Locale defaultLocale) {
 		String languageId = LocaleUtil.toLanguageId(locale);
 		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
@@ -438,14 +471,17 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 		}
 	}
 
+	@Override
 	public void setNameCurrentLanguageId(String languageId) {
 		_nameCurrentLanguageId = languageId;
 	}
 
+	@Override
 	public void setNameMap(Map<Locale, String> nameMap) {
 		setNameMap(nameMap, LocaleUtil.getDefault());
 	}
 
+	@Override
 	public void setNameMap(Map<Locale, String> nameMap, Locale defaultLocale) {
 		if (nameMap == null) {
 			return;
@@ -455,6 +491,7 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 				LocaleUtil.toLanguageId(defaultLocale)));
 	}
 
+	@Override
 	@JSON
 	public String getDescription() {
 		if (_description == null) {
@@ -465,10 +502,12 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 		}
 	}
 
+	@Override
 	public void setDescription(String description) {
 		_description = description;
 	}
 
+	@Override
 	@JSON
 	public String getSettings() {
 		if (_settings == null) {
@@ -479,19 +518,23 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 		}
 	}
 
+	@Override
 	public void setSettings(String settings) {
 		_settings = settings;
 	}
 
+	@Override
 	@JSON
 	public boolean getActive() {
 		return _active;
 	}
 
+	@Override
 	public boolean isActive() {
 		return _active;
 	}
 
+	@Override
 	public void setActive(boolean active) {
 		_columnBitmask |= ACTIVE_COLUMN_BITMASK;
 
@@ -525,6 +568,7 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 		expandoBridge.setAttributes(serviceContext);
 	}
 
+	@Override
 	@SuppressWarnings("unused")
 	public void prepareLocalizedFieldsForImport(Locale defaultImportLocale)
 		throws LocaleException {
@@ -563,6 +607,7 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 		return layoutSetPrototypeImpl;
 	}
 
+	@Override
 	public int compareTo(LayoutSetPrototype layoutSetPrototype) {
 		long primaryKey = layoutSetPrototype.getPrimaryKey();
 
@@ -579,18 +624,15 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof LayoutSetPrototype)) {
 			return false;
 		}
 
-		LayoutSetPrototype layoutSetPrototype = null;
-
-		try {
-			layoutSetPrototype = (LayoutSetPrototype)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		LayoutSetPrototype layoutSetPrototype = (LayoutSetPrototype)obj;
 
 		long primaryKey = layoutSetPrototype.getPrimaryKey();
 
@@ -728,6 +770,7 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(37);
 

@@ -150,26 +150,32 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 	public ShoppingCategoryModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _categoryId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setCategoryId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _categoryId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return ShoppingCategory.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return ShoppingCategory.class.getName();
 	}
@@ -255,20 +261,24 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 		}
 	}
 
+	@Override
 	@JSON
 	public long getCategoryId() {
 		return _categoryId;
 	}
 
+	@Override
 	public void setCategoryId(long categoryId) {
 		_categoryId = categoryId;
 	}
 
+	@Override
 	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -285,32 +295,39 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 		return _originalGroupId;
 	}
 
+	@Override
 	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
+	@Override
 	@JSON
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
 
+	@Override
 	@JSON
 	public String getUserName() {
 		if (_userName == null) {
@@ -321,33 +338,40 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 		}
 	}
 
+	@Override
 	public void setUserName(String userName) {
 		_userName = userName;
 	}
 
+	@Override
 	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
 	}
 
+	@Override
 	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
 	@JSON
 	public long getParentCategoryId() {
 		return _parentCategoryId;
 	}
 
+	@Override
 	public void setParentCategoryId(long parentCategoryId) {
 		_columnBitmask = -1L;
 
@@ -364,6 +388,7 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 		return _originalParentCategoryId;
 	}
 
+	@Override
 	@JSON
 	public String getName() {
 		if (_name == null) {
@@ -374,12 +399,14 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 		}
 	}
 
+	@Override
 	public void setName(String name) {
 		_columnBitmask = -1L;
 
 		_name = name;
 	}
 
+	@Override
 	@JSON
 	public String getDescription() {
 		if (_description == null) {
@@ -390,6 +417,7 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 		}
 	}
 
+	@Override
 	public void setDescription(String description) {
 		_description = description;
 	}
@@ -441,6 +469,7 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 		return shoppingCategoryImpl;
 	}
 
+	@Override
 	public int compareTo(ShoppingCategory shoppingCategory) {
 		int value = 0;
 
@@ -469,18 +498,15 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ShoppingCategory)) {
 			return false;
 		}
 
-		ShoppingCategory shoppingCategory = null;
-
-		try {
-			shoppingCategory = (ShoppingCategory)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		ShoppingCategory shoppingCategory = (ShoppingCategory)obj;
 
 		long primaryKey = shoppingCategory.getPrimaryKey();
 
@@ -600,6 +626,7 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(34);
 

@@ -89,26 +89,32 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel>
 	public PasswordPolicyRelModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _passwordPolicyRelId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setPasswordPolicyRelId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _passwordPolicyRelId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return PasswordPolicyRel.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return PasswordPolicyRel.class.getName();
 	}
@@ -152,18 +158,22 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel>
 		}
 	}
 
+	@Override
 	public long getPasswordPolicyRelId() {
 		return _passwordPolicyRelId;
 	}
 
+	@Override
 	public void setPasswordPolicyRelId(long passwordPolicyRelId) {
 		_passwordPolicyRelId = passwordPolicyRelId;
 	}
 
+	@Override
 	public long getPasswordPolicyId() {
 		return _passwordPolicyId;
 	}
 
+	@Override
 	public void setPasswordPolicyId(long passwordPolicyId) {
 		_columnBitmask |= PASSWORDPOLICYID_COLUMN_BITMASK;
 
@@ -180,6 +190,7 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel>
 		return _originalPasswordPolicyId;
 	}
 
+	@Override
 	public String getClassName() {
 		if (getClassNameId() <= 0) {
 			return StringPool.BLANK;
@@ -188,6 +199,7 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel>
 		return PortalUtil.getClassName(getClassNameId());
 	}
 
+	@Override
 	public void setClassName(String className) {
 		long classNameId = 0;
 
@@ -198,10 +210,12 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel>
 		setClassNameId(classNameId);
 	}
 
+	@Override
 	public long getClassNameId() {
 		return _classNameId;
 	}
 
+	@Override
 	public void setClassNameId(long classNameId) {
 		_columnBitmask |= CLASSNAMEID_COLUMN_BITMASK;
 
@@ -218,10 +232,12 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel>
 		return _originalClassNameId;
 	}
 
+	@Override
 	public long getClassPK() {
 		return _classPK;
 	}
 
+	@Override
 	public void setClassPK(long classPK) {
 		_columnBitmask |= CLASSPK_COLUMN_BITMASK;
 
@@ -279,6 +295,7 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel>
 		return passwordPolicyRelImpl;
 	}
 
+	@Override
 	public int compareTo(PasswordPolicyRel passwordPolicyRel) {
 		long primaryKey = passwordPolicyRel.getPrimaryKey();
 
@@ -295,18 +312,15 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof PasswordPolicyRel)) {
 			return false;
 		}
 
-		PasswordPolicyRel passwordPolicyRel = null;
-
-		try {
-			passwordPolicyRel = (PasswordPolicyRel)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		PasswordPolicyRel passwordPolicyRel = (PasswordPolicyRel)obj;
 
 		long primaryKey = passwordPolicyRel.getPrimaryKey();
 
@@ -374,6 +388,7 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(16);
 

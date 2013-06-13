@@ -39,10 +39,12 @@ import java.util.Map;
 public class AssetCategoriesNavigationPortletDisplayTemplateHandler
 	extends BasePortletDisplayTemplateHandler {
 
+	@Override
 	public String getClassName() {
 		return AssetCategory.class.getName();
 	}
 
+	@Override
 	public String getName(Locale locale) {
 		String portletTitle = PortalUtil.getPortletTitle(
 			PortletKeys.TAGS_CATEGORIES_NAVIGATION, locale);
@@ -51,17 +53,18 @@ public class AssetCategoriesNavigationPortletDisplayTemplateHandler
 			LanguageUtil.get(locale, "template"));
 	}
 
+	@Override
 	public String getResourceName() {
 		return "com.liferay.portlet.assetcategoriesnavigation";
 	}
 
 	@Override
 	public Map<String, TemplateVariableGroup> getTemplateVariableGroups(
-			long classPK, Locale locale)
+			long classPK, String language, Locale locale)
 		throws Exception {
 
 		Map<String, TemplateVariableGroup> templateVariableGroups =
-			super.getTemplateVariableGroups(classPK, locale);
+			super.getTemplateVariableGroups(classPK, language, locale);
 
 		TemplateVariableGroup templateVariableGroup =
 			templateVariableGroups.get("fields");

@@ -51,6 +51,7 @@ public class JournalArticleResourceCacheModel implements CacheModel<JournalArtic
 		return sb.toString();
 	}
 
+	@Override
 	public JournalArticleResource toEntityModel() {
 		JournalArticleResourceImpl journalArticleResourceImpl = new JournalArticleResourceImpl();
 
@@ -76,6 +77,7 @@ public class JournalArticleResourceCacheModel implements CacheModel<JournalArtic
 		return journalArticleResourceImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		resourcePrimKey = objectInput.readLong();
@@ -83,6 +85,7 @@ public class JournalArticleResourceCacheModel implements CacheModel<JournalArtic
 		articleId = objectInput.readUTF();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

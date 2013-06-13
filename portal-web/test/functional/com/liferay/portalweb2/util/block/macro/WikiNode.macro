@@ -1,6 +1,6 @@
 <definition>
-	<command name="cpAdd">
-		<execute macro="Page#cpGoto">
+	<command name="addCP">
+		<execute macro="Page#cpGotoContent">
 			<var name="portletName" value="Wiki" />
 		</execute>
 
@@ -15,8 +15,8 @@
 		<execute action="CPWiki#assertTextEquals" locator-key1="WIKI_NODE_TABLE_NUMBER_OF_PAGES_2" value1="0" />
 	</command>
 
-	<command name="cpDelete">
-		<execute macro="Page#cpGoto">
+	<command name="deleteCP">
+		<execute macro="Page#cpGotoContent">
 			<var name="portletName" value="Wiki" />
 		</execute>
 
@@ -25,10 +25,12 @@
 		<execute action="CPWiki#click" locator-key1="WIKI_NODE_MENULIST_RECYCLE_BIN" />
 		<execute action="CPWiki#assertTextEquals" locator-key1="SUCCESS_MESSAGE_RECYCLE_BIN" />
 		<execute action="CPWiki#assertTextNotPresent" value1="${wikiNodeName}" />
+
+		<execute macro="RecycleBin#emptyRecycleBinCP" />
 	</command>
 
-	<command name="cpEdit">
-		<execute macro="Page#cpGoto">
+	<command name="editCP">
+		<execute macro="Page#cpGotoContent">
 			<var name="portletName" value="Wiki" />
 		</execute>
 
@@ -45,8 +47,8 @@
 		<execute action="CPWiki#assertTextNotEquals" locator-key1="WIKI_NODE_TABLE_WIKI_2" value1="${wikiNodeName}" />
 	</command>
 
-	<command name="cpTearDown">
-		<execute macro="Page#cpGoto">
+	<command name="tearDownCP">
+		<execute macro="Page#cpGotoContent">
 			<var name="portletName" value="Wiki" />
 		</execute>
 
@@ -59,6 +61,6 @@
 			</then>
 		</while>
 
-		<execute macro="RecycleBin#cpEmptyRecycleBin" />
+		<execute macro="RecycleBin#emptyRecycleBinCP" />
 	</command>
 </definition>

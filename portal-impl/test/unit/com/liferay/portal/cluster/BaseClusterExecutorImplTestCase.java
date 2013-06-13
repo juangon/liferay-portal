@@ -308,6 +308,7 @@ public abstract class BaseClusterExecutorImplTestCase
 
 	protected class MockClusterEventListener implements ClusterEventListener {
 
+		@Override
 		public void processClusterEvent(ClusterEvent clusterEvent) {
 			try {
 				ClusterEventType clusterEventType =
@@ -474,10 +475,12 @@ public abstract class BaseClusterExecutorImplTestCase
 
 	protected class MockPortalExecutorManager implements PortalExecutorManager {
 
+		@Override
 		public <T> Future<T> execute(String name, Callable<T> callable) {
 			return _threadPoolExecutor.submit(callable);
 		}
 
+		@Override
 		public <T> T execute(
 				String name, Callable<T> callable, long timeout,
 				TimeUnit timeUnit)
@@ -488,26 +491,31 @@ public abstract class BaseClusterExecutorImplTestCase
 			return future.get(timeout, timeUnit);
 		}
 
+		@Override
 		public ThreadPoolExecutor getPortalExecutor(String name) {
 			return _threadPoolExecutor;
 		}
 
+		@Override
 		public ThreadPoolExecutor getPortalExecutor(
 			String name, boolean createIfAbsent) {
 
 			return _threadPoolExecutor;
 		}
 
+		@Override
 		public ThreadPoolExecutor registerPortalExecutor(
 			String name, ThreadPoolExecutor threadPoolExecutor) {
 
 			return _threadPoolExecutor;
 		}
 
+		@Override
 		public void shutdown() {
 			shutdown(false);
 		}
 
+		@Override
 		public void shutdown(boolean interrupt) {
 			if (interrupt) {
 				_threadPoolExecutor.shutdownNow();
@@ -517,10 +525,12 @@ public abstract class BaseClusterExecutorImplTestCase
 			}
 		}
 
+		@Override
 		public void shutdown(String name) {
 			shutdown(name, false);
 		}
 
+		@Override
 		public void shutdown(String name, boolean interrupt) {
 			if (interrupt) {
 				_threadPoolExecutor.shutdownNow();

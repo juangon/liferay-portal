@@ -38,6 +38,7 @@ public abstract class SCLicenseBaseImpl extends SCLicenseModelImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a s c license model instance should use the {@link SCLicense} interface instead.
 	 */
+	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
 			SCLicenseLocalServiceUtil.addSCLicense(this);

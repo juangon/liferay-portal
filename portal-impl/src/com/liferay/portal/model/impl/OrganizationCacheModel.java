@@ -76,6 +76,7 @@ public class OrganizationCacheModel implements CacheModel<Organization>,
 		return sb.toString();
 	}
 
+	@Override
 	public Organization toEntityModel() {
 		OrganizationImpl organizationImpl = new OrganizationImpl();
 
@@ -151,6 +152,7 @@ public class OrganizationCacheModel implements CacheModel<Organization>,
 		return organizationImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		organizationId = objectInput.readLong();
@@ -170,6 +172,7 @@ public class OrganizationCacheModel implements CacheModel<Organization>,
 		comments = objectInput.readUTF();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

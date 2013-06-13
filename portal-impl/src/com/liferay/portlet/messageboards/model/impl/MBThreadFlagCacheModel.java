@@ -63,6 +63,7 @@ public class MBThreadFlagCacheModel implements CacheModel<MBThreadFlag>,
 		return sb.toString();
 	}
 
+	@Override
 	public MBThreadFlag toEntityModel() {
 		MBThreadFlagImpl mbThreadFlagImpl = new MBThreadFlagImpl();
 
@@ -106,6 +107,7 @@ public class MBThreadFlagCacheModel implements CacheModel<MBThreadFlag>,
 		return mbThreadFlagImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		threadFlagId = objectInput.readLong();
@@ -118,6 +120,7 @@ public class MBThreadFlagCacheModel implements CacheModel<MBThreadFlag>,
 		threadId = objectInput.readLong();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

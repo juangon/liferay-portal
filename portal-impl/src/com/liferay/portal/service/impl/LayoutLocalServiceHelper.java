@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -30,22 +31,28 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
+import com.liferay.portal.model.LayoutFriendlyURL;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutSetPrototype;
 import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.service.persistence.LayoutFriendlyURLPersistence;
 import com.liferay.portal.service.persistence.LayoutPersistence;
 import com.liferay.portal.service.persistence.LayoutSetPersistence;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.comparator.LayoutPriorityComparator;
 import com.liferay.portlet.sites.util.SitesUtil;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * @author Raymond Augé
  */
 public class LayoutLocalServiceHelper implements IdentifiableBean {
 
+	@Override
 	public String getBeanIdentifier() {
 		return _beanIdentifier;
 	}
@@ -57,29 +64,31 @@ public class LayoutLocalServiceHelper implements IdentifiableBean {
 
 		friendlyURL = getFriendlyURL(friendlyURL);
 
-		if (Validator.isNull(friendlyURL)) {
-			friendlyURL = StringPool.SLASH + getFriendlyURL(name);
+		if (Validator.isNotNull(friendlyURL)) {
+			return friendlyURL;
+		}
 
-			String originalFriendlyURL = friendlyURL;
+		friendlyURL = StringPool.SLASH + getFriendlyURL(name);
 
-			for (int i = 1;; i++) {
-				try {
-					validateFriendlyURL(
-						groupId, privateLayout, layoutId, friendlyURL);
+		String originalFriendlyURL = friendlyURL;
+
+		for (int i = 1;; i++) {
+			try {
+				validateFriendlyURL(
+					groupId, privateLayout, layoutId, friendlyURL);
+
+				break;
+			}
+			catch (LayoutFriendlyURLException lfurle) {
+				int type = lfurle.getType();
+
+				if (type == LayoutFriendlyURLException.DUPLICATE) {
+					friendlyURL = originalFriendlyURL + i;
+				}
+				else {
+					friendlyURL = StringPool.SLASH + layoutId;
 
 					break;
-				}
-				catch (LayoutFriendlyURLException lfurle) {
-					int type = lfurle.getType();
-
-					if (type == LayoutFriendlyURLException.DUPLICATE) {
-						friendlyURL = originalFriendlyURL + i;
-					}
-					else {
-						friendlyURL = StringPool.SLASH + layoutId;
-
-						break;
-					}
 				}
 			}
 		}
@@ -89,6 +98,36 @@ public class LayoutLocalServiceHelper implements IdentifiableBean {
 
 	public String getFriendlyURL(String friendlyURL) {
 		return FriendlyURLNormalizerUtil.normalize(friendlyURL);
+	}
+
+	public Map<Locale, String> getFriendlyURLMap(
+			long groupId, boolean privateLayout, long layoutId, String name,
+			Map<Locale, String> friendlyURLMap)
+		throws PortalException, SystemException {
+
+		Map<Locale, String> newFriendlyURLMap = new HashMap<Locale, String>();
+
+		Locale[] locales = LanguageUtil.getAvailableLocales();
+
+		for (Locale locale : locales) {
+			String friendlyURL = friendlyURLMap.get(locale);
+
+			if (Validator.isNotNull(friendlyURL)) {
+				friendlyURL = getFriendlyURL(
+					groupId, privateLayout, layoutId, name, friendlyURL);
+
+				newFriendlyURLMap.put(locale, friendlyURL);
+			}
+		}
+
+		if (newFriendlyURLMap.isEmpty()) {
+			String friendlyURL = getFriendlyURL(
+				groupId, privateLayout, layoutId, name, StringPool.BLANK);
+
+			newFriendlyURLMap.put(LocaleUtil.getDefault(), friendlyURL);
+		}
+
+		return newFriendlyURLMap;
 	}
 
 	public int getNextPriority(
@@ -162,6 +201,7 @@ public class LayoutLocalServiceHelper implements IdentifiableBean {
 		return false;
 	}
 
+	@Override
 	public void setBeanIdentifier(String beanIdentifier) {
 		_beanIdentifier = beanIdentifier;
 	}
@@ -169,7 +209,7 @@ public class LayoutLocalServiceHelper implements IdentifiableBean {
 	public void validate(
 			long groupId, boolean privateLayout, long layoutId,
 			long parentLayoutId, String name, String type, boolean hidden,
-			String friendlyURL)
+			Map<Locale, String> friendlyURLMap)
 		throws PortalException, SystemException {
 
 		validateName(name);
@@ -205,7 +245,7 @@ public class LayoutLocalServiceHelper implements IdentifiableBean {
 			}
 		}
 
-		validateFriendlyURL(groupId, privateLayout, layoutId, friendlyURL);
+		validateFriendlyURLs(groupId, privateLayout, layoutId, friendlyURLMap);
 	}
 
 	public void validateFirstLayout(String type) throws PortalException {
@@ -234,12 +274,18 @@ public class LayoutLocalServiceHelper implements IdentifiableBean {
 			throw new LayoutFriendlyURLException(exceptionType);
 		}
 
-		Layout layout = layoutPersistence.fetchByG_P_F(
-			groupId, privateLayout, friendlyURL);
+		List<LayoutFriendlyURL> layoutFriendlyURLs =
+			layoutFriendlyURLPersistence.findByG_P_F(
+				groupId, privateLayout, friendlyURL);
 
-		if ((layout != null) && (layout.getLayoutId() != layoutId)) {
-			throw new LayoutFriendlyURLException(
-				LayoutFriendlyURLException.DUPLICATE);
+		for (LayoutFriendlyURL layoutFriendlyURL : layoutFriendlyURLs) {
+			Layout layout = layoutPersistence.findByPrimaryKey(
+				layoutFriendlyURL.getPlid());
+
+			if (layout.getLayoutId() != layoutId) {
+				throw new LayoutFriendlyURLException(
+					LayoutFriendlyURLException.DUPLICATE);
+			}
 		}
 
 		LayoutImpl.validateFriendlyURLKeyword(friendlyURL);
@@ -273,6 +319,18 @@ public class LayoutLocalServiceHelper implements IdentifiableBean {
 		}
 	}
 
+	public void validateFriendlyURLs(
+			long groupId, boolean privateLayout, long layoutId,
+			Map<Locale, String> friendlyURLMap)
+		throws PortalException, SystemException {
+
+		for (Map.Entry<Locale, String> entry : friendlyURLMap.entrySet()) {
+			String friendlyURL = entry.getValue();
+
+			validateFriendlyURL(groupId, privateLayout, layoutId, friendlyURL);
+		}
+	}
+
 	public void validateName(String name) throws PortalException {
 		if (Validator.isNull(name)) {
 			throw new LayoutNameException();
@@ -298,67 +356,71 @@ public class LayoutLocalServiceHelper implements IdentifiableBean {
 		Layout layout = layoutPersistence.findByG_P_L(
 			groupId, privateLayout, layoutId);
 
-		if (parentLayoutId != layout.getParentLayoutId()) {
+		if (parentLayoutId == layout.getParentLayoutId()) {
+			return;
+		}
 
-			// Layouts can always be moved to the root level
+		// Layouts can always be moved to the root level
 
-			if (parentLayoutId == LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
-				return;
-			}
+		if (parentLayoutId == LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
+			return;
+		}
 
-			// Layout cannot become a child of a layout that is not parentable
+		// Layout cannot become a child of a layout that is not parentable
 
-			Layout parentLayout = layoutPersistence.findByG_P_L(
-				groupId, privateLayout, parentLayoutId);
+		Layout parentLayout = layoutPersistence.findByG_P_L(
+			groupId, privateLayout, parentLayoutId);
 
-			if (!PortalUtil.isLayoutParentable(parentLayout)) {
-				throw new LayoutParentLayoutIdException(
-					LayoutParentLayoutIdException.NOT_PARENTABLE);
-			}
+		if (!PortalUtil.isLayoutParentable(parentLayout)) {
+			throw new LayoutParentLayoutIdException(
+				LayoutParentLayoutIdException.NOT_PARENTABLE);
+		}
 
-			// Layout cannot become a child of a layout that is not sortable
-			// because it is linked to a layout set prototype
+		// Layout cannot become a child of a layout that is not sortable because
+		// it is linked to a layout set prototype
 
-			if (!SitesUtil.isLayoutSortable(parentLayout)) {
-				throw new LayoutParentLayoutIdException(
-					LayoutParentLayoutIdException.NOT_SORTABLE);
-			}
+		if (!SitesUtil.isLayoutSortable(parentLayout)) {
+			throw new LayoutParentLayoutIdException(
+				LayoutParentLayoutIdException.NOT_SORTABLE);
+		}
 
-			// Layout cannot become descendant of itself
+		// Layout cannot become descendant of itself
 
-			if (PortalUtil.isLayoutDescendant(layout, parentLayoutId)) {
-				throw new LayoutParentLayoutIdException(
-					LayoutParentLayoutIdException.SELF_DESCENDANT);
-			}
+		if (PortalUtil.isLayoutDescendant(layout, parentLayoutId)) {
+			throw new LayoutParentLayoutIdException(
+				LayoutParentLayoutIdException.SELF_DESCENDANT);
+		}
 
-			// If layout is moved, the new first layout must be valid
+		// If layout is moved, the new first layout must be valid
 
-			if (layout.getParentLayoutId() ==
-					LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
+		if (layout.getParentLayoutId() ==
+				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
 
-				List<Layout> layouts = layoutPersistence.findByG_P_P(
-					groupId, privateLayout,
-					LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, 0, 2);
+			List<Layout> layouts = layoutPersistence.findByG_P_P(
+				groupId, privateLayout,
+				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, 0, 2);
 
-				// You can only reach this point if there are more than two
-				// layouts at the root level because of the descendant check
+			// You can only reach this point if there are more than two layouts
+			// at the root level because of the descendant check
 
-				long firstLayoutId = layouts.get(0).getLayoutId();
+			long firstLayoutId = layouts.get(0).getLayoutId();
 
-				if (firstLayoutId == layoutId) {
-					Layout secondLayout = layouts.get(1);
+			if (firstLayoutId == layoutId) {
+				Layout secondLayout = layouts.get(1);
 
-					try {
-						validateFirstLayout(secondLayout.getType());
-					}
-					catch (LayoutTypeException lte) {
-						throw new LayoutParentLayoutIdException(
-							LayoutParentLayoutIdException.FIRST_LAYOUT_TYPE);
-					}
+				try {
+					validateFirstLayout(secondLayout.getType());
+				}
+				catch (LayoutTypeException lte) {
+					throw new LayoutParentLayoutIdException(
+						LayoutParentLayoutIdException.FIRST_LAYOUT_TYPE);
 				}
 			}
 		}
 	}
+
+	@BeanReference(type = LayoutFriendlyURLPersistence.class)
+	protected LayoutFriendlyURLPersistence layoutFriendlyURLPersistence;
 
 	@BeanReference(type = LayoutPersistence.class)
 	protected LayoutPersistence layoutPersistence;

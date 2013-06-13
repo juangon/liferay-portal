@@ -86,26 +86,32 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction>
 	public ResourceActionModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _resourceActionId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setResourceActionId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _resourceActionId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return ResourceAction.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return ResourceAction.class.getName();
 	}
@@ -149,14 +155,17 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction>
 		}
 	}
 
+	@Override
 	public long getResourceActionId() {
 		return _resourceActionId;
 	}
 
+	@Override
 	public void setResourceActionId(long resourceActionId) {
 		_resourceActionId = resourceActionId;
 	}
 
+	@Override
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -166,6 +175,7 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction>
 		}
 	}
 
+	@Override
 	public void setName(String name) {
 		_columnBitmask = -1L;
 
@@ -180,6 +190,7 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction>
 		return GetterUtil.getString(_originalName);
 	}
 
+	@Override
 	public String getActionId() {
 		if (_actionId == null) {
 			return StringPool.BLANK;
@@ -189,6 +200,7 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction>
 		}
 	}
 
+	@Override
 	public void setActionId(String actionId) {
 		_columnBitmask |= ACTIONID_COLUMN_BITMASK;
 
@@ -203,10 +215,12 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction>
 		return GetterUtil.getString(_originalActionId);
 	}
 
+	@Override
 	public long getBitwiseValue() {
 		return _bitwiseValue;
 	}
 
+	@Override
 	public void setBitwiseValue(long bitwiseValue) {
 		_columnBitmask = -1L;
 
@@ -254,6 +268,7 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction>
 		return resourceActionImpl;
 	}
 
+	@Override
 	public int compareTo(ResourceAction resourceAction) {
 		int value = 0;
 
@@ -282,18 +297,15 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ResourceAction)) {
 			return false;
 		}
 
-		ResourceAction resourceAction = null;
-
-		try {
-			resourceAction = (ResourceAction)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		ResourceAction resourceAction = (ResourceAction)obj;
 
 		long primaryKey = resourceAction.getPrimaryKey();
 
@@ -365,6 +377,7 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(16);
 

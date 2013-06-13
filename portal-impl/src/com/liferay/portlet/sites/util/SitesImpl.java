@@ -122,6 +122,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class SitesImpl implements Sites {
 
+	@Override
 	public void addPortletBreadcrumbEntries(
 			Group group, HttpServletRequest request,
 			RenderResponse renderResponse)
@@ -154,6 +155,7 @@ public class SitesImpl implements Sites {
 			portletURL.toString());
 	}
 
+	@Override
 	public void addPortletBreadcrumbEntries(
 			Group group, String pagesName, PortletURL redirectURL,
 			HttpServletRequest request, RenderResponse renderResponse)
@@ -197,6 +199,7 @@ public class SitesImpl implements Sites {
 		}
 	}
 
+	@Override
 	public void applyLayoutPrototype(
 			LayoutPrototype layoutPrototype, Layout targetLayout,
 			boolean linkEnabled)
@@ -217,7 +220,7 @@ public class SitesImpl implements Sites {
 			targetLayout.getNameMap(), targetLayout.getTitleMap(),
 			targetLayout.getDescriptionMap(), targetLayout.getKeywordsMap(),
 			targetLayout.getRobotsMap(), layoutPrototypeLayout.getType(),
-			targetLayout.getHidden(), targetLayout.getFriendlyURL(),
+			targetLayout.getHidden(), targetLayout.getFriendlyURLMap(),
 			targetLayout.getIconImage(), null, serviceContext);
 
 		targetLayout = LayoutLocalServiceUtil.updateLayout(
@@ -250,6 +253,7 @@ public class SitesImpl implements Sites {
 		LayoutLocalServiceUtil.updateLayout(layoutPrototypeLayout);
 	}
 
+	@Override
 	public void copyLayout(
 			long userId, Layout sourceLayout, Layout targetLayout,
 			ServiceContext serviceContext)
@@ -276,6 +280,7 @@ public class SitesImpl implements Sites {
 		}
 	}
 
+	@Override
 	public void copyLookAndFeel(Layout targetLayout, Layout sourceLayout)
 		throws Exception {
 
@@ -290,6 +295,7 @@ public class SitesImpl implements Sites {
 			sourceLayout.getWapColorSchemeId(), sourceLayout.getCss(), true);
 	}
 
+	@Override
 	public void copyPortletPermissions(Layout targetLayout, Layout sourceLayout)
 		throws Exception {
 
@@ -318,7 +324,10 @@ public class SitesImpl implements Sites {
 			for (Role role : roles) {
 				String roleName = role.getName();
 
-				if (roleName.equals(RoleConstants.ADMINISTRATOR)) {
+				if (roleName.equals(RoleConstants.ADMINISTRATOR) ||
+					(targetLayout.isPrivateLayout() &&
+					 roleName.equals(RoleConstants.GUEST))) {
+
 					continue;
 				}
 
@@ -337,6 +346,7 @@ public class SitesImpl implements Sites {
 		}
 	}
 
+	@Override
 	public void copyPortletSetups(Layout sourceLayout, Layout targetLayout)
 		throws Exception {
 
@@ -402,6 +412,7 @@ public class SitesImpl implements Sites {
 		}
 	}
 
+	@Override
 	public void copyTypeSettings(Group sourceGroup, Group targetGroup)
 		throws Exception {
 
@@ -409,6 +420,7 @@ public class SitesImpl implements Sites {
 			targetGroup.getGroupId(), sourceGroup.getTypeSettings());
 	}
 
+	@Override
 	public Object[] deleteLayout(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
@@ -421,6 +433,7 @@ public class SitesImpl implements Sites {
 		return deleteLayout(request, response);
 	}
 
+	@Override
 	public Object[] deleteLayout(
 			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
@@ -452,7 +465,7 @@ public class SitesImpl implements Sites {
 		}
 
 		Group group = layout.getGroup();
-		String oldFriendlyURL = layout.getFriendlyURL();
+		String oldFriendlyURL = layout.getFriendlyURL(themeDisplay.getLocale());
 
 		if (group.isStagingGroup() &&
 			!GroupPermissionUtil.contains(
@@ -502,6 +515,7 @@ public class SitesImpl implements Sites {
 		return new Object[] {group, oldFriendlyURL, newPlid};
 	}
 
+	@Override
 	public void deleteLayout(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
@@ -514,6 +528,7 @@ public class SitesImpl implements Sites {
 		deleteLayout(request, response);
 	}
 
+	@Override
 	public File exportLayoutSetPrototype(
 			LayoutSetPrototype layoutSetPrototype,
 			ServiceContext serviceContext)
@@ -529,6 +544,7 @@ public class SitesImpl implements Sites {
 			parameterMap, null, null);
 	}
 
+	@Override
 	public Long[] filterGroups(List<Group> groups, String[] names) {
 		List<Long> groupIds = new ArrayList<Long>();
 
@@ -541,6 +557,7 @@ public class SitesImpl implements Sites {
 		return ArrayUtil.toArray(ArrayUtil.toLongArray(groupIds));
 	}
 
+	@Override
 	public Layout getLayoutSetPrototypeLayout(Layout layout) {
 		try {
 			LayoutSet layoutSet = layout.getLayoutSet();
@@ -569,6 +586,7 @@ public class SitesImpl implements Sites {
 		return null;
 	}
 
+	@Override
 	public Map<String, String[]> getLayoutSetPrototypeParameters(
 		ServiceContext serviceContext) {
 
@@ -633,6 +651,18 @@ public class SitesImpl implements Sites {
 		return parameterMap;
 	}
 
+	/**
+	 * Returns the number of failed merge attempts for the layout prototype
+	 * since its last reset or update.
+	 *
+	 * @param  layoutPrototype the page template being checked for failed merge
+	 *         attempts
+	 * @return the number of failed merge attempts for the layout prototype
+	 * @throws PortalException if no page was associated with the layout
+	 *         prototype or if a portal exception occurred
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
 	public int getMergeFailCount(LayoutPrototype layoutPrototype)
 		throws PortalException, SystemException {
 
@@ -651,6 +681,18 @@ public class SitesImpl implements Sites {
 			prototypeTypeSettingsProperties.getProperty(MERGE_FAIL_COUNT));
 	}
 
+	/**
+	 * Returns the number of failed merge attempts for the layout set prototype
+	 * since its last reset or update.
+	 *
+	 * @param  layoutSetPrototype the site template being checked for failed
+	 *         merge attempts
+	 * @return the number of failed merge attempts for the layout set prototype
+	 * @throws PortalException if no site was associated with the layout set
+	 *         prototype or if a portal exception occurred
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
 	public int getMergeFailCount(LayoutSetPrototype layoutSetPrototype)
 		throws PortalException, SystemException {
 
@@ -670,6 +712,7 @@ public class SitesImpl implements Sites {
 			layoutSetPrototypeSettingsProperties.getProperty(MERGE_FAIL_COUNT));
 	}
 
+	@Override
 	public void importLayoutSetPrototype(
 			LayoutSetPrototype layoutSetPrototype, InputStream inputStream,
 			ServiceContext serviceContext)
@@ -688,6 +731,7 @@ public class SitesImpl implements Sites {
 			inputStream);
 	}
 
+	@Override
 	public boolean isContentSharingWithChildrenEnabled(Group group)
 		throws SystemException {
 
@@ -722,6 +766,7 @@ public class SitesImpl implements Sites {
 		return false;
 	}
 
+	@Override
 	public boolean isLayoutDeleteable(Layout layout) {
 		try {
 			if (layout instanceof VirtualLayout) {
@@ -755,6 +800,7 @@ public class SitesImpl implements Sites {
 		return true;
 	}
 
+	@Override
 	public boolean isLayoutModifiedSinceLastMerge(Layout layout) {
 		if ((layout == null) ||
 			Validator.isNull(layout.getSourcePrototypeLayoutUuid()) ||
@@ -778,6 +824,23 @@ public class SitesImpl implements Sites {
 		return false;
 	}
 
+	/**
+	 * Returns <code>true</code> if the linked site template can be merged into
+	 * the layout set. This method checks the current number of merge fail
+	 * attempts stored for the linked site template and, if greater than the
+	 * merge fail threshold, will return <code>false</code>.
+	 *
+	 * @param  group the site template's group, which is about to be merged into
+	 *         the layout set
+	 * @param  layoutSet the site in which the site template is attempting to
+	 *         merge into
+	 * @return <code>true</code> if the linked site template can be merged into
+	 *         the layout set; <code>false</code> otherwise
+	 * @throws PortalException if no site template was associated with the
+	 *         layout set or if a portal exception occurred
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
 	public boolean isLayoutSetMergeable(Group group, LayoutSet layoutSet)
 		throws PortalException, SystemException {
 
@@ -836,6 +899,7 @@ public class SitesImpl implements Sites {
 		return true;
 	}
 
+	@Override
 	public boolean isLayoutSetPrototypeUpdateable(LayoutSet layoutSet) {
 		if (!layoutSet.isLayoutSetPrototypeLinkActive()) {
 			return true;
@@ -864,10 +928,12 @@ public class SitesImpl implements Sites {
 		return true;
 	}
 
+	@Override
 	public boolean isLayoutSortable(Layout layout) {
 		return isLayoutDeleteable(layout);
 	}
 
+	@Override
 	public boolean isLayoutUpdateable(Layout layout) {
 		try {
 			if (layout instanceof VirtualLayout) {
@@ -913,6 +979,7 @@ public class SitesImpl implements Sites {
 		return true;
 	}
 
+	@Override
 	public boolean isOrganizationUser(
 			long companyId, Group group, User user,
 			List<String> organizationNames)
@@ -947,6 +1014,7 @@ public class SitesImpl implements Sites {
 		return organizationUser;
 	}
 
+	@Override
 	public boolean isUserGroupLayoutSetViewable(
 			PermissionChecker permissionChecker, Group userGroupGroup)
 		throws PortalException, SystemException {
@@ -975,6 +1043,7 @@ public class SitesImpl implements Sites {
 		}
 	}
 
+	@Override
 	public boolean isUserGroupUser(
 			long companyId, Group group, User user, List<String> userGroupNames)
 		throws Exception {
@@ -1003,18 +1072,27 @@ public class SitesImpl implements Sites {
 		return userGroupUser;
 	}
 
+	@Override
 	public void mergeLayoutPrototypeLayout(Group group, Layout layout)
 		throws Exception {
 
 		String sourcePrototypeLayoutUuid =
 			layout.getSourcePrototypeLayoutUuid();
 
-		if (Validator.isNotNull(sourcePrototypeLayoutUuid)) {
-			LayoutSet layoutSet = layout.getLayoutSet();
+		if (Validator.isNull(sourcePrototypeLayoutUuid)) {
+			doMergeLayoutPrototypeLayout(group, layout);
 
+			return;
+		}
+
+		LayoutSet layoutSet = layout.getLayoutSet();
+
+		long layoutSetPrototypeId = layoutSet.getLayoutSetPrototypeId();
+
+		if (layoutSetPrototypeId > 0) {
 			Group layoutSetPrototypeGroup =
 				GroupLocalServiceUtil.getLayoutSetPrototypeGroup(
-					layout.getCompanyId(), layoutSet.getLayoutSetPrototypeId());
+					layout.getCompanyId(), layoutSetPrototypeId);
 
 			Layout sourcePrototypeLayout =
 				LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
@@ -1032,12 +1110,14 @@ public class SitesImpl implements Sites {
 	 * @deprecated As of 6.2.0, replaced by {@link
 	 *             #mergeLayoutPrototypeLayout(Group, Layout)}
 	 */
+	@Override
 	public void mergeLayoutProtypeLayout(Group group, Layout layout)
 		throws Exception {
 
 		mergeLayoutPrototypeLayout(group, layout);
 	}
 
+	@Override
 	public void mergeLayoutSetPrototypeLayouts(Group group, LayoutSet layoutSet)
 		throws Exception {
 
@@ -1142,12 +1222,24 @@ public class SitesImpl implements Sites {
 	 * @deprecated As of 6.2.0, replaced by {@link
 	 *             #mergeLayoutSetPrototypeLayouts(Group, LayoutSet)}
 	 */
+	@Override
 	public void mergeLayoutSetProtypeLayouts(Group group, LayoutSet layoutSet)
 		throws Exception {
 
 		mergeLayoutSetPrototypeLayouts(group, layoutSet);
 	}
 
+	/**
+	 * Checks the permissions necessary for resetting the layout. If sufficient,
+	 * the layout is reset by calling {@link #doResetPrototype(Layout)}.
+	 *
+	 * @param  layout the page being checked for sufficient permissions
+	 * @throws PortalException if no site was associated with the layout, if the
+	 *         user did not have permission to update the layout or the layout's
+	 *         site, or if a portal exception occurred
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
 	public void resetPrototype(Layout layout)
 		throws PortalException, SystemException {
 
@@ -1156,6 +1248,17 @@ public class SitesImpl implements Sites {
 		doResetPrototype(layout);
 	}
 
+	/**
+	 * Checks the permissions necessary for resetting the layout set. If
+	 * sufficient, the layout set is reset by calling {@link
+	 * #doResetPrototype(LayoutSet)}.
+	 *
+	 * @param  layoutSet the site being checked for sufficient permissions
+	 * @throws PortalException if the user did not have permission to update the
+	 *         site or if a portal exception occurred
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
 	public void resetPrototype(LayoutSet layoutSet)
 		throws PortalException, SystemException {
 
@@ -1164,6 +1267,18 @@ public class SitesImpl implements Sites {
 		doResetPrototype(layoutSet);
 	}
 
+	/**
+	 * Sets the number of failed merge attempts for the layout prototype to a
+	 * new value.
+	 *
+	 * @param  layoutPrototype the page template of the counter being updated
+	 * @param  newMergeFailCount the new value of the counter
+	 * @throws PortalException if no page was associated with the layout
+	 *         prototype, if the user did not have permission to update the
+	 *         page, or if a portal exception occurred
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
 	public void setMergeFailCount(
 			LayoutPrototype layoutPrototype, int newMergeFailCount)
 		throws PortalException, SystemException {
@@ -1188,6 +1303,18 @@ public class SitesImpl implements Sites {
 			layoutPrototypeLayout.getTypeSettings());
 	}
 
+	/**
+	 * Sets the number of failed merge attempts for the layout set prototype to
+	 * a new value.
+	 *
+	 * @param  layoutSetPrototype the site template of the counter being updated
+	 * @param  newMergeFailCount the new value of the counter
+	 * @throws PortalException if no site was associated with the layout set
+	 *         prototype, if the user did not have permission to update the
+	 *         layout set prototype, or if a portal exception occurred
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
 	public void setMergeFailCount(
 			LayoutSetPrototype layoutSetPrototype, int newMergeFailCount)
 		throws PortalException, SystemException {
@@ -1212,6 +1339,7 @@ public class SitesImpl implements Sites {
 			layoutSetPrototypeLayoutSet.getSettings());
 	}
 
+	@Override
 	public void updateLayoutScopes(
 			long userId, Layout sourceLayout, Layout targetLayout,
 			PortletPreferences sourcePreferences,
@@ -1260,6 +1388,7 @@ public class SitesImpl implements Sites {
 		targetPreferences.store();
 	}
 
+	@Override
 	public void updateLayoutSetPrototypesLinks(
 			Group group, long publicLayoutSetPrototypeId,
 			long privateLayoutSetPrototypeId,
@@ -1275,6 +1404,18 @@ public class SitesImpl implements Sites {
 			publicLayoutSetPrototypeLinkEnabled);
 	}
 
+	/**
+	 * Checks the permissions necessary for resetting the layout or site. If the
+	 * permissions are not sufficient, a {@link PortalException} is thrown.
+	 *
+	 * @param  group the site being checked for sufficient permissions
+	 * @param  layout the page being checked for sufficient permissions
+	 *         (optionally <code>null</code>). If <code>null</code>, the
+	 *         permissions are only checked for resetting the site.
+	 * @throws PortalException if the user did not have permission to update the
+	 *         layout or site, or if a portal exception occurred
+	 * @throws SystemException if a system exception occurred
+	 */
 	protected void checkResetPrototypePermissions(Group group, Layout layout)
 		throws PortalException, SystemException {
 
@@ -1406,6 +1547,22 @@ public class SitesImpl implements Sites {
 		}
 	}
 
+	/**
+	 * Resets the modified timestamp on the layout, and then calls {@link
+	 * #doResetPrototype(LayoutSet)} to reset the modified timestamp on the
+	 * layout's site.
+	 *
+	 * <p>
+	 * After the timestamps are reset, the modified page template and site
+	 * template are merged into their linked layout and site when they are first
+	 * accessed.
+	 * </p>
+	 *
+	 * @param  layout the page having its timestamp reset
+	 * @throws PortalException if no site was associated with the layout or if a
+	 *         portal exception occurred
+	 * @throws SystemException if a system exception occurred
+	 */
 	protected void doResetPrototype(Layout layout)
 		throws PortalException, SystemException {
 
@@ -1418,6 +1575,17 @@ public class SitesImpl implements Sites {
 		doResetPrototype(layoutSet);
 	}
 
+	/**
+	 * Resets the modified timestamp on the layout set.
+	 *
+	 * <p>
+	 * After the timestamp is reset, the modified site template is merged into
+	 * its linked layout set when it is first accessed.
+	 * </p>
+	 *
+	 * @param  layoutSet the site having its timestamp reset
+	 * @throws SystemException if a system exception occurred
+	 */
 	protected void doResetPrototype(LayoutSet layoutSet)
 		throws SystemException {
 
@@ -1672,6 +1840,6 @@ public class SitesImpl implements Sites {
 		SystemProperties.get(SystemProperties.TMP_DIR) +
 			"/liferay/layout_set_prototype/";
 
-	private Log _log = LogFactoryUtil.getLog(SitesImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(SitesImpl.class);
 
 }

@@ -16,6 +16,7 @@ package com.liferay.portlet.blogs.lar;
 
 import com.liferay.portal.kernel.lar.BaseStagedModelDataHandler;
 import com.liferay.portal.kernel.lar.ExportImportPathUtil;
+import com.liferay.portal.kernel.lar.ExportImportUtil;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.StreamUtil;
@@ -30,8 +31,6 @@ import com.liferay.portal.service.persistence.ImageUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil;
-import com.liferay.portlet.dynamicdatamapping.lar.DDMPortletDataHandler;
-import com.liferay.portlet.journal.lar.JournalPortletDataHandler;
 
 import java.io.InputStream;
 
@@ -51,6 +50,11 @@ public class BlogsEntryStagedModelDataHandler
 	}
 
 	@Override
+	public String getDisplayName(BlogsEntry entry) {
+		return entry.getTitle();
+	}
+
+	@Override
 	protected void doExportStagedModel(
 			PortletDataContext portletDataContext, BlogsEntry entry)
 		throws Exception {
@@ -67,16 +71,17 @@ public class BlogsEntryStagedModelDataHandler
 
 			if (Validator.isNotNull(entry.getSmallImageURL())) {
 				String smallImageURL =
-					DDMPortletDataHandler.exportReferenceContent(
-						portletDataContext, null, null, null, null, null, null,
-						entryElement,
-						entry.getSmallImageURL().concat(StringPool.SPACE));
+					ExportImportUtil.replaceExportContentReferences(
+						portletDataContext, entry, entryElement,
+						entry.getSmallImageURL().concat(StringPool.SPACE),
+						true);
 
 				entry.setSmallImageURL(smallImageURL);
 			}
 			else if (smallImage != null) {
 				String smallImagePath = ExportImportPathUtil.getModelPath(
-					entry, smallImage.getImageId() + StringPool.PERIOD +
+					entry,
+					smallImage.getImageId() + StringPool.PERIOD +
 						smallImage.getType());
 
 				entryElement.addAttribute("small-image-path", smallImagePath);
@@ -88,9 +93,10 @@ public class BlogsEntryStagedModelDataHandler
 			}
 		}
 
-		String content = DDMPortletDataHandler.exportReferenceContent(
-			portletDataContext, null, null, null, null, null, null,
-			entryElement, entry.getContent());
+		String content = ExportImportUtil.replaceExportContentReferences(
+			portletDataContext, entry, entryElement, entry.getContent(),
+			portletDataContext.getBooleanParameter(
+				BlogsPortletDataHandler.NAMESPACE, "embedded-assets"));
 
 		entry.setContent(content);
 
@@ -109,8 +115,10 @@ public class BlogsEntryStagedModelDataHandler
 		Element entryElement =
 			portletDataContext.getImportDataStagedModelElement(entry);
 
-		String content = JournalPortletDataHandler.importReferenceContent(
-			portletDataContext, entryElement, entry.getContent());
+		String content = ExportImportUtil.replaceImportContentReferences(
+			portletDataContext, entryElement, entry.getContent(),
+			portletDataContext.getBooleanParameter(
+				BlogsPortletDataHandler.NAMESPACE, "embedded-assets"));
 
 		entry.setContent(content);
 
@@ -143,9 +151,9 @@ public class BlogsEntryStagedModelDataHandler
 
 				if (Validator.isNotNull(entry.getSmallImageURL())) {
 					String smallImageURL =
-						JournalPortletDataHandler.importReferenceContent(
+						ExportImportUtil.replaceImportContentReferences(
 							portletDataContext, entryElement,
-							entry.getSmallImageURL());
+							entry.getSmallImageURL(), true);
 
 					entry.setSmallImageURL(smallImageURL);
 				}

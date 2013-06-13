@@ -17,30 +17,24 @@ package com.liferay.portlet.dynamicdatalists.util;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.search.Hits;
-import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Eduardo Lundgren
+ * @author Marcellus Tavares
  */
 public interface DDL {
-
-	public void addAllReservedEls(
-		Element rootElement, Map<String, String> tokens,
-		DDLRecordSet recordSet);
 
 	public JSONObject getRecordJSONObject(DDLRecord record) throws Exception;
 
@@ -77,16 +71,6 @@ public interface DDL {
 			PortletPreferences preferences, String portletId, long groupId)
 		throws Exception;
 
-	public void sendRecordFileUpload(
-			HttpServletRequest request, HttpServletResponse response,
-			DDLRecord record, String fieldName, int valueIndex)
-		throws Exception;
-
-	public void sendRecordFileUpload(
-			HttpServletRequest request, HttpServletResponse response,
-			long recordId, String fieldName, int valueIndex)
-		throws Exception;
-
 	public DDLRecord updateRecord(
 			long recordId, long recordSetId, boolean mergeFields,
 			boolean checkPermission, ServiceContext serviceContext)
@@ -95,10 +79,6 @@ public interface DDL {
 	public DDLRecord updateRecord(
 			long recordId, long recordSetId, boolean mergeFields,
 			ServiceContext serviceContext)
-		throws Exception;
-
-	public void uploadRecordFieldFile(
-			DDLRecord record, String fieldName, ServiceContext serviceContext)
 		throws Exception;
 
 }

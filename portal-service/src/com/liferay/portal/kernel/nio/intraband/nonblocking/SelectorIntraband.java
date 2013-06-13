@@ -63,6 +63,7 @@ public class SelectorIntraband extends BaseIntraband {
 		super.close();
 	}
 
+	@Override
 	public RegistrationReference registerChannel(Channel channel)
 		throws IOException {
 
@@ -117,6 +118,7 @@ public class SelectorIntraband extends BaseIntraband {
 		}
 	}
 
+	@Override
 	public RegistrationReference registerChannel(
 			ScatteringByteChannel scatteringByteChannel,
 			GatheringByteChannel gatheringByteChannel)
@@ -237,6 +239,7 @@ public class SelectorIntraband extends BaseIntraband {
 			_writeSelectableChannel = writeSelectableChannel;
 		}
 
+		@Override
 		public RegistrationReference call() throws Exception {
 			if (_readSelectableChannel == _writeSelectableChannel) {
 
@@ -262,8 +265,7 @@ public class SelectorIntraband extends BaseIntraband {
 
 				// Alter interest ops after preparing the channel context
 
-				selectionKey.interestOps(
-					SelectionKey.OP_READ | SelectionKey.OP_WRITE);
+				selectionKey.interestOps(SelectionKey.OP_READ);
 
 				return selectionKeyRegistrationReference;
 			}
@@ -297,7 +299,6 @@ public class SelectorIntraband extends BaseIntraband {
 				// Alter interest ops after ChannelContexts preparation
 
 				readSelectionKey.interestOps(SelectionKey.OP_READ);
-				writeSelectionKey.interestOps(SelectionKey.OP_WRITE);
 
 				return selectionKeyRegistrationReference;
 			}
@@ -327,37 +328,35 @@ public class SelectorIntraband extends BaseIntraband {
 
 		Queue<Datagram> sendingQueue = channelContext.getSendingQueue();
 
-		boolean ready = false;
-
 		if (channelContext.getWritingDatagram() == null) {
-			Datagram datagram = sendingQueue.poll();
+			channelContext.setWritingDatagram(sendingQueue.poll());
+		}
 
-			if (datagram != null) {
-				channelContext.setWritingDatagram(datagram);
+		boolean backOff = false;
 
-				ready = true;
+		if (channelContext.getWritingDatagram() != null) {
+			if (handleWriting(gatheringByteChannel, channelContext)) {
+				if (sendingQueue.isEmpty()) {
+					backOff = true;
+				}
 			}
 		}
 		else {
-			ready = true;
+			backOff = true;
 		}
 
-		if (ready) {
-			if (handleWriting(gatheringByteChannel, channelContext)) {
+		if (backOff) {
+
+			// Channel is still writable, but there is nothing to send, back off
+			// to prevent unnecessary busy spinning.
+
+			int ops = selectionKey.interestOps();
+
+			ops &= ~SelectionKey.OP_WRITE;
+
+			synchronized (selectionKey) {
 				if (sendingQueue.isEmpty()) {
-
-					// Channel is still writable, but there is nothing to send,
-					// back off to prevent unnecessary busy spinning.
-
-					int ops = selectionKey.interestOps();
-
-					ops &= ~SelectionKey.OP_WRITE;
-
-					synchronized (selectionKey) {
-						if (sendingQueue.isEmpty()) {
-							selectionKey.interestOps(ops);
-						}
-					}
+					selectionKey.interestOps(ops);
 				}
 			}
 		}
@@ -367,6 +366,7 @@ public class SelectorIntraband extends BaseIntraband {
 
 	private class PollingJob implements Runnable {
 
+		@Override
 		public void run() {
 			try {
 				try {

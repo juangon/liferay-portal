@@ -3,7 +3,7 @@
 
 	var arrayIndexOf = A.Array.indexOf;
 
-	var TPL_NOT_AJAXABLE = '<div class="portlet-msg-info">{0}</div>';
+	var TPL_NOT_AJAXABLE = '<div class="alert alert-info">{0}</div>';
 
 	var Portlet = {
 		list: [],
@@ -311,7 +311,7 @@
 						failure: function(event, id, obj) {
 							placeHolder.hide();
 
-							placeHolder.placeAfter('<div class="portlet-msg-error">' + Liferay.Language.get('there-was-an-unexpected-error.-please-refresh-the-current-page') + '</div>');
+							placeHolder.placeAfter('<div class="alert alert-error">' + Liferay.Language.get('there-was-an-unexpected-error.-please-refresh-the-current-page') + '</div>');
 						},
 						success: function(event, id, obj) {
 							var instance = this;
@@ -377,7 +377,7 @@
 				var content = portlet.one('.portlet-content-container');
 
 				if (content) {
-					var restore = content.hasClass('aui-helper-hidden');
+					var restore = content.hasClass('hide');
 
 					content.toggle();
 					portlet.toggleClass('portlet-minimized');
@@ -422,35 +422,22 @@
 						html = portletBody.html();
 					}
 
-					var hasBodyContent = !!(A.Lang.trim(html));
-
-					if (hasBodyContent) {
-						content.unplug(A.Plugin.IO);
-					}
-					else {
-						content.plug(
-							A.Plugin.IO,
-							{
-								autoLoad: false,
-								data: {
-									doAsUserId: doAsUserId,
-									p_l_id: plid,
-									p_p_id: portlet.portletId,
-									p_p_state: 'exclusive'
-								},
-								showLoading: false,
-								uri: themeDisplay.getPathMain() + '/portal/render_portlet'
-							}
-						);
-					}
-
 					A.io.request(
 						themeDisplay.getPathMain() + '/portal/update_layout',
 						{
 							after: {
 								success: function() {
-									if (restore && content.io) {
-										content.io.start();
+									if (restore) {
+										var data = {
+											doAsUserId: doAsUserId,
+											p_l_id: plid,
+											p_p_id: portlet.portletId,
+											p_p_state: 'exclusive'
+										};
+
+										content.plug(A.Plugin.ParseContent);
+
+										content.load(themeDisplay.getPathMain() + '/portal/render_portlet?' + A.QueryString.stringify(data));
 									}
 								}
 							},
@@ -468,7 +455,7 @@
 				}
 			}
 		},
-		['aui-io']
+		['aui-io', 'aui-parse-content', 'node-load', 'querystring-stringify']
 	);
 
 	Liferay.provide(
@@ -664,15 +651,6 @@
 				Liferay.Util.openWindow(
 					{
 						cache: false,
-						dialog: {
-							align: Util.Window.ALIGN_CENTER,
-							after: {
-								render: function(event) {
-									this.set('y', this.get('y') + 50);
-								}
-							},
-							width: 820
-						},
 						dialogIframe: {
 							id: namespacedId + 'configurationIframe',
 							uri: configurationURL

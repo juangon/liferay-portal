@@ -60,6 +60,7 @@ public class OrgGroupRolePK implements Comparable<OrgGroupRolePK>, Serializable 
 		this.roleId = roleId;
 	}
 
+	@Override
 	public int compareTo(OrgGroupRolePK pk) {
 		if (pk == null) {
 			return -1;
@@ -114,18 +115,15 @@ public class OrgGroupRolePK implements Comparable<OrgGroupRolePK>, Serializable 
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof OrgGroupRolePK)) {
 			return false;
 		}
 
-		OrgGroupRolePK pk = null;
-
-		try {
-			pk = (OrgGroupRolePK)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		OrgGroupRolePK pk = (OrgGroupRolePK)obj;
 
 		if ((organizationId == pk.organizationId) && (groupId == pk.groupId) &&
 				(roleId == pk.roleId)) {

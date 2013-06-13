@@ -115,6 +115,10 @@ public class PortalInstances {
 		_instance._reload(servletContext);
 	}
 
+	public static void removeCompany(long companyId) {
+		_instance._removeCompanyId(companyId);
+	}
+
 	private PortalInstances() {
 		_companyIds = new long[0];
 		_autoLoginIgnoreHosts = SetUtil.fromArray(
@@ -525,6 +529,19 @@ public class PortalInstances {
 		for (String webId : webIds) {
 			_initCompany(servletContext, webId);
 		}
+	}
+
+	private void _removeCompanyId(long companyId) {
+		_companyIds = ArrayUtil.remove(_companyIds, companyId);
+		_webIds = null;
+
+		_getWebIds();
+
+		LuceneHelperUtil.delete(companyId);
+
+		LuceneHelperUtil.shutdown(companyId);
+
+		WebAppPool.remove(companyId, WebKeys.PORTLET_CATEGORY);
 	}
 
 	private static final String _GET_COMPANY_IDS =

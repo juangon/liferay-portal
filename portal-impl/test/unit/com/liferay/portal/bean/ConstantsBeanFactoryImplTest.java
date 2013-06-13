@@ -93,6 +93,7 @@ public class ConstantsBeanFactoryImplTest {
 			methods,
 			new Comparator<Method>() {
 
+				@Override
 				public int compare(Method method1, Method method2) {
 					String name1 = method1.getName();
 					String name2 = method2.getName();
@@ -313,7 +314,7 @@ public class ConstantsBeanFactoryImplTest {
 
 		long startTime = System.currentTimeMillis();
 
-		while ((System.currentTimeMillis() - startTime) < 100) {
+		while ((System.currentTimeMillis() - startTime) < 1000) {
 			System.gc();
 
 			Thread.sleep(1);

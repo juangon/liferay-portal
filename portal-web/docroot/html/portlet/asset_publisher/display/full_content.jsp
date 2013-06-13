@@ -187,9 +187,21 @@ request.setAttribute("view.jsp-showIconLabel", true);
 
 		<c:if test="<%= enableRatings %>">
 			<div class="asset-ratings">
+
+				<%
+				String assetEntryClassName = assetEntry.getClassName();
+
+				String ratingsType = "stars";
+
+				if (assetEntryClassName.equals(MBDiscussion.class.getName()) || assetEntryClassName.equals(MBMessage.class.getName())) {
+					ratingsType = "thumbs";
+				}
+				%>
+
 				<liferay-ui:ratings
 					className="<%= assetEntry.getClassName() %>"
 					classPK="<%= assetEntry.getClassPK() %>"
+					type="<%= ratingsType %>"
 				/>
 			</div>
 		</c:if>

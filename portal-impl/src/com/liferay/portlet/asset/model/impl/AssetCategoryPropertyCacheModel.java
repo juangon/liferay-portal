@@ -63,6 +63,7 @@ public class AssetCategoryPropertyCacheModel implements CacheModel<AssetCategory
 		return sb.toString();
 	}
 
+	@Override
 	public AssetCategoryProperty toEntityModel() {
 		AssetCategoryPropertyImpl assetCategoryPropertyImpl = new AssetCategoryPropertyImpl();
 
@@ -112,6 +113,7 @@ public class AssetCategoryPropertyCacheModel implements CacheModel<AssetCategory
 		return assetCategoryPropertyImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		categoryPropertyId = objectInput.readLong();
 		companyId = objectInput.readLong();
@@ -124,6 +126,7 @@ public class AssetCategoryPropertyCacheModel implements CacheModel<AssetCategory
 		value = objectInput.readUTF();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(categoryPropertyId);

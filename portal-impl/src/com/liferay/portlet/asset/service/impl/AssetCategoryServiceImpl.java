@@ -55,6 +55,7 @@ import java.util.Map;
  */
 public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 
+	@Override
 	public AssetCategory addCategory(
 			long parentCategoryId, Map<Locale, String> titleMap,
 			Map<Locale, String> descriptionMap, long vocabularyId,
@@ -70,6 +71,7 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 			vocabularyId, categoryProperties, serviceContext);
 	}
 
+	@Override
 	public AssetCategory addCategory(
 			String title, long vocabularyId, ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -83,6 +85,18 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 			getUserId(), title, vocabularyId, serviceContext);
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, Replaced by {@link #deleteCategories(long[],
+	 *             ServiceContext)}
+	 */
+	@Override
+	public void deleteCategories(long[] categoryIds)
+		throws PortalException, SystemException {
+
+		deleteCategories(categoryIds, null);
+	}
+
+	@Override
 	public List<AssetCategory> deleteCategories(
 			long[] categoryIds, ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -97,6 +111,10 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 				assetCategoryLocalService.deleteCategory(categoryId);
 			}
 			catch (PortalException pe) {
+				if (serviceContext == null) {
+					return null;
+				}
+
 				if (serviceContext.isFailOnPortalException()) {
 					throw pe;
 				}
@@ -115,6 +133,7 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 		return failedCategories;
 	}
 
+	@Override
 	public void deleteCategory(long categoryId)
 		throws PortalException, SystemException {
 
@@ -124,6 +143,7 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 		assetCategoryLocalService.deleteCategory(categoryId);
 	}
 
+	@Override
 	public List<AssetCategory> getCategories(String className, long classPK)
 		throws PortalException, SystemException {
 
@@ -131,6 +151,7 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 			assetCategoryLocalService.getCategories(className, classPK));
 	}
 
+	@Override
 	public AssetCategory getCategory(long categoryId)
 		throws PortalException, SystemException {
 
@@ -140,6 +161,7 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 		return assetCategoryLocalService.getCategory(categoryId);
 	}
 
+	@Override
 	public List<AssetCategory> getChildCategories(long parentCategoryId)
 		throws PortalException, SystemException {
 
@@ -147,6 +169,7 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 			assetCategoryLocalService.getChildCategories(parentCategoryId));
 	}
 
+	@Override
 	public List<AssetCategory> getChildCategories(
 			long parentCategoryId, int start, int end, OrderByComparator obc)
 		throws PortalException, SystemException {
@@ -160,6 +183,7 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 	 * @deprecated As of 6.2.0, replaced by {@link #search(long[], String,
 	 *             long[], int, int)}
 	 */
+	@Override
 	public JSONArray getJSONSearch(
 			long groupId, String name, long[] vocabularyIds, int start, int end)
 		throws PortalException, SystemException {
@@ -172,6 +196,7 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 	 *             #getVocabularyCategoriesDisplay(long, int, int,
 	 *             OrderByComparator)}
 	 */
+	@Override
 	public JSONObject getJSONVocabularyCategories(
 			long vocabularyId, int start, int end, OrderByComparator obc)
 		throws PortalException, SystemException {
@@ -193,6 +218,7 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 	 *             #getVocabularyCategoriesDisplay(long, String, long, int, int,
 	 *             OrderByComparator)}
 	 */
+	@Override
 	public JSONObject getJSONVocabularyCategories(
 			long groupId, String name, long vocabularyId, int start, int end,
 			OrderByComparator obc)
@@ -229,6 +255,7 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 		return jsonObject;
 	}
 
+	@Override
 	public List<AssetCategory> getVocabularyCategories(
 			long vocabularyId, int start, int end, OrderByComparator obc)
 		throws PortalException, SystemException {
@@ -238,6 +265,7 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 				vocabularyId, start, end, obc));
 	}
 
+	@Override
 	public List<AssetCategory> getVocabularyCategories(
 			long parentCategoryId, long vocabularyId, int start, int end,
 			OrderByComparator obc)
@@ -248,6 +276,7 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 				parentCategoryId, vocabularyId, start, end, obc));
 	}
 
+	@Override
 	public List<AssetCategory> getVocabularyCategories(
 			long groupId, String name, long vocabularyId, int start, int end,
 			OrderByComparator obc)
@@ -263,12 +292,14 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 		}
 	}
 
+	@Override
 	public int getVocabularyCategoriesCount(long groupId, long vocabularyId)
 		throws SystemException {
 
 		return assetCategoryPersistence.filterCountByG_V(groupId, vocabularyId);
 	}
 
+	@Override
 	public int getVocabularyCategoriesCount(
 			long groupId, String name, long vocabularyId)
 		throws SystemException {
@@ -283,6 +314,7 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 		}
 	}
 
+	@Override
 	public AssetCategoryDisplay getVocabularyCategoriesDisplay(
 			long vocabularyId, int start, int end, OrderByComparator obc)
 		throws PortalException, SystemException {
@@ -295,6 +327,7 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 			categories, categories.size(), start, end);
 	}
 
+	@Override
 	public AssetCategoryDisplay getVocabularyCategoriesDisplay(
 			long groupId, String name, long vocabularyId, int start, int end,
 			OrderByComparator obc)
@@ -323,6 +356,7 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 	 *             getVocabularyRootCategories(long, long, int, int,
 	 *             OrderByComparator)}
 	 */
+	@Override
 	public List<AssetCategory> getVocabularyRootCategories(
 			long vocabularyId, int start, int end, OrderByComparator obc)
 		throws PortalException, SystemException {
@@ -334,6 +368,7 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 			vocabulary.getGroupId(), vocabularyId, start, end, obc);
 	}
 
+	@Override
 	public List<AssetCategory> getVocabularyRootCategories(
 			long groupId, long vocabularyId, int start, int end,
 			OrderByComparator obc)
@@ -344,6 +379,7 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 			vocabularyId, start, end, obc);
 	}
 
+	@Override
 	public int getVocabularyRootCategoriesCount(long groupId, long vocabularyId)
 		throws SystemException {
 
@@ -352,6 +388,7 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 			vocabularyId);
 	}
 
+	@Override
 	public AssetCategory moveCategory(
 			long categoryId, long parentCategoryId, long vocabularyId,
 			ServiceContext serviceContext)
@@ -364,6 +401,7 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 			categoryId, parentCategoryId, vocabularyId, serviceContext);
 	}
 
+	@Override
 	public List<AssetCategory> search(
 			long groupId, String keywords, long vocabularyId, int start,
 			int end, OrderByComparator obc)
@@ -381,6 +419,7 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 		}
 	}
 
+	@Override
 	public JSONArray search(
 			long groupId, String name, String[] categoryProperties, int start,
 			int end)
@@ -394,6 +433,7 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 		return Autocomplete.listToJson(categories, "name", "name");
 	}
 
+	@Override
 	public JSONArray search(
 			long[] groupIds, String name, long[] vocabularyIds, int start,
 			int end)
@@ -423,6 +463,7 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 		return jsonArray;
 	}
 
+	@Override
 	public AssetCategory updateCategory(
 			long categoryId, long parentCategoryId,
 			Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,

@@ -54,6 +54,7 @@ public class PluginSettingCacheModel implements CacheModel<PluginSetting>,
 		return sb.toString();
 	}
 
+	@Override
 	public PluginSetting toEntityModel() {
 		PluginSettingImpl pluginSettingImpl = new PluginSettingImpl();
 
@@ -88,6 +89,7 @@ public class PluginSettingCacheModel implements CacheModel<PluginSetting>,
 		return pluginSettingImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		pluginSettingId = objectInput.readLong();
 		companyId = objectInput.readLong();
@@ -97,6 +99,7 @@ public class PluginSettingCacheModel implements CacheModel<PluginSetting>,
 		active = objectInput.readBoolean();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(pluginSettingId);

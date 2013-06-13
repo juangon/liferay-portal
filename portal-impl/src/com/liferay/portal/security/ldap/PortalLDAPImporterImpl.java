@@ -94,6 +94,7 @@ import javax.naming.ldap.LdapContext;
 @DoPrivileged
 public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 
+	@Override
 	public void importFromLDAP() throws Exception {
 		List<Company> companies = CompanyLocalServiceUtil.getCompanies(false);
 
@@ -102,6 +103,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		}
 	}
 
+	@Override
 	public void importFromLDAP(long companyId) throws Exception {
 		if (!LDAPSettingsUtil.isImportEnabled(companyId)) {
 			return;
@@ -163,6 +165,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		}
 	}
 
+	@Override
 	public void importFromLDAP(long ldapServerId, long companyId)
 		throws Exception {
 
@@ -217,6 +220,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		}
 	}
 
+	@Override
 	public User importLDAPUser(
 			long ldapServerId, long companyId, LdapContext ldapContext,
 			Attributes attributes, String password)
@@ -246,6 +250,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		return user;
 	}
 
+	@Override
 	public User importLDAPUser(
 			long ldapServerId, long companyId, String emailAddress,
 			String screenName)
@@ -346,6 +351,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		}
 	}
 
+	@Override
 	public User importLDAPUser(
 			long companyId, String emailAddress, String screenName)
 		throws Exception {
@@ -396,6 +402,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		return null;
 	}
 
+	@Override
 	public User importLDAPUserByScreenName(long companyId, String screenName)
 		throws Exception {
 
@@ -761,6 +768,10 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			UserGroup userGroup = importUserGroup(
 				companyId, groupAttributes, groupMappings);
 
+			if (userGroup == null) {
+				return newUserGroupIds;
+			}
+
 			userGroupId = userGroup.getUserGroupId();
 
 			if (PropsValues.LDAP_IMPORT_GROUP_CACHE_ENABLED) {
@@ -768,14 +779,12 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			}
 		}
 
-		if (userGroupId != null) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Adding " + user.getUserId() + " to group " + userGroupId);
-			}
-
-			newUserGroupIds.add(userGroupId);
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Adding " + user.getUserId() + " to group " + userGroupId);
 		}
+
+		newUserGroupIds.add(userGroupId);
 
 		return newUserGroupIds;
 	}
@@ -918,9 +927,11 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 				attributes, "modifyTimestamp");
 
 			user = updateUser(
-				companyId, ldapUser, user, password, modifiedDate);
+				companyId, ldapUser, user, userMappings, contactMappings,
+				password, modifiedDate);
 
-			updateExpandoAttributes(user, ldapUser);
+			updateExpandoAttributes(
+				user, ldapUser, userExpandoMappings, contactExpandoMappings);
 
 			return user;
 		}
@@ -1050,7 +1061,8 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 	}
 
 	protected void populateExpandoAttributes(
-		ExpandoBridge expandoBridge, Map<String, String[]> expandoAttributes) {
+		ExpandoBridge expandoBridge, Map<String, String[]> expandoAttributes,
+		Properties expandoMappings) {
 
 		Map<String, Serializable> serializedExpandoAttributes =
 			new HashMap<String, Serializable>();
@@ -1064,13 +1076,17 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 				continue;
 			}
 
-			int type = expandoBridge.getAttributeType(name);
+			if (!expandoMappings.containsKey(name) ||
+				_ldapUserIgnoreAttributes.contains(name)) {
 
-			Serializable value =
-				ExpandoConverterUtil.getAttributeFromStringArray(
-					type, expandoAttribute.getValue());
+				int type = expandoBridge.getAttributeType(name);
 
-			serializedExpandoAttributes.put(name, value);
+				Serializable value =
+					ExpandoConverterUtil.getAttributeFromStringArray(
+						type, expandoAttribute.getValue());
+
+				serializedExpandoAttributes.put(name, value);
+			}
 		}
 
 		try {
@@ -1093,47 +1109,59 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 	protected void setProperty(
 		Object bean1, Object bean2, String propertyName) {
 
-		Object value = BeanPropertiesUtil.getObject(bean1, propertyName);
-		Object defaultValue = BeanPropertiesUtil.getObject(bean2, propertyName);
+		Object value = BeanPropertiesUtil.getObject(bean2, propertyName);
 
-		if ((value == null) || value.equals(StringPool.BLANK)) {
-			BeanPropertiesUtil.setProperty(bean1, propertyName, defaultValue);
-		}
+		BeanPropertiesUtil.setProperty(bean1, propertyName, value);
 	}
 
-	protected void updateExpandoAttributes(User user, LDAPUser ldapUser)
+	protected void updateExpandoAttributes(
+			User user, LDAPUser ldapUser, Properties userExpandoMappings,
+			Properties contactExpandoMappings)
 		throws Exception {
 
 		ExpandoBridge userExpandoBridge = user.getExpandoBridge();
 
 		populateExpandoAttributes(
-			userExpandoBridge, ldapUser.getUserExpandoAttributes());
+			userExpandoBridge, ldapUser.getUserExpandoAttributes(),
+			userExpandoMappings);
 
 		Contact contact = user.getContact();
 
 		ExpandoBridge contactExpandoBridge = contact.getExpandoBridge();
 
 		populateExpandoAttributes(
-			contactExpandoBridge, ldapUser.getContactExpandoAttributes());
+			contactExpandoBridge, ldapUser.getContactExpandoAttributes(),
+			contactExpandoMappings);
 	}
 
-	protected void updateLDAPUser(User ldapUser, Contact ldapContact, User user)
+	protected void updateLDAPUser(
+			User ldapUser, Contact ldapContact, User user,
+			Properties userMappings, Properties contactMappings)
 		throws PortalException, SystemException {
 
 		Contact contact = user.getContact();
 
 		for (String propertyName : _CONTACT_PROPERTY_NAMES) {
-			setProperty(ldapContact, contact, propertyName);
+			if (!contactMappings.containsKey(propertyName) ||
+				_ldapUserIgnoreAttributes.contains(propertyName)) {
+
+				setProperty(ldapContact, contact, propertyName);
+			}
 		}
 
 		for (String propertyName : _USER_PROPERTY_NAMES) {
-			setProperty(ldapUser, user, propertyName);
+			if (!userMappings.containsKey(propertyName) ||
+				_ldapUserIgnoreAttributes.contains(propertyName) ) {
+
+				setProperty(ldapUser, user, propertyName);
+			}
 		}
 	}
 
 	protected User updateUser(
-			long companyId, LDAPUser ldapUser, User user, String password,
-			String modifiedDate)
+			long companyId, LDAPUser ldapUser, User user,
+			Properties userMappings, Properties contactMappings,
+			String password, String modifiedDate)
 		throws Exception {
 
 		Date ldapUserModifiedDate = null;
@@ -1228,24 +1256,9 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 				user.getUserId(), password, password, passwordReset, true);
 		}
 
-		Contact contact = user.getContact();
-
-		Set<String> ldapIgnoreAttributes = SetUtil.fromArray(
-			PropsValues.LDAP_USER_IGNORE_ATTRIBUTES);
-
-		for (String attribute : ldapIgnoreAttributes) {
-			Object value = BeanPropertiesUtil.getObjectSilent(user, attribute);
-
-			if (value == null) {
-				value = BeanPropertiesUtil.getObjectSilent(contact, attribute);
-			}
-
-			if (value != null) {
-				BeanPropertiesUtil.setProperty(ldapUser, attribute, value);
-			}
-		}
-
-		updateLDAPUser(ldapUser.getUser(), ldapContact, user);
+		updateLDAPUser(
+			ldapUser.getUser(), ldapContact, user, userMappings,
+			contactMappings);
 
 		user = UserLocalServiceUtil.updateUser(
 			user.getUserId(), password, StringPool.BLANK, StringPool.BLANK,
@@ -1309,6 +1322,8 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		PortalLDAPImporterImpl.class);
 
 	private LDAPToPortalConverter _ldapToPortalConverter;
+	private Set<String> _ldapUserIgnoreAttributes = SetUtil.fromArray(
+		PropsValues.LDAP_USER_IGNORE_ATTRIBUTES);
 	private PortalCache<String, Long> _portalCache = SingleVMPoolUtil.getCache(
 		PortalLDAPImporter.class.getName(), false);
 

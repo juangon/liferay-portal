@@ -40,6 +40,7 @@ public class RSSWebCacheItem implements WebCacheItem {
 		_url = url;
 	}
 
+	@Override
 	public Object convert(String key) throws WebCacheException {
 		SyndFeed feed = null;
 
@@ -87,7 +88,8 @@ public class RSSWebCacheItem implements WebCacheItem {
 				PropsValues.RSS_CONNECTION_TIMEOUT);
 			httpClientParams.setSoTimeout(PropsValues.RSS_CONNECTION_TIMEOUT);
 
-			GetMethod getMethod = new GetMethod(_url);
+			GetMethod getMethod = new GetMethod(
+				httpImpl.encodeParameters(_url));
 
 			httpClient.executeMethod(hostConfiguration, getMethod);
 
@@ -103,6 +105,7 @@ public class RSSWebCacheItem implements WebCacheItem {
 		return feed;
 	}
 
+	@Override
 	public long getRefreshTime() {
 		return _REFRESH_TIME;
 	}

@@ -38,6 +38,7 @@ public abstract class ExpandoColumnBaseImpl extends ExpandoColumnModelImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a expando column model instance should use the {@link ExpandoColumn} interface instead.
 	 */
+	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
 			ExpandoColumnLocalServiceUtil.addExpandoColumn(this);

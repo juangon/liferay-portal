@@ -33,7 +33,11 @@
 		vertical-align: top;
 	}
 
-	.portlet-msg-error, .portlet-msg-success {
+	.license-form {
+		padding-bottom: 30px;
+	}
+
+	.alert-error, .alert-success {
 		margin: 15px auto 5px;
 	}
 
@@ -79,10 +83,10 @@ dateFormatDateTime.setTimeZone(timeZone);
 	<%= buildInfo %>
 </h3>
 
-<form method="post" name="license_fm" <%= (clusterNodes.size() > 1) ? "onsubmit=\"return validateForm();\"" : "" %>>
+<form class="license-form" method="post" name="license_fm" <%= (clusterNodes.size() > 1) ? "onsubmit=\"return validateForm();\"" : "" %>>
 
 <c:if test="<%= Validator.isNotNull(errorMessage) %>">
-	<div class="portlet-msg-error">
+	<div class="alert alert-error">
 		<%= errorMessage %>
 	</div>
 </c:if>
@@ -99,7 +103,7 @@ dateFormatDateTime.setTimeZone(timeZone);
 		%>
 
 		<c:if test="<%= Validator.isNotNull(successMessage) %>">
-			<div class="portlet-msg-success">
+			<div class="alert alert-success">
 				<%= successMessage %>
 			</div>
 		</c:if>
@@ -314,7 +318,7 @@ dateFormatDateTime.setTimeZone(timeZone);
 			<c:if test="<%= Validator.isNotNull(successMessage) %>">
 				<tr>
 					<td colspan="3">
-						<div class="portlet-msg-success">
+						<div class="alert alert-success">
 							<%= successMessage %>
 						</div>
 					</td>
@@ -324,7 +328,7 @@ dateFormatDateTime.setTimeZone(timeZone);
 			<c:if test="<%= Validator.isNotNull(curErrorMessage) %>">
 				<tr>
 					<td colspan="3">
-						<div class="portlet-msg-error">
+						<div class="alert alert-error">
 							<%= curErrorMessage %>
 						</div>
 					</td>
@@ -440,7 +444,7 @@ dateFormatDateTime.setTimeZone(timeZone);
 										errorMessage += ':' + port;
 									}
 
-									A.one('#' + clusterNodeId + '_' + cmd).html('<div class="portlet-msg-error">' + errorMessage + '</div>');
+									A.one('#' + clusterNodeId + '_' + cmd).html('<div class="alert alert-error">' + errorMessage + '</div>');
 								},
 								success: function(event, id, obj) {
 									var instance = this;
@@ -584,7 +588,7 @@ dateFormatDateTime.setTimeZone(timeZone);
 
 <br />
 
-<strong>Register Your Application</strong>
+<h3>Register Your Application</h3>
 
 <table class="lfr-table">
 <tr>
@@ -674,12 +678,12 @@ dateFormatDateTime.setTimeZone(timeZone);
 
 <c:choose>
 	<c:when test="<%= orderProducts != null %>">
-		<input type="submit" value="<liferay-ui:message key="register" />" />
+		<input class="btn" type="submit" value="<liferay-ui:message key="register" />" />
 
 		<input onClick="location.href='<%= themeDisplay.getURLCurrent() %>';" type="button" value="<liferay-ui:message key="cancel" />" />
 	</c:when>
 	<c:otherwise>
-		<input type="submit" value="Query" />
+		<input class="btn" type="submit" value="Query" />
 	</c:otherwise>
 </c:choose>
 

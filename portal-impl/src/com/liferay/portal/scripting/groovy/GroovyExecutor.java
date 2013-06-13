@@ -42,6 +42,7 @@ public class GroovyExecutor extends BaseScriptingExecutor {
 		_portalCache.removeAll();
 	}
 
+	@Override
 	public Map<String, Object> eval(
 			Set<String> allowedClasses, Map<String, Object> inputObjects,
 			Set<String> outputNames, String script, ClassLoader... classLoaders)
@@ -73,6 +74,7 @@ public class GroovyExecutor extends BaseScriptingExecutor {
 		return outputObjects;
 	}
 
+	@Override
 	public String getLanguage() {
 		return _LANGUAGE;
 	}

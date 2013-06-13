@@ -15,12 +15,10 @@
 package com.liferay.portal.service;
 
 /**
- * <p>
- * This class is a wrapper for {@link RepositoryEntryLocalService}.
- * </p>
+ * Provides a wrapper for {@link RepositoryEntryLocalService}.
  *
- * @author    Brian Wing Shun Chan
- * @see       RepositoryEntryLocalService
+ * @author Brian Wing Shun Chan
+ * @see RepositoryEntryLocalService
  * @generated
  */
 public class RepositoryEntryLocalServiceWrapper
@@ -38,6 +36,7 @@ public class RepositoryEntryLocalServiceWrapper
 	* @return the repository entry that was added
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.RepositoryEntry addRepositoryEntry(
 		com.liferay.portal.model.RepositoryEntry repositoryEntry)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -50,6 +49,7 @@ public class RepositoryEntryLocalServiceWrapper
 	* @param repositoryEntryId the primary key for the new repository entry
 	* @return the new repository entry
 	*/
+	@Override
 	public com.liferay.portal.model.RepositoryEntry createRepositoryEntry(
 		long repositoryEntryId) {
 		return _repositoryEntryLocalService.createRepositoryEntry(repositoryEntryId);
@@ -63,6 +63,7 @@ public class RepositoryEntryLocalServiceWrapper
 	* @throws PortalException if a repository entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.RepositoryEntry deleteRepositoryEntry(
 		long repositoryEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -77,12 +78,14 @@ public class RepositoryEntryLocalServiceWrapper
 	* @return the repository entry that was removed
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.RepositoryEntry deleteRepositoryEntry(
 		com.liferay.portal.model.RepositoryEntry repositoryEntry)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _repositoryEntryLocalService.deleteRepositoryEntry(repositoryEntry);
 	}
 
+	@Override
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {
 		return _repositoryEntryLocalService.dynamicQuery();
 	}
@@ -94,6 +97,7 @@ public class RepositoryEntryLocalServiceWrapper
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -114,6 +118,7 @@ public class RepositoryEntryLocalServiceWrapper
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -136,6 +141,7 @@ public class RepositoryEntryLocalServiceWrapper
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -153,12 +159,14 @@ public class RepositoryEntryLocalServiceWrapper
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _repositoryEntryLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	@Override
 	public com.liferay.portal.model.RepositoryEntry fetchRepositoryEntry(
 		long repositoryEntryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -173,6 +181,7 @@ public class RepositoryEntryLocalServiceWrapper
 	* @throws PortalException if a repository entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.RepositoryEntry getRepositoryEntry(
 		long repositoryEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -180,6 +189,7 @@ public class RepositoryEntryLocalServiceWrapper
 		return _repositoryEntryLocalService.getRepositoryEntry(repositoryEntryId);
 	}
 
+	@Override
 	public com.liferay.portal.model.PersistedModel getPersistedModel(
 		java.io.Serializable primaryKeyObj)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -196,6 +206,7 @@ public class RepositoryEntryLocalServiceWrapper
 	* @throws PortalException if a matching repository entry could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.RepositoryEntry getRepositoryEntryByUuidAndGroupId(
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -216,6 +227,7 @@ public class RepositoryEntryLocalServiceWrapper
 	* @return the range of repository entries
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public java.util.List<com.liferay.portal.model.RepositoryEntry> getRepositoryEntries(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -228,6 +240,7 @@ public class RepositoryEntryLocalServiceWrapper
 	* @return the number of repository entries
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public int getRepositoryEntriesCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _repositoryEntryLocalService.getRepositoryEntriesCount();
@@ -240,6 +253,7 @@ public class RepositoryEntryLocalServiceWrapper
 	* @return the repository entry that was updated
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.RepositoryEntry updateRepositoryEntry(
 		com.liferay.portal.model.RepositoryEntry repositoryEntry)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -251,6 +265,7 @@ public class RepositoryEntryLocalServiceWrapper
 	*
 	* @return the Spring bean ID for this bean
 	*/
+	@Override
 	public java.lang.String getBeanIdentifier() {
 		return _repositoryEntryLocalService.getBeanIdentifier();
 	}
@@ -260,10 +275,12 @@ public class RepositoryEntryLocalServiceWrapper
 	*
 	* @param beanIdentifier the Spring bean ID for this bean
 	*/
+	@Override
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		_repositoryEntryLocalService.setBeanIdentifier(beanIdentifier);
 	}
 
+	@Override
 	public com.liferay.portal.model.RepositoryEntry addRepositoryEntry(
 		long userId, long groupId, long repositoryId,
 		java.lang.String mappedId,
@@ -274,6 +291,7 @@ public class RepositoryEntryLocalServiceWrapper
 			repositoryId, mappedId, serviceContext);
 	}
 
+	@Override
 	public com.liferay.portal.model.RepositoryEntry updateRepositoryEntry(
 		long repositoryEntryId, java.lang.String mappedId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -297,10 +315,12 @@ public class RepositoryEntryLocalServiceWrapper
 		_repositoryEntryLocalService = repositoryEntryLocalService;
 	}
 
+	@Override
 	public RepositoryEntryLocalService getWrappedService() {
 		return _repositoryEntryLocalService;
 	}
 
+	@Override
 	public void setWrappedService(
 		RepositoryEntryLocalService repositoryEntryLocalService) {
 		_repositoryEntryLocalService = repositoryEntryLocalService;

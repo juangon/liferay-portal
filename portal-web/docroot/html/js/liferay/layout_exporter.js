@@ -12,10 +12,8 @@
 		function(options) {
 			options = options || {};
 
-			var namespace = options.namespace;
 			var obj = options.obj;
 			var pane = options.pane;
-			var publish = options.publish;
 
 			if (obj && obj.checked) {
 				pane = A.one(pane);
@@ -40,7 +38,7 @@
 			if (detail && img) {
 				var icon = LayoutExporter.icons.plus;
 
-				if (detail.hasClass('aui-helper-hidden')) {
+				if (detail.hasClass('hide')) {
 					detail.show();
 					icon = LayoutExporter.icons.minus;
 				}
@@ -51,7 +49,7 @@
 				img.attr('src', icon);
 			}
 		},
-		['aui-dialog']
+		['aui-base']
 	);
 
 	Liferay.provide(
@@ -60,14 +58,12 @@
 		function(options) {
 			options = options || {};
 
-			var url = options.url;
 			var namespace = options.namespace;
 			var reviewers = options.reviewers;
-			var title = options.title;
 
 			var contents =
 				"<div>" +
-					"<form action='" + url + "' method='post'>";
+					"<form action='" + options.url + "' method='post'>";
 
 			if (reviewers.length > 0) {
 				contents +=
@@ -92,23 +88,16 @@
 					"</form>" +
 				"</div>";
 
-			new A.Dialog(
+			Liferay.Util.openWindow(
 				{
-					align: {
-						node: null,
-						points: ['tc', 'tc']
+					dialog: {
+						destroyOnHide: true
 					},
-					bodyContent: contents,
-					destroyOnClose: true,
-					modal: true,
-					title: title,
-					width: 350
+					title: contents
 				}
-			).render();
-
-			dialog.move(dialog.get('x'), dialog.get('y') + 100);
+			);
 		},
-		['aui-dialog']
+		['liferay-util-window']
 	);
 
 	Liferay.provide(
@@ -117,32 +106,18 @@
 		function(options) {
 			options = options || {};
 
-			var url = options.url;
-			var title = options.title;
-
-			var dialog = new A.Dialog(
+			Liferay.Util.openWindow(
 				{
-					align: {
-						node: null,
-						points: ['tc', 'tc']
+					dialog: {
+						constrain: true,
+						modal: true,
+						width: 600
 					},
-					destroyOnClose: true,
-					modal: true,
-					title: title,
-					width: 600
-				}
-			).render();
-
-			dialog.move(dialog.get('x'), dialog.get('y') + 100);
-
-			dialog.plug(
-				A.Plugin.IO,
-				{
-					uri: url
+					title: options.title,
+					uri: options.url
 				}
 			);
-		},
-		['aui-dialog', 'aui-io']
+		}
 	);
 
 	Liferay.provide(
@@ -151,10 +126,8 @@
 		function(options) {
 			options = options || {};
 
-			var namespace = options.namespace;
 			var obj = options.obj;
 			var pane = options.pane;
-			var publish = options.publish;
 
 			if (obj && obj.checked) {
 				pane = A.one(pane);

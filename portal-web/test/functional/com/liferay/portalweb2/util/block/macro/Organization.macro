@@ -2,7 +2,7 @@
 	<var name="orgName" value="Organization*" />
 
 	<command name="isPresent">
-		<execute macro="Page#cpGoto">
+		<execute macro="Page#cpGotoUsers">
 			<var name="portletName" value="Users and Organizations" />
 		</execute>
 
@@ -11,8 +11,8 @@
 		<execute action="CPUsersandorganizations#isElementPresent" locator-key1="ORGANIZATION_TABLE_NAME_1" />
 	</command>
 
-	<command name="cpAdd">
-		<execute macro="Page#cpGoto">
+	<command name="addCP">
+		<execute macro="Page#cpGotoUsers">
 			<var name="portletName" value="Users and Organizations" />
 		</execute>
 
@@ -28,8 +28,8 @@
 		<execute action="CPUsersandorganizationsOrganizationEdit#assertTextEquals" locator-key1="DETAILS_TYPE" value1="Type ${orgType}" />
 	</command>
 
-	<command name="cpAddMember">
-		<execute macro="Page#cpGoto">
+	<command name="addMemberCP">
+		<execute macro="Page#cpGotoUsers">
 			<var name="portletName" value="Users and Organizations" />
 		</execute>
 
@@ -40,7 +40,6 @@
 		<execute action="CPUsersandorganizations#click" locator-key1="ORGANIZATION_MENULIST_ASSIGN_USERS" />
 
 		<execute action="CPUsersandorganizationsAssignmembers#click" locator-key1="AVAILABLE" />
-		<execute macro="CPUsersandorganizationsAssignmembers#showBasicSearch" />
 		<execute action="CPUsersandorganizationsAssignmembers#type" locator-key1="BASIC_SEARCH_FIELD" value1="${userScreenName}" />
 		<execute action="CPUsersandorganizationsAssignmembers#click" locator-key1="BASIC_SEARCH_BUTTON" />
 		<execute action="CPUsersandorganizationsAssignmembers#assertTextEquals" locator-key1="USER_TABLE_SCREEN_NAME_1" value1="${userScreenName}" />
@@ -54,8 +53,8 @@
 		<execute action="CPUsersandorganizationsAssignmembers#assertTextEquals" locator-key1="USER_TABLE_SCREEN_NAME_1" value1="${userScreenName}" />
 	</command>
 
-	<command name="cpAddSite">
-		<execute macro="Page#cpGoto">
+	<command name="addSiteCP">
+		<execute macro="Page#cpGotoUsers">
 			<var name="portletName" value="Users and Organizations" />
 		</execute>
 
@@ -72,8 +71,36 @@
 		<execute action="CPUsersandorganizationsOrganizationEdit#assertChecked" locator-key1="ORGANIZATION_SITE_CREATE_SITE_CHECKBOX" />
 	</command>
 
-	<command name="cpDelete">
-		<execute macro="Page#cpGoto">
+	<command name="assignOrgRoleCP">
+		<execute macro="Page#cpGotoUsers">
+			<var name="portletName" value="Users and Organizations" />
+		</execute>
+
+		<execute action="CPUsersandorganizations#type" locator-key1="SEARCH_FIELD" value1="${orgName}" />
+		<execute action="CPUsersandorganizations#click" locator-key1="SEARCH_BUTTON" />
+		<execute action="CPUsersandorganizations#assertTextEquals" locator-key1="ORGANIZATION_TABLE_NAME_1" value1="${orgName}" />
+		<execute action="CPUsersandorganizations#click" locator-key1="ORGANIZATION_TABLE_ACTIONS_1" />
+		<execute action="CPUsersandorganizations#click" locator-key1="ORGANIZATION_MENULIST_ASSIGN_ORGANIZATION_ROLES" />
+
+		<execute action="CPUsersandorganizationsAssignuserroles#assertTextEquals" locator1="//tr[contains(.,'${roleName}')]/td[1]/a" value1="${roleName}" />
+		<execute action="CPUsersandorganizationsAssignuserroles#click" locator1="//tr[contains(.,'${roleName}')]/td[1]/a" value1="${roleName}" />
+
+		<execute action="CPUsersandorganizationsAssignuserrolesUser#click" locator-key1="AVAILABLE" />
+		<execute action="CPUsersandorganizationsAssignuserrolesUser#type" locator-key1="BASIC_SEARCH_FIELD" value1="${userScreenName}" />
+		<execute action="CPUsersandorganizationsAssignuserrolesUser#click" locator-key1="BASIC_SEARCH_BUTTON" />
+		<execute action="CPUsersandorganizationsAssignuserrolesUser#assertTextEquals" locator-key1="USER_TABLE_SCREEN_NAME_1" value1="${userScreenName}" />
+		<execute action="CPUsersandorganizationsAssignuserrolesUser#check" locator-key1="USER_TABLE_CHECKBOX_1" />
+		<execute action="CPUsersandorganizationsAssignuserrolesUser#click" locator-key1="UPDATE_ASSOCIATIONS_BUTTON" />
+		<execute action="CPUsersandorganizationsAssignuserrolesUser#assertTextEquals" locator-key1="SUCCESS_MESSAGE" />
+
+		<execute action="CPUsersandorganizationsAssignuserrolesUser#click" locator-key1="CURRENT" />
+		<execute action="CPUsersandorganizationsAssignuserrolesUser#assertChecked" locator-key1="USER_TABLE_CHECKBOX_1" />
+		<execute action="CPUsersandorganizationsAssignuserrolesUser#assertTextEquals" locator-key1="USER_TABLE_USER_NAME_1" value1="${userFirstName} ${userLastName}" />
+		<execute action="CPUsersandorganizationsAssignuserrolesUser#assertTextEquals" locator-key1="USER_TABLE_SCREEN_NAME_1" value1="${userScreenName}" />
+	</command>
+
+	<command name="deleteCP">
+		<execute macro="Page#cpGotoUsers">
 			<var name="portletName" value="Users and Organizations" />
 		</execute>
 
@@ -86,8 +113,8 @@
 		<execute action="CPUsersandorganizations#assertTextNotPresent" value1="${orgName}" />
 	</command>
 
-	<command name="cpRemoveMember">
-		<execute macro="Page#cpGoto">
+	<command name="removeMemberCP">
+		<execute macro="Page#cpGotoUsers">
 			<var name="portletName" value="Users and Organizations" />
 		</execute>
 
@@ -98,7 +125,6 @@
 		<execute action="CPUsersandorganizations#click" locator-key1="ORGANIZATION_MENULIST_ASSIGN_USERS" />
 
 		<execute action="CPUsersandorganizationsAssignmembers#click" locator-key1="AVAILABLE" />
-		<execute macro="CPUsersandorganizationsAssignmembers#showBasicSearch" />
 		<execute action="CPUsersandorganizationsAssignmembers#type" locator-key1="BASIC_SEARCH_FIELD" value1="${userScreenName}" />
 		<execute action="CPUsersandorganizationsAssignmembers#click" locator-key1="BASIC_SEARCH_BUTTON" />
 		<execute action="CPUsersandorganizationsAssignmembers#assertTextEquals" locator-key1="USER_TABLE_SCREEN_NAME_1" value1="${userScreenName}" />
@@ -107,7 +133,7 @@
 		<execute action="CPUsersandorganizationsAssignmembers#assertTextEquals" locator-key1="SUCCESS_MESSAGE" />
 		<execute action="CPUsersandorganizationsAssignmembers#assertNotChecked" locator-key1="USER_TABLE_CHECKBOX_1" />
 
-		<execute macro="Page#cpGoto">
+		<execute macro="Page#cpGotoUsers">
 			<var name="portletName" value="Users and Organizations" />
 		</execute>
 
@@ -118,7 +144,7 @@
 		<execute action="CPUsersandorganizationsOrganization#assertTextNotPresent" value1="${userFirstName}" />
 	</command>
 
-	<command name="cpTearDown">
+	<command name="tearDownCP">
 		<while>
 			<condition macro="Organization#isPresent" />
 			<then>
@@ -145,26 +171,8 @@
 		</while>
 	</command>
 
-	<command name="cpView">
-		<execute macro="Page#cpGoto">
-			<var name="portletName" value="Users and Organizations" />
-		</execute>
-
-		<execute action="CPUsersandorganizations#type" locator-key1="SEARCH_FIELD" value1="${searchToken}" />
-		<execute action="CPUsersandorganizations#click" locator-key1="SEARCH_BUTTON" />
-		<execute action="CPUsersandorganizations#assertTextEquals" locator-key1="ORGANIZATION_TABLE_NAME_1" value1="${orgName}" />
-		<execute action="CPUsersandorganizations#assertTextEquals" locator-key1="ORGANIZATION_TABLE_TYPE_1" value1="${orgType}" />
-		<execute action="CPUsersandorganizations#click" locator-key1="ORGANIZATION_TABLE_ACTIONS_1" />
-		<execute action="CPUsersandorganizations#click" locator-key1="ORGANIZATION_MENULIST_EDIT" />
-
-		<execute action="CPUsersandorganizationsOrganizationEdit#assertTextEquals" locator-key1="TITLE" value1="${orgName}" />
-		<execute action="CPUsersandorganizationsOrganizationEdit#assertTextEquals" locator-key1="DETAILS_NAME_FIELD" value1="${orgName}" />
-		<execute action="CPUsersandorganizationsOrganizationEdit#assertTextEquals" locator-key1="DETAILS_TYPE" value1="Type ${orgType}" />
-		<execute action="CPUsersandorganizationsOrganizationEdit#assertTextEquals" locator-key1="ORGANIZATION_NAME" value1="${orgName}" />
-	</command>
-
-	<command name="cpViewAssignMember">
-		<execute macro="Page#cpGoto">
+	<command name="viewAssignMemberCP">
+		<execute macro="Page#cpGotoUsers">
 			<var name="portletName" value="Users and Organizations" />
 		</execute>
 
@@ -176,5 +184,23 @@
 		<execute action="CPUsersandorganizationsOrganization#assertTextEquals" locator-key1="USER_TABLE_FIRST_NAME_1" value1="${userFirstName}" />
 		<execute action="CPUsersandorganizationsOrganization#assertTextEquals" locator-key1="USER_TABLE_LAST_NAME_1" value1="${userLastName}" />
 		<execute action="CPUsersandorganizationsOrganization#assertTextEquals" locator-key1="USER_TABLE_SCREEN_NAME_1" value1="${userScreenName}" />
+	</command>
+
+	<command name="viewCP">
+		<execute macro="Page#cpGotoUsers">
+			<var name="portletName" value="Users and Organizations" />
+		</execute>
+
+		<execute action="CPUsersandorganizations#type" locator-key1="SEARCH_FIELD" value1="${searchToken}" />
+		<execute action="CPUsersandorganizations#click" locator-key1="SEARCH_BUTTON" />
+		<execute action="CPUsersandorganizations#assertTextEquals" locator-key1="ORGANIZATION_TABLE_NAME_1" value1="${orgName}" />
+		<execute action="CPUsersandorganizations#assertTextEquals" locator-key1="ORGANIZATION_TABLE_TYPE_1" value1="${orgType}" />
+		<execute action="CPUsersandorganizations#click" locator-key1="ORGANIZATION_TABLE_ACTIONS_1" />
+		<execute action="CPUsersandorganizations#click" locator-key1="ORGANIZATION_MENULIST_EDIT" />
+
+		<execute action="CPUsersandorganizationsOrganizationEdit#assertTextEquals" locator-key1="TITLE" value1="Edit ${orgName}" />
+		<execute action="CPUsersandorganizationsOrganizationEdit#assertTextEquals" locator-key1="DETAILS_NAME_FIELD" value1="${orgName}" />
+		<execute action="CPUsersandorganizationsOrganizationEdit#assertTextEquals" locator-key1="DETAILS_TYPE" value1="Type ${orgType}" />
+		<execute action="CPUsersandorganizationsOrganizationEdit#assertTextEquals" locator-key1="ORGANIZATION_NAME" value1="${orgName}" />
 	</command>
 </definition>

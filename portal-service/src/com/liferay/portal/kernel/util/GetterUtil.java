@@ -76,7 +76,7 @@ public class GetterUtil {
 
 		Class<?> clazz = value.getClass();
 
-		if (clazz.isAssignableFrom(Boolean.class)) {
+		if (Boolean.class.isAssignableFrom(clazz)) {
 			return (Boolean)value;
 		}
 
@@ -96,7 +96,7 @@ public class GetterUtil {
 
 		Class<?> clazz = value.getClass();
 
-		if (clazz.isAssignableFrom(Date.class)) {
+		if (Date.class.isAssignableFrom(clazz)) {
 			return (Date)value;
 		}
 
@@ -114,7 +114,7 @@ public class GetterUtil {
 
 		Class<?> clazz = value.getClass();
 
-		if (clazz.isAssignableFrom(Double.class)) {
+		if (Double.class.isAssignableFrom(clazz)) {
 			return (Double)value;
 		}
 
@@ -138,7 +138,7 @@ public class GetterUtil {
 
 		Class<?> clazz = value.getClass();
 
-		if (clazz.isAssignableFrom(Float.class)) {
+		if (Float.class.isAssignableFrom(clazz)) {
 			return (Float)value;
 		}
 
@@ -162,7 +162,7 @@ public class GetterUtil {
 
 		Class<?> clazz = value.getClass();
 
-		if (clazz.isAssignableFrom(Integer.class)) {
+		if (Integer.class.isAssignableFrom(clazz)) {
 			return (Integer)value;
 		}
 
@@ -186,7 +186,7 @@ public class GetterUtil {
 
 		Class<?> clazz = value.getClass();
 
-		if (clazz.isAssignableFrom(Long.class)) {
+		if (Long.class.isAssignableFrom(clazz)) {
 			return (Long)value;
 		}
 
@@ -219,22 +219,22 @@ public class GetterUtil {
 
 		Class<?> clazz = value.getClass();
 
-		if (clazz.isAssignableFrom(Byte.class)) {
+		if (Byte.class.isAssignableFrom(clazz)) {
 			return (Byte)value;
 		}
-		else if (clazz.isAssignableFrom(Double.class)) {
+		else if (Double.class.isAssignableFrom(clazz)) {
 			return (Double)value;
 		}
-		else if (clazz.isAssignableFrom(Float.class)) {
+		else if (Float.class.isAssignableFrom(clazz)) {
 			return (Float)value;
 		}
-		else if (clazz.isAssignableFrom(Integer.class)) {
+		else if (Integer.class.isAssignableFrom(clazz)) {
 			return (Integer)value;
 		}
-		else if (clazz.isAssignableFrom(Long.class)) {
+		else if (Long.class.isAssignableFrom(clazz)) {
 			return (Long)value;
 		}
-		else if (clazz.isAssignableFrom(Short.class)) {
+		else if (Short.class.isAssignableFrom(clazz)) {
 			return (Short)value;
 		}
 
@@ -256,7 +256,7 @@ public class GetterUtil {
 
 		Class<?> clazz = value.getClass();
 
-		if (clazz.isAssignableFrom(Short.class)) {
+		if (Short.class.isAssignableFrom(clazz)) {
 			return (Short)value;
 		}
 
@@ -418,10 +418,10 @@ public class GetterUtil {
 		if (clazz.isArray()) {
 			Class<?> componentType = clazz.getComponentType();
 
-			if (componentType.isAssignableFrom(String.class)) {
+			if (String.class.isAssignableFrom(componentType)) {
 				return getBooleanValues((String[])value, defaultValue);
 			}
-			else if (componentType.isAssignableFrom(Boolean.class)) {
+			else if (Boolean.class.isAssignableFrom(componentType)) {
 				return (boolean[])value;
 			}
 		}
@@ -481,10 +481,10 @@ public class GetterUtil {
 		if (clazz.isArray()) {
 			Class<?> componentType = clazz.getComponentType();
 
-			if (componentType.isAssignableFrom(String.class)) {
+			if (String.class.isAssignableFrom(componentType)) {
 				return getDateValues((String[])value, dateFormat, defaultValue);
 			}
-			else if (componentType.isAssignableFrom(Date.class)) {
+			else if (Date.class.isAssignableFrom(componentType)) {
 				return (Date[])value;
 			}
 		}
@@ -540,10 +540,10 @@ public class GetterUtil {
 		if (clazz.isArray()) {
 			Class<?> componentType = clazz.getComponentType();
 
-			if (componentType.isAssignableFrom(String.class)) {
+			if (String.class.isAssignableFrom(componentType)) {
 				return getDoubleValues((String[])value, defaultValue);
 			}
-			else if (componentType.isAssignableFrom(Double.class)) {
+			else if (Double.class.isAssignableFrom(componentType)) {
 				return (double[])value;
 			}
 		}
@@ -597,10 +597,10 @@ public class GetterUtil {
 		if (clazz.isArray()) {
 			Class<?> componentType = clazz.getComponentType();
 
-			if (componentType.isAssignableFrom(String.class)) {
+			if (String.class.isAssignableFrom(componentType)) {
 				return getFloatValues((String[])value, defaultValue);
 			}
-			else if (componentType.isAssignableFrom(Float.class)) {
+			else if (Float.class.isAssignableFrom(componentType)) {
 				return (float[])value;
 			}
 		}
@@ -644,6 +644,69 @@ public class GetterUtil {
 		return get(value, defaultValue);
 	}
 
+	public static int getIntegerStrict(String value) {
+		int length = value.length();
+
+		if (length <= 0) {
+			throw new NumberFormatException("Unable to parse " + value);
+		}
+
+		int index = 0;
+		int limit = -Integer.MAX_VALUE;
+		boolean negative = false;
+
+		char c = value.charAt(0);
+
+		if (c < CharPool.NUMBER_0) {
+			if (c == CharPool.MINUS) {
+				limit = Integer.MIN_VALUE;
+				negative = true;
+			}
+			else if (c != CharPool.PLUS) {
+				throw new NumberFormatException("Unable to parse " + value);
+			}
+
+			if (length == 1) {
+				throw new NumberFormatException("Unable to parse " + value);
+			}
+
+			index++;
+		}
+
+		int smallLimit = limit / 10;
+
+		int result = 0;
+
+		while (index < length) {
+			if (result < smallLimit) {
+				throw new NumberFormatException("Unable to parse " + value);
+			}
+
+			c = value.charAt(index++);
+
+			if ((c < CharPool.NUMBER_0) || (c > CharPool.NUMBER_9)) {
+				throw new NumberFormatException("Unable to parse " + value);
+			}
+
+			int number = c - CharPool.NUMBER_0;
+
+			result *= 10;
+
+			if (result < (limit + number)) {
+				throw new NumberFormatException("Unable to parse " + value);
+			}
+
+			result -= number;
+		}
+
+		if (negative) {
+			return result;
+		}
+		else {
+			return -result;
+		}
+	}
+
 	public static int[] getIntegerValues(Object value) {
 		return getIntegerValues(value, DEFAULT_INTEGER_VALUES);
 	}
@@ -654,10 +717,10 @@ public class GetterUtil {
 		if (clazz.isArray()) {
 			Class<?> componentType = clazz.getComponentType();
 
-			if (componentType.isAssignableFrom(String.class)) {
+			if (String.class.isAssignableFrom(componentType)) {
 				return getIntegerValues((String[])value, defaultValue);
 			}
-			else if (componentType.isAssignableFrom(Integer.class)) {
+			else if (Integer.class.isAssignableFrom(componentType)) {
 				return (int[])value;
 			}
 		}
@@ -699,6 +762,69 @@ public class GetterUtil {
 		return get(value, defaultValue);
 	}
 
+	public static long getLongStrict(String value) {
+		int length = value.length();
+
+		if (length <= 0) {
+			throw new NumberFormatException("Unable to parse " + value);
+		}
+
+		int index = 0;
+		long limit = -Long.MAX_VALUE;
+		boolean negative = false;
+
+		char c = value.charAt(0);
+
+		if (c < CharPool.NUMBER_0) {
+			if (c == CharPool.MINUS) {
+				limit = Long.MIN_VALUE;
+				negative = true;
+			}
+			else if (c != CharPool.PLUS) {
+				throw new NumberFormatException("Unable to parse " + value);
+			}
+
+			if (length == 1) {
+				throw new NumberFormatException("Unable to parse " + value);
+			}
+
+			index++;
+		}
+
+		long smallLimit = limit / 10;
+
+		long result = 0;
+
+		while (index < length) {
+			if (result < smallLimit) {
+				throw new NumberFormatException("Unable to parse " + value);
+			}
+
+			c = value.charAt(index++);
+
+			if ((c < CharPool.NUMBER_0) || (c > CharPool.NUMBER_9)) {
+				throw new NumberFormatException("Unable to parse " + value);
+			}
+
+			int number = c - CharPool.NUMBER_0;
+
+			result *= 10;
+
+			if (result < (limit + number)) {
+				throw new NumberFormatException("Unable to parse " + value);
+			}
+
+			result -= number;
+		}
+
+		if (negative) {
+			return result;
+		}
+		else {
+			return -result;
+		}
+	}
+
 	public static long[] getLongValues(Object value) {
 		return getLongValues(value, DEFAULT_LONG_VALUES);
 	}
@@ -706,26 +832,28 @@ public class GetterUtil {
 	public static long[] getLongValues(Object value, long[] defaultValue) {
 		Class<?> clazz = value.getClass();
 
-		if (clazz.isArray()) {
-			Class<?> componentType = clazz.getComponentType();
+		if (!clazz.isArray()) {
+			return defaultValue;
+		}
 
-			if (componentType.isAssignableFrom(String.class)) {
-				return getLongValues((String[])value, defaultValue);
+		Class<?> componentType = clazz.getComponentType();
+
+		if (String.class.isAssignableFrom(componentType)) {
+			return getLongValues((String[])value, defaultValue);
+		}
+		else if (Long.class.isAssignableFrom(componentType)) {
+			return (long[])value;
+		}
+		else if (Number.class.isAssignableFrom(componentType)) {
+			Number[] numbers = (Number[])value;
+
+			long[] values = new long[numbers.length];
+
+			for (int i = 0; i < values.length; i++) {
+				values[i] = numbers[i].longValue();
 			}
-			else if (componentType.isAssignableFrom(Long.class)) {
-				return (long[])value;
-			}
-			else if (Number.class.isAssignableFrom(componentType)) {
-				Number[] numbers = (Number[])value;
 
-				long[] values = new long[numbers.length];
-
-				for (int i = 0; i < values.length; i++) {
-					values[i] = numbers[i].longValue();
-				}
-
-				return values;
-			}
+			return values;
 		}
 
 		return defaultValue;
@@ -777,10 +905,10 @@ public class GetterUtil {
 		if (clazz.isArray()) {
 			Class<?> componentType = clazz.getComponentType();
 
-			if (componentType.isAssignableFrom(String.class)) {
+			if (String.class.isAssignableFrom(componentType)) {
 				return getNumberValues((String[])value, defaultValue);
 			}
-			else if (componentType.isAssignableFrom(Number.class)) {
+			else if (Number.class.isAssignableFrom(componentType)) {
 				return (Number[])value;
 			}
 		}
@@ -836,6 +964,16 @@ public class GetterUtil {
 		return get(value, defaultValue);
 	}
 
+	public static short getShortStrict(String value) {
+		int i = getIntegerStrict(value);
+
+		if ((i < Short.MIN_VALUE) || (i > Short.MAX_VALUE)) {
+			throw new NumberFormatException("Out of range value " + value);
+		}
+
+		return (short)i;
+	}
+
 	public static short[] getShortValues(Object value) {
 		return getShortValues(value, DEFAULT_SHORT_VALUES);
 	}
@@ -846,10 +984,10 @@ public class GetterUtil {
 		if (clazz.isArray()) {
 			Class<?> componentType = clazz.getComponentType();
 
-			if (componentType.isAssignableFrom(String.class)) {
+			if (String.class.isAssignableFrom(componentType)) {
 				return getShortValues((String[])value, defaultValue);
 			}
-			else if (componentType.isAssignableFrom(Short.class)) {
+			else if (Short.class.isAssignableFrom(componentType)) {
 				return (short[])value;
 			}
 		}
@@ -905,7 +1043,7 @@ public class GetterUtil {
 		if (clazz.isArray()) {
 			Class<?> componentType = clazz.getComponentType();
 
-			if (componentType.isAssignableFrom(String.class)) {
+			if (String.class.isAssignableFrom(componentType)) {
 				return getStringValues((String[])value, defaultValue);
 			}
 		}
@@ -997,26 +1135,6 @@ public class GetterUtil {
 	}
 
 	private static long _parseLong(String value, long defaultValue) {
-		if (_useJDKParseLong == null) {
-			if (OSDetector.isAIX() && ServerDetector.isWebSphere() &&
-				JavaDetector.isIBM() && JavaDetector.is64bit()) {
-
-				_useJDKParseLong = Boolean.TRUE;
-			}
-			else {
-				_useJDKParseLong = Boolean.FALSE;
-			}
-		}
-
-		if (_useJDKParseLong) {
-			try {
-				return Long.parseLong(value);
-			}
-			catch (NumberFormatException nfe) {
-				return defaultValue;
-			}
-		}
-
 		int length = value.length();
 
 		if (length <= 0) {
@@ -1112,7 +1230,5 @@ public class GetterUtil {
 
 		return sb.toString();
 	}
-
-	private static Boolean _useJDKParseLong;
 
 }

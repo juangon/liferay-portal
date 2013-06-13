@@ -124,6 +124,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	 * @return the matching workflow instance links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WorkflowInstanceLink> findByG_C_C_C(long groupId,
 		long companyId, long classNameId, long classPK)
 		throws SystemException {
@@ -147,6 +148,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	 * @return the range of matching workflow instance links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WorkflowInstanceLink> findByG_C_C_C(long groupId,
 		long companyId, long classNameId, long classPK, int start, int end)
 		throws SystemException {
@@ -171,6 +173,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	 * @return the ordered range of matching workflow instance links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WorkflowInstanceLink> findByG_C_C_C(long groupId,
 		long companyId, long classNameId, long classPK, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -300,6 +303,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	 * @throws com.liferay.portal.NoSuchWorkflowInstanceLinkException if a matching workflow instance link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WorkflowInstanceLink findByG_C_C_C_First(long groupId,
 		long companyId, long classNameId, long classPK,
 		OrderByComparator orderByComparator)
@@ -343,6 +347,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	 * @return the first matching workflow instance link, or <code>null</code> if a matching workflow instance link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WorkflowInstanceLink fetchByG_C_C_C_First(long groupId,
 		long companyId, long classNameId, long classPK,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -368,6 +373,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	 * @throws com.liferay.portal.NoSuchWorkflowInstanceLinkException if a matching workflow instance link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WorkflowInstanceLink findByG_C_C_C_Last(long groupId,
 		long companyId, long classNameId, long classPK,
 		OrderByComparator orderByComparator)
@@ -411,6 +417,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	 * @return the last matching workflow instance link, or <code>null</code> if a matching workflow instance link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WorkflowInstanceLink fetchByG_C_C_C_Last(long groupId,
 		long companyId, long classNameId, long classPK,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -439,6 +446,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	 * @throws com.liferay.portal.NoSuchWorkflowInstanceLinkException if a workflow instance link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WorkflowInstanceLink[] findByG_C_C_C_PrevAndNext(
 		long workflowInstanceLinkId, long groupId, long companyId,
 		long classNameId, long classPK, OrderByComparator orderByComparator)
@@ -599,6 +607,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	 * @param classPK the class p k
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByG_C_C_C(long groupId, long companyId, long classNameId,
 		long classPK) throws SystemException {
 		for (WorkflowInstanceLink workflowInstanceLink : findByG_C_C_C(
@@ -618,6 +627,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	 * @return the number of matching workflow instance links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_C_C_C(long groupId, long companyId, long classNameId,
 		long classPK) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_C_C_C;
@@ -688,6 +698,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	 *
 	 * @param workflowInstanceLink the workflow instance link
 	 */
+	@Override
 	public void cacheResult(WorkflowInstanceLink workflowInstanceLink) {
 		EntityCacheUtil.putResult(WorkflowInstanceLinkModelImpl.ENTITY_CACHE_ENABLED,
 			WorkflowInstanceLinkImpl.class,
@@ -701,6 +712,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	 *
 	 * @param workflowInstanceLinks the workflow instance links
 	 */
+	@Override
 	public void cacheResult(List<WorkflowInstanceLink> workflowInstanceLinks) {
 		for (WorkflowInstanceLink workflowInstanceLink : workflowInstanceLinks) {
 			if (EntityCacheUtil.getResult(
@@ -769,6 +781,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	 * @param workflowInstanceLinkId the primary key for the new workflow instance link
 	 * @return the new workflow instance link
 	 */
+	@Override
 	public WorkflowInstanceLink create(long workflowInstanceLinkId) {
 		WorkflowInstanceLink workflowInstanceLink = new WorkflowInstanceLinkImpl();
 
@@ -786,6 +799,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	 * @throws com.liferay.portal.NoSuchWorkflowInstanceLinkException if a workflow instance link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WorkflowInstanceLink remove(long workflowInstanceLinkId)
 		throws NoSuchWorkflowInstanceLinkException, SystemException {
 		return remove((Serializable)workflowInstanceLinkId);
@@ -994,6 +1008,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	 * @throws com.liferay.portal.NoSuchWorkflowInstanceLinkException if a workflow instance link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WorkflowInstanceLink findByPrimaryKey(long workflowInstanceLinkId)
 		throws NoSuchWorkflowInstanceLinkException, SystemException {
 		return findByPrimaryKey((Serializable)workflowInstanceLinkId);
@@ -1055,6 +1070,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	 * @return the workflow instance link, or <code>null</code> if a workflow instance link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WorkflowInstanceLink fetchByPrimaryKey(long workflowInstanceLinkId)
 		throws SystemException {
 		return fetchByPrimaryKey((Serializable)workflowInstanceLinkId);
@@ -1066,6 +1082,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	 * @return the workflow instance links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WorkflowInstanceLink> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1082,6 +1099,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	 * @return the range of workflow instance links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WorkflowInstanceLink> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
@@ -1100,6 +1118,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	 * @return the ordered range of workflow instance links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WorkflowInstanceLink> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -1185,6 +1204,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (WorkflowInstanceLink workflowInstanceLink : findAll()) {
 			remove(workflowInstanceLink);
@@ -1197,6 +1217,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	 * @return the number of workflow instance links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -1283,6 +1304,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 
 	private static CacheModel<WorkflowInstanceLink> _nullWorkflowInstanceLinkCacheModel =
 		new CacheModel<WorkflowInstanceLink>() {
+			@Override
 			public WorkflowInstanceLink toEntityModel() {
 				return _nullWorkflowInstanceLink;
 			}

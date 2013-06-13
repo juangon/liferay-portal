@@ -32,25 +32,26 @@ public class IntrabandBridgeMessageListener implements MessageListener {
 
 		_registrationReference = registrationReference;
 
-		_intraBand = registrationReference.getIntraband();
+		_intraband = registrationReference.getIntraband();
 
 		SystemDataType systemDataType = SystemDataType.MESSAGE;
 
 		_messageType = systemDataType.getValue();
 	}
 
+	@Override
 	public void receive(Message message) {
 		Serializer serializer = new Serializer();
 
 		serializer.writeObject(message);
 
-		_intraBand.sendDatagram(
+		_intraband.sendDatagram(
 			_registrationReference,
 			Datagram.createRequestDatagram(
 				_messageType, serializer.toByteBuffer()));
 	}
 
-	private final Intraband _intraBand;
+	private final Intraband _intraband;
 	private final byte _messageType;
 	private final RegistrationReference _registrationReference;
 

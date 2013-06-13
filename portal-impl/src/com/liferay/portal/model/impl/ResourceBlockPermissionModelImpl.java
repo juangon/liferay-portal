@@ -85,26 +85,32 @@ public class ResourceBlockPermissionModelImpl extends BaseModelImpl<ResourceBloc
 	public ResourceBlockPermissionModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _resourceBlockPermissionId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setResourceBlockPermissionId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _resourceBlockPermissionId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return ResourceBlockPermission.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return ResourceBlockPermission.class.getName();
 	}
@@ -150,18 +156,22 @@ public class ResourceBlockPermissionModelImpl extends BaseModelImpl<ResourceBloc
 		}
 	}
 
+	@Override
 	public long getResourceBlockPermissionId() {
 		return _resourceBlockPermissionId;
 	}
 
+	@Override
 	public void setResourceBlockPermissionId(long resourceBlockPermissionId) {
 		_resourceBlockPermissionId = resourceBlockPermissionId;
 	}
 
+	@Override
 	public long getResourceBlockId() {
 		return _resourceBlockId;
 	}
 
+	@Override
 	public void setResourceBlockId(long resourceBlockId) {
 		_columnBitmask |= RESOURCEBLOCKID_COLUMN_BITMASK;
 
@@ -178,10 +188,12 @@ public class ResourceBlockPermissionModelImpl extends BaseModelImpl<ResourceBloc
 		return _originalResourceBlockId;
 	}
 
+	@Override
 	public long getRoleId() {
 		return _roleId;
 	}
 
+	@Override
 	public void setRoleId(long roleId) {
 		_columnBitmask |= ROLEID_COLUMN_BITMASK;
 
@@ -198,10 +210,12 @@ public class ResourceBlockPermissionModelImpl extends BaseModelImpl<ResourceBloc
 		return _originalRoleId;
 	}
 
+	@Override
 	public long getActionIds() {
 		return _actionIds;
 	}
 
+	@Override
 	public void setActionIds(long actionIds) {
 		_actionIds = actionIds;
 	}
@@ -247,6 +261,7 @@ public class ResourceBlockPermissionModelImpl extends BaseModelImpl<ResourceBloc
 		return resourceBlockPermissionImpl;
 	}
 
+	@Override
 	public int compareTo(ResourceBlockPermission resourceBlockPermission) {
 		long primaryKey = resourceBlockPermission.getPrimaryKey();
 
@@ -263,18 +278,15 @@ public class ResourceBlockPermissionModelImpl extends BaseModelImpl<ResourceBloc
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ResourceBlockPermission)) {
 			return false;
 		}
 
-		ResourceBlockPermission resourceBlockPermission = null;
-
-		try {
-			resourceBlockPermission = (ResourceBlockPermission)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		ResourceBlockPermission resourceBlockPermission = (ResourceBlockPermission)obj;
 
 		long primaryKey = resourceBlockPermission.getPrimaryKey();
 
@@ -338,6 +350,7 @@ public class ResourceBlockPermissionModelImpl extends BaseModelImpl<ResourceBloc
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(16);
 

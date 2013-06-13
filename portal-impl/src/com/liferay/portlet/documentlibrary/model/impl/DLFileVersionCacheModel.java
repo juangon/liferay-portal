@@ -95,6 +95,7 @@ public class DLFileVersionCacheModel implements CacheModel<DLFileVersion>,
 		return sb.toString();
 	}
 
+	@Override
 	public DLFileVersion toEntityModel() {
 		DLFileVersionImpl dlFileVersionImpl = new DLFileVersionImpl();
 
@@ -217,6 +218,7 @@ public class DLFileVersionCacheModel implements CacheModel<DLFileVersion>,
 		return dlFileVersionImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		fileVersionId = objectInput.readLong();
@@ -245,6 +247,7 @@ public class DLFileVersionCacheModel implements CacheModel<DLFileVersion>,
 		statusDate = objectInput.readLong();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

@@ -67,6 +67,7 @@ public class PollsChoiceCacheModel implements CacheModel<PollsChoice>,
 		return sb.toString();
 	}
 
+	@Override
 	public PollsChoice toEntityModel() {
 		PollsChoiceImpl pollsChoiceImpl = new PollsChoiceImpl();
 
@@ -124,6 +125,7 @@ public class PollsChoiceCacheModel implements CacheModel<PollsChoice>,
 		return pollsChoiceImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		choiceId = objectInput.readLong();
@@ -138,6 +140,7 @@ public class PollsChoiceCacheModel implements CacheModel<PollsChoice>,
 		description = objectInput.readUTF();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

@@ -65,6 +65,7 @@ public class ShoppingCategoryCacheModel implements CacheModel<ShoppingCategory>,
 		return sb.toString();
 	}
 
+	@Override
 	public ShoppingCategory toEntityModel() {
 		ShoppingCategoryImpl shoppingCategoryImpl = new ShoppingCategoryImpl();
 
@@ -115,6 +116,7 @@ public class ShoppingCategoryCacheModel implements CacheModel<ShoppingCategory>,
 		return shoppingCategoryImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		categoryId = objectInput.readLong();
 		groupId = objectInput.readLong();
@@ -128,6 +130,7 @@ public class ShoppingCategoryCacheModel implements CacheModel<ShoppingCategory>,
 		description = objectInput.readUTF();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(categoryId);

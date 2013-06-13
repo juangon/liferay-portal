@@ -112,7 +112,7 @@ String iconMenuId = null;
 %>
 
 <liferay-util:buffer var="iconMenu">
-	<liferay-ui:icon-menu align='<%= showMinimalActionButtons ? "auto" : "right" %>' direction='<%= showMinimalActionButtons ? "down" : null %>' extended="<%= showMinimalActionButtons ? false : true %>" icon="<%= showMinimalActionButtons ? StringPool.BLANK : null %>" message='<%= showMinimalActionButtons ? StringPool.BLANK : "actions" %>' showExpanded="<%= view %>" showWhenSingleIcon="<%= showWhenSingleIcon %>">
+	<liferay-ui:icon-menu direction='<%= showMinimalActionButtons ? "down" : "left" %>' extended="<%= showMinimalActionButtons ? false : true %>" icon="<%= showMinimalActionButtons ? StringPool.BLANK : null %>" message='<%= showMinimalActionButtons ? StringPool.BLANK : "actions" %>' showExpanded="<%= view %>" showWhenSingleIcon="<%= showWhenSingleIcon %>">
 		<c:if test="<%= showActions %>">
 			<c:choose>
 				<c:when test="<%= folder != null %>">
@@ -302,31 +302,29 @@ String iconMenuId = null;
 		<c:choose>
 			<c:when test="<%= portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY) || portletName.equals(PortletKeys.MEDIA_GALLERY_DISPLAY) %>">
 				<c:if test="<%= showActions && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_DOCUMENT) %>">
-					<portlet:renderURL var="editFileEntryURL">
-						<portlet:param name="struts_action" value="/document_library/upload_multiple_file_entries" />
-						<portlet:param name="redirect" value="<%= currentURL %>" />
-						<portlet:param name="backURL" value="<%= currentURL %>" />
-						<portlet:param name="repositoryId" value="<%= String.valueOf(repositoryId) %>" />
-						<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
-					</portlet:renderURL>
+					<c:if test="<%= ((folder == null) || folder.isSupportsMultipleUpload()) %>">
+						<portlet:renderURL var="editFileEntryURL">
+							<portlet:param name="struts_action" value="/document_library/upload_multiple_file_entries" />
+							<portlet:param name="redirect" value="<%= currentURL %>" />
+							<portlet:param name="backURL" value="<%= currentURL %>" />
+							<portlet:param name="repositoryId" value="<%= String.valueOf(repositoryId) %>" />
+							<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
+						</portlet:renderURL>
 
-					<%
-					String taglibEditURL = "javascript:Liferay.Util.openWindow({dialog: {width: 420}, id: '" + renderResponse.getNamespace() + "selectFileEntryType', title: '" + UnicodeLanguageUtil.get(pageContext, "select-document-type") + "', uri: '" + editFileEntryURL.toString() + "'});";
-					%>
-
-					<liferay-ui:icon
-						cssClass="aui-helper-hidden upload-multiple-documents"
-						image="../document_library/add_multiple_documents"
-						message='<%= portletName.equals(PortletKeys.MEDIA_GALLERY_DISPLAY) ? "multiple-media" : "multiple-documents" %>'
-						url="<%= editFileEntryURL %>"
-					/>
+						<liferay-ui:icon
+							cssClass="hide upload-multiple-documents"
+							image="../document_library/add_multiple_documents"
+							message='<%= portletName.equals(PortletKeys.MEDIA_GALLERY_DISPLAY) ? "multiple-media" : "multiple-documents" %>'
+							url="<%= editFileEntryURL %>"
+						/>
+					</c:if>
 
 					<%
 					int fileEntryTypesCount = DLFileEntryTypeServiceUtil.getFileEntryTypesCount(PortalUtil.getSiteAndCompanyGroupIds(themeDisplay));
 					%>
 
-					<liferay-portlet:renderURL var="editFileEntryURL" windowState="<%= fileEntryTypesCount > 0 ? LiferayWindowState.POP_UP.toString() : WindowState.NORMAL.toString() %>">
-						<portlet:param name="struts_action" value='<%= fileEntryTypesCount > 0 ? "/document_library_display/select_file_entry_type" : "/document_library_display/edit_file_entry" %>' />
+					<liferay-portlet:renderURL var="editFileEntryURL" windowState="<%= (((folder == null) || folder.isSupportsMetadata()) && (fileEntryTypesCount > 0)) ? LiferayWindowState.POP_UP.toString() : WindowState.NORMAL.toString() %>">
+						<portlet:param name="struts_action" value='<%= (((folder == null) || folder.isSupportsMetadata()) && (fileEntryTypesCount > 0)) ? "/document_library_display/select_file_entry_type" : "/document_library_display/edit_file_entry" %>' />
 						<portlet:param name="redirect" value="<%= currentURL %>" />
 						<portlet:param name="backURL" value="<%= currentURL %>" />
 						<portlet:param name="repositoryId" value="<%= String.valueOf(repositoryId) %>" />
@@ -334,13 +332,13 @@ String iconMenuId = null;
 					</liferay-portlet:renderURL>
 
 					<%
-					taglibEditURL = "javascript:Liferay.Util.openWindow({dialog: {centered: true, modal: true, width: 420}, id: '" + renderResponse.getNamespace() + "selectFileEntryType', title: '" + UnicodeLanguageUtil.get(pageContext, portletName.equals(PortletKeys.MEDIA_GALLERY_DISPLAY) ? "select-media-type" : "select-document-type") + "', uri: '" + editFileEntryURL.toString() + "'});";
+					String taglibEditURL = "javascript:Liferay.Util.openWindow({id: '" + renderResponse.getNamespace() + "selectFileEntryType', title: '" + UnicodeLanguageUtil.get(pageContext, portletName.equals(PortletKeys.MEDIA_GALLERY_DISPLAY) ? "select-media-type" : "select-document-type") + "', uri:'" + editFileEntryURL.toString() + "'});";
 					%>
 
 					<liferay-ui:icon
 						image="../document_library/add_document"
 						message='<%= portletName.equals(PortletKeys.MEDIA_GALLERY_DISPLAY) ? "add-media" : "add-document" %>'
-						url="<%= fileEntryTypesCount > 0 ? taglibEditURL : editFileEntryURL %>"
+						url="<%= (((folder == null) || folder.isSupportsMetadata()) && (fileEntryTypesCount > 0)) ? taglibEditURL : editFileEntryURL %>"
 					/>
 				</c:if>
 
@@ -458,7 +456,7 @@ String iconMenuId = null;
 	<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 </portlet:renderURL>
 
-<aui:script use="aui-dialog,uploader">
+<aui:script use="uploader,liferay-util-window">
 	if (!A.UA.ios && (A.Uploader.TYPE != 'none')) {
 		var uploadMultipleDocumentsIcon = A.all('.upload-multiple-documents:hidden');
 
@@ -486,14 +484,13 @@ String iconMenuId = null;
 			function(event) {
 				event.preventDefault();
 
-				var webdavDialog = new A.Dialog(
+				var webdavDialog = Liferay.Util.Window.getWindow(
 					{
-						align: Liferay.Util.Window.ALIGN_CENTER,
-						bodyContent: A.one('#<%= randomNamespace %>webDav').html(),
-						destroyOnClose: true,
-						modal: true,
-						title: '<%= UnicodeLanguageUtil.get(pageContext, "access-from-desktop") %>',
-						width: 500
+						dialog: {
+							bodyContent: A.one('#<%= randomNamespace %>webDav').html(),
+							destroyOnHide: true
+						},
+						title: '<%= UnicodeLanguageUtil.get(pageContext, "access-from-desktop") %>'
 					}
 				);
 

@@ -17,12 +17,10 @@ package com.liferay.portlet.dynamicdatamapping.service;
 import com.liferay.portal.service.ServiceWrapper;
 
 /**
- * <p>
- * This class is a wrapper for {@link DDMContentLocalService}.
- * </p>
+ * Provides a wrapper for {@link DDMContentLocalService}.
  *
- * @author    Brian Wing Shun Chan
- * @see       DDMContentLocalService
+ * @author Brian Wing Shun Chan
+ * @see DDMContentLocalService
  * @generated
  */
 public class DDMContentLocalServiceWrapper implements DDMContentLocalService,
@@ -39,6 +37,7 @@ public class DDMContentLocalServiceWrapper implements DDMContentLocalService,
 	* @return the d d m content that was added
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.dynamicdatamapping.model.DDMContent addDDMContent(
 		com.liferay.portlet.dynamicdatamapping.model.DDMContent ddmContent)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -51,6 +50,7 @@ public class DDMContentLocalServiceWrapper implements DDMContentLocalService,
 	* @param contentId the primary key for the new d d m content
 	* @return the new d d m content
 	*/
+	@Override
 	public com.liferay.portlet.dynamicdatamapping.model.DDMContent createDDMContent(
 		long contentId) {
 		return _ddmContentLocalService.createDDMContent(contentId);
@@ -64,6 +64,7 @@ public class DDMContentLocalServiceWrapper implements DDMContentLocalService,
 	* @throws PortalException if a d d m content with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.dynamicdatamapping.model.DDMContent deleteDDMContent(
 		long contentId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -78,12 +79,14 @@ public class DDMContentLocalServiceWrapper implements DDMContentLocalService,
 	* @return the d d m content that was removed
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.dynamicdatamapping.model.DDMContent deleteDDMContent(
 		com.liferay.portlet.dynamicdatamapping.model.DDMContent ddmContent)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _ddmContentLocalService.deleteDDMContent(ddmContent);
 	}
 
+	@Override
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {
 		return _ddmContentLocalService.dynamicQuery();
 	}
@@ -95,6 +98,7 @@ public class DDMContentLocalServiceWrapper implements DDMContentLocalService,
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -115,6 +119,7 @@ public class DDMContentLocalServiceWrapper implements DDMContentLocalService,
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -136,6 +141,7 @@ public class DDMContentLocalServiceWrapper implements DDMContentLocalService,
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -153,12 +159,14 @@ public class DDMContentLocalServiceWrapper implements DDMContentLocalService,
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _ddmContentLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	@Override
 	public com.liferay.portlet.dynamicdatamapping.model.DDMContent fetchDDMContent(
 		long contentId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -173,6 +181,7 @@ public class DDMContentLocalServiceWrapper implements DDMContentLocalService,
 	* @throws PortalException if a d d m content with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.dynamicdatamapping.model.DDMContent getDDMContent(
 		long contentId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -180,6 +189,7 @@ public class DDMContentLocalServiceWrapper implements DDMContentLocalService,
 		return _ddmContentLocalService.getDDMContent(contentId);
 	}
 
+	@Override
 	public com.liferay.portal.model.PersistedModel getPersistedModel(
 		java.io.Serializable primaryKeyObj)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -196,6 +206,7 @@ public class DDMContentLocalServiceWrapper implements DDMContentLocalService,
 	* @throws PortalException if a matching d d m content could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.dynamicdatamapping.model.DDMContent getDDMContentByUuidAndGroupId(
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -216,6 +227,7 @@ public class DDMContentLocalServiceWrapper implements DDMContentLocalService,
 	* @return the range of d d m contents
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMContent> getDDMContents(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -228,6 +240,7 @@ public class DDMContentLocalServiceWrapper implements DDMContentLocalService,
 	* @return the number of d d m contents
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public int getDDMContentsCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _ddmContentLocalService.getDDMContentsCount();
@@ -240,6 +253,7 @@ public class DDMContentLocalServiceWrapper implements DDMContentLocalService,
 	* @return the d d m content that was updated
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.dynamicdatamapping.model.DDMContent updateDDMContent(
 		com.liferay.portlet.dynamicdatamapping.model.DDMContent ddmContent)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -251,6 +265,7 @@ public class DDMContentLocalServiceWrapper implements DDMContentLocalService,
 	*
 	* @return the Spring bean ID for this bean
 	*/
+	@Override
 	public java.lang.String getBeanIdentifier() {
 		return _ddmContentLocalService.getBeanIdentifier();
 	}
@@ -260,10 +275,12 @@ public class DDMContentLocalServiceWrapper implements DDMContentLocalService,
 	*
 	* @param beanIdentifier the Spring bean ID for this bean
 	*/
+	@Override
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		_ddmContentLocalService.setBeanIdentifier(beanIdentifier);
 	}
 
+	@Override
 	public com.liferay.portlet.dynamicdatamapping.model.DDMContent addContent(
 		long userId, long groupId, java.lang.String name,
 		java.lang.String description, java.lang.String xml,
@@ -274,17 +291,20 @@ public class DDMContentLocalServiceWrapper implements DDMContentLocalService,
 			description, xml, serviceContext);
 	}
 
+	@Override
 	public void deleteContent(
 		com.liferay.portlet.dynamicdatamapping.model.DDMContent content)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_ddmContentLocalService.deleteContent(content);
 	}
 
+	@Override
 	public void deleteContents(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_ddmContentLocalService.deleteContents(groupId);
 	}
 
+	@Override
 	public com.liferay.portlet.dynamicdatamapping.model.DDMContent getContent(
 		long contentId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -292,28 +312,33 @@ public class DDMContentLocalServiceWrapper implements DDMContentLocalService,
 		return _ddmContentLocalService.getContent(contentId);
 	}
 
+	@Override
 	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMContent> getContents()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _ddmContentLocalService.getContents();
 	}
 
+	@Override
 	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMContent> getContents(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _ddmContentLocalService.getContents(groupId);
 	}
 
+	@Override
 	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMContent> getContents(
 		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _ddmContentLocalService.getContents(groupId, start, end);
 	}
 
+	@Override
 	public int getContentsCount(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _ddmContentLocalService.getContentsCount(groupId);
 	}
 
+	@Override
 	public com.liferay.portlet.dynamicdatamapping.model.DDMContent updateContent(
 		long contentId, java.lang.String name, java.lang.String description,
 		java.lang.String xml,
@@ -339,10 +364,12 @@ public class DDMContentLocalServiceWrapper implements DDMContentLocalService,
 		_ddmContentLocalService = ddmContentLocalService;
 	}
 
+	@Override
 	public DDMContentLocalService getWrappedService() {
 		return _ddmContentLocalService;
 	}
 
+	@Override
 	public void setWrappedService(DDMContentLocalService ddmContentLocalService) {
 		_ddmContentLocalService = ddmContentLocalService;
 	}

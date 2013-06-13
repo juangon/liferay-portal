@@ -9,6 +9,7 @@
  * @return the number of matching ${entity.humanNames}
  * @throws SystemException if a system exception occurred
  */
+@Override
 public int countBy${finder.name}(
 
 <#list finderColsList as finderCol>
@@ -86,6 +87,7 @@ public int countBy${finder.name}(
 	 * @return the number of matching ${entity.humanNames}
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countBy${finder.name}(
 
 	<#list finderColsList as finderCol>
@@ -161,6 +163,7 @@ public int countBy${finder.name}(
 	 * @return the number of matching ${entity.humanNames} that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountBy${finder.name}(
 
 	<#list finderColsList as finderCol>
@@ -265,6 +268,7 @@ public int countBy${finder.name}(
 		 * @return the number of matching ${entity.humanNames} that the user has permission to view
 		 * @throws SystemException if a system exception occurred
 		 */
+		@Override
 		public int filterCountBy${finder.name}(
 
 		<#list finderColsList as finderCol>

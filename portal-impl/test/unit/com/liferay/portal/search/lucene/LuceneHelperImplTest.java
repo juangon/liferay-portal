@@ -64,6 +64,7 @@ import java.net.Socket;
 import java.nio.channels.ServerSocketChannel;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -544,23 +545,29 @@ public class LuceneHelperImplTest {
 
 	private class MockAddress implements org.jgroups.Address {
 
+		@Override
 		public int compareTo(org.jgroups.Address jGroupsAddress) {
 			return 0;
 		}
 
+		@Override
 		public void readExternal(ObjectInput objectInput) {
 		}
 
+		@Override
 		public void readFrom(DataInput dataInput) {
 		}
 
+		@Override
 		public int size() {
 			return 0;
 		}
 
+		@Override
 		public void writeExternal(ObjectOutput objectOutput) {
 		}
 
+		@Override
 		public void writeTo(DataOutput dataOutput) {
 		}
 
@@ -583,17 +590,20 @@ public class LuceneHelperImplTest {
 
 	private class MockClusterExecutor implements ClusterExecutor {
 
+		@Override
 		public void addClusterEventListener(
 			ClusterEventListener clusterEventListener) {
 
 			_clusterEventListeners.add(clusterEventListener);
 		}
 
+		@Override
 		public void destroy() {
 			_addresses.clear();
 			_clusterEventListeners.clear();
 		}
 
+		@Override
 		public FutureClusterResponses execute(ClusterRequest clusterRequest)
 			throws SystemException {
 
@@ -642,6 +652,7 @@ public class LuceneHelperImplTest {
 			return futureClusterResponses;
 		}
 
+		@Override
 		public void execute(
 				ClusterRequest clusterRequest,
 				ClusterResponseCallback clusterResponseCallback)
@@ -664,6 +675,7 @@ public class LuceneHelperImplTest {
 			}
 		}
 
+		@Override
 		public void execute(
 				ClusterRequest clusterRequest,
 				ClusterResponseCallback clusterResponseCallback, long timeout,
@@ -683,41 +695,51 @@ public class LuceneHelperImplTest {
 			}
 		}
 
+		@Override
 		public List<ClusterEventListener> getClusterEventListeners() {
 			return Collections.unmodifiableList(_clusterEventListeners);
 		}
 
+		@Override
 		public List<Address> getClusterNodeAddresses() {
 			return Collections.unmodifiableList(_addresses);
 		}
 
+		@Override
 		public List<ClusterNode> getClusterNodes() {
 			return Collections.emptyList();
 		}
 
+		@Override
 		public ClusterNode getLocalClusterNode() {
 			return null;
 		}
 
+		@Override
 		public Address getLocalClusterNodeAddress() {
 			return _addresses.get(0);
 		}
 
+		@Override
 		public void initialize() {
 		}
 
+		@Override
 		public boolean isClusterNodeAlive(Address address) {
 			return _addresses.contains(address);
 		}
 
+		@Override
 		public boolean isClusterNodeAlive(String clusterNodeId) {
 			return false;
 		}
 
+		@Override
 		public boolean isEnabled() {
 			return PropsValues.CLUSTER_LINK_ENABLED;
 		}
 
+		@Override
 		public void removeClusterEventListener(
 			ClusterEventListener clusterEventListener) {
 
@@ -783,33 +805,46 @@ public class LuceneHelperImplTest {
 
 	private class MockIndexAccessor implements IndexAccessor {
 
+		@Override
 		public void addDocument(Document document) {
 		}
 
+		@Override
+		public void addDocuments(Collection<Document> documents) {
+		}
+
+		@Override
 		public void close() {
 		}
 
+		@Override
 		public void delete() {
 		}
 
+		@Override
 		public void deleteDocuments(Term term) {
 		}
 
+		@Override
 		public void dumpIndex(OutputStream outputStream) {
 		}
 
+		@Override
 		public long getCompanyId() {
 			return _COMPANY_ID;
 		}
 
+		@Override
 		public long getLastGeneration() {
 			return _LAST_GENERATION;
 		}
 
+		@Override
 		public Directory getLuceneDir() {
 			return null;
 		}
 
+		@Override
 		public void loadIndex(InputStream inputStream) throws IOException {
 			UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
 				new UnsyncByteArrayOutputStream();
@@ -819,6 +854,7 @@ public class LuceneHelperImplTest {
 			_bytes = unsyncByteArrayOutputStream.toByteArray();
 		}
 
+		@Override
 		public void updateDocument(Term term, Document document) {
 		}
 

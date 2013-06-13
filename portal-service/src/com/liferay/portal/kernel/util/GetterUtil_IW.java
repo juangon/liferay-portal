@@ -252,6 +252,10 @@ public class GetterUtil_IW {
 		return GetterUtil.getInteger(value, defaultValue);
 	}
 
+	public int getIntegerStrict(java.lang.String value) {
+		return GetterUtil.getIntegerStrict(value);
+	}
+
 	public int[] getIntegerValues(java.lang.Object value) {
 		return GetterUtil.getIntegerValues(value);
 	}
@@ -282,6 +286,10 @@ public class GetterUtil_IW {
 
 	public long getLong(java.lang.String value, long defaultValue) {
 		return GetterUtil.getLong(value, defaultValue);
+	}
+
+	public long getLongStrict(java.lang.String value) {
+		return GetterUtil.getLongStrict(value);
 	}
 
 	public long[] getLongValues(java.lang.Object value) {
@@ -359,6 +367,10 @@ public class GetterUtil_IW {
 
 	public short getShort(java.lang.String value, short defaultValue) {
 		return GetterUtil.getShort(value, defaultValue);
+	}
+
+	public short getShortStrict(java.lang.String value) {
+		return GetterUtil.getShortStrict(value);
 	}
 
 	public short[] getShortValues(java.lang.Object value) {

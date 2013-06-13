@@ -44,8 +44,8 @@ long folderId = BeanParamUtil.getLong(fileEntry, request, "folderId");
 	title='<%= portletName.equals(PortletKeys.MEDIA_GALLERY_DISPLAY) ? "add-multiple-media" : "add-multiple-documents" %>'
 />
 
-<aui:layout>
-	<aui:column columnWidth="50">
+<aui:row>
+	<aui:col width="<%= 50 %>">
 		<aui:form name="fm1">
 			<div class="lfr-dynamic-uploader">
 				<div class="lfr-upload-container" id="<portlet:namespace />fileUpload"></div>
@@ -56,29 +56,11 @@ long folderId = BeanParamUtil.getLong(fileEntry, request, "folderId");
 		Date expirationDate = new Date(System.currentTimeMillis() + PropsValues.SESSION_TIMEOUT * Time.MINUTE);
 
 		Ticket ticket = TicketLocalServiceUtil.addTicket(user.getCompanyId(), User.class.getName(), user.getUserId(), TicketConstants.TYPE_IMPERSONATE, null, expirationDate, new ServiceContext());
-
-		String allowedFileExtensions = null;
-
-		if (portletName.equals(PortletKeys.MEDIA_GALLERY_DISPLAY)) {
-			Set<String> extensions = new HashSet<String>();
-
-			String[] mimeTypes = DLUtil.getMediaGalleryMimeTypes(preferences, renderRequest);
-
-			for (String mimeType : mimeTypes) {
-				extensions.addAll(MimeTypesUtil.getExtensions(mimeType));
-			}
-
-			allowedFileExtensions = StringUtil.merge(extensions.toArray(new String[extensions.size()]));
-		}
-		else {
-			allowedFileExtensions = StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA));
-		}
 		%>
 
 		<aui:script use="liferay-upload">
 			new Liferay.Upload(
 				{
-					allowedFileTypes: '<%= allowedFileExtensions %>',
 					boundingBox: '#<portlet:namespace />fileUpload',
 					deleteFile: '<liferay-portlet:actionURL doAsUserId="<%= user.getUserId() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE_TEMP %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></liferay-portlet:actionURL>&ticketKey=<%= ticket.getKey() %><liferay-ui:input-permissions-params modelName="<%= DLFileEntryConstants.getClassName() %>" />',
 					fileDescription: '<%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA)) %>',
@@ -98,9 +80,9 @@ long folderId = BeanParamUtil.getLong(fileEntry, request, "folderId");
 				}
 			);
 		</aui:script>
-	</aui:column>
-	<aui:column columnWidth="50">
-		<div class="common-file-metadata-container aui-helper-hidden selected" id="<portlet:namespace />commonFileMetadataContainer">
+	</aui:col>
+	<aui:col width="<%= 50 %>">
+		<div class="common-file-metadata-container hide selected" id="<portlet:namespace />commonFileMetadataContainer">
 			<liferay-util:include page="/html/portlet/document_library/upload_multiple_file_entries_resources.jsp" />
 		</div>
 
@@ -215,5 +197,5 @@ long folderId = BeanParamUtil.getLong(fileEntry, request, "folderId");
 				['aui-base']
 			);
 		</aui:script>
-	</aui:column>
-</aui:layout>
+	</aui:col>
+</aui:row>

@@ -18,11 +18,12 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
- * The utility for the workflow definition link local service. This utility wraps {@link com.liferay.portal.service.impl.WorkflowDefinitionLinkLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
+ * Provides the local service utility for WorkflowDefinitionLink. This utility wraps
+ * {@link com.liferay.portal.service.impl.WorkflowDefinitionLinkLocalServiceImpl} and is the
+ * primary access point for service operations in application layer code running
+ * on the local server. Methods of this service will not have security checks
+ * based on the propagated JAAS credentials because this service can only be
+ * accessed from within the same VM.
  *
  * @author Brian Wing Shun Chan
  * @see WorkflowDefinitionLinkLocalService
@@ -273,6 +274,34 @@ public class WorkflowDefinitionLinkLocalServiceUtil {
 		getService()
 			.deleteWorkflowDefinitionLink(companyId, groupId, className,
 			classPK, typePK);
+	}
+
+	public static com.liferay.portal.model.WorkflowDefinitionLink fetchDefaultWorkflowDefinitionLink(
+		long companyId, java.lang.String className, long classPK, long typePK)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .fetchDefaultWorkflowDefinitionLink(companyId, className,
+			classPK, typePK);
+	}
+
+	public static com.liferay.portal.model.WorkflowDefinitionLink fetchWorkflowDefinitionLink(
+		long companyId, long groupId, java.lang.String className, long classPK,
+		long typePK)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .fetchWorkflowDefinitionLink(companyId, groupId, className,
+			classPK, typePK);
+	}
+
+	public static com.liferay.portal.model.WorkflowDefinitionLink fetchWorkflowDefinitionLink(
+		long companyId, long groupId, java.lang.String className, long classPK,
+		long typePK, boolean strict)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .fetchWorkflowDefinitionLink(companyId, groupId, className,
+			classPK, typePK, strict);
 	}
 
 	public static com.liferay.portal.model.WorkflowDefinitionLink getDefaultWorkflowDefinitionLink(

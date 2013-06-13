@@ -162,26 +162,32 @@ public class MDRRuleModelImpl extends BaseModelImpl<MDRRule>
 	public MDRRuleModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _ruleId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setRuleId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _ruleId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return MDRRule.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return MDRRule.class.getName();
 	}
@@ -288,6 +294,7 @@ public class MDRRuleModelImpl extends BaseModelImpl<MDRRule>
 		}
 	}
 
+	@Override
 	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
@@ -298,6 +305,7 @@ public class MDRRuleModelImpl extends BaseModelImpl<MDRRule>
 		}
 	}
 
+	@Override
 	public void setUuid(String uuid) {
 		if (_originalUuid == null) {
 			_originalUuid = _uuid;
@@ -310,20 +318,24 @@ public class MDRRuleModelImpl extends BaseModelImpl<MDRRule>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@Override
 	@JSON
 	public long getRuleId() {
 		return _ruleId;
 	}
 
+	@Override
 	public void setRuleId(long ruleId) {
 		_ruleId = ruleId;
 	}
 
+	@Override
 	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -340,11 +352,13 @@ public class MDRRuleModelImpl extends BaseModelImpl<MDRRule>
 		return _originalGroupId;
 	}
 
+	@Override
 	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
@@ -361,23 +375,28 @@ public class MDRRuleModelImpl extends BaseModelImpl<MDRRule>
 		return _originalCompanyId;
 	}
 
+	@Override
 	@JSON
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
 
+	@Override
 	@JSON
 	public String getUserName() {
 		if (_userName == null) {
@@ -388,33 +407,40 @@ public class MDRRuleModelImpl extends BaseModelImpl<MDRRule>
 		}
 	}
 
+	@Override
 	public void setUserName(String userName) {
 		_userName = userName;
 	}
 
+	@Override
 	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
 	}
 
+	@Override
 	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
 	@JSON
 	public long getRuleGroupId() {
 		return _ruleGroupId;
 	}
 
+	@Override
 	public void setRuleGroupId(long ruleGroupId) {
 		_columnBitmask |= RULEGROUPID_COLUMN_BITMASK;
 
@@ -431,6 +457,7 @@ public class MDRRuleModelImpl extends BaseModelImpl<MDRRule>
 		return _originalRuleGroupId;
 	}
 
+	@Override
 	@JSON
 	public String getName() {
 		if (_name == null) {
@@ -441,50 +468,60 @@ public class MDRRuleModelImpl extends BaseModelImpl<MDRRule>
 		}
 	}
 
+	@Override
 	public String getName(Locale locale) {
 		String languageId = LocaleUtil.toLanguageId(locale);
 
 		return getName(languageId);
 	}
 
+	@Override
 	public String getName(Locale locale, boolean useDefault) {
 		String languageId = LocaleUtil.toLanguageId(locale);
 
 		return getName(languageId, useDefault);
 	}
 
+	@Override
 	public String getName(String languageId) {
 		return LocalizationUtil.getLocalization(getName(), languageId);
 	}
 
+	@Override
 	public String getName(String languageId, boolean useDefault) {
 		return LocalizationUtil.getLocalization(getName(), languageId,
 			useDefault);
 	}
 
+	@Override
 	public String getNameCurrentLanguageId() {
 		return _nameCurrentLanguageId;
 	}
 
 	@JSON
+	@Override
 	public String getNameCurrentValue() {
 		Locale locale = getLocale(_nameCurrentLanguageId);
 
 		return getName(locale);
 	}
 
+	@Override
 	public Map<Locale, String> getNameMap() {
 		return LocalizationUtil.getLocalizationMap(getName());
 	}
 
+	@Override
 	public void setName(String name) {
 		_name = name;
 	}
 
+	@Override
 	public void setName(String name, Locale locale) {
 		setName(name, locale, LocaleUtil.getDefault());
 	}
 
+	@Override
 	public void setName(String name, Locale locale, Locale defaultLocale) {
 		String languageId = LocaleUtil.toLanguageId(locale);
 		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
@@ -499,14 +536,17 @@ public class MDRRuleModelImpl extends BaseModelImpl<MDRRule>
 		}
 	}
 
+	@Override
 	public void setNameCurrentLanguageId(String languageId) {
 		_nameCurrentLanguageId = languageId;
 	}
 
+	@Override
 	public void setNameMap(Map<Locale, String> nameMap) {
 		setNameMap(nameMap, LocaleUtil.getDefault());
 	}
 
+	@Override
 	public void setNameMap(Map<Locale, String> nameMap, Locale defaultLocale) {
 		if (nameMap == null) {
 			return;
@@ -516,6 +556,7 @@ public class MDRRuleModelImpl extends BaseModelImpl<MDRRule>
 				LocaleUtil.toLanguageId(defaultLocale)));
 	}
 
+	@Override
 	@JSON
 	public String getDescription() {
 		if (_description == null) {
@@ -526,50 +567,60 @@ public class MDRRuleModelImpl extends BaseModelImpl<MDRRule>
 		}
 	}
 
+	@Override
 	public String getDescription(Locale locale) {
 		String languageId = LocaleUtil.toLanguageId(locale);
 
 		return getDescription(languageId);
 	}
 
+	@Override
 	public String getDescription(Locale locale, boolean useDefault) {
 		String languageId = LocaleUtil.toLanguageId(locale);
 
 		return getDescription(languageId, useDefault);
 	}
 
+	@Override
 	public String getDescription(String languageId) {
 		return LocalizationUtil.getLocalization(getDescription(), languageId);
 	}
 
+	@Override
 	public String getDescription(String languageId, boolean useDefault) {
 		return LocalizationUtil.getLocalization(getDescription(), languageId,
 			useDefault);
 	}
 
+	@Override
 	public String getDescriptionCurrentLanguageId() {
 		return _descriptionCurrentLanguageId;
 	}
 
 	@JSON
+	@Override
 	public String getDescriptionCurrentValue() {
 		Locale locale = getLocale(_descriptionCurrentLanguageId);
 
 		return getDescription(locale);
 	}
 
+	@Override
 	public Map<Locale, String> getDescriptionMap() {
 		return LocalizationUtil.getLocalizationMap(getDescription());
 	}
 
+	@Override
 	public void setDescription(String description) {
 		_description = description;
 	}
 
+	@Override
 	public void setDescription(String description, Locale locale) {
 		setDescription(description, locale, LocaleUtil.getDefault());
 	}
 
+	@Override
 	public void setDescription(String description, Locale locale,
 		Locale defaultLocale) {
 		String languageId = LocaleUtil.toLanguageId(locale);
@@ -586,14 +637,17 @@ public class MDRRuleModelImpl extends BaseModelImpl<MDRRule>
 		}
 	}
 
+	@Override
 	public void setDescriptionCurrentLanguageId(String languageId) {
 		_descriptionCurrentLanguageId = languageId;
 	}
 
+	@Override
 	public void setDescriptionMap(Map<Locale, String> descriptionMap) {
 		setDescriptionMap(descriptionMap, LocaleUtil.getDefault());
 	}
 
+	@Override
 	public void setDescriptionMap(Map<Locale, String> descriptionMap,
 		Locale defaultLocale) {
 		if (descriptionMap == null) {
@@ -605,6 +659,7 @@ public class MDRRuleModelImpl extends BaseModelImpl<MDRRule>
 				LocaleUtil.toLanguageId(defaultLocale)));
 	}
 
+	@Override
 	@JSON
 	public String getType() {
 		if (_type == null) {
@@ -615,10 +670,12 @@ public class MDRRuleModelImpl extends BaseModelImpl<MDRRule>
 		}
 	}
 
+	@Override
 	public void setType(String type) {
 		_type = type;
 	}
 
+	@Override
 	@JSON
 	public String getTypeSettings() {
 		if (_typeSettings == null) {
@@ -629,6 +686,7 @@ public class MDRRuleModelImpl extends BaseModelImpl<MDRRule>
 		}
 	}
 
+	@Override
 	public void setTypeSettings(String typeSettings) {
 		_typeSettings = typeSettings;
 	}
@@ -650,6 +708,7 @@ public class MDRRuleModelImpl extends BaseModelImpl<MDRRule>
 		expandoBridge.setAttributes(serviceContext);
 	}
 
+	@Override
 	@SuppressWarnings("unused")
 	public void prepareLocalizedFieldsForImport(Locale defaultImportLocale)
 		throws LocaleException {
@@ -692,6 +751,7 @@ public class MDRRuleModelImpl extends BaseModelImpl<MDRRule>
 		return mdrRuleImpl;
 	}
 
+	@Override
 	public int compareTo(MDRRule mdrRule) {
 		long primaryKey = mdrRule.getPrimaryKey();
 
@@ -708,18 +768,15 @@ public class MDRRuleModelImpl extends BaseModelImpl<MDRRule>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof MDRRule)) {
 			return false;
 		}
 
-		MDRRule mdrRule = null;
-
-		try {
-			mdrRule = (MDRRule)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		MDRRule mdrRule = (MDRRule)obj;
 
 		long primaryKey = mdrRule.getPrimaryKey();
 
@@ -875,6 +932,7 @@ public class MDRRuleModelImpl extends BaseModelImpl<MDRRule>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(43);
 

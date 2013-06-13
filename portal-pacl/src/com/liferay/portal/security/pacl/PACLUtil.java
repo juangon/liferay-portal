@@ -190,6 +190,7 @@ public class PACLUtil {
 			_clazz = clazz;
 		}
 
+		@Override
 		public ProtectionDomain run() {
 			return _clazz.getProtectionDomain();
 		}

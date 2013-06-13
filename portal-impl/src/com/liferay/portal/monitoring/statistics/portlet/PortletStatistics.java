@@ -79,6 +79,7 @@ public class PortletStatistics
 		return _resourceRequestStatistics;
 	}
 
+	@Override
 	public void processDataSample(
 			PortletRequestDataSample portletRequestDataSample)
 		throws MonitoringException {

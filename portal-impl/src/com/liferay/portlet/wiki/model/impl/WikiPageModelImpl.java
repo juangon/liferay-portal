@@ -186,26 +186,32 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 	public WikiPageModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _pageId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setPageId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _pageId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return WikiPage.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return WikiPage.class.getName();
 	}
@@ -382,6 +388,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		}
 	}
 
+	@Override
 	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
@@ -392,6 +399,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		}
 	}
 
+	@Override
 	public void setUuid(String uuid) {
 		if (_originalUuid == null) {
 			_originalUuid = _uuid;
@@ -404,20 +412,24 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@Override
 	@JSON
 	public long getPageId() {
 		return _pageId;
 	}
 
+	@Override
 	public void setPageId(long pageId) {
 		_pageId = pageId;
 	}
 
+	@Override
 	@JSON
 	public long getResourcePrimKey() {
 		return _resourcePrimKey;
 	}
 
+	@Override
 	public void setResourcePrimKey(long resourcePrimKey) {
 		_columnBitmask |= RESOURCEPRIMKEY_COLUMN_BITMASK;
 
@@ -430,6 +442,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		_resourcePrimKey = resourcePrimKey;
 	}
 
+	@Override
 	public boolean isResourceMain() {
 		return true;
 	}
@@ -438,11 +451,13 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		return _originalResourcePrimKey;
 	}
 
+	@Override
 	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -459,11 +474,13 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		return _originalGroupId;
 	}
 
+	@Override
 	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
@@ -480,11 +497,13 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		return _originalCompanyId;
 	}
 
+	@Override
 	@JSON
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_columnBitmask |= USERID_COLUMN_BITMASK;
 
@@ -497,10 +516,12 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
@@ -509,6 +530,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		return _originalUserId;
 	}
 
+	@Override
 	@JSON
 	public String getUserName() {
 		if (_userName == null) {
@@ -519,33 +541,40 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		}
 	}
 
+	@Override
 	public void setUserName(String userName) {
 		_userName = userName;
 	}
 
+	@Override
 	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
 	}
 
+	@Override
 	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
 	@JSON
 	public long getNodeId() {
 		return _nodeId;
 	}
 
+	@Override
 	public void setNodeId(long nodeId) {
 		_columnBitmask = -1L;
 
@@ -562,6 +591,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		return _originalNodeId;
 	}
 
+	@Override
 	@JSON
 	public String getTitle() {
 		if (_title == null) {
@@ -572,6 +602,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		}
 	}
 
+	@Override
 	public void setTitle(String title) {
 		_columnBitmask = -1L;
 
@@ -586,11 +617,13 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		return GetterUtil.getString(_originalTitle);
 	}
 
+	@Override
 	@JSON
 	public double getVersion() {
 		return _version;
 	}
 
+	@Override
 	public void setVersion(double version) {
 		_columnBitmask = -1L;
 
@@ -607,19 +640,23 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		return _originalVersion;
 	}
 
+	@Override
 	@JSON
 	public boolean getMinorEdit() {
 		return _minorEdit;
 	}
 
+	@Override
 	public boolean isMinorEdit() {
 		return _minorEdit;
 	}
 
+	@Override
 	public void setMinorEdit(boolean minorEdit) {
 		_minorEdit = minorEdit;
 	}
 
+	@Override
 	@JSON
 	public String getContent() {
 		if (_content == null) {
@@ -630,10 +667,12 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		}
 	}
 
+	@Override
 	public void setContent(String content) {
 		_content = content;
 	}
 
+	@Override
 	@JSON
 	public String getSummary() {
 		if (_summary == null) {
@@ -644,10 +683,12 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		}
 	}
 
+	@Override
 	public void setSummary(String summary) {
 		_summary = summary;
 	}
 
+	@Override
 	@JSON
 	public String getFormat() {
 		if (_format == null) {
@@ -658,6 +699,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		}
 	}
 
+	@Override
 	public void setFormat(String format) {
 		_columnBitmask |= FORMAT_COLUMN_BITMASK;
 
@@ -672,15 +714,18 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		return GetterUtil.getString(_originalFormat);
 	}
 
+	@Override
 	@JSON
 	public boolean getHead() {
 		return _head;
 	}
 
+	@Override
 	public boolean isHead() {
 		return _head;
 	}
 
+	@Override
 	public void setHead(boolean head) {
 		_columnBitmask |= HEAD_COLUMN_BITMASK;
 
@@ -697,6 +742,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		return _originalHead;
 	}
 
+	@Override
 	@JSON
 	public String getParentTitle() {
 		if (_parentTitle == null) {
@@ -707,6 +753,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		}
 	}
 
+	@Override
 	public void setParentTitle(String parentTitle) {
 		_columnBitmask |= PARENTTITLE_COLUMN_BITMASK;
 
@@ -721,6 +768,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		return GetterUtil.getString(_originalParentTitle);
 	}
 
+	@Override
 	@JSON
 	public String getRedirectTitle() {
 		if (_redirectTitle == null) {
@@ -731,6 +779,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		}
 	}
 
+	@Override
 	public void setRedirectTitle(String redirectTitle) {
 		_columnBitmask |= REDIRECTTITLE_COLUMN_BITMASK;
 
@@ -745,11 +794,13 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		return GetterUtil.getString(_originalRedirectTitle);
 	}
 
+	@Override
 	@JSON
 	public int getStatus() {
 		return _status;
 	}
 
+	@Override
 	public void setStatus(int status) {
 		_columnBitmask |= STATUS_COLUMN_BITMASK;
 
@@ -766,24 +817,29 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		return _originalStatus;
 	}
 
+	@Override
 	@JSON
 	public long getStatusByUserId() {
 		return _statusByUserId;
 	}
 
+	@Override
 	public void setStatusByUserId(long statusByUserId) {
 		_statusByUserId = statusByUserId;
 	}
 
+	@Override
 	public String getStatusByUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getStatusByUserId(), "uuid",
 			_statusByUserUuid);
 	}
 
+	@Override
 	public void setStatusByUserUuid(String statusByUserUuid) {
 		_statusByUserUuid = statusByUserUuid;
 	}
 
+	@Override
 	@JSON
 	public String getStatusByUserName() {
 		if (_statusByUserName == null) {
@@ -794,15 +850,18 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		}
 	}
 
+	@Override
 	public void setStatusByUserName(String statusByUserName) {
 		_statusByUserName = statusByUserName;
 	}
 
+	@Override
 	@JSON
 	public Date getStatusDate() {
 		return _statusDate;
 	}
 
+	@Override
 	public void setStatusDate(Date statusDate) {
 		_statusDate = statusDate;
 	}
@@ -810,10 +869,12 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #isApproved}
 	 */
+	@Override
 	public boolean getApproved() {
 		return isApproved();
 	}
 
+	@Override
 	public boolean isApproved() {
 		if (getStatus() == WorkflowConstants.STATUS_APPROVED) {
 			return true;
@@ -823,6 +884,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		}
 	}
 
+	@Override
 	public boolean isDenied() {
 		if (getStatus() == WorkflowConstants.STATUS_DENIED) {
 			return true;
@@ -832,6 +894,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		}
 	}
 
+	@Override
 	public boolean isDraft() {
 		if (getStatus() == WorkflowConstants.STATUS_DRAFT) {
 			return true;
@@ -841,6 +904,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		}
 	}
 
+	@Override
 	public boolean isExpired() {
 		if (getStatus() == WorkflowConstants.STATUS_EXPIRED) {
 			return true;
@@ -850,6 +914,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		}
 	}
 
+	@Override
 	public boolean isInactive() {
 		if (getStatus() == WorkflowConstants.STATUS_INACTIVE) {
 			return true;
@@ -859,6 +924,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		}
 	}
 
+	@Override
 	public boolean isIncomplete() {
 		if (getStatus() == WorkflowConstants.STATUS_INCOMPLETE) {
 			return true;
@@ -868,6 +934,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		}
 	}
 
+	@Override
 	public boolean isInTrash() {
 		if (getStatus() == WorkflowConstants.STATUS_IN_TRASH) {
 			return true;
@@ -877,6 +944,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		}
 	}
 
+	@Override
 	public boolean isPending() {
 		if (getStatus() == WorkflowConstants.STATUS_PENDING) {
 			return true;
@@ -886,6 +954,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		}
 	}
 
+	@Override
 	public boolean isScheduled() {
 		if (getStatus() == WorkflowConstants.STATUS_SCHEDULED) {
 			return true;
@@ -955,6 +1024,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		return wikiPageImpl;
 	}
 
+	@Override
 	public int compareTo(WikiPage wikiPage) {
 		int value = 0;
 
@@ -999,18 +1069,15 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof WikiPage)) {
 			return false;
 		}
 
-		WikiPage wikiPage = null;
-
-		try {
-			wikiPage = (WikiPage)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		WikiPage wikiPage = (WikiPage)obj;
 
 		long primaryKey = wikiPage.getPrimaryKey();
 
@@ -1259,6 +1326,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(73);
 

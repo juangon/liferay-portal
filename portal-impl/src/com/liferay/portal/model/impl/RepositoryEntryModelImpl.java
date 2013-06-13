@@ -99,26 +99,32 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 	public RepositoryEntryModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _repositoryEntryId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setRepositoryEntryId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _repositoryEntryId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return RepositoryEntry.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return RepositoryEntry.class.getName();
 	}
@@ -212,6 +218,7 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 		}
 	}
 
+	@Override
 	public String getUuid() {
 		if (_uuid == null) {
 			return StringPool.BLANK;
@@ -221,6 +228,7 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 		}
 	}
 
+	@Override
 	public void setUuid(String uuid) {
 		if (_originalUuid == null) {
 			_originalUuid = _uuid;
@@ -233,18 +241,22 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@Override
 	public long getRepositoryEntryId() {
 		return _repositoryEntryId;
 	}
 
+	@Override
 	public void setRepositoryEntryId(long repositoryEntryId) {
 		_repositoryEntryId = repositoryEntryId;
 	}
 
+	@Override
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -261,10 +273,12 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 		return _originalGroupId;
 	}
 
+	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
@@ -281,22 +295,27 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 		return _originalCompanyId;
 	}
 
+	@Override
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
 
+	@Override
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -306,30 +325,37 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 		}
 	}
 
+	@Override
 	public void setUserName(String userName) {
 		_userName = userName;
 	}
 
+	@Override
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
 	}
 
+	@Override
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
 	public long getRepositoryId() {
 		return _repositoryId;
 	}
 
+	@Override
 	public void setRepositoryId(long repositoryId) {
 		_columnBitmask |= REPOSITORYID_COLUMN_BITMASK;
 
@@ -346,6 +372,7 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 		return _originalRepositoryId;
 	}
 
+	@Override
 	public String getMappedId() {
 		if (_mappedId == null) {
 			return StringPool.BLANK;
@@ -355,6 +382,7 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 		}
 	}
 
+	@Override
 	public void setMappedId(String mappedId) {
 		_columnBitmask |= MAPPEDID_COLUMN_BITMASK;
 
@@ -369,14 +397,17 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 		return GetterUtil.getString(_originalMappedId);
 	}
 
+	@Override
 	public boolean getManualCheckInRequired() {
 		return _manualCheckInRequired;
 	}
 
+	@Override
 	public boolean isManualCheckInRequired() {
 		return _manualCheckInRequired;
 	}
 
+	@Override
 	public void setManualCheckInRequired(boolean manualCheckInRequired) {
 		_manualCheckInRequired = manualCheckInRequired;
 	}
@@ -429,6 +460,7 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 		return repositoryEntryImpl;
 	}
 
+	@Override
 	public int compareTo(RepositoryEntry repositoryEntry) {
 		long primaryKey = repositoryEntry.getPrimaryKey();
 
@@ -445,18 +477,15 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof RepositoryEntry)) {
 			return false;
 		}
 
-		RepositoryEntry repositoryEntry = null;
-
-		try {
-			repositoryEntry = (RepositoryEntry)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		RepositoryEntry repositoryEntry = (RepositoryEntry)obj;
 
 		long primaryKey = repositoryEntry.getPrimaryKey();
 
@@ -588,6 +617,7 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(37);
 

@@ -24,11 +24,9 @@ import com.liferay.portal.security.ac.AccessControlled;
 import com.liferay.portal.service.BaseService;
 
 /**
- * The interface for the d d m template remote service.
- *
- * <p>
- * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
- * </p>
+ * Provides the remote service interface for DDMTemplate. Methods of this
+ * service are expected to have security checks based on the propagated JAAS
+ * credentials because this service can be accessed remotely.
  *
  * @author Brian Wing Shun Chan
  * @see DDMTemplateServiceUtil
@@ -504,7 +502,7 @@ public interface DDMTemplateService extends BaseService {
 	* @param groupIds the primary keys of the groups
 	* @param classNameIds the primary keys of the entity's instances the
 	templates are related to
-	* @param classPK the primary key of the template's related entity
+	* @param classPKs the primary keys of the template's related entities
 	* @param keywords the keywords (space separated), which may occur in the
 	template's name or description (optionally <code>null</code>)
 	* @param type the template's type (optionally <code>null</code>). For more
@@ -523,7 +521,7 @@ public interface DDMTemplateService extends BaseService {
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMTemplate> search(
-		long companyId, long[] groupIds, long[] classNameIds, long classPK,
+		long companyId, long[] groupIds, long[] classNameIds, long[] classPKs,
 		java.lang.String keywords, java.lang.String type,
 		java.lang.String mode, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -548,7 +546,7 @@ public interface DDMTemplateService extends BaseService {
 	* @param groupIds the primary keys of the groups
 	* @param classNameIds the primary keys of the entity's instances the
 	templates are related to
-	* @param classPK the primary key of the template's related entity
+	* @param classPKs the primary keys of the template's related entities
 	* @param name the name keywords (optionally <code>null</code>)
 	* @param description the description keywords (optionally
 	<code>null</code>)
@@ -573,7 +571,7 @@ public interface DDMTemplateService extends BaseService {
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMTemplate> search(
-		long companyId, long[] groupIds, long[] classNameIds, long classPK,
+		long companyId, long[] groupIds, long[] classNameIds, long[] classPKs,
 		java.lang.String name, java.lang.String description,
 		java.lang.String type, java.lang.String mode,
 		java.lang.String language, boolean andOperator, int start, int end,
@@ -649,7 +647,7 @@ public interface DDMTemplateService extends BaseService {
 	* @param groupIds the primary keys of the groups
 	* @param classNameIds the primary keys of the entity's instances the
 	templates are related to
-	* @param classPK the primary key of the template's related entity
+	* @param classPKs the primary keys of the template's related entities
 	* @param keywords the keywords (space separated), which may occur in the
 	template's name or description (optionally <code>null</code>)
 	* @param type the template's type (optionally <code>null</code>). For more
@@ -663,7 +661,7 @@ public interface DDMTemplateService extends BaseService {
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int searchCount(long companyId, long[] groupIds,
-		long[] classNameIds, long classPK, java.lang.String keywords,
+		long[] classNameIds, long[] classPKs, java.lang.String keywords,
 		java.lang.String type, java.lang.String mode)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -675,7 +673,7 @@ public interface DDMTemplateService extends BaseService {
 	* @param groupIds the primary keys of the groups
 	* @param classNameIds the primary keys of the entity's instances the
 	templates are related to
-	* @param classPK the primary key of the template's related entity
+	* @param classPKs the primary keys of the template's related entities
 	* @param name the name keywords (optionally <code>null</code>)
 	* @param description the description keywords (optionally
 	<code>null</code>)
@@ -695,7 +693,7 @@ public interface DDMTemplateService extends BaseService {
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int searchCount(long companyId, long[] groupIds,
-		long[] classNameIds, long classPK, java.lang.String name,
+		long[] classNameIds, long[] classPKs, java.lang.String name,
 		java.lang.String description, java.lang.String type,
 		java.lang.String mode, java.lang.String language, boolean andOperator)
 		throws com.liferay.portal.kernel.exception.SystemException;

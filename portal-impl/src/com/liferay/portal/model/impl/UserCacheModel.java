@@ -123,6 +123,7 @@ public class UserCacheModel implements CacheModel<User>, Externalizable {
 		return sb.toString();
 	}
 
+	@Override
 	public User toEntityModel() {
 		UserImpl userImpl = new UserImpl();
 
@@ -329,6 +330,7 @@ public class UserCacheModel implements CacheModel<User>, Externalizable {
 		return userImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		userId = objectInput.readLong();
@@ -372,6 +374,7 @@ public class UserCacheModel implements CacheModel<User>, Externalizable {
 		status = objectInput.readInt();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

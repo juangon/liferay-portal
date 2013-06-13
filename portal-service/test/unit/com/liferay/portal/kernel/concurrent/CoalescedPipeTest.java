@@ -35,6 +35,7 @@ public class CoalescedPipeTest extends TestCase {
 		scheduledExecutorService.schedule(
 			new Runnable() {
 
+				@Override
 				public void run() {
 					try {
 						coalescedPipe.put("test1");
@@ -119,6 +120,7 @@ public class CoalescedPipeTest extends TestCase {
 		coalescedPipe = new CoalescedPipe<String>(
 			new Comparator<String>() {
 
+				@Override
 				public int compare(String o1, String o2) {
 					return o1.length() - o2.length();
 				}

@@ -91,26 +91,32 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 	public ShoppingItemPriceModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _itemPriceId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setItemPriceId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _itemPriceId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return ShoppingItemPrice.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return ShoppingItemPrice.class.getName();
 	}
@@ -197,20 +203,24 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 		}
 	}
 
+	@Override
 	public long getItemPriceId() {
 		return _itemPriceId;
 	}
 
+	@Override
 	public void setItemPriceId(long itemPriceId) {
 		_columnBitmask = -1L;
 
 		_itemPriceId = itemPriceId;
 	}
 
+	@Override
 	public long getItemId() {
 		return _itemId;
 	}
 
+	@Override
 	public void setItemId(long itemId) {
 		_columnBitmask = -1L;
 
@@ -227,74 +237,92 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 		return _originalItemId;
 	}
 
+	@Override
 	public int getMinQuantity() {
 		return _minQuantity;
 	}
 
+	@Override
 	public void setMinQuantity(int minQuantity) {
 		_minQuantity = minQuantity;
 	}
 
+	@Override
 	public int getMaxQuantity() {
 		return _maxQuantity;
 	}
 
+	@Override
 	public void setMaxQuantity(int maxQuantity) {
 		_maxQuantity = maxQuantity;
 	}
 
+	@Override
 	public double getPrice() {
 		return _price;
 	}
 
+	@Override
 	public void setPrice(double price) {
 		_price = price;
 	}
 
+	@Override
 	public double getDiscount() {
 		return _discount;
 	}
 
+	@Override
 	public void setDiscount(double discount) {
 		_discount = discount;
 	}
 
+	@Override
 	public boolean getTaxable() {
 		return _taxable;
 	}
 
+	@Override
 	public boolean isTaxable() {
 		return _taxable;
 	}
 
+	@Override
 	public void setTaxable(boolean taxable) {
 		_taxable = taxable;
 	}
 
+	@Override
 	public double getShipping() {
 		return _shipping;
 	}
 
+	@Override
 	public void setShipping(double shipping) {
 		_shipping = shipping;
 	}
 
+	@Override
 	public boolean getUseShippingFormula() {
 		return _useShippingFormula;
 	}
 
+	@Override
 	public boolean isUseShippingFormula() {
 		return _useShippingFormula;
 	}
 
+	@Override
 	public void setUseShippingFormula(boolean useShippingFormula) {
 		_useShippingFormula = useShippingFormula;
 	}
 
+	@Override
 	public int getStatus() {
 		return _status;
 	}
 
+	@Override
 	public void setStatus(int status) {
 		_status = status;
 	}
@@ -346,6 +374,7 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 		return shoppingItemPriceImpl;
 	}
 
+	@Override
 	public int compareTo(ShoppingItemPrice shoppingItemPrice) {
 		int value = 0;
 
@@ -382,18 +411,15 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ShoppingItemPrice)) {
 			return false;
 		}
 
-		ShoppingItemPrice shoppingItemPrice = null;
-
-		try {
-			shoppingItemPrice = (ShoppingItemPrice)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		ShoppingItemPrice shoppingItemPrice = (ShoppingItemPrice)obj;
 
 		long primaryKey = shoppingItemPrice.getPrimaryKey();
 
@@ -477,6 +503,7 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(34);
 

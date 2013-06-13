@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.journal.lar;
 
+import com.liferay.portal.kernel.lar.DataLevel;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.StagedModelDataHandlerUtil;
@@ -37,6 +38,7 @@ import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
+import com.liferay.portlet.journal.service.permission.JournalPermission;
 
 import java.util.List;
 import java.util.Map;
@@ -74,11 +76,12 @@ public class JournalContentPortletDataHandler
 	extends JournalPortletDataHandler {
 
 	public JournalContentPortletDataHandler() {
-		setAlwaysStaged(true);
+		setDataLevel(DataLevel.PORTLET_INSTANCE);
 		setDataPortletPreferences("groupId", "articleId", "templateId");
 		setExportControls(
 			new PortletDataHandlerBoolean(
-				NAMESPACE, "selected-web-content", true, true),
+				NAMESPACE, "selected-web-content", true, true, null,
+				JournalArticle.class.getName()),
 				new PortletDataHandlerBoolean(NAMESPACE, "embedded-assets"));
 
 		DLPortletDataHandler dlPortletDataHandler = new DLPortletDataHandler();
@@ -115,7 +118,7 @@ public class JournalContentPortletDataHandler
 		throws Exception {
 
 		portletDataContext.addPermissions(
-			"com.liferay.portlet.journal",
+			JournalPermission.RESOURCE_NAME,
 			portletDataContext.getScopeGroupId());
 
 		String articleId = portletPreferences.getValue("articleId", null);
@@ -203,7 +206,9 @@ public class JournalContentPortletDataHandler
 			Element articleElement = portletDataContext.getExportDataElement(
 				article);
 
-			portletDataContext.addReferenceElement(articleElement, ddmTemplate);
+			portletDataContext.addReferenceElement(
+				article, articleElement, ddmTemplate,
+				PortletDataContext.REFERENCE_TYPE_STRONG, false);
 		}
 
 		portletDataContext.setScopeGroupId(previousScopeGroupId);
@@ -218,7 +223,7 @@ public class JournalContentPortletDataHandler
 		throws Exception {
 
 		portletDataContext.importPermissions(
-			"com.liferay.portlet.journal",
+			JournalPermission.RESOURCE_NAME,
 			portletDataContext.getSourceGroupId(),
 			portletDataContext.getScopeGroupId());
 
@@ -230,11 +235,6 @@ public class JournalContentPortletDataHandler
 		if (importGroupId == portletDataContext.getSourceGroupId()) {
 			portletDataContext.setScopeGroupId(portletDataContext.getGroupId());
 		}
-
-		Element rootElement = portletDataContext.getImportDataRootElement();
-
-		JournalPortletDataHandler.importReferenceData(
-			portletDataContext, rootElement);
 
 		Element ddmStructuresElement =
 			portletDataContext.getImportDataGroupElement(DDMStructure.class);

@@ -395,10 +395,12 @@ public class ProcessUtilTest {
 		final Future<?> future = ProcessUtil.execute(
 			new OutputProcessor<Void, Void>() {
 
+				@Override
 				public Void processStdErr(InputStream stdErrInputStream) {
 					return null;
 				}
 
+				@Override
 				public Void processStdOut(InputStream stdOutInputStream) {
 					return null;
 				}
@@ -523,6 +525,7 @@ public class ProcessUtilTest {
 			_countDownLatch = new CountDownLatch(1);
 		}
 
+		@Override
 		public Void call() throws Exception {
 			_countDownLatch.countDown();
 
@@ -567,6 +570,7 @@ public class ProcessUtilTest {
 	private static class ErrorStderrOutputProcessor
 		implements OutputProcessor<Void, Void> {
 
+		@Override
 		public Void processStdErr(InputStream stdErrInputStream)
 			throws ProcessException {
 
@@ -574,6 +578,7 @@ public class ProcessUtilTest {
 				ErrorStderrOutputProcessor.class.getName());
 		}
 
+		@Override
 		public Void processStdOut(InputStream stdOutInputStream) {
 			return null;
 		}
@@ -583,10 +588,12 @@ public class ProcessUtilTest {
 	private static class ErrorStdoutOutputProcessor
 		implements OutputProcessor<Void, Void> {
 
+		@Override
 		public Void processStdErr(InputStream stdErrInputStream) {
 			return null;
 		}
 
+		@Override
 		public Void processStdOut(InputStream stdOutInputStream)
 			throws ProcessException {
 

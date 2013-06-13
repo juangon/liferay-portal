@@ -98,26 +98,32 @@ public class MBThreadFlagModelImpl extends BaseModelImpl<MBThreadFlag>
 	public MBThreadFlagModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _threadFlagId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setThreadFlagId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _threadFlagId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return MBThreadFlag.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return MBThreadFlag.class.getName();
 	}
@@ -196,6 +202,7 @@ public class MBThreadFlagModelImpl extends BaseModelImpl<MBThreadFlag>
 		}
 	}
 
+	@Override
 	public String getUuid() {
 		if (_uuid == null) {
 			return StringPool.BLANK;
@@ -205,6 +212,7 @@ public class MBThreadFlagModelImpl extends BaseModelImpl<MBThreadFlag>
 		}
 	}
 
+	@Override
 	public void setUuid(String uuid) {
 		if (_originalUuid == null) {
 			_originalUuid = _uuid;
@@ -217,18 +225,22 @@ public class MBThreadFlagModelImpl extends BaseModelImpl<MBThreadFlag>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@Override
 	public long getThreadFlagId() {
 		return _threadFlagId;
 	}
 
+	@Override
 	public void setThreadFlagId(long threadFlagId) {
 		_threadFlagId = threadFlagId;
 	}
 
+	@Override
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -245,10 +257,12 @@ public class MBThreadFlagModelImpl extends BaseModelImpl<MBThreadFlag>
 		return _originalGroupId;
 	}
 
+	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
@@ -265,10 +279,12 @@ public class MBThreadFlagModelImpl extends BaseModelImpl<MBThreadFlag>
 		return _originalCompanyId;
 	}
 
+	@Override
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_columnBitmask |= USERID_COLUMN_BITMASK;
 
@@ -281,10 +297,12 @@ public class MBThreadFlagModelImpl extends BaseModelImpl<MBThreadFlag>
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
@@ -293,6 +311,7 @@ public class MBThreadFlagModelImpl extends BaseModelImpl<MBThreadFlag>
 		return _originalUserId;
 	}
 
+	@Override
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -302,30 +321,37 @@ public class MBThreadFlagModelImpl extends BaseModelImpl<MBThreadFlag>
 		}
 	}
 
+	@Override
 	public void setUserName(String userName) {
 		_userName = userName;
 	}
 
+	@Override
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
 	}
 
+	@Override
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
 	public long getThreadId() {
 		return _threadId;
 	}
 
+	@Override
 	public void setThreadId(long threadId) {
 		_columnBitmask |= THREADID_COLUMN_BITMASK;
 
@@ -388,6 +414,7 @@ public class MBThreadFlagModelImpl extends BaseModelImpl<MBThreadFlag>
 		return mbThreadFlagImpl;
 	}
 
+	@Override
 	public int compareTo(MBThreadFlag mbThreadFlag) {
 		long primaryKey = mbThreadFlag.getPrimaryKey();
 
@@ -404,18 +431,15 @@ public class MBThreadFlagModelImpl extends BaseModelImpl<MBThreadFlag>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof MBThreadFlag)) {
 			return false;
 		}
 
-		MBThreadFlag mbThreadFlag = null;
-
-		try {
-			mbThreadFlag = (MBThreadFlag)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		MBThreadFlag mbThreadFlag = (MBThreadFlag)obj;
 
 		long primaryKey = mbThreadFlag.getPrimaryKey();
 
@@ -535,6 +559,7 @@ public class MBThreadFlagModelImpl extends BaseModelImpl<MBThreadFlag>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(31);
 

@@ -186,7 +186,9 @@ else if (type.equals("categorized_pages") || type.equals("tagged_pages")) {
 
 	total = AssetEntryServiceUtil.getEntriesCount(assetEntryQuery);
 
-	if (searchContainer.recalculateCur(total)) {
+	searchContainer.setTotal(total);
+
+	if (searchContainer.isRecalculateCur()) {
 		assetEntryQuery = new AssetEntryQuery(WikiPage.class.getName(), searchContainer);
 	}
 
@@ -281,7 +283,7 @@ for (int i = 0; i < results.size(); i++) {
 			rowURL.setParameter("struts_action", "/wiki/view");
 		}
 		else {
-			rowURL.setParameter("struts_action", "/wiki/view_page");
+			rowURL.setParameter("struts_action", "/wiki/view_page_activities");
 		}
 
 		rowURL.setParameter("redirect", currentURL);
@@ -362,7 +364,7 @@ for (int i = 0; i < results.size(); i++) {
 		}
 	}
 
-	if (type.equals("all_pages") || type.equals("draft_pages") || type.equals("orphan_pages") || type.equals("recent_changes") || type.equals("tagged_pages")) {
+	if (type.equals("all_pages") || type.equals("categorized_pages") || type.equals("draft_pages") || type.equals("orphan_pages") || type.equals("recent_changes") || type.equals("tagged_pages")) {
 		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/wiki/page_action.jsp");
 	}
 

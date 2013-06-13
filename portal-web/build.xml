@@ -5,8 +5,6 @@
 
 	<property name="war.file" value="${ant.project.name}" />
 
-	<property name="alloy.file" value="alloy-1.7.0.zip" />
-
 	<!--
 	When upgrading CKEditor, make sure to delete
 	docroot/html/js/editor/ckeditor_diffs/ckeditor.js.
@@ -56,6 +54,12 @@
 	</path>
 
 	<target name="build-alloy">
+		<antcall target="build-alloy-twitter-bootstrap" />
+
+		<property name="alloy.version" value="2.0.0pr5" />
+
+		<property name="alloy.file" value="alloy-${alloy.version}.zip" />
+
 		<if>
 			<not>
 				<uptodate
@@ -68,80 +72,52 @@
 				<!-- Prepare -->
 
 				<delete dir="docroot/html/ALLOY_ZIP" />
-				<delete dir="docroot/html/css/portal/aui.css" />
+				<delete dir="docroot/html/css/portal/aui_deprecated.css" />
 				<delete dir="docroot/html/js/aui" />
-				<delete dir="docroot/html/portal/aui" />
-				<delete dir="docroot/html/themes/_unstyled/images/aui/" />
+				<delete dir="docroot/html/themes/_unstyled/images/aui" />
 
 				<unzip src="third-party/${alloy.file}" dest="docroot/html/ALLOY_ZIP" />
 
-				<!-- JavaScript -->
-
-				<copy todir="docroot/html/js/aui" overwrite="true" preservelastmodified="true">
-					<fileset dir="docroot/html/ALLOY_ZIP/build/" />
-				</copy>
-
-				<replaceregexp match="[\n\s\t]+filter: 'raw'," replace="" flags="g" byline="false">
-					<fileset
-						dir="docroot/html/js/aui/aui-base/"
-						includes="aui-base.js"
-					/>
-				</replaceregexp>
-
-				<replaceregexp match="combine: ?false," replace="combine:Liferay.AUI.getCombine()," flags="g" byline="true">
-					<fileset
-						dir="docroot/html/js/aui/aui-base/"
-						includes="aui-base.js"
-					/>
-				</replaceregexp>
-
-				<replaceregexp match="skinnable:true" replace="skinnable:false" flags="g" byline="true">
-					<fileset
-						dir="docroot/html/js/aui/aui-base/"
-						includes="aui-base.js"
-					/>
-				</replaceregexp>
-
-				<replace file="docroot/html/js/aui/aui-base/aui-base.js">
-					<replacefilter token="var PATH_THEME_IMAGES = PATH_THEME_ROOT + '../images/';" value="var PATH_THEME_IMAGES = Liferay.ThemeDisplay.getPathThemeImages() + '/aui';" />
-				</replace>
-
 				<!-- CSS -->
 
-				<property name="alloy.core.css" value="aui-skin-base.css" />
+				<property name="alloy.build.dir" value="docroot/html/ALLOY_ZIP/alloy-${alloy.version}/build" />
+				<property name="alloy.temp.dir" value="docroot/html/ALLOY_ZIP/temp" />
 
-				<concat destfile="docroot/html/ALLOY_ZIP/build/aui-skins/tmp/alloy.css">
+				<concat destfile="${alloy.temp.dir}/aui_deprecated.css">
 					<filelist
-						dir="docroot/html/ALLOY_ZIP/build/aui-skin-base/css"
-						files="${alloy.core.css}"
+						dir="${alloy.build.dir}/aui-skin-deprecated"
+						files="aui-skin-deprecated.css"
 					/>
 				</concat>
 
 				<for param="dir">
 					<path>
 						<dirset
-							dir="docroot/html/ALLOY_ZIP/build/"
-							includes="aui-*/"
+							dir="${alloy.build.dir}"
+							includes="aui-*"
 						/>
 					</path>
 					<sequential>
 						<basename property="dir.name" file="@{dir}" />
 						<if>
-							<available file="docroot/html/js/aui/${dir.name}/assets/skins/sam/${dir.name}.css" />
+							<and>
+								<available file="${alloy.build.dir}/${dir.name}/assets/skins/sam/${dir.name}.css" />
+								<matches pattern="-deprecated" string="${dir.name}" />
+							</and>
 							<then>
-								<concat append="true" destfile="docroot/html/ALLOY_ZIP/build/aui-skins/tmp/alloy.css">
+								<concat append="true" destfile="${alloy.temp.dir}/aui_deprecated.css">
 									<filelist
-										dir="docroot/html/js/aui/${dir.name}/assets/skins/sam/"
+										dir="${alloy.build.dir}/${dir.name}/assets/skins/sam"
 										files="${dir.name}.css"
 									/>
 								</concat>
 							</then>
 						</if>
 						<if>
-							<available file="docroot/html/js/aui/${dir.name}/assets/skins/sam/" />
+							<available file="docroot/html/js/aui/${dir.name}/assets/skins/sam" />
 							<then>
-								<copy todir="docroot/html/themes/_unstyled/images/aui/">
-									<fileset dir="docroot/html/js/aui/${dir.name}/assets/skins/sam/" includes="**/*.png,**/*.jpg,**/*.gif" />
+								<copy todir="docroot/html/themes/_unstyled/images/aui">
+									<fileset dir="docroot/html/js/aui/${dir.name}/assets/skins/sam" includes="**/*.png,**/*.jpg,**/*.gif" />
 								</copy>
 							</then>
 						</if>
@@ -151,42 +127,94 @@
 
 				<replaceregexp match="url\(([^)]+)\)" replace="url(@theme_image_path@/aui/\1)" flags="g" byline="false">
 					<fileset
-						dir="docroot/html/ALLOY_ZIP/build/aui-skins/tmp/"
-						includes="alloy.css"
+						dir="${alloy.temp.dir}"
+						includes="aui_deprecated.css"
 					/>
 				</replaceregexp>
 
-				<replace file="docroot/html/ALLOY_ZIP/build/aui-skins/tmp/alloy.css">
+				<replace file="${alloy.temp.dir}/aui_deprecated.css">
 					<replacefilter token="../images/" value="" />
 				</replace>
 
-				<replace file="docroot/html/ALLOY_ZIP/build/aui-skins/tmp/alloy.css">
+				<replace file="${alloy.temp.dir}/aui_deprecated.css">
 					<replacefilter token="../../../../../build/aui-skin-base/images/" value="" />
 				</replace>
 
-				<replace file="docroot/html/ALLOY_ZIP/build/aui-skins/tmp/alloy.css">
+				<replace file="${alloy.temp.dir}/aui_deprecated.css">
 					<replacefilter token="../../../../../build/aui-skin-classic/images/" value="" />
 				</replace>
 
+				<replace file="${alloy.temp.dir}/aui_deprecated.css">
+					<replacefilter token="../../../../../build/aui-skin-deprecated/images/" value="" />
+				</replace>
+
 				<copy
-					file="docroot/html/ALLOY_ZIP/build/aui-skins/tmp/alloy.css"
-					tofile="docroot/html/css/portal/aui.css"
+					file="${alloy.temp.dir}/aui_deprecated.css"
+					tofile="docroot/html/css/portal/aui_deprecated.css"
 					overwrite="true"
 				/>
 
-				<!-- Images -->
+				<!-- JavaScript -->
 
-				<copy todir="docroot/html/themes/_unstyled/images/aui/">
-					<fileset dir="docroot/html/ALLOY_ZIP/build/aui-skin-base/images/" />
+				<copy todir="docroot/html/js/aui" overwrite="true" preservelastmodified="true">
+					<fileset dir="${alloy.build.dir}/" />
 				</copy>
 
-				<copy todir="docroot/html/themes/_unstyled/images/aui/">
-					<fileset dir="docroot/html/ALLOY_ZIP/build/aui-skin-classic/images/" />
+				<!-- Images -->
+
+				<copy todir="docroot/html/themes/_unstyled/images/aui">
+					<fileset dir="${alloy.build.dir}/aui-css/img" />
+				</copy>
+
+				<copy todir="docroot/html/themes/_unstyled/images/aui">
+					<fileset dir="${alloy.build.dir}/aui-skin-deprecated/images" />
 				</copy>
 
 				<!-- Clean up -->
 
 				<delete dir="docroot/html/ALLOY_ZIP" />
+			</then>
+		</if>
+	</target>
+
+	<target name="build-alloy-twitter-bootstrap">
+		<property name="alloy.bootstrap.version" value="2.2.2" />
+
+		<property name="alloy.bootstrap.deploy" value="docroot/html/themes/_unstyled/css/aui" />
+
+		<property name="alloy.bootstrap.file" value="alloy-twitter-bootstrap-${alloy.bootstrap.version}.zip" />
+
+		<property name="alloy.bootstrap.tmp.dir" value="docroot/html/ALLOY_BOOTSTRAP_ZIP" />
+
+		<if>
+			<not>
+				<uptodate
+					srcfile="third-party/${alloy.bootstrap.file}"
+					targetfile="${alloy.bootstrap.deploy}"
+				/>
+			</not>
+			<then>
+
+				<!-- Prepare -->
+
+				<delete dir="${alloy.bootstrap.tmp.dir}" />
+				<delete dir="${alloy.bootstrap.deploy}" />
+
+				<unzip src="third-party/${alloy.bootstrap.file}" dest="${alloy.bootstrap.tmp.dir}" />
+
+				<!-- CSS -->
+
+				<property name="alloy.bootstrap.lib.dir" value="${alloy.bootstrap.tmp.dir}/lib" />
+
+				<delete dir="${alloy.bootstrap.lib.dir}/tests" />
+
+				<copy todir="${alloy.bootstrap.deploy}" overwrite="true" preservelastmodified="true">
+					<fileset dir="${alloy.bootstrap.lib.dir}/" />
+				</copy>
+
+				<!-- Clean up -->
+
+				<delete dir="${alloy.bootstrap.tmp.dir}" />
 			</then>
 		</if>
 	</target>
@@ -212,49 +240,6 @@
 						<delete
 							dir="docroot/html/js/editor/ckeditor/dev/builder/release"
 						/>
-
-						<replace file="docroot/html/js/editor/ckeditor/core/htmlparser/fragment.js">
-							<replacetoken><![CDATA[function sendPendingBRs()]]></replacetoken>
-							<replacevalue><![CDATA[function sendPendingBRs( brsToIgnore )]]></replacevalue>
-						</replace>
-
-						<replace file="docroot/html/js/editor/ckeditor/core/htmlparser/fragment.js">
-							<replacetoken><![CDATA[while ( pendingBRs.length )]]></replacetoken>
-							<replacevalue><![CDATA[while ( pendingBRs.length - ( brsToIgnore || 0 ) > 0 )]]></replacevalue>
-						</replace>
-
-						<replace file="docroot/html/js/editor/ckeditor/plugins/indent/plugin.js">
-							<replacetoken><![CDATA[return node.type == CKEDITOR.NODE_ELEMENT && node.is( 'li' );]]></replacetoken>
-							<replacevalue>
-								<![CDATA[return node.type == CKEDITOR.NODE_ELEMENT && node.is && node.is( 'li' );]]>
-							</replacevalue>
-						</replace>
-
-						<replace file="docroot/html/js/editor/ckeditor/plugins/popup/plugin.js">
-							<replacetoken><![CDATA[popupWindow.moveTo( left, top );]]></replacetoken>
-							<replacevalue><![CDATA[// Chrome is problematic, but it's not really needed here (#8855)]]></replacevalue>
-						</replace>
-
-						<replace file="docroot/html/js/editor/ckeditor/plugins/popup/plugin.js">
-							<replacetoken><![CDATA[popupWindow.resizeTo( width, height );]]></replacetoken>
-							<replacevalue>
-								<![CDATA[
-									var ua = navigator.userAgent.toLowerCase();
-
-									if (ua.indexOf(' chrome/') == -1) {
-										popupWindow.moveTo(left, top);
-										popupWindow.resizeTo(width, height);
-									}
-								]]>
-							</replacevalue>
-						</replace>
-
-						<replace file="docroot/html/js/editor/ckeditor/plugins/indent/plugin.js">
-							<replacetoken><![CDATA[return node.type == CKEDITOR.NODE_ELEMENT && node.is( 'li' );]]></replacetoken>
-							<replacevalue>
-								<![CDATA[return node.type == CKEDITOR.NODE_ELEMENT && node.is && node.is( 'li' );]]>
-							</replacevalue>
-						</replace>
 
 						<replace file="docroot/html/js/editor/ckeditor/plugins/wysiwygarea/plugin.js">
 							<replacetoken><![CDATA[var data = fullPage]]></replacetoken>
@@ -428,31 +413,41 @@
 	</target>
 
 	<target name="build-ckeditor-plugins-scayt">
-		<get
-			dest="${scayt.file}"
-			src="http://download.ckeditor.com/scayt/releases/${scayt.file}"
-		/>
+		<if>
+			<not>
+				<available file="third-party/${scayt.file}" />
+			</not>
+			<then>
+				<get
+					dest="third-party/${scayt.file}"
+					src="http://download.ckeditor.com/scayt/releases/${scayt.file}"
+				/>
+			</then>
+		</if>
 
 		<unzip
 			dest="docroot/html/js/editor/ckeditor/plugins"
-			src="${scayt.file}"
+			src="third-party/${scayt.file}"
 		/>
-
-		<delete file="${scayt.file}" />
 	</target>
 
 	<target name="build-ckeditor-plugins-wsc">
-		<get
-			dest="${wsc.file}"
-			src="http://download.ckeditor.com/wsc/releases/${wsc.file}"
-		/>
+		<if>
+			<not>
+				<available file="third-party/${wsc.file}" />
+			</not>
+			<then>
+				<get
+					dest="third-party/${wsc.file}"
+					src="http://download.ckeditor.com/wsc/releases/${wsc.file}"
+				/>
+			</then>
+		</if>
 
 		<unzip
 			dest="docroot/html/js/editor/ckeditor/plugins"
-			src="${wsc.file}"
+			src="third-party/${wsc.file}"
 		/>
-
-		<delete file="${wsc.file}" />
 	</target>
 
 	<target name="build-css">

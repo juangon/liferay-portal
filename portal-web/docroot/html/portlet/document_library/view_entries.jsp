@@ -130,7 +130,7 @@ if (fileEntryTypeId >= 0) {
 	if (fileEntryTypeId > 0) {
 		DLFileEntryType dlFileEntryType = DLFileEntryTypeLocalServiceUtil.getFileEntryType(fileEntryTypeId);
 
-		dlFileEntryTypeName = dlFileEntryType.getName();
+		dlFileEntryTypeName = dlFileEntryType.getName(locale);
 	}
 
 	SearchContext searchContext = SearchContextFactory.getInstance(request);
@@ -326,27 +326,13 @@ request.setAttribute("view_entries.jsp-entryEnd", String.valueOf(entryEnd));
 </div>
 
 <c:if test="<%= results.isEmpty() %>">
-	<div class="entries-empty portlet-msg-info">
+	<div class="entries-empty alert alert-info">
 		<c:choose>
 			<c:when test="<%= (fileEntryTypeId >= 0) %>">
-				<c:choose>
-					<c:when test="<%= total == 0 %>">
-						<liferay-ui:message arguments="<%= HtmlUtil.escape(dlFileEntryTypeName) %>" key="there-are-no-documents-or-media-files-of-type-x" />
-					</c:when>
-					<c:otherwise>
-						<liferay-ui:message arguments="<%= HtmlUtil.escape(dlFileEntryTypeName) %>" key="there-are-no-documents-or-media-files-of-type-x-on-this-page" />
-					</c:otherwise>
-				</c:choose>
+				<liferay-ui:message arguments="<%= HtmlUtil.escape(dlFileEntryTypeName) %>" key="there-are-no-documents-or-media-files-of-type-x" />
 			</c:when>
 			<c:otherwise>
-				<c:choose>
-					<c:when test="<%= total == 0 %>">
-						<liferay-ui:message key="there-are-no-documents-or-media-files-in-this-folder" />
-					</c:when>
-					<c:otherwise>
-						<liferay-ui:message key="there-are-no-documents-or-media-files-on-this-page" />
-					</c:otherwise>
-				</c:choose>
+				<liferay-ui:message key="there-are-no-documents-or-media-files-in-this-folder" />
 			</c:otherwise>
 		</c:choose>
 	</div>
@@ -618,8 +604,8 @@ for (int i = 0; i < results.size(); i++) {
 	Liferay.fire(
 		'<portlet:namespace />pageLoaded',
 		{
-			paginator: {
-				name: 'entryPaginator',
+			pagination: {
+				name: 'entryPagination',
 				state: {
 					page: <%= (total == 0) ? 0 : searchContainer.getCur() %>,
 					rowsPerPage: <%= searchContainer.getDelta() %>,

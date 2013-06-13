@@ -100,6 +100,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	 * @throws com.liferay.portlet.ratings.NoSuchStatsException if a matching ratings stats could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public RatingsStats findByC_C(long classNameId, long classPK)
 		throws NoSuchStatsException, SystemException {
 		RatingsStats ratingsStats = fetchByC_C(classNameId, classPK);
@@ -135,6 +136,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	 * @return the matching ratings stats, or <code>null</code> if a matching ratings stats could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public RatingsStats fetchByC_C(long classNameId, long classPK)
 		throws SystemException {
 		return fetchByC_C(classNameId, classPK, true);
@@ -149,6 +151,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	 * @return the matching ratings stats, or <code>null</code> if a matching ratings stats could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public RatingsStats fetchByC_C(long classNameId, long classPK,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { classNameId, classPK };
@@ -240,6 +243,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	 * @return the ratings stats that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public RatingsStats removeByC_C(long classNameId, long classPK)
 		throws NoSuchStatsException, SystemException {
 		RatingsStats ratingsStats = findByC_C(classNameId, classPK);
@@ -255,6 +259,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	 * @return the number of matching ratings statses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByC_C(long classNameId, long classPK)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_C;
@@ -313,6 +318,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	 *
 	 * @param ratingsStats the ratings stats
 	 */
+	@Override
 	public void cacheResult(RatingsStats ratingsStats) {
 		EntityCacheUtil.putResult(RatingsStatsModelImpl.ENTITY_CACHE_ENABLED,
 			RatingsStatsImpl.class, ratingsStats.getPrimaryKey(), ratingsStats);
@@ -330,6 +336,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	 *
 	 * @param ratingsStatses the ratings statses
 	 */
+	@Override
 	public void cacheResult(List<RatingsStats> ratingsStatses) {
 		for (RatingsStats ratingsStats : ratingsStatses) {
 			if (EntityCacheUtil.getResult(
@@ -450,6 +457,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	 * @param statsId the primary key for the new ratings stats
 	 * @return the new ratings stats
 	 */
+	@Override
 	public RatingsStats create(long statsId) {
 		RatingsStats ratingsStats = new RatingsStatsImpl();
 
@@ -467,6 +475,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	 * @throws com.liferay.portlet.ratings.NoSuchStatsException if a ratings stats with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public RatingsStats remove(long statsId)
 		throws NoSuchStatsException, SystemException {
 		return remove((Serializable)statsId);
@@ -643,6 +652,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	 * @throws com.liferay.portlet.ratings.NoSuchStatsException if a ratings stats with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public RatingsStats findByPrimaryKey(long statsId)
 		throws NoSuchStatsException, SystemException {
 		return findByPrimaryKey((Serializable)statsId);
@@ -703,6 +713,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	 * @return the ratings stats, or <code>null</code> if a ratings stats with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public RatingsStats fetchByPrimaryKey(long statsId)
 		throws SystemException {
 		return fetchByPrimaryKey((Serializable)statsId);
@@ -714,6 +725,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	 * @return the ratings statses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<RatingsStats> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -730,6 +742,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	 * @return the range of ratings statses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<RatingsStats> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
@@ -748,6 +761,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	 * @return the ordered range of ratings statses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<RatingsStats> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -833,6 +847,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (RatingsStats ratingsStats : findAll()) {
 			remove(ratingsStats);
@@ -845,6 +860,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	 * @return the number of ratings statses
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -930,6 +946,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 		};
 
 	private static CacheModel<RatingsStats> _nullRatingsStatsCacheModel = new CacheModel<RatingsStats>() {
+			@Override
 			public RatingsStats toEntityModel() {
 				return _nullRatingsStats;
 			}

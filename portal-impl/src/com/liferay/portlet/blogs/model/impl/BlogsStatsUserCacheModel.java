@@ -62,6 +62,7 @@ public class BlogsStatsUserCacheModel implements CacheModel<BlogsStatsUser>,
 		return sb.toString();
 	}
 
+	@Override
 	public BlogsStatsUser toEntityModel() {
 		BlogsStatsUserImpl blogsStatsUserImpl = new BlogsStatsUserImpl();
 
@@ -87,6 +88,7 @@ public class BlogsStatsUserCacheModel implements CacheModel<BlogsStatsUser>,
 		return blogsStatsUserImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		statsUserId = objectInput.readLong();
 		groupId = objectInput.readLong();
@@ -99,6 +101,7 @@ public class BlogsStatsUserCacheModel implements CacheModel<BlogsStatsUser>,
 		ratingsAverageScore = objectInput.readDouble();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(statsUserId);

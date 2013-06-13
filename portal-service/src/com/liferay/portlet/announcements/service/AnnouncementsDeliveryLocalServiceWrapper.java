@@ -17,12 +17,10 @@ package com.liferay.portlet.announcements.service;
 import com.liferay.portal.service.ServiceWrapper;
 
 /**
- * <p>
- * This class is a wrapper for {@link AnnouncementsDeliveryLocalService}.
- * </p>
+ * Provides a wrapper for {@link AnnouncementsDeliveryLocalService}.
  *
- * @author    Brian Wing Shun Chan
- * @see       AnnouncementsDeliveryLocalService
+ * @author Brian Wing Shun Chan
+ * @see AnnouncementsDeliveryLocalService
  * @generated
  */
 public class AnnouncementsDeliveryLocalServiceWrapper
@@ -40,6 +38,7 @@ public class AnnouncementsDeliveryLocalServiceWrapper
 	* @return the announcements delivery that was added
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.announcements.model.AnnouncementsDelivery addAnnouncementsDelivery(
 		com.liferay.portlet.announcements.model.AnnouncementsDelivery announcementsDelivery)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -52,6 +51,7 @@ public class AnnouncementsDeliveryLocalServiceWrapper
 	* @param deliveryId the primary key for the new announcements delivery
 	* @return the new announcements delivery
 	*/
+	@Override
 	public com.liferay.portlet.announcements.model.AnnouncementsDelivery createAnnouncementsDelivery(
 		long deliveryId) {
 		return _announcementsDeliveryLocalService.createAnnouncementsDelivery(deliveryId);
@@ -65,6 +65,7 @@ public class AnnouncementsDeliveryLocalServiceWrapper
 	* @throws PortalException if a announcements delivery with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.announcements.model.AnnouncementsDelivery deleteAnnouncementsDelivery(
 		long deliveryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -79,12 +80,14 @@ public class AnnouncementsDeliveryLocalServiceWrapper
 	* @return the announcements delivery that was removed
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.announcements.model.AnnouncementsDelivery deleteAnnouncementsDelivery(
 		com.liferay.portlet.announcements.model.AnnouncementsDelivery announcementsDelivery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _announcementsDeliveryLocalService.deleteAnnouncementsDelivery(announcementsDelivery);
 	}
 
+	@Override
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {
 		return _announcementsDeliveryLocalService.dynamicQuery();
 	}
@@ -96,6 +99,7 @@ public class AnnouncementsDeliveryLocalServiceWrapper
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -116,6 +120,7 @@ public class AnnouncementsDeliveryLocalServiceWrapper
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -138,6 +143,7 @@ public class AnnouncementsDeliveryLocalServiceWrapper
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -155,12 +161,14 @@ public class AnnouncementsDeliveryLocalServiceWrapper
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _announcementsDeliveryLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	@Override
 	public com.liferay.portlet.announcements.model.AnnouncementsDelivery fetchAnnouncementsDelivery(
 		long deliveryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -175,6 +183,7 @@ public class AnnouncementsDeliveryLocalServiceWrapper
 	* @throws PortalException if a announcements delivery with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.announcements.model.AnnouncementsDelivery getAnnouncementsDelivery(
 		long deliveryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -182,6 +191,7 @@ public class AnnouncementsDeliveryLocalServiceWrapper
 		return _announcementsDeliveryLocalService.getAnnouncementsDelivery(deliveryId);
 	}
 
+	@Override
 	public com.liferay.portal.model.PersistedModel getPersistedModel(
 		java.io.Serializable primaryKeyObj)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -201,6 +211,7 @@ public class AnnouncementsDeliveryLocalServiceWrapper
 	* @return the range of announcements deliveries
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> getAnnouncementsDeliveries(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -214,6 +225,7 @@ public class AnnouncementsDeliveryLocalServiceWrapper
 	* @return the number of announcements deliveries
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public int getAnnouncementsDeliveriesCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _announcementsDeliveryLocalService.getAnnouncementsDeliveriesCount();
@@ -226,6 +238,7 @@ public class AnnouncementsDeliveryLocalServiceWrapper
 	* @return the announcements delivery that was updated
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portlet.announcements.model.AnnouncementsDelivery updateAnnouncementsDelivery(
 		com.liferay.portlet.announcements.model.AnnouncementsDelivery announcementsDelivery)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -237,6 +250,7 @@ public class AnnouncementsDeliveryLocalServiceWrapper
 	*
 	* @return the Spring bean ID for this bean
 	*/
+	@Override
 	public java.lang.String getBeanIdentifier() {
 		return _announcementsDeliveryLocalService.getBeanIdentifier();
 	}
@@ -246,10 +260,12 @@ public class AnnouncementsDeliveryLocalServiceWrapper
 	*
 	* @param beanIdentifier the Spring bean ID for this bean
 	*/
+	@Override
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		_announcementsDeliveryLocalService.setBeanIdentifier(beanIdentifier);
 	}
 
+	@Override
 	public com.liferay.portlet.announcements.model.AnnouncementsDelivery addUserDelivery(
 		long userId, java.lang.String type)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -257,28 +273,33 @@ public class AnnouncementsDeliveryLocalServiceWrapper
 		return _announcementsDeliveryLocalService.addUserDelivery(userId, type);
 	}
 
+	@Override
 	public void deleteDeliveries(long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_announcementsDeliveryLocalService.deleteDeliveries(userId);
 	}
 
+	@Override
 	public void deleteDelivery(
 		com.liferay.portlet.announcements.model.AnnouncementsDelivery delivery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_announcementsDeliveryLocalService.deleteDelivery(delivery);
 	}
 
+	@Override
 	public void deleteDelivery(long deliveryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_announcementsDeliveryLocalService.deleteDelivery(deliveryId);
 	}
 
+	@Override
 	public void deleteDelivery(long userId, java.lang.String type)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_announcementsDeliveryLocalService.deleteDelivery(userId, type);
 	}
 
+	@Override
 	public com.liferay.portlet.announcements.model.AnnouncementsDelivery getDelivery(
 		long deliveryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -286,6 +307,7 @@ public class AnnouncementsDeliveryLocalServiceWrapper
 		return _announcementsDeliveryLocalService.getDelivery(deliveryId);
 	}
 
+	@Override
 	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> getUserDeliveries(
 		long userId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -293,6 +315,7 @@ public class AnnouncementsDeliveryLocalServiceWrapper
 		return _announcementsDeliveryLocalService.getUserDeliveries(userId);
 	}
 
+	@Override
 	public com.liferay.portlet.announcements.model.AnnouncementsDelivery getUserDelivery(
 		long userId, java.lang.String type)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -300,6 +323,7 @@ public class AnnouncementsDeliveryLocalServiceWrapper
 		return _announcementsDeliveryLocalService.getUserDelivery(userId, type);
 	}
 
+	@Override
 	public com.liferay.portlet.announcements.model.AnnouncementsDelivery updateDelivery(
 		long userId, java.lang.String type, boolean email, boolean sms,
 		boolean website)
@@ -324,10 +348,12 @@ public class AnnouncementsDeliveryLocalServiceWrapper
 		_announcementsDeliveryLocalService = announcementsDeliveryLocalService;
 	}
 
+	@Override
 	public AnnouncementsDeliveryLocalService getWrappedService() {
 		return _announcementsDeliveryLocalService;
 	}
 
+	@Override
 	public void setWrappedService(
 		AnnouncementsDeliveryLocalService announcementsDeliveryLocalService) {
 		_announcementsDeliveryLocalService = announcementsDeliveryLocalService;

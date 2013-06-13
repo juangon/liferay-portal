@@ -73,6 +73,7 @@ public class GroupCacheModel implements CacheModel<Group>, Externalizable {
 		return sb.toString();
 	}
 
+	@Override
 	public Group toEntityModel() {
 		GroupImpl groupImpl = new GroupImpl();
 
@@ -136,6 +137,7 @@ public class GroupCacheModel implements CacheModel<Group>, Externalizable {
 		return groupImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		groupId = objectInput.readLong();
@@ -155,6 +157,7 @@ public class GroupCacheModel implements CacheModel<Group>, Externalizable {
 		active = objectInput.readBoolean();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

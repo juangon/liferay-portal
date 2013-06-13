@@ -61,6 +61,7 @@ public class TeamCacheModel implements CacheModel<Team>, Externalizable {
 		return sb.toString();
 	}
 
+	@Override
 	public Team toEntityModel() {
 		TeamImpl teamImpl = new TeamImpl();
 
@@ -110,6 +111,7 @@ public class TeamCacheModel implements CacheModel<Team>, Externalizable {
 		return teamImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		teamId = objectInput.readLong();
 		companyId = objectInput.readLong();
@@ -122,6 +124,7 @@ public class TeamCacheModel implements CacheModel<Team>, Externalizable {
 		description = objectInput.readUTF();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(teamId);

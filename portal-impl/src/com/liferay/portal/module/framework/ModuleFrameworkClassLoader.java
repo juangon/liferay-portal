@@ -86,10 +86,12 @@ public class ModuleFrameworkClassLoader extends URLClassLoader {
 		return new Enumeration<URL>() {
 			final Iterator<URL> iterator = urls.iterator();
 
+			@Override
 			public boolean hasMoreElements() {
 				return iterator.hasNext();
 			}
 
+			@Override
 			public URL nextElement() {
 				return iterator.next();
 			}

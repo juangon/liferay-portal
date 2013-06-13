@@ -15,12 +15,10 @@
 package com.liferay.portal.service;
 
 /**
- * <p>
- * This class is a wrapper for {@link LayoutBranchService}.
- * </p>
+ * Provides a wrapper for {@link LayoutBranchService}.
  *
- * @author    Brian Wing Shun Chan
- * @see       LayoutBranchService
+ * @author Brian Wing Shun Chan
+ * @see LayoutBranchService
  * @generated
  */
 public class LayoutBranchServiceWrapper implements LayoutBranchService,
@@ -34,6 +32,7 @@ public class LayoutBranchServiceWrapper implements LayoutBranchService,
 	*
 	* @return the Spring bean ID for this bean
 	*/
+	@Override
 	public java.lang.String getBeanIdentifier() {
 		return _layoutBranchService.getBeanIdentifier();
 	}
@@ -43,10 +42,12 @@ public class LayoutBranchServiceWrapper implements LayoutBranchService,
 	*
 	* @param beanIdentifier the Spring bean ID for this bean
 	*/
+	@Override
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		_layoutBranchService.setBeanIdentifier(beanIdentifier);
 	}
 
+	@Override
 	public com.liferay.portal.model.LayoutBranch addLayoutBranch(
 		long layoutRevisionId, java.lang.String name,
 		java.lang.String description, boolean master,
@@ -57,12 +58,14 @@ public class LayoutBranchServiceWrapper implements LayoutBranchService,
 			description, master, serviceContext);
 	}
 
+	@Override
 	public void deleteLayoutBranch(long layoutBranchId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_layoutBranchService.deleteLayoutBranch(layoutBranchId);
 	}
 
+	@Override
 	public com.liferay.portal.model.LayoutBranch updateLayoutBranch(
 		long layoutBranchId, java.lang.String name,
 		java.lang.String description,
@@ -88,10 +91,12 @@ public class LayoutBranchServiceWrapper implements LayoutBranchService,
 		_layoutBranchService = layoutBranchService;
 	}
 
+	@Override
 	public LayoutBranchService getWrappedService() {
 		return _layoutBranchService;
 	}
 
+	@Override
 	public void setWrappedService(LayoutBranchService layoutBranchService) {
 		_layoutBranchService = layoutBranchService;
 	}

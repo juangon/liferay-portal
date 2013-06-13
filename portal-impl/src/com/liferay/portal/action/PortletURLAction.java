@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletURLImpl;
 
@@ -39,7 +40,8 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * @author Eduardo Lundgren
+ * @author     Eduardo Lundgren
+ * @deprecated As of 6.2.0 with no direct replacement
  */
 public class PortletURLAction extends Action {
 
@@ -48,6 +50,12 @@ public class PortletURLAction extends Action {
 			ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response)
 		throws Exception {
+
+		if (!PropsValues.PORTLET_URL_GENERATE_BY_PATH_ENABLED) {
+			response.sendError(HttpServletResponse.SC_FORBIDDEN);
+
+			return null;
+		}
 
 		try {
 			String portletURL = getPortletURL(request);

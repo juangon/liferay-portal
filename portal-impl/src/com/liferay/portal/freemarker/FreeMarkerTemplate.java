@@ -66,16 +66,19 @@ public class FreeMarkerTemplate extends AbstractTemplate {
 		_configuration = configuration;
 	}
 
+	@Override
 	public Object get(String key) {
 		return _context.get(key);
 	}
 
+	@Override
 	public String[] getKeys() {
 		Set<String> keys = _context.keySet();
 
 		return keys.toArray(new String[keys.size()]);
 	}
 
+	@Override
 	public void put(String key, Object value) {
 		if (value == null) {
 			return;
@@ -160,6 +163,7 @@ public class FreeMarkerTemplate extends AbstractTemplate {
 			_templateResource = templateResource;
 		}
 
+		@Override
 		public Template run() throws Exception {
 			return _configuration.getTemplate(
 				getTemplateResourceUUID(_templateResource),

@@ -52,10 +52,12 @@ import javax.portlet.PortletURL;
 public abstract class BaseSocialActivityInterpreter
 	implements SocialActivityInterpreter {
 
+	@Override
 	public String getSelector() {
 		return StringPool.BLANK;
 	}
 
+	@Override
 	public SocialActivityFeedEntry interpret(
 		SocialActivity activity, ServiceContext serviceContext) {
 
@@ -69,19 +71,12 @@ public abstract class BaseSocialActivityInterpreter
 		return null;
 	}
 
+	@Override
 	public SocialActivityFeedEntry interpret(
 		SocialActivitySet activitySet, ServiceContext serviceContext) {
 
 		try {
-			List<SocialActivity> activities =
-				SocialActivityLocalServiceUtil.getActivitySetActivities(
-					activitySet.getActivitySetId(), 0, 1);
-
-			if (!activities.isEmpty()) {
-				SocialActivity activity = activities.get(0);
-
-				return doInterpret(activity, serviceContext);
-			}
+			return doInterpret(activitySet, serviceContext);
 		}
 		catch (Exception e) {
 			_log.error("Unable to interpret activity set", e);
@@ -90,6 +85,7 @@ public abstract class BaseSocialActivityInterpreter
 		return null;
 	}
 
+	@Override
 	public void updateActivitySet(long activityId)
 		throws PortalException, SystemException {
 
@@ -175,6 +171,23 @@ public abstract class BaseSocialActivityInterpreter
 		throws Exception {
 
 		return _deprecatedMarkerSocialActivityFeedEntry;
+	}
+
+	protected SocialActivityFeedEntry doInterpret(
+			SocialActivitySet activitySet, ServiceContext serviceContext)
+		throws Exception {
+
+		List<SocialActivity> activities =
+			SocialActivityLocalServiceUtil.getActivitySetActivities(
+				activitySet.getActivitySetId(), 0, 1);
+
+		if (!activities.isEmpty()) {
+			SocialActivity activity = activities.get(0);
+
+			return doInterpret(activity, serviceContext);
+		}
+
+		return null;
 	}
 
 	protected long getActivitySetId(long activityId) {

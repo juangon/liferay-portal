@@ -23,26 +23,32 @@ public class NumberIncrement implements Increment<Number> {
 		_value = value;
 	}
 
+	@Override
 	public void decrease(Number delta) {
 		_value = subtract(delta);
 	}
 
+	@Override
 	public Increment<Number> decreaseForNew(Number delta) {
 		return new NumberIncrement(subtract(delta));
 	}
 
+	@Override
 	public Number getValue() {
 		return _value;
 	}
 
+	@Override
 	public void increase(Number delta) {
 		_value = add(delta);
 	}
 
+	@Override
 	public Increment<Number> increaseForNew(Number delta) {
 		return new NumberIncrement(add(delta));
 	}
 
+	@Override
 	public void setValue(Number value) {
 		_value = value;
 	}

@@ -113,6 +113,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * @return the matching workflow definition links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WorkflowDefinitionLink> findByCompanyId(long companyId)
 		throws SystemException {
 		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -132,6 +133,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * @return the range of matching workflow definition links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WorkflowDefinitionLink> findByCompanyId(long companyId,
 		int start, int end) throws SystemException {
 		return findByCompanyId(companyId, start, end, null);
@@ -151,6 +153,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * @return the ordered range of matching workflow definition links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WorkflowDefinitionLink> findByCompanyId(long companyId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -258,6 +261,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * @throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException if a matching workflow definition link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WorkflowDefinitionLink findByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchWorkflowDefinitionLinkException, SystemException {
@@ -288,6 +292,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * @return the first matching workflow definition link, or <code>null</code> if a matching workflow definition link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WorkflowDefinitionLink fetchByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<WorkflowDefinitionLink> list = findByCompanyId(companyId, 0, 1,
@@ -309,6 +314,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * @throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException if a matching workflow definition link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WorkflowDefinitionLink findByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchWorkflowDefinitionLinkException, SystemException {
@@ -339,6 +345,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * @return the last matching workflow definition link, or <code>null</code> if a matching workflow definition link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WorkflowDefinitionLink fetchByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByCompanyId(companyId);
@@ -363,6 +370,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * @throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException if a workflow definition link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WorkflowDefinitionLink[] findByCompanyId_PrevAndNext(
 		long workflowDefinitionLinkId, long companyId,
 		OrderByComparator orderByComparator)
@@ -505,6 +513,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * @param companyId the company ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (WorkflowDefinitionLink workflowDefinitionLink : findByCompanyId(
 				companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
@@ -519,6 +528,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * @return the number of matching workflow definition links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByCompanyId(long companyId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMPANYID;
 
@@ -604,6 +614,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * @return the matching workflow definition links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WorkflowDefinitionLink> findByC_W_W(long companyId,
 		String workflowDefinitionName, int workflowDefinitionVersion)
 		throws SystemException {
@@ -627,6 +638,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * @return the range of matching workflow definition links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WorkflowDefinitionLink> findByC_W_W(long companyId,
 		String workflowDefinitionName, int workflowDefinitionVersion,
 		int start, int end) throws SystemException {
@@ -650,6 +662,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * @return the ordered range of matching workflow definition links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WorkflowDefinitionLink> findByC_W_W(long companyId,
 		String workflowDefinitionName, int workflowDefinitionVersion,
 		int start, int end, OrderByComparator orderByComparator)
@@ -791,6 +804,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * @throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException if a matching workflow definition link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WorkflowDefinitionLink findByC_W_W_First(long companyId,
 		String workflowDefinitionName, int workflowDefinitionVersion,
 		OrderByComparator orderByComparator)
@@ -831,6 +845,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * @return the first matching workflow definition link, or <code>null</code> if a matching workflow definition link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WorkflowDefinitionLink fetchByC_W_W_First(long companyId,
 		String workflowDefinitionName, int workflowDefinitionVersion,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -856,6 +871,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * @throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException if a matching workflow definition link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WorkflowDefinitionLink findByC_W_W_Last(long companyId,
 		String workflowDefinitionName, int workflowDefinitionVersion,
 		OrderByComparator orderByComparator)
@@ -896,6 +912,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * @return the last matching workflow definition link, or <code>null</code> if a matching workflow definition link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WorkflowDefinitionLink fetchByC_W_W_Last(long companyId,
 		String workflowDefinitionName, int workflowDefinitionVersion,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -925,6 +942,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * @throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException if a workflow definition link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WorkflowDefinitionLink[] findByC_W_W_PrevAndNext(
 		long workflowDefinitionLinkId, long companyId,
 		String workflowDefinitionName, int workflowDefinitionVersion,
@@ -1095,6 +1113,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * @param workflowDefinitionVersion the workflow definition version
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByC_W_W(long companyId, String workflowDefinitionName,
 		int workflowDefinitionVersion) throws SystemException {
 		for (WorkflowDefinitionLink workflowDefinitionLink : findByC_W_W(
@@ -1113,6 +1132,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * @return the number of matching workflow definition links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByC_W_W(long companyId, String workflowDefinitionName,
 		int workflowDefinitionVersion) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_W_W;
@@ -1222,6 +1242,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * @throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException if a matching workflow definition link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WorkflowDefinitionLink findByG_C_C_C_T(long groupId, long companyId,
 		long classNameId, long classPK, long typePK)
 		throws NoSuchWorkflowDefinitionLinkException, SystemException {
@@ -1271,6 +1292,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * @return the matching workflow definition link, or <code>null</code> if a matching workflow definition link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WorkflowDefinitionLink fetchByG_C_C_C_T(long groupId,
 		long companyId, long classNameId, long classPK, long typePK)
 		throws SystemException {
@@ -1290,6 +1312,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * @return the matching workflow definition link, or <code>null</code> if a matching workflow definition link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WorkflowDefinitionLink fetchByG_C_C_C_T(long groupId,
 		long companyId, long classNameId, long classPK, long typePK,
 		boolean retrieveFromCache) throws SystemException {
@@ -1412,6 +1435,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * @return the workflow definition link that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WorkflowDefinitionLink removeByG_C_C_C_T(long groupId,
 		long companyId, long classNameId, long classPK, long typePK)
 		throws NoSuchWorkflowDefinitionLinkException, SystemException {
@@ -1432,6 +1456,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * @return the number of matching workflow definition links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_C_C_C_T(long groupId, long companyId, long classNameId,
 		long classPK, long typePK) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_C_C_C_T;
@@ -1507,6 +1532,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 *
 	 * @param workflowDefinitionLink the workflow definition link
 	 */
+	@Override
 	public void cacheResult(WorkflowDefinitionLink workflowDefinitionLink) {
 		EntityCacheUtil.putResult(WorkflowDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
 			WorkflowDefinitionLinkImpl.class,
@@ -1529,6 +1555,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 *
 	 * @param workflowDefinitionLinks the workflow definition links
 	 */
+	@Override
 	public void cacheResult(
 		List<WorkflowDefinitionLink> workflowDefinitionLinks) {
 		for (WorkflowDefinitionLink workflowDefinitionLink : workflowDefinitionLinks) {
@@ -1670,6 +1697,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * @param workflowDefinitionLinkId the primary key for the new workflow definition link
 	 * @return the new workflow definition link
 	 */
+	@Override
 	public WorkflowDefinitionLink create(long workflowDefinitionLinkId) {
 		WorkflowDefinitionLink workflowDefinitionLink = new WorkflowDefinitionLinkImpl();
 
@@ -1687,6 +1715,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * @throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException if a workflow definition link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WorkflowDefinitionLink remove(long workflowDefinitionLinkId)
 		throws NoSuchWorkflowDefinitionLinkException, SystemException {
 		return remove((Serializable)workflowDefinitionLinkId);
@@ -1920,6 +1949,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * @throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException if a workflow definition link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WorkflowDefinitionLink findByPrimaryKey(
 		long workflowDefinitionLinkId)
 		throws NoSuchWorkflowDefinitionLinkException, SystemException {
@@ -1982,6 +2012,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * @return the workflow definition link, or <code>null</code> if a workflow definition link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WorkflowDefinitionLink fetchByPrimaryKey(
 		long workflowDefinitionLinkId) throws SystemException {
 		return fetchByPrimaryKey((Serializable)workflowDefinitionLinkId);
@@ -1993,6 +2024,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * @return the workflow definition links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WorkflowDefinitionLink> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -2009,6 +2041,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * @return the range of workflow definition links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WorkflowDefinitionLink> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
@@ -2027,6 +2060,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * @return the ordered range of workflow definition links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WorkflowDefinitionLink> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -2112,6 +2146,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (WorkflowDefinitionLink workflowDefinitionLink : findAll()) {
 			remove(workflowDefinitionLink);
@@ -2124,6 +2159,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * @return the number of workflow definition links
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -2210,6 +2246,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 
 	private static CacheModel<WorkflowDefinitionLink> _nullWorkflowDefinitionLinkCacheModel =
 		new CacheModel<WorkflowDefinitionLink>() {
+			@Override
 			public WorkflowDefinitionLink toEntityModel() {
 				return _nullWorkflowDefinitionLink;
 			}

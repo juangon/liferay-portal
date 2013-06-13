@@ -1,9 +1,4 @@
 .portlet-asset-publisher {
-	.add-asset-selector {
-		margin-bottom: 1em;
-		overflow: auto;
-	}
-
 	.asset-abstract {
 		.asset-content p {
 			margin-bottom: 0;
@@ -69,12 +64,6 @@
 
 	.asset-more {
 		clear: left;
-	}
-
-	.asset-entries-group-label {
-		background-color: #DDD;
-		clear: both;
-		padding: 3px;
 	}
 
 	.asset-small-image {
@@ -215,7 +204,7 @@
 }
 
 .portlet-configuration {
-	.aui-form {
+	.form {
 		.queryRules fieldset {
 			padding: 0;
 
@@ -233,7 +222,7 @@
 				background-color: #DFFCCB;
 			}
 
-			.aui-field {
+			.field {
 				line-height: 2;
 
 				&.tags-selector, &.categories-selector {
@@ -243,6 +232,10 @@
 					width: 100%;
 				}
 			}
+		}
+
+		.asset-query-rule-error {
+			background-color: #fee5e2;
 		}
 
 		.general-display-settings {

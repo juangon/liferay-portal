@@ -75,6 +75,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 * @return the uuid of this journal article
 	 */
 	@AutoEscape
+	@Override
 	public String getUuid();
 
 	/**
@@ -82,6 +83,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 *
 	 * @param uuid the uuid of this journal article
 	 */
+	@Override
 	public void setUuid(String uuid);
 
 	/**
@@ -103,6 +105,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 *
 	 * @return the resource prim key of this journal article
 	 */
+	@Override
 	public long getResourcePrimKey();
 
 	/**
@@ -110,8 +113,10 @@ public interface JournalArticleModel extends AttachedModel,
 	 *
 	 * @param resourcePrimKey the resource prim key of this journal article
 	 */
+	@Override
 	public void setResourcePrimKey(long resourcePrimKey);
 
+	@Override
 	public boolean isResourceMain();
 
 	/**
@@ -119,6 +124,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 *
 	 * @return the group ID of this journal article
 	 */
+	@Override
 	public long getGroupId();
 
 	/**
@@ -126,6 +132,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 *
 	 * @param groupId the group ID of this journal article
 	 */
+	@Override
 	public void setGroupId(long groupId);
 
 	/**
@@ -133,6 +140,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 *
 	 * @return the company ID of this journal article
 	 */
+	@Override
 	public long getCompanyId();
 
 	/**
@@ -140,6 +148,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 *
 	 * @param companyId the company ID of this journal article
 	 */
+	@Override
 	public void setCompanyId(long companyId);
 
 	/**
@@ -147,6 +156,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 *
 	 * @return the user ID of this journal article
 	 */
+	@Override
 	public long getUserId();
 
 	/**
@@ -154,6 +164,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 *
 	 * @param userId the user ID of this journal article
 	 */
+	@Override
 	public void setUserId(long userId);
 
 	/**
@@ -162,6 +173,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 * @return the user uuid of this journal article
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public String getUserUuid() throws SystemException;
 
 	/**
@@ -169,6 +181,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 *
 	 * @param userUuid the user uuid of this journal article
 	 */
+	@Override
 	public void setUserUuid(String userUuid);
 
 	/**
@@ -177,6 +190,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 * @return the user name of this journal article
 	 */
 	@AutoEscape
+	@Override
 	public String getUserName();
 
 	/**
@@ -184,6 +198,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 *
 	 * @param userName the user name of this journal article
 	 */
+	@Override
 	public void setUserName(String userName);
 
 	/**
@@ -191,6 +206,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 *
 	 * @return the create date of this journal article
 	 */
+	@Override
 	public Date getCreateDate();
 
 	/**
@@ -198,6 +214,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 *
 	 * @param createDate the create date of this journal article
 	 */
+	@Override
 	public void setCreateDate(Date createDate);
 
 	/**
@@ -205,6 +222,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 *
 	 * @return the modified date of this journal article
 	 */
+	@Override
 	public Date getModifiedDate();
 
 	/**
@@ -212,6 +230,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 *
 	 * @param modifiedDate the modified date of this journal article
 	 */
+	@Override
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
@@ -233,6 +252,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 *
 	 * @return the fully qualified class name of this journal article
 	 */
+	@Override
 	public String getClassName();
 
 	public void setClassName(String className);
@@ -242,6 +262,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 *
 	 * @return the class name ID of this journal article
 	 */
+	@Override
 	public long getClassNameId();
 
 	/**
@@ -249,6 +270,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 *
 	 * @param classNameId the class name ID of this journal article
 	 */
+	@Override
 	public void setClassNameId(long classNameId);
 
 	/**
@@ -256,6 +278,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 *
 	 * @return the class p k of this journal article
 	 */
+	@Override
 	public long getClassPK();
 
 	/**
@@ -263,6 +286,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 *
 	 * @param classPK the class p k of this journal article
 	 */
+	@Override
 	public void setClassPK(long classPK);
 
 	/**
@@ -699,6 +723,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 *
 	 * @return the status of this journal article
 	 */
+	@Override
 	public int getStatus();
 
 	/**
@@ -706,6 +731,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 *
 	 * @param status the status of this journal article
 	 */
+	@Override
 	public void setStatus(int status);
 
 	/**
@@ -713,6 +739,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 *
 	 * @return the status by user ID of this journal article
 	 */
+	@Override
 	public long getStatusByUserId();
 
 	/**
@@ -720,6 +747,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 *
 	 * @param statusByUserId the status by user ID of this journal article
 	 */
+	@Override
 	public void setStatusByUserId(long statusByUserId);
 
 	/**
@@ -728,6 +756,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 * @return the status by user uuid of this journal article
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public String getStatusByUserUuid() throws SystemException;
 
 	/**
@@ -735,6 +764,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 *
 	 * @param statusByUserUuid the status by user uuid of this journal article
 	 */
+	@Override
 	public void setStatusByUserUuid(String statusByUserUuid);
 
 	/**
@@ -743,6 +773,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 * @return the status by user name of this journal article
 	 */
 	@AutoEscape
+	@Override
 	public String getStatusByUserName();
 
 	/**
@@ -750,6 +781,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 *
 	 * @param statusByUserName the status by user name of this journal article
 	 */
+	@Override
 	public void setStatusByUserName(String statusByUserName);
 
 	/**
@@ -757,6 +789,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 *
 	 * @return the status date of this journal article
 	 */
+	@Override
 	public Date getStatusDate();
 
 	/**
@@ -764,11 +797,13 @@ public interface JournalArticleModel extends AttachedModel,
 	 *
 	 * @param statusDate the status date of this journal article
 	 */
+	@Override
 	public void setStatusDate(Date statusDate);
 
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #isApproved()}
 	 */
+	@Override
 	public boolean getApproved();
 
 	/**
@@ -776,6 +811,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 *
 	 * @return <code>true</code> if this journal article is approved; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isApproved();
 
 	/**
@@ -783,6 +819,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 *
 	 * @return <code>true</code> if this journal article is denied; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isDenied();
 
 	/**
@@ -790,6 +827,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 *
 	 * @return <code>true</code> if this journal article is a draft; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isDraft();
 
 	/**
@@ -797,6 +835,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 *
 	 * @return <code>true</code> if this journal article is expired; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isExpired();
 
 	/**
@@ -804,6 +843,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 *
 	 * @return <code>true</code> if this journal article is inactive; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isInactive();
 
 	/**
@@ -811,6 +851,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 *
 	 * @return <code>true</code> if this journal article is incomplete; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isIncomplete();
 
 	/**
@@ -818,6 +859,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 *
 	 * @return <code>true</code> if this journal article is in the Recycle Bin; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isInTrash();
 
 	/**
@@ -825,6 +867,7 @@ public interface JournalArticleModel extends AttachedModel,
 	 *
 	 * @return <code>true</code> if this journal article is pending; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isPending();
 
 	/**
@@ -832,46 +875,66 @@ public interface JournalArticleModel extends AttachedModel,
 	 *
 	 * @return <code>true</code> if this journal article is scheduled; <code>false</code> otherwise
 	 */
+	@Override
 	public boolean isScheduled();
 
+	@Override
 	public boolean isNew();
 
+	@Override
 	public void setNew(boolean n);
 
+	@Override
 	public boolean isCachedModel();
 
+	@Override
 	public void setCachedModel(boolean cachedModel);
 
+	@Override
 	public boolean isEscapedModel();
 
+	@Override
 	public Serializable getPrimaryKeyObj();
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
+	@Override
 	public ExpandoBridge getExpandoBridge();
 
+	@Override
 	public void setExpandoBridgeAttributes(BaseModel<?> baseModel);
 
+	@Override
 	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge);
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext);
 
 	public void prepareLocalizedFieldsForImport(Locale defaultImportLocale)
 		throws LocaleException;
 
+	@Override
 	public Object clone();
 
+	@Override
 	public int compareTo(JournalArticle journalArticle);
 
+	@Override
 	public int hashCode();
 
+	@Override
 	public CacheModel<JournalArticle> toCacheModel();
 
+	@Override
 	public JournalArticle toEscapedModel();
 
+	@Override
 	public JournalArticle toUnescapedModel();
 
+	@Override
 	public String toString();
 
+	@Override
 	public String toXmlString();
 }

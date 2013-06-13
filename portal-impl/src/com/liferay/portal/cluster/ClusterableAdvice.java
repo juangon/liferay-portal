@@ -184,10 +184,12 @@ public class ClusterableAdvice
 
 	private static Clusterable _nullClusterable = new Clusterable() {
 
+			@Override
 			public Class<? extends ClusterInvokeAcceptor> acceptor() {
 				return null;
 			}
 
+			@Override
 			public Class<? extends Annotation> annotationType() {
 				return Clusterable.class;
 			}

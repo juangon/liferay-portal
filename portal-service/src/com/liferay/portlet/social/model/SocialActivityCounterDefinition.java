@@ -30,6 +30,14 @@ public class SocialActivityCounterDefinition implements Serializable {
 
 	public static final int LIMIT_PERIOD_PERIOD = 3;
 
+	public SocialActivityCounterDefinition() {
+	}
+
+	public SocialActivityCounterDefinition(String name, int ownerType) {
+		_name = name;
+		_ownerType = ownerType;
+	}
+
 	@Override
 	public SocialActivityCounterDefinition clone() {
 		SocialActivityCounterDefinition activityCounterDefinition =

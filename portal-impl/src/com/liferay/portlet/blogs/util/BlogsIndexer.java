@@ -66,10 +66,12 @@ public class BlogsIndexer extends BaseIndexer {
 		document.addKeyword(Field.RELATED_ENTRY, true);
 	}
 
+	@Override
 	public String[] getClassNames() {
 		return CLASS_NAMES;
 	}
 
+	@Override
 	public String getPortletId() {
 		return PORTLET_ID;
 	}
@@ -114,7 +116,7 @@ public class BlogsIndexer extends BaseIndexer {
 		document.addText(
 			Field.CONTENT, HtmlUtil.extractText(entry.getContent()));
 		document.addText(Field.DESCRIPTION, entry.getDescription());
-		document.addDate(Field.MODIFIED_DATE, entry.getDisplayDate());
+		document.addDate(Field.MODIFIED_DATE, entry.getModifiedDate());
 		document.addText(Field.TITLE, entry.getTitle());
 
 		return document;

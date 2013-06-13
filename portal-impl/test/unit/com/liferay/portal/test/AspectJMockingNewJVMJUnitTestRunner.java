@@ -123,6 +123,7 @@ public class AspectJMockingNewJVMJUnitTestRunner extends NewJVMJUnitTestRunner {
 			_toString = processCallable.toString();
 		}
 
+		@Override
 		public Serializable call() throws ProcessException {
 			attachProcess("Attached " + toString());
 

@@ -16,8 +16,6 @@ package com.liferay.portal.kernel.resiliency.spi.agent;
 
 import com.liferay.portal.kernel.resiliency.PortalResiliencyException;
 import com.liferay.portal.kernel.resiliency.spi.SPI;
-import com.liferay.portal.kernel.resiliency.spi.agent.annotation.Direction;
-import com.liferay.portal.kernel.resiliency.spi.agent.annotation.Distributed;
 
 import java.io.IOException;
 
@@ -28,34 +26,6 @@ import javax.servlet.http.HttpServletResponse;
  * @author Shuyang Zhou
  */
 public interface SPIAgent {
-
-	@Distributed(direction = Direction.RESPONSE)
-	public static final String SPI_AGENT_ACTION_RESULT =
-		"SPI_AGENT_ACTION_RESULT";
-
-	@Distributed(direction = Direction.REQUEST)
-	public static final String SPI_AGENT_EVENT = "SPI_AGENT_EVENT";
-
-	@Distributed(direction = Direction.RESPONSE)
-	public static final String SPI_AGENT_EVENT_RESULT =
-		"SPI_AGENT_EVENT_RESULT";
-
-	@Distributed(direction = Direction.REQUEST)
-	public static final String SPI_AGENT_LAYOUT = "SPI_AGENT__LAYOUT";
-
-	@Distributed(direction = Direction.RESPONSE)
-	public static final String SPI_AGENT_LAYOUT_TYPE_SETTINGS =
-		"SPI_AGENT_LAYOUT_TYPE_SETTINGS";
-
-	@Distributed(direction = Direction.REQUEST)
-	public static final String SPI_AGENT_LIFECYCLE = "SPI_AGENT_LIFECYCLE";
-
-	@Distributed(direction = Direction.REQUEST)
-	public static final String SPI_AGENT_PORTLET = "SPI_AGENT_PORTLET";
-
-	public static final String SPI_AGENT_REQUEST = "SPI_AGENT_REQUEST";
-
-	public static final String SPI_AGENT_RESPONSE = "SPI_AGENT_RESPONSE";
 
 	public void destroy();
 

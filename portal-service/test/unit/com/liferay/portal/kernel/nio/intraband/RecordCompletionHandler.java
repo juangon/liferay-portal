@@ -26,12 +26,14 @@ import java.util.concurrent.TimeUnit;
  */
 public class RecordCompletionHandler<A> implements CompletionHandler<A> {
 
+	@Override
 	public void delivered(A attachment) {
 		_attachment = attachment;
 
 		_deliveredCountDownLatch.countDown();
 	}
 
+	@Override
 	public void failed(A attachment, IOException ioe) {
 		_attachment = attachment;
 		_ioe = ioe;
@@ -47,18 +49,21 @@ public class RecordCompletionHandler<A> implements CompletionHandler<A> {
 		return _ioe;
 	}
 
+	@Override
 	public void replied(A attachment, Datagram datagram) {
 		_attachment = attachment;
 
 		_repliedCountDownLatch.countDown();
 	}
 
+	@Override
 	public void submitted(A attachment) {
 		_attachment = attachment;
 
 		_submittedCountDownLatch.countDown();
 	}
 
+	@Override
 	public void timeouted(A attachment) {
 		_attachment = attachment;
 

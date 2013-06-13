@@ -4,14 +4,13 @@
 		display: block;
 	}
 
-	.choice {
-		label {
-			float: left;
-			margin: 0.5em 0.5em 0 0;
+	.last-choice {
+		.btn-delete {
+			margin-bottom: 10px;
 		}
 
-		.aui-field {
-			float: left;
+		.control-group {
+			margin-bottom: 0;
 		}
 	}
 }

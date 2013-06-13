@@ -95,6 +95,7 @@ public class MBMessageCacheModel implements CacheModel<MBMessage>,
 		return sb.toString();
 	}
 
+	@Override
 	public MBMessage toEntityModel() {
 		MBMessageImpl mbMessageImpl = new MBMessageImpl();
 
@@ -185,6 +186,7 @@ public class MBMessageCacheModel implements CacheModel<MBMessage>,
 		return mbMessageImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		messageId = objectInput.readLong();
@@ -213,6 +215,7 @@ public class MBMessageCacheModel implements CacheModel<MBMessage>,
 		statusDate = objectInput.readLong();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

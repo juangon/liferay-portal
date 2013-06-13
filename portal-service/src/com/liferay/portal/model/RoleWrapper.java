@@ -23,8 +23,8 @@ import java.util.Map;
  * This class is a wrapper for {@link Role}.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       Role
+ * @author Brian Wing Shun Chan
+ * @see Role
  * @generated
  */
 public class RoleWrapper implements Role, ModelWrapper<Role> {
@@ -32,14 +32,17 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 		_role = role;
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return Role.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return Role.class.getName();
 	}
 
+	@Override
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
@@ -61,6 +64,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 		return attributes;
 	}
 
+	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 		String uuid = (String)attributes.get("uuid");
 
@@ -152,6 +156,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	*
 	* @return the primary key of this role
 	*/
+	@Override
 	public long getPrimaryKey() {
 		return _role.getPrimaryKey();
 	}
@@ -161,6 +166,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	*
 	* @param primaryKey the primary key of this role
 	*/
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_role.setPrimaryKey(primaryKey);
 	}
@@ -170,6 +176,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	*
 	* @return the uuid of this role
 	*/
+	@Override
 	public java.lang.String getUuid() {
 		return _role.getUuid();
 	}
@@ -179,6 +186,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	*
 	* @param uuid the uuid of this role
 	*/
+	@Override
 	public void setUuid(java.lang.String uuid) {
 		_role.setUuid(uuid);
 	}
@@ -188,6 +196,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	*
 	* @return the role ID of this role
 	*/
+	@Override
 	public long getRoleId() {
 		return _role.getRoleId();
 	}
@@ -197,6 +206,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	*
 	* @param roleId the role ID of this role
 	*/
+	@Override
 	public void setRoleId(long roleId) {
 		_role.setRoleId(roleId);
 	}
@@ -206,6 +216,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	*
 	* @return the company ID of this role
 	*/
+	@Override
 	public long getCompanyId() {
 		return _role.getCompanyId();
 	}
@@ -215,6 +226,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	*
 	* @param companyId the company ID of this role
 	*/
+	@Override
 	public void setCompanyId(long companyId) {
 		_role.setCompanyId(companyId);
 	}
@@ -224,6 +236,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	*
 	* @return the user ID of this role
 	*/
+	@Override
 	public long getUserId() {
 		return _role.getUserId();
 	}
@@ -233,6 +246,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	*
 	* @param userId the user ID of this role
 	*/
+	@Override
 	public void setUserId(long userId) {
 		_role.setUserId(userId);
 	}
@@ -243,6 +257,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	* @return the user uuid of this role
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public java.lang.String getUserUuid()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _role.getUserUuid();
@@ -253,6 +268,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	*
 	* @param userUuid the user uuid of this role
 	*/
+	@Override
 	public void setUserUuid(java.lang.String userUuid) {
 		_role.setUserUuid(userUuid);
 	}
@@ -262,6 +278,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	*
 	* @return the user name of this role
 	*/
+	@Override
 	public java.lang.String getUserName() {
 		return _role.getUserName();
 	}
@@ -271,6 +288,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	*
 	* @param userName the user name of this role
 	*/
+	@Override
 	public void setUserName(java.lang.String userName) {
 		_role.setUserName(userName);
 	}
@@ -280,6 +298,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	*
 	* @return the create date of this role
 	*/
+	@Override
 	public java.util.Date getCreateDate() {
 		return _role.getCreateDate();
 	}
@@ -289,6 +308,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	*
 	* @param createDate the create date of this role
 	*/
+	@Override
 	public void setCreateDate(java.util.Date createDate) {
 		_role.setCreateDate(createDate);
 	}
@@ -298,6 +318,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	*
 	* @return the modified date of this role
 	*/
+	@Override
 	public java.util.Date getModifiedDate() {
 		return _role.getModifiedDate();
 	}
@@ -307,6 +328,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	*
 	* @param modifiedDate the modified date of this role
 	*/
+	@Override
 	public void setModifiedDate(java.util.Date modifiedDate) {
 		_role.setModifiedDate(modifiedDate);
 	}
@@ -316,10 +338,12 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	*
 	* @return the fully qualified class name of this role
 	*/
+	@Override
 	public java.lang.String getClassName() {
 		return _role.getClassName();
 	}
 
+	@Override
 	public void setClassName(java.lang.String className) {
 		_role.setClassName(className);
 	}
@@ -329,6 +353,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	*
 	* @return the class name ID of this role
 	*/
+	@Override
 	public long getClassNameId() {
 		return _role.getClassNameId();
 	}
@@ -338,6 +363,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	*
 	* @param classNameId the class name ID of this role
 	*/
+	@Override
 	public void setClassNameId(long classNameId) {
 		_role.setClassNameId(classNameId);
 	}
@@ -347,6 +373,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	*
 	* @return the class p k of this role
 	*/
+	@Override
 	public long getClassPK() {
 		return _role.getClassPK();
 	}
@@ -356,6 +383,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	*
 	* @param classPK the class p k of this role
 	*/
+	@Override
 	public void setClassPK(long classPK) {
 		_role.setClassPK(classPK);
 	}
@@ -365,6 +393,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	*
 	* @return the name of this role
 	*/
+	@Override
 	public java.lang.String getName() {
 		return _role.getName();
 	}
@@ -374,6 +403,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	*
 	* @param name the name of this role
 	*/
+	@Override
 	public void setName(java.lang.String name) {
 		_role.setName(name);
 	}
@@ -383,6 +413,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	*
 	* @return the title of this role
 	*/
+	@Override
 	public java.lang.String getTitle() {
 		return _role.getTitle();
 	}
@@ -393,6 +424,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	* @param locale the locale of the language
 	* @return the localized title of this role
 	*/
+	@Override
 	public java.lang.String getTitle(java.util.Locale locale) {
 		return _role.getTitle(locale);
 	}
@@ -404,6 +436,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	* @param useDefault whether to use the default language if no localization exists for the requested language
 	* @return the localized title of this role. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
 	*/
+	@Override
 	public java.lang.String getTitle(java.util.Locale locale, boolean useDefault) {
 		return _role.getTitle(locale, useDefault);
 	}
@@ -414,6 +447,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	* @param languageId the ID of the language
 	* @return the localized title of this role
 	*/
+	@Override
 	public java.lang.String getTitle(java.lang.String languageId) {
 		return _role.getTitle(languageId);
 	}
@@ -425,15 +459,18 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	* @param useDefault whether to use the default language if no localization exists for the requested language
 	* @return the localized title of this role
 	*/
+	@Override
 	public java.lang.String getTitle(java.lang.String languageId,
 		boolean useDefault) {
 		return _role.getTitle(languageId, useDefault);
 	}
 
+	@Override
 	public java.lang.String getTitleCurrentLanguageId() {
 		return _role.getTitleCurrentLanguageId();
 	}
 
+	@Override
 	public java.lang.String getTitleCurrentValue() {
 		return _role.getTitleCurrentValue();
 	}
@@ -443,6 +480,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	*
 	* @return the locales and localized titles of this role
 	*/
+	@Override
 	public java.util.Map<java.util.Locale, java.lang.String> getTitleMap() {
 		return _role.getTitleMap();
 	}
@@ -452,6 +490,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	*
 	* @param title the title of this role
 	*/
+	@Override
 	public void setTitle(java.lang.String title) {
 		_role.setTitle(title);
 	}
@@ -462,6 +501,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	* @param title the localized title of this role
 	* @param locale the locale of the language
 	*/
+	@Override
 	public void setTitle(java.lang.String title, java.util.Locale locale) {
 		_role.setTitle(title, locale);
 	}
@@ -473,11 +513,13 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	* @param locale the locale of the language
 	* @param defaultLocale the default locale
 	*/
+	@Override
 	public void setTitle(java.lang.String title, java.util.Locale locale,
 		java.util.Locale defaultLocale) {
 		_role.setTitle(title, locale, defaultLocale);
 	}
 
+	@Override
 	public void setTitleCurrentLanguageId(java.lang.String languageId) {
 		_role.setTitleCurrentLanguageId(languageId);
 	}
@@ -487,6 +529,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	*
 	* @param titleMap the locales and localized titles of this role
 	*/
+	@Override
 	public void setTitleMap(
 		java.util.Map<java.util.Locale, java.lang.String> titleMap) {
 		_role.setTitleMap(titleMap);
@@ -498,6 +541,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	* @param titleMap the locales and localized titles of this role
 	* @param defaultLocale the default locale
 	*/
+	@Override
 	public void setTitleMap(
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.util.Locale defaultLocale) {
@@ -509,6 +553,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	*
 	* @return the description of this role
 	*/
+	@Override
 	public java.lang.String getDescription() {
 		return _role.getDescription();
 	}
@@ -519,6 +564,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	* @param locale the locale of the language
 	* @return the localized description of this role
 	*/
+	@Override
 	public java.lang.String getDescription(java.util.Locale locale) {
 		return _role.getDescription(locale);
 	}
@@ -530,6 +576,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	* @param useDefault whether to use the default language if no localization exists for the requested language
 	* @return the localized description of this role. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
 	*/
+	@Override
 	public java.lang.String getDescription(java.util.Locale locale,
 		boolean useDefault) {
 		return _role.getDescription(locale, useDefault);
@@ -541,6 +588,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	* @param languageId the ID of the language
 	* @return the localized description of this role
 	*/
+	@Override
 	public java.lang.String getDescription(java.lang.String languageId) {
 		return _role.getDescription(languageId);
 	}
@@ -552,15 +600,18 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	* @param useDefault whether to use the default language if no localization exists for the requested language
 	* @return the localized description of this role
 	*/
+	@Override
 	public java.lang.String getDescription(java.lang.String languageId,
 		boolean useDefault) {
 		return _role.getDescription(languageId, useDefault);
 	}
 
+	@Override
 	public java.lang.String getDescriptionCurrentLanguageId() {
 		return _role.getDescriptionCurrentLanguageId();
 	}
 
+	@Override
 	public java.lang.String getDescriptionCurrentValue() {
 		return _role.getDescriptionCurrentValue();
 	}
@@ -570,6 +621,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	*
 	* @return the locales and localized descriptions of this role
 	*/
+	@Override
 	public java.util.Map<java.util.Locale, java.lang.String> getDescriptionMap() {
 		return _role.getDescriptionMap();
 	}
@@ -579,6 +631,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	*
 	* @param description the description of this role
 	*/
+	@Override
 	public void setDescription(java.lang.String description) {
 		_role.setDescription(description);
 	}
@@ -589,6 +642,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	* @param description the localized description of this role
 	* @param locale the locale of the language
 	*/
+	@Override
 	public void setDescription(java.lang.String description,
 		java.util.Locale locale) {
 		_role.setDescription(description, locale);
@@ -601,11 +655,13 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	* @param locale the locale of the language
 	* @param defaultLocale the default locale
 	*/
+	@Override
 	public void setDescription(java.lang.String description,
 		java.util.Locale locale, java.util.Locale defaultLocale) {
 		_role.setDescription(description, locale, defaultLocale);
 	}
 
+	@Override
 	public void setDescriptionCurrentLanguageId(java.lang.String languageId) {
 		_role.setDescriptionCurrentLanguageId(languageId);
 	}
@@ -615,6 +671,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	*
 	* @param descriptionMap the locales and localized descriptions of this role
 	*/
+	@Override
 	public void setDescriptionMap(
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap) {
 		_role.setDescriptionMap(descriptionMap);
@@ -626,6 +683,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	* @param descriptionMap the locales and localized descriptions of this role
 	* @param defaultLocale the default locale
 	*/
+	@Override
 	public void setDescriptionMap(
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.util.Locale defaultLocale) {
@@ -637,6 +695,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	*
 	* @return the type of this role
 	*/
+	@Override
 	public int getType() {
 		return _role.getType();
 	}
@@ -646,6 +705,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	*
 	* @param type the type of this role
 	*/
+	@Override
 	public void setType(int type) {
 		_role.setType(type);
 	}
@@ -655,6 +715,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	*
 	* @return the subtype of this role
 	*/
+	@Override
 	public java.lang.String getSubtype() {
 		return _role.getSubtype();
 	}
@@ -664,57 +725,70 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	*
 	* @param subtype the subtype of this role
 	*/
+	@Override
 	public void setSubtype(java.lang.String subtype) {
 		_role.setSubtype(subtype);
 	}
 
+	@Override
 	public boolean isNew() {
 		return _role.isNew();
 	}
 
+	@Override
 	public void setNew(boolean n) {
 		_role.setNew(n);
 	}
 
+	@Override
 	public boolean isCachedModel() {
 		return _role.isCachedModel();
 	}
 
+	@Override
 	public void setCachedModel(boolean cachedModel) {
 		_role.setCachedModel(cachedModel);
 	}
 
+	@Override
 	public boolean isEscapedModel() {
 		return _role.isEscapedModel();
 	}
 
+	@Override
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _role.getPrimaryKeyObj();
 	}
 
+	@Override
 	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
 		_role.setPrimaryKeyObj(primaryKeyObj);
 	}
 
+	@Override
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
 		return _role.getExpandoBridge();
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.model.BaseModel<?> baseModel) {
 		_role.setExpandoBridgeAttributes(baseModel);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portlet.expando.model.ExpandoBridge expandoBridge) {
 		_role.setExpandoBridgeAttributes(expandoBridge);
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		_role.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public void prepareLocalizedFieldsForImport(
 		java.util.Locale defaultImportLocale)
 		throws com.liferay.portal.LocaleException {
@@ -726,6 +800,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 		return new RoleWrapper((Role)_role.clone());
 	}
 
+	@Override
 	public int compareTo(com.liferay.portal.model.Role role) {
 		return _role.compareTo(role);
 	}
@@ -735,14 +810,17 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 		return _role.hashCode();
 	}
 
+	@Override
 	public com.liferay.portal.model.CacheModel<com.liferay.portal.model.Role> toCacheModel() {
 		return _role.toCacheModel();
 	}
 
+	@Override
 	public com.liferay.portal.model.Role toEscapedModel() {
 		return new RoleWrapper(_role.toEscapedModel());
 	}
 
+	@Override
 	public com.liferay.portal.model.Role toUnescapedModel() {
 		return new RoleWrapper(_role.toUnescapedModel());
 	}
@@ -752,25 +830,30 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 		return _role.toString();
 	}
 
+	@Override
 	public java.lang.String toXmlString() {
 		return _role.toXmlString();
 	}
 
+	@Override
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_role.persist();
 	}
 
+	@Override
 	public java.lang.String getDescriptiveName()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _role.getDescriptiveName();
 	}
 
+	@Override
 	public java.lang.String getTypeLabel() {
 		return _role.getTypeLabel();
 	}
 
+	@Override
 	public boolean isTeam() {
 		return _role.isTeam();
 	}
@@ -782,10 +865,12 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 		return _role;
 	}
 
+	@Override
 	public Role getWrappedModel() {
 		return _role;
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		_role.resetOriginalValues();
 	}

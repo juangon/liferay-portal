@@ -211,6 +211,9 @@ public class SeleniumBuilderContext {
 
 			_testCaseFileNames.put(testCaseName, fileName);
 
+			_testCaseHTMLFileNames.put(
+				testCaseName, _getHTMLFileName(fileName));
+
 			_testCaseJavaFileNames.put(
 				testCaseName, _getJavaFileName(fileName));
 
@@ -234,6 +237,9 @@ public class SeleniumBuilderContext {
 			_testSuiteClassNames.put(testSuiteName, _getClassName(fileName));
 
 			_testSuiteFileNames.put(testSuiteName, fileName);
+
+			_testSuiteHTMLFileNames.put(
+				testSuiteName, _getHTMLFileName(fileName));
 
 			_testSuiteJavaFileNames.put(
 				testSuiteName, _getJavaFileName(fileName));
@@ -395,6 +401,10 @@ public class SeleniumBuilderContext {
 		return _testCaseFileNames.get(testCaseName);
 	}
 
+	public String getTestCaseHTMLFileName(String testCaseName) {
+		return _testCaseHTMLFileNames.get(testCaseName);
+	}
+
 	public String getTestCaseJavaFileName(String testCaseName) {
 		return _testCaseJavaFileNames.get(testCaseName);
 	}
@@ -421,6 +431,10 @@ public class SeleniumBuilderContext {
 
 	public String getTestSuiteFileName(String testSuiteName) {
 		return _testSuiteFileNames.get(testSuiteName);
+	}
+
+	public String getTestSuiteHTMLFileName(String testSuiteName) {
+		return _testSuiteHTMLFileNames.get(testSuiteName);
 	}
 
 	public String getTestSuiteJavaFileName(String testSuiteName) {
@@ -691,6 +705,10 @@ public class SeleniumBuilderContext {
 		return _seleniumBuilderFileUtil.getClassName(fileName, classSuffix);
 	}
 
+	private String _getHTMLFileName(String fileName) {
+		return _seleniumBuilderFileUtil.getHTMLFileName(fileName);
+	}
+
 	private String _getJavaFileName(String fileName) {
 		return _seleniumBuilderFileUtil.getJavaFileName(fileName);
 	}
@@ -838,6 +856,14 @@ public class SeleniumBuilderContext {
 		Set<String> pathLocatorKeys =
 			_seleniumBuilderFileUtil.getPathLocatorKeys(pathRootElement);
 
+		String[] partialKeys = {};
+
+		if (locatorKey.contains("${") && locatorKey.contains("}")) {
+			caseComparator = "partial";
+
+			partialKeys = locatorKey.split("\\$\\{[^}]*?\\}");
+		}
+
 		for (String pathLocatorKey : pathLocatorKeys) {
 			if (caseComparator == null) {
 				if (pathLocatorKey.equals(locatorKey)) {
@@ -854,6 +880,19 @@ public class SeleniumBuilderContext {
 						 pathLocatorKey.endsWith(locatorKey)) {
 
 					return true;
+				}
+				else if (caseComparator.equals("partial")) {
+					boolean containsAll = true;
+
+					for (String s : partialKeys) {
+						if (!pathLocatorKey.contains(s)) {
+							containsAll = false;
+						}
+					}
+
+					if (containsAll) {
+						return true;
+					}
 				}
 				else if (caseComparator.equals("startsWith") &&
 						 pathLocatorKey.startsWith(locatorKey)) {
@@ -1058,6 +1097,8 @@ public class SeleniumBuilderContext {
 		new HashMap<String, String>();
 	private Map<String, String> _testCaseFileNames =
 		new HashMap<String, String>();
+	private Map<String, String> _testCaseHTMLFileNames =
+		new HashMap<String, String>();
 	private Map<String, String> _testCaseJavaFileNames =
 		new HashMap<String, String>();
 	private Set<String> _testCaseNames = new HashSet<String>();
@@ -1070,6 +1111,8 @@ public class SeleniumBuilderContext {
 	private Map<String, String> _testSuiteClassNames =
 		new HashMap<String, String>();
 	private Map<String, String> _testSuiteFileNames =
+		new HashMap<String, String>();
+	private Map<String, String> _testSuiteHTMLFileNames =
 		new HashMap<String, String>();
 	private Map<String, String> _testSuiteJavaFileNames =
 		new HashMap<String, String>();

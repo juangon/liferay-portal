@@ -163,6 +163,7 @@ public interface SocialActivitySetModel extends AttachedModel,
 	 *
 	 * @return the fully qualified class name of this social activity set
 	 */
+	@Override
 	public String getClassName();
 
 	public void setClassName(String className);
@@ -172,6 +173,7 @@ public interface SocialActivitySetModel extends AttachedModel,
 	 *
 	 * @return the class name ID of this social activity set
 	 */
+	@Override
 	public long getClassNameId();
 
 	/**
@@ -179,6 +181,7 @@ public interface SocialActivitySetModel extends AttachedModel,
 	 *
 	 * @param classNameId the class name ID of this social activity set
 	 */
+	@Override
 	public void setClassNameId(long classNameId);
 
 	/**
@@ -186,6 +189,7 @@ public interface SocialActivitySetModel extends AttachedModel,
 	 *
 	 * @return the class p k of this social activity set
 	 */
+	@Override
 	public long getClassPK();
 
 	/**
@@ -193,6 +197,7 @@ public interface SocialActivitySetModel extends AttachedModel,
 	 *
 	 * @param classPK the class p k of this social activity set
 	 */
+	@Override
 	public void setClassPK(long classPK);
 
 	/**
@@ -210,6 +215,20 @@ public interface SocialActivitySetModel extends AttachedModel,
 	public void setType(int type);
 
 	/**
+	 * Returns the extra data of this social activity set.
+	 *
+	 * @return the extra data of this social activity set
+	 */
+	public String getExtraData();
+
+	/**
+	 * Sets the extra data of this social activity set.
+	 *
+	 * @param extraData the extra data of this social activity set
+	 */
+	public void setExtraData(String extraData);
+
+	/**
 	 * Returns the activity count of this social activity set.
 	 *
 	 * @return the activity count of this social activity set
@@ -223,41 +242,60 @@ public interface SocialActivitySetModel extends AttachedModel,
 	 */
 	public void setActivityCount(int activityCount);
 
+	@Override
 	public boolean isNew();
 
+	@Override
 	public void setNew(boolean n);
 
+	@Override
 	public boolean isCachedModel();
 
+	@Override
 	public void setCachedModel(boolean cachedModel);
 
+	@Override
 	public boolean isEscapedModel();
 
+	@Override
 	public Serializable getPrimaryKeyObj();
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
+	@Override
 	public ExpandoBridge getExpandoBridge();
 
+	@Override
 	public void setExpandoBridgeAttributes(BaseModel<?> baseModel);
 
+	@Override
 	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge);
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext);
 
+	@Override
 	public Object clone();
 
+	@Override
 	public int compareTo(SocialActivitySet socialActivitySet);
 
+	@Override
 	public int hashCode();
 
+	@Override
 	public CacheModel<SocialActivitySet> toCacheModel();
 
+	@Override
 	public SocialActivitySet toEscapedModel();
 
+	@Override
 	public SocialActivitySet toUnescapedModel();
 
+	@Override
 	public String toString();
 
+	@Override
 	public String toXmlString();
 }

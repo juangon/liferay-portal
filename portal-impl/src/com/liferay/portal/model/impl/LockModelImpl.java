@@ -98,26 +98,32 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 	public LockModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _lockId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setLockId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _lockId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return Lock.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return Lock.class.getName();
 	}
@@ -210,6 +216,7 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 		}
 	}
 
+	@Override
 	public String getUuid() {
 		if (_uuid == null) {
 			return StringPool.BLANK;
@@ -219,6 +226,7 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 		}
 	}
 
+	@Override
 	public void setUuid(String uuid) {
 		if (_originalUuid == null) {
 			_originalUuid = _uuid;
@@ -231,18 +239,22 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@Override
 	public long getLockId() {
 		return _lockId;
 	}
 
+	@Override
 	public void setLockId(long lockId) {
 		_lockId = lockId;
 	}
 
+	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
@@ -259,22 +271,27 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 		return _originalCompanyId;
 	}
 
+	@Override
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
 
+	@Override
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -284,18 +301,22 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 		}
 	}
 
+	@Override
 	public void setUserName(String userName) {
 		_userName = userName;
 	}
 
+	@Override
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
 	}
 
+	@Override
 	public String getClassName() {
 		if (_className == null) {
 			return StringPool.BLANK;
@@ -305,6 +326,7 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 		}
 	}
 
+	@Override
 	public void setClassName(String className) {
 		_columnBitmask |= CLASSNAME_COLUMN_BITMASK;
 
@@ -319,6 +341,7 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 		return GetterUtil.getString(_originalClassName);
 	}
 
+	@Override
 	public String getKey() {
 		if (_key == null) {
 			return StringPool.BLANK;
@@ -328,6 +351,7 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 		}
 	}
 
+	@Override
 	public void setKey(String key) {
 		_columnBitmask |= KEY_COLUMN_BITMASK;
 
@@ -342,6 +366,7 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 		return GetterUtil.getString(_originalKey);
 	}
 
+	@Override
 	public String getOwner() {
 		if (_owner == null) {
 			return StringPool.BLANK;
@@ -351,26 +376,32 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 		}
 	}
 
+	@Override
 	public void setOwner(String owner) {
 		_owner = owner;
 	}
 
+	@Override
 	public boolean getInheritable() {
 		return _inheritable;
 	}
 
+	@Override
 	public boolean isInheritable() {
 		return _inheritable;
 	}
 
+	@Override
 	public void setInheritable(boolean inheritable) {
 		_inheritable = inheritable;
 	}
 
+	@Override
 	public Date getExpirationDate() {
 		return _expirationDate;
 	}
 
+	@Override
 	public void setExpirationDate(Date expirationDate) {
 		_columnBitmask |= EXPIRATIONDATE_COLUMN_BITMASK;
 
@@ -433,6 +464,7 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 		return lockImpl;
 	}
 
+	@Override
 	public int compareTo(Lock lock) {
 		long primaryKey = lock.getPrimaryKey();
 
@@ -449,18 +481,15 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof Lock)) {
 			return false;
 		}
 
-		Lock lock = null;
-
-		try {
-			lock = (Lock)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		Lock lock = (Lock)obj;
 
 		long primaryKey = lock.getPrimaryKey();
 
@@ -600,6 +629,7 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(37);
 

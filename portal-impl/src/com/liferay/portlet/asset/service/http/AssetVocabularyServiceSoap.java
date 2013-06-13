@@ -26,13 +26,11 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * <p>
- * This class provides a SOAP utility for the
+ * Provides the SOAP utility for the
  * {@link com.liferay.portlet.asset.service.AssetVocabularyServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it is difficult for SOAP to
  * support certain types.
- * </p>
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
@@ -61,15 +59,16 @@ import java.util.Map;
  * The SOAP utility is only generated for remote services.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       AssetVocabularyServiceHttp
- * @see       com.liferay.portlet.asset.model.AssetVocabularySoap
- * @see       com.liferay.portlet.asset.service.AssetVocabularyServiceUtil
+ * @author Brian Wing Shun Chan
+ * @see AssetVocabularyServiceHttp
+ * @see com.liferay.portlet.asset.model.AssetVocabularySoap
+ * @see com.liferay.portlet.asset.service.AssetVocabularyServiceUtil
  * @generated
  */
 public class AssetVocabularyServiceSoap {
 	/**
-	* @deprecated As of 6.1.0
+	* @deprecated As of 6.1.0 {@link #addVocabulary(String, Map, Map, String,
+	ServiceContext)}
 	*/
 	public static com.liferay.portlet.asset.model.AssetVocabularySoap addVocabulary(
 		java.lang.String[] titleMapLanguageIds,
@@ -130,6 +129,22 @@ public class AssetVocabularyServiceSoap {
 					serviceContext);
 
 			return com.liferay.portlet.asset.model.AssetVocabularySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	/**
+	* @deprecated As of 6.2.0, Replaced by {@link #deleteVocabularies(long[],
+	ServiceContext)}
+	*/
+	public static void deleteVocabularies(long[] vocabularyIds)
+		throws RemoteException {
+		try {
+			AssetVocabularyServiceUtil.deleteVocabularies(vocabularyIds);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -313,6 +328,24 @@ public class AssetVocabularyServiceSoap {
 
 	public static com.liferay.portlet.asset.model.AssetVocabularyDisplay getGroupVocabulariesDisplay(
 		long groupId, java.lang.String name, int start, int end,
+		boolean addDefaultVocabulary,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.asset.model.AssetVocabularyDisplay returnValue = AssetVocabularyServiceUtil.getGroupVocabulariesDisplay(groupId,
+					name, start, end, addDefaultVocabulary, obc);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.asset.model.AssetVocabularyDisplay getGroupVocabulariesDisplay(
+		long groupId, java.lang.String name, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws RemoteException {
 		try {
@@ -328,6 +361,9 @@ public class AssetVocabularyServiceSoap {
 		}
 	}
 
+	/**
+	* @deprecated As of 6.2.0, with no direct replacement
+	*/
 	public static java.lang.String getJSONGroupVocabularies(long groupId,
 		java.lang.String name, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
@@ -375,7 +411,8 @@ public class AssetVocabularyServiceSoap {
 	}
 
 	/**
-	* @deprecated As of 6.1.0
+	* @deprecated As of 6.1.0, {@link #updateVocabulary(long, String, Map, Map,
+	String, ServiceContext)}
 	*/
 	public static com.liferay.portlet.asset.model.AssetVocabularySoap updateVocabulary(
 		long vocabularyId, java.lang.String[] titleMapLanguageIds,

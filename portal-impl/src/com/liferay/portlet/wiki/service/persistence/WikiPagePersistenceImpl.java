@@ -120,6 +120,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByUuid(String uuid) throws SystemException {
 		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -137,6 +138,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByUuid(String uuid, int start, int end)
 		throws SystemException {
 		return findByUuid(uuid, start, end, null);
@@ -156,6 +158,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the ordered range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByUuid(String uuid, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -276,6 +279,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByUuid_First(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -305,6 +309,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the first matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByUuid_First(String uuid,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<WikiPage> list = findByUuid(uuid, 0, 1, orderByComparator);
@@ -325,6 +330,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByUuid_Last(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -354,6 +360,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the last matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByUuid_Last(String uuid,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByUuid(uuid);
@@ -378,6 +385,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage[] findByUuid_PrevAndNext(long pageId, String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -533,6 +541,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @param uuid the uuid
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByUuid(String uuid) throws SystemException {
 		for (WikiPage wikiPage : findByUuid(uuid, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null)) {
@@ -547,6 +556,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the number of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUuid(String uuid) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID;
 
@@ -629,6 +639,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByUUID_G(String uuid, long groupId)
 		throws NoSuchPageException, SystemException {
 		WikiPage wikiPage = fetchByUUID_G(uuid, groupId);
@@ -664,6 +675,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		return fetchByUUID_G(uuid, groupId, true);
@@ -678,6 +690,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByUUID_G(String uuid, long groupId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, groupId };
@@ -784,6 +797,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the wiki page that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage removeByUUID_G(String uuid, long groupId)
 		throws NoSuchPageException, SystemException {
 		WikiPage wikiPage = findByUUID_G(uuid, groupId);
@@ -799,6 +813,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the number of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID_G;
@@ -899,6 +914,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		return findByUuid_C(uuid, companyId, QueryUtil.ALL_POS,
@@ -919,6 +935,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByUuid_C(String uuid, long companyId, int start,
 		int end) throws SystemException {
 		return findByUuid_C(uuid, companyId, start, end, null);
@@ -939,6 +956,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the ordered range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByUuid_C(String uuid, long companyId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -1069,6 +1087,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByUuid_C_First(String uuid, long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -1103,6 +1122,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the first matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByUuid_C_First(String uuid, long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<WikiPage> list = findByUuid_C(uuid, companyId, 0, 1,
@@ -1125,6 +1145,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByUuid_C_Last(String uuid, long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -1159,6 +1180,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the last matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByUuid_C_Last(String uuid, long companyId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByUuid_C(uuid, companyId);
@@ -1184,6 +1206,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage[] findByUuid_C_PrevAndNext(long pageId, String uuid,
 		long companyId, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -1344,6 +1367,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @param companyId the company ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		for (WikiPage wikiPage : findByUuid_C(uuid, companyId,
@@ -1360,6 +1384,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the number of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByUuid_C(String uuid, long companyId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID_C;
@@ -1457,6 +1482,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByNodeId(long nodeId) throws SystemException {
 		return findByNodeId(nodeId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1474,6 +1500,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByNodeId(long nodeId, int start, int end)
 		throws SystemException {
 		return findByNodeId(nodeId, start, end, null);
@@ -1493,6 +1520,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the ordered range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByNodeId(long nodeId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -1599,6 +1627,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByNodeId_First(long nodeId,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -1628,6 +1657,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the first matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByNodeId_First(long nodeId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<WikiPage> list = findByNodeId(nodeId, 0, 1, orderByComparator);
@@ -1648,6 +1678,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByNodeId_Last(long nodeId,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -1677,6 +1708,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the last matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByNodeId_Last(long nodeId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByNodeId(nodeId);
@@ -1701,6 +1733,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage[] findByNodeId_PrevAndNext(long pageId, long nodeId,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -1842,6 +1875,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @param nodeId the node ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByNodeId(long nodeId) throws SystemException {
 		for (WikiPage wikiPage : findByNodeId(nodeId, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null)) {
@@ -1856,6 +1890,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the number of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByNodeId(long nodeId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_NODEID;
 
@@ -1932,6 +1967,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByFormat(String format) throws SystemException {
 		return findByFormat(format, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1949,6 +1985,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByFormat(String format, int start, int end)
 		throws SystemException {
 		return findByFormat(format, start, end, null);
@@ -1968,6 +2005,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the ordered range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByFormat(String format, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -2088,6 +2126,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByFormat_First(String format,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -2117,6 +2156,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the first matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByFormat_First(String format,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<WikiPage> list = findByFormat(format, 0, 1, orderByComparator);
@@ -2137,6 +2177,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByFormat_Last(String format,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -2166,6 +2207,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the last matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByFormat_Last(String format,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByFormat(format);
@@ -2190,6 +2232,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage[] findByFormat_PrevAndNext(long pageId, String format,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -2345,6 +2388,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @param format the format
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByFormat(String format) throws SystemException {
 		for (WikiPage wikiPage : findByFormat(format, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null)) {
@@ -2359,6 +2403,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the number of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByFormat(String format) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_FORMAT;
 
@@ -2451,6 +2496,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByR_N(long resourcePrimKey, long nodeId)
 		throws SystemException {
 		return findByR_N(resourcePrimKey, nodeId, QueryUtil.ALL_POS,
@@ -2471,6 +2517,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByR_N(long resourcePrimKey, long nodeId,
 		int start, int end) throws SystemException {
 		return findByR_N(resourcePrimKey, nodeId, start, end, null);
@@ -2491,6 +2538,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the ordered range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByR_N(long resourcePrimKey, long nodeId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -2608,6 +2656,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByR_N_First(long resourcePrimKey, long nodeId,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -2642,6 +2691,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the first matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByR_N_First(long resourcePrimKey, long nodeId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<WikiPage> list = findByR_N(resourcePrimKey, nodeId, 0, 1,
@@ -2664,6 +2714,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByR_N_Last(long resourcePrimKey, long nodeId,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -2698,6 +2749,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the last matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByR_N_Last(long resourcePrimKey, long nodeId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByR_N(resourcePrimKey, nodeId);
@@ -2723,6 +2775,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage[] findByR_N_PrevAndNext(long pageId, long resourcePrimKey,
 		long nodeId, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -2869,6 +2922,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @param nodeId the node ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByR_N(long resourcePrimKey, long nodeId)
 		throws SystemException {
 		for (WikiPage wikiPage : findByR_N(resourcePrimKey, nodeId,
@@ -2885,6 +2939,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the number of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByR_N(long resourcePrimKey, long nodeId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_R_N;
@@ -2966,6 +3021,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByN_T(long nodeId, String title)
 		throws SystemException {
 		return findByN_T(nodeId, title, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -2986,6 +3042,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByN_T(long nodeId, String title, int start,
 		int end) throws SystemException {
 		return findByN_T(nodeId, title, start, end, null);
@@ -3006,6 +3063,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the ordered range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByN_T(long nodeId, String title, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -3136,6 +3194,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByN_T_First(long nodeId, String title,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -3169,6 +3228,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the first matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByN_T_First(long nodeId, String title,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<WikiPage> list = findByN_T(nodeId, title, 0, 1, orderByComparator);
@@ -3190,6 +3250,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByN_T_Last(long nodeId, String title,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -3223,6 +3284,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the last matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByN_T_Last(long nodeId, String title,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByN_T(nodeId, title);
@@ -3248,6 +3310,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage[] findByN_T_PrevAndNext(long pageId, long nodeId,
 		String title, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -3408,6 +3471,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @param title the title
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByN_T(long nodeId, String title)
 		throws SystemException {
 		for (WikiPage wikiPage : findByN_T(nodeId, title, QueryUtil.ALL_POS,
@@ -3424,6 +3488,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the number of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByN_T(long nodeId, String title) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_N_T;
 
@@ -3521,6 +3586,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByN_H(long nodeId, boolean head)
 		throws SystemException {
 		return findByN_H(nodeId, head, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -3541,6 +3607,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByN_H(long nodeId, boolean head, int start,
 		int end) throws SystemException {
 		return findByN_H(nodeId, head, start, end, null);
@@ -3561,6 +3628,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the ordered range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByN_H(long nodeId, boolean head, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -3677,6 +3745,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByN_H_First(long nodeId, boolean head,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -3710,6 +3779,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the first matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByN_H_First(long nodeId, boolean head,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<WikiPage> list = findByN_H(nodeId, head, 0, 1, orderByComparator);
@@ -3731,6 +3801,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByN_H_Last(long nodeId, boolean head,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -3764,6 +3835,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the last matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByN_H_Last(long nodeId, boolean head,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByN_H(nodeId, head);
@@ -3789,6 +3861,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage[] findByN_H_PrevAndNext(long pageId, long nodeId,
 		boolean head, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -3935,6 +4008,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @param head the head
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByN_H(long nodeId, boolean head)
 		throws SystemException {
 		for (WikiPage wikiPage : findByN_H(nodeId, head, QueryUtil.ALL_POS,
@@ -3951,6 +4025,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the number of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByN_H(long nodeId, boolean head) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_N_H;
 
@@ -4032,6 +4107,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByN_P(long nodeId, String parentTitle)
 		throws SystemException {
 		return findByN_P(nodeId, parentTitle, QueryUtil.ALL_POS,
@@ -4052,6 +4128,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByN_P(long nodeId, String parentTitle, int start,
 		int end) throws SystemException {
 		return findByN_P(nodeId, parentTitle, start, end, null);
@@ -4072,6 +4149,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the ordered range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByN_P(long nodeId, String parentTitle, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -4202,6 +4280,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByN_P_First(long nodeId, String parentTitle,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -4236,6 +4315,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the first matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByN_P_First(long nodeId, String parentTitle,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<WikiPage> list = findByN_P(nodeId, parentTitle, 0, 1,
@@ -4258,6 +4338,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByN_P_Last(long nodeId, String parentTitle,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -4292,6 +4373,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the last matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByN_P_Last(long nodeId, String parentTitle,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByN_P(nodeId, parentTitle);
@@ -4317,6 +4399,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage[] findByN_P_PrevAndNext(long pageId, long nodeId,
 		String parentTitle, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -4477,6 +4560,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @param parentTitle the parent title
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByN_P(long nodeId, String parentTitle)
 		throws SystemException {
 		for (WikiPage wikiPage : findByN_P(nodeId, parentTitle,
@@ -4493,6 +4577,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the number of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByN_P(long nodeId, String parentTitle)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_N_P;
@@ -4591,6 +4676,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByN_R(long nodeId, String redirectTitle)
 		throws SystemException {
 		return findByN_R(nodeId, redirectTitle, QueryUtil.ALL_POS,
@@ -4611,6 +4697,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByN_R(long nodeId, String redirectTitle,
 		int start, int end) throws SystemException {
 		return findByN_R(nodeId, redirectTitle, start, end, null);
@@ -4631,6 +4718,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the ordered range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByN_R(long nodeId, String redirectTitle,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -4763,6 +4851,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByN_R_First(long nodeId, String redirectTitle,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -4797,6 +4886,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the first matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByN_R_First(long nodeId, String redirectTitle,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<WikiPage> list = findByN_R(nodeId, redirectTitle, 0, 1,
@@ -4819,6 +4909,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByN_R_Last(long nodeId, String redirectTitle,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -4853,6 +4944,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the last matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByN_R_Last(long nodeId, String redirectTitle,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByN_R(nodeId, redirectTitle);
@@ -4878,6 +4970,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage[] findByN_R_PrevAndNext(long pageId, long nodeId,
 		String redirectTitle, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -5038,6 +5131,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @param redirectTitle the redirect title
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByN_R(long nodeId, String redirectTitle)
 		throws SystemException {
 		for (WikiPage wikiPage : findByN_R(nodeId, redirectTitle,
@@ -5054,6 +5148,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the number of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByN_R(long nodeId, String redirectTitle)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_N_R;
@@ -5152,6 +5247,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByN_S(long nodeId, int status)
 		throws SystemException {
 		return findByN_S(nodeId, status, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
@@ -5172,6 +5268,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByN_S(long nodeId, int status, int start, int end)
 		throws SystemException {
 		return findByN_S(nodeId, status, start, end, null);
@@ -5192,6 +5289,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the ordered range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByN_S(long nodeId, int status, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -5308,6 +5406,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByN_S_First(long nodeId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -5341,6 +5440,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the first matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByN_S_First(long nodeId, int status,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<WikiPage> list = findByN_S(nodeId, status, 0, 1, orderByComparator);
@@ -5362,6 +5462,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByN_S_Last(long nodeId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -5395,6 +5496,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the last matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByN_S_Last(long nodeId, int status,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByN_S(nodeId, status);
@@ -5420,6 +5522,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage[] findByN_S_PrevAndNext(long pageId, long nodeId,
 		int status, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -5566,6 +5669,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @param status the status
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByN_S(long nodeId, int status) throws SystemException {
 		for (WikiPage wikiPage : findByN_S(nodeId, status, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null)) {
@@ -5581,6 +5685,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the number of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByN_S(long nodeId, int status) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_N_S;
 
@@ -5660,6 +5765,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByR_N_V(long resourcePrimKey, long nodeId,
 		double version) throws NoSuchPageException, SystemException {
 		WikiPage wikiPage = fetchByR_N_V(resourcePrimKey, nodeId, version);
@@ -5699,6 +5805,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByR_N_V(long resourcePrimKey, long nodeId,
 		double version) throws SystemException {
 		return fetchByR_N_V(resourcePrimKey, nodeId, version, true);
@@ -5714,6 +5821,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByR_N_V(long resourcePrimKey, long nodeId,
 		double version, boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { resourcePrimKey, nodeId, version };
@@ -5812,6 +5920,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the wiki page that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage removeByR_N_V(long resourcePrimKey, long nodeId,
 		double version) throws NoSuchPageException, SystemException {
 		WikiPage wikiPage = findByR_N_V(resourcePrimKey, nodeId, version);
@@ -5828,6 +5937,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the number of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByR_N_V(long resourcePrimKey, long nodeId, double version)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_R_N_V;
@@ -5924,6 +6034,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByR_N_H(long resourcePrimKey, long nodeId,
 		boolean head) throws SystemException {
 		return findByR_N_H(resourcePrimKey, nodeId, head, QueryUtil.ALL_POS,
@@ -5945,6 +6056,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByR_N_H(long resourcePrimKey, long nodeId,
 		boolean head, int start, int end) throws SystemException {
 		return findByR_N_H(resourcePrimKey, nodeId, head, start, end, null);
@@ -5966,6 +6078,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the ordered range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByR_N_H(long resourcePrimKey, long nodeId,
 		boolean head, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -6089,6 +6202,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByR_N_H_First(long resourcePrimKey, long nodeId,
 		boolean head, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -6127,6 +6241,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the first matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByR_N_H_First(long resourcePrimKey, long nodeId,
 		boolean head, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -6151,6 +6266,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByR_N_H_Last(long resourcePrimKey, long nodeId,
 		boolean head, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -6189,6 +6305,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the last matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByR_N_H_Last(long resourcePrimKey, long nodeId,
 		boolean head, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -6216,6 +6333,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage[] findByR_N_H_PrevAndNext(long pageId,
 		long resourcePrimKey, long nodeId, boolean head,
 		OrderByComparator orderByComparator)
@@ -6368,6 +6486,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @param head the head
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByR_N_H(long resourcePrimKey, long nodeId, boolean head)
 		throws SystemException {
 		for (WikiPage wikiPage : findByR_N_H(resourcePrimKey, nodeId, head,
@@ -6385,6 +6504,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the number of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByR_N_H(long resourcePrimKey, long nodeId, boolean head)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_R_N_H;
@@ -6481,6 +6601,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByR_N_S(long resourcePrimKey, long nodeId,
 		int status) throws SystemException {
 		return findByR_N_S(resourcePrimKey, nodeId, status, QueryUtil.ALL_POS,
@@ -6502,6 +6623,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByR_N_S(long resourcePrimKey, long nodeId,
 		int status, int start, int end) throws SystemException {
 		return findByR_N_S(resourcePrimKey, nodeId, status, start, end, null);
@@ -6523,6 +6645,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the ordered range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByR_N_S(long resourcePrimKey, long nodeId,
 		int status, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -6646,6 +6769,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByR_N_S_First(long resourcePrimKey, long nodeId,
 		int status, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -6684,6 +6808,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the first matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByR_N_S_First(long resourcePrimKey, long nodeId,
 		int status, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -6708,6 +6833,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByR_N_S_Last(long resourcePrimKey, long nodeId,
 		int status, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -6746,6 +6872,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the last matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByR_N_S_Last(long resourcePrimKey, long nodeId,
 		int status, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -6773,6 +6900,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage[] findByR_N_S_PrevAndNext(long pageId,
 		long resourcePrimKey, long nodeId, int status,
 		OrderByComparator orderByComparator)
@@ -6925,6 +7053,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @param status the status
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByR_N_S(long resourcePrimKey, long nodeId, int status)
 		throws SystemException {
 		for (WikiPage wikiPage : findByR_N_S(resourcePrimKey, nodeId, status,
@@ -6942,6 +7071,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the number of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByR_N_S(long resourcePrimKey, long nodeId, int status)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_R_N_S;
@@ -7038,6 +7168,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByG_N_H(long groupId, long nodeId, boolean head)
 		throws SystemException {
 		return findByG_N_H(groupId, nodeId, head, QueryUtil.ALL_POS,
@@ -7059,6 +7190,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByG_N_H(long groupId, long nodeId, boolean head,
 		int start, int end) throws SystemException {
 		return findByG_N_H(groupId, nodeId, head, start, end, null);
@@ -7080,6 +7212,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the ordered range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByG_N_H(long groupId, long nodeId, boolean head,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -7203,6 +7336,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByG_N_H_First(long groupId, long nodeId, boolean head,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -7241,6 +7375,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the first matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByG_N_H_First(long groupId, long nodeId, boolean head,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<WikiPage> list = findByG_N_H(groupId, nodeId, head, 0, 1,
@@ -7264,6 +7399,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByG_N_H_Last(long groupId, long nodeId, boolean head,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -7302,6 +7438,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the last matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByG_N_H_Last(long groupId, long nodeId, boolean head,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByG_N_H(groupId, nodeId, head);
@@ -7328,6 +7465,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage[] findByG_N_H_PrevAndNext(long pageId, long groupId,
 		long nodeId, boolean head, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -7480,6 +7618,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the matching wiki pages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> filterFindByG_N_H(long groupId, long nodeId,
 		boolean head) throws SystemException {
 		return filterFindByG_N_H(groupId, nodeId, head, QueryUtil.ALL_POS,
@@ -7501,6 +7640,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the range of matching wiki pages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> filterFindByG_N_H(long groupId, long nodeId,
 		boolean head, int start, int end) throws SystemException {
 		return filterFindByG_N_H(groupId, nodeId, head, start, end, null);
@@ -7522,6 +7662,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the ordered range of matching wiki pages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> filterFindByG_N_H(long groupId, long nodeId,
 		boolean head, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -7624,6 +7765,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage[] filterFindByG_N_H_PrevAndNext(long pageId, long groupId,
 		long nodeId, boolean head, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -7815,6 +7957,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @param head the head
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByG_N_H(long groupId, long nodeId, boolean head)
 		throws SystemException {
 		for (WikiPage wikiPage : findByG_N_H(groupId, nodeId, head,
@@ -7832,6 +7975,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the number of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_N_H(long groupId, long nodeId, boolean head)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_N_H;
@@ -7895,6 +8039,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the number of matching wiki pages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByG_N_H(long groupId, long nodeId, boolean head)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -7987,6 +8132,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByG_N_S(long groupId, long nodeId, int status)
 		throws SystemException {
 		return findByG_N_S(groupId, nodeId, status, QueryUtil.ALL_POS,
@@ -8008,6 +8154,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByG_N_S(long groupId, long nodeId, int status,
 		int start, int end) throws SystemException {
 		return findByG_N_S(groupId, nodeId, status, start, end, null);
@@ -8029,6 +8176,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the ordered range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByG_N_S(long groupId, long nodeId, int status,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -8152,6 +8300,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByG_N_S_First(long groupId, long nodeId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -8190,6 +8339,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the first matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByG_N_S_First(long groupId, long nodeId, int status,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<WikiPage> list = findByG_N_S(groupId, nodeId, status, 0, 1,
@@ -8213,6 +8363,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByG_N_S_Last(long groupId, long nodeId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -8251,6 +8402,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the last matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByG_N_S_Last(long groupId, long nodeId, int status,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByG_N_S(groupId, nodeId, status);
@@ -8277,6 +8429,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage[] findByG_N_S_PrevAndNext(long pageId, long groupId,
 		long nodeId, int status, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -8429,6 +8582,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the matching wiki pages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> filterFindByG_N_S(long groupId, long nodeId,
 		int status) throws SystemException {
 		return filterFindByG_N_S(groupId, nodeId, status, QueryUtil.ALL_POS,
@@ -8450,6 +8604,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the range of matching wiki pages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> filterFindByG_N_S(long groupId, long nodeId,
 		int status, int start, int end) throws SystemException {
 		return filterFindByG_N_S(groupId, nodeId, status, start, end, null);
@@ -8471,6 +8626,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the ordered range of matching wiki pages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> filterFindByG_N_S(long groupId, long nodeId,
 		int status, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -8573,6 +8729,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage[] filterFindByG_N_S_PrevAndNext(long pageId, long groupId,
 		long nodeId, int status, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -8764,6 +8921,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @param status the status
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByG_N_S(long groupId, long nodeId, int status)
 		throws SystemException {
 		for (WikiPage wikiPage : findByG_N_S(groupId, nodeId, status,
@@ -8781,6 +8939,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the number of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_N_S(long groupId, long nodeId, int status)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_N_S;
@@ -8844,6 +9003,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the number of matching wiki pages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByG_N_S(long groupId, long nodeId, int status)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -8936,6 +9096,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByU_N_S(long userId, long nodeId, int status)
 		throws SystemException {
 		return findByU_N_S(userId, nodeId, status, QueryUtil.ALL_POS,
@@ -8957,6 +9118,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByU_N_S(long userId, long nodeId, int status,
 		int start, int end) throws SystemException {
 		return findByU_N_S(userId, nodeId, status, start, end, null);
@@ -8978,6 +9140,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the ordered range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByU_N_S(long userId, long nodeId, int status,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -9101,6 +9264,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByU_N_S_First(long userId, long nodeId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -9139,6 +9303,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the first matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByU_N_S_First(long userId, long nodeId, int status,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<WikiPage> list = findByU_N_S(userId, nodeId, status, 0, 1,
@@ -9162,6 +9327,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByU_N_S_Last(long userId, long nodeId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -9200,6 +9366,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the last matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByU_N_S_Last(long userId, long nodeId, int status,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByU_N_S(userId, nodeId, status);
@@ -9226,6 +9393,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage[] findByU_N_S_PrevAndNext(long pageId, long userId,
 		long nodeId, int status, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -9377,6 +9545,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @param status the status
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByU_N_S(long userId, long nodeId, int status)
 		throws SystemException {
 		for (WikiPage wikiPage : findByU_N_S(userId, nodeId, status,
@@ -9394,6 +9563,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the number of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByU_N_S(long userId, long nodeId, int status)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_U_N_S;
@@ -9479,6 +9649,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByN_T_V(long nodeId, String title, double version)
 		throws NoSuchPageException, SystemException {
 		WikiPage wikiPage = fetchByN_T_V(nodeId, title, version);
@@ -9518,6 +9689,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByN_T_V(long nodeId, String title, double version)
 		throws SystemException {
 		return fetchByN_T_V(nodeId, title, version, true);
@@ -9533,6 +9705,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByN_T_V(long nodeId, String title, double version,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { nodeId, title, version };
@@ -9646,6 +9819,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the wiki page that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage removeByN_T_V(long nodeId, String title, double version)
 		throws NoSuchPageException, SystemException {
 		WikiPage wikiPage = findByN_T_V(nodeId, title, version);
@@ -9662,6 +9836,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the number of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByN_T_V(long nodeId, String title, double version)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_N_T_V;
@@ -9773,6 +9948,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByN_T_H(long nodeId, String title, boolean head)
 		throws SystemException {
 		return findByN_T_H(nodeId, title, head, QueryUtil.ALL_POS,
@@ -9794,6 +9970,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByN_T_H(long nodeId, String title, boolean head,
 		int start, int end) throws SystemException {
 		return findByN_T_H(nodeId, title, head, start, end, null);
@@ -9815,6 +9992,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the ordered range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByN_T_H(long nodeId, String title, boolean head,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -9952,6 +10130,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByN_T_H_First(long nodeId, String title, boolean head,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -9990,6 +10169,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the first matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByN_T_H_First(long nodeId, String title, boolean head,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<WikiPage> list = findByN_T_H(nodeId, title, head, 0, 1,
@@ -10013,6 +10193,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByN_T_H_Last(long nodeId, String title, boolean head,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -10051,6 +10232,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the last matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByN_T_H_Last(long nodeId, String title, boolean head,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByN_T_H(nodeId, title, head);
@@ -10077,6 +10259,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage[] findByN_T_H_PrevAndNext(long pageId, long nodeId,
 		String title, boolean head, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -10242,6 +10425,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @param head the head
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByN_T_H(long nodeId, String title, boolean head)
 		throws SystemException {
 		for (WikiPage wikiPage : findByN_T_H(nodeId, title, head,
@@ -10259,6 +10443,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the number of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByN_T_H(long nodeId, String title, boolean head)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_N_T_H;
@@ -10370,6 +10555,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByN_T_S(long nodeId, String title, int status)
 		throws SystemException {
 		return findByN_T_S(nodeId, title, status, QueryUtil.ALL_POS,
@@ -10391,6 +10577,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByN_T_S(long nodeId, String title, int status,
 		int start, int end) throws SystemException {
 		return findByN_T_S(nodeId, title, status, start, end, null);
@@ -10412,6 +10599,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the ordered range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByN_T_S(long nodeId, String title, int status,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -10549,6 +10737,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByN_T_S_First(long nodeId, String title, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -10587,6 +10776,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the first matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByN_T_S_First(long nodeId, String title, int status,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<WikiPage> list = findByN_T_S(nodeId, title, status, 0, 1,
@@ -10610,6 +10800,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByN_T_S_Last(long nodeId, String title, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -10648,6 +10839,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the last matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByN_T_S_Last(long nodeId, String title, int status,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByN_T_S(nodeId, title, status);
@@ -10674,6 +10866,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage[] findByN_T_S_PrevAndNext(long pageId, long nodeId,
 		String title, int status, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -10839,6 +11032,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @param status the status
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByN_T_S(long nodeId, String title, int status)
 		throws SystemException {
 		for (WikiPage wikiPage : findByN_T_S(nodeId, title, status,
@@ -10856,6 +11050,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the number of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByN_T_S(long nodeId, String title, int status)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_N_T_S;
@@ -10968,6 +11163,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByN_H_P(long nodeId, boolean head,
 		String parentTitle) throws SystemException {
 		return findByN_H_P(nodeId, head, parentTitle, QueryUtil.ALL_POS,
@@ -10989,6 +11185,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByN_H_P(long nodeId, boolean head,
 		String parentTitle, int start, int end) throws SystemException {
 		return findByN_H_P(nodeId, head, parentTitle, start, end, null);
@@ -11010,6 +11207,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the ordered range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByN_H_P(long nodeId, boolean head,
 		String parentTitle, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -11147,6 +11345,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByN_H_P_First(long nodeId, boolean head,
 		String parentTitle, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -11185,6 +11384,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the first matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByN_H_P_First(long nodeId, boolean head,
 		String parentTitle, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -11209,6 +11409,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByN_H_P_Last(long nodeId, boolean head,
 		String parentTitle, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -11247,6 +11448,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the last matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByN_H_P_Last(long nodeId, boolean head,
 		String parentTitle, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -11274,6 +11476,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage[] findByN_H_P_PrevAndNext(long pageId, long nodeId,
 		boolean head, String parentTitle, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -11439,6 +11642,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @param parentTitle the parent title
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByN_H_P(long nodeId, boolean head, String parentTitle)
 		throws SystemException {
 		for (WikiPage wikiPage : findByN_H_P(nodeId, head, parentTitle,
@@ -11456,6 +11660,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the number of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByN_H_P(long nodeId, boolean head, String parentTitle)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_N_H_P;
@@ -11568,6 +11773,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByN_H_S(long nodeId, boolean head, int status)
 		throws SystemException {
 		return findByN_H_S(nodeId, head, status, QueryUtil.ALL_POS,
@@ -11589,6 +11795,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByN_H_S(long nodeId, boolean head, int status,
 		int start, int end) throws SystemException {
 		return findByN_H_S(nodeId, head, status, start, end, null);
@@ -11610,6 +11817,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the ordered range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByN_H_S(long nodeId, boolean head, int status,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -11733,6 +11941,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByN_H_S_First(long nodeId, boolean head, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -11771,6 +11980,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the first matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByN_H_S_First(long nodeId, boolean head, int status,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<WikiPage> list = findByN_H_S(nodeId, head, status, 0, 1,
@@ -11794,6 +12004,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByN_H_S_Last(long nodeId, boolean head, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -11832,6 +12043,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the last matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByN_H_S_Last(long nodeId, boolean head, int status,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByN_H_S(nodeId, head, status);
@@ -11858,6 +12070,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage[] findByN_H_S_PrevAndNext(long pageId, long nodeId,
 		boolean head, int status, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -12009,6 +12222,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @param status the status
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByN_H_S(long nodeId, boolean head, int status)
 		throws SystemException {
 		for (WikiPage wikiPage : findByN_H_S(nodeId, head, status,
@@ -12026,6 +12240,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the number of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByN_H_S(long nodeId, boolean head, int status)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_N_H_S;
@@ -12125,6 +12340,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByG_U_N_S(long groupId, long userId, long nodeId,
 		int status) throws SystemException {
 		return findByG_U_N_S(groupId, userId, nodeId, status,
@@ -12147,6 +12363,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByG_U_N_S(long groupId, long userId, long nodeId,
 		int status, int start, int end) throws SystemException {
 		return findByG_U_N_S(groupId, userId, nodeId, status, start, end, null);
@@ -12169,6 +12386,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the ordered range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByG_U_N_S(long groupId, long userId, long nodeId,
 		int status, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -12298,6 +12516,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByG_U_N_S_First(long groupId, long userId, long nodeId,
 		int status, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -12340,6 +12559,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the first matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByG_U_N_S_First(long groupId, long userId,
 		long nodeId, int status, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -12365,6 +12585,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByG_U_N_S_Last(long groupId, long userId, long nodeId,
 		int status, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -12407,6 +12628,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the last matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByG_U_N_S_Last(long groupId, long userId, long nodeId,
 		int status, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -12435,6 +12657,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage[] findByG_U_N_S_PrevAndNext(long pageId, long groupId,
 		long userId, long nodeId, int status,
 		OrderByComparator orderByComparator)
@@ -12593,6 +12816,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the matching wiki pages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> filterFindByG_U_N_S(long groupId, long userId,
 		long nodeId, int status) throws SystemException {
 		return filterFindByG_U_N_S(groupId, userId, nodeId, status,
@@ -12615,6 +12839,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the range of matching wiki pages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> filterFindByG_U_N_S(long groupId, long userId,
 		long nodeId, int status, int start, int end) throws SystemException {
 		return filterFindByG_U_N_S(groupId, userId, nodeId, status, start, end,
@@ -12638,6 +12863,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the ordered range of matching wiki pages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> filterFindByG_U_N_S(long groupId, long userId,
 		long nodeId, int status, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -12745,6 +12971,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage[] filterFindByG_U_N_S_PrevAndNext(long pageId,
 		long groupId, long userId, long nodeId, int status,
 		OrderByComparator orderByComparator)
@@ -12942,6 +13169,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @param status the status
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByG_U_N_S(long groupId, long userId, long nodeId,
 		int status) throws SystemException {
 		for (WikiPage wikiPage : findByG_U_N_S(groupId, userId, nodeId, status,
@@ -12960,6 +13188,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the number of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_U_N_S(long groupId, long userId, long nodeId, int status)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_U_N_S;
@@ -13028,6 +13257,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the number of matching wiki pages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByG_U_N_S(long groupId, long userId, long nodeId,
 		int status) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -13127,6 +13357,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByG_N_T_H(long groupId, long nodeId,
 		String title, boolean head) throws SystemException {
 		return findByG_N_T_H(groupId, nodeId, title, head, QueryUtil.ALL_POS,
@@ -13149,6 +13380,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByG_N_T_H(long groupId, long nodeId,
 		String title, boolean head, int start, int end)
 		throws SystemException {
@@ -13172,6 +13404,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the ordered range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByG_N_T_H(long groupId, long nodeId,
 		String title, boolean head, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -13315,6 +13548,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByG_N_T_H_First(long groupId, long nodeId,
 		String title, boolean head, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -13357,6 +13591,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the first matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByG_N_T_H_First(long groupId, long nodeId,
 		String title, boolean head, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -13382,6 +13617,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByG_N_T_H_Last(long groupId, long nodeId, String title,
 		boolean head, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -13424,6 +13660,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the last matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByG_N_T_H_Last(long groupId, long nodeId,
 		String title, boolean head, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -13452,6 +13689,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage[] findByG_N_T_H_PrevAndNext(long pageId, long groupId,
 		long nodeId, String title, boolean head,
 		OrderByComparator orderByComparator)
@@ -13624,6 +13862,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the matching wiki pages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> filterFindByG_N_T_H(long groupId, long nodeId,
 		String title, boolean head) throws SystemException {
 		return filterFindByG_N_T_H(groupId, nodeId, title, head,
@@ -13646,6 +13885,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the range of matching wiki pages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> filterFindByG_N_T_H(long groupId, long nodeId,
 		String title, boolean head, int start, int end)
 		throws SystemException {
@@ -13670,6 +13910,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the ordered range of matching wiki pages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> filterFindByG_N_T_H(long groupId, long nodeId,
 		String title, boolean head, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -13791,6 +14032,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage[] filterFindByG_N_T_H_PrevAndNext(long pageId,
 		long groupId, long nodeId, String title, boolean head,
 		OrderByComparator orderByComparator)
@@ -14002,6 +14244,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @param head the head
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByG_N_T_H(long groupId, long nodeId, String title,
 		boolean head) throws SystemException {
 		for (WikiPage wikiPage : findByG_N_T_H(groupId, nodeId, title, head,
@@ -14020,6 +14263,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the number of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_N_T_H(long groupId, long nodeId, String title,
 		boolean head) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_N_T_H;
@@ -14102,6 +14346,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the number of matching wiki pages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByG_N_T_H(long groupId, long nodeId, String title,
 		boolean head) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -14218,6 +14463,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByG_N_H_S(long groupId, long nodeId,
 		boolean head, int status) throws SystemException {
 		return findByG_N_H_S(groupId, nodeId, head, status, QueryUtil.ALL_POS,
@@ -14240,6 +14486,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByG_N_H_S(long groupId, long nodeId,
 		boolean head, int status, int start, int end) throws SystemException {
 		return findByG_N_H_S(groupId, nodeId, head, status, start, end, null);
@@ -14262,6 +14509,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the ordered range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByG_N_H_S(long groupId, long nodeId,
 		boolean head, int status, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -14391,6 +14639,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByG_N_H_S_First(long groupId, long nodeId,
 		boolean head, int status, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -14433,6 +14682,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the first matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByG_N_H_S_First(long groupId, long nodeId,
 		boolean head, int status, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -14458,6 +14708,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByG_N_H_S_Last(long groupId, long nodeId, boolean head,
 		int status, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -14500,6 +14751,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the last matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByG_N_H_S_Last(long groupId, long nodeId,
 		boolean head, int status, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -14528,6 +14780,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage[] findByG_N_H_S_PrevAndNext(long pageId, long groupId,
 		long nodeId, boolean head, int status,
 		OrderByComparator orderByComparator)
@@ -14686,6 +14939,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the matching wiki pages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> filterFindByG_N_H_S(long groupId, long nodeId,
 		boolean head, int status) throws SystemException {
 		return filterFindByG_N_H_S(groupId, nodeId, head, status,
@@ -14708,6 +14962,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the range of matching wiki pages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> filterFindByG_N_H_S(long groupId, long nodeId,
 		boolean head, int status, int start, int end) throws SystemException {
 		return filterFindByG_N_H_S(groupId, nodeId, head, status, start, end,
@@ -14731,6 +14986,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the ordered range of matching wiki pages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> filterFindByG_N_H_S(long groupId, long nodeId,
 		boolean head, int status, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -14838,6 +15094,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage[] filterFindByG_N_H_S_PrevAndNext(long pageId,
 		long groupId, long nodeId, boolean head, int status,
 		OrderByComparator orderByComparator)
@@ -15035,6 +15292,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @param status the status
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByG_N_H_S(long groupId, long nodeId, boolean head,
 		int status) throws SystemException {
 		for (WikiPage wikiPage : findByG_N_H_S(groupId, nodeId, head, status,
@@ -15053,6 +15311,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the number of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_N_H_S(long groupId, long nodeId, boolean head,
 		int status) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_N_H_S;
@@ -15121,6 +15380,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the number of matching wiki pages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByG_N_H_S(long groupId, long nodeId, boolean head,
 		int status) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -15221,6 +15481,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByN_H_P_S(long nodeId, boolean head,
 		String parentTitle, int status) throws SystemException {
 		return findByN_H_P_S(nodeId, head, parentTitle, status,
@@ -15243,6 +15504,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByN_H_P_S(long nodeId, boolean head,
 		String parentTitle, int status, int start, int end)
 		throws SystemException {
@@ -15266,6 +15528,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the ordered range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByN_H_P_S(long nodeId, boolean head,
 		String parentTitle, int status, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -15409,6 +15672,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByN_H_P_S_First(long nodeId, boolean head,
 		String parentTitle, int status, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -15451,6 +15715,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the first matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByN_H_P_S_First(long nodeId, boolean head,
 		String parentTitle, int status, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -15476,6 +15741,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByN_H_P_S_Last(long nodeId, boolean head,
 		String parentTitle, int status, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -15518,6 +15784,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the last matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByN_H_P_S_Last(long nodeId, boolean head,
 		String parentTitle, int status, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -15546,6 +15813,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage[] findByN_H_P_S_PrevAndNext(long pageId, long nodeId,
 		boolean head, String parentTitle, int status,
 		OrderByComparator orderByComparator)
@@ -15717,6 +15985,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @param status the status
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByN_H_P_S(long nodeId, boolean head, String parentTitle,
 		int status) throws SystemException {
 		for (WikiPage wikiPage : findByN_H_P_S(nodeId, head, parentTitle,
@@ -15735,6 +16004,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the number of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByN_H_P_S(long nodeId, boolean head, String parentTitle,
 		int status) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_N_H_P_S;
@@ -15861,6 +16131,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByG_N_H_P_S(long groupId, long nodeId,
 		boolean head, String parentTitle, int status) throws SystemException {
 		return findByG_N_H_P_S(groupId, nodeId, head, parentTitle, status,
@@ -15884,6 +16155,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByG_N_H_P_S(long groupId, long nodeId,
 		boolean head, String parentTitle, int status, int start, int end)
 		throws SystemException {
@@ -15909,6 +16181,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the ordered range of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findByG_N_H_P_S(long groupId, long nodeId,
 		boolean head, String parentTitle, int status, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -16058,6 +16331,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByG_N_H_P_S_First(long groupId, long nodeId,
 		boolean head, String parentTitle, int status,
 		OrderByComparator orderByComparator)
@@ -16105,6 +16379,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the first matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByG_N_H_P_S_First(long groupId, long nodeId,
 		boolean head, String parentTitle, int status,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -16131,6 +16406,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByG_N_H_P_S_Last(long groupId, long nodeId,
 		boolean head, String parentTitle, int status,
 		OrderByComparator orderByComparator)
@@ -16178,6 +16454,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the last matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByG_N_H_P_S_Last(long groupId, long nodeId,
 		boolean head, String parentTitle, int status,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -16207,6 +16484,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage[] findByG_N_H_P_S_PrevAndNext(long pageId, long groupId,
 		long nodeId, boolean head, String parentTitle, int status,
 		OrderByComparator orderByComparator)
@@ -16385,6 +16663,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the matching wiki pages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> filterFindByG_N_H_P_S(long groupId, long nodeId,
 		boolean head, String parentTitle, int status) throws SystemException {
 		return filterFindByG_N_H_P_S(groupId, nodeId, head, parentTitle,
@@ -16408,6 +16687,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the range of matching wiki pages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> filterFindByG_N_H_P_S(long groupId, long nodeId,
 		boolean head, String parentTitle, int status, int start, int end)
 		throws SystemException {
@@ -16433,6 +16713,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the ordered range of matching wiki pages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> filterFindByG_N_H_P_S(long groupId, long nodeId,
 		boolean head, String parentTitle, int status, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -16559,6 +16840,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage[] filterFindByG_N_H_P_S_PrevAndNext(long pageId,
 		long groupId, long nodeId, boolean head, String parentTitle,
 		int status, OrderByComparator orderByComparator)
@@ -16778,6 +17060,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @param status the status
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByG_N_H_P_S(long groupId, long nodeId, boolean head,
 		String parentTitle, int status) throws SystemException {
 		for (WikiPage wikiPage : findByG_N_H_P_S(groupId, nodeId, head,
@@ -16797,6 +17080,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the number of matching wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByG_N_H_P_S(long groupId, long nodeId, boolean head,
 		String parentTitle, int status) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_N_H_P_S;
@@ -16886,6 +17170,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the number of matching wiki pages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int filterCountByG_N_H_P_S(long groupId, long nodeId, boolean head,
 		String parentTitle, int status) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -16971,6 +17256,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 *
 	 * @param wikiPage the wiki page
 	 */
+	@Override
 	public void cacheResult(WikiPage wikiPage) {
 		EntityCacheUtil.putResult(WikiPageModelImpl.ENTITY_CACHE_ENABLED,
 			WikiPageImpl.class, wikiPage.getPrimaryKey(), wikiPage);
@@ -16997,6 +17283,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 *
 	 * @param wikiPages the wiki pages
 	 */
+	@Override
 	public void cacheResult(List<WikiPage> wikiPages) {
 		for (WikiPage wikiPage : wikiPages) {
 			if (EntityCacheUtil.getResult(
@@ -17198,6 +17485,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @param pageId the primary key for the new wiki page
 	 * @return the new wiki page
 	 */
+	@Override
 	public WikiPage create(long pageId) {
 		WikiPage wikiPage = new WikiPageImpl();
 
@@ -17219,6 +17507,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage remove(long pageId)
 		throws NoSuchPageException, SystemException {
 		return remove((Serializable)pageId);
@@ -17977,6 +18266,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage findByPrimaryKey(long pageId)
 		throws NoSuchPageException, SystemException {
 		return findByPrimaryKey((Serializable)pageId);
@@ -18036,6 +18326,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the wiki page, or <code>null</code> if a wiki page with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiPage fetchByPrimaryKey(long pageId) throws SystemException {
 		return fetchByPrimaryKey((Serializable)pageId);
 	}
@@ -18046,6 +18337,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -18062,6 +18354,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the range of wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findAll(int start, int end) throws SystemException {
 		return findAll(start, end, null);
 	}
@@ -18079,6 +18372,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the ordered range of wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<WikiPage> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -18164,6 +18458,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (WikiPage wikiPage : findAll()) {
 			remove(wikiPage);
@@ -18176,6 +18471,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 * @return the number of wiki pages
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -18279,6 +18575,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		};
 
 	private static CacheModel<WikiPage> _nullWikiPageCacheModel = new CacheModel<WikiPage>() {
+			@Override
 			public WikiPage toEntityModel() {
 				return _nullWikiPage;
 			}

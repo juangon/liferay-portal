@@ -86,26 +86,32 @@ public class PortalPreferencesModelImpl extends BaseModelImpl<PortalPreferences>
 	public PortalPreferencesModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _portalPreferencesId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setPortalPreferencesId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _portalPreferencesId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return PortalPreferences.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return PortalPreferences.class.getName();
 	}
@@ -149,18 +155,22 @@ public class PortalPreferencesModelImpl extends BaseModelImpl<PortalPreferences>
 		}
 	}
 
+	@Override
 	public long getPortalPreferencesId() {
 		return _portalPreferencesId;
 	}
 
+	@Override
 	public void setPortalPreferencesId(long portalPreferencesId) {
 		_portalPreferencesId = portalPreferencesId;
 	}
 
+	@Override
 	public long getOwnerId() {
 		return _ownerId;
 	}
 
+	@Override
 	public void setOwnerId(long ownerId) {
 		_columnBitmask |= OWNERID_COLUMN_BITMASK;
 
@@ -177,10 +187,12 @@ public class PortalPreferencesModelImpl extends BaseModelImpl<PortalPreferences>
 		return _originalOwnerId;
 	}
 
+	@Override
 	public int getOwnerType() {
 		return _ownerType;
 	}
 
+	@Override
 	public void setOwnerType(int ownerType) {
 		_columnBitmask |= OWNERTYPE_COLUMN_BITMASK;
 
@@ -197,6 +209,7 @@ public class PortalPreferencesModelImpl extends BaseModelImpl<PortalPreferences>
 		return _originalOwnerType;
 	}
 
+	@Override
 	public String getPreferences() {
 		if (_preferences == null) {
 			return StringPool.BLANK;
@@ -206,6 +219,7 @@ public class PortalPreferencesModelImpl extends BaseModelImpl<PortalPreferences>
 		}
 	}
 
+	@Override
 	public void setPreferences(String preferences) {
 		_preferences = preferences;
 	}
@@ -251,6 +265,7 @@ public class PortalPreferencesModelImpl extends BaseModelImpl<PortalPreferences>
 		return portalPreferencesImpl;
 	}
 
+	@Override
 	public int compareTo(PortalPreferences portalPreferences) {
 		long primaryKey = portalPreferences.getPrimaryKey();
 
@@ -267,18 +282,15 @@ public class PortalPreferencesModelImpl extends BaseModelImpl<PortalPreferences>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof PortalPreferences)) {
 			return false;
 		}
 
-		PortalPreferences portalPreferences = null;
-
-		try {
-			portalPreferences = (PortalPreferences)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		PortalPreferences portalPreferences = (PortalPreferences)obj;
 
 		long primaryKey = portalPreferences.getPrimaryKey();
 
@@ -348,6 +360,7 @@ public class PortalPreferencesModelImpl extends BaseModelImpl<PortalPreferences>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(16);
 

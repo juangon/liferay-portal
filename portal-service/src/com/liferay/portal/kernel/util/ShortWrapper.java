@@ -30,6 +30,7 @@ public class ShortWrapper
 		_value = value;
 	}
 
+	@Override
 	public int compareTo(ShortWrapper shortWrapper) {
 		if (shortWrapper == null) {
 			return 1;

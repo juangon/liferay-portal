@@ -68,6 +68,7 @@ public class JavaSecurityTest {
 			AccessController.doPrivileged(
 				new PrivilegedAction<Void>() {
 
+					@Override
 					public Void run() {
 						new URLClassLoader(new URL[0]);
 
@@ -100,6 +101,7 @@ public class JavaSecurityTest {
 			AccessController.doPrivileged(
 				new PrivilegedAction<Void>() {
 
+					@Override
 					public Void run() {
 						Permissions permissions = new Permissions();
 
@@ -115,6 +117,7 @@ public class JavaSecurityTest {
 						AccessController.doPrivileged(
 							new PrivilegedAction<Void>() {
 
+								@Override
 								public Void run() {
 									new URLClassLoader(new URL[0]);
 
@@ -155,6 +158,7 @@ public class JavaSecurityTest {
 				accessControlContext,
 				new DomainCombiner() {
 
+					@Override
 					public ProtectionDomain[] combine(
 						ProtectionDomain[] currentDomains,
 						ProtectionDomain[] assignedDomains) {
@@ -167,6 +171,7 @@ public class JavaSecurityTest {
 			AccessController.doPrivileged(
 				new PrivilegedAction<Void>() {
 
+					@Override
 					public Void run() {
 						new URLClassLoader(new URL[0]);
 

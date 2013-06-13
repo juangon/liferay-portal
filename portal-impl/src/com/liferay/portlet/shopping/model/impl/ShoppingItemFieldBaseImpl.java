@@ -38,6 +38,7 @@ public abstract class ShoppingItemFieldBaseImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a shopping item field model instance should use the {@link ShoppingItemField} interface instead.
 	 */
+	@Override
 	public void persist() throws SystemException {
 		if (this.isNew()) {
 			ShoppingItemFieldLocalServiceUtil.addShoppingItemField(this);

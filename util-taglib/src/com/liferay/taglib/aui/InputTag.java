@@ -44,8 +44,6 @@ public class InputTag extends BaseInputTag {
 	public int doEndTag() throws JspException {
 		updateFormValidators();
 
-		setEndAttributes();
-
 		return super.doEndTag();
 	}
 
@@ -225,11 +223,6 @@ public class InputTag extends BaseInputTag {
 			if (Validator.isNotNull(fieldParam)) {
 				_inputName = fieldParam;
 			}
-
-			if (ModelHintsUtil.isLocalized(model.getName(), field)) {
-				_forLabel += StringPool.UNDERLINE + defaultLanguageId;
-				_inputName += StringPool.UNDERLINE + defaultLanguageId;
-			}
 		}
 		else if (Validator.isNotNull(type)) {
 			if (Validator.equals(type, "checkbox") ||
@@ -254,17 +247,11 @@ public class InputTag extends BaseInputTag {
 		setNamespacedAttribute(request, "model", model);
 
 		request.setAttribute(getAttributeNamespace() + "value", getValue());
-	}
 
-	protected void setEndAttributes() {
-		if ((_validators == null) || (_validators.get("required") == null)) {
-			return;
+		if ((_validators != null) && (_validators.get("required") != null)) {
+			setNamespacedAttribute(
+				request, "required", Boolean.TRUE.toString());
 		}
-
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		setNamespacedAttribute(request, "required", Boolean.TRUE.toString());
 	}
 
 	protected void updateFormValidators() {

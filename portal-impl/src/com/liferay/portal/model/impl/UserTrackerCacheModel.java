@@ -60,6 +60,7 @@ public class UserTrackerCacheModel implements CacheModel<UserTracker>,
 		return sb.toString();
 	}
 
+	@Override
 	public UserTracker toEntityModel() {
 		UserTrackerImpl userTrackerImpl = new UserTrackerImpl();
 
@@ -107,6 +108,7 @@ public class UserTrackerCacheModel implements CacheModel<UserTracker>,
 		return userTrackerImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		userTrackerId = objectInput.readLong();
 		companyId = objectInput.readLong();
@@ -118,6 +120,7 @@ public class UserTrackerCacheModel implements CacheModel<UserTracker>,
 		userAgent = objectInput.readUTF();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(userTrackerId);

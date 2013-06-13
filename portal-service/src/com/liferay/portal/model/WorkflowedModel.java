@@ -14,6 +14,8 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.exception.SystemException;
+
 import java.util.Date;
 
 /**
@@ -21,29 +23,46 @@ import java.util.Date;
  */
 public interface WorkflowedModel {
 
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #isApproved()}
+	 */
+	public boolean getApproved();
+
 	public int getStatus();
 
 	public long getStatusByUserId();
 
 	public String getStatusByUserName();
 
+	public String getStatusByUserUuid() throws SystemException;
+
 	public Date getStatusDate();
 
 	public boolean isApproved();
+
+	public boolean isDenied();
 
 	public boolean isDraft();
 
 	public boolean isExpired();
 
+	public boolean isInactive();
+
+	public boolean isIncomplete();
+
 	public boolean isInTrash();
 
 	public boolean isPending();
+
+	public boolean isScheduled();
 
 	public void setStatus(int status);
 
 	public void setStatusByUserId(long statusByUserId);
 
 	public void setStatusByUserName(String statusByUserName);
+
+	public void setStatusByUserUuid(String statusByUserUuid);
 
 	public void setStatusDate(Date statusDate);
 

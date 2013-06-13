@@ -30,6 +30,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
  */
 public class GroupPermissionImpl implements GroupPermission {
 
+	@Override
 	public void check(
 			PermissionChecker permissionChecker, Group group, String actionId)
 		throws PortalException, SystemException {
@@ -39,6 +40,7 @@ public class GroupPermissionImpl implements GroupPermission {
 		}
 	}
 
+	@Override
 	public void check(
 			PermissionChecker permissionChecker, long groupId, String actionId)
 		throws PortalException, SystemException {
@@ -48,6 +50,7 @@ public class GroupPermissionImpl implements GroupPermission {
 		}
 	}
 
+	@Override
 	public void check(PermissionChecker permissionChecker, String actionId)
 		throws PortalException {
 
@@ -56,6 +59,7 @@ public class GroupPermissionImpl implements GroupPermission {
 		}
 	}
 
+	@Override
 	public boolean contains(
 			PermissionChecker permissionChecker, Group group, String actionId)
 		throws PortalException, SystemException {
@@ -84,10 +88,19 @@ public class GroupPermissionImpl implements GroupPermission {
 			}
 		}
 
-		if (actionId.equals(ActionKeys.ADD_LAYOUT) &&
+		if (actionId.equals(ActionKeys.ADD_COMMUNITY) &&
 			permissionChecker.hasPermission(
 				groupId, Group.class.getName(), groupId,
-				ActionKeys.MANAGE_LAYOUTS)) {
+				ActionKeys.MANAGE_SUBGROUPS) ||
+			PortalPermissionUtil.contains(
+				permissionChecker, ActionKeys.ADD_COMMUNITY)) {
+
+			return true;
+		}
+		else if (actionId.equals(ActionKeys.ADD_LAYOUT) &&
+				 permissionChecker.hasPermission(
+					groupId, Group.class.getName(), groupId,
+					ActionKeys.MANAGE_LAYOUTS)) {
 
 			return true;
 		}
@@ -148,6 +161,7 @@ public class GroupPermissionImpl implements GroupPermission {
 		return false;
 	}
 
+	@Override
 	public boolean contains(
 			PermissionChecker permissionChecker, long groupId, String actionId)
 		throws PortalException, SystemException {
@@ -162,6 +176,7 @@ public class GroupPermissionImpl implements GroupPermission {
 		}
 	}
 
+	@Override
 	public boolean contains(
 		PermissionChecker permissionChecker, String actionId) {
 

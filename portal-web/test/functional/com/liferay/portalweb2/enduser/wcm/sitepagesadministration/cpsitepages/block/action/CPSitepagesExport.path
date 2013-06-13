@@ -1,0 +1,39 @@
+<html>
+<head>
+<title>CPSitepagesExport</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">CPSitepagesExport</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>PAGE_NAME</td>
+	<td></td>
+	<td>CPSitepagesExport</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>EXPORT_IFRAME</td>
+	<td>//iframe[@id='_156_exportDialog_iframe_']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>EXPORT_FILE_FIELD</td>
+	<td>//input[@id='_156_exportFileName']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>EXPORT_BUTTON</td>
+	<td>//div[@id='_156_exportImportOptions']//button[contains(.,'Export')]</td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

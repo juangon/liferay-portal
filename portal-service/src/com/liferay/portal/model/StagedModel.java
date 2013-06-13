@@ -14,14 +14,28 @@
 
 package com.liferay.portal.model;
 
+import java.util.Date;
+
 /**
  * @author Michael C. Han
  */
-public interface StagedModel extends AuditedModel {
+public interface StagedModel extends ClassedModel {
 
 	public Object clone();
 
+	public long getCompanyId();
+
+	public Date getCreateDate();
+
+	public Date getModifiedDate();
+
 	public String getUuid();
+
+	public void setCompanyId(long companyId);
+
+	public void setCreateDate(Date date);
+
+	public void setModifiedDate(Date date);
 
 	public void setUuid(String uuid);
 

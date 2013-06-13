@@ -27,6 +27,7 @@ import com.liferay.portal.model.Country;
 import com.liferay.portal.model.ListTypeConstants;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.AddressLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
 
@@ -39,11 +40,31 @@ import java.util.List;
  */
 public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #addAddress(long, String,
+	 *             long, String, String, String, String, String, long, long,
+	 *             int, boolean, boolean, ServiceContext)}
+	 */
+	@Override
 	public Address addAddress(
 			long userId, String className, long classPK, String street1,
 			String street2, String street3, String city, String zip,
 			long regionId, long countryId, int typeId, boolean mailing,
 			boolean primary)
+		throws PortalException, SystemException {
+
+		return addAddress(
+			userId, className, classPK, street1, street2, street3, city, zip,
+			regionId, countryId, typeId, mailing, primary,
+			new ServiceContext());
+	}
+
+	@Override
+	public Address addAddress(
+			long userId, String className, long classPK, String street1,
+			String street2, String street3, String city, String zip,
+			long regionId, long countryId, int typeId, boolean mailing,
+			boolean primary, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -58,11 +79,12 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 
 		Address address = addressPersistence.create(addressId);
 
+		address.setUuid(serviceContext.getUuid());
 		address.setCompanyId(user.getCompanyId());
 		address.setUserId(user.getUserId());
 		address.setUserName(user.getFullName());
-		address.setCreateDate(now);
-		address.setModifiedDate(now);
+		address.setCreateDate(serviceContext.getCreateDate(now));
+		address.setModifiedDate(serviceContext.getModifiedDate(now));
 		address.setClassNameId(classNameId);
 		address.setClassPK(classPK);
 		address.setStreet1(street1);
@@ -81,6 +103,7 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 		return address;
 	}
 
+	@Override
 	public void deleteAddresses(long companyId, String className, long classPK)
 		throws SystemException {
 
@@ -94,10 +117,19 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 		}
 	}
 
+	@Override
+	public Address fetchAddressByUuidAndCompanyId(String uuid, long companyId)
+		throws SystemException {
+
+		return addressPersistence.fetchByUuid_C_First(uuid, companyId, null);
+	}
+
+	@Override
 	public List<Address> getAddresses() throws SystemException {
 		return addressPersistence.findAll();
 	}
 
+	@Override
 	public List<Address> getAddresses(
 			long companyId, String className, long classPK)
 		throws SystemException {
@@ -107,6 +139,7 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 		return addressPersistence.findByC_C_C(companyId, classNameId, classPK);
 	}
 
+	@Override
 	public Address updateAddress(
 			long addressId, String street1, String street2, String street3,
 			String city, String zip, long regionId, long countryId, int typeId,

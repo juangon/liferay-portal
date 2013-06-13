@@ -50,6 +50,7 @@ public class DDMStructureLinkCacheModel implements CacheModel<DDMStructureLink>,
 		return sb.toString();
 	}
 
+	@Override
 	public DDMStructureLink toEntityModel() {
 		DDMStructureLinkImpl ddmStructureLinkImpl = new DDMStructureLinkImpl();
 
@@ -63,6 +64,7 @@ public class DDMStructureLinkCacheModel implements CacheModel<DDMStructureLink>,
 		return ddmStructureLinkImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		structureLinkId = objectInput.readLong();
 		classNameId = objectInput.readLong();
@@ -70,6 +72,7 @@ public class DDMStructureLinkCacheModel implements CacheModel<DDMStructureLink>,
 		structureId = objectInput.readLong();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(structureLinkId);

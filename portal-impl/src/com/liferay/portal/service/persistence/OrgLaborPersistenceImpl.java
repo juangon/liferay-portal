@@ -108,6 +108,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 	 * @return the matching org labors
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<OrgLabor> findByOrganizationId(long organizationId)
 		throws SystemException {
 		return findByOrganizationId(organizationId, QueryUtil.ALL_POS,
@@ -127,6 +128,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 	 * @return the range of matching org labors
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<OrgLabor> findByOrganizationId(long organizationId, int start,
 		int end) throws SystemException {
 		return findByOrganizationId(organizationId, start, end, null);
@@ -146,6 +148,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 	 * @return the ordered range of matching org labors
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<OrgLabor> findByOrganizationId(long organizationId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -256,6 +259,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 	 * @throws com.liferay.portal.NoSuchOrgLaborException if a matching org labor could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public OrgLabor findByOrganizationId_First(long organizationId,
 		OrderByComparator orderByComparator)
 		throws NoSuchOrgLaborException, SystemException {
@@ -286,6 +290,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 	 * @return the first matching org labor, or <code>null</code> if a matching org labor could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public OrgLabor fetchByOrganizationId_First(long organizationId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<OrgLabor> list = findByOrganizationId(organizationId, 0, 1,
@@ -307,6 +312,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 	 * @throws com.liferay.portal.NoSuchOrgLaborException if a matching org labor could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public OrgLabor findByOrganizationId_Last(long organizationId,
 		OrderByComparator orderByComparator)
 		throws NoSuchOrgLaborException, SystemException {
@@ -337,6 +343,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 	 * @return the last matching org labor, or <code>null</code> if a matching org labor could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public OrgLabor fetchByOrganizationId_Last(long organizationId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByOrganizationId(organizationId);
@@ -361,6 +368,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 	 * @throws com.liferay.portal.NoSuchOrgLaborException if a org labor with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public OrgLabor[] findByOrganizationId_PrevAndNext(long orgLaborId,
 		long organizationId, OrderByComparator orderByComparator)
 		throws NoSuchOrgLaborException, SystemException {
@@ -502,6 +510,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 	 * @param organizationId the organization ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByOrganizationId(long organizationId)
 		throws SystemException {
 		for (OrgLabor orgLabor : findByOrganizationId(organizationId,
@@ -517,6 +526,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 	 * @return the number of matching org labors
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByOrganizationId(long organizationId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_ORGANIZATIONID;
@@ -570,6 +580,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 	 *
 	 * @param orgLabor the org labor
 	 */
+	@Override
 	public void cacheResult(OrgLabor orgLabor) {
 		EntityCacheUtil.putResult(OrgLaborModelImpl.ENTITY_CACHE_ENABLED,
 			OrgLaborImpl.class, orgLabor.getPrimaryKey(), orgLabor);
@@ -582,6 +593,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 	 *
 	 * @param orgLabors the org labors
 	 */
+	@Override
 	public void cacheResult(List<OrgLabor> orgLabors) {
 		for (OrgLabor orgLabor : orgLabors) {
 			if (EntityCacheUtil.getResult(
@@ -648,6 +660,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 	 * @param orgLaborId the primary key for the new org labor
 	 * @return the new org labor
 	 */
+	@Override
 	public OrgLabor create(long orgLaborId) {
 		OrgLabor orgLabor = new OrgLaborImpl();
 
@@ -665,6 +678,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 	 * @throws com.liferay.portal.NoSuchOrgLaborException if a org labor with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public OrgLabor remove(long orgLaborId)
 		throws NoSuchOrgLaborException, SystemException {
 		return remove((Serializable)orgLaborId);
@@ -870,6 +884,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 	 * @throws com.liferay.portal.NoSuchOrgLaborException if a org labor with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public OrgLabor findByPrimaryKey(long orgLaborId)
 		throws NoSuchOrgLaborException, SystemException {
 		return findByPrimaryKey((Serializable)orgLaborId);
@@ -929,6 +944,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 	 * @return the org labor, or <code>null</code> if a org labor with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public OrgLabor fetchByPrimaryKey(long orgLaborId)
 		throws SystemException {
 		return fetchByPrimaryKey((Serializable)orgLaborId);
@@ -940,6 +956,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 	 * @return the org labors
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<OrgLabor> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -956,6 +973,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 	 * @return the range of org labors
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<OrgLabor> findAll(int start, int end) throws SystemException {
 		return findAll(start, end, null);
 	}
@@ -973,6 +991,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 	 * @return the ordered range of org labors
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<OrgLabor> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -1058,6 +1077,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (OrgLabor orgLabor : findAll()) {
 			remove(orgLabor);
@@ -1070,6 +1090,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 	 * @return the number of org labors
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -1155,6 +1176,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 		};
 
 	private static CacheModel<OrgLabor> _nullOrgLaborCacheModel = new CacheModel<OrgLabor>() {
+			@Override
 			public OrgLabor toEntityModel() {
 				return _nullOrgLabor;
 			}

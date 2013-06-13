@@ -93,26 +93,32 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 	public SocialRelationModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _relationId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setRelationId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _relationId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return SocialRelation.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return SocialRelation.class.getName();
 	}
@@ -177,6 +183,7 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 		}
 	}
 
+	@Override
 	public String getUuid() {
 		if (_uuid == null) {
 			return StringPool.BLANK;
@@ -186,6 +193,7 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 		}
 	}
 
+	@Override
 	public void setUuid(String uuid) {
 		if (_originalUuid == null) {
 			_originalUuid = _uuid;
@@ -198,18 +206,22 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@Override
 	public long getRelationId() {
 		return _relationId;
 	}
 
+	@Override
 	public void setRelationId(long relationId) {
 		_relationId = relationId;
 	}
 
+	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
@@ -226,18 +238,22 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 		return _originalCompanyId;
 	}
 
+	@Override
 	public long getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(long createDate) {
 		_createDate = createDate;
 	}
 
+	@Override
 	public long getUserId1() {
 		return _userId1;
 	}
 
+	@Override
 	public void setUserId1(long userId1) {
 		_columnBitmask |= USERID1_COLUMN_BITMASK;
 
@@ -254,10 +270,12 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 		return _originalUserId1;
 	}
 
+	@Override
 	public long getUserId2() {
 		return _userId2;
 	}
 
+	@Override
 	public void setUserId2(long userId2) {
 		_columnBitmask |= USERID2_COLUMN_BITMASK;
 
@@ -274,10 +292,12 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 		return _originalUserId2;
 	}
 
+	@Override
 	public int getType() {
 		return _type;
 	}
 
+	@Override
 	public void setType(int type) {
 		_columnBitmask |= TYPE_COLUMN_BITMASK;
 
@@ -338,6 +358,7 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 		return socialRelationImpl;
 	}
 
+	@Override
 	public int compareTo(SocialRelation socialRelation) {
 		long primaryKey = socialRelation.getPrimaryKey();
 
@@ -354,18 +375,15 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof SocialRelation)) {
 			return false;
 		}
 
-		SocialRelation socialRelation = null;
-
-		try {
-			socialRelation = (SocialRelation)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		SocialRelation socialRelation = (SocialRelation)obj;
 
 		long primaryKey = socialRelation.getPrimaryKey();
 
@@ -457,6 +475,7 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(25);
 

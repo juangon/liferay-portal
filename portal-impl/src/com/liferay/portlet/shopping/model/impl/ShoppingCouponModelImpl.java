@@ -166,26 +166,32 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 	public ShoppingCouponModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _couponId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setCouponId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _couponId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return ShoppingCoupon.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return ShoppingCoupon.class.getName();
 	}
@@ -327,20 +333,24 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 		}
 	}
 
+	@Override
 	@JSON
 	public long getCouponId() {
 		return _couponId;
 	}
 
+	@Override
 	public void setCouponId(long couponId) {
 		_couponId = couponId;
 	}
 
+	@Override
 	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -357,32 +367,39 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 		return _originalGroupId;
 	}
 
+	@Override
 	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
+	@Override
 	@JSON
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
 
+	@Override
 	@JSON
 	public String getUserName() {
 		if (_userName == null) {
@@ -393,30 +410,36 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 		}
 	}
 
+	@Override
 	public void setUserName(String userName) {
 		_userName = userName;
 	}
 
+	@Override
 	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_columnBitmask = -1L;
 
 		_createDate = createDate;
 	}
 
+	@Override
 	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
 	@JSON
 	public String getCode() {
 		if (_code == null) {
@@ -427,6 +450,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 		}
 	}
 
+	@Override
 	public void setCode(String code) {
 		_columnBitmask |= CODE_COLUMN_BITMASK;
 
@@ -441,6 +465,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 		return GetterUtil.getString(_originalCode);
 	}
 
+	@Override
 	@JSON
 	public String getName() {
 		if (_name == null) {
@@ -451,10 +476,12 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 		}
 	}
 
+	@Override
 	public void setName(String name) {
 		_name = name;
 	}
 
+	@Override
 	@JSON
 	public String getDescription() {
 		if (_description == null) {
@@ -465,41 +492,50 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 		}
 	}
 
+	@Override
 	public void setDescription(String description) {
 		_description = description;
 	}
 
+	@Override
 	@JSON
 	public Date getStartDate() {
 		return _startDate;
 	}
 
+	@Override
 	public void setStartDate(Date startDate) {
 		_startDate = startDate;
 	}
 
+	@Override
 	@JSON
 	public Date getEndDate() {
 		return _endDate;
 	}
 
+	@Override
 	public void setEndDate(Date endDate) {
 		_endDate = endDate;
 	}
 
+	@Override
 	@JSON
 	public boolean getActive() {
 		return _active;
 	}
 
+	@Override
 	public boolean isActive() {
 		return _active;
 	}
 
+	@Override
 	public void setActive(boolean active) {
 		_active = active;
 	}
 
+	@Override
 	@JSON
 	public String getLimitCategories() {
 		if (_limitCategories == null) {
@@ -510,10 +546,12 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 		}
 	}
 
+	@Override
 	public void setLimitCategories(String limitCategories) {
 		_limitCategories = limitCategories;
 	}
 
+	@Override
 	@JSON
 	public String getLimitSkus() {
 		if (_limitSkus == null) {
@@ -524,28 +562,34 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 		}
 	}
 
+	@Override
 	public void setLimitSkus(String limitSkus) {
 		_limitSkus = limitSkus;
 	}
 
+	@Override
 	@JSON
 	public double getMinOrder() {
 		return _minOrder;
 	}
 
+	@Override
 	public void setMinOrder(double minOrder) {
 		_minOrder = minOrder;
 	}
 
+	@Override
 	@JSON
 	public double getDiscount() {
 		return _discount;
 	}
 
+	@Override
 	public void setDiscount(double discount) {
 		_discount = discount;
 	}
 
+	@Override
 	@JSON
 	public String getDiscountType() {
 		if (_discountType == null) {
@@ -556,6 +600,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 		}
 	}
 
+	@Override
 	public void setDiscountType(String discountType) {
 		_discountType = discountType;
 	}
@@ -615,6 +660,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 		return shoppingCouponImpl;
 	}
 
+	@Override
 	public int compareTo(ShoppingCoupon shoppingCoupon) {
 		int value = 0;
 
@@ -630,18 +676,15 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ShoppingCoupon)) {
 			return false;
 		}
 
-		ShoppingCoupon shoppingCoupon = null;
-
-		try {
-			shoppingCoupon = (ShoppingCoupon)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		ShoppingCoupon shoppingCoupon = (ShoppingCoupon)obj;
 
 		long primaryKey = shoppingCoupon.getPrimaryKey();
 
@@ -829,6 +872,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(58);
 

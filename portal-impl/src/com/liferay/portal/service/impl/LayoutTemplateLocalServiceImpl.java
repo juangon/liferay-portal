@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.template.StringTemplateResource;
 import com.liferay.portal.kernel.template.Template;
 import com.liferay.portal.kernel.template.TemplateConstants;
-import com.liferay.portal.kernel.template.TemplateContextType;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.template.TemplateResourceLoaderUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -63,6 +62,7 @@ import javax.servlet.ServletContext;
 public class LayoutTemplateLocalServiceImpl
 	extends LayoutTemplateLocalServiceBaseImpl {
 
+	@Override
 	public String getContent(
 			String layoutTemplateId, boolean standard, String themeId)
 		throws SystemException {
@@ -103,6 +103,7 @@ public class LayoutTemplateLocalServiceImpl
 		}
 	}
 
+	@Override
 	public LayoutTemplate getLayoutTemplate(
 		String layoutTemplateId, boolean standard, String themeId) {
 
@@ -145,6 +146,7 @@ public class LayoutTemplateLocalServiceImpl
 		return layoutTemplate;
 	}
 
+	@Override
 	public List<LayoutTemplate> getLayoutTemplates() {
 		List<LayoutTemplate> customLayoutTemplates =
 			new ArrayList<LayoutTemplate>(
@@ -156,6 +158,7 @@ public class LayoutTemplateLocalServiceImpl
 		return customLayoutTemplates;
 	}
 
+	@Override
 	public List<LayoutTemplate> getLayoutTemplates(String themeId) {
 		Map<String, LayoutTemplate> _themesCustom = _getThemesCustom(themeId);
 
@@ -214,6 +217,7 @@ public class LayoutTemplateLocalServiceImpl
 		return customLayoutTemplates;
 	}
 
+	@Override
 	public String getWapContent(
 			String layoutTemplateId, boolean standard, String themeId)
 		throws SystemException {
@@ -254,6 +258,7 @@ public class LayoutTemplateLocalServiceImpl
 		}
 	}
 
+	@Override
 	public List<ObjectValuePair<String, Boolean>> init(
 		ServletContext servletContext, String[] xmls,
 		PluginPackage pluginPackage) {
@@ -261,6 +266,7 @@ public class LayoutTemplateLocalServiceImpl
 		return init(null, servletContext, xmls, pluginPackage);
 	}
 
+	@Override
 	public List<ObjectValuePair<String, Boolean>> init(
 		String servletContextName, ServletContext servletContext, String[] xmls,
 		PluginPackage pluginPackage) {
@@ -291,6 +297,7 @@ public class LayoutTemplateLocalServiceImpl
 		return layoutTemplateIdOVPs;
 	}
 
+	@Override
 	public void readLayoutTemplate(
 		String servletContextName, ServletContext servletContext,
 		Set<ObjectValuePair<String, Boolean>> layoutTemplateIdOVPs,
@@ -462,6 +469,7 @@ public class LayoutTemplateLocalServiceImpl
 		}
 	}
 
+	@Override
 	public void uninstallLayoutTemplate(
 		String layoutTemplateId, boolean standard) {
 
@@ -495,6 +503,7 @@ public class LayoutTemplateLocalServiceImpl
 		}
 	}
 
+	@Override
 	public void uninstallLayoutTemplates(String themeId) {
 		Map<String, LayoutTemplate> _themesStandard = _getThemesStandard(
 			themeId);
@@ -558,7 +567,7 @@ public class LayoutTemplateLocalServiceImpl
 				TemplateConstants.LANG_TYPE_VM,
 				new StringTemplateResource(
 					velocityTemplateId, velocityTemplateContent),
-				TemplateContextType.STANDARD);
+				false);
 
 			template.put("processor", processor);
 
@@ -643,10 +652,8 @@ public class LayoutTemplateLocalServiceImpl
 		new LinkedHashMap<String, LayoutTemplate>();
 	private static Map<String, LayoutTemplate> _portalStandard =
 		new LinkedHashMap<String, LayoutTemplate>();
-
 	private static Map<String, Map<String, LayoutTemplate>> _themes =
 		new LinkedHashMap<String, Map<String, LayoutTemplate>>();
-
 	private static Map<String, LayoutTemplate> _warCustom =
 		new LinkedHashMap<String, LayoutTemplate>();
 	private static Map<String, LayoutTemplate> _warStandard =

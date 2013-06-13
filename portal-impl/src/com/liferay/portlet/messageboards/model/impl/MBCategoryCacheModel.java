@@ -83,6 +83,7 @@ public class MBCategoryCacheModel implements CacheModel<MBCategory>,
 		return sb.toString();
 	}
 
+	@Override
 	public MBCategory toEntityModel() {
 		MBCategoryImpl mbCategoryImpl = new MBCategoryImpl();
 
@@ -174,6 +175,7 @@ public class MBCategoryCacheModel implements CacheModel<MBCategory>,
 		return mbCategoryImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		categoryId = objectInput.readLong();
@@ -196,6 +198,7 @@ public class MBCategoryCacheModel implements CacheModel<MBCategory>,
 		statusDate = objectInput.readLong();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

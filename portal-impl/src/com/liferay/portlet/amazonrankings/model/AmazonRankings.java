@@ -52,6 +52,7 @@ public class AmazonRankings
 		_availability = availability;
 	}
 
+	@Override
 	public int compareTo(AmazonRankings amazonRankings) {
 		if (amazonRankings == null) {
 			return -1;

@@ -148,26 +148,32 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 	public AssetTagPropertyModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _tagPropertyId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setTagPropertyId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _tagPropertyId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return AssetTagProperty.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return AssetTagProperty.class.getName();
 	}
@@ -246,20 +252,24 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 		}
 	}
 
+	@Override
 	@JSON
 	public long getTagPropertyId() {
 		return _tagPropertyId;
 	}
 
+	@Override
 	public void setTagPropertyId(long tagPropertyId) {
 		_tagPropertyId = tagPropertyId;
 	}
 
+	@Override
 	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
@@ -276,23 +286,28 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 		return _originalCompanyId;
 	}
 
+	@Override
 	@JSON
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
 
+	@Override
 	@JSON
 	public String getUserName() {
 		if (_userName == null) {
@@ -303,33 +318,40 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 		}
 	}
 
+	@Override
 	public void setUserName(String userName) {
 		_userName = userName;
 	}
 
+	@Override
 	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
 	}
 
+	@Override
 	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
 	@JSON
 	public long getTagId() {
 		return _tagId;
 	}
 
+	@Override
 	public void setTagId(long tagId) {
 		_columnBitmask |= TAGID_COLUMN_BITMASK;
 
@@ -346,6 +368,7 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 		return _originalTagId;
 	}
 
+	@Override
 	@JSON
 	public String getKey() {
 		if (_key == null) {
@@ -356,6 +379,7 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 		}
 	}
 
+	@Override
 	public void setKey(String key) {
 		_columnBitmask = -1L;
 
@@ -370,6 +394,7 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 		return GetterUtil.getString(_originalKey);
 	}
 
+	@Override
 	@JSON
 	public String getValue() {
 		if (_value == null) {
@@ -380,6 +405,7 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 		}
 	}
 
+	@Override
 	public void setValue(String value) {
 		_value = value;
 	}
@@ -430,6 +456,7 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 		return assetTagPropertyImpl;
 	}
 
+	@Override
 	public int compareTo(AssetTagProperty assetTagProperty) {
 		int value = 0;
 
@@ -444,18 +471,15 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof AssetTagProperty)) {
 			return false;
 		}
 
-		AssetTagProperty assetTagProperty = null;
-
-		try {
-			assetTagProperty = (AssetTagProperty)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		AssetTagProperty assetTagProperty = (AssetTagProperty)obj;
 
 		long primaryKey = assetTagProperty.getPrimaryKey();
 
@@ -573,6 +597,7 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(31);
 

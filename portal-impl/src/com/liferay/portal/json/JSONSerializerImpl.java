@@ -30,26 +30,31 @@ public class JSONSerializerImpl implements JSONSerializer {
 		_jsonSerializer = new flexjson.JSONSerializer();
 	}
 
+	@Override
 	public JSONSerializerImpl exclude(String... fields) {
 		_jsonSerializer.exclude(fields);
 
 		return this;
 	}
 
+	@Override
 	public JSONSerializerImpl include(String... fields) {
 		_jsonSerializer.include(fields);
 
 		return this;
 	}
 
+	@Override
 	public String serialize(Object target) {
 		return _jsonSerializer.serialize(target);
 	}
 
+	@Override
 	public String serializeDeep(Object target) {
 		return _jsonSerializer.deepSerialize(target);
 	}
 
+	@Override
 	public JSONSerializerImpl transform(
 		JSONTransformer jsonTransformer, Class<?>... types) {
 
@@ -67,6 +72,7 @@ public class JSONSerializerImpl implements JSONSerializer {
 		return this;
 	}
 
+	@Override
 	public JSONSerializerImpl transform(
 		JSONTransformer jsonTransformer, String... fields) {
 

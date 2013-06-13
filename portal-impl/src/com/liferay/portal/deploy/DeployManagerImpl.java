@@ -16,7 +16,7 @@ package com.liferay.portal.deploy;
 
 import com.liferay.portal.events.GlobalStartupAction;
 import com.liferay.portal.kernel.deploy.DeployManager;
-import com.liferay.portal.kernel.deploy.auto.AutoDeployListener;
+import com.liferay.portal.kernel.deploy.auto.AutoDeployDir;
 import com.liferay.portal.kernel.deploy.auto.context.AutoDeploymentContext;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.security.pacl.DoPrivileged;
@@ -36,21 +36,21 @@ import java.util.Properties;
 @DoPrivileged
 public class DeployManagerImpl implements DeployManager {
 
+	@Override
 	public void deploy(AutoDeploymentContext autoDeploymentContext)
 		throws Exception {
 
-		List<AutoDeployListener> autoDeployListeners =
-			GlobalStartupAction.getAutoDeployListeners();
-
-		for (AutoDeployListener autoDeployListener : autoDeployListeners) {
-			autoDeployListener.deploy(autoDeploymentContext);
-		}
+		AutoDeployDir.deploy(
+			autoDeploymentContext,
+			GlobalStartupAction.getAutoDeployListeners());
 	}
 
+	@Override
 	public String getDeployDir() throws Exception {
 		return DeployUtil.getAutoDeployDestDir();
 	}
 
+	@Override
 	public String getInstalledDir() throws Exception {
 		if (ServerDetector.isGlassfish()) {
 			File file = new File(
@@ -62,18 +62,22 @@ public class DeployManagerImpl implements DeployManager {
 		return DeployUtil.getAutoDeployDestDir();
 	}
 
+	@Override
 	public PluginPackage getInstalledPluginPackage(String context) {
 		return PluginPackageUtil.getInstalledPluginPackage(context);
 	}
 
+	@Override
 	public List<PluginPackage> getInstalledPluginPackages() {
 		return PluginPackageUtil.getInstalledPluginPackages();
 	}
 
+	@Override
 	public boolean isDeployed(String context) {
 		return PluginPackageUtil.isInstalled(context);
 	}
 
+	@Override
 	public PluginPackage readPluginPackageProperties(
 		String displayName, Properties properties) {
 
@@ -81,10 +85,12 @@ public class DeployManagerImpl implements DeployManager {
 			displayName, properties);
 	}
 
+	@Override
 	public PluginPackage readPluginPackageXml(String xml) throws Exception {
 		return PluginPackageUtil.readPluginPackageXml(xml);
 	}
 
+	@Override
 	public void redeploy(String context) throws Exception {
 		if (ServerDetector.isJetty()) {
 			DeployUtil.redeployJetty(context);
@@ -94,6 +100,7 @@ public class DeployManagerImpl implements DeployManager {
 		}
 	}
 
+	@Override
 	public void undeploy(String context) throws Exception {
 		File deployDir = new File(getDeployDir(), context);
 

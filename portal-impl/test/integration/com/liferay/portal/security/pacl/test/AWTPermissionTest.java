@@ -41,6 +41,7 @@ public class AWTPermissionTest {
 			toolkit.addAWTEventListener(
 				new AWTEventListener() {
 
+					@Override
 					public void eventDispatched(AWTEvent event) {
 					}
 

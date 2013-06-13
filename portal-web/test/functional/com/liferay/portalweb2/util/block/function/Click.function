@@ -1,4 +1,10 @@
 <definition>
+	<command name="click">
+		<execute selenium="waitForVisible" />
+
+		<execute selenium="click" />
+	</command>
+
 	<command name="clickAt">
 		<execute selenium="waitForVisible" />
 
@@ -12,9 +18,15 @@
 	</command>
 
 	<command name="clickAtApplicationSearch">
-		<execute selenium="waitForElementPresent" argument1="//script[contains(@src,'/aui/aui-live-search/aui-live-search-min.js')]" />
+		<execute selenium="waitForElementPresent" argument1="//script[contains(@src,'/autocomplete-filters/autocomplete-filters-min.js')]" />
 
 		<execute function="Click#clickAt" />
+	</command>
+
+	<command name="makeVisibleClickAt">
+		<execute selenium="makeVisible" />
+
+		<execute selenium="clickAt" />
 	</command>
 
 	<command name="partialTextClickAt">
@@ -33,6 +45,12 @@
 		<execute selenium="pause" argument1="1000" />
 
 		<execute function="Click#textClickAt" />
+	</command>
+
+	<command name="pauseTextClickAtAndWait">
+		<execute selenium="pause" argument1="1000" />
+
+		<execute function="Click#textClickAtAndWait" />
 	</command>
 
 	<command name="textClick">
@@ -59,10 +77,16 @@
 		<execute selenium="clickAtAndWait" />
 	</command>
 
-	<command name="textClickAtClickDockbar">
-		<execute selenium="clickAt" argument1="//div[@id='dockbar']" argument2="" />
+	<command name="textClickAtAndWaitCKEditor">
+		<execute selenium="waitForVisible" argument1="//a[contains(@class,'cke_button cke_button__cut') and contains(@class,'cke_button_disabled')]" />
 
-		<execute selenium="waitForElementPresent" argument1="//script[contains(@src,'/aui/aui-button-item/aui-button-item-min.js')]" />
+		<execute function="Click#textClickAtAndWait" />
+	</command>
+
+	<command name="textClickAtClickDockbar">
+		<execute selenium="clickAt" argument1="//div[@id='_145_dockbar']" argument2="" />
+
+		<execute selenium="waitForElementPresent" argument1="//script[contains(@src,'/aui/aui-editable-deprecated/aui-editable-deprecated-min.js')]" />
 
 		<execute function="Click#textClickAt" />
 	</command>

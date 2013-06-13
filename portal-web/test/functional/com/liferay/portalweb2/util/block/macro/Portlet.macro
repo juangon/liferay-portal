@@ -1,15 +1,73 @@
 <definition>
 	<command name="pgAdd">
-		<execute macro="Page#pgGoto">
-			<var name="pageName" value="${pageName}" />
-		</execute>
+		<if>
+			<equals arg1="${pageType}" arg2="Organization" />
+			<then>
+				<execute macro="Page#pgGotoOrganization">
+					<var name="pageName" value="${pageName}" />
+				</execute>
+			</then>
+			<elseif>
+				<equals arg1="${pageType}" arg2="Private" />
+				<then>
+					<execute macro="Page#pgGotoSitePrivate">
+						<var name="pageName" value="${pageName}" />
+					</execute>
+				</then>
+			</elseif>
+			<elseif>
+				<equals arg1="${pageType}" arg2="Public" />
+				<then>
+					<execute macro="Page#pgGotoSitePublic">
+						<var name="pageName" value="${pageName}" />
+					</execute>
+				</then>
+			</elseif>
+			<else>
+				<execute macro="Page#pgGoto">
+					<var name="pageName" value="${pageName}" />
+				</execute>
+			</else>
+		</if>
 
-		<execute action="Dockbar#mouseOver" locator-key1="ADD" />
+		<execute action="Dockbar#click" locator-key1="ADD" />
 		<execute action="Dockbar#click" locator-key1="ADD_CONTENT_AND_APPLICATIONS" />
 		<execute action="Dockbar#click" locator-key1="ADD_APPLICATION_LINK" />
+
+		<while>
+			<condition action="Dockbar#isElementPresent" locator-key1="ADD_APPLICATION_COLLAPSED_CATEGORY" />
+			<then>
+				<execute action="Dockbar#click" locator-key1="ADD_APPLICATION_COLLAPSED_CATEGORY" />
+			</then>
+		</while>
+
 		<execute action="Dockbar#type" locator-key1="ADD_APPLICATION_SEARCH_FIELD" value1="${portletName}" />
-		<execute action="Dockbar#click" locator1="//li[@title='${portletName}']/p/a" value1="Add" />
+		<execute action="Dockbar#click" locator1="//span[@data-title='${portletName}']" value1="Add" />
 
 		<execute action="Home#assertElementPresent" locator-key1="PORTLET_1" />
+	</command>
+
+	<command name="pgAddOrganization">
+		<execute macro="Portlet#pgAdd">
+			<var name="pageName" value="${pageName}" />
+			<var name="pageType" value="Organization" />
+			<var name="portletName" value="${portletName}" />
+		</execute>
+	</command>
+
+	<command name="pgAddSitePrivate">
+		<execute macro="Portlet#pgAdd">
+			<var name="pageName" value="${pageName}" />
+			<var name="pageType" value="Private" />
+			<var name="portletName" value="${portletName}" />
+		</execute>
+	</command>
+
+	<command name="pgAddSitePublic">
+		<execute macro="Portlet#pgAdd">
+			<var name="pageName" value="${pageName}" />
+			<var name="pageType" value="Public" />
+			<var name="portletName" value="${portletName}" />
+		</execute>
 	</command>
 </definition>

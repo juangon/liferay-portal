@@ -45,7 +45,7 @@ else {
 	}
 %>
 
-	<div class="portlet-msg-info">
+	<div class="alert alert-info">
 		<liferay-ui:message key="there-are-no-tags" />
 	</div>
 
@@ -152,7 +152,7 @@ private String _buildTagsNavigation(long groupId, String selectedTagName, Portle
 			sb.append("<a href=\"");
 		}
 
-		sb.append(portletURL.toString());
+		sb.append(HtmlUtil.escape(portletURL.toString()));
 		sb.append("\">");
 		sb.append(tagName);
 

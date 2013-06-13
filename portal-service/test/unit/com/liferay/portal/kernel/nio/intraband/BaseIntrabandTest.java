@@ -161,6 +161,7 @@ public class BaseIntrabandTest {
 				}
 			}
 
+			@Override
 			public Void call() {
 				for (int i = _start; i < _end; i++) {
 					DatagramReceiveHandler outputDatagramReceiveHandler =
@@ -261,45 +262,10 @@ public class BaseIntrabandTest {
 
 		sequenceIdGenerator.set(Long.MAX_VALUE);
 
+		Assert.assertEquals(
+			Long.MAX_VALUE, _mockIntraband.generateSequenceId());
+		Assert.assertEquals(0, _mockIntraband.generateSequenceId());
 		Assert.assertEquals(1, _mockIntraband.generateSequenceId());
-		Assert.assertEquals(2, _mockIntraband.generateSequenceId());
-
-		// Concurrent resetting
-
-		List<Callable<Long>> getSequenceIdCallables =
-			new ArrayList<Callable<Long>>(2);
-
-		Callable<Long> getSequenceIdCallable = new Callable<Long>() {
-
-			public Long call() {
-				return _mockIntraband.generateSequenceId();
-			}
-
-		};
-
-		getSequenceIdCallables.add(getSequenceIdCallable);
-		getSequenceIdCallables.add(getSequenceIdCallable);
-
-		ExecutorService executorService = Executors.newFixedThreadPool(2);
-
-		for (int i = 0; i < 10240; i++) {
-			sequenceIdGenerator.set(Long.MAX_VALUE);
-
-			List<Future<Long>> getSequenceIdFutures = executorService.invokeAll(
-				getSequenceIdCallables);
-
-			Future<Long> sequenceIdFuture1 = getSequenceIdFutures.get(0);
-			Future<Long> sequenceIdFuture2 = getSequenceIdFutures.get(1);
-
-			long sequenceId1 = sequenceIdFuture1.get();
-			long sequenceId2 = sequenceIdFuture2.get();
-
-			Assert.assertTrue(
-				((sequenceId1 == 1) && (sequenceId2 == 2)) ||
-				((sequenceId1 == 2) && (sequenceId2 == 1)));
-		}
-
-		executorService.shutdownNow();
 	}
 
 	@Test
@@ -1460,7 +1426,7 @@ public class BaseIntrabandTest {
 		final IOException expectedIOException = new IOException(
 			"Force to fail");
 
-		Intraband intraBand = new MockIntraband(_DEFAULT_TIMEOUT) {
+		Intraband intraband = new MockIntraband(_DEFAULT_TIMEOUT) {
 
 			@Override
 			protected void doSendDatagram(
@@ -1476,7 +1442,7 @@ public class BaseIntrabandTest {
 		};
 
 		try {
-			intraBand.sendSyncDatagram(
+			intraband.sendSyncDatagram(
 				new MockRegistrationReference(_mockIntraband),
 				Datagram.createRequestDatagram(_type, _data));
 
@@ -1491,7 +1457,7 @@ public class BaseIntrabandTest {
 		final Datagram expectedDatagram = Datagram.createResponseDatagram(
 			requestDatagram, _data);
 
-		intraBand = new MockIntraband(_DEFAULT_TIMEOUT) {
+		intraband = new MockIntraband(_DEFAULT_TIMEOUT) {
 
 			@Override
 			protected void doSendDatagram(
@@ -1506,7 +1472,7 @@ public class BaseIntrabandTest {
 
 		};
 
-		Datagram responseDatagram = intraBand.sendSyncDatagram(
+		Datagram responseDatagram = intraband.sendSyncDatagram(
 			new MockRegistrationReference(_mockIntraband), requestDatagram);
 
 		Assert.assertSame(expectedDatagram, responseDatagram);
@@ -1539,22 +1505,27 @@ public class BaseIntrabandTest {
 	private static class MockGatheringByteChannel
 		implements GatheringByteChannel {
 
+		@Override
 		public void close() throws IOException {
 			throw new IOException();
 		}
 
+		@Override
 		public boolean isOpen() {
 			return true;
 		}
 
+		@Override
 		public int write(ByteBuffer byteBuffer) throws IOException {
 			throw new IOException();
 		}
 
+		@Override
 		public long write(ByteBuffer[] byteBuffers) throws IOException {
 			throw new IOException();
 		}
 
+		@Override
 		public long write(ByteBuffer[] byteBuffers, int offset, int length)
 			throws IOException {
 
@@ -1570,14 +1541,17 @@ public class BaseIntrabandTest {
 			_eofOnDataBufferReading = eofOnDataBufferReading;
 		}
 
+		@Override
 		public void close() throws IOException {
 			throw new IOException();
 		}
 
+		@Override
 		public boolean isOpen() {
 			return true;
 		}
 
+		@Override
 		public int read(ByteBuffer byteBuffer) {
 			if (_eofOnDataBufferReading && (byteBuffer.capacity() == 14)) {
 				BigEndianCodec.putInt(byteBuffer.array(), 10, 1);
@@ -1591,10 +1565,12 @@ public class BaseIntrabandTest {
 			}
 		}
 
+		@Override
 		public long read(ByteBuffer[] byteBuffers) {
 			return -1;
 		}
 
+		@Override
 		public long read(ByteBuffer[] byteBuffers, int offset, int length) {
 			return -1;
 		}

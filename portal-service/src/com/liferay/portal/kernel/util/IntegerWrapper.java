@@ -30,6 +30,7 @@ public class IntegerWrapper
 		_value = value;
 	}
 
+	@Override
 	public int compareTo(IntegerWrapper integerWrapper) {
 		if (integerWrapper == null) {
 			return 1;

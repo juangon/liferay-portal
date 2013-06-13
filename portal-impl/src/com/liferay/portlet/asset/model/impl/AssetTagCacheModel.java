@@ -62,6 +62,7 @@ public class AssetTagCacheModel implements CacheModel<AssetTag>, Externalizable 
 		return sb.toString();
 	}
 
+	@Override
 	public AssetTag toEntityModel() {
 		AssetTagImpl assetTagImpl = new AssetTagImpl();
 
@@ -105,6 +106,7 @@ public class AssetTagCacheModel implements CacheModel<AssetTag>, Externalizable 
 		return assetTagImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		tagId = objectInput.readLong();
 		groupId = objectInput.readLong();
@@ -117,6 +119,7 @@ public class AssetTagCacheModel implements CacheModel<AssetTag>, Externalizable 
 		assetCount = objectInput.readInt();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(tagId);

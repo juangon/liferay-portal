@@ -18,11 +18,12 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
- * The utility for the address local service. This utility wraps {@link com.liferay.portal.service.impl.AddressLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
+ * Provides the local service utility for Address. This utility wraps
+ * {@link com.liferay.portal.service.impl.AddressLocalServiceImpl} and is the
+ * primary access point for service operations in application layer code running
+ * on the local server. Methods of this service will not have security checks
+ * based on the propagated JAAS credentials because this service can only be
+ * accessed from within the same VM.
  *
  * @author Brian Wing Shun Chan
  * @see AddressLocalService
@@ -248,6 +249,11 @@ public class AddressLocalServiceUtil {
 		getService().setBeanIdentifier(beanIdentifier);
 	}
 
+	/**
+	* @deprecated As of 6.2.0, replaced by {@link #addAddress(long, String,
+	long, String, String, String, String, String, long, long,
+	int, boolean, boolean, ServiceContext)}
+	*/
 	public static com.liferay.portal.model.Address addAddress(long userId,
 		java.lang.String className, long classPK, java.lang.String street1,
 		java.lang.String street2, java.lang.String street3,
@@ -260,10 +266,30 @@ public class AddressLocalServiceUtil {
 			street3, city, zip, regionId, countryId, typeId, mailing, primary);
 	}
 
+	public static com.liferay.portal.model.Address addAddress(long userId,
+		java.lang.String className, long classPK, java.lang.String street1,
+		java.lang.String street2, java.lang.String street3,
+		java.lang.String city, java.lang.String zip, long regionId,
+		long countryId, int typeId, boolean mailing, boolean primary,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .addAddress(userId, className, classPK, street1, street2,
+			street3, city, zip, regionId, countryId, typeId, mailing, primary,
+			serviceContext);
+	}
+
 	public static void deleteAddresses(long companyId,
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteAddresses(companyId, className, classPK);
+	}
+
+	public static com.liferay.portal.model.Address fetchAddressByUuidAndCompanyId(
+		java.lang.String uuid, long companyId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchAddressByUuidAndCompanyId(uuid, companyId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Address> getAddresses()

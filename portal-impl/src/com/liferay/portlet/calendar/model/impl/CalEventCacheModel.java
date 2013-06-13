@@ -90,6 +90,7 @@ public class CalEventCacheModel implements CacheModel<CalEvent>, Externalizable 
 		return sb.toString();
 	}
 
+	@Override
 	public CalEvent toEntityModel() {
 		CalEventImpl calEventImpl = new CalEventImpl();
 
@@ -191,6 +192,7 @@ public class CalEventCacheModel implements CacheModel<CalEvent>, Externalizable 
 		return calEventImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid = objectInput.readUTF();
 		eventId = objectInput.readLong();
@@ -217,6 +219,7 @@ public class CalEventCacheModel implements CacheModel<CalEvent>, Externalizable 
 		secondReminder = objectInput.readInt();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		if (uuid == null) {

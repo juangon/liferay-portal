@@ -16,10 +16,15 @@
 
 <%@ include file="/html/portal/layout/edit/init.jsp" %>
 
-<div class="aui-helper-hidden" id="<portlet:namespace />copyPortletsFromPage">
+<%
+String portletId = portletDisplay.getId();
+%>
 
+<div class='<%= portletId.equals(PortletKeys.DOCKBAR) ? StringPool.BLANK : "hide" %>' id="<portlet:namespace />copyPortletsFromPage">
 	<p>
-		<liferay-ui:message arguments="<%= HtmlUtil.escape(selLayout.getName(locale)) %>" key="the-portlets-in-page-x-will-be-replaced-with-the-portlets-in-the-page-you-select-below" />
+		<c:if test="<%= selLayout != null %>">
+			<liferay-ui:message arguments="<%= HtmlUtil.escape(selLayout.getName(locale)) %>" key="the-applications-in-page-x-will-be-replaced-with-the-ones-in-the-page-you-select-below" />
+		</c:if>
 	</p>
 
 	<aui:select label="copy-from-page" name="copyLayoutId" showEmptyOption="<%= true %>">
@@ -61,7 +66,7 @@
 			if (copiableLayout != null) {
 		%>
 
-				<aui:option disabled="<%= selLayout.getPlid() == copiableLayout.getPlid() %>" label="<%= name %>" value="<%= copiableLayout.getLayoutId() %>" />
+				<aui:option disabled="<%= Validator.isNotNull(selLayout) && selLayout.getPlid() == copiableLayout.getPlid() %>" label="<%= name %>" value="<%= copiableLayout.getLayoutId() %>" />
 
 		<%
 			}
@@ -70,72 +75,9 @@
 
 	</aui:select>
 
-	<aui:button-row>
-		<aui:button name="copySubmitButton" value="copy" />
-	</aui:button-row>
+	<c:if test="<%= !portletId.equals(PortletKeys.DOCKBAR) %>">
+		<aui:button-row>
+			<aui:button name="copySubmitButton" value="copy" />
+		</aui:button-row>
+	</c:if>
 </div>
-
-<c:if test="<%= LayoutPermissionUtil.contains(permissionChecker, selLayout, ActionKeys.UPDATE) %>">
-	<aui:script use="aui-button-item,aui-dialog">
-		var content = A.one('#<portlet:namespace />copyPortletsFromPage');
-
-		var button = new A.ButtonItem(
-			{
-				handler: function(event) {
-					var popUp = new A.Dialog(
-						{
-							align: Liferay.Util.Window.ALIGN_CENTER,
-							bodyContent: content.show(),
-							destroyOnClose: true,
-							modal: true,
-							title: '<%= UnicodeLanguageUtil.get(pageContext, "copy-portlets-from-page") %>',
-							width: 500
-						}
-					).render();
-
-					popUp.show();
-
-					var submitButton = popUp.get('contentBox').one('#<portlet:namespace />copySubmitButton');
-
-					if (submitButton) {
-						submitButton.on(
-							'click',
-							function(event) {
-								popUp.close();
-
-								var form = A.one('#<portlet:namespace />fm');
-
-								if (form) {
-									form.append(content);
-								}
-
-								<portlet:namespace />saveLayout();
-							}
-						);
-					}
-				},
-				icon: 'copy',
-				label: '<%= UnicodeLanguageUtil.get(pageContext, "copy-portlets-from-page") %>'
-			}
-		);
-
-		button.toggle('<%= selLayout.getType() %>' == 'portlet');
-
-		var buttonRow = A.one('#<portlet:namespace />layoutToolbar');
-
-		if (buttonRow) {
-			var layoutToolbar = buttonRow.getData('layoutToolbar');
-
-			if (layoutToolbar) {
-				layoutToolbar.add(button);
-			}
-		}
-
-		Liferay.on(
-			'<portlet:namespace />toggleLayoutTypeFields',
-			function(event) {
-				button.toggle(event.type == 'portlet');
-			}
-		);
-	</aui:script>
-</c:if>

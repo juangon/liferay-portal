@@ -44,6 +44,7 @@ import java.util.List;
 public class WorkflowDefinitionLinkLocalServiceImpl
 	extends WorkflowDefinitionLinkLocalServiceBaseImpl {
 
+	@Override
 	public WorkflowDefinitionLink addWorkflowDefinitionLink(
 			long userId, long companyId, long groupId, String className,
 			long classPK, long typePK, String workflowDefinitionName,
@@ -78,53 +79,55 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 		return workflowDefinitionLink;
 	}
 
+	@Override
 	public void deleteWorkflowDefinitionLink(
 			long companyId, long groupId, String className, long classPK,
 			long typePK)
 		throws PortalException, SystemException {
 
-		try {
-			WorkflowDefinitionLink workflowDefinitionLink =
-				getWorkflowDefinitionLink(
-					companyId, groupId, className, classPK, typePK, true);
+		WorkflowDefinitionLink workflowDefinitionLink =
+			fetchWorkflowDefinitionLink(
+				companyId, groupId, className, classPK, typePK, true);
 
+		if (workflowDefinitionLink != null) {
 			deleteWorkflowDefinitionLink(workflowDefinitionLink);
-		}
-		catch (NoSuchWorkflowDefinitionLinkException nswdle) {
 		}
 	}
 
-	public WorkflowDefinitionLink getDefaultWorkflowDefinitionLink(
+	@Override
+	public WorkflowDefinitionLink fetchDefaultWorkflowDefinitionLink(
 			long companyId, String className, long classPK, long typePK)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if (!WorkflowEngineManagerUtil.isDeployed()) {
-			throw new NoSuchWorkflowDefinitionLinkException();
+			return null;
 		}
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return workflowDefinitionLinkPersistence.findByG_C_C_C_T(
+		return workflowDefinitionLinkPersistence.fetchByG_C_C_C_T(
 			WorkflowConstants.DEFAULT_GROUP_ID, companyId, classNameId, classPK,
 			typePK);
 	}
 
-	public WorkflowDefinitionLink getWorkflowDefinitionLink(
+	@Override
+	public WorkflowDefinitionLink fetchWorkflowDefinitionLink(
 			long companyId, long groupId, String className, long classPK,
 			long typePK)
 		throws PortalException, SystemException {
 
-		return getWorkflowDefinitionLink(
+		return fetchWorkflowDefinitionLink(
 			companyId, groupId, className, classPK, typePK, false);
 	}
 
-	public WorkflowDefinitionLink getWorkflowDefinitionLink(
+	@Override
+	public WorkflowDefinitionLink fetchWorkflowDefinitionLink(
 			long companyId, long groupId, String className, long classPK,
 			long typePK, boolean strict)
 		throws PortalException, SystemException {
 
 		if (!WorkflowEngineManagerUtil.isDeployed()) {
-			throw new NoSuchWorkflowDefinitionLinkException();
+			return null;
 		}
 
 		long classNameId = PortalUtil.getClassNameId(className);
@@ -146,15 +149,59 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 					classPK, typePK);
 		}
 
+		return workflowDefinitionLink;
+	}
+
+	@Override
+	public WorkflowDefinitionLink getDefaultWorkflowDefinitionLink(
+			long companyId, String className, long classPK, long typePK)
+		throws PortalException, SystemException {
+
+		if (!WorkflowEngineManagerUtil.isDeployed()) {
+			throw new NoSuchWorkflowDefinitionLinkException();
+		}
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return workflowDefinitionLinkPersistence.findByG_C_C_C_T(
+			WorkflowConstants.DEFAULT_GROUP_ID, companyId, classNameId, classPK,
+			typePK);
+	}
+
+	@Override
+	public WorkflowDefinitionLink getWorkflowDefinitionLink(
+			long companyId, long groupId, String className, long classPK,
+			long typePK)
+		throws PortalException, SystemException {
+
+		return getWorkflowDefinitionLink(
+			companyId, groupId, className, classPK, typePK, false);
+	}
+
+	@Override
+	public WorkflowDefinitionLink getWorkflowDefinitionLink(
+			long companyId, long groupId, String className, long classPK,
+			long typePK, boolean strict)
+		throws PortalException, SystemException {
+
+		if (!WorkflowEngineManagerUtil.isDeployed()) {
+			throw new NoSuchWorkflowDefinitionLinkException();
+		}
+
+		WorkflowDefinitionLink workflowDefinitionLink =
+			fetchWorkflowDefinitionLink(
+				companyId, groupId, className, classPK, typePK, strict);
+
 		if (workflowDefinitionLink == null) {
 			throw new NoSuchWorkflowDefinitionLinkException(
 				"No workflow for groupId=" + groupId + ", companyId=" +
-					companyId + " and classNameId=" + classNameId);
+					companyId + " and className=" + className);
 		}
 
 		return workflowDefinitionLink;
 	}
 
+	@Override
 	public int getWorkflowDefinitionLinksCount(
 			long companyId, String workflowDefinitionName,
 			int workflowDefinitionVersion)
@@ -168,6 +215,7 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 			companyId, workflowDefinitionName, workflowDefinitionVersion);
 	}
 
+	@Override
 	@Skip
 	public boolean hasWorkflowDefinitionLink(
 			long companyId, long groupId, String className)
@@ -176,6 +224,7 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 		return hasWorkflowDefinitionLink(companyId, groupId, className, 0);
 	}
 
+	@Override
 	@Skip
 	public boolean hasWorkflowDefinitionLink(
 			long companyId, long groupId, String className, long classPK)
@@ -185,6 +234,7 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 			companyId, groupId, className, classPK, 0);
 	}
 
+	@Override
 	@Skip
 	public boolean hasWorkflowDefinitionLink(
 			long companyId, long groupId, String className, long classPK,
@@ -195,17 +245,18 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 			return false;
 		}
 
-		try {
-			workflowDefinitionLinkLocalService.getWorkflowDefinitionLink(
+		WorkflowDefinitionLink workflowDefinitionLink =
+			workflowDefinitionLinkLocalService.fetchWorkflowDefinitionLink(
 				companyId, groupId, className, classPK, typePK);
 
+		if (workflowDefinitionLink != null) {
 			return true;
 		}
-		catch (NoSuchWorkflowDefinitionLinkException nswdle) {
-			return false;
-		}
+
+		return false;
 	}
 
+	@Override
 	public void updateWorkflowDefinitionLink(
 			long userId, long companyId, long groupId, String className,
 			long classPK, long typePK, String workflowDefinition)
@@ -229,6 +280,7 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 		}
 	}
 
+	@Override
 	public WorkflowDefinitionLink updateWorkflowDefinitionLink(
 			long userId, long companyId, long groupId, String className,
 			long classPK, long typePK, String workflowDefinitionName,
@@ -267,6 +319,7 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 		return workflowDefinitionLink;
 	}
 
+	@Override
 	public void updateWorkflowDefinitionLinks(
 			long userId, long companyId, long groupId, String className,
 			long classPK,

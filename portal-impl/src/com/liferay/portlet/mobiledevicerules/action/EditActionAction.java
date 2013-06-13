@@ -32,9 +32,11 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.mobiledevicerules.ActionTypeException;
 import com.liferay.portlet.mobiledevicerules.NoSuchActionException;
 import com.liferay.portlet.mobiledevicerules.NoSuchRuleGroupException;
 import com.liferay.portlet.mobiledevicerules.model.MDRAction;
+import com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup;
 import com.liferay.portlet.mobiledevicerules.model.MDRRuleGroupInstance;
 import com.liferay.portlet.mobiledevicerules.service.MDRActionServiceUtil;
 import com.liferay.portlet.mobiledevicerules.service.MDRRuleGroupInstanceLocalServiceUtil;
@@ -92,7 +94,8 @@ public class EditActionAction extends EditRuleAction {
 
 				setForward(actionRequest, "portlet.mobile_device_rules.error");
 			}
-			else if (e instanceof NoSuchActionException ||
+			else if (e instanceof ActionTypeException ||
+					 e instanceof NoSuchActionException ||
 					 e instanceof NoSuchRuleGroupException) {
 
 				SessionErrors.add(actionRequest, e.getClass());
@@ -136,6 +139,11 @@ public class EditActionAction extends EditRuleAction {
 
 		renderRequest.setAttribute(
 			WebKeys.MOBILE_DEVICE_RULES_RULE_GROUP_INSTANCE, ruleGroupInstance);
+
+		MDRRuleGroup ruleGroup = ruleGroupInstance.getRuleGroup();
+
+		renderRequest.setAttribute(
+			WebKeys.MOBILE_DEVICE_RULES_RULE_GROUP, ruleGroup);
 
 		return mapping.findForward("portlet.mobile_device_rules.edit_action");
 	}
@@ -204,9 +212,7 @@ public class EditActionAction extends EditRuleAction {
 			type);
 
 		if (actionHandler == null) {
-			SessionErrors.add(actionRequest, "typeInvalid");
-
-			return;
+			throw new ActionTypeException();
 		}
 
 		UnicodeProperties typeSettingsProperties = getTypeSettingsProperties(

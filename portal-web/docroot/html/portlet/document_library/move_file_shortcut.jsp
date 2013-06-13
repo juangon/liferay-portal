@@ -35,7 +35,7 @@ long folderId = BeanParamUtil.getLong(fileShortcut, request, "folderId");
 </c:if>
 
 <c:if test="<%= cmd.equals(Constants.MOVE_FROM_TRASH) %>">
-	<div class="portlet-msg-alert">
+	<div class="alert alert-block">
 		<liferay-ui:message arguments='<%= fileShortcut.getToTitle() + " (" + LanguageUtil.get(pageContext, "shortcut") + ")" %>' key="the-original-folder-does-not-exist-anymore" />
 	</div>
 </c:if>
@@ -119,10 +119,9 @@ long folderId = BeanParamUtil.getLong(fileShortcut, request, "folderId");
 			Liferay.Util.selectEntity(
 				{
 					dialog: {
-						align: Liferay.Util.Window.ALIGN_CENTER,
 						constrain: true,
 						modal: true,
-						stack: true,
+						zIndex: Liferay.zIndex.WINDOW + 2,
 						width: 680
 					},
 					id: '<portlet:namespace />selectFolder',

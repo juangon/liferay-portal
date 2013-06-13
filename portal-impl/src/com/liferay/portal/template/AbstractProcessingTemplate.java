@@ -31,6 +31,7 @@ public abstract class AbstractProcessingTemplate implements Template {
 
 	public abstract TemplateContextHelper getTemplateContextHelper();
 
+	@Override
 	public final void processTemplate(Writer writer) throws TemplateException {
 		TemplateControlContext templateControlContext =
 			getTemplateContextHelper().getTemplateControlContext();
@@ -64,6 +65,7 @@ public abstract class AbstractProcessingTemplate implements Template {
 			_writer = writer;
 		}
 
+		@Override
 		public Void run() throws Exception {
 			doProcessTemplate(_writer);
 

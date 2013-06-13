@@ -103,26 +103,32 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 	public DDLRecordVersionModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _recordVersionId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setRecordVersionId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _recordVersionId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return DDLRecordVersion.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return DDLRecordVersion.class.getName();
 	}
@@ -243,46 +249,57 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 		}
 	}
 
+	@Override
 	public long getRecordVersionId() {
 		return _recordVersionId;
 	}
 
+	@Override
 	public void setRecordVersionId(long recordVersionId) {
 		_recordVersionId = recordVersionId;
 	}
 
+	@Override
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_groupId = groupId;
 	}
 
+	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
+	@Override
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
 
+	@Override
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -292,38 +309,47 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 		}
 	}
 
+	@Override
 	public void setUserName(String userName) {
 		_userName = userName;
 	}
 
+	@Override
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
 	}
 
+	@Override
 	public long getDDMStorageId() {
 		return _DDMStorageId;
 	}
 
+	@Override
 	public void setDDMStorageId(long DDMStorageId) {
 		_DDMStorageId = DDMStorageId;
 	}
 
+	@Override
 	public long getRecordSetId() {
 		return _recordSetId;
 	}
 
+	@Override
 	public void setRecordSetId(long recordSetId) {
 		_recordSetId = recordSetId;
 	}
 
+	@Override
 	public long getRecordId() {
 		return _recordId;
 	}
 
+	@Override
 	public void setRecordId(long recordId) {
 		_columnBitmask |= RECORDID_COLUMN_BITMASK;
 
@@ -340,6 +366,7 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 		return _originalRecordId;
 	}
 
+	@Override
 	public String getVersion() {
 		if (_version == null) {
 			return StringPool.BLANK;
@@ -349,6 +376,7 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 		}
 	}
 
+	@Override
 	public void setVersion(String version) {
 		_columnBitmask |= VERSION_COLUMN_BITMASK;
 
@@ -363,18 +391,22 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 		return GetterUtil.getString(_originalVersion);
 	}
 
+	@Override
 	public int getDisplayIndex() {
 		return _displayIndex;
 	}
 
+	@Override
 	public void setDisplayIndex(int displayIndex) {
 		_displayIndex = displayIndex;
 	}
 
+	@Override
 	public int getStatus() {
 		return _status;
 	}
 
+	@Override
 	public void setStatus(int status) {
 		_columnBitmask |= STATUS_COLUMN_BITMASK;
 
@@ -391,23 +423,28 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 		return _originalStatus;
 	}
 
+	@Override
 	public long getStatusByUserId() {
 		return _statusByUserId;
 	}
 
+	@Override
 	public void setStatusByUserId(long statusByUserId) {
 		_statusByUserId = statusByUserId;
 	}
 
+	@Override
 	public String getStatusByUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getStatusByUserId(), "uuid",
 			_statusByUserUuid);
 	}
 
+	@Override
 	public void setStatusByUserUuid(String statusByUserUuid) {
 		_statusByUserUuid = statusByUserUuid;
 	}
 
+	@Override
 	public String getStatusByUserName() {
 		if (_statusByUserName == null) {
 			return StringPool.BLANK;
@@ -417,14 +454,17 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 		}
 	}
 
+	@Override
 	public void setStatusByUserName(String statusByUserName) {
 		_statusByUserName = statusByUserName;
 	}
 
+	@Override
 	public Date getStatusDate() {
 		return _statusDate;
 	}
 
+	@Override
 	public void setStatusDate(Date statusDate) {
 		_statusDate = statusDate;
 	}
@@ -432,10 +472,12 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #isApproved}
 	 */
+	@Override
 	public boolean getApproved() {
 		return isApproved();
 	}
 
+	@Override
 	public boolean isApproved() {
 		if (getStatus() == WorkflowConstants.STATUS_APPROVED) {
 			return true;
@@ -445,6 +487,7 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 		}
 	}
 
+	@Override
 	public boolean isDenied() {
 		if (getStatus() == WorkflowConstants.STATUS_DENIED) {
 			return true;
@@ -454,6 +497,7 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 		}
 	}
 
+	@Override
 	public boolean isDraft() {
 		if (getStatus() == WorkflowConstants.STATUS_DRAFT) {
 			return true;
@@ -463,6 +507,7 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 		}
 	}
 
+	@Override
 	public boolean isExpired() {
 		if (getStatus() == WorkflowConstants.STATUS_EXPIRED) {
 			return true;
@@ -472,6 +517,7 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 		}
 	}
 
+	@Override
 	public boolean isInactive() {
 		if (getStatus() == WorkflowConstants.STATUS_INACTIVE) {
 			return true;
@@ -481,6 +527,7 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 		}
 	}
 
+	@Override
 	public boolean isIncomplete() {
 		if (getStatus() == WorkflowConstants.STATUS_INCOMPLETE) {
 			return true;
@@ -490,6 +537,7 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 		}
 	}
 
+	@Override
 	public boolean isInTrash() {
 		if (getStatus() == WorkflowConstants.STATUS_IN_TRASH) {
 			return true;
@@ -499,6 +547,7 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 		}
 	}
 
+	@Override
 	public boolean isPending() {
 		if (getStatus() == WorkflowConstants.STATUS_PENDING) {
 			return true;
@@ -508,6 +557,7 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 		}
 	}
 
+	@Override
 	public boolean isScheduled() {
 		if (getStatus() == WorkflowConstants.STATUS_SCHEDULED) {
 			return true;
@@ -569,6 +619,7 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 		return ddlRecordVersionImpl;
 	}
 
+	@Override
 	public int compareTo(DDLRecordVersion ddlRecordVersion) {
 		long primaryKey = ddlRecordVersion.getPrimaryKey();
 
@@ -585,18 +636,15 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof DDLRecordVersion)) {
 			return false;
 		}
 
-		DDLRecordVersion ddlRecordVersion = null;
-
-		try {
-			ddlRecordVersion = (DDLRecordVersion)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		DDLRecordVersion ddlRecordVersion = (DDLRecordVersion)obj;
 
 		long primaryKey = ddlRecordVersion.getPrimaryKey();
 
@@ -738,6 +786,7 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(49);
 

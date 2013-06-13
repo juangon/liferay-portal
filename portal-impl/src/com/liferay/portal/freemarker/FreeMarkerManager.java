@@ -17,7 +17,6 @@ package com.liferay.portal.freemarker;
 import com.liferay.portal.kernel.security.pacl.DoPrivileged;
 import com.liferay.portal.kernel.template.Template;
 import com.liferay.portal.kernel.template.TemplateConstants;
-import com.liferay.portal.kernel.template.TemplateContextType;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateResource;
 import com.liferay.portal.kernel.util.ReflectionUtil;
@@ -28,6 +27,8 @@ import com.liferay.portal.template.TemplateContextHelper;
 import com.liferay.portal.util.PropsValues;
 
 import freemarker.cache.TemplateCache;
+
+import freemarker.debug.impl.DebuggerService;
 
 import freemarker.template.Configuration;
 
@@ -42,6 +43,7 @@ import java.util.Map;
 @DoPrivileged
 public class FreeMarkerManager extends BaseTemplateManager {
 
+	@Override
 	public void destroy() {
 		if (_configuration == null) {
 			return;
@@ -56,16 +58,23 @@ public class FreeMarkerManager extends BaseTemplateManager {
 		_templateContextHelper.removeAllHelperUtilities();
 
 		_templateContextHelper = null;
+
+		if (isEnableDebuggerService()) {
+			DebuggerService.shutdown();
+		}
 	}
 
+	@Override
 	public void destroy(ClassLoader classLoader) {
 		_templateContextHelper.removeHelperUtilities(classLoader);
 	}
 
+	@Override
 	public String getName() {
 		return TemplateConstants.LANG_TYPE_FTL;
 	}
 
+	@Override
 	public void init() throws TemplateException {
 		if (_configuration != null) {
 			return;
@@ -104,6 +113,10 @@ public class FreeMarkerManager extends BaseTemplateManager {
 		catch (Exception e) {
 			throw new TemplateException("Unable to init freemarker manager", e);
 		}
+
+		if (isEnableDebuggerService()) {
+			DebuggerService.getBreakpoints("*");
+		}
 	}
 
 	public void setTemplateContextHelper(
@@ -115,28 +128,16 @@ public class FreeMarkerManager extends BaseTemplateManager {
 	@Override
 	protected Template doGetTemplate(
 		TemplateResource templateResource,
-		TemplateResource errorTemplateResource,
-		TemplateContextType templateContextType,
+		TemplateResource errorTemplateResource, boolean restricted,
 		Map<String, Object> helperUtilities) {
 
-		Template template = null;
+		Template template = new FreeMarkerTemplate(
+			templateResource, errorTemplateResource, helperUtilities,
+			_configuration, _templateContextHelper);
 
-		if (templateContextType.equals(TemplateContextType.EMPTY)) {
-			template = new FreeMarkerTemplate(
-				templateResource, errorTemplateResource, null, _configuration,
-				_templateContextHelper);
-		}
-		else if (templateContextType.equals(TemplateContextType.RESTRICTED)) {
+		if (restricted) {
 			template = new RestrictedTemplate(
-				new FreeMarkerTemplate(
-					templateResource, errorTemplateResource, helperUtilities,
-					_configuration, _templateContextHelper),
-				_templateContextHelper.getRestrictedVariables());
-		}
-		else if (templateContextType.equals(TemplateContextType.STANDARD)) {
-			template = new FreeMarkerTemplate(
-				templateResource, errorTemplateResource, helperUtilities,
-				_configuration, _templateContextHelper);
+				template, _templateContextHelper.getRestrictedVariables());
 		}
 
 		return template;
@@ -145,6 +146,16 @@ public class FreeMarkerManager extends BaseTemplateManager {
 	@Override
 	protected TemplateContextHelper getTemplateContextHelper() {
 		return _templateContextHelper;
+	}
+
+	protected boolean isEnableDebuggerService() {
+		if ((System.getProperty("freemarker.debug.password") != null) &&
+			(System.getProperty("freemarker.debug.port") != null)) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 	private Configuration _configuration;

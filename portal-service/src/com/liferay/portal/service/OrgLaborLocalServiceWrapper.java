@@ -15,12 +15,10 @@
 package com.liferay.portal.service;
 
 /**
- * <p>
- * This class is a wrapper for {@link OrgLaborLocalService}.
- * </p>
+ * Provides a wrapper for {@link OrgLaborLocalService}.
  *
- * @author    Brian Wing Shun Chan
- * @see       OrgLaborLocalService
+ * @author Brian Wing Shun Chan
+ * @see OrgLaborLocalService
  * @generated
  */
 public class OrgLaborLocalServiceWrapper implements OrgLaborLocalService,
@@ -37,6 +35,7 @@ public class OrgLaborLocalServiceWrapper implements OrgLaborLocalService,
 	* @return the org labor that was added
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.OrgLabor addOrgLabor(
 		com.liferay.portal.model.OrgLabor orgLabor)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -49,6 +48,7 @@ public class OrgLaborLocalServiceWrapper implements OrgLaborLocalService,
 	* @param orgLaborId the primary key for the new org labor
 	* @return the new org labor
 	*/
+	@Override
 	public com.liferay.portal.model.OrgLabor createOrgLabor(long orgLaborId) {
 		return _orgLaborLocalService.createOrgLabor(orgLaborId);
 	}
@@ -61,6 +61,7 @@ public class OrgLaborLocalServiceWrapper implements OrgLaborLocalService,
 	* @throws PortalException if a org labor with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.OrgLabor deleteOrgLabor(long orgLaborId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -74,12 +75,14 @@ public class OrgLaborLocalServiceWrapper implements OrgLaborLocalService,
 	* @return the org labor that was removed
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.OrgLabor deleteOrgLabor(
 		com.liferay.portal.model.OrgLabor orgLabor)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _orgLaborLocalService.deleteOrgLabor(orgLabor);
 	}
 
+	@Override
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {
 		return _orgLaborLocalService.dynamicQuery();
 	}
@@ -91,6 +94,7 @@ public class OrgLaborLocalServiceWrapper implements OrgLaborLocalService,
 	* @return the matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -111,6 +115,7 @@ public class OrgLaborLocalServiceWrapper implements OrgLaborLocalService,
 	* @return the range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -132,6 +137,7 @@ public class OrgLaborLocalServiceWrapper implements OrgLaborLocalService,
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	@SuppressWarnings("rawtypes")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -149,12 +155,14 @@ public class OrgLaborLocalServiceWrapper implements OrgLaborLocalService,
 	* @return the number of rows that match the dynamic query
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _orgLaborLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	@Override
 	public com.liferay.portal.model.OrgLabor fetchOrgLabor(long orgLaborId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _orgLaborLocalService.fetchOrgLabor(orgLaborId);
@@ -168,12 +176,14 @@ public class OrgLaborLocalServiceWrapper implements OrgLaborLocalService,
 	* @throws PortalException if a org labor with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.OrgLabor getOrgLabor(long orgLaborId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _orgLaborLocalService.getOrgLabor(orgLaborId);
 	}
 
+	@Override
 	public com.liferay.portal.model.PersistedModel getPersistedModel(
 		java.io.Serializable primaryKeyObj)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -193,6 +203,7 @@ public class OrgLaborLocalServiceWrapper implements OrgLaborLocalService,
 	* @return the range of org labors
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public java.util.List<com.liferay.portal.model.OrgLabor> getOrgLabors(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -205,6 +216,7 @@ public class OrgLaborLocalServiceWrapper implements OrgLaborLocalService,
 	* @return the number of org labors
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public int getOrgLaborsCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _orgLaborLocalService.getOrgLaborsCount();
@@ -217,6 +229,7 @@ public class OrgLaborLocalServiceWrapper implements OrgLaborLocalService,
 	* @return the org labor that was updated
 	* @throws SystemException if a system exception occurred
 	*/
+	@Override
 	public com.liferay.portal.model.OrgLabor updateOrgLabor(
 		com.liferay.portal.model.OrgLabor orgLabor)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -228,6 +241,7 @@ public class OrgLaborLocalServiceWrapper implements OrgLaborLocalService,
 	*
 	* @return the Spring bean ID for this bean
 	*/
+	@Override
 	public java.lang.String getBeanIdentifier() {
 		return _orgLaborLocalService.getBeanIdentifier();
 	}
@@ -237,10 +251,12 @@ public class OrgLaborLocalServiceWrapper implements OrgLaborLocalService,
 	*
 	* @param beanIdentifier the Spring bean ID for this bean
 	*/
+	@Override
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		_orgLaborLocalService.setBeanIdentifier(beanIdentifier);
 	}
 
+	@Override
 	public com.liferay.portal.model.OrgLabor addOrgLabor(long organizationId,
 		int typeId, int sunOpen, int sunClose, int monOpen, int monClose,
 		int tueOpen, int tueClose, int wedOpen, int wedClose, int thuOpen,
@@ -252,12 +268,14 @@ public class OrgLaborLocalServiceWrapper implements OrgLaborLocalService,
 			wedClose, thuOpen, thuClose, friOpen, friClose, satOpen, satClose);
 	}
 
+	@Override
 	public java.util.List<com.liferay.portal.model.OrgLabor> getOrgLabors(
 		long organizationId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _orgLaborLocalService.getOrgLabors(organizationId);
 	}
 
+	@Override
 	public com.liferay.portal.model.OrgLabor updateOrgLabor(long orgLaborId,
 		int typeId, int sunOpen, int sunClose, int monOpen, int monClose,
 		int tueOpen, int tueClose, int wedOpen, int wedClose, int thuOpen,
@@ -284,10 +302,12 @@ public class OrgLaborLocalServiceWrapper implements OrgLaborLocalService,
 		_orgLaborLocalService = orgLaborLocalService;
 	}
 
+	@Override
 	public OrgLaborLocalService getWrappedService() {
 		return _orgLaborLocalService;
 	}
 
+	@Override
 	public void setWrappedService(OrgLaborLocalService orgLaborLocalService) {
 		_orgLaborLocalService = orgLaborLocalService;
 	}

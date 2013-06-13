@@ -112,6 +112,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @return the matching document library contents
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLContent> findByC_R(long companyId, long repositoryId)
 		throws SystemException {
 		return findByC_R(companyId, repositoryId, QueryUtil.ALL_POS,
@@ -132,6 +133,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @return the range of matching document library contents
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLContent> findByC_R(long companyId, long repositoryId,
 		int start, int end) throws SystemException {
 		return findByC_R(companyId, repositoryId, start, end, null);
@@ -152,6 +154,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @return the ordered range of matching document library contents
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLContent> findByC_R(long companyId, long repositoryId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -269,6 +272,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchContentException if a matching document library content could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLContent findByC_R_First(long companyId, long repositoryId,
 		OrderByComparator orderByComparator)
 		throws NoSuchContentException, SystemException {
@@ -303,6 +307,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @return the first matching document library content, or <code>null</code> if a matching document library content could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLContent fetchByC_R_First(long companyId, long repositoryId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<DLContent> list = findByC_R(companyId, repositoryId, 0, 1,
@@ -325,6 +330,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchContentException if a matching document library content could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLContent findByC_R_Last(long companyId, long repositoryId,
 		OrderByComparator orderByComparator)
 		throws NoSuchContentException, SystemException {
@@ -359,6 +365,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @return the last matching document library content, or <code>null</code> if a matching document library content could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLContent fetchByC_R_Last(long companyId, long repositoryId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByC_R(companyId, repositoryId);
@@ -384,6 +391,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchContentException if a document library content with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLContent[] findByC_R_PrevAndNext(long contentId, long companyId,
 		long repositoryId, OrderByComparator orderByComparator)
 		throws NoSuchContentException, SystemException {
@@ -530,6 +538,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @param repositoryId the repository ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByC_R(long companyId, long repositoryId)
 		throws SystemException {
 		for (DLContent dlContent : findByC_R(companyId, repositoryId,
@@ -546,6 +555,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @return the number of matching document library contents
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByC_R(long companyId, long repositoryId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_R;
@@ -636,6 +646,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @return the matching document library contents
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLContent> findByC_R_P(long companyId, long repositoryId,
 		String path) throws SystemException {
 		return findByC_R_P(companyId, repositoryId, path, QueryUtil.ALL_POS,
@@ -657,6 +668,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @return the range of matching document library contents
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLContent> findByC_R_P(long companyId, long repositoryId,
 		String path, int start, int end) throws SystemException {
 		return findByC_R_P(companyId, repositoryId, path, start, end, null);
@@ -678,6 +690,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @return the ordered range of matching document library contents
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLContent> findByC_R_P(long companyId, long repositoryId,
 		String path, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -815,6 +828,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchContentException if a matching document library content could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLContent findByC_R_P_First(long companyId, long repositoryId,
 		String path, OrderByComparator orderByComparator)
 		throws NoSuchContentException, SystemException {
@@ -853,6 +867,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @return the first matching document library content, or <code>null</code> if a matching document library content could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLContent fetchByC_R_P_First(long companyId, long repositoryId,
 		String path, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -877,6 +892,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchContentException if a matching document library content could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLContent findByC_R_P_Last(long companyId, long repositoryId,
 		String path, OrderByComparator orderByComparator)
 		throws NoSuchContentException, SystemException {
@@ -915,6 +931,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @return the last matching document library content, or <code>null</code> if a matching document library content could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLContent fetchByC_R_P_Last(long companyId, long repositoryId,
 		String path, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -942,6 +959,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchContentException if a document library content with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLContent[] findByC_R_P_PrevAndNext(long contentId, long companyId,
 		long repositoryId, String path, OrderByComparator orderByComparator)
 		throws NoSuchContentException, SystemException {
@@ -1107,6 +1125,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @param path the path
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByC_R_P(long companyId, long repositoryId, String path)
 		throws SystemException {
 		for (DLContent dlContent : findByC_R_P(companyId, repositoryId, path,
@@ -1124,6 +1143,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @return the number of matching document library contents
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByC_R_P(long companyId, long repositoryId, String path)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_R_P;
@@ -1226,6 +1246,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @return the matching document library contents
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLContent> findByC_R_LikeP(long companyId, long repositoryId,
 		String path) throws SystemException {
 		return findByC_R_LikeP(companyId, repositoryId, path,
@@ -1247,6 +1268,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @return the range of matching document library contents
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLContent> findByC_R_LikeP(long companyId, long repositoryId,
 		String path, int start, int end) throws SystemException {
 		return findByC_R_LikeP(companyId, repositoryId, path, start, end, null);
@@ -1268,6 +1290,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @return the ordered range of matching document library contents
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLContent> findByC_R_LikeP(long companyId, long repositoryId,
 		String path, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1397,6 +1420,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchContentException if a matching document library content could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLContent findByC_R_LikeP_First(long companyId, long repositoryId,
 		String path, OrderByComparator orderByComparator)
 		throws NoSuchContentException, SystemException {
@@ -1435,6 +1459,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @return the first matching document library content, or <code>null</code> if a matching document library content could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLContent fetchByC_R_LikeP_First(long companyId, long repositoryId,
 		String path, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1459,6 +1484,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchContentException if a matching document library content could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLContent findByC_R_LikeP_Last(long companyId, long repositoryId,
 		String path, OrderByComparator orderByComparator)
 		throws NoSuchContentException, SystemException {
@@ -1497,6 +1523,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @return the last matching document library content, or <code>null</code> if a matching document library content could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLContent fetchByC_R_LikeP_Last(long companyId, long repositoryId,
 		String path, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1524,6 +1551,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchContentException if a document library content with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLContent[] findByC_R_LikeP_PrevAndNext(long contentId,
 		long companyId, long repositoryId, String path,
 		OrderByComparator orderByComparator)
@@ -1690,6 +1718,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @param path the path
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeByC_R_LikeP(long companyId, long repositoryId, String path)
 		throws SystemException {
 		for (DLContent dlContent : findByC_R_LikeP(companyId, repositoryId,
@@ -1707,6 +1736,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @return the number of matching document library contents
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByC_R_LikeP(long companyId, long repositoryId, String path)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_WITH_PAGINATION_COUNT_BY_C_R_LIKEP;
@@ -1810,6 +1840,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchContentException if a matching document library content could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLContent findByC_R_P_V(long companyId, long repositoryId,
 		String path, String version)
 		throws NoSuchContentException, SystemException {
@@ -1855,6 +1886,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @return the matching document library content, or <code>null</code> if a matching document library content could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLContent fetchByC_R_P_V(long companyId, long repositoryId,
 		String path, String version) throws SystemException {
 		return fetchByC_R_P_V(companyId, repositoryId, path, version, true);
@@ -1871,6 +1903,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @return the matching document library content, or <code>null</code> if a matching document library content could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLContent fetchByC_R_P_V(long companyId, long repositoryId,
 		String path, String version, boolean retrieveFromCache)
 		throws SystemException {
@@ -2009,6 +2042,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @return the document library content that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLContent removeByC_R_P_V(long companyId, long repositoryId,
 		String path, String version)
 		throws NoSuchContentException, SystemException {
@@ -2028,6 +2062,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @return the number of matching document library contents
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countByC_R_P_V(long companyId, long repositoryId, String path,
 		String version) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_R_P_V;
@@ -2130,6 +2165,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 *
 	 * @param dlContent the document library content
 	 */
+	@Override
 	public void cacheResult(DLContent dlContent) {
 		EntityCacheUtil.putResult(DLContentModelImpl.ENTITY_CACHE_ENABLED,
 			DLContentImpl.class, dlContent.getPrimaryKey(), dlContent);
@@ -2148,6 +2184,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 *
 	 * @param dlContents the document library contents
 	 */
+	@Override
 	public void cacheResult(List<DLContent> dlContents) {
 		for (DLContent dlContent : dlContents) {
 			if (EntityCacheUtil.getResult(
@@ -2273,6 +2310,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @param contentId the primary key for the new document library content
 	 * @return the new document library content
 	 */
+	@Override
 	public DLContent create(long contentId) {
 		DLContent dlContent = new DLContentImpl();
 
@@ -2290,6 +2328,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchContentException if a document library content with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLContent remove(long contentId)
 		throws NoSuchContentException, SystemException {
 		return remove((Serializable)contentId);
@@ -2522,6 +2561,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchContentException if a document library content with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLContent findByPrimaryKey(long contentId)
 		throws NoSuchContentException, SystemException {
 		return findByPrimaryKey((Serializable)contentId);
@@ -2582,6 +2622,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @return the document library content, or <code>null</code> if a document library content with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DLContent fetchByPrimaryKey(long contentId)
 		throws SystemException {
 		return fetchByPrimaryKey((Serializable)contentId);
@@ -2593,6 +2634,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @return the document library contents
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLContent> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -2609,6 +2651,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @return the range of document library contents
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLContent> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
@@ -2627,6 +2670,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @return the ordered range of document library contents
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<DLContent> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -2712,6 +2756,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeAll() throws SystemException {
 		for (DLContent dlContent : findAll()) {
 			remove(dlContent);
@@ -2724,6 +2769,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 	 * @return the number of document library contents
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -2817,6 +2863,7 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 		};
 
 	private static CacheModel<DLContent> _nullDLContentCacheModel = new CacheModel<DLContent>() {
+			@Override
 			public DLContent toEntityModel() {
 				return _nullDLContent;
 			}

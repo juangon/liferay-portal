@@ -78,8 +78,8 @@ public class ProcessUtil {
 					"Cancelled execution because of a concurrent destroy", ree);
 			}
 		}
-		catch (IOException e) {
-			throw new ProcessException(e);
+		catch (IOException ioe) {
+			throw new ProcessException(ioe);
 		}
 	}
 
@@ -134,6 +134,7 @@ public class ProcessUtil {
 			_process = process;
 		}
 
+		@Override
 		public boolean cancel(boolean mayInterruptIfRunning) {
 			if (_stdOutFuture.isCancelled() || _stdOutFuture.isDone()) {
 				return false;
@@ -146,6 +147,7 @@ public class ProcessUtil {
 			return true;
 		}
 
+		@Override
 		public ObjectValuePair<O, E> get()
 			throws ExecutionException, InterruptedException {
 
@@ -155,6 +157,7 @@ public class ProcessUtil {
 			return new ObjectValuePair<O, E>(stdOutResult, stdErrResult);
 		}
 
+		@Override
 		public ObjectValuePair<O, E> get(long timeout, TimeUnit unit)
 			throws ExecutionException, InterruptedException, TimeoutException {
 
@@ -172,10 +175,12 @@ public class ProcessUtil {
 			return new ObjectValuePair<O, E>(stdOutResult, stdErrResult);
 		}
 
+		@Override
 		public boolean isCancelled() {
 			return _stdOutFuture.isCancelled();
 		}
 
+		@Override
 		public boolean isDone() {
 			return _stdOutFuture.isDone();
 		}
@@ -195,6 +200,7 @@ public class ProcessUtil {
 			_process = process;
 		}
 
+		@Override
 		public T call() throws Exception {
 			return _outputProcessor.processStdErr(_process.getErrorStream());
 		}
@@ -213,6 +219,7 @@ public class ProcessUtil {
 			_process = process;
 		}
 
+		@Override
 		public T call() throws Exception {
 			try {
 				return _outputProcessor.processStdOut(

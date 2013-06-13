@@ -65,6 +65,7 @@ public class TrashEntryCacheModel implements CacheModel<TrashEntry>,
 		return sb.toString();
 	}
 
+	@Override
 	public TrashEntry toEntityModel() {
 		TrashEntryImpl trashEntryImpl = new TrashEntryImpl();
 
@@ -104,6 +105,7 @@ public class TrashEntryCacheModel implements CacheModel<TrashEntry>,
 		return trashEntryImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		entryId = objectInput.readLong();
 		groupId = objectInput.readLong();
@@ -117,6 +119,7 @@ public class TrashEntryCacheModel implements CacheModel<TrashEntry>,
 		status = objectInput.readInt();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(entryId);

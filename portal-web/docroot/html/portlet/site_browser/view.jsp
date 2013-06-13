@@ -43,9 +43,9 @@ portletURL.setParameter("target", target);
 		searchContainer="<%= new GroupSearch(renderRequest, portletURL) %>"
 	>
 		<c:if test='<%= !type.equals("parentSites") %>'>
-			<liferay-ui:search-form
-				page="/html/portlet/users_admin/group_search.jsp"
-			/>
+			<aui:nav-bar>
+				<aui:nav-bar-search cssClass="pull-right" file="/html/portlet/users_admin/group_search.jsp" searchContainer="<%= searchContainer %>" />
+			</aui:nav-bar>
 		</c:if>
 
 		<%
@@ -163,7 +163,7 @@ portletURL.setParameter("target", target);
 				sb.append(AssetPublisherUtil.getScopeId(group, scopeGroupId));
 				sb.append("', '");
 				sb.append(target);
-				sb.append("'); Liferay.Util.getWindow().close();");
+				sb.append("'); Liferay.Util.getWindow().hide();");
 
 				rowHREF = sb.toString();
 			}
@@ -178,7 +178,7 @@ portletURL.setParameter("target", target);
 			<liferay-ui:search-container-column-text
 				href="<%= rowHREF %>"
 				name="type"
-				value="<%= LanguageUtil.get(pageContext, group.getTypeLabel()) %>"
+				value="<%= LanguageUtil.get(pageContext, group.getScopeLabel(themeDisplay)) %>"
 			/>
 		</liferay-ui:search-container-row>
 

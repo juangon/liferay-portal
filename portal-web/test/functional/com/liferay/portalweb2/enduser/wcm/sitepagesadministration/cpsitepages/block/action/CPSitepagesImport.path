@@ -1,0 +1,39 @@
+<html>
+<head>
+<title>CPSitepagesImport</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">CPSitepagesImport</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>PAGE_NAME</td>
+	<td></td>
+	<td>CPSitepagesImport</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>IMPORT_IFRAME</td>
+	<td>//iframe[@id='_156_importDialog_iframe_']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SELECT_FILE_BUTTON</td>
+	<td>//span[@id='_156_selectFilesButton']/button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>CONTINUE_BUTTON</td>
+	<td>//button[@id='_156_continueButton']</td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

@@ -149,26 +149,32 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 	public MBBanModelImpl() {
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _banId;
 	}
 
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setBanId(primaryKey);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _banId;
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return MBBan.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return MBBan.class.getName();
 	}
@@ -247,6 +253,7 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 		}
 	}
 
+	@Override
 	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
@@ -257,6 +264,7 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 		}
 	}
 
+	@Override
 	public void setUuid(String uuid) {
 		if (_originalUuid == null) {
 			_originalUuid = _uuid;
@@ -269,20 +277,24 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@Override
 	@JSON
 	public long getBanId() {
 		return _banId;
 	}
 
+	@Override
 	public void setBanId(long banId) {
 		_banId = banId;
 	}
 
+	@Override
 	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_columnBitmask |= GROUPID_COLUMN_BITMASK;
 
@@ -299,11 +311,13 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 		return _originalGroupId;
 	}
 
+	@Override
 	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
 
@@ -320,11 +334,13 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 		return _originalCompanyId;
 	}
 
+	@Override
 	@JSON
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_columnBitmask |= USERID_COLUMN_BITMASK;
 
@@ -337,10 +353,12 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 		_userId = userId;
 	}
 
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
@@ -349,6 +367,7 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 		return _originalUserId;
 	}
 
+	@Override
 	@JSON
 	public String getUserName() {
 		if (_userName == null) {
@@ -359,33 +378,40 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 		}
 	}
 
+	@Override
 	public void setUserName(String userName) {
 		_userName = userName;
 	}
 
+	@Override
 	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
+	@Override
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
 	}
 
+	@Override
 	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
 	@JSON
 	public long getBanUserId() {
 		return _banUserId;
 	}
 
+	@Override
 	public void setBanUserId(long banUserId) {
 		_columnBitmask |= BANUSERID_COLUMN_BITMASK;
 
@@ -398,10 +424,12 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 		_banUserId = banUserId;
 	}
 
+	@Override
 	public String getBanUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getBanUserId(), "uuid", _banUserUuid);
 	}
 
+	@Override
 	public void setBanUserUuid(String banUserUuid) {
 		_banUserUuid = banUserUuid;
 	}
@@ -456,6 +484,7 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 		return mbBanImpl;
 	}
 
+	@Override
 	public int compareTo(MBBan mbBan) {
 		long primaryKey = mbBan.getPrimaryKey();
 
@@ -472,18 +501,15 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof MBBan)) {
 			return false;
 		}
 
-		MBBan mbBan = null;
-
-		try {
-			mbBan = (MBBan)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		MBBan mbBan = (MBBan)obj;
 
 		long primaryKey = mbBan.getPrimaryKey();
 
@@ -603,6 +629,7 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(31);
 

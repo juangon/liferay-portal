@@ -146,34 +146,81 @@ public interface VelocityTaglib {
 	public void icon(String image, boolean label, String message, String url)
 		throws Exception;
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #iconBack}
+	 */
 	public void iconBack() throws Exception;
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #portletIconClose}
+	 */
 	public void iconClose() throws Exception;
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #portletIconConfiguration}
+	 */
 	public void iconConfiguration() throws Exception;
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #portletIconEdit}
+	 */
 	public void iconEdit() throws Exception;
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #portletIconEditDefaults}
+	 */
 	public void iconEditDefaults() throws Exception;
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #portletIconEditGuest}
+	 */
 	public void iconEditGuest() throws Exception;
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #portletIconHelp}
+	 */
 	public void iconHelp() throws Exception;
 
+	public void iconHelp(String message) throws Exception;
+
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #portletIconMaximize}
+	 */
 	public void iconMaximize() throws Exception;
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #portletIconMinimize}
+	 */
 	public void iconMinimize() throws Exception;
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #portletIconOptions}
+	 */
 	public void iconOptions() throws Exception;
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #portletIconPortlet}
+	 */
 	public void iconPortlet() throws Exception;
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #portletIconPortlet(Portlet)}
+	 */
 	public void iconPortlet(Portlet portlet) throws Exception;
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #portletIconPortletCss}
+	 */
 	public void iconPortletCss() throws Exception;
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #portletIconPrint}
+	 */
 	public void iconPrint() throws Exception;
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #portletIconRefresh}
+	 */
 	public void iconRefresh() throws Exception;
 
 	public void include(ServletContext servletContext, String page)
@@ -235,6 +282,36 @@ public interface VelocityTaglib {
 			String modelResourceDescription, String resourcePrimKey,
 			String windowState, int[] roleTypes)
 		throws Exception;
+
+	public void portletIconBack() throws Exception;
+
+	public void portletIconClose() throws Exception;
+
+	public void portletIconConfiguration() throws Exception;
+
+	public void portletIconEdit() throws Exception;
+
+	public void portletIconEditDefaults() throws Exception;
+
+	public void portletIconEditGuest() throws Exception;
+
+	public void portletIconHelp() throws Exception;
+
+	public void portletIconMaximize() throws Exception;
+
+	public void portletIconMinimize() throws Exception;
+
+	public void portletIconOptions() throws Exception;
+
+	public void portletIconPortlet() throws Exception;
+
+	public void portletIconPortlet(Portlet portlet) throws Exception;
+
+	public void portletIconPortletCss() throws Exception;
+
+	public void portletIconPrint() throws Exception;
+
+	public void portletIconRefresh() throws Exception;
 
 	public void ratings(
 			String className, long classPK, int numberOfStars, String type,

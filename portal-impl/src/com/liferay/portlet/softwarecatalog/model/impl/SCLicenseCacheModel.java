@@ -55,6 +55,7 @@ public class SCLicenseCacheModel implements CacheModel<SCLicense>,
 		return sb.toString();
 	}
 
+	@Override
 	public SCLicense toEntityModel() {
 		SCLicenseImpl scLicenseImpl = new SCLicenseImpl();
 
@@ -83,6 +84,7 @@ public class SCLicenseCacheModel implements CacheModel<SCLicense>,
 		return scLicenseImpl;
 	}
 
+	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		licenseId = objectInput.readLong();
 		name = objectInput.readUTF();
@@ -92,6 +94,7 @@ public class SCLicenseCacheModel implements CacheModel<SCLicense>,
 		recommended = objectInput.readBoolean();
 	}
 
+	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(licenseId);
