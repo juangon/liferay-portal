@@ -16,6 +16,7 @@
 	<property name="tinymce.file" value="tinymce_3.5.6.zip" />
 	<property name="vaadin.file" value="vaadin-6.7.4-liferay.zip" />
 	<property name="wsc.file" value="wsc_4.0.3.zip" />
+	<property name="video.file" value="liferayvideo.zip" />
 
 	<path id="jspc.common.classpath">
 		<pathelement path="docroot/WEB-INF/classes" />
@@ -297,6 +298,8 @@
 				<antcall target="build-ckeditor-plugins-scayt" />
 
 				<antcall target="build-ckeditor-plugins-wsc" />
+				
+				<antcall target="build-ckeditor-plugins-video" />
 			</then>
 			<else>
 				<copy todir="docroot/html/js/editor/ckeditor">
@@ -449,6 +452,13 @@
 			src="third-party/${wsc.file}"
 		/>
 	</target>
+	
+	<target name="build-ckeditor-plugins-video">
+			<unzip
+				dest="docroot/html/js/editor/ckeditor/plugins"
+				src="third-party/${video.file}"
+			/>
+		</target>
 
 	<target name="build-css">
 		<java
