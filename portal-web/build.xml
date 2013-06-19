@@ -560,7 +560,13 @@
 
 				<replace file="docroot/html/js/editor/fckeditor/editor/filemanager/browser/liferay/browser.html">
 					<replacetoken><![CDATA[sUrl += '&CurrentFolder=' + encodeURIComponent( this.CurrentFolder ) ;]]></replacetoken>
-					<replacevalue><![CDATA[sUrl += '&CurrentFolder=' + encodeURIComponent( oConnector.CurrentFolder ) ;]]></replacevalue>
+					<replacevalue>
+						<![CDATA[
+								if (!params || (params && params.indexOf( 'CurrentFolder' ) < 0)) {
+									sUrl += '&CurrentFolder=' + encodeURIComponent( oConnector.CurrentFolder ) ;
+								}
+						]]>
+					</replacevalue>
 				</replace>
 
 				<replace file="docroot/html/js/editor/fckeditor/editor/filemanager/browser/liferay/browser.html">
@@ -616,6 +622,22 @@
 				<replace file="docroot/html/js/editor/fckeditor/editor/filemanager/browser/liferay/frmfolders.html">
 					<replacetoken><![CDATA[oListManager.AddItem( sFolderName, sCurrentFolderPath + sFolderName + '/' ) ;]]></replacetoken>
 					<replacevalue><![CDATA[oListManager.AddItem( sFolderName, sCurrentFolderPath.replace( /'/g, '\\\'') + sFolderName + '/' ) ;]]></replacevalue>
+				</replace>
+
+				<replaceregexp file="docroot/html/js/editor/fckeditor/editor/filemanager/browser/liferay/frmfolders.html"
+					match="oListManager.Init\(\) ;(.+?)LoadFolders\( '/' \) ;"
+					replace="oListManager.Init() ;${line.separator}LoadFolders( oConnector.CurrentFolder ) ;"
+				    flags="s"
+				/>
+
+				<replace file="docroot/html/js/editor/fckeditor/editor/filemanager/browser/liferay/frmfolders.html">
+					<replacetoken><![CDATA[oConnector.CurrentFolder = sParentFolderPath ;]]></replacetoken>
+					<replacevalue><![CDATA[]]></replacevalue>
+				</replace>
+
+				<replace file="docroot/html/js/editor/fckeditor/editor/filemanager/browser/liferay/frmfolders.html">
+					<replacetoken><![CDATA[oConnector.SendCommand( 'GetFolders', null, GetFoldersCallBack ) ;]]></replacetoken>
+					<replacevalue><![CDATA[oConnector.SendCommand( 'GetFolders', 'CurrentFolder='+encodeURIComponent(sParentFolderPath), GetFoldersCallBack ) ;]]></replacevalue>
 				</replace>
 
 				<!-- frmresourceslist.html -->

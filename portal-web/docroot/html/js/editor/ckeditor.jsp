@@ -46,6 +46,21 @@ boolean hideImageResizing = ParamUtil.getBoolean(request, "hideImageResizing");
 Map<String, String> configParamsMap = (Map<String, String>)request.getAttribute("liferay-ui:input-editor:configParams");
 Map<String, String> fileBrowserParamsMap = (Map<String, String>)request.getAttribute("liferay-ui:input-editor:fileBrowserParams");
 
+Group group = GroupLocalServiceUtil.getGroup(themeDisplay.getScopeGroupId());
+
+String currentFolder = FCKEditorUtil.getRootFolderName(group, themeDisplay.getScopeGroupId(), portletId);
+
+StringBundler currentFolderParam = new StringBundler();
+
+if (Validator.isNull(currentFolder)) {
+	currentFolderParam.append(StringPool.SLASH);
+}
+
+currentFolderParam.append(StringPool.AMPERSAND);
+currentFolderParam.append("currentFolder");
+currentFolderParam.append(StringPool.EQUAL);
+currentFolderParam.append(HttpUtil.encodePath(StringPool.SLASH + currentFolder+ StringPool.SLASH));
+
 String configParams = marshallParams(configParamsMap);
 String fileBrowserParams = marshallParams(fileBrowserParamsMap);
 
@@ -228,7 +243,7 @@ if (inlineEdit && (inlineEditSaveURL != null)) {
 			'<%= name %>',
 			{
 				customConfig: '<%= PortalUtil.getPathContext() %>/html/js/editor/ckeditor/<%= HtmlUtil.escapeJS(ckEditorConfigFileName) %>?p_l_id=<%= plid %>&p_p_id=<%= HttpUtil.encodeURL(portletId) %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>&doAsGroupId=<%= HttpUtil.encodeURL(String.valueOf(doAsGroupId)) %>&contentsLanguageId=<%= HttpUtil.encodeURL(Validator.isNotNull(contentsLanguageId) ? contentsLanguageId : LocaleUtil.toLanguageId(locale)) %>&cssPath=<%= HttpUtil.encodeURL(themeDisplay.getPathThemeCss()) %>&cssClasses=<%= HttpUtil.encodeURL(cssClasses) %>&imagesPath=<%= HttpUtil.encodeURL(themeDisplay.getPathThemeImages()) %>&languageId=<%= HttpUtil.encodeURL(LocaleUtil.toLanguageId(locale)) %>&resizable=<%= resizable %>&inlineEdit=<%= inlineEdit %><%= configParams %>',
-				filebrowserBrowseUrl: '<%= PortalUtil.getPathContext() %>/html/js/editor/ckeditor/editor/filemanager/browser/liferay/browser.html?Connector=<%= connectorURL %><%= fileBrowserParams %>',
+				filebrowserBrowseUrl: '<%= PortalUtil.getPathContext() %>/html/js/editor/ckeditor/editor/filemanager/browser/liferay/browser.html?Connector=<%= connectorURL %><%= fileBrowserParams %><%= currentFolderParam.toString() %>',
 				filebrowserUploadUrl: null,
 				toolbar: '<%= TextFormatter.format(HtmlUtil.escapeJS(toolbarSet), TextFormatter.M) %>'
 			}
