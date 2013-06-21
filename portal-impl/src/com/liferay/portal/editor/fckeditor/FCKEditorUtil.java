@@ -17,6 +17,7 @@ package com.liferay.portal.editor.fckeditor;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 
 /**
  *
@@ -36,6 +37,18 @@ public class FCKEditorUtil {
 			Group group, long scopeGroupId, String portletId,
 			Boolean stagedData)
 		throws Exception {
+
+		if (group.isLayoutPrototype() || group.isLayoutSetPrototype()) {
+			return null;
+		}
+
+		if (group.isLayout()) {
+			long parentGroupId = group.getParentGroupId();
+
+			if (parentGroupId >0) {
+				group = GroupLocalServiceUtil.getGroup(parentGroupId);
+			}
+		}
 
 		boolean setNameAttribute = false;
 
