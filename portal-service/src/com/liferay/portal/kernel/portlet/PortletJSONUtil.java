@@ -17,6 +17,8 @@ package com.liferay.portal.kernel.portlet;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
@@ -24,7 +26,10 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
+
+import javax.portlet.MimeResponse;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -211,6 +216,15 @@ public class PortletJSONUtil {
 		jsonObject.put(
 			"headerJavaScriptPaths",
 			JSONFactoryUtil.createJSONArray(headerJavaScriptPaths));
+
+		List<String> markupHeadElements = (List<String>)request.getAttribute(
+			MimeResponse.MARKUP_HEAD_ELEMENT);
+
+		if (markupHeadElements != null) {
+			jsonObject.put(
+				"markupHeadElements",
+				StringUtil.merge(markupHeadElements, StringPool.BLANK));
+		}
 
 		jsonObject.put("portletHTML", portletHTML);
 		jsonObject.put("refresh", !portlet.isAjaxable());

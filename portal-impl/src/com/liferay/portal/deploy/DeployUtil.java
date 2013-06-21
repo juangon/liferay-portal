@@ -89,11 +89,12 @@ public class DeployUtil {
 
 			String name = "auto.deploy." + serverId + ".dest.dir";
 
-			PortletPreferences preferences = PrefsPropsUtil.getPreferences();
+			PortletPreferences portletPreferences =
+				PrefsPropsUtil.getPreferences();
 
 			String value = PropsUtil.get(name, new Filter("5"));
 
-			destDir = preferences.getValue(name, value);
+			destDir = portletPreferences.getValue(name, value);
 		}
 		else if (serverId.equals(ServerDetector.TOMCAT_ID)) {
 			destDir = PrefsPropsUtil.getString(

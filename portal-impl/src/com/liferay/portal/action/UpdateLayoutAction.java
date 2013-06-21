@@ -73,8 +73,8 @@ public class UpdateLayoutAction extends JSONAction {
 
 	@Override
 	public String getJSON(
-			ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response)
+			ActionMapping actionMapping, ActionForm actionForm,
+			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
@@ -132,7 +132,7 @@ public class UpdateLayoutAction extends JSONAction {
 				String top = ParamUtil.getString(request, "top");
 				String left = ParamUtil.getString(request, "left");
 
-				PortletPreferences preferences =
+				PortletPreferences portletPreferences =
 					PortletPreferencesFactoryUtil.getLayoutPortletSetup(
 						layout, portletId);
 
@@ -151,9 +151,10 @@ public class UpdateLayoutAction extends JSONAction {
 				sb.append(left);
 				sb.append("\n");
 
-				preferences.setValue("portlet-freeform-styles", sb.toString());
+				portletPreferences.setValue(
+					"portlet-freeform-styles", sb.toString());
 
-				preferences.store();
+				portletPreferences.store();
 			}
 		}
 		else if (cmd.equals("minimize")) {
@@ -266,15 +267,16 @@ public class UpdateLayoutAction extends JSONAction {
 		}
 
 		if (cmd.equals(Constants.ADD) && (portletId != null)) {
-			addPortlet(mapping, form, request, response, portletId);
+			addPortlet(actionMapping, actionForm, request, response, portletId);
 		}
 
 		return StringPool.BLANK;
 	}
 
 	protected void addPortlet(
-			ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response, String portletId)
+			ActionMapping actionMapping, ActionForm actionForm,
+			HttpServletRequest request, HttpServletResponse response,
+			String portletId)
 		throws Exception {
 
 		// Run the render portlet action to add a portlet without refreshing.
@@ -314,7 +316,8 @@ public class UpdateLayoutAction extends JSONAction {
 				new BufferCacheServletResponse(response);
 
 			renderPortletAction.execute(
-				mapping, form, dynamicRequest, bufferCacheServletResponse);
+				actionMapping, actionForm, dynamicRequest,
+				bufferCacheServletResponse);
 
 			String portletHTML = bufferCacheServletResponse.getString();
 
@@ -329,7 +332,7 @@ public class UpdateLayoutAction extends JSONAction {
 		}
 		else {
 			renderPortletAction.execute(
-				mapping, form, dynamicRequest, response);
+				actionMapping, actionForm, dynamicRequest, response);
 		}
 	}
 

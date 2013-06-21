@@ -19,7 +19,14 @@
 <%
 long groupId = ParamUtil.getLong(request, "groupId");
 long[] selectedGroupIds = StringUtil.split(ParamUtil.getString(request, "selectedGroupIds"), 0L);
-String type = ParamUtil.getString(request, "type", "manageableSites");
+
+String type = ParamUtil.getString(request, "type", "sites-that-i-administer");
+String[] types = ParamUtil.getParameterValues(request, "types", new String[] {type});
+
+if (Validator.isNull(type) && (types.length > 0)) {
+	type = types[0];
+}
+
 String filter = ParamUtil.getString(request, "filter");
 boolean includeCompany = ParamUtil.getBoolean(request, "includeCompany");
 boolean includeUserPersonalSite = ParamUtil.getBoolean(request, "includeUserPersonalSite");
@@ -30,6 +37,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/site_browser/view");
 portletURL.setParameter("type", type);
+portletURL.setParameter("types", types);
 portletURL.setParameter("groupId", String.valueOf(groupId));
 portletURL.setParameter("filter", filter);
 portletURL.setParameter("includeCompany", String.valueOf(includeCompany));
@@ -42,9 +50,28 @@ portletURL.setParameter("target", target);
 	<liferay-ui:search-container
 		searchContainer="<%= new GroupSearch(renderRequest, portletURL) %>"
 	>
-		<c:if test='<%= !type.equals("parentSites") %>'>
+		<c:if test='<%= !type.equals("parent-sites") || (types.length > 1) %>'>
 			<aui:nav-bar>
-				<aui:nav-bar-search cssClass="pull-right" file="/html/portlet/users_admin/group_search.jsp" searchContainer="<%= searchContainer %>" />
+				<c:if test="<%= types.length > 1 %>">
+					<aui:nav>
+
+						<%
+						for (String curType : types) {
+							portletURL.setParameter("type", curType);
+						%>
+
+							<aui:nav-item href="<%= portletURL.toString() %>" label="<%= curType %>" selected="<%= curType.equals(type) %>" />
+
+						<%
+						}
+						%>
+
+					</aui:nav>
+				</c:if>
+
+				<c:if test='<%= !type.equals("parent-sites") %>'>
+					<aui:nav-bar-search cssClass="pull-right" file="/html/portlet/users_admin/group_search.jsp" searchContainer="<%= searchContainer %>" />
+				</c:if>
 			</aui:nav-bar>
 		</c:if>
 
@@ -79,7 +106,7 @@ portletURL.setParameter("target", target);
 				additionalSites++;
 			}
 
-			if (type.equals("childSites")) {
+			if (type.equals("child-sites")) {
 				Group parentGroup = GroupLocalServiceUtil.getGroup(groupId);
 
 				List<Group> parentGroups = new ArrayList<Group>();
@@ -109,7 +136,7 @@ portletURL.setParameter("target", target);
 
 				total = GroupLocalServiceUtil.getGroupsCount(company.getCompanyId(), Layout.class.getName(), groupId);
 			}
-			else if (type.equals("parentSites")) {
+			else if (type.equals("parent-sites")) {
 				Group group = GroupLocalServiceUtil.getGroup(groupId);
 
 				groups = group.getAncestors();

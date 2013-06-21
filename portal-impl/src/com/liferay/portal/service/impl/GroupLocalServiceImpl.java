@@ -42,6 +42,7 @@ import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.GroupThreadLocal;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -68,6 +69,7 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
+import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.model.UserPersonalSite;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
@@ -93,10 +95,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Provides the local service for accessing, adding, deleting, and updating
@@ -671,183 +675,194 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	public Group deleteGroup(Group group)
 		throws PortalException, SystemException {
 
-		if ((group.isCompany() || PortalUtil.isSystemGroup(group.getName())) &&
-			!CompanyThreadLocal.isDeleteInProcess()) {
-
-			throw new RequiredGroupException(
-				String.valueOf(group.getGroupId()),
-				RequiredGroupException.SYSTEM_GROUP);
-		}
-
-		if (groupPersistence.countByC_P_S(
-				group.getCompanyId(), group.getGroupId(), true) > 0) {
-
-			throw new RequiredGroupException(
-				String.valueOf(group.getGroupId()),
-				RequiredGroupException.PARENT_GROUP);
-		}
-
-		// Layout set branches
-
-		layoutSetBranchLocalService.deleteLayoutSetBranches(
-			group.getGroupId(), true, true);
-
-		layoutSetBranchLocalService.deleteLayoutSetBranches(
-			group.getGroupId(), false, true);
-
-		// Layout sets
-
-		ServiceContext serviceContext = new ServiceContext();
+		boolean deleteInProcess = GroupThreadLocal.isDeleteInProcess();
 
 		try {
-			layoutSetLocalService.deleteLayoutSet(
-				group.getGroupId(), true, serviceContext);
-		}
-		catch (NoSuchLayoutSetException nslse) {
-		}
+			GroupThreadLocal.setDeleteInProcess(true);
 
-		try {
-			layoutSetLocalService.deleteLayoutSet(
-				group.getGroupId(), false, serviceContext);
-		}
-		catch (NoSuchLayoutSetException nslse) {
-		}
+			if ((group.isCompany() ||
+				 PortalUtil.isSystemGroup(group.getName())) &&
+				!CompanyThreadLocal.isDeleteInProcess()) {
 
-		// Group roles
+				throw new RequiredGroupException(
+					String.valueOf(group.getGroupId()),
+					RequiredGroupException.SYSTEM_GROUP);
+			}
 
-		userGroupRoleLocalService.deleteUserGroupRolesByGroupId(
-			group.getGroupId());
+			if (groupPersistence.countByC_P_S(
+					group.getCompanyId(), group.getGroupId(), true) > 0) {
 
-		// User group roles
+				throw new RequiredGroupException(
+					String.valueOf(group.getGroupId()),
+					RequiredGroupException.PARENT_GROUP);
+			}
 
-		userGroupGroupRoleLocalService.deleteUserGroupGroupRolesByGroupId(
-			group.getGroupId());
+			// Layout set branches
 
-		// Membership requests
+			layoutSetBranchLocalService.deleteLayoutSetBranches(
+				group.getGroupId(), true, true);
 
-		membershipRequestLocalService.deleteMembershipRequests(
-			group.getGroupId());
+			layoutSetBranchLocalService.deleteLayoutSetBranches(
+				group.getGroupId(), false, true);
 
-		// Portlet preferences
+			// Layout sets
 
-		portletPreferencesLocalService.deletePortletPreferences(
-			group.getGroupId(), PortletKeys.PREFS_OWNER_TYPE_GROUP,
-			PortletKeys.PREFS_PLID_SHARED);
+			ServiceContext serviceContext = new ServiceContext();
 
-		// Repositories
-
-		repositoryLocalService.deleteRepositories(group.getGroupId());
-
-		// Subscriptions
-
-		subscriptionLocalService.deleteSubscriptions(
-			group.getCompanyId(), BlogsEntry.class.getName(),
-			group.getGroupId());
-		subscriptionLocalService.deleteSubscriptions(
-			group.getCompanyId(), JournalArticle.class.getName(),
-			group.getGroupId());
-
-		// Teams
-
-		teamLocalService.deleteTeams(group.getGroupId());
-
-		// Staging
-
-		unscheduleStaging(group);
-
-		if (group.hasStagingGroup()) {
 			try {
-				StagingUtil.disableStaging(group, serviceContext);
+				layoutSetLocalService.deleteLayoutSet(
+					group.getGroupId(), true, serviceContext);
 			}
-			catch (Exception e) {
-				_log.error(
-					"Unable to disable staging for group " +
-						group.getGroupId());
+			catch (NoSuchLayoutSetException nslse) {
 			}
+
+			try {
+				layoutSetLocalService.deleteLayoutSet(
+					group.getGroupId(), false, serviceContext);
+			}
+			catch (NoSuchLayoutSetException nslse) {
+			}
+
+			// Group roles
+
+			userGroupRoleLocalService.deleteUserGroupRolesByGroupId(
+				group.getGroupId());
+
+			// User group roles
+
+			userGroupGroupRoleLocalService.deleteUserGroupGroupRolesByGroupId(
+				group.getGroupId());
+
+			// Membership requests
+
+			membershipRequestLocalService.deleteMembershipRequests(
+				group.getGroupId());
+
+			// Portlet preferences
+
+			portletPreferencesLocalService.deletePortletPreferences(
+				group.getGroupId(), PortletKeys.PREFS_OWNER_TYPE_GROUP,
+				PortletKeys.PREFS_PLID_SHARED);
+
+			// Repositories
+
+			repositoryLocalService.deleteRepositories(group.getGroupId());
+
+			// Subscriptions
+
+			subscriptionLocalService.deleteSubscriptions(
+				group.getCompanyId(), BlogsEntry.class.getName(),
+				group.getGroupId());
+			subscriptionLocalService.deleteSubscriptions(
+				group.getCompanyId(), JournalArticle.class.getName(),
+				group.getGroupId());
+
+			// Teams
+
+			teamLocalService.deleteTeams(group.getGroupId());
+
+			// Staging
+
+			unscheduleStaging(group);
+
+			if (group.hasStagingGroup()) {
+				try {
+					StagingUtil.disableStaging(group, serviceContext);
+				}
+				catch (Exception e) {
+					_log.error(
+						"Unable to disable staging for group " +
+							group.getGroupId());
+				}
+			}
+
+			// Themes
+
+			ThemeLoader themeLoader =
+				ThemeLoaderFactory.getDefaultThemeLoader();
+
+			if (themeLoader != null) {
+				String themePath =
+					themeLoader.getFileStorage() + StringPool.SLASH +
+						group.getGroupId();
+
+				FileUtil.deltree(themePath + "-private");
+				FileUtil.deltree(themePath + "-public");
+			}
+
+			// Portlet data
+
+			deletePortletData(group);
+
+			// Asset
+
+			if (group.isRegularSite()) {
+				assetEntryLocalService.deleteEntry(
+					Group.class.getName(), group.getGroupId());
+			}
+
+			assetVocabularyLocalService.deleteVocabularies(group.getGroupId());
+
+			// Shopping
+
+			shoppingCartLocalService.deleteGroupCarts(group.getGroupId());
+			shoppingCategoryLocalService.deleteCategories(group.getGroupId());
+			shoppingCouponLocalService.deleteCoupons(group.getGroupId());
+			shoppingOrderLocalService.deleteOrders(group.getGroupId());
+
+			// Social
+
+			socialActivityLocalService.deleteActivities(group.getGroupId());
+			socialActivitySettingLocalService.deleteActivitySettings(
+				group.getGroupId());
+
+			// Software catalog
+
+			scFrameworkVersionLocalService.deleteFrameworkVersions(
+				group.getGroupId());
+			scProductEntryLocalService.deleteProductEntries(group.getGroupId());
+
+			// Resources
+
+			List<ResourcePermission> resourcePermissions =
+				resourcePermissionPersistence.findByC_LikeP(
+					group.getCompanyId(), String.valueOf(group.getGroupId()));
+
+			for (ResourcePermission resourcePermission : resourcePermissions) {
+				resourcePermissionLocalService.deleteResourcePermission(
+					resourcePermission);
+			}
+
+			if (!group.isStagingGroup() &&
+				(group.isOrganization() || group.isRegularSite())) {
+
+				resourceLocalService.deleteResource(
+					group.getCompanyId(), Group.class.getName(),
+					ResourceConstants.SCOPE_INDIVIDUAL, group.getGroupId());
+			}
+
+			// Group
+
+			if (!group.isStagingGroup() && group.isOrganization() &&
+				group.isSite()) {
+
+				group.setSite(false);
+
+				groupPersistence.update(group);
+			}
+			else {
+				groupPersistence.remove(group);
+			}
+
+			// Permission cache
+
+			PermissionCacheUtil.clearCache();
+
+			return group;
 		}
-
-		// Themes
-
-		ThemeLoader themeLoader = ThemeLoaderFactory.getDefaultThemeLoader();
-
-		if (themeLoader != null) {
-			String themePath =
-				themeLoader.getFileStorage() + StringPool.SLASH +
-					group.getGroupId();
-
-			FileUtil.deltree(themePath + "-private");
-			FileUtil.deltree(themePath + "-public");
+		finally {
+			GroupThreadLocal.setDeleteInProcess(deleteInProcess);
 		}
-
-		// Portlet data
-
-		deletePortletData(group);
-
-		// Asset
-
-		if (group.isRegularSite()) {
-			assetEntryLocalService.deleteEntry(
-				Group.class.getName(), group.getGroupId());
-		}
-
-		assetVocabularyLocalService.deleteVocabularies(group.getGroupId());
-
-		// Shopping
-
-		shoppingCartLocalService.deleteGroupCarts(group.getGroupId());
-		shoppingCategoryLocalService.deleteCategories(group.getGroupId());
-		shoppingCouponLocalService.deleteCoupons(group.getGroupId());
-		shoppingOrderLocalService.deleteOrders(group.getGroupId());
-
-		// Social
-
-		socialActivityLocalService.deleteActivities(group.getGroupId());
-		socialActivitySettingLocalService.deleteActivitySettings(
-			group.getGroupId());
-
-		// Software catalog
-
-		scFrameworkVersionLocalService.deleteFrameworkVersions(
-			group.getGroupId());
-		scProductEntryLocalService.deleteProductEntries(group.getGroupId());
-
-		// Resources
-
-		List<ResourcePermission> resourcePermissions =
-			resourcePermissionPersistence.findByC_LikeP(
-				group.getCompanyId(), String.valueOf(group.getGroupId()));
-
-		for (ResourcePermission resourcePermission : resourcePermissions) {
-			resourcePermissionLocalService.deleteResourcePermission(
-				resourcePermission);
-		}
-
-		if (!group.isStagingGroup() &&
-			(group.isOrganization() || group.isRegularSite())) {
-
-			resourceLocalService.deleteResource(
-				group.getCompanyId(), Group.class.getName(),
-				ResourceConstants.SCOPE_INDIVIDUAL, group.getGroupId());
-		}
-
-		// Group
-
-		if (!group.isStagingGroup() && group.isOrganization() &&
-			group.isSite()) {
-
-			group.setSite(false);
-
-			groupPersistence.update(group);
-		}
-		else {
-			groupPersistence.remove(group);
-		}
-
-		// Permission cache
-
-		PermissionCacheUtil.clearCache();
-
-		return group;
 	}
 
 	/**
@@ -1750,6 +1765,57 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		return groupPersistence.findByC_C_C(
 			companyId, classNameId, defaultUserId);
+	}
+
+	@Override
+	public List<Group> getUserSitesGroups(long userId)
+		throws PortalException, SystemException {
+
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		LinkedHashMap<String, Object> groupParams =
+			new LinkedHashMap<String, Object>();
+
+		groupParams.put("inherit", Boolean.TRUE);
+		groupParams.put("site", Boolean.TRUE);
+		groupParams.put("usersGroups", userId);
+
+		return groupLocalService.search(
+			user.getCompanyId(), groupParams, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS);
+	}
+
+	@Override
+	public List<Group> getUserSitesGroups(
+			long userId, boolean includeAdministrative)
+		throws PortalException, SystemException {
+
+		if (!includeAdministrative) {
+			return getUserSitesGroups(userId);
+		}
+
+		Set<Group> sites = new HashSet<Group>();
+
+		List<UserGroupRole> userGroupRoles =
+			userGroupRoleLocalService.getUserGroupRoles(userId);
+
+		for (UserGroupRole userGroupRole : userGroupRoles) {
+			Role role = userGroupRole.getRole();
+
+			String roleName = role.getName();
+
+			if (roleName.equals(RoleConstants.SITE_ADMINISTRATOR) ||
+				roleName.equals(RoleConstants.SITE_OWNER)) {
+
+				Group group = userGroupRole.getGroup();
+
+				sites.add(group);
+			}
+		}
+
+		sites.addAll(getUserSitesGroups(userId));
+
+		return new ArrayList<Group>(sites);
 	}
 
 	/**
@@ -3426,13 +3492,13 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			PortletDataHandlerKeys.PERMISSIONS,
 			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
+			PortletDataHandlerKeys.PORTLET_CONFIGURATION,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
 			PortletDataHandlerKeys.PORTLET_DATA,
 			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
 			PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT,
-			new String[] {Boolean.TRUE.toString()});
-		parameterMap.put(
-			PortletDataHandlerKeys.PORTLET_SETUP,
 			new String[] {Boolean.TRUE.toString()});
 
 		layoutLocalService.importLayouts(

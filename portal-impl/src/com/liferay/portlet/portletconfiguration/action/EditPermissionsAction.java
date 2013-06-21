@@ -31,6 +31,7 @@ import com.liferay.portal.service.ResourceBlockLocalServiceUtil;
 import com.liferay.portal.service.ResourceBlockServiceUtil;
 import com.liferay.portal.service.ResourcePermissionServiceUtil;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
+import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
@@ -56,12 +57,13 @@ import org.apache.struts.action.ActionMapping;
  * @author Brian Wing Shun Chan
  * @author Connor McKay
  */
-public class EditPermissionsAction extends EditConfigurationAction {
+public class EditPermissionsAction extends PortletAction {
 
 	@Override
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
 		try {
@@ -84,8 +86,9 @@ public class EditPermissionsAction extends EditConfigurationAction {
 
 	@Override
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
@@ -122,10 +125,11 @@ public class EditPermissionsAction extends EditConfigurationAction {
 			themeDisplay.getCompanyId(), portletResource);
 
 		if (portlet != null) {
-			renderResponse.setTitle(getTitle(portlet, renderRequest));
+			renderResponse.setTitle(
+				ActionUtil.getTitle(portlet, renderRequest));
 		}
 
-		return mapping.findForward(
+		return actionMapping.findForward(
 			getForward(
 				renderRequest,
 				"portlet.portlet_configuration.edit_permissions"));

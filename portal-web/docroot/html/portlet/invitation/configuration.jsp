@@ -17,13 +17,10 @@
 <%@ include file="/html/portlet/invitation/init.jsp" %>
 
 <%
-String portletResource = ParamUtil.getString(request, "portletResource");
 String redirect = ParamUtil.getString(request, "redirect");
 
-PortletPreferences preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
-
-String emailMessageSubject = ParamUtil.getString(request, "emailMessageSubject", InvitationUtil.getEmailMessageSubject(preferences));
-String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", InvitationUtil.getEmailMessageBody(preferences));
+String emailMessageSubject = ParamUtil.getString(request, "emailMessageSubject", InvitationUtil.getEmailMessageSubject(portletPreferences));
+String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", InvitationUtil.getEmailMessageBody(portletPreferences));
 
 String editorParam = "emailMessageBody";
 String editorContent = emailMessageBody;

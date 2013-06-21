@@ -51,6 +51,9 @@ public interface ExportImportHelper {
 	public Layout getExportableLayout(ThemeDisplay themeDisplay)
 		throws PortalException, SystemException;
 
+	public String getExportableRootPortletId(long companyId, String portletId)
+		throws Exception;
+
 	public ManifestSummary getManifestSummary(
 			long userId, long groupId, Map<String, String[]> parameterMap,
 			File file)
@@ -61,7 +64,8 @@ public interface ExportImportHelper {
 			FileEntry fileEntry)
 		throws Exception;
 
-	public FileEntry getTempFileEntry(long groupId, long userId)
+	public FileEntry getTempFileEntry(
+			long groupId, long userId, String folderName)
 		throws PortalException, SystemException;
 
 	public String replaceExportContentReferences(

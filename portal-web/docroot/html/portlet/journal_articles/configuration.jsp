@@ -39,10 +39,10 @@ groupId = ParamUtil.getLong(request, "groupId", groupId);
 					<aui:option label="global" selected="<%= groupId == themeDisplay.getCompanyGroupId() %>" value="<%= themeDisplay.getCompanyGroupId() %>" />
 
 					<%
-					List<Group> mySites = user.getMySites();
+					List<Group> mySiteGroups = user.getMySiteGroups();
 
-					for (int i = 0; i < mySites.size(); i++) {
-						Group group = mySites.get(i);
+					for (int i = 0; i < mySiteGroups.size(); i++) {
+						Group group = mySiteGroups.get(i);
 
 						String groupName = HtmlUtil.escape(group.getDescriptiveName(locale));
 

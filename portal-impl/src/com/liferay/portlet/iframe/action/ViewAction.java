@@ -45,8 +45,9 @@ public class ViewAction extends PortletAction {
 
 	@Override
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
 		String src = transformSrc(renderRequest, renderResponse);
@@ -54,21 +55,21 @@ public class ViewAction extends PortletAction {
 		if (Validator.isNull(src) || src.equals(Http.HTTP_WITH_SLASH) ||
 			src.equals(Http.HTTPS_WITH_SLASH)) {
 
-			return mapping.findForward("/portal/portlet_not_setup");
+			return actionMapping.findForward("/portal/portlet_not_setup");
 		}
 
 		renderRequest.setAttribute(WebKeys.IFRAME_SRC, src);
 
-		return mapping.findForward("portlet.iframe.view");
+		return actionMapping.findForward("portlet.iframe.view");
 	}
 
 	protected String getPassword(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws PortalException, SystemException {
 
-		PortletPreferences preferences = renderRequest.getPreferences();
+		PortletPreferences portletPreferences = renderRequest.getPreferences();
 
-		String password = preferences.getValue(
+		String password = portletPreferences.getValue(
 			"basicPassword", StringPool.BLANK);
 
 		return IFrameUtil.getPassword(renderRequest, password);
@@ -77,9 +78,9 @@ public class ViewAction extends PortletAction {
 	protected String getSrc(
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
-		PortletPreferences preferences = renderRequest.getPreferences();
+		PortletPreferences portletPreferences = renderRequest.getPreferences();
 
-		String src = preferences.getValue("src", StringPool.BLANK);
+		String src = portletPreferences.getValue("src", StringPool.BLANK);
 
 		src = ParamUtil.getString(renderRequest, "src", src);
 
@@ -90,9 +91,9 @@ public class ViewAction extends PortletAction {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws PortalException, SystemException {
 
-		PortletPreferences preferences = renderRequest.getPreferences();
+		PortletPreferences portletPreferences = renderRequest.getPreferences();
 
-		String userName = preferences.getValue(
+		String userName = portletPreferences.getValue(
 			"basicUserName", StringPool.BLANK);
 
 		return IFrameUtil.getUserName(renderRequest, userName);
@@ -102,18 +103,19 @@ public class ViewAction extends PortletAction {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws PortalException, SystemException {
 
-		PortletPreferences preferences = renderRequest.getPreferences();
+		PortletPreferences portletPreferences = renderRequest.getPreferences();
 
 		String src = getSrc(renderRequest, renderResponse);
 
 		boolean auth = GetterUtil.getBoolean(
-			preferences.getValue("auth", StringPool.BLANK));
+			portletPreferences.getValue("auth", StringPool.BLANK));
 
 		if (!auth) {
 			return src;
 		}
 
-		String authType = preferences.getValue("authType", StringPool.BLANK);
+		String authType = portletPreferences.getValue(
+			"authType", StringPool.BLANK);
 
 		if (authType.equals("basic")) {
 			String userName = getUserName(renderRequest, renderResponse);

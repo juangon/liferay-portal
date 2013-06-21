@@ -172,9 +172,9 @@ private void _buildSitesList(Group rootGroup, Group curGroup, List<Group> branch
 		else {
 			User user = themeDisplay.getUser();
 
-			List<Group> mySites = user.getMySites(true, QueryUtil.ALL_POS);
+			List<Group> mySiteGroups = user.getMySiteGroups(true, QueryUtil.ALL_POS);
 
-			if (mySites.contains(childGroup)) {
+			if (mySiteGroups.contains(childGroup)) {
 				visibleGroups.add(childGroup);
 			}
 		}

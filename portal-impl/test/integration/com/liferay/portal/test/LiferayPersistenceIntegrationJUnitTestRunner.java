@@ -14,6 +14,9 @@
 
 package com.liferay.portal.test;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.tools.DBUpgrader;
 import com.liferay.portal.util.InitUtil;
 
 import java.util.ArrayList;
@@ -40,6 +43,16 @@ public class LiferayPersistenceIntegrationJUnitTestRunner
 		extraConfigLocations.add("META-INF/test-persistence-spring.xml");
 
 		InitUtil.initWithSpring(extraConfigLocations);
+
+		try {
+			DBUpgrader.upgrade();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(
+		LiferayPersistenceIntegrationJUnitTestRunner.class);
 
 }

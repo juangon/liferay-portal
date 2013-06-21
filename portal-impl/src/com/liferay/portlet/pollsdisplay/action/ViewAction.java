@@ -39,15 +39,17 @@ public class ViewAction extends PortletAction {
 
 	@Override
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
 		try {
-			PortletPreferences preferences = renderRequest.getPreferences();
+			PortletPreferences portletPreferences =
+				renderRequest.getPreferences();
 
 			long questionId = GetterUtil.getLong(
-				preferences.getValue("questionId", StringPool.BLANK));
+				portletPreferences.getValue("questionId", StringPool.BLANK));
 
 			if (questionId > 0) {
 				PollsQuestion question = PollsQuestionServiceUtil.getQuestion(
@@ -60,11 +62,11 @@ public class ViewAction extends PortletAction {
 			if (!(e instanceof NoSuchQuestionException)) {
 				SessionErrors.add(renderRequest, e.getClass());
 
-				return mapping.findForward("portlet.polls_display.error");
+				return actionMapping.findForward("portlet.polls_display.error");
 			}
 		}
 
-		return mapping.findForward("portlet.polls_display.view");
+		return actionMapping.findForward("portlet.polls_display.view");
 	}
 
 }

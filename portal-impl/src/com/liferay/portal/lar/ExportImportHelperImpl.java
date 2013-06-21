@@ -61,6 +61,7 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.StagedModel;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -248,6 +249,26 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 	}
 
 	@Override
+	public String getExportableRootPortletId(long companyId, String portletId)
+		throws Exception {
+
+		Portlet portlet = PortletLocalServiceUtil.getPortletById(
+			companyId, portletId);
+
+		if (portlet == null) {
+			return null;
+		}
+
+		String portletDataHandlerClass = portlet.getPortletDataHandlerClass();
+
+		if (portletDataHandlerClass == null) {
+			return null;
+		}
+
+		return PortletConstants.getRootPortletId(portletId);
+	}
+
+	@Override
 	public ManifestSummary getManifestSummary(
 			long userId, long groupId, Map<String, String[]> parameterMap,
 			File file)
@@ -391,18 +412,19 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 	}
 
 	@Override
-	public FileEntry getTempFileEntry(long groupId, long userId)
+	public FileEntry getTempFileEntry(
+			long groupId, long userId, String folderName)
 		throws PortalException, SystemException {
 
 		String[] tempFileEntryNames = LayoutServiceUtil.getTempFileEntryNames(
-			groupId, TEMP_FOLDER_NAME);
+			groupId, folderName);
 
 		if (tempFileEntryNames.length == 0) {
 			return null;
 		}
 
 		return TempFileUtil.getTempFile(
-			groupId, userId, tempFileEntryNames[0], TEMP_FOLDER_NAME);
+			groupId, userId, tempFileEntryNames[0], folderName);
 	}
 
 	@Override

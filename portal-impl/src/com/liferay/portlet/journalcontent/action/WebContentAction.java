@@ -45,11 +45,12 @@ public class WebContentAction extends PortletAction {
 
 	@Override
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
-		PortletPreferences preferences = actionRequest.getPreferences();
+		PortletPreferences portletPreferences = actionRequest.getPreferences();
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -58,7 +59,7 @@ public class WebContentAction extends PortletAction {
 
 		if (groupId < 1) {
 			groupId = GetterUtil.getLong(
-				preferences.getValue("groupId", StringPool.BLANK));
+				portletPreferences.getValue("groupId", null));
 		}
 
 		String articleId = ParamUtil.getString(actionRequest, "articleId");
@@ -67,9 +68,9 @@ public class WebContentAction extends PortletAction {
 
 		if (Validator.isNull(articleId)) {
 			articleId = GetterUtil.getString(
-				preferences.getValue("articleId", StringPool.BLANK));
+				portletPreferences.getValue("articleId", null));
 			ddmTemplateKey = GetterUtil.getString(
-				preferences.getValue("ddmTemplateKey", StringPool.BLANK));
+				portletPreferences.getValue("ddmTemplateKey", null));
 		}
 
 		String viewMode = ParamUtil.getString(actionRequest, "viewMode");
@@ -88,8 +89,9 @@ public class WebContentAction extends PortletAction {
 
 	@Override
 	public void serveResource(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ResourceRequest resourceRequest,
+			ResourceResponse resourceResponse)
 		throws Exception {
 
 		String contentType = ParamUtil.getString(
@@ -101,11 +103,12 @@ public class WebContentAction extends PortletAction {
 
 		if (resourceRequest.getResourceID() != null) {
 			super.serveResource(
-				mapping, form, portletConfig, resourceRequest,
+				actionMapping, actionForm, portletConfig, resourceRequest,
 				resourceResponse);
 		}
 		else {
-			PortletPreferences preferences = resourceRequest.getPreferences();
+			PortletPreferences portletPreferences =
+				resourceRequest.getPreferences();
 
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)resourceRequest.getAttribute(
@@ -115,7 +118,7 @@ public class WebContentAction extends PortletAction {
 
 			if (groupId < 1) {
 				groupId = GetterUtil.getLong(
-					preferences.getValue("groupId", StringPool.BLANK));
+					portletPreferences.getValue("groupId", null));
 			}
 
 			String articleId = ParamUtil.getString(
@@ -125,9 +128,9 @@ public class WebContentAction extends PortletAction {
 
 			if (Validator.isNull(articleId)) {
 				articleId = GetterUtil.getString(
-					preferences.getValue("articleId", StringPool.BLANK));
+					portletPreferences.getValue("articleId", null));
 				ddmTemplateKey = GetterUtil.getString(
-					preferences.getValue("ddmTemplateKey", StringPool.BLANK));
+					portletPreferences.getValue("ddmTemplateKey", null));
 			}
 
 			String viewMode = ParamUtil.getString(resourceRequest, "viewMode");

@@ -71,8 +71,9 @@ public class EditTemplateAction extends PortletAction {
 
 	@Override
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
@@ -137,8 +138,9 @@ public class EditTemplateAction extends PortletAction {
 
 	@Override
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
 		try {
@@ -151,7 +153,7 @@ public class EditTemplateAction extends PortletAction {
 
 				SessionErrors.add(renderRequest, e.getClass());
 
-				return mapping.findForward(
+				return actionMapping.findForward(
 					"portlet.dynamic_data_mapping.error");
 			}
 			else {
@@ -159,7 +161,7 @@ public class EditTemplateAction extends PortletAction {
 			}
 		}
 
-		return mapping.findForward(
+		return actionMapping.findForward(
 			getForward(
 				renderRequest, "portlet.dynamic_data_mapping.edit_template"));
 	}
@@ -300,22 +302,22 @@ public class EditTemplateAction extends PortletAction {
 			actionRequest, "portletResource");
 
 		if (Validator.isNotNull(portletResource)) {
-			PortletPreferences preferences =
+			PortletPreferences portletPreferences =
 				PortletPreferencesFactoryUtil.getPortletSetup(
 					actionRequest, portletResource);
 
 			if (type.equals(DDMTemplateConstants.TEMPLATE_TYPE_DISPLAY)) {
-				preferences.setValue(
+				portletPreferences.setValue(
 					"displayDDMTemplateId",
 					String.valueOf(template.getTemplateId()));
 			}
 			else {
-				preferences.setValue(
+				portletPreferences.setValue(
 					"formDDMTemplateId",
 					String.valueOf(template.getTemplateId()));
 			}
 
-			preferences.store();
+			portletPreferences.store();
 		}
 
 		return template;

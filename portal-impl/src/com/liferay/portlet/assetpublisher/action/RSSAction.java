@@ -138,17 +138,18 @@ public class RSSAction extends com.liferay.portal.struts.RSSAction {
 	}
 
 	protected List<AssetEntry> getAssetEntries(
-			PortletRequest portletRequest, PortletPreferences preferences)
+			PortletRequest portletRequest,
+			PortletPreferences portletPreferences)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		int rssDelta = GetterUtil.getInteger(
-			preferences.getValue("rssDelta", "20"));
+			portletPreferences.getValue("rssDelta", "20"));
 
 		return AssetPublisherUtil.getAssetEntries(
-			preferences, themeDisplay.getLayout(),
+			portletPreferences, themeDisplay.getLayout(),
 			themeDisplay.getScopeGroupId(), rssDelta, true);
 	}
 
@@ -259,22 +260,22 @@ public class RSSAction extends com.liferay.portal.struts.RSSAction {
 			ResourceRequest portletRequest, ResourceResponse portletResponse)
 		throws Exception {
 
-		PortletPreferences preferences = portletRequest.getPreferences();
+		PortletPreferences portletPreferences = portletRequest.getPreferences();
 
-		String selectionStyle = preferences.getValue(
+		String selectionStyle = portletPreferences.getValue(
 			"selectionStyle", "dynamic");
 
 		if (!selectionStyle.equals("dynamic")) {
 			return new byte[0];
 		}
 
-		String assetLinkBehavior = preferences.getValue(
+		String assetLinkBehavior = portletPreferences.getValue(
 			"assetLinkBehavior", "showFullContent");
-		String rssDisplayStyle = preferences.getValue(
+		String rssDisplayStyle = portletPreferences.getValue(
 			"rssDisplayStyle", RSSUtil.DISPLAY_STYLE_ABSTRACT);
-		String rssFeedType = preferences.getValue(
+		String rssFeedType = portletPreferences.getValue(
 			"rssFeedType", RSSUtil.FEED_TYPE_DEFAULT);
-		String rssName = preferences.getValue("rssName", null);
+		String rssName = portletPreferences.getValue("rssName", null);
 
 		String format = RSSUtil.getFeedTypeFormat(rssFeedType);
 		double version = RSSUtil.getFeedTypeVersion(rssFeedType);
@@ -282,7 +283,7 @@ public class RSSAction extends com.liferay.portal.struts.RSSAction {
 		String rss = exportToRSS(
 			portletRequest, portletResponse, rssName, null, format, version,
 			rssDisplayStyle, assetLinkBehavior,
-			getAssetEntries(portletRequest, preferences));
+			getAssetEntries(portletRequest, portletPreferences));
 
 		return rss.getBytes(StringPool.UTF8);
 	}

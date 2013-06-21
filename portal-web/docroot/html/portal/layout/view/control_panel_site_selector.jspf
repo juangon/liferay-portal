@@ -17,35 +17,35 @@
 <%
 Collection<Portlet> siteAdministrationPortlets = PortalUtil.getControlPanelPortlets(themeDisplay.getCompanyId(), PortletCategoryKeys.SITE_ADMINISTRATION);
 
-List<Group> manageableSites = GroupServiceUtil.getManageableSites(siteAdministrationPortlets, PropsValues.CONTROL_PANEL_NAVIGATION_MAX_SITES);
+List<Group> manageableSiteGroups = GroupServiceUtil.getManageableSiteGroups(siteAdministrationPortlets, PropsValues.CONTROL_PANEL_NAVIGATION_MAX_SITES);
 
 Group userGroup = user.getGroup();
 
 if (PortletPermissionUtil.hasControlPanelAccessPermission(permissionChecker, userGroup.getGroupId(), siteAdministrationPortlets)) {
-	manageableSites.add(0, userGroup);
+	manageableSiteGroups.add(0, userGroup);
 }
 
 if (PortalUtil.isCompanyControlPanelVisible(themeDisplay)) {
 	Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(themeDisplay.getCompanyId());
 
-	if (!manageableSites.contains(companyGroup)) {
-		manageableSites.add(0, companyGroup);
+	if (!manageableSiteGroups.contains(companyGroup)) {
+		manageableSiteGroups.add(0, companyGroup);
 	}
 }
 
-manageableSites.remove(curGroup);
+manageableSiteGroups.remove(group);
 %>
 
 <liferay-ui:icon-menu cssClass="control-panel-site-selector" direction="down" extended="<%= false %>" icon="" id="controlPanelSiteSelector" message="" showWhenSingleIcon="<%= true %>">
 
 	<%
-	for (Group group : manageableSites) {
+	for (Group manageableSiteGroup : manageableSiteGroups) {
 	%>
 
 		<liferay-ui:icon
-			message="<%= HtmlUtil.escape(group.getDescriptiveName(locale)) %>"
-			src="<%= group.getIconURL(themeDisplay) %>"
-			url='<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", group.getGroupId()) %>'
+			message="<%= HtmlUtil.escape(manageableSiteGroup.getDescriptiveName(locale)) %>"
+			src="<%= manageableSiteGroup.getIconURL(themeDisplay) %>"
+			url='<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", manageableSiteGroup.getGroupId()) %>'
 		/>
 
 	<%

@@ -60,8 +60,9 @@ public class LoginAction extends PortletAction {
 
 	@Override
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
@@ -82,10 +83,12 @@ public class LoginAction extends PortletAction {
 		}*/
 
 		try {
-			PortletPreferences preferences =
+			PortletPreferences portletPreferences =
 				PortletPreferencesFactoryUtil.getPortletSetup(actionRequest);
 
-			login(themeDisplay, actionRequest, actionResponse, preferences);
+			login(
+				themeDisplay, actionRequest, actionResponse,
+				portletPreferences);
 
 			boolean doActionAfterLogin = ParamUtil.getBoolean(
 				actionRequest, "doActionAfterLogin");
@@ -133,11 +136,12 @@ public class LoginAction extends PortletAction {
 
 	@Override
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
-		return mapping.findForward(
+		return actionMapping.findForward(
 			getForward(renderRequest, "portlet.login.login"));
 	}
 
@@ -171,7 +175,8 @@ public class LoginAction extends PortletAction {
 
 	protected void login(
 			ThemeDisplay themeDisplay, ActionRequest actionRequest,
-			ActionResponse actionResponse, PortletPreferences preferences)
+			ActionResponse actionResponse,
+			PortletPreferences portletPreferences)
 		throws Exception {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
@@ -183,7 +188,7 @@ public class LoginAction extends PortletAction {
 		String password = actionRequest.getParameter("password");
 		boolean rememberMe = ParamUtil.getBoolean(actionRequest, "rememberMe");
 
-		String authType = preferences.getValue("authType", null);
+		String authType = portletPreferences.getValue("authType", null);
 
 		if (!themeDisplay.isSignedIn()) {
 			LoginUtil.login(

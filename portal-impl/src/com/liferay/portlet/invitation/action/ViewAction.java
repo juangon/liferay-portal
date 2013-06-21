@@ -54,8 +54,9 @@ public class ViewAction extends PortletAction {
 
 	@Override
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
 		Set<String> invalidEmailAddresses = new HashSet<String>();
@@ -104,12 +105,13 @@ public class ViewAction extends PortletAction {
 		String layoutFullURL = PortalUtil.getLayoutFullURL(
 			layout, themeDisplay);
 
-		PortletPreferences preferences =
+		PortletPreferences portletPreferences =
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				actionRequest, PortletKeys.INVITATION);
 
-		String subject = InvitationUtil.getEmailMessageSubject(preferences);
-		String body = InvitationUtil.getEmailMessageBody(preferences);
+		String subject = InvitationUtil.getEmailMessageSubject(
+			portletPreferences);
+		String body = InvitationUtil.getEmailMessageBody(portletPreferences);
 
 		subject = StringUtil.replace(
 			subject,
@@ -152,11 +154,12 @@ public class ViewAction extends PortletAction {
 
 	@Override
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
-		return mapping.findForward(
+		return actionMapping.findForward(
 			getForward(renderRequest, "portlet.invitation.view"));
 	}
 

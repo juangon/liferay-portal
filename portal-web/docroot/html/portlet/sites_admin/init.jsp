@@ -77,10 +77,13 @@ if (permissionChecker.isCompanyAdmin()) {
 	filterManageableGroups = false;
 }
 
+if (GroupPermissionUtil.contains(permissionChecker, ActionKeys.VIEW)) {
+	filterManageableGroups = false;
+}
+
 long[] classNameIds = new long[] {PortalUtil.getClassNameId(Company.class), PortalUtil.getClassNameId(Group.class), PortalUtil.getClassNameId(Organization.class)};
 
 Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale, timeZone);
-Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 %>
 
 <%@ include file="/html/portlet/sites_admin/init-ext.jsp" %>

@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.PortletPreferencesServiceUtil;
+import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
@@ -45,18 +46,19 @@ import org.apache.struts.action.ActionMapping;
  * @author Jorge Ferrer
  * @author Raymond Augé
  */
-public class EditArchivedSetupsAction extends EditConfigurationAction {
+public class EditArchivedSetupsAction extends PortletAction {
 
 	@Override
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
 		Portlet portlet = null;
 
 		try {
-			portlet = getPortlet(actionRequest);
+			portlet = ActionUtil.getPortlet(actionRequest);
 		}
 		catch (PrincipalException pe) {
 			SessionErrors.add(
@@ -128,25 +130,27 @@ public class EditArchivedSetupsAction extends EditConfigurationAction {
 
 	@Override
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
 		Portlet portlet = null;
 
 		try {
-			portlet = getPortlet(renderRequest);
+			portlet = ActionUtil.getPortlet(renderRequest);
 		}
 		catch (PrincipalException pe) {
 			SessionErrors.add(
 				renderRequest, PrincipalException.class.getName());
 
-			return mapping.findForward("portlet.portlet_configuration.error");
+			return actionMapping.findForward(
+				"portlet.portlet_configuration.error");
 		}
 
-		renderResponse.setTitle(getTitle(portlet, renderRequest));
+		renderResponse.setTitle(ActionUtil.getTitle(portlet, renderRequest));
 
-		return mapping.findForward(
+		return actionMapping.findForward(
 			getForward(
 				renderRequest,
 				"portlet.portlet_configuration.edit_archived_setups"));
