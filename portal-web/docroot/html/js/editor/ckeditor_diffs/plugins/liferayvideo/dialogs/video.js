@@ -207,7 +207,7 @@ CKEDITOR.dialog.add( 'liferayvideo',
 									{
 										action : 'Browse',
 										target: 'info:poster',
-										url: editor.config.filebrowserVideoBrowseUrl || editor.config.filebrowserBrowseUrl
+										url: editor.config.filebrowserBrowseUrl + '&Type=Video'
 									},
 									label : editor.lang.common.browseServer
 								}]
