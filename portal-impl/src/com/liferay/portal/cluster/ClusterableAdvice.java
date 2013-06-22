@@ -140,7 +140,7 @@ public class ClusterableAdvice
 			}
 		}
 
-		if (servletContextName == null) {
+		if (Validator.isNull(servletContextName)) {
 			if (Validator.isNull(beanIdentifier)) {
 				return methodHandler.invoke(true);
 			}
@@ -155,9 +155,8 @@ public class ClusterableAdvice
 			ClassLoaderUtil.getContextClassLoader();
 
 		try {
-			ClassLoader classLoader =
-				(ClassLoader)PortletBeanLocatorUtil.locate(
-					servletContextName, "portletClassLoader");
+			ClassLoader classLoader = ClassLoaderPool.getClassLoader(
+				servletContextName);
 
 			ClassLoaderUtil.setContextClassLoader(classLoader);
 

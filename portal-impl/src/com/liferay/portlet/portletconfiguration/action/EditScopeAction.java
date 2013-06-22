@@ -36,7 +36,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletConfigFactoryUtil;
-import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.portletconfiguration.util.PortletConfigurationUtil;
 
 import java.util.ResourceBundle;
@@ -80,6 +79,12 @@ public class EditScopeAction extends PortletAction {
 
 			setForward(actionRequest, "portlet.portlet_configuration.error");
 		}
+
+		PortletPreferences portletPreferences =
+			ActionUtil.getLayoutPortletSetup(actionRequest, portlet);
+
+		actionRequest = ActionUtil.getWrappedActionRequest(
+			actionRequest, portletPreferences);
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
@@ -133,6 +138,12 @@ public class EditScopeAction extends PortletAction {
 			return actionMapping.findForward(
 				"portlet.portlet_configuration.error");
 		}
+
+		PortletPreferences portletPreferences =
+			ActionUtil.getLayoutPortletSetup(renderRequest, portlet);
+
+		renderRequest = ActionUtil.getWrappedRenderRequest(
+			renderRequest, portletPreferences);
 
 		renderResponse.setTitle(ActionUtil.getTitle(portlet, renderRequest));
 
@@ -199,9 +210,7 @@ public class EditScopeAction extends PortletAction {
 
 		Layout layout = themeDisplay.getLayout();
 
-		PortletPreferences portletPreferences =
-			PortletPreferencesFactoryUtil.getLayoutPortletSetup(
-				layout, portlet.getPortletId());
+		PortletPreferences portletPreferences = actionRequest.getPreferences();
 
 		String scopeType = GetterUtil.getString(
 			portletPreferences.getValue("lfrScopeType", null));
@@ -271,11 +280,7 @@ public class EditScopeAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		Layout layout = themeDisplay.getLayout();
-
-		PortletPreferences portletPreferences =
-			PortletPreferencesFactoryUtil.getLayoutPortletSetup(
-				layout, portlet.getPortletId());
+		PortletPreferences portletPreferences = actionRequest.getPreferences();
 
 		String scopeType = ParamUtil.getString(actionRequest, "scopeType");
 

@@ -19,27 +19,19 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.portlet.ResourceServingConfigurationAction;
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
-import javax.portlet.filter.ActionRequestWrapper;
-import javax.portlet.filter.RenderRequestWrapper;
-import javax.portlet.filter.ResourceRequestWrapper;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -57,6 +49,8 @@ public class EditConfigurationAction extends PortletAction {
 			PortletConfig portletConfig, ActionRequest actionRequest,
 			ActionResponse actionResponse)
 		throws Exception {
+
+		actionRequest = ActionUtil.getWrappedActionRequest(actionRequest, null);
 
 		Portlet portlet = null;
 
@@ -79,16 +73,6 @@ public class EditConfigurationAction extends PortletAction {
 			return;
 		}
 
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
-
-		PortletPreferences portletPreferences =
-			ActionUtil.getPortletPreferences(
-				request, actionRequest.getPreferences());
-
-		actionRequest = new ConfigurationActionRequest(
-			actionRequest, portletPreferences);
-
 		configurationAction.processAction(
 			portletConfig, actionRequest, actionResponse);
 	}
@@ -99,6 +83,8 @@ public class EditConfigurationAction extends PortletAction {
 			PortletConfig portletConfig, RenderRequest renderRequest,
 			RenderResponse renderResponse)
 		throws Exception {
+
+		renderRequest = ActionUtil.getWrappedRenderRequest(renderRequest, null);
 
 		Portlet portlet = null;
 
@@ -129,19 +115,6 @@ public class EditConfigurationAction extends PortletAction {
 			if (Validator.isNotNull(path)) {
 				renderRequest.setAttribute(
 					WebKeys.CONFIGURATION_ACTION_PATH, path);
-
-				HttpServletRequest request = PortalUtil.getHttpServletRequest(
-					renderRequest);
-
-				PortletPreferences portletPreferences =
-					ActionUtil.getPortletPreferences(
-						request, renderRequest.getPreferences());
-
-				renderRequest = new ConfigurationRenderRequest(
-					renderRequest, portletPreferences);
-
-				request.setAttribute(
-					JavaConstants.JAVAX_PORTLET_REQUEST, renderRequest);
 			}
 			else {
 				_log.error("Configuration action returned a null path");
@@ -161,6 +134,9 @@ public class EditConfigurationAction extends PortletAction {
 			ResourceResponse resourceResponse)
 		throws Exception {
 
+		resourceRequest = ActionUtil.getWrappedResourceRequest(
+			resourceRequest, null);
+
 		Portlet portlet = null;
 
 		try {
@@ -176,16 +152,6 @@ public class EditConfigurationAction extends PortletAction {
 		if (resourceServingConfigurationAction == null) {
 			return;
 		}
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			resourceRequest);
-
-		PortletPreferences portletPreferences =
-			ActionUtil.getPortletPreferences(
-				request, resourceRequest.getPreferences());
-
-		resourceRequest = new ConfigurationResourceRequest(
-			resourceRequest, portletPreferences);
 
 		resourceServingConfigurationAction.serveResource(
 			portletConfig, resourceRequest, resourceResponse);
@@ -212,65 +178,5 @@ public class EditConfigurationAction extends PortletAction {
 
 	private static Log _log = LogFactoryUtil.getLog(
 		EditConfigurationAction.class);
-
-	private class ConfigurationActionRequest extends ActionRequestWrapper {
-
-		public ConfigurationActionRequest(
-			ActionRequest actionRequest,
-			PortletPreferences portletPreferences) {
-
-			super(actionRequest);
-
-			_portletPreferences = portletPreferences;
-		}
-
-		@Override
-		public PortletPreferences getPreferences() {
-			return _portletPreferences;
-		}
-
-		private PortletPreferences _portletPreferences;
-
-	}
-
-	private class ConfigurationRenderRequest extends RenderRequestWrapper {
-
-		public ConfigurationRenderRequest(
-			RenderRequest renderRequest,
-			PortletPreferences portletPreferences) {
-
-			super(renderRequest);
-
-			_portletPreferences = portletPreferences;
-		}
-
-		@Override
-		public PortletPreferences getPreferences() {
-			return _portletPreferences;
-		}
-
-		private PortletPreferences _portletPreferences;
-
-	}
-
-	private class ConfigurationResourceRequest extends ResourceRequestWrapper {
-
-		public ConfigurationResourceRequest(
-			ResourceRequest resourceRequest,
-			PortletPreferences portletPreferences) {
-
-			super(resourceRequest);
-
-			_portletPreferences = portletPreferences;
-		}
-
-		@Override
-		public PortletPreferences getPreferences() {
-			return _portletPreferences;
-		}
-
-		private PortletPreferences _portletPreferences;
-
-	}
 
 }

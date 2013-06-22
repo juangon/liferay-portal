@@ -78,6 +78,8 @@ public class ExportImportAction extends ImportLayoutsAction {
 			ActionResponse actionResponse)
 		throws Exception {
 
+		actionRequest = ActionUtil.getWrappedActionRequest(actionRequest, null);
+
 		Portlet portlet = null;
 
 		try {
@@ -211,6 +213,8 @@ public class ExportImportAction extends ImportLayoutsAction {
 
 		renderResponse.setTitle(ActionUtil.getTitle(portlet, renderRequest));
 
+		renderRequest = ActionUtil.getWrappedRenderRequest(renderRequest, null);
+
 		return actionMapping.findForward(
 			getForward(
 				renderRequest, "portlet.portlet_configuration.export_import"));
@@ -229,6 +233,9 @@ public class ExportImportAction extends ImportLayoutsAction {
 			portletContext.getRequestDispatcher(
 				"/html/portlet/portlet_configuration/" +
 					"import_portlet_resources.jsp");
+
+		resourceRequest = ActionUtil.getWrappedResourceRequest(
+			resourceRequest, null);
 
 		portletRequestDispatcher.include(resourceRequest, resourceResponse);
 	}

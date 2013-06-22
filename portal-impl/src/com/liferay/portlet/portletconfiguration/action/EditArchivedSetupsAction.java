@@ -29,7 +29,6 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -54,6 +53,8 @@ public class EditArchivedSetupsAction extends PortletAction {
 			PortletConfig portletConfig, ActionRequest actionRequest,
 			ActionResponse actionResponse)
 		throws Exception {
+
+		actionRequest = ActionUtil.getWrappedActionRequest(actionRequest, null);
 
 		Portlet portlet = null;
 
@@ -135,6 +136,8 @@ public class EditArchivedSetupsAction extends PortletAction {
 			RenderResponse renderResponse)
 		throws Exception {
 
+		renderRequest = ActionUtil.getWrappedRenderRequest(renderRequest, null);
+
 		Portlet portlet = null;
 
 		try {
@@ -170,13 +173,11 @@ public class EditArchivedSetupsAction extends PortletAction {
 
 		String name = ParamUtil.getString(actionRequest, "name");
 
-		PortletPreferences setup =
-			PortletPreferencesFactoryUtil.getPortletSetup(
-				actionRequest, portlet.getPortletId());
+		PortletPreferences portletPreferences = actionRequest.getPreferences();
 
 		PortletPreferencesServiceUtil.restoreArchivedPreferences(
 			themeDisplay.getScopeGroupId(), name, themeDisplay.getLayout(),
-			portlet.getRootPortletId(), setup);
+			portlet.getRootPortletId(), portletPreferences);
 	}
 
 	protected void updateSetup(ActionRequest actionRequest, Portlet portlet)
@@ -187,13 +188,11 @@ public class EditArchivedSetupsAction extends PortletAction {
 
 		String name = ParamUtil.getString(actionRequest, "name");
 
-		PortletPreferences setup =
-			PortletPreferencesFactoryUtil.getPortletSetup(
-				actionRequest, portlet.getPortletId());
+		PortletPreferences portletPreferences = actionRequest.getPreferences();
 
 		PortletPreferencesServiceUtil.updateArchivePreferences(
 			themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), name,
-			portlet.getRootPortletId(), setup);
+			portlet.getRootPortletId(), portletPreferences);
 	}
 
 }

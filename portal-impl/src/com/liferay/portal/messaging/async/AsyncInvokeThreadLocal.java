@@ -12,29 +12,25 @@
  * details.
  */
 
-package com.liferay.portal.kernel.repository.model;
+package com.liferay.portal.messaging.async;
 
-import com.liferay.portal.model.StagedGroupedModel;
-
-import java.io.Serializable;
-
-import java.util.Map;
+import com.liferay.portal.kernel.util.AutoResetThreadLocal;
 
 /**
- * @author Alexander Chow
+ * @author Shuyang Zhou
  */
-public interface RepositoryModel<T> extends StagedGroupedModel, Serializable {
+public class AsyncInvokeThreadLocal {
 
-	public Map<String, Serializable> getAttributes();
+	public static boolean isEnabled() {
+		return _enabled.get();
+	}
 
-	public Object getModel();
+	public static void setEnabled(boolean enabled) {
+		_enabled.set(enabled);
+	}
 
-	public long getPrimaryKey();
-
-	public boolean isEscapedModel();
-
-	public T toEscapedModel();
-
-	public T toUnescapedModel();
+	private static ThreadLocal<Boolean> _enabled =
+		new AutoResetThreadLocal<Boolean>(
+			AsyncInvokeThreadLocal.class + "._enabled", true);
 
 }
