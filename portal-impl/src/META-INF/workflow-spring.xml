@@ -79,6 +79,14 @@
 			</bean>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.workflow.comparator.WorkflowComparatorFactoryProxyBean" class="com.liferay.portal.workflow.comparator.WorkflowComparatorFactoryProxyBean">
+		<property name="singleDestinationSynchronousMessageSender">
+			<bean class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationSynchronousMessageSender">
+				<property name="destinationName" value="liferay/workflow_comparator" />
+				<property name="synchronousMessageSender" ref="com.liferay.portal.kernel.messaging.sender.DirectSynchronousMessageSender" />
+			</bean>
+		</property>
+	</bean>
 
 	<!-- Util -->
 
@@ -100,9 +108,15 @@
 	<bean class="com.liferay.portal.kernel.workflow.WorkflowTaskManagerUtil">
 		<property name="workflowTaskManager" ref="com.liferay.portal.workflow.WorkflowTaskManagerProxyBean" />
 	</bean>
+	<bean class="com.liferay.portal.kernel.workflow.comparator.WorkflowComparatorFactoryUtil">
+		<property name="workflowComparatorFactory" ref="com.liferay.portal.workflow.comparator.WorkflowComparatorFactoryProxyBean" />
+	</bean>
 
 	<!-- Messaging -->
 
+	<bean id="destination.workflow_comparator" class="com.liferay.portal.kernel.messaging.SynchronousDestination">
+		<property name="name" value="liferay/workflow_comparator" />
+	</bean>
 	<bean id="destination.workflow_definition" class="com.liferay.portal.kernel.messaging.SynchronousDestination">
 		<property name="name" value="liferay/workflow_definition" />
 	</bean>
@@ -129,6 +143,7 @@
 	<bean id="messagingConfigurator.workflow" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator">
 		<property name="destinations">
 			<list>
+				<ref bean="destination.workflow_comparator" />
 				<ref bean="destination.workflow_definition" />
 				<ref bean="destination.workflow_engine" />
 				<ref bean="destination.workflow_instance" />

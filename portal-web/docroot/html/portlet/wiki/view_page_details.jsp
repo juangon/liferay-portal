@@ -52,10 +52,6 @@ PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "det
 	<liferay-util:param name="tabs1" value="details" />
 </liferay-util:include>
 
-<%
-int count = 0;
-%>
-
 <table class="table table-bordered table-hover table-striped page-info">
 <tr>
 	<th class="table-header">
@@ -170,7 +166,7 @@ int count = 0;
 	</tr>
 </c:if>
 
-<c:if test="<%= (WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.SUBSCRIBE) || WikiNodePermission.contains(permissionChecker, node, ActionKeys.SUBSCRIBE)) && (WikiUtil.getEmailPageAddedEnabled(preferences) || WikiUtil.getEmailPageUpdatedEnabled(preferences)) %>">
+<c:if test="<%= (WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.SUBSCRIBE) || WikiNodePermission.contains(permissionChecker, node, ActionKeys.SUBSCRIBE)) && (WikiUtil.getEmailPageAddedEnabled(portletPreferences) || WikiUtil.getEmailPageUpdatedEnabled(portletPreferences)) %>">
 	<tr>
 		<th class="table-header">
 			<liferay-ui:message key="email-subscription" />

@@ -81,11 +81,13 @@ import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
 import com.liferay.portlet.asset.service.persistence.AssetCategoryUtil;
 import com.liferay.portlet.asset.service.persistence.AssetVocabularyUtil;
 import com.liferay.portlet.assetpublisher.util.AssetPublisher;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryType;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryTypeLocalServiceUtil;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil;
 import com.liferay.portlet.expando.model.ExpandoColumn;
+import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBDiscussionLocalServiceUtil;
@@ -289,31 +291,76 @@ public class PortletExporter {
 
 		boolean exportPermissions = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PERMISSIONS);
-		boolean exportPortletArchivedSetups = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.PORTLET_ARCHIVED_SETUPS);
+		boolean exportPortletConfiguration = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.PORTLET_CONFIGURATION);
+		boolean exportPortletConfigurationAll = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.PORTLET_CONFIGURATION_ALL);
+		boolean exportPortletData = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.PORTLET_DATA);
+		boolean exportPortletDataAll = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.PORTLET_DATA_ALL);
 
-		boolean exportPortletData = false;
+		String rootPortletId = PortletConstants.getRootPortletId(portletId);
 
-		if (parameterMap.containsKey(
-				PortletDataHandlerKeys.PORTLET_DATA + "_" +
-					PortletConstants.getRootPortletId(portletId))) {
+		if (exportPortletDataAll) {
+			exportPortletData = true;
+		}
+		else if (parameterMap.containsKey(
+					PortletDataHandlerKeys.PORTLET_DATA + "_" +
+						rootPortletId)) {
 
 			exportPortletData = MapUtil.getBoolean(
 				parameterMap,
-				PortletDataHandlerKeys.PORTLET_DATA + "_" +
-					PortletConstants.getRootPortletId(portletId));
-		}
-		else {
-			exportPortletData = MapUtil.getBoolean(
-				parameterMap, PortletDataHandlerKeys.PORTLET_DATA);
+				PortletDataHandlerKeys.PORTLET_DATA + "_" + rootPortletId);
 		}
 
-		boolean exportPortletDataAll = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.PORTLET_DATA_ALL);
-		boolean exportPortletSetup = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.PORTLET_SETUP);
-		boolean exportPortletUserPreferences = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.PORTLET_USER_PREFERENCES);
+		boolean exportPortletArchivedSetups = exportPortletConfiguration;
+		boolean exportPortletSetup = exportPortletConfiguration;
+		boolean exportPortletUserPreferences = exportPortletConfiguration;
+
+		if (exportPortletConfigurationAll) {
+			exportPortletArchivedSetups =
+				MapUtil.getBoolean(
+					parameterMap,
+					PortletDataHandlerKeys.PORTLET_ARCHIVED_SETUPS_ALL);
+			exportPortletSetup =
+				MapUtil.getBoolean(
+					parameterMap, PortletDataHandlerKeys.PORTLET_SETUP_ALL);
+			exportPortletUserPreferences =
+				MapUtil.getBoolean(
+					parameterMap,
+					PortletDataHandlerKeys.PORTLET_USER_PREFERENCES_ALL);
+		}
+		else if (parameterMap.containsKey(
+					PortletDataHandlerKeys.PORTLET_CONFIGURATION + "_" +
+						rootPortletId)) {
+
+			exportPortletConfiguration =
+				exportPortletConfiguration &&
+				MapUtil.getBoolean(
+					parameterMap,
+					PortletDataHandlerKeys.PORTLET_CONFIGURATION +
+						StringPool.UNDERLINE + rootPortletId);
+
+			exportPortletArchivedSetups =
+				exportPortletConfiguration &&
+				MapUtil.getBoolean(
+					parameterMap,
+					PortletDataHandlerKeys.PORTLET_ARCHIVED_SETUPS +
+						StringPool.UNDERLINE + rootPortletId);
+			exportPortletSetup =
+				exportPortletConfiguration &&
+				MapUtil.getBoolean(
+					parameterMap,
+					PortletDataHandlerKeys.PORTLET_SETUP +
+						StringPool.UNDERLINE + rootPortletId);
+			exportPortletUserPreferences =
+				exportPortletConfiguration &&
+				MapUtil.getBoolean(
+					parameterMap,
+					PortletDataHandlerKeys.PORTLET_USER_PREFERENCES +
+						StringPool.UNDERLINE + rootPortletId);
+		}
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Export permissions " + exportPermissions);
@@ -322,14 +369,11 @@ public class PortletExporter {
 					exportPortletArchivedSetups);
 			_log.debug("Export portlet data " + exportPortletData);
 			_log.debug("Export all portlet data " + exportPortletDataAll);
-			_log.debug("Export portlet setup " + exportPortletSetup);
+			_log.debug(
+				"Export portlet configuration " + exportPortletConfiguration);
 			_log.debug(
 				"Export portlet user preferences " +
 					exportPortletUserPreferences);
-		}
-
-		if (exportPortletDataAll) {
-			exportPortletData = true;
 		}
 
 		StopWatch stopWatch = null;
@@ -1574,6 +1618,15 @@ public class PortletExporter {
 		javax.portlet.PortletPreferences jxPreferences =
 			PortletPreferencesFactoryUtil.fromDefaultXML(xml);
 
+		String anyAssetTypeClassName = StringPool.BLANK;
+
+		long anyAssetType = GetterUtil.getLong(
+			jxPreferences.getValue("anyAssetType", null));
+
+		if (anyAssetType > 0) {
+			anyAssetTypeClassName = PortalUtil.getClassName(anyAssetType);
+		}
+
 		Enumeration<String> enu = jxPreferences.getNames();
 
 		while (enu.hasMoreElements()) {
@@ -1587,6 +1640,9 @@ public class PortletExporter {
 			}
 			else if (name.equals(
 						"anyClassTypeDLFileEntryAssetRendererFactory") ||
+					 (name.equals("classTypeIds") &&
+					  anyAssetTypeClassName.equals(
+						  DLFileEntry.class.getName())) ||
 					 name.equals(
 						"classTypeIdsDLFileEntryAssetRendererFactory")) {
 
@@ -1595,9 +1651,11 @@ public class PortletExporter {
 			}
 			else if (name.equals(
 						"anyClassTypeJournalArticleAssetRendererFactory") ||
+					 (name.equals("classTypeIds") &&
+					  anyAssetTypeClassName.equals(
+						  JournalArticle.class.getName())) ||
 					 name.equals(
-						"classTypeIdsJournalArticleAssetRendererFactory") ||
-					 name.equals("classTypeIds")) {
+						"classTypeIdsJournalArticleAssetRendererFactory")) {
 
 				updatePreferencesClassPKs(
 					jxPreferences, name, DDMStructure.class.getName());

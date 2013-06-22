@@ -133,8 +133,9 @@ public class EditServerAction extends PortletAction {
 
 	@Override
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
@@ -152,7 +153,7 @@ public class EditServerAction extends PortletAction {
 			return;
 		}
 
-		PortletPreferences preferences = PrefsPropsUtil.getPreferences();
+		PortletPreferences portletPreferences = PrefsPropsUtil.getPreferences();
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
@@ -208,19 +209,19 @@ public class EditServerAction extends PortletAction {
 			threadDump();
 		}
 		else if (cmd.equals("updateCaptcha")) {
-			updateCaptcha(actionRequest, preferences);
+			updateCaptcha(actionRequest, portletPreferences);
 		}
 		else if (cmd.equals("updateExternalServices")) {
-			updateExternalServices(actionRequest, preferences);
+			updateExternalServices(actionRequest, portletPreferences);
 		}
 		else if (cmd.equals("updateFileUploads")) {
-			updateFileUploads(actionRequest, preferences);
+			updateFileUploads(actionRequest, portletPreferences);
 		}
 		else if (cmd.equals("updateLogLevels")) {
 			updateLogLevels(actionRequest);
 		}
 		else if (cmd.equals("updateMail")) {
-			updateMail(actionRequest, preferences);
+			updateMail(actionRequest, portletPreferences);
 		}
 		else if (cmd.equals("verifyMembershipPolicies")) {
 			verifyMembershipPolicies();
@@ -613,7 +614,7 @@ public class EditServerAction extends PortletAction {
 	}
 
 	protected void updateCaptcha(
-			ActionRequest actionRequest, PortletPreferences preferences)
+			ActionRequest actionRequest, PortletPreferences portletPreferences)
 		throws Exception {
 
 		boolean reCaptchaEnabled = ParamUtil.getBoolean(
@@ -635,16 +636,16 @@ public class EditServerAction extends PortletAction {
 		validateCaptcha(actionRequest);
 
 		if (SessionErrors.isEmpty(actionRequest)) {
-			preferences.setValue(
+			portletPreferences.setValue(
 				PropsKeys.CAPTCHA_ENGINE_IMPL, captcha.getClass().getName());
-			preferences.setValue(
+			portletPreferences.setValue(
 				PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_KEY_PRIVATE,
 				reCaptchaPrivateKey);
-			preferences.setValue(
+			portletPreferences.setValue(
 				PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_KEY_PUBLIC,
 				reCaptchaPublicKey);
 
-			preferences.store();
+			portletPreferences.store();
 
 			CaptchaImpl captchaImpl = (CaptchaImpl)CaptchaUtil.getCaptcha();
 
@@ -653,7 +654,7 @@ public class EditServerAction extends PortletAction {
 	}
 
 	protected void updateExternalServices(
-			ActionRequest actionRequest, PortletPreferences preferences)
+			ActionRequest actionRequest, PortletPreferences portletPreferences)
 		throws Exception {
 
 		boolean imageMagickEnabled = ParamUtil.getBoolean(
@@ -667,16 +668,16 @@ public class EditServerAction extends PortletAction {
 		boolean xugglerEnabled = ParamUtil.getBoolean(
 			actionRequest, "xugglerEnabled");
 
-		preferences.setValue(
+		portletPreferences.setValue(
 			PropsKeys.IMAGEMAGICK_ENABLED, String.valueOf(imageMagickEnabled));
-		preferences.setValue(
+		portletPreferences.setValue(
 			PropsKeys.IMAGEMAGICK_GLOBAL_SEARCH_PATH, imageMagickPath);
-		preferences.setValue(
+		portletPreferences.setValue(
 			PropsKeys.OPENOFFICE_SERVER_ENABLED,
 			String.valueOf(openOfficeEnabled));
-		preferences.setValue(
+		portletPreferences.setValue(
 			PropsKeys.OPENOFFICE_SERVER_PORT, String.valueOf(openOfficePort));
-		preferences.setValue(
+		portletPreferences.setValue(
 			PropsKeys.XUGGLER_ENABLED, String.valueOf(xugglerEnabled));
 
 		Enumeration<String> enu = actionRequest.getParameterNames();
@@ -688,19 +689,19 @@ public class EditServerAction extends PortletAction {
 				String key = name.substring(16, name.length()).toLowerCase();
 				String value = ParamUtil.getString(actionRequest, name);
 
-				preferences.setValue(
+				portletPreferences.setValue(
 					PropsKeys.IMAGEMAGICK_RESOURCE_LIMIT + key, value);
 			}
 		}
 
-		preferences.store();
+		portletPreferences.store();
 
 		GhostscriptUtil.reset();
 		ImageMagickUtil.reset();
 	}
 
 	protected void updateFileUploads(
-			ActionRequest actionRequest, PortletPreferences preferences)
+			ActionRequest actionRequest, PortletPreferences portletPreferences)
 		throws Exception {
 
 		long dlFileEntryThumbnailMaxHeight = ParamUtil.getLong(
@@ -735,45 +736,46 @@ public class EditServerAction extends PortletAction {
 		long usersImageMaxSize = ParamUtil.getLong(
 			actionRequest, "usersImageMaxSize");
 
-		preferences.setValue(
+		portletPreferences.setValue(
 			PropsKeys.DL_FILE_ENTRY_THUMBNAIL_MAX_HEIGHT,
 			String.valueOf(dlFileEntryThumbnailMaxHeight));
-		preferences.setValue(
+		portletPreferences.setValue(
 			PropsKeys.DL_FILE_ENTRY_THUMBNAIL_MAX_WIDTH,
 			String.valueOf(dlFileEntryThumbnailMaxWidth));
-		preferences.setValue(PropsKeys.DL_FILE_EXTENSIONS, dlFileExtensions);
-		preferences.setValue(
+		portletPreferences.setValue(
+			PropsKeys.DL_FILE_EXTENSIONS, dlFileExtensions);
+		portletPreferences.setValue(
 			PropsKeys.DL_FILE_MAX_SIZE, String.valueOf(dlFileMaxSize));
-		preferences.setValue(
+		portletPreferences.setValue(
 			PropsKeys.JOURNAL_IMAGE_EXTENSIONS, journalImageExtensions);
-		preferences.setValue(
+		portletPreferences.setValue(
 			PropsKeys.JOURNAL_IMAGE_SMALL_MAX_SIZE,
 			String.valueOf(journalImageSmallMaxSize));
-		preferences.setValue(
+		portletPreferences.setValue(
 			PropsKeys.SHOPPING_IMAGE_EXTENSIONS, shoppingImageExtensions);
-		preferences.setValue(
+		portletPreferences.setValue(
 			PropsKeys.SHOPPING_IMAGE_LARGE_MAX_SIZE,
 			String.valueOf(shoppingImageLargeMaxSize));
-		preferences.setValue(
+		portletPreferences.setValue(
 			PropsKeys.SHOPPING_IMAGE_MEDIUM_MAX_SIZE,
 			String.valueOf(shoppingImageMediumMaxSize));
-		preferences.setValue(
+		portletPreferences.setValue(
 			PropsKeys.SHOPPING_IMAGE_SMALL_MAX_SIZE,
 			String.valueOf(shoppingImageSmallMaxSize));
-		preferences.setValue(
+		portletPreferences.setValue(
 			PropsKeys.SC_IMAGE_MAX_SIZE, String.valueOf(scImageMaxSize));
-		preferences.setValue(
+		portletPreferences.setValue(
 			PropsKeys.SC_IMAGE_THUMBNAIL_MAX_HEIGHT,
 			String.valueOf(scImageThumbnailMaxHeight));
-		preferences.setValue(
+		portletPreferences.setValue(
 			PropsKeys.SC_IMAGE_THUMBNAIL_MAX_WIDTH,
 			String.valueOf(scImageThumbnailMaxWidth));
-		preferences.setValue(
+		portletPreferences.setValue(
 			PropsKeys.UPLOAD_SERVLET_REQUEST_IMPL_MAX_SIZE,
 			String.valueOf(uploadServletRequestImplMaxSize));
 
 		if (Validator.isNotNull(uploadServletRequestImplTempDir)) {
-			preferences.setValue(
+			portletPreferences.setValue(
 				PropsKeys.UPLOAD_SERVLET_REQUEST_IMPL_TEMP_DIR,
 				uploadServletRequestImplTempDir);
 
@@ -781,10 +783,10 @@ public class EditServerAction extends PortletAction {
 				new File(uploadServletRequestImplTempDir));
 		}
 
-		preferences.setValue(
+		portletPreferences.setValue(
 			PropsKeys.USERS_IMAGE_MAX_SIZE, String.valueOf(usersImageMaxSize));
 
-		preferences.store();
+		portletPreferences.store();
 	}
 
 	protected void updateLogLevels(ActionRequest actionRequest)
@@ -807,7 +809,7 @@ public class EditServerAction extends PortletAction {
 	}
 
 	protected void updateMail(
-			ActionRequest actionRequest, PortletPreferences preferences)
+			ActionRequest actionRequest, PortletPreferences portletPreferences)
 		throws Exception {
 
 		String advancedProperties = ParamUtil.getString(
@@ -837,28 +839,32 @@ public class EditServerAction extends PortletAction {
 			transportProtocol = Account.PROTOCOL_SMTPS;
 		}
 
-		preferences.setValue(PropsKeys.MAIL_SESSION_MAIL, "true");
-		preferences.setValue(
+		portletPreferences.setValue(PropsKeys.MAIL_SESSION_MAIL, "true");
+		portletPreferences.setValue(
 			PropsKeys.MAIL_SESSION_MAIL_ADVANCED_PROPERTIES,
 			advancedProperties);
-		preferences.setValue(PropsKeys.MAIL_SESSION_MAIL_POP3_HOST, pop3Host);
-		preferences.setValue(
+		portletPreferences.setValue(
+			PropsKeys.MAIL_SESSION_MAIL_POP3_HOST, pop3Host);
+		portletPreferences.setValue(
 			PropsKeys.MAIL_SESSION_MAIL_POP3_PASSWORD, pop3Password);
-		preferences.setValue(
+		portletPreferences.setValue(
 			PropsKeys.MAIL_SESSION_MAIL_POP3_PORT, String.valueOf(pop3Port));
-		preferences.setValue(PropsKeys.MAIL_SESSION_MAIL_POP3_USER, pop3User);
-		preferences.setValue(PropsKeys.MAIL_SESSION_MAIL_SMTP_HOST, smtpHost);
-		preferences.setValue(
+		portletPreferences.setValue(
+			PropsKeys.MAIL_SESSION_MAIL_POP3_USER, pop3User);
+		portletPreferences.setValue(
+			PropsKeys.MAIL_SESSION_MAIL_SMTP_HOST, smtpHost);
+		portletPreferences.setValue(
 			PropsKeys.MAIL_SESSION_MAIL_SMTP_PASSWORD, smtpPassword);
-		preferences.setValue(
+		portletPreferences.setValue(
 			PropsKeys.MAIL_SESSION_MAIL_SMTP_PORT, String.valueOf(smtpPort));
-		preferences.setValue(PropsKeys.MAIL_SESSION_MAIL_SMTP_USER, smtpUser);
-		preferences.setValue(
+		portletPreferences.setValue(
+			PropsKeys.MAIL_SESSION_MAIL_SMTP_USER, smtpUser);
+		portletPreferences.setValue(
 			PropsKeys.MAIL_SESSION_MAIL_STORE_PROTOCOL, storeProtocol);
-		preferences.setValue(
+		portletPreferences.setValue(
 			PropsKeys.MAIL_SESSION_MAIL_TRANSPORT_PROTOCOL, transportProtocol);
 
-		preferences.store();
+		portletPreferences.store();
 
 		MailServiceUtil.clearSession();
 	}

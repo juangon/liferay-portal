@@ -38,8 +38,8 @@ public class SaveAction extends JSONAction {
 
 	@Override
 	public String getJSON(
-			ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response)
+			ActionMapping actionMapping, ActionForm actionForm,
+			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
@@ -51,21 +51,21 @@ public class SaveAction extends JSONAction {
 			themeDisplay.getPermissionChecker(), themeDisplay.getLayout(),
 			portletId, ActionKeys.CONFIGURATION);
 
-		PortletPreferences preferences =
+		PortletPreferences portletPreferences =
 			PortletPreferencesFactoryUtil.getPortletSetup(request, portletId);
 
 		String color = ParamUtil.getString(request, "color");
 		String data = ParamUtil.getString(request, "data");
 
 		if (Validator.isNotNull(color)) {
-			preferences.setValue("color", color);
+			portletPreferences.setValue("color", color);
 		}
 
 		if (Validator.isNotNull(data)) {
-			preferences.setValue("data", data);
+			portletPreferences.setValue("data", data);
 		}
 
-		preferences.store();
+		portletPreferences.store();
 
 		return null;
 	}

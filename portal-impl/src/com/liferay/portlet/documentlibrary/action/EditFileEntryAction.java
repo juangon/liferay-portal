@@ -119,8 +119,9 @@ public class EditFileEntryAction extends PortletAction {
 
 	@Override
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
@@ -248,8 +249,9 @@ public class EditFileEntryAction extends PortletAction {
 
 	@Override
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
 		try {
@@ -263,7 +265,8 @@ public class EditFileEntryAction extends PortletAction {
 
 				SessionErrors.add(renderRequest, e.getClass());
 
-				return mapping.findForward("portlet.document_library.error");
+				return actionMapping.findForward(
+					"portlet.document_library.error");
 			}
 			else {
 				throw e;
@@ -272,13 +275,14 @@ public class EditFileEntryAction extends PortletAction {
 
 		String forward = "portlet.document_library.edit_file_entry";
 
-		return mapping.findForward(getForward(renderRequest, forward));
+		return actionMapping.findForward(getForward(renderRequest, forward));
 	}
 
 	@Override
 	public void serveResource(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ResourceRequest resourceRequest,
+			ResourceResponse resourceResponse)
 		throws Exception {
 
 		PortletContext portletContext = portletConfig.getPortletContext();
@@ -648,13 +652,13 @@ public class EditFileEntryAction extends PortletAction {
 			PortletResponse portletResponse)
 		throws PortalException, SystemException {
 
-		PortletPreferences preferences = portletRequest.getPreferences();
+		PortletPreferences portletPreferences = portletRequest.getPreferences();
 
 		String portletResource = ParamUtil.getString(
 			portletRequest, "portletResource");
 
 		if (Validator.isNotNull(portletResource)) {
-			preferences = PortletPreferencesFactoryUtil.getPortletSetup(
+			portletPreferences = PortletPreferencesFactoryUtil.getPortletSetup(
 				portletRequest, portletResource);
 		}
 
@@ -664,7 +668,7 @@ public class EditFileEntryAction extends PortletAction {
 			Set<String> extensions = new HashSet<String>();
 
 			String[] mimeTypes = DLUtil.getMediaGalleryMimeTypes(
-				preferences, portletRequest);
+				portletPreferences, portletRequest);
 
 			for (String mimeType : mimeTypes) {
 				extensions.addAll(MimeTypesUtil.getExtensions(mimeType));

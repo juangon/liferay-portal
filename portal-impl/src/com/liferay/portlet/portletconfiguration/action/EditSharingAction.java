@@ -19,13 +19,10 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -41,18 +38,19 @@ import org.apache.struts.action.ActionMapping;
 /**
  * @author Jorge Ferrer
  */
-public class EditSharingAction extends EditConfigurationAction {
+public class EditSharingAction extends PortletAction {
 
 	@Override
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
 		Portlet portlet = null;
 
 		try {
-			portlet = getPortlet(actionRequest);
+			portlet = ActionUtil.getPortlet(actionRequest);
 		}
 		catch (PrincipalException pe) {
 			SessionErrors.add(
@@ -61,34 +59,31 @@ public class EditSharingAction extends EditConfigurationAction {
 			setForward(actionRequest, "portlet.portlet_configuration.error");
 		}
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
+		PortletPreferences portletPreferences =
+			ActionUtil.getLayoutPortletSetup(actionRequest, portlet);
 
-		Layout layout = themeDisplay.getLayout();
-
-		PortletPreferences preferences =
-			PortletPreferencesFactoryUtil.getLayoutPortletSetup(
-				layout, portlet.getPortletId());
+		actionRequest = ActionUtil.getWrappedActionRequest(
+			actionRequest, portletPreferences);
 
 		String tabs2 = ParamUtil.getString(actionRequest, "tabs2");
 
 		if (tabs2.equals("any-website")) {
-			updateAnyWebsite(actionRequest, preferences);
+			updateAnyWebsite(actionRequest, portletPreferences);
 		}
 		else if (tabs2.equals("facebook")) {
-			updateFacebook(actionRequest, preferences);
+			updateFacebook(actionRequest, portletPreferences);
 		}
 		else if (tabs2.equals("friends")) {
-			updateFriends(actionRequest, preferences);
+			updateFriends(actionRequest, portletPreferences);
 		}
 		else if (tabs2.equals("opensocial-gadget")) {
-			updateGoogleGadget(actionRequest, preferences);
+			updateGoogleGadget(actionRequest, portletPreferences);
 		}
 		else if (tabs2.equals("netvibes")) {
-			updateNetvibes(actionRequest, preferences);
+			updateNetvibes(actionRequest, portletPreferences);
 		}
 
-		preferences.store();
+		portletPreferences.store();
 
 		if (!SessionErrors.isEmpty(actionRequest)) {
 			return;
@@ -121,42 +116,50 @@ public class EditSharingAction extends EditConfigurationAction {
 
 	@Override
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
 		Portlet portlet = null;
 
 		try {
-			portlet = getPortlet(renderRequest);
+			portlet = ActionUtil.getPortlet(renderRequest);
 		}
 		catch (PrincipalException pe) {
 			SessionErrors.add(
 				renderRequest, PrincipalException.class.getName());
 
-			return mapping.findForward("portlet.portlet_configuration.error");
+			return actionMapping.findForward(
+				"portlet.portlet_configuration.error");
 		}
 
-		renderResponse.setTitle(getTitle(portlet, renderRequest));
+		PortletPreferences portletPreferences =
+			ActionUtil.getLayoutPortletSetup(renderRequest, portlet);
 
-		return mapping.findForward(
+		renderRequest = ActionUtil.getWrappedRenderRequest(
+			renderRequest, portletPreferences);
+
+		renderResponse.setTitle(ActionUtil.getTitle(portlet, renderRequest));
+
+		return actionMapping.findForward(
 			getForward(
 				renderRequest, "portlet.portlet_configuration.edit_sharing"));
 	}
 
 	protected void updateAnyWebsite(
-			ActionRequest actionRequest, PortletPreferences preferences)
+			ActionRequest actionRequest, PortletPreferences portletPreferences)
 		throws Exception {
 
 		boolean widgetShowAddAppLink = ParamUtil.getBoolean(
 			actionRequest, "widgetShowAddAppLink");
 
-		preferences.setValue(
+		portletPreferences.setValue(
 			"lfrWidgetShowAddAppLink", String.valueOf(widgetShowAddAppLink));
 	}
 
 	protected void updateFacebook(
-			ActionRequest actionRequest, PortletPreferences preferences)
+			ActionRequest actionRequest, PortletPreferences portletPreferences)
 		throws Exception {
 
 		String facebookAPIKey = ParamUtil.getString(
@@ -166,44 +169,45 @@ public class EditSharingAction extends EditConfigurationAction {
 		boolean facebookShowAddAppLink = ParamUtil.getBoolean(
 			actionRequest, "facebookShowAddAppLink");
 
-		preferences.setValue("lfrFacebookApiKey", facebookAPIKey);
-		preferences.setValue("lfrFacebookCanvasPageUrl", facebookCanvasPageURL);
-		preferences.setValue(
+		portletPreferences.setValue("lfrFacebookApiKey", facebookAPIKey);
+		portletPreferences.setValue(
+			"lfrFacebookCanvasPageUrl", facebookCanvasPageURL);
+		portletPreferences.setValue(
 			"lfrFacebookShowAddAppLink",
 			String.valueOf(facebookShowAddAppLink));
 	}
 
 	protected void updateFriends(
-			ActionRequest actionRequest, PortletPreferences preferences)
+			ActionRequest actionRequest, PortletPreferences portletPreferences)
 		throws Exception {
 
 		boolean appShowShareWithFriendsLink = ParamUtil.getBoolean(
 			actionRequest, "appShowShareWithFriendsLink");
 
-		preferences.setValue(
+		portletPreferences.setValue(
 			"lfrAppShowShareWithFriendsLink",
 			String.valueOf(appShowShareWithFriendsLink));
 	}
 
 	protected void updateGoogleGadget(
-			ActionRequest actionRequest, PortletPreferences preferences)
+			ActionRequest actionRequest, PortletPreferences portletPreferences)
 		throws Exception {
 
 		boolean iGoogleShowAddAppLink = ParamUtil.getBoolean(
 			actionRequest, "iGoogleShowAddAppLink");
 
-		preferences.setValue(
+		portletPreferences.setValue(
 			"lfrIgoogleShowAddAppLink", String.valueOf(iGoogleShowAddAppLink));
 	}
 
 	protected void updateNetvibes(
-			ActionRequest actionRequest, PortletPreferences preferences)
+			ActionRequest actionRequest, PortletPreferences portletPreferences)
 		throws Exception {
 
 		boolean netvibesShowAddAppLink = ParamUtil.getBoolean(
 			actionRequest, "netvibesShowAddAppLink");
 
-		preferences.setValue(
+		portletPreferences.setValue(
 			"lfrNetvibesShowAddAppLink",
 			String.valueOf(netvibesShowAddAppLink));
 	}

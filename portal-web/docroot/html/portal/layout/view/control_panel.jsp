@@ -72,8 +72,6 @@ if (ppid.equals(PortletKeys.PLUGIN_INSTALLER)) {
 
 String category = PortalUtil.getControlPanelCategory(ppid, themeDisplay);
 
-List<Layout> scopeLayouts = new ArrayList<Layout>();
-
 Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), ppid);
 
 request.setAttribute("control_panel.jsp-ppid", ppid);
@@ -114,12 +112,12 @@ request.setAttribute("control_panel.jsp-ppid", ppid);
 			panelCategory += " panel-manage-frontpage";
 		}
 
-		Layout scopeLayout = null;
-		Group curGroup = themeDisplay.getScopeGroup();
+		Group group = themeDisplay.getScopeGroup();
 
-		if (curGroup.isLayout()) {
-			scopeLayout = LayoutLocalServiceUtil.getLayout(curGroup.getClassPK());
-			curGroup = scopeLayout.getGroup();
+		if (group.isLayout()) {
+			Layout scopeLayout = LayoutLocalServiceUtil.getLayout(group.getClassPK());
+
+			group = scopeLayout.getGroup();
 		}
 		%>
 
@@ -161,25 +159,71 @@ request.setAttribute("control_panel.jsp-ppid", ppid);
 						<c:otherwise>
 							<aui:container cssClass="<%= panelCategory %>">
 								<aui:row>
-
-									<c:if test="<%= showControlPanelMenu %>">
-
-										<%
-										String backURL = HttpUtil.setParameter(themeDisplay.getURLControlPanel(), "p_p_id", PortletKeys.SITES_ADMIN);
-										%>
-
-										<a class="control-panel-back-link icon-circle-arrow-left" href="<%= backURL %>">&nbsp;</a>
-									</c:if>
-
-									<h1>
-										<%= curGroup.getDescriptiveName(themeDisplay.getLocale()) %>
-
+									<div id="controlPanelSiteHeading">
 										<c:if test="<%= showControlPanelMenu %>">
-											<c:if test="<%= !Validator.equals(controlPanelCategory, PortletCategoryKeys.CURRENT_SITE) %>">
+
+											<%
+											String backURL = HttpUtil.setParameter(themeDisplay.getURLControlPanel(), "p_p_id", PortletKeys.SITES_ADMIN);
+											%>
+
+											<a class="control-panel-back-link" href="<%= backURL %>" title="<liferay-ui:message key="back" />">
+												<i class="control-panel-back-icon icon-circle-arrow-left"></i>
+
+												<span class="control-panel-back-text">
+													<liferay-ui:message key="back" />
+												</span>
+											</a>
+										</c:if>
+
+										<h1 class="site-title">
+											<%= group.getDescriptiveName(themeDisplay.getLocale()) %>
+
+											<c:if test="<%= showControlPanelMenu && !Validator.equals(controlPanelCategory, PortletCategoryKeys.CURRENT_SITE) %>">
 												<%@ include file="/html/portal/layout/view/control_panel_site_selector.jspf" %>
 											</c:if>
+										</h1>
+
+										<c:if test="<%= group.hasPrivateLayouts() || group.hasPublicLayouts() %>">
+											<ul class="visit-links">
+												<li><liferay-ui:message key="visit" />:</li>
+
+												<%
+												PortletURL portletURL = new PortletURLImpl(request, PortletKeys.SITE_REDIRECTOR, plid, PortletRequest.ACTION_PHASE);
+
+												portletURL.setParameter("struts_action", "/my_sites/view");
+												portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
+												portletURL.setPortletMode(PortletMode.VIEW);
+												portletURL.setWindowState(WindowState.NORMAL);
+												%>
+
+												<c:choose>
+													<c:when test="<%= group.hasPrivateLayouts() && group.hasPublicLayouts() %>">
+
+														<%
+														portletURL.setParameter("privateLayout", Boolean.FALSE.toString());
+														%>
+
+														<li><a href="<%= portletURL.toString() %>"><liferay-ui:message key="public-pages" /></a></li>
+														<li class="divider"></li>
+
+														<%
+														portletURL.setParameter("privateLayout", Boolean.TRUE.toString());
+														%>
+
+														<li><a href="<%= portletURL.toString() %>"><liferay-ui:message key="private-pages" /></a></li>
+													</c:when>
+													<c:otherwise>
+
+														<%
+														portletURL.setParameter("privateLayout", group.hasPrivateLayouts() ? Boolean.TRUE.toString() : Boolean.FALSE.toString());
+														%>
+
+														<li><a href="<%= portletURL.toString() %>"><liferay-ui:message key="site-pages" /></a></li>
+													</c:otherwise>
+												</c:choose>
+											</ul>
 										</c:if>
-									</h1>
+									</div>
 								</aui:row>
 								<aui:row>
 

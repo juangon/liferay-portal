@@ -61,8 +61,9 @@ public class ViewAction extends PortletAction {
 
 	@Override
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
@@ -71,11 +72,11 @@ public class ViewAction extends PortletAction {
 		Portlet portlet = (Portlet)renderRequest.getAttribute(
 			WebKeys.RENDER_PORTLET);
 
-		PortletPreferences preferences =
+		PortletPreferences portletPreferences =
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				renderRequest, portlet.getPortletId());
 
-		String layoutTemplateId = preferences.getValue(
+		String layoutTemplateId = portletPreferences.getValue(
 			"layoutTemplateId",
 			PropsValues.NESTED_PORTLETS_LAYOUT_TEMPLATE_DEFAULT);
 
@@ -145,7 +146,7 @@ public class ViewAction extends PortletAction {
 			renderRequest.setAttribute(WebKeys.VM_VARIABLES, columnIds);
 		}
 
-		return mapping.findForward("portlet.nested_portlets.view");
+		return actionMapping.findForward("portlet.nested_portlets.view");
 	}
 
 	protected void checkLayout(Layout layout, Collection<String> columnIds) {

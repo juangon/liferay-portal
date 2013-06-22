@@ -6868,7 +6868,8 @@ public class PortalImpl implements Portal {
 		Collection<Portlet> portlets = getControlPanelPortlets(
 			companyId, PortletCategoryKeys.SITE_ADMINISTRATION);
 
-		List<Group> groups = GroupServiceUtil.getManageableSites(portlets, 1);
+		List<Group> groups = GroupServiceUtil.getManageableSiteGroups(
+			portlets, 1);
 
 		if (!groups.isEmpty()) {
 			Group group = groups.get(0);

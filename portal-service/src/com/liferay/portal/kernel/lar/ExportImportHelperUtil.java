@@ -60,6 +60,14 @@ public class ExportImportHelperUtil {
 		return getExportImportHelper().getExportableLayout(themeDisplay);
 	}
 
+	public static String getExportableRootPortletId(
+			long companyId, String portletId)
+		throws Exception {
+
+		return getExportImportHelper().getExportableRootPortletId(
+			companyId, portletId);
+	}
+
 	public static ExportImportHelper getExportImportHelper() {
 		PortalRuntimePermission.checkGetBeanProperty(
 			ExportImportHelperUtil.class);
@@ -85,10 +93,12 @@ public class ExportImportHelperUtil {
 			userId, groupId, parameterMap, fileEntry);
 	}
 
-	public static FileEntry getTempFileEntry(long groupId, long userId)
+	public static FileEntry getTempFileEntry(
+			long groupId, long userId, String folderName)
 		throws PortalException, SystemException {
 
-		return getExportImportHelper().getTempFileEntry(groupId, userId);
+		return getExportImportHelper().getTempFileEntry(
+			groupId, userId, folderName);
 	}
 
 	public static String replaceExportContentReferences(

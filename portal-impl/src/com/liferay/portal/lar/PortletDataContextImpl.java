@@ -461,7 +461,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 				((type == RoleConstants.TYPE_ORGANIZATION) &&
 				 group.isOrganization()) ||
 				((type == RoleConstants.TYPE_SITE) &&
-				 (group.isLayoutSetPrototype() || group.isSite()))) {
+				 (group.isLayout() || group.isLayoutSetPrototype() ||
+				  group.isSite()))) {
 
 				String name = role.getName();
 
@@ -599,9 +600,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 			String.valueOf(classedModel.getPrimaryKeyObj()));
 
 		if (missing) {
-			if (_missingReferences.contains(referenceKey) ||
-				_references.contains(referenceKey)) {
-
+			if (_references.contains(referenceKey)) {
 				return referenceElement;
 			}
 
@@ -627,10 +626,12 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 				XPath xPath = SAXReaderUtil.createXPath(sb.toString());
 
-				Element missingReferenceElement =
-					(Element)xPath.selectSingleNode(_missingReferencesElement);
+				List<Node> missingReferenceNodes = xPath.selectNodes(
+					_missingReferencesElement);
 
-				_missingReferencesElement.remove(missingReferenceElement);
+				for (Node missingReferenceNode : missingReferenceNodes) {
+					_missingReferencesElement.remove(missingReferenceNode);
+				}
 			}
 		}
 

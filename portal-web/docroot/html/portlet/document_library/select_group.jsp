@@ -30,18 +30,18 @@ String eventName = ParamUtil.getString(request, "eventName", liferayPortletRespo
 
 	portletURL.setParameter("struts_action", "/document_library/select_group");
 
-	List<Group> mySites = user.getMySites();
+	List<Group> mySiteGroups = user.getMySiteGroups();
 
 	if (PortalUtil.isCompanyControlPanelPortlet(portletId, themeDisplay)) {
-		mySites = ListUtil.copy(mySites);
+		mySiteGroups = ListUtil.copy(mySiteGroups);
 
-		mySites.add(0, GroupLocalServiceUtil.getGroup(themeDisplay.getCompanyGroupId()));
+		mySiteGroups.add(0, GroupLocalServiceUtil.getGroup(themeDisplay.getCompanyGroupId()));
 	}
 	%>
 
 	<liferay-ui:search-container
 		searchContainer="<%= new GroupSearch(renderRequest, portletURL) %>"
-		total="<%= mySites.size() %>"
+		total="<%= mySiteGroups.size() %>"
 	>
 		<liferay-ui:search-form
 			page="/html/portlet/users_admin/group_search.jsp"
@@ -51,7 +51,7 @@ String eventName = ParamUtil.getString(request, "eventName", liferayPortletRespo
 		<div class="separator"><!-- --></div>
 
 		<liferay-ui:search-container-results
-			results="<%= mySites %>"
+			results="<%= mySiteGroups %>"
 		/>
 
 		<liferay-ui:search-container-row

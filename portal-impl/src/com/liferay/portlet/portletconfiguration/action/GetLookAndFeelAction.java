@@ -40,8 +40,8 @@ public class GetLookAndFeelAction extends JSONAction {
 
 	@Override
 	public String getJSON(
-			ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response)
+			ActionMapping actionMapping, ActionForm actionForm,
+			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
@@ -62,7 +62,7 @@ public class GetLookAndFeelAction extends JSONAction {
 		}
 
 		PortletPreferences portletSetup =
-			PortletPreferencesFactoryUtil.getLayoutPortletSetup(
+			PortletPreferencesFactoryUtil.getStrictLayoutPortletSetup(
 				layout, portletId);
 
 		return PortletSetupUtil.cssToJSONString(portletSetup);

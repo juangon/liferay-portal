@@ -91,7 +91,7 @@ String toggleControlsState = GetterUtil.getString(SessionClicks.get(request, "li
 			</c:if>
 
 			<c:if test="<%= !controlPanelCategory.equals(PortletCategoryKeys.MY) && !controlPanelCategory.equals(PortletCategoryKeys.CURRENT_SITE) %>">
-				<aui:nav-item href="<%= themeDisplay.getURLControlPanel() %>" iconClass="icon-list" selected="<%= Validator.isNull(controlPanelCategory) %>" />
+				<aui:nav-item anchorId="controlPanelNavHomeLink" href="<%= themeDisplay.getURLControlPanel() %>" iconClass="icon-list" selected="<%= Validator.isNull(controlPanelCategory) %>" />
 
 				<%
 				String[] categories = PortletCategoryKeys.ALL;
@@ -116,7 +116,7 @@ String toggleControlsState = GetterUtil.getString(SessionClicks.get(request, "li
 				%>
 
 					<c:if test="<%= _hasPortlets(curCategory, themeDisplay) %>">
-						<aui:nav-item href="<%= urlControlPanelCategory %>" iconClass="<%= iconClass %>" label='<%= "category." + curCategory %>' selected="<%= controlPanelCategory.equals(curCategory) %>" />
+						<aui:nav-item anchorId='<%= "controlPanelNav" + curCategory + "Link" %>' href="<%= urlControlPanelCategory %>" iconClass="<%= iconClass %>" label='<%= "category." + curCategory %>' selected="<%= controlPanelCategory.equals(curCategory) %>" />
 					</c:if>
 
 				<%
@@ -127,20 +127,12 @@ String toggleControlsState = GetterUtil.getString(SessionClicks.get(request, "li
 		</c:if>
 
 		<c:if test="<%= !group.isControlPanel() && (!group.hasStagingGroup() || group.isStagingGroup()) && (GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.ADD_LAYOUT) || hasLayoutUpdatePermission || (layoutTypePortlet.isCustomizable() && layoutTypePortlet.isCustomizedView() && hasLayoutCustomizePermission)) %>">
-			<aui:nav-item anchorCssClass="add-link" dropdown="<%= true %>" iconClass="icon-plus" id="addContent" label="add">
-				<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_LAYOUT) && !group.isLayoutPrototype() %>">
-					<aui:nav-item anchorId="addPage" label="page" />
-				</c:if>
+			<portlet:renderURL var="addURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
+				<portlet:param name="struts_action" value="/dockbar/add_panel" />
+				<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
+			</portlet:renderURL>
 
-				<c:if test="<%= !themeDisplay.isStateMaximized() && layout.isTypePortlet() && !layout.isLayoutPrototypeLinkActive() %>">
-					<portlet:renderURL var="addContentURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
-						<portlet:param name="struts_action" value="/dockbar/add_panel" />
-						<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
-					</portlet:renderURL>
-
-					<aui:nav-item anchorId="addPanel" href="<%= addContentURL %>" label="content-and-applications" />
-				</c:if>
-			</aui:nav-item>
+			<aui:nav-item anchorId="addPanel" data-addURL="<%= addURL %>" href="javascript:;" iconClass="icon-plus" label="add" />
 		</c:if>
 
 		<c:if test="<%= !group.isControlPanel() && (themeDisplay.isShowLayoutTemplatesIcon() || themeDisplay.isShowPageSettingsIcon()) %>">

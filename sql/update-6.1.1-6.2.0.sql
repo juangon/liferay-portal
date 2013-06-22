@@ -344,6 +344,8 @@ update DLFolder set statusByUserId = userId;
 update DLFolder set statusByUserName = userName;
 update DLFolder set statusDate = modifiedDate;
 
+drop table DLSync;
+
 alter table EmailAddress add uuid_ VARCHAR(75) null;
 
 alter table ExpandoRow add modifiedDate DATE null;

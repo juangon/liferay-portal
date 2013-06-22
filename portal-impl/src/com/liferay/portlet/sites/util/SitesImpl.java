@@ -652,16 +652,19 @@ public class SitesImpl implements Sites {
 			PortletDataHandlerKeys.PERMISSIONS,
 			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
+			PortletDataHandlerKeys.PORTLET_CONFIGURATION,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.PORTLET_CONFIGURATION_ALL,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
 			PortletDataHandlerKeys.PORTLET_DATA,
 			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
 			PortletDataHandlerKeys.PORTLET_DATA_ALL,
 			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
-			PortletDataHandlerKeys.PORTLET_SETUP,
-			new String[] {Boolean.TRUE.toString()});
-		parameterMap.put(
-			PortletDataHandlerKeys.PORTLET_USER_PREFERENCES,
+			PortletDataHandlerKeys.PORTLET_SETUP_ALL,
 			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
 			PortletDataHandlerKeys.THEME,
@@ -740,6 +743,10 @@ public class SitesImpl implements Sites {
 	@Override
 	public List<Layout> getMergeFailFriendlyURLLayouts(LayoutSet layoutSet)
 		throws PortalException, SystemException {
+
+		if (layoutSet == null) {
+			return Collections.emptyList();
+		}
 
 		UnicodeProperties settingsProperties =
 			layoutSet.getSettingsProperties();
@@ -1704,10 +1711,10 @@ public class SitesImpl implements Sites {
 			PortletDataHandlerKeys.PERMISSIONS,
 			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
-			PortletDataHandlerKeys.PORTLET_ARCHIVED_SETUPS,
+			PortletDataHandlerKeys.PORTLET_CONFIGURATION,
 			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
-			PortletDataHandlerKeys.PORTLET_SETUP,
+			PortletDataHandlerKeys.PORTLET_CONFIGURATION_ALL,
 			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
 			PortletDataHandlerKeys.PORTLET_SETUP_ALL,

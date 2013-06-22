@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.lar.BasePortletDataHandler;
 import com.liferay.portal.kernel.lar.ManifestSummary;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
+import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.StagedModelDataHandlerUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.xml.Element;
@@ -94,18 +95,21 @@ public class JournalPortletDataHandler extends BasePortletDataHandler {
 		setDataLocalized(true);
 		setExportControls(
 			new PortletDataHandlerBoolean(
-				NAMESPACE, "web-content", true, false, null,
+				NAMESPACE, "web-content", true, false,
+				new PortletDataHandlerControl[] {
+					new PortletDataHandlerBoolean(
+						NAMESPACE, "referenced-content"),
+					new PortletDataHandlerBoolean(
+						NAMESPACE, "version-history",
+						PropsValues.JOURNAL_PUBLISH_VERSION_HISTORY_BY_DEFAULT)
+				},
 				JournalArticle.class.getName()),
 			new PortletDataHandlerBoolean(
 				NAMESPACE, "structures", true, false, null,
 				DDMStructure.class.getName(), JournalArticle.class.getName()),
 			new PortletDataHandlerBoolean(
 				NAMESPACE, "feeds", true, false, null,
-				JournalFeed.class.getName()),
-			new PortletDataHandlerBoolean(NAMESPACE, "embedded-assets"),
-			new PortletDataHandlerBoolean(
-				NAMESPACE, "version-history",
-				PropsValues.JOURNAL_PUBLISH_VERSION_HISTORY_BY_DEFAULT));
+				JournalFeed.class.getName()));
 		setPublishToLiveByDefault(
 			PropsValues.JOURNAL_PUBLISH_TO_LIVE_BY_DEFAULT);
 	}

@@ -16,12 +16,9 @@ package com.liferay.portlet.portletconfiguration.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.portal.struts.PortletAction;
 
 import java.util.Set;
 
@@ -39,18 +36,19 @@ import org.apache.struts.action.ActionMapping;
 /**
  * @author Brian Wing Shun Chan
  */
-public class EditSupportedClientsAction extends EditConfigurationAction {
+public class EditSupportedClientsAction extends PortletAction {
 
 	@Override
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
 		Portlet portlet = null;
 
 		try {
-			portlet = getPortlet(actionRequest);
+			portlet = ActionUtil.getPortlet(actionRequest);
 		}
 		catch (PrincipalException pe) {
 			SessionErrors.add(
@@ -59,6 +57,12 @@ public class EditSupportedClientsAction extends EditConfigurationAction {
 			setForward(actionRequest, "portlet.portlet_configuration.error");
 		}
 
+		PortletPreferences portletPreferences =
+			ActionUtil.getLayoutPortletSetup(actionRequest, portlet);
+
+		actionRequest = ActionUtil.getWrappedActionRequest(
+			actionRequest, portletPreferences);
+
 		updateSupportedClients(portlet, actionRequest);
 
 		sendRedirect(actionRequest, actionResponse);
@@ -66,25 +70,33 @@ public class EditSupportedClientsAction extends EditConfigurationAction {
 
 	@Override
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
 		Portlet portlet = null;
 
 		try {
-			portlet = getPortlet(renderRequest);
+			portlet = ActionUtil.getPortlet(renderRequest);
 		}
 		catch (PrincipalException pe) {
 			SessionErrors.add(
 				renderRequest, PrincipalException.class.getName());
 
-			return mapping.findForward("portlet.portlet_configuration.error");
+			return actionMapping.findForward(
+				"portlet.portlet_configuration.error");
 		}
 
-		renderResponse.setTitle(getTitle(portlet, renderRequest));
+		PortletPreferences portletPreferences =
+			ActionUtil.getLayoutPortletSetup(renderRequest, portlet);
 
-		return mapping.findForward(
+		renderRequest = ActionUtil.getWrappedRenderRequest(
+			renderRequest, portletPreferences);
+
+		renderResponse.setTitle(ActionUtil.getTitle(portlet, renderRequest));
+
+		return actionMapping.findForward(
 			getForward(
 				renderRequest,
 				"portlet.portlet_configuration.edit_supported_clients"));
@@ -94,14 +106,7 @@ public class EditSupportedClientsAction extends EditConfigurationAction {
 			Portlet portlet, ActionRequest actionRequest)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		Layout layout = themeDisplay.getLayout();
-
-		PortletPreferences portletSetup =
-			PortletPreferencesFactoryUtil.getLayoutPortletSetup(
-				layout, portlet.getPortletId());
+		PortletPreferences portletPreferences = actionRequest.getPreferences();
 
 		Set<String> allPortletModes = portlet.getAllPortletModes();
 
@@ -112,11 +117,11 @@ public class EditSupportedClientsAction extends EditConfigurationAction {
 			boolean mobileDevices = ParamUtil.getBoolean(
 				actionRequest, mobileDevicesParam);
 
-			portletSetup.setValue(
+			portletPreferences.setValue(
 				mobileDevicesParam, String.valueOf(mobileDevices));
 		}
 
-		portletSetup.store();
+		portletPreferences.store();
 	}
 
 }

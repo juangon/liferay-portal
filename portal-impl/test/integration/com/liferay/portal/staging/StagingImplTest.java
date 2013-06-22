@@ -119,28 +119,36 @@ public class StagingImplTest {
 		Map<String, String[]> parameters = StagingUtil.getStagingParameters();
 
 		parameters.put(
-			PortletDataHandlerKeys.PORTLET_DATA_ALL,
-			new String[] {String.valueOf(false)});
-
+			PortletDataHandlerKeys.CATEGORIES,
+			new String[] {String.valueOf(stageCategories)});
+		parameters.put(
+			PortletDataHandlerKeys.PORTLET_CONFIGURATION + "_" +
+				PortletKeys.JOURNAL,
+			new String[] {String.valueOf(stageJournal)});
+		parameters.put(
+			PortletDataHandlerKeys.PORTLET_CONFIGURATION_ALL,
+			new String[] {Boolean.FALSE.toString()});
 		parameters.put(
 			PortletDataHandlerKeys.PORTLET_DATA + "_" + PortletKeys.JOURNAL,
 			new String[] {String.valueOf(stageJournal)});
+		parameters.put(
+			PortletDataHandlerKeys.PORTLET_DATA_ALL,
+			new String[] {Boolean.FALSE.toString()});
+		parameters.put(
+			PortletDataHandlerKeys.PORTLET_SETUP + "_" + PortletKeys.JOURNAL,
+			new String[] {String.valueOf(stageJournal)});
 
-		parameters.put(PortletDataHandlerKeys.CATEGORIES, new String[] {
-			String.valueOf(stageCategories)});
+		serviceContext.setAttribute(
+			StagingConstants.STAGED_PORTLET + PortletDataHandlerKeys.CATEGORIES,
+				stageCategories);
+		serviceContext.setAttribute(
+			StagingConstants.STAGED_PORTLET + PortletKeys.JOURNAL,
+			stageJournal);
 
 		for (String parameterName : parameters.keySet()) {
 			serviceContext.setAttribute(
 				parameterName, parameters.get(parameterName)[0]);
 		}
-
-		serviceContext.setAttribute(
-			StagingConstants.STAGED_PORTLET + PortletKeys.JOURNAL,
-			stageJournal);
-
-		serviceContext.setAttribute(
-			StagingConstants.STAGED_PORTLET + PortletDataHandlerKeys.CATEGORIES,
-				stageCategories);
 
 		// Enable staging
 

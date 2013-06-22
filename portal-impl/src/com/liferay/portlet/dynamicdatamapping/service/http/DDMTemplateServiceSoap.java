@@ -524,6 +524,21 @@ public class DDMTemplateServiceSoap {
 		}
 	}
 
+	public static int getTemplatesByStructureClassNameIdCount(long groupId,
+		long structureClassNameId) throws RemoteException {
+		try {
+			int returnValue = DDMTemplateServiceUtil.getTemplatesByStructureClassNameIdCount(groupId,
+					structureClassNameId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	/**
 	* Returns an ordered range of all the templates matching the group, class
 	* name ID, class PK, type, and mode, and matching the keywords in the

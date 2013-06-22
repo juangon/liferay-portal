@@ -107,6 +107,14 @@ public interface WebKeys {
 
 	public static final String PARALLEL_RENDERING_TIMEOUT_ERROR = "PARALLEL_RENDERING_TIMEOUT_ERROR";
 
+	public static final String PLUGIN_LAYOUT_TEMPLATES = "PLUGIN_LAYOUT_TEMPLATES";
+
+	public static final String PLUGIN_PORTLETS = "PLUGIN_PORTLETS";
+
+	public static final String PLUGIN_REPOSITORY_REPORT = "PLUGIN_REPOSITORY_REPORT";
+
+	public static final String PLUGIN_THEMES = "PLUGIN_THEMES";
+
 	public static final String PORTAL_MESSAGES = "LIFERAY_SHARED_PORTAL_MESSAGES";
 
 	public static final String PORTLET_CONFIGURATOR_VISIBILITY = "PORTLET_CONFIGURATOR_VISIBILITY";

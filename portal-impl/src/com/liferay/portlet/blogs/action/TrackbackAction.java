@@ -62,8 +62,9 @@ public class TrackbackAction extends PortletAction {
 
 	@Override
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
 		try {
@@ -192,18 +193,18 @@ public class TrackbackAction extends PortletAction {
 	protected boolean isCommentsEnabled(ActionRequest actionRequest)
 		throws Exception {
 
-		PortletPreferences preferences = actionRequest.getPreferences();
+		PortletPreferences portletPreferences = actionRequest.getPreferences();
 
 		String portletResource = ParamUtil.getString(
 			actionRequest, "portletResource");
 
 		if (Validator.isNotNull(portletResource)) {
-			preferences = PortletPreferencesFactoryUtil.getPortletSetup(
+			portletPreferences = PortletPreferencesFactoryUtil.getPortletSetup(
 				actionRequest, portletResource);
 		}
 
 		return GetterUtil.getBoolean(
-			preferences.getValue("enableComments", null), true);
+			portletPreferences.getValue("enableComments", null), true);
 	}
 
 	protected void sendError(

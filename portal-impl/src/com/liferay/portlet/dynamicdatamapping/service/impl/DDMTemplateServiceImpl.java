@@ -490,6 +490,15 @@ public class DDMTemplateServiceImpl extends DDMTemplateServiceBaseImpl {
 			groupId, structureClassNameId, start, end, orderByComparator);
 	}
 
+	@Override
+	public int getTemplatesByStructureClassNameIdCount(
+			long groupId, long structureClassNameId)
+		throws SystemException {
+
+		return ddmTemplateFinder.filterCountByG_SC(
+			groupId, structureClassNameId);
+	}
+
 	/**
 	 * Returns an ordered range of all the templates matching the group, class
 	 * name ID, class PK, type, and mode, and matching the keywords in the
