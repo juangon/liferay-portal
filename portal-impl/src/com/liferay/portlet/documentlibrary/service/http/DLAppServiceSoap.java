@@ -584,23 +584,6 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.kernel.repository.model.FileEntrySoap[] getFileEntries(
-		long repositoryId, long folderId, java.lang.String[] mimeTypes)
-		throws RemoteException {
-		try {
-			java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> returnValue =
-				DLAppServiceUtil.getFileEntries(repositoryId, folderId,
-					mimeTypes);
-
-			return com.liferay.portal.kernel.repository.model.FileEntrySoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	/**
 	* Returns a range of all the file entries in the folder.
 	*
@@ -773,13 +756,12 @@ public class DLAppServiceSoap {
 	}
 
 	public static com.liferay.portal.kernel.repository.model.FileEntrySoap[] getFileEntries(
-		long repositoryId, long folderId, java.lang.String[] mimeTypes,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long repositoryId, long folderId, java.lang.String[] mimeTypes)
 		throws RemoteException {
 		try {
 			java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> returnValue =
 				DLAppServiceUtil.getFileEntries(repositoryId, folderId,
-					mimeTypes, start, end, obc);
+					mimeTypes);
 
 			return com.liferay.portal.kernel.repository.model.FileEntrySoap.toSoapModels(returnValue);
 		}
