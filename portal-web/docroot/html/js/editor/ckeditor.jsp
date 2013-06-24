@@ -49,6 +49,50 @@ Map<String, String> fileBrowserParamsMap = (Map<String, String>)request.getAttri
 String configParams = marshallParams(configParamsMap);
 String fileBrowserParams = marshallParams(fileBrowserParamsMap);
 
+String currentFolder = StringPool.SLASH;
+Group group = GroupLocalServiceUtil.getGroup(themeDisplay.getScopeGroupId());
+
+if (!group.isLayoutPrototype() && !group.isLayoutSetPrototype()) {
+	if (group.isLayout()) {
+		long parentGroupId = group.getParentGroupId();
+	
+		if (parentGroupId >0) {
+			group = GroupLocalServiceUtil.getGroup(parentGroupId);
+		}
+	}
+	
+	boolean setNameAttribute = false;
+	
+	boolean stagedDataPortlet = group.isStagedPortlet(portletId);
+	
+	if (group.hasStagingGroup()) {
+		Group stagingGroup = group.getStagingGroup();
+	
+		if ((stagingGroup.getGroupId() == themeDisplay.getScopeGroupId()) &&
+			group.isStagedPortlet(portletId) && !group.isStagedRemotely() &&
+			stagedDataPortlet) {
+	
+			currentFolder =
+				stagingGroup.getGroupId() + " - " +
+					HtmlUtil.escape(stagingGroup.getDescriptiveName());
+	
+			setNameAttribute = true;
+		}
+	}
+	
+	if (!setNameAttribute) {
+		currentFolder =
+			group.getGroupId() + " - " +
+				HtmlUtil.escape(group.getDescriptiveName());
+	}
+}
+
+StringBundler currentFolderParam = new StringBundler();
+currentFolderParam.append(StringPool.AMPERSAND);
+currentFolderParam.append("currentFolder");
+currentFolderParam.append(StringPool.EQUAL);
+currentFolderParam.append(HttpUtil.encodePath(StringPool.SLASH + currentFolder+ StringPool.SLASH)); 
+
 String contentsLanguageId = (String)request.getAttribute("liferay-ui:input-editor:contentsLanguageId");
 String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:cssClass"));
 String cssClasses = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:cssClasses"));
@@ -228,7 +272,7 @@ if (inlineEdit && (inlineEditSaveURL != null)) {
 			'<%= name %>',
 			{
 				customConfig: '<%= PortalUtil.getPathContext() %>/html/js/editor/ckeditor/<%= HtmlUtil.escapeJS(ckEditorConfigFileName) %>?p_l_id=<%= plid %>&p_p_id=<%= HttpUtil.encodeURL(portletId) %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>&doAsGroupId=<%= HttpUtil.encodeURL(String.valueOf(doAsGroupId)) %>&contentsLanguageId=<%= HttpUtil.encodeURL(Validator.isNotNull(contentsLanguageId) ? contentsLanguageId : LocaleUtil.toLanguageId(locale)) %>&cssPath=<%= HttpUtil.encodeURL(themeDisplay.getPathThemeCss()) %>&cssClasses=<%= HttpUtil.encodeURL(cssClasses) %>&imagesPath=<%= HttpUtil.encodeURL(themeDisplay.getPathThemeImages()) %>&languageId=<%= HttpUtil.encodeURL(LocaleUtil.toLanguageId(locale)) %>&resizable=<%= resizable %>&inlineEdit=<%= inlineEdit %><%= configParams %>',
-				filebrowserBrowseUrl: '<%= PortalUtil.getPathContext() %>/html/js/editor/ckeditor/editor/filemanager/browser/liferay/browser.html?Connector=<%= connectorURL %><%= fileBrowserParams %>',
+				filebrowserBrowseUrl: '<%= PortalUtil.getPathContext() %>/html/js/editor/ckeditor/editor/filemanager/browser/liferay/browser.html?Connector=<%= connectorURL %><%= fileBrowserParams %><%= currentFolderParam.toString() %>',
 				filebrowserUploadUrl: null,
 				toolbar: '<%= TextFormatter.format(HtmlUtil.escapeJS(toolbarSet), TextFormatter.M) %>'
 			}
