@@ -49,7 +49,7 @@ Map<String, String> fileBrowserParamsMap = (Map<String, String>)request.getAttri
 String configParams = marshallParams(configParamsMap);
 String fileBrowserParams = marshallParams(fileBrowserParamsMap);
 
-String currentFolder = StringPool.SLASH;
+String currentFolder = null;
 Group group = GroupLocalServiceUtil.getGroup(themeDisplay.getScopeGroupId());
 
 if (!group.isLayoutPrototype() && !group.isLayoutSetPrototype()) {
@@ -88,10 +88,13 @@ if (!group.isLayoutPrototype() && !group.isLayoutSetPrototype()) {
 }
 
 StringBundler currentFolderParam = new StringBundler();
-currentFolderParam.append(StringPool.AMPERSAND);
-currentFolderParam.append("currentFolder");
-currentFolderParam.append(StringPool.EQUAL);
-currentFolderParam.append(HttpUtil.encodePath(StringPool.SLASH + currentFolder+ StringPool.SLASH)); 
+
+if (Validator.isNotNull(currentFolder)){
+	currentFolderParam.append(StringPool.AMPERSAND);
+	currentFolderParam.append("currentFolder");
+	currentFolderParam.append(StringPool.EQUAL);
+	currentFolderParam.append(HttpUtil.encodePath(StringPool.SLASH + currentFolder+ StringPool.SLASH));	
+}
 
 String contentsLanguageId = (String)request.getAttribute("liferay-ui:input-editor:contentsLanguageId");
 String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:cssClass"));
