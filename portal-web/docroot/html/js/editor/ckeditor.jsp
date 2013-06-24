@@ -93,7 +93,7 @@ if (Validator.isNotNull(currentFolder)){
 	currentFolderParam.append(StringPool.AMPERSAND);
 	currentFolderParam.append("currentFolder");
 	currentFolderParam.append(StringPool.EQUAL);
-	currentFolderParam.append(HttpUtil.encodePath(StringPool.SLASH + currentFolder+ StringPool.SLASH));	
+	currentFolderParam.append(HttpUtil.encodeURL(StringPool.SLASH + currentFolder+ StringPool.SLASH, true));	
 }
 
 String contentsLanguageId = (String)request.getAttribute("liferay-ui:input-editor:contentsLanguageId");
