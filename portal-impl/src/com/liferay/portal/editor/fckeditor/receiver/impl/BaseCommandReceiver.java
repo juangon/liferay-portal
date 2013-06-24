@@ -14,6 +14,7 @@
 
 package com.liferay.portal.editor.fckeditor.receiver.impl;
 
+import com.liferay.portal.editor.fckeditor.FCKEditorUtil;
 import com.liferay.portal.editor.fckeditor.command.CommandArgument;
 import com.liferay.portal.editor.fckeditor.exception.FCKException;
 import com.liferay.portal.editor.fckeditor.receiver.CommandReceiver;
@@ -24,7 +25,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -353,30 +353,10 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 
 			foldersElement.appendChild(folderElement);
 
-			boolean setNameAttribute = false;
-
-			if (group.hasStagingGroup()) {
-				Group stagingGroup = group.getStagingGroup();
-
-				if ((stagingGroup.getGroupId() == scopeGroupId) &&
-					group.isStagedPortlet(portletId) &&
-					!group.isStagedRemotely() && isStagedData(group)) {
-
-					folderElement.setAttribute(
-						"name",
-						stagingGroup.getGroupId() + " - " +
-							HtmlUtil.escape(stagingGroup.getDescriptiveName()));
-
-					setNameAttribute = true;
-				}
-			}
-
-			if (!setNameAttribute) {
-				folderElement.setAttribute(
-					"name",
-					group.getGroupId() + " - " +
-						HtmlUtil.escape(group.getDescriptiveName()));
-			}
+			String name = FCKEditorUtil.getRootFolderName(
+				         group, scopeGroupId, portletId, isStagedData(group)); 
+			
+			folderElement.setAttribute("name", name);				        
 		}
 	}
 

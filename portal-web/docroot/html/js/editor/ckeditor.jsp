@@ -49,43 +49,8 @@ Map<String, String> fileBrowserParamsMap = (Map<String, String>)request.getAttri
 String configParams = marshallParams(configParamsMap);
 String fileBrowserParams = marshallParams(fileBrowserParamsMap);
 
-String currentFolder = null;
 Group group = GroupLocalServiceUtil.getGroup(themeDisplay.getScopeGroupId());
-
-if (!group.isLayoutPrototype() && !group.isLayoutSetPrototype()) {
-	if (group.isLayout()) {
-		long parentGroupId = group.getParentGroupId();
-	
-		if (parentGroupId >0) {
-			group = GroupLocalServiceUtil.getGroup(parentGroupId);
-		}
-	}
-	
-	boolean setNameAttribute = false;
-	
-	boolean stagedDataPortlet = group.isStagedPortlet(portletId);
-	
-	if (group.hasStagingGroup()) {
-		Group stagingGroup = group.getStagingGroup();
-	
-		if ((stagingGroup.getGroupId() == themeDisplay.getScopeGroupId()) &&
-			group.isStagedPortlet(portletId) && !group.isStagedRemotely() &&
-			stagedDataPortlet) {
-	
-			currentFolder =
-				stagingGroup.getGroupId() + " - " +
-					HtmlUtil.escape(stagingGroup.getDescriptiveName());
-	
-			setNameAttribute = true;
-		}
-	}
-	
-	if (!setNameAttribute) {
-		currentFolder =
-			group.getGroupId() + " - " +
-				HtmlUtil.escape(group.getDescriptiveName());
-	}
-}
+String currentFolder = FCKEditorUtil.getRootFolderName(group, themeDisplay.getScopeGroupId(), portletId);
 
 StringBundler currentFolderParam = new StringBundler();
 
