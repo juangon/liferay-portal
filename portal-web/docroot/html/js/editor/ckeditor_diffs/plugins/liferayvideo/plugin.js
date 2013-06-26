@@ -15,17 +15,57 @@
 	 * 
 	 */
 
-( function() {
+(function() {
 
-CKEDITOR.plugins.add( 'liferayvideo',{
+CKEDITOR.plugins.add('liferayvideo',
+		{
 	
-	lang : [ 'en', 'es' ],
+	afterInit: function(editor) {
+		var dataProcessor = editor.dataProcessor;
+		var htmlFilter = dataProcessor && dataProcessor.htmlFilter;
+		var	dataFilter = dataProcessor && dataProcessor.dataFilter;
+		
+		dataFilter.addRules(
+			{
+			elements : {
+					'div' : function(realElement) {						
+								if (realElement.attributes['class'] && realElement.attributes['class'].indexOf('liferayckevideo') >= 0) {	
+									var fakeElement = editor.createFakeParserElement(realElement, 'liferay_cke_video', 'liferayvideo', false);
+									var fakeStyle = fakeElement.attributes.style || '';
+		
+									var width = realElement.attributes['data-width'];
+									var	height = realElement.attributes['data-height'];
+									var	poster = realElement.attributes['data-poster'];
+		
+									if (typeof width != 'undefined') {
+										fakeElement.attributes.style = fakeStyle + 'width:' + CKEDITOR.tools.cssLength(width) + ';';
+										fakeStyle = fakeElement.attributes.style;
+									}
+		
+									if (typeof height != 'undefined') {
+										fakeElement.attributes.style = fakeStyle + 'height:' + CKEDITOR.tools.cssLength(height) + ';';
+										fakeStyle = fakeElement.attributes.style;
+									}
+		
+									if (poster) {
+										fakeElement.attributes.style = fakeStyle + 'background-image:url(' + poster + ');';
+										fakeStyle = fakeElement.attributes.style;
+									}
+		
+									return fakeElement;
+								}
+						}
+				}
+			}
+		);		
+	},	
 
-	getPlaceholderCss : function()
-	{
+	getPlaceholderCss : function() {
+		var instance = this;
+		
 		return 'img.cke_video' +
 				'{' +
-					'background-image: url(' + CKEDITOR.getUrl( this.path + 'icons/placeholder.png' ) + ');' +
+					'background-image: url(' + CKEDITOR.getUrl(instance.path + 'icons/placeholder.png' ) + ');' +
 					'background-position: center center;' +
 					'background-repeat: no-repeat;' +
 					'background-color:gray;'+
@@ -34,104 +74,69 @@ CKEDITOR.plugins.add( 'liferayvideo',{
 					'height: 80px;' +
 				'}';
 	},
-
-	onLoad : function()
-	{
-		// v4
-		if (CKEDITOR.addCss)
-			CKEDITOR.addCss( this.getPlaceholderCss() );
-
-	},
-
-	init : function( editor )
-	{
+	
+	init : function(editor) {
+		var instance = this;
+		
 		var lang = editor.lang.liferayvideo;		
 
-		CKEDITOR.dialog.add( 'liferayvideo', this.path + 'dialogs/video.js' );
+		CKEDITOR.dialog.add('liferayvideo', instance.path + 'dialogs/video.js');
 		
-		editor.addCommand( 'LiferayVideo', new CKEDITOR.dialogCommand( 'liferayvideo'));
+		editor.addCommand('LiferayVideo', new CKEDITOR.dialogCommand('liferayvideo'));
 
-		editor.ui.addButton( 'LiferayVideo',
+		editor.ui.addButton('LiferayVideo',
 			{
-				label : lang.toolbar,
 				command : 'LiferayVideo',
-				icon : this.path + 'icons/icon.png'
-			} );		
+				icon : instance.path + 'icons/icon.png',
+				label : lang.toolbar			
+			}
+		);		
 
-		if ( editor.addMenuItems )
-		{
+		if (editor.addMenuItems) {
 			editor.addMenuItems(
 				{
 					liferayvideo :
 					{
-						label : lang.properties,
 						command : 'LiferayVideo',
-						group : 'flash'
+						group : 'flash',
+						label : lang.properties					
 					}
 				});
 		}
 
-		editor.on( 'doubleclick', function( evt )
-			{
-				var element = evt.data.element;
+		editor.on(
+				'doubleclick', 
+				function(evt) {
+					var element = evt.data.element;
 
-				if ( element.is( 'img' ) && element.data( 'cke-real-element-type' ) == 'liferayvideo' )
-					evt.data.dialog = 'liferayvideo';
-			});
+					if ( element.is('img') && element.data('cke-real-element-type') === 'liferayvideo') {
+						evt.data.dialog = 'liferayvideo';
+					}
+				}
+		);
 		
-		if ( editor.contextMenu )
-		{
-			editor.contextMenu.addListener( function( element, selection )
-				{
-					if ( element && element.is( 'img' ) && !element.isReadOnly()
-							&& element.data( 'cke-real-element-type' ) == 'liferayvideo' )
-						return { video : CKEDITOR.TRISTATE_OFF };
-				});
+		if (editor.contextMenu) {
+			editor.contextMenu.addListener(
+					function(element, selection) {
+						if (element && element.is('img') && !element.isReadOnly()
+							&& element.data('cke-real-element-type') === 'liferayvideo') {
+							return { video : CKEDITOR.TRISTATE_OFF };
+						}
+					}
+			);
 		}
 		
 		editor.lang.fakeobjects.liferayvideo = lang.fakeObject;
-
-
-	}, 
-
-	afterInit: function( editor )
-	{
-		var dataProcessor = editor.dataProcessor,
-			htmlFilter = dataProcessor && dataProcessor.htmlFilter,
-			dataFilter = dataProcessor && dataProcessor.dataFilter;
+	},
+	
+	lang : ['en', 'es'],
+	
+	onLoad : function() {
+		var instance = this;
 		
-		dataFilter.addRules(
-			{
-
-			elements : {
-					'div' : function( realElement )
-					{						
-						if (realElement.attributes["class"] && realElement.attributes["class"].indexOf( "liferayckevideo" ) >= 0)
-						{	
-							var fakeElement = editor.createFakeParserElement( realElement, 'liferay_cke_video', 'liferayvideo', false ),
-								fakeStyle = fakeElement.attributes.style || '';
-
-							var width = realElement.attributes['data-width'],
-								height = realElement.attributes['data-height'],
-								poster = realElement.attributes['data-poster'];
-
-							if ( typeof width != 'undefined' )
-								fakeStyle = fakeElement.attributes.style = fakeStyle + 'width:' + CKEDITOR.tools.cssLength( width ) + ';';
-
-							if ( typeof height != 'undefined' )
-								fakeStyle = fakeElement.attributes.style = fakeStyle + 'height:' + CKEDITOR.tools.cssLength( height ) + ';';
-
-							if ( poster )
-								fakeStyle = fakeElement.attributes.style = fakeStyle + 'background-image:url(' + poster + ');';
-
-							return fakeElement;
-						}
-					}
-				}
-
-			}
-		);
-		
+		if (CKEDITOR.addCss) {
+			CKEDITOR.addCss(instance.getPlaceholderCss());
+		}
 	}
 
 } ); 
