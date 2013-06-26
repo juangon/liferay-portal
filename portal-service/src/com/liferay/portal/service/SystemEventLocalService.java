@@ -241,19 +241,9 @@ public interface SystemEventLocalService extends BaseLocalService,
 	*/
 	public void setBeanIdentifier(java.lang.String beanIdentifier);
 
-	public void addSystemEvent(long userId, long groupId, long classNameId,
-		long classPK, java.lang.String classUuid, int type)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public void addSystemEvent(long userId, long groupId, long classNameId,
-		long classPK, java.lang.String classUuid, int type,
-		java.lang.String extraData)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public void addSystemEvent(long groupId, java.lang.String className,
-		long classPK, java.lang.String classUuid, int type)
+	public void addSystemEvent(long userId, long groupId,
+		java.lang.String className, long classPK, java.lang.String classUuid,
+		java.lang.String referrerClassName, int type, java.lang.String extraData)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

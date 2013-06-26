@@ -14,6 +14,7 @@
 
 package com.liferay.portal.kernel.lar;
 
+import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.model.Portlet;
 
 import javax.portlet.PortletPreferences;
@@ -172,6 +173,16 @@ public interface PortletDataHandler {
 	public boolean isPublishToLiveByDefault();
 
 	public void prepareManifestSummary(PortletDataContext portletDataContext)
+		throws PortletDataException;
+
+	public PortletPreferences processExportPortletPreferences(
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences, Element rootElement)
+		throws PortletDataException;
+
+	public PortletPreferences processImportPortletPreferences(
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences)
 		throws PortletDataException;
 
 	public void setPortletId(String portletId);

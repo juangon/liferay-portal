@@ -1168,6 +1168,7 @@
 			<basic name="classNameId" />
 			<basic name="classPK" />
 			<basic name="classUuid" />
+			<basic name="referrerClassNameId" />
 			<basic name="type">
 				<column name="TYPE_" />
 			</basic>
@@ -1348,6 +1349,25 @@
 			</basic>
 			<basic name="description" />
 			<basic name="externalUserId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.UserNotificationDeliveryModelImpl">
+		<attributes>
+			<id name="userNotificationDeliveryId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="classNameId" />
+			<basic name="type">
+				<column name="TYPE_" />
+			</basic>
+			<basic name="email" />
+			<basic name="sms" />
+			<basic name="website" />
+			<transient name="className" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
@@ -4181,7 +4201,9 @@
 	</entity>
 	<entity class="com.liferay.portal.model.impl.SystemEventImpl" name="SystemEvent">
 		<table name="SystemEvent" />
-		<attributes />
+		<attributes>
+			<transient name="referrerClassName" />
+		</attributes>
 	</entity>
 	<entity class="com.liferay.portal.model.impl.TeamImpl" name="Team">
 		<table name="Team" />
@@ -4212,6 +4234,10 @@
 	</entity>
 	<entity class="com.liferay.portal.model.impl.UserIdMapperImpl" name="UserIdMapper">
 		<table name="UserIdMapper" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.portal.model.impl.UserNotificationDeliveryImpl" name="UserNotificationDelivery">
+		<table name="UserNotificationDelivery" />
 		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.UserNotificationEventImpl" name="UserNotificationEvent">

@@ -538,6 +538,7 @@ create table SystemEvent (
 	classNameId LONG,
 	classPK LONG,
 	classUuid VARCHAR(75) null,
+	referrerClassNameId LONG,
 	type_ INTEGER,
 	extraData TEXT null
 );
@@ -574,6 +575,17 @@ alter table UserGroup add userId LONG;
 alter table UserGroup add userName VARCHAR(75) null;
 alter table UserGroup add createDate DATE null;
 alter table UserGroup add modifiedDate DATE null;
+
+create table UserNotificationDelivery (
+	userNotificationDeliveryId LONG not null primary key,
+	companyId LONG,
+	userId LONG,
+	classNameId LONG,
+	type_ INTEGER,
+	email BOOLEAN,
+	sms BOOLEAN,
+	website BOOLEAN
+);
 
 alter table UserNotificationEvent add delivered BOOLEAN;
 

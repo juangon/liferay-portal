@@ -214,8 +214,8 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		// System event
 
 		systemEventLocalService.addSystemEvent(
-			node.getGroupId(), WikiNode.class.getName(), node.getNodeId(),
-			node.getUuid(), SystemEventConstants.TYPE_DELETE);
+			0, node.getGroupId(), WikiNode.class.getName(), node.getNodeId(),
+			node.getUuid(), null, SystemEventConstants.TYPE_DELETE, null);
 
 		// Attachments
 
@@ -269,10 +269,17 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 	}
 
 	@Override
-	public WikiNode fetchWikiNode(long groupId, String name)
+	public WikiNode fetchNode(long groupId, String name)
 		throws SystemException {
 
 		return wikiNodePersistence.fetchByG_N(groupId, name);
+	}
+
+	@Override
+	public WikiNode fetchNodeByUuidAndGroupId(String uuid, long groupId)
+		throws SystemException {
+
+		return wikiNodePersistence.fetchByUUID_G(uuid, groupId);
 	}
 
 	@Override

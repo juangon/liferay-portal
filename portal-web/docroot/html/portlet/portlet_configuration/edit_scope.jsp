@@ -17,62 +17,106 @@
 <%@ include file="/html/portlet/portlet_configuration/init.jsp" %>
 
 <%
-String redirect = ParamUtil.getString(request, "redirect");
-String returnToFullPageURL = ParamUtil.getString(request, "returnToFullPageURL");
-
 String scopeType = GetterUtil.getString(portletPreferences.getValue("lfrScopeType", null));
 String scopeLayoutUuid = GetterUtil.getString(portletPreferences.getValue("lfrScopeLayoutUuid", null));
 
-Group group = layout.getGroup();
+Group group = null;
+
+if (Validator.isNull(scopeType)) {
+	group = themeDisplay.getSiteGroup();
+}
+else if (scopeType.equals("company")) {
+	group = GroupLocalServiceUtil.getGroup(themeDisplay.getCompanyGroupId());
+}
+else if (scopeType.equals("layout")) {
+	for (Layout scopeGroupLayout : LayoutLocalServiceUtil.getScopeGroupLayouts(layout.getGroupId(), layout.isPrivateLayout())) {
+		if (scopeLayoutUuid.equals(scopeGroupLayout.getUuid())) {
+			group = GroupLocalServiceUtil.getLayoutGroup(scopeGroupLayout.getCompanyId(), scopeGroupLayout.getPlid());
+
+			break;
+		}
+	}
+
+	if (group == null) {
+		group = themeDisplay.getSiteGroup();
+	}
+}
+
+Set<Group> availableGroups = new LinkedHashSet<Group>();
+
+availableGroups.add(group);
+availableGroups.add(themeDisplay.getSiteGroup());
+availableGroups.add(company.getGroup());
+
+for (Layout scopeGroupLayout : LayoutLocalServiceUtil.getScopeGroupLayouts(layout.getGroupId(), layout.isPrivateLayout())) {
+	availableGroups.add(scopeGroupLayout.getScopeGroup());
+}
 %>
 
 <liferay-util:include page="/html/portlet/portlet_configuration/tabs1.jsp">
 	<liferay-util:param name="tabs1" value="scope" />
 </liferay-util:include>
 
-<portlet:actionURL var="editScopeURL">
-	<portlet:param name="struts_action" value="/portlet_configuration/edit_scope" />
-</portlet:actionURL>
+<aui:fieldset>
+	<aui:field-wrapper label="scope" name="scopeId">
+		<liferay-ui:icon-menu direction="down" icon="<%= group.getIconURL(themeDisplay) %>" message="<%= group.getDescriptiveName(locale) %>" showWhenSingleIcon="<%= true %>">
 
-<aui:form action="<%= editScopeURL %>" method="post" name="fm">
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.SAVE %>" />
-	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-	<aui:input name="returnToFullPageURL" type="hidden" value="<%= returnToFullPageURL %>" />
-	<aui:input name="portletResource" type="hidden" value="<%= portletResource %>" />
+			<%
+			for (Group availableGroup : availableGroups) {
+				String availableGroupScopeType = StringPool.BLANK;
+				String availableGroupScopeLayoutUuid = StringPool.BLANK;
 
-	<aui:fieldset>
-		<aui:select label="scope" name="scopeType">
-			<aui:option label="default" selected="<%= Validator.isNull(scopeType) %>" value="" />
-			<aui:option label="global" selected='<%= scopeType.equals("company") %>' value="company" />
-			<aui:option label="select-layout" selected='<%= scopeType.equals("layout") %>' value="layout" />
-		</aui:select>
-
-		<div id="<portlet:namespace />scopeLayoutUuidContainer">
-			<aui:select label="scope-layout" name="scopeLayoutUuid">
-				<aui:option label='<%= LanguageUtil.get(pageContext,"current-page") + " (" + HtmlUtil.escape(layout.getName(locale)) + ")" %>' selected="<%= scopeLayoutUuid.equals(layout.getUuid()) %>" value="<%= layout.getUuid() %>" />
-
-				<%
-				for (Layout curLayout : LayoutLocalServiceUtil.getScopeGroupLayouts(layout.getGroupId(), layout.isPrivateLayout())) {
-					if (curLayout.getPlid() == layout.getPlid()) {
-						continue;
-					}
-				%>
-
-					<aui:option label="<%= HtmlUtil.escape(curLayout.getName(locale)) %>" selected="<%= scopeLayoutUuid.equals(curLayout.getUuid()) %>" value="<%= curLayout.getUuid() %>" />
-
-				<%
+				if (availableGroup.isCompany()) {
+					availableGroupScopeType = "company";
 				}
-				%>
+				else if (availableGroup.isLayout()) {
+					availableGroupScopeType = "layout";
 
-			</aui:select>
-		</div>
-	</aui:fieldset>
+					Layout availableGroupLayout = LayoutLocalServiceUtil.getLayout(availableGroup.getClassPK());
 
-	<aui:button-row>
-		<aui:button type="submit" />
-	</aui:button-row>
-</aui:form>
+					availableGroupScopeLayoutUuid = availableGroupLayout.getUuid();
+				}
+			%>
 
-<aui:script>
-	Liferay.Util.toggleSelectBox('<portlet:namespace />scopeType', 'layout', '<portlet:namespace />scopeLayoutUuidContainer');
-</aui:script>
+				<liferay-portlet:actionURL var="setScopeURL">
+					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SAVE %>" />
+					<portlet:param name="redirect" value="<%= currentURL %>" />
+					<portlet:param name="portletResource" value="<%= portletResource %>" />
+					<portlet:param name="struts_action" value="/portlet_configuration/edit_scope" />
+					<portlet:param name="scopeType" value="<%= availableGroupScopeType %>" />
+					<portlet:param name="scopeLayoutUuid" value="<%= availableGroupScopeLayoutUuid %>" />
+				</liferay-portlet:actionURL>
+
+				<liferay-ui:icon
+					id='<%= "scope" + availableGroup.getGroupId() %>'
+					message="<%= availableGroup.getDescriptiveName(locale) %>"
+					method="post"
+					src="<%= availableGroup.getIconURL(themeDisplay) %>"
+					url="<%= setScopeURL %>"
+				/>
+
+			<%
+			}
+			%>
+
+			<c:if test="<%= !layout.hasScopeGroup() %>">
+				<liferay-portlet:actionURL var="createNewScopeURL">
+					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SAVE %>" />
+					<portlet:param name="redirect" value="<%= currentURL %>" />
+					<portlet:param name="portletResource" value="<%= portletResource %>" />
+					<portlet:param name="struts_action" value="/portlet_configuration/edit_scope" />
+					<portlet:param name="scopeType" value="layout" />
+					<portlet:param name="scopeLayoutUuid" value="<%= layout.getUuid() %>" />
+				</liferay-portlet:actionURL>
+
+				<liferay-ui:icon
+					id="scopeCurLayout"
+					image="add"
+					message='<%= HtmlUtil.escape(layout.getName(locale)) + " (" + LanguageUtil.get(pageContext, "create-new") + ")" %>'
+					method="post"
+					url="<%= createNewScopeURL %>"
+				/>
+			</c:if>
+		</liferay-ui:icon-menu>
+	</aui:field-wrapper>
+</aui:fieldset>

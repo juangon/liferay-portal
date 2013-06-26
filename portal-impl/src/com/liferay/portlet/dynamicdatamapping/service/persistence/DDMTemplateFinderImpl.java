@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -45,13 +46,13 @@ public class DDMTemplateFinderImpl
 	extends BasePersistenceImpl<DDMTemplate> implements DDMTemplateFinder {
 
 	public static final String COUNT_BY_G_C_SC =
-	DDMTemplateFinder.class.getName() + ".countByG_C_SC";
+		DDMTemplateFinder.class.getName() + ".countByG_C_SC";
 
 	public static final String COUNT_BY_C_G_C_C_N_D_T_M_L =
 		DDMTemplateFinder.class.getName() + ".countByC_G_C_C_N_D_T_M_L";
 
 	public static final String FIND_BY_G_C_SC =
-	DDMTemplateFinder.class.getName() + ".findByG_C_SC";
+		DDMTemplateFinder.class.getName() + ".findByG_C_SC";
 
 	public static final String FIND_BY_C_G_C_C_N_D_T_M_L =
 		DDMTemplateFinder.class.getName() + ".findByC_G_C_C_N_D_T_M_L";
@@ -660,20 +661,18 @@ public class DDMTemplateFinderImpl
 					groupIds);
 			}
 
-			if (groupIds.length <= 0) {
-				sql = StringUtil.replace(
-					sql, "(groupId IN ([$GROUP_ID$]))", StringPool.BLANK);
-			}
-			else {
-				sql = StringUtil.replace(
-					sql, "[$GROUP_ID$]", StringUtil.merge(groupIds));
-			}
+			sql = StringUtil.replace(
+				sql, "[$GROUP_ID$]", getGroupIds(groupIds));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
 			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
+
+			if (groupIds != null) {
+				qPos.add(groupIds);
+			}
 
 			qPos.add(classNameId);
 			qPos.add(structureClassNameId);
@@ -724,33 +723,12 @@ public class DDMTemplateFinderImpl
 					groupIds);
 			}
 
-			if (groupIds.length <= 0) {
-				sql = StringUtil.replace(
-					sql, "(groupId IN ([$GROUP_ID$])) AND", StringPool.BLANK);
-			}
-			else {
-				sql = StringUtil.replace(
-					sql, "[$GROUP_ID$]", StringUtil.merge(groupIds));
-			}
-
-			if (classNameIds.length == 0) {
-				sql = StringUtil.replace(
-					sql, "(classNameId IN ([$CLASSNAME_ID$])) AND", "");
-			}
-			else {
-				sql = StringUtil.replace(
-					sql, "[$CLASSNAME_ID$]", StringUtil.merge(classNameIds));
-			}
-
-			if (classPKs.length == 0) {
-				sql = StringUtil.replace(
-					sql, "(classPK IN ([$CLASS_PK$])) AND", "");
-			}
-			else {
-				sql = StringUtil.replace(
-					sql, "[$CLASS_PK$]", StringUtil.merge(classPKs));
-			}
-
+			sql = StringUtil.replace(
+				sql, "[$GROUP_ID$]", getGroupIds(groupIds));
+			sql = StringUtil.replace(
+				sql, "[$CLASSNAME_ID$]", getClassNameIds(classNameIds));
+			sql = StringUtil.replace(
+				sql, "[$CLASS_PK$]", getClassPKs(classPKs));
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "lower(name)", StringPool.LIKE, false, names);
 			sql = CustomSQLUtil.replaceKeywords(
@@ -770,6 +748,19 @@ public class DDMTemplateFinderImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(companyId);
+
+			if (groupIds != null) {
+				qPos.add(groupIds);
+			}
+
+			if (classNameIds != null) {
+				qPos.add(classNameIds);
+			}
+
+			if (classPKs != null) {
+				qPos.add(classPKs);
+			}
+
 			qPos.add(names, 2);
 			qPos.add(descriptions, 2);
 			qPos.add(types, 2);
@@ -815,14 +806,8 @@ public class DDMTemplateFinderImpl
 					groupIds);
 			}
 
-			if (groupIds.length <= 0) {
-				sql = StringUtil.replace(
-					sql, "(groupId IN ([$GROUP_ID$]))", StringPool.BLANK);
-			}
-			else {
-				sql = StringUtil.replace(
-					sql, "[$GROUP_ID$]", StringUtil.merge(groupIds));
-			}
+			sql = StringUtil.replace(
+				sql, "[$GROUP_ID$]", getGroupIds(groupIds));
 
 			if (orderByComparator != null) {
 				sql = CustomSQLUtil.replaceOrderBy(sql, orderByComparator);
@@ -833,6 +818,10 @@ public class DDMTemplateFinderImpl
 			q.addEntity("DDMTemplate", DDMTemplateImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
+
+			if (groupIds != null) {
+				qPos.add(groupIds);
+			}
 
 			qPos.add(classNameId);
 			qPos.add(structureClassNameId);
@@ -875,33 +864,12 @@ public class DDMTemplateFinderImpl
 					groupIds);
 			}
 
-			if (groupIds.length <= 0) {
-				sql = StringUtil.replace(
-					sql, "(groupId IN ([$GROUP_ID$])) AND", StringPool.BLANK);
-			}
-			else {
-				sql = StringUtil.replace(
-					sql, "[$GROUP_ID$]", StringUtil.merge(groupIds));
-			}
-
-			if (classNameIds.length == 0) {
-				sql = StringUtil.replace(
-					sql, "(classNameId IN ([$CLASSNAME_ID$])) AND", "");
-			}
-			else {
-				sql = StringUtil.replace(
-					sql, "[$CLASSNAME_ID$]", StringUtil.merge(classNameIds));
-			}
-
-			if (classPKs.length == 0) {
-				sql = StringUtil.replace(
-					sql, "(classPK IN ([$CLASS_PK$])) AND", "");
-			}
-			else {
-				sql = StringUtil.replace(
-					sql, "[$CLASS_PK$]", StringUtil.merge(classPKs));
-			}
-
+			sql = StringUtil.replace(
+				sql, "[$GROUP_ID$]", getGroupIds(groupIds));
+			sql = StringUtil.replace(
+				sql, "[$CLASSNAME_ID$]", getClassNameIds(classNameIds));
+			sql = StringUtil.replace(
+				sql, "[$CLASS_PK$]", getClassPKs(classPKs));
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "lower(name)", StringPool.LIKE, false, names);
 			sql = CustomSQLUtil.replaceKeywords(
@@ -925,6 +893,19 @@ public class DDMTemplateFinderImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(companyId);
+
+			if (groupIds != null) {
+				qPos.add(groupIds);
+			}
+
+			if (classNameIds != null) {
+				qPos.add(classNameIds);
+			}
+
+			if (classPKs != null) {
+				qPos.add(classPKs);
+			}
+
 			qPos.add(names, 2);
 			qPos.add(descriptions, 2);
 			qPos.add(types, 2);
@@ -940,6 +921,72 @@ public class DDMTemplateFinderImpl
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected String getClassNameIds(long[] classNameIds) {
+		if ((classNameIds == null) || (classNameIds.length == 0)) {
+			return StringPool.BLANK;
+		}
+
+		StringBundler sb = new StringBundler(classNameIds.length * 2);
+
+		sb.append(StringPool.OPEN_PARENTHESIS);
+
+		for (int i = 0; i < classNameIds.length; i++) {
+			sb.append("classNameId = ?");
+
+			if ((i + 1) < classNameIds.length) {
+				sb.append(" OR ");
+			}
+		}
+
+		sb.append(") AND");
+
+		return sb.toString();
+	}
+
+	protected String getClassPKs(long[] classPKs) {
+		if ((classPKs == null) || (classPKs.length == 0)) {
+			return StringPool.BLANK;
+		}
+
+		StringBundler sb = new StringBundler(classPKs.length * 2);
+
+		sb.append(StringPool.OPEN_PARENTHESIS);
+
+		for (int i = 0; i < classPKs.length; i++) {
+			sb.append("classPK = ?");
+
+			if ((i + 1) < classPKs.length) {
+				sb.append(" OR ");
+			}
+		}
+
+		sb.append(") AND");
+
+		return sb.toString();
+	}
+
+	protected String getGroupIds(long[] groupIds) {
+		if ((groupIds == null) || (groupIds.length == 0)) {
+			return StringPool.BLANK;
+		}
+
+		StringBundler sb = new StringBundler(groupIds.length * 2);
+
+		sb.append(StringPool.OPEN_PARENTHESIS);
+
+		for (int i = 0; i < groupIds.length; i++) {
+			sb.append("groupId = ?");
+
+			if ((i + 1) < groupIds.length) {
+				sb.append(" OR ");
+			}
+		}
+
+		sb.append(") AND");
+
+		return sb.toString();
 	}
 
 }

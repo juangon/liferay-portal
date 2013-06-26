@@ -22,7 +22,6 @@ import com.liferay.portal.model.SystemEvent;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.service.base.SystemEventLocalServiceBaseImpl;
-import com.liferay.portal.util.PortalUtil;
 
 import java.util.Date;
 import java.util.List;
@@ -35,18 +34,9 @@ public class SystemEventLocalServiceImpl
 
 	@Override
 	public void addSystemEvent(
-			long userId, long groupId, long classNameId, long classPK,
-			String classUuid, int type)
-		throws PortalException, SystemException {
-
-		addSystemEvent(
-			userId, groupId, classNameId, classPK, classUuid, type, null);
-	}
-
-	@Override
-	public void addSystemEvent(
-			long userId, long groupId, long classNameId, long classPK,
-			String classUuid, int type, String extraData)
+			long userId, long groupId, String className, long classPK,
+			String classUuid, String referrerClassName, int type,
+			String extraData)
 		throws PortalException, SystemException {
 
 		if (userId == 0) {
@@ -84,24 +74,14 @@ public class SystemEventLocalServiceImpl
 		systemEvent.setUserId(userId);
 		systemEvent.setUserName(userName);
 		systemEvent.setCreateDate(new Date());
-		systemEvent.setClassNameId(classNameId);
+		systemEvent.setClassName(className);
 		systemEvent.setClassPK(classPK);
 		systemEvent.setClassUuid(classUuid);
+		systemEvent.setReferrerClassName(referrerClassName);
 		systemEvent.setType(type);
 		systemEvent.setExtraData(extraData);
 
 		systemEventPersistence.update(systemEvent);
-	}
-
-	@Override
-	public void addSystemEvent(
-			long groupId, String className, long classPK, String classUuid,
-			int type)
-		throws PortalException, SystemException {
-
-		addSystemEvent(
-			0, groupId, PortalUtil.getClassNameId(className), classPK,
-			classUuid, type, null);
 	}
 
 	@Override

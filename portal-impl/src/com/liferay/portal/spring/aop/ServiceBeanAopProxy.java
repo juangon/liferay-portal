@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.util.ProxyUtil;
 import java.lang.annotation.Annotation;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
@@ -35,7 +36,6 @@ import org.aopalliance.intercept.MethodInterceptor;
 
 import org.springframework.aop.SpringProxy;
 import org.springframework.aop.TargetSource;
-import org.springframework.aop.framework.Advised;
 import org.springframework.aop.framework.AdvisedSupport;
 import org.springframework.aop.framework.AdvisorChainFactory;
 import org.springframework.aop.framework.AopProxy;
@@ -46,6 +46,22 @@ import org.springframework.util.ClassUtils;
  * @author Shuyang Zhou
  */
 public class ServiceBeanAopProxy implements AopProxy, InvocationHandler {
+
+	public static AdvisedSupport getAdvisedSupport(Object proxy)
+		throws Exception {
+
+		InvocationHandler invocationHandler = ProxyUtil.getInvocationHandler(
+			proxy);
+
+		Class<?> invocationHandlerClass = invocationHandler.getClass();
+
+		Field advisedSupportField = invocationHandlerClass.getDeclaredField(
+			"_advisedSupport");
+
+		advisedSupportField.setAccessible(true);
+
+		return (AdvisedSupport)advisedSupportField.get(invocationHandler);
+	}
 
 	public ServiceBeanAopProxy(
 		AdvisedSupport advisedSupport, MethodInterceptor methodInterceptor,
@@ -138,16 +154,6 @@ public class ServiceBeanAopProxy implements AopProxy, InvocationHandler {
 	@Override
 	public Object invoke(Object proxy, Method method, Object[] arguments)
 		throws Throwable {
-
-		String methodName = method.getName();
-
-		if (methodName.equals("getTargetSource") && (arguments == null)) {
-			Class<?> clazz = method.getDeclaringClass();
-
-			if (clazz.equals(Advised.class)) {
-				return _advisedSupport.getTargetSource();
-			}
-		}
 
 		TargetSource targetSource = _advisedSupport.getTargetSource();
 

@@ -2051,6 +2051,7 @@
 		<column name="classNameId" type="long" />
 		<column name="classPK" type="long" />
 		<column name="classUuid" type="String" />
+		<column name="referrerClassNameId" type="long" />
 		<column name="type" type="int" />
 		<column name="extraData" type="String" />
 
@@ -2416,6 +2417,36 @@
 		<finder name="T_E" return-type="UserIdMapper" unique="true">
 			<finder-column name="type" />
 			<finder-column name="externalUserId" />
+		</finder>
+	</entity>
+	<entity name="UserNotificationDelivery" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="userNotificationDeliveryId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+
+		<!-- Other fields -->
+
+		<column name="classNameId" type="long" />
+		<column name="type" type="int" />
+		<column name="email" type="boolean" />
+		<column name="sms" type="boolean" />
+		<column name="website" type="boolean" />
+
+		<!-- Finder methods -->
+
+		<finder name="UserId" return-type="Collection">
+			<finder-column name="userId" />
+		</finder>
+		<finder name="U_C_T" return-type="UserNotificationDelivery" unique="true">
+			<finder-column name="userId" />
+			<finder-column name="classNameId" />
+			<finder-column name="type" />
 		</finder>
 	</entity>
 	<entity name="UserNotificationEvent" uuid="true" local-service="true" remote-service="false">

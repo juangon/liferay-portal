@@ -2050,6 +2050,7 @@ create table SystemEvent (
 	classNameId LONG,
 	classPK LONG,
 	classUuid VARCHAR(75) null,
+	referrerClassNameId LONG,
 	type_ INTEGER,
 	extraData TEXT null
 );
@@ -2097,6 +2098,17 @@ create table TrashVersion (
 	classNameId LONG,
 	classPK LONG,
 	status INTEGER
+);
+
+create table UserNotificationDelivery (
+	userNotificationDeliveryId LONG not null primary key,
+	companyId LONG,
+	userId LONG,
+	classNameId LONG,
+	type_ INTEGER,
+	email BOOLEAN,
+	sms BOOLEAN,
+	website BOOLEAN
 );
 
 create table User_ (

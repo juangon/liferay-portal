@@ -14,21 +14,58 @@
 
 package com.liferay.portal.verify;
 
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.model.Organization;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
+import com.liferay.portal.service.persistence.OrganizationActionableDynamicQuery;
 import com.liferay.portal.util.PortalInstances;
+import com.liferay.portlet.asset.model.AssetEntry;
+import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Daniel Kocsis
  */
 public class VerifyOrganization extends VerifyProcess {
 
 	@Override
 	protected void doVerify() throws Exception {
+		rebuildTree();
+		updateOrganizationAssets();
+	}
+
+	protected void rebuildTree() throws Exception {
 		long[] companyIds = PortalInstances.getCompanyIdsBySQL();
 
 		for (long companyId : companyIds) {
 			OrganizationLocalServiceUtil.rebuildTree(companyId);
 		}
+	}
+
+	protected void updateOrganizationAssets() throws Exception {
+		ActionableDynamicQuery actionableDynamicQuery =
+			new OrganizationActionableDynamicQuery() {
+
+			@Override
+			protected void performAction(Object object)
+				throws PortalException, SystemException {
+
+				Organization organization = (Organization)object;
+
+				AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(
+					Organization.class.getName(),
+					organization.getOrganizationId());
+
+				assetEntry.setClassUuid(organization.getUuid());
+
+				AssetEntryLocalServiceUtil.updateAssetEntry(assetEntry);
+			}
+
+		};
+
+		actionableDynamicQuery.performActions();
 	}
 
 }

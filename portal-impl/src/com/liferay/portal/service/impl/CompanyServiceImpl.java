@@ -27,6 +27,7 @@ import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.base.CompanyServiceBaseImpl;
 import com.liferay.portlet.usersadmin.util.UsersAdminUtil;
 
@@ -69,12 +70,28 @@ public class CompanyServiceImpl extends CompanyServiceBaseImpl {
 			boolean system, int maxUsers, boolean active)
 		throws PortalException, SystemException {
 
-		if (!getPermissionChecker().isOmniadmin()) {
+		PermissionChecker permissionChecker = getPermissionChecker();
+
+		if (!permissionChecker.isOmniadmin()) {
 			throw new PrincipalException();
 		}
 
 		return companyLocalService.addCompany(
 			webId, virtualHost, mx, shardName, system, maxUsers, active);
+	}
+
+	@JSONWebService(mode = JSONWebServiceMode.IGNORE)
+	@Override
+	public Company deleteCompany(long companyId)
+		throws PortalException, SystemException {
+
+		PermissionChecker permissionChecker = getPermissionChecker();
+
+		if (!permissionChecker.isOmniadmin()) {
+			throw new PrincipalException();
+		}
+
+		return companyLocalService.deleteCompany(companyId);
 	}
 
 	/**
@@ -226,7 +243,9 @@ public class CompanyServiceImpl extends CompanyServiceBaseImpl {
 			boolean active)
 		throws PortalException, SystemException {
 
-		if (!getPermissionChecker().isOmniadmin()) {
+		PermissionChecker permissionChecker = getPermissionChecker();
+
+		if (!permissionChecker.isOmniadmin()) {
 			throw new PrincipalException();
 		}
 

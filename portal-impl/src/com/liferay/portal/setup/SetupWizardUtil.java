@@ -332,16 +332,18 @@ public class SetupWizardUtil {
 
 		Class.forName(driverClassName);
 
+		DataSource dataSource = null;
 		Connection connection = null;
 
 		try {
-			DataSource dataSource = DataSourceFactoryUtil.initDataSource(
+			dataSource = DataSourceFactoryUtil.initDataSource(
 				driverClassName, url, userName, password, jndiName);
 
 			connection = dataSource.getConnection();
 		}
 		finally {
 			DataAccess.cleanUp(connection);
+			DataSourceFactoryUtil.destroyDataSource(dataSource);
 		}
 	}
 

@@ -53,8 +53,9 @@
 			<var name="sitePageName" value="${pageName}" />
 		</execute>
 
-		<execute macro="Portlet#pgAddOrganization">
+		<execute macro="Portlet#addPG">
 			<var name="pageName" value="${pageName}" />
+			<var name="pageType" value="Organization" />
 			<var name="potletName" value="${portletName}" />
 		</execute>
 
@@ -75,8 +76,9 @@
 			<var name="userEmailAddress" value="${userEmailAddress}" />
 		</execute>
 
-		<execute macro="BlogsEntry#addNoPermissionOrganizationPG">
+		<execute macro="BlogsEntry#addNoPermissionPG">
 			<var name="pageName" value="${pageName}" />
+			<var name="pageType" value="Organization" />
 		</execute>
 
 		<execute macro="User#pgLogout" />
@@ -91,10 +93,11 @@
 			<var name="userEmailAddress" value="${userEmailAddress}" />
 		</execute>
 
-		<execute macro="BlogsEntry#addOrganizationPG">
+		<execute macro="BlogsEntry#addPG">
 			<var name="entryContent" value="${entryContent}" />
 			<var name="entryTitle" value="${entryTitle}" />
 			<var name="pageName" value="${pageName}" />
+			<var name="pageType" value="Organization" />
 		</execute>
 
 		<execute macro="User#pgLogout" />
@@ -109,8 +112,9 @@
 			<var name="userEmailAddress" value="${userEmailAddress}" />
 		</execute>
 
-		<execute macro="BlogsEntry#addNoPermissionOrganizationPG">
+		<execute macro="BlogsEntry#addNoPermissionPG">
 			<var name="pageName" value="${pageName}" />
+			<var name="pageType" value="Organization" />
 		</execute>
 
 		<execute macro="User#pgLogout" />
@@ -131,11 +135,11 @@
 		<var name="userLastName" value="userln" />
 		<var name="userScreenName" value="usersn" />
 
-		<execute macro="Page#pgAdd">
+		<execute macro="Page#addPG">
 			<var name="pageName" value="${pageName}" />
 		</execute>
 
-		<execute macro="Portlet#pgAdd">
+		<execute macro="Portlet#addPG">
 			<var name="pageName" value="${pageName}" />
 			<var name="potletName" value="${portletName}" />
 		</execute>
@@ -253,8 +257,9 @@
 			<var name="sitePageName" value="${pageName}" />
 		</execute>
 
-		<execute macro="Portlet#pgAddSitePublic">
+		<execute macro="Portlet#addPG">
 			<var name="pageName" value="${pageName}" />
+			<var name="pageType" value="Site" />
 			<var name="potletName" value="${portletName}" />
 		</execute>
 
@@ -275,8 +280,9 @@
 			<var name="userEmailAddress" value="${userEmailAddress}" />
 		</execute>
 
-		<execute macro="BlogsEntry#addNoPermissionSitePublicPG">
+		<execute macro="BlogsEntry#addNoPermissionPG">
 			<var name="pageName" value="${pageName}" />
+			<var name="pageType" value="Site" />
 		</execute>
 
 		<execute macro="User#pgLogout" />
@@ -291,10 +297,11 @@
 			<var name="userEmailAddress" value="${userEmailAddress}" />
 		</execute>
 
-		<execute macro="BlogsEntry#addSitePublicPG">
+		<execute macro="BlogsEntry#addPG">
 			<var name="entryContent" value="${entryContent}" />
 			<var name="entryTitle" value="${entryTitle}" />
 			<var name="pageName" value="${pageName}" />
+			<var name="pageType" value="Site" />
 		</execute>
 
 		<execute macro="User#pgLogout" />
@@ -309,8 +316,9 @@
 			<var name="userEmailAddress" value="${userEmailAddress}" />
 		</execute>
 
-		<execute macro="BlogsEntry#addNoPermissionSitePublicPG">
+		<execute macro="BlogsEntry#addNoPermissionPG">
 			<var name="pageName" value="${pageName}" />
+			<var name="pageType" value="Site" />
 		</execute>
 
 		<execute macro="User#pgLogout" />
@@ -393,8 +401,9 @@
 			<var name="sitePageName" value="${pageName}" />
 		</execute>
 
-		<execute macro="Portlet#pgAddOrganization">
+		<execute macro="Portlet#addPG">
 			<var name="pageName" value="${pageName}" />
+			<var name="pageType" value="Organization" />
 			<var name="potletName" value="${portletName}" />
 		</execute>
 
@@ -410,10 +419,11 @@
 			<var name="userScreenName" value="${userScreenName}" />
 		</execute>
 
-		<execute macro="BlogsEntry#addOrganizationPG">
+		<execute macro="BlogsEntry#addPG">
 			<var name="entryContent" value="${entryContent}" />
 			<var name="entryTitle" value="${entryTitle}" />
 			<var name="pageName" value="${pageName}" />
+			<var name="pageType" value="Organization" />
 		</execute>
 
 		<execute macro="User#pgLogout" />
@@ -421,8 +431,9 @@
 			<var name="userEmailAddress" value="${userEmailAddress}" />
 		</execute>
 
-		<execute macro="BlogsEntry#deleteNoPermissionOrganizationPG">
+		<execute macro="BlogsEntry#moveToRecycleBinNoPermissionPG">
 			<var name="pageName" value="${pageName}" />
+			<var name="pageType" value="Organization" />
 		</execute>
 
 		<execute macro="User#pgLogout" />
@@ -437,10 +448,11 @@
 			<var name="userEmailAddress" value="${userEmailAddress}" />
 		</execute>
 
-		<execute macro="BlogsEntry#deleteOrganizationPG">
+		<execute macro="BlogsEntry#moveToRecycleBinPG">
 			<var name="entryContent" value="${entryContent}" />
 			<var name="entryTitle" value="${entryTitle}" />
 			<var name="pageName" value="${pageName}" />
+			<var name="pageType" value="Organization" />
 		</execute>
 
 		<execute macro="User#pgLogout" />
@@ -450,10 +462,11 @@
 
 		<execute macro="Role#removePermissionBlogsEntryOrgCP" />
 
-		<execute macro="BlogsEntry#addOrganizationPG">
+		<execute macro="BlogsEntry#addPG">
 			<var name="entryContent" value="${entryContent}" />
 			<var name="entryTitle" value="${entryTitle}" />
 			<var name="pageName" value="${pageName}" />
+			<var name="pageType" value="Organization" />
 		</execute>
 
 		<execute macro="User#pgLogout" />
@@ -461,8 +474,9 @@
 			<var name="userEmailAddress" value="${userEmailAddress}" />
 		</execute>
 
-		<execute macro="BlogsEntry#deleteNoPermissionOrganizationPG">
+		<execute macro="BlogsEntry#moveToRecycleBinNoPermissionPG">
 			<var name="pageName" value="${pageName}" />
+			<var name="pageType" value="Organization" />
 		</execute>
 
 		<execute macro="User#pgLogout" />
@@ -483,11 +497,11 @@
 		<var name="userLastName" value="userln" />
 		<var name="userScreenName" value="usersn" />
 
-		<execute macro="Page#pgAdd">
+		<execute macro="Page#addPG">
 			<var name="pageName" value="${pageName}" />
 		</execute>
 
-		<execute macro="Portlet#pgAdd">
+		<execute macro="Portlet#addPG">
 			<var name="pageName" value="${pageName}" />
 			<var name="potletName" value="${portletName}" />
 		</execute>
@@ -524,7 +538,7 @@
 			<var name="userEmailAddress" value="${userEmailAddress}" />
 		</execute>
 
-		<execute macro="BlogsEntry#deleteNoPermissionPG">
+		<execute macro="BlogsEntry#moveToRecycleBinNoPermissionPG">
 			<var name="pageName" value="${pageName}" />
 		</execute>
 
@@ -540,7 +554,7 @@
 			<var name="userEmailAddress" value="${userEmailAddress}" />
 		</execute>
 
-		<execute macro="BlogsEntry#deletePG">
+		<execute macro="BlogsEntry#moveToRecycleBinPG">
 			<var name="entryContent" value="${entryContent}" />
 			<var name="entryTitle" value="${entryTitle}" />
 			<var name="pageName" value="${pageName}" />
@@ -564,7 +578,7 @@
 			<var name="userEmailAddress" value="${userEmailAddress}" />
 		</execute>
 
-		<execute macro="BlogsEntry#deleteNoPermissionPG">
+		<execute macro="BlogsEntry#moveToRecycleBinNoPermissionPG">
 			<var name="pageName" value="${pageName}" />
 		</execute>
 
@@ -617,8 +631,9 @@
 			<var name="sitePageName" value="${pageName}" />
 		</execute>
 
-		<execute macro="Portlet#pgAddSitePublic">
+		<execute macro="Portlet#addPG">
 			<var name="pageName" value="${pageName}" />
+			<var name="pageType" value="Site" />
 			<var name="potletName" value="${portletName}" />
 		</execute>
 
@@ -634,10 +649,11 @@
 			<var name="userScreenName" value="${userScreenName}" />
 		</execute>
 
-		<execute macro="BlogsEntry#addSitePublicPG">
+		<execute macro="BlogsEntry#addPG">
 			<var name="entryContent" value="${entryContent}" />
 			<var name="entryTitle" value="${entryTitle}" />
 			<var name="pageName" value="${pageName}" />
+			<var name="pageType" value="Site" />
 		</execute>
 
 		<execute macro="User#pgLogout" />
@@ -645,8 +661,9 @@
 			<var name="userEmailAddress" value="${userEmailAddress}" />
 		</execute>
 
-		<execute macro="BlogsEntry#deleteNoPermissionSitePublicPG">
+		<execute macro="BlogsEntry#moveToRecycleBinNoPermissionPG">
 			<var name="pageName" value="${pageName}" />
+			<var name="pageType" value="Site" />
 		</execute>
 
 		<execute macro="User#pgLogout" />
@@ -661,10 +678,11 @@
 			<var name="userEmailAddress" value="${userEmailAddress}" />
 		</execute>
 
-		<execute macro="BlogsEntry#deleteSitePublicPG">
+		<execute macro="BlogsEntry#moveToRecycleBinPG">
 			<var name="entryContent" value="${entryContent}" />
 			<var name="entryTitle" value="${entryTitle}" />
 			<var name="pageName" value="${pageName}" />
+			<var name="pageType" value="Site" />
 		</execute>
 
 		<execute macro="User#pgLogout" />
@@ -674,10 +692,11 @@
 
 		<execute macro="Role#removePermissionBlogsEntrySiteCP" />
 
-		<execute macro="BlogsEntry#addSitePublicPG">
+		<execute macro="BlogsEntry#addPG">
 			<var name="entryContent" value="${entryContent}" />
 			<var name="entryTitle" value="${entryTitle}" />
 			<var name="pageName" value="${pageName}" />
+			<var name="pageType" value="Site" />
 		</execute>
 
 		<execute macro="User#pgLogout" />
@@ -685,8 +704,9 @@
 			<var name="userEmailAddress" value="${userEmailAddress}" />
 		</execute>
 
-		<execute macro="BlogsEntry#deleteNoPermissionSitePublicPG">
+		<execute macro="BlogsEntry#moveToRecycleBinNoPermissionPG">
 			<var name="pageName" value="${pageName}" />
+			<var name="pageType" value="Site" />
 		</execute>
 
 		<execute macro="User#pgLogout" />
@@ -706,6 +726,6 @@
 
 		<execute macro="BlogsEntry#tearDownCP" />
 
-		<execute macro="Page#pgTearDown" />
+		<execute macro="Page#tearDownPG" />
 	</tear-down>
 </definition>

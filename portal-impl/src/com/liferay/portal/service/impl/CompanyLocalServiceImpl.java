@@ -21,6 +21,7 @@ import com.liferay.portal.CompanyWebIdException;
 import com.liferay.portal.LocaleException;
 import com.liferay.portal.NoSuchShardException;
 import com.liferay.portal.NoSuchVirtualHostException;
+import com.liferay.portal.RequiredCompanyException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -54,6 +55,7 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.VirtualHost;
+import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.service.base.CompanyLocalServiceBaseImpl;
 import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalInstances;
@@ -430,6 +432,29 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			}
 
 			companyPersistence.update(company);
+		}
+	}
+
+	@Override
+	public Company deleteCompany(long companyId)
+		throws PortalException, SystemException {
+
+		if (companyId == PortalInstances.getDefaultCompanyId()) {
+			throw new RequiredCompanyException();
+		}
+
+		Long currentCompanyId = CompanyThreadLocal.getCompanyId();
+		boolean deleteInProcess = CompanyThreadLocal.isDeleteInProcess();
+
+		try {
+			CompanyThreadLocal.setCompanyId(companyId);
+			CompanyThreadLocal.setDeleteInProcess(true);
+
+			return doDeleteCompany(companyId);
+		}
+		finally {
+			CompanyThreadLocal.setCompanyId(currentCompanyId);
+			CompanyThreadLocal.setDeleteInProcess(deleteInProcess);
 		}
 	}
 
@@ -1139,6 +1164,18 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 			company = companyPersistence.update(company);
 		}
+
+		return company;
+	}
+
+	protected Company doDeleteCompany(long companyId)
+		throws PortalException, SystemException {
+
+		Company company = companyPersistence.findByPrimaryKey(companyId);
+
+		company.setActive(false);
+
+		companyPersistence.update(company);
 
 		return company;
 	}
