@@ -1,68 +1,70 @@
-/*	 
-	 * Liferay Video plugin for CKEditor.
-	 * Based on Video plugin for CKEditor Copyright (C) 2011 Alfonso Martínez de
-	 * Lizarrondo
-	 *  == BEGIN LICENSE ==
-	 * 
-	 * Licensed under the terms of any of the following licenses at your choice:
-	 *  - GNU General Public License Version 2 or later (the "GPL")
-	 * http://www.gnu.org/licenses/gpl.html
-	 *  - GNU Lesser General Public License Version 2.1 or later (the "LGPL")
-	 * http://www.gnu.org/licenses/lgpl.html
-	 *  - Mozilla Public License Version 1.1 or later (the "MPL")
-	 * http://www.mozilla.org/MPL/MPL-1.1.html
-	 *  == END LICENSE ==
-	 * 
-	 */
+/*
+ * Liferay Video plugin for CKEditor.
+ * Based on Video plugin for CKEditor Copyright (C) 2011 Alfonso Martínez de
+ * Lizarrondo
+ *  == BEGIN LICENSE ==
+ *
+ * Licensed under the terms of any of the following licenses at your choice:
+ *  - GNU General Public License Version 2 or later (the "GPL")
+ * http://www.gnu.org/licenses/gpl.html
+ *  - GNU Lesser General Public License Version 2.1 or later (the "LGPL")
+ * http://www.gnu.org/licenses/lgpl.html
+ *  - Mozilla Public License Version 1.1 or later (the "MPL")
+ * http://www.mozilla.org/MPL/MPL-1.1.html
+ *  == END LICENSE ==
+ *
+ */
 
 (function() {
 
 CKEDITOR.plugins.add('liferayvideo',
 		{
-	
+
 	afterInit: function(editor) {
 		var dataProcessor = editor.dataProcessor;
 		var htmlFilter = dataProcessor && dataProcessor.htmlFilter;
 		var	dataFilter = dataProcessor && dataProcessor.dataFilter;
-		
+
 		dataFilter.addRules(
 			{
 			elements : {
-					'div' : function(realElement) {						
-								if (realElement.attributes['class'] && realElement.attributes['class'].indexOf('liferayckevideo') >= 0) {	
+					'div' : function(realElement) {
+								var attributes = realElement.attributes;
+
+								if (attributes['class'] && attributes['class'].indexOf('liferayckevideo') >= 0) {
 									var fakeElement = editor.createFakeParserElement(realElement, 'liferay_cke_video', 'liferayvideo', false);
 									var fakeStyle = fakeElement.attributes.style || '';
-		
-									var width = realElement.attributes['data-width'];
-									var	height = realElement.attributes['data-height'];
-									var	poster = realElement.attributes['data-poster'];
-		
+
+									var width = attributes['data-width'];
+									var height = attributes['data-height'];
+									var poster = attributes['data-poster'];
+
 									if (typeof width != 'undefined') {
 										fakeElement.attributes.style = fakeStyle + 'width:' + CKEDITOR.tools.cssLength(width) + ';';
 										fakeStyle = fakeElement.attributes.style;
 									}
-		
+
 									if (typeof height != 'undefined') {
 										fakeElement.attributes.style = fakeStyle + 'height:' + CKEDITOR.tools.cssLength(height) + ';';
 										fakeStyle = fakeElement.attributes.style;
 									}
-		
+
 									if (poster) {
 										fakeElement.attributes.style = fakeStyle + 'background-image:url(' + poster + ');';
 										fakeStyle = fakeElement.attributes.style;
 									}
-		
+
 									return fakeElement;
 								}
 						}
 				}
 			}
-		);		
-	},	
+		);
+	},
 
 	getPlaceholderCss : function() {
 		var instance = this;
-		
+
 		return 'img.cke_video' +
 				'{' +
 					'background-image: url(' + CKEDITOR.getUrl(instance.path + 'icons/placeholder.png' ) + ');' +
@@ -74,23 +76,23 @@ CKEDITOR.plugins.add('liferayvideo',
 					'height: 80px;' +
 				'}';
 	},
-	
+
 	init : function(editor) {
 		var instance = this;
-		
-		var lang = editor.lang.liferayvideo;		
+
+		var lang = editor.lang.liferayvideo;
 
 		CKEDITOR.dialog.add('liferayvideo', instance.path + 'dialogs/video.js');
-		
+
 		editor.addCommand('LiferayVideo', new CKEDITOR.dialogCommand('liferayvideo'));
 
 		editor.ui.addButton('LiferayVideo',
 			{
 				command : 'LiferayVideo',
 				icon : instance.path + 'icons/icon.png',
-				label : lang.toolbar			
+				label : lang.toolbar
 			}
-		);		
+		);
 
 		if (editor.addMenuItems) {
 			editor.addMenuItems(
@@ -99,7 +101,7 @@ CKEDITOR.plugins.add('liferayvideo',
 					{
 						command : 'LiferayVideo',
 						group : 'flash',
-						label : lang.properties					
+						label : lang.properties
 					}
 				});
 		}
@@ -114,7 +116,7 @@ CKEDITOR.plugins.add('liferayvideo',
 					}
 				}
 		);
-		
+
 		if (editor.contextMenu) {
 			editor.contextMenu.addListener(
 					function(element, selection) {
@@ -128,12 +130,12 @@ CKEDITOR.plugins.add('liferayvideo',
 		
 		editor.lang.fakeobjects.liferayvideo = lang.fakeObject;
 	},
-	
+
 	lang : ['en', 'es'],
-	
+
 	onLoad : function() {
 		var instance = this;
-		
+
 		if (CKEDITOR.addCss) {
 			CKEDITOR.addCss(instance.getPlaceholderCss());
 		}

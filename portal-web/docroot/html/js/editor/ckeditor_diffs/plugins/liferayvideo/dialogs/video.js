@@ -1,21 +1,26 @@
 CKEDITOR.dialog.add( 'liferayvideo',
 		function (editor) {
 			var lang = editor.lang.liferayvideo;
-		
-			function commitValue(videoNode, extraStyles) {				
+
+			function commitValue(videoNode, extraStyles) {
 				var instance = this;
-				
+
 				var value=instance.getValue();
-				
+				var id = instance.id;
+
 				var videoDivNode =  videoNode.getChild(0);
-				
+				var scriptNode = videoNode.getChild(1);
+
+				var scripttpl = null;
+				var textScript = null;
+
 				var videoUrl = videoNode.getAttribute('data-video-url');
 				var videoOgvUrl = videoNode.getAttribute('data-video-ogv-url');
 				var videoPoster = videoNode.getAttribute('data-poster');
 				var videoId = videoDivNode.getAttribute('id');
 				var videoHeight = videoNode.getAttribute('data-height');
 				var videoWidth = videoNode.getAttribute('data-width');
-				
+
 				var TPL_SCRIPT_PREFIX = 'AUI().use(' +
 										'	\'aui-base\',\'aui-video\',' +
 										'  	function(A) {' +
@@ -27,94 +32,83 @@ CKEDITOR.dialog.add( 'liferayvideo',
 										'	       		boundingBox: \'#{videoBoxId}\',' +
 										'				height: {height},' +
 										'				width: {width}';
-				
+
 				var TPL_SCRIPT_SUFFIX = '	     	}' +
 										'		).render();' +
 										'	}' +
 										');'; 
-				
-				if (!value && instance.id ==='id') {
+
+				if (!value && id ==='id') {
 					value = generateId();
 				}
-		
-				if (instance.id ==='poster') {		     			        
-				    	videoNode.setAttribute('data-document-url', value);	
-		
-				        var urlChar = '?';
-				        var videos = [];
-				        var vide0 = videos[0];
-				        var vide1 = videos[1];
-				        
-				        
+
+				if (id ==='poster') {
+				    	videoNode.setAttribute('data-document-url', value);
+
+				        var urlChar = '?';				        
+
 				        if (value.indexOf('?') >=0) {
 				          urlChar = '&';
-				        }				        
-				        
-				        vide0 = {};      
-				        vide0['type'] = 'video/mp4';
-				        vide0['src'] = value + urlChar + 'videoPreview=1&type=mp4';           
-				        videoNode.setAttribute('data-video-url', vide0['src']);
-				        
-				        vide1 = {};        
-				        vide1['type'] = 'video/ogg';
-				        vide1['src'] = value + urlChar + 'videoPreview=1&type=ogv';  
-				        videoNode.setAttribute('data-video-ogv-url', vide1['src']);
-					
+				        }
+
+				        videoUrl = value + urlChar + 'videoPreview=1&type=mp4';
+				        videoNode.setAttribute('data-video-url', videoUrl);
+
+				        videoOgvUrl = value + urlChar + 'videoPreview=1&type=ogv';
+				        videoNode.setAttribute('data-video-ogv-url', videoOgvUrl);
+
 				        value = value + urlChar + 'videoThumbnail=1';
-		
-						videoNode.setAttribute('data-poster',value);						
-						
-						var scriptNode = videoNode.getChild(1);
-						var scripttpl = new CKEDITOR.template(TPL_SCRIPT);						
-						var scriptText = scripttpl.output(
-															{ 																
-																ogvUrl: vide1['src'],
-																url: vide0['src'],
+
+						videoNode.setAttribute('data-poster', value);
+
+						scripttpl = new CKEDITOR.template(TPL_SCRIPT);
+						textScript = scripttpl.output(
+															{
+																ogvUrl: videoOgvUrl,
+																url: videoUrl,
 																poster: value,
 																videoBoxId: videoId,
 																height: videoHeight,
 																width: videoWidth
-															} 
+															}
 														);
-						scriptNode.setText(TPL_SCRIPT_PREFIX + scriptText + TPL_SCRIPT_SUFFIX);		
-				} 		
-		
+						scriptNode.setText(TPL_SCRIPT_PREFIX + textScript + TPL_SCRIPT_SUFFIX);
+				}
+
 				if (value) {
-					if (instance.id === 'poster') {
-						extraStyles.backgroundImage = 'url(' + value + ')';					
-					} 
-					else if (instance.id === 'height') {
-						var scriptNode = videoNode.getChild(1);
-						
-						extraStyles.width = value + 'px';	
-						videoNode.setAttribute('data-height',value);		
-								
-						if (scriptNode && scriptNode.getText()){
-							var scripttpl = new CKEDITOR.template(TPL_SCRIPT);										
-													 
-							var textScript = scripttpl.output(
-																{ 
+					if (id === 'poster') {
+						extraStyles.backgroundImage = 'url(' + value + ')';
+					}
+					else if (id === 'height') {
+
+						extraStyles.width = value + 'px';
+						videoNode.setAttribute('data-height', value);
+
+						if (scriptNode && scriptNode.getText()) {
+							scripttpl = new CKEDITOR.template(TPL_SCRIPT);
+
+							textScript = scripttpl.output(
+																{
 																	ogvUrl: videoOgvUrl,
 																	url: videoUrl,
 																	poster: videoPoster,
 																	videoBoxId: videoId,
 																	height: value,
-																	width: videoWidth																	
-																} 
+																	width: videoWidth
+																}
 															);
 							scriptNode.setText(TPL_SCRIPT_PREFIX + textScript + TPL_SCRIPT_SUFFIX);
-						}		
-					} 
-					else if (instance.id === 'width') {
-						var scriptNode = videoNode.getChild(1);		
-						
+						}
+					}
+					else if (id === 'width') {
+
 						extraStyles.height = value + 'px';
-						videoNode.setAttribute('data-width',value);						
-						
-						if (scriptNode && scriptNode.getText()){
-							var scripttpl = new CKEDITOR.template(TPL_SCRIPT);
-																	
-							var textScript = scripttpl.output(
+						videoNode.setAttribute('data-width', value);
+
+						if (scriptNode && scriptNode.getText()) {
+							scripttpl = new CKEDITOR.template(TPL_SCRIPT);
+
+							textScript = scripttpl.output(
 																{ 
 																	ogvUrl: videoOgvUrl,
 																	url: videoUrl,
@@ -122,42 +116,43 @@ CKEDITOR.dialog.add( 'liferayvideo',
 																	videoBoxId: videoId,
 																	height: videoHeight,
 																	width: value 
-																} 
-															);							
+																}
+															);
 							scriptNode.setText(TPL_SCRIPT_PREFIX + textScript + TPL_SCRIPT_SUFFIX);
-						}				
+						}
 					}
 				}
-			}	
-		
-			function loadValue( videoNode ) {
+			}
+
+			function loadValue(videoNode) {
 				var instance = this;
-				
-				if (videoNode){					
-					if (instance.id === 'id') {
+				var id = instance.id;
+
+				if (videoNode) {
+					if (id === 'id') {
 							instance.setValue(videoNode.getChild(0).getAttribute('id'));
 					}
-					else if (instance.id === 'poster') {
+					else if (id === 'poster') {
 							instance.setValue(videoNode.getAttribute('data-document-url'));
 					}
-					else if (instance.id === 'height') {
+					else if (id === 'height') {
 							instance.setValue(videoNode.getAttribute('data-height'));
 					}
-					else if (instance.id === 'width') {						
+					else if (id === 'width') {
 							instance.setValue(videoNode.getAttribute('data-width'));
-					}					
+					}
 				}
 				else {
-					if (instance.id === 'id') {
+					if (id === 'id') {
 						instance.setValue(generateId());
 					}
 				}
-			}	
-		
-			function generateId() {				
+			}
+
+			function generateId() {
 				return 'video' + new Date().getTime();
-			}	
-		
+			}
+
 			return {
 					contents :
 							[{
@@ -166,13 +161,13 @@ CKEDITOR.dialog.add( 'liferayvideo',
 									{
 										children: [
 													{
-														commit: commitValue,														
+														commit: commitValue,
 														id: 'poster',
-														label: lang.poster,														
-														setup: loadValue,	
+														label: lang.poster,
+														setup: loadValue,
 														type: 'text'
 													},
-													{														
+													{
 														filebrowser:
 														{
 															action: 'Browse',
@@ -183,21 +178,21 @@ CKEDITOR.dialog.add( 'liferayvideo',
 														id: 'browse',
 														label: editor.lang.common.browseServer,
 														style: 'display:inline-block;margin-top:10px;',
-														type: 'button'													
+														type: 'button'
 													}],
 										type: 'hbox',
-										widths: [ '', '100px']										
+										widths: [ '', '100px']
 									},
 									{
 										children: [
 													{
 														commit: commitValue,
-														'default': 400,														
+														'default': 400,
 														id: 'width',
-														label: editor.lang.common.width,														
+														label: editor.lang.common.width,
 														setup: loadValue,
 														type: 'text',
-														validate: CKEDITOR.dialog.validate.notEmpty(lang.widthRequired)														
+														validate: CKEDITOR.dialog.validate.notEmpty(lang.widthRequired)
 													},
 													{
 														commit: commitValue,
@@ -205,82 +200,82 @@ CKEDITOR.dialog.add( 'liferayvideo',
 														id: 'height',
 														label: editor.lang.common.height,
 														setup: loadValue,
-														type: 'text',												
-														validate: CKEDITOR.dialog.validate.notEmpty(lang.heightRequired)														
+														type: 'text',
+														validate: CKEDITOR.dialog.validate.notEmpty(lang.heightRequired)
 													},
 													{
 														commit: commitValue,
 														id: 'id',
 														label: 'Id',
 														setup: loadValue,
-														type: 'text'													
+														type: 'text'
 													}],
 										type : 'hbox',
-										widths: [ '33%', '33%', '33%']										
+										widths: [ '33%', '33%', '33%']
 									}
 								],
 								id : 'info'
 							}]
 					,
-					
+
 					minWidth : 400,
-					
+
 					minHeight : 200,
-					
-					onShow : function() {	
+
+					onShow : function() {
 						var instance = this;
-						
+
 						instance.fakeImage = null;
 						instance.videoNode = null;
-			
+
 						var fakeImage = instance.getSelectedElement();
-			
+
 						if (fakeImage && fakeImage.data('cke-real-element-type') && 
 							fakeImage.data('cke-real-element-type') === 'liferayvideo') {
-							
-								instance.fakeImage = fakeImage;	
-								var videoNode = editor.restoreRealElement( fakeImage );					
-								instance.videoNode = videoNode;					
+
+								instance.fakeImage = fakeImage;
+								var videoNode = editor.restoreRealElement(fakeImage);
+								instance.videoNode = videoNode;
 								instance.setupContent( videoNode);
 						}
 						else {
 							instance.setupContent( null);
 						}
 					},
-	
-					onOk : function() {		
+
+					onOk : function() {
 						var instance = this;
-						
+
 						var STR_DIV = 'div';
-						
+
 						var tmpid = generateId();
-						var extraStyles = {};						
-						
+						var extraStyles = {};
+
 						var divNode = editor.document.createElement(STR_DIV);
 						divNode.setAttribute('class', 'liferayckevideo video-container');
-						
+
 						var boundingBoxTmp = editor.document.createElement(STR_DIV);
 						boundingBoxTmp.setAttribute('id', tmpid);
-						
+
 						var scriptTmp = editor.document.createElement('script');
 						scriptTmp.setAttribute('type', 'text/javascript');
-						
+
 						divNode.append(boundingBoxTmp);
 						divNode.append(scriptTmp);			
-						
+
 						instance.commitContent(divNode, extraStyles);	
-						
+
 						var newFakeImage = editor.createFakeElement(divNode, 'liferay_cke_video', 'liferayvideo', false);
 						newFakeImage.setStyles(extraStyles);
-						
+
 						if (instance.fakeImage) {
 							newFakeImage.replace(instance.fakeImage);
 							editor.getSelection().selectElement(newFakeImage);
 						}
-						else {		
+						else {
 							editor.insertElement(newFakeImage);
 						}
-					},		
+					},
 					title : lang.dialogTitle				
 			};
 		}
