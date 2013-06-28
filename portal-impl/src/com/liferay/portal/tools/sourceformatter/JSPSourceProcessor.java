@@ -287,6 +287,8 @@ public class JSPSourceProcessor extends BaseSourceProcessor {
 					"while (", ") {\n"
 				});
 
+			newContent = fixCompatClassImports(fileName, newContent);
+
 			if (stripJSPImports) {
 				try {
 					newContent = stripJSPImports(fileName, newContent);

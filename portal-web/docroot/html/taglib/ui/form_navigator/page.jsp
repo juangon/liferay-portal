@@ -97,6 +97,8 @@ if (Validator.isNotNull(historyKey)) {
 				modifiedSections = null;
 			}
 
+			boolean error = false;
+
 			for (int i = 0; i < categoryNames.length; i++) {
 				String category = categoryNames[i];
 				String[] sections = categorySections[i];
@@ -111,6 +113,8 @@ if (Validator.isNotNull(historyKey)) {
 					<%
 					if (Validator.isNotNull(errorSection)) {
 						curSection = StringPool.BLANK;
+
+						error = true;
 					}
 
 					for (String section : sections) {
@@ -298,6 +302,10 @@ if (Validator.isNotNull(historyKey)) {
 		}
 
 		selectTabBySectionId(locationSectionId);
+	}
+
+	if (<%= error %>) {
+		Liferay.fire('formNavigator:reveal<portlet:namespace /><%= errorSection %>');
 	}
 </aui:script>
 

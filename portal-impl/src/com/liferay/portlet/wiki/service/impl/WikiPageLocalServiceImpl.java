@@ -61,6 +61,7 @@ import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.model.AssetLink;
 import com.liferay.portlet.asset.model.AssetLinkConstants;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
+import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.model.SocialActivityConstants;
 import com.liferay.portlet.trash.model.TrashEntry;
@@ -2262,6 +2263,11 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			WikiPage.class.getName(), page.getResourcePrimKey());
 
 		serviceContext.setAssetTagNames(assetTagNames);
+
+		ExpandoBridge expandoBridge = page.getExpandoBridge();
+
+		serviceContext.setExpandoBridgeAttributes(
+			expandoBridge.getAttributes());
 	}
 
 	protected String replaceStyles(String html) {
