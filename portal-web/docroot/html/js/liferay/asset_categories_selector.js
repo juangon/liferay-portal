@@ -640,6 +640,8 @@ AUI.add(
 							paginatorConfig.start = -1;
 						}
 
+						vocabularyRootNode.paginator = paginatorConfig;
+
 						instance.TREEVIEWS[vocabularyId] = new A.TreeView(
 							{
 								children: [vocabularyRootNode],
@@ -664,8 +666,7 @@ AUI.add(
 									},
 									formatter: A.bind('_formatJSONResult', instance),
 									url: themeDisplay.getPathMain() + '/asset/get_categories'
-								},
-								paginator: paginatorConfig
+								}
 							}
 						).render(popup.entriesNode);
 					}
