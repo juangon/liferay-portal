@@ -111,6 +111,11 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 		return "0";
 	}
 
+	protected List<FileEntry> getFileEntries(Folder folder) throws Exception {
+		return DLAppServiceUtil.getFileEntries(
+			folder.getRepositoryId(), folder.getFolderId());
+	}
+
 	protected void getFiles(
 			CommandArgument commandArgument, Document document, Node rootNode)
 		throws Exception {
@@ -128,8 +133,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 		Folder folder = getFolder(
 			group.getGroupId(), commandArgument.getCurrentFolder());
 
-		List<FileEntry> fileEntries = DLAppServiceUtil.getFileEntries(
-			folder.getRepositoryId(), folder.getFolderId());
+		List<FileEntry> fileEntries = getFileEntries(folder);
 
 		for (FileEntry fileEntry : fileEntries) {
 			Element fileElement = document.createElement("File");
