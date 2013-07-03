@@ -6986,6 +6986,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		groupImpl.setMembershipRestriction(group.getMembershipRestriction());
 		groupImpl.setFriendlyURL(group.getFriendlyURL());
 		groupImpl.setSite(group.isSite());
+		groupImpl.setRemoteStagingGroupCount(group.getRemoteStagingGroupCount());
 		groupImpl.setActive(group.isActive());
 
 		return groupImpl;

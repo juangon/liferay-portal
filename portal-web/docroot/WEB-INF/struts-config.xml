@@ -451,6 +451,8 @@
 			<forward name="portlet.layouts_admin.error" path="portlet.dockbar.add_page" />
 		</action>
 
+		<action path="/dockbar/preview_panel" forward="portlet.dockbar.preview_panel" />
+
 		<action path="/dockbar/view" type="com.liferay.portlet.dockbar.action.ViewAction">
 			<forward name="portlet.dockbar.view" path="portlet.dockbar.view" />
 		</action>
@@ -694,6 +696,8 @@
 
 		<!-- Group Pages -->
 
+		<action path="/group_pages/delete_background_task" type="com.liferay.portlet.backgroundtask.action.DeleteBackgroundTaskAction" />
+
 		<action path="/group_pages/edit_layout_branch" type="com.liferay.portlet.stagingbar.action.EditLayoutBranchAction">
 			<forward name="portlet.staging_bar.edit_layout_branch" path="portlet.staging_bar.edit_layout_branch" />
 			<forward name="portlet.staging_bar.error" path="portlet.staging_bar.error" />
@@ -718,6 +722,8 @@
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 			<forward name="portlet.layouts_admin.export_layouts" path="portlet.layouts_admin.export_layouts" />
 		</action>
+
+		<action path="/group_pages/get_background_task_attachment" type="com.liferay.portlet.backgroundtask.action.GetBackgroundTaskAttachmentAction" />
 
 		<action path="/group_pages/get_layouts" type="com.liferay.portlet.layoutsadmin.action.GetLayoutsAction" />
 

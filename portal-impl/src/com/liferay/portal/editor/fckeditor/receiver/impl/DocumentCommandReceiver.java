@@ -53,7 +53,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 		try {
 			Group group = commandArgument.getCurrentGroup();
 
-			Folder folder = _getFolder(
+			Folder folder = getFolder(
 				group.getGroupId(),
 				StringPool.SLASH + commandArgument.getCurrentFolder());
 
@@ -86,7 +86,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 		try {
 			Group group = commandArgument.getCurrentGroup();
 
-			Folder folder = _getFolder(
+			Folder folder = getFolder(
 				group.getGroupId(), commandArgument.getCurrentFolder());
 
 			long repositoryId = folder.getRepositoryId();
@@ -111,42 +111,12 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 		return "0";
 	}
 
-	@Override
-	protected void getFolders(
-		CommandArgument commandArgument, Document document, Node rootNode) {
-
-		try {
-			_getFolders(commandArgument, document, rootNode);
-		}
-		catch (Exception e) {
-			throw new FCKException(e);
-		}
+	protected List<FileEntry> getFileEntries(Folder folder) throws Exception {
+		return DLAppServiceUtil.getFileEntries(
+			folder.getRepositoryId(), folder.getFolderId());
 	}
 
-	@Override
-	protected void getFoldersAndFiles(
-		CommandArgument commandArgument, Document document, Node rootNode) {
-
-		try {
-			_getFolders(commandArgument, document, rootNode);
-			_getFiles(commandArgument, document, rootNode);
-		}
-		catch (PrincipalException pe) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(pe, pe);
-			}
-		}
-		catch (Exception e) {
-			throw new FCKException(e);
-		}
-	}
-
-	@Override
-	protected boolean isStagedData(Group group) {
-		return group.isStagedPortlet(PortletKeys.DOCUMENT_LIBRARY);
-	}
-
-	private void _getFiles(
+	protected void getFiles(
 			CommandArgument commandArgument, Document document, Node rootNode)
 		throws Exception {
 
@@ -160,11 +130,10 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 
 		Group group = commandArgument.getCurrentGroup();
 
-		Folder folder = _getFolder(
+		Folder folder = getFolder(
 			group.getGroupId(), commandArgument.getCurrentFolder());
 
-		List<FileEntry> fileEntries = DLAppServiceUtil.getFileEntries(
-			folder.getRepositoryId(), folder.getFolderId());
+		List<FileEntry> fileEntries = getFileEntries(folder);
 
 		for (FileEntry fileEntry : fileEntries) {
 			Element fileElement = document.createElement("File");
@@ -185,7 +154,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 		}
 	}
 
-	private Folder _getFolder(long groupId, String folderName)
+	protected Folder getFolder(long groupId, String folderName)
 		throws Exception {
 
 		DLFolder dlFolder = new DLFolderImpl();
@@ -220,6 +189,41 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 		return folder;
 	}
 
+	@Override
+	protected void getFolders(
+		CommandArgument commandArgument, Document document, Node rootNode) {
+
+		try {
+			_getFolders(commandArgument, document, rootNode);
+		}
+		catch (Exception e) {
+			throw new FCKException(e);
+		}
+	}
+
+	@Override
+	protected void getFoldersAndFiles(
+		CommandArgument commandArgument, Document document, Node rootNode) {
+
+		try {
+			_getFolders(commandArgument, document, rootNode);
+			getFiles(commandArgument, document, rootNode);
+		}
+		catch (PrincipalException pe) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(pe, pe);
+			}
+		}
+		catch (Exception e) {
+			throw new FCKException(e);
+		}
+	}
+
+	@Override
+	protected boolean isStagedData(Group group) {
+		return group.isStagedPortlet(PortletKeys.DOCUMENT_LIBRARY);
+	}
+
 	private void _getFolders(
 			CommandArgument commandArgument, Document document, Node rootNode)
 		throws Exception {
@@ -234,7 +238,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 		else {
 			Group group = commandArgument.getCurrentGroup();
 
-			Folder folder = _getFolder(
+			Folder folder = getFolder(
 				group.getGroupId(), commandArgument.getCurrentFolder());
 
 			List<Folder> folders = DLAppServiceUtil.getFolders(

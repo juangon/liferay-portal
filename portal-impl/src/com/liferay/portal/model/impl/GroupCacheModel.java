@@ -34,7 +34,7 @@ import java.io.ObjectOutput;
 public class GroupCacheModel implements CacheModel<Group>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(39);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -70,6 +70,8 @@ public class GroupCacheModel implements CacheModel<Group>, Externalizable {
 		sb.append(friendlyURL);
 		sb.append(", site=");
 		sb.append(site);
+		sb.append(", remoteStagingGroupCount=");
+		sb.append(remoteStagingGroupCount);
 		sb.append(", active=");
 		sb.append(active);
 		sb.append("}");
@@ -137,6 +139,7 @@ public class GroupCacheModel implements CacheModel<Group>, Externalizable {
 		}
 
 		groupImpl.setSite(site);
+		groupImpl.setRemoteStagingGroupCount(remoteStagingGroupCount);
 		groupImpl.setActive(active);
 
 		groupImpl.resetOriginalValues();
@@ -163,6 +166,7 @@ public class GroupCacheModel implements CacheModel<Group>, Externalizable {
 		membershipRestriction = objectInput.readInt();
 		friendlyURL = objectInput.readUTF();
 		site = objectInput.readBoolean();
+		remoteStagingGroupCount = objectInput.readInt();
 		active = objectInput.readBoolean();
 	}
 
@@ -225,6 +229,7 @@ public class GroupCacheModel implements CacheModel<Group>, Externalizable {
 		}
 
 		objectOutput.writeBoolean(site);
+		objectOutput.writeInt(remoteStagingGroupCount);
 		objectOutput.writeBoolean(active);
 	}
 
@@ -245,5 +250,6 @@ public class GroupCacheModel implements CacheModel<Group>, Externalizable {
 	public int membershipRestriction;
 	public String friendlyURL;
 	public boolean site;
+	public int remoteStagingGroupCount;
 	public boolean active;
 }

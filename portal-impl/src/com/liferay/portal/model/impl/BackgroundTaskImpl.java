@@ -14,6 +14,7 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.backgroundtask.BackgroundTaskConstants;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -141,6 +142,11 @@ public class BackgroundTaskImpl extends BackgroundTaskBaseImpl {
 		}
 
 		return _attachmentsFolderId;
+	}
+
+	@Override
+	public String getStatusLabel() {
+		return BackgroundTaskConstants.getStatusLabel(getStatus());
 	}
 
 	@Override

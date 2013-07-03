@@ -405,6 +405,7 @@
 		<column name="membershipRestriction" type="int" />
 		<column name="friendlyURL" type="String" />
 		<column name="site" type="boolean" />
+		<column name="remoteStagingGroupCount" type="int" />
 		<column name="active" type="boolean" />
 
 		<!-- Relationships -->

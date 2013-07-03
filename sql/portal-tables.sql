@@ -775,6 +775,7 @@ create table Group_ (
 	membershipRestriction INTEGER,
 	friendlyURL VARCHAR(255) null,
 	site BOOLEAN,
+	remoteStagingGroupCount INTEGER,
 	active_ BOOLEAN
 );
 

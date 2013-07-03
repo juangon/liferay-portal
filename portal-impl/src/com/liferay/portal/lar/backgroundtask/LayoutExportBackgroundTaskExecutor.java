@@ -61,10 +61,10 @@ public class LayoutExportBackgroundTaskExecutor
 			endDate);
 
 		long userId = MapUtil.getLong(taskContextMap, "userId");
+		String fileName = MapUtil.getString(taskContextMap, "fileName");
 
 		BackgroundTaskLocalServiceUtil.addBackgroundTaskAttachment(
-			userId, backgroundTask.getBackgroundTaskId(), larFile.getName(),
-			larFile);
+			userId, backgroundTask.getBackgroundTaskId(), fileName, larFile);
 
 		return BackgroundTaskResult.SUCCESS;
 	}

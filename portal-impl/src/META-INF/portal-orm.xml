@@ -289,6 +289,7 @@
 			<basic name="membershipRestriction" />
 			<basic name="friendlyURL" />
 			<basic name="site" />
+			<basic name="remoteStagingGroupCount" />
 			<basic name="active">
 				<column name="ACTIVE_" />
 			</basic>

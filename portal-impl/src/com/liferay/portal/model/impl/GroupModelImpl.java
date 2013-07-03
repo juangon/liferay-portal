@@ -80,9 +80,10 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 			{ "membershipRestriction", Types.INTEGER },
 			{ "friendlyURL", Types.VARCHAR },
 			{ "site", Types.BOOLEAN },
+			{ "remoteStagingGroupCount", Types.INTEGER },
 			{ "active_", Types.BOOLEAN }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Group_ (uuid_ VARCHAR(75) null,groupId LONG not null primary key,companyId LONG,creatorUserId LONG,classNameId LONG,classPK LONG,parentGroupId LONG,liveGroupId LONG,treePath VARCHAR(75) null,name VARCHAR(150) null,description STRING null,type_ INTEGER,typeSettings TEXT null,manualMembership BOOLEAN,membershipRestriction INTEGER,friendlyURL VARCHAR(255) null,site BOOLEAN,active_ BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table Group_ (uuid_ VARCHAR(75) null,groupId LONG not null primary key,companyId LONG,creatorUserId LONG,classNameId LONG,classPK LONG,parentGroupId LONG,liveGroupId LONG,treePath VARCHAR(75) null,name VARCHAR(150) null,description STRING null,type_ INTEGER,typeSettings TEXT null,manualMembership BOOLEAN,membershipRestriction INTEGER,friendlyURL VARCHAR(255) null,site BOOLEAN,remoteStagingGroupCount INTEGER,active_ BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table Group_";
 	public static final String ORDER_BY_JPQL = " ORDER BY group_.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Group_.name ASC";
@@ -141,6 +142,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		model.setMembershipRestriction(soapModel.getMembershipRestriction());
 		model.setFriendlyURL(soapModel.getFriendlyURL());
 		model.setSite(soapModel.getSite());
+		model.setRemoteStagingGroupCount(soapModel.getRemoteStagingGroupCount());
 		model.setActive(soapModel.getActive());
 
 		return model;
@@ -255,6 +257,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		attributes.put("membershipRestriction", getMembershipRestriction());
 		attributes.put("friendlyURL", getFriendlyURL());
 		attributes.put("site", getSite());
+		attributes.put("remoteStagingGroupCount", getRemoteStagingGroupCount());
 		attributes.put("active", getActive());
 
 		return attributes;
@@ -363,6 +366,13 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 
 		if (site != null) {
 			setSite(site);
+		}
+
+		Integer remoteStagingGroupCount = (Integer)attributes.get(
+				"remoteStagingGroupCount");
+
+		if (remoteStagingGroupCount != null) {
+			setRemoteStagingGroupCount(remoteStagingGroupCount);
 		}
 
 		Boolean active = (Boolean)attributes.get("active");
@@ -756,6 +766,17 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 
 	@Override
 	@JSON
+	public int getRemoteStagingGroupCount() {
+		return _remoteStagingGroupCount;
+	}
+
+	@Override
+	public void setRemoteStagingGroupCount(int remoteStagingGroupCount) {
+		_remoteStagingGroupCount = remoteStagingGroupCount;
+	}
+
+	@Override
+	@JSON
 	public boolean getActive() {
 		return _active;
 	}
@@ -830,6 +851,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		groupImpl.setMembershipRestriction(getMembershipRestriction());
 		groupImpl.setFriendlyURL(getFriendlyURL());
 		groupImpl.setSite(getSite());
+		groupImpl.setRemoteStagingGroupCount(getRemoteStagingGroupCount());
 		groupImpl.setActive(getActive());
 
 		groupImpl.resetOriginalValues();
@@ -1000,6 +1022,8 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 
 		groupCacheModel.site = getSite();
 
+		groupCacheModel.remoteStagingGroupCount = getRemoteStagingGroupCount();
+
 		groupCacheModel.active = getActive();
 
 		return groupCacheModel;
@@ -1007,7 +1031,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(39);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -1043,6 +1067,8 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		sb.append(getFriendlyURL());
 		sb.append(", site=");
 		sb.append(getSite());
+		sb.append(", remoteStagingGroupCount=");
+		sb.append(getRemoteStagingGroupCount());
 		sb.append(", active=");
 		sb.append(getActive());
 		sb.append("}");
@@ -1052,7 +1078,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(58);
+		StringBundler sb = new StringBundler(61);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.Group");
@@ -1127,6 +1153,10 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		sb.append(getSite());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>remoteStagingGroupCount</column-name><column-value><![CDATA[");
+		sb.append(getRemoteStagingGroupCount());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>active</column-name><column-value><![CDATA[");
 		sb.append(getActive());
 		sb.append("]]></column-value></column>");
@@ -1175,6 +1205,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 	private boolean _site;
 	private boolean _originalSite;
 	private boolean _setOriginalSite;
+	private int _remoteStagingGroupCount;
 	private boolean _active;
 	private boolean _originalActive;
 	private boolean _setOriginalActive;

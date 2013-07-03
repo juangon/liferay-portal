@@ -31,6 +31,8 @@ portletURL.setParameter("struts_action", "/journal/view_feeds");
 	<%
 	FeedSearch searchContainer = new FeedSearch(renderRequest, portletURL);
 
+	searchContainerReference.register(searchContainer);
+
 	List headerNames = searchContainer.getHeaderNames();
 
 	headerNames.add(StringPool.BLANK);

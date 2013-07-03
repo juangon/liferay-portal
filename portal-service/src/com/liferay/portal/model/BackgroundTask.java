@@ -46,5 +46,7 @@ public interface BackgroundTask extends BackgroundTaskModel, PersistedModel {
 	public long getAttachmentsFolderId()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public java.lang.String getStatusLabel();
+
 	public java.util.Map<java.lang.String, java.io.Serializable> getTaskContextMap();
 }

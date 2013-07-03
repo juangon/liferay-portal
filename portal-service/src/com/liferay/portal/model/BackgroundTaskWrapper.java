@@ -652,6 +652,11 @@ public class BackgroundTaskWrapper implements BackgroundTask,
 	}
 
 	@Override
+	public java.lang.String getStatusLabel() {
+		return _backgroundTask.getStatusLabel();
+	}
+
+	@Override
 	public java.util.Map<java.lang.String, java.io.Serializable> getTaskContextMap() {
 		return _backgroundTask.getTaskContextMap();
 	}

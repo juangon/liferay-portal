@@ -21,12 +21,10 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
-import com.liferay.portal.kernel.util.SearchContainerReference;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.TextFormatter;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.util.PortalUtil;
 
 import java.util.ArrayList;
@@ -67,8 +65,6 @@ public class SearchContainer<R> {
 	public static final String DEFAULT_ORDER_BY_COL_PARAM = "orderByCol";
 
 	public static final String DEFAULT_ORDER_BY_TYPE_PARAM = "orderByType";
-
-	public static final String DEFAULT_VAR = "searchContainer";
 
 	public static final int MAX_DELTA = 200;
 
@@ -142,12 +138,6 @@ public class SearchContainer<R> {
 		}
 
 		_emptyResultsMessage = emptyResultsMessage;
-
-		SearchContainerReference searchContainerReference =
-			(SearchContainerReference)portletRequest.getAttribute(
-				WebKeys.SEARCH_CONTAINER_REFERENCE);
-
-		searchContainerReference.register(this);
 	}
 
 	public SearchContainer(

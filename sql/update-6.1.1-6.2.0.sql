@@ -359,6 +359,7 @@ alter table Group_ add uuid_ VARCHAR(75) null;
 alter table Group_ add treePath STRING null;
 alter table Group_ add manualMembership BOOLEAN;
 alter table Group_ add membershipRestriction INTEGER;
+alter table Group_ add remoteStagingGroupCount INTEGER;
 
 COMMIT_TRANSACTION;
 
