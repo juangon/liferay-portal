@@ -64,10 +64,10 @@ public class VideoCommandReceiver extends DocumentCommandReceiver {
 
 		if (!VideoProcessorUtil.hasVideo(fileEntry.getFileVersion())) {
 			fileElement.setAttribute(
-					"errorMessage",
-					LanguageUtil.get(
-						themeDisplay.getLocale(),
-						"video-still-generating-try-later"));
+				"errorMessage",
+				LanguageUtil.get(
+					themeDisplay.getLocale(),
+					"video-preview-is-been-processed-please-retry-later"));
 		}
 
 		return fileElement;
