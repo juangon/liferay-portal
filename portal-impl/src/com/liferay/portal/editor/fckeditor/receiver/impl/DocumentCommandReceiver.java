@@ -36,6 +36,7 @@ import com.liferay.portlet.documentlibrary.util.DLUtil;
 
 import java.io.InputStream;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -111,9 +112,54 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 		return "0";
 	}
 
-	protected List<FileEntry> getFileEntries(Folder folder) throws Exception {
-		return DLAppServiceUtil.getFileEntries(
+	protected Element getFileElement(
+			Element fileElement, ThemeDisplay themeDisplay, FileEntry fileEntry)
+		throws Exception {
+
+		String name = fileEntry.getTitle();
+
+		String extension = fileEntry.getExtension();
+
+		if (Validator.isNotNull(extension)) {
+			String periodAndExtension = StringPool.PERIOD.concat(extension);
+
+			if (!name.endsWith(periodAndExtension)) {
+				name = name.concat(periodAndExtension);
+			}
+		}
+
+		fileElement.setAttribute("name", name);
+		fileElement.setAttribute("desc", name);
+
+		fileElement.setAttribute("size", getSize(fileEntry.getSize()));
+
+		String url = DLUtil.getPreviewURL(
+			fileEntry, fileEntry.getFileVersion(), themeDisplay,
+			StringPool.BLANK, false, false);
+
+		fileElement.setAttribute("url", url);
+
+		return fileElement;
+	}
+
+	protected List<Element> getFileElements(
+			Document document, ThemeDisplay themeDisplay, Folder folder)
+		throws Exception {
+
+		List<FileEntry> fileEntries = DLAppServiceUtil.getFileEntries(
 			folder.getRepositoryId(), folder.getFolderId());
+
+		List<Element> fileElements = new ArrayList<Element>(fileEntries.size());
+
+		for (FileEntry fileEntry : fileEntries) {
+			Element fileElement = document.createElement("File");
+
+			fileElement = getFileElement(fileElement, themeDisplay, fileEntry);
+
+			fileElements.add(fileElement);
+		}
+
+		return fileElements;
 	}
 
 	protected void getFiles(
@@ -133,37 +179,11 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 		Folder folder = getFolder(
 			group.getGroupId(), commandArgument.getCurrentFolder());
 
-		List<FileEntry> fileEntries = getFileEntries(folder);
+		List<Element> fileElements = getFileElements(
+			document, commandArgument.getThemeDisplay(), folder);
 
-		for (FileEntry fileEntry : fileEntries) {
-			Element fileElement = document.createElement("File");
-
+		for (Element fileElement : fileElements) {
 			filesElement.appendChild(fileElement);
-
-			String name = fileEntry.getTitle();
-
-			String extension = fileEntry.getExtension();
-
-			if (Validator.isNotNull(extension)) {
-				String periodAndExtension = StringPool.PERIOD.concat(extension);
-
-				if (!name.endsWith(periodAndExtension)) {
-					name = name.concat(periodAndExtension);
-				}
-			}
-
-			fileElement.setAttribute("name", name);
-			fileElement.setAttribute("desc", name);
-
-			fileElement.setAttribute("size", getSize(fileEntry.getSize()));
-
-			ThemeDisplay themeDisplay = commandArgument.getThemeDisplay();
-
-			String url = DLUtil.getPreviewURL(
-				fileEntry, fileEntry.getFileVersion(), themeDisplay,
-				StringPool.BLANK, false, false);
-
-			fileElement.setAttribute("url", url);
 		}
 	}
 
