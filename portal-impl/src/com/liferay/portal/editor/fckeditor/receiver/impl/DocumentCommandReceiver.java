@@ -36,6 +36,7 @@ import com.liferay.portlet.documentlibrary.util.DLUtil;
 
 import java.io.InputStream;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -53,7 +54,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 		try {
 			Group group = commandArgument.getCurrentGroup();
 
-			Folder folder = _getFolder(
+			Folder folder = getFolder(
 				group.getGroupId(),
 				StringPool.SLASH + commandArgument.getCurrentFolder());
 
@@ -86,7 +87,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 		try {
 			Group group = commandArgument.getCurrentGroup();
 
-			Folder folder = _getFolder(
+			Folder folder = getFolder(
 				group.getGroupId(), commandArgument.getCurrentFolder());
 
 			long repositoryId = folder.getRepositoryId();
@@ -111,42 +112,57 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 		return "0";
 	}
 
-	@Override
-	protected void getFolders(
-		CommandArgument commandArgument, Document document, Node rootNode) {
+	protected Element getFileElement(
+			Element fileElement, ThemeDisplay themeDisplay, FileEntry fileEntry)
+		throws Exception {
 
-		try {
-			_getFolders(commandArgument, document, rootNode);
-		}
-		catch (Exception e) {
-			throw new FCKException(e);
-		}
-	}
+		String name = fileEntry.getTitle();
 
-	@Override
-	protected void getFoldersAndFiles(
-		CommandArgument commandArgument, Document document, Node rootNode) {
+		String extension = fileEntry.getExtension();
 
-		try {
-			_getFolders(commandArgument, document, rootNode);
-			_getFiles(commandArgument, document, rootNode);
-		}
-		catch (PrincipalException pe) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(pe, pe);
+		if (Validator.isNotNull(extension)) {
+			String periodAndExtension = StringPool.PERIOD.concat(extension);
+
+			if (!name.endsWith(periodAndExtension)) {
+				name = name.concat(periodAndExtension);
 			}
 		}
-		catch (Exception e) {
-			throw new FCKException(e);
+
+		fileElement.setAttribute("name", name);
+		fileElement.setAttribute("desc", name);
+
+		fileElement.setAttribute("size", getSize(fileEntry.getSize()));
+
+		String url = DLUtil.getPreviewURL(
+			fileEntry, fileEntry.getFileVersion(), themeDisplay,
+			StringPool.BLANK, false, false);
+
+		fileElement.setAttribute("url", url);
+
+		return fileElement;
+	}
+
+	protected List<Element> getFileElements(
+			Document document, ThemeDisplay themeDisplay, Folder folder)
+		throws Exception {
+
+		List<FileEntry> fileEntries = DLAppServiceUtil.getFileEntries(
+			folder.getRepositoryId(), folder.getFolderId());
+
+		List<Element> fileElements = new ArrayList<Element>(fileEntries.size());
+
+		for (FileEntry fileEntry : fileEntries) {
+			Element fileElement = document.createElement("File");
+
+			fileElement = getFileElement(fileElement, themeDisplay, fileEntry);
+
+			fileElements.add(fileElement);
 		}
+
+		return fileElements;
 	}
 
-	@Override
-	protected boolean isStagedData(Group group) {
-		return group.isStagedPortlet(PortletKeys.DOCUMENT_LIBRARY);
-	}
-
-	private void _getFiles(
+	protected void getFiles(
 			CommandArgument commandArgument, Document document, Node rootNode)
 		throws Exception {
 
@@ -160,45 +176,18 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 
 		Group group = commandArgument.getCurrentGroup();
 
-		Folder folder = _getFolder(
+		Folder folder = getFolder(
 			group.getGroupId(), commandArgument.getCurrentFolder());
 
-		List<FileEntry> fileEntries = DLAppServiceUtil.getFileEntries(
-			folder.getRepositoryId(), folder.getFolderId());
+		List<Element> fileElements = getFileElements(
+			document, commandArgument.getThemeDisplay(), folder);
 
-		for (FileEntry fileEntry : fileEntries) {
-			Element fileElement = document.createElement("File");
-
+		for (Element fileElement : fileElements) {
 			filesElement.appendChild(fileElement);
-
-			String name = fileEntry.getTitle();
-
-			String extension = fileEntry.getExtension();
-
-			if (Validator.isNotNull(extension)) {
-				String periodAndExtension = StringPool.PERIOD.concat(extension);
-
-				if (!name.endsWith(periodAndExtension)) {
-					name = name.concat(periodAndExtension);
-				}
-			}
-
-			fileElement.setAttribute("name", name);
-			fileElement.setAttribute("desc", name);
-
-			fileElement.setAttribute("size", getSize(fileEntry.getSize()));
-
-			ThemeDisplay themeDisplay = commandArgument.getThemeDisplay();
-
-			String url = DLUtil.getPreviewURL(
-				fileEntry, fileEntry.getFileVersion(), themeDisplay,
-				StringPool.BLANK, false, false);
-
-			fileElement.setAttribute("url", url);
 		}
 	}
 
-	private Folder _getFolder(long groupId, String folderName)
+	protected Folder getFolder(long groupId, String folderName)
 		throws Exception {
 
 		DLFolder dlFolder = new DLFolderImpl();
@@ -233,6 +222,41 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 		return folder;
 	}
 
+	@Override
+	protected void getFolders(
+		CommandArgument commandArgument, Document document, Node rootNode) {
+
+		try {
+			_getFolders(commandArgument, document, rootNode);
+		}
+		catch (Exception e) {
+			throw new FCKException(e);
+		}
+	}
+
+	@Override
+	protected void getFoldersAndFiles(
+		CommandArgument commandArgument, Document document, Node rootNode) {
+
+		try {
+			_getFolders(commandArgument, document, rootNode);
+			getFiles(commandArgument, document, rootNode);
+		}
+		catch (PrincipalException pe) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(pe, pe);
+			}
+		}
+		catch (Exception e) {
+			throw new FCKException(e);
+		}
+	}
+
+	@Override
+	protected boolean isStagedData(Group group) {
+		return group.isStagedPortlet(PortletKeys.DOCUMENT_LIBRARY);
+	}
+
 	private void _getFolders(
 			CommandArgument commandArgument, Document document, Node rootNode)
 		throws Exception {
@@ -247,7 +271,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 		else {
 			Group group = commandArgument.getCurrentGroup();
 
-			Folder folder = _getFolder(
+			Folder folder = getFolder(
 				group.getGroupId(), commandArgument.getCurrentFolder());
 
 			List<Folder> folders = DLAppServiceUtil.getFolders(
