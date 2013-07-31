@@ -114,11 +114,11 @@ public class ImportPagesAction extends PortletAction {
 			uploadPortletRequest, "importProgressId");
 
 		ProgressTracker progressTracker = new ProgressTracker(
-			actionRequest, importProgressId);
+			importProgressId);
 
 		ProgressTrackerThreadLocal.setProgressTracker(progressTracker);
 
-		progressTracker.start();
+		progressTracker.start(actionRequest);
 
 		long nodeId = ParamUtil.getLong(uploadPortletRequest, "nodeId");
 		String importer = ParamUtil.getString(uploadPortletRequest, "importer");
@@ -149,7 +149,7 @@ public class ImportPagesAction extends PortletAction {
 
 		WikiCacheUtil.clearCache(nodeId);
 
-		progressTracker.finish();
+		progressTracker.finish(actionRequest);
 	}
 
 }

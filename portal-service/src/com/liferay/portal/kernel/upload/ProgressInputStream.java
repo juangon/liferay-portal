@@ -64,9 +64,9 @@ public class ProgressInputStream extends InputStream {
 
 	public void initProgress() {
 		ProgressTracker progressTracker = new ProgressTracker(
-			_portletSession, _progressId);
+			_progressId);
 
-		progressTracker.initialize();
+		progressTracker.initialize(_portletSession);
 	}
 
 	@Override
@@ -159,9 +159,9 @@ public class ProgressInputStream extends InputStream {
 		if ((curPercent == null) || ((percent - curPercent.intValue()) >= 1)) {
 			if (progressTracker == null) {
 				progressTracker = new ProgressTracker(
-					_portletSession, _progressId);
+					_progressId);
 
-				progressTracker.initialize();
+				progressTracker.initialize(_portletSession);
 			}
 
 			progressTracker.setPercent(percent);
