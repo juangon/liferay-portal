@@ -113,8 +113,7 @@ public class ImportPagesAction extends PortletAction {
 		String importProgressId = ParamUtil.getString(
 			uploadPortletRequest, "importProgressId");
 
-		ProgressTracker progressTracker = new ProgressTracker(
-			importProgressId);
+		ProgressTracker progressTracker = new ProgressTracker(importProgressId);
 
 		ProgressTrackerThreadLocal.setProgressTracker(progressTracker);
 

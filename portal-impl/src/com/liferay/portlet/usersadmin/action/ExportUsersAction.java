@@ -252,8 +252,7 @@ public class ExportUsersAction extends PortletAction {
 		String exportProgressId = ParamUtil.getString(
 			actionRequest, "exportProgressId");
 
-		ProgressTracker progressTracker = new ProgressTracker(
-			exportProgressId);
+		ProgressTracker progressTracker = new ProgressTracker(exportProgressId);
 
 		progressTracker.start(actionRequest);
 
