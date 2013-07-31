@@ -253,9 +253,9 @@ public class ExportUsersAction extends PortletAction {
 			actionRequest, "exportProgressId");
 
 		ProgressTracker progressTracker = new ProgressTracker(
-			actionRequest, exportProgressId);
+			exportProgressId);
 
-		progressTracker.start();
+		progressTracker.start(actionRequest);
 
 		int percentage = 10;
 		int total = users.size();
@@ -274,7 +274,7 @@ public class ExportUsersAction extends PortletAction {
 			progressTracker.setPercent(percentage);
 		}
 
-		progressTracker.finish();
+		progressTracker.finish(actionRequest);
 
 		return sb.toString();
 	}
