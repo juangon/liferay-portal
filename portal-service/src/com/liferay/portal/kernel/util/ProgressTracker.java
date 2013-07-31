@@ -15,6 +15,7 @@
 package com.liferay.portal.kernel.util;
 
 import java.io.Serializable;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,11 +29,11 @@ import javax.servlet.http.HttpSession;
  * @author Jorge Ferrer
  * @author Sergio González
  */
-public class ProgressTracker implements Serializable{
+public class ProgressTracker implements Serializable {
 
 	public static final String PERCENT =
 		ProgressTracker.class.getName() + "_PERCENT";
-	
+
 	public ProgressTracker(String progressId) {
 		_progressId = progressId;
 		addProgress(ProgressStatusConstants.PREPARED, 0, StringPool.BLANK);
@@ -44,21 +45,21 @@ public class ProgressTracker implements Serializable{
 		_progress.put(status, tuple);
 	}
 
+	public void finish(HttpServletRequest httpServletRequest) {
+		finish(httpServletRequest.getSession());
+	}
+
 	public void finish(HttpSession session) {
 		session.removeAttribute(PERCENT + _progressId);
+	}
+
+	public void finish(PortletRequest portletRequest) {
+		finish(portletRequest.getPortletSession());
 	}
 
 	public void finish(PortletSession portletSession) {
 		portletSession.removeAttribute(
 				PERCENT + _progressId, PortletSession.APPLICATION_SCOPE);
-	}
-
-	public void finish(HttpServletRequest httpServletRequest) {
-		finish(httpServletRequest.getSession());
-	}
-	
-	public void finish(PortletRequest portletRequest) {
-		finish(portletRequest.getPortletSession());
 	}
 
 	public String getMessage() {
@@ -77,21 +78,21 @@ public class ProgressTracker implements Serializable{
 		return _status;
 	}
 
-	public void initialize(HttpSession session) {
-		session.setAttribute(PERCENT + _progressId, this);
-	}
-
-	public void initialize(PortletSession portletSession) {
-		portletSession.setAttribute(
-				PERCENT + _progressId, this, PortletSession.APPLICATION_SCOPE);		
-	}
-
 	public void initialize(HttpServletRequest httpServletRequest) {
 		initialize(httpServletRequest.getSession());
 	}
 
+	public void initialize(HttpSession session) {
+		session.setAttribute(PERCENT + _progressId, this);
+	}
+
 	public void initialize(PortletRequest portletRequest) {
 		initialize(portletRequest.getPortletSession());
+	}
+
+	public void initialize(PortletSession portletSession) {
+		portletSession.setAttribute(
+			PERCENT + _progressId, this, PortletSession.APPLICATION_SCOPE);
 	}
 
 	public void setPercent(int percent) {
@@ -106,23 +107,23 @@ public class ProgressTracker implements Serializable{
 		_percent = GetterUtil.getInteger(tuple.getObject(0));
 	}
 
+	public void start(HttpServletRequest httpServletRequest) {
+		start(httpServletRequest.getSession());
+	}
+
 	public void start(HttpSession session) {
 		initialize(session);
 		setPercent(1);
+	}
+
+	public void start(PortletRequest portletRequest) {
+		start(portletRequest.getPortletSession());
 	}
 
 	public void start(PortletSession portletSession) {
 		initialize(portletSession);
 		setPercent(1);
 	}
-
-	public void start(HttpServletRequest httpServletRequest) {
-		start(httpServletRequest.getSession());
-	}
-
-	public void start(PortletRequest portletRequest) {
-		start(portletRequest.getPortletSession());
-	}	
 
 	private int _percent;
 	private Map<Integer, Tuple> _progress = new HashMap<Integer, Tuple>();
