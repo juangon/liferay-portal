@@ -88,12 +88,12 @@ public class AssetPublisherUtil {
 	}
 
 	public static List<AssetEntry> getAssetEntries(
-			PortletPreferences preferences, Layout layout, long scopeGroupId,
-			int max, boolean checkPermission)
+			PortletPreferences portletPreferences, Layout layout,
+			long scopeGroupId, int max, boolean checkPermission)
 		throws PortalException, SystemException {
 
 		return getAssetPublisher().getAssetEntries(
-			preferences, layout, scopeGroupId, max, checkPermission);
+			portletPreferences, layout, scopeGroupId, max, checkPermission);
 	}
 
 	public static List<AssetEntry> getAssetEntries(
@@ -168,36 +168,40 @@ public class AssetPublisherUtil {
 	}
 
 	public static Map<Locale, String> getEmailAssetEntryAddedBodyMap(
-		PortletPreferences preferences) {
+		PortletPreferences portletPreferences) {
 
-		return getAssetPublisher().getEmailAssetEntryAddedBodyMap(preferences);
+		return getAssetPublisher().getEmailAssetEntryAddedBodyMap(
+			portletPreferences);
 	}
 
 	public static boolean getEmailAssetEntryAddedEnabled(
-		PortletPreferences preferences) {
+		PortletPreferences portletPreferences) {
 
-		return getAssetPublisher().getEmailAssetEntryAddedEnabled(preferences);
+		return getAssetPublisher().getEmailAssetEntryAddedEnabled(
+			portletPreferences);
 	}
 
 	public static Map<Locale, String> getEmailAssetEntryAddedSubjectMap(
-		PortletPreferences preferences) {
+		PortletPreferences portletPreferences) {
 
 		return getAssetPublisher().getEmailAssetEntryAddedSubjectMap(
-			preferences);
+			portletPreferences);
 	}
 
 	public static String getEmailFromAddress(
-			PortletPreferences preferences, long companyId)
+			PortletPreferences portletPreferences, long companyId)
 		throws SystemException {
 
-		return getAssetPublisher().getEmailFromAddress(preferences, companyId);
+		return getAssetPublisher().getEmailFromAddress(
+			portletPreferences, companyId);
 	}
 
 	public static String getEmailFromName(
-			PortletPreferences preferences, long companyId)
+			PortletPreferences portletPreferences, long companyId)
 		throws SystemException {
 
-		return getAssetPublisher().getEmailFromName(preferences, companyId);
+		return getAssetPublisher().getEmailFromName(
+			portletPreferences, companyId);
 	}
 
 	public static long getGroupIdFromScopeId(
@@ -246,12 +250,28 @@ public class AssetPublisherUtil {
 	}
 
 	public static void notifySubscribers(
-			PortletPreferences preferences, long plid, String portletId,
+			PortletPreferences portletPreferences, long plid, String portletId,
 			List<AssetEntry> assetEntries)
 		throws PortalException, SystemException {
 
 		getAssetPublisher().notifySubscribers(
-			preferences, plid, portletId, assetEntries);
+			portletPreferences, plid, portletId, assetEntries);
+	}
+
+	public static void processAssetEntryQuery(
+			User user, PortletPreferences portletPreferences,
+			AssetEntryQuery assetEntryQuery)
+		throws Exception {
+
+		getAssetPublisher().processAssetEntryQuery(
+			user, portletPreferences, assetEntryQuery);
+	}
+
+	public static void registerAssetQueryProcessor(
+		String name, AssetEntryQueryProcessor assetQueryProcessor) {
+
+		getAssetPublisher().registerAssetQueryProcessor(
+				name, assetQueryProcessor);
 	}
 
 	public static void removeAndStoreSelection(
@@ -276,6 +296,13 @@ public class AssetPublisherUtil {
 
 		getAssetPublisher().subscribe(
 			permissionChecker, groupId, plid, portletId);
+	}
+
+	public static void unregisterAssetQueryProcessor(
+		String assetQueryProcessorClassName) {
+
+		getAssetPublisher().unregisterAssetQueryProcessor(
+			assetQueryProcessorClassName);
 	}
 
 	public static void unsubscribe(

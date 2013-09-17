@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.Accessor;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
@@ -87,6 +88,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.portlet.PortletException;
 import javax.portlet.PortletPreferences;
@@ -100,6 +102,25 @@ import javax.servlet.http.HttpSession;
  * @author Julio Camarero
  */
 public class AssetPublisherImpl implements AssetPublisher {
+
+	public AssetPublisherImpl() {
+		for (String assetEntryQueryProcessorClassName :
+				PropsValues.ASSET_PUBLISHER_ASSET_ENTRY_QUERY_PROCESSORS) {
+
+			try {
+				AssetEntryQueryProcessor assetEntryQueryProcessor =
+					(AssetEntryQueryProcessor)InstanceFactory.newInstance(
+						assetEntryQueryProcessorClassName);
+
+				registerAssetQueryProcessor(
+					assetEntryQueryProcessorClassName,
+					assetEntryQueryProcessor);
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+		}
+	}
 
 	@Override
 	public void addAndStoreSelection(
@@ -276,10 +297,8 @@ public class AssetPublisherImpl implements AssetPublisher {
 			protected void performAction(Object object)
 				throws PortalException, SystemException {
 
-				com.liferay.portal.model.PortletPreferences portletPreferences =
-					(com.liferay.portal.model.PortletPreferences)object;
-
-				_checkAssetEntries(portletPreferences);
+				_checkAssetEntries(
+					(com.liferay.portal.model.PortletPreferences)object);
 			}
 
 		};
@@ -289,15 +308,15 @@ public class AssetPublisherImpl implements AssetPublisher {
 
 	@Override
 	public List<AssetEntry> getAssetEntries(
-			PortletPreferences preferences, Layout layout, long scopeGroupId,
-			int max, boolean checkPermission)
+			PortletPreferences portletPreferences, Layout layout,
+			long scopeGroupId, int max, boolean checkPermission)
 		throws PortalException, SystemException {
 
 		AssetEntryQuery assetEntryQuery = getAssetEntryQuery(
-			preferences, new long[] {scopeGroupId});
+			portletPreferences, new long[] {scopeGroupId});
 
 		boolean anyAssetType = GetterUtil.getBoolean(
-			preferences.getValue("anyAssetType", null), true);
+			portletPreferences.getValue("anyAssetType", null), true);
 
 		if (!anyAssetType) {
 			long[] availableClassNameIds =
@@ -305,56 +324,56 @@ public class AssetPublisherImpl implements AssetPublisher {
 					layout.getCompanyId());
 
 			long[] classNameIds = getClassNameIds(
-				preferences, availableClassNameIds);
+				portletPreferences, availableClassNameIds);
 
 			assetEntryQuery.setClassNameIds(classNameIds);
 		}
 
 		long[] classTypeIds = GetterUtil.getLongValues(
-			preferences.getValues("classTypeIds", null));
+			portletPreferences.getValues("classTypeIds", null));
 
 		assetEntryQuery.setClassTypeIds(classTypeIds);
 
 		boolean enablePermissions = GetterUtil.getBoolean(
-			preferences.getValue("enablePermissions", null));
+			portletPreferences.getValue("enablePermissions", null));
 
 		assetEntryQuery.setEnablePermissions(enablePermissions);
 
 		assetEntryQuery.setEnd(max);
 
 		boolean excludeZeroViewCount = GetterUtil.getBoolean(
-			preferences.getValue("excludeZeroViewCount", null));
+			portletPreferences.getValue("excludeZeroViewCount", null));
 
 		assetEntryQuery.setExcludeZeroViewCount(excludeZeroViewCount);
 
-		long[] groupIds = getGroupIds(preferences, scopeGroupId, layout);
+		long[] groupIds = getGroupIds(portletPreferences, scopeGroupId, layout);
 
 		assetEntryQuery.setGroupIds(groupIds);
 
 		boolean showOnlyLayoutAssets = GetterUtil.getBoolean(
-			preferences.getValue("showOnlyLayoutAssets", null));
+			portletPreferences.getValue("showOnlyLayoutAssets", null));
 
 		if (showOnlyLayoutAssets) {
 			assetEntryQuery.setLayout(layout);
 		}
 
 		String orderByColumn1 = GetterUtil.getString(
-			preferences.getValue("orderByColumn1", "modifiedDate"));
+			portletPreferences.getValue("orderByColumn1", "modifiedDate"));
 
 		assetEntryQuery.setOrderByCol1(orderByColumn1);
 
 		String orderByColumn2 = GetterUtil.getString(
-			preferences.getValue("orderByColumn2", "title"));
+			portletPreferences.getValue("orderByColumn2", "title"));
 
 		assetEntryQuery.setOrderByCol2(orderByColumn2);
 
 		String orderByType1 = GetterUtil.getString(
-			preferences.getValue("orderByType1", "DESC"));
+			portletPreferences.getValue("orderByType1", "DESC"));
 
 		assetEntryQuery.setOrderByType1(orderByType1);
 
 		String orderByType2 = GetterUtil.getString(
-			preferences.getValue("orderByType2", "ASC"));
+			portletPreferences.getValue("orderByType2", "ASC"));
 
 		assetEntryQuery.setOrderByType2(orderByType2);
 
@@ -700,10 +719,10 @@ public class AssetPublisherImpl implements AssetPublisher {
 
 	@Override
 	public Map<Locale, String> getEmailAssetEntryAddedBodyMap(
-		PortletPreferences preferences) {
+		PortletPreferences portletPreferences) {
 
 		Map<Locale, String> map = LocalizationUtil.getLocalizationMap(
-			preferences, "emailAssetEntryAddedBody");
+			portletPreferences, "emailAssetEntryAddedBody");
 
 		Locale defaultLocale = LocaleUtil.getSiteDefault();
 
@@ -724,9 +743,9 @@ public class AssetPublisherImpl implements AssetPublisher {
 
 	@Override
 	public boolean getEmailAssetEntryAddedEnabled(
-		PortletPreferences preferences) {
+		PortletPreferences portletPreferences) {
 
-		String emailAssetEntryAddedEnabled = preferences.getValue(
+		String emailAssetEntryAddedEnabled = portletPreferences.getValue(
 			"emailAssetEntryAddedEnabled", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailAssetEntryAddedEnabled)) {
@@ -739,10 +758,10 @@ public class AssetPublisherImpl implements AssetPublisher {
 
 	@Override
 	public Map<Locale, String> getEmailAssetEntryAddedSubjectMap(
-		PortletPreferences preferences) {
+		PortletPreferences portletPreferences) {
 
 		Map<Locale, String> map = LocalizationUtil.getLocalizationMap(
-			preferences, "emailAssetEntryAddedSubject");
+			portletPreferences, "emailAssetEntryAddedSubject");
 
 		Locale defaultLocale = LocaleUtil.getSiteDefault();
 
@@ -764,21 +783,21 @@ public class AssetPublisherImpl implements AssetPublisher {
 
 	@Override
 	public String getEmailFromAddress(
-			PortletPreferences preferences, long companyId)
+			PortletPreferences portletPreferences, long companyId)
 		throws SystemException {
 
 		return PortalUtil.getEmailFromAddress(
-			preferences, companyId,
+			portletPreferences, companyId,
 			PropsValues.ASSET_PUBLISHER_EMAIL_FROM_ADDRESS);
 	}
 
 	@Override
 	public String getEmailFromName(
-			PortletPreferences preferences, long companyId)
+			PortletPreferences portletPreferences, long companyId)
 		throws SystemException {
 
 		return PortalUtil.getEmailFromName(
-			preferences, companyId,
+			portletPreferences, companyId,
 			PropsValues.ASSET_PUBLISHER_EMAIL_FROM_NAME);
 	}
 
@@ -831,7 +850,7 @@ public class AssetPublisherImpl implements AssetPublisher {
 		}
 		else if (scopeId.startsWith(SCOPE_ID_LAYOUT_PREFIX)) {
 
-			// Legacy preferences
+			// Legacy portlet preferences
 
 			String scopeIdSuffix = scopeId.substring(
 				SCOPE_ID_LAYOUT_PREFIX.length());
@@ -992,11 +1011,11 @@ public class AssetPublisherImpl implements AssetPublisher {
 
 	@Override
 	public void notifySubscribers(
-			PortletPreferences preferences, long plid, String portletId,
+			PortletPreferences portletPreferences, long plid, String portletId,
 			List<AssetEntry> assetEntries)
 		throws PortalException, SystemException {
 
-		if (!getEmailAssetEntryAddedEnabled(preferences) ||
+		if (!getEmailAssetEntryAddedEnabled(portletPreferences) ||
 			assetEntries.isEmpty()) {
 
 			return;
@@ -1005,14 +1024,14 @@ public class AssetPublisherImpl implements AssetPublisher {
 		AssetEntry assetEntry = assetEntries.get(0);
 
 		String fromName = getEmailFromName(
-			preferences, assetEntry.getCompanyId());
+			portletPreferences, assetEntry.getCompanyId());
 		String fromAddress = getEmailFromAddress(
-			preferences, assetEntry.getCompanyId());
+			portletPreferences, assetEntry.getCompanyId());
 
 		Map<Locale, String> localizedSubjectMap =
-			getEmailAssetEntryAddedSubjectMap(preferences);
+			getEmailAssetEntryAddedSubjectMap(portletPreferences);
 		Map<Locale, String> localizedBodyMap = getEmailAssetEntryAddedBodyMap(
-			preferences);
+			portletPreferences);
 
 		SubscriptionSender subscriptionSender = new SubscriptionSender();
 
@@ -1035,6 +1054,33 @@ public class AssetPublisherImpl implements AssetPublisher {
 			_getPortletPreferencesId(plid, portletId));
 
 		subscriptionSender.flushNotificationsAsync();
+	}
+
+	@Override
+	public void processAssetEntryQuery(
+			User user, PortletPreferences portletPreferences,
+			AssetEntryQuery assetEntryQuery)
+		throws Exception {
+
+		for (AssetEntryQueryProcessor assetEntryQueryProcessor :
+				_assetEntryQueryProcessor.values()) {
+
+			assetEntryQueryProcessor.processAssetEntryQuery(
+				user, portletPreferences, assetEntryQuery);
+		}
+	}
+
+	@Override
+	public void registerAssetQueryProcessor(
+		String assetQueryProcessorClassName,
+		AssetEntryQueryProcessor assetQueryProcessor) {
+
+		if (assetQueryProcessor == null) {
+			return;
+		}
+
+		_assetEntryQueryProcessor.put(
+			assetQueryProcessorClassName, assetQueryProcessor);
 	}
 
 	@Override
@@ -1099,6 +1145,13 @@ public class AssetPublisherImpl implements AssetPublisher {
 	}
 
 	@Override
+	public void unregisterAssetQueryProcessor(
+		String assetQueryProcessorClassName) {
+
+		_assetEntryQueryProcessor.remove(assetQueryProcessorClassName);
+	}
+
+	@Override
 	public void unsubscribe(
 			PermissionChecker permissionChecker, long plid, String portletId)
 		throws PortalException, SystemException {
@@ -1113,24 +1166,27 @@ public class AssetPublisherImpl implements AssetPublisher {
 	}
 
 	private void _checkAssetEntries(
-			com.liferay.portal.model.PortletPreferences portletPreferences)
+			com.liferay.portal.model.PortletPreferences
+			portletPreferencesModel)
 		throws PortalException, SystemException {
 
 		Layout layout = LayoutLocalServiceUtil.getLayout(
-			portletPreferences.getPlid());
+			portletPreferencesModel.getPlid());
 
-		PortletPreferences preferences = PortletPreferencesFactoryUtil.fromXML(
-			layout.getCompanyId(), portletPreferences.getOwnerId(),
-			portletPreferences.getOwnerType(), portletPreferences.getPlid(),
-			portletPreferences.getPortletId(),
-			portletPreferences.getPreferences());
+		PortletPreferences portletPreferences =
+			PortletPreferencesFactoryUtil.fromXML(
+				layout.getCompanyId(), portletPreferencesModel.getOwnerId(),
+				portletPreferencesModel.getOwnerType(),
+				portletPreferencesModel.getPlid(),
+				portletPreferencesModel.getPortletId(),
+				portletPreferencesModel.getPreferences());
 
-		if (!getEmailAssetEntryAddedEnabled(preferences)) {
+		if (!getEmailAssetEntryAddedEnabled(portletPreferences)) {
 			return;
 		}
 
 		List<AssetEntry> assetEntries = getAssetEntries(
-			preferences, layout, layout.getGroupId(),
+			portletPreferences, layout, layout.getGroupId(),
 			PropsValues.ASSET_PUBLISHER_DYNAMIC_SUBSCRIPTION_LIMIT, false);
 
 		if (assetEntries.isEmpty()) {
@@ -1138,7 +1194,7 @@ public class AssetPublisherImpl implements AssetPublisher {
 		}
 
 		long[] notifiedAssetEntryIds = GetterUtil.getLongValues(
-			preferences.getValues("notifiedAssetEntryIds", null));
+			portletPreferences.getValues("notifiedAssetEntryIds", null));
 
 		List<AssetEntry> newAssetEntries = new ArrayList<AssetEntry>();
 
@@ -1153,17 +1209,17 @@ public class AssetPublisherImpl implements AssetPublisher {
 		}
 
 		notifySubscribers(
-			preferences, portletPreferences.getPlid(),
-			portletPreferences.getPortletId(), newAssetEntries);
+			portletPreferences, portletPreferencesModel.getPlid(),
+			portletPreferencesModel.getPortletId(), newAssetEntries);
 
 		try {
-			preferences.setValues(
+			portletPreferences.setValues(
 				"notifiedAssetEntryIds",
 				StringUtil.split(
 					ListUtil.toString(
 						assetEntries, AssetEntry.ENTRY_ID_ACCESSOR)));
 
-			preferences.store();
+			portletPreferences.store();
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
@@ -1249,12 +1305,12 @@ public class AssetPublisherImpl implements AssetPublisher {
 	private long _getPortletPreferencesId(long plid, String portletId)
 		throws PortalException, SystemException {
 
-		com.liferay.portal.model.PortletPreferences portletPreferences =
+		com.liferay.portal.model.PortletPreferences portletPreferencesModel =
 			PortletPreferencesLocalServiceUtil.getPortletPreferences(
 				PortletKeys.PREFS_OWNER_ID_DEFAULT,
 				PortletKeys.PREFS_OWNER_TYPE_LAYOUT, plid, portletId);
 
-		return portletPreferences.getPortletPreferencesId();
+		return portletPreferencesModel.getPortletPreferencesId();
 	}
 
 	private Map<String, Long> _getRecentFolderIds(
@@ -1284,6 +1340,9 @@ public class AssetPublisherImpl implements AssetPublisher {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(AssetPublisherImpl.class);
+
+	private Map<String, AssetEntryQueryProcessor> _assetEntryQueryProcessor =
+		new ConcurrentHashMap<String, AssetEntryQueryProcessor>();
 
 	private Accessor<AssetEntry, String> _titleAccessor =
 		new Accessor<AssetEntry, String>() {

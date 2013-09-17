@@ -2217,6 +2217,18 @@ custom.sql.function.isnotnull=CONVERT(VARCHAR,?) IS NOT NULL</echo>
 					<elseif>
 						<equals arg1="${database.family}" arg2="mysql" />
 						<then>
+							<var name="mysql.arg.line" unset="true" />
+
+							<if>
+								<equals arg1="${database.password}" arg2="" />
+								<then>
+									<var name="mysql.arg.line" value="-u ${database.username}" />
+								</then>
+								<else>
+									<var name="mysql.arg.line" value="-p ${database.password} -u ${database.username}" />
+								</else>
+							</if>
+
 							<exec executable="${mysql.executable}" input="create.sql">
 								<arg line="${mysql.arg.line}" />
 							</exec>
@@ -2316,6 +2328,20 @@ custom.sql.function.isnotnull=CONVERT(VARCHAR,?) IS NOT NULL</echo>
 		<exec executable="${shell.executable}">
 			<arg line="${scm.revert.command.formatted}" />
 		</exec>
+	</target>
+
+	<target name="run-selenium-smoke-test">
+		<antcall target="compile" />
+
+		<antcall target="start-selenium" />
+
+		<ant dir="portal-impl" target="compile-test" inheritAll="false" />
+
+		<ant dir="portal-web" target="test-class" inheritAll="false">
+			<property name="class" value="SeleniumSmokeTestSuite" />
+		</ant>
+
+		<antcall target="stop-selenium" />
 	</target>
 
 	<target name="run-selenium-test">

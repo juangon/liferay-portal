@@ -12,28 +12,21 @@
  * details.
  */
 
-package com.liferay.portal.kernel.messaging.proxy;
+package com.liferay.portlet.assetpublisher.util;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import com.liferay.portal.model.User;
+import com.liferay.portlet.asset.service.persistence.AssetEntryQuery;
+
+import javax.portlet.PortletPreferences;
 
 /**
- * @author Michael C. Han
+ * @author Jorge Ferrer
  */
-@Documented
-@Inherited
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD, ElementType.TYPE})
-public @interface MessagingProxy {
+public interface AssetEntryQueryProcessor {
 
-	public static final String LOCAL_MESSAGE = "LOCAL_MESSAGE";
-
-	public boolean local() default false;
-
-	public ProxyMode mode();
+	public void processAssetEntryQuery(
+			User user, PortletPreferences portletPreferences,
+			AssetEntryQuery assetEntryQuery)
+		throws Exception;
 
 }
