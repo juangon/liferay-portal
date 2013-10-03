@@ -991,6 +991,10 @@ public abstract class DLPreviewableProcessor implements DLProcessor {
 				importedFileVersion, previewType);
 
 			FileVersion fileVersion = fileEntry.getFileVersion();
+			
+			if (!hasPreview(fileVersion, previewType)) {
+				return;
+			}
 
 			InputStream is = null;
 
