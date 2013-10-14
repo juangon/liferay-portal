@@ -199,6 +199,22 @@ public class ImageProcessorImpl
 	}
 
 	@Override
+	protected void deletePreviews(
+		long companyId, long groupId, long fileEntryId, long fileVersionId) {
+
+		String pathSegment = getPathSegment(
+			groupId, fileEntryId, fileVersionId, true);
+
+		String path = pathSegment + StringPool.PERIOD + getPreviewType();
+
+		try {
+			DLStoreUtil.deleteDirectory(companyId, REPOSITORY_ID, path);
+		}
+		catch (Exception e) {
+		}
+	}
+
+	@Override
 	protected void doExportGeneratedFiles(
 			PortletDataContext portletDataContext, FileEntry fileEntry,
 			Element fileEntryElement)
