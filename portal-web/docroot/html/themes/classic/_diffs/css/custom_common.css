@@ -122,6 +122,7 @@
 		text-decoration: none;
 
 		&:focus, &:hover {
+			color: #009AE5;
 			text-decoration: none;
 		}
 
@@ -147,7 +148,13 @@
 		padding-right: 12px;
 	}
 
-	.tree-node-selected .tree-label {
+	.navbar .nav > li > a {
+		&:focus, &:hover {
+			color: #009AE5;
+		}
+	}
+
+	.lfr-tree .tree-node .tree-node-selected .tree-label {
 		background: #E4F5FC;
 	}
 
@@ -361,7 +368,7 @@
 	}
 
 	.app-view-taglib .lfr-header-row-content .select-all-entries {
-		left: 15px;
+		left: 7px;
 		top: 14px;
 	}
 
