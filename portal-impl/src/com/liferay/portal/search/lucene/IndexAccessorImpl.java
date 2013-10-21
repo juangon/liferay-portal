@@ -269,13 +269,11 @@ public class IndexAccessorImpl implements IndexAccessor {
 		try {
 			_indexWriter.deleteAll();
 
-			// Ensuring that all the changes has been applied to the index
-
 			_indexWriter.commit();
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Could not delete index in directory " + path);
+				_log.warn("Unable to delete index in directory " + path);
 			}
 		}
 	}
