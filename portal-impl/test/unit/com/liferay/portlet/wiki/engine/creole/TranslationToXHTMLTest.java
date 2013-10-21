@@ -650,8 +650,9 @@ public class TranslationToXHTMLTest extends PowerMockito {
 	@Test
 	public void testParseTableLinksNested() {
 		Assert.assertEquals(
-			"<table><tr><th>H1</th></tr><tr><td><a href=" +
-				"\"http://www.liferay.com \"> Liferay</a></td></tr></table>",
+			"<table><tr><th>H1</th></tr><tr><td><a " +
+				"href=\"http://www.liferay.com \"> Liferay</a></td></tr>" +
+					"</table>",
 			translate("table-3.creole"));
 	}
 
