@@ -3034,13 +3034,14 @@ public class PortalImpl implements Portal {
 			if ((layoutSet.getLayoutSetId() != curLayoutSetId) ||
 				portalURL.startsWith(themeDisplay.getURLPortal())) {
 
-				String layoutSetFriendlyURL = StringPool.BLANK;
+				String layoutSetFriendlyURL = portalURL + _pathContext;
 
 				if (themeDisplay.isI18n()) {
-					layoutSetFriendlyURL = themeDisplay.getI18nPath();
+					layoutSetFriendlyURL += themeDisplay.getI18nPath();
 				}
 
-				return portalURL + _pathContext + layoutSetFriendlyURL;
+				return addPreservedParameters(
+					themeDisplay, layoutSetFriendlyURL);
 			}
 		}
 
@@ -6046,7 +6047,10 @@ public class PortalImpl implements Portal {
 				themeDisplay.getScopeGroupId(), portletId);
 		}
 		catch (PortalException pe) {
-			_log.warn("Unable to check control panel access permission", pe);
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Unable to check control panel access permission", pe);
+			}
 		}
 
 		return false;

@@ -49,7 +49,9 @@ if (Validator.isNull(script)) {
 	TemplateHandler templateHandler = TemplateHandlerRegistryUtil.getTemplateHandler(classNameId);
 
 	if (templateHandler != null) {
-		script = ContentUtil.get(templateHandler.getTemplatesHelpPath(language));
+		Class<?> templateHandlerClass = templateHandler.getClass();
+
+		script = ContentUtil.get(templateHandlerClass.getClassLoader(), templateHandler.getTemplatesHelpPath(language));
 	}
 	else if ((structure != null) && Validator.equals(structure.getClassName(), JournalArticle.class.getName())) {
 		script = ContentUtil.get(PropsUtil.get(PropsKeys.JOURNAL_TEMPLATE_LANGUAGE_CONTENT, new Filter(language)));
@@ -140,7 +142,7 @@ if (Validator.isNotNull(structureAvailableFields)) {
 
 						<c:if test="<%= ((template == null) || (template.getClassPK() == 0)) %>">
 							<liferay-ui:icon
-								iconClass="icon-search"
+								iconCssClass="icon-search"
 								label="<%= true %>"
 								linkCssClass="btn"
 								message="select"

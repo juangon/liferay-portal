@@ -1,9 +1,8 @@
+@import "aui/alloy-font-awesome/scss/mixins-alloy";
+@import "aui/alloy-font-awesome/scss/variables";
 @import "compass";
 @import "compass/css3/user-interface";
 @import "mixins";
-
-@import "aui/alloy-font-awesome/scss/mixins-alloy";
-@import "aui/alloy-font-awesome/scss/variables";
 
 @import url(custom_responsive.css);
 
@@ -61,10 +60,6 @@
 		> td, > th {
 			background-color: #EDF8FD;
 		}
-	}
-
-	form fieldset.fieldset {
-		min-width: 100%;
 	}
 
 	input[type="color"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="email"], input[type="month"], input[type="number"], input[type="password"], input[type="search"], input[type="tel"], input[type="text"], input[type="time"], input[type="url"], input[type="week"], select, textarea, .uneditable-input {
@@ -529,7 +524,7 @@
 
 	/* ---------- Hidden accessible ---------- */
 
-	#banner h2, #banner h3, .site-breadcrumbs h1, #skip-to-content {
+	#banner h2, #banner h3, .site-breadcrumbs h1 {
 		clip: rect(0 0 0 0);
 		position: absolute;
 	}

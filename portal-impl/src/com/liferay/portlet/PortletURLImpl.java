@@ -412,8 +412,14 @@ public class PortletURLImpl
 			throw new IllegalArgumentException();
 		}
 
+		Portlet portlet = getPortlet();
+
+		if (portlet == null) {
+			return;
+		}
+
 		PublicRenderParameter publicRenderParameter =
-			_portlet.getPublicRenderParameter(name);
+			portlet.getPublicRenderParameter(name);
 
 		if (publicRenderParameter == null) {
 			if (_log.isWarnEnabled()) {
@@ -759,10 +765,16 @@ public class PortletURLImpl
 			return;
 		}
 
+		Portlet portlet = getPortlet();
+
+		if (portlet == null) {
+			return;
+		}
+
 		String strutsAction = getParameter("struts_action");
 
 		if (AuthTokenWhitelistUtil.isPortletCSRFWhitelisted(
-				_portlet.getCompanyId(), _portletId, strutsAction)) {
+				portlet.getCompanyId(), _portletId, strutsAction)) {
 
 			return;
 		}
@@ -778,14 +790,20 @@ public class PortletURLImpl
 			return;
 		}
 
-		if (!_portlet.isAddDefaultResource()) {
+		Portlet portlet = getPortlet();
+
+		if (portlet == null) {
+			return;
+		}
+
+		if (!portlet.isAddDefaultResource()) {
 			return;
 		}
 
 		String strutsAction = getParameter("struts_action");
 
 		if (AuthTokenWhitelistUtil.isPortletInvocationWhitelisted(
-				_portlet.getCompanyId(), _portletId, strutsAction)) {
+				portlet.getCompanyId(), _portletId, strutsAction)) {
 
 			return;
 		}
@@ -804,15 +822,8 @@ public class PortletURLImpl
 			}
 		}
 
-		Portlet portlet = (Portlet)_request.getAttribute(
-			WebKeys.RENDER_PORTLET);
-
-		if (portlet != null) {
-			String portletId = portlet.getPortletId();
-
-			if (portletId.equals(PortletKeys.CONTROL_PANEL_MENU)) {
-				return;
-			}
+		if (_portletId.equals(PortletKeys.CONTROL_PANEL_MENU)) {
+			return;
 		}
 
 		sb.append("p_p_auth");

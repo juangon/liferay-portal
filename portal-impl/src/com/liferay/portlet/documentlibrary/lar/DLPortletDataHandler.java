@@ -85,7 +85,7 @@ public class DLPortletDataHandler extends BasePortletDataHandler {
 			new StagedModelType(Repository.class));
 		setExportControls(
 			new PortletDataHandlerBoolean(
-				NAMESPACE, "repositories", false, false, null,
+				NAMESPACE, "repositories", true, false, null,
 				Repository.class.getName()),
 			new PortletDataHandlerBoolean(
 				NAMESPACE, "folders", true, false, null,
@@ -399,9 +399,7 @@ public class DLPortletDataHandler extends BasePortletDataHandler {
 
 				DLFileEntry dlFileEntry = (DLFileEntry)object;
 
-				if (dlFileEntry.isInTrash() ||
-					dlFileEntry.isInTrashContainer()) {
-
+				if (dlFileEntry.isInTrash()) {
 					return;
 				}
 
@@ -469,7 +467,7 @@ public class DLPortletDataHandler extends BasePortletDataHandler {
 
 				DLFolder dlFolder = (DLFolder)object;
 
-				if (dlFolder.isInTrash() || dlFolder.isInTrashContainer()) {
+				if (dlFolder.isInTrash()) {
 					return;
 				}
 
