@@ -928,6 +928,7 @@ public class StagingImpl implements Staging {
 			PortletDataException pde = (PortletDataException)e;
 
 			StagedModel stagedModel = pde.getStagedModel();
+
 			StagedModelType stagedModelType = stagedModel.getStagedModelType();
 
 			String referrerClassName = stagedModelType.getClassName();
@@ -937,7 +938,7 @@ public class StagingImpl implements Staging {
 			if (pde.getType() == PortletDataException.MISSING_DEPENDENCY) {
 				errorMessage = LanguageUtil.format(
 					locale,
-					"the-x-x-has-missing-references-could-not-be-found-" +
+					"the-x-x-has-missing-references-that-could-not-be-found-" +
 						"during-the-export",
 					new String[] {
 						ResourceActionsUtil.getModelResource(
@@ -949,8 +950,8 @@ public class StagingImpl implements Staging {
 			else if (pde.getType() == PortletDataException.STATUS_UNAVAILABLE) {
 				errorMessage = LanguageUtil.format(
 					locale,
-					"the-x-x-has-references-could-not-be-exported-because-" +
-						"their-workflow-status-is-not-exportable",
+					"the-x-x-has-references-that-could-not-be-exported-" +
+						"because-their-workflow-status-is-not-exportable",
 					new String[] {
 						ResourceActionsUtil.getModelResource(
 							locale, referrerClassName),
@@ -961,8 +962,8 @@ public class StagingImpl implements Staging {
 			else if (pde.getType() == PortletDataException.STATUS_IN_TRASH) {
 				errorMessage = LanguageUtil.format(
 					locale,
-					"the-x-x-has-references-could-not-be-exported-because-" +
-						"these-are-in-the-recycle-bin",
+					"the-x-x-has-references-that-could-not-be-exported-" +
+						"because-they-are-in-the-recycle-bin",
 					new String[] {
 						ResourceActionsUtil.getModelResource(
 							locale, referrerClassName),

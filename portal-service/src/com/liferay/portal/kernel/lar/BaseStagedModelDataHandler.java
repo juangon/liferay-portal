@@ -259,8 +259,10 @@ public abstract class BaseStagedModelDataHandler<T extends StagedModel>
 			}
 		}
 
+		StagedModelType stagedModelType = stagedModel.getStagedModelType();
+
 		TrashHandler trashHandler = TrashHandlerRegistryUtil.getTrashHandler(
-			stagedModel.getStagedModelType().getClassName());
+			stagedModelType.getClassName());
 
 		if (trashHandler != null) {
 			try {
