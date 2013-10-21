@@ -643,8 +643,6 @@ AUI.add(
 					},
 
 					_valueListView: function() {
-						debugger;
-
 						var instance = this;
 
 						var folderContainer = instance.get(STR_FOLDER_CONTAINER);

@@ -96,7 +96,6 @@ else {
 
 			<c:choose>
 				<c:when test='<%= ((folderId == JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID) && !expandFolder) && !browseBy.equals("structure") %>'>
-
 					<liferay-portlet:renderURL varImpl="viewArticlesHomeURL">
 						<portlet:param name="struts_action" value="/journal/view" />
 						<portlet:param name="folderId" value="<%= String.valueOf(JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID) %>" />

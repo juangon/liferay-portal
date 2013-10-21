@@ -43,5 +43,4 @@ if (!data.containsKey("view-folders")) {
 	<c:if test="<%= Validator.isNotNull(actionJsp) %>">
 		<liferay-util:include page="<%= actionJsp %>" />
 	</c:if>
-
 </aui:nav-item>
