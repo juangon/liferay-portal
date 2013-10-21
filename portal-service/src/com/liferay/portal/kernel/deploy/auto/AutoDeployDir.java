@@ -123,7 +123,7 @@ public class AutoDeployDir {
 			}
 		}
 
-		if (_interval > 0 &&
+		if ((_interval > 0) &&
 			((_autoDeployScanner == null) || !_autoDeployScanner.isAlive())) {
 
 			try {
