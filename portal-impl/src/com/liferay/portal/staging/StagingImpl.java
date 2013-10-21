@@ -947,11 +947,11 @@ public class StagingImpl implements Staging {
 					}
 				);
 			}
-			else if (pde.getType() == PortletDataException.STATUS_UNAVAILABLE) {
+			else if (pde.getType() == PortletDataException.STATUS_IN_TRASH) {
 				errorMessage = LanguageUtil.format(
 					locale,
 					"the-x-x-has-references-that-could-not-be-exported-" +
-						"because-their-workflow-status-is-not-exportable",
+						"because-they-are-in-the-recycle-bin",
 					new String[] {
 						ResourceActionsUtil.getModelResource(
 							locale, referrerClassName),
@@ -959,11 +959,11 @@ public class StagingImpl implements Staging {
 					}
 				);
 			}
-			else if (pde.getType() == PortletDataException.STATUS_IN_TRASH) {
+			else if (pde.getType() == PortletDataException.STATUS_UNAVAILABLE) {
 				errorMessage = LanguageUtil.format(
 					locale,
 					"the-x-x-has-references-that-could-not-be-exported-" +
-						"because-they-are-in-the-recycle-bin",
+						"because-their-workflow-status-is-not-exportable",
 					new String[] {
 						ResourceActionsUtil.getModelResource(
 							locale, referrerClassName),
