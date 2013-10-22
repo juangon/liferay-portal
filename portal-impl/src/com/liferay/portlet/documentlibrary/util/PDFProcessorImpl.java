@@ -223,6 +223,19 @@ public class PDFProcessorImpl
 	}
 
 	@Override
+	protected void deletePreviews(
+		long companyId, long groupId, long fileEntryId, long fileVersionId) {
+
+		try {
+			DLStoreUtil.deleteDirectory(
+				companyId, REPOSITORY_ID,
+				getPathSegment(groupId, fileEntryId, fileVersionId, true));
+		}
+		catch (Exception e) {
+		}
+	}
+
+	@Override
 	protected void doExportGeneratedFiles(
 			PortletDataContext portletDataContext, FileEntry fileEntry,
 			Element fileEntryElement)
