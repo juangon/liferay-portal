@@ -51,7 +51,7 @@ public class FreeMarkerServletResourceParser extends URLResourceParser {
 
 		if (servletContext == null) {
 			_log.error(
-				name + " is not valid because " + servletContextName +
+				name + " is invalid because " + servletContextName +
 					" does not map to a servlet context");
 
 			return null;
