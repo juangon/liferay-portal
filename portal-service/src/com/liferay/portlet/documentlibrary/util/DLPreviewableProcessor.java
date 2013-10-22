@@ -355,15 +355,14 @@ public abstract class DLPreviewableProcessor implements DLProcessor {
 	protected void deletePreviews(
 		long companyId, long groupId, long fileEntryId, long fileVersionId) {
 
-		try {
-			for (String type : getPreviewTypes()) {
-				String path = getPreviewFilePath(
-					groupId, fileEntryId, fileVersionId, type);
-
+		for (String type : getPreviewTypes()) {
+			String path = getPreviewFilePath(
+				groupId, fileEntryId, fileVersionId, type);
+			try {
 				DLStoreUtil.deleteDirectory(companyId, REPOSITORY_ID, path);
 			}
-		}
-		catch (Exception e) {
+			catch (Exception e) {
+			}
 		}
 	}
 
