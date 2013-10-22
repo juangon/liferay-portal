@@ -56,10 +56,6 @@ public class LiferayIntegrationJUnitTestRunner
 			public void evaluate() throws Throwable {
 				Thread currentThread = Thread.currentThread();
 
-				Object threadLocals = _threadLocalsField.get(currentThread);
-
-				_threadLocalsField.set(currentThread, null);
-
 				Object inheritableThreadLocals =
 					_inheritableThreadLocalsField.get(currentThread);
 
@@ -68,13 +64,17 @@ public class LiferayIntegrationJUnitTestRunner
 					_createInheritedMapMethod.invoke(
 						null, inheritableThreadLocals));
 
+				Object threadLocals = _threadLocalsField.get(currentThread);
+
+				_threadLocalsField.set(currentThread, null);
+
 				try {
 					classBlock.evaluate();
 				}
 				finally {
-					_threadLocalsField.set(currentThread, threadLocals);
 					_inheritableThreadLocalsField.set(
 						currentThread, inheritableThreadLocals);
+					_threadLocalsField.set(currentThread, threadLocals);
 				}
 			}
 
@@ -94,11 +94,10 @@ public class LiferayIntegrationJUnitTestRunner
 			_createInheritedMapMethod = ReflectionUtil.getDeclaredMethod(
 				ThreadLocal.class, "createInheritedMap", _threadLocalMapClass);
 
-			_threadLocalsField = ReflectionUtil.getDeclaredField(
-				Thread.class, "threadLocals");
-
 			_inheritableThreadLocalsField = ReflectionUtil.getDeclaredField(
 				Thread.class, "inheritableThreadLocals");
+			_threadLocalsField = ReflectionUtil.getDeclaredField(
+				Thread.class, "threadLocals");
 		}
 		catch (Exception e) {
 			throw new ExceptionInInitializerError(e);
