@@ -134,7 +134,10 @@ public class I18nFilter extends BasePortalFilter {
 			int[] groupFriendlyURLIndex = PortalUtil.getGroupFriendlyURLIndex(
 				requestURI);
 
-			if (groupFriendlyURLIndex != null) {
+			if ((groupFriendlyURLIndex != null) &&
+				requestURI.startsWith(
+					PropsValues.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING)) {
+
 				int x = groupFriendlyURLIndex[0];
 				int y = groupFriendlyURLIndex[1];
 
