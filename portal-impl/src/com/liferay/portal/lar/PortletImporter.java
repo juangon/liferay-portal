@@ -501,11 +501,32 @@ public class PortletImporter {
 		portletDataContext.setSourceUserPersonalSiteGroupId(
 			sourceUserPersonalSiteGroupId);
 
+		Element portletElement = null;
+
+		try {
+			portletElement = _rootElement.element("portlet");
+
+			Document portletDocument = SAXReaderUtil.read(
+				portletDataContext.getZipEntryAsString(
+					portletElement.attributeValue("path")));
+
+			portletElement = portletDocument.getRootElement();
+		}
+		catch (DocumentException de) {
+			throw new SystemException(de);
+		}
+
+		LayoutCache layoutCache = new LayoutCache();
+
 		// Read asset categories, asset tags, comments, locks, and ratings
 		// entries to make them available to the data handlers through the
 		// context
 
 		if (importPermissions) {
+			_permissionImporter.importRoles(
+				layoutCache, layout.getCompanyId(), groupId, userId,
+				portletElement);
+
 			_permissionImporter.readPortletDataPermissions(portletDataContext);
 		}
 
@@ -524,21 +545,6 @@ public class PortletImporter {
 
 		if (deletePortletData) {
 			deletePortletData(portletDataContext, portletId, plid);
-		}
-
-		Element portletElement = null;
-
-		try {
-			portletElement = _rootElement.element("portlet");
-
-			Document portletDocument = SAXReaderUtil.read(
-				portletDataContext.getZipEntryAsString(
-					portletElement.attributeValue("path")));
-
-			portletElement = portletDocument.getRootElement();
-		}
-		catch (DocumentException de) {
-			throw new SystemException(de);
 		}
 
 		Element portletDataElement = portletElement.element("portlet-data");
@@ -576,8 +582,6 @@ public class PortletImporter {
 			if (_log.isDebugEnabled()) {
 				_log.debug("Importing portlet permissions");
 			}
-
-			LayoutCache layoutCache = new LayoutCache();
 
 			_permissionImporter.importPortletPermissions(
 				layoutCache, layout.getCompanyId(), groupId, userId, layout,
