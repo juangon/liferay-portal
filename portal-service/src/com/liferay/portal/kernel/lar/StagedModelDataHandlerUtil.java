@@ -126,6 +126,8 @@ public class StagedModelDataHandlerUtil {
 			if (portletDataContext.isCompanyStagedGroupedModel(
 					stagedGroupedModel)) {
 
+				exportStagedModel(portletDataContext, stagedModel);
+				
 				referenceElement = portletDataContext.addReferenceElement(
 					referrerStagedModel, referrerStagedModelElement,
 					stagedModel, stagedModelClass,
