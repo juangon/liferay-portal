@@ -6715,8 +6715,8 @@ public class JournalArticleLocalServiceImpl
 		Fields fields = DDMUtil.getFields(
 			ddmStructure.getStructureId(), serviceContext);
 
-		for (com.liferay.portlet.dynamicdatamapping.storage.Field field
-			: fields) {
+		for (com.liferay.portlet.dynamicdatamapping.storage.Field field :
+				fields) {
 
 			if (!ddmStructure.hasField(field.getName())) {
 				throw new StorageFieldNameException();
