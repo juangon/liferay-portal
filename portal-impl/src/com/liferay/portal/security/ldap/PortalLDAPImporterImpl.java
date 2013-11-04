@@ -44,7 +44,6 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
-import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.ScreenNameGenerator;
 import com.liferay.portal.security.auth.ScreenNameGeneratorFactory;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
@@ -62,7 +61,9 @@ import com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil;
 import com.liferay.portlet.expando.util.ExpandoConverterUtil;
 
 import java.io.Serializable;
+
 import java.text.ParseException;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
