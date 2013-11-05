@@ -99,6 +99,7 @@ public class DLFileEntrySearchTest extends BaseSearchTestCase {
 
 		try {
 			String mimeType = MimeTypesUtil.getContentType(file, fileName);
+
 			file = FileUtil.createTempFile(inputStream);
 
 			DLAppLocalServiceUtil.addFileEntry(
