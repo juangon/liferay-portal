@@ -270,6 +270,8 @@ public class JournalArticleServiceTest {
 		List<JournalArticle> expectedArticles = addArticles(
 			2, ServiceTestUtil.randomString());
 
+		expectedArticles.add(0, _article);
+
 		_article = updateArticleStatus(
 			_article, WorkflowConstants.STATUS_DRAFT);
 
@@ -278,7 +280,7 @@ public class JournalArticleServiceTest {
 			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			WorkflowConstants.STATUS_APPROVED);
 
-		Assert.assertEquals(2, count);
+		Assert.assertEquals(3, count);
 
 		List<JournalArticle> articles =
 			JournalArticleServiceUtil.getGroupArticles(
@@ -324,6 +326,8 @@ public class JournalArticleServiceTest {
 		List<JournalArticle> expectedArticles = addArticles(
 			2, ServiceTestUtil.randomString());
 
+		expectedArticles.add(0, _article);
+
 		_article = updateArticleStatus(
 			_article, WorkflowConstants.STATUS_DRAFT);
 
@@ -332,7 +336,7 @@ public class JournalArticleServiceTest {
 			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			WorkflowConstants.STATUS_APPROVED);
 
-		Assert.assertEquals(2, count);
+		Assert.assertEquals(3, count);
 
 		List<JournalArticle> articles =
 			JournalArticleServiceUtil.getGroupArticles(
@@ -363,16 +367,13 @@ public class JournalArticleServiceTest {
 	public void testSearchArticlesByKeywordAndStatus() throws Exception {
 		List<JournalArticle> initialArticles = createArticlesWithKeyword(2);
 
-		JournalArticle initialArticle = initialArticles.get(0);
-
-		initialArticles.remove(initialArticle);
-
-		updateArticleStatus(initialArticle, WorkflowConstants.STATUS_DRAFT);
+		updateArticleStatus(
+			initialArticles.get(0), WorkflowConstants.STATUS_DRAFT);
 
 		int count = countArticlesByKeyword(
 			_keyword, WorkflowConstants.STATUS_APPROVED);
 
-		Assert.assertEquals(1, count);
+		Assert.assertEquals(2, count);
 
 		List<JournalArticle> articles = searchArticlesByKeyword(
 			_keyword, WorkflowConstants.STATUS_APPROVED);
