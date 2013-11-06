@@ -30,5 +30,5 @@
 /* ---------- Misc ---------- */
 
 .navbar .nav li > a {
-	word-break: break-all;
+	@include word-break(break-all);
 }
