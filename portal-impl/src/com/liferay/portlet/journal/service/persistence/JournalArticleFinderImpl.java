@@ -733,6 +733,8 @@ public class JournalArticleFinderImpl
 			String sql = CustomSQLUtil.get(
 				COUNT_BY_G_F, queryDefinition, "JournalArticle");
 
+			sql = replaceStatusJoin(sql, queryDefinition);
+
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(
 					sql, JournalArticle.class.getName(),
@@ -859,6 +861,8 @@ public class JournalArticleFinderImpl
 			String sql = CustomSQLUtil.get(
 				COUNT_BY_G_U_F_C, queryDefinition, "JournalArticle");
 
+			sql = replaceStatusJoin(sql, queryDefinition);
+
 			if (folderIds.isEmpty()) {
 				sql = StringUtil.replace(
 					sql, "([$FOLDER_ID$]) AND", StringPool.BLANK);
@@ -939,6 +943,8 @@ public class JournalArticleFinderImpl
 			String sql = CustomSQLUtil.get(
 				COUNT_BY_C_G_F_C_A_V_T_D_C_T_S_T_D_R, queryDefinition,
 				"JournalArticle");
+
+			sql = replaceStatusJoin(sql, queryDefinition);
 
 			if (groupId <= 0) {
 				sql = StringUtil.replace(
@@ -1090,6 +1096,8 @@ public class JournalArticleFinderImpl
 			String sql = CustomSQLUtil.get(
 				FIND_BY_G_F, queryDefinition, "JournalArticle");
 
+			sql = replaceStatusJoin(sql, queryDefinition);
+
 			sql = CustomSQLUtil.replaceOrderBy(
 				sql, queryDefinition.getOrderByComparator());
 
@@ -1143,6 +1151,8 @@ public class JournalArticleFinderImpl
 
 			String sql = CustomSQLUtil.get(
 				FIND_BY_G_C_S, queryDefinition, "JournalArticle");
+
+			sql = replaceStatusJoin(sql, queryDefinition);
 
 			sql = CustomSQLUtil.replaceOrderBy(
 				sql, queryDefinition.getOrderByComparator());
@@ -1208,6 +1218,8 @@ public class JournalArticleFinderImpl
 
 			String sql = CustomSQLUtil.get(
 				FIND_BY_G_U_F_C, queryDefinition, "JournalArticle");
+
+			sql = replaceStatusJoin(sql, queryDefinition);
 
 			sql = CustomSQLUtil.replaceOrderBy(
 				sql, queryDefinition.getOrderByComparator());
@@ -1285,6 +1297,8 @@ public class JournalArticleFinderImpl
 			String sql = CustomSQLUtil.get(
 				FIND_BY_C_G_F_C_A_V_T_D_C_T_S_T_D_R, queryDefinition,
 				"JournalArticle");
+
+			sql = replaceStatusJoin(sql, queryDefinition);
 
 			if (groupId <= 0) {
 				sql = StringUtil.replace(
@@ -1474,6 +1488,39 @@ public class JournalArticleFinderImpl
 		}
 
 		return true;
+	}
+
+	protected String replaceStatusJoin(
+		String sql, QueryDefinition queryDefinition) {
+
+		if (queryDefinition.getStatus() == WorkflowConstants.STATUS_ANY) {
+			return StringUtil.remove(sql, "[$STATUS_JOIN$] AND");
+		}
+
+		if (queryDefinition.isExcludeStatus()) {
+			StringBundler sb = new StringBundler(5);
+
+			sb.append("(JournalArticle.status != ");
+			sb.append(queryDefinition.getStatus());
+			sb.append(") AND (tempJournalArticle.status != ");
+			sb.append(queryDefinition.getStatus());
+			sb.append(")");
+
+			sql = StringUtil.replace(sql, "[$STATUS_JOIN$]", sb.toString());
+		}
+		else {
+			StringBundler sb = new StringBundler(5);
+
+			sb.append("(JournalArticle.status = ");
+			sb.append(queryDefinition.getStatus());
+			sb.append(") AND (tempJournalArticle.status = ");
+			sb.append(queryDefinition.getStatus());
+			sb.append(")");
+
+			sql = StringUtil.replace(sql, "[$STATUS_JOIN$]", sb.toString());
+		}
+
+		return sql;
 	}
 
 	private static final String _STRUCTURE_ID_SQL =
