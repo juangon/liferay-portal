@@ -48,7 +48,8 @@ td {
 	overflow: hidden;
 	overflow-x: auto;
 	white-space: pre;
-	word-break: normal;
+
+	@include word-break(normal);
 
 	table {
 		table-layout: auto;

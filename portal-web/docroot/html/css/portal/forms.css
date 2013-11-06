@@ -28,7 +28,8 @@
 			height: auto;
 			text-align: left;
 			white-space: normal;
-			word-break: break-all;
+
+			@include word-break(break-all);
 		}
 	}
 

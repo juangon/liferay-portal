@@ -4,7 +4,7 @@
 	}
 
 	.lfr-asset-url, .row-url {
-		word-break: break-all;
+		@include word-break(break-all);
 	}
 
 	.folder-search {

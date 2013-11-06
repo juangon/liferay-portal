@@ -11,7 +11,8 @@
 	.lfr-asset-summary {
 		margin-bottom: 2em;
 		text-align: center;
-		word-break: break-all;
+
+		@include word-break(break-all);
 	}
 
 	.lfr-asset-avatar img {
