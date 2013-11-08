@@ -2105,14 +2105,16 @@ public class StringUtil {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0
+	 * @deprecated As of 7.0.0, replaced by {@link #removeFromList(String,
+	 *             String)}
 	 */
 	public static String remove(String s, String element) {
 		return removeFromList(s, element, StringPool.COMMA);
 	}
 
 	/**
-	 * @deprecated As of 7.0.0
+	 * @deprecated As of 7.0.0, replaced by {@link #removeFromList(String,
+	 *             String, String)}
 	 */
 	public static String remove(String s, String element, String delimiter) {
 		return removeFromList(s, element, delimiter);
