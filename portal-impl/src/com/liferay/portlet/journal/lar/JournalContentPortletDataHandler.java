@@ -25,7 +25,9 @@ import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
@@ -225,8 +227,11 @@ public class JournalContentPortletDataHandler
 
 			portletPreferences.setValue("articleId", articleId);
 
+			JournalArticle article = fetchParentSiteArticle(
+				portletDataContext.getScopeGroupId(), articleId);
+
 			String importedArticleGroupId = String.valueOf(
-				portletDataContext.getScopeGroupId());
+				article.getGroupId());
 
 			portletPreferences.setValue("groupId", importedArticleGroupId);
 
@@ -262,6 +267,30 @@ public class JournalContentPortletDataHandler
 		portletDataContext.setScopeGroupId(previousScopeGroupId);
 
 		return portletPreferences;
+	}
+
+	private JournalArticle fetchParentSiteArticle(
+				long groupId, String articleId)
+			throws Exception {
+
+		JournalArticle article =
+						JournalArticleLocalServiceUtil.fetchLatestArticle(
+							groupId, articleId, WorkflowConstants.STATUS_ANY);
+
+		if (article == null) {
+			Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+			for (Group parentGroup : group.getAncestors()) {
+				article = fetchParentSiteArticle(
+					parentGroup.getGroupId(), articleId);
+
+				if (article != null) {
+					break;
+				}
+			}
+		}
+
+		return article;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
