@@ -22,10 +22,12 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Attribute;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.model.ClassedModel;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.StagedGroupedModel;
 import com.liferay.portal.model.StagedModel;
 import com.liferay.portal.model.TypedModel;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 
@@ -82,6 +84,47 @@ public class StagedModelDataHandlerUtil {
 
 				return referenceElement;
 			}
+			else {
+				long stagedModelGroupId = stagedGroupedModel.getGroupId();
+				long portletGroupId = portletDataContext.getGroupId();
+
+				if (stagedModelGroupId != portletGroupId) {
+					try {
+						Group portletGroup =
+										GroupLocalServiceUtil.getGroup(
+											portletGroupId);
+
+						Group stagedModelGroup =
+										GroupLocalServiceUtil.getGroup(
+											stagedModelGroupId);
+
+						Group portletLiveGroup = portletGroup.getLiveGroup();
+
+						Group stagedModelLive = stagedModelGroup.getLiveGroup();
+
+						if (portletLiveGroup.hasAncestor(
+								stagedModelLive.getGroupId())) {
+
+							referenceElement =
+											portletDataContext.
+												addReferenceElement(
+													referrerPortlet,
+													portletDataContext.
+													getExportDataRootElement(),
+													stagedModel,
+													stagedModel.
+														getModelClass(),
+													PortletDataContext.
+													REFERENCE_TYPE_DEPENDENCY,
+													true);
+
+							return referenceElement;
+						}
+					}
+					catch (Exception e) {
+					}
+				}
+			}
 		}
 
 		exportStagedModel(portletDataContext, stagedModel);
@@ -132,6 +175,39 @@ public class StagedModelDataHandlerUtil {
 					PortletDataContext.REFERENCE_TYPE_DEPENDENCY, true);
 
 				return referenceElement;
+			}
+			else {
+				long stagedModelGroupId = stagedGroupedModel.getGroupId();
+				long portletGroupId = portletDataContext.getGroupId();
+
+				if (stagedModelGroupId != portletGroupId) {
+					try {
+						Group portletGroup = GroupLocalServiceUtil.getGroup(
+							portletGroupId);
+						Group stagedModelGroup =
+										GroupLocalServiceUtil.getGroup(
+											stagedModelGroupId);
+						Group portletLiveGroup = portletGroup.getLiveGroup();
+						Group stagedModelLive = stagedModelGroup.getLiveGroup();
+
+						if (portletLiveGroup.hasAncestor(
+								stagedModelLive.getGroupId())) {
+
+							referenceElement =
+										portletDataContext.addReferenceElement(
+												referrerStagedModel,
+												referrerStagedModelElement,
+												stagedModel, stagedModelClass,
+												PortletDataContext.
+												REFERENCE_TYPE_DEPENDENCY,
+												true);
+
+							return referenceElement;
+						}
+					}
+					catch (Exception e) {
+					}
+				}
 			}
 		}
 
@@ -217,11 +293,38 @@ public class StagedModelDataHandlerUtil {
 			return;
 		}
 
+		Group group = null;
+		boolean hasAncestors = false;
+
+		try {
+			group = GroupLocalServiceUtil.getGroup(
+				portletDataContext.getScopeGroupId());
+			hasAncestors = (group.getAncestors().size() > 0);
+		}
+		catch (Exception e) {
+		}
+
+		if ((portletDataContext.getSourceGroupId() != groupId) &&
+			hasAncestors) {
+
+			StagedModelDataHandler<?> stagedModelDataHandler =
+				StagedModelDataHandlerRegistryUtil.getStagedModelDataHandler(
+					stagedModelClass.getName());
+
+			stagedModelDataHandler.importParentSiteStagedModel(
+				portletDataContext, referenceElement,
+				portletDataContext.getGroupId());
+
+			return;
+		}
+
 		Element referenceDataElement =
 			portletDataContext.getReferenceDataElement(
 				referrerStagedModel, stagedModelClass, classPK);
 
-		importStagedModel(portletDataContext, referenceDataElement);
+		if (referenceDataElement != null) {
+			importStagedModel(portletDataContext, referenceDataElement);
+		}
 	}
 
 	public static void importReferenceStagedModels(
@@ -264,6 +367,31 @@ public class StagedModelDataHandlerUtil {
 				continue;
 			}
 
+			Group group = null;
+			boolean hasAncestors = false;
+
+			try {
+				group = GroupLocalServiceUtil.getGroup(
+					portletDataContext.getScopeGroupId());
+				hasAncestors = (group.getAncestors().size() > 0);
+			}
+			catch (Exception e) {
+			}
+
+			if ((portletDataContext.getSourceGroupId() != groupId) &&
+				hasAncestors) {
+
+				StagedModelDataHandler<?> stagedModelDataHandler =
+					StagedModelDataHandlerRegistryUtil.
+						getStagedModelDataHandler(stagedModelClass.getName());
+
+				stagedModelDataHandler.importParentSiteStagedModel(
+					portletDataContext, referenceElement,
+					portletDataContext.getScopeGroupId());
+
+				continue;
+			}
+
 			long classPK = GetterUtil.getLong(
 				referenceElement.attributeValue("class-pk"));
 
@@ -274,7 +402,9 @@ public class StagedModelDataHandlerUtil {
 				(StagedModel)portletDataContext.getZipEntryAsObject(
 					stagedModelPath);
 
-			importStagedModel(portletDataContext, stagedModel);
+			if (stagedModel != null) {
+				importStagedModel(portletDataContext, stagedModel);
+			}
 		}
 	}
 
