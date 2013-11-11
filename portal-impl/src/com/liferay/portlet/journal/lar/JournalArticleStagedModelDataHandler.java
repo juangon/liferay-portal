@@ -131,7 +131,7 @@ public class JournalArticleStagedModelDataHandler
 		Map<String, String> referenceAttributes = new HashMap<String, String>();
 
 		String articleResourceUuid = StringPool.BLANK;
-
+		
 		try {
 			articleResourceUuid = article.getArticleResourceUuid();
 		}
@@ -214,28 +214,26 @@ public class JournalArticleStagedModelDataHandler
 	public boolean validateReference(
 		PortletDataContext portletDataContext, Element referenceElement) {
 
-		String articleResourceUuid = referenceElement.attributeValue(
-			"article-resource-uuid");
-		String articleArticleId = referenceElement.attributeValue("article-id");
-		boolean preloaded = GetterUtil.getBoolean(
-			referenceElement.attributeValue("preloaded"));
+		String uuid = referenceElement.attributeValue("article-resource-uuid");
 
 		try {
-			JournalArticle existingArticle = fetchExistingArticle(
-				articleResourceUuid, portletDataContext.getScopeGroupId(),
-				articleArticleId, null, 0.0, preloaded);
+			boolean valid = validateMissingReference(
+				uuid, portletDataContext.getCompanyId(),
+				portletDataContext.getScopeGroupId());
 
-			if (existingArticle == null) {
-				existingArticle = fetchExistingArticle(
-					articleResourceUuid, portletDataContext.getCompanyGroupId(),
-					articleArticleId, null, 0.0, preloaded);
+			if (!valid) {
+				valid = validateMissingReference(
+					uuid, portletDataContext.getCompanyId(),
+					portletDataContext.getCompanyGroupId());
 			}
 
-			if (existingArticle == null) {
-				return false;
+			if (!valid) {
+				valid = validateParentMissingReference(
+					uuid, portletDataContext.getCompanyId(),
+					portletDataContext.getScopeGroupId());
 			}
 
-			return true;
+			return valid;
 		}
 		catch (Exception e) {
 			return false;
@@ -267,6 +265,8 @@ public class JournalArticleStagedModelDataHandler
 
 		articleElement.addAttribute(
 			"article-resource-uuid", article.getArticleResourceUuid());
+
+		articleElement.addAttribute("article-id", article.getArticleId());
 
 		if (article.getFolderId() !=
 				JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
@@ -359,6 +359,64 @@ public class JournalArticleStagedModelDataHandler
 		portletDataContext.addClassedModel(
 			articleElement, ExportImportPathUtil.getModelPath(article),
 			article);
+	}
+
+	@Override
+	protected void doImportStagedModel(
+			PortletDataContext portletDataContext, Element element,
+			long groupId)
+		throws Exception {
+
+		String articleResourceUuid = element.attributeValue(
+						"article-resource-uuid");
+
+		JournalArticleResource existingArticleResource = null;
+
+		try {
+			existingArticleResource =
+				JournalArticleResourceLocalServiceUtil.
+					fetchJournalArticleResourceByUuidAndGroupId(
+						articleResourceUuid, groupId);
+		}
+		catch (SystemException se) {
+			throw new PortletDataException(se);
+		}
+
+		if (existingArticleResource == null) {
+			return;
+		}
+
+		JournalArticle existingArticle = null;
+
+		try {
+			existingArticle =
+				JournalArticleLocalServiceUtil.getLatestArticle(
+					existingArticleResource.getResourcePrimKey(),
+					WorkflowConstants.STATUS_ANY, false);
+		}
+		catch (Exception e) {
+			if (e instanceof SystemException) {
+				throw new PortletDataException(e);
+			}
+
+			return;
+		}
+
+		Map<Long, Long> articleIds =
+			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
+				JournalArticle.class);
+
+		long articleId = GetterUtil.getLong(element.attributeValue("class-pk"));
+
+		articleIds.put(articleId, existingArticle.getId());
+
+		Map<String, String> articleArticleIds =
+			(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
+				JournalArticle.class + ".articleId");
+
+		String articleArticleId = element.attributeValue("article-id");
+
+		articleArticleIds.put(articleArticleId, existingArticle.getArticleId());
 	}
 
 	@Override
@@ -834,6 +892,32 @@ public class JournalArticleStagedModelDataHandler
 			articleDefaultLocale, articleAvailableLocales);
 
 		article.prepareLocalizedFieldsForImport(defaultImportLocale);
+	}
+
+	@Override
+	protected boolean validateMissingReference(
+			String uuid, long companyId, long groupId)
+		throws Exception {
+
+		JournalArticleResource articleResource =
+						JournalArticleResourceLocalServiceUtil.
+						fetchJournalArticleResourceByUuidAndGroupId(
+							uuid, groupId);
+
+		if (articleResource == null) {
+			return false;
+		}
+
+		JournalArticle article =
+						JournalArticleLocalServiceUtil.getLatestArticle(
+							articleResource.getResourcePrimKey(),
+							WorkflowConstants.STATUS_ANY, false);
+
+		if (article == null) {
+			return false;
+		}
+
+		return true;
 	}
 
 }
