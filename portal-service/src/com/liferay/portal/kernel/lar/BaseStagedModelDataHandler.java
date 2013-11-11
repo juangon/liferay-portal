@@ -25,9 +25,11 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.StagedModel;
 import com.liferay.portal.model.TrashedModel;
 import com.liferay.portal.model.WorkflowedModel;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -135,6 +137,29 @@ public abstract class BaseStagedModelDataHandler<T extends StagedModel>
 	}
 
 	@Override
+	public void importParentSiteStagedModel(
+			PortletDataContext portletDataContext, Element element,
+			long groupId)
+		throws PortletDataException {
+
+		try {
+			Group group = GroupLocalServiceUtil.getGroup(groupId);
+			doImportStagedModel(portletDataContext, element, groupId);
+
+			for (Group parentGroup : group.getAncestors()) {
+				importParentSiteStagedModel(
+					portletDataContext, element, parentGroup.getGroupId());
+			}
+		}
+		catch (PortletDataException pde) {
+			throw pde;
+		}
+		catch (Exception e) {
+			throw new PortletDataException(e);
+		}
+	}
+
+	@Override
 	public void importStagedModel(
 			PortletDataContext portletDataContext, T stagedModel)
 		throws PortletDataException {
@@ -202,6 +227,12 @@ public abstract class BaseStagedModelDataHandler<T extends StagedModel>
 					portletDataContext.getCompanyGroupId());
 			}
 
+			if (!valid) {
+				valid = validateParentMissingReference(
+					uuid, portletDataContext.getCompanyId(),
+					portletDataContext.getScopeGroupId());
+			}
+
 			return valid;
 		}
 		catch (Exception e) {
@@ -221,6 +252,14 @@ public abstract class BaseStagedModelDataHandler<T extends StagedModel>
 
 	protected void doImportCompanyStagedModel(
 			PortletDataContext portletDataContext, String uuid, long classPK)
+		throws Exception {
+
+		throw new UnsupportedOperationException();
+	}
+
+	protected void doImportStagedModel(
+			PortletDataContext portletDataContext, Element element,
+			long groupId)
 		throws Exception {
 
 		throw new UnsupportedOperationException();
@@ -292,6 +331,31 @@ public abstract class BaseStagedModelDataHandler<T extends StagedModel>
 		throws Exception {
 
 		return true;
+	}
+
+	protected boolean validateParentMissingReference(
+			String uuid, long companyId, long groupId)
+		throws Exception {
+
+		boolean valid = false;
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+		for (Group parentGroup : group.getAncestors()) {
+			valid = validateMissingReference(
+						uuid, companyId, parentGroup.getGroupId());
+
+			if (!valid) {
+				valid =
+					validateParentMissingReference(
+						uuid, companyId, parentGroup.getGroupId());
+			}
+
+			if (valid) {
+				break;
+			}
+		}
+
+		return valid;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
