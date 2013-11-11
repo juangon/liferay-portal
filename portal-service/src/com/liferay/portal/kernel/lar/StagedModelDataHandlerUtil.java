@@ -111,8 +111,6 @@ public class StagedModelDataHandlerUtil {
 													portletDataContext.
 													getExportDataRootElement(),
 													stagedModel,
-													stagedModel.
-														getModelClass(),
 													PortletDataContext.
 													REFERENCE_TYPE_DEPENDENCY,
 													true);
@@ -376,42 +374,43 @@ public class StagedModelDataHandlerUtil {
 			boolean missing = portletDataContext.isMissingReference(
 				referenceElement);
 
-			if (missing) {
+			long groupId = GetterUtil.getLong(
+					referenceElement.attributeValue("group-id"),
+					portletDataContext.getSourceGroupId());
+			
+			if (missing) {				
+
+				Group group = null;
+				boolean hasAncestors = false;
+
+				try {
+					group = GroupLocalServiceUtil.getGroup(
+						portletDataContext.getScopeGroupId());
+					hasAncestors = (group.getAncestors().size() > 0);
+				}
+				catch (Exception e) {
+				}
+
+				if ((portletDataContext.getSourceGroupId() != groupId) &&
+					hasAncestors) {
+
+					StagedModelDataHandler<?> stagedModelDataHandler =
+						StagedModelDataHandlerRegistryUtil.
+							getStagedModelDataHandler(stagedModelClass.getName());
+
+					stagedModelDataHandler.importParentSiteStagedModel(
+						portletDataContext, referenceElement,
+						portletDataContext.getScopeGroupId());
+
+					continue;
+				}
+			
 				StagedModelDataHandler<?> stagedModelDataHandler =
 					StagedModelDataHandlerRegistryUtil.
 						getStagedModelDataHandler(stagedModelClass.getName());
 
 				stagedModelDataHandler.importCompanyStagedModel(
 					portletDataContext, referenceElement);
-
-				continue;
-			}
-
-			long groupId = GetterUtil.getLong(
-				referenceElement.attributeValue("group-id"),
-				portletDataContext.getSourceGroupId());
-
-			Group group = null;
-			boolean hasAncestors = false;
-
-			try {
-				group = GroupLocalServiceUtil.getGroup(
-					portletDataContext.getScopeGroupId());
-				hasAncestors = (group.getAncestors().size() > 0);
-			}
-			catch (Exception e) {
-			}
-
-			if ((portletDataContext.getSourceGroupId() != groupId) &&
-				hasAncestors) {
-
-				StagedModelDataHandler<?> stagedModelDataHandler =
-					StagedModelDataHandlerRegistryUtil.
-						getStagedModelDataHandler(stagedModelClass.getName());
-
-				stagedModelDataHandler.importParentSiteStagedModel(
-					portletDataContext, referenceElement,
-					portletDataContext.getScopeGroupId());
 
 				continue;
 			}
