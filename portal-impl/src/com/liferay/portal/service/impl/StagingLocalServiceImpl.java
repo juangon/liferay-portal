@@ -44,6 +44,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.auth.RemoteAuthException;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.StagingLocalServiceBaseImpl;
 import com.liferay.portal.service.http.GroupServiceHttp;
@@ -211,12 +212,26 @@ public class StagingLocalServiceImpl extends StagingLocalServiceBaseImpl {
 		if (!liveGroup.hasStagingGroup()) {
 			serviceContext.setAttribute("staging", String.valueOf(true));
 
+			long parentGroupId = GroupConstants.DEFAULT_PARENT_GROUP_ID;
+
+			if (liveGroup.getParentGroupId() !=
+					GroupConstants.DEFAULT_PARENT_GROUP_ID) {
+
+				Group parentGroup = GroupLocalServiceUtil.fetchGroup(
+					liveGroup.getParentGroupId());
+
+				parentGroupId = parentGroup.getGroupId();
+
+				if (parentGroup.hasStagingGroup()) {
+					parentGroupId = parentGroup.getStagingGroup().getGroupId();
+				}
+			}
+
 			Group stagingGroup = groupLocalService.addGroup(
-				userId, GroupConstants.DEFAULT_PARENT_GROUP_ID,
-				liveGroup.getClassName(), liveGroup.getClassPK(),
-				liveGroup.getGroupId(), liveGroup.getDescriptiveName(),
-				liveGroup.getDescription(), liveGroup.getType(),
-				liveGroup.isManualMembership(),
+				userId, parentGroupId, liveGroup.getClassName(),
+				liveGroup.getClassPK(), liveGroup.getGroupId(),
+				liveGroup.getDescriptiveName(), liveGroup.getDescription(),
+				liveGroup.getType(), liveGroup.isManualMembership(),
 				liveGroup.getMembershipRestriction(),
 				liveGroup.getFriendlyURL(), false, liveGroup.isActive(),
 				serviceContext);
