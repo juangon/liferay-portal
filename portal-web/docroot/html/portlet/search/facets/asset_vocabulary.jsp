@@ -58,7 +58,7 @@ if (assetVocabularies.isEmpty()) {
 
 				String clearFields = renderResponse.getNamespace() + facet.getFieldId();
 
-				_buildCategoriesNavigation(assetCategoryIdsOrNames, matchByName, facetCollector, assetCategories, clearFields, pageContext, sb, locale);
+				_buildCategoriesNavigation(assetCategoryIdsOrNames, matchByName, facetCollector, assetCategories, clearFields, pageContext, locale, sb);
 				%>
 
 				<%= sb.toString() %>
@@ -73,7 +73,7 @@ if (assetVocabularies.isEmpty()) {
 </div>
 
 <%!
-private void _buildCategoriesNavigation(String[] assetCategoryIdsOrNames, boolean matchByName, FacetCollector facetCollector, List<AssetCategory> assetCategories, String clearFields, PageContext pageContext, StringBundler sb, Locale locale) throws Exception {
+private void _buildCategoriesNavigation(String[] assetCategoryIdsOrNames, boolean matchByName, FacetCollector facetCollector, List<AssetCategory> assetCategories, String clearFields, PageContext pageContext, Locale locale, StringBundler sb) throws Exception {
 	for (AssetCategory assetCategory : assetCategories) {
 		String term = String.valueOf(assetCategory.getCategoryId());
 
@@ -112,7 +112,7 @@ private void _buildCategoriesNavigation(String[] assetCategoryIdsOrNames, boolea
 		if (!childAssetCategories.isEmpty()) {
 			sb.append("<ul>");
 
-			_buildCategoriesNavigation(assetCategoryIdsOrNames, matchByName, facetCollector, childAssetCategories, clearFields, pageContext, sb, locale);
+			_buildCategoriesNavigation(assetCategoryIdsOrNames, matchByName, facetCollector, childAssetCategories, clearFields, pageContext, locale, sb);
 
 			sb.append("</ul>");
 		}
