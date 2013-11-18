@@ -439,13 +439,13 @@ public class LayoutImporter {
 				groupId, privateLayout, settings);
 		}
 
-		Element portletsElement = _rootElement.element("portlets");
-
-		List<Element> portletElements = portletsElement.elements("portlet");
-
 		// Read asset categories, asset tags, comments, locks, permissions, and
 		// ratings entries to make them available to the data handlers through
 		// the context
+
+		Element portletsElement = _rootElement.element("portlets");
+
+		List<Element> portletElements = portletsElement.elements("portlet");
 
 		if (importPermissions) {
 			for (Element portletElement : portletElements) {
