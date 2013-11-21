@@ -68,10 +68,9 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 		Method method = methodInvocation.getMethod();
 
 		String methodName = method.getName();
+		Class<?>[] parameterTypes = method.getParameterTypes();
 
 		Object[] arguments = methodInvocation.getArguments();
-
-		Class<?>[] parameterTypes = method.getParameterTypes();
 
 		boolean workflowEnabled = WorkflowThreadLocal.isEnabled();
 

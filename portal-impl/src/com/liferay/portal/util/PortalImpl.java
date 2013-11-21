@@ -903,7 +903,7 @@ public class PortalImpl implements Portal {
 
 		if (Validator.isNull(friendlyURL)) {
 
-			// We need to make sure any virtual layouts are merged.
+			// We need to ensure that virtual layouts are merged
 
 			List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
 				groupId, privateLayout,
