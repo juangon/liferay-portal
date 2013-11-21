@@ -143,10 +143,10 @@ public class LayoutLocalServiceStagingAdvice implements MethodInterceptor {
 
 		Object returnValue = null;
 
+		Class<?>[] parameterTypes = method.getParameterTypes();
+
 		Object thisObject = methodInvocation.getThis();
 		Object[] arguments = methodInvocation.getArguments();
-
-		Class<?>[] parameterTypes = method.getParameterTypes();
 
 		if (methodName.equals("createLayout")) {
 			return methodInvocation.proceed();
