@@ -368,6 +368,7 @@
 
 									&:focus, &:hover {
 										background: #2FA4F5;
+
 										@include filter-gradient(#2FA4F5, #2FA4F5, vertical);
 									}
 
@@ -399,8 +400,8 @@
 
 						li.dropdown.user-avatar {
 							.dropdown-menu {
-								right: 0;
 								left: auto;
+								right: 0;
 							}
 						}
 					}
