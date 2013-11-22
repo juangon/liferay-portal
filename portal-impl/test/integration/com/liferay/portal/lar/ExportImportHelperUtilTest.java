@@ -378,9 +378,6 @@ public class ExportImportHelperUtilTest extends PowerMockito {
 
 	@Test
 	public void testImportDLReferences() throws Exception {
-		Element rootElement =
-			_portletDataContextExport.getExportDataRootElement();
-
 		Element referrerStagedModelElement =
 			_portletDataContextExport.getExportDataElement(
 				_referrerStagedModel);
