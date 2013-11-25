@@ -1794,6 +1794,10 @@ public class StagingImpl implements Staging {
 			Date lastPublishDate)
 		throws Exception {
 
+		if (lastPublishDate == null) {
+			lastPublishDate = new Date();
+		}
+
 		try {
 			portletPreferences.setValue(
 				"last-publish-date", String.valueOf(lastPublishDate.getTime()));
