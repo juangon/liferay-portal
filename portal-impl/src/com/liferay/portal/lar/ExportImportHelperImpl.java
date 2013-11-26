@@ -302,6 +302,7 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 		return PortletConstants.getRootPortletId(portletId);
 	}
 
+	@Override
 	public boolean[] getExportPortletControls(
 			long companyId, String portletId,
 			Map<String, String[]> parameterMap)
@@ -311,6 +312,7 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 			companyId, portletId, parameterMap, "layout-set");
 	}
 
+	@Override
 	public boolean[] getExportPortletControls(
 			long companyId, String portletId,
 			Map<String, String[]> parameterMap, String type)
@@ -404,6 +406,7 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 			exportCurPortletSetup, exportCurPortletUserPreferences};
 	}
 
+	@Override
 	public boolean[] getImportPortletControls(
 			long companyId, String portletId,
 			Map<String, String[]> parameterMap, Element portletDataElement)
