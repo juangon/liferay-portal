@@ -475,8 +475,7 @@ public class LayoutExporter {
 
 		for (Layout layout : layouts) {
 			exportLayout(
-				portletDataContext, portlets, layoutIds, portletIds, layout,
-				zipWriter);
+				portletDataContext, portlets, layoutIds, portletIds, layout);
 		}
 
 		long previousScopeGroupId = portletDataContext.getScopeGroupId();
@@ -625,8 +624,7 @@ public class LayoutExporter {
 
 	protected void exportLayout(
 			PortletDataContext portletDataContext, List<Portlet> portlets,
-			long[] layoutIds, Map<String, Object[]> portletIds, Layout layout,
-			ZipWriter zipWriter)
+			long[] layoutIds, Map<String, Object[]> portletIds, Layout layout)
 		throws Exception {
 
 		if (!ArrayUtil.contains(layoutIds, layout.getLayoutId()) &&
