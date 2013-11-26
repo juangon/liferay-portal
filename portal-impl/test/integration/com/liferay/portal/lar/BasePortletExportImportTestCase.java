@@ -209,12 +209,13 @@ public class BasePortletExportImportTestCase extends BaseExportImportTestCase {
 
 		Map<String, String[]> exportParameterMap =
 			new LinkedHashMap<String, String[]>();
-		Map<String, String[]> importParameterMap =
-			new LinkedHashMap<String, String[]>();
 
 		exportParameterMap.put(
 			PortletDataHandlerKeys.UPDATE_LAST_PUBLISH_DATE,
 			new String[] {String.valueOf(true)});
+
+		Map<String, String[]> importParameterMap =
+			new LinkedHashMap<String, String[]>();
 
 		Date startDate = new Date(System.currentTimeMillis() - Time.HOUR);
 		Date endDate = new Date();
