@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
+import com.liferay.portal.kernel.staging.LayoutStagingUtil;
 import com.liferay.portal.kernel.staging.StagingConstants;
 import com.liferay.portal.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -36,6 +37,7 @@ import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.LayoutSet;
+import com.liferay.portal.model.LayoutSetBranch;
 import com.liferay.portal.model.Repository;
 import com.liferay.portal.model.User;
 import com.liferay.portal.portletfilerepository.PortletFileRepositoryUtil;
@@ -405,13 +407,29 @@ public class StagingLocalServiceImpl extends StagingLocalServiceBaseImpl {
 		LayoutSet layoutSet = layoutSetLocalService.getLayoutSet(
 			groupId, privateLayout);
 
-		UnicodeProperties settingsProperties =
-			layoutSet.getSettingsProperties();
+		LayoutSetBranch layoutSetBranch = LayoutStagingUtil.getLayoutSetBranch(
+			layoutSet);
+
+		UnicodeProperties settingsProperties = null;
+
+		if (layoutSetBranch != null) {
+			settingsProperties = layoutSetBranch.getSettingsProperties();
+		}
+		else {
+			settingsProperties = layoutSet.getSettingsProperties();
+		}
 
 		settingsProperties.remove("last-publish-date");
 
-		layoutSetLocalService.updateSettings(
-			groupId, privateLayout, settingsProperties.toString());
+		if (layoutSetBranch != null) {
+			layoutSetBranchLocalService.updateSettings(
+				layoutSetBranch.getLayoutSetBranchId(),
+				settingsProperties.toString());
+		}
+		else {
+			layoutSetLocalService.updateSettings(
+				groupId, privateLayout, settingsProperties.toString());
+		}
 	}
 
 	protected void disableRemoteStaging(String remoteURL, long remoteGroupId)
