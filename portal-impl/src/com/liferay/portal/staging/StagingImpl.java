@@ -1777,15 +1777,31 @@ public class StagingImpl implements Staging {
 		LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
 			groupId, privateLayout);
 
-		UnicodeProperties settingsProperties =
-			layoutSet.getSettingsProperties();
+		LayoutSetBranch layoutSetBranch = LayoutStagingUtil.getLayoutSetBranch(
+			layoutSet);
+
+		UnicodeProperties settingsProperties = null;
+
+		if (layoutSetBranch != null) {
+			settingsProperties = layoutSetBranch.getSettingsProperties();
+		}
+		else {
+			settingsProperties = layoutSet.getSettingsProperties();
+		}
 
 		settingsProperties.setProperty(
 			"last-publish-date", String.valueOf(lastPublishDate.getTime()));
 
-		LayoutSetLocalServiceUtil.updateSettings(
-			layoutSet.getGroupId(), layoutSet.isPrivateLayout(),
-			settingsProperties.toString());
+		if (layoutSetBranch != null) {
+			LayoutSetBranchLocalServiceUtil.updateSettings(
+				layoutSetBranch.getLayoutSetBranchId(),
+				settingsProperties.toString());
+		}
+		else {
+			LayoutSetLocalServiceUtil.updateSettings(
+				layoutSet.getGroupId(), layoutSet.isPrivateLayout(),
+				settingsProperties.toString());
+		}
 	}
 
 	@Override
@@ -1996,12 +2012,33 @@ public class StagingImpl implements Staging {
 			groupName);
 
 		try {
+			LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
+						groupId, privateLayout);
+
+			UnicodeProperties settingsProperties =
+							layoutSet.getSettingsProperties();
+
+			long lastPublishDate = GetterUtil.getLong(
+				layoutSet.getSettingsProperty("last-publish-date"));
+
 			LayoutSetBranch layoutSetBranch =
 				LayoutSetBranchLocalServiceUtil.addLayoutSetBranch(
 					userId, groupId, privateLayout,
 					LayoutSetBranchConstants.MASTER_BRANCH_NAME, description,
 					true, LayoutSetBranchConstants.ALL_BRANCHES,
 					serviceContext);
+
+			if (lastPublishDate > 0) {
+				settingsProperties = layoutSetBranch.getSettingsProperties();
+
+				settingsProperties.setProperty(
+					"last-publish-date", String.valueOf(lastPublishDate));
+
+				layoutSetBranch =
+						LayoutSetBranchLocalServiceUtil.updateSettings(
+									layoutSetBranch.getLayoutSetBranchId(),
+									settingsProperties.toString());
+			}
 
 			List<LayoutRevision> layoutRevisions =
 				LayoutRevisionLocalServiceUtil.getLayoutRevisions(
