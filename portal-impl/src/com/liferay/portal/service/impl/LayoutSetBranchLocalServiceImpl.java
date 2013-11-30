@@ -499,6 +499,22 @@ public class LayoutSetBranchLocalServiceImpl
 		return layoutSetBranch;
 	}
 
+	@Override
+	public LayoutSetBranch updateSettings(
+			long layoutSetBranchId, String settings)
+		throws PortalException, SystemException {
+
+		LayoutSetBranch layoutSetBranch =
+			layoutSetBranchPersistence.findByPrimaryKey(layoutSetBranchId);
+
+		layoutSetBranch.setModifiedDate(new Date());
+		layoutSetBranch.setSettings(settings);
+
+		layoutSetBranchPersistence.update(layoutSetBranch);
+
+		return layoutSetBranch;
+	}
+
 	protected String getLayoutBranchName(
 			long layoutSetBranchId, Locale locale, String mergeBranchName,
 			String mergeLayoutSetBranchName, long plid)
