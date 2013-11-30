@@ -402,6 +402,15 @@ public class LayoutSetBranchLocalServiceWrapper
 			name, description, serviceContext);
 	}
 
+	@Override
+	public com.liferay.portal.model.LayoutSetBranch updateSettings(
+		long layoutSetBranchId, java.lang.String settings)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layoutSetBranchLocalService.updateSettings(layoutSetBranchId,
+			settings);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

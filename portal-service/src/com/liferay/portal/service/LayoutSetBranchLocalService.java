@@ -320,4 +320,9 @@ public interface LayoutSetBranchLocalService extends BaseLocalService,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.model.LayoutSetBranch updateSettings(
+		long layoutSetBranchId, java.lang.String settings)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 }

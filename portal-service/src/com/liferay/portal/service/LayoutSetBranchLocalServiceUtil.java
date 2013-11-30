@@ -378,6 +378,13 @@ public class LayoutSetBranchLocalServiceUtil {
 			serviceContext);
 	}
 
+	public static com.liferay.portal.model.LayoutSetBranch updateSettings(
+		long layoutSetBranchId, java.lang.String settings)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().updateSettings(layoutSetBranchId, settings);
+	}
+
 	public static LayoutSetBranchLocalService getService() {
 		if (_service == null) {
 			_service = (LayoutSetBranchLocalService)PortalBeanLocatorUtil.locate(LayoutSetBranchLocalService.class.getName());
