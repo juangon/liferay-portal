@@ -70,6 +70,7 @@ import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ListMergeable;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.MethodHandler;
 import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -2192,6 +2193,10 @@ public class PortalImpl implements Portal {
 		else if (type == ExpandoColumnConstants.STRING_ARRAY) {
 			value = portletRequest.getParameterValues(name);
 		}
+		else if (type == ExpandoColumnConstants.STRING_LOCALIZED) {
+			value = (Serializable)LocalizationUtil.getLocalizationMap(
+				portletRequest, name);
+		}
 		else {
 			value = ParamUtil.getString(portletRequest, name);
 		}
@@ -2316,6 +2321,10 @@ public class PortalImpl implements Portal {
 		}
 		else if (type == ExpandoColumnConstants.STRING_ARRAY) {
 			value = uploadPortletRequest.getParameterValues(name);
+		}
+		else if (type == ExpandoColumnConstants.STRING_LOCALIZED) {
+			value = (Serializable)LocalizationUtil.getLocalizationMap(
+				uploadPortletRequest, name);
 		}
 		else {
 			value = ParamUtil.getString(uploadPortletRequest, name);
