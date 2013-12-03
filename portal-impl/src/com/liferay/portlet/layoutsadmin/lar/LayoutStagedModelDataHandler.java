@@ -1183,7 +1183,8 @@ public class LayoutStagedModelDataHandler
 					boolean[] importPortletControls =
 						ExportImportHelperUtil.getImportPortletControls(
 							portletDataContext.getCompanyId(), portletId,
-							portletDataContext.getParameterMap(), null);
+							portletDataContext.getParameterMap(), null,
+							portletDataContext.getManifestSummary());
 
 					importPortletSetup = importPortletControls[2];
 				}
