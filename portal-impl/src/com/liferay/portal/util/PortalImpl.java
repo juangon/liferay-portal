@@ -3020,27 +3020,7 @@ public class PortalImpl implements Portal {
 			LayoutSet layoutSet, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
-		String virtualHostname = layoutSet.getVirtualHostname();
-
-		if (Validator.isNull(virtualHostname) &&
-			Validator.isNotNull(PropsValues.VIRTUAL_HOSTS_DEFAULT_SITE_NAME) &&
-			!layoutSet.isPrivateLayout()) {
-
-			try {
-				Group group = GroupLocalServiceUtil.getGroup(
-					themeDisplay.getCompanyId(),
-					PropsValues.VIRTUAL_HOSTS_DEFAULT_SITE_NAME);
-
-				if (layoutSet.getGroupId() == group.getGroupId()) {
-					Company company = themeDisplay.getCompany();
-
-					virtualHostname = company.getVirtualHostname();
-				}
-			}
-			catch (Exception e) {
-				_log.error(e, e);
-			}
-		}
+		String virtualHostname = getVirtualHostname(layoutSet);
 
 		if (Validator.isNotNull(virtualHostname)) {
 			String portalURL = getPortalURL(
@@ -7316,29 +7296,11 @@ public class PortalImpl implements Portal {
 
 		String portalURL = themeDisplay.getPortalURL();
 
-		if (canonicalURL || !themeDisplay.getServerName().equals(_LOCALHOST)) {
-			String virtualHostname = layoutSet.getVirtualHostname();
+		if (canonicalURL ||
+			!StringUtil.equalsIgnoreCase(
+				themeDisplay.getServerName(), _LOCALHOST)) {
 
-			if (Validator.isNull(virtualHostname) &&
-				Validator.isNotNull(
-					PropsValues.VIRTUAL_HOSTS_DEFAULT_SITE_NAME) &&
-				!layoutSet.isPrivateLayout()) {
-
-				try {
-					Group defaultGroup = GroupLocalServiceUtil.getGroup(
-						themeDisplay.getCompanyId(),
-						PropsValues.VIRTUAL_HOSTS_DEFAULT_SITE_NAME);
-
-					if (layoutSet.getGroupId() == defaultGroup.getGroupId()) {
-						Company company = themeDisplay.getCompany();
-
-						virtualHostname = company.getVirtualHostname();
-					}
-				}
-				catch (Exception e) {
-					_log.error(e, e);
-				}
-			}
+			String virtualHostname = getVirtualHostname(layoutSet);
 
 			String portalDomain = HttpUtil.getDomain(portalURL);
 
