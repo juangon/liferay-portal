@@ -5563,6 +5563,34 @@ public class PortalImpl implements Portal {
 	}
 
 	@Override
+	public String getVirtualHostname(LayoutSet layoutSet) {
+		String virtualHostname = layoutSet.getVirtualHostname();
+
+		if (Validator.isNull(virtualHostname) &&
+			Validator.isNotNull(PropsValues.VIRTUAL_HOSTS_DEFAULT_SITE_NAME) &&
+			!layoutSet.isPrivateLayout()) {
+
+			try {
+				Group defaultGroup = GroupLocalServiceUtil.getGroup(
+					layoutSet.getCompanyId(),
+					PropsValues.VIRTUAL_HOSTS_DEFAULT_SITE_NAME);
+
+				if (layoutSet.getGroupId() == defaultGroup.getGroupId()) {
+					Company company = CompanyLocalServiceUtil.getCompany(
+						layoutSet.getCompanyId());
+
+					virtualHostname = company.getVirtualHostname();
+				}
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+		}
+
+		return virtualHostname;
+	}
+
+	@Override
 	public String getVirtualLayoutActualURL(
 			long groupId, boolean privateLayout, String mainPath,
 			String friendlyURL, Map<String, String[]> params,
