@@ -314,11 +314,8 @@ public class GlobalStartupAction extends SimpleAction {
 
 		// JSON web service
 
-		String portalContextPath = PortalContextLoaderListener
-			.getPortalServletContextPath();
-
 		JSONWebServiceActionsManagerUtil.registerServletContext(
-			portalContextPath);
+			PortalContextLoaderListener.getPortalServletContextPath());
 
 		// Plugins
 
