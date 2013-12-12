@@ -37,10 +37,11 @@ public class MapUtil {
 	}
 
 	public static <K, V> Map<K, V> filter(
-		Map<K, V> inputMap, Map<K, V> outputMap, PredicateFilter<K> keyFilter) {
+		Map<K, V> inputMap, Map<K, V> outputMap,
+		PredicateFilter<K> keyPredicateFilter) {
 
 		for (Map.Entry<K, V> entry : inputMap.entrySet()) {
-			if (keyFilter.filter(entry.getKey())) {
+			if (keyPredicateFilter.filter(entry.getKey())) {
 				outputMap.put(entry.getKey(), entry.getValue());
 			}
 		}

@@ -26,7 +26,7 @@ import org.junit.Test;
 public class MapUtilTest {
 
 	@Test
-	public void testFilter() throws Exception {
+	public void testPredicateFilter() throws Exception {
 		Map<String, String> inputMap = new HashMap<String, String>();
 
 		inputMap.put("1", "one");
@@ -40,8 +40,8 @@ public class MapUtilTest {
 			new PredicateFilter<String>() {
 
 				@Override
-				public boolean filter(String key) {
-					int value = Integer.parseInt(key);
+				public boolean filter(String string) {
+					int value = GetterUtil.getInteger(string);
 
 					if ((value % 2) == 0) {
 						return true;
@@ -50,7 +50,7 @@ public class MapUtilTest {
 					return false;
 				}
 
-		});
+			});
 
 		Assert.assertEquals(2, outputMap.size());
 		Assert.assertEquals("two", outputMap.get("2"));
