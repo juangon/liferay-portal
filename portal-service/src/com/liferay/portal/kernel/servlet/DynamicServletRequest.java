@@ -42,8 +42,7 @@ public class DynamicServletRequest extends HttpServletRequestWrapper {
 		HttpServletRequest request, Map<String, String[]> parameterMap,
 		String queryString) {
 
-		return addQueryString(
-			request, parameterMap, queryString, true);
+		return addQueryString(request, parameterMap, queryString, true);
 	}
 
 	public static HttpServletRequest addQueryString(
