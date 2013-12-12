@@ -38,7 +38,7 @@ public class DynamicServletRequestTest {
 			"15", StringPool.BLANK);
 
 		HttpServletRequest request =
-			DynamicServletRequest.addParametersAndQueryString(
+			DynamicServletRequest.addQueryString(
 				new MockHttpServletRequest(),
 				Collections.<String, String[]>emptyMap(), queryString, false);
 
@@ -55,7 +55,7 @@ public class DynamicServletRequestTest {
 			"15", "param1=value1&param2=value2&param3=value3");
 
 		HttpServletRequest request =
-			DynamicServletRequest.addParametersAndQueryString(
+			DynamicServletRequest.addQueryString(
 				new MockHttpServletRequest(),
 				Collections.<String, String[]>emptyMap(), queryString, false);
 

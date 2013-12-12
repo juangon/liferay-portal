@@ -98,7 +98,7 @@ public class PortletLogic extends RuntimeLogic {
 		}
 
 		HttpServletRequest request =
-			DynamicServletRequest.addParametersAndQueryString(
+			DynamicServletRequest.addQueryString(
 				_request, parameterMap, queryString, false);
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
