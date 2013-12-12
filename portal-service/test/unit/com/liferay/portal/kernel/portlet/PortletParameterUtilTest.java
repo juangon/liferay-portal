@@ -25,28 +25,17 @@ import org.junit.Test;
 public class PortletParameterUtilTest {
 
 	@Test
-	public void testAddNamespaceNoParameters() {
-		String query = PortletParameterUtil.addNamespace(
-			"15", StringPool.BLANK);
-
-		Assert.assertEquals("p_p_id=15", query);
-	}
-
-	@Test
-	public void testAddNamespaceOneParameter() {
-		String query = PortletParameterUtil.addNamespace("15", "param1=value1");
-
-		Assert.assertEquals("p_p_id=15&_15_param1=value1", query);
-	}
-
-	@Test
-	public void testAddNamespaceThreeParameters() {
-		String query = PortletParameterUtil.addNamespace(
-			"15", "param1=value1&param2=value2&param3=value3");
-
+	public void testAddNamespace() {
+		Assert.assertEquals(
+			"p_p_id=15",
+			PortletParameterUtil.addNamespace("15", StringPool.BLANK));
+		Assert.assertEquals(
+			"p_p_id=15&_15_param1=value1",
+			PortletParameterUtil.addNamespace("15", "param1=value1"));
 		Assert.assertEquals(
 			"p_p_id=15&_15_param1=value1&_15_param2=value2&_15_param3=value3",
-			query);
+			PortletParameterUtil.addNamespace(
+				"15", "param1=value1&param2=value2&param3=value3"));
 	}
 
 }

@@ -29,12 +29,12 @@ public class PrefixPredicateFilter implements PredicateFilter<String> {
 	}
 
 	@Override
-	public boolean filter(String t) {
+	public boolean filter(String string) {
 		if (_include) {
-			return t.startsWith(_prefix);
+			return string.startsWith(_prefix);
 		}
 		else {
-			return !t.startsWith(_prefix);
+			return !string.startsWith(_prefix);
 		}
 	}
 
