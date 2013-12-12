@@ -38,15 +38,15 @@ public class DynamicServletRequest extends HttpServletRequestWrapper {
 
 	public static final String DYNAMIC_QUERY_STRING = "DYNAMIC_QUERY_STRING";
 
-	public static HttpServletRequest addParametersAndQueryString(
+	public static HttpServletRequest addQueryString(
 		HttpServletRequest request, Map<String, String[]> parameterMap,
 		String queryString) {
 
-		return addParametersAndQueryString(
+		return addQueryString(
 			request, parameterMap, queryString, true);
 	}
 
-	public static HttpServletRequest addParametersAndQueryString(
+	public static HttpServletRequest addQueryString(
 		HttpServletRequest request, Map<String, String[]> parameterMap,
 		String queryString, boolean inherit) {
 
@@ -91,14 +91,14 @@ public class DynamicServletRequest extends HttpServletRequestWrapper {
 	public static HttpServletRequest addQueryString(
 		HttpServletRequest request, String queryString) {
 
-		return addParametersAndQueryString(
+		return addQueryString(
 			request, new HashMap<String, String[]>(), queryString, true);
 	}
 
 	public static HttpServletRequest addQueryString(
 		HttpServletRequest request, String queryString, boolean inherit) {
 
-		return addParametersAndQueryString(
+		return addQueryString(
 			request, new HashMap<String, String[]>(), queryString, inherit);
 	}
 

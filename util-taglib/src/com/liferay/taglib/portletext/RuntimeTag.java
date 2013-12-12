@@ -99,7 +99,7 @@ public class RuntimeTag extends TagSupport {
 				new PrefixPredicateFilter("p_p_"));
 		}
 
-		request = DynamicServletRequest.addParametersAndQueryString(
+		request = DynamicServletRequest.addQueryString(
 			restrictPortletServletRequest, parameterMap, queryString, false);
 
 		try {
