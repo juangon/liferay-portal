@@ -262,8 +262,10 @@ String emailBody = PrefsParamUtil.getString(portletPreferences, request, emailBo
 				<aui:input cssClass="lfr-input-text-container" label="address" name="preferences--emailFromAddress--" value="<%= emailFromAddress %>" />
 			</aui:fieldset>
 
-			<div class="definition-of-terms">
-				<h4><liferay-ui:message key="definition-of-terms" /></h4>
+			<aui:fieldset cssClass="definition-of-terms">
+				<legend>
+					<liferay-ui:message key="definition-of-terms" />
+				</legend>
 
 				<dl>
 					<dt>
@@ -315,7 +317,7 @@ String emailBody = PrefsParamUtil.getString(portletPreferences, request, emailBo
 						<liferay-ui:message key="the-site-name-associated-with-the-document" />
 					</dd>
 				</dl>
-			</div>
+			</aui:fieldset>
 		</c:when>
 		<c:when test='<%= tabs2.startsWith("document-") %>'>
 			<aui:fieldset>
@@ -360,8 +362,10 @@ String emailBody = PrefsParamUtil.getString(portletPreferences, request, emailBo
 				</aui:field-wrapper>
 			</aui:fieldset>
 
-			<div class="definition-of-terms">
-				<h4><liferay-ui:message key="definition-of-terms" /></h4>
+			<aui:fieldset cssClass="definition-of-terms">
+				<legend>
+					<liferay-ui:message key="definition-of-terms" />
+				</legend>
 
 				<dl>
 					<dt>
@@ -455,7 +459,7 @@ String emailBody = PrefsParamUtil.getString(portletPreferences, request, emailBo
 						<liferay-ui:message key="the-name-of-the-email-recipient" />
 					</dd>
 				</dl>
-			</div>
+			</aui:fieldset>
 		</c:when>
 	</c:choose>
 	<aui:button-row>
