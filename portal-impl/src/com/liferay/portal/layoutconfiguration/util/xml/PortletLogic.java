@@ -97,9 +97,8 @@ public class PortletLogic extends RuntimeLogic {
 				new PrefixPredicateFilter("p_p_"));
 		}
 
-		HttpServletRequest request =
-			DynamicServletRequest.addQueryString(
-				_request, parameterMap, queryString, false);
+		HttpServletRequest request = DynamicServletRequest.addQueryString(
+			_request, parameterMap, queryString, false);
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
