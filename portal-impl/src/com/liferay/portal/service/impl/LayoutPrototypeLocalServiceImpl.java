@@ -256,27 +256,18 @@ public class LayoutPrototypeLocalServiceImpl
 			String description, boolean active, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		Date modifiedDate = serviceContext.getModifiedDate(new Date());
-
 		// Layout prototype
 
 		LayoutPrototype layoutPrototype =
 			layoutPrototypePersistence.findByPrimaryKey(layoutPrototypeId);
 
-		layoutPrototype.setModifiedDate(modifiedDate);
+		layoutPrototype.setModifiedDate(
+			serviceContext.getModifiedDate(new Date()));
 		layoutPrototype.setNameMap(nameMap);
 		layoutPrototype.setDescription(description);
 		layoutPrototype.setActive(active);
 
 		layoutPrototypePersistence.update(layoutPrototype);
-
-		// Layout
-
-		Layout layout = layoutPrototype.getLayout();
-		layout.setNameMap(nameMap);
-		layout.setModifiedDate(modifiedDate);
-
-		layoutPersistence.update(layout);
 
 		// Group
 
@@ -286,6 +277,15 @@ public class LayoutPrototypeLocalServiceImpl
 		group.setName(layoutPrototype.getName(LocaleUtil.getDefault()));
 
 		groupPersistence.update(group);
+
+		// Layout
+
+		Layout layout = layoutPrototype.getLayout();
+
+		layout.setModifiedDate(layoutPrototype.getModifiedDate());
+		layout.setNameMap(nameMap);
+
+		layoutPersistence.update(layout);
 
 		return layoutPrototype;
 	}
