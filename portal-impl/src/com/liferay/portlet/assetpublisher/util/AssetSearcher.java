@@ -99,46 +99,34 @@ public class AssetSearcher extends BaseIndexer {
 		PermissionChecker permissionChecker =
 			PermissionThreadLocal.getPermissionChecker();
 
-		long[] allCategoryIds = AssetUtil.filterCategoryIds(
+		Map<Long, Boolean> allCategoryIds = AssetUtil.viewableCategoryIds(
 			permissionChecker, _assetEntryQuery.getAllCategoryIds());
 
-		if (allCategoryIds.length == 0) {
+		if (allCategoryIds.size() == 0) {
 			return;
 		}
 
-		BooleanQuery categoryIdsQuery = BooleanQueryFactoryUtil.create(
-			searchContext);
+		List<Long> viewableCategoryIds = new ArrayList<Long>();
+		List<Long> notViewableCategoryIds = new ArrayList<Long>();
 
-		for (long allCategoryId : allCategoryIds) {
-			AssetCategory assetCategory =
-				AssetCategoryLocalServiceUtil.fetchAssetCategory(allCategoryId);
+		for (long allCategoryId : allCategoryIds.keySet()) {
+			Boolean categoryViewable = allCategoryIds.get(allCategoryId);
 
-			if (assetCategory == null) {
-				continue;
+			if (categoryViewable != null) {
+				if (categoryViewable.booleanValue()) {
+					viewableCategoryIds.add(allCategoryId);
+				}
+				else {
+					notViewableCategoryIds.add(allCategoryId);
+				}
 			}
-
-			List<Long> categoryIds = new ArrayList<Long>();
-
-			if (PropsValues.ASSET_CATEGORIES_SEARCH_HIERARCHICAL) {
-				categoryIds = AssetCategoryLocalServiceUtil.getSubcategoryIds(
-					allCategoryId);
-			}
-
-			if (categoryIds.isEmpty()) {
-				categoryIds.add(allCategoryId);
-			}
-
-			BooleanQuery categoryIdQuery = BooleanQueryFactoryUtil.create(
-				searchContext);
-
-			for (long categoryId : categoryIds) {
-				categoryIdQuery.addTerm(Field.ASSET_CATEGORY_IDS, categoryId);
-			}
-
-			categoryIdsQuery.add(categoryIdQuery, BooleanClauseOccur.MUST);
 		}
 
-		contextQuery.add(categoryIdsQuery, BooleanClauseOccur.MUST);
+		buildAllCategoriesQuery(
+			contextQuery, searchContext, viewableCategoryIds, true);
+
+		buildAllCategoriesQuery(
+			contextQuery, searchContext, notViewableCategoryIds, false);
 	}
 
 	protected void addSearchAllTags(
@@ -195,10 +183,10 @@ public class AssetSearcher extends BaseIndexer {
 			}
 		}
 
-		buildCategoriesQuery(
+		buildAnyCategoriesQuery(
 			contextQuery, searchContext, viewableCategoryIds, true);
 
-		buildCategoriesQuery(
+		buildAnyCategoriesQuery(
 			contextQuery, searchContext, notViewableCategoryIds, false);
 	}
 
@@ -407,7 +395,55 @@ public class AssetSearcher extends BaseIndexer {
 		contextQuery.add(tagIdsQuery, BooleanClauseOccur.MUST_NOT);
 	}
 
-	protected void buildCategoriesQuery(
+	protected void buildAllCategoriesQuery(
+			BooleanQuery contextQuery, SearchContext searchContext,
+			List<Long> allCategoryIds, boolean viewable)
+		throws Exception {
+
+		BooleanQuery categoryIdsQuery = BooleanQueryFactoryUtil.create(
+			searchContext);
+
+		for (long allCategoryId : allCategoryIds) {
+			AssetCategory assetCategory =
+				AssetCategoryLocalServiceUtil.fetchAssetCategory(allCategoryId);
+
+			if (assetCategory == null) {
+				continue;
+			}
+
+			List<Long> categoryIds = new ArrayList<Long>();
+
+			if (PropsValues.ASSET_CATEGORIES_SEARCH_HIERARCHICAL && viewable) {
+				categoryIds = AssetCategoryLocalServiceUtil.getSubcategoryIds(
+					allCategoryId);
+			}
+
+			if (categoryIds.isEmpty()) {
+				categoryIds.add(allCategoryId);
+			}
+
+			BooleanQuery categoryIdQuery = BooleanQueryFactoryUtil.create(
+				searchContext);
+
+			for (long categoryId : categoryIds) {
+				categoryIdQuery.addTerm(Field.ASSET_CATEGORY_IDS, categoryId);
+			}
+
+			BooleanClauseOccur booleanClauseOccur = BooleanClauseOccur.MUST;
+
+			if (!viewable) {
+				booleanClauseOccur = BooleanClauseOccur.MUST_NOT;
+			}
+
+			categoryIdsQuery.add(categoryIdQuery, booleanClauseOccur);
+		}
+
+		if (allCategoryIds.size() > 0) {
+			contextQuery.add(categoryIdsQuery, BooleanClauseOccur.MUST);
+		}
+	}
+
+	protected void buildAnyCategoriesQuery(
 			BooleanQuery contextQuery, SearchContext searchContext,
 			List<Long> anyCategoryIds, boolean viewable)
 		throws Exception {
@@ -445,7 +481,9 @@ public class AssetSearcher extends BaseIndexer {
 			booleanClauseOccur = BooleanClauseOccur.MUST_NOT;
 		}
 
-		contextQuery.add(categoryIdsQuery, booleanClauseOccur);
+		if (anyCategoryIds.size() > 0 ) {
+			contextQuery.add(categoryIdsQuery, booleanClauseOccur);
+		}
 	}
 
 	@Override
