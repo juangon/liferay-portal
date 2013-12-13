@@ -38,6 +38,7 @@ import com.liferay.portlet.asset.util.AssetUtil;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.portlet.PortletURL;
 
@@ -171,41 +172,34 @@ public class AssetSearcher extends BaseIndexer {
 		PermissionChecker permissionChecker =
 			PermissionThreadLocal.getPermissionChecker();
 
-		long[] anyCategoryIds = AssetUtil.filterCategoryIds(
+		Map<Long, Boolean> anyCategoryIds = AssetUtil.viewableCategoryIds(
 			permissionChecker, _assetEntryQuery.getAnyCategoryIds());
 
-		if (anyCategoryIds.length == 0) {
+		if (anyCategoryIds.size() == 0) {
 			return;
 		}
 
-		BooleanQuery categoryIdsQuery = BooleanQueryFactoryUtil.create(
-			searchContext);
+		List<Long> viewableCategoryIds = new ArrayList<Long>();
+		List<Long> notViewableCategoryIds = new ArrayList<Long>();
 
-		for (long anyCategoryId : anyCategoryIds) {
-			AssetCategory assetCategory =
-				AssetCategoryLocalServiceUtil.fetchAssetCategory(anyCategoryId);
+		for (long anyCategoryId : anyCategoryIds.keySet()) {
+			Boolean categoryViewable = anyCategoryIds.get(anyCategoryId);
 
-			if (assetCategory == null) {
-				continue;
-			}
-
-			List<Long> categoryIds = new ArrayList<Long>();
-
-			if (PropsValues.ASSET_CATEGORIES_SEARCH_HIERARCHICAL) {
-				categoryIds = AssetCategoryLocalServiceUtil.getSubcategoryIds(
-					anyCategoryId);
-			}
-
-			if (categoryIds.isEmpty()) {
-				categoryIds.add(anyCategoryId);
-			}
-
-			for (long categoryId : categoryIds) {
-				categoryIdsQuery.addTerm(Field.ASSET_CATEGORY_IDS, categoryId);
+			if (categoryViewable != null) {
+				if (categoryViewable.booleanValue()) {
+					viewableCategoryIds.add(anyCategoryId);
+				}
+				else {
+					notViewableCategoryIds.add(anyCategoryId);
+				}
 			}
 		}
 
-		contextQuery.add(categoryIdsQuery, BooleanClauseOccur.MUST);
+		buildCategoriesQuery(
+			contextQuery, searchContext, viewableCategoryIds, true);
+
+		buildCategoriesQuery(
+			contextQuery, searchContext, notViewableCategoryIds, false);
 	}
 
 	protected void addSearchAnyTags(
@@ -411,6 +405,47 @@ public class AssetSearcher extends BaseIndexer {
 		}
 
 		contextQuery.add(tagIdsQuery, BooleanClauseOccur.MUST_NOT);
+	}
+
+	protected void buildCategoriesQuery(
+			BooleanQuery contextQuery, SearchContext searchContext,
+			List<Long> anyCategoryIds, boolean viewable)
+		throws Exception {
+
+		BooleanQuery categoryIdsQuery = BooleanQueryFactoryUtil.create(
+			searchContext);
+
+		for (long anyCategoryId : anyCategoryIds) {
+			AssetCategory assetCategory =
+				AssetCategoryLocalServiceUtil.fetchAssetCategory(anyCategoryId);
+
+			if (assetCategory == null) {
+				continue;
+			}
+
+			List<Long> categoryIds = new ArrayList<Long>();
+
+			if (PropsValues.ASSET_CATEGORIES_SEARCH_HIERARCHICAL && viewable) {
+				categoryIds = AssetCategoryLocalServiceUtil.getSubcategoryIds(
+					anyCategoryId);
+			}
+
+			if (categoryIds.isEmpty()) {
+				categoryIds.add(anyCategoryId);
+			}
+
+			for (long categoryId : categoryIds) {
+				categoryIdsQuery.addTerm(Field.ASSET_CATEGORY_IDS, categoryId);
+			}
+		}
+
+		BooleanClauseOccur booleanClauseOccur = BooleanClauseOccur.MUST;
+
+		if (!viewable) {
+			booleanClauseOccur = BooleanClauseOccur.MUST_NOT;
+		}
+
+		contextQuery.add(categoryIdsQuery, booleanClauseOccur);
 	}
 
 	@Override
