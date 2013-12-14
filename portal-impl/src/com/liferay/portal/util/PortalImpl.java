@@ -5551,11 +5551,11 @@ public class PortalImpl implements Portal {
 			!layoutSet.isPrivateLayout()) {
 
 			try {
-				Group defaultGroup = GroupLocalServiceUtil.getGroup(
+				Group group = GroupLocalServiceUtil.getGroup(
 					layoutSet.getCompanyId(),
 					PropsValues.VIRTUAL_HOSTS_DEFAULT_SITE_NAME);
 
-				if (layoutSet.getGroupId() == defaultGroup.getGroupId()) {
+				if (layoutSet.getGroupId() == group.getGroupId()) {
 					Company company = CompanyLocalServiceUtil.getCompany(
 						layoutSet.getCompanyId());
 
