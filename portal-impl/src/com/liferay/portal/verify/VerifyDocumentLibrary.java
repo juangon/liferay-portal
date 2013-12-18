@@ -201,9 +201,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 			new DLFileVersionActionableDynamicQuery() {
 
 			@Override
-			protected void performAction(Object object)
-				throws PortalException, SystemException {
-
+			protected void performAction(Object object) throws SystemException {
 				DLFileVersion dlFileVersion = (DLFileVersion)object;
 
 				InputStream inputStream = null;
