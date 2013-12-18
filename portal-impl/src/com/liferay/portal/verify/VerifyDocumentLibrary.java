@@ -216,11 +216,11 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 				}
 				catch (Exception e) {
 					if (_log.isWarnEnabled()) {
-						DLFileEntry fileEntry =
+						DLFileEntry dlFileEntry =
 							DLFileEntryLocalServiceUtil.fetchDLFileEntry(
 								dlFileVersion.getFileEntryId());
 
-						if (fileEntry == null) {
+						if (dlFileEntry == null) {
 							_log.warn(
 								"Unable to find file entry associated with " +
 									"file version " +
@@ -231,7 +231,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 							_log.warn(
 								"Unable to find file version " +
 									dlFileVersion.getVersion() + " for file " +
-										"entry " + fileEntry.getName(),
+										"entry " + dlFileEntry.getName(),
 								e);
 						}
 					}
