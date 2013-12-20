@@ -158,10 +158,21 @@ public class AssetSearcher extends BaseIndexer {
 		PermissionChecker permissionChecker =
 			PermissionThreadLocal.getPermissionChecker();
 
-		long[] allTagIds = AssetUtil.filterTagIds(
-			permissionChecker, _assetEntryQuery.getAllTagIds());
+		long[] allTagIds = _assetEntryQuery.getAllTagIds();
 
 		if (allTagIds.length == 0) {
+			return;
+		}
+
+		long[] filteredAllTagIds = AssetUtil.filterTagIds(
+			permissionChecker, allTagIds);
+
+		// LPS-42908
+
+		if (allTagIds.length != filteredAllTagIds.length) {
+			contextQuery.addTerm(
+				Field.ASSET_TAG_IDS, "-1", false, BooleanClauseOccur.MUST);
+
 			return;
 		}
 
@@ -237,10 +248,21 @@ public class AssetSearcher extends BaseIndexer {
 		PermissionChecker permissionChecker =
 			PermissionThreadLocal.getPermissionChecker();
 
-		long[] anyTagIds = AssetUtil.filterTagIds(
-			permissionChecker, _assetEntryQuery.getAnyTagIds());
+		long[] anyTagIds = _assetEntryQuery.getAnyTagIds();
 
 		if (anyTagIds.length == 0) {
+			return;
+		}
+
+		long[] filteredAnyTagIds = AssetUtil.filterTagIds(
+			permissionChecker, anyTagIds);
+
+		// LPS-42908
+
+		if (filteredAnyTagIds.length == 0) {
+			contextQuery.addTerm(
+				Field.ASSET_TAG_IDS, "-1", false, BooleanClauseOccur.MUST);
+
 			return;
 		}
 
