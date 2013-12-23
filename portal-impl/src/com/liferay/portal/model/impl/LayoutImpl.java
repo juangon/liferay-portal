@@ -424,6 +424,13 @@ public class LayoutImpl extends LayoutBaseImpl {
 
 	@Override
 	public String getThemeSetting(String key, String device) {
+		return getThemeSetting(key, device, isInheritLookAndFeel());
+	}
+
+	@Override
+	public String getThemeSetting(
+		String key, String device, boolean inheritLookAndFeel) {
+
 		UnicodeProperties typeSettingsProperties = getTypeSettingsProperties();
 
 		String value = typeSettingsProperties.getProperty(
@@ -433,7 +440,7 @@ public class LayoutImpl extends LayoutBaseImpl {
 			return value;
 		}
 
-		if (!isInheritLookAndFeel()) {
+		if (!inheritLookAndFeel) {
 			try {
 				Theme theme = getTheme(device);
 
