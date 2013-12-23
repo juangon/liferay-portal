@@ -23,11 +23,8 @@ import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.RoleConstants;
-import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceTestUtil;
-import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.test.EnvironmentExecutionTestListener;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.Sync;
@@ -35,7 +32,6 @@ import com.liferay.portal.test.TransactionalExecutionTestListener;
 import com.liferay.portal.util.GroupTestUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.TestPropsValues;
-import com.liferay.portal.util.UserTestUtil;
 import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetVocabulary;
@@ -44,7 +40,6 @@ import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
 import com.liferay.portlet.asset.util.AssetUtil;
 
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -66,7 +61,6 @@ public abstract class BaseAssetSearchTestCase {
 	@Before
 	public void setUp() throws Exception {
 		_group = GroupTestUtil.addGroup();
-		_user = UserTestUtil.addGroupUser(_group, RoleConstants.SITE_MEMBER);
 
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			_group.getGroupId());
@@ -109,23 +103,9 @@ public abstract class BaseAssetSearchTestCase {
 				serviceContext);
 
 		_travelCategoryId = travelCategory.getCategoryId();
-		
-		serviceContext.setAddGuestPermissions(false);
-		serviceContext.setAddGroupPermissions(false);
-						
-		AssetCategory noPermissionCategory =
-				AssetCategoryLocalServiceUtil.addCategory(
-					TestPropsValues.getUserId(), "NonGuestCategory", 
-					_vocabularyId, serviceContext);
-
-		_noPermissionsCategoryId = noPermissionCategory.getCategoryId();
-		
-		serviceContext = ServiceTestUtil.getServiceContext(
-			_group.getGroupId());
 
 		_assetCategoryIds1 =
-			new long[] {_healthCategoryId, _sportCategoryId, _travelCategoryId,
-			_noPermissionsCategoryId};
+			new long[] {_healthCategoryId, _sportCategoryId, _travelCategoryId};
 		_assetCategoryIds2 = new long[] {
 			_fashionCategoryId, _foodCategoryId, _healthCategoryId,
 			_sportCategoryId
@@ -151,29 +131,6 @@ public abstract class BaseAssetSearchTestCase {
 		_assetTagsNames2 = new String[] {"liferay", "architecture", "services"};
 	}
 
-	@After
-	public void tearDown() throws Exception {
-		UserLocalServiceUtil.deleteUser(_user);
-	}
-	
-	@Test
-	public void testAllAssetCategoriesNoPermissions() throws Exception {
-		long[] noPermissionsCategoryIds = {_noPermissionsCategoryId};
-
-		User currentUser = TestPropsValues.getUser();		
-		
-		ServiceTestUtil.setUser(_user);
-		
-		AssetEntryQuery assetEntryQuery =
-						AssetEntryQueryTestUtil.createAssetEntryQuery(
-							_group.getGroupId(), getBaseModelClassName(), null, 
-							null, noPermissionsCategoryIds, null);	
-
-		testAssetCategorization(assetEntryQuery, 1);	
-				
-		ServiceTestUtil.setUser(currentUser);
-	}
-	
 	@Test
 	public void testAllAssetCategories1() throws Exception {
 		long[] allCategoryIds = {_healthCategoryId};
@@ -272,24 +229,6 @@ public abstract class BaseAssetSearchTestCase {
 				allTags, null);
 
 		testAssetCategorization(assetEntryQuery, 0);
-	}
-	
-	@Test
-	public void testAnyAssetCategoriesNoPermissions() throws Exception {
-		long[] noPermissionsCategoryIds = {_noPermissionsCategoryId};
-
-		User currentUser = TestPropsValues.getUser();		
-		
-		ServiceTestUtil.setUser(_user);
-		
-		AssetEntryQuery assetEntryQuery =
-						AssetEntryQueryTestUtil.createAssetEntryQuery(
-							_group.getGroupId(), getBaseModelClassName(), null, 
-							null, null, noPermissionsCategoryIds);	
-
-		testAssetCategorization(assetEntryQuery, 1);
-		
-		ServiceTestUtil.setUser(currentUser);
 	}
 
 	@Test
@@ -1107,10 +1046,8 @@ public abstract class BaseAssetSearchTestCase {
 	private long _foodCategoryId;
 	private Group _group;
 	private long _healthCategoryId;
-	private long _noPermissionsCategoryId;
 	private long _sportCategoryId;
 	private long _travelCategoryId;
 	private long _vocabularyId;
-	private User _user;
 
 }
