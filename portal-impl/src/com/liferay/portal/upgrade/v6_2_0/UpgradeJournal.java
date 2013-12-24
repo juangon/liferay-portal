@@ -127,13 +127,17 @@ public class UpgradeJournal extends BaseUpgradePortletPreferences {
 			parentDDMStructureId = updateStructure(parentStructureId);
 		}
 
-		addDDMStructure(
-			uuid_, ddmStructureId, groupId, companyId, userId, userName,
-			createDate, modifiedDate, parentDDMStructureId,
-			PortalUtil.getClassNameId(JournalArticle.class.getName()),
-			ddmStructureKey, name, description, xsd,
-			PropsValues.JOURNAL_ARTICLE_STORAGE_TYPE,
-			DDMStructureConstants.TYPE_DEFAULT);
+		Long insertedDdmStructureId =
+			_ddmStructureIds.get(groupId + "#" + ddmStructureKey);
+		if (insertedDdmStructureId == null) {
+			addDDMStructure(
+				uuid_, ddmStructureId, groupId, companyId, userId, userName,
+				createDate, modifiedDate, parentDDMStructureId,
+				PortalUtil.getClassNameId(JournalArticle.class.getName()),
+				ddmStructureKey, name, description, xsd,
+				PropsValues.JOURNAL_ARTICLE_STORAGE_TYPE,
+				DDMStructureConstants.TYPE_DEFAULT);
+		}
 	}
 
 	protected void addDDMTemplate(
