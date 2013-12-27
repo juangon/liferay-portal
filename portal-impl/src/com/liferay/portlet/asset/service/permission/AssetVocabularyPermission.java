@@ -80,8 +80,8 @@ public class AssetVocabularyPermission {
 		throws PortalException, SystemException {
 
 		if (vocabularyId == 0) {
-			return permissionChecker.hasPermission(
-				groupId, AssetVocabulary.class.getName(), groupId, actionId);
+			return AssetPermission.contains(
+				permissionChecker, groupId, actionId);
 		}
 
 		AssetVocabulary vocabulary =
