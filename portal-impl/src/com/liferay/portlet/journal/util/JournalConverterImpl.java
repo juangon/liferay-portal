@@ -504,8 +504,14 @@ public class JournalConverterImpl implements JournalConverter {
 		String indexType = ddmStructure.getFieldProperty(
 			fieldName, "indexType");
 
-		dynamicElementElement.addAttribute(
-			"type", _ddmTypesToJournalTypes.get(fieldType));
+		String type = _ddmTypesToJournalTypes.get(fieldType);
+
+		if (type == null) {
+			type = fieldType;
+		}
+
+		dynamicElementElement.addAttribute("type", type);
+
 		dynamicElementElement.addAttribute("index-type", indexType);
 
 		for (Locale locale : ddmField.getAvailableLocales()) {
@@ -811,7 +817,13 @@ public class JournalConverterImpl implements JournalConverter {
 
 		element.remove(element.attribute("type"));
 
-		element.addAttribute("dataType", _ddmDataTypes.get(type));
+		String dataType = _ddmDataTypes.get(type);
+
+		if (dataType == null) {
+			dataType = "string";
+		}
+
+		element.addAttribute("dataType", dataType);
 		element.addAttribute("indexType", indexType);
 
 		String required = "false";
@@ -828,6 +840,10 @@ public class JournalConverterImpl implements JournalConverter {
 		element.addAttribute("showLabel", "true");
 
 		String newType = _journalTypesToDDMTypes.get(type);
+
+		if (newType == null) {
+			newType = type;
+		}
 
 		element.addAttribute("type", newType);
 
