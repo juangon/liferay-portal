@@ -127,9 +127,11 @@ public class UpgradeJournal extends BaseUpgradePortletPreferences {
 			parentDDMStructureId = updateStructure(parentStructureId);
 		}
 
-		Long insertedDdmStructureId =
-			_ddmStructureIds.get(groupId + "#" + ddmStructureKey);
-		if (insertedDdmStructureId == null) {
+		long insertedDdmStructureId = getDDMStructureId(
+			groupId, ddmStructureKey);
+
+		if (insertedDdmStructureId == 0) {
+
 			addDDMStructure(
 				uuid_, ddmStructureId, groupId, companyId, userId, userName,
 				createDate, modifiedDate, parentDDMStructureId,
