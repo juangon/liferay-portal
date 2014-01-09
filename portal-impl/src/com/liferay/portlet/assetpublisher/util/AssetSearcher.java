@@ -109,9 +109,9 @@ public class AssetSearcher extends BaseIndexer {
 
 		// LPS-42908
 
-		if (allCategoryIds.length != filteredAllCategoryIds.length) {
-			contextQuery.addTerm(
-				Field.ASSET_CATEGORY_IDS, "-1", false, BooleanClauseOccur.MUST);
+		if (checkAllQuery(
+				allCategoryIds, filteredAllCategoryIds, contextQuery,
+				Field.ASSET_CATEGORY_IDS)) {
 
 			return;
 		}
@@ -169,9 +169,9 @@ public class AssetSearcher extends BaseIndexer {
 
 		// LPS-42908
 
-		if (allTagIds.length != filteredAllTagIds.length) {
-			contextQuery.addTerm(
-				Field.ASSET_TAG_IDS, "-1", false, BooleanClauseOccur.MUST);
+		if (checkAllQuery(
+				allTagIds, filteredAllTagIds, contextQuery,
+				Field.ASSET_TAG_IDS)) {
 
 			return;
 		}
@@ -204,9 +204,9 @@ public class AssetSearcher extends BaseIndexer {
 
 		// LPS-42908
 
-		if (filteredAnyCategoryIds.length == 0) {
-			contextQuery.addTerm(
-				Field.ASSET_CATEGORY_IDS, "-1", false, BooleanClauseOccur.MUST);
+		if (checkAnyQuery(
+				filteredAnyCategoryIds, contextQuery,
+				Field.ASSET_CATEGORY_IDS)) {
 
 			return;
 		}
@@ -259,9 +259,8 @@ public class AssetSearcher extends BaseIndexer {
 
 		// LPS-42908
 
-		if (filteredAnyTagIds.length == 0) {
-			contextQuery.addTerm(
-				Field.ASSET_TAG_IDS, "-1", false, BooleanClauseOccur.MUST);
+		if (checkAnyQuery(
+				filteredAnyTagIds, contextQuery, Field.ASSET_TAG_IDS)) {
 
 			return;
 		}
@@ -455,6 +454,33 @@ public class AssetSearcher extends BaseIndexer {
 		}
 
 		contextQuery.add(tagIdsQuery, BooleanClauseOccur.MUST_NOT);
+	}
+
+	protected boolean checkAllQuery(
+			long allIds[], long filteredIds[], BooleanQuery contextQuery,
+			String field)
+		throws Exception {
+
+		if (allIds.length != filteredIds.length) {
+			contextQuery.addTerm(field, "-1", false, BooleanClauseOccur.MUST);
+
+			return true;
+		}
+
+		return false;
+	}
+
+	protected boolean checkAnyQuery(
+			long ids[], BooleanQuery contextQuery, String field)
+		throws Exception {
+
+		if (ids.length == 0) {
+			contextQuery.addTerm(field, "-1", false, BooleanClauseOccur.MUST);
+
+			return true;
+		}
+
+		return false;
 	}
 
 	@Override
