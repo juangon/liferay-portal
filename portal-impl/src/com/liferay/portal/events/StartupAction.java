@@ -206,15 +206,15 @@ public class StartupAction extends SimpleAction {
 
 		DBUpgrader.verify();
 
-		// Liferay JspFactory
-
-		JspFactorySwapper.swap();
-
 		// Background tasks
 
 		if (!ClusterMasterExecutorUtil.isEnabled()) {
 			BackgroundTaskLocalServiceUtil.cleanUpBackgroundTasks();
 		}
+
+		// Liferay JspFactory
+
+		JspFactorySwapper.swap();
 
 		// Jericho
 
