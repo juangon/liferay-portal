@@ -169,7 +169,7 @@ public class AssetSearcher extends BaseIndexer {
 
 		// LPS-42908
 
-		if (filteredAllTagIds.length == 0) {
+		if (allTagIds.length != filteredAllTagIds.length) {
 			contextQuery.addTerm(
 				Field.ASSET_TAG_IDS, "-1", false, BooleanClauseOccur.MUST);
 
