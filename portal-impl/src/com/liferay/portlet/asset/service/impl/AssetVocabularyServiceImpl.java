@@ -248,15 +248,18 @@ public class AssetVocabularyServiceImpl extends AssetVocabularyServiceBaseImpl {
 		else {
 			vocabularies = getGroupVocabularies(groupId, start, end, obc);
 			total = getGroupVocabulariesCount(groupId);
-		}
 
-		if (addDefaultVocabulary && (total == 0)) {
-			vocabularies = new ArrayList<AssetVocabulary>();
+			if (addDefaultVocabulary && (total == 0) && 
+				(assetVocabularyPersistence.countByGroupId(groupId) == 0)) {
+				
+				vocabularies = new ArrayList<AssetVocabulary>();
 
-			vocabularies.add(
-				assetVocabularyLocalService.addDefaultVocabulary(groupId));
+				vocabularies.add(
+					assetVocabularyLocalService.addDefaultVocabulary(
+						groupId));
 
-			total = 1;
+				total = 1;
+			}
 		}
 
 		return new AssetVocabularyDisplay(vocabularies, total, start, end);
