@@ -113,8 +113,6 @@ public class AssetSearcher extends BaseIndexer {
 		long[] filteredAllCategoryIds = AssetUtil.filterCategoryIds(
 			permissionChecker, allCategoryIds);
 
-		// LPS-42908
-
 		if (allCategoryIds.length != filteredAllCategoryIds.length) {
 			addImpossibleTerm(contextQuery, Field.ASSET_CATEGORY_IDS);
 
@@ -172,8 +170,6 @@ public class AssetSearcher extends BaseIndexer {
 		long[] filteredAllTagIds = AssetUtil.filterTagIds(
 			permissionChecker, allTagIds);
 
-		// LPS-42908
-
 		if (allTagIds.length != filteredAllTagIds.length) {
 			addImpossibleTerm(contextQuery, Field.ASSET_TAG_IDS);
 
@@ -205,8 +201,6 @@ public class AssetSearcher extends BaseIndexer {
 
 		long[] filteredAnyCategoryIds = AssetUtil.filterCategoryIds(
 			permissionChecker, anyCategoryIds);
-
-		// LPS-42908
 
 		if (filteredAnyCategoryIds.length == 0) {
 			addImpossibleTerm(contextQuery, Field.ASSET_CATEGORY_IDS);
@@ -259,8 +253,6 @@ public class AssetSearcher extends BaseIndexer {
 
 		long[] filteredAnyTagIds = AssetUtil.filterTagIds(
 			permissionChecker, anyTagIds);
-
-		// LPS-42908
 
 		if (filteredAnyTagIds.length == 0) {
 			addImpossibleTerm(contextQuery, Field.ASSET_TAG_IDS);
