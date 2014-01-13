@@ -91,6 +91,12 @@ public class AssetSearcher extends BaseIndexer {
 		_assetEntryQuery = assetEntryQuery;
 	}
 
+	protected void addImpossibleTerm(BooleanQuery contextQuery, String field)
+		throws Exception {
+
+		contextQuery.addTerm(field, "-1", false, BooleanClauseOccur.MUST);
+	}
+
 	protected void addSearchAllCategories(
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
@@ -110,8 +116,7 @@ public class AssetSearcher extends BaseIndexer {
 		// LPS-42908
 
 		if (allCategoryIds.length != filteredAllCategoryIds.length) {
-			contextQuery.addTerm(
-				Field.ASSET_CATEGORY_IDS, "-1", false, BooleanClauseOccur.MUST);
+			addImpossibleTerm(contextQuery, Field.ASSET_CATEGORY_IDS);
 
 			return;
 		}
@@ -170,8 +175,7 @@ public class AssetSearcher extends BaseIndexer {
 		// LPS-42908
 
 		if (allTagIds.length != filteredAllTagIds.length) {
-			contextQuery.addTerm(
-				Field.ASSET_TAG_IDS, "-1", false, BooleanClauseOccur.MUST);
+			addImpossibleTerm(contextQuery, Field.ASSET_TAG_IDS);
 
 			return;
 		}
@@ -205,8 +209,7 @@ public class AssetSearcher extends BaseIndexer {
 		// LPS-42908
 
 		if (filteredAnyCategoryIds.length == 0) {
-			contextQuery.addTerm(
-				Field.ASSET_CATEGORY_IDS, "-1", false, BooleanClauseOccur.MUST);
+			addImpossibleTerm(contextQuery, Field.ASSET_CATEGORY_IDS);
 
 			return;
 		}
@@ -260,8 +263,7 @@ public class AssetSearcher extends BaseIndexer {
 		// LPS-42908
 
 		if (filteredAnyTagIds.length == 0) {
-			contextQuery.addTerm(
-				Field.ASSET_TAG_IDS, "-1", false, BooleanClauseOccur.MUST);
+			addImpossibleTerm(contextQuery, Field.ASSET_TAG_IDS);
 
 			return;
 		}
