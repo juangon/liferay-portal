@@ -110,11 +110,19 @@ public class ViewAction extends PortletAction {
 
 		String layoutURL = StringPool.BLANK;
 		String queryString = StringPool.BLANK;
+		String url = StringPool.BLANK;
 
 		int pos = redirect.indexOf(Portal.FRIENDLY_URL_SEPARATOR);
 
 		if (pos == -1) {
 			pos = redirect.indexOf(StringPool.QUESTION);
+		}
+		else {
+			url = redirect.substring(0, pos);
+
+			if (url.startsWith(StringPool.SLASH) && (url.length() > 1)) {
+				url = url.substring(1);
+			}
 		}
 
 		if (pos != -1) {
@@ -126,18 +134,21 @@ public class ViewAction extends PortletAction {
 
 		Group group = layout.getGroup();
 
-		if (Validator.isNull(layoutURL) ||
-			PortalUtil.isGroupFriendlyURL(
-				layoutURL, group.getFriendlyURL(),
-				layout.getFriendlyURL(locale))) {
+		boolean groupFriendlyURL = PortalUtil.isGroupFriendlyURL(
+			layoutURL, group.getFriendlyURL(), layout.getFriendlyURL(locale));
 
-			if (PropsValues.LOCALE_PREPEND_FRIENDLY_URL_STYLE == 0) {
-				redirect = layoutURL;
-			}
-			else {
-				redirect = PortalUtil.getGroupFriendlyURL(
-					group, layout.isPrivateLayout(), themeDisplay, locale);
-			}
+		if (groupFriendlyURL &&
+			(PropsValues.LOCALE_PREPEND_FRIENDLY_URL_STYLE == 0)) {
+
+			redirect = layoutURL;
+		}
+		else if (groupFriendlyURL ||
+				 ((pos != -1) && Validator.isNull(layoutURL)) ||
+				 (Validator.isNotNull(url) &&
+				  (LocaleUtil.fromLanguageId(url, false, false) != null))) {
+
+			redirect = PortalUtil.getGroupFriendlyURL(
+				group, layout.isPrivateLayout(), themeDisplay, locale);
 		}
 		else {
 			if (PropsValues.LOCALE_PREPEND_FRIENDLY_URL_STYLE == 0) {
