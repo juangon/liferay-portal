@@ -5333,16 +5333,17 @@ public class JournalArticleLocalServiceImpl
 						article.getDisplayDate(), article.getExpirationDate());
 
 					Date publishDate = dateInterval[0];
-					Date expirationDate = dateInterval[1];
-
-					if (neverExpire) {
-						expirationDate = null;
-					}
 
 					if ((oldStatus != WorkflowConstants.STATUS_APPROVED) &&
 						publishDate.before(now)) {
 
 						publishDate = now;
+					}
+
+					Date expirationDate = dateInterval[1];
+
+					if (neverExpire) {
+						expirationDate = null;
 					}
 
 					assetEntryLocalService.updateEntry(

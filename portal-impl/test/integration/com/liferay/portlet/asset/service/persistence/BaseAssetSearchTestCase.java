@@ -919,27 +919,6 @@ public abstract class BaseAssetSearchTestCase {
 		return addBaseModel(parentBaseModel, keywords, serviceContext);
 	}
 
-	protected abstract Class<?> getBaseModelClass();
-
-	protected String getBaseModelClassName() {
-		Class<?> clazz = getBaseModelClass();
-
-		return clazz.getName();
-	}
-
-	protected long[] getClassTypeIds() {
-		return null;
-	}
-
-	protected BaseModel<?> getParentBaseModel(
-			Group group, ServiceContext serviceContext)
-		throws Exception {
-
-		return group;
-	}
-
-	protected abstract String getSearchKeywords();
-
 	protected Date[] generateRandomDates(Date startDate, int size) {
 		Date[] dates = new Date[size];
 
@@ -960,6 +939,27 @@ public abstract class BaseAssetSearchTestCase {
 
 		return dates;
 	}
+
+	protected abstract Class<?> getBaseModelClass();
+
+	protected String getBaseModelClassName() {
+		Class<?> clazz = getBaseModelClass();
+
+		return clazz.getName();
+	}
+
+	protected long[] getClassTypeIds() {
+		return null;
+	}
+
+	protected BaseModel<?> getParentBaseModel(
+			Group group, ServiceContext serviceContext)
+		throws Exception {
+
+		return group;
+	}
+
+	protected abstract String getSearchKeywords();
 
 	protected Document[] search(
 			AssetEntryQuery assetEntryQuery, SearchContext searchContext)
@@ -1095,7 +1095,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		searchContext.setGroupIds(assetEntryQuery.getGroupIds());
 
-		BaseModel[] baseModels = new BaseModel[titles.length];
+		BaseModel<?>[] baseModels = new BaseModel[titles.length];
 
 		for (int i = 0; i < titles.length; i++) {
 			String title = titles[i];

@@ -70,8 +70,22 @@ public class JournalTestUtil {
 	public static JournalArticle addArticle(
 			long groupId, long folderId, long classNameId,
 			Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
-			Map<Locale, String> contentMap, Date expirationDate,
-			Locale defaultLocale, boolean workflowEnabled, boolean approved,
+			Map<Locale, String> contentMap, Locale defaultLocale,
+			boolean workflowEnabled, boolean approved,
+			ServiceContext serviceContext)
+		throws Exception {
+
+		return addArticle(
+			groupId, folderId, classNameId, titleMap, descriptionMap,
+			contentMap, defaultLocale, null, workflowEnabled, approved,
+			serviceContext);
+	}
+
+	public static JournalArticle addArticle(
+			long groupId, long folderId, long classNameId,
+			Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
+			Map<Locale, String> contentMap, Locale defaultLocale,
+			Date expirationDate, boolean workflowEnabled, boolean approved,
 			ServiceContext serviceContext)
 		throws Exception {
 
@@ -127,23 +141,21 @@ public class JournalTestUtil {
 	}
 
 	public static JournalArticle addArticle(
-			long groupId, long folderId, long classNameId,
-			Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
-			Map<Locale, String> contentMap, Locale defaultLocale,
+			long groupId, long folderId, long classNameId, String title,
+			String description, String content, Locale defaultLocale,
 			boolean workflowEnabled, boolean approved,
 			ServiceContext serviceContext)
 		throws Exception {
 
 		return addArticle(
-			groupId, folderId, classNameId, titleMap, descriptionMap,
-			contentMap, null, defaultLocale, workflowEnabled, approved,
-			serviceContext);
+			groupId, folderId, classNameId, title, description, content,
+			defaultLocale, null, workflowEnabled, approved, serviceContext);
 	}
 
 	public static JournalArticle addArticle(
 			long groupId, long folderId, long classNameId, String title,
-			String description, String content, Date expirationDate,
-			Locale defaultLocale, boolean workflowEnabled, boolean approved,
+			String description, String content, Locale defaultLocale,
+			Date expirationDate, boolean workflowEnabled, boolean approved,
 			ServiceContext serviceContext)
 		throws Exception {
 
@@ -167,20 +179,8 @@ public class JournalTestUtil {
 
 		return addArticle(
 			groupId, folderId, classNameId, titleMap, descriptionMap,
-			contentMap, expirationDate, defaultLocale, workflowEnabled,
+			contentMap, defaultLocale, expirationDate, workflowEnabled,
 			approved, serviceContext);
-	}
-
-	public static JournalArticle addArticle(
-			long groupId, long folderId, long classNameId, String title,
-			String description, String content, Locale defaultLocale,
-			boolean workflowEnabled, boolean approved,
-			ServiceContext serviceContext)
-		throws Exception {
-
-		return addArticle(
-			groupId, folderId, classNameId, title, description, content, null,
-			defaultLocale, workflowEnabled, approved, serviceContext);
 	}
 
 	public static JournalArticle addArticle(
@@ -233,7 +233,7 @@ public class JournalTestUtil {
 		return addArticle(
 			groupId, JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			JournalArticleConstants.CLASSNAME_ID_DEFAULT, title, title, content,
-			expirationDate, LocaleUtil.getSiteDefault(), false, false,
+			LocaleUtil.getSiteDefault(), expirationDate, false, false,
 			serviceContext);
 	}
 
