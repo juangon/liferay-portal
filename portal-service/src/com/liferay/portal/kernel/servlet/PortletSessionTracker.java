@@ -57,8 +57,8 @@ public class PortletSessionTracker {
 
 		String contextPath = servletContext.getContextPath();
 
-		// ConcurrentHashMap's read is faster than write, this pre-check is
-		// logically unnecessary, but a performance improvement.
+		// ConcurrentHashMap's read is faster than its write. This check is
+		// logically unnecessary, but is a performance improvement.
 
 		if (!sessions.containsKey(contextPath)) {
 			sessions.put(contextPath, session);
