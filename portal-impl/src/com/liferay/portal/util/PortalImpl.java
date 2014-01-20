@@ -7306,12 +7306,8 @@ public class PortalImpl implements Portal {
 		}
 
 		if ((canonicalURL && !defaultNonLocalhostVirtualhost) ||
-			Validator.isBlank(portalDomain)) {
+			Validator.isBlank(portalDomain) || !defaultNonLocalhostVirtualhost) {
 
-			return virtualHostname;
-		}
-
-		if (!defaultNonLocalhostVirtualhost) {
 			return virtualHostname;
 		}
 
