@@ -7297,16 +7297,9 @@ public class PortalImpl implements Portal {
 	protected String getCanonicalDomain(
 		boolean canonicalURL, String virtualHostname, String portalDomain) {
 
-		boolean defaultNonLocalhostVirtualhost = false;
-
-		if (!StringUtil.equalsIgnoreCase(portalDomain, _LOCALHOST) &&
-			StringUtil.equalsIgnoreCase(virtualHostname, _LOCALHOST)) {
-
-			defaultNonLocalhostVirtualhost = true;
-		}
-
-		if (!defaultNonLocalhostVirtualhost ||
-			 Validator.isBlank(portalDomain)) {
+		if (StringUtil.equalsIgnoreCase(portalDomain, _LOCALHOST) ||
+			!StringUtil.equalsIgnoreCase(virtualHostname, _LOCALHOST) ||
+			Validator.isBlank(portalDomain)) {
 
 			return virtualHostname;
 		}
