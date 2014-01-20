@@ -7295,7 +7295,7 @@ public class PortalImpl implements Portal {
 	}
 
 	protected String getCanonicalDomain(
-		boolean canonicalURL, String virtualHostname, String portalDomain) {
+		String virtualHostname, String portalDomain) {
 
 		if (StringUtil.equalsIgnoreCase(portalDomain, _LOCALHOST) ||
 			!StringUtil.equalsIgnoreCase(virtualHostname, _LOCALHOST) ||
@@ -7474,7 +7474,7 @@ public class PortalImpl implements Portal {
 				 !StringUtil.equalsIgnoreCase(virtualHostname, _LOCALHOST))) {
 
 				virtualHostname = getCanonicalDomain(
-					canonicalURL, virtualHostname, portalDomain);
+					virtualHostname, portalDomain);
 
 				virtualHostname = getPortalURL(
 					virtualHostname, themeDisplay.getServerPort(),
@@ -7528,7 +7528,7 @@ public class PortalImpl implements Portal {
 							virtualHostname, _LOCALHOST)) {
 
 						virtualHostname = getCanonicalDomain(
-							canonicalURL, virtualHostname, portalDomain);
+							virtualHostname, portalDomain);
 
 						portalURL = getPortalURL(
 							virtualHostname, themeDisplay.getServerPort(),
