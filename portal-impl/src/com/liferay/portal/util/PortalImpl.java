@@ -1006,28 +1006,23 @@ public class PortalImpl implements Portal {
 			Layout layout)
 		throws PortalException, SystemException {
 
-		LayoutSet layoutSet = themeDisplay.getLayoutSet();
+		String virtualHost = getVirtualHostname(themeDisplay.getLayoutSet());
 
-		String virtualHost = null;
-
-		if (Validator.isNotNull(layoutSet.getVirtualHostname())) {
-			virtualHost = layoutSet.getVirtualHostname();
-		}
-		else {
+		if (Validator.isNull(virtualHost)) {
 			Company company = themeDisplay.getCompany();
 
 			virtualHost = company.getVirtualHostname();
+		}
 
+		if (!StringUtil.equalsIgnoreCase(virtualHost, _LOCALHOST)) {
 			String portalURL = themeDisplay.getPortalURL();
 
-			String portalDomain = HttpUtil.getDomain(portalURL);
+			virtualHost = getCanonicalDomain(
+				virtualHost, HttpUtil.getDomain(portalURL));
 
-			if (!Validator.isBlank(portalDomain) &&
-				!StringUtil.equalsIgnoreCase(portalDomain, _LOCALHOST) &&
-				StringUtil.equalsIgnoreCase(virtualHost, _LOCALHOST)) {
-
-				virtualHost = portalDomain;
-			}
+			virtualHost = getPortalURL(
+				virtualHost, themeDisplay.getServerPort(),
+				themeDisplay.isSecure());
 		}
 
 		String i18nPath = buildI18NPath(locale);
