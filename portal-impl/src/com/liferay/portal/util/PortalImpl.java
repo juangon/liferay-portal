@@ -1006,28 +1006,29 @@ public class PortalImpl implements Portal {
 			Layout layout)
 		throws PortalException, SystemException {
 
-		String virtualHost = getVirtualHostname(themeDisplay.getLayoutSet());
+		String virtualHostname = getVirtualHostname(
+			themeDisplay.getLayoutSet());
 
-		if (Validator.isNull(virtualHost)) {
+		if (Validator.isNull(virtualHostname)) {
 			Company company = themeDisplay.getCompany();
 
-			virtualHost = company.getVirtualHostname();
+			virtualHostname = company.getVirtualHostname();
 		}
 
-		if (!StringUtil.equalsIgnoreCase(virtualHost, _LOCALHOST)) {
+		if (!StringUtil.equalsIgnoreCase(virtualHostname, _LOCALHOST)) {
 			String portalURL = themeDisplay.getPortalURL();
 
-			virtualHost = getCanonicalDomain(
-				virtualHost, HttpUtil.getDomain(portalURL));
+			virtualHostname = getCanonicalDomain(
+				virtualHostname, HttpUtil.getDomain(portalURL));
 
-			virtualHost = getPortalURL(
-				virtualHost, themeDisplay.getServerPort(),
+			virtualHostname = getPortalURL(
+				virtualHostname, themeDisplay.getServerPort(),
 				themeDisplay.isSecure());
 		}
 
 		String i18nPath = buildI18NPath(locale);
 
-		if (Validator.isNull(virtualHost)) {
+		if (Validator.isNull(virtualHostname)) {
 			return canonicalURL.replaceFirst(
 				_PUBLIC_GROUP_SERVLET_MAPPING,
 				i18nPath.concat(_PUBLIC_GROUP_SERVLET_MAPPING));
@@ -1035,11 +1036,11 @@ public class PortalImpl implements Portal {
 
 		// www.liferay.com:8080/ctx/page to www.liferay.com:8080/ctx/es/page
 
-		int pos = canonicalURL.indexOf(virtualHost);
+		int pos = canonicalURL.indexOf(virtualHostname);
 
 		if (pos > 0) {
 			pos = canonicalURL.indexOf(
-				CharPool.SLASH, pos + virtualHost.length());
+				CharPool.SLASH, pos + virtualHostname.length());
 
 			if (Validator.isNotNull(_pathContext)) {
 				pos = canonicalURL.indexOf(
