@@ -7311,14 +7311,14 @@ public class PortalImpl implements Portal {
 			return virtualHostname;
 		}
 
+		if (!defaultNonLocalhostVirtualhost) {
+			return virtualHostname;
+		}
+
 		int pos = portalDomain.indexOf(CharPool.COLON);
 
 		if (pos != -1) {
-			portalDomain = portalDomain.substring(0, pos);
-		}
-
-		if (defaultNonLocalhostVirtualhost) {
-			virtualHostname = portalDomain;
+			virtualHostname = portalDomain.substring(0, pos);
 		}
 
 		return virtualHostname;
