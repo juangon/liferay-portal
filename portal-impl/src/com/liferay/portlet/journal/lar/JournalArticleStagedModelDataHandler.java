@@ -130,6 +130,16 @@ public class JournalArticleStagedModelDataHandler
 
 		Map<String, String> referenceAttributes = new HashMap<String, String>();
 
+		String articleId = StringPool.BLANK;
+
+		try {
+			articleId = article.getArticleId();
+		}
+		catch (Exception e) {
+		}
+
+		referenceAttributes.put("article-id", articleId);
+
 		String articleResourceUuid = StringPool.BLANK;
 
 		try {
