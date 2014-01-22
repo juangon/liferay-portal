@@ -386,16 +386,16 @@ public class PortalImplCanonicalURLTest {
 			expectedGroupFriendlyURL = group.getFriendlyURL();
 		}
 
-		String expectedDomain = virtualHostname;
+		String expectedPortalDomain = virtualHostname;
 
 		if (StringUtil.equalsIgnoreCase(virtualHostname, "localhost") &&
 			!StringUtil.equalsIgnoreCase(portalDomain, "localhost")) {
 
-			expectedDomain = portalDomain;
+			expectedPortalDomain = portalDomain;
 		}
 
 		String expectedCanonicalURL = generateURL(
-			expectedDomain, StringPool.BLANK, expectedGroupFriendlyURL,
+			expectedPortalDomain, StringPool.BLANK, expectedGroupFriendlyURL,
 			expectedLayoutFriendlyURL);
 
 		Assert.assertEquals(expectedCanonicalURL, actualCanonicalURL);

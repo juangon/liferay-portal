@@ -115,7 +115,7 @@ public class PortalImplAlternateURLTest {
 		String portalDomain, String languageId, String groupFriendlyURL,
 		String layoutFriendlyURL) {
 
-		StringBundler sb = new StringBundler(5);
+		StringBundler sb = new StringBundler(6);
 
 		sb.append("http://");
 		sb.append(portalDomain);
@@ -138,7 +138,6 @@ public class PortalImplAlternateURLTest {
 		themeDisplay.setCompany(company);
 
 		themeDisplay.setLayoutSet(group.getPublicLayoutSet());
-
 		themeDisplay.setPortalURL(portalURL);
 
 		return themeDisplay;
