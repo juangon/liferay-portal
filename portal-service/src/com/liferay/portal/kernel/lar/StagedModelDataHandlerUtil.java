@@ -193,9 +193,8 @@ public class StagedModelDataHandlerUtil {
 			Class<?> stagedModelClass, long classPK)
 		throws PortletDataException {
 
-		Element referenceElement =
-			portletDataContext.getReferenceElement(
-				referrerStagedModel, stagedModelClass, classPK);
+		Element referenceElement = portletDataContext.getReferenceElement(
+			referrerStagedModel, stagedModelClass, classPK);
 
 		if (referenceElement == null) {
 			return;
