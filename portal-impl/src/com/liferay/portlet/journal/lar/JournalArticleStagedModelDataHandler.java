@@ -130,8 +130,6 @@ public class JournalArticleStagedModelDataHandler
 
 		Map<String, String> referenceAttributes = new HashMap<String, String>();
 
-		referenceAttributes.put("article-id", article.getArticleId());
-
 		String articleResourceUuid = StringPool.BLANK;
 
 		try {
@@ -141,6 +139,8 @@ public class JournalArticleStagedModelDataHandler
 		}
 
 		referenceAttributes.put("article-resource-uuid", articleResourceUuid);
+
+		referenceAttributes.put("article-id", article.getArticleId());
 
 		long defaultUserId = 0;
 
