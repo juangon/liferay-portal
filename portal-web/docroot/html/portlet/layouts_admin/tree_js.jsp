@@ -419,6 +419,7 @@ if (!selectableTree) {
 				A.mix(
 					data,
 					{
+						p_auth: Liferay.authToken,
 						useHttpSession: true
 					}
 				);
