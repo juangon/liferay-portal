@@ -17,6 +17,7 @@ package com.liferay.portal.action;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.security.auth.AuthTokenUtil;
@@ -75,6 +76,8 @@ public class SessionClickAction extends Action {
 			String value = getValue(request);
 
 			if (value != null) {
+				response.setContentType(ContentTypes.APPLICATION_JSON);
+
 				ServletOutputStream servletOutputStream =
 					response.getOutputStream();
 
