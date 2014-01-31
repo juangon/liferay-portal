@@ -314,7 +314,7 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 		return ArrayUtil.toLongArray(roleIds);
 	}
 
-	protected String getRolesOrOwnerSQL(
+	protected String getRoleIdsOrOwnerIdSQL(
 		PermissionChecker permissionChecker, long[] groupIds,
 		String userIdField) {
 
@@ -615,18 +615,18 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 
 		sb.append(")))");
 
-		String rolesOrOwnerSQL = getRolesOrOwnerSQL(
+		String roleIdsOrOwnerIdSQL = getRoleIdsOrOwnerIdSQL(
 			permissionChecker, groupIds, userIdField);
 
 		permissionJoin = StringUtil.replace(
 			permissionJoin,
 			new String[] {
 				"[$CLASS_NAME$]", "[$COMPANY_ID$]", "[$PRIM_KEYS$]",
-				"[$ROLES_OR_OWNER$]"
+				"[$ROLE_IDS_OR_OWNER_ID$]"
 			},
 			new String[] {
 				className, String.valueOf(permissionChecker.getCompanyId()),
-				sb.toString(), rolesOrOwnerSQL
+				sb.toString(), roleIdsOrOwnerIdSQL
 			});
 
 		int pos = sql.indexOf(_WHERE_CLAUSE);
