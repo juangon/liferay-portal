@@ -17,7 +17,6 @@ package com.liferay.portal.security.permission;
 import com.liferay.portal.kernel.security.pacl.DoPrivileged;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CharPool;
-import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -29,7 +28,6 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -289,16 +287,15 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 		return resourceBlockIds;
 	}
 
-	protected Set<Long> getRoleIds(long groupId) {
-		Set<Long> roleIds = Collections.emptySet();
+	protected long[] getRoleIds(long groupId) {
+		long[] roleIds = PermissionChecker.DEFAULT_ROLE_IDS;
 
 		PermissionChecker permissionChecker =
 			PermissionThreadLocal.getPermissionChecker();
 
 		if (permissionChecker != null) {
-			roleIds = SetUtil.fromArray(
-				permissionChecker.getRoleIds(
-					permissionChecker.getUserId(), groupId));
+			roleIds = permissionChecker.getRoleIds(
+				permissionChecker.getUserId(), groupId);
 		}
 
 		return roleIds;
@@ -308,7 +305,9 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 		Set<Long> roleIds = new HashSet<Long>();
 
 		for (long groupId : groupIds) {
-			roleIds.addAll(getRoleIds(groupId));
+			for (long roleId : getRoleIds(groupId)) {
+				roleIds.add(roleId);
+			}
 		}
 
 		return ArrayUtil.toLongArray(roleIds);
