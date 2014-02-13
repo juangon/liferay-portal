@@ -179,7 +179,9 @@ public class ServletResponseUtil {
 			String contentType)
 		throws IOException {
 
-		sendFile(request, response, fileName, is, 0, contentType, null);
+		sendFile(
+			request, response, fileName, inputStream, contentLength,
+			contentType, null);
 	}
 
 	public static void sendFile(
