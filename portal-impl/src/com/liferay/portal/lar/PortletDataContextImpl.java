@@ -619,6 +619,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 			_missingReferences.add(referenceKey);
 
+			referenceElement.addAttribute("missing", Boolean.TRUE.toString());
+
 			doAddReferenceElement(
 				referrerClassedModel, null, classedModel, className, binPath,
 				referenceType, true);
@@ -633,6 +635,9 @@ public class PortletDataContextImpl implements PortletDataContext {
 					classedModel);
 
 				_missingReferencesElement.remove(missingReferenceElement);
+
+				referenceElement.addAttribute(
+					"missing", Boolean.FALSE.toString());
 			}
 		}
 
