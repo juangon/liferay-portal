@@ -211,7 +211,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		return WorkflowHandlerRegistryUtil.startWorkflowInstance(
 			user.getCompanyId(), groupId, userId, BlogsEntry.class.getName(),
-			entry.getEntryId(), entry, serviceContext);
+			entry.getEntryId(), entry, serviceContext, null);
 	}
 
 	@Override
@@ -1096,7 +1096,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		return WorkflowHandlerRegistryUtil.startWorkflowInstance(
 			user.getCompanyId(), entry.getGroupId(), userId,
 			BlogsEntry.class.getName(), entry.getEntryId(), entry,
-			serviceContext);
+			serviceContext, null);
 	}
 
 	@Override

@@ -86,6 +86,12 @@ public class AssetSearcher extends BaseIndexer {
 
 		throw new UnsupportedOperationException();
 	}
+	protected void postProcessFullQuery(
+			BooleanQuery fullQuery, SearchContext searchContext)
+		throws Exception {
+
+		fullQuery.addRequiredTerm("visible", true);
+	}
 
 	public void setAssetEntryQuery(AssetEntryQuery assetEntryQuery) {
 		_assetEntryQuery = assetEntryQuery;
