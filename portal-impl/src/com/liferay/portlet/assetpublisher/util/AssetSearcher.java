@@ -86,6 +86,7 @@ public class AssetSearcher extends BaseIndexer {
 
 		throw new UnsupportedOperationException();
 	}
+
 	protected void postProcessFullQuery(
 			BooleanQuery fullQuery, SearchContext searchContext)
 		throws Exception {
@@ -495,7 +496,6 @@ public class AssetSearcher extends BaseIndexer {
 	protected String getPortletId(SearchContext searchContext) {
 		return null;
 	}
-
 	private AssetEntryQuery _assetEntryQuery;
 
 }
