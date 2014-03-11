@@ -235,7 +235,6 @@ public class StagedModelDataHandlerUtil {
 			long groupId = GetterUtil.getLong(
 				referenceElement.attributeValue("group-id"),
 				portletDataContext.getSourceGroupId());
-
 			long classPK = GetterUtil.getLong(
 				referenceElement.attributeValue("class-pk"));
 
