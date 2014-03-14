@@ -300,12 +300,13 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		for (BlogsEntry entry : blogsEntryPersistence.findByGroupId(groupId)) {
-			deleteEntry(entry);
+			blogsEntryLocalService.deleteEntry(entry);
 		}
 	}
 
+	@Indexable(type = IndexableType.DELETE)
 	@Override
-	public void deleteEntry(BlogsEntry entry)
+	public BlogsEntry deleteEntry(BlogsEntry entry)
 		throws PortalException, SystemException {
 
 		// Entry
@@ -369,6 +370,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		workflowInstanceLinkLocalService.deleteWorkflowInstanceLinks(
 			entry.getCompanyId(), entry.getGroupId(),
 			BlogsEntry.class.getName(), entry.getEntryId());
+
+		return entry;
 	}
 
 	@Override
@@ -377,7 +380,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		BlogsEntry entry = blogsEntryPersistence.findByPrimaryKey(entryId);
 
-		deleteEntry(entry);
+		blogsEntryLocalService.deleteEntry(entry);
 	}
 
 	/**
@@ -833,7 +836,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		List<BlogsEntry> entries = blogsEntryPersistence.findByGroupId(groupId);
 
 		for (BlogsEntry entry : entries) {
-			moveEntryToTrash(userId, entry);
+			blogsEntryLocalService.moveEntryToTrash(userId, entry);
 		}
 	}
 
@@ -849,6 +852,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	 *         be updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public BlogsEntry moveEntryToTrash(long userId, BlogsEntry entry)
 		throws PortalException, SystemException {
@@ -906,7 +910,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		BlogsEntry entry = blogsEntryPersistence.findByPrimaryKey(entryId);
 
-		return moveEntryToTrash(userId, entry);
+		return blogsEntryLocalService.moveEntryToTrash(userId, entry);
 	}
 
 	/**
@@ -920,8 +924,9 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	 *         counter could not be updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	@Override
-	public void restoreEntryFromTrash(long userId, long entryId)
+	public BlogsEntry restoreEntryFromTrash(long userId, long entryId)
 		throws PortalException, SystemException {
 
 		// Entry
@@ -942,6 +947,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			userId, trashEntry.getGroupId(), BlogsEntry.class.getName(),
 			entryId, SocialActivityConstants.TYPE_RESTORE_FROM_TRASH,
 			extraDataJSONObject.toString(), 0);
+
+		return entry;
 	}
 
 	@Override
@@ -1111,6 +1118,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			guestPermissions);
 	}
 
+	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public BlogsEntry updateStatus(
 			long userId, long entryId, int status,
@@ -1144,9 +1152,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		blogsStatsUserLocalService.updateStatsUser(
 			entry.getGroupId(), entry.getUserId(), entry.getDisplayDate());
-
-		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
-			BlogsEntry.class);
 
 		AssetEntry assetEntry = assetEntryLocalService.fetchEntry(
 			BlogsEntry.class.getName(), entryId);
@@ -1194,10 +1199,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				trashEntryLocalService.deleteEntry(
 					BlogsEntry.class.getName(), entryId);
 			}
-
-			// Indexer
-
-			indexer.reindex(entry);
 
 			if (oldStatus != WorkflowConstants.STATUS_IN_TRASH) {
 
@@ -1257,15 +1258,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			else if (oldStatus == WorkflowConstants.STATUS_IN_TRASH) {
 				trashEntryLocalService.deleteEntry(
 					BlogsEntry.class.getName(), entryId);
-			}
-
-			// Indexer
-
-			if (status == WorkflowConstants.STATUS_IN_TRASH) {
-				indexer.reindex(entry);
-			}
-			else {
-				indexer.delete(entry);
 			}
 		}
 
