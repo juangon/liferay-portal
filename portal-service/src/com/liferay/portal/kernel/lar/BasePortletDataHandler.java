@@ -492,7 +492,7 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 					portletDataContext, portletId, portletPreferences);
 
 				if (displayStyleGroupId ==
-						portletDataContext.getCompanyGroupId()) {
+						portletDataContext.getSourceCompanyGroupId()) {
 
 					Element importDataRootElement =
 						portletDataContext.getImportDataRootElement();
