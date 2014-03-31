@@ -23,12 +23,14 @@ import com.liferay.portal.kernel.trash.TrashHandler;
 import com.liferay.portal.kernel.trash.TrashHandlerRegistryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.StagedModel;
 import com.liferay.portal.model.TrashedModel;
 import com.liferay.portal.model.WorkflowedModel;
-
+import com.liferay.portlet.sitesadmin.lar.StagedGroup;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -107,24 +109,68 @@ public abstract class BaseStagedModelDataHandler<T extends StagedModel>
 		return new HashMap<String, String>();
 	}
 
+	/**
+	 * @deprecated As of 7.0.0, replaced by {@link
+	 *             #importMissingReference(PortletDataContext, Element)}
+	 */
+	@Deprecated
 	@Override
 	public void importCompanyStagedModel(
-			PortletDataContext portletDataContext, Element element)
+			PortletDataContext portletDataContext, Element referenceElement)
 		throws PortletDataException {
 
-		String uuid = element.attributeValue("uuid");
-		long classPK = GetterUtil.getLong(element.attributeValue("class-pk"));
-
-		importCompanyStagedModel(portletDataContext, uuid, classPK);
+		importMissingReference(portletDataContext, referenceElement);
 	}
 
+	/**
+	 * @deprecated As of 7.0.0, replaced by {@link
+	 *             #importMissingReference(PortletDataContext, String, long,
+	 *             long)}
+	 */
+	@Deprecated
 	@Override
 	public void importCompanyStagedModel(
 			PortletDataContext portletDataContext, String uuid, long classPK)
 		throws PortletDataException {
 
+		importMissingReference(
+			portletDataContext, uuid, portletDataContext.getCompanyGroupId(),
+			classPK);
+	}
+
+	@Override
+	public void importMissingReference(
+			PortletDataContext portletDataContext, Element referenceElement)
+		throws PortletDataException {
+
+		importMissingGroupReference(portletDataContext, referenceElement);
+
+		String uuid = referenceElement.attributeValue("uuid");
+
+		Map<Long, Long> groupIds =
+			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
+				Group.class);
+
+		long liveGroupId = GetterUtil.getLong(
+			referenceElement.attributeValue("live-group-id"));
+
+		liveGroupId = MapUtil.getLong(groupIds, liveGroupId, liveGroupId);
+
+		long classPK = GetterUtil.getLong(
+			referenceElement.attributeValue("class-pk"));
+
+		importMissingReference(portletDataContext, uuid, liveGroupId, classPK);
+	}
+
+	@Override
+	public void importMissingReference(
+			PortletDataContext portletDataContext, String uuid, long groupId,
+			long classPK)
+		throws PortletDataException {
+
 		try {
-			doImportCompanyStagedModel(portletDataContext, uuid, classPK);
+			doImportMissingReference(
+				portletDataContext, uuid, groupId, classPK);
 		}
 		catch (PortletDataException pde) {
 			throw pde;
@@ -189,20 +235,26 @@ public abstract class BaseStagedModelDataHandler<T extends StagedModel>
 	public boolean validateReference(
 		PortletDataContext portletDataContext, Element referenceElement) {
 
+		if (!validateMissingGroupReference(
+				portletDataContext, referenceElement)) {
+
+			return false;
+		}
+
 		String uuid = referenceElement.attributeValue("uuid");
 
+		Map<Long, Long> groupIds =
+			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
+				Group.class);
+
+		long liveGroupId = GetterUtil.getLong(
+			referenceElement.attributeValue("live-group-id"));
+
+		liveGroupId = MapUtil.getLong(groupIds, liveGroupId, liveGroupId);
+
 		try {
-			boolean valid = validateMissingReference(
-				uuid, portletDataContext.getCompanyId(),
-				portletDataContext.getScopeGroupId());
-
-			if (!valid) {
-				valid = validateMissingReference(
-					uuid, portletDataContext.getCompanyId(),
-					portletDataContext.getCompanyGroupId());
-			}
-
-			return valid;
+			return validateMissingReference(
+				uuid, portletDataContext.getCompanyId(), liveGroupId);
 		}
 		catch (Exception e) {
 			return false;
@@ -219,8 +271,9 @@ public abstract class BaseStagedModelDataHandler<T extends StagedModel>
 			PortletDataContext portletDataContext, T stagedModel)
 		throws Exception;
 
-	protected void doImportCompanyStagedModel(
-			PortletDataContext portletDataContext, String uuid, long classPK)
+	protected void doImportMissingReference(
+			PortletDataContext portletDataContext, String uuid, long groupId,
+			long classPK)
 		throws Exception {
 
 		throw new UnsupportedOperationException();
@@ -235,6 +288,20 @@ public abstract class BaseStagedModelDataHandler<T extends StagedModel>
 		throws Exception {
 
 		throw new UnsupportedOperationException();
+	}
+
+
+	protected void importMissingGroupReference(
+			PortletDataContext portletDataContext, Element referenceElement)
+		throws PortletDataException {
+
+		StagedModelDataHandler<StagedGroup> stagedModelDataHandler =
+			(StagedModelDataHandler<StagedGroup>)
+				StagedModelDataHandlerRegistryUtil.getStagedModelDataHandler(
+					StagedGroup.class.getName());
+
+		stagedModelDataHandler.importMissingReference(
+			portletDataContext, referenceElement);
 	}
 
 	protected void validateExport(
@@ -285,6 +352,18 @@ public abstract class BaseStagedModelDataHandler<T extends StagedModel>
 				}
 			}
 		}
+	}
+
+	protected boolean validateMissingGroupReference(
+		PortletDataContext portletDataContext, Element referenceElement) {
+
+		StagedModelDataHandler<StagedGroup> stagedModelDataHandler =
+			(StagedModelDataHandler<StagedGroup>)
+				StagedModelDataHandlerRegistryUtil.getStagedModelDataHandler(
+					StagedGroup.class.getName());
+
+		return stagedModelDataHandler.validateReference(
+			portletDataContext, referenceElement);
 	}
 
 	protected boolean validateMissingReference(

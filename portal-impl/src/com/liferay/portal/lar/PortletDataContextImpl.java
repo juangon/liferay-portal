@@ -55,6 +55,7 @@ import com.liferay.portal.model.AttachedModel;
 import com.liferay.portal.model.AuditedModel;
 import com.liferay.portal.model.ClassedModel;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.model.Portlet;
@@ -618,6 +619,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 			_missingReferences.add(referenceKey);
 
+			referenceElement.addAttribute("missing", Boolean.TRUE.toString());
+
 			doAddReferenceElement(
 				referrerClassedModel, null, classedModel, className, binPath,
 				referenceType, true);
@@ -632,6 +635,9 @@ public class PortletDataContextImpl implements PortletDataContext {
 					classedModel);
 
 				_missingReferencesElement.remove(missingReferenceElement);
+
+				referenceElement.addAttribute(
+					"missing", Boolean.FALSE.toString());
 			}
 		}
 
@@ -1428,6 +1434,25 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 		newPrimaryKeysMap.put(classPK, newClassPK);
 
+		if (classedModel instanceof StagedGroupedModel &&
+			newClassedModel instanceof StagedGroupedModel) {
+
+			Map<Long, Long> groupIds = (Map<Long, Long>)getNewPrimaryKeysMap(
+				Group.class);
+
+			StagedGroupedModel stagedGroupedModel =
+				(StagedGroupedModel)classedModel;
+
+			if (!groupIds.containsKey(stagedGroupedModel.getGroupId())) {
+				StagedGroupedModel newStagedGroupedModel =
+					(StagedGroupedModel)newClassedModel;
+
+				groupIds.put(
+					stagedGroupedModel.getGroupId(),
+					newStagedGroupedModel.getGroupId());
+			}
+		}
+
 		importLocks(clazz, String.valueOf(classPK), String.valueOf(newClassPK));
 		importPermissions(clazz, classPK, newClassPK);
 
@@ -2165,6 +2190,31 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 			referenceElement.addAttribute(
 				"group-id", String.valueOf(stagedGroupedModel.getGroupId()));
+
+			try {
+				Group group = GroupLocalServiceUtil.getGroup(
+					stagedGroupedModel.getGroupId());
+
+				long liveGroupId = group.getLiveGroupId();
+
+				if (group.isStagedRemotely()) {
+					liveGroupId = group.getRemoteLiveGroupId();
+				}
+
+				if (liveGroupId == GroupConstants.DEFAULT_LIVE_GROUP_ID) {
+					liveGroupId = group.getGroupId();
+				}
+
+				referenceElement.addAttribute(
+					"live-group-id", String.valueOf(liveGroupId));
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Unable to find group " +
+							stagedGroupedModel.getGroupId());
+				}
+			}
 		}
 
 		if (Validator.isNotNull(binPath)) {
