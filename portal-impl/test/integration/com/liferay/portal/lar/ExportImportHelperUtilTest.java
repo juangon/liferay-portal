@@ -394,9 +394,6 @@ public class ExportImportHelperUtilTest extends PowerMockito {
 		content = ExportImportHelperUtil.replaceExportContentReferences(
 			_portletDataContextExport, _referrerStagedModel,
 			referrerStagedModelElement, content, true);
-
-		_portletDataContextImport.setScopeGroupId(_fileEntry.getGroupId());
-
 		content = ExportImportHelperUtil.replaceImportContentReferences(
 			_portletDataContextImport, _referrerStagedModel,
 			referrerStagedModelElement, content, true);
