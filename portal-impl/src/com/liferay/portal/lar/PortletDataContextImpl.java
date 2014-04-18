@@ -1434,8 +1434,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 		newPrimaryKeysMap.put(classPK, newClassPK);
 
-		// For complete group mapping during the import process make sure the
-		// currently imported group's id is also mapped
+		// Group mapping
 
 		if (classedModel instanceof StagedGroupedModel &&
 			newClassedModel instanceof StagedGroupedModel) {
@@ -1446,14 +1445,12 @@ public class PortletDataContextImpl implements PortletDataContext {
 			StagedGroupedModel stagedGroupedModel =
 				(StagedGroupedModel)classedModel;
 
-			if (!groupIds.containsKey(stagedGroupedModel.getGroupId())) {
-				StagedGroupedModel newStagedGroupedModel =
-					(StagedGroupedModel)newClassedModel;
+			StagedGroupedModel newStagedGroupedModel =
+				(StagedGroupedModel)newClassedModel;
 
-				groupIds.put(
-					stagedGroupedModel.getGroupId(),
-					newStagedGroupedModel.getGroupId());
-			}
+			groupIds.put(
+				stagedGroupedModel.getGroupId(),
+				newStagedGroupedModel.getGroupId());
 		}
 
 		importLocks(clazz, String.valueOf(classPK), String.valueOf(newClassPK));
