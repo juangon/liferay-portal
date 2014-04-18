@@ -58,23 +58,24 @@ public class StagedGroupStagedModelDataHandler
 
 		String groupIdAttribute = referenceElement.attributeValue("group-id");
 
-		if (Validator.isNull(groupIdAttribute)) {
-			return true;
+		// Validate only for StagedGroupModels
+
+		if (Validator.isNotNull(groupIdAttribute)) {
+			Group existingGroup = fetchExistingGroup(
+				portletDataContext, referenceElement);
+
+			if (existingGroup == null) {
+				return false;
+			}
+
+			Map<Long, Long> groupIds =
+				(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
+					Group.class);
+
+			groupIds.put(
+				GetterUtil.getLong(groupIdAttribute),
+				existingGroup.getGroupId());
 		}
-
-		Group existingGroup = fetchExistingGroup(
-			portletDataContext, referenceElement);
-
-		if (existingGroup == null) {
-			return false;
-		}
-
-		Map<Long, Long> groupIds =
-			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
-				Group.class);
-
-		groupIds.put(
-			GetterUtil.getLong(groupIdAttribute), existingGroup.getGroupId());
 
 		return true;
 	}
@@ -102,16 +103,16 @@ public class StagedGroupStagedModelDataHandler
 		String liveGroupIdAttribute = referenceElement.attributeValue(
 			"live-group-id");
 
-		if (Validator.isNull(groupIdAttribute) ||
-			Validator.isNull(liveGroupIdAttribute)) {
+		if (Validator.isNotNull(groupIdAttribute) &&
+			Validator.isNotNull(liveGroupIdAttribute)) {
 
-			return null;
+			long groupId = GetterUtil.getLong(groupIdAttribute);
+			long liveGroupId = GetterUtil.getLong(liveGroupIdAttribute);
+
+			return fetchExistingGroup(portletDataContext, groupId, liveGroupId);
 		}
 
-		long groupId = GetterUtil.getLong(groupIdAttribute);
-		long liveGroupId = GetterUtil.getLong(liveGroupIdAttribute);
-
-		return fetchExistingGroup(portletDataContext, groupId, liveGroupId);
+		return null;
 	}
 
 	protected Group fetchExistingGroup(
@@ -130,12 +131,15 @@ public class StagedGroupStagedModelDataHandler
 		// reference's group is properly staged or in case of local staging when
 		// the references don't change between stage and live
 
+		Group existingGroup = null;
+
 		try {
-			return GroupLocalServiceUtil.getGroup(existingGroupId);
+			existingGroup = GroupLocalServiceUtil.getGroup(existingGroupId);
 		}
 		catch (Exception e) {
-			return null;
 		}
+
+		return existingGroup;
 	}
 
 }
