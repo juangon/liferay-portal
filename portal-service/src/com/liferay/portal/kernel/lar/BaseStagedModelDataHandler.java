@@ -233,7 +233,7 @@ public abstract class BaseStagedModelDataHandler<T extends StagedModel>
 		PortletDataContext portletDataContext, Element referenceElement) {
 
 		String uuid = referenceElement.attributeValue("uuid");
-		long liveGroupId = GetterUtil.getLong(
+		long groupId = GetterUtil.getLong(
 			referenceElement.attributeValue("live-group-id"));
 
 		if (!validateMissingGroupReference(
@@ -246,11 +246,11 @@ public abstract class BaseStagedModelDataHandler<T extends StagedModel>
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
 				Group.class);
 
-		liveGroupId = MapUtil.getLong(groupIds, liveGroupId, liveGroupId);
+		groupId = MapUtil.getLong(groupIds, groupId, groupId);
 
 		try {
 			return validateMissingReference(
-				uuid, portletDataContext.getCompanyId(), liveGroupId);
+				uuid, portletDataContext.getCompanyId(), groupId);
 		}
 		catch (Exception e) {
 			return false;
@@ -291,10 +291,9 @@ public abstract class BaseStagedModelDataHandler<T extends StagedModel>
 			PortletDataContext portletDataContext, Element referenceElement)
 		throws PortletDataException {
 
-		StagedModelDataHandler<StagedGroup> stagedModelDataHandler =
-			(StagedModelDataHandler<StagedGroup>)
-				StagedModelDataHandlerRegistryUtil.getStagedModelDataHandler(
-					StagedGroup.class.getName());
+		StagedModelDataHandler<?> stagedModelDataHandler =
+			StagedModelDataHandlerRegistryUtil.getStagedModelDataHandler(
+				StagedGroup.class.getName());
 
 		stagedModelDataHandler.importMissingReference(
 			portletDataContext, referenceElement);
@@ -353,10 +352,9 @@ public abstract class BaseStagedModelDataHandler<T extends StagedModel>
 	protected boolean validateMissingGroupReference(
 			PortletDataContext portletDataContext, Element referenceElement) {
 
-		StagedModelDataHandler<StagedGroup> stagedModelDataHandler =
-			(StagedModelDataHandler<StagedGroup>)
-				StagedModelDataHandlerRegistryUtil.getStagedModelDataHandler(
-					StagedGroup.class.getName());
+		StagedModelDataHandler<?> stagedModelDataHandler =
+			StagedModelDataHandlerRegistryUtil.getStagedModelDataHandler(
+				StagedGroup.class.getName());
 
 		return stagedModelDataHandler.validateReference(
 			portletDataContext, referenceElement);
