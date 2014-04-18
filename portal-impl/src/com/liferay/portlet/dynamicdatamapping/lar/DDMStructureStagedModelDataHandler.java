@@ -102,24 +102,23 @@ public class DDMStructureStagedModelDataHandler
 	}
 
 	@Override
-	public void importMissingReference(
-			PortletDataContext portletDataContext, Element referenceElement)
+	public void importCompanyStagedModel(
+			PortletDataContext portletDataContext, Element element)
 		throws PortletDataException {
 
-		String uuid = referenceElement.attributeValue("uuid");
-		long groupId = GetterUtil.getLong(
-			referenceElement.attributeValue("live-group-id"));
+		String uuid = element.attributeValue("uuid");
 		long classNameId = PortalUtil.getClassNameId(
-			referenceElement.attributeValue("referenced-class-name"));
-		String structureKey = referenceElement.attributeValue("structure-key");
+			element.attributeValue("referenced-class-name"));
+		String structureKey = element.attributeValue("structure-key");
 		boolean preloaded = GetterUtil.getBoolean(
-			referenceElement.attributeValue("preloaded"));
+			element.attributeValue("preloaded"));
 
 		DDMStructure existingStructure = null;
 
 		try {
 			existingStructure = fetchExistingStructure(
-				uuid, groupId, classNameId, structureKey, preloaded);
+				uuid, portletDataContext.getCompanyGroupId(), classNameId,
+				structureKey, preloaded);
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
@@ -130,7 +129,7 @@ public class DDMStructureStagedModelDataHandler
 				DDMStructure.class);
 
 		long structureId = GetterUtil.getLong(
-			referenceElement.attributeValue("class-pk"));
+			element.attributeValue("class-pk"));
 
 		structureIds.put(structureId, existingStructure.getStructureId());
 

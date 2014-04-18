@@ -97,23 +97,21 @@ public class DLFileEntryTypeStagedModelDataHandler
 	}
 
 	@Override
-	public void importMissingReference(
-			PortletDataContext portletDataContext, Element referenceElement)
+	public void importCompanyStagedModel(
+			PortletDataContext portletDataContext, Element element)
 		throws PortletDataException {
 
-		String uuid = referenceElement.attributeValue("uuid");
-		long groupId = GetterUtil.getLong(
-			referenceElement.attributeValue("live-group-id"));
-		String fileEntryTypeKey = referenceElement.attributeValue(
-			"file-entry-type-key");
+		String uuid = element.attributeValue("uuid");
+		String fileEntryTypeKey = element.attributeValue("file-entry-type-key");
 		boolean preloaded = GetterUtil.getBoolean(
-			referenceElement.attributeValue("preloaded"));
+			element.attributeValue("preloaded"));
 
 		DLFileEntryType existingFileEntryType = null;
 
 		try {
 			existingFileEntryType = fetchExistingFileEntryType(
-				uuid, groupId, fileEntryTypeKey, preloaded);
+				uuid, portletDataContext.getCompanyGroupId(), fileEntryTypeKey,
+				preloaded);
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
@@ -124,7 +122,7 @@ public class DLFileEntryTypeStagedModelDataHandler
 				DLFileEntryType.class);
 
 		long fileEntryTypeId = GetterUtil.getLong(
-			referenceElement.attributeValue("class-pk"));
+			element.attributeValue("class-pk"));
 
 		fileEntryTypeIds.put(
 			fileEntryTypeId, existingFileEntryType.getFileEntryTypeId());

@@ -76,14 +76,13 @@ public class PollsQuestionStagedModelDataHandler
 	}
 
 	@Override
-	protected void doImportMissingReference(
-			PortletDataContext portletDataContext, String uuid, long groupId,
-			long questionId)
+	protected void doImportCompanyStagedModel(
+			PortletDataContext portletDataContext, String uuid, long questionId)
 		throws Exception {
 
 		PollsQuestion existingQuestion =
 			PollsQuestionLocalServiceUtil.fetchPollsQuestionByUuidAndGroupId(
-				uuid, groupId);
+				uuid, portletDataContext.getCompanyGroupId());
 
 		Map<Long, Long> questionIds =
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(

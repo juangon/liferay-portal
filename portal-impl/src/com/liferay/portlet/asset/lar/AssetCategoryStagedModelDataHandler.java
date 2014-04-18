@@ -46,7 +46,6 @@ public class AssetCategoryStagedModelDataHandler
 	protected void doExportStagedModel(
 			PortletDataContext portletDataContext, AssetCategory category)
 		throws Exception {
-
 	}
 
 	@Override

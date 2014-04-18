@@ -101,14 +101,13 @@ public class WikiPageStagedModelDataHandler
 	}
 
 	@Override
-	protected void doImportMissingReference(
-			PortletDataContext portletDataContext, String uuid, long groupId,
-			long pageId)
+	protected void doImportCompanyStagedModel(
+			PortletDataContext portletDataContext, String uuid, long pageId)
 		throws Exception {
 
 		WikiPage existingPage =
 			WikiPageLocalServiceUtil.fetchWikiPageByUuidAndGroupId(
-				uuid, groupId);
+				uuid, portletDataContext.getCompanyGroupId());
 
 		Map<Long, Long> pageIds =
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(

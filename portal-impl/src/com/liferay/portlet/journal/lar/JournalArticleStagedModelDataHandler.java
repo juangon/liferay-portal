@@ -164,24 +164,22 @@ public class JournalArticleStagedModelDataHandler
 	}
 
 	@Override
-	public void importMissingReference(
-			PortletDataContext portletDataContext, Element referenceElement)
+	public void importCompanyStagedModel(
+			PortletDataContext portletDataContext, Element element)
 		throws PortletDataException {
 
-		String articleResourceUuid = referenceElement.attributeValue(
+		String articleResourceUuid = element.attributeValue(
 			"article-resource-uuid");
-		long groupId = GetterUtil.getLong(
-			referenceElement.attributeValue("live-group-id"));
-		String articleArticleId = referenceElement.attributeValue("article-id");
+		String articleArticleId = element.attributeValue("article-id");
 		boolean preloaded = GetterUtil.getBoolean(
-			referenceElement.attributeValue("preloaded"));
+			element.attributeValue("preloaded"));
 
 		JournalArticle existingArticle = null;
 
 		try {
 			existingArticle = fetchExistingArticle(
-				articleResourceUuid, groupId, articleArticleId, null, 0.0,
-				preloaded);
+				articleResourceUuid, portletDataContext.getCompanyGroupId(),
+				articleArticleId, null, 0.0, preloaded);
 		}
 		catch (Exception e) {
 			if (e instanceof SystemException) {
@@ -201,8 +199,7 @@ public class JournalArticleStagedModelDataHandler
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
 				JournalArticle.class);
 
-		long articleId = GetterUtil.getLong(
-			referenceElement.attributeValue("class-pk"));
+		long articleId = GetterUtil.getLong(element.attributeValue("class-pk"));
 
 		articleIds.put(articleId, existingArticle.getId());
 	}

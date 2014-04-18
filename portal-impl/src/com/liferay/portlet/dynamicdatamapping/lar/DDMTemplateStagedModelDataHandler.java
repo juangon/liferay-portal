@@ -112,24 +112,23 @@ public class DDMTemplateStagedModelDataHandler
 	}
 
 	@Override
-	public void importMissingReference(
-			PortletDataContext portletDataContext, Element referenceElement)
+	public void importCompanyStagedModel(
+			PortletDataContext portletDataContext, Element element)
 		throws PortletDataException {
 
-		String uuid = referenceElement.attributeValue("uuid");
-		long groupId = GetterUtil.getLong(
-			referenceElement.attributeValue("live-group-id"));
+		String uuid = element.attributeValue("uuid");
 		long classNameId = PortalUtil.getClassNameId(
-			referenceElement.attributeValue("referenced-class-name"));
-		String templateKey = referenceElement.attributeValue("template-key");
+			element.attributeValue("referenced-class-name"));
+		String templateKey = element.attributeValue("template-key");
 		boolean preloaded = GetterUtil.getBoolean(
-			referenceElement.attributeValue("preloaded"));
+			element.attributeValue("preloaded"));
 
 		DDMTemplate existingTemplate = null;
 
 		try {
 			existingTemplate = fetchExistingTemplate(
-				uuid, groupId, classNameId, templateKey, preloaded);
+				uuid, portletDataContext.getCompanyGroupId(), classNameId,
+				templateKey, preloaded);
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
@@ -140,7 +139,7 @@ public class DDMTemplateStagedModelDataHandler
 				DDMTemplate.class);
 
 		long templateId = GetterUtil.getLong(
-			referenceElement.attributeValue("class-pk"));
+			element.attributeValue("class-pk"));
 
 		templateIds.put(templateId, existingTemplate.getTemplateId());
 

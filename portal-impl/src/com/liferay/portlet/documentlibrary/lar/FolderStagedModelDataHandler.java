@@ -105,12 +105,12 @@ public class FolderStagedModelDataHandler
 	}
 
 	@Override
-	protected void doImportMissingReference(
-			PortletDataContext portletDataContext, String uuid, long groupId,
-			long folderId)
+	protected void doImportCompanyStagedModel(
+			PortletDataContext portletDataContext, String uuid, long folderId)
 		throws Exception {
 
-		Folder existingFolder = FolderUtil.fetchByUUID_R(uuid, groupId);
+		Folder existingFolder = FolderUtil.fetchByUUID_R(
+			uuid, portletDataContext.getCompanyGroupId());
 
 		Map<Long, Long> folderIds =
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(

@@ -222,13 +222,13 @@ public class FileEntryStagedModelDataHandler
 	}
 
 	@Override
-	protected void doImportMissingReference(
-			PortletDataContext portletDataContext, String uuid, long groupId,
+	protected void doImportCompanyStagedModel(
+			PortletDataContext portletDataContext, String uuid,
 			long fileEntryId)
 		throws Exception {
 
 		FileEntry existingFileEntry = FileEntryUtil.fetchByUUID_R(
-			uuid, groupId);
+			uuid, portletDataContext.getCompanyGroupId());
 
 		Map<Long, Long> fileEntryIds =
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
