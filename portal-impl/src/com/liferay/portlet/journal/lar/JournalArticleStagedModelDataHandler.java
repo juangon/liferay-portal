@@ -36,8 +36,10 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -229,40 +231,25 @@ public class JournalArticleStagedModelDataHandler
 			}
 
 			if (existingArticle == null) {
+				Group group = GroupLocalServiceUtil.getGroup(
+						portletDataContext.getScopeGroupId());
+
+				for (Group parentGroup : group.getAncestors()) {
+					existingArticle = fetchExistingArticle(
+							articleResourceUuid, parentGroup.getGroupId(),
+							articleArticleId, null, 0.0, preloaded);
+			
+					if (existingArticle != null) {
+						break;
+					}
+				}
+			}
+
+			if (existingArticle == null) {
 				return false;
 			}
 
 			return true;
-		}
-		catch (Exception e) {
-			return false;
-		}
-	}
-
-	@Override
-	public boolean validateReference(
-		PortletDataContext portletDataContext, Element referenceElement) {
-
-		String uuid = referenceElement.attributeValue("article-resource-uuid");
-
-		try {
-			boolean valid = validateMissingReference(
-				uuid, portletDataContext.getCompanyId(),
-				portletDataContext.getScopeGroupId());
-
-			if (!valid) {
-				valid = validateMissingReference(
-					uuid, portletDataContext.getCompanyId(),
-					portletDataContext.getCompanyGroupId());
-			}
-
-			if (!valid) {
-				valid = validateParentMissingReference(
-					uuid, portletDataContext.getCompanyId(),
-					portletDataContext.getScopeGroupId());
-			}
-
-			return valid;
 		}
 		catch (Exception e) {
 			return false;
