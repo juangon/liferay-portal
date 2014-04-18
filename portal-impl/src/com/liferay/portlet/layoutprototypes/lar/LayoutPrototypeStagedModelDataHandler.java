@@ -75,10 +75,11 @@ public class LayoutPrototypeStagedModelDataHandler
 			LayoutPrototype layoutPrototype)
 		throws Exception {
 
-		exportLayouts(portletDataContext, layoutPrototype);
-
 		Element layoutPrototypeElement =
 			portletDataContext.getExportDataElement(layoutPrototype);
+
+		exportLayouts(
+			portletDataContext, layoutPrototype, layoutPrototypeElement);
 
 		portletDataContext.addClassedModel(
 			layoutPrototypeElement,
@@ -147,32 +148,17 @@ public class LayoutPrototypeStagedModelDataHandler
 
 	protected void exportLayouts(
 			PortletDataContext portletDataContext,
-			LayoutPrototype layoutPrototype)
+			LayoutPrototype layoutPrototype, Element layoutPrototypeElement)
 		throws Exception {
 
 		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
 			layoutPrototype.getGroupId(), true,
 			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
-		long groupId = portletDataContext.getGroupId();
-		boolean privateLayout = portletDataContext.isPrivateLayout();
-		long scopeGroupId = portletDataContext.getScopeGroupId();
-
-		try {
-			portletDataContext.setGroupId(layoutPrototype.getGroupId());
-			portletDataContext.setPrivateLayout(true);
-			portletDataContext.setScopeGroupId(layoutPrototype.getGroupId());
-
-			for (Layout layout : layouts) {
-				StagedModelDataHandlerUtil.exportReferenceStagedModel(
-					portletDataContext, layoutPrototype, layout,
-					PortletDataContext.REFERENCE_TYPE_EMBEDDED);
-			}
-		}
-		finally {
-			portletDataContext.setGroupId(groupId);
-			portletDataContext.setPrivateLayout(privateLayout);
-			portletDataContext.setScopeGroupId(scopeGroupId);
+		for (Layout layout : layouts) {
+			StagedModelDataHandlerUtil.exportReferenceStagedModel(
+				portletDataContext, layoutPrototype, layout,
+				PortletDataContext.REFERENCE_TYPE_EMBEDDED);
 		}
 	}
 
