@@ -1434,6 +1434,9 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 		newPrimaryKeysMap.put(classPK, newClassPK);
 
+		// For complete group mapping during the import process make sure the
+		// currently imported group's id is also mapped
+
 		if (classedModel instanceof StagedGroupedModel &&
 			newClassedModel instanceof StagedGroupedModel) {
 

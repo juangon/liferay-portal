@@ -192,12 +192,12 @@ public class JournalContentPortletDataHandler
 
 		long previousScopeGroupId = portletDataContext.getScopeGroupId();
 
+		long importGroupId = GetterUtil.getLong(
+			portletPreferences.getValue("groupId", null));
+
 		Map<Long, Long> groupIds =
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
 				Group.class);
-
-		long importGroupId = GetterUtil.getLong(
-			portletPreferences.getValue("groupId", null));
 
 		long groupId = MapUtil.getLong(groupIds, importGroupId, importGroupId);
 
