@@ -14,9 +14,12 @@
 
 package com.liferay.portlet.sitesadmin.lar;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.BaseStagedModelDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -33,7 +36,8 @@ public class StagedGroupStagedModelDataHandler
 
 	@Override
 	public void deleteStagedModel(
-		String uuid, long groupId, String className, String extraData) {
+			String uuid, long groupId, String className, String extraData)
+		throws PortalException, SystemException {
 
 		throw new UnsupportedOperationException();
 	}
@@ -52,10 +56,9 @@ public class StagedGroupStagedModelDataHandler
 	public boolean validateReference(
 		PortletDataContext portletDataContext, Element referenceElement) {
 
-		long groupId = GetterUtil.getLong(
-			referenceElement.attributeValue("group-id"));
+		String groupIdAttribute = referenceElement.attributeValue("group-id");
 
-		if (groupId == 0) {
+		if (Validator.isNull(groupIdAttribute)) {
 			return true;
 		}
 
@@ -70,7 +73,8 @@ public class StagedGroupStagedModelDataHandler
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
 				Group.class);
 
-		groupIds.put(groupId, existingGroup.getGroupId());
+		groupIds.put(
+			GetterUtil.getLong(groupIdAttribute), existingGroup.getGroupId());
 
 		return true;
 	}
@@ -94,14 +98,18 @@ public class StagedGroupStagedModelDataHandler
 	protected Group fetchExistingGroup(
 		PortletDataContext portletDataContext, Element referenceElement) {
 
-		long groupId = GetterUtil.getLong(
-			referenceElement.attributeValue("group-id"));
-		long liveGroupId = GetterUtil.getLong(
-			referenceElement.attributeValue("live-group-id"));
+		String groupIdAttribute = referenceElement.attributeValue("group-id");
+		String liveGroupIdAttribute = referenceElement.attributeValue(
+			"live-group-id");
 
-		if ((groupId == 0) || (liveGroupId == 0)) {
+		if (Validator.isNull(groupIdAttribute) ||
+			Validator.isNull(liveGroupIdAttribute)) {
+
 			return null;
 		}
+
+		long groupId = GetterUtil.getLong(groupIdAttribute);
+		long liveGroupId = GetterUtil.getLong(liveGroupIdAttribute);
 
 		return fetchExistingGroup(portletDataContext, groupId, liveGroupId);
 	}
