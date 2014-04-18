@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Element;
-import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
@@ -126,14 +125,6 @@ public class DDMTemplateStagedModelDataHandler
 		boolean preloaded = GetterUtil.getBoolean(
 			referenceElement.attributeValue("preloaded"));
 
-		importMissingGroupReference(portletDataContext, referenceElement);
-
-		Map<Long, Long> groupIds =
-			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
-				Group.class);
-
-		groupId = MapUtil.getLong(groupIds, groupId, groupId);
-
 		DDMTemplate existingTemplate = null;
 
 		try {
@@ -165,29 +156,22 @@ public class DDMTemplateStagedModelDataHandler
 		PortletDataContext portletDataContext, Element referenceElement) {
 
 		String uuid = referenceElement.attributeValue("uuid");
-		long groupId = GetterUtil.getLong(
-			referenceElement.attributeValue("live-group-id"));
 		long classNameId = PortalUtil.getClassNameId(
 			referenceElement.attributeValue("referenced-class-name"));
 		String templateKey = referenceElement.attributeValue("template-key");
 		boolean preloaded = GetterUtil.getBoolean(
 			referenceElement.attributeValue("preloaded"));
 
-		if (!validateMissingGroupReference(
-				portletDataContext, referenceElement)) {
-
-			return false;
-		}
-
-		Map<Long, Long> groupIds =
-			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
-				Group.class);
-
-		groupId = MapUtil.getLong(groupIds, groupId, groupId);
-
 		try {
 			DDMTemplate existingTemplate = fetchExistingTemplate(
-				uuid, groupId, classNameId, templateKey, preloaded);
+				uuid, portletDataContext.getScopeGroupId(), classNameId,
+				templateKey, preloaded);
+
+			if (existingTemplate == null) {
+				existingTemplate = fetchExistingTemplate(
+					uuid, portletDataContext.getCompanyGroupId(), classNameId,
+					templateKey, preloaded);
+			}
 
 			if (existingTemplate == null) {
 				return false;

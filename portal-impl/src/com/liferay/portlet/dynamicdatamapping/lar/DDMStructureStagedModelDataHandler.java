@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.xml.Element;
-import com.liferay.portal.model.Group;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -116,14 +115,6 @@ public class DDMStructureStagedModelDataHandler
 		boolean preloaded = GetterUtil.getBoolean(
 			referenceElement.attributeValue("preloaded"));
 
-		importMissingGroupReference(portletDataContext, referenceElement);
-
-		Map<Long, Long> groupIds =
-			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
-				Group.class);
-
-		groupId = MapUtil.getLong(groupIds, groupId, groupId);
-
 		DDMStructure existingStructure = null;
 
 		try {
@@ -155,29 +146,22 @@ public class DDMStructureStagedModelDataHandler
 		PortletDataContext portletDataContext, Element referenceElement) {
 
 		String uuid = referenceElement.attributeValue("uuid");
-		long groupId = GetterUtil.getLong(
-			referenceElement.attributeValue("live-group-id"));
 		long classNameId = PortalUtil.getClassNameId(
 			referenceElement.attributeValue("referenced-class-name"));
 		String structureKey = referenceElement.attributeValue("structure-key");
 		boolean preloaded = GetterUtil.getBoolean(
 			referenceElement.attributeValue("preloaded"));
 
-		if (!validateMissingGroupReference(
-				portletDataContext, referenceElement)) {
-
-			return false;
-		}
-
-		Map<Long, Long> groupIds =
-			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
-				Group.class);
-
-		groupId = MapUtil.getLong(groupIds, groupId, groupId);
-
 		try {
 			DDMStructure existingStructure = fetchExistingStructure(
-				uuid, groupId, classNameId, structureKey, preloaded);
+				uuid, portletDataContext.getScopeGroupId(), classNameId,
+				structureKey, preloaded);
+
+			if (existingStructure == null) {
+				existingStructure = fetchExistingStructure(
+					uuid, portletDataContext.getCompanyGroupId(), classNameId,
+					structureKey, preloaded);
+			}
 
 			if (existingStructure == null) {
 				return false;
