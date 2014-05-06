@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PrefsPropsUtil;
@@ -343,6 +344,17 @@ public abstract class DLPreviewableProcessor implements DLProcessor {
 		}
 	}
 
+	protected void deleteDirectory(long companyId, String path)
+		throws PortalException, SystemException {
+
+		if (path.indexOf(CharPool.SLASH) > -1) {
+			String dirName = path.substring(
+				0, path.lastIndexOf(CharPool.SLASH));
+
+			DLStoreUtil.deleteDirectory(companyId, REPOSITORY_ID, dirName);
+		}
+	}
+
 	protected void deleteFiles(
 		long companyId, long groupId, long fileEntryId, long fileVersionId,
 		String thumbnailType) {
@@ -359,7 +371,7 @@ public abstract class DLPreviewableProcessor implements DLProcessor {
 			groupId, fileEntryId, fileVersionId, null);
 
 		try {
-			DLStoreUtil.deleteFile(companyId, REPOSITORY_ID, path);
+			deleteDirectory(companyId, path);
 		}
 		catch (Exception e) {
 		}
@@ -378,7 +390,7 @@ public abstract class DLPreviewableProcessor implements DLProcessor {
 				dirName = dirName.concat(thumbnailType);
 			}
 
-			DLStoreUtil.deleteFile(companyId, REPOSITORY_ID, dirName);
+			deleteDirectory(companyId, dirName);
 		}
 		catch (Exception e) {
 		}
