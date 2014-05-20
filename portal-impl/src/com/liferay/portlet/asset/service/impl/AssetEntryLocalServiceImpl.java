@@ -888,16 +888,16 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			AssetRendererFactoryRegistryUtil.getAssetRendererFactories(
 				companyId);
 
-		long[] classNames = new long[rendererFactories.size()];
+		long[] classNameIds = new long[rendererFactories.size()];
 
 		for (int i = 0; i < rendererFactories.size(); i++) {
 			AssetRendererFactory rendererFactory = rendererFactories.get(i);
 
-			classNames[i] = PortalUtil.getClassNameId(
+			classNameIds[i] = PortalUtil.getClassNameId(
 				rendererFactory.getClassName());
 		}
 
-		return classNames;
+		return classNameIds;
 	}
 
 	protected AssetEntry getEntry(Document document)
