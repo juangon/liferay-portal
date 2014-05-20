@@ -464,6 +464,10 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		throws SystemException {
 
 		try {
+			Indexer indexer = AssetSearcher.getInstance();
+
+			AssetSearcher assetSearcher = (AssetSearcher)indexer;
+
 			AssetEntryQuery assetEntryQuery = new AssetEntryQuery();
 
 			assetEntryQuery.setClassNameIds(
