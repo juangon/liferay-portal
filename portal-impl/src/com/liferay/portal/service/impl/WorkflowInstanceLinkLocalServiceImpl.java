@@ -245,7 +245,7 @@ public class WorkflowInstanceLinkLocalServiceImpl
 			userId = userLocalService.getDefaultUserId(companyId);
 		}
 
-		WorkflowHandler workflowHandler =
+		WorkflowHandler<?> workflowHandler =
 			WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
 
 		WorkflowDefinitionLink workflowDefinitionLink =

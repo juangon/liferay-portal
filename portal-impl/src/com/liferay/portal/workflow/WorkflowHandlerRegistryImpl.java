@@ -31,22 +31,22 @@ import java.util.TreeMap;
 public class WorkflowHandlerRegistryImpl implements WorkflowHandlerRegistry {
 
 	@Override
-	public List<WorkflowHandler> getScopeableWorkflowHandlers() {
+	public List<WorkflowHandler<?>> getScopeableWorkflowHandlers() {
 		return ListUtil.fromMapValues(_scopeableWorkflowHandlerMap);
 	}
 
 	@Override
-	public WorkflowHandler getWorkflowHandler(String className) {
+	public WorkflowHandler<?> getWorkflowHandler(String className) {
 		return _workflowHandlerMap.get(className);
 	}
 
 	@Override
-	public List<WorkflowHandler> getWorkflowHandlers() {
+	public List<WorkflowHandler<?>> getWorkflowHandlers() {
 		return ListUtil.fromMapValues(_workflowHandlerMap);
 	}
 
 	@Override
-	public void register(WorkflowHandler workflowHandler) {
+	public void register(WorkflowHandler<?> workflowHandler) {
 		_workflowHandlerMap.put(
 			workflowHandler.getClassName(), workflowHandler);
 
@@ -57,7 +57,7 @@ public class WorkflowHandlerRegistryImpl implements WorkflowHandlerRegistry {
 	}
 
 	@Override
-	public void unregister(WorkflowHandler workflowHandler) {
+	public void unregister(WorkflowHandler<?> workflowHandler) {
 		_workflowHandlerMap.remove(workflowHandler.getClassName());
 
 		if (workflowHandler.isScopeable()) {
@@ -65,10 +65,10 @@ public class WorkflowHandlerRegistryImpl implements WorkflowHandlerRegistry {
 		}
 	}
 
-	private Map<String, WorkflowHandler> _scopeableWorkflowHandlerMap =
+	private Map<String, WorkflowHandler<?>> _scopeableWorkflowHandlerMap =
 		//new ConcurrentSkipListMap<String, WorkflowHandler>();
-		new TreeMap<String, WorkflowHandler>();
-	private Map<String, WorkflowHandler> _workflowHandlerMap =
-		new TreeMap<String, WorkflowHandler>();
+		new TreeMap<String, WorkflowHandler<?>>();
+	private Map<String, WorkflowHandler<?>> _workflowHandlerMap =
+		new TreeMap<String, WorkflowHandler<?>>();
 
 }

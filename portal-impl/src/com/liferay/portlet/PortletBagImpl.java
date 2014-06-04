@@ -78,7 +78,7 @@ public class PortletBagImpl implements PortletBag {
 		List<CustomAttributesDisplay> customAttributesDisplayInstances,
 		PermissionPropagator permissionPropagatorInstance,
 		List<TrashHandler> trashHandlerInstances,
-		List<WorkflowHandler> workflowHandlerInstances,
+		List<WorkflowHandler<?>> workflowHandlerInstances,
 		PreferencesValidator preferencesValidatorInstance,
 		Map<String, ResourceBundle> resourceBundles) {
 
@@ -289,7 +289,7 @@ public class PortletBagImpl implements PortletBag {
 	}
 
 	@Override
-	public List<WorkflowHandler> getWorkflowHandlerInstances() {
+	public List<WorkflowHandler<?>> getWorkflowHandlerInstances() {
 		return _workflowHandlerInstances;
 	}
 
@@ -335,7 +335,6 @@ public class PortletBagImpl implements PortletBag {
 	private List<UserNotificationHandler>
 		_userNotificationHandlerInstances;
 	private WebDAVStorage _webDAVStorageInstance;
-	private List<WorkflowHandler> _workflowHandlerInstances;
+	private List<WorkflowHandler<?>> _workflowHandlerInstances;
 	private Method _xmlRpcMethodInstance;
-
 }

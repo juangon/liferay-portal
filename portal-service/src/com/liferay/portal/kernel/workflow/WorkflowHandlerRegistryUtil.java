@@ -39,12 +39,12 @@ import java.util.Map;
  */
 public class WorkflowHandlerRegistryUtil {
 
-	public static List<WorkflowHandler> getScopeableWorkflowHandlers() {
+	public static List<WorkflowHandler<?>> getScopeableWorkflowHandlers() {
 		return getWorkflowHandlerRegistry().getScopeableWorkflowHandlers();
 	}
 
-	public static WorkflowHandler getWorkflowHandler(String className) {
-		return getWorkflowHandlerRegistry().getWorkflowHandler(className);
+	public static <T> WorkflowHandler<T> getWorkflowHandler(String className) {
+		return (WorkflowHandler<T>)getWorkflowHandlerRegistry().getWorkflowHandler(className);
 	}
 
 	public static WorkflowHandlerRegistry getWorkflowHandlerRegistry() {
@@ -54,23 +54,24 @@ public class WorkflowHandlerRegistryUtil {
 		return _workflowHandlerRegistry;
 	}
 
-	public static List<WorkflowHandler> getWorkflowHandlers() {
+	public static List<WorkflowHandler<?>> getWorkflowHandlers() {
 		return getWorkflowHandlerRegistry().getWorkflowHandlers();
 	}
 
-	public static void register(List<WorkflowHandler> workflowHandlers) {
-		for (WorkflowHandler workflowHandler : workflowHandlers) {
+	public static void register(List<WorkflowHandler<?>> workflowHandlers) {
+		for (WorkflowHandler<?> workflowHandler : workflowHandlers) {
 			register(workflowHandler);
 		}
 	}
 
-	public static void register(WorkflowHandler workflowHandler) {
+	public static void register(WorkflowHandler<?> workflowHandler) {
 		getWorkflowHandlerRegistry().register(workflowHandler);
 	}
 
-	public static void startWorkflowInstance(
-			long companyId, long groupId, long userId, String className,
-			long classPK, Object model, ServiceContext serviceContext)
+	public static <T> void startWorkflowInstance(
+			final long companyId, final long groupId, final long userId,
+			final String className, long classPK, final T model,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		Map<String, Serializable> workflowContext =
@@ -86,9 +87,10 @@ public class WorkflowHandlerRegistryUtil {
 			serviceContext, workflowContext);
 	}
 
-	public static void startWorkflowInstance(
-			long companyId, long groupId, long userId, String className,
-			long classPK, Object model, ServiceContext serviceContext,
+	public static <T> void startWorkflowInstance(
+			final long companyId, final long groupId, final long userId,
+			String className, final long classPK, final T model,
+			ServiceContext serviceContext,
 			Map<String, Serializable> workflowContext)
 		throws PortalException, SystemException {
 
@@ -98,7 +100,8 @@ public class WorkflowHandlerRegistryUtil {
 			return;
 		}
 
-		WorkflowHandler workflowHandler = getWorkflowHandler(className);
+		final WorkflowHandler<T> workflowHandler = getWorkflowHandler(
+			className);
 
 		if (workflowHandler == null) {
 			if (WorkflowThreadLocal.isEnabled()) {
@@ -168,9 +171,9 @@ public class WorkflowHandlerRegistryUtil {
 		}
 	}
 
-	public static void startWorkflowInstance(
+	public static <T> void startWorkflowInstance(
 			long companyId, long userId, String className, long classPK,
-			Object model, ServiceContext serviceContext)
+			T model, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		Map<String, Serializable> workflowContext =
@@ -186,9 +189,9 @@ public class WorkflowHandlerRegistryUtil {
 			classPK, model, serviceContext, workflowContext);
 	}
 
-	public static void startWorkflowInstance(
+	public static <T> void startWorkflowInstance(
 			long companyId, long userId, String className, long classPK,
-			Object model, ServiceContext serviceContext,
+			T model, ServiceContext serviceContext,
 			Map<String, Serializable> workflowContext)
 		throws PortalException, SystemException {
 
@@ -197,24 +200,24 @@ public class WorkflowHandlerRegistryUtil {
 			classPK, model, serviceContext, workflowContext);
 	}
 
-	public static void unregister(List<WorkflowHandler> workflowHandlers) {
-		for (WorkflowHandler workflowHandler : workflowHandlers) {
+	public static void unregister(List<WorkflowHandler<?>> workflowHandlers) {
+		for (WorkflowHandler<?> workflowHandler : workflowHandlers) {
 			unregister(workflowHandler);
 		}
 	}
 
-	public static void unregister(WorkflowHandler workflowHandler) {
+	public static void unregister(WorkflowHandler<?> workflowHandler) {
 		getWorkflowHandlerRegistry().unregister(workflowHandler);
 	}
 
-	public static Object updateStatus(
+	public static <T> T updateStatus(
 			int status, Map<String, Serializable> workflowContext)
 		throws PortalException, SystemException {
 
 		String className = (String)workflowContext.get(
 			WorkflowConstants.CONTEXT_ENTRY_CLASS_NAME);
 
-		WorkflowHandler workflowHandler = getWorkflowHandler(className);
+		WorkflowHandler<T> workflowHandler = getWorkflowHandler(className);
 
 		if (workflowHandler != null) {
 			return workflowHandler.updateStatus(status, workflowContext);

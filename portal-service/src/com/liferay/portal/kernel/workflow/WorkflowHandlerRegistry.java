@@ -22,14 +22,14 @@ import java.util.List;
  */
 public interface WorkflowHandlerRegistry {
 
-	public List<WorkflowHandler> getScopeableWorkflowHandlers();
+	public List<WorkflowHandler<?>> getScopeableWorkflowHandlers();
 
-	public WorkflowHandler getWorkflowHandler(String className);
+	public WorkflowHandler<?> getWorkflowHandler(String className);
 
-	public List<WorkflowHandler> getWorkflowHandlers();
+	public List<WorkflowHandler<?>> getWorkflowHandlers();
 
-	public void register(WorkflowHandler workflowHandler);
+	public void register(WorkflowHandler<?> workflowHandler);
 
-	public void unregister(WorkflowHandler workflowHandler);
+	public void unregister(WorkflowHandler<?> workflowHandler);
 
 }

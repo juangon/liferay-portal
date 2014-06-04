@@ -108,7 +108,7 @@ public interface PortletBag extends Cloneable {
 
 	public WebDAVStorage getWebDAVStorageInstance();
 
-	public List<WorkflowHandler> getWorkflowHandlerInstances();
+	public List<WorkflowHandler<?>> getWorkflowHandlerInstances();
 
 	public Method getXmlRpcMethodInstance();
 

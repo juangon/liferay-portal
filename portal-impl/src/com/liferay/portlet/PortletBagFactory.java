@@ -250,14 +250,14 @@ public class PortletBagFactory {
 			TrashHandlerRegistryUtil.register(trashHandlerInstance);
 		}
 
-		List<WorkflowHandler> workflowHandlerInstances =
-			new ArrayList<WorkflowHandler>();
+		List<WorkflowHandler<?>> workflowHandlerInstances =
+			new ArrayList<WorkflowHandler<?>>();
 
 		for (String workflowHandlerClass :
 				portlet.getWorkflowHandlerClasses()) {
 
-			WorkflowHandler workflowHandlerInstance =
-				(WorkflowHandler)newInstance(
+			WorkflowHandler<?> workflowHandlerInstance =
+				(WorkflowHandler<?>)newInstance(
 					WorkflowHandler.class, workflowHandlerClass);
 
 			workflowHandlerInstances.add(workflowHandlerInstance);
@@ -1035,7 +1035,7 @@ public class PortletBagFactory {
 		}
 
 		return userNotificationHandlerInstances;
-	}
+	}	
 
 	protected void validate() {
 		if (_classLoader == null) {
