@@ -176,7 +176,16 @@ public class UnicodeProperties extends HashMap<String, String> {
 		return put(key, value);
 	}
 
+	/**
+	 * @deprecated As of 7.0.0, replaced by {@link #toString}
+	 */
+	@Deprecated
 	public String toSortedString() {
+		return toString();
+	}
+
+	@Override
+	public String toString() {
 		StringBuilder sb = new StringBuilder(_length);
 
 		Set<String> keys = new TreeSet<String>(keySet());
@@ -199,11 +208,6 @@ public class UnicodeProperties extends HashMap<String, String> {
 		}
 
 		return sb.toString();
-	}
-
-	@Override
-	public String toString() {
-		return toSortedString();
 	}
 
 	protected int getToStringLength() {
