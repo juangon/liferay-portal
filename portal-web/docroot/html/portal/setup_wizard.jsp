@@ -418,7 +418,7 @@
 								</div>
 							</p>
 
-							<aui:input cssClass="properties-text" label="" name="portal-ext" type="textarea" value="<%= unicodeProperties.toSortedString() %>" wrap="soft" />
+							<aui:input cssClass="properties-text" label="" name="portal-ext" type="textarea" value="<%= unicodeProperties.toString() %>" wrap="soft" />
 						</c:otherwise>
 					</c:choose>
 				</c:otherwise>
