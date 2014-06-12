@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import java.io.IOException;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -204,26 +203,7 @@ public class UnicodeProperties extends HashMap<String, String> {
 
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder(_length);
-
-		for (Map.Entry<String, String> entry : entrySet()) {
-			String value = entry.getValue();
-
-			if (Validator.isNull(value)) {
-				continue;
-			}
-
-			if (_safe) {
-				value = _encode(value);
-			}
-
-			sb.append(entry.getKey());
-			sb.append(StringPool.EQUAL);
-			sb.append(value);
-			sb.append(StringPool.NEW_LINE);
-		}
-
-		return sb.toString();
+		return toSortedString();
 	}
 
 	protected int getToStringLength() {
