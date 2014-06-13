@@ -92,7 +92,6 @@ public class LayoutRemoteStagingBackgroundTaskExecutor
 				new byte[PropsValues.STAGING_REMOTE_TRANSFER_BUFFER_SIZE];
 
 			int i = 0;
-
 			int j = 0;
 
 			String numberFormat = String.format(
@@ -101,8 +100,8 @@ public class LayoutRemoteStagingBackgroundTaskExecutor
 					(int)(file.length() / bytes.length)).length() + 1);
 
 			while ((i = fileInputStream.read(bytes)) >= 0) {
-				String fileName = file.getName() + String.format(
-					numberFormat, j++);
+				String fileName =
+					file.getName() + String.format(numberFormat, j++);
 
 				if (i < PropsValues.STAGING_REMOTE_TRANSFER_BUFFER_SIZE) {
 					byte[] tempBytes = new byte[i];
