@@ -341,6 +341,15 @@ public class PortletFileRepositoryImpl implements PortletFileRepository {
 				groupId, folderId, status, start, end, obc));
 	}
 
+	public List<FileEntry> getPortletFileEntries(
+		long groupId, long folderId, OrderByComparator obc) 
+		throws SystemException{
+
+		return toFileEntries(
+			DLFileEntryLocalServiceUtil.getFileEntries(
+				groupId, folderId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, obc));
+	}
+
 	@Override
 	public int getPortletFileEntriesCount(long groupId, long folderId)
 		throws SystemException {

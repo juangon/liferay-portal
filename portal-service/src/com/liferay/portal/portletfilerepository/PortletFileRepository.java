@@ -97,6 +97,10 @@ public interface PortletFileRepository {
 			OrderByComparator obc)
 		throws SystemException;
 
+	public List<FileEntry> getPortletFileEntries(
+			long groupId, long folderId, OrderByComparator obc)
+		throws SystemException;
+
 	public int getPortletFileEntriesCount(long groupId, long folderId)
 		throws SystemException;
 
