@@ -48,7 +48,9 @@ pageContext.setAttribute("portletURL", portletURL);
 <input name="<%= namespace %>keywords" size="30" title="<liferay-ui:message key="search" />" type="text" value="<%= HtmlUtil.escapeAttribute(keywords) %>" />
 
 <select name="<%= namespace %>groupId" title="<liferay-ui:message key="scope" /> ">
-	<option value="0" <%= (groupId == 0) ? "selected" : "" %>><liferay-ui:message key="everything" /></option>
+	<c:if test="<%= !group.isStagingGroup() %>">
+		<option value="0" <%= (groupId == 0) ? "selected" : "" %>><liferay-ui:message key="everything" /></option>
+	</c:if>
 	<option value="<%= group.getGroupId() %>" <%= (groupId != 0) ? "selected" : "" %>><liferay-ui:message key='<%= "this-" + (group.isOrganization() ? "organization" : "site") %>' /></option>
 </select>
 
