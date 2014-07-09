@@ -21,6 +21,8 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexable;
+import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -70,7 +72,6 @@ import com.liferay.portlet.trash.model.TrashEntry;
 
 import java.io.IOException;
 import java.io.InputStream;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -80,7 +81,6 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.portlet.PortletPreferences;
-
 import javax.servlet.http.HttpServletRequest;
 
 import net.htmlparser.jericho.Source;
@@ -99,6 +99,7 @@ import net.htmlparser.jericho.StartTag;
  */
 public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
+	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public BlogsEntry addEntry(
 			long userId, String title, String description, String content,
@@ -208,11 +209,9 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			serviceContext.setAttribute("trackbacks", null);
 		}
 
-		WorkflowHandlerRegistryUtil.startWorkflowInstance(
+		return WorkflowHandlerRegistryUtil.startWorkflowInstance(
 			user.getCompanyId(), groupId, userId, BlogsEntry.class.getName(),
 			entry.getEntryId(), entry, serviceContext);
-
-		return entry;
 	}
 
 	@Override
@@ -989,6 +988,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			AssetLinkConstants.TYPE_RELATED);
 	}
 
+	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public BlogsEntry updateEntry(
 			long userId, long entryId, String title, String description,
@@ -1093,12 +1093,10 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			serviceContext.setAttribute("trackbacks", null);
 		}
 
-		WorkflowHandlerRegistryUtil.startWorkflowInstance(
+		return WorkflowHandlerRegistryUtil.startWorkflowInstance(
 			user.getCompanyId(), entry.getGroupId(), userId,
 			BlogsEntry.class.getName(), entry.getEntryId(), entry,
 			serviceContext);
-
-		return entry;
 	}
 
 	@Override
