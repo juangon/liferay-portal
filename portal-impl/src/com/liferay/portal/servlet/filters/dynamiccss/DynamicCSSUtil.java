@@ -64,9 +64,15 @@ public class DynamicCSSUtil {
 
 	public static void init() {
 		try {
+			if (_initialized) {
+				return;
+			}
+
 			_rubyScript = StringUtil.read(
 				ClassLoaderUtil.getPortalClassLoader(),
 				"com/liferay/portal/servlet/filters/dynamiccss/main.rb");
+
+			_initialized = true;
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -440,6 +446,7 @@ public class DynamicCSSUtil {
 
 	private static Log _log = LogFactoryUtil.getLog(DynamicCSSUtil.class);
 
+	private static boolean _initialized;
 	private static Pattern _pluginThemePattern = Pattern.compile(
 		"\\/([^\\/]+)-theme\\/", Pattern.CASE_INSENSITIVE);
 	private static Pattern _portalThemePattern = Pattern.compile(
