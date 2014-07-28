@@ -149,8 +149,11 @@ public class CompanyImpl extends CompanyBaseImpl {
 
 	@Override
 	public String getPortalURL(long groupId) throws PortalException {
+		String domain = PortalUtil.getValidPortalDomain(
+				getCompanyId(), getVirtualHostname());
+
 		String portalURL = PortalUtil.getPortalURL(
-			getVirtualHostname(), Http.HTTP_PORT, false);
+			domain, Http.HTTP_PORT, false);
 
 		if (groupId <= 0) {
 			return portalURL;
