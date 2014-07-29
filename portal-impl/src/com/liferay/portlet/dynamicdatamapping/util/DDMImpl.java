@@ -398,7 +398,7 @@ public class DDMImpl implements DDM {
 		return existingFields;
 	}
 
-	protected int coundFieldRepetition(
+	protected int countFieldRepetition(
 		String[] fieldsDisplayValues, String fieldName) {
 
 		int count = 0;
@@ -715,7 +715,7 @@ public class DDMImpl implements DDM {
 
 		List<Serializable> mergedLocaleValues = new ArrayList<Serializable>();
 
-		int repetition = coundFieldRepetition(
+		int repetition = countFieldRepetition(
 			newFieldsDisplayValues, fieldName);
 
 		for (int i = 0; i < repetition; i++) {
