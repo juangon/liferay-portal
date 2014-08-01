@@ -4162,7 +4162,7 @@ public class PortalImpl implements Portal {
 	public String getPortalURL(Layout layout, ThemeDisplay themeDisplay)
 		throws PortalException {
 
-		String serverName = themeDisplay.getServerName();
+		String serverName = null;
 
 		if (layout == null) {
 			layout = themeDisplay.getLayout();
@@ -4189,6 +4189,11 @@ public class PortalImpl implements Portal {
 
 				serverName = virtualHostname;
 			}
+		}
+
+		if (serverName == null) {
+			serverName = getValidPortalDomain(
+				themeDisplay.getCompanyId(), themeDisplay.getServerName());
 		}
 
 		return getPortalURL(
@@ -5928,6 +5933,54 @@ public class PortalImpl implements Portal {
 		catch (PortalException pe) {
 			return StringPool.BLANK;
 		}
+	}
+
+	@Override
+	public String getValidPortalDomain(long companyId, String domain) {
+		for (String virtualHost : PropsValues.VIRTUAL_HOSTS_VALID_HOSTS) {
+			if (StringUtil.equalsIgnoreCase(domain, virtualHost) ||
+				StringUtil.wildcardMatches(
+					domain, virtualHost, CharPool.QUESTION, CharPool.STAR,
+					CharPool.PERCENT, false)) {
+
+				return domain;
+			}
+		}
+
+		if (StringUtil.equalsIgnoreCase(domain, PropsValues.WEB_SERVER_HOST)) {
+			return PropsValues.WEB_SERVER_HOST;
+		}
+
+		if (isValidVirtualHostname(domain)) {
+			return domain;
+		}
+
+		if (StringUtil.equalsIgnoreCase(domain, getCDNHostHttp(companyId))) {
+			return domain;
+		}
+
+		if (StringUtil.equalsIgnoreCase(domain, getCDNHostHttps(companyId))) {
+			return domain;
+		}
+
+		if (_log.isWarnEnabled()) {
+			_log.warn(
+				"Set the property \"" + PropsKeys.VIRTUAL_HOSTS_VALID_HOSTS +
+					"\" in portal.properties to allow \"" + domain +
+						"\" as a domain");
+		}
+
+		try {
+			Company company = CompanyLocalServiceUtil.getCompanyById(
+				getDefaultCompanyId());
+
+			return company.getVirtualHostname();
+		}
+		catch (Exception e) {
+			_log.error("Unable to load default portal instance", e);
+		}
+
+		return _LOCALHOST;
 	}
 
 	@Override
@@ -8014,7 +8067,9 @@ public class PortalImpl implements Portal {
 					 (group.getClassPK() != themeDisplay.getUserId()))) {
 
 					if (group.isControlPanel()) {
-						virtualHostname = themeDisplay.getServerName();
+						virtualHostname = getValidPortalDomain(
+							themeDisplay.getCompanyId(),
+							themeDisplay.getServerName());
 
 						if (Validator.isNull(virtualHostname) ||
 							StringUtil.equalsIgnoreCase(
@@ -8187,53 +8242,6 @@ public class PortalImpl implements Portal {
 		}
 
 		return sb.toString();
-	}
-
-	protected String getValidPortalDomain(long companyId, String domain) {
-		for (String virtualHost : PropsValues.VIRTUAL_HOSTS_VALID_HOSTS) {
-			if (StringUtil.equalsIgnoreCase(domain, virtualHost) ||
-				StringUtil.wildcardMatches(
-					domain, virtualHost, CharPool.QUESTION, CharPool.STAR,
-					CharPool.PERCENT, false)) {
-
-				return domain;
-			}
-		}
-
-		if (StringUtil.equalsIgnoreCase(domain, PropsValues.WEB_SERVER_HOST)) {
-			return PropsValues.WEB_SERVER_HOST;
-		}
-
-		if (isValidVirtualHostname(domain)) {
-			return domain;
-		}
-
-		if (StringUtil.equalsIgnoreCase(domain, getCDNHostHttp(companyId))) {
-			return domain;
-		}
-
-		if (StringUtil.equalsIgnoreCase(domain, getCDNHostHttps(companyId))) {
-			return domain;
-		}
-
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Set the property \"" + PropsKeys.VIRTUAL_HOSTS_VALID_HOSTS +
-					"\" in portal.properties to allow \"" + domain +
-						"\" as a domain");
-		}
-
-		try {
-			Company company = CompanyLocalServiceUtil.getCompanyById(
-				getDefaultCompanyId());
-
-			return company.getVirtualHostname();
-		}
-		catch (Exception e) {
-			_log.error("Unable to load default portal instance", e);
-		}
-
-		return _LOCALHOST;
 	}
 
 	protected boolean isAlwaysAllowDoAsUser(HttpServletRequest request)

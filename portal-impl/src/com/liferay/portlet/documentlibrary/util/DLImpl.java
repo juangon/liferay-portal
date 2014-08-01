@@ -1053,8 +1053,11 @@ public class DLImpl implements DL {
 			secure = true;
 		}
 
+		String portalDomain = PortalUtil.getValidPortalDomain(
+			themeDisplay.getCompanyId(), themeDisplay.getServerName());
+
 		String portalURL = PortalUtil.getPortalURL(
-			themeDisplay.getServerName(), themeDisplay.getServerPort(), secure);
+			portalDomain, themeDisplay.getServerPort(), secure);
 
 		webDavURL.append(portalURL);
 

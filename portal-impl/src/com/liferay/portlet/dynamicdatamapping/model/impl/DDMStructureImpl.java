@@ -320,8 +320,11 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 			secure = true;
 		}
 
+		String portalDomain = PortalUtil.getValidPortalDomain(
+			themeDisplay.getCompanyId(), themeDisplay.getServerName());
+
 		String portalURL = PortalUtil.getPortalURL(
-			themeDisplay.getServerName(), themeDisplay.getServerPort(), secure);
+			portalDomain, themeDisplay.getServerPort(), secure);
 
 		sb.append(portalURL);
 
