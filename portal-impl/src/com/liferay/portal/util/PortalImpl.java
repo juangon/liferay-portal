@@ -8071,7 +8071,6 @@ public class PortalImpl implements Portal {
 							themeDisplay.getCompanyId(),
 							themeDisplay.getServerName());
 
-
 						if (Validator.isNull(virtualHostname) ||
 							StringUtil.equalsIgnoreCase(
 								virtualHostname, _LOCALHOST)) {

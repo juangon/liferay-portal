@@ -125,7 +125,6 @@ public class DDMTemplateImpl extends DDMTemplateBaseImpl {
 		_smallImageType = smallImageType;
 	}
 
-
 	private static Log _log = LogFactoryUtil.getLog(DDMTemplateImpl.class);
 
 	private String _smallImageType;
