@@ -4162,7 +4162,7 @@ public class PortalImpl implements Portal {
 	public String getPortalURL(Layout layout, ThemeDisplay themeDisplay)
 		throws PortalException {
 
-		String serverName = themeDisplay.getServerName();
+		String serverName = null;
 
 		if (layout == null) {
 			layout = themeDisplay.getLayout();
@@ -4191,11 +4191,13 @@ public class PortalImpl implements Portal {
 			}
 		}
 
-		String domain = getValidPortalDomain(
-				themeDisplay.getCompanyId(), serverName);
+		if (serverName == null) {
+			serverName = getValidPortalDomain(
+				themeDisplay.getCompanyId(), themeDisplay.getServerName());
+		}
 
 		return getPortalURL(
-			domain, themeDisplay.getServerPort(), themeDisplay.isSecure());
+			serverName, themeDisplay.getServerPort(), themeDisplay.isSecure());
 	}
 
 	@Override
@@ -8065,7 +8067,10 @@ public class PortalImpl implements Portal {
 					 (group.getClassPK() != themeDisplay.getUserId()))) {
 
 					if (group.isControlPanel()) {
-						virtualHostname = themeDisplay.getServerName();
+						virtualHostname = getValidPortalDomain(
+							themeDisplay.getCompanyId(),
+							themeDisplay.getServerName());
+
 
 						if (Validator.isNull(virtualHostname) ||
 							StringUtil.equalsIgnoreCase(

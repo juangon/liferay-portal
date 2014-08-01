@@ -15,6 +15,8 @@
 package com.liferay.portlet.dynamicdatamapping.model.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -92,8 +94,11 @@ public class DDMTemplateImpl extends DDMTemplateBaseImpl {
 			secure = true;
 		}
 
+		String portalDomain = PortalUtil.getValidPortalDomain(
+			themeDisplay.getCompanyId(), themeDisplay.getServerName());
+
 		String portalURL = PortalUtil.getPortalURL(
-			themeDisplay.getServerName(), themeDisplay.getServerPort(), secure);
+			portalDomain, themeDisplay.getServerPort(), secure);
 
 		sb.append(portalURL);
 
@@ -119,6 +124,9 @@ public class DDMTemplateImpl extends DDMTemplateBaseImpl {
 	public void setSmallImageType(String smallImageType) {
 		_smallImageType = smallImageType;
 	}
+
+
+	private static Log _log = LogFactoryUtil.getLog(DDMTemplateImpl.class);
 
 	private String _smallImageType;
 
