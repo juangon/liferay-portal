@@ -1684,13 +1684,10 @@ public class PortalImpl implements Portal {
 		Company company = CompanyLocalServiceUtil.getCompany(
 			group.getCompanyId());
 
-		String domain = getValidPortalDomain(
-				company.getCompanyId(), 
-				company.getVirtualHostname());
 		sb.append(
 			getPortalURL(
-				domain, getPortalServerPort(false), false));
-
+				company.getVirtualHostname(), getPortalServerPort(false),
+				false));
 		sb.append(getPathFriendlyURLPrivateGroup());
 		sb.append(GroupConstants.CONTROL_PANEL_FRIENDLY_URL);
 		sb.append(PropsValues.CONTROL_PANEL_LAYOUT_FRIENDLY_URL);
@@ -3179,11 +3176,8 @@ public class PortalImpl implements Portal {
 			virtualHostname = company.getVirtualHostname();
 		}
 
-		String domain = getValidPortalDomain(
-				layout.getCompanyId(), virtualHostname);
-
 		String portalURL = getPortalURL(
-			domain, getPortalServerPort(secure), secure);
+			virtualHostname, getPortalServerPort(secure), secure);
 
 		sb.append(portalURL);
 
@@ -3239,11 +3233,9 @@ public class PortalImpl implements Portal {
 		if (Validator.isNotNull(virtualHostname) &&
 			!StringUtil.equalsIgnoreCase(virtualHostname, _LOCALHOST)) {
 
-			String domain = getValidPortalDomain(
-					themeDisplay.getCompanyId(), virtualHostname);
-
 			String portalURL = getPortalURL(
-				domain, themeDisplay.getServerPort(), themeDisplay.isSecure());
+				virtualHostname, themeDisplay.getServerPort(),
+				themeDisplay.isSecure());
 
 			// Use the layout set's virtual host setting only if the layout set
 			// is already used for the current request
@@ -8047,11 +8039,8 @@ public class PortalImpl implements Portal {
 				virtualHostname = getCanonicalDomain(
 					virtualHostname, portalDomain);
 
-				String domain = getValidPortalDomain(
-						group.getCompanyId(), virtualHostname);
-
 				virtualHostname = getPortalURL(
-					domain, themeDisplay.getServerPort(),
+					virtualHostname, themeDisplay.getServerPort(),
 					themeDisplay.isSecure());
 
 				String path = StringPool.BLANK;
