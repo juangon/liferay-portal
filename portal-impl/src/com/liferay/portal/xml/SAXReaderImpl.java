@@ -17,6 +17,10 @@ package com.liferay.portal.xml;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.security.pacl.DoPrivileged;
+import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.PropertiesUtil;
+import com.liferay.portal.kernel.util.PropsUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.xml.Attribute;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
@@ -27,6 +31,7 @@ import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.ProcessingInstruction;
 import com.liferay.portal.kernel.xml.QName;
 import com.liferay.portal.kernel.xml.SAXReader;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.xml.Text;
 import com.liferay.portal.kernel.xml.XMLSchema;
 import com.liferay.portal.kernel.xml.XPath;
@@ -38,17 +43,16 @@ import com.liferay.util.xml.XMLSafeReader;
 import java.io.File;
 import java.io.InputStream;
 import java.io.Reader;
-
 import java.net.MalformedURLException;
 import java.net.URL;
-
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import org.apache.xerces.parsers.SAXParser;
-
 import org.dom4j.DocumentFactory;
 
 /**
@@ -393,6 +397,90 @@ public class SAXReaderImpl implements SAXReader {
 		}
 	}
 
+	@Override
+	public Document read(Properties props) throws DocumentException {
+			return read(props, null);	
+	}
+	
+	@Override
+	public Document read(Properties props, String prefix) throws DocumentException {
+		Document document = createDocument();
+		
+		Properties properties = props;
+		
+		if (prefix != null) {
+				properties = PropertiesUtil.getProperties(properties, prefix, true);
+		}
+
+		Iterator<Object> keyIterator = properties.keySet().iterator(); 
+		
+		List<String> processedKeys = new ArrayList<String>();
+		
+		while (keyIterator.hasNext()) {
+			String key = (String) keyIterator.next();
+			
+			if (processedKeys.contains(key)) {
+				continue;
+			}
+			
+			String nextPrefix = key;
+			String elementName = key;
+					
+			int posFirstPeriod = 0;
+			
+			if (key.startsWith(StringPool.PERIOD)) {								
+				posFirstPeriod = 1;						
+			}	
+						 
+			int pos = nextPrefix.indexOf(CharPool.PERIOD, posFirstPeriod);
+						
+			if (pos == -1) {
+				pos = nextPrefix.length() -1;
+			}
+			
+			nextPrefix = nextPrefix.substring(0, pos);
+			elementName = nextPrefix.substring(posFirstPeriod,pos);
+						
+			
+			Properties portletSubProperties = PropertiesUtil.
+							getProperties(properties, nextPrefix,
+							false);
+			
+			Document tempDocument = null;
+			
+			if (portletSubProperties.size()>0) {
+				
+				Properties portletSubPropertiesArray = PropertiesUtil.
+								getProperties(portletSubProperties, nextPrefix+".0",
+								true);
+
+				if (portletSubPropertiesArray.size()>0) {
+					for (int i=0; i< portletSubPropertiesArray.size(); i++)  {
+						String arrayKey = nextPrefix + "."+ i;
+						tempDocument = read(portletSubProperties, arrayKey);
+						document.add(tempDocument.getRootElement());
+						processedKeys.add(arrayKey);
+					}
+				}else{
+					tempDocument = read(portletSubProperties);
+					document.add(tempDocument.getRootElement());					
+				}				
+			}
+			else {			
+				String value = properties.getProperty(key);				
+							
+				Element element = createElement(elementName);
+				element.addText(value);
+				
+				document.add(element);
+			}
+			
+			processedKeys.add(key);
+		}
+		
+		return document;
+	}
+	
 	@Override
 	public Document read(Reader reader) throws DocumentException {
 		return read(reader, false);

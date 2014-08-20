@@ -21,12 +21,11 @@ import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermissio
 import java.io.File;
 import java.io.InputStream;
 import java.io.Reader;
-
 import java.net.MalformedURLException;
 import java.net.URL;
-
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 /**
  * @author Brian Wing Shun Chan
@@ -142,6 +141,16 @@ public class SAXReaderUtil {
 		throws DocumentException {
 
 		return getSAXReader().read(is, validate);
+	}
+
+	public static Document read(Properties props) throws DocumentException {
+			return getSAXReader().read(props);
+	}
+
+	public static Document read(Properties props, String prefix) 
+		throws DocumentException {
+
+		return getSAXReader().read(props, prefix);
 	}
 
 	public static Document read(Reader reader) throws DocumentException {

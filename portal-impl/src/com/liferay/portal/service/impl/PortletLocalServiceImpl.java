@@ -40,10 +40,12 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ContextPathUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.QName;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -88,7 +90,6 @@ import com.liferay.util.ContentUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 import java.net.URL;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -103,7 +104,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.portlet.PortletMode;
 import javax.portlet.PreferencesValidator;
 import javax.portlet.WindowState;
-
 import javax.servlet.ServletContext;
 
 /**
@@ -1852,6 +1852,9 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		String portletId = portletName;
 
+		_readPortletProperties(portletName, portletElement);
+		//portletElement = _readPortletProperties(portletName, portletElement); 
+						
 		if (Validator.isNotNull(servletContextName)) {
 			portletId = portletId.concat(PortletConstants.WAR_SEPARATOR).concat(
 				servletContextName);
@@ -2319,6 +2322,43 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		}
 
 		return portletIds;
+	}
+
+	private Element _readPortletProperties(String portletName, Element portletElement) {
+		Element newElement = portletElement.createCopy();
+		
+		Properties portletProperties = PropsUtil.
+						getProperties("liferay.portlet.portal." + portletName +".",
+						true);
+
+		try {
+			Document doc = SAXReaderUtil.read(portletProperties);
+		}
+		catch (DocumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+						
+		/*for (Object propKey: portletProperties.keySet()) {
+			String key = (String) propKey;
+			String value = portletProperties.getProperty(key);
+			
+			if (key.equals("portlet-name")) {
+				continue;
+			}
+			
+			Element currentElement = portletElement.element(key); 
+			if (currentElement != null) {
+				
+			}
+			else {
+				Element newElem = SAXReaderUtil.createElement(key);
+				newElem.addText(value);
+				portletElement.add(newElement);
+			}
+		}*/
+		
+		return newElement;
 	}
 
 	private Set<String> _readWebXML(String xml) throws Exception {

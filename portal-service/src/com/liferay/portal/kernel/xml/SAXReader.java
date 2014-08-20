@@ -19,12 +19,11 @@ import aQute.bnd.annotation.ProviderType;
 import java.io.File;
 import java.io.InputStream;
 import java.io.Reader;
-
 import java.net.MalformedURLException;
 import java.net.URL;
-
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 /**
  * @author Brian Wing Shun Chan
@@ -95,6 +94,11 @@ public interface SAXReader {
 	public Document read(String xml, XMLSchema xmlSchema)
 		throws DocumentException;
 
+	public Document read(Properties props) throws DocumentException;
+
+	public Document read(Properties props, String prefix)
+		throws DocumentException;
+
 	public Document read(URL url) throws DocumentException;
 
 	public Document read(URL url, boolean validate) throws DocumentException;
@@ -113,6 +117,5 @@ public interface SAXReader {
 	public void sort(List<Node> nodes, String xPathExpression);
 
 	public void sort(
-		List<Node> nodes, String xPathExpression, boolean distinct);
-
+		List<Node> nodes, String xPathExpression, boolean distinct);	
 }
