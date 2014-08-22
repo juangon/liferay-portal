@@ -355,11 +355,12 @@ public abstract class DLPreviewableProcessor implements DLProcessor {
 	protected void deletePreviews(
 		long companyId, long groupId, long fileEntryId, long fileVersionId) {
 
-		String dirName = getPreviewFilePath(
+		String previewFilePath = getPreviewFilePath(
 			groupId, fileEntryId, fileVersionId, null);
 
 		try {
-			DLStoreUtil.deleteDirectory(companyId, REPOSITORY_ID, dirName);
+			DLStoreUtil.deleteDirectory(
+				companyId, REPOSITORY_ID, previewFilePath);
 		}
 		catch (Exception e) {
 		}
