@@ -426,15 +426,15 @@ public class ActionUtil {
 	protected static String getElementInstanceId(
 		String content, String fieldName, int index) throws Exception {
 
-		String xpathExpression =
+		Document document = SAXReaderUtil.read(content);
+
+		String xPathExpression =
 			"//dynamic-element[@name = " +
 				HtmlUtil.escapeXPathAttribute(fieldName) + "]";
 
-		XPath xpath = SAXReaderUtil.createXPath(xpathExpression);
+		XPath xPath = SAXReaderUtil.createXPath(xPathExpression);
 
-		Document document = SAXReaderUtil.read(content);
-
-		List<Node> nodes = xpath.selectNodes(document);
+		List<Node> nodes = xPath.selectNodes(document);
 
 		if (index > nodes.size()) {
 			return StringPool.BLANK;
