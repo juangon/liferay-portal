@@ -424,7 +424,8 @@ public class ActionUtil {
 	}
 
 	protected static String getElementInstanceId(
-		String content, String fieldName, int index) throws Exception {
+			String content, String fieldName, int index)
+		throws Exception {
 
 		Document document = SAXReaderUtil.read(content);
 
