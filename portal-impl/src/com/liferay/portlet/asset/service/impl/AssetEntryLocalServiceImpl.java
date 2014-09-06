@@ -428,7 +428,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		throws SystemException {
 
 		return search(
-			companyId, groupIds, userId, className, classTypeId, null, null,
+			companyId, groupIds, userId, className, null, null,
 			null, null, null, status, false, start, end);
 	}
 
@@ -492,11 +492,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			searchContext.setQueryConfig(queryConfig);
 
 			searchContext.setStart(start);
-			searchContext.setUserId(userId);
-
-			Indexer searcher = AssetSearcher.getInstance();
-
-			AssetSearcher assetSearcher = (AssetSearcher)searcher;
+			searchContext.setUserId(userId);			
 
 			assetSearcher.setAssetEntryQuery(assetEntryQuery);
 
@@ -877,7 +873,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 
 	protected long[] getClassNameIds(long companyId, String className) {
 		if (Validator.isNotNull(className)) {
-			return new long[] {classNameLocalService.getClassNameId(className)};
+			return new long[] {PortalUtil.getClassNameId(className)};
 		}
 
 		List<AssetRendererFactory> rendererFactories =
@@ -889,7 +885,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		for (int i = 0; i < rendererFactories.size(); i++) {
 			AssetRendererFactory rendererFactory = rendererFactories.get(i);
 
-			classNameIds[i] = classNameLocalService.getClassNameId(
+			classNameIds[i] = PortalUtil.getClassNameId(
 				rendererFactory.getClassName());
 		}
 
