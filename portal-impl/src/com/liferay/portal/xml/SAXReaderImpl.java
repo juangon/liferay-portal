@@ -17,6 +17,10 @@ package com.liferay.portal.xml;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.security.pacl.DoPrivileged;
+import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.PropertiesUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Attribute;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
@@ -44,8 +48,10 @@ import java.net.URL;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import org.apache.xerces.parsers.SAXParser;
 
@@ -330,6 +336,70 @@ public class SAXReaderImpl implements SAXReader {
 	}
 
 	@Override
+	public Element mergeElement(
+		Element originalElement, Element changedElement) {
+
+		Element mergedElement = originalElement.createCopy();
+
+		if (mergedElement.getName().equals(changedElement.getName())) {
+			mergedElement.setText(changedElement.getText());
+		}
+
+		List<Element> sourceElements = mergedElement.elements();
+
+		for (Element sourceElement : sourceElements) {
+			List<Element> sourceElementsName = mergedElement.elements(
+							sourceElement.getName());
+
+			List<Element> destElementsName = changedElement.elements(
+							sourceElement.getName());
+
+			if (sourceElementsName.size()>1 && destElementsName.size() >0) {
+				for (Element srcEL : sourceElementsName) {
+					mergedElement.remove(srcEL);
+				}
+			}
+		}
+
+		sourceElements = mergedElement.elements();
+
+		for (Element sourceElement : sourceElements) {
+			Element destElementName = changedElement.element(
+							sourceElement.getName());
+
+			if (destElementName != null) {
+				Element tempMergedElement = mergeElement(
+					sourceElement, destElementName);
+
+				mergedElement.remove(sourceElement);
+
+				if (!_elementEmpty(tempMergedElement)) {
+					mergedElement.add(tempMergedElement.detach());
+				}
+			}
+		}
+
+		List<Element> changedElements = changedElement.elements();
+
+		for (Element tmpItemEl : changedElements) {
+			Element sourceEl = mergedElement.element(tmpItemEl.getName());
+
+			if (sourceEl == null) {
+				List<Element> arrayElements = changedElement.elements(
+								tmpItemEl.getName());
+
+				for (Element arrayElement : arrayElements) {
+					if (!_elementEmpty(arrayElement)) {
+						mergedElement.add(arrayElement.detach());
+					}
+				}
+			}
+		}
+
+		return mergedElement;
+	}
+
+	@Override
 	public Document read(File file) throws DocumentException {
 		return read(file, false);
 	}
@@ -391,6 +461,20 @@ public class SAXReaderImpl implements SAXReader {
 				ClassLoaderUtil.setContextClassLoader(contextClassLoader);
 			}
 		}
+	}
+
+	@Override
+	public Document read(Properties props) throws DocumentException {
+		return read(props, null);
+	}
+
+	@Override
+	public Document read(Properties props, String prefix)
+		throws DocumentException {
+
+		List<String> processedKeys = new ArrayList<String>();
+
+		return _read (props, prefix, processedKeys);
 	}
 
 	@Override
@@ -611,6 +695,165 @@ public class SAXReaderImpl implements SAXReader {
 		}
 
 		return saxReader;
+	}
+
+	private void _copyInRoot(
+		String elementName, Document source, Document destination,
+		boolean copyNoRootElements) {
+
+		Element sourceRootElement = source.getRootElement();
+		List<Element> elements = sourceRootElement.elements();
+
+		Element destinationRootElement = destination.getRootElement();
+
+		if ((elements.size() > 0) || copyNoRootElements) {
+			Element subElement = destinationRootElement.addElement(elementName);
+
+			for (Element el : elements) {
+				subElement.add(el.detach());
+			}
+
+			subElement.setText(sourceRootElement.getText());
+		}
+	}
+
+	private boolean _elementEmpty(Element element) {
+		int sizeElements = element.elements().size();
+		String text = element.getText();
+
+		if (((sizeElements == 0) && Validator.isNotNull(text)) ||
+			(sizeElements >0)) {
+
+			return false;
+		}
+
+		return true;
+	}
+
+	private Document _read(
+		Properties props, String prefix, List<String> processedKeys) {
+
+		return _read (props, prefix, processedKeys, false);
+	}
+
+	private Document _read(
+		Properties props, String prefix, List<String> processedKeys,
+		boolean allowEmptyElement) {
+
+		Document document = createDocument();
+
+		document.addElement("root");
+
+		Properties properties = props;
+
+		if (prefix != null) {
+			properties = PropertiesUtil.getProperties(
+				properties, prefix, false);
+		}
+
+		Iterator<Object> keyIterator = properties.keySet().iterator();
+
+		while (keyIterator.hasNext()) {
+			String key = (String)keyIterator.next();
+
+			if (processedKeys.contains(key)) {
+				continue;
+			}
+
+			String nextPrefix = key;
+
+			int posPrefix = 0;
+
+			if (prefix != null) {
+				posPrefix = prefix.length();
+			}
+
+			String keyNoPrefix = nextPrefix.substring(posPrefix);
+
+			if (keyNoPrefix.startsWith(StringPool.PERIOD)) {
+				posPrefix += 1;
+			}
+
+			keyNoPrefix = nextPrefix.substring(posPrefix);
+
+			int posFirstPeriod = keyNoPrefix.indexOf(CharPool.PERIOD);
+
+			if (posFirstPeriod == -1) {
+				posFirstPeriod = keyNoPrefix.length();
+			}
+
+			String elementName = keyNoPrefix.substring(0, posFirstPeriod);
+
+			if (prefix != null) {
+				posFirstPeriod = posFirstPeriod + posPrefix;
+			}
+
+			if (posFirstPeriod == -1) {
+				posFirstPeriod = nextPrefix.length();
+			}
+
+			nextPrefix = nextPrefix.substring(0, posFirstPeriod);
+
+			Properties portletSubProperties =
+							PropertiesUtil.getProperties(
+								properties, nextPrefix, false);
+
+			posFirstPeriod = keyNoPrefix.indexOf(CharPool.PERIOD);
+			int posLastPeriod = keyNoPrefix.lastIndexOf(CharPool.PERIOD);
+
+			if (posFirstPeriod !=-1 && (posFirstPeriod <= posLastPeriod) &&
+				(portletSubProperties.size() > 0)) {
+
+				Document tempDocument = null;
+
+				Properties portletSubPropertiesArray =
+								PropertiesUtil.getProperties(
+									portletSubProperties, nextPrefix+".0",
+									false);
+
+				if (portletSubPropertiesArray.size()>0) {
+					for (int i = 0; i< portletSubProperties.size(); i++) {
+						String arrayKey = nextPrefix + "."+ i;
+						Properties portletSubPropertiesItem =
+										PropertiesUtil.getProperties(
+											portletSubProperties, arrayKey,
+											false);
+
+						if (portletSubPropertiesItem.size() > 0) {
+							tempDocument = _read(
+								portletSubProperties, arrayKey, processedKeys,
+								true);
+							_copyInRoot(
+								elementName, tempDocument, document, true);
+						}
+					}
+				}
+
+				tempDocument = _read(
+					portletSubProperties, nextPrefix, processedKeys);
+
+				_copyInRoot(elementName, tempDocument, document, false);
+			}
+			else {
+				String value = properties.getProperty(key);
+
+				Element element = null;
+
+				if (Validator.isNotNull(elementName)) {
+					element = createElement(elementName);
+					element.setText(value);
+					document.getRootElement().add(element.detach());
+				}
+				else if (allowEmptyElement) {
+					element = document.getRootElement();
+					element.setText(value);
+				}
+			}
+
+			processedKeys.add(key);
+		}
+
+		return document;
 	}
 
 	private static final String _FEATURES_DYNAMIC =
