@@ -25,6 +25,7 @@ import java.net.URL;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 /**
  * @author Brian Wing Shun Chan
@@ -74,6 +75,8 @@ public interface SAXReader {
 	public XPath createXPath(
 		String xPathExpression, String prefix, String namespace);
 
+	public Element mergeElement(Element source, Element newElement);
+
 	public Document read(File file) throws DocumentException;
 
 	public Document read(File file, boolean validate) throws DocumentException;
@@ -81,6 +84,11 @@ public interface SAXReader {
 	public Document read(InputStream is) throws DocumentException;
 
 	public Document read(InputStream is, boolean validate)
+		throws DocumentException;
+
+	public Document read(Properties props) throws DocumentException;
+
+	public Document read(Properties props, String prefix)
 		throws DocumentException;
 
 	public Document read(Reader reader) throws DocumentException;
