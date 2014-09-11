@@ -40,10 +40,12 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ContextPathUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.QName;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -88,7 +90,6 @@ import com.liferay.util.ContentUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 import java.net.URL;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -103,7 +104,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.portlet.PortletMode;
 import javax.portlet.PreferencesValidator;
 import javax.portlet.WindowState;
-
 import javax.servlet.ServletContext;
 
 /**
@@ -1190,9 +1190,11 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	private void _readLiferayPortletXML(
 		String servletContextName, Map<String, Portlet> portletsPool,
 		Set<String> liferayPortletIds, Map<String, String> roleMappers,
-		Element portletElement) {
+		Element portletElement) throws DocumentException {
 
 		String portletId = portletElement.elementText("portlet-name");
+
+		portletElement = _readPortletProperties(portletId, portletElement);
 
 		if (Validator.isNotNull(servletContextName)) {
 			portletId = portletId.concat(PortletConstants.WAR_SEPARATOR).concat(
@@ -1833,6 +1835,27 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		}
 
 		return liferayPortletIds;
+	}
+
+	private Element _readPortletProperties(
+			String portletName, Element portletElement)
+		throws DocumentException {
+
+		Element newElement = portletElement;
+
+		Properties portletProperties =
+						PropsUtil.getProperties(
+							"liferay.portlet.portal." + portletName +".", 
+							true);
+
+		if (portletProperties.size()>0) {
+			Document doc = SAXReaderUtil.read(portletProperties);
+
+			newElement = SAXReaderUtil.mergeElement(
+				portletElement, doc.getRootElement());
+		}
+
+		return newElement;
 	}
 
 	private Set<String> _readPortletXML(
