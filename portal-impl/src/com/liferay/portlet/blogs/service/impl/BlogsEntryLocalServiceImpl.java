@@ -72,6 +72,7 @@ import com.liferay.portlet.trash.model.TrashEntry;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -209,9 +210,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			serviceContext.setAttribute("trackbacks", null);
 		}
 
+		Map<String, Serializable> workflowContext = new HashMap<String, Serializable>();
+		
 		return WorkflowHandlerRegistryUtil.startWorkflowInstance(
 			user.getCompanyId(), groupId, userId, BlogsEntry.class.getName(),
-			entry.getEntryId(), entry, serviceContext, null);
+			entry.getEntryId(), entry, serviceContext, workflowContext);
 	}
 
 	@Override
@@ -1100,10 +1103,12 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			serviceContext.setAttribute("trackbacks", null);
 		}
 
+		Map<String, Serializable> workflowContext = new HashMap<String, Serializable>();
+		
 		return WorkflowHandlerRegistryUtil.startWorkflowInstance(
 			user.getCompanyId(), entry.getGroupId(), userId,
 			BlogsEntry.class.getName(), entry.getEntryId(), entry,
-			serviceContext, null);
+			serviceContext, workflowContext);
 	}
 
 	@Override
