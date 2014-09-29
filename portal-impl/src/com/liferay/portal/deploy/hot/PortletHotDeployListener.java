@@ -300,7 +300,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			TrashHandlerRegistryUtil.unregister(trashHandlers);
 		}
 
-		List<WorkflowHandler> workflowHandlers =
+		List<WorkflowHandler<?>> workflowHandlers =
 			portlet.getWorkflowHandlerInstances();
 
 		if (workflowHandlers != null) {
