@@ -806,6 +806,20 @@ public class ArrayUtil {
 		return true;
 	}
 
+	public static boolean containsStartsWith(String[] array, String value) {
+		if (isEmpty(array) || (value == null)) {
+			return false;
+		}
+
+		for (int i = 0; i < array.length; i++) {
+			if (value.startsWith(array[i])) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	public static <T> int count(T[] array, PredicateFilter<T> predicateFilter) {
 		if (isEmpty(array)) {
 			return 0;
