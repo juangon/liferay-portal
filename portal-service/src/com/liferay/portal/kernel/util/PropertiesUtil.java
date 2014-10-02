@@ -77,7 +77,21 @@ public class PropertiesUtil {
 	public static Properties getProperties(
 		Properties properties, String prefix, boolean removePrefix) {
 
-		Properties newProperties = new Properties();
+		return getProperties(properties, prefix, removePrefix, false);
+	}
+
+	public static Properties getProperties(
+		Properties properties, String prefix, boolean removePrefix,
+		boolean ordered) {
+
+		Properties newProperties = null;
+
+		if (ordered) {
+			newProperties = new OrderedProperties();
+		}
+		else {
+			newProperties = new Properties();
+		}
 
 		Enumeration<String> enu =
 			(Enumeration<String>)properties.propertyNames();

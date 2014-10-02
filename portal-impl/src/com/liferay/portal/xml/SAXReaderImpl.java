@@ -17,6 +17,7 @@ package com.liferay.portal.xml;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.security.pacl.DoPrivileged;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -47,8 +48,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -748,15 +749,18 @@ public class SAXReaderImpl implements SAXReader {
 
 		if (prefix != null) {
 			properties = PropertiesUtil.getProperties(
-				properties, prefix, false);
+				properties, prefix, false, true);
 		}
 
-		Iterator<Object> keyIterator = properties.keySet().iterator();
+		Enumeration<String> keyEnu =
+						(Enumeration<String>)properties.propertyNames();
 
-		while (keyIterator.hasNext()) {
-			String key = (String)keyIterator.next();
+		while (keyEnu.hasMoreElements()) {
+			String key = (String)keyEnu.nextElement();
 
-			if (processedKeys.contains(key)) {
+			if (ArrayUtil.containsStartsWith(
+					ArrayUtil.toStringArray(processedKeys), key)) {
+
 				continue;
 			}
 
@@ -796,7 +800,7 @@ public class SAXReaderImpl implements SAXReader {
 
 			Properties portletSubProperties =
 							PropertiesUtil.getProperties(
-								properties, nextPrefix, false);
+								properties, nextPrefix, false, true);
 
 			posFirstPeriod = keyNoPrefix.indexOf(CharPool.PERIOD);
 			int posLastPeriod = keyNoPrefix.lastIndexOf(CharPool.PERIOD);
@@ -814,6 +818,19 @@ public class SAXReaderImpl implements SAXReader {
 				if (portletSubPropertiesArray.size()>0) {
 					for (int i = 0; i< portletSubProperties.size(); i++) {
 						String arrayKey = nextPrefix + "."+ i;
+						processedKeys.add(arrayKey);
+					}
+				}
+
+				tempDocument = _read(
+					portletSubProperties, nextPrefix, processedKeys);
+
+				_copyInRoot(elementName, tempDocument, document, false);
+
+				if (portletSubPropertiesArray.size()>0) {
+					for (int i = 0; i< portletSubProperties.size(); i++) {
+						String arrayKey = nextPrefix + "."+ i;
+						processedKeys.remove(arrayKey);
 						Properties portletSubPropertiesItem =
 										PropertiesUtil.getProperties(
 											portletSubProperties, arrayKey,
@@ -828,11 +845,6 @@ public class SAXReaderImpl implements SAXReader {
 						}
 					}
 				}
-
-				tempDocument = _read(
-					portletSubProperties, nextPrefix, processedKeys);
-
-				_copyInRoot(elementName, tempDocument, document, false);
 			}
 			else {
 				String value = properties.getProperty(key);
