@@ -338,39 +338,39 @@ public class SAXReaderImpl implements SAXReader {
 
 	@Override
 	public Element mergeElement(
-		Element originalElement, Element changedElement) {
+		Element firstElement, Element secondElement) {
 
-		Element mergedElement = originalElement.createCopy();
+		Element mergedElement = firstElement.createCopy();
 
-		if (mergedElement.getName().equals(changedElement.getName())) {
-			mergedElement.setText(changedElement.getText());
+		if (mergedElement.getName().equals(secondElement.getName())) {
+			mergedElement.setText(secondElement.getText());
 		}
 
-		List<Element> sourceElements = mergedElement.elements();
+		List<Element> firstElements = mergedElement.elements();
 
-		for (Element sourceElement : sourceElements) {
-			List<Element> sourceElementsName = mergedElement.elements(
-							sourceElement.getName());
+		for (Element firstEl : firstElements) {
+			List<Element> firstElementName = mergedElement.elements(
+							firstEl.getName());
 
-			List<Element> destElementsName = changedElement.elements(
-							sourceElement.getName());
+			List<Element> secondElementName = secondElement.elements(
+							firstEl.getName());
 
-			if (sourceElementsName.size()>1 && destElementsName.size() >0) {
-				for (Element srcEL : sourceElementsName) {
+			if (firstElementName.size()>1 && secondElementName.size() >0) {
+				for (Element srcEL : firstElementName) {
 					mergedElement.remove(srcEL);
 				}
 			}
 		}
 
-		sourceElements = mergedElement.elements();
+		firstElements = mergedElement.elements();
 
-		for (Element sourceElement : sourceElements) {
-			Element destElementName = changedElement.element(
+		for (Element sourceElement : firstElements) {
+			Element secondElementName = secondElement.element(
 							sourceElement.getName());
 
-			if (destElementName != null) {
+			if (secondElementName != null) {
 				Element tempMergedElement = mergeElement(
-					sourceElement, destElementName);
+					sourceElement, secondElementName);
 
 				mergedElement.remove(sourceElement);
 
@@ -380,14 +380,14 @@ public class SAXReaderImpl implements SAXReader {
 			}
 		}
 
-		List<Element> changedElements = changedElement.elements();
+		List<Element> secondElements = secondElement.elements();
 
-		for (Element tmpItemEl : changedElements) {
-			Element sourceEl = mergedElement.element(tmpItemEl.getName());
+		for (Element secondEl : secondElements) {
+			Element firstElementName = mergedElement.element(secondEl.getName());
 
-			if (sourceEl == null) {
-				List<Element> arrayElements = changedElement.elements(
-								tmpItemEl.getName());
+			if (firstElementName == null) {
+				List<Element> arrayElements = secondElement.elements(
+								secondEl.getName());
 
 				for (Element arrayElement : arrayElements) {
 					if (!_elementEmpty(arrayElement)) {
@@ -763,22 +763,20 @@ public class SAXReaderImpl implements SAXReader {
 
 				continue;
 			}
-
-			String nextPrefix = key;
-
+			
 			int posPrefix = 0;
 
 			if (prefix != null) {
 				posPrefix = prefix.length();
 			}
 
-			String keyNoPrefix = nextPrefix.substring(posPrefix);
+			String keyNoPrefix = key.substring(posPrefix);
 
 			if (keyNoPrefix.startsWith(StringPool.PERIOD)) {
 				posPrefix += 1;
 			}
 
-			keyNoPrefix = nextPrefix.substring(posPrefix);
+			keyNoPrefix = key.substring(posPrefix);
 
 			int posFirstPeriod = keyNoPrefix.indexOf(CharPool.PERIOD);
 
@@ -793,10 +791,10 @@ public class SAXReaderImpl implements SAXReader {
 			}
 
 			if (posFirstPeriod == -1) {
-				posFirstPeriod = nextPrefix.length();
+				posFirstPeriod = key.length();
 			}
 
-			nextPrefix = nextPrefix.substring(0, posFirstPeriod);
+			String nextPrefix = key.substring(0, posFirstPeriod);
 
 			Properties portletSubProperties =
 							PropertiesUtil.getProperties(

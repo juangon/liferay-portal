@@ -175,14 +175,14 @@ public class SAXReaderTest {
 
 	protected Properties getMergeProperties() throws IOException {
 		Properties props = new OrderedProperties();
-		props.load(this.getClass().getResourceAsStream("xmlMerge.properties"));
+		props.load(this.getClass().getResourceAsStream("dependencies/xmlMerge.properties"));
 
 		return props;
 	}
 
 	protected Properties getProperties() throws IOException {
 		Properties props = new OrderedProperties();
-		props.load(this.getClass().getResourceAsStream("xml.properties"));
+		props.load(this.getClass().getResourceAsStream("dependencies/xml.properties"));
 
 		return props;
 	}
