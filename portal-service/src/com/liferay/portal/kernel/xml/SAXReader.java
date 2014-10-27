@@ -75,7 +75,7 @@ public interface SAXReader {
 	public XPath createXPath(
 		String xPathExpression, String prefix, String namespace);
 
-	public Element mergeElement(Element source, Element newElement);
+	public Element mergeElement(Element firstElement, Element secondElement);
 
 	public Document read(File file) throws DocumentException;
 
