@@ -60,7 +60,7 @@
 
 	<#assign fieldRawValue = paramUtil.getString(request, "${namespacedFieldName}", fieldRawValue)>
 
-	<#if (fieldRawValue?? && fieldRawValue != "")>
+	<#if (validator.isNotNull(fieldRawValue))>
 		<#assign fieldLayoutJSONObject = jsonFactoryUtil.createJSONObject(fieldRawValue)>
 
 		<#if (fieldLayoutJSONObject.getLong("groupId") > 0)>
