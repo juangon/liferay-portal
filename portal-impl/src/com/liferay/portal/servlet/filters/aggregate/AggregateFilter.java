@@ -161,8 +161,11 @@ public class AggregateFilter extends IgnoreModuleRequestFilter {
 
 				baseURL = baseURL.concat(
 					aggregateContext.getResourcePath(StringPool.BLANK));
-				baseURL = baseURL.concat(importDirName);
-
+				
+				if (!baseURL.endsWith(StringPool.SLASH)) {
+					baseURL = baseURL.concat(importDirName);
+				}				
+						
 				importContent = AggregateUtil.updateRelativeURLs(
 					importContent, baseURL);
 
