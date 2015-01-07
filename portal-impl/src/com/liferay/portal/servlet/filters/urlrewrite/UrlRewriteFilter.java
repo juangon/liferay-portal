@@ -49,7 +49,7 @@ public class UrlRewriteFilter extends BasePortalFilter {
 		catch (ServletException se) {
 			_urlRewriteFilter = null;
 
-			getLog().error(se);
+			_log.error(se, se);
 		}
 	}
 
@@ -63,6 +63,9 @@ public class UrlRewriteFilter extends BasePortalFilter {
 			_urlRewriteFilter.doFilter(request, response, filterChain);
 		}
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		UrlRewriteFilter.class);
 
 	private org.tuckey.web.filters.urlrewrite.UrlRewriteFilter
 		_urlRewriteFilter;
