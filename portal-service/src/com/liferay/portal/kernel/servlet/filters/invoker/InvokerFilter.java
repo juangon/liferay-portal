@@ -74,20 +74,17 @@ public class InvokerFilter extends BasePortalLifecycle implements Filter {
 
 		String requestURL = getURL(request);
 
-		if (requestURL.length() > _invokerFilterURILengthHardLimit) {
+		if (requestURL.length() > _invokerFilterURIMaxLength) {
 			response.sendError(HttpServletResponse.SC_REQUEST_URI_TOO_LONG);
 
 			if (_log.isWarnEnabled()) {
 				StringBundler sb = new StringBundler(7);
 
-				sb.append("Request uri=\"");
-				sb.append(
-					StringUtil.shorten(uri, _invokerFilterURILengthHardLimit));
-				sb.append("\",len=");
-				sb.append(uri.length());
-				sb.append(" was rejected, because it was longer than ");
-				sb.append(_invokerFilterURILengthHardLimit);
-				sb.append(" characters.");
+				sb.append("Rejected ");
+				sb.append(StringUtil.shorten(uri, _invokerFilterURIMaxLength));
+				sb.append(" because it has more than ");
+				sb.append(_invokerFilterURIMaxLength);
+				sb.append(" characters");
 
 				_log.warn(sb.toString());
 			}
@@ -182,8 +179,8 @@ public class InvokerFilter extends BasePortalLifecycle implements Filter {
 				_invokerFilterChainSize);
 		}
 
-		_invokerFilterURILengthHardLimit = GetterUtil.getInteger(
-			PropsUtil.get(PropsKeys.INVOKER_FILTER_URI_LENGTH_HARD_LIMIT));
+		_invokerFilterURIMaxLength = GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.INVOKER_FILTER_URI_MAX_LENGTH));
 
 		ServletContext servletContext = _filterConfig.getServletContext();
 
@@ -332,6 +329,6 @@ public class InvokerFilter extends BasePortalLifecycle implements Filter {
 	private FilterConfig _filterConfig;
 	private int _invokerFilterChainSize;
 	private InvokerFilterHelper _invokerFilterHelper;
-	private int _invokerFilterURILengthHardLimit;
+	private int _invokerFilterURIMaxLength;
 
 }

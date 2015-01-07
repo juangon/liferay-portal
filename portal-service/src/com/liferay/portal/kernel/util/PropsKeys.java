@@ -1069,7 +1069,7 @@ public interface PropsKeys {
 
 	public static final String INVOKER_FILTER_CHAIN_SIZE = "invoker.filter.chain.cache.size";
 
-	public static final String INVOKER_FILTER_URI_LENGTH_HARD_LIMIT = "invoker.filter.uri.length.hard.limit";
+	public static final String INVOKER_FILTER_URI_MAX_LENGTH = "invoker.filter.uri.max.length";
 
 	public static final String JAVADOC_MANAGER_ENABLED = "javadoc.manager.enabled";
 
