@@ -17,7 +17,7 @@
 				<a href="javascript:;" id="${portletNamespace}${namespacedFieldName}DeleteImage" onClick="${portletNamespace}${namespacedFieldName}ToggleDeleteImage();">${languageUtil.get(locale, "delete")}</a>
 			</#if>
 
-			<img id="${portletNamespace}${namespacedFieldName}Image" src="${fieldValue}" />
+			<img id="${portletNamespace}${namespacedFieldName}Image" src="${contextPath}${fieldValue}" />
 		</div>
 
 		<@aui.input name="${namespacedFieldName}URL" type="hidden" value="${fieldValue}" />

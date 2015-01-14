@@ -18,7 +18,7 @@
 		[ <a href="javascript:;" id="${portletNamespace}${namespacedFieldName}ToggleImage" onClick="${portletNamespace}${namespacedFieldName}ToggleImage();">${languageUtil.get(locale, "show")}</a> ]
 
 		<div class="hide wcm-image-preview" id="${portletNamespace}${namespacedFieldName}Container">
-			<img alt="${alt}" id="${portletNamespace}${namespacedFieldName}Image" src="${src}" class="img-polaroid"/>
+			<img alt="${alt}" id="${portletNamespace}${namespacedFieldName}Image" src="${contextPath}${src}" class="img-polaroid"/>
 		</div>
 
 		<#if !disabled>
