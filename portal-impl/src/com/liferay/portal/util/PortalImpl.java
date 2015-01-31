@@ -4815,7 +4815,7 @@ public class PortalImpl implements Portal {
 
 			// Descendant sites
 
-			groups.addAll(siteGroup.getDescendants(true));
+			groups.addAll(siteGroup.getChildren(true));
 
 			// Layout scopes
 
