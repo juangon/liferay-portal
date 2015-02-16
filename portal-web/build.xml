@@ -86,6 +86,8 @@
 
 				<property name="alloy.build.dir" value="docroot/html/ALLOY_ZIP/build" />
 				<property name="alloy.temp.dir" value="docroot/html/ALLOY_ZIP/temp" />
+				
+				<mkdir dir="${alloy.temp.dir}" />
 
 				<concat destfile="${alloy.temp.dir}/aui_deprecated.css">
 					<filelist
