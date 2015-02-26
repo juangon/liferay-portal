@@ -61,7 +61,6 @@ import com.liferay.portlet.util.test.PortletKeys;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.portlet.PortletPreferences;
@@ -183,12 +182,13 @@ public class LayoutSetPrototypePropagationTest
 		LayoutSet layoutSet = group.getPublicLayoutSet();
 
 		long layoutSetPrototypeId = layoutSet.getLayoutSetPrototypeId();
-		
-		LayoutSetPrototype layoutSetPrototype = LayoutSetPrototypeLocalServiceUtil
-						.getLayoutSetPrototype(layoutSetPrototypeId);
 
-		long initialMergeFailFriendlyURLLayouts =
-			SitesUtil.getMergeFailCount(layoutSetPrototype);
+		LayoutSetPrototype layoutSetPrototype =
+				LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototype(
+					layoutSetPrototypeId);
+
+		long initialMergeFailFriendlyURLLayouts = SitesUtil.getMergeFailCount(
+			layoutSetPrototype);
 
 		setLinkEnabled(true);
 
@@ -198,15 +198,15 @@ public class LayoutSetPrototypePropagationTest
 
 		propagateChanges(group);
 
-		layoutSetPrototype = LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototype(
-			layoutSetPrototypeId);
+		layoutSetPrototype =
+						LayoutSetPrototypeLocalServiceUtil.
+						getLayoutSetPrototype(layoutSetPrototypeId);
 
-		long mergeFailFriendlyURLLayouts =
-			SitesUtil.getMergeFailCount(layoutPrototype);
+		long mergeFailFriendlyURLLayouts = SitesUtil.getMergeFailCount(
+			layoutSetPrototype);
 
 		Assert.assertEquals(
-			initialMergeFailFriendlyURLLayouts,
-			mergeFailFriendlyURLLayouts);
+			initialMergeFailFriendlyURLLayouts, mergeFailFriendlyURLLayouts);
 	}
 
 	@Test
