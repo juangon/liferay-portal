@@ -182,8 +182,13 @@ public class LayoutSetPrototypePropagationTest
 
 		LayoutSet layoutSet = group.getPublicLayoutSet();
 
-		List<Layout> initialMergeFailFriendlyURLLayouts =
-			SitesUtil.getMergeFailFriendlyURLLayouts(layoutSet);
+		long layoutSetPrototypeId = layoutSet.getLayoutSetPrototypeId();
+		
+		LayoutSetPrototype layoutSetPrototype = LayoutSetPrototypeLocalServiceUtil
+						.getLayoutSetPrototype(layoutSetPrototypeId);
+
+		long initialMergeFailFriendlyURLLayouts =
+			SitesUtil.getMergeFailCount(layoutSetPrototype);
 
 		setLinkEnabled(true);
 
@@ -193,15 +198,15 @@ public class LayoutSetPrototypePropagationTest
 
 		propagateChanges(group);
 
-		layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
-			layoutSet.getLayoutSetId());
+		layoutSetPrototype = LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototype(
+			layoutSetPrototypeId);
 
-		List<Layout> mergeFailFriendlyURLLayouts =
-			SitesUtil.getMergeFailFriendlyURLLayouts(layoutSet);
+		long mergeFailFriendlyURLLayouts =
+			SitesUtil.getMergeFailCount(layoutPrototype);
 
 		Assert.assertEquals(
-			initialMergeFailFriendlyURLLayouts.size() + 1,
-			mergeFailFriendlyURLLayouts.size());
+			initialMergeFailFriendlyURLLayouts,
+			mergeFailFriendlyURLLayouts);
 	}
 
 	@Test
