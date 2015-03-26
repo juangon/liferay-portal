@@ -348,7 +348,7 @@ public class JournalPortletDataHandler extends BasePortletDataHandler {
 		ddmTemplateActionableDynamicQuery.performActions();
 
 		manifestSummary.addModelAdditionCount(
-			new StagedModelType(DDMTemplate.class, DDMStructure.class),
+			new StagedModelType(DDMStructure.class, JournalArticle.class),
 			ddmTemplateActionableDynamicQuery.performCount() +
 				ddmTemplates.size());
 
