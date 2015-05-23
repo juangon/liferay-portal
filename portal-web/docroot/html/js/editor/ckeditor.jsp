@@ -331,9 +331,7 @@ if (inlineEdit && Validator.isNotNull(inlineEditSaveURL)) {
 		StringBundler sb = new StringBundler(8);
 
 		sb.append(mainPath);
-		sb.append("/portal/fckeditor?p_l_id=");
-		sb.append(plid);
-		sb.append("&p_p_id=");
+		sb.append("/portal/fckeditor?p_p_id=");		
 		sb.append(HttpUtil.encodeURL(portletId));
 		sb.append("&doAsUserId=");
 		sb.append(HttpUtil.encodeURL(doAsUserId));
