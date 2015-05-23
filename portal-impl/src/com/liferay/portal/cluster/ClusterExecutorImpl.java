@@ -101,7 +101,7 @@ public class ClusterExecutorImpl
 		_secure = StringUtil.equalsIgnoreCase(
 			Http.HTTPS, PropsValues.WEB_SERVER_PROTOCOL);
 
-		if (Validator.isNotNull(PropsValues.PORTAL_INSTANCE_HTTPS_PORT)) {
+		if (PropsValues.PORTAL_INSTANCE_HTTPS_PORT > 0) {
 			_port = PropsValues.PORTAL_INSTANCE_HTTPS_PORT;
 		}
 		else {
