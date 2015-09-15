@@ -1,0 +1,12 @@
+Bundle-ClassPath: .,lib/jsf-api.jar,lib/jsf-impl.jar
+Bundle-Name: Liferay Sample JSF
+Bundle-SymbolicName: com.liferay.sample.jsf
+Bundle-Version: 1.0.0
+Include-Resource:\
+	classes,\
+	META-INF/resources=src/META-INF/resources,\
+	lib/=lib/jsf-api.jar,\
+	lib/=lib/jsf-impl.jar,\
+	lib/=lib/jstl-api.jar,\
+	lib/=lib/jstl-impl.jar
+Web-ContextPath: /sample-jsf
