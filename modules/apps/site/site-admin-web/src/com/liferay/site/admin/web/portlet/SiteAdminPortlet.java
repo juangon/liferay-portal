@@ -66,21 +66,21 @@ import com.liferay.portal.model.Team;
 import com.liferay.portal.security.auth.AuthException;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.auth.RemoteAuthException;
-import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.service.GroupServiceUtil;
-import com.liferay.portal.service.LayoutLocalServiceUtil;
-import com.liferay.portal.service.LayoutSetLocalServiceUtil;
-import com.liferay.portal.service.LayoutSetPrototypeServiceUtil;
-import com.liferay.portal.service.LayoutSetServiceUtil;
-import com.liferay.portal.service.MembershipRequestLocalServiceUtil;
-import com.liferay.portal.service.MembershipRequestServiceUtil;
-import com.liferay.portal.service.RoleLocalServiceUtil;
+import com.liferay.portal.service.GroupLocalService;
+import com.liferay.portal.service.GroupService;
+import com.liferay.portal.service.LayoutLocalService;
+import com.liferay.portal.service.LayoutSetLocalService;
+import com.liferay.portal.service.LayoutSetPrototypeService;
+import com.liferay.portal.service.LayoutSetService;
+import com.liferay.portal.service.MembershipRequestLocalService;
+import com.liferay.portal.service.MembershipRequestService;
+import com.liferay.portal.service.RoleLocalService;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.service.ServiceContextThreadLocal;
-import com.liferay.portal.service.TeamLocalServiceUtil;
-import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.service.UserServiceUtil;
+import com.liferay.portal.service.TeamLocalService;
+import com.liferay.portal.service.UserLocalService;
+import com.liferay.portal.service.UserService;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.asset.AssetCategoryException;
@@ -121,8 +121,6 @@ import org.osgi.service.component.annotations.Reference;
 	immediate = true,
 	property = {
 		"com.liferay.portlet.add-default-resource=true",
-		"com.liferay.portlet.control-panel-entry-category=sites",
-		"com.liferay.portlet.control-panel-entry-weight=1.0",
 		"com.liferay.portlet.css-class-wrapper=portlet-site-admin",
 		"com.liferay.portlet.display-category=category.hidden",
 		"com.liferay.portlet.header-portlet-css=/css/main.css",
@@ -136,6 +134,7 @@ import org.osgi.service.component.annotations.Reference;
 		"javax.portlet.expiration-cache=0",
 		"javax.portlet.init-param.template-path=/",
 		"javax.portlet.init-param.view-template=/view.jsp",
+		"javax.portlet.name=" + SiteAdminPortletKeys.SITE_ADMIN,
 		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=administrator",
 		"javax.portlet.supports.mime-type=text/html"
@@ -188,7 +187,7 @@ public class SiteAdminPortlet extends MVCPortlet {
 		}
 
 		for (long deleteGroupId : deleteGroupIds) {
-			GroupServiceUtil.deleteGroup(deleteGroupId);
+			groupService.deleteGroup(deleteGroupId);
 
 			LiveUsers.deleteGroup(themeDisplay.getCompanyId(), deleteGroupId);
 		}
@@ -243,7 +242,7 @@ public class SiteAdminPortlet extends MVCPortlet {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			actionRequest);
 
-		UserServiceUtil.unsetGroupUsers(groupId, removeUserIds, serviceContext);
+		userService.unsetGroupUsers(groupId, removeUserIds, serviceContext);
 
 		LiveUsers.leaveGroup(
 			themeDisplay.getCompanyId(), groupId, removeUserIds);
@@ -271,7 +270,7 @@ public class SiteAdminPortlet extends MVCPortlet {
 			actionRequest, "layoutSetPrototypeId");
 
 		LayoutSetPrototype layoutSetPrototype =
-			LayoutSetPrototypeServiceUtil.getLayoutSetPrototype(
+			layoutSetPrototypeService.getLayoutSetPrototype(
 				layoutSetPrototypeId);
 
 		SitesUtil.setMergeFailCount(layoutSetPrototype, 0);
@@ -280,18 +279,17 @@ public class SiteAdminPortlet extends MVCPortlet {
 		boolean privateLayoutSet = ParamUtil.getBoolean(
 			actionRequest, "privateLayoutSet");
 
-		LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
+		LayoutSet layoutSet = layoutSetLocalService.getLayoutSet(
 			groupId, privateLayoutSet);
 
 		SitesUtil.resetPrototype(layoutSet);
 
-		Group group = GroupLocalServiceUtil.getGroup(groupId);
+		Group group = groupLocalService.getGroup(groupId);
 
 		SitesUtil.mergeLayoutSetPrototypeLayouts(group, layoutSet);
 
-		layoutSetPrototype =
-			LayoutSetPrototypeServiceUtil.getLayoutSetPrototype(
-				layoutSetPrototypeId);
+		layoutSetPrototype = layoutSetPrototypeService.getLayoutSetPrototype(
+			layoutSetPrototypeId);
 
 		if (SitesUtil.getMergeFailCount(layoutSetPrototype) > 0) {
 			SessionErrors.add(actionRequest, "resetMergeFailCountAndMerge");
@@ -329,7 +327,7 @@ public class SiteAdminPortlet extends MVCPortlet {
 		Set<Long> filteredUserIds = new HashSet<>(userIds.length);
 
 		for (long userId : userIds) {
-			if (UserLocalServiceUtil.hasGroupUser(groupId, userId)) {
+			if (userLocalService.hasGroupUser(groupId, userId)) {
 				filteredUserIds.add(userId);
 			}
 		}
@@ -344,7 +342,7 @@ public class SiteAdminPortlet extends MVCPortlet {
 		long liveGroupId = ParamUtil.getLong(portletRequest, "liveGroupId");
 
 		if (liveGroupId > 0) {
-			return GroupLocalServiceUtil.getGroup(liveGroupId);
+			return groupLocalService.getGroup(liveGroupId);
 		}
 
 		return null;
@@ -356,7 +354,7 @@ public class SiteAdminPortlet extends MVCPortlet {
 		long refererGroupId = 0;
 
 		try {
-			Layout refererLayout = LayoutLocalServiceUtil.getLayout(
+			Layout refererLayout = layoutLocalService.getLayout(
 				themeDisplay.getRefererPlid());
 
 			refererGroupId = refererLayout.getGroupId();
@@ -380,7 +378,7 @@ public class SiteAdminPortlet extends MVCPortlet {
 				continue;
 			}
 
-			Role role = RoleLocalServiceUtil.getRole(siteRolesRoleId);
+			Role role = roleLocalService.getRole(siteRolesRoleId);
 
 			roles.add(role);
 		}
@@ -403,7 +401,7 @@ public class SiteAdminPortlet extends MVCPortlet {
 				continue;
 			}
 
-			Team team = TeamLocalServiceUtil.getTeam(teamsTeamId);
+			Team team = teamLocalService.getTeam(teamsTeamId);
 
 			teams.add(team);
 		}
@@ -439,6 +437,56 @@ public class SiteAdminPortlet extends MVCPortlet {
 	}
 
 	@Reference(unbind = "-")
+	protected void setGroupLocalService(GroupLocalService groupLocalService) {
+		this.groupLocalService = groupLocalService;
+	}
+
+	@Reference(unbind = "-")
+	protected void setGroupService(GroupService groupService) {
+		this.groupService = groupService;
+	}
+
+	@Reference(unbind = "-")
+	protected void setLayoutLocalService(
+		LayoutLocalService layoutLocalService) {
+
+		this.layoutLocalService = layoutLocalService;
+	}
+
+	@Reference(unbind = "-")
+	protected void setLayoutSetLocalService(
+		LayoutSetLocalService layoutSetLocalService) {
+
+		this.layoutSetLocalService = layoutSetLocalService;
+	}
+
+	@Reference(unbind = "-")
+	protected void setLayoutSetPrototypeService(
+		LayoutSetPrototypeService layoutSetPrototypeService) {
+
+		this.layoutSetPrototypeService = layoutSetPrototypeService;
+	}
+
+	@Reference(unbind = "-")
+	protected void setLayoutSetService(LayoutSetService layoutSetService) {
+		this.layoutSetService = layoutSetService;
+	}
+
+	@Reference(unbind = "-")
+	protected void setMembershipRequestLocalService(
+		MembershipRequestLocalService membershipRequestLocalService) {
+
+		this.membershipRequestLocalService = membershipRequestLocalService;
+	}
+
+	@Reference(unbind = "-")
+	protected void setMembershipRequestService(
+		MembershipRequestService membershipRequestService) {
+
+		this.membershipRequestService = membershipRequestService;
+	}
+
+	@Reference(unbind = "-")
 	protected void setPanelAppRegistry(PanelAppRegistry panelAppRegistry) {
 		_panelAppRegistry = panelAppRegistry;
 	}
@@ -451,8 +499,28 @@ public class SiteAdminPortlet extends MVCPortlet {
 	}
 
 	@Reference(unbind = "-")
+	protected void setRoleLocalService(RoleLocalService roleLocalService) {
+		this.roleLocalService = roleLocalService;
+	}
+
+	@Reference(unbind = "-")
 	protected void setSiteAdminWebUpgrade(
 		SiteAdminWebUpgrade siteAdminWebUpgrade) {
+	}
+
+	@Reference(unbind = "-")
+	protected void setTeamLocalService(TeamLocalService teamLocalService) {
+		this.teamLocalService = teamLocalService;
+	}
+
+	@Reference(unbind = "-")
+	protected void setUserLocalService(UserLocalService userLocalService) {
+		this.userLocalService = userLocalService;
+	}
+
+	@Reference(unbind = "-")
+	protected void setUserService(UserService userService) {
+		this.userService = userService;
 	}
 
 	protected void updateActive(ActionRequest actionRequest, boolean active)
@@ -470,12 +538,12 @@ public class SiteAdminPortlet extends MVCPortlet {
 			throw new RequiredGroupException.MustNotDeleteCurrentGroup(groupId);
 		}
 
-		Group group = GroupServiceUtil.getGroup(groupId);
+		Group group = groupService.getGroup(groupId);
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			Group.class.getName(), actionRequest);
 
-		GroupServiceUtil.updateGroup(
+		groupService.updateGroup(
 			groupId, group.getParentGroupId(), group.getNameMap(),
 			group.getDescriptionMap(), group.getType(),
 			group.isManualMembership(), group.getMembershipRestriction(),
@@ -538,7 +606,7 @@ public class SiteAdminPortlet extends MVCPortlet {
 				actionRequest, "inheritContent");
 			active = ParamUtil.getBoolean(actionRequest, "active");
 
-			liveGroup = GroupServiceUtil.addGroup(
+			liveGroup = groupService.addGroup(
 				parentGroupId, GroupConstants.DEFAULT_LIVE_GROUP_ID, nameMap,
 				descriptionMap, type, manualMembership, membershipRestriction,
 				friendlyURL, true, inheritContent, active, serviceContext);
@@ -550,7 +618,7 @@ public class SiteAdminPortlet extends MVCPortlet {
 
 			// Update group
 
-			liveGroup = GroupLocalServiceUtil.getGroup(liveGroupId);
+			liveGroup = groupLocalService.getGroup(liveGroupId);
 
 			nameMap = LocalizationUtil.getLocalizationMap(
 				actionRequest, "name", liveGroup.getNameMap());
@@ -568,19 +636,19 @@ public class SiteAdminPortlet extends MVCPortlet {
 			active = ParamUtil.getBoolean(
 				actionRequest, "active", liveGroup.getActive());
 
-			liveGroup = GroupServiceUtil.updateGroup(
+			liveGroup = groupService.updateGroup(
 				liveGroupId, parentGroupId, nameMap, descriptionMap, type,
 				manualMembership, membershipRestriction, friendlyURL,
 				inheritContent, active, serviceContext);
 
 			if (type == GroupConstants.TYPE_SITE_OPEN) {
 				List<MembershipRequest> membershipRequests =
-					MembershipRequestLocalServiceUtil.search(
+					membershipRequestLocalService.search(
 						liveGroupId, MembershipRequestConstants.STATUS_PENDING,
 						QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 				for (MembershipRequest membershipRequest : membershipRequests) {
-					MembershipRequestServiceUtil.updateStatus(
+					membershipRequestService.updateStatus(
 						membershipRequest.getMembershipRequestId(),
 						themeDisplay.translate(
 							"your-membership-has-been-approved"),
@@ -698,7 +766,7 @@ public class SiteAdminPortlet extends MVCPortlet {
 			actionRequest, "publicVirtualHost",
 			publicLayoutSet.getVirtualHostname());
 
-		LayoutSetServiceUtil.updateVirtualHost(
+		layoutSetService.updateVirtualHost(
 			liveGroup.getGroupId(), false, publicVirtualHost);
 
 		LayoutSet privateLayoutSet = liveGroup.getPrivateLayoutSet();
@@ -707,7 +775,7 @@ public class SiteAdminPortlet extends MVCPortlet {
 			actionRequest, "privateVirtualHost",
 			privateLayoutSet.getVirtualHostname());
 
-		LayoutSetServiceUtil.updateVirtualHost(
+		layoutSetService.updateVirtualHost(
 			liveGroup.getGroupId(), true, privateVirtualHost);
 
 		// Staging
@@ -719,7 +787,7 @@ public class SiteAdminPortlet extends MVCPortlet {
 				actionRequest, "stagingFriendlyURL",
 				stagingGroup.getFriendlyURL());
 
-			GroupServiceUtil.updateFriendlyURL(
+			groupService.updateFriendlyURL(
 				stagingGroup.getGroupId(), friendlyURL);
 
 			LayoutSet stagingPublicLayoutSet =
@@ -729,7 +797,7 @@ public class SiteAdminPortlet extends MVCPortlet {
 				actionRequest, "stagingPublicVirtualHost",
 				stagingPublicLayoutSet.getVirtualHostname());
 
-			LayoutSetServiceUtil.updateVirtualHost(
+			layoutSetService.updateVirtualHost(
 				stagingGroup.getGroupId(), false, publicVirtualHost);
 
 			LayoutSet stagingPrivateLayoutSet =
@@ -739,14 +807,14 @@ public class SiteAdminPortlet extends MVCPortlet {
 				actionRequest, "stagingPrivateVirtualHost",
 				stagingPrivateLayoutSet.getVirtualHostname());
 
-			LayoutSetServiceUtil.updateVirtualHost(
+			layoutSetService.updateVirtualHost(
 				stagingGroup.getGroupId(), true, privateVirtualHost);
 
-			GroupServiceUtil.updateGroup(
+			groupService.updateGroup(
 				stagingGroup.getGroupId(), typeSettingsProperties.toString());
 		}
 
-		liveGroup = GroupServiceUtil.updateGroup(
+		liveGroup = groupService.updateGroup(
 			liveGroup.getGroupId(), typeSettingsProperties.toString());
 
 		// Layout set prototypes
@@ -815,6 +883,19 @@ public class SiteAdminPortlet extends MVCPortlet {
 
 		return liveGroup;
 	}
+
+	protected GroupLocalService groupLocalService;
+	protected GroupService groupService;
+	protected LayoutLocalService layoutLocalService;
+	protected LayoutSetLocalService layoutSetLocalService;
+	protected LayoutSetPrototypeService layoutSetPrototypeService;
+	protected LayoutSetService layoutSetService;
+	protected MembershipRequestLocalService membershipRequestLocalService;
+	protected MembershipRequestService membershipRequestService;
+	protected RoleLocalService roleLocalService;
+	protected TeamLocalService teamLocalService;
+	protected UserLocalService userLocalService;
+	protected UserService userService;
 
 	private static final int _LAYOUT_SET_VISIBILITY_PRIVATE = 1;
 

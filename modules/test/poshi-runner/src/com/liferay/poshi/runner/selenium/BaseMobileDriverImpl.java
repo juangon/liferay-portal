@@ -56,6 +56,11 @@ public abstract class BaseMobileDriverImpl
 	}
 
 	@Override
+	public void assertConsoleErrors() throws Exception {
+		LiferaySeleniumHelper.assertConsoleErrors();
+	}
+
+	@Override
 	public void assertConsoleTextNotPresent(String text) throws Exception {
 		LiferaySeleniumHelper.assertConsoleTextNotPresent(text);
 	}
@@ -119,7 +124,7 @@ public abstract class BaseMobileDriverImpl
 
 	@Override
 	public void assertLiferayErrors() throws Exception {
-		LiferaySeleniumHelper.assertLiferayErrors();
+		LiferaySeleniumHelper.assertConsoleErrors();
 	}
 
 	@Override
@@ -370,11 +375,6 @@ public abstract class BaseMobileDriverImpl
 	@Override
 	public boolean isHTMLSourceTextPresent(String value) throws Exception {
 		return LiferaySeleniumHelper.isHTMLSourceTextPresent(this, value);
-	}
-
-	@Override
-	public boolean isMobileDeviceEnabled() {
-		return LiferaySeleniumHelper.isMobileDeviceEnabled();
 	}
 
 	@Override

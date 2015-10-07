@@ -32,6 +32,8 @@ public interface LiferaySelenium extends Selenium {
 
 	public void assertConfirmation(String pattern) throws Exception;
 
+	public void assertConsoleErrors() throws Exception;
+
 	public void assertConsoleTextNotPresent(String text) throws Exception;
 
 	public void assertConsoleTextPresent(String text) throws Exception;
@@ -156,8 +158,6 @@ public interface LiferaySelenium extends Selenium {
 	public boolean isElementPresentAfterWait(String locator) throws Exception;
 
 	public boolean isHTMLSourceTextPresent(String value) throws Exception;
-
-	public boolean isMobileDeviceEnabled();
 
 	public boolean isNotChecked(String locator);
 

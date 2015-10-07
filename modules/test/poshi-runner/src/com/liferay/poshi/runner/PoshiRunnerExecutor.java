@@ -21,6 +21,7 @@ import com.liferay.poshi.runner.logger.XMLLoggerHandler;
 import com.liferay.poshi.runner.selenium.LiferaySelenium;
 import com.liferay.poshi.runner.selenium.SeleniumUtil;
 import com.liferay.poshi.runner.util.GetterUtil;
+import com.liferay.poshi.runner.util.PropsUtil;
 import com.liferay.poshi.runner.util.PropsValues;
 import com.liferay.poshi.runner.util.RegexUtil;
 import com.liferay.poshi.runner.util.Validator;
@@ -37,6 +38,7 @@ import org.dom4j.Element;
 /**
  * @author Karen Dang
  * @author Michael Hashimoto
+ * @author Peter Yoo
  */
 public class PoshiRunnerExecutor {
 
@@ -156,13 +158,13 @@ public class PoshiRunnerExecutor {
 				}
 				else if ((childElement.attributeValue(
 							"macro-desktop") != null) &&
-						 Validator.isNull(PropsValues.MOBILE_DEVICE_TYPE)) {
+						 !PropsValues.MOBILE_BROWSER) {
 
 					runMacroExecuteElement(childElement, "macro-desktop");
 				}
 				else if ((childElement.attributeValue(
 							"macro-mobile") != null) &&
-						 Validator.isNotNull(PropsValues.MOBILE_DEVICE_TYPE)) {
+						 PropsValues.MOBILE_BROWSER) {
 
 					runMacroExecuteElement(childElement, "macro-mobile");
 				}
@@ -197,7 +199,7 @@ public class PoshiRunnerExecutor {
 	public static void runEchoElement(Element element) throws Exception {
 		PoshiRunnerStackTraceUtil.setCurrentElement(element);
 
-		XMLLoggerHandler.updateStatus(element, "pending");
+		CommandLoggerHandler.logMessage(element);
 
 		String message = element.attributeValue("message");
 
@@ -207,14 +209,12 @@ public class PoshiRunnerExecutor {
 
 		System.out.println(
 			PoshiRunnerVariablesUtil.replaceCommandVars(message));
-
-		XMLLoggerHandler.updateStatus(element, "pass");
 	}
 
 	public static void runFailElement(Element element) throws Exception {
 		PoshiRunnerStackTraceUtil.setCurrentElement(element);
 
-		XMLLoggerHandler.updateStatus(element, "pending");
+		CommandLoggerHandler.logMessage(element);
 
 		String message = element.attributeValue("message");
 
@@ -380,10 +380,10 @@ public class PoshiRunnerExecutor {
 
 				PoshiRunnerStackTraceUtil.setCurrentElement(executeElement);
 
-				CommandLoggerHandler.failCommand(_functionExecuteElement);
-
 				SummaryLoggerHandler.failSummary(
 					_functionExecuteElement, t.getMessage());
+
+				CommandLoggerHandler.failCommand(_functionExecuteElement);
 
 				throw t;
 			}
@@ -395,15 +395,15 @@ public class PoshiRunnerExecutor {
 
 		if (_functionExecuteElement == executeElement) {
 			if (_functionWarningMessage != null) {
-				CommandLoggerHandler.warnCommand(_functionExecuteElement);
-
 				SummaryLoggerHandler.warnSummary(
 					_functionExecuteElement, _functionWarningMessage);
+
+				CommandLoggerHandler.warnCommand(_functionExecuteElement);
 			}
 			else {
-				CommandLoggerHandler.passCommand(executeElement);
-
 				SummaryLoggerHandler.passSummary(executeElement);
+
+				CommandLoggerHandler.passCommand(executeElement);
 			}
 
 			_functionExecuteElement = null;
@@ -793,6 +793,14 @@ public class PoshiRunnerExecutor {
 
 				varValue = PoshiRunnerGetterUtil.getVarMethodValue(
 					classCommandName);
+			}
+			else if (element.attributeValue("property-value") != null) {
+				varValue = PropsUtil.get(
+					element.attributeValue("property-value"));
+
+				if (varValue == null) {
+					varValue = "";
+				}
 			}
 			else {
 				varValue = element.getText();

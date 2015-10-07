@@ -100,11 +100,11 @@ public class PoshiRunner {
 
 			_runCommand();
 
-			LiferaySeleniumHelper.writePoshiWarnings();
-
 			LiferaySeleniumHelper.assertNoPoshiWarnings();
 		}
 		catch (Exception e) {
+			LiferaySeleniumHelper.printJavaProcessStacktrace();
+
 			PoshiRunnerStackTraceUtil.printStackTrace(e.getMessage());
 
 			PoshiRunnerStackTraceUtil.emptyStackTrace();
@@ -112,6 +112,8 @@ public class PoshiRunner {
 			throw new Exception(e.getMessage(), e);
 		}
 		finally {
+			LiferaySeleniumHelper.writePoshiWarnings();
+
 			LoggerUtil.createSummary();
 
 			try {

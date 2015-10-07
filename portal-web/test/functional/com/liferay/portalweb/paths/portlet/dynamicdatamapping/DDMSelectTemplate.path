@@ -34,6 +34,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>INFO</td>
+	<td>//form[contains(@id,'DDMPortlet')]//div[contains(@class,'empty-message')]/span</td>
+	<td></td>
+</tr>
+<tr>
 	<td></td>
 	<td></td>
 	<td></td>
@@ -142,7 +147,7 @@
 </tr>
 <tr>
 	<td>TEMPLATE_TABLE_CHOOSE_BUTTON</td>
-	<td>//tr[contains(.,'${key_templateName}')]//button[contains(.,'Choose')]</td>
+	<td>//tr[contains(.,'${key_ddlTemplateName}')]//button[contains(.,'Choose')]</td>
 	<td></td>
 </tr>
 </tbody>

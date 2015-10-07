@@ -360,7 +360,7 @@
 
 	<target name="deploy-additional-jars">
 		<copy todir="${app.server.lib.global.dir}">
-			<fileset dir="lib/development" includes="hsql.jar,jtds.jar,mysql.jar,postgresql.jar" />
+			<fileset dir="lib/development" includes="hsql.jar,mysql.jar,postgresql.jar" />
 			<fileset dir="lib/global" />
 		</copy>
 
@@ -544,6 +544,8 @@
 	<target name="install-portal-snapshots">
 		<install-portal-snapshot artifact.dir="portal-impl" artifact.name="portal-impl" />
 		<install-portal-snapshot artifact.dir="portal-service" artifact.name="portal-service" />
+		<install-portal-snapshot artifact.dir="portal-test" artifact.name="portal-test" />
+		<install-portal-snapshot artifact.dir="portal-test-internal" artifact.name="portal-test-internal" />
 		<install-portal-snapshot artifact.dir="portal-web" artifact.name="portal-web" />
 		<install-portal-snapshot artifact.dir="util-bridges" artifact.name="util-bridges" />
 		<install-portal-snapshot artifact.dir="util-java" artifact.name="util-java" />
@@ -939,28 +941,6 @@ print AdminControl.invoke(appManager, 'startApplication', 'liferay-portal')
 		</gradle-execute>
 
 		<ant dir="portal-web" target="update-gradle-cache" inheritAll="false" />
-	</target>
-
-	<target name="update-plugins-to-svn-revision">
-		<loadfile property="svn.info.revision.valid" srcfile="svn-revision" />
-
-		<script classpathref="project.classpath" language="beanshell">
-			String svnInfoOutput = project.getProperty("svn.info.revision.valid");
-
-			int x = svnInfoOutput.indexOf("Revision: ");
-
-			x = svnInfoOutput.indexOf(" ", x);
-
-			int y = svnInfoOutput.indexOf("Username:", x);
-
-			String revision = svnInfoOutput.substring(x, y).trim();
-
-			project.setProperty("svn.info.revision", revision);
-		</script>
-
-		<exec dir="${lp.plugins.dir}" executable="cmd.exe" os="${os.windows}">
-			<arg line="/c svn --username ${svn.username} --password ${svn.password} update -r ${svn.info.revision}" />
-		</exec>
 	</target>
 
 	<target name="validate-xml">

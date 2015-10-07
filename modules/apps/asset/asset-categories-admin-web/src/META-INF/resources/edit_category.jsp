@@ -85,7 +85,7 @@ else {
 portletDisplay.setShowBackIcon(true);
 portletDisplay.setURLBack(redirect);
 
-renderResponse.setTitle(((category == null) ? LanguageUtil.get(request, "add-new-category") : category.getTitle(locale)));
+renderResponse.setTitle(((category == null) ? LanguageUtil.get(request, "add-new-category") : HtmlUtil.escape(category.getTitle(locale))));
 %>
 
 <portlet:actionURL name="editCategory" var="editCategoryURL">
@@ -100,6 +100,7 @@ renderResponse.setTitle(((category == null) ? LanguageUtil.get(request, "add-new
 
 	<liferay-ui:error exception="<%= AssetCategoryNameException.class %>" message="please-enter-a-valid-name" />
 	<liferay-ui:error exception="<%= DuplicateCategoryException.class %>" message="please-enter-a-unique-name" />
+	<liferay-ui:error exception="<%= DuplicateCategoryPropertyException.class %>" message="please-enter-a-unique-property-key" />
 
 	<aui:model-context bean="<%= category %>" model="<%= AssetCategory.class %>" />
 

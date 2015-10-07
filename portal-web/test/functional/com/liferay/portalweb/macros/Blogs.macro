@@ -54,6 +54,24 @@
 		<execute macro="BlogsEntry#publish" />
 	</command>
 
+	<command name="addEntryWithPermissions">
+		<execute macro="BlogsNavigator#gotoAddEntry" />
+
+		<execute macro="BlogsEntry#addEntryContent">
+			<var name="entryContent" value="${entryContent}" />
+			<var name="entrySubtitle" value="${entrySubtitle}" />
+			<var name="entryTitle" value="${entryTitle}" />
+		</execute>
+
+		<execute macro="BlogsNavigator#gotoSettings" />
+
+		<execute macro="BlogsEntry#entryAddPermissions">
+			<var name="viewableBy" value="${viewableBy}" />
+		</execute>
+
+		<execute macro="BlogsEntry#publish" />
+	</command>
+
 	<command name="addEntryWithTag">
 		<execute macro="BlogsNavigator#gotoAddEntry" />
 
@@ -68,6 +86,26 @@
 		<execute macro="AssetCategorization#addTag">
 			<var name="tagName" value="${tagName}" />
 		</execute>
+
+		<execute macro="BlogsEntry#publish" />
+	</command>
+
+	<command name="addEntryWithTags">
+		<execute macro="BlogsNavigator#gotoAddEntry" />
+
+		<execute macro="BlogsEntry#addEntryContent">
+			<var name="entryContent" value="${entryContent}" />
+			<var name="entrySubtitle" value="${entrySubtitle}" />
+			<var name="entryTitle" value="${entryTitle}" />
+		</execute>
+
+		<execute macro="BlogsNavigator#gotoSettings" />
+
+		<for list="${tagNameList}" param="tagName">
+			<execute macro="AssetCategorization#addTag">
+				<var name="tagName" value="${tagName}" />
+			</execute>
+		</for>
 
 		<execute macro="BlogsEntry#publish" />
 	</command>
@@ -252,39 +290,6 @@
 		<execute function="AssertTextEquals#assertPartialText" locator1="Message#ERROR_1" value1="Please enter a valid abstract." />
 	</command>
 
-	<command name="addWithTag">
-		<execute macro="BlogsNavigator#gotoAddEntry" />
-
-		<execute macro="BlogsEntry#addEntryContent">
-			<var name="entryContent" value="${entryContent}" />
-			<var name="entrySubtitle" value="${entrySubtitle}" />
-			<var name="entryTitle" value="${entryTitle}" />
-		</execute>
-
-		<execute macro="BlogsNavigator#gotoSettings" />
-
-		<if>
-			<isset var="tagName" />
-			<then>
-				<execute macro="BlogsEntry#addTag">
-					<var name="tagName" value="${tagName}" />
-				</execute>
-			</then>
-		</if>
-
-		<if>
-			<isset var="tagNameList" />
-			<then>
-				<execute macro="BlogsEntry#addTagList">
-					<var name="tagName" value="${tagName}" />
-					<var name="tagNameList" value="${tagNameList}" />
-				</execute>
-			</then>
-		</if>
-
-		<execute macro="BlogsEntry#publish" />
-	</command>
-
 	<command name="addWithWorkflow">
 		<execute macro="BlogsNavigator#gotoAddEntry" />
 
@@ -442,7 +447,7 @@
 	</command>
 
 	<command name="subscribePG">
-		<execute function="AssertClick" locator1="Link#SUBSCRIBE" value1="Subscribe" />
+		<execute function="AssertClick" locator1="Blogs#SUBSCRIBE_LINK" value1="Subscribe" />
 
 		<execute function="AssertTextEquals" locator1="Message#SUCCESS" value1="Your request completed successfully." />
 	</command>

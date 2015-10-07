@@ -91,8 +91,8 @@ public class PanelCategoryRegistry {
 						return panelCategory.hasAccessPermission(
 							permissionChecker, group);
 					}
-					catch (PortalException e) {
-						_log.error(e);
+					catch (PortalException pe) {
+						_log.error(pe, pe);
 					}
 
 					return false;
@@ -116,8 +116,8 @@ public class PanelCategoryRegistry {
 					return panelCategory;
 				}
 			}
-			catch (PortalException e) {
-				_log.error(e);
+			catch (PortalException pe) {
+				_log.error(pe, pe);
 			}
 		}
 

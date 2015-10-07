@@ -56,6 +56,7 @@ import org.junit.Assert;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -67,6 +68,9 @@ import org.springframework.aop.framework.AdvisedSupport;
  * @author William Newbury
  * @author Shuyang Zhou
  */
+@Ignore(
+	"Ignored due to random hanging, Matthew Tambara will fix and reenable it"
+)
 public class ResourcePermissionLocalServiceConcurrentTest {
 
 	@ClassRule
@@ -185,7 +189,7 @@ public class ResourcePermissionLocalServiceConcurrentTest {
 					@ExpectedLog(
 						dbType = DB.TYPE_SYBASE,
 						expectedLog = "Attempt to insert duplicate key row",
-						expectedType = ExpectedType.PREFIX
+						expectedType = ExpectedType.CONTAINS
 					)
 				},
 				level = "ERROR", loggerClass = JDBCExceptionReporter.class

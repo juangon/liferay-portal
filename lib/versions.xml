@@ -212,26 +212,6 @@
 				</licenses>
 			</library>
 			<library>
-				<file-name>lib/development/firebird.jar</file-name>
-				<version></version>
-				<project-name>Firebird</project-name>
-				<project-url>http://www.firebirdsql.org</project-url>
-				<licenses>
-					<license>
-						<license-name>Initial Developer's Public License 1.0</license-name>
-						<license-url>http://www.firebirdsql.org/en/initial-developer-s-public-license-version-1-0</license-url>
-					</license>
-					<license>
-						<license-name>Public Domain</license-name>
-						<license-url>http://en.wikipedia.org/wiki/Public_domain</license-url>
-					</license>
-					<license>
-						<license-name>Technology License From Sun Microsystems Inc. To Doug Lea</license-name>
-						<license-url>http://gee.cs.oswego.edu/dl/classes/EDU/oswego/cs/dl/util/sun-u.c.license.pdf</license-url>
-					</license>
-				</licenses>
-			</library>
-			<library>
 				<file-name>lib/development/gson.jar</file-name>
 				<version>2.2.4</version>
 				<project-name>Gson</project-name>
@@ -281,18 +261,6 @@
 				<comments>
 					See LPS-58322.
 				</comments>
-			</library>
-			<library>
-				<file-name>lib/development/interbase.jar</file-name>
-				<version>6.01</version>
-				<project-name>InterBase</project-name>
-				<project-url>http://info.borland.com/devsupport/interbase/opensource</project-url>
-				<licenses>
-					<license>
-						<license-name>InterBase Public License 1.0 and Amendments</license-name>
-						<license-url>http://www.firebirdsql.org/en/interbase-public-license</license-url>
-					</license>
-				</licenses>
 			</library>
 			<library>
 				<file-name>lib/development/j2h.jar</file-name>
@@ -513,18 +481,6 @@
 				<comments>
 					See LPS-27200.
 				</comments>
-			</library>
-			<library>
-				<file-name>lib/development/jtds.jar</file-name>
-				<version>1.3.1</version>
-				<project-name>jTDS</project-name>
-				<project-url>http://jtds.sourceforge.net</project-url>
-				<licenses>
-					<license>
-						<license-name>LGPL 2.1</license-name>
-						<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
-					</license>
-				</licenses>
 			</library>
 			<library>
 				<file-name>lib/development/junit.jar</file-name>
@@ -820,18 +776,6 @@
 				<comments>
 					See LEP-5048 and LPS-15805.
 				</comments>
-			</library>
-			<library>
-				<file-name>lib/development/sap.jar</file-name>
-				<version></version>
-				<project-name>SAP DB / MaxDB</project-name>
-				<project-url>http://www.sapdb.org</project-url>
-				<licenses>
-					<license>
-						<license-name>LGPL 2.1</license-name>
-						<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
-					</license>
-				</licenses>
 			</library>
 			<library>
 				<file-name>lib/development/saxpath.jar</file-name>
@@ -2553,7 +2497,7 @@
 			</library>
 			<library>
 				<file-name>lib/portal/metadata-extractor.jar</file-name>
-				<version>2.6.2</version>
+				<version>2.8.0</version>
 				<project-name>Metadata Extractor</project-name>
 				<project-url>http://www.drewnoakes.com/code/exif</project-url>
 				<licenses>
@@ -3291,7 +3235,7 @@
 			</library>
 			<library>
 				<file-name>lib/portal/tika-core.jar</file-name>
-				<version>1.6</version>
+				<version>1.10</version>
 				<project-name>Tika</project-name>
 				<project-url>http://tika.apache.org</project-url>
 				<licenses>
@@ -3303,7 +3247,7 @@
 			</library>
 			<library>
 				<file-name>lib/portal/tika-parsers.jar</file-name>
-				<version>1.6</version>
+				<version>1.10</version>
 				<project-name>Tika</project-name>
 				<project-url>http://tika.apache.org</project-url>
 				<licenses>
@@ -3312,9 +3256,6 @@
 						<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 					</license>
 				</licenses>
-				<comments>
-					See LPS-49991.
-				</comments>
 			</library>
 			<library>
 				<file-name>lib/portal/tomcat-jdbc.jar</file-name>

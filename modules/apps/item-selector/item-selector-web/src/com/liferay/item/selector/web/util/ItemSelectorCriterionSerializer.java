@@ -135,6 +135,12 @@ public class ItemSelectorCriterionSerializer<T extends ItemSelectorCriterion> {
 							serializableFieldClass.getComponentType(),
 							list.size()));
 				}
+				else if (((serializableFieldClass == Long.class) ||
+						  (serializableFieldClass == Long.TYPE)) &&
+						 (value instanceof String)) {
+
+					value = Long.valueOf((String)value);
+				}
 
 				PropertyUtils.setProperty(
 					itemSelectorCriterion, externalPropertyKey, value);

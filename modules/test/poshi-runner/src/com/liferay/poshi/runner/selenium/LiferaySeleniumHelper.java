@@ -157,6 +157,75 @@ public class LiferaySeleniumHelper {
 		}
 	}
 
+	public static void assertConsoleErrors() throws Exception {
+		if (!PropsValues.TEST_ASSERT_CONSOLE_ERRORS) {
+			return;
+		}
+
+		String fileName = PropsValues.TEST_CONSOLE_LOG_FILE_NAME;
+
+		if (!FileUtil.exists(fileName)) {
+			return;
+		}
+
+		String content = FileUtil.read(fileName);
+
+		if (content.equals("")) {
+			return;
+		}
+
+		SAXReader saxReader = new SAXReader();
+
+		content = "<log4j>" + content + "</log4j>";
+		content = content.replaceAll("log4j:", "");
+
+		InputStream inputStream = new ByteArrayInputStream(
+			content.getBytes("UTF-8"));
+
+		Document document = saxReader.read(inputStream);
+
+		Element rootElement = document.getRootElement();
+
+		List<Element> eventElements = rootElement.elements("event");
+		List<Exception> exceptions = new ArrayList<>();
+
+		for (Element eventElement : eventElements) {
+			String level = eventElement.attributeValue("level");
+
+			if (level.equals("ERROR")) {
+				String fileContent = FileUtil.read(fileName);
+
+				fileContent = fileContent.replaceFirst(
+					"level=\"ERROR\"", "level=\"ERROR_FOUND\"");
+
+				FileUtil.write(fileName, fileContent);
+
+				Element messageElement = eventElement.element("message");
+
+				String messageText = messageElement.getText();
+
+				if (isIgnorableErrorLine(messageText)) {
+					continue;
+				}
+
+				StringBuilder sb = new StringBuilder();
+
+				sb.append("LIFERAY_ERROR: ");
+				sb.append(messageText);
+
+				System.out.println(sb.toString());
+
+				exceptions.add(new PoshiRunnerWarningException(sb.toString()));
+			}
+		}
+
+		if (!exceptions.isEmpty()) {
+			addToLiferayExceptions(exceptions);
+
+			throw exceptions.get(0);
+		}
+	}
+
 	public static void assertConsoleTextNotPresent(String text)
 		throws Exception {
 
@@ -231,71 +300,6 @@ public class LiferaySeleniumHelper {
 		if (!isHTMLSourceTextPresent(liferaySelenium, value)) {
 			throw new Exception(
 				"Pattern \"" + value + "\" does not exists in the HTML source");
-		}
-	}
-
-	public static void assertLiferayErrors() throws Exception {
-		String fileName = PropsValues.TEST_CONSOLE_LOG_FILE_NAME;
-
-		if (!FileUtil.exists(fileName)) {
-			return;
-		}
-
-		String content = FileUtil.read(fileName);
-
-		if (content.equals("")) {
-			return;
-		}
-
-		SAXReader saxReader = new SAXReader();
-
-		content = "<log4j>" + content + "</log4j>";
-		content = content.replaceAll("log4j:", "");
-
-		InputStream inputStream = new ByteArrayInputStream(
-			content.getBytes("UTF-8"));
-
-		Document document = saxReader.read(inputStream);
-
-		Element rootElement = document.getRootElement();
-
-		List<Element> eventElements = rootElement.elements("event");
-		List<Exception> exceptions = new ArrayList<>();
-
-		for (Element eventElement : eventElements) {
-			String level = eventElement.attributeValue("level");
-
-			if (level.equals("ERROR")) {
-				String fileContent = FileUtil.read(fileName);
-
-				fileContent = fileContent.replaceFirst(
-					"level=\"ERROR\"", "level=\"ERROR_FOUND\"");
-
-				FileUtil.write(fileName, fileContent);
-
-				Element messageElement = eventElement.element("message");
-
-				String messageText = messageElement.getText();
-
-				if (isIgnorableErrorLine(messageText)) {
-					continue;
-				}
-
-				StringBuilder sb = new StringBuilder();
-
-				sb.append("LIFERAY_ERROR: ");
-				sb.append(messageText);
-
-				System.out.println(sb.toString());
-
-				exceptions.add(new PoshiRunnerWarningException(sb.toString()));
-			}
-		}
-
-		if (!exceptions.isEmpty()) {
-			addToLiferayExceptions(exceptions);
-
-			throw exceptions.get(0);
 		}
 	}
 
@@ -737,7 +741,11 @@ public class LiferaySeleniumHelper {
 		List<String> baseDirNames = new ArrayList<>();
 
 		baseDirNames.add(PropsValues.TEST_BASE_DIR_NAME);
-		baseDirNames.addAll(Arrays.asList(PropsValues.TEST_INCLUDE_DIR_NAMES));
+
+		if (Validator.isNotNull(PropsValues.TEST_INCLUDE_DIR_NAMES)) {
+			baseDirNames.addAll(
+				Arrays.asList(PropsValues.TEST_INCLUDE_DIR_NAMES));
+		}
 
 		for (String baseDirName : baseDirNames) {
 			String filePath = PoshiRunnerGetterUtil.getCanonicalPath(
@@ -976,14 +984,6 @@ public class LiferaySeleniumHelper {
 		return false;
 	}
 
-	public static boolean isMobileDeviceEnabled() {
-		if (Validator.isNull(PropsValues.MOBILE_DEVICE_TYPE)) {
-			return false;
-		}
-
-		return true;
-	}
-
 	public static boolean isNotChecked(
 		LiferaySelenium liferaySelenium, String locator) {
 
@@ -1041,6 +1041,36 @@ public class LiferaySeleniumHelper {
 
 	public static void pause(String waitTime) throws Exception {
 		Thread.sleep(GetterUtil.getInteger(waitTime));
+	}
+
+	public static void printJavaProcessStacktrace() throws Exception {
+		if (Validator.isNull(PropsValues.PRINT_JAVA_PROCESS_ON_FAIL)) {
+			return;
+		}
+
+		String line = null;
+		String pid = null;
+
+		BufferedReader bufferedReader = _execute("jps");
+
+		while ((line = bufferedReader.readLine()) != null) {
+			System.out.println(line);
+
+			if (line.contains(PropsValues.PRINT_JAVA_PROCESS_ON_FAIL)) {
+				pid = line.substring(0, line.indexOf(" "));
+
+				System.out.println(
+					PropsValues.PRINT_JAVA_PROCESS_ON_FAIL + " PID: " + pid);
+			}
+		}
+
+		if (Validator.isNotNull(pid)) {
+			bufferedReader = _execute("jstack -l " + pid);
+
+			while ((line = bufferedReader.readLine()) != null) {
+				System.out.println(line);
+			}
+		}
 	}
 
 	public static void replyToEmail(
@@ -1788,6 +1818,28 @@ public class LiferaySeleniumHelper {
 
 		FileUtil.write(
 			PropsValues.TEST_POSHI_WARNINGS_FILE_NAME, sb.toString());
+	}
+
+	private static BufferedReader _execute(String command) throws Exception {
+		String[] runCommand;
+
+		if (!OSDetector.isWindows()) {
+			runCommand = new String[] {"/bin/bash", "-c", command};
+		}
+		else {
+			runCommand = new String[] {"cmd", "/c", command};
+		}
+
+		Runtime runtime = Runtime.getRuntime();
+
+		Process process = runtime.exec(runCommand);
+
+		InputStreamReader inputStreamReader = new InputStreamReader(
+			process.getInputStream());
+
+		BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+		return bufferedReader;
 	}
 
 	private static List<ScreenRegion> getScreenRegions(

@@ -84,7 +84,7 @@ public class DLExportImportPortletPreferencesProcessor
 			try {
 				folder = DLAppLocalServiceUtil.getFolder(rootFolderId);
 			}
-			catch (PortalException e) {
+			catch (PortalException pe) {
 				StringBundler sb = new StringBundler(4);
 
 				sb.append("Portlet ");
@@ -92,11 +92,9 @@ public class DLExportImportPortletPreferencesProcessor
 				sb.append(" refers to an invalid root folder ID ");
 				sb.append(rootFolderId);
 
-				if (_log.isErrorEnabled()) {
-					_log.error(sb.toString());
-				}
+				_log.error(sb.toString());
 
-				throw new PortletDataException(sb.toString(), e);
+				throw new PortletDataException(sb.toString(), pe);
 			}
 
 			StagedModelDataHandlerUtil.exportReferenceStagedModel(

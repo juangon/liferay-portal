@@ -14,21 +14,44 @@
 
 package com.liferay.sync.engine.util;
 
+import java.io.IOException;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.poi.hpsf.HPSFPropertiesOnlyDocument;
+import org.apache.poi.hpsf.SummaryInformation;
+import org.apache.poi.poifs.filesystem.NPOIFSFileSystem;
 
 /**
  * @author Shinn Lok
  */
 public class MSOfficeFileUtil {
+
+	public static Date getLastSavedDate(Path filePath) throws IOException {
+		NPOIFSFileSystem npoifsFileSystem = new NPOIFSFileSystem(
+			filePath.toFile());
+
+		HPSFPropertiesOnlyDocument hpsfPropertiesOnlyDocument =
+			new HPSFPropertiesOnlyDocument(npoifsFileSystem);
+
+		SummaryInformation summaryInformation =
+			hpsfPropertiesOnlyDocument.getSummaryInformation();
+
+		if (summaryInformation == null) {
+			return null;
+		}
+
+		return summaryInformation.getLastSaveDateTime();
+	}
 
 	public static boolean isExcelFile(Path filePath) {
 		if (Files.isDirectory(filePath)) {
@@ -42,6 +65,26 @@ public class MSOfficeFileUtil {
 		}
 
 		if (_excelExtensions.contains(extension.toLowerCase())) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public static boolean isLegacyExcelFile(Path filePath) {
+		if (Files.isDirectory(filePath)) {
+			return false;
+		}
+
+		String extension = FilenameUtils.getExtension(filePath.toString());
+
+		if (extension == null) {
+			return false;
+		}
+
+		extension = extension.toLowerCase();
+
+		if (extension.equals("xls")) {
 			return true;
 		}
 

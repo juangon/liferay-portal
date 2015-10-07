@@ -1,12 +1,12 @@
 <#include "${templatesPath}/NAVIGATION-MACRO-FTL" />
 
-<#assign rootNavigationItems = navItem.fromLayouts(request, themeDisplay.getLayouts(), null) />
-
 <#if rootNavigationItems?has_content>
 	<#assign layoutLevel = 0 />
 
 	<div class="nav-menu nav-menu-style-${bulletStyle}">
 		<ul class="layouts level-${layoutLevel}">
+			<#assign rootNavigationItems = navItem.fromLayouts(request, themeDisplay.getLayouts(), null) />
+
 			<#list rootNavigationItems as rootNavigationItem>
 				<li class="open">
 					<#if rootNavigationItem.isBrowsable()>

@@ -163,8 +163,8 @@ public class JournalContentDisplayContext {
 					new PortletRequestModel(_portletRequest, _portletResponse),
 					themeDisplay);
 			}
-			catch (PortalException e) {
-				_log.error(e);
+			catch (PortalException pe) {
+				_log.error(pe, pe);
 			}
 		}
 

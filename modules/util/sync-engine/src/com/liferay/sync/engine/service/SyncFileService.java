@@ -23,6 +23,7 @@ import com.liferay.sync.engine.service.persistence.SyncFilePersistence;
 import com.liferay.sync.engine.util.FileKeyUtil;
 import com.liferay.sync.engine.util.FileUtil;
 import com.liferay.sync.engine.util.IODeltaUtil;
+import com.liferay.sync.engine.util.MSOfficeFileUtil;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -111,6 +112,13 @@ public class SyncFileService {
 		syncFile.setChecksum(checksum);
 		syncFile.setDescription(description);
 		syncFile.setFilePathName(filePathName);
+
+		if (MSOfficeFileUtil.isLegacyExcelFile(Paths.get(filePathName))) {
+			syncFile.setLocalExtraSettingsValue(
+				"lastSavedDate",
+				MSOfficeFileUtil.getLastSavedDate(Paths.get(filePathName)));
+		}
+
 		syncFile.setLocalSyncTime(System.currentTimeMillis());
 		syncFile.setMimeType(mimeType);
 		syncFile.setName(name);
@@ -611,18 +619,48 @@ public class SyncFileService {
 		_syncFilePersistence.unregisterModelListener(modelListener);
 	}
 
-	public static SyncFile unsyncFolder(String filePathName) throws Exception {
-		SyncFile syncFile = SyncFileService.fetchSyncFile(filePathName);
+	public static SyncFile unsyncFolder(
+			long syncAccountId, SyncFile targetSyncFile)
+		throws Exception {
 
-		if (syncFile == null) {
-			return addSyncFile(
-				null, null, null, filePathName, null, null, 0, 0,
-				SyncFile.STATE_UNSYNCED, 0, null, false);
+		SyncFile parentSyncFile = SyncFileService.fetchSyncFile(
+			targetSyncFile.getRepositoryId(), syncAccountId,
+			targetSyncFile.getParentFolderId());
+
+		if (parentSyncFile == null) {
+			return null;
 		}
 
-		setStatuses(syncFile, SyncFile.STATE_UNSYNCED, SyncFile.UI_EVENT_NONE);
+		String filePathName = FileUtil.getFilePathName(
+			parentSyncFile.getFilePathName(),
+			FileUtil.getSanitizedFileName(targetSyncFile.getName(), null));
 
-		return syncFile;
+		SyncFile sourceSyncFile = SyncFileService.fetchSyncFile(filePathName);
+
+		if (sourceSyncFile == null) {
+			targetSyncFile.setFilePathName(filePathName);
+			targetSyncFile.setModifiedTime(0);
+			targetSyncFile.setState(SyncFile.STATE_UNSYNCED);
+			targetSyncFile.setSyncAccountId(syncAccountId);
+
+			return update(targetSyncFile);
+		}
+
+		sourceSyncFile.setModifiedTime(0);
+
+		setStatuses(
+			sourceSyncFile, SyncFile.STATE_UNSYNCED, SyncFile.UI_EVENT_NONE);
+
+		return sourceSyncFile;
+	}
+
+	public static void unsyncFolders(
+			long syncAccountId, List<SyncFile> targetSyncFiles)
+		throws Exception {
+
+		for (SyncFile targetSyncFile : targetSyncFiles) {
+			unsyncFolder(syncAccountId, targetSyncFile);
+		}
 	}
 
 	public static SyncFile update(SyncFile syncFile) {
@@ -650,6 +688,11 @@ public class SyncFileService {
 			filePath, String.valueOf(syncFile.getSyncFileId()), true);
 
 		Path deltaFilePath = null;
+
+		if (MSOfficeFileUtil.isLegacyExcelFile(filePath)) {
+			syncFile.setLocalExtraSettingsValue(
+				"lastSavedDate", MSOfficeFileUtil.getLastSavedDate(filePath));
+		}
 
 		String name = _getName(filePath, syncFile);
 		String sourceChecksum = syncFile.getChecksum();

@@ -63,9 +63,6 @@ public class SearchPaginatorTag<R> extends SearchFormTag<R> {
 		request.setAttribute("liferay-ui:search:type", _type);
 	}
 
-	private static final String _PAGE =
-		"/html/taglib/ui/search_paginator/page.jsp";
-
 	private String _id;
 	private String _markupView;
 	private String _type = "regular";

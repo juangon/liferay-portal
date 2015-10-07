@@ -38,6 +38,7 @@ public class SearchIteratorTag<R> extends SearchPaginatorTag<R> {
 		_displayStyle = displayStyle;
 	}
 
+	@Override
 	public void setMarkupView(String markupView) {
 		_markupView = markupView;
 	}
