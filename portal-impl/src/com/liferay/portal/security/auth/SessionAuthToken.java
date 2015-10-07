@@ -165,6 +165,10 @@ public class SessionAuthToken implements AuthToken {
 				(HttpServletRequest)httpServletRequestWrapper.getRequest();
 		}
 
+		if (session == null ) {
+			session = currentRequest.getSession();
+		}
+
 		if (createToken && Validator.isNull(sessionAuthenticationToken)) {
 			sessionAuthenticationToken = PwdGenerator.getPassword(
 				PropsValues.AUTH_TOKEN_LENGTH);
