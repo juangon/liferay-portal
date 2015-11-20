@@ -148,6 +148,8 @@ public class I18nServlet extends HttpServlet {
 			return null;
 		}
 
+		String i18nPath = StringPool.SLASH + i18nLanguageId;
+		
 		Locale locale = LocaleUtil.fromLanguageId(i18nLanguageId);
 
 		String i18nLanguageCode = locale.getLanguage();
@@ -172,8 +174,6 @@ public class I18nServlet extends HttpServlet {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Redirect " + redirect);
 		}
-
-		String i18nPath = StringPool.SLASH + i18nLanguageId;
 
 		return new String[] {
 			i18nLanguageId, i18nPath, redirect, i18nLanguageCode
