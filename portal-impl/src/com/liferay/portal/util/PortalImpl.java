@@ -6470,6 +6470,18 @@ public class PortalImpl implements Portal {
 	}
 
 	@Override
+	public boolean isSkipPortletContentRendering(
+			Group group, LayoutTypePortlet layoutTypePortlet,
+			PortletDisplay portletDisplay, String portletName)
+		throws PortalException, SystemException {
+
+		return (group.isLayoutPrototype() &&
+				layoutTypePortlet.hasPortletId(portletDisplay.getId()) &&
+				!portletName.equals(PortletKeys.NESTED_PORTLETS) &&
+				portletDisplay.isModeView());
+	}
+
+	@Override
 	public boolean isSystemGroup(String groupName) {
 		if (groupName == null) {
 			return false;
