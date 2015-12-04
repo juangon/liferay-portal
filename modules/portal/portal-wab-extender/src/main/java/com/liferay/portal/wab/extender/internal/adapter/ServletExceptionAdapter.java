@@ -15,11 +15,12 @@
 package com.liferay.portal.wab.extender.internal.adapter;
 
 import java.io.IOException;
-
+import java.util.Enumeration;
 import java.util.concurrent.Callable;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -29,13 +30,29 @@ import javax.servlet.ServletResponse;
  */
 public class ServletExceptionAdapter implements Servlet {
 
-	public ServletExceptionAdapter(Servlet servlet) {
+	public ServletExceptionAdapter(Servlet servlet, ServletContext servletContext) {
 		_servlet = servlet;
+		_servletContext = servletContext;
 	}
 
 	@Override
 	public void destroy() {
-		_servlet.destroy();
+		try {
+			TCCLUtil.wrapTCCL(
+				new Callable<Void>() {
+
+					@Override
+					public Void call() throws Exception {
+							_servlet.destroy();
+
+							return null;
+					}
+
+				});
+		}
+		catch (Exception e) {
+			_exception = e;
+		}
 	}
 
 	public Exception getException() {
@@ -60,7 +77,31 @@ public class ServletExceptionAdapter implements Servlet {
 
 					@Override
 					public Void call() throws Exception {
-						_servlet.init(servletConfig);
+						
+						ServletConfig newServletConfig = new ServletConfig() {
+							
+							@Override
+							public String getServletName() {
+								return servletConfig.getServletName();
+							}
+							
+							@Override
+							public ServletContext getServletContext() {
+								return _servletContext;
+							}
+							
+							@Override
+							public Enumeration<String> getInitParameterNames() {
+								return servletConfig.getInitParameterNames();
+							}
+							
+							@Override
+							public String getInitParameter(String name) {
+								return servletConfig.getInitParameter(name);
+							}
+						};
+						
+						_servlet.init(newServletConfig);
 
 						return null;
 					}
@@ -82,5 +123,6 @@ public class ServletExceptionAdapter implements Servlet {
 
 	private Exception _exception;
 	private final Servlet _servlet;
+	private final ServletContext _servletContext;
 
 }

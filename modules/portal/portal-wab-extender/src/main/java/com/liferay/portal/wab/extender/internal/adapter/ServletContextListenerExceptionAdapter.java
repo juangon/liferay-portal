@@ -16,6 +16,7 @@ package com.liferay.portal.wab.extender.internal.adapter;
 
 import java.util.concurrent.Callable;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
@@ -31,10 +32,26 @@ public class ServletContextListenerExceptionAdapter
 		_servletContextListener = servletContextListener;
 	}
 
+	public ServletContext getServletContext() {
+		return _servletContext;
+	}
+
 	@Override
-	public void contextDestroyed(ServletContextEvent servletContextEvent) {
+	public void contextDestroyed(final ServletContextEvent servletContextEvent) {
 		try {
-			_servletContextListener.contextDestroyed(servletContextEvent);
+			TCCLUtil.wrapTCCL(
+					new Callable<Void>() {
+
+						@Override
+						public Void call() throws Exception {
+								_servletContextListener.contextDestroyed(servletContextEvent);
+								
+								_servletContext = servletContextEvent.getServletContext();
+								
+								return null;
+						}
+
+					});
 		}
 		catch (Exception e) {
 			_exception = e;
@@ -54,6 +71,7 @@ public class ServletContextListenerExceptionAdapter
 						_servletContextListener.contextInitialized(
 							servletContextEvent);
 
+						_servletContext = servletContextEvent.getServletContext();
 						return null;
 					}
 
@@ -70,5 +88,6 @@ public class ServletContextListenerExceptionAdapter
 
 	private Exception _exception;
 	private final ServletContextListener _servletContextListener;
+	private ServletContext _servletContext;
 
 }
