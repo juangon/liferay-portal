@@ -15,11 +15,12 @@
 package com.liferay.portal.wab.extender.internal.adapter;
 
 import java.io.IOException;
-
+import java.util.Enumeration;
 import java.util.concurrent.Callable;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -29,8 +30,9 @@ import javax.servlet.ServletResponse;
  */
 public class ServletExceptionAdapter implements Servlet {
 
-	public ServletExceptionAdapter(Servlet servlet) {
+	public ServletExceptionAdapter(Servlet servlet, ServletContext servletContext) {
 		_servlet = servlet;
+		_servletContext = servletContext;
 	}
 
 	@Override
@@ -47,6 +49,11 @@ public class ServletExceptionAdapter implements Servlet {
 		return _servlet.getServletConfig();
 	}
 
+	
+	public ServletContext getServletContext() {
+		return _servletContext;
+	}
+	
 	@Override
 	public String getServletInfo() {
 		return _servlet.getServletInfo();
@@ -60,7 +67,38 @@ public class ServletExceptionAdapter implements Servlet {
 
 					@Override
 					public Void call() throws Exception {
-						_servlet.init(servletConfig);
+						
+						ServletConfig newServletConfig = new ServletConfig() {
+							
+							@Override
+							public String getServletName() {
+								return servletConfig.getServletName();
+							}
+							
+							@Override
+							public ServletContext getServletContext() {
+								if (_servletContext != null) {
+									return _servletContext;
+								}
+								else {
+									return servletConfig.getServletContext();
+								}
+							}
+							
+							@Override
+							public Enumeration<String> getInitParameterNames() {
+								return servletConfig.getInitParameterNames();
+							}
+							
+							@Override
+							public String getInitParameter(String name) {
+								return servletConfig.getInitParameter(name);
+							}
+						};
+						
+						_servlet.init(newServletConfig);
+						
+						_servletContext = newServletConfig.getServletContext();
 
 						return null;
 					}
@@ -82,5 +120,6 @@ public class ServletExceptionAdapter implements Servlet {
 
 	private Exception _exception;
 	private final Servlet _servlet;
+	private ServletContext _servletContext;
 
 }
