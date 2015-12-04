@@ -16,9 +16,7 @@ package com.liferay.portal.portlet.tracker.internal;
 
 import java.io.IOException;
 import java.io.InputStream;
-
 import java.net.URL;
-
 import java.util.Enumeration;
 
 /**
@@ -124,4 +122,16 @@ public class PassThroughClassLoader extends ClassLoader {
 		return super.loadClass(name, resolve);
 	}
 
+	@Override
+	public int hashCode() {
+		return getParent().hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof PassThroughClassLoader){
+			return getParent().equals(((PassThroughClassLoader) obj).getParent());
+		}
+		return getParent().equals(obj);
+	}
 }
