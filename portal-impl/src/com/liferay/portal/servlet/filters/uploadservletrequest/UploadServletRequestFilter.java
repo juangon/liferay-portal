@@ -21,17 +21,12 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
-import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.theme.ThemeDisplayFactory;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.InvokerPortlet;
 import com.liferay.portlet.PortletInstanceFactoryUtil;
-
-import java.util.Locale;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletContext;
@@ -60,28 +55,13 @@ public class UploadServletRequestFilter extends BasePortalFilter {
 		if ((contentType != null) &&
 			contentType.startsWith(ContentTypes.MULTIPART_FORM_DATA)) {
 
-			boolean initThemeDisplay = false;
-
 			String portletId = ParamUtil.getString(request, "p_p_id");
 
-			ThemeDisplay themeDisplay = (ThemeDisplay)
-					request.getAttribute(WebKeys.THEME_DISPLAY);
-
-			if (themeDisplay == null) {
-				initThemeDisplay = true;
-				themeDisplay = ThemeDisplayFactory.create();
-			}
-
 			if (Validator.isNotNull(portletId)) {
-
-				Company company = PortalUtil.getCompany(request);
-
-				if (initThemeDisplay) {
-					themeDisplay.setCompany(company);
-				}
+				long companyId = PortalUtil.getCompanyId(request);
 
 				Portlet portlet = PortletLocalServiceUtil.getPortletById(
-					company.getCompanyId(), portletId);
+					companyId, portletId);
 
 				if (portlet != null) {
 					ServletContext servletContext =
@@ -104,18 +84,6 @@ public class UploadServletRequestFilter extends BasePortalFilter {
 							Boolean.FALSE);
 					}
 				}
-			}
-
-			if (initThemeDisplay) {
-				Locale locale = PortalUtil.getLocale(request);
-				long scopeGroupId = PortalUtil.getScopeGroupId(request);
-				String portalURL = PortalUtil.getPortalURL(request);
-
-				themeDisplay.setLocale(locale);
-				themeDisplay.setPortalURL(portalURL);
-				themeDisplay.setScopeGroupId(scopeGroupId);
-
-				request.setAttribute(WebKeys.THEME_DISPLAY, themeDisplay);
 			}
 
 			uploadServletRequest = PortalUtil.getUploadServletRequest(request);
