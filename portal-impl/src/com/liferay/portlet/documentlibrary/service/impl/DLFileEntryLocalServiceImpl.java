@@ -59,6 +59,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portal.model.Group;
@@ -73,6 +74,7 @@ import com.liferay.portal.repository.liferayrepository.model.LiferayFileEntry;
 import com.liferay.portal.repository.liferayrepository.model.LiferayFileVersion;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -2116,6 +2118,9 @@ public class DLFileEntryLocalServiceImpl
 
 		HttpServletRequest request = serviceContext.getRequest();
 
+		ThemeDisplay themeDisplay = (ThemeDisplay) 
+				request.getAttribute(WebKeys.THEME_DISPLAY);
+		
 		ServletContext servletContext = null;
 		
 		try {
@@ -2124,7 +2129,7 @@ public class DLFileEntryLocalServiceImpl
 		catch (Exception e) {
 		}
 		
-		if ((request == null) || (servletContext == null)) {
+		if ((themeDisplay == null) || (request == null) || (servletContext == null)) {
 			if (Validator.isNull(serviceContext.getLayoutFullURL())) {
 				return StringPool.BLANK;
 			}

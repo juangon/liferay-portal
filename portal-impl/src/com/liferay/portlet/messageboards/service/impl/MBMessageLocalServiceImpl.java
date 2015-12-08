@@ -1872,6 +1872,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		HttpServletRequest request = serviceContext.getRequest();
 
+		ThemeDisplay themeDisplay = (ThemeDisplay) 
+				request.getAttribute(WebKeys.THEME_DISPLAY);
+
 		ServletContext servletContext = null;
 		
 		try {
@@ -1880,7 +1883,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		catch (Exception e) {
 		}
 		
-		if ((request == null) || (servletContext == null)) {
+		if ((themeDisplay == null) || (request == null) || (servletContext == null)) {
 			if (Validator.isNull(serviceContext.getLayoutFullURL())) {
 				return StringPool.BLANK;
 			}
