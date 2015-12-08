@@ -117,12 +117,10 @@ import com.liferay.portlet.expando.model.ExpandoTable;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.awt.image.RenderedImage;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -131,7 +129,7 @@ import java.util.Map;
 
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
-
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -2118,7 +2116,15 @@ public class DLFileEntryLocalServiceImpl
 
 		HttpServletRequest request = serviceContext.getRequest();
 
-		if (request == null) {
+		ServletContext servletContext = null;
+		
+		try {
+			servletContext = request.getServletContext();
+		}
+		catch (Exception e) {
+		}
+		
+		if ((request == null) || (servletContext == null)) {
 			if (Validator.isNull(serviceContext.getLayoutFullURL())) {
 				return StringPool.BLANK;
 			}
