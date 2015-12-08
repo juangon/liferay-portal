@@ -98,7 +98,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -108,7 +107,7 @@ import java.util.List;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
-
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import net.htmlparser.jericho.Source;
@@ -1913,7 +1912,15 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		HttpServletRequest request = serviceContext.getRequest();
 
-		if (request == null) {
+		ServletContext servletContext = null;
+		
+		try {
+			servletContext = request.getServletContext();
+		}
+		catch (Exception e) {
+		}
+		
+		if ((request == null) || (servletContext == null)) {
 			if (Validator.isNull(serviceContext.getLayoutFullURL())) {
 				return StringPool.BLANK;
 			}
