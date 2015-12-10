@@ -15,13 +15,12 @@
 package com.liferay.portal.wab.extender.internal.adapter;
 
 import java.io.IOException;
-import java.util.Enumeration;
+
 import java.util.concurrent.Callable;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -31,9 +30,8 @@ import javax.servlet.ServletResponse;
  */
 public class FilterExceptionAdapter implements Filter {
 
-	public FilterExceptionAdapter(Filter filter, ServletContext servletContext) {
+	public FilterExceptionAdapter(Filter filter) {
 		_filter = filter;
-		_servletContext = servletContext;
 	}
 
 	@Override
@@ -54,10 +52,6 @@ public class FilterExceptionAdapter implements Filter {
 		return _exception;
 	}
 
-	public ServletContext getServletContext() {
-		return _servletContext;
-	}
-	
 	@Override
 	public void init(final FilterConfig filterConfig) {
 		try {
@@ -66,37 +60,8 @@ public class FilterExceptionAdapter implements Filter {
 
 					@Override
 					public Void call() throws Exception {
-						FilterConfig newFilterConfig = new FilterConfig() {
-							
-							@Override
-							public ServletContext getServletContext() {
-								if (_servletContext != null) {
-									return _servletContext;
-								}else {
-									return filterConfig.getServletContext();
-								}
-							}
-							
-							@Override
-							public Enumeration<String> getInitParameterNames() {
-								return filterConfig.getInitParameterNames();
-							}
-							
-							@Override
-							public String getInitParameter(String name) {
-								return filterConfig.getInitParameter(name);
-							}
-							
-							@Override
-							public String getFilterName() {
-								return filterConfig.getFilterName();
-							}
-						};
-						
-						_filter.init(newFilterConfig);
+						_filter.init(filterConfig);
 
-						_servletContext = newFilterConfig.getServletContext();
-						
 						return null;
 					}
 
@@ -109,6 +74,5 @@ public class FilterExceptionAdapter implements Filter {
 
 	private Exception _exception;
 	private final Filter _filter;
-	private ServletContext _servletContext;
 
 }
