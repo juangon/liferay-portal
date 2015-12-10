@@ -134,9 +134,7 @@ public class WabBundleProcessor implements ServletContextListener {
 				_jspServletServiceRegistration.unregister();
 			}
 
-			if (_defaultServletServiceRegistration != null) {
-				_defaultServletServiceRegistration.unregister();
-			}
+			_defaultServletServiceRegistration.unregister();
 
 			currentThread.setContextClassLoader(_bundleClassLoader);
 
@@ -169,9 +167,9 @@ public class WabBundleProcessor implements ServletContextListener {
 
 			registerThisAsEventListener();
 
-			ServletContext servletContext = initListeners();
+			initListeners();
 
-			servletContext = initFilters(servletContext);
+			initFilters();
 
 			try {
 				currentThread.setContextClassLoader(contextClassLoader);
@@ -183,7 +181,7 @@ public class WabBundleProcessor implements ServletContextListener {
 				currentThread.setContextClassLoader(_bundleClassLoader);
 			}
 
-			initServlets(servletContext);
+			initServlets();
 		}
 		catch (Exception e) {
 			_logger.log(
@@ -361,12 +359,10 @@ public class WabBundleProcessor implements ServletContextListener {
 			ServletContextHelper.class, _wabServletContextHelper, properties);
 	}
 
-	protected ServletContext initFilters(ServletContext servletContext) throws Exception {
+	protected void initFilters() throws Exception {
 		Map<String, FilterDefinition> filterDefinitions =
 			_webXMLDefinition.getFilterDefinitions();
 
-		ServletContext newServletContext = servletContext;
-		
 		for (Map.Entry<String, FilterDefinition> entry :
 				filterDefinitions.entrySet()) {
 
@@ -412,15 +408,13 @@ public class WabBundleProcessor implements ServletContextListener {
 			}
 
 			FilterExceptionAdapter filterExceptionAdaptor =
-				new FilterExceptionAdapter(filterDefinition.getFilter(), newServletContext);
+				new FilterExceptionAdapter(filterDefinition.getFilter());
 
 			ServiceRegistration<Filter> serviceRegistration =
 				_bundleContext.registerService(
 					Filter.class, filterExceptionAdaptor, properties);
 
 			Exception exception = filterExceptionAdaptor.getException();
-
-			newServletContext = filterExceptionAdaptor.getServletContext();
 
 			if (exception != null) {
 				serviceRegistration.unregister();
@@ -430,16 +424,12 @@ public class WabBundleProcessor implements ServletContextListener {
 
 			_filterRegistrations.add(serviceRegistration);
 		}
-
-		return newServletContext;
 	}
 
-	protected ServletContext initListeners() throws Exception {
+	protected void initListeners() throws Exception {
 		List<ListenerDefinition> listenerDefinitions =
 			_webXMLDefinition.getListenerDefinitions();
 
-		ServletContext servletContext = null;
-		
 		for (ListenerDefinition listenerDefinition : listenerDefinitions) {
 			Dictionary<String, Object> properties = new Hashtable<>();
 
@@ -470,7 +460,7 @@ public class WabBundleProcessor implements ServletContextListener {
 				servletContextListenerExceptionAdaptor =
 					new ServletContextListenerExceptionAdapter(
 						(ServletContextListener)
-							listenerDefinition.getEventListener(), servletContext);
+							listenerDefinition.getEventListener());
 
 			serviceRegistration = _bundleContext.registerService(
 				ServletContextListener.class,
@@ -479,8 +469,6 @@ public class WabBundleProcessor implements ServletContextListener {
 			Exception exception =
 				servletContextListenerExceptionAdaptor.getException();
 
-			servletContext = servletContextListenerExceptionAdaptor.getServletContext();
-			
 			if (exception != null) {
 				serviceRegistration.unregister();
 
@@ -489,15 +477,11 @@ public class WabBundleProcessor implements ServletContextListener {
 
 			_listenerRegistrations.add(serviceRegistration);
 		}
-		
-		return servletContext;
 	}
 
-	protected void initServlets(ServletContext servletContext) throws Exception {
+	protected void initServlets() throws Exception {
 		Map<String, ServletDefinition> servletDefinitions =
 			_webXMLDefinition.getServletDefinitions();
-
-		ServletContext newServletContext = servletContext;
 
 		for (Entry<String, ServletDefinition> entry :
 				servletDefinitions.entrySet()) {
@@ -538,22 +522,19 @@ public class WabBundleProcessor implements ServletContextListener {
 			}
 
 			ServletExceptionAdapter servletExceptionAdaptor =
-				new ServletExceptionAdapter(servletDefinition.getServlet(), 
-						newServletContext);
+				new ServletExceptionAdapter(servletDefinition.getServlet());
 
 			ServiceRegistration<Servlet> serviceRegistration =
 				_bundleContext.registerService(
 					Servlet.class, servletExceptionAdaptor, properties);
 
 			Exception exception = servletExceptionAdaptor.getException();
-		
+
 			if (exception != null) {
 				serviceRegistration.unregister();
 
 				throw exception;
 			}
-			
-			newServletContext = servletExceptionAdaptor.getServletContext();
 
 			_servletRegistrations.add(serviceRegistration);
 		}

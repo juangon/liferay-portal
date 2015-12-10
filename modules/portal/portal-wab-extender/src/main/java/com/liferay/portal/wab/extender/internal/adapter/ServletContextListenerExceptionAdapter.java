@@ -16,7 +16,6 @@ package com.liferay.portal.wab.extender.internal.adapter;
 
 import java.util.concurrent.Callable;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
@@ -27,23 +26,15 @@ public class ServletContextListenerExceptionAdapter
 	implements ServletContextListener {
 
 	public ServletContextListenerExceptionAdapter(
-		ServletContextListener servletContextListener, ServletContext servletContext) {
+		ServletContextListener servletContextListener) {
 
 		_servletContextListener = servletContextListener;
-		_servletContext = servletContext;
-	}
-
-	public ServletContext getServletContext() {
-		return _servletContext;
 	}
 
 	@Override
-	public void contextDestroyed(final ServletContextEvent servletContextEvent) {
+	public void contextDestroyed(ServletContextEvent servletContextEvent) {
 		try {
 			_servletContextListener.contextDestroyed(servletContextEvent);
-								
-			_servletContext = servletContextEvent.getServletContext();
-		
 		}
 		catch (Exception e) {
 			_exception = e;
@@ -60,17 +51,8 @@ public class ServletContextListenerExceptionAdapter
 
 					@Override
 					public Void call() throws Exception {
-						
-						ServletContextEvent newServletContextEvent = servletContextEvent;
-
-						if (_servletContext != null) {
-							newServletContextEvent = new ServletContextEvent(_servletContext);
-						}
-
 						_servletContextListener.contextInitialized(
-								newServletContextEvent);
-
-						_servletContext = newServletContextEvent.getServletContext();
+							servletContextEvent);
 
 						return null;
 					}
@@ -88,6 +70,5 @@ public class ServletContextListenerExceptionAdapter
 
 	private Exception _exception;
 	private final ServletContextListener _servletContextListener;
-	private ServletContext _servletContext;
 
 }
