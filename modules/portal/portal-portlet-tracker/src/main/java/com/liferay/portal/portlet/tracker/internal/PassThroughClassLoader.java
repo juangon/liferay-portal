@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.wab.extender.internal.adapter;
+package com.liferay.portal.portlet.tracker.internal;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,10 +20,6 @@ import java.net.URL;
 import java.util.Enumeration;
 
 /**
- * Alters the logic in the <code>isRequestFromVM</code> method of Equinox's
- * <code>BundleLoader</code> class. All of the methods in this class must be
- * implemented even though they just invoke the parent class.
- *
  * @author Carlos Sierra Andrés
  */
 public class PassThroughClassLoader extends ClassLoader {
@@ -132,11 +128,10 @@ public class PassThroughClassLoader extends ClassLoader {
 	}
 
 	@Override
-	public boolean equals(Object obj) {	
+	public boolean equals(Object obj) {
 		if (obj instanceof PassThroughClassLoader){
 			return getParent().equals(((PassThroughClassLoader) obj).getParent());
 		}
 		return getParent().equals(obj);
 	}
-
 }
