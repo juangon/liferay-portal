@@ -24,6 +24,8 @@ String tabsNames = (String)request.getAttribute(PortalSettingsWebKeys.AUTHENTICA
 tabsNames = (tabsNames.length() > 0) ? StringPool.COMMA + tabsNames : tabsNames;
 
 tabsNames = StringUtil.merge(PropsValues.COMPANY_SETTINGS_FORM_AUTHENTICATION) + tabsNames;
+
+tabsNames = (tabsNames.length() > 0) ? "general" + StringPool.COMMA + tabsNames : "general";
 %>
 
 <liferay-ui:error-marker key="errorSection" value="authentication" />
@@ -34,13 +36,16 @@ tabsNames = StringUtil.merge(PropsValues.COMPANY_SETTINGS_FORM_AUTHENTICATION) +
 	names="<%= tabsNames %>"
 	refresh="<%= false %>"
 >
+	<liferay-ui:section>
+		<liferay-util:include page='<%= "/authentication/general.jsp" %>' portletId="<%= portletDisplay.getRootPortletId() %>" />
+	</liferay-ui:section>
 
 	<%
 	for (String section : PropsValues.COMPANY_SETTINGS_FORM_AUTHENTICATION) {
 	%>
 
 		<liferay-ui:section>
-			<liferay-util:include page='<%= "/authentication/" + _getSectionJsp(section) + ".jsp" %>' portletId="<%= portletDisplay.getRootPortletId() %>" />
+			<liferay-util:include page='<%= "/html/portlet/portal_settings/authentication/" + _getSectionJsp(section) + ".jsp" %>' portletId="<%= PortletKeys.PORTAL %>" />
 		</liferay-ui:section>
 
 	<%
