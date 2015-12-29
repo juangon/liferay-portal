@@ -15,8 +15,6 @@
 package com.liferay.portal.wab.extender.internal;
 
 import com.liferay.portal.kernel.util.HashMapDictionary;
-import com.liferay.portal.wab.extender.internal.adapter.EventListenerExceptionAdapter;
-import com.liferay.portal.wab.extender.internal.adapter.EventListenerExceptionAdapterFactory;
 import com.liferay.portal.wab.extender.internal.adapter.FilterExceptionAdapter;
 import com.liferay.portal.wab.extender.internal.adapter.PassThroughClassLoader;
 import com.liferay.portal.wab.extender.internal.adapter.ServletContextListenerExceptionAdapter;
@@ -553,13 +551,6 @@ public class WabBundleProcessor implements ServletContextListener {
 					throw exception;
 				}
 			}
-			
-			/*EventListenerExceptionAdapter<?> listenerAdapter = EventListenerExceptionAdapterFactory.getEventListenerAdapter(listenerDefinition.getEventListener(), 
-					classLoader);
-
-			serviceRegistration = _bundleContext.registerService(
-					listenerDefinition.getEventListener().getClass(),
-					listenerAdapter, properties);*/
 			
 			_listenerRegistrations.add(serviceRegistration);
 		}

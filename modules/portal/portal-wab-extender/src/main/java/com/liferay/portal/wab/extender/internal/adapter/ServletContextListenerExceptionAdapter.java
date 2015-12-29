@@ -47,13 +47,11 @@ public class ServletContextListenerExceptionAdapter
 
 						@Override
 						public Void call() throws Exception {
-							
-							if (_initialized) {
-								ServletContext oldServletContext = servletContextEvent.getServletContext();
-								ServletContext newServletContext = new ServletContextWrapper(oldServletContext, _classLoader);
-								ServletContextEvent newServletContextEvent = new ServletContextEvent(newServletContext);
-								_servletContextListener.contextDestroyed(newServletContextEvent);
-							}
+
+							ServletContext oldServletContext = servletContextEvent.getServletContext();
+							ServletContext newServletContext = new ServletContextWrapper(oldServletContext, _classLoader);
+							ServletContextEvent newServletContextEvent = new ServletContextEvent(newServletContext);
+							_servletContextListener.contextDestroyed(newServletContextEvent);
 							return null;
 						}
 				});
