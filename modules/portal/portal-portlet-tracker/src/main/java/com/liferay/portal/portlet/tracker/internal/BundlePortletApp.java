@@ -35,6 +35,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 import org.osgi.framework.Bundle;
+import org.osgi.framework.BundleContext;
 
 /**
  * @author Raymond Augé
@@ -42,8 +43,11 @@ import org.osgi.framework.Bundle;
 public class BundlePortletApp implements PortletApp, ServletContextListener {
 
 	public BundlePortletApp(
-		Bundle bundle, Portlet portalPortletModel, String httpServiceEndpoint) {
+		Bundle bundle, Portlet portalPortletModel, String httpServiceEndpoint,
+		ClassLoader classLoader) {
 
+		_classLoader = classLoader;
+		
 		_portalPortletModel = portalPortletModel;
 
 		_pluginPackage = new BundlePluginPackage(bundle, this);
@@ -104,7 +108,10 @@ public class BundlePortletApp implements PortletApp, ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent servletContextEvent) {
-		setServletContext(servletContextEvent.getServletContext());
+		ServletContext oldServletContext = servletContextEvent.getServletContext();
+		ServletContext newServletContext = new ServletContextWrapper(oldServletContext, _classLoader);
+					
+		setServletContext(newServletContext);
 	}
 
 	@Override
@@ -172,7 +179,7 @@ public class BundlePortletApp implements PortletApp, ServletContextListener {
 
 	@Override
 	public ServletContext getServletContext() {
-		return _servletContext;
+		return _servletContext;//new ServletContextWrapper(_servletContext, _classLoader);
 	}
 
 	@Override
@@ -239,7 +246,10 @@ public class BundlePortletApp implements PortletApp, ServletContextListener {
 		return symbolicName.replaceAll("[^a-zA-Z0-9]", "");
 	}
 
+	private BundleContext _bundleContext;
+	private Bundle _bundle;
 	private final String _contextPath;
+	private final ClassLoader _classLoader;
 	private final BundlePluginPackage _pluginPackage;
 	private final Portlet _portalPortletModel;
 	private final PortletApp _portletApp;

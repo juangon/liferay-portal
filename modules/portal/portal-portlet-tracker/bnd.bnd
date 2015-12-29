@@ -1,6 +1,7 @@
 Bundle-Name: Liferay Portal Portlet Tracker
 Bundle-SymbolicName: com.liferay.portal.portlet.tracker
 Bundle-Version: 1.0.0
+Export-Package:com.liferay.portal.portlet.tracker
 Import-Package:\
 	javax.servlet;version='[2.3.0,4.0.0)',\
 	javax.servlet.http;version='[2.3.0,4.0.0)',\

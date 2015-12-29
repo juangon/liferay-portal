@@ -171,7 +171,7 @@ public class PortletInstanceFactoryImpl implements PortletInstanceFactory {
 			}
 		}
 
-		if (!instanceable) {
+		if ((!instanceable) /*|| (deployed && instanceable && rootInvokerPortletInstance != null)*/) {
 			return rootInvokerPortletInstance;
 		}
 

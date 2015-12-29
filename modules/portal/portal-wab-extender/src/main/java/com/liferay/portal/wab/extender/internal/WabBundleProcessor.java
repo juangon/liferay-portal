@@ -15,10 +15,14 @@
 package com.liferay.portal.wab.extender.internal;
 
 import com.liferay.portal.kernel.util.HashMapDictionary;
+import com.liferay.portal.wab.extender.internal.adapter.EventListenerExceptionAdapter;
+import com.liferay.portal.wab.extender.internal.adapter.EventListenerExceptionAdapterFactory;
 import com.liferay.portal.wab.extender.internal.adapter.FilterExceptionAdapter;
 import com.liferay.portal.wab.extender.internal.adapter.PassThroughClassLoader;
 import com.liferay.portal.wab.extender.internal.adapter.ServletContextListenerExceptionAdapter;
 import com.liferay.portal.wab.extender.internal.adapter.ServletExceptionAdapter;
+import com.liferay.portal.wab.extender.internal.adapter.ServletRequestListenerExceptionAdapter;
+import com.liferay.portal.wab.extender.internal.adapter.SessionListenerExceptionAdapter;
 import com.liferay.portal.wab.extender.internal.definition.FilterDefinition;
 import com.liferay.portal.wab.extender.internal.definition.ListenerDefinition;
 import com.liferay.portal.wab.extender.internal.definition.ServletDefinition;
@@ -26,8 +30,8 @@ import com.liferay.portal.wab.extender.internal.definition.WebXMLDefinition;
 import com.liferay.portal.wab.extender.internal.definition.WebXMLDefinitionLoader;
 
 import java.io.IOException;
-
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.EventListener;
@@ -53,14 +57,14 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionListener;
-
 import javax.xml.parsers.SAXParserFactory;
 
 import org.apache.felix.utils.log.Logger;
-
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.Constants;
+import org.osgi.framework.InvalidSyntaxException;
+import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.framework.wiring.BundleWiring;
 import org.osgi.service.http.context.ServletContextHelper;
@@ -109,19 +113,40 @@ public class WabBundleProcessor implements ServletContextListener {
 	public void contextInitialized(ServletContextEvent servletContextEvent) {
 		ServletContext servletContext = servletContextEvent.getServletContext();
 
-		servletContext.setAttribute(
+		ServletContext newServletContext =  new ServletContextWrapper(servletContext, 
+				_bundleClassLoader);
+		/*Collection<ServiceReference<ServletContext>> references = null;
+
+		try {
+			 references = 
+					_bundleContext.getServiceReferences(
+							ServletContext.class, "(&(service.bundleId=" + _bundle.getBundleId() +"))");
+		}
+		catch (InvalidSyntaxException e) {
+			_logger.log(
+					Logger.LOG_ERROR,
+					"Error while getting ServletContext references on" +
+						_contextName + " WAB due to: " + e.getMessage(), e);
+		}
+
+		//FUNCIONA CON ESTO COMENTADO TB
+		if (references != null && references.size() >0) {
+			 return;
+		 }*/
+
+		newServletContext.setAttribute(
 			"jsp.taglib.mappings", _webXMLDefinition.getJspTaglibMappings());
-		servletContext.setAttribute("osgi-bundlecontext", _bundleContext);
-		servletContext.setAttribute("osgi-runtime-vendor", _VENDOR);
+		newServletContext.setAttribute("osgi-bundlecontext", _bundleContext);
+		newServletContext.setAttribute("osgi-runtime-vendor", _VENDOR);
 
 		Dictionary<String, Object> properties = new HashMapDictionary<>();
 
 		properties.put("osgi.web.symbolicname", _bundle.getSymbolicName());
 		properties.put("osgi.web.version", _bundle.getVersion());
-		properties.put("osgi.web.contextpath", servletContext.getContextPath());
+		properties.put("osgi.web.contextpath", newServletContext.getContextPath());
 
 		_servletContextRegistration = _bundleContext.registerService(
-			ServletContext.class, servletContext, properties);
+			ServletContext.class, newServletContext, properties);
 	}
 
 	public void destroy() throws Exception {
@@ -182,6 +207,7 @@ public class WabBundleProcessor implements ServletContextListener {
 			}
 
 			initServlets();
+			
 		}
 		catch (Exception e) {
 			_logger.log(
@@ -301,9 +327,9 @@ public class WabBundleProcessor implements ServletContextListener {
 			classNamesList.add(HttpSessionAttributeListener.class.getName());
 		}
 
-		if (HttpSessionListener.class.isInstance(eventListener)) {
+		/*if (HttpSessionListener.class.isInstance(eventListener)) {
 			classNamesList.add(HttpSessionListener.class.getName());
-		}
+		}*/
 
 		if (ServletContextAttributeListener.class.isInstance(eventListener)) {
 			classNamesList.add(ServletContextAttributeListener.class.getName());
@@ -322,9 +348,9 @@ public class WabBundleProcessor implements ServletContextListener {
 			classNamesList.add(ServletRequestAttributeListener.class.getName());
 		}
 
-		if (ServletRequestListener.class.isInstance(eventListener)) {
+		/*if (ServletRequestListener.class.isInstance(eventListener)) {
 			classNamesList.add(ServletRequestListener.class.getName());
-		}
+		}*/
 
 		return classNamesList.toArray(new String[classNamesList.size()]);
 	}
@@ -444,38 +470,97 @@ public class WabBundleProcessor implements ServletContextListener {
 			String[] classNames = getClassNames(
 				listenerDefinition.getEventListener());
 
-			ServiceRegistration<?> serviceRegistration =
-				_bundleContext.registerService(
-					classNames, listenerDefinition.getEventListener(),
-					properties);
+			ServiceRegistration<?> serviceRegistration = null;
+			
+			if (classNames.length >0) {
+				serviceRegistration = _bundleContext.registerService(
+								classNames, listenerDefinition.getEventListener(),
+								properties);
 
-			_listenerRegistrations.add(serviceRegistration);
+				_listenerRegistrations.add(serviceRegistration);
+			}
 
 			if (!ServletContextListener.class.isInstance(
+					listenerDefinition.getEventListener()) ||
+				!ServletRequestListener.class.isInstance(
+					listenerDefinition.getEventListener()) ||
+				!HttpSessionListener.class.isInstance(
 					listenerDefinition.getEventListener())) {
 
 				continue;
 			}
 
-			ServletContextListenerExceptionAdapter
-				servletContextListenerExceptionAdaptor =
-					new ServletContextListenerExceptionAdapter(
-						(ServletContextListener)
-							listenerDefinition.getEventListener());
+			Thread thread = Thread.currentThread();
+			ClassLoader classLoader = thread.getContextClassLoader();
+			
+			if (ServletContextListener.class.isInstance(
+					listenerDefinition.getEventListener())) {
+				ServletContextListenerExceptionAdapter
+					servletContextListenerExceptionAdaptor =
+						new ServletContextListenerExceptionAdapter(
+							(ServletContextListener)
+								listenerDefinition.getEventListener(), classLoader);
+	
+				serviceRegistration = _bundleContext.registerService(
+					ServletContextListener.class,
+					servletContextListenerExceptionAdaptor, properties);
+	
+				Exception exception =
+					servletContextListenerExceptionAdaptor.getException();
+	
+				if (exception != null) {
+					serviceRegistration.unregister();
+	
+					throw exception;
+				}
+			} else if  (ServletRequestListener.class.isInstance(
+					listenerDefinition.getEventListener())){
+				ServletRequestListenerExceptionAdapter
+				servletRequestListenerExceptionAdaptor =
+					new ServletRequestListenerExceptionAdapter(
+						(ServletRequestListener)
+							listenerDefinition.getEventListener(), classLoader);
+
+				serviceRegistration = _bundleContext.registerService(
+					ServletRequestListener.class,
+					servletRequestListenerExceptionAdaptor, properties);
+	
+				Exception exception =
+						servletRequestListenerExceptionAdaptor.getException();
+	
+				if (exception != null) {
+					serviceRegistration.unregister();
+	
+					throw exception;
+				}
+			}else {
+				SessionListenerExceptionAdapter
+				sessionListenerExceptionAdapter =
+					new SessionListenerExceptionAdapter(
+						(HttpSessionListener)
+							listenerDefinition.getEventListener(), classLoader);
+
+				serviceRegistration = _bundleContext.registerService(
+					HttpSessionListener.class,
+					sessionListenerExceptionAdapter, properties);
+	
+				Exception exception =
+						sessionListenerExceptionAdapter.getException();
+	
+				if (exception != null) {
+					serviceRegistration.unregister();
+	
+					throw exception;
+				}
+			}
+			
+			/*EventListenerExceptionAdapter<?> listenerAdapter = EventListenerExceptionAdapterFactory.getEventListenerAdapter(listenerDefinition.getEventListener(), 
+					classLoader);
 
 			serviceRegistration = _bundleContext.registerService(
-				ServletContextListener.class,
-				servletContextListenerExceptionAdaptor, properties);
-
-			Exception exception =
-				servletContextListenerExceptionAdaptor.getException();
-
-			if (exception != null) {
-				serviceRegistration.unregister();
-
-				throw exception;
-			}
-
+					listenerDefinition.getEventListener().getClass(),
+					listenerAdapter, properties);*/
+			
 			_listenerRegistrations.add(serviceRegistration);
 		}
 	}

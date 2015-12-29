@@ -52,6 +52,7 @@ import com.liferay.portal.model.PortletInfo;
 import com.liferay.portal.model.PortletInstance;
 import com.liferay.portal.model.PublicRenderParameter;
 import com.liferay.portal.model.impl.PublicRenderParameterImpl;
+import com.liferay.portal.portlet.tracker.ServletContextAware;
 import com.liferay.portal.security.permission.ResourceActions;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.CompanyLocalService;
@@ -69,10 +70,9 @@ import com.liferay.portlet.PortletInstanceFactory;
 import com.liferay.registry.util.StringPlus;
 
 import java.io.IOException;
-
 import java.net.URL;
-
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -90,13 +90,13 @@ import javax.portlet.Portlet;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
 import javax.portlet.WindowState;
-
 import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletContextListener;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -108,6 +108,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.Constants;
+import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.framework.wiring.BundleWiring;
@@ -220,7 +221,7 @@ public class PortletTracker
 			serviceRegistrations.getBundlePortletApp();
 
 		bundlePortletApp.removePortlet(portletModel);
-
+		
 		serviceRegistrations.removeServiceReference(serviceReference);
 
 		BundleContext bundleContext = _componentContext.getBundleContext();
@@ -280,9 +281,9 @@ public class PortletTracker
 
 		PassThroughClassLoader passThroughClassLoader = 
 				new PassThroughClassLoader(bundleWiring.getClassLoader());
-		
+
 		BundlePortletApp bundlePortletApp = createBundlePortletApp(
-			bundle, passThroughClassLoader, serviceRegistrations);
+			bundle, passThroughClassLoader, portlet, serviceRegistrations);
 
 		com.liferay.portal.model.Portlet portletModel = buildPortletModel(
 			bundlePortletApp, portletId);
@@ -311,14 +312,13 @@ public class PortletTracker
 		PortletBagFactory portletBagFactory = new BundlePortletBagFactory(
 			portlet);
 
-		
 		portletBagFactory.setClassLoader(passThroughClassLoader);
 		portletBagFactory.setServletContext(
 			bundlePortletApp.getServletContext());
 		portletBagFactory.setWARFile(true);
 
 		Thread thread = Thread.currentThread();
-
+		
 		ClassLoader contextClassLoader = thread.getContextClassLoader();
 
 		thread.setContextClassLoader(passThroughClassLoader);
@@ -1023,7 +1023,7 @@ public class PortletTracker
 	}
 
 	protected BundlePortletApp createBundlePortletApp(
-		Bundle bundle, ClassLoader classLoader,
+		Bundle bundle, ClassLoader classLoader, Portlet portlet,
 		ServiceRegistrations serviceRegistrations) {
 
 		BundlePortletApp bundlePortletApp =
@@ -1038,9 +1038,65 @@ public class PortletTracker
 				CompanyConstants.SYSTEM, PortletKeys.PORTAL);
 
 		bundlePortletApp = new BundlePortletApp(
-			bundle, portalPortletModel, _httpServiceEndpoint);
+			bundle, portalPortletModel, _httpServiceEndpoint, classLoader);
 
-		createContext(bundle, bundlePortletApp, serviceRegistrations);
+		
+		if (portlet instanceof ServletContextAware) {
+			ServletContextAware contextAware = (ServletContextAware) portlet;
+
+			ServletContext servletContext = contextAware.getServletContext();
+
+			bundlePortletApp.setServletContext(servletContext);
+
+			serviceRegistrations.setBundlePortletApp(bundlePortletApp);
+
+			serviceRegistrations.doConfiguration(classLoader);
+			
+			/*serviceRegistrations.setBundlePortletApp(bundlePortletApp);
+
+			serviceRegistrations.doConfiguration(classLoader);*/
+
+			/*BundleContext bundleContext = bundle.getBundleContext();
+
+			Dictionary<String, Object> properties = new HashMapDictionary<>();
+
+			properties.put(
+				HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_SELECT,
+				bundlePortletApp.getServletContextName());
+			properties.put(
+				HttpWhiteboardConstants.HTTP_WHITEBOARD_LISTENER,
+				Boolean.TRUE.toString());
+
+			serviceRegistrations.addServiceRegistration(
+					bundleContext.registerService(
+					ServletContextListener.class, bundlePortletApp, properties));*/
+		}
+		else {
+			createContext(bundle, bundlePortletApp, serviceRegistrations);
+		//}
+			serviceRegistrations.setBundlePortletApp(bundlePortletApp);
+
+			serviceRegistrations.doConfiguration(classLoader);
+
+			BundleContext bundleContext = bundle.getBundleContext();
+
+			Dictionary<String, Object> properties = new HashMapDictionary<>();
+
+			properties.put(
+				HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_SELECT,
+				bundlePortletApp.getServletContextName());
+			properties.put(
+				HttpWhiteboardConstants.HTTP_WHITEBOARD_LISTENER,
+				Boolean.TRUE.toString());
+
+			serviceRegistrations.addServiceRegistration(
+				bundleContext.registerService(
+					ServletContextListener.class, bundlePortletApp, properties));
+		
+		}
+		//return bundlePortletApp;
+			
+		/*createContext(bundle, bundlePortletApp, serviceRegistrations);
 
 		serviceRegistrations.setBundlePortletApp(bundlePortletApp);
 
@@ -1059,8 +1115,41 @@ public class PortletTracker
 
 		serviceRegistrations.addServiceRegistration(
 			bundleContext.registerService(
-				ServletContextListener.class, bundlePortletApp, properties));
+				ServletContextListener.class, bundlePortletApp, properties));*/
 
+			/*try {
+			 references = 
+					_bundleContext.getServiceReferences(
+							ServletContext.class, "(&(service.bundleId=" + _bundle.getBundleId() +"))");
+		}
+		catch (InvalidSyntaxException e) {
+			_logger.log(
+					Logger.LOG_ERROR,
+					"Error while getting ServletContext references on" +
+						_contextName + " WAB due to: " + e.getMessage(), e);
+		}*/
+	
+		//FUNCIONA CON ESTO COMENTADO TB
+		/*if (references != null && references.size() >0) {
+			 return;
+		 }*/
+	
+		/*newServletContext.setAttribute(
+			"jsp.taglib.mappings", _webXMLDefinition.getJspTaglibMappings());*/
+		
+		/*ServletContext newServletContext = bundlePortletApp.getServletContext();
+		newServletContext.setAttribute("osgi-bundlecontext", bundleContext);
+		newServletContext.setAttribute("osgi-runtime-vendor", "Liferay");
+	
+		properties = new HashMapDictionary<>();
+	
+		properties.put("osgi.web.symbolicname", bundle.getSymbolicName());
+		properties.put("osgi.web.version", bundle.getVersion());
+		properties.put("osgi.web.contextpath", newServletContext.getContextPath());
+	
+		serviceRegistrations.addServiceRegistration(bundleContext.
+				registerService(ServletContext.class, newServletContext, properties));*/
+		
 		return bundlePortletApp;
 	}
 
@@ -1072,6 +1161,25 @@ public class PortletTracker
 			new BundlePortletServletContextHelper(bundle);
 
 		BundleContext bundleContext = bundle.getBundleContext();
+
+		Collection<ServiceReference<ServletContextHelper>> references = null;
+
+		try{
+			Dictionary<String,String> headers =bundle.getHeaders();
+			//if (headers.get("Wab-first") != null && headers.get("Wab-first").equals("true")) {
+					references = 
+					bundleContext.getServiceReferences(
+							ServletContextHelper.class, "(&(osgi.http.whiteboard.context.name=" +
+				portletApp.getServletContextName() + ")(service.bundleId=" + bundle.getBundleId() +"))");
+			//}
+		}
+		catch (InvalidSyntaxException e){
+			_log.error("Error while getting ServletContextHelper references", e);
+		}
+
+		/*if (references != null && references.size() >0) {
+			return;
+		}*/
 
 		Dictionary<String, Object> properties = new HashMapDictionary<>();
 
@@ -1161,7 +1269,7 @@ public class PortletTracker
 			"/portlet-servlet/*");
 
 		return bundleContext.registerService(
-			Servlet.class, new PortletServletWrapper(), properties);
+			Servlet.class, new PortletServletWrapper(classLoader), properties);
 	}
 
 	protected ServiceRegistration<?> createRestrictPortletServletRequestFilter(
@@ -1422,6 +1530,7 @@ public class PortletTracker
 			throws IOException, ServletException {
 
 			_servlet.service(servletRequest, servletResponse);
+
 		}
 
 		private final Servlet _servlet = new JspServlet();
@@ -1430,16 +1539,37 @@ public class PortletTracker
 
 	private class PortletServletWrapper extends HttpServlet {
 
+		public PortletServletWrapper(ClassLoader classLoader) {
+			_classLoader = classLoader;
+		}
+
 		@Override
 		protected void service(
 				HttpServletRequest httpServletRequest,
 				HttpServletResponse httpServletResponse)
 			throws IOException, ServletException {
 
-			_servlet.service(httpServletRequest, httpServletResponse);
+			Thread thread = Thread.currentThread();
+
+			ClassLoader contextClassLoader = thread.getContextClassLoader();
+
+			thread.setContextClassLoader(_classLoader);
+
+			try {
+				_servlet.service(httpServletRequest, httpServletResponse);
+			}
+			finally {
+				thread.setContextClassLoader(contextClassLoader);
+			}
+		}
+
+		@Override
+		public void destroy() {
+			_servlet.destroy();
 		}
 
 		private final Servlet _servlet = new PortletServlet();
+		private final ClassLoader _classLoader;
 
 	}
 

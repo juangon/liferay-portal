@@ -17,47 +17,44 @@ package com.liferay.portal.wab.extender.internal.adapter;
 import java.util.concurrent.Callable;
 
 import javax.servlet.ServletContext;
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
+import javax.servlet.ServletRequestEvent;
+import javax.servlet.ServletRequestListener;
 
 import com.liferay.portal.wab.extender.internal.ServletContextWrapper;
 
 /**
- * @author Raymond Augé
+ * @author Juan Gonzalez
  */
-public class ServletContextListenerExceptionAdapter 
-	implements ServletContextListener {
+public class ServletRequestListenerExceptionAdapter 
+	implements ServletRequestListener {
 
-	public ServletContextListenerExceptionAdapter(
-		ServletContextListener servletContextListener, ClassLoader classLoader) {
-		
+	public ServletRequestListenerExceptionAdapter(
+		ServletRequestListener servletRequestListener, ClassLoader classLoader) {
+
+		_servletRequestListener = servletRequestListener;
 		_classLoader = classLoader;
-		_servletContextListener = servletContextListener;
 	}
 
-	public ServletContextListener getEventListener() {
-		return _servletContextListener;
+	
+	public ServletRequestListener getEventListener() {
+		return _servletRequestListener;
 	}
 	
 	@Override
-	public void contextDestroyed(final ServletContextEvent servletContextEvent) {
+	public void requestDestroyed(final ServletRequestEvent servletRequestEvent) {
 		try {
 			TCCLUtil.wrapTCCL(
-					new Callable<Void>() {
+				new Callable<Void>() {
 
 						@Override
-						public Void call() throws Exception {
-							
-							if (_initialized) {
-								ServletContext oldServletContext = servletContextEvent.getServletContext();
-								ServletContext newServletContext = new ServletContextWrapper(oldServletContext, _classLoader);
-								ServletContextEvent newServletContextEvent = new ServletContextEvent(newServletContext);
-								_servletContextListener.contextDestroyed(newServletContextEvent);
-							}
+					public Void call() throws Exception {
+							ServletContext oldServletContext = servletRequestEvent.getServletContext();
+							ServletContext newServletContext = new ServletContextWrapper(oldServletContext, _classLoader);
+							ServletRequestEvent newServletRequesttEvent = new ServletRequestEvent(newServletContext, servletRequestEvent.getServletRequest());
+							_servletRequestListener.requestDestroyed(newServletRequesttEvent);
 							return null;
 						}
 				});
-
 		}
 		catch (Exception e) {
 			_exception = e;
@@ -65,8 +62,8 @@ public class ServletContextListenerExceptionAdapter
 	}
 
 	@Override
-	public void contextInitialized(
-		final ServletContextEvent servletContextEvent) {
+	public void requestInitialized(
+		final ServletRequestEvent servletRequestEvent) {
 
 		try {
 			TCCLUtil.wrapTCCL(
@@ -75,10 +72,10 @@ public class ServletContextListenerExceptionAdapter
 					@Override
 					public Void call() throws Exception {
 						
-						ServletContext oldServletContext = servletContextEvent.getServletContext();
+						ServletContext oldServletContext = servletRequestEvent.getServletContext();
 						ServletContext newServletContext = new ServletContextWrapper(oldServletContext, _classLoader);
-						ServletContextEvent newServletContextEvent = new ServletContextEvent(newServletContext);
-						_servletContextListener.contextInitialized(newServletContextEvent);
+						ServletRequestEvent newServletRequesttEvent = new ServletRequestEvent(newServletContext, servletRequestEvent.getServletRequest());
+						_servletRequestListener.requestInitialized(newServletRequesttEvent);
 
 						return null;
 					}
@@ -95,7 +92,8 @@ public class ServletContextListenerExceptionAdapter
 	}
 
 	private Exception _exception;
-	private final ServletContextListener _servletContextListener;
+	private ServletRequestListener _servletRequestListener;
 	private final ClassLoader _classLoader;
+	
 
 }

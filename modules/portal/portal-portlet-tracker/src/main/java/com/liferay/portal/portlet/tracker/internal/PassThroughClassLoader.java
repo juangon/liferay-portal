@@ -132,6 +132,10 @@ public class PassThroughClassLoader extends ClassLoader {
 		if (obj instanceof PassThroughClassLoader){
 			return getParent().equals(((PassThroughClassLoader) obj).getParent());
 		}
-		return getParent().equals(obj);
+		if (obj !=null) {
+			return obj.equals(getParent());
+		}else {
+			return getParent().equals(obj);
+		}
 	}
 }
