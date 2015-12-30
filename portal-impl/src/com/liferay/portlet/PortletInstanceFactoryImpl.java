@@ -14,6 +14,7 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.portlet.LiferayPortletContext;
 import com.liferay.portal.kernel.portlet.PortletBag;
 import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.security.pacl.DoPrivileged;
@@ -99,6 +100,21 @@ public class PortletInstanceFactoryImpl implements PortletInstanceFactory {
 	public InvokerPortlet create(Portlet portlet, ServletContext servletContext)
 		throws PortletException {
 
+		return create (portlet, servletContext, false);
+	}
+
+	@Override
+	public InvokerPortlet create(Portlet portlet, ServletContext servletContext,
+			boolean destroyPrevious)
+		throws PortletException {
+
+		if (destroyPrevious) {
+			PortletConfigFactoryUtil.destroy(portlet);
+			PortletContextFactory.destroy(portlet);
+
+			PortletLocalServiceUtil.destroyPortlet(portlet);
+		}
+
 		boolean instanceable = false;
 
 		boolean deployed = !portlet.isUndeployedPortlet();
@@ -171,7 +187,7 @@ public class PortletInstanceFactoryImpl implements PortletInstanceFactory {
 			}
 		}
 
-		if ((!instanceable) /*|| (deployed && instanceable && rootInvokerPortletInstance != null)*/) {
+		if (!instanceable) {
 			return rootInvokerPortletInstance;
 		}
 
