@@ -14,12 +14,16 @@
 
 package com.liferay.portal.wab.extender.internal.adapter;
 
+import com.liferay.portal.portlet.tracker.ServletContextWrapper;
+
 import java.io.IOException;
 
+import java.util.Enumeration;
 import java.util.concurrent.Callable;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -35,7 +39,23 @@ public class ServletExceptionAdapter implements Servlet {
 
 	@Override
 	public void destroy() {
-		_servlet.destroy();
+		try {
+			TCCLUtil.wrapTCCL(
+				new Callable<Void>() {
+
+					@Override
+					public Void call() throws Exception {
+
+						_servlet.destroy();
+
+						return null;
+					}
+
+				});
+		}
+		catch (Exception e) {
+			_exception = e;
+		}
 	}
 
 	public Exception getException() {
@@ -60,7 +80,42 @@ public class ServletExceptionAdapter implements Servlet {
 
 					@Override
 					public Void call() throws Exception {
-						_servlet.init(servletConfig);
+
+						Thread thread = Thread.currentThread();
+
+						ClassLoader classLoader =
+							thread.getContextClassLoader();
+
+						final ServletContext newServletContext =
+								new ServletContextWrapper(
+										servletConfig.getServletContext(),
+										classLoader);
+
+						ServletConfig newServletConfig = new ServletConfig() {
+
+							@Override
+							public String getServletName() {
+								return servletConfig.getServletName();
+							}
+
+							@Override
+							public ServletContext getServletContext() {
+								return newServletContext;
+							}
+
+							@Override
+							public Enumeration<String> getInitParameterNames() {
+								return servletConfig.getInitParameterNames();
+							}
+
+							@Override
+							public String getInitParameter(String name) {
+								return servletConfig.getInitParameter(name);
+							}
+
+						};
+
+						_servlet.init(newServletConfig);
 
 						return null;
 					}
