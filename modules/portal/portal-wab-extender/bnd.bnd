@@ -13,6 +13,7 @@ Import-Package:\
 	org.osgi.service.log;resolution:='optional',\
 	org.xml.sax,\
 	org.xml.sax.helpers,\
+	com.liferay.portal.portlet.tracker,\
 	*
 Include-Resource:\
 	classes,\
