@@ -40,6 +40,20 @@ public class PassThroughClassLoader extends ClassLoader {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+
+		if (obj instanceof PassThroughClassLoader) {
+			PassThroughClassLoader passThroughObj = (PassThroughClassLoader)obj;
+			return getParent().equals(passThroughObj.getParent());
+		}
+
+		return getParent().equals(obj);
+	}
+
+	@Override
 	public URL getResource(String name) {
 		return super.getResource(name);
 	}
