@@ -23,6 +23,7 @@ import com.liferay.portal.model.PortletFilter;
 import com.liferay.portal.model.PortletURLListener;
 import com.liferay.portal.model.PublicRenderParameter;
 import com.liferay.portal.model.SpriteImage;
+import com.liferay.portal.portlet.tracker.ServletContextWrapper;
 
 import java.util.Dictionary;
 import java.util.List;
@@ -42,8 +43,10 @@ import org.osgi.framework.Bundle;
 public class BundlePortletApp implements PortletApp, ServletContextListener {
 
 	public BundlePortletApp(
-		Bundle bundle, Portlet portalPortletModel, String httpServiceEndpoint) {
+		Bundle bundle, ClassLoader classLoader, Portlet portalPortletModel,
+		String httpServiceEndpoint) {
 
+		_classLoader = classLoader;
 		_portalPortletModel = portalPortletModel;
 
 		_pluginPackage = new BundlePluginPackage(bundle, this);
@@ -104,7 +107,12 @@ public class BundlePortletApp implements PortletApp, ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent servletContextEvent) {
-		setServletContext(servletContextEvent.getServletContext());
+		ServletContext oldServletContext =
+			servletContextEvent.getServletContext();
+		ServletContext newServletContext = new ServletContextWrapper(
+			oldServletContext, _classLoader);
+
+		setServletContext(newServletContext);
 	}
 
 	@Override
@@ -239,6 +247,7 @@ public class BundlePortletApp implements PortletApp, ServletContextListener {
 		return symbolicName.replaceAll("[^a-zA-Z0-9]", "");
 	}
 
+	private final ClassLoader _classLoader;
 	private final String _contextPath;
 	private final BundlePluginPackage _pluginPackage;
 	private final Portlet _portalPortletModel;

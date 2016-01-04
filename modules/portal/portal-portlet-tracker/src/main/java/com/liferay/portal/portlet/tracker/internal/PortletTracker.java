@@ -1038,7 +1038,7 @@ public class PortletTracker
 				CompanyConstants.SYSTEM, PortletKeys.PORTAL);
 
 		bundlePortletApp = new BundlePortletApp(
-			bundle, portalPortletModel, _httpServiceEndpoint);
+			bundle, classLoader, portalPortletModel, _httpServiceEndpoint);
 
 		createContext(bundle, bundlePortletApp, serviceRegistrations);
 
