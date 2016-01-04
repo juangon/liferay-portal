@@ -14,6 +14,8 @@
 
 package com.liferay.portal.wab.extender.internal.adapter;
 
+import com.liferay.portal.portlet.tracker.PassThroughClassLoader;
+
 import java.util.concurrent.Callable;
 
 /**

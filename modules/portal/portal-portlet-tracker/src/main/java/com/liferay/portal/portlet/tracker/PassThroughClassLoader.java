@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.wab.extender.internal.adapter;
+package com.liferay.portal.portlet.tracker;
 
 import java.io.IOException;
 import java.io.InputStream;
