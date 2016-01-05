@@ -69,6 +69,11 @@ public class PassThroughClassLoader extends ClassLoader {
 	}
 
 	@Override
+	public int hashCode() {
+		return getParent().hashCode();
+	}
+
+	@Override
 	public Class<?> loadClass(String name) throws ClassNotFoundException {
 		return super.loadClass(name);
 	}
