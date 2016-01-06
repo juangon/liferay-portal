@@ -74,6 +74,7 @@ import java.io.IOException;
 import java.net.URL;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -109,6 +110,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.Constants;
+import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.framework.wiring.BundleWiring;
@@ -1068,10 +1070,30 @@ public class PortletTracker
 		Bundle bundle, PortletApp portletApp,
 		ServiceRegistrations serviceRegistrations) {
 
+		BundleContext bundleContext = bundle.getBundleContext();
+
+		Collection<ServiceReference<ServletContextHelper>> references = null;
+
+		try {
+			references =
+					bundleContext.getServiceReferences(
+							ServletContextHelper.class,
+							"(&(osgi.http.whiteboard.context.name=" +
+							portletApp.getServletContextName() +
+							")(service.bundleId=" +
+							bundle.getBundleId() +"))");
+		}
+		catch (InvalidSyntaxException e) {
+			_log.error(
+				"Error while getting ServletContextHelper references", e);
+		}
+
+		if ((references != null) && (references.size() >0)) {
+			return;
+		}
+
 		ServletContextHelper servletContextHelper =
 			new BundlePortletServletContextHelper(bundle);
-
-		BundleContext bundleContext = bundle.getBundleContext();
 
 		Dictionary<String, Object> properties = new HashMapDictionary<>();
 
