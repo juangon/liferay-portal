@@ -89,6 +89,12 @@ import javax.servlet.ServletContext;
 public class PortletBagFactory {
 
 	public PortletBag create(Portlet portlet) throws Exception {
+		return create(portlet, false);
+	}
+
+	public PortletBag create(Portlet portlet, boolean destroyPrevious)
+		throws Exception {
+
 		validate();
 
 		javax.portlet.Portlet portletInstance = getPortletInstance(portlet);
@@ -191,7 +197,8 @@ public class PortletBagFactory {
 		PortletBagPool.put(portlet.getRootPortletId(), portletBag);
 
 		try {
-			PortletInstanceFactoryUtil.create(portlet, _servletContext);
+			PortletInstanceFactoryUtil.create(
+				portlet, _servletContext, destroyPrevious);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

@@ -99,6 +99,19 @@ public class PortletInstanceFactoryImpl implements PortletInstanceFactory {
 	public InvokerPortlet create(Portlet portlet, ServletContext servletContext)
 		throws PortletException {
 
+		return create (portlet, servletContext, false);
+	}
+
+	@Override
+	public InvokerPortlet create(
+			Portlet portlet, ServletContext servletContext,
+			boolean destroyPrevious)
+		throws PortletException {
+
+		if (destroyPrevious) {
+			destroyRelated(portlet);
+		}
+
 		boolean instanceable = false;
 
 		boolean deployed = !portlet.isUndeployedPortlet();
@@ -227,6 +240,10 @@ public class PortletInstanceFactoryImpl implements PortletInstanceFactory {
 
 		clear(portlet);
 
+		destroyRelated(portlet);
+	}
+
+	protected void destroyRelated(Portlet portlet) {
 		PortletConfigFactoryUtil.destroy(portlet);
 		PortletContextFactory.destroy(portlet);
 

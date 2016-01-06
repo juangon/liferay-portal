@@ -326,7 +326,7 @@ public class PortletTracker
 		thread.setContextClassLoader(passThroughClassLoader);
 
 		try {
-			portletBagFactory.create(portletModel);
+			portletBagFactory.create(portletModel, true);
 
 			checkWebResources(
 				bundle.getBundleContext(),
