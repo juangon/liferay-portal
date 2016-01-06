@@ -326,7 +326,7 @@ public class PortletTracker
 				bundlePortletApp.getServletContext());
 			portletBagFactory.setWARFile(true);
 
-			portletBagFactory.create(portletModel);
+			portletBagFactory.create(portletModel, true);
 
 			checkWebResources(
 				bundle.getBundleContext(),
