@@ -912,7 +912,6 @@ Boolean renderPortletBoundary = GetterUtil.getBoolean(request.getAttribute(WebKe
 			}
 		}
 		else {
-
 			renderRequestImpl.setAttribute(WebKeys.PORTLET_CONTENT, bufferCacheServletResponse.getString());
 
 			String portletContentJSP = StringPool.BLANK;

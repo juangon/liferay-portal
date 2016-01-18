@@ -6477,17 +6477,18 @@ public class PortalImpl implements Portal {
 		throws Exception {
 
 		boolean skipPortletContentRendering = isSkipPortletContentRendering(
-					group, layoutTypePortlet, portletDisplay, portletName);
+			group, layoutTypePortlet, portletDisplay, portletName);
 
 		if (!skipPortletContentRendering) {
 			return false;
 		}
 
-		long companyId = getCompanyId(httpServletRequest);
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
-			companyId, portletDisplay.getId());
+			getCompanyId(httpServletRequest), portletDisplay.getId());
 
-		boolean strutsPortlet = false;
+		if (portlet.isSystem()) {
+			return false;
+		}
 
 		ServletContext servletContext =
 			(ServletContext)httpServletRequest.getAttribute(WebKeys.CTX);
@@ -6498,10 +6499,10 @@ public class PortalImpl implements Portal {
 		if (invokerPortlet.isStrutsPortlet() ||
 			invokerPortlet.isStrutsBridgePortlet()) {
 
-			strutsPortlet = true;
+			return false;
 		}
 
-		return (!portlet.isSystem() && !strutsPortlet);
+		return true;
 	}
 
 	@Override
@@ -6510,10 +6511,15 @@ public class PortalImpl implements Portal {
 			PortletDisplay portletDisplay, String portletName)
 		throws PortalException {
 
-		return (group.isLayoutPrototype() &&
-				layoutTypePortlet.hasPortletId(portletDisplay.getId()) &&
-				!portletName.equals(PortletKeys.NESTED_PORTLETS) &&
-				portletDisplay.isModeView());
+		if (group.isLayoutPrototype() &&
+			layoutTypePortlet.hasPortletId(portletDisplay.getId()) &&
+			portletDisplay.isModeView() &&
+			!portletName.equals(PortletKeys.NESTED_PORTLETS)) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 	@Override
