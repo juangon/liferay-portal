@@ -1847,8 +1847,8 @@ public class PortalUtil {
 		throws Exception {
 
 		return getPortal().isSkipPortletContentProcessing(
-				group, htpServletRequest, layoutTypePortlet, portletDisplay,
-				portletName);
+			group, htpServletRequest, layoutTypePortlet, portletDisplay,
+			portletName);
 	}
 
 	public static boolean isSkipPortletContentRendering(
