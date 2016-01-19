@@ -1189,7 +1189,7 @@ public class PortletTracker
 			"/portlet-servlet/*");
 
 		return bundleContext.registerService(
-			Servlet.class, new PortletServletWrapper(), properties);
+			Servlet.class, new PortletServletWrapper(classLoader), properties);
 	}
 
 	protected ServiceRegistration<?> createRestrictPortletServletRequestFilter(
@@ -1457,15 +1457,30 @@ public class PortletTracker
 
 	private class PortletServletWrapper extends HttpServlet {
 
+		public PortletServletWrapper(ClassLoader classLoader) {
+			_classLoader = classLoader;
+		}
+
 		@Override
 		protected void service(
 				HttpServletRequest httpServletRequest,
 				HttpServletResponse httpServletResponse)
 			throws IOException, ServletException {
 
-			_servlet.service(httpServletRequest, httpServletResponse);
+			Thread thread = Thread.currentThread();
+
+			ClassLoader contextClassLoader = thread.getContextClassLoader();
+			thread.setContextClassLoader(_classLoader);
+
+			try {
+				_servlet.service(httpServletRequest, httpServletResponse);
+			}
+			finally {
+				thread.setContextClassLoader(contextClassLoader);
+			}
 		}
 
+		private final ClassLoader _classLoader;
 		private final Servlet _servlet = new PortletServlet();
 
 	}
