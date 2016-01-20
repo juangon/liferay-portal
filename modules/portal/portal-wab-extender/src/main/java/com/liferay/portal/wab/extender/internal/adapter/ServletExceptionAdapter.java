@@ -129,10 +129,26 @@ public class ServletExceptionAdapter implements Servlet {
 
 	@Override
 	public void service(
-			ServletRequest servletRequest, ServletResponse servletResponse)
+			final ServletRequest servletRequest,
+			final ServletResponse servletResponse)
 		throws IOException, ServletException {
 
-		_servlet.service(servletRequest, servletResponse);
+		try {
+			TCCLUtil.wrapTCCL(
+				new Callable<Void>() {
+
+					@Override
+					public Void call() throws Exception {
+						_servlet.service(servletRequest, servletResponse);
+
+						return null;
+					}
+
+				});
+		}
+		catch (Exception e) {
+			_exception = e;
+		}
 	}
 
 	private Exception _exception;
