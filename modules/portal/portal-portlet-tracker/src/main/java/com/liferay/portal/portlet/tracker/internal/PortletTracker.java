@@ -54,6 +54,7 @@ import com.liferay.portal.model.PortletInfo;
 import com.liferay.portal.model.PortletInstance;
 import com.liferay.portal.model.PublicRenderParameter;
 import com.liferay.portal.model.impl.PublicRenderParameterImpl;
+import com.liferay.portal.portlet.tracker.ServletContextAware;
 import com.liferay.portal.security.permission.ResourceActions;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.CompanyLocalService;
@@ -292,7 +293,7 @@ public class PortletTracker
 
 		try {
 			BundlePortletApp bundlePortletApp = createBundlePortletApp(
-				bundle, passThroughClassLoader, serviceRegistrations);
+				bundle, passThroughClassLoader, portlet, serviceRegistrations);
 
 			com.liferay.portal.model.Portlet portletModel = buildPortletModel(
 				bundlePortletApp, portletId);
@@ -1051,7 +1052,7 @@ public class PortletTracker
 	}
 
 	protected BundlePortletApp createBundlePortletApp(
-		Bundle bundle, ClassLoader classLoader,
+		Bundle bundle, ClassLoader classLoader, Portlet portlet,
 		ServiceRegistrations serviceRegistrations) {
 
 		BundlePortletApp bundlePortletApp =
@@ -1068,7 +1069,16 @@ public class PortletTracker
 		bundlePortletApp = new BundlePortletApp(
 			bundle, classLoader, portalPortletModel, _httpServiceEndpoint);
 
-		createContext(bundle, bundlePortletApp, serviceRegistrations);
+		if (portlet instanceof ServletContextAware) {
+			ServletContextAware servletContextAware =
+				(ServletContextAware)portlet;
+
+			bundlePortletApp.setServletContext(
+				servletContextAware.getServletContext());
+		}
+		else {
+			createContext(bundle, bundlePortletApp, serviceRegistrations);
+		}
 
 		serviceRegistrations.setBundlePortletApp(bundlePortletApp);
 
