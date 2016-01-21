@@ -49,8 +49,9 @@ public class ServletRequestAttributeListenerExceptionAdapter
 		return new ServletRequestAttributeListener() {
 
 			@Override
-			public void attributeRemoved(final ServletRequestAttributeEvent
-				servletRequestAttributeEvent) {
+			public void attributeRemoved(
+				final ServletRequestAttributeEvent
+					servletRequestAttributeEvent) {
 
 				try {
 					TCCLUtil.wrapTCCL(
@@ -64,21 +65,21 @@ public class ServletRequestAttributeListenerExceptionAdapter
 									thread.getContextClassLoader();
 
 								ServletContext oldServletContext =
-										servletRequestAttributeEvent.
-											getServletContext();
+									servletRequestAttributeEvent.
+										getServletContext();
 								ServletContext newServletContext =
-										new ServletContextWrapper(
-											oldServletContext, classLoader);
+									new ServletContextWrapper(
+										oldServletContext, classLoader);
 								ServletRequestAttributeEvent
 									newServletRequestAttributeEvent =
 										new ServletRequestAttributeEvent(
-												newServletContext,
-												servletRequestAttributeEvent.
-													getServletRequest(),
-												servletRequestAttributeEvent.
-													getName(),
-												servletRequestAttributeEvent.
-													getSource());
+											newServletContext,
+											servletRequestAttributeEvent.
+												getServletRequest(),
+											servletRequestAttributeEvent.
+												getName(),
+											servletRequestAttributeEvent.
+												getSource());
 
 								_servletRequestAttributeListener.
 									attributeRemoved(
@@ -95,8 +96,9 @@ public class ServletRequestAttributeListenerExceptionAdapter
 			}
 
 			@Override
-			public void attributeReplaced(final ServletRequestAttributeEvent
-				servletRequestAttributeEvent) {
+			public void attributeReplaced(
+				final ServletRequestAttributeEvent
+					servletRequestAttributeEvent) {
 
 				try {
 					TCCLUtil.wrapTCCL(
@@ -111,21 +113,21 @@ public class ServletRequestAttributeListenerExceptionAdapter
 									thread.getContextClassLoader();
 
 								ServletContext oldServletContext =
-										servletRequestAttributeEvent.
-											getServletContext();
+									servletRequestAttributeEvent.
+										getServletContext();
 								ServletContext newServletContext =
-										new ServletContextWrapper(
-											oldServletContext, classLoader);
+									new ServletContextWrapper(
+										oldServletContext, classLoader);
 								ServletRequestAttributeEvent
 									newServletRequestAttributeEvent =
 										new ServletRequestAttributeEvent(
-												newServletContext,
-												servletRequestAttributeEvent.
-													getServletRequest(),
-												servletRequestAttributeEvent.
-													getName(),
-												servletRequestAttributeEvent.
-													getSource());
+											newServletContext,
+											servletRequestAttributeEvent.
+												getServletRequest(),
+											servletRequestAttributeEvent.
+												getName(),
+											servletRequestAttributeEvent.
+												getSource());
 
 								_servletRequestAttributeListener.
 									attributeReplaced(
@@ -142,8 +144,9 @@ public class ServletRequestAttributeListenerExceptionAdapter
 			}
 
 			@Override
-			public void attributeAdded(final ServletRequestAttributeEvent
-				servletRequestAttributeEvent) {
+			public void attributeAdded(
+				final ServletRequestAttributeEvent
+					servletRequestAttributeEvent) {
 
 				try {
 					TCCLUtil.wrapTCCL(
@@ -158,21 +161,21 @@ public class ServletRequestAttributeListenerExceptionAdapter
 									thread.getContextClassLoader();
 
 								ServletContext oldServletContext =
-										servletRequestAttributeEvent.
-											getServletContext();
+									servletRequestAttributeEvent.
+										getServletContext();
 								ServletContext newServletContext =
-										new ServletContextWrapper(
-											oldServletContext, classLoader);
+									new ServletContextWrapper(
+										oldServletContext, classLoader);
 								ServletRequestAttributeEvent
 									newServletRequestAttributeEvent =
 										new ServletRequestAttributeEvent(
-												newServletContext,
-												servletRequestAttributeEvent.
-													getServletRequest(),
-												servletRequestAttributeEvent.
-													getName(),
-												servletRequestAttributeEvent.
-													getSource());
+											newServletContext,
+											servletRequestAttributeEvent.
+												getServletRequest(),
+											servletRequestAttributeEvent.
+												getName(),
+											servletRequestAttributeEvent.
+												getSource());
 
 								_servletRequestAttributeListener.attributeAdded(
 									newServletRequestAttributeEvent);

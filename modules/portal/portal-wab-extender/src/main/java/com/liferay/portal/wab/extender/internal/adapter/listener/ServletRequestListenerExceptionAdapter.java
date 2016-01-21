@@ -73,10 +73,10 @@ public class ServletRequestListenerExceptionAdapter
 									new ServletContextWrapper(
 										oldServletContext, classLoader);
 								newServletRequestEvent =
-										new ServletRequestEvent(
-											newServletContext,
-											servletRequestEvent.
-												getServletRequest());
+									new ServletRequestEvent(
+										newServletContext,
+										servletRequestEvent.
+											getServletRequest());
 
 								_servletRequestListener.requestDestroyed(
 									newServletRequestEvent);
@@ -116,10 +116,10 @@ public class ServletRequestListenerExceptionAdapter
 									new ServletContextWrapper(
 										oldServletContext, classLoader);
 								newServletRequestEvent =
-										new ServletRequestEvent(
-											newServletContext,
-											servletRequestEvent.
-												getServletRequest());
+									new ServletRequestEvent(
+										newServletContext,
+										servletRequestEvent.
+											getServletRequest());
 								_servletRequestListener.requestInitialized(
 									newServletRequestEvent);
 

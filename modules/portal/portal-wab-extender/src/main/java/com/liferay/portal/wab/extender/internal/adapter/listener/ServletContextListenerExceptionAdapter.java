@@ -67,11 +67,10 @@ public class ServletContextListenerExceptionAdapter
 								ServletContext oldServletContext =
 									servletContextEvent.getServletContext();
 								ServletContext newServletContext =
-										new ServletContextWrapper(
-											oldServletContext, classLoader);
+									new ServletContextWrapper(
+										oldServletContext, classLoader);
 								ServletContextEvent newServletContextEvent =
-										new ServletContextEvent(
-											newServletContext);
+									new ServletContextEvent(newServletContext);
 
 								_servletContextListener.contextDestroyed(
 									newServletContextEvent);
@@ -104,11 +103,10 @@ public class ServletContextListenerExceptionAdapter
 								ServletContext oldServletContext =
 									servletContextEvent.getServletContext();
 								ServletContext newServletContext =
-										new ServletContextWrapper(
-											oldServletContext, classLoader);
+									new ServletContextWrapper(
+										oldServletContext, classLoader);
 								ServletContextEvent newServletContextEvent =
-										new ServletContextEvent(
-											newServletContext);
+									new ServletContextEvent(newServletContext);
 
 								_servletContextListener.contextInitialized(
 									newServletContextEvent);

@@ -87,9 +87,8 @@ public class ServletExceptionAdapter implements Servlet {
 							thread.getContextClassLoader();
 
 						final ServletContext newServletContext =
-								new ServletContextWrapper(
-										servletConfig.getServletContext(),
-										classLoader);
+							new ServletContextWrapper(
+								servletConfig.getServletContext(), classLoader);
 
 						ServletConfig newServletConfig = new ServletConfig() {
 
