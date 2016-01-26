@@ -114,7 +114,13 @@ public class ResourceBundleUtil {
 
 			@Override
 			public ResourceBundle loadResourceBundle(String languageId) {
-				return ResourceBundleUtil.getBundle(base, classLoader);
+				return ResourceBundleUtil.getBundle(
+					base, LocaleUtil.fromLanguageId(languageId), classLoader);
+			}
+
+			@Override
+			public ResourceBundle loadResourceBundle(Locale locale) {
+				return ResourceBundleUtil.getBundle(base, locale, classLoader);
 			}
 
 		};

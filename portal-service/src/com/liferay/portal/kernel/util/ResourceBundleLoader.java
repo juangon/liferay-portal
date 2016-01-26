@@ -14,12 +14,15 @@
 
 package com.liferay.portal.kernel.util;
 
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
  * @author Carlos Sierra Andrés
  */
 public interface ResourceBundleLoader {
+
+	public ResourceBundle loadResourceBundle(Locale locale);
 
 	public ResourceBundle loadResourceBundle(String languageId);
 

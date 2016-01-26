@@ -64,6 +64,11 @@ public class LanguageResources {
 					LocaleUtil.fromLanguageId(languageId));
 			}
 
+			@Override
+			public ResourceBundle loadResourceBundle(Locale locale) {
+				return LanguageResources.getResourceBundle(locale);
+			}
+
 		};
 
 	public static String fixValue(String value) {

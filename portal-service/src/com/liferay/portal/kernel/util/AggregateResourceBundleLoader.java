@@ -15,6 +15,7 @@
 package com.liferay.portal.kernel.util;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
@@ -27,6 +28,40 @@ public class AggregateResourceBundleLoader implements ResourceBundleLoader {
 		ResourceBundleLoader... resourceBundleLoaders) {
 
 		_resourceBundleLoaders = resourceBundleLoaders;
+	}
+
+	@Override
+	public ResourceBundle loadResourceBundle(Locale locale) {
+		ArrayList<ResourceBundle> resourceBundles = new ArrayList<>();
+
+		for (ResourceBundleLoader resourceBundleLoader :
+				_resourceBundleLoaders) {
+
+			try {
+				ResourceBundle resourceBundle =
+					resourceBundleLoader.loadResourceBundle(locale);
+
+				if (resourceBundle != null) {
+					resourceBundles.add(resourceBundle);
+				}
+			}
+			catch (Exception e) {
+			}
+		}
+
+		if (resourceBundles.isEmpty()) {
+			throw new MissingResourceException(
+				"ResourceBundleLoader " + this + " failed to load " +
+					"ResourceBundle for " + locale.getLanguage(),
+				"", locale.getLanguage());
+		}
+
+		if (resourceBundles.size() == 1) {
+			return resourceBundles.get(0);
+		}
+
+		return new AggregateResourceBundle(
+			resourceBundles.toArray(new ResourceBundle[0]));
 	}
 
 	@Override
