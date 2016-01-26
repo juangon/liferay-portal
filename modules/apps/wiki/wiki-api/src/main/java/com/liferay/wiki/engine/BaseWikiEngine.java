@@ -14,7 +14,7 @@
 
 package com.liferay.wiki.engine;
 
-import com.liferay.portal.kernel.util.AggregateResourceBundle;
+import com.liferay.portal.kernel.util.ResourceBundleLoader;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.language.LanguageResources;
 import com.liferay.wiki.exception.PageContentException;
@@ -25,7 +25,6 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Locale;
 import java.util.Map;
-import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import javax.portlet.PortletURL;
@@ -56,18 +55,10 @@ public abstract class BaseWikiEngine implements WikiEngine {
 
 	@Override
 	public String getFormatLabel(Locale locale) {
-		ResourceBundle resourceBundle;
+		ResourceBundleLoader resourceBundleLoader = getResourceBundleLoader();
 
-		try {
-			resourceBundle = new AggregateResourceBundle(
-				ResourceBundleUtil.getBundle(
-					"content.Language", locale, getClass()),
-				LanguageResources.getResourceBundle(locale));
-
-		}
-		catch (MissingResourceException mre) {
-			resourceBundle = LanguageResources.getResourceBundle(locale);
-		}
+		ResourceBundle resourceBundle = resourceBundleLoader.loadResourceBundle(
+			locale);
 
 		String format = getFormat();
 
@@ -119,6 +110,10 @@ public abstract class BaseWikiEngine implements WikiEngine {
 	}
 
 	protected abstract ServletContext getEditPageServletContext();
+
+	protected ResourceBundleLoader getResourceBundleLoader() {
+		return LanguageResources.RESOURCE_BUNDLE_LOADER;
+	}
 
 	private static final String _WIKI_PAGE =
 		BaseWikiEngine.class.getName() + "#WIKI_PAGE";

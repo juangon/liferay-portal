@@ -16,7 +16,6 @@ package com.liferay.document.library.item.selector.web;
 
 import com.liferay.document.library.item.selector.web.display.context.DLItemSelectorViewDisplayContext;
 import com.liferay.item.selector.ItemSelectorCriterion;
-import com.liferay.portal.kernel.util.AggregateResourceBundleLoader;
 import com.liferay.portal.kernel.util.ResourceBundleLoader;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.language.LanguageResources;
@@ -52,13 +51,7 @@ public abstract class BaseDLItemSelectorView<T extends ItemSelectorCriterion>
 
 	@Override
 	public String getTitle(Locale locale) {
-		ClassLoader classLoader = getClass().getClassLoader();
-
-		ResourceBundleLoader resourceBundleLoader =
-			new AggregateResourceBundleLoader(
-				ResourceBundleUtil.getResourceBundleLoader(
-					"content.Language", classLoader),
-				LanguageResources.RESOURCE_BUNDLE_LOADER);
+		ResourceBundleLoader resourceBundleLoader = getResourceBundleLoader();
 
 		ResourceBundle resourceBundle = resourceBundleLoader.loadResourceBundle(
 			locale);
@@ -101,6 +94,10 @@ public abstract class BaseDLItemSelectorView<T extends ItemSelectorCriterion>
 
 	public void setServletContext(ServletContext servletContext) {
 		_servletContext = servletContext;
+	}
+
+	protected ResourceBundleLoader getResourceBundleLoader() {
+		return LanguageResources.RESOURCE_BUNDLE_LOADER;
 	}
 
 	private ServletContext _servletContext;
