@@ -97,6 +97,11 @@ public class LanguageFilter extends BasePortalFilter {
 					}
 				}
 
+				@Override
+				public ResourceBundle loadResourceBundle(Locale locale) {
+					return loadResourceBundle(LocaleUtil.toLanguageId(locale));
+				}
+
 			});
 
 		return _resourceBundles.get(languageId);

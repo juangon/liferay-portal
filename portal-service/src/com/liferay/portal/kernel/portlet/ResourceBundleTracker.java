@@ -15,6 +15,7 @@
 package com.liferay.portal.kernel.portlet;
 
 import com.liferay.portal.kernel.util.AggregateResourceBundle;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ResourceBundleLoader;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.registry.collections.ServiceReferenceMapperFactory;
@@ -26,6 +27,7 @@ import java.io.Closeable;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -88,6 +90,14 @@ public class ResourceBundleTracker implements Closeable {
 							return new AggregateResourceBundle(
 								resourceBundles.toArray(
 									new ResourceBundle[size]));
+						}
+
+						@Override
+						public ResourceBundle loadResourceBundle(
+							Locale locale) {
+
+							return loadResourceBundle(
+								LocaleUtil.toLanguageId(locale));
 						}
 
 					});

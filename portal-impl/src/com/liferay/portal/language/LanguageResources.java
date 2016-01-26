@@ -66,7 +66,7 @@ public class LanguageResources {
 
 			@Override
 			public ResourceBundle loadResourceBundle(Locale locale) {
-				return LanguageResources.getResourceBundle(locale);
+				return loadResourceBundle(LocaleUtil.toLanguageId(locale));
 			}
 
 		};
