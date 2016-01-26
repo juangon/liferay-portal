@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.AggregateResourceBundleLoader;
-import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ResourceBundleLoader;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -29,7 +28,6 @@ import com.liferay.portlet.RequestBackedPortletURLFactory;
 
 import java.util.Locale;
 import java.util.Map;
-import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import org.osgi.service.component.annotations.Component;
@@ -85,15 +83,8 @@ public class AlloyEditorConfigContributor
 	protected JSONArray getStyleFormatsJSONArray(Locale locale) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
-		ResourceBundle resourceBundle;
-
-		try {
-			resourceBundle = _resourceBundleLoader.loadResourceBundle(
-				LocaleUtil.toLanguageId(locale));
-		}
-		catch (MissingResourceException mre) {
-			resourceBundle = ResourceBundleUtil.EMPTY_RESOURCE_BUNDLE;
-		}
+		ResourceBundle resourceBundle =
+			_resourceBundleLoader.loadResourceBundle(locale);
 
 		jsonArray.put(
 			getStyleFormatJSONObject(

@@ -16,7 +16,10 @@ package com.liferay.document.library.item.selector.web;
 
 import com.liferay.document.library.item.selector.web.display.context.DLItemSelectorViewDisplayContext;
 import com.liferay.item.selector.ItemSelectorCriterion;
+import com.liferay.portal.kernel.util.AggregateResourceBundleLoader;
+import com.liferay.portal.kernel.util.ResourceBundleLoader;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
+import com.liferay.portal.language.LanguageResources;
 import com.liferay.portal.theme.ThemeDisplay;
 
 import java.io.IOException;
@@ -49,8 +52,16 @@ public abstract class BaseDLItemSelectorView<T extends ItemSelectorCriterion>
 
 	@Override
 	public String getTitle(Locale locale) {
-		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
-			"content/Language", locale, getClass());
+		ClassLoader classLoader = getClass().getClassLoader();
+
+		ResourceBundleLoader resourceBundleLoader =
+			new AggregateResourceBundleLoader(
+				ResourceBundleUtil.getResourceBundleLoader(
+					"content.Language", classLoader),
+				LanguageResources.RESOURCE_BUNDLE_LOADER);
+
+		ResourceBundle resourceBundle = resourceBundleLoader.loadResourceBundle(
+			locale);
 
 		return ResourceBundleUtil.getString(
 			resourceBundle, "documents-and-media");
