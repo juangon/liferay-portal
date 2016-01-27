@@ -15,7 +15,6 @@
 package com.liferay.portal.portlet.tracker.internal;
 
 import com.liferay.osgi.util.ServiceTrackerFactory;
-import com.liferay.osgi.util.classloader.PassThroughClassLoader;
 import com.liferay.portal.kernel.application.type.ApplicationType;
 import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
@@ -279,8 +278,7 @@ public class PortletTracker
 
 		BundleWiring bundleWiring = bundle.adapt(BundleWiring.class);
 
-		PassThroughClassLoader passThroughClassLoader =
-			new PassThroughClassLoader(bundleWiring.getClassLoader());
+		ClassLoader passThroughClassLoader = bundleWiring.getClassLoader();
 
 		Thread thread = Thread.currentThread();
 
@@ -327,7 +325,7 @@ public class PortletTracker
 				bundlePortletApp.getServletContext());
 			portletBagFactory.setWARFile(true);
 
-			portletBagFactory.create(portletModel);
+			portletBagFactory.create(portletModel, true);
 
 			checkWebResources(
 				bundle.getBundleContext(),
