@@ -18,7 +18,6 @@ import org.osgi.framework.Bundle;
 import org.osgi.service.http.context.ServletContextHelper;
 
 /**
- *
  * @author Juan Gonzalez
  *
  */
