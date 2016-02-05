@@ -15,9 +15,12 @@
 package com.liferay.application.list.taglib.display.context.logic;
 
 import com.liferay.portal.kernel.layoutconfiguration.util.RuntimePageUtil;
+import com.liferay.portal.kernel.servlet.DynamicServletRequest;
 import com.liferay.portal.kernel.template.StringTemplateResource;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -26,9 +29,13 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.service.LayoutTemplateLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.servlet.NamespaceServletRequest;
 import com.liferay.portlet.PortletRequestImpl;
 
 import java.io.Writer;
+
+import java.util.Enumeration;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -80,12 +87,55 @@ public class PanelAppContentHelper {
 				(PortletRequestImpl)_request.getAttribute(
 					JavaConstants.JAVAX_PORTLET_REQUEST);
 
+			HttpServletRequest newRequest = request;
+
 			if (portletRequestImpl != null) {
-				request = portletRequestImpl.getOriginalHttpServletRequest();
+				newRequest = portletRequestImpl.getOriginalHttpServletRequest();
+			}
+			else {
+				HttpServletRequest originalServletRequest =
+					PortalUtil.getOriginalServletRequest(request);
+
+				boolean privateRequestAttributes =
+					getPortlet().isPrivateRequestAttributes();
+
+				DynamicServletRequest dynamicServletRequest = null;
+
+				if (privateRequestAttributes) {
+					String namespace = PortalUtil.getPortletNamespace(
+						getPortletId());
+
+					dynamicServletRequest = new NamespaceServletRequest(
+						originalServletRequest, namespace, namespace);
+				}
+				else {
+					dynamicServletRequest = new DynamicServletRequest(
+						originalServletRequest);
+				}
+
+				Map<String, String[]> parameterMap = request.getParameterMap();
+
+				for (Map.Entry<String, String[]> entry :
+						parameterMap.entrySet()) {
+
+					String name = entry.getKey();
+
+					String[] values = entry.getValue();
+
+					String[] oldValues = request.getParameterValues(name);
+
+					if (oldValues != null) {
+						values = ArrayUtil.append(values, oldValues);
+					}
+
+					dynamicServletRequest.setParameterValues(name, values);
+				}
+
+				newRequest = dynamicServletRequest;
 			}
 
 			StringBundler sb = RuntimePageUtil.getProcessedTemplate(
-				request, _response, getPortletId(),
+				newRequest, _response, getPortletId(),
 				new StringTemplateResource(velocityTemplateId, content));
 
 			if (sb != null) {
