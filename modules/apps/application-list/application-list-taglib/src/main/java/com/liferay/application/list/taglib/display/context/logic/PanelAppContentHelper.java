@@ -122,12 +122,6 @@ public class PanelAppContentHelper {
 
 					String[] values = entry.getValue();
 
-					String[] oldValues = request.getParameterValues(name);
-
-					if (oldValues != null) {
-						values = ArrayUtil.append(values, oldValues);
-					}
-
 					dynamicServletRequest.setParameterValues(name, values);
 				}
 
