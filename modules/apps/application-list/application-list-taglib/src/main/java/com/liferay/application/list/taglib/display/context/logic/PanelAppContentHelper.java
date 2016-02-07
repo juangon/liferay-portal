@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.layoutconfiguration.util.RuntimePageUtil;
 import com.liferay.portal.kernel.servlet.DynamicServletRequest;
 import com.liferay.portal.kernel.template.StringTemplateResource;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -34,7 +33,6 @@ import com.liferay.portlet.PortletRequestImpl;
 
 import java.io.Writer;
 
-import java.util.Enumeration;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -121,12 +119,6 @@ public class PanelAppContentHelper {
 					String name = entry.getKey();
 
 					String[] values = entry.getValue();
-
-					String[] oldValues = request.getParameterValues(name);
-
-					if (oldValues != null) {
-						values = ArrayUtil.append(values, oldValues);
-					}
 
 					dynamicServletRequest.setParameterValues(name, values);
 				}
