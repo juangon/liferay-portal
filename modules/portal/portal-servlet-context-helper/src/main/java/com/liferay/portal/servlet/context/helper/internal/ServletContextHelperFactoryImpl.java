@@ -23,7 +23,7 @@ import org.osgi.service.http.context.ServletContextHelper;
 /**
  * @author Juan Gonzalez
  */
-@Component(immediate = true)
+@Component(immediate = true, service = ServletContextHelperFactory.class)
 public class ServletContextHelperFactoryImpl
 	implements ServletContextHelperFactory {
 
