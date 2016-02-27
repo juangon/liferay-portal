@@ -6509,7 +6509,7 @@ public class PortalImpl implements Portal {
 	public boolean isSkipPortletContentRendering(
 			Group group, LayoutTypePortlet layoutTypePortlet,
 			PortletDisplay portletDisplay, String portletName)
-		throws PortalException {
+		throws PortalException, SystemException {
 
 		if (group.isLayoutPrototype() &&
 			layoutTypePortlet.hasPortletId(portletDisplay.getId()) &&

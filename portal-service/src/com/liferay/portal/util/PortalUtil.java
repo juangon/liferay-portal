@@ -1854,7 +1854,7 @@ public class PortalUtil {
 	public static boolean isSkipPortletContentRendering(
 			Group group, LayoutTypePortlet layoutTypePortlet,
 			PortletDisplay portletDisplay, String portletName)
-		throws PortalException {
+		throws PortalException, SystemException {
 
 		return getPortal().isSkipPortletContentRendering(
 			group, layoutTypePortlet, portletDisplay, portletName);
