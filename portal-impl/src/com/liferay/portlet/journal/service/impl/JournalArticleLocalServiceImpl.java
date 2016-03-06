@@ -1473,22 +1473,6 @@ public class JournalArticleLocalServiceImpl
 		return fetchLatestArticle(resourcePrimKey, status, true);
 	}
 
-	public JournalArticle fetchLatestArticle(
-			long resourcePrimKey, int[] statuses)
-		throws SystemException {
-
-		OrderByComparator orderByComparator = new ArticleVersionComparator();
-
-		List<JournalArticle> articles = journalArticlePersistence.findByR_ST(
-			resourcePrimKey, statuses, 0, 1, orderByComparator);
-
-		if (!articles.isEmpty()) {
-			return articles.get(0);
-		}
-
-		return null;
-	}
-
 	@Override
 	public JournalArticle fetchLatestArticle(
 			long resourcePrimKey, int status, boolean preferApproved)
@@ -1517,6 +1501,22 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		return article;
+	}
+
+	public JournalArticle fetchLatestArticle(
+			long resourcePrimKey, int[] statuses)
+		throws SystemException {
+
+		OrderByComparator orderByComparator = new ArticleVersionComparator();
+
+		List<JournalArticle> articles = journalArticlePersistence.findByR_ST(
+			resourcePrimKey, statuses, 0, 1, orderByComparator);
+
+		if (!articles.isEmpty()) {
+			return articles.get(0);
+		}
+
+		return null;
 	}
 
 	@Override
@@ -6217,7 +6217,29 @@ public class JournalArticleLocalServiceImpl
 				StringPool.UNDERLINE +
 					LocaleUtil.toLanguageId(LocaleUtil.getSiteDefault());
 
-			if (ArrayUtil.isEmpty(bytes) &&
+			Image image = imageLocalService.fetchImage(imageId);
+
+			if (image == null) {
+				double latestVersion = version;
+
+				try {
+					journalArticleLocalService.getLatestVersion(
+						groupId, articleId);
+				}
+				catch (PortalException pe) {
+				}
+
+				if (latestVersion != version) {
+					long latestVersionImageId =
+						journalArticleImageLocalService.getArticleImageId(
+							groupId, articleId, latestVersion, elInstanceId,
+							elName, elLanguage);
+
+					image = imageLocalService.fetchImage(latestVersionImageId);
+				}
+			}
+
+			if ((image == null) && ArrayUtil.isEmpty(bytes) &&
 				!defaultElLanguage.equals(elLanguage)) {
 
 				bytes = images.get(
@@ -6268,8 +6290,6 @@ public class JournalArticleLocalServiceImpl
 
 				continue;
 			}
-
-			Image image = imageLocalService.getImage(imageId);
 
 			if (image != null) {
 				dynamicContent.setText(elContent);
