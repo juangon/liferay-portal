@@ -111,6 +111,10 @@ public class DDMUtil {
 		return getDDM().mergeFields(newFields, existingFields);
 	}
 
+	public static String[] splitFieldsDisplayValue(Field fieldsDisplayField) {
+		return getDDM().splitFieldsDisplayValue(fieldsDisplayField);
+	}
+
 	public void setDDM(DDM ddm) {
 		PortalRuntimePermission.checkSetBeanProperty(getClass());
 

@@ -6223,8 +6223,9 @@ public class JournalArticleLocalServiceImpl
 				double latestVersion = version;
 
 				try {
-					journalArticleLocalService.getLatestVersion(
-						groupId, articleId);
+					latestVersion =
+						journalArticleLocalService.getLatestVersion(
+								groupId, articleId);
 				}
 				catch (PortalException pe) {
 				}

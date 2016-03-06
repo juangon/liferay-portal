@@ -69,4 +69,6 @@ public interface DDM {
 
 	public Fields mergeFields(Fields newFields, Fields existingFields);
 
+	public String[] splitFieldsDisplayValue(Field fieldsDisplayField);
+
 }
