@@ -34,6 +34,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Dictionary;
 import java.util.Enumeration;
@@ -418,46 +419,53 @@ public class JspServlet extends HttpServlet {
 	}
 
 	protected void scanTLDs(ServletContext servletContext) {
-		Enumeration<URL> urls = _bundle.findEntries("META-INF/", "*.tld", true);
+		BundleWiring bundleWiring =_bundle.adapt(BundleWiring.class);
 
-		if (urls == null) {
+		Collection<String> resources = bundleWiring.listResources(
+			"META-INF/", "*.tld", BundleWiring.LISTRESOURCES_RECURSE);
+
+		if (resources == null) {
 			return;
 		}
 
-		while (urls.hasMoreElements()) {
-			URL url = urls.nextElement();
+		for (String resource : resources) {
+			URL url = _bundle.getResource(resource);
 
-			try (InputStream inputStream = url.openStream()) {
-				ParserUtils parserUtils = new ParserUtils(true);
+			if (url != null) {
+				try (InputStream inputStream = url.openStream()) {
+					ParserUtils parserUtils = new ParserUtils(true);
 
-				TreeNode treeNode = parserUtils.parseXMLDocument(
-					url.getPath(), inputStream, false);
+					TreeNode treeNode = parserUtils.parseXMLDocument(
+						url.getPath(), inputStream, false);
 
-				Iterator<TreeNode>iterator = treeNode.findChildren("listener");
+					Iterator<TreeNode>iterator = treeNode.findChildren(
+						"listener");
 
-				while (iterator.hasNext()) {
-					TreeNode listenerTreeNode = iterator.next();
+					while (iterator.hasNext()) {
+						TreeNode listenerTreeNode = iterator.next();
 
-					TreeNode listenerClassTreeNode = listenerTreeNode.findChild(
-						"listener-class");
+						TreeNode listenerClassTreeNode =
+							listenerTreeNode.findChild("listener-class");
 
-					if (listenerClassTreeNode == null) {
-						continue;
+						if (listenerClassTreeNode == null) {
+							continue;
+						}
+
+						String listenerClassName =
+							listenerClassTreeNode.getBody();
+
+						if (listenerClassName == null) {
+							continue;
+						}
+
+						addListener(
+							listenerClassName, _bundle.getBundleContext(),
+							servletContext);
 					}
-
-					String listenerClassName = listenerClassTreeNode.getBody();
-
-					if (listenerClassName == null) {
-						continue;
-					}
-
-					addListener(
-						listenerClassName, _bundle.getBundleContext(),
-						servletContext);
 				}
-			}
-			catch (Exception e) {
-				log(e.getMessage(), e);
+				catch (Exception e) {
+					log(e.getMessage(), e);
+				}
 			}
 		}
 	}
