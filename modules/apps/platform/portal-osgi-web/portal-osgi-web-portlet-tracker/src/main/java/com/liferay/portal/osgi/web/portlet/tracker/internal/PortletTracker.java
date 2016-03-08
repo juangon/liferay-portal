@@ -981,7 +981,7 @@ public class PortletTracker
 			getServletContextHelperRegistration(bundle, serviceRegistrations);
 
 		ServiceReference<ServletContextHelper> serviceReference =
-			servletContextHelperRegistration.getServiceReference();
+			servletContextHelperRegistration.getServletContextHelperReference();
 
 		String servletContextName = GetterUtil.getString(
 			serviceReference.getProperty(
@@ -1192,7 +1192,8 @@ public class PortletTracker
 			serviceReference = bundleContext.getServiceReference(
 				ServletContextHelperRegistration.class);
 
-		serviceRegistrations.addServiceReference(serviceReference);
+		serviceRegistrations.setServletContextHelperRegistrationReference(
+			serviceReference);
 
 		return bundleContext.getService(serviceReference);
 	}
@@ -1455,7 +1456,7 @@ public class PortletTracker
 		}
 
 		public synchronized void addServiceReference(
-			ServiceReference<?> serviceReference) {
+			ServiceReference<Portlet> serviceReference) {
 
 			_serviceReferences.add(serviceReference);
 		}
@@ -1471,7 +1472,7 @@ public class PortletTracker
 		}
 
 		public synchronized void removeServiceReference(
-			ServiceReference<?> serviceReference) {
+			ServiceReference<Portlet> serviceReference) {
 
 			_serviceReferences.remove(serviceReference);
 
@@ -1490,6 +1491,14 @@ public class PortletTracker
 			_bundlePortletApp = bundlePortletApp;
 		}
 
+		public void setServletContextHelperRegistrationReference(
+			ServiceReference<ServletContextHelperRegistration>
+				servletContextHelperRegistrationReference) {
+
+			_servletContextHelperRegistrationReference =
+				servletContextHelperRegistrationReference;
+		}
+
 		protected synchronized void close() {
 			for (ServiceRegistration<?> serviceRegistration :
 					_serviceRegistrations) {
@@ -1497,15 +1506,18 @@ public class PortletTracker
 				serviceRegistration.unregister();
 			}
 
-			if (!_serviceReferences.isEmpty()) {
-				BundleContext bundleContext = _bundle.getBundleContext();
+			BundleContext bundleContext = _bundle.getBundleContext();
 
+			if (!_serviceReferences.isEmpty()) {
 				for (ServiceReference<?> serviceReference :
 						_serviceReferences) {
 
 					bundleContext.ungetService(serviceReference);
 				}
 			}
+
+			bundleContext.ungetService(
+				_servletContextHelperRegistrationReference);
 
 			_bundlePortletApp = null;
 			_serviceReferences.clear();
@@ -1532,10 +1544,12 @@ public class PortletTracker
 		private final Bundle _bundle;
 		private BundlePortletApp _bundlePortletApp;
 		private Configuration _configuration;
-		private final List<ServiceReference<?>> _serviceReferences =
+		private final List<ServiceReference<Portlet>> _serviceReferences =
 			new ArrayList<>();
 		private final List<ServiceRegistration<?>> _serviceRegistrations =
 			new ArrayList<>();
+		private ServiceReference<ServletContextHelperRegistration>
+			_servletContextHelperRegistrationReference;
 
 	}
 
