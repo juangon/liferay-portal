@@ -51,6 +51,7 @@ public class ServletContextHelperFactory {
 
 	@Reference
 	private HttpServiceRuntime _httpServiceRuntime;
+
 	@Reference
 	private Props _props;
 

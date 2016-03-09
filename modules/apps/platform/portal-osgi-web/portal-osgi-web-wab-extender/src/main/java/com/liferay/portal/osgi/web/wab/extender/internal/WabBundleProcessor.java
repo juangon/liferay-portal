@@ -14,10 +14,7 @@
 
 package com.liferay.portal.osgi.web.wab.extender.internal;
 
-import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HashMapDictionary;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.osgi.web.servlet.context.helper.ServletContextHelperRegistration;
 import com.liferay.portal.osgi.web.wab.extender.internal.adapter.FilterExceptionAdapter;
 import com.liferay.portal.osgi.web.wab.extender.internal.adapter.ServletContextListenerExceptionAdapter;
@@ -29,19 +26,10 @@ import com.liferay.portal.osgi.web.wab.extender.internal.definition.WebXMLDefini
 import com.liferay.portal.osgi.web.wab.extender.internal.definition.WebXMLDefinitionLoader;
 
 import java.io.IOException;
-import java.io.InputStream;
-
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-
-import java.net.URL;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Dictionary;
 import java.util.EventListener;
-import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
@@ -52,7 +40,6 @@ import java.util.concurrent.ConcurrentSkipListSet;
 import javax.servlet.Filter;
 import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
-import javax.servlet.ServletContainerInitializer;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextAttributeListener;
 import javax.servlet.ServletContextListener;
@@ -61,7 +48,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletRequestAttributeListener;
 import javax.servlet.ServletRequestListener;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.HandlesTypes;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionListener;
@@ -139,8 +125,6 @@ public class WabBundleProcessor {
 			initContext(
 				webXMLDefinition.getContextParameters(),
 				webXMLDefinition.getJspTaglibMappings());
-
-			initServletContainerInitializers();
 
 			initListeners(webXMLDefinition.getListenerDefinitions());
 
@@ -445,227 +429,6 @@ public class WabBundleProcessor {
 			}
 
 			_listenerRegistrations.add(serviceRegistration);
-		}
-	}
-
-	protected void initServletContainerInitializers() throws Exception {
-		BundleWiring bundleWiring =_bundle.adapt(BundleWiring.class);
-
-		Collection<String> initializerResources = bundleWiring.listResources(
-			"META-INF/services", "javax.servlet.ServletContainerInitializer",
-			BundleWiring.LISTRESOURCES_RECURSE);
-
-		if (initializerResources == null) {
-			return;
-		}
-
-		for (String initializerResource : initializerResources) {
-			URL url = _bundle.getResource(initializerResource);
-
-			if (url == null) {
-				continue;
-			}
-
-			try (InputStream inputStream = url.openStream()) {
-				String fdqn = StringUtil.read(inputStream);
-
-				Class<? extends ServletContainerInitializer> initializerClass =
-					null;
-
-				try {
-					initializerClass =
-						(Class<? extends ServletContainerInitializer>)
-							_bundle.loadClass(fdqn);
-				}
-				catch (Exception e) {
-					_logger.log(Logger.LOG_ERROR, e.getMessage(), e);
-					continue;
-				}
-
-				HandlesTypes handledTypesAnnotation =
-					initializerClass.getAnnotation(HandlesTypes.class);
-
-				if (handledTypesAnnotation == null) {
-					continue;
-				}
-
-				Class<?>[] handledTypesArray = handledTypesAnnotation.value();
-
-				if (ArrayUtil.isEmpty(handledTypesArray)) {
-					continue;
-				}
-
-				Collection<String> classResources = bundleWiring.listResources(
-					"/", "*.class", BundleWiring.LISTRESOURCES_RECURSE);
-
-				if (classResources == null) {
-					continue;
-				}
-
-				Set<Class<?>> annotatedClasses = new HashSet<>();
-
-				for (String classResource : classResources) {
-					boolean found = false;
-
-					URL urlClassResource = _bundle.getResource(classResource);
-
-					if (urlClassResource == null) {
-						continue;
-					}
-
-					String className = classResource.replaceAll(".class", "");
-					className = className.replaceAll("/", ".");
-
-					Class<?> annotatedClass = null;
-
-					try {
-						annotatedClass = _bundle.loadClass(className);
-					}
-					catch (Throwable t) {
-						_logger.log(Logger.LOG_DEBUG, t.getMessage());
-						continue;
-					}
-
-					//Class extends/implements
-
-					for (Class<?> handledType : handledTypesArray) {
-						if (handledType.isAssignableFrom(annotatedClass)) {
-							annotatedClasses.add(annotatedClass);
-							found = true;
-							break;
-						}
-					}
-
-					if (found) {
-						continue;
-					}
-
-					//Class annotation
-					Annotation[] classAnnotations = new Annotation[0];
-
-					try {
-						classAnnotations = annotatedClass.getAnnotations();
-					}
-					catch (Throwable t) {
-						_logger.log(Logger.LOG_DEBUG, t.getMessage());
-					}
-
-					for (Annotation classAnnotation : classAnnotations) {
-						if (ArrayUtil.contains(
-								handledTypesArray,
-								classAnnotation.annotationType())) {
-
-							annotatedClasses.add(annotatedClass);
-							found = true;
-							break;
-						}
-					}
-
-					if (found) {
-						continue;
-					}
-
-					//Method annotation
-
-					Method[] classMethods = new Method[0];
-
-					try {
-						classMethods = annotatedClass.getDeclaredMethods();
-					}
-					catch (Throwable t) {
-						_logger.log(Logger.LOG_DEBUG, t.getMessage());
-					}
-
-					for (Method method : classMethods) {
-						if (found) {
-							break;
-						}
-
-						Annotation[] methodAnnotations = new Annotation[0];
-
-						try {
-							methodAnnotations = method.getDeclaredAnnotations();
-						}
-						catch (Throwable t) {
-							_logger.log(Logger.LOG_DEBUG, t.getMessage());
-						}
-
-						for (Annotation methodAnnotation : methodAnnotations) {
-							if (ArrayUtil.contains(
-									handledTypesArray,
-									methodAnnotation.annotationType())) {
-
-								annotatedClasses.add(annotatedClass);
-								found = true;
-								break;
-							}
-						}
-					}
-
-					if (found) {
-						continue;
-					}
-
-					//Field annotation
-
-					Field[] declaredFields = new Field[0];
-
-					try {
-						declaredFields = annotatedClass.getDeclaredFields();
-					}
-					catch (Throwable t) {
-						_logger.log(Logger.LOG_DEBUG, t.getMessage());
-					}
-
-					for (Field field : declaredFields) {
-						if (found) {
-							break;
-						}
-
-						Annotation[] fieldAnnotations = new Annotation[0];
-
-						try {
-							fieldAnnotations = field.getDeclaredAnnotations();
-						}
-						catch (Throwable t) {
-							_logger.log(Logger.LOG_DEBUG, t.getMessage());
-						}
-
-						for (Annotation fieldAnnotation : fieldAnnotations) {
-							if (ArrayUtil.contains(
-									handledTypesArray,
-									fieldAnnotation.annotationType())) {
-
-								annotatedClasses.add(annotatedClass);
-								found = true;
-								break;
-							}
-						}
-					}
-				}
-
-				if (annotatedClasses.isEmpty()) {
-					annotatedClasses = null;
-				}
-
-				ServletContextHelperRegistration
-					servletContextHelperRegistration =
-						_bundleContext.getService(_serviceReference);
-
-				ServletContext servletContext =
-					servletContextHelperRegistration.getServletContext();
-
-				try {
-					ServletContainerInitializer servletContainerInitializer =
-						initializerClass.newInstance();
-
-					servletContainerInitializer.onStartup(
-						annotatedClasses, servletContext);
-				}
-				catch (Throwable t) {
-					_logger.log(Logger.LOG_ERROR, t.getMessage(), t);
-				}
-			}
 		}
 	}
 
