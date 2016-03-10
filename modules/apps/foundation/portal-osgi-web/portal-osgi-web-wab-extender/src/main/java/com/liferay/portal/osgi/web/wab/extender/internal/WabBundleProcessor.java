@@ -175,11 +175,13 @@ public class WabBundleProcessor {
 			throws IOException, ServletException {
 
 			String curJspFile = (String)servletRequest.getAttribute(
-				org.apache.jasper.Constants.JSP_FILE);
+				com.liferay.portal.osgi.web.servlet.jsp.compiler.JspServlet.
+					JSP_FILE);
 
 			if (jspFile != null) {
 				servletRequest.setAttribute(
-					org.apache.jasper.Constants.JSP_FILE, jspFile);
+					com.liferay.portal.osgi.web.servlet.jsp.compiler.JspServlet.
+						JSP_FILE, jspFile);
 			}
 
 			try {
@@ -187,7 +189,8 @@ public class WabBundleProcessor {
 			}
 			finally {
 				servletRequest.setAttribute(
-					org.apache.jasper.Constants.JSP_FILE, curJspFile);
+					com.liferay.portal.osgi.web.servlet.jsp.compiler.JspServlet.
+						JSP_FILE, curJspFile);
 			}
 		}
 
