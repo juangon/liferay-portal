@@ -144,7 +144,7 @@ public class ServletContextHelperRegistrationImpl
 	}
 
 	@Override
-	public void initDefaults() {
+	public void initDefaults(boolean wabShapedBundle) {
 		if (_defaultServletServiceRegistration == null) {
 			_defaultServletServiceRegistration = createDefaultServlet(
 				_bundleContext, _servletContextName, _wabShapedBundle);
@@ -157,7 +157,7 @@ public class ServletContextHelperRegistrationImpl
 
 		if (_portletServletServiceRegistration == null) {
 			_portletServletServiceRegistration = createPortletServlet(
-				_bundleContext, _servletContextName, _wabShapedBundle);
+				_bundleContext, _servletContextName, wabShapedBundle);
 		}
 
 		if (_portletServletRequestFilterServiceRegistration == null) {

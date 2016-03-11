@@ -147,7 +147,7 @@ public class WabBundleProcessor {
 
 			initServletContainerInitializers(_bundle, servletContext);
 
-			servletContextHelperRegistration.initDefaults();
+			servletContextHelperRegistration.initDefaults(true);
 
 			initListeners(webXMLDefinition.getListenerDefinitions());
 
