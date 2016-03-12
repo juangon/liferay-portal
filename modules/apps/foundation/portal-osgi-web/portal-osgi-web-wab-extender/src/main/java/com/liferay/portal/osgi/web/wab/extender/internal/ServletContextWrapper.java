@@ -542,13 +542,13 @@ public class ServletContextWrapper implements ServletContext {
 	}
 
 	private final Bundle _bundle;
-	private final LinkedHashMap<String, FilterRegistrationImpl>
+	private final Map<String, FilterRegistrationImpl>
 		_filterRegistrations = new LinkedHashMap<>();
-	private final LinkedHashMap<Class<? extends EventListener>, EventListener>
+	private final Map<Class<? extends EventListener>, EventListener>
 		_listeners = new LinkedHashMap<>();
 	private final Logger _logger;
 	private final ServletContext _servletContext;
-	private final LinkedHashMap<String, ServletRegistrationImpl>
+	private final Map<String, ServletRegistrationImpl>
 		_servletRegistrations = new LinkedHashMap<>();
 
 }
