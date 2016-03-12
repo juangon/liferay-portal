@@ -14,6 +14,7 @@
 
 package com.liferay.portal.osgi.web.wab.extender.internal;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -149,7 +150,7 @@ public class ServletRegistrationImpl implements ServletRegistration.Dynamic {
 	private Servlet _instance;
 	private String _jspFile;
 	private int _loadOnStartup;
-	private final Collection<String> _mappings = Collections.emptyList();
+	private final Collection<String> _mappings = new ArrayList<>();
 	private String _name;
 
 }
