@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -183,11 +182,11 @@ public class FilterRegistrationImpl implements FilterRegistration.Dynamic {
 		}
 
 		public List<String> getServletNames() {
-			return Collections.unmodifiableList(getItems(false));
+			return getItems(false);
 		}
 
 		public List<String> getURLPatterns() {
-			return Collections.unmodifiableList(getItems(true));
+			return getItems(true);
 		}
 
 		public void setDispatcher(EnumSet<DispatcherType> dispatcher) {
