@@ -14,8 +14,6 @@
 
 package com.liferay.portal.osgi.web.wab.extender.internal;
 
-import com.liferay.portal.kernel.util.Validator;
-
 import java.io.InputStream;
 
 import java.net.MalformedURLException;
@@ -26,7 +24,6 @@ import java.util.Enumeration;
 import java.util.EventListener;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.servlet.Filter;
@@ -41,8 +38,6 @@ import javax.servlet.SessionCookieConfig;
 import javax.servlet.SessionTrackingMode;
 import javax.servlet.descriptor.JspConfigDescriptor;
 
-import org.apache.felix.utils.log.Logger;
-
 import org.osgi.framework.Bundle;
 
 /**
@@ -51,12 +46,9 @@ import org.osgi.framework.Bundle;
  */
 public class ServletContextWrapper implements ServletContext {
 
-	public ServletContextWrapper(
-		Bundle bundle, ServletContext servletContext, Logger logger) {
-
+	public ServletContextWrapper(Bundle bundle, ServletContext servletContext) {
 		_bundle = bundle;
 		_servletContext = servletContext;
-		_logger = logger;
 	}
 
 	@Override
@@ -124,10 +116,8 @@ public class ServletContextWrapper implements ServletContext {
 			_listeners.put(listenerClass, null);
 		}
 		catch (Exception e) {
-			_logger.log(
-				Logger.LOG_ERROR,
+			throw new IllegalArgumentException(
 				"Bundle " + _bundle + " is unable to load filter " + className);
-			throw new IllegalArgumentException(e);
 		}
 	}
 
@@ -185,10 +175,8 @@ public class ServletContextWrapper implements ServletContext {
 			return clazz.newInstance();
 		}
 		catch (Throwable t) {
-			_logger.log(
-				Logger.LOG_ERROR,
+			throw new ServletException(
 				"Bundle " + _bundle + " is unable to load filter " + clazz);
-			throw new ServletException();
 		}
 	}
 
@@ -200,10 +188,8 @@ public class ServletContextWrapper implements ServletContext {
 			return clazz.newInstance();
 		}
 		catch (Throwable t) {
-			_logger.log(
-				Logger.LOG_ERROR,
+			throw new ServletException(
 				"Bundle " + _bundle + " is unable to load listener " + clazz);
-			throw new ServletException();
 		}
 	}
 
@@ -215,10 +201,8 @@ public class ServletContextWrapper implements ServletContext {
 			return clazz.newInstance();
 		}
 		catch (Throwable t) {
-			_logger.log(
-				Logger.LOG_ERROR,
+			throw new ServletException(
 				"Bundle " + _bundle + " is unable to load servlet " + clazz);
-			throw new ServletException();
 		}
 	}
 
@@ -307,8 +291,16 @@ public class ServletContextWrapper implements ServletContext {
 		return getWrapped().getJspConfigDescriptor();
 	}
 
-	public Collection<EventListener> getListeners() {
+	public Set<Class<? extends EventListener>> getListenerClasses() {
+		return _listeners.keySet();
+	}
+
+	public Collection<EventListener> getListenerInstances() {
 		return _listeners.values();
+	}
+
+	public Map<Class<? extends EventListener>, EventListener> getListeners() {
+		return _listeners;
 	}
 
 	@Override
@@ -417,92 +409,6 @@ public class ServletContextWrapper implements ServletContext {
 		return _servletContext;
 	}
 
-	public void initInstances() {
-		//Listeners instantiation
-
-		for (Entry<Class<? extends EventListener>, EventListener> entry :
-				_listeners.entrySet()) {
-
-			if (entry.getValue() == null) {
-				Class<? extends EventListener> listenerClass = entry.getKey();
-
-				try {
-					EventListener listener = listenerClass.newInstance();
-					entry.setValue(listener);
-				}
-				catch (Exception e) {
-					_logger.log(
-						Logger.LOG_ERROR,
-						"Bundle " + _bundle + " is unable to load listener " +
-							listenerClass);
-				}
-			}
-		}
-
-		//Filters instantiation
-
-		for (Entry<String, FilterRegistrationImpl> entry :
-				_filterRegistrations.entrySet()) {
-
-			FilterRegistrationImpl filterRegistrationImpl = entry.getValue();
-
-			if (filterRegistrationImpl.getInstance() == null) {
-				String filterClassName = filterRegistrationImpl.getClassName();
-
-				try {
-					Class<?> clazz = _bundle.loadClass(filterClassName);
-					Class<? extends Filter> filterClass = clazz.asSubclass(
-						Filter.class);
-					Filter filter = filterClass.newInstance();
-					filterRegistrationImpl.setInstance(filter);
-				}
-				catch (Exception e) {
-					_logger.log(
-						Logger.LOG_ERROR,
-						"Bundle " + _bundle + " is unable to load filter " +
-							filterClassName);
-				}
-			}
-		}
-
-		//Servlets instantiation
-
-		for (Entry<String, ServletRegistrationImpl> entry :
-				_servletRegistrations.entrySet()) {
-
-			ServletRegistrationImpl servletRegistrationImpl = entry.getValue();
-
-			if (servletRegistrationImpl.getInstance() == null) {
-				String servletClassName =
-					servletRegistrationImpl.getClassName();
-
-				try {
-					String jspFile = servletRegistrationImpl.getJspFile();
-					Servlet servlet = null;
-
-					if (Validator.isNotNull(jspFile)) {
-						servlet = new WabBundleProcessor.JspServletWrapper(
-							jspFile);
-					}
-					else {
-						Class<?> clazz = _bundle.loadClass(servletClassName);
-						Class<? extends Servlet> servletClass =
-							clazz.asSubclass(Servlet.class);
-						servlet = servletClass.newInstance();
-					}
-
-					servletRegistrationImpl.setInstance(servlet);
-				}
-				catch (Exception e) {
-					_logger.log(
-						Logger.LOG_ERROR,
-						"Bundle " + _bundle + " is unable to load servlet " +
-							servletClassName);
-				}
-			}
-		}
-	}
-
 	@Override
 	@SuppressWarnings("deprecation")
 	public void log(Exception exception, String msg) {
@@ -546,7 +452,6 @@ public class ServletContextWrapper implements ServletContext {
 		_filterRegistrations = new LinkedHashMap<>();
 	private final Map<Class<? extends EventListener>, EventListener>
 		_listeners = new LinkedHashMap<>();
-	private final Logger _logger;
 	private final ServletContext _servletContext;
 	private final Map<String, ServletRegistrationImpl>
 		_servletRegistrations = new LinkedHashMap<>();

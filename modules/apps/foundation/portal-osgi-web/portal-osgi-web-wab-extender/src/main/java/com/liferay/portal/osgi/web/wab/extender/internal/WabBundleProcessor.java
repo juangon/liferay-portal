@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.HashMapDictionary;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.osgi.web.servlet.context.helper.ServletContextHelperRegistration;
 import com.liferay.portal.osgi.web.servlet.jsp.compiler.JspServlet;
 import com.liferay.portal.osgi.web.wab.extender.internal.adapter.FilterExceptionAdapter;
@@ -148,8 +149,7 @@ public class WabBundleProcessor {
 					webXMLDefinition.getJspTaglibMappings());
 
 			ServletContextWrapper servletContext = new ServletContextWrapper(
-				_bundle, servletContextHelperRegistration.getServletContext(),
-				_logger);
+				_bundle, servletContextHelperRegistration.getServletContext());
 
 			initServletContainerInitializers(_bundle, servletContext);
 
@@ -162,7 +162,7 @@ public class WabBundleProcessor {
 
 			addServlets(webXMLDefinition, servletContext);
 
-			servletContext.initInstances();
+			initInstances(servletContext);
 
 			initListeners(servletContext);
 
@@ -183,6 +183,99 @@ public class WabBundleProcessor {
 		}
 		finally {
 			currentThread.setContextClassLoader(contextClassLoader);
+		}
+	}
+
+	public void initInstances(ServletContextWrapper servletContextWrapper) {
+		//Listeners instantiation
+		Map<Class<? extends EventListener>, EventListener> listeners =
+			servletContextWrapper.getListeners();
+
+		for (Entry<Class<? extends EventListener>, EventListener> entry :
+				listeners.entrySet()) {
+
+			if (entry.getValue() == null) {
+				Class<? extends EventListener> listenerClass = entry.getKey();
+
+				try {
+					EventListener listener = listenerClass.newInstance();
+					entry.setValue(listener);
+				}
+				catch (Exception e) {
+					_logger.log(
+						Logger.LOG_ERROR,
+						"Bundle " + _bundle + " is unable to load listener " +
+							listenerClass);
+				}
+			}
+		}
+
+		//Filters instantiation
+		Map<String, ? extends FilterRegistrationImpl> filterRegistrationImpls =
+			servletContextWrapper.getFilterRegistrationsImpl();
+
+		for (Entry<String, ? extends FilterRegistrationImpl> entry :
+				filterRegistrationImpls.entrySet()) {
+
+			FilterRegistrationImpl filterRegistrationImpl = entry.getValue();
+
+			if (filterRegistrationImpl.getInstance() == null) {
+				String filterClassName = filterRegistrationImpl.getClassName();
+
+				try {
+					Class<?> clazz = _bundle.loadClass(filterClassName);
+					Class<? extends Filter> filterClass = clazz.asSubclass(
+						Filter.class);
+					Filter filter = filterClass.newInstance();
+					filterRegistrationImpl.setInstance(filter);
+				}
+				catch (Exception e) {
+					_logger.log(
+						Logger.LOG_ERROR,
+						"Bundle " + _bundle + " is unable to load filter " +
+							filterClassName);
+				}
+			}
+		}
+
+		//Servlets instantiation
+		Map<String, ? extends ServletRegistrationImpl>
+			servletRegistrationImpls =
+				servletContextWrapper.getServletRegistrationsImpl();
+
+		for (Entry<String, ? extends ServletRegistrationImpl> entry :
+				servletRegistrationImpls.entrySet()) {
+
+			ServletRegistrationImpl servletRegistrationImpl = entry.getValue();
+
+			if (servletRegistrationImpl.getInstance() == null) {
+				String servletClassName =
+					servletRegistrationImpl.getClassName();
+
+				try {
+					String jspFile = servletRegistrationImpl.getJspFile();
+					Servlet servlet = null;
+
+					if (Validator.isNotNull(jspFile)) {
+						servlet = new WabBundleProcessor.JspServletWrapper(
+							jspFile);
+					}
+					else {
+						Class<?> clazz = _bundle.loadClass(servletClassName);
+						Class<? extends Servlet> servletClass =
+							clazz.asSubclass(Servlet.class);
+						servlet = servletClass.newInstance();
+					}
+
+					servletRegistrationImpl.setInstance(servlet);
+				}
+				catch (Exception e) {
+					_logger.log(
+						Logger.LOG_ERROR,
+						"Bundle " + _bundle + " is unable to load servlet " +
+							servletClassName);
+				}
+			}
 		}
 	}
 
@@ -683,7 +776,9 @@ public class WabBundleProcessor {
 	protected void initListeners(ServletContextWrapper servletContext)
 		throws Exception {
 
-		for (EventListener eventListener : servletContext.getListeners()) {
+		for (EventListener eventListener :
+				servletContext.getListenerInstances()) {
+
 			Dictionary<String, Object> properties = new Hashtable<>();
 
 			properties.put(
