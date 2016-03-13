@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.osgi.web.wab.extender.internal;
+package com.liferay.portal.osgi.web.servlet.context.helper;
 
 import java.io.InputStream;
 
