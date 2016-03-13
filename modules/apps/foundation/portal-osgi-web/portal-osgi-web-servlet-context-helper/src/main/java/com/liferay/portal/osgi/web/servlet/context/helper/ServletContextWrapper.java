@@ -62,6 +62,8 @@ public class ServletContextWrapper implements ServletContext {
 	public javax.servlet.FilterRegistration.Dynamic addFilter(
 		String filterName, Filter filter) {
 
+		checkInitiated();
+
 		FilterRegistrationImpl filterRegistrationImpl =
 			getFilterRegistrationImpl(filterName);
 
@@ -82,6 +84,8 @@ public class ServletContextWrapper implements ServletContext {
 	public javax.servlet.FilterRegistration.Dynamic addFilter(
 		String filterName, String className) {
 
+		checkInitiated();
+
 		FilterRegistrationImpl filterRegistrationImpl =
 			getFilterRegistrationImpl(filterName);
 
@@ -98,11 +102,15 @@ public class ServletContextWrapper implements ServletContext {
 
 	@Override
 	public void addListener(Class<? extends EventListener> listenerClass) {
+		checkInitiated();
+
 		_listeners.put(listenerClass, null);
 	}
 
 	@Override
 	public void addListener(String className) {
+		checkInitiated();
+
 		try {
 			Class<?> clazz = _bundle.loadClass(className);
 
@@ -123,6 +131,8 @@ public class ServletContextWrapper implements ServletContext {
 
 	@Override
 	public <T extends EventListener> void addListener(T t) {
+		checkInitiated();
+
 		_listeners.put(t.getClass(), t);
 	}
 
@@ -135,6 +145,8 @@ public class ServletContextWrapper implements ServletContext {
 
 	@Override
 	public Dynamic addServlet(String servletName, Servlet servlet) {
+		checkInitiated();
+
 		ServletRegistrationImpl servletRegistrationImpl =
 			getServletRegistrationImpl(servletName);
 
@@ -153,6 +165,8 @@ public class ServletContextWrapper implements ServletContext {
 
 	@Override
 	public Dynamic addServlet(String servletName, String className) {
+		checkInitiated();
+
 		ServletRegistrationImpl servletRegistrationImpl =
 			getServletRegistrationImpl(servletName);
 
@@ -409,6 +423,10 @@ public class ServletContextWrapper implements ServletContext {
 		return _servletContext;
 	}
 
+	public boolean isInitiated() {
+		return _initiated;
+	}
+
 	@Override
 	@SuppressWarnings("deprecation")
 	public void log(Exception exception, String msg) {
@@ -435,6 +453,10 @@ public class ServletContextWrapper implements ServletContext {
 		getWrapped().setAttribute(name, object);
 	}
 
+	public void setInitiated(boolean initiated) {
+		_initiated = initiated;
+	}
+
 	@Override
 	public boolean setInitParameter(String name, String value) {
 		return getWrapped().setInitParameter(name, value);
@@ -447,9 +469,17 @@ public class ServletContextWrapper implements ServletContext {
 		getWrapped().setSessionTrackingModes(sessionTrackingModes);
 	}
 
+	protected void checkInitiated() {
+		if (_initiated) {
+			throw new IllegalStateException(
+				"Context had already been initialized");
+		}
+	}
+
 	private final Bundle _bundle;
 	private final Map<String, FilterRegistrationImpl>
 		_filterRegistrations = new LinkedHashMap<>();
+	private boolean _initiated;
 	private final Map<Class<? extends EventListener>, EventListener>
 		_listeners = new LinkedHashMap<>();
 	private final ServletContext _servletContext;
