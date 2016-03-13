@@ -165,6 +165,8 @@ public class WabBundleProcessor {
 
 			addServlets(webXMLDefinition, servletContext);
 
+			servletContext.setInitiated(true);
+
 			initInstances(servletContext);
 
 			initListeners(servletContext);
