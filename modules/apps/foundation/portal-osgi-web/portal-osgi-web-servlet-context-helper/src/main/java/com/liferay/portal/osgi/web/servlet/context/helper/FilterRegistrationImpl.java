@@ -105,12 +105,12 @@ public class FilterRegistrationImpl implements FilterRegistration.Dynamic {
 
 	@Override
 	public Collection<String> getServletNameMappings() {
-		return _filterMapping.getServletNames();
+		return new ArrayList<>(_filterMapping.getServletNames());
 	}
 
 	@Override
 	public Collection<String> getUrlPatternMappings() {
-		return _filterMapping.getURLPatterns();
+		return new ArrayList<>(_filterMapping.getURLPatterns());
 	}
 
 	public boolean isAsyncSupported() {

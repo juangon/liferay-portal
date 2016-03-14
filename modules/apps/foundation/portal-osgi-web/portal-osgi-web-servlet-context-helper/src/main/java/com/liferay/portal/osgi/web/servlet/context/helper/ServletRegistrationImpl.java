@@ -72,7 +72,7 @@ public class ServletRegistrationImpl implements ServletRegistration.Dynamic {
 
 	@Override
 	public Collection<String> getMappings() {
-		return _mappings;
+		return new ArrayList<>(_mappings);
 	}
 
 	@Override
