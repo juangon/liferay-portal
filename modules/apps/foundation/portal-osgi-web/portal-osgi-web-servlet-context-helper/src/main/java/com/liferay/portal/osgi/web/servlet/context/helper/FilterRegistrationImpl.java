@@ -157,24 +157,19 @@ public class FilterRegistrationImpl implements FilterRegistration.Dynamic {
 	private static class FilterMapping {
 
 		public void addServletName(int index, String servletName) {
-			FilterMappingItem item = new FilterMappingItem();
-			item.setItemContent(servletName);
-			_items.add(index, item);
+			_servletNames.add(index, servletName);
 		}
 
 		public void addServletName(String servletName) {
-			addServletName(_items.size(), servletName);
+			addServletName(_servletNames.size(), servletName);
 		}
 
 		public void addURLPattern(int index, String urlPattern) {
-			FilterMappingItem item = new FilterMappingItem();
-			item.setUrlPattern(true);
-			item.setItemContent(urlPattern);
-			_items.add(index, item);
+			_urlPatterns.add(index, urlPattern);
 		}
 
 		public void addURLPattern(String urlPattern) {
-			addURLPattern(_items.size(), urlPattern);
+			addURLPattern(_urlPatterns.size(), urlPattern);
 		}
 
 		public EnumSet<DispatcherType> getDispatcher() {
@@ -182,55 +177,21 @@ public class FilterRegistrationImpl implements FilterRegistration.Dynamic {
 		}
 
 		public List<String> getServletNames() {
-			return getItems(false);
+			return _servletNames;
 		}
 
 		public List<String> getURLPatterns() {
-			return getItems(true);
+			return _urlPatterns;
 		}
 
 		public void setDispatcher(EnumSet<DispatcherType> dispatcher) {
 			_dispatcher = dispatcher;
 		}
 
-		private List<String> getItems(boolean urlPattern) {
-			List<String> items = new ArrayList<>();
-
-			for (FilterMappingItem item : _items) {
-				if (urlPattern == item.isUrlPattern()) {
-					items.add(item.getItemContent());
-				}
-			}
-
-			return items;
-		}
-
 		private EnumSet<DispatcherType> _dispatcher = EnumSet.noneOf(
 			DispatcherType.class);
-		private final List<FilterMappingItem> _items = new ArrayList<>();
-
-	}
-
-	private static class FilterMappingItem {
-
-		public String getItemContent() {
-			return _itemContent;
-		}
-
-		public boolean isUrlPattern() {
-			return _urlPattern;
-		}
-
-		public void setItemContent(String itemContent) {
-			_itemContent = itemContent;
-		}
-
-		public void setUrlPattern(boolean urlPattern) {
-			_urlPattern = urlPattern;
-		}
-
-		private String _itemContent = StringPool.BLANK;
-		private boolean _urlPattern;
+		private final List<String> _servletNames = new ArrayList<>();
+		private final List<String> _urlPatterns = new ArrayList<>();
 
 	}
 
