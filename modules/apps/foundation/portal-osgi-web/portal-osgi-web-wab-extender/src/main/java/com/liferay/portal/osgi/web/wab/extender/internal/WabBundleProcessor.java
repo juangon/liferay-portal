@@ -191,99 +191,6 @@ public class WabBundleProcessor {
 		}
 	}
 
-	public void initInstances(ServletContextWrapper servletContextWrapper) {
-		//Listeners instantiation
-		Map<Class<? extends EventListener>, EventListener> listeners =
-			servletContextWrapper.getListeners();
-
-		for (Entry<Class<? extends EventListener>, EventListener> entry :
-				listeners.entrySet()) {
-
-			if (entry.getValue() == null) {
-				Class<? extends EventListener> listenerClass = entry.getKey();
-
-				try {
-					EventListener listener = listenerClass.newInstance();
-					entry.setValue(listener);
-				}
-				catch (Exception e) {
-					_logger.log(
-						Logger.LOG_ERROR,
-						"Bundle " + _bundle + " is unable to load listener " +
-							listenerClass);
-				}
-			}
-		}
-
-		//Filters instantiation
-		Map<String, ? extends FilterRegistrationImpl> filterRegistrationImpls =
-			servletContextWrapper.getFilterRegistrationsImpl();
-
-		for (Entry<String, ? extends FilterRegistrationImpl> entry :
-				filterRegistrationImpls.entrySet()) {
-
-			FilterRegistrationImpl filterRegistrationImpl = entry.getValue();
-
-			if (filterRegistrationImpl.getInstance() == null) {
-				String filterClassName = filterRegistrationImpl.getClassName();
-
-				try {
-					Class<?> clazz = _bundle.loadClass(filterClassName);
-					Class<? extends Filter> filterClass = clazz.asSubclass(
-						Filter.class);
-					Filter filter = filterClass.newInstance();
-					filterRegistrationImpl.setInstance(filter);
-				}
-				catch (Exception e) {
-					_logger.log(
-						Logger.LOG_ERROR,
-						"Bundle " + _bundle + " is unable to load filter " +
-							filterClassName);
-				}
-			}
-		}
-
-		//Servlets instantiation
-		Map<String, ? extends ServletRegistrationImpl>
-			servletRegistrationImpls =
-				servletContextWrapper.getServletRegistrationsImpl();
-
-		for (Entry<String, ? extends ServletRegistrationImpl> entry :
-				servletRegistrationImpls.entrySet()) {
-
-			ServletRegistrationImpl servletRegistrationImpl = entry.getValue();
-
-			if (servletRegistrationImpl.getInstance() == null) {
-				String servletClassName =
-					servletRegistrationImpl.getClassName();
-
-				try {
-					String jspFile = servletRegistrationImpl.getJspFile();
-					Servlet servlet = null;
-
-					if (Validator.isNotNull(jspFile)) {
-						servlet = new WabBundleProcessor.JspServletWrapper(
-							jspFile);
-					}
-					else {
-						Class<?> clazz = _bundle.loadClass(servletClassName);
-						Class<? extends Servlet> servletClass =
-							clazz.asSubclass(Servlet.class);
-						servlet = servletClass.newInstance();
-					}
-
-					servletRegistrationImpl.setInstance(servlet);
-				}
-				catch (Exception e) {
-					_logger.log(
-						Logger.LOG_ERROR,
-						"Bundle " + _bundle + " is unable to load servlet " +
-							servletClassName);
-				}
-			}
-		}
-	}
-
 	public static class JspServletWrapper extends HttpServlet {
 
 		public JspServletWrapper(String jspFile) {
@@ -351,25 +258,7 @@ public class WabBundleProcessor {
 
 			if (ListUtil.isNotEmpty(filterDefinition.getDispatchers())) {
 				for (String dispatcher : filterDefinition.getDispatchers()) {
-					if (dispatcher.equals("ASYNC")) {
-						dispatchers.add(DispatcherType.ASYNC);
-					}
-
-					if (dispatcher.equals("ERROR")) {
-						dispatchers.add(DispatcherType.ERROR);
-					}
-
-					if (dispatcher.equals("FORWARD")) {
-						dispatchers.add(DispatcherType.FORWARD);
-					}
-
-					if (dispatcher.equals("INCLUDE")) {
-						dispatchers.add(DispatcherType.INCLUDE);
-					}
-
-					if (dispatcher.equals("REQUEST")) {
-						dispatchers.add(DispatcherType.REQUEST);
-					}
+					dispatchers.add(DispatcherType.valueOf(dispatcher));
 				}
 			}
 
@@ -708,25 +597,7 @@ public class WabBundleProcessor {
 			while (dispatcherTypes.hasNext()) {
 				DispatcherType type = dispatcherTypes.next();
 
-				if (type.equals(DispatcherType.ASYNC)) {
-					dispatchers.add("ASYNC");
-				}
-
-				if (type.equals(DispatcherType.ERROR)) {
-					dispatchers.add("ERROR");
-				}
-
-				if (type.equals(DispatcherType.FORWARD)) {
-					dispatchers.add("FORWARD");
-				}
-
-				if (type.equals(DispatcherType.INCLUDE)) {
-					dispatchers.add("INCLUDE");
-				}
-
-				if (type.equals(DispatcherType.REQUEST)) {
-					dispatchers.add("REQUEST");
-				}
+				dispatchers.add(type.toString());
 			}
 
 			properties.put(
@@ -775,6 +646,99 @@ public class WabBundleProcessor {
 			}
 
 			_filterRegistrations.add(serviceRegistration);
+		}
+	}
+
+	protected void initInstances(ServletContextWrapper servletContextWrapper) {
+		//Listeners instantiation
+		Map<Class<? extends EventListener>, EventListener> listeners =
+			servletContextWrapper.getListeners();
+
+		for (Entry<Class<? extends EventListener>, EventListener> entry :
+				listeners.entrySet()) {
+
+			if (entry.getValue() == null) {
+				Class<? extends EventListener> listenerClass = entry.getKey();
+
+				try {
+					EventListener listener = listenerClass.newInstance();
+					entry.setValue(listener);
+				}
+				catch (Exception e) {
+					_logger.log(
+						Logger.LOG_ERROR,
+						"Bundle " + _bundle + " is unable to load listener " +
+							listenerClass);
+				}
+			}
+		}
+
+		//Filters instantiation
+		Map<String, ? extends FilterRegistrationImpl> filterRegistrationImpls =
+			servletContextWrapper.getFilterRegistrationsImpl();
+
+		for (Entry<String, ? extends FilterRegistrationImpl> entry :
+				filterRegistrationImpls.entrySet()) {
+
+			FilterRegistrationImpl filterRegistrationImpl = entry.getValue();
+
+			if (filterRegistrationImpl.getInstance() == null) {
+				String filterClassName = filterRegistrationImpl.getClassName();
+
+				try {
+					Class<?> clazz = _bundle.loadClass(filterClassName);
+					Class<? extends Filter> filterClass = clazz.asSubclass(
+						Filter.class);
+					Filter filter = filterClass.newInstance();
+					filterRegistrationImpl.setInstance(filter);
+				}
+				catch (Exception e) {
+					_logger.log(
+						Logger.LOG_ERROR,
+						"Bundle " + _bundle + " is unable to load filter " +
+							filterClassName);
+				}
+			}
+		}
+
+		//Servlets instantiation
+		Map<String, ? extends ServletRegistrationImpl>
+			servletRegistrationImpls =
+				servletContextWrapper.getServletRegistrationsImpl();
+
+		for (Entry<String, ? extends ServletRegistrationImpl> entry :
+				servletRegistrationImpls.entrySet()) {
+
+			ServletRegistrationImpl servletRegistrationImpl = entry.getValue();
+
+			if (servletRegistrationImpl.getInstance() == null) {
+				String servletClassName =
+					servletRegistrationImpl.getClassName();
+
+				try {
+					String jspFile = servletRegistrationImpl.getJspFile();
+					Servlet servlet = null;
+
+					if (Validator.isNotNull(jspFile)) {
+						servlet = new WabBundleProcessor.JspServletWrapper(
+							jspFile);
+					}
+					else {
+						Class<?> clazz = _bundle.loadClass(servletClassName);
+						Class<? extends Servlet> servletClass =
+							clazz.asSubclass(Servlet.class);
+						servlet = servletClass.newInstance();
+					}
+
+					servletRegistrationImpl.setInstance(servlet);
+				}
+				catch (Exception e) {
+					_logger.log(
+						Logger.LOG_ERROR,
+						"Bundle " + _bundle + " is unable to load servlet " +
+							servletClassName);
+				}
+			}
 		}
 	}
 
