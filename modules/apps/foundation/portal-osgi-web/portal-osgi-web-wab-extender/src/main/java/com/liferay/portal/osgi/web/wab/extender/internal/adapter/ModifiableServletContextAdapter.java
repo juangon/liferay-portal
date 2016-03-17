@@ -238,6 +238,21 @@ public class ModifiableServletContextAdapter
 		}
 	}
 
+	public boolean equals(Object obj) {
+		if (!(obj instanceof ModifiableServletContext)) {
+			return false;
+		}
+
+		ModifiableServletContext objModifiableServletContext =
+			(ModifiableServletContext)obj;
+
+		return (_bundle.equals(objModifiableServletContext.getBundle()));
+	}
+
+	public Bundle getBundle() {
+		return _bundle;
+	}
+
 	public FilterRegistration getFilterRegistration(String filterName) {
 		return getFilterRegistrationImpl(filterName);
 	}
@@ -476,6 +491,18 @@ public class ModifiableServletContextAdapter
 				catch (NoSuchMethodException nsme2) {
 				}
 			}
+		}
+
+		try {
+			Method equalsMethod = Object.class.getMethod(
+				"equals", Object.class);
+
+			Method equalsHandlerMethod =
+				ModifiableServletContextAdapter.class.getMethod(
+					"equals", Object.class);
+			methods.put(equalsMethod, equalsHandlerMethod);
+		}
+		catch (NoSuchMethodException nsme) {
 		}
 
 		return Collections.unmodifiableMap(methods);
