@@ -333,6 +333,10 @@ public class ModifiableServletContextAdapter
 		return _servletRegistrations;
 	}
 
+	public int hashCode() {
+		return _servletContext.hashCode();
+	}
+
 	@Override
 	public Object invoke(Object proxy, Method method, Object[] args)
 		throws Throwable {
@@ -501,6 +505,14 @@ public class ModifiableServletContextAdapter
 				ModifiableServletContextAdapter.class.getMethod(
 					"equals", Object.class);
 			methods.put(equalsMethod, equalsHandlerMethod);
+
+			Method hashCodeMethod = Object.class.getMethod(
+				"hashCode", (Class<?>[])null);
+
+			Method hashCodeHandlerMethod =
+				ModifiableServletContextAdapter.class.getMethod(
+					"hashCode", (Class<?>[])null);
+			methods.put(hashCodeMethod, hashCodeHandlerMethod);
 		}
 		catch (NoSuchMethodException nsme) {
 		}
