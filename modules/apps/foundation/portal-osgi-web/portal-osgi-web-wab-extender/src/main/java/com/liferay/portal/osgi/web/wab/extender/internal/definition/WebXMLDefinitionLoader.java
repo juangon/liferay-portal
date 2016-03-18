@@ -16,6 +16,9 @@ package com.liferay.portal.osgi.web.wab.extender.internal.definition;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.osgi.web.wab.extender.internal.WabBundleProcessor;
+import com.liferay.portal.osgi.web.wab.extender.internal.definition.ordering.Ordering;
+import com.liferay.portal.osgi.web.wab.extender.internal.definition.ordering.Ordering.Path;
+import com.liferay.portal.osgi.web.wab.extender.internal.definition.ordering.OrderingImpl;
 
 import java.io.InputStream;
 
@@ -23,6 +26,7 @@ import java.net.URL;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.EventListener;
 import java.util.HashMap;
 import java.util.List;
@@ -249,6 +253,90 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		else if (qName.equals("taglib-uri")) {
 			_taglibUri = String.valueOf(_stack.pop());
 		}
+		else if (qName.equals("after")) {
+			_nameAfter = _name;
+			_name = null;
+			_after = false;
+		}
+		else if (qName.equals("before")) {
+			_nameBefore = _name;
+			_name = null;
+			_before = false;
+		}
+		else if (qName.equals("name")) {
+			String name = String.valueOf(_stack.pop());
+
+			if (_namesAbsoluteOrdering != null) {
+				_namesAbsoluteOrdering.add(name);
+			}else if (!_after && !_before) {
+				_webXMLDefinition.setFragmentName(name);
+			}else {
+				_name = name;
+			}
+		}
+		else if (qName.equals("others")) {
+			if (_namesAbsoluteOrdering != null) {
+				_othersAbsoluteOrderingSet = true;
+			}
+
+			if (_after) {
+				_othersAfterSet = true;
+			}else if (_before) {
+				_othersBeforeSet = true;
+			}
+		}
+		else if (qName.equals("absolute-ordering")) {
+			if (_othersAbsoluteOrderingSet &&
+				(_namesAbsoluteOrdering != null)) {
+
+				_namesAbsoluteOrdering.add(OrderingImpl.OTHERS);
+			}
+
+			_othersAbsoluteOrderingSet = false;
+
+			List<String> absoluteOrderNames =
+				_webXMLDefinition.getAbsoluteOrderNames();
+			absoluteOrderNames.addAll(_namesAbsoluteOrdering);
+
+			_namesAbsoluteOrdering = null;
+		}
+		else if (qName.equals("ordering")) {
+			if (_ordering != null) {
+				EnumMap<Path, String[]> map = _ordering.getRoutes();
+
+				if (_nameBefore != null) {
+					List<String> namesBefore = new ArrayList<>(2);
+					namesBefore.add(_nameBefore);
+
+					if (_othersBeforeSet) {
+						namesBefore.add(OrderingImpl.OTHERS);
+					}
+
+					map.put(Path.BEFORE, namesBefore.toArray(new String[0]));
+				}
+
+				if (_nameAfter != null) {
+					List<String> namesAfter = new ArrayList<>(2);
+					namesAfter.add(_nameAfter);
+
+					if (_othersAfterSet) {
+						namesAfter.add(OrderingImpl.OTHERS);
+					}
+
+					map.put(Path.AFTER, namesAfter.toArray(new String[0]));
+				}
+
+				_othersAfterSet = false;
+				_othersBeforeSet = false;
+				_nameAfter = null;
+				_nameBefore = null;
+				_ordering.setRoutes(map);
+
+				_webXMLDefinition.setOrdering(_ordering);
+
+				_ordering = null;
+			}
+		}
 		else if (qName.equals("url-pattern")) {
 			if (_filterMapping != null) {
 				String urlPattern = String.valueOf(_stack.pop());
@@ -272,26 +360,31 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		URL url = _bundle.getEntry("WEB-INF/web.xml");
 
 		if (url != null) {
-			try (InputStream inputStream = url.openStream()) {
-				SAXParser saxParser = _saxParserFactory.newSAXParser();
+			loadWebXML(url);
+		}
 
-				XMLReader xmlReader = saxParser.getXMLReader();
+		return _webXMLDefinition;
+	}
 
-				xmlReader.setContentHandler(this);
+	public WebXMLDefinition loadWebXML(URL url) throws Exception {
+		try (InputStream inputStream = url.openStream()) {
+			SAXParser saxParser = _saxParserFactory.newSAXParser();
 
-				xmlReader.parse(new InputSource(inputStream));
+			XMLReader xmlReader = saxParser.getXMLReader();
+
+			xmlReader.setContentHandler(this);
+			xmlReader.parse(new InputSource(inputStream));
+		}
+		catch (SAXParseException saxpe) {
+			String message = saxpe.getMessage();
+
+			if (message.contains("DOCTYPE is disallowed")) {
+				throw new Exception(
+					url.toString() + "must be updated to the Servlet 2.4 " +
+						"specification");
 			}
-			catch (SAXParseException saxpe) {
-				String message = saxpe.getMessage();
 
-				if (message.contains("DOCTYPE is disallowed")) {
-					throw new Exception(
-						"WEB-INF/web.xml must be updated to the Servlet 2.4 " +
-							"specification");
-				}
-
-				throw saxpe;
-			}
+			throw saxpe;
 		}
 
 		return _webXMLDefinition;
@@ -318,6 +411,18 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		}
 		else if (qName.equals("servlet-mapping")) {
 			_servletMapping = new ServletMapping();
+		}
+		else if (qName.equals("absolute-ordering")) {
+			_namesAbsoluteOrdering = new ArrayList<>();
+		}
+		else if (qName.equals("ordering")) {
+			_ordering = new OrderingImpl();
+		}
+		else if (qName.equals("after")) {
+			_after = true;
+		}
+		else if (qName.equals("before")) {
+			_before = true;
 		}
 		else if (Arrays.binarySearch(_LEAVES, qName) > -1) {
 			_stack.push(new StringBuilder());
@@ -384,15 +489,25 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		"async-supported", "dispatcher", "error-code", "exception-type",
 		"filter-class", "filter-name", "jsp-file", "listener-class", "location",
 		"param-name", "param-value", "servlet-class", "servlet-name",
-		"taglib-location", "taglib-uri", "url-pattern"
+		"taglib-location", "taglib-uri", "url-pattern", "name"
 	};
 
+	private boolean _after;
+	private boolean _before;
 	private final Bundle _bundle;
 	private FilterDefinition _filterDefinition;
 	private FilterMapping _filterMapping;
 	private JSPConfig _jspConfig;
 	private ListenerDefinition _listenerDefinition;
 	private final Logger _logger;
+	private String _name;
+	private String _nameAfter;
+	private String _nameBefore;
+	private List<String> _namesAbsoluteOrdering;
+	private Ordering _ordering;
+	private boolean _othersAbsoluteOrderingSet;
+	private boolean _othersAfterSet;
+	private boolean _othersBeforeSet;
 	private String _paramName;
 	private String _paramValue;
 	private final SAXParserFactory _saxParserFactory;
