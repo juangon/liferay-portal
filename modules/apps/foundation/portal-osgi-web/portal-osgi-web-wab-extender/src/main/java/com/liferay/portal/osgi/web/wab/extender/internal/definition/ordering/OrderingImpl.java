@@ -29,9 +29,9 @@ public class OrderingImpl implements Ordering {
 	public static final String OTHERS = Ordering.class.getName() + ".OTHERS";
 
 	public OrderingImpl() {
-		this.routes = new EnumMap<>(Path.class);
-		this.routes.put(Path.BEFORE, new String[0]);
-		this.routes.put(Path.AFTER, new String[0]);
+		_routes = new EnumMap<>(Path.class);
+		_routes.put(Path.BEFORE, new String[0]);
+		_routes.put(Path.AFTER, new String[0]);
 	}
 
 	public EnumMap<Path, String[]> getRoutes() {
@@ -77,10 +77,10 @@ public class OrderingImpl implements Ordering {
 		return false;
 	}
 
-	public void setRoutes(EnumMap<Path, String[]> _routes) {
-		this.routes = _routes;
+	public void setRoutes(EnumMap<Path, String[]> routes) {
+		_routes = routes;
 	}
 
-	private final EnumMap<Path, String[]> _routes;
+	private EnumMap<Path, String[]> _routes;
 
 }
