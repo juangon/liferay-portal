@@ -321,7 +321,7 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 						<liferay-ui:message key="type" />:
 					</th>
 					<td>
-						<liferay-ui:message key='<%= "cc_" + order.getCcType() %>' />
+						<liferay-ui:message key='<%= "cc_" + HtmlUtil.escape(order.getCcType()) %>' />
 					</td>
 				</tr>
 				<tr>
