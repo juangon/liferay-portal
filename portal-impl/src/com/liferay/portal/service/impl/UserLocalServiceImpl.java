@@ -152,6 +152,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -1211,22 +1212,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			return 0;
 		}
 
-		if (user.isDefaultUser()) {
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					"Basic authentication is disabled for the default " +
-						"user");
-			}
-
-			return 0;
-		}
-		else if (!user.isActive()) {
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					"Basic authentication is disabled for inactive user " +
-						user.getUserId());
-			}
-
+		if (!isUserAllowedToAuthenticate(user)) {
 			return 0;
 		}
 
@@ -1246,6 +1232,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		if (userPassword.equals(password) || userPassword.equals(encPassword)) {
 			return user.getUserId();
 		}
+
+		handleAuthenticationFailure(
+			login, authType, user, Collections.<String, String[]>emptyMap(),
+			Collections.<String, String[]>emptyMap());
 
 		return 0;
 	}
@@ -1296,21 +1286,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			return 0;
 		}
 
-		if (user.isDefaultUser()) {
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					"Digest authentication is disabled for the default user");
-			}
-
-			return 0;
-		}
-		else if (!user.isActive()) {
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					"Digest authentication is disabled for inactive user " +
-						user.getUserId());
-			}
-
+		if (!isUserAllowedToAuthenticate(user)) {
 			return 0;
 		}
 
@@ -1337,6 +1313,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				return user.getUserId();
 			}
 		}
+
+		Company company = companyPersistence.findByPrimaryKey(companyId);
+
+		handleAuthenticationFailure(
+			username, company.getAuthType(), user,
+			new HashMap<String, String[]>(), new HashMap<String, String[]>());
 
 		return 0;
 	}
@@ -5503,20 +5485,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			return Authenticator.DNE;
 		}
 
-		if (user.isDefaultUser()) {
-			if (_log.isInfoEnabled()) {
-				_log.info("Authentication is disabled for the default user");
-			}
-
-			return Authenticator.DNE;
-		}
-		else if (!user.isActive()) {
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					"Authentication is disabled for inactive user " +
-						user.getUserId());
-			}
-
+		if (!isUserAllowedToAuthenticate(user)) {
 			return Authenticator.FAILURE;
 		}
 
@@ -5526,13 +5495,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 			userPersistence.update(user);
 		}
-
-		// Check password policy to see if the is account locked out or if the
-		// password is expired
-
-		checkLockout(user);
-
-		checkPasswordExpired(user);
 
 		// Authenticate against the User_ table
 
@@ -5599,69 +5561,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		// Execute code triggered by authentication failure
 
 		if (authResult == Authenticator.FAILURE) {
-			try {
-				if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
-					AuthPipeline.onFailureByEmailAddress(
-						PropsKeys.AUTH_FAILURE, companyId, login, headerMap,
-						parameterMap);
-				}
-				else if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
-					AuthPipeline.onFailureByScreenName(
-						PropsKeys.AUTH_FAILURE, companyId, login, headerMap,
-						parameterMap);
-				}
-				else if (authType.equals(CompanyConstants.AUTH_TYPE_ID)) {
-					AuthPipeline.onFailureByUserId(
-						PropsKeys.AUTH_FAILURE, companyId, userId, headerMap,
-						parameterMap);
-				}
-
-				user = userPersistence.fetchByPrimaryKey(user.getUserId());
-
-				if (user == null) {
-					return Authenticator.DNE;
-				}
-
-				// Let LDAP handle max failure event
-
-				if (!LDAPSettingsUtil.isPasswordPolicyEnabled(
-						user.getCompanyId())) {
-
-					PasswordPolicy passwordPolicy = user.getPasswordPolicy();
-
-					user = userPersistence.fetchByPrimaryKey(user.getUserId());
-
-					int failedLoginAttempts = user.getFailedLoginAttempts();
-					int maxFailures = passwordPolicy.getMaxFailure();
-
-					if ((failedLoginAttempts >= maxFailures) &&
-						(maxFailures != 0)) {
-
-						if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
-							AuthPipeline.onMaxFailuresByEmailAddress(
-								PropsKeys.AUTH_MAX_FAILURES, companyId, login,
-								headerMap, parameterMap);
-						}
-						else if (authType.equals(
-									CompanyConstants.AUTH_TYPE_SN)) {
-
-							AuthPipeline.onMaxFailuresByScreenName(
-								PropsKeys.AUTH_MAX_FAILURES, companyId, login,
-								headerMap, parameterMap);
-						}
-						else if (authType.equals(
-									CompanyConstants.AUTH_TYPE_ID)) {
-
-							AuthPipeline.onMaxFailuresByUserId(
-								PropsKeys.AUTH_MAX_FAILURES, companyId, userId,
-								headerMap, parameterMap);
-						}
-					}
-				}
-			}
-			catch (Exception e) {
-				_log.error(e, e);
-			}
+			authResult = handleAuthenticationFailure(
+				login, authType, user, headerMap, parameterMap);
 		}
 
 		// PLACEHOLDER 02
@@ -5700,6 +5601,107 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		return userIds;
+	}
+
+	protected int handleAuthenticationFailure(
+		String login, String authType, User user,
+		Map<String, String[]> headerMap, Map<String, String[]> parameterMap) {
+
+		if (user == null) {
+			return Authenticator.DNE;
+		}
+
+		try {
+			if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
+				AuthPipeline.onFailureByEmailAddress(
+					PropsKeys.AUTH_FAILURE, user.getCompanyId(), login,
+					headerMap, parameterMap);
+			}
+			else if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
+				AuthPipeline.onFailureByScreenName(
+					PropsKeys.AUTH_FAILURE, user.getCompanyId(), login,
+					headerMap, parameterMap);
+			}
+			else if (authType.equals(CompanyConstants.AUTH_TYPE_ID)) {
+				AuthPipeline.onFailureByUserId(
+					PropsKeys.AUTH_FAILURE, user.getCompanyId(),
+					user.getUserId(), headerMap, parameterMap);
+			}
+
+			user = userPersistence.fetchByPrimaryKey(user.getUserId());
+
+			if (user == null) {
+				return Authenticator.DNE;
+			}
+
+			// Let LDAP handle max failure event
+
+			if (!LDAPSettingsUtil.isPasswordPolicyEnabled(
+					user.getCompanyId())) {
+
+				PasswordPolicy passwordPolicy = user.getPasswordPolicy();
+
+				user = userPersistence.fetchByPrimaryKey(user.getUserId());
+
+				int failedLoginAttempts = user.getFailedLoginAttempts();
+				int maxFailures = passwordPolicy.getMaxFailure();
+
+				if ((failedLoginAttempts >= maxFailures) &&
+					(maxFailures != 0)) {
+
+					if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
+						AuthPipeline.onMaxFailuresByEmailAddress(
+							PropsKeys.AUTH_MAX_FAILURES, user.getCompanyId(),
+							login, headerMap, parameterMap);
+					}
+					else if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
+						AuthPipeline.onMaxFailuresByScreenName(
+							PropsKeys.AUTH_MAX_FAILURES, user.getCompanyId(),
+							login, headerMap, parameterMap);
+					}
+					else if (authType.equals(CompanyConstants.AUTH_TYPE_ID)) {
+						AuthPipeline.onMaxFailuresByUserId(
+							PropsKeys.AUTH_MAX_FAILURES, user.getCompanyId(),
+							user.getUserId(), headerMap, parameterMap);
+					}
+				}
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		return Authenticator.FAILURE;
+	}
+
+	protected boolean isUserAllowedToAuthenticate(User user)
+		throws PortalException, SystemException {
+
+		if (user.isDefaultUser()) {
+			if (_log.isInfoEnabled()) {
+				_log.info("Authentication is disabled for the default user");
+			}
+
+			return false;
+		}
+		else if (!user.isActive()) {
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"Authentication is disabled for inactive user " +
+						user.getUserId());
+			}
+
+			return false;
+		}
+
+		// Check password policy to see if the is account locked out or if the
+		// password is expired
+
+		checkLockout(user);
+
+		checkPasswordExpired(user);
+
+		return true;
 	}
 
 	protected void reindex(final User user) {
