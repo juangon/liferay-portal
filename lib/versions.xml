@@ -1381,7 +1381,7 @@
 	</library>
 	<library>
 		<file-name>lib/portal/commons-collections.jar</file-name>
-		<version>3.2.1</version>
+		<version>3.2.2</version>
 		<project-name>Commons Collections</project-name>
 		<project-url>http://commons.apache.org/collections</project-url>
 		<licenses>
@@ -1821,7 +1821,11 @@
 				<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 			</license>
 		</licenses>
-	</library>
+		<comments>
+			This includes a public patch from GROOVY-7504 for CVE-2015-3253.
+			See the Ant target "build-groovy-jar" in portal-impl/build.xml.
+		</comments>
+		</library>
 	<library>
 		<file-name>lib/portal/hessian.jar</file-name>
 		<version>4.0.3</version>

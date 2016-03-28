@@ -16,6 +16,7 @@ package com.liferay.portal.servlet;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.io.ProtectedObjectInputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.MethodHandler;
@@ -47,7 +48,7 @@ public class TunnelServlet extends HttpServlet {
 		ObjectInputStream ois;
 
 		try {
-			ois = new ObjectInputStream(request.getInputStream());
+			ois = new ProtectedObjectInputStream(request.getInputStream());
 		}
 		catch (IOException ioe) {
 			if (_log.isWarnEnabled()) {

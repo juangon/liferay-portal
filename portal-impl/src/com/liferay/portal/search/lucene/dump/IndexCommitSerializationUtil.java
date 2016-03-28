@@ -14,6 +14,7 @@
 
 package com.liferay.portal.search.lucene.dump;
 
+import com.liferay.portal.kernel.io.ProtectedObjectInputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.search.lucene.dump.IndexCommitMetaInfo.Segment;
@@ -51,7 +52,7 @@ public class IndexCommitSerializationUtil {
 		ObjectInputStream objectInputStream = null;
 
 		try {
-			objectInputStream = new ObjectInputStream(inputStream);
+			objectInputStream = new ProtectedObjectInputStream(inputStream);
 
 			IndexCommitMetaInfo indexCommitMetaInfo = null;
 

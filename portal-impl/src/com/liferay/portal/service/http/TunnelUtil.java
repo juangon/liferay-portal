@@ -14,6 +14,7 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.io.ProtectedObjectInputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
@@ -130,8 +131,9 @@ public class TunnelUtil {
 		Object returnObject = null;
 
 		try {
-			ObjectInputStream objectInputStream = new ObjectInputStream(
-				httpURLConnection.getInputStream());
+			ObjectInputStream objectInputStream =
+				new ProtectedObjectInputStream(
+					httpURLConnection.getInputStream());
 
 			returnObject = objectInputStream.readObject();
 

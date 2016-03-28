@@ -14,6 +14,8 @@
 
 package net.sourceforge.cobertura.instrument;
 
+import com.liferay.portal.kernel.io.ProtectedObjectInputStream;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileDescriptor;
@@ -162,7 +164,8 @@ public class ProjectDataUtil {
 			try {
 				fileInputStream = new FileInputStream(dataFile);
 
-				objectInputStream = new ObjectInputStream(fileInputStream);
+				objectInputStream = new ProtectedObjectInputStream(
+					fileInputStream);
 
 				return (ProjectData)objectInputStream.readObject();
 			}
