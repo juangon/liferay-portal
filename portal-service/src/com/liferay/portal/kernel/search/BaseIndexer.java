@@ -529,6 +529,10 @@ public abstract class BaseIndexer implements Indexer {
 			if ((permissionChecker != null) &&
 				isUseSearchResultPermissionFilter(searchContext)) {
 
+				if (searchContext.getUserId() == 0) {
+					searchContext.setUserId(permissionChecker.getUserId());
+				}
+
 				SearchResultPermissionFilter searchResultPermissionFilter =
 					new DefaultSearchResultPermissionFilter(
 						this, permissionChecker);
