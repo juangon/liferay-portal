@@ -43,6 +43,29 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 public class OrderUtil {
 
+	/**
+	 * This method returns an ordered version of the specified list of
+	 * web-fragment.xml descriptors, taking the specified absolute ordering
+	 * into account.
+	 * @param configs
+	 * @param absoluteOrder
+	 * @return
+	 * @throws OrderMaxAttemptsException
+	 * @throws OrderCircularDependencyException
+	 * @throws OrderBeforeAndAfterException
+	 */
+	public static List<WebXMLDefinition> getOrderedWebXMLDefinitions(
+			List<WebXMLDefinition> configs, List<String> absoluteOrder)
+		throws OrderBeforeAndAfterException,
+			OrderCircularDependencyException, OrderMaxAttemptsException {
+
+		if (ListUtil.isEmpty(absoluteOrder)) {
+			return getWebXMLDefinitionOrder(configs);
+		}
+
+		return getOrderWithAbsoluteOrder(configs, absoluteOrder);
+	}
+
 	public static Map<String, WebXMLDefinition> getWebXMLDefinitionMap(
 		List<WebXMLDefinition> webXMLs) {
 
@@ -104,29 +127,6 @@ public class OrderUtil {
 		postSort(configs);
 
 		return new ArrayList<>(Arrays.asList(configs));
-	}
-
-	/**
-	 * This method returns an ordered version of the specified list of
-	 * web-fragment.xml descriptors, taking the specified absolute ordering
-	 * into account.
-	 * @param configs
-	 * @param absoluteOrder
-	 * @return
-	 * @throws OrderMaxAttemptsException
-	 * @throws OrderCircularDependencyException
-	 * @throws OrderBeforeAndAfterException
-	 */
-	public static List<WebXMLDefinition> getOrderedWebXMLDefinitions(
-			List<WebXMLDefinition> configs, List<String> absoluteOrder)
-		throws OrderBeforeAndAfterException,
-			OrderCircularDependencyException, OrderMaxAttemptsException {
-
-		if (ListUtil.isEmpty(absoluteOrder)) {
-			return getWebXMLDefinitionOrder(configs);
-		}
-
-		return getOrderWithAbsoluteOrder(configs, absoluteOrder);
 	}
 
 	private static String[] appendAndSort(String[]... groups) {

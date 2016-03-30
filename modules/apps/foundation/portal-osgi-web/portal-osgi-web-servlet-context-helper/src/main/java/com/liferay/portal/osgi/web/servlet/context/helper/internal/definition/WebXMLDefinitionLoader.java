@@ -413,7 +413,8 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 				webXMLDefinitions, webXMLDefinition.getAbsoluteOrderNames());
 		}
 
-		return _assembleWebXMLDefinition(webXMLDefinition, orderedWebXMLDefinitions);
+		return _assembleWebXMLDefinition(
+			webXMLDefinition, orderedWebXMLDefinitions);
 	}
 
 	public WebXMLDefinition loadWebXML(URL url) throws Exception {
@@ -489,62 +490,6 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		}
 	}
 
-	private Filter _getFilterInstance(String filterClassName) {
-		try {
-			Class<?> clazz = _bundle.loadClass(filterClassName);
-
-			Class<? extends Filter> filterClass = clazz.asSubclass(
-				Filter.class);
-
-			return filterClass.newInstance();
-		}
-		catch (Exception e) {
-			_logger.log(
-				Logger.LOG_ERROR,
-				"Bundle " + _bundle + " is unable to load filter " +
-					filterClassName);
-
-			return null;
-		}
-	}
-
-	private EventListener _getListenerInstance(String listenerClassName) {
-		try {
-			Class<?> clazz = _bundle.loadClass(listenerClassName);
-
-			Class<? extends EventListener> eventListenerClass =
-				clazz.asSubclass(EventListener.class);
-
-			return eventListenerClass.newInstance();
-		}
-		catch (Exception e) {
-			_logger.log(
-				Logger.LOG_ERROR,
-				"Bundle " + _bundle + " is unable to load listener " +
-					listenerClassName);
-
-			return null;
-		}
-	}
-
-	private Servlet _getServletInstance(String servletClassName) {
-		try {
-			Class<?> clazz = _bundle.loadClass(servletClassName);
-
-			Class<? extends Servlet> servletClass = clazz.asSubclass(
-				Servlet.class);
-
-			return servletClass.newInstance();
-		}
-		catch (Exception e) {
-			_logger.log(
-				Logger.LOG_ERROR,
-				_bundle + " unable to load servlet " + servletClassName, e);
-
-			return null;
-		}
-	}
-
 	private void _assembleContextParameters(
 		Map<String, String> assembledContextParameters,
 		Map<String, String> fragmentContextParameters) {
@@ -573,7 +518,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 
 			if (!assembledFilterDefinitions.containsKey(filterName)) {
 				assembledFilterDefinitions.put(filterName, entry.getValue());
-				
+
 				continue;
 			}
 
@@ -698,7 +643,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 
 			if (!assembledServletDefinitions.containsKey(servletName)) {
 				fragmentServletDefinitions.put(servletName, entry.getValue());
-				
+
 				continue;
 			}
 
@@ -831,6 +776,62 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		return assembledWebXMLDefinition;
 	}
 
+	private Filter _getFilterInstance(String filterClassName) {
+		try {
+			Class<?> clazz = _bundle.loadClass(filterClassName);
+
+			Class<? extends Filter> filterClass = clazz.asSubclass(
+				Filter.class);
+
+			return filterClass.newInstance();
+		}
+		catch (Exception e) {
+			_logger.log(
+				Logger.LOG_ERROR,
+				"Bundle " + _bundle + " is unable to load filter " +
+					filterClassName);
+
+			return null;
+		}
+	}
+
+	private EventListener _getListenerInstance(String listenerClassName) {
+		try {
+			Class<?> clazz = _bundle.loadClass(listenerClassName);
+
+			Class<? extends EventListener> eventListenerClass =
+				clazz.asSubclass(EventListener.class);
+
+			return eventListenerClass.newInstance();
+		}
+		catch (Exception e) {
+			_logger.log(
+				Logger.LOG_ERROR,
+				"Bundle " + _bundle + " is unable to load listener " +
+					listenerClassName);
+
+			return null;
+		}
+	}
+
+	private Servlet _getServletInstance(String servletClassName) {
+		try {
+			Class<?> clazz = _bundle.loadClass(servletClassName);
+
+			Class<? extends Servlet> servletClass = clazz.asSubclass(
+				Servlet.class);
+
+			return servletClass.newInstance();
+		}
+		catch (Exception e) {
+			_logger.log(
+				Logger.LOG_ERROR,
+				_bundle + " unable to load servlet " + servletClassName, e);
+
+			return null;
+		}
+	}
+
 	private static final String[] _LEAVES = new String[] {
 		"async-supported", "dispatcher", "error-code", "exception-type",
 		"filter-class", "filter-name", "jsp-file", "listener-class", "location",
@@ -838,8 +839,11 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		"taglib-location", "taglib-uri", "url-pattern"
 	};
 
+	private List<String> _absoluteOrderingNames;
 	private boolean _after;
+	private String _afterName;
 	private boolean _before;
+	private String _beforeName;
 	private final Bundle _bundle;
 	private FilterDefinition _filterDefinition;
 	private FilterMapping _filterMapping;
@@ -847,9 +851,6 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 	private ListenerDefinition _listenerDefinition;
 	private final Logger _logger;
 	private String _name;
-	private String _afterName;
-	private String _beforeName;
-	private List<String> _absoluteOrderingNames;
 	private Order _ordering;
 	private boolean _othersAbsoluteOrderingSet;
 	private boolean _othersAfterSet;
