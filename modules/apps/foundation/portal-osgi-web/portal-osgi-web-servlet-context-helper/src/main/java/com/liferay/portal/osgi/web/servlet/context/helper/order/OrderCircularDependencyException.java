@@ -39,9 +39,9 @@ public class OrderCircularDependencyException extends Exception {
 
 		StringBundler sb = new StringBundler();
 
-		sb.append("Circular dependencies detected when traversing '");
+		sb.append("Circular dependencies detected when traversing ");
 		sb.append(path.name());
-		sb.append("' declarations:");
+		sb.append(" declarations:");
 
 		for (WebXMLDefinition webXMLDefinition : webXMLDefinitions) {
 			Order order = webXMLDefinition.getOrdering();
@@ -51,13 +51,12 @@ public class OrderCircularDependencyException extends Exception {
 			String[] names = routes.get(path);
 
 			if (names.length != 0) {
-				sb.append(" ");
+				sb.append("\n");
 				sb.append(webXMLDefinition.getFragmentName());
 				sb.append(" ");
 				sb.append(path.name());
 				sb.append(": ");
 				sb.append(Arrays.asList(names));
-				sb.append("\n");
 			}
 		}
 
