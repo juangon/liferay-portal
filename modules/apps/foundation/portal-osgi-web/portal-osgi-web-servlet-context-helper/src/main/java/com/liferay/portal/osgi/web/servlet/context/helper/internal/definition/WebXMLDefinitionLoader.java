@@ -90,17 +90,17 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 	public void endElement(String uri, String localName, String qName) {
 		if (qName.equals("absolute-ordering")) {
 			if (_othersAbsoluteOrderingSet &&
-				(_namesAbsoluteOrdering != null)) {
+				(_absoluteOrderingNames != null)) {
 
-				_namesAbsoluteOrdering.add(Order.OTHERS);
+				_absoluteOrderingNames.add(Order.OTHERS);
 			}
 
 			List<String> absoluteOrderNames =
 				_webXMLDefinition.getAbsoluteOrderNames();
 
-			absoluteOrderNames.addAll(_namesAbsoluteOrdering);
+			absoluteOrderNames.addAll(_absoluteOrderingNames);
 
-			_namesAbsoluteOrdering = null;
+			_absoluteOrderingNames = null;
 			_othersAbsoluteOrderingSet = false;
 		}
 		else if (qName.equals("after")) {
@@ -229,8 +229,8 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		else if (qName.equals("name")) {
 			String name = String.valueOf(_stack.pop());
 
-			if (_namesAbsoluteOrdering != null) {
-				_namesAbsoluteOrdering.add(name);
+			if (_absoluteOrderingNames != null) {
+				_absoluteOrderingNames.add(name);
 			}
 			else if (!_after && !_before) {
 				_webXMLDefinition.setFragmentName(name);
@@ -285,7 +285,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 			_othersBeforeSet = false;
 		}
 		else if (qName.equals("others")) {
-			if (_namesAbsoluteOrdering != null) {
+			if (_absoluteOrderingNames != null) {
 				_othersAbsoluteOrderingSet = true;
 			}
 
@@ -446,7 +446,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		String uri, String localName, String qName, Attributes attributes) {
 
 		if (qName.equals("absolute-ordering")) {
-			_namesAbsoluteOrdering = new ArrayList<>();
+			_absoluteOrderingNames = new ArrayList<>();
 		}
 		else if (qName.equals("after")) {
 			_after = true;
@@ -844,7 +844,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 	private String _name;
 	private String _afterName;
 	private String _beforeName;
-	private List<String> _namesAbsoluteOrdering;
+	private List<String> _absoluteOrderingNames;
 	private Order _ordering;
 	private boolean _othersAbsoluteOrderingSet;
 	private boolean _othersAfterSet;
