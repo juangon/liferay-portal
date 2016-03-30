@@ -117,7 +117,7 @@ public class OrderUtil {
 	 * @throws OrderCircularDependencyException
 	 * @throws OrderBeforeAndAfterException
 	 */
-	public static List<WebXMLDefinition> getWebXMLDefinitionOrder(
+	public static List<WebXMLDefinition> getOrderedWebXMLDefinitions(
 			List<WebXMLDefinition> configs, List<String> absoluteOrder)
 		throws OrderBeforeAndAfterException,
 			OrderCircularDependencyException, OrderMaxAttemptsException {

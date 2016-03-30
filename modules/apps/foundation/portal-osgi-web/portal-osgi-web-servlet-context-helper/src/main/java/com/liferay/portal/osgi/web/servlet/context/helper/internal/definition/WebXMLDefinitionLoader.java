@@ -95,18 +95,18 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 				_namesAbsoluteOrdering.add(Order.OTHERS);
 			}
 
-			_othersAbsoluteOrderingSet = false;
-
 			List<String> absoluteOrderNames =
 				_webXMLDefinition.getAbsoluteOrderNames();
 
 			absoluteOrderNames.addAll(_namesAbsoluteOrdering);
 
 			_namesAbsoluteOrdering = null;
+			_othersAbsoluteOrderingSet = false;
 		}
 		else if (qName.equals("after")) {
 			_after = false;
-			_nameAfter = _name;
+			_afterName = _name;
+
 			_name = null;
 		}
 		else if (qName.equals("async-supported")) {
@@ -121,7 +121,8 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		}
 		else if (qName.equals("before")) {
 			_before = false;
-			_nameBefore = _name;
+			_beforeName = _name;
+
 			_name = null;
 		}
 		else if (qName.equals("context-param")) {
@@ -245,44 +246,43 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 
 			EnumMap<Path, String[]> routes = _ordering.getRoutes();
 
-			List<String> namesBefore = new ArrayList<>(2);
+			List<String> beforeNames = new ArrayList<>(2);
 
-			if (_nameBefore != null) {
-				namesBefore.add(_nameBefore);
+			if (_beforeName != null) {
+				beforeNames.add(_beforeName);
 			}
 
 			if (_othersBeforeSet) {
-				namesBefore.add(Order.OTHERS);
+				beforeNames.add(Order.OTHERS);
 			}
 
-			if (ListUtil.isNotEmpty(namesBefore)) {
-				routes.put(Path.BEFORE, namesBefore.toArray(new String[0]));
+			if (ListUtil.isNotEmpty(beforeNames)) {
+				routes.put(Path.BEFORE, beforeNames.toArray(new String[0]));
 			}
 
-			List<String> namesAfter = new ArrayList<>(2);
+			List<String> afterNames = new ArrayList<>(2);
 
-			if (_nameAfter != null) {
-				namesAfter.add(_nameAfter);
+			if (_afterName != null) {
+				afterNames.add(_afterName);
 			}
 
 			if (_othersAfterSet) {
-				namesAfter.add(Order.OTHERS);
+				afterNames.add(Order.OTHERS);
 			}
 
-			if (ListUtil.isNotEmpty(namesAfter)) {
-				routes.put(Path.AFTER, namesAfter.toArray(new String[0]));
+			if (ListUtil.isNotEmpty(afterNames)) {
+				routes.put(Path.AFTER, afterNames.toArray(new String[0]));
 			}
-
-			_nameAfter = null;
-			_nameBefore = null;
-			_othersAfterSet = false;
-			_othersBeforeSet = false;
 
 			_ordering.setRoutes(routes);
 
 			_webXMLDefinition.setOrdering(_ordering);
 
+			_afterName = null;
+			_beforeName = null;
 			_ordering = null;
+			_othersAfterSet = false;
+			_othersBeforeSet = false;
 		}
 		else if (qName.equals("others")) {
 			if (_namesAbsoluteOrdering != null) {
@@ -386,30 +386,31 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 			return webXMLDefinition;
 		}
 
-		Enumeration<URL> resources = _bundle.getResources(
+		Enumeration<URL> enumeration = _bundle.getResources(
 			"META-INF/web-fragment.xml");
 
-		List<WebXMLDefinition> webFragments = new ArrayList<>();
+		List<WebXMLDefinition> webXMLDefinitions = new ArrayList<>();
 
-		if (resources != null) {
-			while (resources.hasMoreElements()) {
-				URL url = resources.nextElement();
-				WebXMLDefinitionLoader webFragmentsDefinitionLoader =
+		if (enumeration != null) {
+			while (enumeration.hasMoreElements()) {
+				URL url = enumeration.nextElement();
+
+				WebXMLDefinitionLoader webXMLDefinitionLoader =
 					new WebXMLDefinitionLoader(
 						_bundle, _saxParserFactory, _logger);
 
-				webFragments.add(webFragmentsDefinitionLoader.loadWebXML(url));
+				webXMLDefinitions.add(webXMLDefinitionLoader.loadWebXML(url));
 			}
 		}
 
-		List<WebXMLDefinition> sortedWebFragments = new ArrayList<>();
+		List<WebXMLDefinition> orderedWebXMLDefinitions = new ArrayList<>();
 
-		if (ListUtil.isNotEmpty(webFragments)) {
-			sortedWebFragments = OrderUtil.getWebXMLDefinitionOrder(
-				webFragments, webXMLDefinition.getAbsoluteOrderNames());
+		if (ListUtil.isNotEmpty(webXMLDefinitions)) {
+			orderedWebXMLDefinitions = OrderUtil.getOrderedWebXMLDefinitions(
+				webXMLDefinitions, webXMLDefinition.getAbsoluteOrderNames());
 		}
 
-		return assembleWebXML(webXMLDefinition, sortedWebFragments);
+		return assembleWebXML(webXMLDefinition, orderedWebXMLDefinitions);
 	}
 
 	public WebXMLDefinition loadWebXML(URL url) throws Exception {
@@ -841,8 +842,8 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 	private ListenerDefinition _listenerDefinition;
 	private final Logger _logger;
 	private String _name;
-	private String _nameAfter;
-	private String _nameBefore;
+	private String _afterName;
+	private String _beforeName;
 	private List<String> _namesAbsoluteOrdering;
 	private Order _ordering;
 	private boolean _othersAbsoluteOrderingSet;
