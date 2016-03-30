@@ -42,6 +42,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Dictionary;
+import java.util.Enumeration;
 import java.util.EventListener;
 import java.util.HashSet;
 import java.util.Hashtable;
@@ -53,22 +54,15 @@ import java.util.concurrent.ConcurrentSkipListSet;
 
 import javax.servlet.Filter;
 import javax.servlet.Servlet;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContainerInitializer;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextAttributeListener;
 import javax.servlet.ServletContextListener;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
 import javax.servlet.ServletRequestAttributeListener;
 import javax.servlet.ServletRequestListener;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.HandlesTypes;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionListener;
-
-import javax.xml.parsers.SAXParserFactory;
 
 import org.apache.felix.utils.log.Logger;
 
@@ -119,11 +113,7 @@ public class WabBundleProcessor {
 		}
 	}
 
-	public void init(
-			SAXParserFactory saxParserFactory,
-			Dictionary<String, Object> properties)
-		throws Exception {
-
+	public void init(Dictionary<String, Object> properties) throws Exception {
 		Thread currentThread = Thread.currentThread();
 
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
@@ -131,22 +121,23 @@ public class WabBundleProcessor {
 		try {
 			currentThread.setContextClassLoader(_bundleClassLoader);
 
-			WebXMLDefinitionLoader webXMLDefinitionLoader =
-				new WebXMLDefinitionLoader(_bundle, saxParserFactory, _logger);
-
-			WebXMLDefinition webXMLDefinition =
-				webXMLDefinitionLoader.loadWebXML();
-
 			ServletContextHelperRegistration servletContextHelperRegistration =
-				initContext(
-					webXMLDefinition.getContextParameters(),
-					webXMLDefinition.getJspTaglibMappings());
+				initContext();
 
 			boolean wabShapedBundle =
 				servletContextHelperRegistration.isWabShapedBundle();
 
 			if (!wabShapedBundle) {
 				return;
+			}
+
+			WebXMLDefinition webXMLDefinition =
+				servletContextHelperRegistration.getWebXMLDefinition();
+
+			Exception exception = webXMLDefinition.getException();
+
+			if (exception != null) {
+				throw exception;
 			}
 
 			ServletContext servletContext =
@@ -389,10 +380,7 @@ public class WabBundleProcessor {
 		return classNamesList.toArray(new String[classNamesList.size()]);
 	}
 
-	protected ServletContextHelperRegistration initContext(
-		Map<String, String> contextParameters,
-		Map<String, String> jspTaglibMappings) {
-
+	protected ServletContextHelperRegistration initContext() {
 		ServiceTracker
 			<ServletContextHelperRegistration, ServletContextHelperRegistration>
 				serviceTracker = new ServiceTracker<>(
@@ -405,6 +393,9 @@ public class WabBundleProcessor {
 			ServletContextHelperRegistration servletContextHelperRegistration =
 				serviceTracker.waitForService(2000);
 
+			WebXMLDefinition webXMLDefinition =
+				servletContextHelperRegistration.getWebXMLDefinition();
+
 			_servletContextHelperRegistrationServiceReference =
 				serviceTracker.getServiceReference();
 
@@ -414,7 +405,7 @@ public class WabBundleProcessor {
 			_contextName = servletContext.getServletContextName();
 
 			servletContext.setAttribute(
-				"jsp.taglib.mappings", jspTaglibMappings);
+				"jsp.taglib.mappings", webXMLDefinition.getJspTaglibMappings());
 			servletContext.setAttribute("osgi-bundlecontext", _bundleContext);
 			servletContext.setAttribute("osgi-runtime-vendor", _VENDOR);
 
@@ -550,24 +541,20 @@ public class WabBundleProcessor {
 	}
 
 	protected void initServletContainerInitializers(
-		Bundle bundle, ServletContext servletContext) {
+			Bundle bundle, ServletContext servletContext)
+		throws IOException {
 
 		BundleWiring bundleWiring = bundle.adapt(BundleWiring.class);
 
-		Collection<String> initializerResources = bundleWiring.listResources(
-			"META-INF/services", "javax.servlet.ServletContainerInitializer",
-			BundleWiring.LISTRESOURCES_RECURSE);
+		Enumeration<URL> initializerResources = bundle.getResources(
+			"META-INF/services/javax.servlet.ServletContainerInitializer");
 
 		if (initializerResources == null) {
 			return;
 		}
 
-		for (String initializerResource : initializerResources) {
-			URL url = bundle.getResource(initializerResource);
-
-			if (url == null) {
-				continue;
-			}
+		while (initializerResources.hasMoreElements()) {
+			URL url = initializerResources.nextElement();
 
 			try (InputStream inputStream = url.openStream()) {
 				String fqcn = StringUtil.read(inputStream);
