@@ -126,10 +126,11 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 			_name = null;
 		}
 		else if (qName.equals("context-param")) {
-			_webXMLDefinition.setContextParameter(_paramName, _paramValue);
+			_webXMLDefinition.setContextParameter(
+				_parameterName, _parameterValue);
 
-			_paramName = null;
-			_paramValue = null;
+			_parameterName = null;
+			_parameterValue = null;
 		}
 		else if (qName.equals("dispatcher")) {
 			String dispatcher = String.valueOf(_stack.pop());
@@ -190,14 +191,16 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		}
 		else if (qName.equals("init-param")) {
 			if (_filterDefinition != null) {
-				_filterDefinition.setInitParameter(_paramName, _paramValue);
+				_filterDefinition.setInitParameter(
+					_parameterName, _parameterValue);
 			}
 			else if (_servletDefinition != null) {
-				_servletDefinition.setInitParameter(_paramName, _paramValue);
+				_servletDefinition.setInitParameter(
+					_parameterName, _parameterValue);
 			}
 
-			_paramName = null;
-			_paramValue = null;
+			_parameterName = null;
+			_parameterValue = null;
 		}
 		else if (qName.equals("jsp-config")) {
 			_webXMLDefinition.setJspTaglibMappings(_jspConfig.mappings);
@@ -297,12 +300,12 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 			}
 		}
 		else if (qName.equals("param-name")) {
-			_paramName = String.valueOf(_stack.pop());
-			_paramName = _paramName.trim();
+			_parameterName = String.valueOf(_stack.pop());
+			_parameterName = _parameterName.trim();
 		}
 		else if (qName.equals("param-value")) {
-			_paramValue = String.valueOf(_stack.pop());
-			_paramValue = _paramValue.trim();
+			_parameterValue = String.valueOf(_stack.pop());
+			_parameterValue = _parameterValue.trim();
 		}
 		else if (qName.equals("servlet")) {
 			_webXMLDefinition.setServletDefinition(
@@ -577,106 +580,107 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 			FilterDefinition webXMLFilterDefinition =
 				webXMLFilterDefinitions.get(filterName);
 
-			FilterDefinition fragmentFilterDefinition = entry.getValue();
-
-			Map<String, String> webXMLFilterParameters = null;
+			Map<String, String> webXMLInitParameters = null;
 
 			if (webXMLFilterDefinition != null) {
-				webXMLFilterParameters =
+				webXMLInitParameters =
 					webXMLFilterDefinition.getInitParameters();
 			}
-
-			Map<String, String> fragmentFilterParams =
-				fragmentFilterDefinition.getInitParameters();
 
 			FilterDefinition assembledFilterDefinition =
 				assembledFilterDefinitions.get(filterName);
 
-			Map<String, String> assembledInitParams =
+			Map<String, String> assembledInitParameters =
 				assembledFilterDefinition.getInitParameters();
 
-			for (Entry<String, String> initParamEntry :
-					fragmentFilterParams.entrySet()) {
+			FilterDefinition fragmentFilterDefinition = entry.getValue();
 
-				String initParamName = initParamEntry.getKey();
-				String initParamValue = initParamEntry.getValue();
+			Map<String, String> fragmentInitParameters =
+				fragmentFilterDefinition.getInitParameters();
 
-				String assembledInitParamValue = assembledInitParams.get(
-					initParamName);
+			for (Entry<String, String> initParametersEntry :
+					fragmentInitParameters.entrySet()) {
 
-				String webXMLInitParamValue = null;
+				String initParameterName = initParametersEntry.getKey();
 
-				if (webXMLFilterParameters != null) {
-					webXMLInitParamValue = webXMLFilterParameters.get(
-						initParamName);
+				String webXMLInitParameterValue = null;
+
+				if (webXMLInitParameters != null) {
+					webXMLInitParameterValue = webXMLInitParameters.get(
+						initParameterName);
 				}
 
-				if (Validator.isNull(assembledInitParamValue)) {
-					if ((webXMLInitParamValue == null) &&
-						!Validator.equals(
-							assembledInitParamValue, initParamValue)) {
+				String assembledInitParameterValue =
+					assembledInitParameters.get(initParameterName);
 
-						// Servlet 3 spec 8.2.3. If two web-fragments
-						// with same param-name and different
-						// param-value does not exist in web.xml,
-						// throw an Exception
+				if (Validator.isNull(assembledInitParameterValue)) {
+					if ((webXMLInitParameterValue == null) &&
+						!Validator.equals(
+							assembledInitParameterValue,
+							initParametersEntry.getValue())) {
+
+						// Servlet 3 spec 8.2.3
 
 						throw new Exception (
-							"Conflicts for " + initParamName +
-								" in filter "+ filterName);
+							"Init paramter name " + initParameterName +
+								" conflicts with filter name " + filterName);
 					}
 					else {
-						assembledInitParams.put(
-							initParamName, initParamValue);
+						assembledInitParameters.put(
+							initParameterName, initParametersEntry.getValue());
 					}
 				}
 			}
 
-			List<String> assembledFilterDispatchers =
+			List<String> assembledDispatchers =
 				assembledFilterDefinition.getDispatchers();
 
 			List<String> fragmentDispatchers =
 				fragmentFilterDefinition.getDispatchers();
 
 			for (String dispatcher : fragmentDispatchers) {
-				if (!assembledFilterDispatchers.contains(dispatcher)) {
-					assembledFilterDispatchers.add(dispatcher);
+				if (!assembledDispatchers.contains(dispatcher)) {
+					assembledDispatchers.add(dispatcher);
 				}
 			}
 
-			List<String> assembledFilterServlets =
+			List<String> assembledServletNames =
 				assembledFilterDefinition.getServletNames();
 
-			List<String> fragmentFilterServlets =
+			List<String> fragmentServletNames =
 				fragmentFilterDefinition.getServletNames();
 
-			for (String servletName : fragmentFilterServlets) {
-				if (!assembledFilterServlets.contains(servletName)) {
-					assembledFilterServlets.add(servletName);
+			for (String servletName : fragmentServletNames) {
+				if (!assembledServletNames.contains(servletName)) {
+					assembledServletNames.add(servletName);
 				}
 			}
 
-			List<String> assembledFilterURLPatterns =
+			List<String> assembledURLPatterns =
 				assembledFilterDefinition.getURLPatterns();
 
-			List<String> fragmentFilterURLPatterns =
+			List<String> fragmentURLPatterns =
 				fragmentFilterDefinition.getURLPatterns();
 
-			for (String urlPattern : fragmentFilterURLPatterns) {
-				if (!assembledFilterURLPatterns.contains(urlPattern)) {
-					assembledFilterURLPatterns.add(urlPattern);
+			for (String urlPattern : fragmentURLPatterns) {
+				if (!assembledURLPatterns.contains(urlPattern)) {
+					assembledURLPatterns.add(urlPattern);
 				}
 			}
 		}
 	}
 
 	private void _assembleListeners(
-		List<ListenerDefinition> assembledListeners,
-		List<ListenerDefinition> fragmentListeners) {
+		List<ListenerDefinition> assembledListenerDefinitions,
+		List<ListenerDefinition> fragmentListenerDefinitions) {
 
-		for (ListenerDefinition fragmentListener : fragmentListeners) {
-			if (!assembledListeners.contains(fragmentListener)) {
-				assembledListeners.add(fragmentListener);
+		for (ListenerDefinition fragmentListenerDefinition :
+				fragmentListenerDefinitions) {
+
+			if (!assembledListenerDefinitions.contains(
+					fragmentListenerDefinition)) {
+
+				assembledListenerDefinitions.add(fragmentListenerDefinition);
 			}
 		}
 	}
@@ -687,13 +691,13 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 			Map<String, ServletDefinition> fragmentServlets)
 		throws Exception {
 
-		for (Entry<String, ServletDefinition> servletEntry :
+		for (Entry<String, ServletDefinition> entry :
 				fragmentServlets.entrySet()) {
 
-			String servletName = servletEntry.getKey();
+			String servletName = entry.getKey();
 
 			if (!assembledServlets.containsKey(servletName)) {
-				fragmentServlets.put(servletName, servletEntry.getValue());
+				fragmentServlets.put(servletName, entry.getValue());
 				
 				continue;
 			}
@@ -702,7 +706,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 				servletName);
 
 			ServletDefinition fragmentServletDefinition =
-				servletEntry.getValue();
+				entry.getValue();
 
 			Map<String, String> webXMLServletParams = null;
 
@@ -724,22 +728,22 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 					fragmentServletParams.entrySet()) {
 
 				String initParamName = initParamEntry.getKey();
-				String initParamValue = initParamEntry.getValue();
+				String initParameterValue = initParamEntry.getValue();
 
-				String assembledInitParamValue = assembledInitParams.get(
+				String assembledInitParameterValue = assembledInitParams.get(
 					initParamName);
 
-				String webXMLInitParamValue = null;
+				String webXMLInitParameterValue = null;
 
 				if (webXMLServletParams != null) {
-					webXMLInitParamValue = webXMLServletParams.get(
+					webXMLInitParameterValue = webXMLServletParams.get(
 						initParamName);
 				}
 
-				if (Validator.isNull(assembledInitParamValue)) {
-					if ((webXMLInitParamValue == null) &&
+				if (Validator.isNull(assembledInitParameterValue)) {
+					if ((webXMLInitParameterValue == null) &&
 						!Validator.equals(
-							assembledInitParamValue, initParamValue)) {
+							assembledInitParameterValue, initParameterValue)) {
 
 						// Servlet 3 spec 8.2.3. If two web-fragments
 						// with same param-name and different
@@ -752,7 +756,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 					}
 					else {
 						assembledInitParams.put(
-							initParamName, initParamValue);
+							initParamName, initParameterValue);
 					}
 				}
 			}
@@ -850,8 +854,8 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 	private boolean _othersAbsoluteOrderingSet;
 	private boolean _othersAfterSet;
 	private boolean _othersBeforeSet;
-	private String _paramName;
-	private String _paramValue;
+	private String _parameterName;
+	private String _parameterValue;
 	private final SAXParserFactory _saxParserFactory;
 	private ServletDefinition _servletDefinition;
 	private ServletMapping _servletMapping;
