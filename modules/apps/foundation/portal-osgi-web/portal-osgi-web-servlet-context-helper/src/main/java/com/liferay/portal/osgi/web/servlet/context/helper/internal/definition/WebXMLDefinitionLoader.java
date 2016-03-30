@@ -88,7 +88,28 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 
 	@Override
 	public void endElement(String uri, String localName, String qName) {
-		if (qName.equals("async-supported")) {
+		if (qName.equals("absolute-ordering")) {
+			if (_othersAbsoluteOrderingSet &&
+				(_namesAbsoluteOrdering != null)) {
+
+				_namesAbsoluteOrdering.add(Order.OTHERS);
+			}
+
+			_othersAbsoluteOrderingSet = false;
+
+			List<String> absoluteOrderNames =
+				_webXMLDefinition.getAbsoluteOrderNames();
+
+			absoluteOrderNames.addAll(_namesAbsoluteOrdering);
+
+			_namesAbsoluteOrdering = null;
+		}
+		else if (qName.equals("after")) {
+			_after = false;
+			_nameAfter = _name;
+			_name = null;
+		}
+		else if (qName.equals("async-supported")) {
 			boolean asyncSupported = GetterUtil.getBoolean(_stack.pop());
 
 			if (_filterDefinition != null) {
@@ -97,6 +118,11 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 			else if (_servletDefinition != null) {
 				_servletDefinition.setAsyncSupported(asyncSupported);
 			}
+		}
+		else if (qName.equals("before")) {
+			_before = false;
+			_nameBefore = _name;
+			_name = null;
 		}
 		else if (qName.equals("context-param")) {
 			_webXMLDefinition.setContextParameter(_paramName, _paramValue);
@@ -199,6 +225,77 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 
 			_listenerDefinition.setEventListener(eventListener);
 		}
+		else if (qName.equals("name")) {
+			String name = String.valueOf(_stack.pop());
+
+			if (_namesAbsoluteOrdering != null) {
+				_namesAbsoluteOrdering.add(name);
+			}
+			else if (!_after && !_before) {
+				_webXMLDefinition.setFragmentName(name);
+			}
+			else {
+				_name = name;
+			}
+		}
+		else if (qName.equals("ordering")) {
+			if (_ordering == null) {
+				return;
+			}
+
+			EnumMap<Path, String[]> routes = _ordering.getRoutes();
+
+			List<String> namesBefore = new ArrayList<>(2);
+
+			if (_nameBefore != null) {
+				namesBefore.add(_nameBefore);
+			}
+
+			if (_othersBeforeSet) {
+				namesBefore.add(Order.OTHERS);
+			}
+
+			if (ListUtil.isNotEmpty(namesBefore)) {
+				routes.put(Path.BEFORE, namesBefore.toArray(new String[0]));
+			}
+
+			List<String> namesAfter = new ArrayList<>(2);
+
+			if (_nameAfter != null) {
+				namesAfter.add(_nameAfter);
+			}
+
+			if (_othersAfterSet) {
+				namesAfter.add(Order.OTHERS);
+			}
+
+			if (ListUtil.isNotEmpty(namesAfter)) {
+				routes.put(Path.AFTER, namesAfter.toArray(new String[0]));
+			}
+
+			_nameAfter = null;
+			_nameBefore = null;
+			_othersAfterSet = false;
+			_othersBeforeSet = false;
+
+			_ordering.setRoutes(routes);
+
+			_webXMLDefinition.setOrdering(_ordering);
+
+			_ordering = null;
+		}
+		else if (qName.equals("others")) {
+			if (_namesAbsoluteOrdering != null) {
+				_othersAbsoluteOrderingSet = true;
+			}
+
+			if (_after) {
+				_othersAfterSet = true;
+			}
+			else if (_before) {
+				_othersBeforeSet = true;
+			}
+		}
 		else if (qName.equals("param-name")) {
 			_paramName = String.valueOf(_stack.pop());
 			_paramName = _paramName.trim();
@@ -261,103 +358,6 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		}
 		else if (qName.equals("taglib-uri")) {
 			_taglibUri = String.valueOf(_stack.pop());
-		}
-		else if (qName.equals("after")) {
-			_after = false;
-			_nameAfter = _name;
-			_name = null;
-		}
-		else if (qName.equals("before")) {
-			_before = false;
-			_nameBefore = _name;
-			_name = null;
-		}
-		else if (qName.equals("name")) {
-			String name = String.valueOf(_stack.pop());
-
-			if (_namesAbsoluteOrdering != null) {
-				_namesAbsoluteOrdering.add(name);
-			}
-			else if (!_after && !_before) {
-				_webXMLDefinition.setFragmentName(name);
-			}
-			else {
-				_name = name;
-			}
-		}
-		else if (qName.equals("others")) {
-			if (_namesAbsoluteOrdering != null) {
-				_othersAbsoluteOrderingSet = true;
-			}
-
-			if (_after) {
-				_othersAfterSet = true;
-			}
-			else if (_before) {
-				_othersBeforeSet = true;
-			}
-		}
-		else if (qName.equals("absolute-ordering")) {
-			if (_othersAbsoluteOrderingSet &&
-				(_namesAbsoluteOrdering != null)) {
-
-				_namesAbsoluteOrdering.add(Order.OTHERS);
-			}
-
-			_othersAbsoluteOrderingSet = false;
-
-			List<String> absoluteOrderNames =
-				_webXMLDefinition.getAbsoluteOrderNames();
-
-			absoluteOrderNames.addAll(_namesAbsoluteOrdering);
-
-			_namesAbsoluteOrdering = null;
-		}
-		else if (qName.equals("ordering")) {
-			if (_ordering == null) {
-				return;
-			}
-
-			EnumMap<Path, String[]> routes = _ordering.getRoutes();
-
-			List<String> namesBefore = new ArrayList<>(2);
-
-			if (_nameBefore != null) {
-				namesBefore.add(_nameBefore);
-			}
-
-			if (_othersBeforeSet) {
-				namesBefore.add(Order.OTHERS);
-			}
-
-			if (ListUtil.isNotEmpty(namesBefore)) {
-				routes.put(Path.BEFORE, namesBefore.toArray(new String[0]));
-			}
-
-			List<String> namesAfter = new ArrayList<>(2);
-
-			if (_nameAfter != null) {
-				namesAfter.add(_nameAfter);
-			}
-
-			if (_othersAfterSet) {
-				namesAfter.add(Order.OTHERS);
-			}
-
-			if (ListUtil.isNotEmpty(namesAfter)) {
-				routes.put(Path.AFTER, namesAfter.toArray(new String[0]));
-			}
-
-			_nameAfter = null;
-			_nameBefore = null;
-			_othersAfterSet = false;
-			_othersBeforeSet = false;
-
-			_ordering.setRoutes(routes);
-
-			_webXMLDefinition.setOrdering(_ordering);
-
-			_ordering = null;
 		}
 		else if (qName.equals("url-pattern")) {
 			if (_filterMapping != null) {
@@ -444,7 +444,16 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 	public void startElement(
 		String uri, String localName, String qName, Attributes attributes) {
 
-		if (qName.equals("filter")) {
+		if (qName.equals("absolute-ordering")) {
+			_namesAbsoluteOrdering = new ArrayList<>();
+		}
+		else if (qName.equals("after")) {
+			_after = true;
+		}
+		else if (qName.equals("before")) {
+			_before = true;
+		}
+		else if (qName.equals("filter")) {
 			_filterDefinition = new FilterDefinition();
 		}
 		else if (qName.equals("filter-mapping")) {
@@ -456,23 +465,14 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		else if (qName.equals("listener")) {
 			_listenerDefinition = new ListenerDefinition();
 		}
+		else if (qName.equals("ordering")) {
+			_ordering = new OrderImpl();
+		}
 		else if (qName.equals("servlet")) {
 			_servletDefinition = new ServletDefinition();
 		}
 		else if (qName.equals("servlet-mapping")) {
 			_servletMapping = new ServletMapping();
-		}
-		else if (qName.equals("absolute-ordering")) {
-			_namesAbsoluteOrdering = new ArrayList<>();
-		}
-		else if (qName.equals("ordering")) {
-			_ordering = new OrderImpl();
-		}
-		else if (qName.equals("after")) {
-			_after = true;
-		}
-		else if (qName.equals("before")) {
-			_before = true;
 		}
 		else if (qName.equals("web-app")) {
 			boolean metadataComplete = GetterUtil.getBoolean(
