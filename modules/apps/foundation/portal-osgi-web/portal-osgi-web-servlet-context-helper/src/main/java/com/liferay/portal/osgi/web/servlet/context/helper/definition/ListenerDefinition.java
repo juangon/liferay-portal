@@ -25,19 +25,20 @@ public class ListenerDefinition {
 
 	@Override
 	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
 		if (!(obj instanceof ListenerDefinition)) {
 			return false;
 		}
 
 		ListenerDefinition listenerDefinition = (ListenerDefinition)obj;
 
-		EventListener eventListener = listenerDefinition.getEventListener();
+		if (Validator.equals(
+				_eventListener.getClass(),
+				listenerDefinition._eventListener.getClass())) {
 
-		Class<?> listenerClass = _eventListener.getClass();
-
-		Class<?> objectListenerClass = eventListener.getClass();
-
-		if (Validator.equals(listenerClass, objectListenerClass)) {
 			return true;
 		}
 
@@ -54,9 +55,9 @@ public class ListenerDefinition {
 			return super.hashCode();
 		}
 
-		Class<?> listenerClass = _eventListener.getClass();
+		Class<?> clazz = _eventListener.getClass();
 
-		return listenerClass.hashCode();
+		return clazz.hashCode();
 	}
 
 	public void setEventListener(EventListener eventListener) {
