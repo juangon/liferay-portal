@@ -41,7 +41,11 @@ public class OrderImpl implements Order {
 
 	@Override
 	public boolean isAfter(String name) {
-		return (Arrays.binarySearch(_routes.get(Path.AFTER), name) >= 0);
+		if (Arrays.binarySearch(_routes.get(Path.AFTER), name) >= 0) {
+			return true;
+		}
+
+		return false;
 	}
 
 	@Override
@@ -58,7 +62,11 @@ public class OrderImpl implements Order {
 
 	@Override
 	public boolean isBefore(String name) {
-		return (Arrays.binarySearch(_routes.get(Path.BEFORE), name) >= 0);
+		if (Arrays.binarySearch(_routes.get(Path.BEFORE), name) >= 0) {
+			return true;
+		}
+
+		return false;
 	}
 
 	@Override
