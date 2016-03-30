@@ -167,6 +167,9 @@ public class ServletContextHelperRegistrationImpl
 		return _wabShapedBundle;
 	}
 
+	/**
+	 * @deprecated As of 7.0.0, with no direct replacement
+	 */
 	@Deprecated
 	@Override
 	public void setProperties(Map<String, String> contextParameters) {
