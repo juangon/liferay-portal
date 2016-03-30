@@ -56,37 +56,37 @@ public class WebXMLDefinitionLoaderTest {
 
 	@Test
 	public void testOrderCircularDependencyException() throws Exception {
-		EntryLoaderMockBundle bundle = new EntryLoaderMockBundle(
+		EntryLoaderMockBundle entryLoaderMockBundle = new EntryLoaderMockBundle(
 			"dependencies/custom-web.xml");
 
 		WebXMLDefinitionLoader webXMLDefinitionLoader =
 			new WebXMLDefinitionLoader(
-				bundle, SAXParserFactory.newInstance(), new Logger(null));
+				entryLoaderMockBundle, SAXParserFactory.newInstance(), new Logger(null));
 
 		WebXMLDefinition webXMLDefinition = webXMLDefinitionLoader.loadWebXML(
-			bundle.getEntry());
+			entryLoaderMockBundle.getEntry());
 
-		EntryLoaderMockBundle bundleCircular1 = new EntryLoaderMockBundle(
+		EntryLoaderMockBundle circular1EntryLoaderMockBundle = new EntryLoaderMockBundle(
 			"dependencies/custom-web-fragment-circular1.xml");
 
-		WebXMLDefinitionLoader fragmentCircular1Loader =
+		WebXMLDefinitionLoader circular1WebXMLDefinitionLoader =
 			new WebXMLDefinitionLoader(
-				bundleCircular1, SAXParserFactory.newInstance(),
+				circular1EntryLoaderMockBundle, SAXParserFactory.newInstance(),
 				new Logger(null));
 
 		WebXMLDefinition fragmentCircular1Definition =
-			fragmentCircular1Loader.loadWebXML(bundleCircular1.getEntry());
+			circular1WebXMLDefinitionLoader.loadWebXML(circular1EntryLoaderMockBundle.getEntry());
 
-		EntryLoaderMockBundle bundleCircular2 = new EntryLoaderMockBundle(
+		EntryLoaderMockBundle circular2WebXMLDefinitionLoader = new EntryLoaderMockBundle(
 			"dependencies/custom-web-fragment-circular2.xml");
 
 		WebXMLDefinitionLoader fragmentCircular2Loader =
 			new WebXMLDefinitionLoader(
-				bundleCircular2, SAXParserFactory.newInstance(),
+				circular2WebXMLDefinitionLoader, SAXParserFactory.newInstance(),
 				new Logger(null));
 
 		WebXMLDefinition fragmentCircular2Definition =
-			fragmentCircular2Loader.loadWebXML(bundleCircular2.getEntry());
+			fragmentCircular2Loader.loadWebXML(circular2WebXMLDefinitionLoader.getEntry());
 
 		List<WebXMLDefinition> definitions = new ArrayList<>();
 		definitions.add(fragmentCircular1Definition);
