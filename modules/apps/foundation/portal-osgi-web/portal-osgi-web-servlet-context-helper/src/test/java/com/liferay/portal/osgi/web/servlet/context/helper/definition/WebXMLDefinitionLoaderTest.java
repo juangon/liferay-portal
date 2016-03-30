@@ -55,7 +55,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 public class WebXMLDefinitionLoaderTest {
 
 	@Test
-	public void testCircularDependenciesException() throws Exception {
+	public void testOrderCircularDependencyException() throws Exception {
 		EntryLoaderMockBundle bundle = new EntryLoaderMockBundle(
 			"dependencies/custom-web.xml");
 
@@ -108,7 +108,7 @@ public class WebXMLDefinitionLoaderTest {
 	}
 
 	@Test
-	public void testDuplicatedNameException() throws Exception {
+	public void testOrderBeforeAndAfterException() throws Exception {
 		EntryLoaderMockBundle bundle = new EntryLoaderMockBundle(
 			"dependencies/custom-web.xml");
 
