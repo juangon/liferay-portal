@@ -23,7 +23,7 @@ import java.util.EnumMap;
  */
 public interface Order {
 
-	public static final String OTHERS = Order.class.getName() + ".OTHERS";
+	public static final String OTHERS = Order.class.getName() + "#OTHERS";
 
 	public EnumMap<Path, String[]> getRoutes();
 
