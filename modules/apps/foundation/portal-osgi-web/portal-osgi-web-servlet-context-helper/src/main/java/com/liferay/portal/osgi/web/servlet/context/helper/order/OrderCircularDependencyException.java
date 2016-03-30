@@ -28,9 +28,9 @@ import java.util.List;
 public class OrderCircularDependencyException extends Exception {
 
 	public OrderCircularDependencyException(
-		Order.Path path, List<WebXMLDefinition> facesConfigs) {
+		Order.Path path, List<WebXMLDefinition> webXMLDefinitions) {
 
-		super(createMessage(path, facesConfigs));
+		super(createMessage(path, webXMLDefinitions));
 	}
 
 	private static String createMessage(
