@@ -413,7 +413,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 				webXMLDefinitions, webXMLDefinition.getAbsoluteOrderNames());
 		}
 
-		return _assembleWebXML(webXMLDefinition, orderedWebXMLDefinitions);
+		return _assembleWebXMLDefinition(webXMLDefinition, orderedWebXMLDefinitions);
 	}
 
 	public WebXMLDefinition loadWebXML(URL url) throws Exception {
@@ -560,7 +560,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		}
 	}
 
-	private void _assembleFilters(
+	private void _assembleFilterDefinitions(
 			Map<String, FilterDefinition> webXMLFilterDefinitions,
 			Map<String, FilterDefinition> assembledFilterDefinitions,
 			Map<String, FilterDefinition> fragmentFilterDefinitions)
@@ -670,7 +670,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		}
 	}
 
-	private void _assembleListeners(
+	private void _assembleListenerDefinitions(
 		List<ListenerDefinition> assembledListenerDefinitions,
 		List<ListenerDefinition> fragmentListenerDefinitions) {
 
@@ -685,91 +685,87 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		}
 	}
 
-	private void _assembleServlets(
-			Map<String, ServletDefinition> webXMLServlets,
-			Map<String, ServletDefinition> assembledServlets,
-			Map<String, ServletDefinition> fragmentServlets)
+	private void _assembleServletDefinitions(
+			Map<String, ServletDefinition> webXMLServletDefinitions,
+			Map<String, ServletDefinition> assembledServletDefinitions,
+			Map<String, ServletDefinition> fragmentServletDefinitions)
 		throws Exception {
 
 		for (Entry<String, ServletDefinition> entry :
-				fragmentServlets.entrySet()) {
+				fragmentServletDefinitions.entrySet()) {
 
 			String servletName = entry.getKey();
 
-			if (!assembledServlets.containsKey(servletName)) {
-				fragmentServlets.put(servletName, entry.getValue());
+			if (!assembledServletDefinitions.containsKey(servletName)) {
+				fragmentServletDefinitions.put(servletName, entry.getValue());
 				
 				continue;
 			}
 
-			ServletDefinition webXMLServletDefinition = webXMLServlets.get(
-				servletName);
+			ServletDefinition webXMLServletDefinition =
+				webXMLServletDefinitions.get(servletName);
 
-			ServletDefinition fragmentServletDefinition =
-				entry.getValue();
-
-			Map<String, String> webXMLServletParams = null;
+			Map<String, String> webXMLServletInitParameters = null;
 
 			if (webXMLServletDefinition != null) {
-				webXMLServletParams =
+				webXMLServletInitParameters =
 					webXMLServletDefinition.getInitParameters();
 			}
 
-			Map<String, String> fragmentServletParams =
-				fragmentServletDefinition.getInitParameters();
-
 			ServletDefinition assembledServletDefinition =
-				assembledServlets.get(servletName);
+				assembledServletDefinitions.get(servletName);
 
-			Map<String, String> assembledInitParams =
+			Map<String, String> assembledInitInitParameters =
 				assembledServletDefinition.getInitParameters();
 
-			for (Entry<String, String> initParamEntry :
-					fragmentServletParams.entrySet()) {
+			ServletDefinition fragmentServletDefinition = entry.getValue();
 
-				String initParamName = initParamEntry.getKey();
-				String initParameterValue = initParamEntry.getValue();
+			Map<String, String> fragmentServletInitParameters =
+				fragmentServletDefinition.getInitParameters();
 
-				String assembledInitParameterValue = assembledInitParams.get(
-					initParamName);
+			for (Entry<String, String> initParameterEntry :
+					fragmentServletInitParameters.entrySet()) {
+
+				String initParameterName = initParameterEntry.getKey();
 
 				String webXMLInitParameterValue = null;
 
-				if (webXMLServletParams != null) {
-					webXMLInitParameterValue = webXMLServletParams.get(
-						initParamName);
+				if (webXMLServletInitParameters != null) {
+					webXMLInitParameterValue = webXMLServletInitParameters.get(
+						initParameterName);
 				}
+
+				String assembledInitParameterValue =
+					assembledInitInitParameters.get(initParameterName);
 
 				if (Validator.isNull(assembledInitParameterValue)) {
 					if ((webXMLInitParameterValue == null) &&
 						!Validator.equals(
-							assembledInitParameterValue, initParameterValue)) {
+							assembledInitParameterValue,
+							initParameterEntry.getValue())) {
 
-						// Servlet 3 spec 8.2.3. If two web-fragments
-						// with same param-name and different
-						// param-value does not exist in web.xml,
-						// throw an Exception
+						// Servlet 3 spec 8.2.3
 
 						throw new Exception (
-							"Conflicts for " + initParamName +
-								" in servlet "+ servletName);
+							"Init paramter name " + initParameterName +
+								" conflicts with servlet name " + servletName);
 					}
 					else {
-						assembledInitParams.put(
-							initParamName, initParameterValue);
+						assembledInitInitParameters.put(
+							initParameterName, initParameterEntry.getValue());
 					}
 				}
 			}
 
-			List<String> assembledServletURLPatterns =
+			List<String> assembledURLPatterns =
 				assembledServletDefinition.getURLPatterns();
 
-			List<String> fragmentServletURLPatterns =
+			List<String> fragmentURLPatterns =
 				fragmentServletDefinition.getURLPatterns();
 
-			for (String urlPattern : fragmentServletURLPatterns) {
-				if (!assembledServletURLPatterns.contains(urlPattern)) {
-					assembledServletURLPatterns.add(urlPattern);
+			for (String urlPattern : fragmentURLPatterns) {
+				if (!assembledURLPatterns.contains(urlPattern)) {
+					assembledURLPatterns.add(urlPattern);
 				}
 			}
 
@@ -780,55 +776,59 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		}
 	}
 
-	private WebXMLDefinition _assembleWebXML(
-			WebXMLDefinition webXML, List<WebXMLDefinition> webFragments)
+	private WebXMLDefinition _assembleWebXMLDefinition(
+			WebXMLDefinition webXMLWebXMLDefinition,
+			List<WebXMLDefinition> fragmentWebXMLDefinitions)
 		throws Exception {
 
-		WebXMLDefinition assembledWebXML = (WebXMLDefinition)webXML.clone();
+		Map<String, FilterDefinition> webXMLFilterDefinitions =
+			webXMLWebXMLDefinition.getFilterDefinitions();
+		Map<String, ServletDefinition> webXMLServletDefinitions =
+			webXMLWebXMLDefinition.getServletDefinitions();
+
+		WebXMLDefinition assembledWebXMLDefinition =
+			(WebXMLDefinition)webXMLWebXMLDefinition.clone();
 
 		Map<String, String> assembledContextParameters =
-			assembledWebXML.getContextParameters();
+			assembledWebXMLDefinition.getContextParameters();
+		Map<String, FilterDefinition> assembledFilterDefinitions =
+			assembledWebXMLDefinition.getFilterDefinitions();
+		List<ListenerDefinition> assembledListenerDefinitions =
+			assembledWebXMLDefinition.getListenerDefinitions();
+		Map<String, ServletDefinition> assembledServletDefinitions =
+			assembledWebXMLDefinition.getServletDefinitions();
 
-		List<ListenerDefinition> assembledListeners =
-			assembledWebXML.getListenerDefinitions();
+		for (WebXMLDefinition fragmentWebXMLDefinition :
+				fragmentWebXMLDefinitions) {
 
-		Map<String, FilterDefinition> webXMLFilters =
-			webXML.getFilterDefinitions();
-
-		Map<String, FilterDefinition> assembledFilters =
-			assembledWebXML.getFilterDefinitions();
-
-		Map<String, ServletDefinition> webXMLServlets =
-			webXML.getServletDefinitions();
-
-		Map<String, ServletDefinition> assembledServlets =
-			assembledWebXML.getServletDefinitions();
-
-		for (WebXMLDefinition fragment : webFragments) {
 			Map<String, String> fragmentContextParameters =
-				fragment.getContextParameters();
+				fragmentWebXMLDefinition.getContextParameters();
 
 			_assembleContextParameters(
 				assembledContextParameters, fragmentContextParameters);
 
-			List<ListenerDefinition> fragmentListeners =
-				fragment.getListenerDefinitions();
+			Map<String, FilterDefinition> fragmentFilterDefinitions =
+				fragmentWebXMLDefinition.getFilterDefinitions();
 
-			_assembleListeners(assembledListeners, fragmentListeners);
+			_assembleFilterDefinitions(
+				webXMLFilterDefinitions, assembledFilterDefinitions,
+				fragmentFilterDefinitions);
 
-			Map<String, FilterDefinition> fragmentFilters =
-				fragment.getFilterDefinitions();
+			List<ListenerDefinition> fragmentListenerDefinitions =
+				fragmentWebXMLDefinition.getListenerDefinitions();
 
-			_assembleFilters(webXMLFilters, assembledFilters, fragmentFilters);
+			_assembleListenerDefinitions(
+				assembledListenerDefinitions, fragmentListenerDefinitions);
 
-			Map<String, ServletDefinition> fragmentServlets =
-				fragment.getServletDefinitions();
+			Map<String, ServletDefinition> fragmentServletDefinitions =
+				fragmentWebXMLDefinition.getServletDefinitions();
 
-			_assembleServlets(
-				webXMLServlets, assembledServlets, fragmentServlets);
+			_assembleServletDefinitions(
+				webXMLServletDefinitions, assembledServletDefinitions,
+				fragmentServletDefinitions);
 		}
 
-		return assembledWebXML;
+		return assembledWebXMLDefinition;
 	}
 
 	private static final String[] _LEAVES = new String[] {
