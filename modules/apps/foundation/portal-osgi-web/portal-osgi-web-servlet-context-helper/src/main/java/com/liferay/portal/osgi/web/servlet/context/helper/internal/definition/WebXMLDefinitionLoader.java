@@ -410,7 +410,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 				webXMLDefinitions, webXMLDefinition.getAbsoluteOrderNames());
 		}
 
-		return assembleWebXML(webXMLDefinition, orderedWebXMLDefinitions);
+		return _assembleWebXML(webXMLDefinition, orderedWebXMLDefinitions);
 	}
 
 	public WebXMLDefinition loadWebXML(URL url) throws Exception {
@@ -542,46 +542,45 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		}
 	}
 
-	private void assembleContextParams(
+	private void _assembleContextParameters(
 		Map<String, String> assembledContextParameters,
 		Map<String, String> fragmentContextParameters) {
 
 		for (Entry<String, String> entry :
 				fragmentContextParameters.entrySet()) {
 
-			String paramName = entry.getKey();
+			String name = entry.getKey();
 
-			if (!assembledContextParameters.containsKey(paramName)) {
-				assembledContextParameters.put(paramName, entry.getValue());
+			if (!assembledContextParameters.containsKey(name)) {
+				assembledContextParameters.put(name, entry.getValue());
 			}
 		}
 	}
 
-	private void assembleFilters(
-			Map<String, FilterDefinition> webXMLFilters,
-			Map<String, FilterDefinition> assembledFilters,
-			Map<String, FilterDefinition> fragmentFilters)
+	private void _assembleFilters(
+			Map<String, FilterDefinition> webXMLFilterDefinitions,
+			Map<String, FilterDefinition> assembledFilterDefinitions,
+			Map<String, FilterDefinition> fragmentFilterDefinitions)
 		throws Exception {
 
-		for (Entry<String, FilterDefinition> filterEntry :
-				fragmentFilters.entrySet()) {
+		for (Entry<String, FilterDefinition> entry :
+				fragmentFilterDefinitions.entrySet()) {
 
-			String filterName = filterEntry.getKey();
+			String filterName = entry.getKey();
 
-			if (!assembledFilters.containsKey(filterName)) {
-				assembledFilters.put(filterName, filterEntry.getValue());
+			if (!assembledFilterDefinitions.containsKey(filterName)) {
+				assembledFilterDefinitions.put(filterName, entry.getValue());
 			}
 			else {
-				FilterDefinition webXMLFilterDefinition = webXMLFilters.get(
-					filterName);
+				FilterDefinition webXMLFilterDefinition =
+					webXMLFilterDefinitions.get(filterName);
 
-				FilterDefinition fragmentFilterDefinition =
-					filterEntry.getValue();
+				FilterDefinition fragmentFilterDefinition = entry.getValue();
 
-				Map<String, String> webXMLFilterParams = null;
+				Map<String, String> webXMLFilterParameters = null;
 
 				if (webXMLFilterDefinition != null) {
-					webXMLFilterParams =
+					webXMLFilterParameters =
 						webXMLFilterDefinition.getInitParameters();
 				}
 
@@ -589,7 +588,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 					fragmentFilterDefinition.getInitParameters();
 
 				FilterDefinition assembledFilterDefinition =
-					assembledFilters.get(filterName);
+					assembledFilterDefinitions.get(filterName);
 
 				Map<String, String> assembledInitParams =
 					assembledFilterDefinition.getInitParameters();
@@ -605,8 +604,8 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 
 					String webXMLInitParamValue = null;
 
-					if (webXMLFilterParams != null) {
-						webXMLInitParamValue = webXMLFilterParams.get(
+					if (webXMLFilterParameters != null) {
+						webXMLInitParamValue = webXMLFilterParameters.get(
 							initParamName);
 					}
 
@@ -670,7 +669,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		}
 	}
 
-	private void assembleListeners(
+	private void _assembleListeners(
 		List<ListenerDefinition> assembledListeners,
 		List<ListenerDefinition> fragmentListeners) {
 
@@ -681,7 +680,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		}
 	}
 
-	private void assembleServlets(
+	private void _assembleServlets(
 			Map<String, ServletDefinition> webXMLServlets,
 			Map<String, ServletDefinition> assembledServlets,
 			Map<String, ServletDefinition> fragmentServlets)
@@ -775,7 +774,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		}
 	}
 
-	private WebXMLDefinition assembleWebXML(
+	private WebXMLDefinition _assembleWebXML(
 			WebXMLDefinition webXML, List<WebXMLDefinition> webFragments)
 		throws Exception {
 
@@ -803,23 +802,23 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 			Map<String, String> fragmentContextParameters =
 				fragment.getContextParameters();
 
-			assembleContextParams(
+			_assembleContextParameters(
 				assembledContextParameters, fragmentContextParameters);
 
 			List<ListenerDefinition> fragmentListeners =
 				fragment.getListenerDefinitions();
 
-			assembleListeners(assembledListeners, fragmentListeners);
+			_assembleListeners(assembledListeners, fragmentListeners);
 
 			Map<String, FilterDefinition> fragmentFilters =
 				fragment.getFilterDefinitions();
 
-			assembleFilters(webXMLFilters, assembledFilters, fragmentFilters);
+			_assembleFilters(webXMLFilters, assembledFilters, fragmentFilters);
 
 			Map<String, ServletDefinition> fragmentServlets =
 				fragment.getServletDefinitions();
 
-			assembleServlets(
+			_assembleServlets(
 				webXMLServlets, assembledServlets, fragmentServlets);
 		}
 
