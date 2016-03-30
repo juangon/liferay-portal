@@ -35,19 +35,19 @@ public class WebXMLDefinition {
 
 	@Override
 	public Object clone() {
-		WebXMLDefinition clonedDefinition = new WebXMLDefinition();
+		WebXMLDefinition webXMLDefinition = new WebXMLDefinition();
 
-		clonedDefinition.setAbsoluteOrderNames(_absoluteOrderNames);
-		clonedDefinition.setContextParameters(_contextParameters);
-		clonedDefinition.setFilterDefinitions(_filterDefinitions);
-		clonedDefinition.setFragmentName(_fragmentName);
-		clonedDefinition.setJspTaglibMappings(_jspTaglibMappings);
-		clonedDefinition.setListenerDefinitions(_listenerDefinitions);
-		clonedDefinition.setMetadataComplete(_metadataComplete);
-		clonedDefinition.setOrdering(_ordering);
-		clonedDefinition.setServletDefinitions(_servletDefinitions);
+		webXMLDefinition.setAbsoluteOrderNames(_absoluteOrderNames);
+		webXMLDefinition.setContextParameters(_contextParameters);
+		webXMLDefinition.setFilterDefinitions(_filterDefinitions);
+		webXMLDefinition.setFragmentName(_fragmentName);
+		webXMLDefinition.setJspTaglibMappings(_jspTaglibMappings);
+		webXMLDefinition.setListenerDefinitions(_listenerDefinitions);
+		webXMLDefinition.setMetadataComplete(_metadataComplete);
+		webXMLDefinition.setOrdering(_ordering);
+		webXMLDefinition.setServletDefinitions(_servletDefinitions);
 
-		return clonedDefinition;
+		return webXMLDefinition;
 	}
 
 	public List<String> getAbsoluteOrderNames() {
