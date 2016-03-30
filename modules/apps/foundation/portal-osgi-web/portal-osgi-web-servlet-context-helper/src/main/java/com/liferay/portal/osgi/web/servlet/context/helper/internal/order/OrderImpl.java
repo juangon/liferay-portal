@@ -53,8 +53,11 @@ public class OrderImpl implements Order {
 		boolean value = false;
 
 		if (_routes.get(Path.AFTER) != null) {
-			value = (Arrays.binarySearch(
-				_routes.get(Path.AFTER), Order.OTHERS) >= 0);
+			if (Arrays.binarySearch(
+					_routes.get(Path.AFTER), Order.OTHERS) >= 0) {
+
+				value = true;
+			}
 		}
 
 		return value;
@@ -74,8 +77,11 @@ public class OrderImpl implements Order {
 		boolean value = false;
 
 		if (_routes.get(Path.BEFORE) != null) {
-			value = (Arrays.binarySearch(
-				_routes.get(Path.BEFORE), Order.OTHERS) >= 0);
+			if (Arrays.binarySearch(
+					_routes.get(Path.BEFORE), Order.OTHERS) >= 0) {
+					
+				value = true;
+			}
 		}
 
 		return value;
