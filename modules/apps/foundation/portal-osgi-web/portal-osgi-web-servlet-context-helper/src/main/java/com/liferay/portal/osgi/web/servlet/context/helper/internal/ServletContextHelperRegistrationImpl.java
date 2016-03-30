@@ -157,6 +157,7 @@ public class ServletContextHelperRegistrationImpl
 		return _customServletContextHelper.getServletContext();
 	}
 
+	@Override
 	public WebXMLDefinition getWebXMLDefinition() {
 		return _webXMLDefinition;
 	}

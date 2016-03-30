@@ -23,6 +23,7 @@ import java.util.EventListener;
  */
 public class ListenerDefinition {
 
+	@Override
 	public boolean equals(Object obj) {
 		if (!(obj instanceof ListenerDefinition)) {
 			return false;
@@ -47,6 +48,7 @@ public class ListenerDefinition {
 		return _eventListener;
 	}
 
+	@Override
 	public int hashCode() {
 		if (_eventListener == null) {
 			return super.hashCode();
