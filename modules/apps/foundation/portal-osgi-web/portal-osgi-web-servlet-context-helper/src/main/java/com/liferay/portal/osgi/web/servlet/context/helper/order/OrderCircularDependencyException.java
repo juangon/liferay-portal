@@ -14,6 +14,7 @@
 
 package com.liferay.portal.osgi.web.servlet.context.helper.order;
 
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.osgi.web.servlet.context.helper.definition.WebXMLDefinition;
 
 import java.util.Arrays;
@@ -36,11 +37,11 @@ public class OrderCircularDependencyException extends Exception {
 	private static String createMessage(
 		Order.Path path, List<WebXMLDefinition> webXMLDefinitions) {
 
-		StringBuilder message = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
-		message.append("Circular dependencies detected when traversing '");
-		message.append(path.name());
-		message.append("' declarations:");
+		sb.append("Circular dependencies detected when traversing '");
+		sb.append(path.name());
+		sb.append("' declarations:");
 
 		for (WebXMLDefinition webXMLDefinition : webXMLDefinitions) {
 			Order order = webXMLDefinition.getOrdering();
@@ -50,17 +51,17 @@ public class OrderCircularDependencyException extends Exception {
 			String[] names = routes.get(path);
 
 			if (names.length != 0) {
-				message.append(" ");
-				message.append(webXMLDefinition.getFragmentName());
-				message.append(" ");
-				message.append(path.name());
-				message.append(": ");
-				message.append(Arrays.asList(names));
-				message.append("\n");
+				sb.append(" ");
+				sb.append(webXMLDefinition.getFragmentName());
+				sb.append(" ");
+				sb.append(path.name());
+				sb.append(": ");
+				sb.append(Arrays.asList(names));
+				sb.append("\n");
 			}
 		}
 
-		return message.toString();
+		return sb.toString();
 	}
 
 }
