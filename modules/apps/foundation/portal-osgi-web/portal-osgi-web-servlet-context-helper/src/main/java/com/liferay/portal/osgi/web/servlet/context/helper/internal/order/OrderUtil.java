@@ -52,7 +52,7 @@ public class OrderUtil {
 			return getWebXMLDefinitionOrder(configs);
 		}
 
-		return getOrderWithAbsoluteOrder(configs, absoluteOrder);
+		return _getOrderWithAbsoluteOrder(configs, absoluteOrder);
 	}
 
 	public static Map<String, WebXMLDefinition> getWebXMLDefinitionMap(
@@ -77,7 +77,7 @@ public class OrderUtil {
 		// Check for "duplicate name exception" and "circular references"
 		// as described in 8.2.2 Ordering of web.xml and web-fragment.xml
 
-		checkForSpecExceptions(configList);
+		_checkForSpecExceptions(configList);
 
 		// It turns out that some of the specified ordering, if it was not
 		// discovered by the sort routine until later in its processing,
@@ -88,7 +88,7 @@ public class OrderUtil {
 		// consider it quickly, and be able to use its ordering algorithm
 		// to the best of its ability to achieve the specified ordering.
 
-		configList = preSort(configList);
+		configList = _preSort(configList);
 
 		WebXMLDefinition[] configs = configList.toArray(
 			new WebXMLDefinition[configList.size()]);
@@ -96,19 +96,19 @@ public class OrderUtil {
 		// This is a multiple pass sorting routine which gets the documents
 		// close to the order they need to be in
 
-		innerSort(configs);
+		_innerSort(configs);
 
 		// This is the final sort which checks the list from left to right to
 		// see if they are in the specified order and if they are not, it moves
 		// the incorrectly placed document(s) to the right into its proper
 		// place, and shifts others left as necessary.
 
-		postSort(configs);
+		_postSort(configs);
 
 		return new ArrayList<>(Arrays.asList(configs));
 	}
 
-	private static String[] appendAndSort(String[]... groups) {
+	private static String[] _appendAndSort(String[]... groups) {
 		HashMap<String, Integer> map = new HashMap<>();
 
 		// retain OTHERS, if it is in the first group, but do not allow
@@ -137,7 +137,7 @@ public class OrderUtil {
 		return orderedNames;
 	}
 
-	private static void checkForBothBeforeAndAfter(WebXMLDefinition config)
+	private static void _checkForBothBeforeAndAfter(WebXMLDefinition config)
 		throws OrderBeforeAndAfterException {
 
 		String configName = config.getFragmentName();
@@ -189,7 +189,7 @@ public class OrderUtil {
 		}
 	}
 
-	private static void checkForSpecExceptions(List<WebXMLDefinition> configs)
+	private static void _checkForSpecExceptions(List<WebXMLDefinition> configs)
 		throws OrderBeforeAndAfterException,
 			OrderCircularDependencyException {
 
@@ -197,18 +197,18 @@ public class OrderUtil {
 
 			// Check for "duplicate name exception"
 
-			checkForBothBeforeAndAfter(config);
+			_checkForBothBeforeAndAfter(config);
 
 			// Map the routes along both paths, checking for
 			// "circular references" along each path
 
 			for (Order.Path path : Order.Path.values()) {
-				mapRoutes(config, path, configs);
+				_mapRoutes(config, path, configs);
 			}
 		}
 	}
 
-	private static Map<String, Integer> descendingByValue(
+	private static Map<String, Integer> _descendingByValue(
 		Map<String, Integer> map) {
 
 		List<Map.Entry<String, Integer>> list = new LinkedList<>(
@@ -225,7 +225,7 @@ public class OrderUtil {
 		return result;
 	}
 
-	private static LinkedList<String> extractNamesList(
+	private static LinkedList<String> _extractNamesList(
 		WebXMLDefinition[] configs) {
 
 		LinkedList<String> names = new LinkedList<>();
@@ -237,7 +237,7 @@ public class OrderUtil {
 		return names;
 	}
 
-	private static List<WebXMLDefinition> getOrderWithAbsoluteOrder(
+	private static List<WebXMLDefinition> _getOrderWithAbsoluteOrder(
 		List<WebXMLDefinition> configs, List<String> absoluteOrder) {
 
 		List<WebXMLDefinition> orderedList = new ArrayList<>();
@@ -280,7 +280,7 @@ public class OrderUtil {
 		return orderedList;
 	}
 
-	private static int innerSort(WebXMLDefinition[] configs)
+	private static int _innerSort(WebXMLDefinition[] configs)
 		throws OrderMaxAttemptsException {
 
 		int attempts = 0;
@@ -304,7 +304,7 @@ public class OrderUtil {
 					first = 0;
 				}
 
-				if (isDisordered(configs[first], configs[second])) {
+				if (_isDisordered(configs[first], configs[second])) {
 					WebXMLDefinition temp = configs[first];
 
 					configs[first] = configs[second];
@@ -320,7 +320,7 @@ public class OrderUtil {
 		return attempts;
 	}
 
-	private static boolean isDisordered(
+	private static boolean _isDisordered(
 		WebXMLDefinition config1, WebXMLDefinition config2) {
 
 		String config1Name = config1.getFragmentName();
@@ -370,7 +370,7 @@ public class OrderUtil {
 		return false;
 	}
 
-	private static void mapRoutes(
+	private static void _mapRoutes(
 			WebXMLDefinition config, Order.Path path,
 			List<WebXMLDefinition> webXMLs)
 		throws OrderCircularDependencyException {
@@ -430,7 +430,7 @@ public class OrderUtil {
 					routes.put(path, otherRoutePathNames);
 					routes.put(
 						oppositePath,
-						appendAndSort(
+						_appendAndSort(
 							otherConfigOrderingRoutes.get(oppositePath),
 							new String[] {configName}));
 
@@ -449,7 +449,7 @@ public class OrderUtil {
 
 					routes.put(
 						path,
-						appendAndSort(routePathNames, otherRoutePathNames));
+						_appendAndSort(routePathNames, otherRoutePathNames));
 					routes.put(
 						oppositePath, configOrderingRoutes.get(oppositePath));
 
@@ -459,11 +459,11 @@ public class OrderUtil {
 		}
 	}
 
-	private static void postSort(WebXMLDefinition[] configs) {
+	private static void _postSort(WebXMLDefinition[] configs) {
 		int i = 0;
 
 		while (i < configs.length) {
-			LinkedList<String> names = extractNamesList(configs);
+			LinkedList<String> names = _extractNamesList(configs);
 
 			boolean done = true;
 
@@ -531,7 +531,7 @@ public class OrderUtil {
 		}
 	}
 
-	private static List<WebXMLDefinition> preSort(
+	private static List<WebXMLDefinition> _preSort(
 		List<WebXMLDefinition> configs) {
 
 		List<WebXMLDefinition> newConfigList = new ArrayList<>();
@@ -560,7 +560,7 @@ public class OrderUtil {
 			}
 		}
 
-		namedMap = descendingByValue(namedMap);
+		namedMap = _descendingByValue(namedMap);
 
 		Map<String, WebXMLDefinition> configMap = getWebXMLDefinitionMap(
 			configs);
