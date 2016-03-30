@@ -43,17 +43,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 public class OrderUtil {
 
-	/**
-	 * This method returns an ordered version of the specified list of
-	 * web-fragment.xml descriptors, taking the specified absolute ordering
-	 * into account.
-	 * @param configs
-	 * @param absoluteOrder
-	 * @return
-	 * @throws OrderMaxAttemptsException
-	 * @throws OrderCircularDependencyException
-	 * @throws OrderBeforeAndAfterException
-	 */
 	public static List<WebXMLDefinition> getOrderedWebXMLDefinitions(
 			List<WebXMLDefinition> configs, List<String> absoluteOrder)
 		throws OrderBeforeAndAfterException,
@@ -80,16 +69,6 @@ public class OrderUtil {
 		return configMap;
 	}
 
-	/**
-	 * This method returns an ordered version of the specified list of
-	 * web-fragment.xml descriptors and assumes that there is no
-	 * absolute ordering.
-	 * @param	configList
-	 * @return
-	 * @throws	OrderBeforeAndAfterException
-	 * @throws	OrderCircularDependencyException
-	 * @throws	OrderMaxAttemptsException
-	 */
 	public static List<WebXMLDefinition> getWebXMLDefinitionOrder(
 			List<WebXMLDefinition> configList)
 		throws OrderBeforeAndAfterException,
