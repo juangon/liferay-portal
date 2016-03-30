@@ -89,8 +89,8 @@ public class OrderImpl implements Order {
 
 	@Override
 	public boolean isOrdered() {
-		if (ArrayUtil.isNotEmpty(_routes.get(Path.BEFORE)) ||
-			ArrayUtil.isNotEmpty(_routes.get(Path.AFTER))) {
+		if (ArrayUtil.isNotEmpty(_routes.get(Path.AFTER)) ||
+			ArrayUtil.isNotEmpty(_routes.get(Path.BEFORE))) {
 
 			return true;
 		}
