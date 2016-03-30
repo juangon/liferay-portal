@@ -21,7 +21,7 @@ package com.liferay.portal.osgi.web.servlet.context.helper.order;
 public class OrderBeforeAndAfterException extends Exception {
 
 	public OrderBeforeAndAfterException(String configName, String name) {
-		super(configName + " cannot be both before and after " + name + "\n");
+		super(configName + " cannot be both before and after " + name);
 	}
 
 }

@@ -22,9 +22,7 @@ package com.liferay.portal.osgi.web.servlet.context.helper.order;
 public class OrderMaxAttemptsException extends Exception {
 
 	public OrderMaxAttemptsException(int limit) {
-		super(
-			"Too many attempts needed to sort the faces-config files." +
-				"Exceeded the limit of " + limit + " passes.");
+		super("Exceeded the limit of " + limit + " maximum attempts");
 	}
 
 }
