@@ -76,34 +76,14 @@ public class OrderUtil {
 		throws OrderBeforeAndAfterException,
 			OrderCircularDependencyException, OrderMaxAttemptsException {
 
-		// Check for "duplicate name exception" and "circular references"
-		// as described in 8.2.2 Ordering of web.xml and web-fragment.xml
-
 		_checkForSpecExceptions(webXMLDefinitions);
-
-		// It turns out that some of the specified ordering, if it was not
-		// discovered by the sort routine until later in its processing,
-		// was not being considered correctly in the ordering algorithm.
-
-		// This preSort method puts all of the documents with specified
-		// ordering as early on in the list of documents as possible for to
-		// consider it quickly, and be able to use its ordering algorithm
-		// to the best of its ability to achieve the specified ordering.
 
 		webXMLDefinitions = _preSort(webXMLDefinitions);
 
 		WebXMLDefinition[] webXMLDefinitionsArray = webXMLDefinitions.toArray(
 			new WebXMLDefinition[webXMLDefinitions.size()]);
 
-		// This is a multiple pass sorting routine which gets the documents
-		// close to the order they need to be in
-
 		_innerSort(webXMLDefinitionsArray);
-
-		// This is the final sort which checks the list from left to right to
-		// see if they are in the specified order and if they are not, it moves
-		// the incorrectly placed document(s) to the right into its proper
-		// place, and shifts others left as necessary.
 
 		_postSort(webXMLDefinitionsArray);
 
@@ -112,9 +92,6 @@ public class OrderUtil {
 
 	private static String[] _appendAndSort(String[]... groups) {
 		HashMap<String, Integer> map = new HashMap<>();
-
-		// retain OTHERS, if it is in the first group, but do not allow
-		// OTHERS to be appended
 
 		if (groups[0] != null) {
 			if (Arrays.binarySearch(groups[0], Order.OTHERS) >= 0) {
@@ -196,13 +173,7 @@ public class OrderUtil {
 			OrderCircularDependencyException {
 
 		for (WebXMLDefinition config : configs) {
-
-			// Check for "duplicate name exception"
-
 			_checkForBothBeforeAndAfter(config);
-
-			// Map the routes along both paths, checking for
-			// "circular references" along each path
 
 			for (Order.Path path : Order.Path.values()) {
 				_mapRoutes(config, path, configs);
