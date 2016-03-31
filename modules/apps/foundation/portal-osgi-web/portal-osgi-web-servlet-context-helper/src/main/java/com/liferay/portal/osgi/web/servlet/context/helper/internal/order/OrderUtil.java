@@ -505,13 +505,13 @@ public class OrderUtil {
 	}
 
 	private static List<WebXMLDefinition> _preSort(
-		List<WebXMLDefinition> configs) {
+		List<WebXMLDefinition> webXMLDefinitions) {
 
 		List<WebXMLDefinition> newConfigList = new ArrayList<>();
 		List<WebXMLDefinition> anonAndUnordered = new LinkedList<>();
 		Map<String, Integer> namedMap = new LinkedHashMap<>();
 
-		for (WebXMLDefinition config : configs) {
+		for (WebXMLDefinition config : webXMLDefinitions) {
 			Order configOrdering = config.getOrder();
 
 			EnumMap<Order.Path, String[]> configOrderingRoutes =
@@ -536,7 +536,7 @@ public class OrderUtil {
 		namedMap = _descendingByValue(namedMap);
 
 		Map<String, WebXMLDefinition> configMap = _getWebXMLDefinitionsMap(
-			configs);
+			webXMLDefinitions);
 
 		// add named configs to the list in the correct preSorted order
 
