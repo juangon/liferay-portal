@@ -56,88 +56,93 @@ public class WebXMLDefinitionLoaderTest {
 
 	@Test
 	public void testLoadCustomDependencies() throws Exception {
-		EntryLoaderMockBundle bundle = new EntryLoaderMockBundle(
+		EntryLoaderMockBundle entryLoaderMockBundle = new EntryLoaderMockBundle(
 			"dependencies/custom-web.xml");
 
 		WebXMLDefinitionLoader webXMLDefinitionLoader =
 			new WebXMLDefinitionLoader(
-				bundle, SAXParserFactory.newInstance(), new Logger(null));
+				entryLoaderMockBundle, SAXParserFactory.newInstance(),
+				new Logger(null));
 
 		testLoadDependencies(
-			webXMLDefinitionLoader, 1, 1, 1, bundle.getEntry());
+			webXMLDefinitionLoader, 1, 1, 1, entryLoaderMockBundle.getEntry());
 	}
 
 	@Test
-	public void testLoadCustomDependenciesAbsoluteOrdering() throws Exception {
-		EntryLoaderMockBundle bundle = new EntryLoaderMockBundle(
-			"dependencies/custom-web-absolute-ordering1.xml");
+	public void testLoadCustomDependenciesAbsoluteOrder() throws Exception {
+		EntryLoaderMockBundle entryLoaderMockBundle = new EntryLoaderMockBundle(
+			"dependencies/custom-web-absolute-ordering-1.xml");
 
 		WebXMLDefinitionLoader webXMLDefinitionLoader =
 			new WebXMLDefinitionLoader(
-				bundle, SAXParserFactory.newInstance(), new Logger(null));
+				entryLoaderMockBundle, SAXParserFactory.newInstance(),
+				new Logger(null));
 
-		List<String> absoluteOrdering = new ArrayList<>();
+		List<String> absoluteOrder = new ArrayList<>();
 
-		absoluteOrdering.add("fragment2");
-		absoluteOrdering.add("fragment1");
-		absoluteOrdering.add(Order.OTHERS);
+		absoluteOrder.add("fragment2");
+		absoluteOrder.add("fragment1");
+		absoluteOrder.add(Order.OTHERS);
 
 		testLoadDependencies(
-			webXMLDefinitionLoader, 1, 1, 1, bundle.getEntry(), null, null,
-			absoluteOrdering);
+			webXMLDefinitionLoader, 1, 1, 1, entryLoaderMockBundle.getEntry(),
+			null, null, absoluteOrder);
 	}
 
 	@Test
 	public void testLoadCustomWebFragment1Dependencies() throws Exception {
-		EntryLoaderMockBundle bundle = new EntryLoaderMockBundle(
-			"dependencies/custom-web-fragment1.xml");
+		EntryLoaderMockBundle entryLoaderMockBundle = new EntryLoaderMockBundle(
+			"dependencies/custom-web-fragment-1.xml");
 
 		WebXMLDefinitionLoader webXMLDefinitionLoader =
 			new WebXMLDefinitionLoader(
-				bundle, SAXParserFactory.newInstance(), new Logger(null));
+				entryLoaderMockBundle, SAXParserFactory.newInstance(),
+				new Logger(null));
 
 		testLoadDependencies(
-			webXMLDefinitionLoader, 1, 1, 0, bundle.getEntry(), "fragment1",
-			null, null);
+			webXMLDefinitionLoader, 1, 1, 0, entryLoaderMockBundle.getEntry(),
+			"fragment1", null, null);
 	}
 
 	@Test
 	public void testLoadCustomWebFragment2Dependencies() throws Exception {
-		EntryLoaderMockBundle bundle = new EntryLoaderMockBundle(
-			"dependencies/custom-web-fragment2.xml");
+		EntryLoaderMockBundle entryLoaderMockBundle = new EntryLoaderMockBundle(
+			"dependencies/custom-web-fragment-2.xml");
 
 		WebXMLDefinitionLoader webXMLDefinitionLoader =
 			new WebXMLDefinitionLoader(
-				bundle, SAXParserFactory.newInstance(), new Logger(null));
+				entryLoaderMockBundle, SAXParserFactory.newInstance(),
+				new Logger(null));
 
-		Order ordering = new OrderImpl();
+		Order order = new OrderImpl();
 
-		EnumMap<Order.Path, String[]> routes = ordering.getRoutes();
+		EnumMap<Order.Path, String[]> routes = order.getRoutes();
 		routes.put(Order.Path.AFTER, new String[] {"fragment1"});
 
 		testLoadDependencies(
-			webXMLDefinitionLoader, 0, 0, 0, bundle.getEntry(), "fragment2",
-			ordering, null);
+			webXMLDefinitionLoader, 0, 0, 0, entryLoaderMockBundle.getEntry(),
+			"fragment2", order, null);
 	}
 
 	@Test
 	public void testLoadCustomWebFragment3Dependencies() throws Exception {
-		EntryLoaderMockBundle bundle = new EntryLoaderMockBundle(
-			"dependencies/custom-web-fragment4.xml");
+		EntryLoaderMockBundle entryLoaderMockBundle = new EntryLoaderMockBundle(
+			"dependencies/custom-web-fragment-4.xml");
 
 		WebXMLDefinitionLoader webXMLDefinitionLoader =
 			new WebXMLDefinitionLoader(
-				bundle, SAXParserFactory.newInstance(), new Logger(null));
+				entryLoaderMockBundle, SAXParserFactory.newInstance(),
+				new Logger(null));
 
-		Order ordering = new OrderImpl();
+		Order order = new OrderImpl();
 
-		EnumMap<Order.Path, String[]> routes = ordering.getRoutes();
+		EnumMap<Order.Path, String[]> routes = order.getRoutes();
 
 		routes.put(Order.Path.BEFORE, new String[] {Order.OTHERS});
 
 		testLoadDependencies(
-			webXMLDefinitionLoader, 0, 0, 0, bundle.getEntry(), "fragment4",
-			ordering, null);
+			webXMLDefinitionLoader, 0, 0, 0, entryLoaderMockBundle.getEntry(),
+			"fragment4", order, null);
 	}
 
 	@Test
@@ -155,65 +160,69 @@ public class WebXMLDefinitionLoaderTest {
 
 	@Test
 	public void testLoadMetadataComplete() throws Exception {
-		EntryLoaderMockBundle bundle = new EntryLoaderMockBundle(
+		EntryLoaderMockBundle entryLoaderMockBundle = new EntryLoaderMockBundle(
 			"dependencies/custom-web.xml");
 
 		WebXMLDefinitionLoader webXMLDefinitionLoader =
 			new WebXMLDefinitionLoader(
-				bundle, SAXParserFactory.newInstance(), new Logger(null));
+				entryLoaderMockBundle, SAXParserFactory.newInstance(),
+				new Logger(null));
 
 		WebXMLDefinition webXMLDefinition = webXMLDefinitionLoader.loadWebXML(
-			bundle.getEntry());
+			entryLoaderMockBundle.getEntry());
 
 		Assert.assertTrue(webXMLDefinition.isMetadataComplete());
 	}
 
 	@Test
 	public void testLoadNotMetadataComplete() throws Exception {
-		EntryLoaderMockBundle bundle = new EntryLoaderMockBundle(
-			"dependencies/custom-web-absolute-ordering1.xml");
+		EntryLoaderMockBundle entryLoaderMockBundle = new EntryLoaderMockBundle(
+			"dependencies/custom-web-absolute-ordering-1.xml");
 
 		WebXMLDefinitionLoader webXMLDefinitionLoader =
 			new WebXMLDefinitionLoader(
-				bundle, SAXParserFactory.newInstance(), new Logger(null));
+				entryLoaderMockBundle, SAXParserFactory.newInstance(),
+				new Logger(null));
 
 		WebXMLDefinition webXMLDefinition = webXMLDefinitionLoader.loadWebXML(
-			bundle.getEntry());
+			entryLoaderMockBundle.getEntry());
 
 		Assert.assertFalse(webXMLDefinition.isMetadataComplete());
 	}
 
 	@Test
 	public void testOrderBeforeAndAfterException() throws Exception {
-		EntryLoaderMockBundle bundle = new EntryLoaderMockBundle(
+		EntryLoaderMockBundle entryLoaderMockBundle = new EntryLoaderMockBundle(
 			"dependencies/custom-web.xml");
 
 		WebXMLDefinitionLoader webXMLDefinitionLoader =
 			new WebXMLDefinitionLoader(
-				bundle, SAXParserFactory.newInstance(), new Logger(null));
-
-		WebXMLDefinition webXMLDefinition = webXMLDefinitionLoader.loadWebXML(
-			bundle.getEntry());
-
-		EntryLoaderMockBundle bundleFragment5 = new EntryLoaderMockBundle(
-			"dependencies/custom-web-fragment5.xml");
-
-		WebXMLDefinitionLoader fragment5DefinitionLoader =
-			new WebXMLDefinitionLoader(
-				bundleFragment5, SAXParserFactory.newInstance(),
+				entryLoaderMockBundle, SAXParserFactory.newInstance(),
 				new Logger(null));
 
-		WebXMLDefinition fragment5Definition =
-			fragment5DefinitionLoader.loadWebXML(bundleFragment5.getEntry());
+		WebXMLDefinition webXMLDefinition = webXMLDefinitionLoader.loadWebXML(
+			entryLoaderMockBundle.getEntry());
 
-		List<WebXMLDefinition> definitions = new ArrayList<>();
-		definitions.add(fragment5Definition);
+		EntryLoaderMockBundle fragment5EntryLoaderMockBundle =
+			new EntryLoaderMockBundle("dependencies/custom-web-fragment-5.xml");
+
+		WebXMLDefinitionLoader fragment5WebXMLDefinitionLoader =
+			new WebXMLDefinitionLoader(
+				fragment5EntryLoaderMockBundle, SAXParserFactory.newInstance(),
+				new Logger(null));
+
+		WebXMLDefinition fragment5WebXMLDefinition =
+			fragment5WebXMLDefinitionLoader.loadWebXML(
+				fragment5EntryLoaderMockBundle.getEntry());
+
+		List<WebXMLDefinition> webXMLDefinitions = new ArrayList<>();
+		webXMLDefinitions.add(fragment5WebXMLDefinition);
 
 		boolean exceptionThrown = false;
 
 		try {
 			OrderUtil.getOrderedWebXMLDefinitions(
-				definitions, webXMLDefinition.getAbsoluteOrderNames());
+				webXMLDefinitions, webXMLDefinition.getAbsoluteOrderNames());
 		}
 		catch (Exception e) {
 			if (e instanceof OrderBeforeAndAfterException) {
@@ -239,39 +248,39 @@ public class WebXMLDefinitionLoaderTest {
 
 		EntryLoaderMockBundle circular1EntryLoaderMockBundle =
 			new EntryLoaderMockBundle(
-				"dependencies/custom-web-fragment-circular1.xml");
+				"dependencies/custom-web-fragment-circular-1.xml");
 
 		WebXMLDefinitionLoader circular1WebXMLDefinitionLoader =
 			new WebXMLDefinitionLoader(
 				circular1EntryLoaderMockBundle, SAXParserFactory.newInstance(),
 				new Logger(null));
 
-		WebXMLDefinition fragmentCircular1Definition =
+		WebXMLDefinition circular1WebXMLDefinition =
 			circular1WebXMLDefinitionLoader.loadWebXML(
 				circular1EntryLoaderMockBundle.getEntry());
 
-		EntryLoaderMockBundle circular2WebXMLDefinitionLoader =
+		EntryLoaderMockBundle circular2EntryLoaderMockBundle =
 			new EntryLoaderMockBundle(
-				"dependencies/custom-web-fragment-circular2.xml");
+				"dependencies/custom-web-fragment-circular-2.xml");
 
-		WebXMLDefinitionLoader fragmentCircular2Loader =
+		WebXMLDefinitionLoader circular2WebXMLDefinitionLoader =
 			new WebXMLDefinitionLoader(
-				circular2WebXMLDefinitionLoader, SAXParserFactory.newInstance(),
+				circular2EntryLoaderMockBundle, SAXParserFactory.newInstance(),
 				new Logger(null));
 
-		WebXMLDefinition fragmentCircular2Definition =
-			fragmentCircular2Loader.loadWebXML(
-				circular2WebXMLDefinitionLoader.getEntry());
+		WebXMLDefinition circular2WebXMLDefinition =
+			circular2WebXMLDefinitionLoader.loadWebXML(
+				circular2EntryLoaderMockBundle.getEntry());
 
-		List<WebXMLDefinition> definitions = new ArrayList<>();
-		definitions.add(fragmentCircular1Definition);
-		definitions.add(fragmentCircular2Definition);
+		List<WebXMLDefinition> webXMLDefinitions = new ArrayList<>();
+		webXMLDefinitions.add(circular1WebXMLDefinition);
+		webXMLDefinitions.add(circular2WebXMLDefinition);
 
 		boolean exceptionThrown = false;
 
 		try {
 			OrderUtil.getOrderedWebXMLDefinitions(
-				definitions, webXMLDefinition.getAbsoluteOrderNames());
+				webXMLDefinitions, webXMLDefinition.getAbsoluteOrderNames());
 		}
 		catch (Exception e) {
 			if (e instanceof OrderCircularDependencyException) {
@@ -284,59 +293,64 @@ public class WebXMLDefinitionLoaderTest {
 
 	@Test
 	public void testSortFragments1() throws Exception {
-		EntryLoaderMockBundle bundleAbsoluteOrdering =
+		EntryLoaderMockBundle absolute1EntryLoaderMockBundle =
 			new EntryLoaderMockBundle(
-				"dependencies/custom-web-absolute-ordering1.xml");
+				"dependencies/custom-web-absolute-ordering-1.xml");
 
-		WebXMLDefinitionLoader webXMLDefinitionLoader =
+		WebXMLDefinitionLoader absolute1WebXMLDefinitionLoader =
 			new WebXMLDefinitionLoader(
-				bundleAbsoluteOrdering, SAXParserFactory.newInstance(),
+				absolute1EntryLoaderMockBundle, SAXParserFactory.newInstance(),
 				new Logger(null));
 
-		WebXMLDefinition webXMLDefinition = webXMLDefinitionLoader.loadWebXML(
-			bundleAbsoluteOrdering.getEntry());
+		WebXMLDefinition absolute1WebXMLDefinition =
+			absolute1WebXMLDefinitionLoader.loadWebXML(
+				absolute1EntryLoaderMockBundle.getEntry());
 
-		EntryLoaderMockBundle bundleFragment1 = new EntryLoaderMockBundle(
-			"dependencies/custom-web-fragment1.xml");
+		EntryLoaderMockBundle fragment1EntryLoaderMockBundle =
+			new EntryLoaderMockBundle("dependencies/custom-web-fragment-1.xml");
 
-		WebXMLDefinitionLoader fragment1DefinitionLoader =
+		WebXMLDefinitionLoader fragment1WebXMLDefinitionLoader =
 			new WebXMLDefinitionLoader(
-				bundleFragment1, SAXParserFactory.newInstance(),
+				fragment1EntryLoaderMockBundle, SAXParserFactory.newInstance(),
 				new Logger(null));
 
-		WebXMLDefinition fragment1Definition =
-			fragment1DefinitionLoader.loadWebXML(bundleFragment1.getEntry());
+		WebXMLDefinition fragment1WebXMLDefinition =
+			fragment1WebXMLDefinitionLoader.loadWebXML(
+				fragment1EntryLoaderMockBundle.getEntry());
 
-		EntryLoaderMockBundle bundleFragment2 = new EntryLoaderMockBundle(
-			"dependencies/custom-web-fragment2.xml");
+		EntryLoaderMockBundle fragment2EntryLoaderMockBundle =
+			new EntryLoaderMockBundle("dependencies/custom-web-fragment-2.xml");
 
-		WebXMLDefinitionLoader fragment2DefinitionLoader =
+		WebXMLDefinitionLoader fragment2WebXMLDefinitionLoader =
 			new WebXMLDefinitionLoader(
-				bundleFragment2, SAXParserFactory.newInstance(),
+				fragment2EntryLoaderMockBundle, SAXParserFactory.newInstance(),
 				new Logger(null));
 
-		WebXMLDefinition fragment2Definition =
-			fragment2DefinitionLoader.loadWebXML(bundleFragment2.getEntry());
+		WebXMLDefinition fragment2WebXMLDefinition =
+			fragment2WebXMLDefinitionLoader.loadWebXML(
+				fragment2EntryLoaderMockBundle.getEntry());
 
-		EntryLoaderMockBundle bundleFragment3 = new EntryLoaderMockBundle(
-			"dependencies/custom-web-fragment3.xml");
+		EntryLoaderMockBundle fragment3EntryLoaderMockBundle =
+			new EntryLoaderMockBundle("dependencies/custom-web-fragment-3.xml");
 
-		WebXMLDefinitionLoader fragment3DefinitionLoader =
+		WebXMLDefinitionLoader fragment3WebXMLDefinitionLoader =
 			new WebXMLDefinitionLoader(
-				bundleFragment3, SAXParserFactory.newInstance(),
+				fragment3EntryLoaderMockBundle, SAXParserFactory.newInstance(),
 				new Logger(null));
 
-		WebXMLDefinition fragment3Definition =
-			fragment3DefinitionLoader.loadWebXML(bundleFragment3.getEntry());
+		WebXMLDefinition fragment3WebXMLDefinition =
+			fragment3WebXMLDefinitionLoader.loadWebXML(
+				fragment3EntryLoaderMockBundle.getEntry());
 
-		List<WebXMLDefinition> definitions = new ArrayList<>();
-		definitions.add(fragment3Definition);
-		definitions.add(fragment1Definition);
-		definitions.add(fragment2Definition);
+		List<WebXMLDefinition> webXMLDefinitions = new ArrayList<>();
+		webXMLDefinitions.add(fragment3WebXMLDefinition);
+		webXMLDefinitions.add(fragment1WebXMLDefinition);
+		webXMLDefinitions.add(fragment2WebXMLDefinition);
 
 		List<WebXMLDefinition> sortedDefinitions =
 			OrderUtil.getOrderedWebXMLDefinitions(
-				definitions, webXMLDefinition.getAbsoluteOrderNames());
+				webXMLDefinitions,
+				absolute1WebXMLDefinition.getAbsoluteOrderNames());
 
 		Assert.assertEquals(3, sortedDefinitions.size());
 
@@ -355,59 +369,64 @@ public class WebXMLDefinitionLoaderTest {
 
 	@Test
 	public void testSortFragments2() throws Exception {
-		EntryLoaderMockBundle bundleAbsoluteOrdering =
+		EntryLoaderMockBundle absolute2EntryLoaderMockBundle =
 			new EntryLoaderMockBundle(
-				"dependencies/custom-web-absolute-ordering2.xml");
+				"dependencies/custom-web-absolute-ordering-2.xml");
 
-		WebXMLDefinitionLoader webXMLDefinitionLoader =
+		WebXMLDefinitionLoader absolute2WebXMLDefinitionLoader =
 			new WebXMLDefinitionLoader(
-				bundleAbsoluteOrdering, SAXParserFactory.newInstance(),
+				absolute2EntryLoaderMockBundle, SAXParserFactory.newInstance(),
 				new Logger(null));
 
-		WebXMLDefinition webXMLDefinition = webXMLDefinitionLoader.loadWebXML(
-			bundleAbsoluteOrdering.getEntry());
+		WebXMLDefinition absolute2WebXMLDefinition =
+			absolute2WebXMLDefinitionLoader.loadWebXML(
+				absolute2EntryLoaderMockBundle.getEntry());
 
-		EntryLoaderMockBundle bundleFragment1 = new EntryLoaderMockBundle(
-			"dependencies/custom-web-fragment1.xml");
+		EntryLoaderMockBundle fragment1EntryLoaderMockBundle =
+			new EntryLoaderMockBundle("dependencies/custom-web-fragment-1.xml");
 
-		WebXMLDefinitionLoader fragment1DefinitionLoader =
+		WebXMLDefinitionLoader fragment1WebXMLDefinitionLoader =
 			new WebXMLDefinitionLoader(
-				bundleFragment1, SAXParserFactory.newInstance(),
+				fragment1EntryLoaderMockBundle, SAXParserFactory.newInstance(),
 				new Logger(null));
 
-		WebXMLDefinition fragment1Definition =
-			fragment1DefinitionLoader.loadWebXML(bundleFragment1.getEntry());
+		WebXMLDefinition fragment1WebXMLDefinition =
+			fragment1WebXMLDefinitionLoader.loadWebXML(
+				fragment1EntryLoaderMockBundle.getEntry());
 
-		EntryLoaderMockBundle bundleFragment2 = new EntryLoaderMockBundle(
-			"dependencies/custom-web-fragment2.xml");
+		EntryLoaderMockBundle fragment2EntryLoaderMockBundle =
+			new EntryLoaderMockBundle("dependencies/custom-web-fragment-2.xml");
 
-		WebXMLDefinitionLoader fragment2DefinitionLoader =
+		WebXMLDefinitionLoader fragment2WebXMLDefinitionLoader =
 			new WebXMLDefinitionLoader(
-				bundleFragment2, SAXParserFactory.newInstance(),
+				fragment2EntryLoaderMockBundle, SAXParserFactory.newInstance(),
 				new Logger(null));
 
-		WebXMLDefinition fragment2Definition =
-			fragment2DefinitionLoader.loadWebXML(bundleFragment2.getEntry());
+		WebXMLDefinition fragment2WebXMLDefinition =
+			fragment2WebXMLDefinitionLoader.loadWebXML(
+				fragment2EntryLoaderMockBundle.getEntry());
 
-		EntryLoaderMockBundle bundleFragment3 = new EntryLoaderMockBundle(
-			"dependencies/custom-web-fragment3.xml");
+		EntryLoaderMockBundle fragment3EntryLoaderMockBundle =
+			new EntryLoaderMockBundle("dependencies/custom-web-fragment-3.xml");
 
-		WebXMLDefinitionLoader fragment3DefinitionLoader =
+		WebXMLDefinitionLoader fragment3WebXMLDefinitionLoader =
 			new WebXMLDefinitionLoader(
-				bundleFragment3, SAXParserFactory.newInstance(),
+				fragment3EntryLoaderMockBundle, SAXParserFactory.newInstance(),
 				new Logger(null));
 
-		WebXMLDefinition fragment3Definition =
-			fragment3DefinitionLoader.loadWebXML(bundleFragment3.getEntry());
+		WebXMLDefinition fragment3WebXMLDefinition =
+			fragment3WebXMLDefinitionLoader.loadWebXML(
+				fragment3EntryLoaderMockBundle.getEntry());
 
-		List<WebXMLDefinition> definitions = new ArrayList<>();
-		definitions.add(fragment3Definition);
-		definitions.add(fragment2Definition);
-		definitions.add(fragment1Definition);
+		List<WebXMLDefinition> webXMLDefinitions = new ArrayList<>();
+		webXMLDefinitions.add(fragment3WebXMLDefinition);
+		webXMLDefinitions.add(fragment2WebXMLDefinition);
+		webXMLDefinitions.add(fragment1WebXMLDefinition);
 
 		List<WebXMLDefinition> sortedDefinitions =
 			OrderUtil.getOrderedWebXMLDefinitions(
-				definitions, webXMLDefinition.getAbsoluteOrderNames());
+				webXMLDefinitions,
+				absolute2WebXMLDefinition.getAbsoluteOrderNames());
 
 		Assert.assertEquals(2, sortedDefinitions.size());
 
@@ -422,57 +441,61 @@ public class WebXMLDefinitionLoaderTest {
 
 	@Test
 	public void testSortFragments3() throws Exception {
-		EntryLoaderMockBundle bundleWebXML = new EntryLoaderMockBundle(
+		EntryLoaderMockBundle entryLoaderMockBundle = new EntryLoaderMockBundle(
 			"dependencies/custom-web.xml");
 
 		WebXMLDefinitionLoader webXMLDefinitionLoader =
 			new WebXMLDefinitionLoader(
-				bundleWebXML, SAXParserFactory.newInstance(), new Logger(null));
+				entryLoaderMockBundle, SAXParserFactory.newInstance(),
+				new Logger(null));
 
 		WebXMLDefinition webXMLDefinition = webXMLDefinitionLoader.loadWebXML(
-			bundleWebXML.getEntry());
+			entryLoaderMockBundle.getEntry());
 
-		EntryLoaderMockBundle bundleFragment1 = new EntryLoaderMockBundle(
-			"dependencies/custom-web-fragment1.xml");
+		EntryLoaderMockBundle fragment1EntryLoaderMockBundle =
+			new EntryLoaderMockBundle("dependencies/custom-web-fragment-1.xml");
 
-		WebXMLDefinitionLoader fragment1DefinitionLoader =
+		WebXMLDefinitionLoader fragment1WebXMLDefinitionLoader =
 			new WebXMLDefinitionLoader(
-				bundleFragment1, SAXParserFactory.newInstance(),
+				fragment1EntryLoaderMockBundle, SAXParserFactory.newInstance(),
 				new Logger(null));
 
-		WebXMLDefinition fragment1Definition =
-			fragment1DefinitionLoader.loadWebXML(bundleFragment1.getEntry());
+		WebXMLDefinition fragment1WebXMLDefinition =
+			fragment1WebXMLDefinitionLoader.loadWebXML(
+				fragment1EntryLoaderMockBundle.getEntry());
 
-		EntryLoaderMockBundle bundleFragment2 = new EntryLoaderMockBundle(
-			"dependencies/custom-web-fragment2.xml");
+		EntryLoaderMockBundle fragment2EntryLoaderMockBundle =
+			new EntryLoaderMockBundle("dependencies/custom-web-fragment-2.xml");
 
-		WebXMLDefinitionLoader fragment2DefinitionLoader =
+		WebXMLDefinitionLoader fragment2WebXMLDefinitionLoader =
 			new WebXMLDefinitionLoader(
-				bundleFragment2, SAXParserFactory.newInstance(),
+				fragment2EntryLoaderMockBundle, SAXParserFactory.newInstance(),
 				new Logger(null));
 
-		WebXMLDefinition fragment2Definition =
-			fragment2DefinitionLoader.loadWebXML(bundleFragment2.getEntry());
+		WebXMLDefinition fragment2WebXMLDefinition =
+			fragment2WebXMLDefinitionLoader.loadWebXML(
+				fragment2EntryLoaderMockBundle.getEntry());
 
-		EntryLoaderMockBundle bundleFragment3 = new EntryLoaderMockBundle(
-			"dependencies/custom-web-fragment3.xml");
+		EntryLoaderMockBundle fragment3EntryLoaderMockBundle =
+			new EntryLoaderMockBundle("dependencies/custom-web-fragment-3.xml");
 
-		WebXMLDefinitionLoader fragment3DefinitionLoader =
+		WebXMLDefinitionLoader fragment3WebXMLDefinitionLoader =
 			new WebXMLDefinitionLoader(
-				bundleFragment3, SAXParserFactory.newInstance(),
+				fragment3EntryLoaderMockBundle, SAXParserFactory.newInstance(),
 				new Logger(null));
 
-		WebXMLDefinition fragment3Definition =
-			fragment3DefinitionLoader.loadWebXML(bundleFragment3.getEntry());
+		WebXMLDefinition fragment3WebXMLDefinition =
+			fragment3WebXMLDefinitionLoader.loadWebXML(
+				fragment3EntryLoaderMockBundle.getEntry());
 
-		List<WebXMLDefinition> definitions = new ArrayList<>();
-		definitions.add(fragment3Definition);
-		definitions.add(fragment2Definition);
-		definitions.add(fragment1Definition);
+		List<WebXMLDefinition> webXMLDefinitions = new ArrayList<>();
+		webXMLDefinitions.add(fragment3WebXMLDefinition);
+		webXMLDefinitions.add(fragment2WebXMLDefinition);
+		webXMLDefinitions.add(fragment1WebXMLDefinition);
 
 		List<WebXMLDefinition> sortedDefinitions =
 			OrderUtil.getOrderedWebXMLDefinitions(
-				definitions, webXMLDefinition.getAbsoluteOrderNames());
+				webXMLDefinitions, webXMLDefinition.getAbsoluteOrderNames());
 
 		Assert.assertEquals(3, sortedDefinitions.size());
 
@@ -491,57 +514,61 @@ public class WebXMLDefinitionLoaderTest {
 
 	@Test
 	public void testSortFragments4() throws Exception {
-		EntryLoaderMockBundle bundleWebxml = new EntryLoaderMockBundle(
+		EntryLoaderMockBundle entryLoaderMockBundle = new EntryLoaderMockBundle(
 			"dependencies/custom-web.xml");
 
 		WebXMLDefinitionLoader webXMLDefinitionLoader =
 			new WebXMLDefinitionLoader(
-				bundleWebxml, SAXParserFactory.newInstance(), new Logger(null));
+				entryLoaderMockBundle, SAXParserFactory.newInstance(),
+				new Logger(null));
 
 		WebXMLDefinition webXMLDefinition = webXMLDefinitionLoader.loadWebXML(
-			bundleWebxml.getEntry());
+			entryLoaderMockBundle.getEntry());
 
-		EntryLoaderMockBundle bundleFragment1 = new EntryLoaderMockBundle(
-			"dependencies/custom-web-fragment1.xml");
+		EntryLoaderMockBundle fragment1EntryLoaderMockBundle =
+			new EntryLoaderMockBundle("dependencies/custom-web-fragment-1.xml");
 
-		WebXMLDefinitionLoader fragment1DefinitionLoader =
+		WebXMLDefinitionLoader fragment1WebXMLDefinitionLoader =
 			new WebXMLDefinitionLoader(
-				bundleFragment1, SAXParserFactory.newInstance(),
+				fragment1EntryLoaderMockBundle, SAXParserFactory.newInstance(),
 				new Logger(null));
 
-		WebXMLDefinition fragment1Definition =
-			fragment1DefinitionLoader.loadWebXML(bundleFragment1.getEntry());
+		WebXMLDefinition fragment1WebXMLDefinition =
+			fragment1WebXMLDefinitionLoader.loadWebXML(
+				fragment1EntryLoaderMockBundle.getEntry());
 
-		EntryLoaderMockBundle bundleFragment2 = new EntryLoaderMockBundle(
-			"dependencies/custom-web-fragment2.xml");
+		EntryLoaderMockBundle fragment2EntryLoaderMockBundle =
+			new EntryLoaderMockBundle("dependencies/custom-web-fragment-2.xml");
 
-		WebXMLDefinitionLoader fragment2DefinitionLoader =
+		WebXMLDefinitionLoader fragment2webXMLDefinitionLoader =
 			new WebXMLDefinitionLoader(
-				bundleFragment2, SAXParserFactory.newInstance(),
+				fragment2EntryLoaderMockBundle, SAXParserFactory.newInstance(),
 				new Logger(null));
 
-		WebXMLDefinition fragment2Definition =
-			fragment2DefinitionLoader.loadWebXML(bundleFragment2.getEntry());
+		WebXMLDefinition fragment2webXMLDefinition =
+			fragment2webXMLDefinitionLoader.loadWebXML(
+				fragment2EntryLoaderMockBundle.getEntry());
 
-		EntryLoaderMockBundle bundleFragment4 = new EntryLoaderMockBundle(
-			"dependencies/custom-web-fragment4.xml");
+		EntryLoaderMockBundle fragment4EntryLoaderMockBundle =
+			new EntryLoaderMockBundle("dependencies/custom-web-fragment-4.xml");
 
-		WebXMLDefinitionLoader fragment4DefinitionLoader =
+		WebXMLDefinitionLoader fragment4WebXMLDefinitionLoader =
 			new WebXMLDefinitionLoader(
-				bundleFragment4, SAXParserFactory.newInstance(),
+				fragment4EntryLoaderMockBundle, SAXParserFactory.newInstance(),
 				new Logger(null));
 
-		WebXMLDefinition fragment4Definition =
-			fragment4DefinitionLoader.loadWebXML(bundleFragment4.getEntry());
+		WebXMLDefinition fragment4WebXMLDefinition =
+			fragment4WebXMLDefinitionLoader.loadWebXML(
+				fragment4EntryLoaderMockBundle.getEntry());
 
-		List<WebXMLDefinition> definitions = new ArrayList<>();
-		definitions.add(fragment2Definition);
-		definitions.add(fragment1Definition);
-		definitions.add(fragment4Definition);
+		List<WebXMLDefinition> webXMLDefinitions = new ArrayList<>();
+		webXMLDefinitions.add(fragment2webXMLDefinition);
+		webXMLDefinitions.add(fragment1WebXMLDefinition);
+		webXMLDefinitions.add(fragment4WebXMLDefinition);
 
 		List<WebXMLDefinition> sortedDefinitions =
 			OrderUtil.getOrderedWebXMLDefinitions(
-				definitions, webXMLDefinition.getAbsoluteOrderNames());
+				webXMLDefinitions, webXMLDefinition.getAbsoluteOrderNames());
 
 		Assert.assertEquals(3, sortedDefinitions.size());
 
@@ -560,46 +587,48 @@ public class WebXMLDefinitionLoaderTest {
 
 	@Test
 	public void testUnsortedFragments() throws Exception {
-		EntryLoaderMockBundle bundleAbsoluteOrdering =
-			new EntryLoaderMockBundle("dependencies/custom-web.xml");
+		EntryLoaderMockBundle entryLoaderMockBundle = new EntryLoaderMockBundle(
+			"dependencies/custom-web.xml");
 
 		WebXMLDefinitionLoader webXMLDefinitionLoader =
 			new WebXMLDefinitionLoader(
-				bundleAbsoluteOrdering, SAXParserFactory.newInstance(),
+				entryLoaderMockBundle, SAXParserFactory.newInstance(),
 				new Logger(null));
 
 		WebXMLDefinition webXMLDefinition = webXMLDefinitionLoader.loadWebXML(
-			bundleAbsoluteOrdering.getEntry());
+			entryLoaderMockBundle.getEntry());
 
-		EntryLoaderMockBundle bundleFragment1 = new EntryLoaderMockBundle(
-			"dependencies/custom-web-fragment1.xml");
+		EntryLoaderMockBundle fragment1EntryLoaderMockBundle =
+			new EntryLoaderMockBundle("dependencies/custom-web-fragment-1.xml");
 
-		WebXMLDefinitionLoader fragment1DefinitionLoader =
+		WebXMLDefinitionLoader fragment1WebXMLDefinitionLoader =
 			new WebXMLDefinitionLoader(
-				bundleFragment1, SAXParserFactory.newInstance(),
+				fragment1EntryLoaderMockBundle, SAXParserFactory.newInstance(),
 				new Logger(null));
 
-		WebXMLDefinition fragment1Definition =
-			fragment1DefinitionLoader.loadWebXML(bundleFragment1.getEntry());
+		WebXMLDefinition fragment1WebXMLDefinition =
+			fragment1WebXMLDefinitionLoader.loadWebXML(
+				fragment1EntryLoaderMockBundle.getEntry());
 
-		EntryLoaderMockBundle bundleFragment3 = new EntryLoaderMockBundle(
-			"dependencies/custom-web-fragment3.xml");
+		EntryLoaderMockBundle fragment3EntryLoaderMockBundle =
+			new EntryLoaderMockBundle("dependencies/custom-web-fragment-3.xml");
 
-		WebXMLDefinitionLoader fragment3DefinitionLoader =
+		WebXMLDefinitionLoader fragment3WebXMLDefinitionLoader =
 			new WebXMLDefinitionLoader(
-				bundleFragment3, SAXParserFactory.newInstance(),
+				fragment3EntryLoaderMockBundle, SAXParserFactory.newInstance(),
 				new Logger(null));
 
-		WebXMLDefinition fragment3Definition =
-			fragment3DefinitionLoader.loadWebXML(bundleFragment3.getEntry());
+		WebXMLDefinition fragment3WebXMLDefinition =
+			fragment3WebXMLDefinitionLoader.loadWebXML(
+				fragment3EntryLoaderMockBundle.getEntry());
 
-		List<WebXMLDefinition> definitions = new ArrayList<>();
-		definitions.add(fragment1Definition);
-		definitions.add(fragment3Definition);
+		List<WebXMLDefinition> webXMLDefinitions = new ArrayList<>();
+		webXMLDefinitions.add(fragment1WebXMLDefinition);
+		webXMLDefinitions.add(fragment3WebXMLDefinition);
 
 		List<WebXMLDefinition> sortedDefinitions =
 			OrderUtil.getOrderedWebXMLDefinitions(
-				definitions, webXMLDefinition.getAbsoluteOrderNames());
+				webXMLDefinitions, webXMLDefinition.getAbsoluteOrderNames());
 
 		Assert.assertEquals(2, sortedDefinitions.size());
 
@@ -625,7 +654,7 @@ public class WebXMLDefinitionLoaderTest {
 	protected void testLoadDependencies(
 			WebXMLDefinitionLoader webXMLDefinitionLoader, int numfOfListeners,
 			int numOfFilters, int numfOfServlets, URL webXML,
-			String fragmentName, Order ordering, List<String> absoluteOrdering)
+			String fragmentName, Order order, List<String> absoluteOrderNames)
 		throws Exception {
 
 		WebXMLDefinition webXMLDefinition = webXMLDefinitionLoader.loadWebXML(
@@ -636,13 +665,12 @@ public class WebXMLDefinitionLoaderTest {
 				fragmentName, webXMLDefinition.getFragmentName());
 		}
 
-		if (ordering != null) {
-			Order definitionOrdering = webXMLDefinition.getOrder();
+		if (order != null) {
+			Order definitionOrder = webXMLDefinition.getOrder();
 
-			EnumMap<Order.Path, String[]> routes =
-				definitionOrdering.getRoutes();
+			EnumMap<Order.Path, String[]> routes = definitionOrder.getRoutes();
 
-			EnumMap<Order.Path, String[]> expectedRoutes = ordering.getRoutes();
+			EnumMap<Order.Path, String[]> expectedRoutes = order.getRoutes();
 
 			Assert.assertArrayEquals(
 				expectedRoutes.get(Order.Path.AFTER),
@@ -653,15 +681,15 @@ public class WebXMLDefinitionLoaderTest {
 				routes.get(Order.Path.BEFORE));
 		}
 
-		if (ListUtil.isNotEmpty(absoluteOrdering)) {
-			String[] absoluteOrderingArray = absoluteOrdering.toArray(
+		if (ListUtil.isNotEmpty(absoluteOrderNames)) {
+			String[] absoluteOrderNamesArray = absoluteOrderNames.toArray(
 				new String[0]);
-			List<String> definitionAbsoluteOrdering =
+			List<String> definitionAbsoluteOrderNames =
 				webXMLDefinition.getAbsoluteOrderNames();
-			String[] definitionAbsoluteOrderingArray =
-				definitionAbsoluteOrdering.toArray(new String[0]);
+			String[] definitionAbsoluteOrderNamesArray =
+				definitionAbsoluteOrderNames.toArray(new String[0]);
 			Assert.assertArrayEquals(
-				absoluteOrderingArray, definitionAbsoluteOrderingArray);
+				absoluteOrderNamesArray, definitionAbsoluteOrderNamesArray);
 		}
 
 		List<ListenerDefinition> listenerDefinitions =
