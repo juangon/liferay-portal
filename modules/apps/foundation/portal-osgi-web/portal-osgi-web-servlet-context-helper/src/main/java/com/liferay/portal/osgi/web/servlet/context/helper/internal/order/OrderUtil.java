@@ -44,40 +44,42 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class OrderUtil {
 
 	public static List<WebXMLDefinition> getOrderedWebXMLDefinitions(
-			List<WebXMLDefinition> configs, List<String> absoluteOrder)
-		throws OrderBeforeAndAfterException,
-			OrderCircularDependencyException, OrderMaxAttemptsException {
+			List<WebXMLDefinition> webXMLDefinitions,
+			List<String> absoluteOrderNames)
+		throws OrderBeforeAndAfterException, OrderCircularDependencyException, 
+			   OrderMaxAttemptsException {
 
-		if (ListUtil.isEmpty(absoluteOrder)) {
-			return getWebXMLDefinitionOrder(configs);
+		if (ListUtil.isEmpty(absoluteOrderNames)) {
+			return _getOrderedWebXMLDefinitions(webXMLDefinitions);
 		}
 
-		return _getOrderWithAbsoluteOrder(configs, absoluteOrder);
+		return _getOrderedWebXMLDefinitions(
+			webXMLDefinitions, absoluteOrderNames);
 	}
 
-	public static Map<String, WebXMLDefinition> getWebXMLDefinitionMap(
-		List<WebXMLDefinition> webXMLs) {
+	private static Map<String, WebXMLDefinition> _getWebXMLDefinitionsMap(
+		List<WebXMLDefinition> webXMLDefinitions) {
 
-		Map<String, WebXMLDefinition> configMap = new HashMap<>();
+		Map<String, WebXMLDefinition> webXMLDefinitionsMap = new HashMap<>();
 
-		for (WebXMLDefinition webxML : webXMLs) {
-			String name = webxML.getFragmentName();
+		for (WebXMLDefinition webXMLDefinition : webXMLDefinitions) {
+			String fragmentName = webXMLDefinition.getFragmentName();
 
-			configMap.put(name, webxML);
+			webXMLDefinitionsMap.put(fragmentName, webXMLDefinition);
 		}
 
-		return configMap;
+		return webXMLDefinitionsMap;
 	}
 
-	public static List<WebXMLDefinition> getWebXMLDefinitionOrder(
-			List<WebXMLDefinition> configList)
+	private static List<WebXMLDefinition> _getOrderedWebXMLDefinitions(
+			List<WebXMLDefinition> webXMLDefinitions)
 		throws OrderBeforeAndAfterException,
 			OrderCircularDependencyException, OrderMaxAttemptsException {
 
 		// Check for "duplicate name exception" and "circular references"
 		// as described in 8.2.2 Ordering of web.xml and web-fragment.xml
 
-		_checkForSpecExceptions(configList);
+		_checkForSpecExceptions(webXMLDefinitions);
 
 		// It turns out that some of the specified ordering, if it was not
 		// discovered by the sort routine until later in its processing,
@@ -88,24 +90,24 @@ public class OrderUtil {
 		// consider it quickly, and be able to use its ordering algorithm
 		// to the best of its ability to achieve the specified ordering.
 
-		configList = _preSort(configList);
+		webXMLDefinitions = _preSort(webXMLDefinitions);
 
-		WebXMLDefinition[] configs = configList.toArray(
-			new WebXMLDefinition[configList.size()]);
+		WebXMLDefinition[] webXMLDefinitionsArray = webXMLDefinitions.toArray(
+			new WebXMLDefinition[webXMLDefinitions.size()]);
 
 		// This is a multiple pass sorting routine which gets the documents
 		// close to the order they need to be in
 
-		_innerSort(configs);
+		_innerSort(webXMLDefinitionsArray);
 
 		// This is the final sort which checks the list from left to right to
 		// see if they are in the specified order and if they are not, it moves
 		// the incorrectly placed document(s) to the right into its proper
 		// place, and shifts others left as necessary.
 
-		_postSort(configs);
+		_postSort(webXMLDefinitionsArray);
 
-		return new ArrayList<>(Arrays.asList(configs));
+		return new ArrayList<>(Arrays.asList(webXMLDefinitionsArray));
 	}
 
 	private static String[] _appendAndSort(String[]... groups) {
@@ -237,7 +239,7 @@ public class OrderUtil {
 		return names;
 	}
 
-	private static List<WebXMLDefinition> _getOrderWithAbsoluteOrder(
+	private static List<WebXMLDefinition> _getOrderedWebXMLDefinitions(
 		List<WebXMLDefinition> configs, List<String> absoluteOrder) {
 
 		List<WebXMLDefinition> orderedList = new ArrayList<>();
@@ -562,7 +564,7 @@ public class OrderUtil {
 
 		namedMap = _descendingByValue(namedMap);
 
-		Map<String, WebXMLDefinition> configMap = getWebXMLDefinitionMap(
+		Map<String, WebXMLDefinition> configMap = _getWebXMLDefinitionsMap(
 			configs);
 
 		// add named configs to the list in the correct preSorted order
