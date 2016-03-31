@@ -91,7 +91,7 @@ public class OrderUtil {
 	}
 
 	private static String[] _appendAndSort(String[]... groups) {
-		HashMap<String, Integer> map = new HashMap<>();
+		Map<String, Integer> map = new HashMap<>();
 
 		if (groups[0] != null) {
 			if (Arrays.binarySearch(groups[0], Order.OTHERS) >= 0) {
@@ -107,9 +107,9 @@ public class OrderUtil {
 			}
 		}
 
-		Set<String> keySet = map.keySet();
+		Set<String> set = map.keySet();
 
-		String[] orderedNames = keySet.toArray(new String[keySet.size()]);
+		String[] orderedNames = set.toArray(new String[set.size()]);
 
 		Arrays.sort(orderedNames);
 
