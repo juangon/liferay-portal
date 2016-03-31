@@ -55,100 +55,6 @@ import org.powermock.modules.junit4.PowerMockRunner;
 public class WebXMLDefinitionLoaderTest {
 
 	@Test
-	public void testOrderCircularDependencyException() throws Exception {
-		EntryLoaderMockBundle entryLoaderMockBundle = new EntryLoaderMockBundle(
-			"dependencies/custom-web.xml");
-
-		WebXMLDefinitionLoader webXMLDefinitionLoader =
-			new WebXMLDefinitionLoader(
-				entryLoaderMockBundle, SAXParserFactory.newInstance(), new Logger(null));
-
-		WebXMLDefinition webXMLDefinition = webXMLDefinitionLoader.loadWebXML(
-			entryLoaderMockBundle.getEntry());
-
-		EntryLoaderMockBundle circular1EntryLoaderMockBundle = new EntryLoaderMockBundle(
-			"dependencies/custom-web-fragment-circular1.xml");
-
-		WebXMLDefinitionLoader circular1WebXMLDefinitionLoader =
-			new WebXMLDefinitionLoader(
-				circular1EntryLoaderMockBundle, SAXParserFactory.newInstance(),
-				new Logger(null));
-
-		WebXMLDefinition fragmentCircular1Definition =
-			circular1WebXMLDefinitionLoader.loadWebXML(circular1EntryLoaderMockBundle.getEntry());
-
-		EntryLoaderMockBundle circular2WebXMLDefinitionLoader = new EntryLoaderMockBundle(
-			"dependencies/custom-web-fragment-circular2.xml");
-
-		WebXMLDefinitionLoader fragmentCircular2Loader =
-			new WebXMLDefinitionLoader(
-				circular2WebXMLDefinitionLoader, SAXParserFactory.newInstance(),
-				new Logger(null));
-
-		WebXMLDefinition fragmentCircular2Definition =
-			fragmentCircular2Loader.loadWebXML(circular2WebXMLDefinitionLoader.getEntry());
-
-		List<WebXMLDefinition> definitions = new ArrayList<>();
-		definitions.add(fragmentCircular1Definition);
-		definitions.add(fragmentCircular2Definition);
-
-		boolean exceptionThrown = false;
-
-		try {
-			OrderUtil.getOrderedWebXMLDefinitions(
-				definitions, webXMLDefinition.getAbsoluteOrderNames());
-		}
-		catch (Exception e) {
-			if (e instanceof OrderCircularDependencyException) {
-				exceptionThrown = true;
-			}
-		}
-
-		Assert.assertTrue(exceptionThrown);
-	}
-
-	@Test
-	public void testOrderBeforeAndAfterException() throws Exception {
-		EntryLoaderMockBundle bundle = new EntryLoaderMockBundle(
-			"dependencies/custom-web.xml");
-
-		WebXMLDefinitionLoader webXMLDefinitionLoader =
-			new WebXMLDefinitionLoader(
-				bundle, SAXParserFactory.newInstance(), new Logger(null));
-
-		WebXMLDefinition webXMLDefinition = webXMLDefinitionLoader.loadWebXML(
-			bundle.getEntry());
-
-		EntryLoaderMockBundle bundleFragment5 = new EntryLoaderMockBundle(
-			"dependencies/custom-web-fragment5.xml");
-
-		WebXMLDefinitionLoader fragment5DefinitionLoader =
-			new WebXMLDefinitionLoader(
-				bundleFragment5, SAXParserFactory.newInstance(),
-				new Logger(null));
-
-		WebXMLDefinition fragment5Definition =
-			fragment5DefinitionLoader.loadWebXML(bundleFragment5.getEntry());
-
-		List<WebXMLDefinition> definitions = new ArrayList<>();
-		definitions.add(fragment5Definition);
-
-		boolean exceptionThrown = false;
-
-		try {
-			OrderUtil.getOrderedWebXMLDefinitions(
-				definitions, webXMLDefinition.getAbsoluteOrderNames());
-		}
-		catch (Exception e) {
-			if (e instanceof OrderBeforeAndAfterException) {
-				exceptionThrown = true;
-			}
-		}
-
-		Assert.assertTrue(exceptionThrown);
-	}
-
-	@Test
 	public void testLoadCustomDependencies() throws Exception {
 		EntryLoaderMockBundle bundle = new EntryLoaderMockBundle(
 			"dependencies/custom-web.xml");
@@ -275,6 +181,105 @@ public class WebXMLDefinitionLoaderTest {
 			bundle.getEntry());
 
 		Assert.assertFalse(webXMLDefinition.isMetadataComplete());
+	}
+
+	@Test
+	public void testOrderBeforeAndAfterException() throws Exception {
+		EntryLoaderMockBundle bundle = new EntryLoaderMockBundle(
+			"dependencies/custom-web.xml");
+
+		WebXMLDefinitionLoader webXMLDefinitionLoader =
+			new WebXMLDefinitionLoader(
+				bundle, SAXParserFactory.newInstance(), new Logger(null));
+
+		WebXMLDefinition webXMLDefinition = webXMLDefinitionLoader.loadWebXML(
+			bundle.getEntry());
+
+		EntryLoaderMockBundle bundleFragment5 = new EntryLoaderMockBundle(
+			"dependencies/custom-web-fragment5.xml");
+
+		WebXMLDefinitionLoader fragment5DefinitionLoader =
+			new WebXMLDefinitionLoader(
+				bundleFragment5, SAXParserFactory.newInstance(),
+				new Logger(null));
+
+		WebXMLDefinition fragment5Definition =
+			fragment5DefinitionLoader.loadWebXML(bundleFragment5.getEntry());
+
+		List<WebXMLDefinition> definitions = new ArrayList<>();
+		definitions.add(fragment5Definition);
+
+		boolean exceptionThrown = false;
+
+		try {
+			OrderUtil.getOrderedWebXMLDefinitions(
+				definitions, webXMLDefinition.getAbsoluteOrderNames());
+		}
+		catch (Exception e) {
+			if (e instanceof OrderBeforeAndAfterException) {
+				exceptionThrown = true;
+			}
+		}
+
+		Assert.assertTrue(exceptionThrown);
+	}
+
+	@Test
+	public void testOrderCircularDependencyException() throws Exception {
+		EntryLoaderMockBundle entryLoaderMockBundle = new EntryLoaderMockBundle(
+			"dependencies/custom-web.xml");
+
+		WebXMLDefinitionLoader webXMLDefinitionLoader =
+			new WebXMLDefinitionLoader(
+				entryLoaderMockBundle, SAXParserFactory.newInstance(),
+				new Logger(null));
+
+		WebXMLDefinition webXMLDefinition = webXMLDefinitionLoader.loadWebXML(
+			entryLoaderMockBundle.getEntry());
+
+		EntryLoaderMockBundle circular1EntryLoaderMockBundle =
+			new EntryLoaderMockBundle(
+				"dependencies/custom-web-fragment-circular1.xml");
+
+		WebXMLDefinitionLoader circular1WebXMLDefinitionLoader =
+			new WebXMLDefinitionLoader(
+				circular1EntryLoaderMockBundle, SAXParserFactory.newInstance(),
+				new Logger(null));
+
+		WebXMLDefinition fragmentCircular1Definition =
+			circular1WebXMLDefinitionLoader.loadWebXML(
+				circular1EntryLoaderMockBundle.getEntry());
+
+		EntryLoaderMockBundle circular2WebXMLDefinitionLoader =
+			new EntryLoaderMockBundle(
+				"dependencies/custom-web-fragment-circular2.xml");
+
+		WebXMLDefinitionLoader fragmentCircular2Loader =
+			new WebXMLDefinitionLoader(
+				circular2WebXMLDefinitionLoader, SAXParserFactory.newInstance(),
+				new Logger(null));
+
+		WebXMLDefinition fragmentCircular2Definition =
+			fragmentCircular2Loader.loadWebXML(
+				circular2WebXMLDefinitionLoader.getEntry());
+
+		List<WebXMLDefinition> definitions = new ArrayList<>();
+		definitions.add(fragmentCircular1Definition);
+		definitions.add(fragmentCircular2Definition);
+
+		boolean exceptionThrown = false;
+
+		try {
+			OrderUtil.getOrderedWebXMLDefinitions(
+				definitions, webXMLDefinition.getAbsoluteOrderNames());
+		}
+		catch (Exception e) {
+			if (e instanceof OrderCircularDependencyException) {
+				exceptionThrown = true;
+			}
+		}
+
+		Assert.assertTrue(exceptionThrown);
 	}
 
 	@Test

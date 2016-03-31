@@ -46,7 +46,7 @@ public class OrderUtil {
 	public static List<WebXMLDefinition> getOrderedWebXMLDefinitions(
 			List<WebXMLDefinition> webXMLDefinitions,
 			List<String> absoluteOrderNames)
-		throws OrderBeforeAndAfterException, OrderCircularDependencyException, 
+		throws OrderBeforeAndAfterException, OrderCircularDependencyException,
 			   OrderMaxAttemptsException {
 
 		if (ListUtil.isEmpty(absoluteOrderNames)) {
@@ -55,39 +55,6 @@ public class OrderUtil {
 
 		return _getOrderedWebXMLDefinitions(
 			webXMLDefinitions, absoluteOrderNames);
-	}
-
-	private static Map<String, WebXMLDefinition> _getWebXMLDefinitionsMap(
-		List<WebXMLDefinition> webXMLDefinitions) {
-
-		Map<String, WebXMLDefinition> webXMLDefinitionsMap = new HashMap<>();
-
-		for (WebXMLDefinition webXMLDefinition : webXMLDefinitions) {
-			String fragmentName = webXMLDefinition.getFragmentName();
-
-			webXMLDefinitionsMap.put(fragmentName, webXMLDefinition);
-		}
-
-		return webXMLDefinitionsMap;
-	}
-
-	private static List<WebXMLDefinition> _getOrderedWebXMLDefinitions(
-			List<WebXMLDefinition> webXMLDefinitions)
-		throws OrderBeforeAndAfterException,
-			OrderCircularDependencyException, OrderMaxAttemptsException {
-
-		_checkForSpecExceptions(webXMLDefinitions);
-
-		webXMLDefinitions = _preSort(webXMLDefinitions);
-
-		WebXMLDefinition[] webXMLDefinitionsArray = webXMLDefinitions.toArray(
-			new WebXMLDefinition[webXMLDefinitions.size()]);
-
-		_innerSort(webXMLDefinitionsArray);
-
-		_postSort(webXMLDefinitionsArray);
-
-		return new ArrayList<>(Arrays.asList(webXMLDefinitionsArray));
 	}
 
 	private static String[] _appendAndSort(String[]... groups) {
@@ -116,14 +83,14 @@ public class OrderUtil {
 		return orderedNames;
 	}
 
-	private static void _checkForBothBeforeAndAfter(WebXMLDefinition webXMLDefinition)
+	private static void _checkForBothBeforeAndAfter(
+			WebXMLDefinition webXMLDefinition)
 		throws OrderBeforeAndAfterException {
 
 		String fragmentName = webXMLDefinition.getFragmentName();
 		Order ordering = webXMLDefinition.getOrder();
 
-		EnumMap<Order.Path, String[]> orderingRoutes =
-			ordering.getRoutes();
+		EnumMap<Order.Path, String[]> orderingRoutes = ordering.getRoutes();
 
 		HashMap<String, Integer> map = new HashMap<>();
 
@@ -211,6 +178,25 @@ public class OrderUtil {
 	}
 
 	private static List<WebXMLDefinition> _getOrderedWebXMLDefinitions(
+			List<WebXMLDefinition> webXMLDefinitions)
+		throws OrderBeforeAndAfterException,
+			OrderCircularDependencyException, OrderMaxAttemptsException {
+
+		_checkForSpecExceptions(webXMLDefinitions);
+
+		webXMLDefinitions = _preSort(webXMLDefinitions);
+
+		WebXMLDefinition[] webXMLDefinitionsArray = webXMLDefinitions.toArray(
+			new WebXMLDefinition[webXMLDefinitions.size()]);
+
+		_innerSort(webXMLDefinitionsArray);
+
+		_postSort(webXMLDefinitionsArray);
+
+		return new ArrayList<>(Arrays.asList(webXMLDefinitionsArray));
+	}
+
+	private static List<WebXMLDefinition> _getOrderedWebXMLDefinitions(
 		List<WebXMLDefinition> configs, List<String> absoluteOrder) {
 
 		List<WebXMLDefinition> orderedList = new ArrayList<>();
@@ -251,6 +237,20 @@ public class OrderUtil {
 		}
 
 		return orderedList;
+	}
+
+	private static Map<String, WebXMLDefinition> _getWebXMLDefinitionsMap(
+		List<WebXMLDefinition> webXMLDefinitions) {
+
+		Map<String, WebXMLDefinition> webXMLDefinitionsMap = new HashMap<>();
+
+		for (WebXMLDefinition webXMLDefinition : webXMLDefinitions) {
+			String fragmentName = webXMLDefinition.getFragmentName();
+
+			webXMLDefinitionsMap.put(fragmentName, webXMLDefinition);
+		}
+
+		return webXMLDefinitionsMap;
 	}
 
 	private static int _innerSort(WebXMLDefinition[] configs)

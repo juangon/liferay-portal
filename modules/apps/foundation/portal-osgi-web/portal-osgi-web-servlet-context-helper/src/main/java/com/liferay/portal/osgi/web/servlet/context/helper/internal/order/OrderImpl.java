@@ -79,7 +79,7 @@ public class OrderImpl implements Order {
 		if (_routes.get(Path.BEFORE) != null) {
 			if (Arrays.binarySearch(
 					_routes.get(Path.BEFORE), Order.OTHERS) >= 0) {
-					
+
 				value = true;
 			}
 		}
