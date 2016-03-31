@@ -88,31 +88,16 @@ public class OrderUtil {
 		throws OrderBeforeAndAfterException {
 
 		String fragmentName = webXMLDefinition.getFragmentName();
-		Order ordering = webXMLDefinition.getOrder();
+		Order order = webXMLDefinition.getOrder();
 
-		EnumMap<Order.Path, String[]> orderingRoutes = ordering.getRoutes();
+		EnumMap<Order.Path, String[]> orderRoutes = order.getRoutes();
 
-		HashMap<String, Integer> map = new HashMap<>();
+		Map<String, Integer> map = new HashMap<>();
 
-		String[] beforeRoutes = orderingRoutes.get(Order.Path.BEFORE);
+		String[] beforeRoutes = orderRoutes.get(Order.Path.BEFORE);
 
-		for (String name : beforeRoutes) {
-			Integer value = map.get(name);
-
-			if (value == null) {
-				value = 1;
-			}
-			else {
-				value += 1;
-			}
-
-			map.put(name, value);
-		}
-
-		String[] afterRoutes = orderingRoutes.get(Order.Path.AFTER);
-
-		for (String name : afterRoutes) {
-			Integer value = map.get(name);
+		for (String beforeRouteName : beforeRoutes) {
+			Integer value = map.get(beforeRouteName);
 
 			if (value == null) {
 				value = 1;
@@ -121,12 +106,27 @@ public class OrderUtil {
 				value += 1;
 			}
 
-			map.put(name, value);
+			map.put(beforeRouteName, value);
 		}
 
-		Set<String> keySet = map.keySet();
+		String[] afterRoutes = orderRoutes.get(Order.Path.AFTER);
 
-		String[] namesToCheck = keySet.toArray(new String[keySet.size()]);
+		for (String afterRouteName : afterRoutes) {
+			Integer value = map.get(afterRouteName);
+
+			if (value == null) {
+				value = 1;
+			}
+			else {
+				value += 1;
+			}
+
+			map.put(afterRouteName, value);
+		}
+
+		Set<String> set = map.keySet();
+
+		String[] namesToCheck = set.toArray(new String[set.size()]);
 
 		for (String name : namesToCheck) {
 			if (map.get(name) > 1) {
@@ -135,46 +135,29 @@ public class OrderUtil {
 		}
 	}
 
-	private static void _checkForSpecExceptions(List<WebXMLDefinition> configs)
-		throws OrderBeforeAndAfterException,
-			OrderCircularDependencyException {
+	private static void _checkForSpecExceptions(
+			List<WebXMLDefinition> webXMLDefinitions)
+		throws OrderBeforeAndAfterException, OrderCircularDependencyException {
 
-		for (WebXMLDefinition config : configs) {
-			_checkForBothBeforeAndAfter(config);
+		for (WebXMLDefinition webXMLDefinition : webXMLDefinitions) {
+			_checkForBothBeforeAndAfter(webXMLDefinition);
 
 			for (Order.Path path : Order.Path.values()) {
-				_mapRoutes(config, path, configs);
+				_mapRoutes(webXMLDefinition, path, webXMLDefinitions);
 			}
 		}
 	}
 
-	private static Map<String, Integer> _descendingByValue(
-		Map<String, Integer> map) {
+	private static List<String> _getFragmentNames(
+		WebXMLDefinition[] webXMLDefinitions) {
 
-		List<Map.Entry<String, Integer>> list = new LinkedList<>(
-			map.entrySet());
+		List<String> fragmentNames = new LinkedList<>();
 
-		Collections.sort(list, _COMPARATOR);
-
-		Map<String, Integer> result = new LinkedHashMap<>();
-
-		for (Map.Entry<String, Integer> entry : list) {
-			result.put(entry.getKey(), entry.getValue());
+		for (WebXMLDefinition webXMLDefinition : webXMLDefinitions) {
+			fragmentNames.add(webXMLDefinition.getFragmentName());
 		}
 
-		return result;
-	}
-
-	private static LinkedList<String> _extractNamesList(
-		WebXMLDefinition[] configs) {
-
-		LinkedList<String> names = new LinkedList<>();
-
-		for (WebXMLDefinition config : configs) {
-			names.add(config.getFragmentName());
-		}
-
-		return names;
+		return fragmentNames;
 	}
 
 	private static List<WebXMLDefinition> _getOrderedWebXMLDefinitions(
@@ -197,42 +180,44 @@ public class OrderUtil {
 	}
 
 	private static List<WebXMLDefinition> _getOrderedWebXMLDefinitions(
-		List<WebXMLDefinition> configs, List<String> absoluteOrder) {
+		List<WebXMLDefinition> webXMLDefinitions,
+		List<String> absoluteOrderNames) {
 
 		List<WebXMLDefinition> orderedList = new ArrayList<>();
 
-		List<WebXMLDefinition> configList = new CopyOnWriteArrayList<>();
+		List<WebXMLDefinition> webXMLDefinitionsList =
+			new CopyOnWriteArrayList<>();
 
-		configList.addAll(configs);
+		webXMLDefinitionsList.addAll(webXMLDefinitions);
 
-		for (String name : absoluteOrder) {
-			if (Order.OTHERS.equals(name)) {
+		for (String absoluteOrderName : absoluteOrderNames) {
+			if (Order.OTHERS.equals(absoluteOrderName)) {
 				continue;
 			}
 
 			boolean found = false;
 
-			for (WebXMLDefinition config : configList) {
-				String fragmentName = config.getFragmentName();
+			for (WebXMLDefinition webXMLDefinition : webXMLDefinitionsList) {
+				String fragmentName = webXMLDefinition.getFragmentName();
 
-				if (!found && name.equals(fragmentName)) {
+				if (!found && absoluteOrderName.equals(fragmentName)) {
 					found = true;
 
-					orderedList.add(config);
+					orderedList.add(webXMLDefinition);
 
-					configList.remove(config);
+					webXMLDefinitionsList.remove(webXMLDefinition);
 				}
-				else if (found && name.equals(fragmentName)) {
+				else if (found && absoluteOrderName.equals(fragmentName)) {
 					break;
 				}
 			}
 		}
 
-		int othersIndex = absoluteOrder.indexOf(Order.OTHERS);
+		int othersIndex = absoluteOrderNames.indexOf(Order.OTHERS);
 
 		if (othersIndex != -1) {
-			for (WebXMLDefinition config : configList) {
-				orderedList.add(othersIndex, config);
+			for (WebXMLDefinition webXMLDefinition : webXMLDefinitionsList) {
+				orderedList.add(othersIndex, webXMLDefinition);
 			}
 		}
 
@@ -253,7 +238,7 @@ public class OrderUtil {
 		return webXMLDefinitionsMap;
 	}
 
-	private static int _innerSort(WebXMLDefinition[] configs)
+	private static int _innerSort(WebXMLDefinition[] webXMLDefinitions)
 		throws OrderMaxAttemptsException {
 
 		int attempts = 0;
@@ -266,9 +251,11 @@ public class OrderUtil {
 
 			attempting = false;
 
-			int last = configs.length - 1;
+			int webXMLDefinitionsLength = webXMLDefinitions.length;
 
-			for (int i = 0; i < configs.length; i++) {
+			int last = webXMLDefinitionsLength - 1;
+
+			for (int i = 0; i < webXMLDefinitionsLength; i++) {
 				int first = i;
 				int second = first + 1;
 
@@ -277,11 +264,14 @@ public class OrderUtil {
 					first = 0;
 				}
 
-				if (_isDisordered(configs[first], configs[second])) {
-					WebXMLDefinition temp = configs[first];
+				if (_isDisordered(
+						webXMLDefinitions[first], webXMLDefinitions[second])) {
 
-					configs[first] = configs[second];
-					configs[second] = temp;
+					WebXMLDefinition webXMLDefinition =
+						webXMLDefinitions[first];
+
+					webXMLDefinitions[first] = webXMLDefinitions[second];
+					webXMLDefinitions[second] = webXMLDefinition;
 
 					attempting = true;
 				}
@@ -294,19 +284,20 @@ public class OrderUtil {
 	}
 
 	private static boolean _isDisordered(
-		WebXMLDefinition config1, WebXMLDefinition config2) {
+		WebXMLDefinition webXMLDefinition1,
+		WebXMLDefinition webXMLDefinition2) {
 
-		String config1Name = config1.getFragmentName();
-		String config2Name = config2.getFragmentName();
+		String fragmentName1 = webXMLDefinition1.getFragmentName();
+		String fragmentName2 = webXMLDefinition2.getFragmentName();
 
-		Order config1Ordering = config1.getOrder();
-		Order config2Ordering = config2.getOrder();
+		Order order1 = webXMLDefinition1.getOrder();
+		Order order2 = webXMLDefinition2.getOrder();
 
-		if (config1Ordering.isOrdered() && !config2Ordering.isOrdered()) {
-			EnumMap<Path, String[]> routes = config1Ordering.getRoutes();
+		if (order1.isOrdered() && !order2.isOrdered()) {
+			EnumMap<Path, String[]> routes = order1.getRoutes();
 
 			if (!ArrayUtil.isEmpty(routes.get(Order.Path.AFTER)) &&
-				!config1Ordering.isBeforeOthers()) {
+				!order1.isBeforeOthers()) {
 
 				return true;
 			}
@@ -314,28 +305,26 @@ public class OrderUtil {
 
 		// they are not in the specified order
 
-		if (config2Ordering.isBefore(config1Name) ||
-			config1Ordering.isAfter(config2Name)) {
+		if (order2.isBefore(fragmentName1) || order1.isAfter(fragmentName2)) {
+			return true;
+		}
+
+		// fragmentName1 should be after others, but it is not
+
+		if (order1.isAfterOthers() &&
+			!order1.isBefore(fragmentName2) &&
+			!(order1.isAfterOthers() &&
+			order2.isAfterOthers())) {
 
 			return true;
 		}
 
-		// config1 should be after others, but it is not
+		// fragmentName2 should be before others, but it is not
 
-		if (config1Ordering.isAfterOthers() &&
-			!config1Ordering.isBefore(config2Name) &&
-			!(config1Ordering.isAfterOthers() &&
-			config2Ordering.isAfterOthers())) {
-
-			return true;
-		}
-
-		// config2 should be before others, but it is not
-
-		if (config2Ordering.isBeforeOthers() &&
-			!config2Ordering.isAfter(config1Name) &&
-			!(config1Ordering.isBeforeOthers() &&
-			config2Ordering.isBeforeOthers())) {
+		if (order2.isBeforeOthers() &&
+			!order2.isAfter(fragmentName1) &&
+			!(order1.isBeforeOthers() &&
+			order2.isBeforeOthers())) {
 
 			return true;
 		}
@@ -344,39 +333,40 @@ public class OrderUtil {
 	}
 
 	private static void _mapRoutes(
-			WebXMLDefinition config, Order.Path path,
-			List<WebXMLDefinition> webXMLs)
+			WebXMLDefinition webXMLDefinition, Order.Path path,
+			List<WebXMLDefinition> webXMLDefinitions)
 		throws OrderCircularDependencyException {
 
-		String configName = config.getFragmentName();
-		Order configOrdering = config.getOrder();
+		String fragmentName = webXMLDefinition.getFragmentName();
+		Order order = webXMLDefinition.getOrder();
 
-		EnumMap<Order.Path, String[]> configOrderingRoutes =
-			configOrdering.getRoutes();
-		String[] routePathNames = configOrderingRoutes.get(path);
+		EnumMap<Order.Path, String[]> orderRoutes = order.getRoutes();
+		String[] routePathNames = orderRoutes.get(path);
 
 		for (String routePathName : routePathNames) {
 			if (routePathName.equals(Order.OTHERS)) {
 				continue;
 			}
 
-			for (WebXMLDefinition otherConfig : webXMLs) {
+			for (WebXMLDefinition otherConfig : webXMLDefinitions) {
 				String otherConfigName = otherConfig.getFragmentName();
 
 				if (!routePathName.equals(otherConfigName)) {
 					continue;
 				}
 
-				Order otherConfigOrdering = otherConfig.getOrder();
+				Order otherConfigOrder = otherConfig.getOrder();
 
-				EnumMap<Order.Path, String[]> otherConfigOrderingRoutes =
-					otherConfigOrdering.getRoutes();
+				EnumMap<Order.Path, String[]> otherConfigOrderRoutes =
+					otherConfigOrder.getRoutes();
 
-				String[] otherRoutePathNames = otherConfigOrderingRoutes.get(
-					path);
+				String[] otherRoutePathNames = otherConfigOrderRoutes.get(path);
 
-				if (Arrays.binarySearch(otherRoutePathNames, configName) >= 0) {
-					throw new OrderCircularDependencyException(path, webXMLs);
+				if (Arrays.binarySearch(
+						otherRoutePathNames, fragmentName) >= 0) {
+
+					throw new OrderCircularDependencyException(
+						path, webXMLDefinitions);
 				}
 
 				// If I am before them, they should be informed
@@ -393,10 +383,10 @@ public class OrderUtil {
 					oppositePath = Order.Path.BEFORE;
 				}
 
-				String[] oppositePathNames = otherConfigOrderingRoutes.get(
+				String[] oppositePathNames = otherConfigOrderRoutes.get(
 					oppositePath);
 
-				if (Arrays.binarySearch(oppositePathNames, configName) < 0) {
+				if (Arrays.binarySearch(oppositePathNames, fragmentName) < 0) {
 					EnumMap<Order.Path, String[]> routes = new EnumMap<>(
 						Order.Path.class);
 
@@ -404,10 +394,10 @@ public class OrderUtil {
 					routes.put(
 						oppositePath,
 						_appendAndSort(
-							otherConfigOrderingRoutes.get(oppositePath),
-							new String[] {configName}));
+							otherConfigOrderRoutes.get(oppositePath),
+							new String[] {fragmentName}));
 
-					otherConfigOrdering.setRoutes(routes);
+					otherConfigOrder.setRoutes(routes);
 				}
 
 				// If I am before them and they are before others,
@@ -423,65 +413,64 @@ public class OrderUtil {
 					routes.put(
 						path,
 						_appendAndSort(routePathNames, otherRoutePathNames));
-					routes.put(
-						oppositePath, configOrderingRoutes.get(oppositePath));
+					routes.put(oppositePath, orderRoutes.get(oppositePath));
 
-					configOrdering.setRoutes(routes);
+					order.setRoutes(routes);
 				}
 			}
 		}
 	}
 
-	private static void _postSort(WebXMLDefinition[] configs) {
+	private static void _postSort(WebXMLDefinition[] webXMLDefinitions) {
 		int i = 0;
 
-		while (i < configs.length) {
-			LinkedList<String> names = _extractNamesList(configs);
+		while (i < webXMLDefinitions.length) {
+			List<String> fragmentNames = _getFragmentNames(webXMLDefinitions);
 
 			boolean done = true;
 
-			for (int j = 0; j < configs.length; j++) {
+			for (int j = 0; j < webXMLDefinitions.length; j++) {
 				int k = 0;
 
-				for (String configName : names) {
-					String fragmentName = configs[j].getFragmentName();
+				for (String currentName : fragmentNames) {
+					String fragmentName =
+						webXMLDefinitions[j].getFragmentName();
 
-					if (fragmentName.equals(configName)) {
+					if (fragmentName.equals(currentName)) {
 						break;
 					}
 
-					Order ordering = configs[j].getOrder();
+					Order order = webXMLDefinitions[j].getOrder();
 
-					if (ordering.isBefore(configName)) {
+					if (order.isBefore(currentName)) {
 
 						// We have a document that is out of order,
 						// and his index is k, he belongs at index j, and all
 						// the documents in between need to be shifted left.
 
-						WebXMLDefinition temp = null;
+						WebXMLDefinition webXMLDefinition = null;
 
-						for (int m = 0; m < configs.length; m++) {
+						for (int m = 0; m < webXMLDefinitions.length; m++) {
 
 							// This is one that is out of order and needs
 							// to be moved.
 
 							if (m == k) {
-								temp = configs[m];
+								webXMLDefinition = webXMLDefinitions[m];
 							}
 
 							// This is one in between that needs to be shifted
 							// left.
 
-							if ((temp != null) && (m != j)) {
-								configs[m] = configs[m + 1];
+							if ((webXMLDefinition != null) && (m != j)) {
+								webXMLDefinitions[m] = webXMLDefinitions[m + 1];
 							}
 
 							// This is where the one that is out of order needs
-
-							//to be moved to.
+							// to be moved to.
 
 							if (m == j) {
-								configs[m] = temp;
+								webXMLDefinitions[m] = webXMLDefinition;
 
 								done = false;
 
@@ -507,52 +496,69 @@ public class OrderUtil {
 	private static List<WebXMLDefinition> _preSort(
 		List<WebXMLDefinition> webXMLDefinitions) {
 
-		List<WebXMLDefinition> newConfigList = new ArrayList<>();
-		List<WebXMLDefinition> anonAndUnordered = new LinkedList<>();
+		List<WebXMLDefinition> webXMLDefinitionList = new ArrayList<>();
+		List<WebXMLDefinition> anonymousAndUnordered = new LinkedList<>();
 		Map<String, Integer> namedMap = new LinkedHashMap<>();
 
-		for (WebXMLDefinition config : webXMLDefinitions) {
-			Order configOrdering = config.getOrder();
+		for (WebXMLDefinition webXMLDefinition : webXMLDefinitions) {
+			Order order = webXMLDefinition.getOrder();
 
-			EnumMap<Order.Path, String[]> configOrderingRoutes =
-				configOrdering.getRoutes();
-			String[] beforePathNames = configOrderingRoutes.get(
+			EnumMap<Order.Path, String[]> webXMLDefinitionOrderRoutes =
+				order.getRoutes();
+			String[] beforePathNames = webXMLDefinitionOrderRoutes.get(
 				Order.Path.BEFORE);
-			String[] afterPathNames = configOrderingRoutes.get(
+			String[] afterPathNames = webXMLDefinitionOrderRoutes.get(
 				Order.Path.AFTER);
 
-			String configName = config.getFragmentName();
+			String fragmentName = webXMLDefinition.getFragmentName();
 
-			if (Validator.isNull(configName) && !configOrdering.isOrdered()) {
-				anonAndUnordered.add(config);
+			if (Validator.isNull(fragmentName) && !order.isOrdered()) {
+				anonymousAndUnordered.add(webXMLDefinition);
 			}
 			else {
 				int totalPathNames =
 					beforePathNames.length + afterPathNames.length;
-				namedMap.put(configName, totalPathNames);
+				namedMap.put(fragmentName, totalPathNames);
 			}
 		}
 
-		namedMap = _descendingByValue(namedMap);
+		namedMap = _sortDescendingByValue(namedMap);
 
 		Map<String, WebXMLDefinition> configMap = _getWebXMLDefinitionsMap(
 			webXMLDefinitions);
 
-		// add named configs to the list in the correct preSorted order
+		// add named definitions to the list in the correct preSorted order
 
 		for (Map.Entry<String, Integer> entry : namedMap.entrySet()) {
 			String key = entry.getKey();
-			newConfigList.add(configMap.get(key));
+			webXMLDefinitionList.add(configMap.get(key));
 		}
 
-		// add configs that are both anonymous and unordered, to the list in
+		// add definitions that are both anonymous and unordered, to the list in
 		// their original, incoming order
 
-		for (WebXMLDefinition config : anonAndUnordered) {
-			newConfigList.add(config);
+		for (WebXMLDefinition webXMLDefinition : anonymousAndUnordered) {
+			webXMLDefinitionList.add(webXMLDefinition);
 		}
 
-		return newConfigList;
+		return webXMLDefinitionList;
+	}
+
+	private static Map<String, Integer> _sortDescendingByValue(
+		Map<String, Integer> map) {
+
+		List<Map.Entry<String, Integer>> list = new LinkedList<>(
+			map.entrySet());
+
+		Collections.sort(list, _COMPARATOR);
+
+		Map<String, Integer> result = new LinkedHashMap<>();
+
+		for (Map.Entry<String, Integer> entry : list) {
+			result.put(entry.getKey(), entry.getValue());
+		}
+
+		return result;
 	}
 
 	private static final MapEntryComparator _COMPARATOR =
