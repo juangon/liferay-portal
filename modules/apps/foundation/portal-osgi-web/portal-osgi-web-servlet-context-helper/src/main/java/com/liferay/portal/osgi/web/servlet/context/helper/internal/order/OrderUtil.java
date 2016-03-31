@@ -116,14 +116,14 @@ public class OrderUtil {
 		return orderedNames;
 	}
 
-	private static void _checkForBothBeforeAndAfter(WebXMLDefinition config)
+	private static void _checkForBothBeforeAndAfter(WebXMLDefinition webXMLDefinition)
 		throws OrderBeforeAndAfterException {
 
-		String configName = config.getFragmentName();
-		Order configOrdering = config.getOrdering();
+		String fragmentName = webXMLDefinition.getFragmentName();
+		Order ordering = webXMLDefinition.getOrder();
 
 		EnumMap<Order.Path, String[]> orderingRoutes =
-			configOrdering.getRoutes();
+			ordering.getRoutes();
 
 		HashMap<String, Integer> map = new HashMap<>();
 
@@ -163,7 +163,7 @@ public class OrderUtil {
 
 		for (String name : namesToCheck) {
 			if (map.get(name) > 1) {
-				throw new OrderBeforeAndAfterException(configName, name);
+				throw new OrderBeforeAndAfterException(fragmentName, name);
 			}
 		}
 	}
@@ -299,8 +299,8 @@ public class OrderUtil {
 		String config1Name = config1.getFragmentName();
 		String config2Name = config2.getFragmentName();
 
-		Order config1Ordering = config1.getOrdering();
-		Order config2Ordering = config2.getOrdering();
+		Order config1Ordering = config1.getOrder();
+		Order config2Ordering = config2.getOrder();
 
 		if (config1Ordering.isOrdered() && !config2Ordering.isOrdered()) {
 			EnumMap<Path, String[]> routes = config1Ordering.getRoutes();
@@ -349,7 +349,7 @@ public class OrderUtil {
 		throws OrderCircularDependencyException {
 
 		String configName = config.getFragmentName();
-		Order configOrdering = config.getOrdering();
+		Order configOrdering = config.getOrder();
 
 		EnumMap<Order.Path, String[]> configOrderingRoutes =
 			configOrdering.getRoutes();
@@ -367,7 +367,7 @@ public class OrderUtil {
 					continue;
 				}
 
-				Order otherConfigOrdering = otherConfig.getOrdering();
+				Order otherConfigOrdering = otherConfig.getOrder();
 
 				EnumMap<Order.Path, String[]> otherConfigOrderingRoutes =
 					otherConfigOrdering.getRoutes();
@@ -450,7 +450,7 @@ public class OrderUtil {
 						break;
 					}
 
-					Order ordering = configs[j].getOrdering();
+					Order ordering = configs[j].getOrder();
 
 					if (ordering.isBefore(configName)) {
 
@@ -512,7 +512,7 @@ public class OrderUtil {
 		Map<String, Integer> namedMap = new LinkedHashMap<>();
 
 		for (WebXMLDefinition config : configs) {
-			Order configOrdering = config.getOrdering();
+			Order configOrdering = config.getOrder();
 
 			EnumMap<Order.Path, String[]> configOrderingRoutes =
 				configOrdering.getRoutes();

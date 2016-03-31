@@ -44,7 +44,7 @@ public class WebXMLDefinition {
 		webXMLDefinition.setJspTaglibMappings(_jspTaglibMappings);
 		webXMLDefinition.setListenerDefinitions(_listenerDefinitions);
 		webXMLDefinition.setMetadataComplete(_metadataComplete);
-		webXMLDefinition.setOrdering(_ordering);
+		webXMLDefinition.setOrder(_order);
 		webXMLDefinition.setServletDefinitions(_servletDefinitions);
 
 		return webXMLDefinition;
@@ -78,8 +78,8 @@ public class WebXMLDefinition {
 		return _listenerDefinitions;
 	}
 
-	public Order getOrdering() {
-		return _ordering;
+	public Order getOrder() {
+		return _order;
 	}
 
 	public Map<String, ServletDefinition> getServletDefinitions() {
@@ -140,8 +140,8 @@ public class WebXMLDefinition {
 		_metadataComplete = metadataComplete;
 	}
 
-	public void setOrdering(Order ordering) {
-		_ordering = ordering;
+	public void setOrder(Order order) {
+		_order = order;
 	}
 
 	public void setServletDefinition(
@@ -164,7 +164,7 @@ public class WebXMLDefinition {
 	private final Map<String, String> _jspTaglibMappings = new HashMap<>();
 	private List<ListenerDefinition> _listenerDefinitions = new ArrayList<>();
 	private boolean _metadataComplete;
-	private Order _ordering = new OrderImpl();
+	private Order _order = new OrderImpl();
 	private Map<String, ServletDefinition> _servletDefinitions =
 		new HashMap<>();
 

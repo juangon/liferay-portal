@@ -243,11 +243,11 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 			}
 		}
 		else if (qName.equals("ordering")) {
-			if (_ordering == null) {
+			if (_order == null) {
 				return;
 			}
 
-			EnumMap<Path, String[]> routes = _ordering.getRoutes();
+			EnumMap<Path, String[]> routes = _order.getRoutes();
 
 			List<String> beforeNames = new ArrayList<>(2);
 
@@ -277,13 +277,13 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 				routes.put(Path.AFTER, afterNames.toArray(new String[0]));
 			}
 
-			_ordering.setRoutes(routes);
+			_order.setRoutes(routes);
 
-			_webXMLDefinition.setOrdering(_ordering);
+			_webXMLDefinition.setOrder(_order);
 
 			_afterName = null;
 			_beforeName = null;
-			_ordering = null;
+			_order = null;
 			_othersAfterSet = false;
 			_othersBeforeSet = false;
 		}
@@ -471,7 +471,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 			_listenerDefinition = new ListenerDefinition();
 		}
 		else if (qName.equals("ordering")) {
-			_ordering = new OrderImpl();
+			_order = new OrderImpl();
 		}
 		else if (qName.equals("servlet")) {
 			_servletDefinition = new ServletDefinition();
@@ -851,7 +851,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 	private ListenerDefinition _listenerDefinition;
 	private final Logger _logger;
 	private String _name;
-	private Order _ordering;
+	private Order _order;
 	private boolean _othersAbsoluteOrderingSet;
 	private boolean _othersAfterSet;
 	private boolean _othersBeforeSet;

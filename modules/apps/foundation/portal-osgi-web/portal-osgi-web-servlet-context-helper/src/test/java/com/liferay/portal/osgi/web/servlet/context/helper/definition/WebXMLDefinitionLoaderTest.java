@@ -632,7 +632,7 @@ public class WebXMLDefinitionLoaderTest {
 		}
 
 		if (ordering != null) {
-			Order definitionOrdering = webXMLDefinition.getOrdering();
+			Order definitionOrdering = webXMLDefinition.getOrder();
 
 			EnumMap<Order.Path, String[]> routes =
 				definitionOrdering.getRoutes();
