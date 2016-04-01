@@ -47,7 +47,6 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PortletKeys;
 import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.ReflectionUtil;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -1023,27 +1022,15 @@ public class PortletTracker
 
 		BundleContext bundleContext = bundle.getBundleContext();
 
-		ServiceTracker
-			<ServletContextHelperRegistration, ServletContextHelperRegistration>
-				serviceTracker = new ServiceTracker<>(
-					bundleContext, ServletContextHelperRegistration.class,
-					null);
+		ServiceReference<ServletContextHelperRegistration> serviceReference =
+			bundleContext.getServiceReference(
+				ServletContextHelperRegistration.class);
 
-		serviceTracker.open();
+		serviceRegistrations.
+			setServletContextHelperRegistrationServiceReference(
+				serviceReference);
 
-		try {
-			ServletContextHelperRegistration servletContextHelperRegistration =
-				serviceTracker.waitForService(2000);
-
-			serviceRegistrations.
-				setServletContextHelperRegistrationServiceReference(
-					serviceTracker.getServiceReference());
-
-			return servletContextHelperRegistration;
-		}
-		catch (InterruptedException e) {
-			return ReflectionUtil.throwException(e);
-		}
+		return bundleContext.getService(serviceReference);
 	}
 
 	protected void readResourceActions(
