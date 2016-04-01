@@ -110,8 +110,6 @@ public class ServletContextHelperRegistrationImpl
 		_servletContextListenerServiceRegistration =
 			createServletContextListener();
 
-		registerServletContext();
-
 		_defaultServletServiceRegistration = createDefaultServlet();
 
 		_jspServletServiceRegistration = createJspServlet();
@@ -124,7 +122,6 @@ public class ServletContextHelperRegistrationImpl
 
 	@Override
 	public void close() {
-		_servletContextRegistration.unregister();
 
 		_servletContextHelperServiceRegistration.unregister();
 
@@ -342,22 +339,6 @@ public class ServletContextHelperRegistrationImpl
 		return contextPath.replaceAll("[^a-zA-Z0-9\\-]", "");
 	}
 
-	protected void registerServletContext() {
-		ServletContext servletContext =
-			_customServletContextHelper.getServletContext();
-
-		Dictionary<String, Object> properties = new HashMapDictionary<>();
-
-		properties.put(
-			"osgi.web.contextname", servletContext.getServletContextName());
-		properties.put("osgi.web.contextpath", servletContext.getContextPath());
-		properties.put("osgi.web.symbolicname", _bundle.getSymbolicName());
-		properties.put("osgi.web.version", _bundle.getVersion());
-
-		_servletContextRegistration = _bundleContext.registerService(
-			ServletContext.class, servletContext, properties);
-	}
-
 	private void _collectContextInitParams(
 		Dictionary<String, Object> properties) {
 
@@ -409,8 +390,7 @@ public class ServletContextHelperRegistrationImpl
 		_servletContextHelperServiceRegistration;
 	private final ServiceRegistration<ServletContextListener>
 		_servletContextListenerServiceRegistration;
-	private final String _servletContextName;
-	private ServiceRegistration<ServletContext> _servletContextRegistration;
+	private final String _servletContextName;	
 	private final boolean _wabShapedBundle;
 
 	private static class ContextInitParamHandler extends DefaultHandler {
