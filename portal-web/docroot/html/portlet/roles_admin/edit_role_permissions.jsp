@@ -291,6 +291,8 @@ portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 		return notification;
 	}
 
+	var originalSelectedValues = [];
+
 	function processNavigationLinks() {
 		var permissionContainerNode = A.one('#<portlet:namespace />permissionContainer');
 
@@ -330,6 +332,10 @@ portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 								permissionContentContainerNode.empty();
 
 								permissionContentContainerNode.setContent(responseData);
+
+								var checkedNodes = permissionContentContainerNode.all(':checked');
+
+								originalSelectedValues = checkedNodes.val();
 							}
 						}
 					}
@@ -339,6 +345,37 @@ portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 		);
 	}
 
+	function processTargetCheckboxes() {
+ 		var permissionContainerNode = A.one('#<portlet:namespace />permissionContainer');
+ 
+ 		permissionContainerNode.delegate(
+ 			'change',
+ 			function(event) {
+ 				var unselectedTargetsNode = permissionContainerNode.one('#<portlet:namespace />unselectedTargets');
+ 
+ 				var unselectedTargets = unselectedTargetsNode.val().split(',');
+ 
+ 				var checkbox = event.currentTarget;
+ 
+ 				var value = checkbox.val();
+ 
+ 				if (checkbox.get('checked')) {
+ 					var index = unselectedTargets.indexOf(value);
+ 
+ 					if (index != -1) {
+ 						unselectedTargets.splice(index, 1);
+ 					}
+ 				}
+ 				else if (originalSelectedValues.indexOf(value) != -1) {
+ 					unselectedTargets.push(value);
+ 				}
+ 
+ 				unselectedTargetsNode.val(unselectedTargets.join(','));
+ 			},
+ 			':checkbox'
+ 		);
+ 	}
+ 
 	Liferay.on(
 		'<portlet:namespace />selectGroup',
 		function(event) {
