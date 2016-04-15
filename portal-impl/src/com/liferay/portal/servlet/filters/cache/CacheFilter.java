@@ -336,10 +336,8 @@ public class CacheFilter extends BasePortalFilter {
 	protected boolean isCacheableResponse(
 		BufferCacheServletResponse bufferCacheServletResponse) {
 
-		if (((bufferCacheServletResponse.getStatus() ==
-				HttpServletResponse.SC_OK) ||
-			 (bufferCacheServletResponse.getStatus() ==
-				 HttpServletResponse.SC_NOT_MODIFIED)) &&
+		if ((bufferCacheServletResponse.getStatus() ==
+				HttpServletResponse.SC_OK) &&
 			(bufferCacheServletResponse.getBufferSize() <
 				PropsValues.CACHE_CONTENT_THRESHOLD_SIZE)) {
 
