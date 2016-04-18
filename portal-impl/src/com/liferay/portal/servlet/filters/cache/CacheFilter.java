@@ -97,6 +97,7 @@ public class CacheFilter extends BasePortalFilter {
 		// Url
 
 		String url = PortalUtil.getCurrentCompleteURL(request);
+
 		sb.append(HttpUtil.getProtocol(request));
 		sb.append(Http.PROTOCOL_DELIMITER);
 		sb.append(HttpUtil.getDomain(url));
@@ -112,7 +113,7 @@ public class CacheFilter extends BasePortalFilter {
 				JavaConstants.JAVAX_SERVLET_FORWARD_QUERY_STRING);
 
 			if (queryString == null) {
-				int pos = url.indexOf(StringPool.QUESTION);
+				int pos = url.indexOf(CharPool.QUESTION);
 
 				if (pos > -1) {
 					queryString = url.substring(pos + 1);
