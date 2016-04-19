@@ -96,11 +96,13 @@ public class CacheFilter extends BasePortalFilter {
 
 		// Url
 
-		String url = PortalUtil.getCurrentCompleteURL(request);
-
 		sb.append(HttpUtil.getProtocol(request));
 		sb.append(Http.PROTOCOL_DELIMITER);
+
+		String url = PortalUtil.getCurrentCompleteURL(request);
+
 		sb.append(HttpUtil.getDomain(url));
+
 		sb.append(request.getContextPath());
 		sb.append(request.getServletPath());
 		sb.append(request.getPathInfo());
