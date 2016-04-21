@@ -6383,7 +6383,7 @@ public class PortalImpl implements Portal {
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			group.getCompanyId(), portletDisplay.getId());
 
-		if (portlet.isSystem() || !portlet.isUseDefaultTemplate()) {
+		if (portlet.isSystem()) {
 			return false;
 		}
 
