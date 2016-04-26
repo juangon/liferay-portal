@@ -138,11 +138,16 @@ public class JspJavaFileObjectResolver implements JavaFileObjectResolver {
 
 		String fileName = url.getFile();
 
+		_logger.log(Logger.LOG_ERROR, "------File:------>" + url.toExternalForm());
+		_logger.log(Logger.LOG_ERROR, "------File proto:------>" + url.getProtocol());
+
 		if (urlConnection instanceof JarURLConnection) {
 			JarURLConnection jarURLConnection = (JarURLConnection)urlConnection;
 
 			URL jarFileURL = jarURLConnection.getJarFileURL();
 
+			_logger.log(Logger.LOG_ERROR, "------JarFileURL------>" + jarFileURL.getFile());
+			
 			fileName = jarFileURL.getFile();
 		}
 		else if (Objects.equals(url.getProtocol(), "vfs")) {
@@ -199,6 +204,8 @@ public class JspJavaFileObjectResolver implements JavaFileObjectResolver {
 		String protocol = resourceURL.getProtocol();
 
 		String className = getClassName(resourceName);
+
+		_logger.log(Logger.LOG_ERROR, "---------Protocol------------->" + protocol);
 
 		if (protocol.equals("bundle") || protocol.equals("bundleresource")) {
 			return new BundleJavaFileObject(className, resourceURL);
