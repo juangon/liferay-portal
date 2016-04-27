@@ -49,10 +49,7 @@ define("frontend-js-spa-web@1.0.6/liferay/screen/RenderURLScreen.es", ['exports'
 		function RenderURLScreen() {
 			_classCallCheck(this, RenderURLScreen);
 
-			var _this = _possibleConstructorReturn(this, _EventScreen.call(this));
-
-			_this.cacheable = true;
-			return _this;
+			return _possibleConstructorReturn(this, _EventScreen.call(this));
 		}
 
 		return RenderURLScreen;

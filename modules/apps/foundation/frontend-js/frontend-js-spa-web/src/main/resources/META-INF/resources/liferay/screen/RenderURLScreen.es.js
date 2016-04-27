@@ -6,7 +6,7 @@ class RenderURLScreen extends EventScreen {
 	constructor() {
 		super();
 
-		this.cacheable = true;
+		//this.cacheable = true;
 	}
 }
 
