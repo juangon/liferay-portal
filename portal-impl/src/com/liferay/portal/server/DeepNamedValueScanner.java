@@ -424,6 +424,10 @@ public class DeepNamedValueScanner {
 
 		Class<?> targetClass = target.getClass();
 
+		if (!_isAcceptClass(targetClass)) {
+			return;
+		}
+
 		if (targetClass.isArray()) {
 			if (!_visitArrays) {
 				return;
@@ -494,10 +498,6 @@ public class DeepNamedValueScanner {
 
 	private void _scanObject(Object target) throws Exception {
 		Class<?> targetClass = target.getClass();
-
-		if (!_isAcceptClass(targetClass)) {
-			return;
-		}
 
 		while (targetClass != null) {
 			Field[] fields = targetClass.getDeclaredFields();
