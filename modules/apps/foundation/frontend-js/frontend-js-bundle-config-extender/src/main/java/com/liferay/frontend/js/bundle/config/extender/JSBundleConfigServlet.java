@@ -91,21 +91,21 @@ public class JSBundleConfigServlet extends HttpServlet {
 				URL url = jsConfig.getURL();
 
 				try (InputStream inputStream = url.openStream()) {
-					servletOutputStream.println("try {");
+					printWriter.println("try {");
 
 					ServletContext servletContext =
 						jsConfig.getServletContext();
 
-					servletOutputStream.println(
+					printWriter.println(
 						"var MODULE_PATH = '" + PortalUtil.getPathProxy() +
 							servletContext.getContextPath() + "';");
 
 					StreamUtil.transfer(
 						inputStream, servletOutputStream, false);
 
-					servletOutputStream.println("} catch (error) {");
-					servletOutputStream.println("console.error(error);");
-					servletOutputStream.println("}");
+					printWriter.println("} catch (error) {");
+					printWriter.println("console.error(error);");
+					printWriter.println("}");
 				}
 				catch (Exception e) {
 					_logger.log(Logger.LOG_ERROR, "Unable to open resource", e);
