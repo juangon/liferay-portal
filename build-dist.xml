@@ -1065,19 +1065,40 @@ release was successful.</echo>
 			</then>
 		</if>
 
-		<unzip
-			 dest="${app.server.parent.dir}"
-			 src="${app.server.parent.dir}/${app.server.glassfish.zip.name}"
-		>
-			<patternset
-				includes="glassfish3/glassfish/**,glassfishv3/glassfish/**"
-			/>
-			<mapper
-				type="regexp"
-				from="glassfishv?3/glassfish/(.*)"
-				to="${app.server.glassfish.dir}/\1"
-			/>
-		</unzip>
+		<if>
+			<equals arg1="${app.server.glassfish.version}" arg2="3.1.2.2" />
+			<then>
+
+				<unzip
+			 		dest="${app.server.parent.dir}"
+					src="${app.server.parent.dir}/${app.server.glassfish.zip.name}"
+				>
+					<patternset
+						includes="glassfish3/glassfish/**,glassfishv3/glassfish/**"
+					/>
+					<mapper
+						type="regexp"
+						from="glassfishv?3/glassfish/(.*)"
+						to="${app.server.glassfish.dir}/\1"
+					/>
+				</unzip>
+			</then>
+			<else>
+				<unzip
+			 		dest="${app.server.parent.dir}"
+					src="${app.server.parent.dir}/${app.server.glassfish.zip.name}"
+				>
+					<patternset
+						includes="glassfish4/glassfish/**"
+					/>
+					<mapper
+						type="regexp"
+						from="glassfish4/glassfish/(.*)"
+						to="${app.server.glassfish.dir}/\1"
+					/>
+				</unzip>
+			</else>
+		</if>
 
 		<if>
 			<equals arg1="${app.server.glassfish.version}" arg2="3.1.2.2" />

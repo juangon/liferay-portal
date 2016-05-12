@@ -31,6 +31,7 @@ import java.net.URLConnection;
 import java.nio.file.DirectoryStream;
 import java.nio.file.DirectoryStream.Filter;
 import java.nio.file.FileSystem;
+import java.nio.file.FileSystemNotFoundException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.spi.FileSystemProvider;
@@ -319,6 +320,10 @@ public class JspJavaFileObjectResolver implements JavaFileObjectResolver {
 						}
 					}
 				}
+			}
+			catch (FileSystemNotFoundException fsnfe) {
+				_logger.log(
+					Logger.LOG_WARNING, "FileSystemNotFound for " + url);
 			}
 			catch (IOException ioe) {
 				_logger.log(Logger.LOG_ERROR, ioe.getMessage(), ioe);
