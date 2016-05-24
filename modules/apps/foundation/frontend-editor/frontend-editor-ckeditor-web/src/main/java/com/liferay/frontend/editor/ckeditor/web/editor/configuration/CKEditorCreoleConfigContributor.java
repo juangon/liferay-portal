@@ -57,8 +57,11 @@ public class CKEditorCreoleConfigContributor
 			(Map<String, String>)inputEditorTaglibAttributes.get(
 				"liferay-ui:input-editor:fileBrowserParams");
 
-		String attachmentURLPrefix = fileBrowserParams.get(
-			"attachmentURLPrefix");
+		String attachmentURLPrefix = null;
+
+		if (fileBrowserParams != null) {
+			attachmentURLPrefix = fileBrowserParams.get("attachmentURLPrefix");
+		}
 
 		jsonObject.put("attachmentURLPrefix", attachmentURLPrefix);
 
@@ -180,7 +183,8 @@ public class CKEditorCreoleConfigContributor
 			(Map<String, String>)inputEditorTaglibAttributes.get(
 				"liferay-ui:input-editor:fileBrowserParams");
 
-		if (GetterUtil.getLong(
+		if ((fileBrowserParams != null) &&
+			GetterUtil.getLong(
 				fileBrowserParams.get("wikiPageResourcePrimKey")) > 0) {
 
 			return true;
