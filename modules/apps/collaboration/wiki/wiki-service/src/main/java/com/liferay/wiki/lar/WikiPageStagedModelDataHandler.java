@@ -186,7 +186,9 @@ public class WikiPageStagedModelDataHandler
 		ServiceContext serviceContext = portletDataContext.createServiceContext(
 			page);
 
-		serviceContext.setUuid(page.getUuid());
+		if (portletDataContext.isDataStrategyMirror()) {
+			serviceContext.setUuid(page.getUuid());
+		}
 
 		Map<Long, Long> nodeIds =
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
@@ -214,7 +216,9 @@ public class WikiPageStagedModelDataHandler
 			String pageResourceUuid = GetterUtil.getString(
 				pageElement.attributeValue("page-resource-uuid"));
 
-			if (Validator.isNotNull(pageResourceUuid)) {
+			if (Validator.isNotNull(pageResourceUuid) &&
+				portletDataContext.isDataStrategyMirror()) {
+
 				pageResource.setUuid(
 					pageElement.attributeValue("page-resource-uuid"));
 
