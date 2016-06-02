@@ -134,6 +134,11 @@ public class WikiNodeStagedModelDataHandler
 
 		if (portletDataContext.isDataStrategyMirror()) {
 			if (existingNode == null) {
+				existingNode = _wikiNodeLocalService.fetchNode(
+					portletDataContext.getScopeGroupId(), node.getName());
+			}
+
+			if (existingNode == null) {
 				serviceContext.setUuid(node.getUuid());
 
 				importedNode = _wikiNodeLocalService.addNode(
