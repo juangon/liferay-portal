@@ -354,21 +354,27 @@ portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
  				var unselectedTargetsNode = permissionContainerNode.one('#<portlet:namespace />unselectedTargets');
  
  				var unselectedTargets = unselectedTargetsNode.val().split(',');
+
+ 				var form = A.one(document.<portlet:namespace />fm);
+
+ 				form.all('input[type=checkbox]').each(
+ 					function(item, index) {
+ 						var checkbox = A.one(item);
  
- 				var checkbox = event.currentTarget;
- 
- 				var value = checkbox.val();
- 
- 				if (checkbox.get('checked')) {
- 					var index = unselectedTargets.indexOf(value);
- 
- 					if (index != -1) {
- 						unselectedTargets.splice(index, 1);
- 					}
- 				}
- 				else if (originalSelectedValues.indexOf(value) != -1) {
- 					unselectedTargets.push(value);
- 				}
+		 				var value = checkbox.val();
+		 
+		 				if (checkbox.get('checked')) {
+		 					var unselectedTargetIndex = unselectedTargets.indexOf(value);
+		 
+		 					if (unselectedTargetIndex != -1) {
+		 						unselectedTargets.splice(unselectedTargetIndex, 1);
+		 					}
+		 				}
+		 				else if (originalSelectedValues.indexOf(value) != -1) {
+		 					unselectedTargets.push(value);
+		 				}
+		 			}
+	 			);
  
  				unselectedTargetsNode.val(unselectedTargets.join(','));
  			},
