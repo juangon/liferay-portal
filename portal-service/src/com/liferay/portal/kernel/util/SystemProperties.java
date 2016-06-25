@@ -183,7 +183,7 @@ public class SystemProperties {
 	}
 
 	private static final Map<String, String> _properties =
-		new ConcurrentHashMap<>();
+		new ConcurrentHashMap<String, String>();
 
 	static {
 		Thread currentThread = Thread.currentThread();
