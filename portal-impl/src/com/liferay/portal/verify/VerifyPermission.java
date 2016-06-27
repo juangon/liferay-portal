@@ -395,7 +395,9 @@ public class VerifyPermission extends VerifyProcess {
 		sb.append("(select SUBSTR(ResourcePermission.primKey, 0,");
 		sb.append("INSTR(ResourcePermission.primKey, '_LAYOUT_') -1) from ");
 		sb.append("ResourcePermission where r1.resourcePermissionId = ");
-		sb.append("ResourcePermission.resourcePermissionId)");
+		sb.append("ResourcePermission.resourcePermissionId");
+		sb.append(" and ResourcePermission.primKey ");
+		sb.append("like '%_LAYOUT_%')");
 
 		runSQL(sb.toString());
 
