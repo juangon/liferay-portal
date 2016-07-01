@@ -113,6 +113,12 @@ public class DateUtil_IW {
 		return DateUtil.parseDate(pattern, dateString, locale);
 	}
 
+	public java.util.Date parseDate(java.lang.String pattern,
+		java.lang.String dateString, java.util.Locale locale,
+		java.util.TimeZone timeZone) throws java.text.ParseException {
+		return DateUtil.parseDate(pattern, dateString, locale, timeZone);
+	}
+
 	private DateUtil_IW() {
 	}
 
