@@ -745,10 +745,46 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 
 				script = updateTemplateScriptDateParseStatement(
 					ddmDateFieldName, language, script);
+
+				script = updateTemplateScriptDateGetDateStatement(
+					ddmDateFieldName, language, script);
 			}
 
 			updateTemplateScript(ddmTemplateId, script);
 		}
+	}
+
+	protected String updateTemplateScriptDateGetDateStatement(
+		String dateFieldName, String language, String script) {
+
+		StringBundler oldTemplateScriptSB = new StringBundler(3);
+		StringBundler newTemplateScriptSB = new StringBundler(5);
+
+		if (language.equals("ftl")) {
+			oldTemplateScriptSB.append("dateUtil.getDate\\(");
+			oldTemplateScriptSB.append("(.*)");
+			oldTemplateScriptSB.append("locale\\)");
+
+			newTemplateScriptSB.append("dateUtil.getDate(");
+			newTemplateScriptSB.append("$1");
+			newTemplateScriptSB.append("locale,");
+			newTemplateScriptSB.append("timeZoneUtil.");
+			newTemplateScriptSB.append("getTimeZone(\"UTC\"))");
+		}
+		else if (language.equals("vm")) {
+			oldTemplateScriptSB.append("dateUtil.getDate\\(");
+			oldTemplateScriptSB.append("(.*)");
+			oldTemplateScriptSB.append("locale\\)");
+
+			newTemplateScriptSB.append("dateUtil.getDate(");
+			newTemplateScriptSB.append("$1");
+			newTemplateScriptSB.append("locale,");
+			newTemplateScriptSB.append("\\$timeZoneUtil.");
+			newTemplateScriptSB.append("getTimeZone(\"UTC\"))");
+		}
+
+		return script.replaceAll(
+			oldTemplateScriptSB.toString(), newTemplateScriptSB.toString());
 	}
 
 	protected String updateTemplateScriptDateIfStatement(
@@ -798,7 +834,8 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 			newTemplateScriptSB.append(
 				"_DateObj = dateUtil.parseDate(\"yyyy-MM-dd\", ");
 			newTemplateScriptSB.append(dateFieldName);
-			newTemplateScriptSB.append("_Data, locale)>");
+			newTemplateScriptSB.append("_Data, locale, timeZoneUtil.");
+			newTemplateScriptSB.append("getTimeZone(\"UTC\"))>");
 		}
 		else if (language.equals("vm")) {
 			dateFieldName =
@@ -816,7 +853,8 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 			newTemplateScriptSB.append(
 				"_DateObj = \\$dateUtil.parseDate(\"yyyy-MM-dd\", ");
 			newTemplateScriptSB.append(dateFieldName);
-			newTemplateScriptSB.append("_Data, \\$locale))");
+			newTemplateScriptSB.append("_Data, \\$locale, \\$timeZoneUtil.");
+			newTemplateScriptSB.append("getTimeZone(\"UTC\")))");
 		}
 
 		return script.replaceAll(
