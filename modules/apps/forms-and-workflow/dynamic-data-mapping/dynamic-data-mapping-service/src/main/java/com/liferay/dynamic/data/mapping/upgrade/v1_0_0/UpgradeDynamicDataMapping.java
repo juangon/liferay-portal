@@ -745,10 +745,46 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 
 				script = updateTemplateScriptDateParseStatement(
 					ddmDateFieldName, language, script);
+
+				script = updateTemplateScriptDateGetDateStatement(
+					language, script);
 			}
 
 			updateTemplateScript(ddmTemplateId, script);
 		}
+	}
+
+	protected String updateTemplateScriptDateGetDateStatement(
+		String language, String script) {
+
+		StringBundler oldTemplateScriptSB = new StringBundler(5);
+		StringBundler newTemplateScriptSB = new StringBundler(3);
+
+		if (language.equals("ftl")) {
+			oldTemplateScriptSB.append("dateUtil.getDate\\(");
+			oldTemplateScriptSB.append("(.*)");
+			oldTemplateScriptSB.append("locale[,\\s]*");
+			oldTemplateScriptSB.append("timeZoneUtil.");
+			oldTemplateScriptSB.append("getTimeZone\\(\"UTC\"\\)\\s*\\)");
+
+			newTemplateScriptSB.append("dateUtil.getDate(");
+			newTemplateScriptSB.append("$1");
+			newTemplateScriptSB.append("locale)");
+		}
+		else if (language.equals("vm")) {
+			oldTemplateScriptSB.append("dateUtil.getDate\\(");
+			oldTemplateScriptSB.append("(.*)");
+			oldTemplateScriptSB.append("\\$locale[,\\s]*");
+			oldTemplateScriptSB.append("\\$timeZoneUtil.");
+			oldTemplateScriptSB.append("getTimeZone\\(\"UTC\"\\)\\s*\\)");
+
+			newTemplateScriptSB.append("dateUtil.getDate(");
+			newTemplateScriptSB.append("$1");
+			newTemplateScriptSB.append("\\$locale)");
+		}
+
+		return script.replaceAll(
+			oldTemplateScriptSB.toString(), newTemplateScriptSB.toString());
 	}
 
 	protected String updateTemplateScriptDateIfStatement(
