@@ -254,14 +254,25 @@ public class DateUtil {
 			String pattern, String dateString, Locale locale)
 		throws ParseException {
 
+		return parseDate(pattern, dateString, locale, null);
+	}
+
+	public static Date parseDate(
+			String pattern, String dateString, Locale locale, TimeZone timeZone)
+		throws ParseException {
+
 		DateFormat dateFormat = null;
 
 		if (Validator.isNull(pattern)) {
 			dateFormat = DateFormat.getDateInstance(DateFormat.SHORT, locale);
+
+			if (timeZone != null) {
+				dateFormat.setTimeZone(timeZone);
+			}
 		}
 		else {
 			dateFormat = DateFormatFactoryUtil.getSimpleDateFormat(
-				pattern, locale);
+				pattern, locale, timeZone);
 		}
 
 		return dateFormat.parse(dateString);
