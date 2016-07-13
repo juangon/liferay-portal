@@ -381,13 +381,21 @@ public class VerifyPermission extends VerifyProcess {
 		throws Exception {
 
 		try {
-			runSQL(
-				"create table ResourcePermissionPlid (resourcePermissionId " +
-					"LONG null, plid LONG null)");
+			runSQL("drop table ResourcePermissionPlid");
 		}
 		catch (SQLException sqle) {
-			runSQL("delete from ResourcePermissionPlid");
+			if (_log.isDebugEnabled()) {
+				_log.debug(sqle, sqle);
+			}
 		}
+
+		runSQL(
+			"create table ResourcePermissionPlid(resourcePermissionId " +
+				"LONG null primary key, plid LONG null)");
+
+		runSQL(
+			"create index IX_TEMP_RESOURCE_PERMISSION_PLID on " +
+				"ResourcePermissionPlid(plid)");
 
 		StringBundler sb = new StringBundler(6);
 
