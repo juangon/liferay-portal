@@ -139,14 +139,6 @@ public class CacheFilter extends BasePortalFilter {
 
 		sb.append(languageId);
 
-		// User agent
-
-		String userAgent = GetterUtil.getString(
-			request.getHeader(HttpHeaders.USER_AGENT));
-
-		sb.append(StringPool.POUND);
-		sb.append(StringUtil.toLowerCase(userAgent).hashCode());
-
 		// Gzip compression
 
 		sb.append(StringPool.POUND);
