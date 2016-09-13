@@ -85,6 +85,14 @@ public class PortletSessionTracker {
 		}
 	}
 
+	public static void removeByContextPath(String contextPath) {
+		for (String sessionId : _sessions.keySet()) {
+			Map<String, HttpSession> sessions = _sessions.get(sessionId);
+
+			sessions.remove(contextPath);
+		}
+	}
+
 	private static final ConcurrentMap<String, Map<String, HttpSession>>
 		_sessions = new ConcurrentHashMap<>();
 
