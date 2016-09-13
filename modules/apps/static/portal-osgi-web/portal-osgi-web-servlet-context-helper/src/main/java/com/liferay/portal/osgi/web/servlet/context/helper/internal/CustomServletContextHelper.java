@@ -15,6 +15,7 @@
 package com.liferay.portal.osgi.web.servlet.context.helper.internal;
 
 import com.liferay.osgi.util.BundleUtil;
+import com.liferay.portal.kernel.servlet.PortletSessionTracker;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -63,6 +64,9 @@ public class CustomServletContextHelper
 
 	@Override
 	public void contextDestroyed(ServletContextEvent servletContextEvent) {
+		PortletSessionTracker.removeByContextPath(
+			_servletContext.getContextPath());
+
 		_servletContext = null;
 	}
 
