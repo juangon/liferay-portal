@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.security.auth.session.AuthenticatedSessionManag
 import com.liferay.portal.kernel.security.pacl.DoPrivileged;
 import com.liferay.portal.kernel.service.CompanyLocalServiceUtil;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
+import com.liferay.portal.kernel.servlet.PortletSessionTracker;
 import com.liferay.portal.kernel.util.CookieKeys;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
@@ -380,6 +381,8 @@ public class AuthenticatedSessionManagerImpl
 			protectedAttributes.put(
 				protectedAttributeName, protectedAttributeValue);
 		}
+
+		PortletSessionTracker.invalidate(session.getId());
 
 		session.invalidate();
 
