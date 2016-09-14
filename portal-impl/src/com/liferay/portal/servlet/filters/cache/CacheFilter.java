@@ -74,6 +74,10 @@ public class CacheFilter extends BasePortalFilter {
 
 			_log.error("Cache pattern is invalid");
 		}
+
+		_useDifferentCachePerUseAgent = GetterUtil.getBoolean(
+			filterConfig.getInitParameter("useDifferentCachePerUseAgent"),
+			false);
 	}
 
 	@Override
@@ -138,6 +142,16 @@ public class CacheFilter extends BasePortalFilter {
 		}
 
 		sb.append(languageId);
+
+		// User agent
+
+		if (_useDifferentCachePerUseAgent) {
+			String userAgent = GetterUtil.getString(
+				request.getHeader(HttpHeaders.USER_AGENT));
+
+			sb.append(StringPool.POUND);
+			sb.append(StringUtil.toLowerCase(userAgent).hashCode());
+		}
 
 		// Gzip compression
 
@@ -487,5 +501,6 @@ public class CacheFilter extends BasePortalFilter {
 	private static final Log _log = LogFactoryUtil.getLog(CacheFilter.class);
 
 	private int _pattern;
+	private boolean _useDifferentCachePerUseAgent;
 
 }
