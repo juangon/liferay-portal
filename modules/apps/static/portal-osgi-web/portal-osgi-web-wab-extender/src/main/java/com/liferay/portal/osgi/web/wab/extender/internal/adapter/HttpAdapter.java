@@ -62,6 +62,8 @@ public class HttpAdapter {
 			@Override
 			public void init(ServletConfig servletConfig) {
 				_servletConfig = servletConfig;
+
+				registerHttpSessionListener();
 			}
 
 			private ServletConfig _servletConfig;
