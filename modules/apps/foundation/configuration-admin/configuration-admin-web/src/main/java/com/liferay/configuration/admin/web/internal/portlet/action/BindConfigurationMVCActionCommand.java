@@ -23,10 +23,12 @@ import com.liferay.configuration.admin.web.internal.util.ResourceBundleLoaderPro
 import com.liferay.dynamic.data.mapping.form.values.factory.DDMFormValuesFactory;
 import com.liferay.dynamic.data.mapping.model.DDMForm;
 import com.liferay.dynamic.data.mapping.storage.DDMFormValues;
+import com.liferay.portal.configuration.persistence.listener.ConfigurationModelListenerException;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.ResourceBundleLoader;
@@ -131,7 +133,17 @@ public class BindConfigurationMVCActionCommand implements MVCActionCommand {
 			properties.put(ConfigurationAdmin.SERVICE_FACTORYPID, factoryPid);
 		}
 
-		configureTargetService(configurationModel, configuration, properties);
+		try {
+			configureTargetService(
+				configurationModel, configuration, properties);
+		}
+		catch (ConfigurationModelListenerException cmle) {
+			SessionErrors.add(
+				actionRequest, ConfigurationModelListenerException.class, cmle);
+
+			actionResponse.setRenderParameter(
+				"mvcRenderCommandName", "/edit_configuration");
+		}
 
 		return true;
 	}
@@ -139,7 +151,7 @@ public class BindConfigurationMVCActionCommand implements MVCActionCommand {
 	protected void configureTargetService(
 			ConfigurationModel configurationModel, Configuration configuration,
 			Dictionary<String, Object> properties)
-		throws PortletException {
+		throws ConfigurationModelListenerException, PortletException {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Properties: " + properties);
@@ -221,6 +233,9 @@ public class BindConfigurationMVCActionCommand implements MVCActionCommand {
 			}
 
 			configuration.update(configuredProperties);
+		}
+		catch (ConfigurationModelListenerException cmle) {
+			throw cmle;
 		}
 		catch (IOException ioe) {
 			throw new PortletException(ioe);
