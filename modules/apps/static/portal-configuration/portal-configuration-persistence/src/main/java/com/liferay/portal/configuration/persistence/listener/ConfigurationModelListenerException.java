@@ -29,8 +29,7 @@ public class ConfigurationModelListenerException extends IOException {
 
 		super(
 			String.format(
-				"The listener %s encountered an error while saving the " +
-					"configuration %s.",
+				"The listener %s was unable to save configuration %s.",
 				listenerClass.getName(), configurationClass.getName()));
 
 		this.causeMessage = causeMessage;
