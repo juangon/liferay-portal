@@ -89,9 +89,6 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 			return _request.getAttribute(name);
 		}
 
-		/*HttpServletRequest originalServletRequest =
-			PortalUtil.getOriginalServletRequest(_request);*/
-
 		if (name.equals(JavaConstants.JAVAX_SERVLET_FORWARD_CONTEXT_PATH)) {
 			if (_named) {
 				return null;
