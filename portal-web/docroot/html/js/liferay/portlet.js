@@ -535,31 +535,33 @@
 					);
 				}
 
-				Liferay.fire(
-					'portletReady',
-					{
-						portlet: portlet,
-						portletId: portletId
-					}
-				);
+			}
 
-				var list = instance.list;
+			Liferay.fire(
+				'portletReady',
+				{
+					portlet: portlet,
+					portletId: portletId
+				}
+			);
 
-				var index = arrayIndexOf(list, portletId);
+			var list = instance.list;
 
-				if (index > -1) {
-					list.splice(index, 1);
+			var index = arrayIndexOf(list, portletId);
 
-					if (!list.length) {
-						Liferay.fire(
-							'allPortletsReady',
-							{
-								portletId: portletId
-							}
-						);
-					}
+			if (index > -1) {
+				list.splice(index, 1);
+
+				if (!list.length) {
+					Liferay.fire(
+						'allPortletsReady',
+						{
+							portletId: portletId
+						}
+					);
 				}
 			}
+			
 		},
 		['aui-base', 'aui-timer', 'event-move']
 	);
