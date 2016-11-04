@@ -161,9 +161,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		else if (qName.equals("filter-class")) {
 			String filterClassName = String.valueOf(_stack.pop());
 
-			Filter filter = _getFilterInstance(filterClassName.trim());
-
-			_filterDefinition.setFilter(filter);
+			_setFilter(_filterDefinition, filterClassName.trim());
 		}
 		else if (qName.equals("filter-mapping")) {
 			Map<String, FilterDefinition> filterDefinitions =
@@ -182,7 +180,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 					servletNames.add(_filterMapping.servletName);
 				}
 
-				filterDefinition.setURLPatterns(_filterMapping.urlPatterns);
+				_setUrlPatterns(filterDefinition, _filterMapping.urlPatterns);
 			}
 
 			_filterMapping = null;
@@ -249,10 +247,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		else if (qName.equals("listener-class")) {
 			String listenerClassName = String.valueOf(_stack.pop());
 
-			EventListener eventListener = _getListenerInstance(
-				listenerClassName);
-
-			_listenerDefinition.setEventListener(eventListener);
+			_setListener(_listenerDefinition, listenerClassName);
 		}
 		else if (qName.equals("name")) {
 			String name = String.valueOf(_stack.pop());
@@ -349,9 +344,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		else if (qName.equals("servlet-class")) {
 			String servletClassName = String.valueOf(_stack.pop());
 
-			Servlet servlet = _getServletInstance(servletClassName.trim());
-
-			_servletDefinition.setServlet(servlet);
+			_setServlet(_servletDefinition, servletClassName.trim());
 		}
 		else if (qName.equals("servlet-mapping")) {
 			Map<String, ServletDefinition> servletDefinitions =
@@ -361,7 +354,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 				_servletMapping.servletName);
 
 			if (servletDefinition != null) {
-				servletDefinition.setURLPatterns(_servletMapping.urlPatterns);
+				_setUrlPatterns(servletDefinition, _servletMapping.urlPatterns);
 			}
 
 			_servletMapping = null;
@@ -481,7 +474,7 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 
 		BundleWiring bundleWiring = _bundle.adapt(BundleWiring.class);
 
-		WebXMLDefinition webXMLDefinitionAnnotation = new WebXMLDefinition();
+		WebXMLDefinition annotationWebXMLDefinition = new WebXMLDefinition();
 
 		Collection<String> classResources = bundleWiring.listResources(
 			"/", "*.class", BundleWiring.LISTRESOURCES_RECURSE);
@@ -491,9 +484,9 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 		}
 
 		_collectAnnotatedClasses(
-			webXMLDefinitionAnnotation, classResources, _bundle);
+			annotationWebXMLDefinition, classResources, _bundle);
 
-		webXMLDefinitions.add(webXMLDefinitionAnnotation);
+		webXMLDefinitions.add(annotationWebXMLDefinition);
 
 		List<WebXMLDefinition> orderedWebXMLDefinitions = new ArrayList<>();
 
@@ -904,16 +897,9 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 				servletDefinition.setAsyncSupported(
 					webServlet.asyncSupported());
 
-				WebInitParam[] initParams = webServlet.initParams();
-
-				if (!ArrayUtil.isEmpty(initParams)) {
-					Map<String, String> initParameters =
-						servletDefinition.getInitParameters();
-
-					for (WebInitParam initParam : initParams) {
-						initParameters.put(initParam.name(), initParam.value());
-					}
-				}
+				_setInitParams(
+					webServlet.initParams(),
+					servletDefinition.getInitParameters());
 
 				String name = webServlet.name();
 
@@ -925,33 +911,12 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 						annotatedClass.getCanonicalName());
 				}
 
-				//Value and urlPatterns should be checked in this order
+				_setUrlPatterns(
+					servletDefinition, webServlet.value(),
+					webServlet.urlPatterns());
 
-				String[] value = webServlet.value();
-
-				if (!ArrayUtil.isEmpty(value)) {
-					for (String urlPattern : value) {
-						servletDefinition.addURLPattern(urlPattern);
-					}
-				}
-
-				String[] urlPatterns = webServlet.urlPatterns();
-
-				if (!ArrayUtil.isEmpty(urlPatterns)) {
-					if (ListUtil.isNotEmpty(
-							servletDefinition.getURLPatterns())) {
-
-						throw new IllegalStateException(
-							"Cannot declare both value and urlPatterns");
-					}
-
-					for (String urlPattern : urlPatterns) {
-						servletDefinition.addURLPattern(urlPattern);
-					}
-				}
-
-				servletDefinition.setServlet(
-					_getServletInstance(annotatedClass.getCanonicalName()));
+				_setServlet(
+					servletDefinition, annotatedClass.getCanonicalName());
 
 				webXMLDefinitionAnnotation.setServletDefinition(
 					servletDefinition.getName(), servletDefinition);
@@ -972,19 +937,11 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 					}
 				}
 
-				filterDefinition.setFilter(
-					_getFilterInstance(annotatedClass.getCanonicalName()));
+				_setFilter(filterDefinition, annotatedClass.getCanonicalName());
 
-				WebInitParam[] initParams = webFilter.initParams();
-
-				if (!ArrayUtil.isEmpty(initParams)) {
-					Map<String, String> initParameters =
-						filterDefinition.getInitParameters();
-
-					for (WebInitParam initParam : initParams) {
-						initParameters.put(initParam.name(), initParam.value());
-					}
-				}
+				_setInitParams(
+					webFilter.initParams(),
+					filterDefinition.getInitParameters());
 
 				String filterName = webFilter.filterName();
 
@@ -1003,30 +960,9 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 					}
 				}
 
-				//Value and urlPatterns should be checked in this order
-
-				String[] value = webFilter.value();
-
-				if (!ArrayUtil.isEmpty(value)) {
-					for (String urlPattern : value) {
-						filterDefinition.addURLPattern(urlPattern);
-					}
-				}
-
-				String[] urlPatterns = webFilter.urlPatterns();
-
-				if (!ArrayUtil.isEmpty(urlPatterns)) {
-					if (ListUtil.isNotEmpty(
-							filterDefinition.getURLPatterns())) {
-
-						throw new IllegalStateException(
-							"Cannot declare both value and urlPatterns");
-					}
-
-					for (String urlPattern : urlPatterns) {
-						filterDefinition.addURLPattern(urlPattern);
-					}
-				}
+				_setUrlPatterns(
+					filterDefinition, webFilter.value(),
+					webFilter.urlPatterns());
 
 				webXMLDefinitionAnnotation.setFilterDefinition(
 					filterDefinition.getName(), filterDefinition);
@@ -1039,8 +975,8 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 				ListenerDefinition listenerDefinition =
 					new ListenerDefinition();
 
-				listenerDefinition.setEventListener(
-					_getListenerInstance(annotatedClass.getCanonicalName()));
+				_setListener(
+					listenerDefinition, annotatedClass.getCanonicalName());
 
 				webXMLDefinitionAnnotation.addListenerDefinition(
 					listenerDefinition);
@@ -1101,6 +1037,101 @@ public class WebXMLDefinitionLoader extends DefaultHandler {
 				_bundle + " unable to load servlet " + servletClassName, e);
 
 			return null;
+		}
+	}
+
+	private void _setFilter(
+		FilterDefinition filterDefinition, String filterClassName) {
+
+		filterDefinition.setFilter(_getFilterInstance(filterClassName));
+	}
+
+	private void _setInitParams(
+		WebInitParam[] initParams, Map<String, String> initParametersMap) {
+
+		if (!ArrayUtil.isEmpty(initParams)) {
+			for (WebInitParam initParam : initParams) {
+				initParametersMap.put(initParam.name(), initParam.value());
+			}
+		}
+	}
+
+	private void _setListener(
+		ListenerDefinition listenerDefinition, String listenerClassName) {
+
+		listenerDefinition.setEventListener(
+			_getListenerInstance(listenerClassName));
+	}
+
+	private void _setServlet(
+		ServletDefinition servletDefinition, String servletClassName) {
+
+		servletDefinition.setServlet(_getServletInstance(servletClassName));
+	}
+
+	private void _setUrlPatterns(
+		FilterDefinition filterDefinition, List<String> value) {
+
+		if (!ListUtil.isEmpty(value)) {
+			_setUrlPatterns(
+				filterDefinition, value.toArray(new String[0]), null);
+		}
+	}
+
+	private void _setUrlPatterns(
+		FilterDefinition filterDefinition, String[] value,
+		String[] urlPatterns) {
+
+		//Value and urlPatterns should be checked in this order
+
+		if (!ArrayUtil.isEmpty(value)) {
+			for (String urlPattern : value) {
+				filterDefinition.addURLPattern(urlPattern);
+			}
+		}
+
+		if (!ArrayUtil.isEmpty(urlPatterns)) {
+			if (ListUtil.isNotEmpty(filterDefinition.getURLPatterns())) {
+				throw new IllegalStateException(
+					"Cannot declare both value and urlPatterns");
+			}
+
+			for (String urlPattern : urlPatterns) {
+				filterDefinition.addURLPattern(urlPattern);
+			}
+		}
+	}
+
+	private void _setUrlPatterns(
+		ServletDefinition servletDefinition, List<String> value) {
+
+		if (!ListUtil.isEmpty(value)) {
+			_setUrlPatterns(
+				servletDefinition, value.toArray(new String[0]), null);
+		}
+	}
+
+	private void _setUrlPatterns(
+		ServletDefinition servletDefinition, String[] value,
+		String[] urlPatterns) {
+
+		//Value and urlPatterns should be checked in this order
+
+		if (!ArrayUtil.isEmpty(value)) {
+			for (String urlPattern : value) {
+				servletDefinition.addURLPattern(urlPattern);
+			}
+		}
+
+		if (!ArrayUtil.isEmpty(urlPatterns)) {
+			if (ListUtil.isNotEmpty(servletDefinition.getURLPatterns())) {
+				throw new IllegalStateException(
+					"Cannot declare both value and urlPatterns");
+			}
+
+			for (String urlPattern : urlPatterns) {
+				servletDefinition.addURLPattern(urlPattern);
+			}
 		}
 	}
 
