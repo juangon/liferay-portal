@@ -23,6 +23,8 @@ import com.liferay.portal.osgi.web.servlet.context.helper.definition.ListenerDef
 import com.liferay.portal.osgi.web.servlet.context.helper.definition.ServletDefinition;
 import com.liferay.portal.osgi.web.servlet.context.helper.definition.WebXMLDefinition;
 import com.liferay.portal.osgi.web.servlet.jsp.compiler.JspServlet;
+import com.liferay.portal.osgi.web.wab.extender.WabInitializer;
+import com.liferay.portal.osgi.web.wab.extender.WabInitializerRegistry;
 import com.liferay.portal.osgi.web.wab.extender.internal.adapter.FilterExceptionAdapter;
 import com.liferay.portal.osgi.web.wab.extender.internal.adapter.ModifiableServletContext;
 import com.liferay.portal.osgi.web.wab.extender.internal.adapter.ModifiableServletContextAdapter;
@@ -90,6 +92,7 @@ public class WabBundleProcessor {
 		_bundleClassLoader = bundleWiring.getClassLoader();
 
 		_bundleContext = _bundle.getBundleContext();
+		_wabInitializerRegistryServiceTracker = new ServiceTracker<WabInitializerRegistry, WabInitializerRegistry>(_bundleContext, WabInitializerRegistry.class, null);
 	}
 
 	public void destroy() throws Exception {
@@ -147,6 +150,8 @@ public class WabBundleProcessor {
 					_bundle.getBundleContext(), webXMLDefinition, _logger);
 
 			initServletContainerInitializers(_bundle, servletContext);
+
+			initWabInitializers(_bundle, servletContext);
 
 			scanTLDsForListeners(webXMLDefinition, servletContext);
 
@@ -635,6 +640,24 @@ public class WabBundleProcessor {
 		}
 	}
 
+	protected void initWabInitializers(
+		Bundle bundle, ServletContext servletContext)
+		throws IOException {
+
+		_wabInitializerRegistryServiceTracker.open();
+
+		if (!_wabInitializerRegistryServiceTracker.isEmpty()) {
+
+			WabInitializerRegistry wabInitializerRegistry = _wabInitializerRegistryServiceTracker.getService();
+			List<WabInitializer> wabInitializers = wabInitializerRegistry.getWabInitializers();
+			for (WabInitializer wabInitializer: wabInitializers) {
+				wabInitializer.onStartup(bundle, null, servletContext);
+			}
+		}
+
+		_wabInitializerRegistryServiceTracker.close();
+	}
+
 	protected void processServletContainerInitializerClass(
 		String fqcn, Bundle bundle, BundleWiring bundleWiring,
 		ServletContext servletContext) {
@@ -767,5 +790,6 @@ public class WabBundleProcessor {
 		_servletContextHelperRegistrationServiceReference;
 	private final Set<ServiceRegistration<Servlet>> _servletRegistrations =
 		new ConcurrentSkipListSet<>();
+	private final ServiceTracker<WabInitializerRegistry, WabInitializerRegistry> _wabInitializerRegistryServiceTracker;
 
 }
