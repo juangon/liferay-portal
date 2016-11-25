@@ -143,9 +143,9 @@ public class ServletContextHelperRegistrationImpl
 	}
 
 	@Override
-	public void setProperties(Map<String, String> contextParameters) {
+	public ServletContext setProperties(Map<String, String> contextParameters) {
 		if (contextParameters.isEmpty()) {
-			return;
+			return null;
 		}
 
 		ServiceReference<ServletContextHelper> serviceReference =
@@ -168,6 +168,8 @@ public class ServletContextHelperRegistrationImpl
 		}
 
 		_servletContextHelperServiceRegistration.setProperties(properties);
+
+		return getServletContext();
 	}
 
 	protected String createContextSelectFilterString() {
