@@ -345,24 +345,22 @@ public class ModifiableServletContextAdapter
 	}
 
 	public String getInitParameter(String name) {
-		String parameter = _servletContext.getInitParameter(name);
+		String value = _servletContext.getInitParameter(name);
 
-		if (parameter == null) {
+		if (value == null) {
 			return _initParameters.get(name);
 		}
 
-		return parameter;
+		return value;
 	}
 
 	public Enumeration<String> getInitParameterNames() {
-		List<String> parameterNames = new ArrayList<>();
+		List<String> names = new ArrayList<>();
 
-		parameterNames.addAll(
-			Collections.list(_servletContext.getInitParameterNames()));
+		names.addAll(Collections.list(_servletContext.getInitParameterNames()));
+		names.addAll(_initParameters.keySet());
 
-		parameterNames.addAll(_initParameters.keySet());
-
-		return Collections.enumeration(parameterNames);
+		return Collections.enumeration(names);
 	}
 
 	@Override
