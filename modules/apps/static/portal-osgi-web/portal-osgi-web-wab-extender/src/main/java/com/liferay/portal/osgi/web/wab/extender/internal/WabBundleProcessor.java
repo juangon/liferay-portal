@@ -28,6 +28,8 @@ import com.liferay.portal.osgi.web.wab.extender.internal.adapter.ModifiableServl
 import com.liferay.portal.osgi.web.wab.extender.internal.adapter.ModifiableServletContextAdapter;
 import com.liferay.portal.osgi.web.wab.extender.internal.adapter.ServletContextListenerExceptionAdapter;
 import com.liferay.portal.osgi.web.wab.extender.internal.adapter.ServletExceptionAdapter;
+import com.liferay.portal.osgi.web.wab.extender.internal.registration.FilterRegistrationImpl;
+import com.liferay.portal.osgi.web.wab.extender.internal.registration.ServletRegistrationImpl;
 
 import java.io.IOException;
 import java.io.InputStream;
