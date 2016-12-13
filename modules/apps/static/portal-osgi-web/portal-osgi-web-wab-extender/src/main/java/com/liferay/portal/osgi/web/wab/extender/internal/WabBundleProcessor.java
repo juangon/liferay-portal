@@ -191,6 +191,9 @@ public class WabBundleProcessor {
 					newServletContext, attributes, listenerDefinitions,
 					filterRegistrationImpls, servletRegistrationImpls,
 					_bundle.getBundleContext(), webXMLDefinition, _logger);
+
+				modifiableServletContext =
+					(ModifiableServletContext)servletContext;
 			}
 
 			scanTLDsForListeners(webXMLDefinition, servletContext);
