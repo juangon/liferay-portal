@@ -44,6 +44,7 @@ import java.util.Collection;
 import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.EventListener;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
@@ -148,13 +149,46 @@ public class WabBundleProcessor {
 
 			initServletContainerInitializers(_bundle, servletContext);
 
+			ModifiableServletContext modifiableServletContext =
+				(ModifiableServletContext)servletContext;
+
+			Map<String, String> unregisteredInitParameters =
+				modifiableServletContext.getUnregisteredInitParameters();
+
+			if ((unregisteredInitParameters != null) &&
+				!unregisteredInitParameters.isEmpty()) {
+
+				servletContextHelperRegistration.setProperties(
+					unregisteredInitParameters);
+
+				ServletContext newServletContext =
+					servletContextHelperRegistration.getServletContext();
+
+				Map<String, Object> attributes = new HashMap<>();
+
+				Enumeration<String> attributeNames =
+					servletContext.getAttributeNames();
+
+				while (attributeNames.hasMoreElements()) {
+					String attributeName = attributeNames.nextElement();
+
+					attributes.put(
+						attributeName,
+						servletContext.getAttribute(attributeName));
+				}
+
+				servletContext = ModifiableServletContextAdapter.createInstance(
+					newServletContext, attributes,
+					modifiableServletContext.getListenerDefinitions(),
+					modifiableServletContext.getFilterRegistrationImpls(),
+					modifiableServletContext.getServletRegistrationImpls(),
+					_bundle.getBundleContext(), webXMLDefinition, _logger);
+			}
+
 			scanTLDsForListeners(webXMLDefinition, servletContext);
 
 			initListeners(
 				webXMLDefinition.getListenerDefinitions(), servletContext);
-
-			ModifiableServletContext modifiableServletContext =
-				(ModifiableServletContext)servletContext;
 
 			initListeners(
 				modifiableServletContext.getListenerDefinitions(),
