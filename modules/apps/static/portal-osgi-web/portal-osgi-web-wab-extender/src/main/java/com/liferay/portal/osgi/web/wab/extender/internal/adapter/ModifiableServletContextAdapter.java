@@ -335,13 +335,13 @@ public class ModifiableServletContextAdapter
 		return _filterRegistrations.get(filterName);
 	}
 
-	public Map<String, ? extends FilterRegistration> getFilterRegistrations() {
-		return getFilterRegistrationImpls();
-	}
-
 	@Override
 	public Map<String, FilterRegistrationImpl> getFilterRegistrationImpls() {
 		return _filterRegistrations;
+	}
+
+	public Map<String, ? extends FilterRegistration> getFilterRegistrations() {
+		return getFilterRegistrationImpls();
 	}
 
 	public String getInitParameter(String name) {
@@ -415,15 +415,15 @@ public class ModifiableServletContextAdapter
 		return _servletRegistrations.get(servletName);
 	}
 
+	@Override
+	public Map<String, ServletRegistrationImpl> getServletRegistrationImpls() {
+		return _servletRegistrations;
+	}
+
 	public Map<String, ? extends ServletRegistration>
 		getServletRegistrations() {
 
 		return getServletRegistrationImpls();
-	}
-
-	@Override
-	public Map<String, ServletRegistrationImpl> getServletRegistrationImpls() {
-		return _servletRegistrations;
 	}
 
 	@Override
