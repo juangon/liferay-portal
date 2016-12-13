@@ -158,16 +158,18 @@ public class WabBundleProcessor {
 			if ((unregisteredInitParameters != null) &&
 				!unregisteredInitParameters.isEmpty()) {
 
-				servletContextHelperRegistration.setProperties(
-					unregisteredInitParameters);
+				List<ListenerDefinition> listenerDefinitions =
+					modifiableServletContext.getListenerDefinitions();
 
-				ServletContext newServletContext =
-					servletContextHelperRegistration.getServletContext();
+				Map<String, FilterRegistrationImpl> filterRegistrationImpls =
+					modifiableServletContext.getFilterRegistrationImpls();
 
-				Map<String, Object> attributes = new HashMap<>();
+				Map<String, ServletRegistrationImpl> servletRegistrationImpls =
+					modifiableServletContext.getServletRegistrationImpls();
 
 				Enumeration<String> attributeNames =
 					servletContext.getAttributeNames();
+				Map<String, Object> attributes = new HashMap<>();
 
 				while (attributeNames.hasMoreElements()) {
 					String attributeName = attributeNames.nextElement();
@@ -177,11 +179,15 @@ public class WabBundleProcessor {
 						servletContext.getAttribute(attributeName));
 				}
 
+				servletContextHelperRegistration.setProperties(
+					unregisteredInitParameters);
+
+				ServletContext newServletContext =
+					servletContextHelperRegistration.getServletContext();
+
 				servletContext = ModifiableServletContextAdapter.createInstance(
-					newServletContext, attributes,
-					modifiableServletContext.getListenerDefinitions(),
-					modifiableServletContext.getFilterRegistrationImpls(),
-					modifiableServletContext.getServletRegistrationImpls(),
+					newServletContext, attributes, listenerDefinitions,
+					filterRegistrationImpls, servletRegistrationImpls,
 					_bundle.getBundleContext(), webXMLDefinition, _logger);
 			}
 
