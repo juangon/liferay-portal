@@ -101,7 +101,7 @@ public class ModifiableServletContextAdapter
 		/* Filters */
 		if (filterRegistrations != null) {
 			Map<String, FilterRegistrationImpl> newFilterRegistrationsImpl =
-				modifiableServletContext.getFilterRegistrationsImpl();
+				modifiableServletContext.getFilterRegistrationImpls();
 
 			for (String filterName : filterRegistrations.keySet()) {
 				FilterRegistrationImpl filterRegistrationImpl =
@@ -115,7 +115,7 @@ public class ModifiableServletContextAdapter
 		/* Servlets */
 		if (servletRegistrations != null) {
 			Map<String, ServletRegistrationImpl> newServletRegistrationsImpl =
-				modifiableServletContext.getServletRegistrationsImpl();
+				modifiableServletContext.getServletRegistrationImpls();
 
 			for (String servletName : servletRegistrations.keySet()) {
 				ServletRegistrationImpl servletRegistrationImpl =
@@ -336,11 +336,11 @@ public class ModifiableServletContextAdapter
 	}
 
 	public Map<String, ? extends FilterRegistration> getFilterRegistrations() {
-		return getFilterRegistrationsImpl();
+		return getFilterRegistrationImpls();
 	}
 
 	@Override
-	public Map<String, FilterRegistrationImpl> getFilterRegistrationsImpl() {
+	public Map<String, FilterRegistrationImpl> getFilterRegistrationImpls() {
 		return _filterRegistrations;
 	}
 
@@ -418,11 +418,11 @@ public class ModifiableServletContextAdapter
 	public Map<String, ? extends ServletRegistration>
 		getServletRegistrations() {
 
-		return getServletRegistrationsImpl();
+		return getServletRegistrationImpls();
 	}
 
 	@Override
-	public Map<String, ServletRegistrationImpl> getServletRegistrationsImpl() {
+	public Map<String, ServletRegistrationImpl> getServletRegistrationImpls() {
 		return _servletRegistrations;
 	}
 

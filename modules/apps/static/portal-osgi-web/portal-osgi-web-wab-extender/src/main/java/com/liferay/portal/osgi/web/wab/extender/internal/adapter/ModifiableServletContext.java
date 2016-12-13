@@ -32,11 +32,11 @@ public interface ModifiableServletContext {
 
 	public Bundle getBundle();
 
-	public Map<String, FilterRegistrationImpl> getFilterRegistrationsImpl();
+	public Map<String, FilterRegistrationImpl> getFilterRegistrationImpls();
 
 	public List<ListenerDefinition> getListenerDefinitions();
 
-	public Map<String, ServletRegistrationImpl> getServletRegistrationsImpl();
+	public Map<String, ServletRegistrationImpl> getServletRegistrationImpls();
 
 	public Map<String, String> getUnregisteredInitParameters();
 

@@ -164,10 +164,10 @@ public class WabBundleProcessor {
 					modifiableServletContext.getListenerDefinitions();
 
 				Map<String, FilterRegistrationImpl> filterRegistrationImpls =
-					modifiableServletContext.getFilterRegistrationsImpl();
+					modifiableServletContext.getFilterRegistrationImpls();
 
 				Map<String, ServletRegistrationImpl> servletRegistrationImpls =
-					modifiableServletContext.getServletRegistrationsImpl();
+					modifiableServletContext.getServletRegistrationImpls();
 
 				Enumeration<String> attributeNames =
 					servletContext.getAttributeNames();
