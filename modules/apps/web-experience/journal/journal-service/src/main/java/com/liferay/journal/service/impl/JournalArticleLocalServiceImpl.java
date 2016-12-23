@@ -6619,6 +6619,20 @@ public class JournalArticleLocalServiceImpl
 		newArticle.setContent(contentDocument.formattedString());
 	}
 
+	/**
+	* @deprecated As of 3.4.0, replaced by {@link #createFieldsValuesMap(
+	*  Element, Locale)}
+	*/
+	@Deprecated
+	protected Map<String, LocalizedValue> createFieldsValuesMap(
+			Element parentElement) {
+
+		Locale defaultLocale = LocaleUtil.fromLanguageId(
+			parentElement.attributeValue("default-locale"));
+
+		return createFieldsValuesMap(parentElement, defaultLocale);
+	}
+
 	protected Map<String, LocalizedValue> createFieldsValuesMap(
 		Element parentElement, Locale defaultLocale) {
 
