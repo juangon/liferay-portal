@@ -27,11 +27,20 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.registry.collections.ServiceTrackerCollections;
 import com.liferay.registry.collections.ServiceTrackerMap;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
 
+import javax.servlet.AsyncContext;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Carlos Sierra Andrés
@@ -56,6 +65,9 @@ public class RequestParameterCacheValidatorManager {
 
 		Collections.sort(parameterNames);
 
+		HttpServletRequest readOnlyRequest = new ReadOnlyHttpServletRequest(
+			request);
+
 		for (String parameterName : _serviceTrackerMap.keySet()) {
 			for (PredicateFilter<HttpServletRequest> predicateFilter :
 					_serviceTrackerMap.getService(parameterName)) {
@@ -65,21 +77,22 @@ public class RequestParameterCacheValidatorManager {
 				}
 
 				try {
-					boolean valid = predicateFilter.filter(request);
+					boolean valid = predicateFilter.filter(readOnlyRequest);
 
 					if (valid) {
 						cacheKeyGenerator.append(StringPool.UNDERLINE);
 						cacheKeyGenerator.append(parameterName);
 						cacheKeyGenerator.append(StringPool.UNDERLINE);
 						cacheKeyGenerator.append(
-							request.getParameter(parameterName));
+							readOnlyRequest.getParameter(parameterName));
 					}
 					else {
 						if (log.isDebugEnabled()) {
 							StringBundler sb = new StringBundler(5);
 
 							sb.append("Parameter value ");
-							sb.append(request.getParameter(parameterName));
+							sb.append(
+								readOnlyRequest.getParameter(parameterName));
 							sb.append(" for parameter ");
 							sb.append(parameterName);
 							sb.append(" has been discarded for cache key");
@@ -114,5 +127,60 @@ public class RequestParameterCacheValidatorManager {
 		ServiceTrackerMap<String, List<PredicateFilter>> _serviceTrackerMap =
 			ServiceTrackerCollections.openMultiValueMap(
 				PredicateFilter.class, "filter.request.parameter");
+
+	private static class ReadOnlyHttpServletRequest
+		extends HttpServletRequestWrapper {
+
+		public ReadOnlyHttpServletRequest(HttpServletRequest request) {
+			super(request);
+		}
+
+		@Override
+		public boolean authenticate(HttpServletResponse response)
+			throws IOException, ServletException {
+
+			return false;
+		}
+
+		@Override
+		public void login(String username, String password)
+			throws ServletException {
+		}
+
+		@Override
+		public void logout() throws ServletException {
+		}
+
+		@Override
+		public void removeAttribute(String name) {
+		}
+
+		@Override
+		public void setAttribute(String name, Object o) {
+		}
+
+		@Override
+		public void setCharacterEncoding(String enc)
+			throws UnsupportedEncodingException {
+		}
+
+		@Override
+		public void setRequest(ServletRequest request) {
+		}
+
+		@Override
+		public AsyncContext startAsync() throws IllegalStateException {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public AsyncContext startAsync(
+				ServletRequest servletRequest, ServletResponse servletResponse)
+			throws IllegalStateException {
+
+			throw new UnsupportedOperationException();
+		}
+
+	}
 
 }
