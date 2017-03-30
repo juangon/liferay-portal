@@ -38,8 +38,8 @@ import com.liferay.portal.kernel.util.URLUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.minifier.MinifierUtil;
 import com.liferay.portal.servlet.filters.IgnoreModuleRequestFilter;
+import com.liferay.portal.servlet.filters.cache.validator.RequestParameterCacheValidatorManager;
 import com.liferay.portal.servlet.filters.dynamiccss.DynamicCSSUtil;
-import com.liferay.portal.servlet.filters.util.CacheFileNameGenerator;
 import com.liferay.portal.util.AggregateUtil;
 import com.liferay.portal.util.JavaScriptBundleUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -313,8 +313,8 @@ public class AggregateFilter extends IgnoreModuleRequestFilter {
 	}
 
 	protected String getCacheFileName(HttpServletRequest request) {
-		return _cacheFileNameGenerator.getCacheFileName(
-			AggregateFilter.class, request, _REMOVE_PARAMETER_NAMES, null);
+		return RequestParameterCacheValidatorManager.getCacheFileName(
+			request, AggregateFilter.class.getName(), _log);
 	}
 
 	protected Object getContent(
@@ -584,8 +584,6 @@ public class AggregateFilter extends IgnoreModuleRequestFilter {
 
 	private static final String _JSP_EXTENSION = ".jsp";
 
-	private static final String[] _REMOVE_PARAMETER_NAMES = {"zx"};
-
 	private static final String _TEMP_DIR = "aggregate";
 
 	private static final Log _log = LogFactoryUtil.getLog(
@@ -594,8 +592,6 @@ public class AggregateFilter extends IgnoreModuleRequestFilter {
 	private static final Pattern _pattern = Pattern.compile(
 		"^(\\.ie|\\.js\\.ie)([^}]*)}", Pattern.MULTILINE);
 
-	private final CacheFileNameGenerator _cacheFileNameGenerator =
-		new CacheFileNameGenerator();
 	private ServletContext _servletContext;
 	private File _tempDir;
 

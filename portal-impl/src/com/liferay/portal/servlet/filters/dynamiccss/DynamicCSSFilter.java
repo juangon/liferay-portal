@@ -32,7 +32,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.URLUtil;
 import com.liferay.portal.servlet.filters.IgnoreModuleRequestFilter;
-import com.liferay.portal.servlet.filters.util.CacheFileNameGenerator;
+import com.liferay.portal.servlet.filters.cache.validator.RequestParameterCacheValidatorManager;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.File;
@@ -69,15 +69,15 @@ public class DynamicCSSFilter extends IgnoreModuleRequestFilter {
 	}
 
 	protected String getCacheFileName(HttpServletRequest request) {
-		String[] cacheKeyKeys = null;
+		String cacheFileName =
+			RequestParameterCacheValidatorManager.getCacheFileName(
+				request, DynamicCSSFilter.class.getName(), _log);
 
 		if (PortalUtil.isRightToLeft(request)) {
-			cacheKeyKeys = _CACHE_KEY_APPEND_KEYS;
+			return cacheFileName + _CACHE_FILE_NAME_RTL;
 		}
 
-		return _cacheFileNameGenerator.getCacheFileName(
-			DynamicCSSFilter.class, request, _REMOVE_PARAMETER_NAMES,
-			cacheKeyKeys);
+		return cacheFileName;
 	}
 
 	protected Object getDynamicContent(
@@ -282,21 +282,17 @@ public class DynamicCSSFilter extends IgnoreModuleRequestFilter {
 		}
 	}
 
-	private static final String[] _CACHE_KEY_APPEND_KEYS = {"_rtl"};
+	private static final String _CACHE_FILE_NAME_RTL = "_rtl";
 
 	private static final String _CSS_EXTENSION = ".css";
 
 	private static final String _JSP_EXTENSION = ".jsp";
-
-	private static final String[] _REMOVE_PARAMETER_NAMES = {"zx"};
 
 	private static final String _TEMP_DIR = "css";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		DynamicCSSFilter.class);
 
-	private final CacheFileNameGenerator _cacheFileNameGenerator =
-		new CacheFileNameGenerator();
 	private ServletContext _servletContext;
 	private File _tempDir;
 
