@@ -1,0 +1,5 @@
+Bundle-Name: Liferay Portal CacheUtil Request Parameter Validators
+Bundle-SymbolicName: com.liferay.portal.cacheutil.request.parameter.validators
+Bundle-Version: 1.0.0
+Liferay-Releng-Module-Group-Description:
+Liferay-Releng-Module-Group-Title: Cache Request Parameter Validators
