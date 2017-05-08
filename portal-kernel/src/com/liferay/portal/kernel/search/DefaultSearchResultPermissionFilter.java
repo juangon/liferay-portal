@@ -22,13 +22,13 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.ServiceProxyFactory;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Tina Tian
@@ -74,9 +74,9 @@ public class DefaultSearchResultPermissionFilter
 			FacetPostProcessor facetPostProcessor = _facetPostProcessor;
 
 			if (facetPostProcessor != null) {
-				for (Facet facet : ListUtil.fromMapValues(
-						searchContext.getFacets())) {
+				Map<String, Facet> facetsMap = searchContext.getFacets();
 
+				for (Facet facet : facetsMap.values()) {
 					facetPostProcessor.exclude(excludeDocs, facet);
 				}
 			}
