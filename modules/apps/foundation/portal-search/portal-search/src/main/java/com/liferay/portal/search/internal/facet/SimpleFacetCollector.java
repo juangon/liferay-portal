@@ -17,7 +17,7 @@ package com.liferay.portal.search.internal.facet;
 import com.liferay.portal.kernel.search.facet.collector.FacetCollector;
 import com.liferay.portal.kernel.search.facet.collector.TermCollector;
 import com.liferay.portal.kernel.util.ListUtil;
-import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringBundler;
 
 import java.util.HashMap;
 import java.util.List;
@@ -56,7 +56,15 @@ public class SimpleFacetCollector implements FacetCollector {
 
 	@Override
 	public String toString() {
-		return _fieldName + StringPool.EQUAL + _termCollectors;
+		StringBundler sb = new StringBundler(5);
+
+		sb.append("{fieldName=");
+		sb.append(_fieldName);
+		sb.append(", termCollectors=");
+		sb.append(_termCollectors);
+		sb.append("}");
+
+		return sb.toString();
 	}
 
 	private final String _fieldName;
