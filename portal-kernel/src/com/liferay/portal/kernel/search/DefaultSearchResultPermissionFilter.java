@@ -164,7 +164,7 @@ public class DefaultSearchResultPermissionFilter
 	private static volatile FacetPostProcessor _facetPostProcessor =
 		ServiceProxyFactory.newServiceTrackedInstance(
 			FacetPostProcessor.class, DefaultSearchResultPermissionFilter.class,
-			"_facetPostProcessor", false);
+			"_facetPostProcessor", false, true);
 
 	private final BaseIndexer<?> _baseIndexer;
 	private final PermissionChecker _permissionChecker;
