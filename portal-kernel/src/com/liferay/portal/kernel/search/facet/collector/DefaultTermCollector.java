@@ -40,10 +40,10 @@ public class DefaultTermCollector implements TermCollector {
 	public String toString() {
 		StringBundler sb = new StringBundler(5);
 
-		sb.append("{term=");
-		sb.append(_term);
-		sb.append(", frequency=");
+		sb.append("{frequency=");
 		sb.append(_frequency);
+		sb.append(", term=");
+		sb.append(_term);
 		sb.append("}");
 
 		return sb.toString();

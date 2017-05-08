@@ -74,9 +74,9 @@ public class DefaultSearchResultPermissionFilter
 			FacetPostProcessor facetPostProcessor = _facetPostProcessor;
 
 			if (facetPostProcessor != null) {
-				Map<String, Facet> facetsMap = searchContext.getFacets();
+				Map<String, Facet> facets = searchContext.getFacets();
 
-				for (Facet facet : facetsMap.values()) {
+				for (Facet facet : facets.values()) {
 					facetPostProcessor.exclude(excludeDocs, facet);
 				}
 			}
