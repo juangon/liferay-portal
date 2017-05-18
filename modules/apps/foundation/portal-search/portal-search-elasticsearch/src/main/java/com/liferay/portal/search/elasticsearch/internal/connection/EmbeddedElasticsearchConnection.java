@@ -44,6 +44,13 @@ import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.discovery.DiscoveryService;
 import org.elasticsearch.node.Node;
 import org.elasticsearch.node.NodeBuilder;
+import org.elasticsearch.search.SearchService;
+import org.elasticsearch.search.action.SearchServiceTransportAction;
+import org.elasticsearch.search.internal.ShardSearchTransportRequest;
+import org.elasticsearch.threadpool.ThreadPool;
+import org.elasticsearch.transport.TransportChannel;
+import org.elasticsearch.transport.TransportRequestHandler;
+import org.elasticsearch.transport.TransportService;
 
 import org.jboss.netty.util.internal.ByteBufferUtil;
 
@@ -309,7 +316,17 @@ public class EmbeddedElasticsearchConnection
 
 			nodeBuilder.local(true);
 
-			return nodeBuilder.build();
+			Node node = nodeBuilder.build();
+
+			if (elasticsearchConfiguration.syncSearch()) {
+				Injector injector = node.injector();
+
+				_replaceTransportRequestHandler(
+					injector.getInstance(TransportService.class),
+					injector.getInstance(SearchService.class));
+			}
+
+			return node;
 		}
 		finally {
 			thread.setContextClassLoader(contextClassLoader);
@@ -366,6 +383,31 @@ public class EmbeddedElasticsearchConnection
 
 	@Reference
 	protected Props props;
+
+	private void _replaceTransportRequestHandler(
+		TransportService transportService, SearchService searchService) {
+
+		String action = SearchServiceTransportAction.QUERY_FETCH_ACTION_NAME;
+
+		transportService.removeHandler(action);
+
+		transportService.registerRequestHandler(
+			action, ShardSearchTransportRequest.class, ThreadPool.Names.SAME,
+			new TransportRequestHandler<ShardSearchTransportRequest>() {
+
+				@Override
+				public void messageReceived(
+						ShardSearchTransportRequest shardSearchTransportRequest,
+						TransportChannel transportChannel)
+					throws Exception {
+
+					transportChannel.sendResponse(
+						searchService.executeFetchPhase(
+							shardSearchTransportRequest));
+				}
+
+			});
+	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		EmbeddedElasticsearchConnection.class);
