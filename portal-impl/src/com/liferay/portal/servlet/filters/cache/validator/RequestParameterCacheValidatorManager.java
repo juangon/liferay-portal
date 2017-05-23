@@ -18,6 +18,8 @@ import com.liferay.portal.kernel.cache.key.CacheKeyGenerator;
 import com.liferay.portal.kernel.cache.key.CacheKeyGeneratorUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.Digester;
+import com.liferay.portal.kernel.util.DigesterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.PredicateFilter;
@@ -57,6 +59,8 @@ public class RequestParameterCacheValidatorManager {
 		cacheKeyGenerator.append(StringPool.UNDERLINE);
 		cacheKeyGenerator.append(request.getRequestURI());
 
+		StringBundler queryStringSB = new StringBundler();
+
 		Enumeration<String> parameterNamesEnumeration =
 			request.getParameterNames();
 
@@ -80,10 +84,10 @@ public class RequestParameterCacheValidatorManager {
 					boolean valid = predicateFilter.filter(readOnlyRequest);
 
 					if (valid) {
-						cacheKeyGenerator.append(StringPool.UNDERLINE);
-						cacheKeyGenerator.append(parameterName);
-						cacheKeyGenerator.append(StringPool.UNDERLINE);
-						cacheKeyGenerator.append(
+						queryStringSB.append(StringPool.UNDERLINE);
+						queryStringSB.append(parameterName);
+						queryStringSB.append(StringPool.UNDERLINE);
+						queryStringSB.append(
 							readOnlyRequest.getParameter(parameterName));
 					}
 					else {
@@ -112,6 +116,13 @@ public class RequestParameterCacheValidatorManager {
 			}
 		}
 
+		String queryString = queryStringSB.toString();
+
+		String queryStringDigest = DigesterUtil.digestBase64(
+			Digester.SHA_256, queryString);
+
+		cacheKeyGenerator.append(queryStringDigest);
+
 		String generatedValue = String.valueOf(cacheKeyGenerator.finish());
 
 		return _sterilizeFileName(generatedValue);
@@ -119,8 +130,15 @@ public class RequestParameterCacheValidatorManager {
 
 	private static String _sterilizeFileName(String fileName) {
 		return StringUtil.replace(
-			fileName, new char[] {CharPool.SLASH, CharPool.BACK_SLASH},
-			new char[] {CharPool.UNDERLINE, CharPool.UNDERLINE});
+			fileName,
+			new char[] {
+				CharPool.SLASH, CharPool.BACK_SLASH, CharPool.PLUS,
+				CharPool.EQUAL
+			},
+			new char[] {
+				CharPool.UNDERLINE, CharPool.UNDERLINE, CharPool.DASH,
+				CharPool.UNDERLINE
+			});
 	}
 
 	private static final
