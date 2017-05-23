@@ -16,7 +16,7 @@ package com.liferay.portal.cacheutil.request.parameter.validators;
 
 import com.liferay.portal.kernel.model.Theme;
 import com.liferay.portal.kernel.service.ThemeLocalService;
-import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.PredicateFilter;
 
 import java.util.Map;
@@ -36,7 +36,7 @@ public class ThemeIdRequestParameterCacheValidator
 
 	@Override
 	public boolean filter(HttpServletRequest request) {
-		long companyId = PortalUtil.getCompanyId(request);
+		long companyId = _portal.getCompanyId(request);
 
 		Theme theme = _themeLocalService.fetchTheme(
 			companyId, request.getParameter(_parameterName));
@@ -56,6 +56,9 @@ public class ThemeIdRequestParameterCacheValidator
 	}
 
 	private String _parameterName;
+
+	@Reference
+	private Portal _portal;
 
 	@Reference
 	private ThemeLocalService _themeLocalService;
