@@ -811,6 +811,8 @@ AUI.add(
 							instance.remove();
 						}
 
+						instance.syncRepeatablelUI();
+
 						event.stopPropagation();
 					},
 
