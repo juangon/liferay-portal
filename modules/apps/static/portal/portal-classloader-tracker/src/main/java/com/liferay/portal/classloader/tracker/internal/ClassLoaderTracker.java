@@ -19,22 +19,19 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 
 import org.osgi.framework.Bundle;
+import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleEvent;
 import org.osgi.framework.wiring.BundleWiring;
-import org.osgi.service.component.annotations.Activate;
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Deactivate;
 import org.osgi.util.tracker.BundleTracker;
 
 /**
  * @author Tina Tian
  */
-@Component(immediate = true)
-public class ClassLoaderTracker {
+public class ClassLoaderTracker implements BundleActivator {
 
-	@Activate
-	public void activate(BundleContext bundleContext) {
+	@Override
+	public void start(BundleContext bundleContext) {
 		_bundleTracker = new BundleTracker<ClassLoader>(
 			bundleContext, Bundle.ACTIVE, null) {
 
@@ -70,8 +67,8 @@ public class ClassLoaderTracker {
 		_bundleTracker.open();
 	}
 
-	@Deactivate
-	public void deactivate() {
+	@Override
+	public void stop(BundleContext context) {
 		_bundleTracker.close();
 	}
 
