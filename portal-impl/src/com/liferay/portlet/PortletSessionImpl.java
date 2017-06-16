@@ -228,17 +228,21 @@ public class PortletSessionImpl implements LiferayPortletSession {
 
 		@Override
 		public void setAttribute(String name, Object value) {
+			if (!(value instanceof Serializable)) {
+				super.setAttribute(name, value);
+
+				return;
+			}
+
 			Class<?> clazz = value.getClass();
 
-			if (PortalClassLoaderUtil.isPortalClassLoader(
+			if (!PortalClassLoaderUtil.isPortalClassLoader(
 					clazz.getClassLoader())) {
 
-				super.setAttribute(name, value);
+				value = new SerializableObjectWrapper((Serializable)value);
 			}
-			else {
-				super.setAttribute(
-					name, new SerializableObjectWrapper((Serializable)value));
-			}
+
+			super.setAttribute(name, value);
 		}
 
 		private SerializableHttpSessionWrapper(HttpSession session) {
