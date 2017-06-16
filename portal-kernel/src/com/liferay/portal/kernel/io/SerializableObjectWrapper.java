@@ -16,9 +16,10 @@ package com.liferay.portal.kernel.io;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
+import java.io.Externalizable;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.io.Serializable;
 
 import java.nio.ByteBuffer;
@@ -26,7 +27,7 @@ import java.nio.ByteBuffer;
 /**
  * @author Tina Tian
  */
-public class SerializableObjectWrapper implements Serializable {
+public class SerializableObjectWrapper implements Externalizable {
 
 	public static <T> T unwrap(Object object) {
 		if (!(object instanceof SerializableObjectWrapper)) {
@@ -64,14 +65,13 @@ public class SerializableObjectWrapper implements Serializable {
 		return _serializable.hashCode();
 	}
 
-	private void readObject(ObjectInputStream objectInputStream)
-		throws IOException {
-
-		int size = objectInputStream.readInt();
+	@Override
+	public void readExternal(ObjectInput objectInput) throws IOException {
+		int size = objectInput.readInt();
 
 		byte[] data = new byte[size];
 
-		objectInputStream.readFully(data);
+		objectInput.readFully(data);
 
 		Deserializer deserializer = new Deserializer(ByteBuffer.wrap(data));
 
@@ -83,17 +83,16 @@ public class SerializableObjectWrapper implements Serializable {
 		}
 	}
 
-	private void writeObject(ObjectOutputStream objectOutputStream)
-		throws IOException {
-
+	@Override
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		Serializer serializer = new Serializer();
 
 		serializer.writeObject(_serializable);
 
 		ByteBuffer byteBuffer = serializer.toByteBuffer();
 
-		objectOutputStream.writeInt(byteBuffer.remaining());
-		objectOutputStream.write(
+		objectOutput.writeInt(byteBuffer.remaining());
+		objectOutput.write(
 			byteBuffer.array(), byteBuffer.position(), byteBuffer.remaining());
 	}
 
