@@ -67,9 +67,7 @@ public class SerializableObjectWrapper implements Externalizable {
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
-		int size = objectInput.readInt();
-
-		byte[] data = new byte[size];
+		byte[] data = new byte[objectInput.readInt()];
 
 		objectInput.readFully(data);
 

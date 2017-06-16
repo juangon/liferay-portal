@@ -45,8 +45,7 @@ public class PortletSessionImpl implements LiferayPortletSession {
 		HttpSession session, PortletContext portletContext, String portletName,
 		long plid) {
 
-		_setHttpSession(session);
-
+		this.session = _wrapHttpSession(session);
 		this.portletContext = portletContext;
 
 		StringBundler sb = new StringBundler(5);
@@ -197,7 +196,7 @@ public class PortletSessionImpl implements LiferayPortletSession {
 
 	@Override
 	public void setHttpSession(HttpSession session) {
-		_setHttpSession(session);
+		this.session = _wrapHttpSession(session);
 	}
 
 	@Override
@@ -209,30 +208,22 @@ public class PortletSessionImpl implements LiferayPortletSession {
 	protected final String scopePrefix;
 	protected HttpSession session;
 
-	private void _setHttpSession(HttpSession session) {
+	private HttpSession _wrapHttpSession(HttpSession session) {
 		if (PropsValues.PORTLET_SESSION_REPLICATE_ENABLED &&
 			!(session instanceof SerializableHttpSessionWrapper)) {
 
-			this.session = new SerializableHttpSessionWrapper(session);
-
-			return;
+			return new SerializableHttpSessionWrapper(session);
 		}
 
-		this.session = session;
+		return session;
 	}
 
 	private static class SerializableHttpSessionWrapper
 		extends HttpSessionWrapper {
 
-		public SerializableHttpSessionWrapper(HttpSession session) {
-			super(session);
-		}
-
 		@Override
 		public Object getAttribute(String name) {
-			Object value = super.getAttribute(name);
-
-			return SerializableObjectWrapper.unwrap(value);
+			return SerializableObjectWrapper.unwrap(super.getAttribute(name));
 		}
 
 		@Override
@@ -248,6 +239,10 @@ public class PortletSessionImpl implements LiferayPortletSession {
 				super.setAttribute(
 					name, new SerializableObjectWrapper((Serializable)value));
 			}
+		}
+
+		private SerializableHttpSessionWrapper(HttpSession session) {
+			super(session);
 		}
 
 	}
