@@ -90,6 +90,7 @@ public class SerializableObjectWrapper implements Externalizable {
 		ByteBuffer byteBuffer = serializer.toByteBuffer();
 
 		objectOutput.writeInt(byteBuffer.remaining());
+
 		objectOutput.write(
 			byteBuffer.array(), byteBuffer.position(), byteBuffer.remaining());
 	}
