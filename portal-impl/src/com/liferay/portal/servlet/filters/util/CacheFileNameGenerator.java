@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.servlet.filters.cache.validator;
+package com.liferay.portal.servlet.filters.util;
 
 import com.liferay.portal.kernel.cache.key.CacheKeyGenerator;
 import com.liferay.portal.kernel.cache.key.CacheKeyGeneratorUtil;
@@ -42,9 +42,10 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * @author Miguel Pastor
  * @author Carlos Sierra Andrés
  */
-public class RequestParameterCacheValidatorManager {
+public class CacheFileNameGenerator {
 
 	public static String getCacheFileName(
 		final HttpServletRequest request, String cacheName, Log log) {

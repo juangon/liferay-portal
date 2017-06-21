@@ -38,8 +38,8 @@ import com.liferay.portal.kernel.util.URLUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.minifier.MinifierUtil;
 import com.liferay.portal.servlet.filters.IgnoreModuleRequestFilter;
-import com.liferay.portal.servlet.filters.cache.validator.RequestParameterCacheValidatorManager;
 import com.liferay.portal.servlet.filters.dynamiccss.DynamicCSSUtil;
+import com.liferay.portal.servlet.filters.util.CacheFileNameGenerator;
 import com.liferay.portal.util.AggregateUtil;
 import com.liferay.portal.util.JavaScriptBundleUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -313,7 +313,7 @@ public class AggregateFilter extends IgnoreModuleRequestFilter {
 	}
 
 	protected String getCacheFileName(HttpServletRequest request) {
-		return RequestParameterCacheValidatorManager.getCacheFileName(
+		return CacheFileNameGenerator.getCacheFileName(
 			request, AggregateFilter.class.getName(), _log);
 	}
 

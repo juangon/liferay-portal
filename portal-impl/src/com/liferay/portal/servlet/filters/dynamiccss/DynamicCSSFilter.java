@@ -32,7 +32,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.URLUtil;
 import com.liferay.portal.servlet.filters.IgnoreModuleRequestFilter;
-import com.liferay.portal.servlet.filters.cache.validator.RequestParameterCacheValidatorManager;
+import com.liferay.portal.servlet.filters.util.CacheFileNameGenerator;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.File;
@@ -69,9 +69,8 @@ public class DynamicCSSFilter extends IgnoreModuleRequestFilter {
 	}
 
 	protected String getCacheFileName(HttpServletRequest request) {
-		String cacheFileName =
-			RequestParameterCacheValidatorManager.getCacheFileName(
-				request, DynamicCSSFilter.class.getName(), _log);
+		String cacheFileName = CacheFileNameGenerator.getCacheFileName(
+			request, DynamicCSSFilter.class.getName(), _log);
 
 		if (PortalUtil.isRightToLeft(request)) {
 			return cacheFileName + _CACHE_FILE_NAME_RTL;
