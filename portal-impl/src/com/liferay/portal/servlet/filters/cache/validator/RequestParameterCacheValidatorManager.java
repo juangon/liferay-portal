@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.Digester;
 import com.liferay.portal.kernel.util.DigesterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.PredicateFilter;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -32,8 +31,6 @@ import com.liferay.registry.collections.ServiceTrackerMap;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
-import java.util.Collections;
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.AsyncContext;
@@ -60,14 +57,6 @@ public class RequestParameterCacheValidatorManager {
 		cacheKeyGenerator.append(request.getRequestURI());
 
 		StringBundler queryStringSB = new StringBundler();
-
-		Enumeration<String> parameterNamesEnumeration =
-			request.getParameterNames();
-
-		List<String> parameterNames = ListUtil.fromEnumeration(
-			parameterNamesEnumeration);
-
-		Collections.sort(parameterNames);
 
 		HttpServletRequest readOnlyRequest = new ReadOnlyHttpServletRequest(
 			request);
