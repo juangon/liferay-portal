@@ -14,9 +14,13 @@
 
 package com.liferay.portal.cacheutil.request.parameter.validators;
 
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.Function;
 import com.liferay.portal.kernel.util.KeyValuePair;
-import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.LocaleUtil;
+
+import java.util.Locale;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,24 +30,22 @@ import org.osgi.service.component.annotations.Component;
  * @author Carlos Sierra Andrés
  */
 @Component(immediate = true, property = "cache.file.name.contributor=true")
-public class MinifierTypeRequestParameterCacheValidator
+public class LanguageIdCacheFileNameContributor
 	implements Function<HttpServletRequest, KeyValuePair> {
 
 	@Override
 	public KeyValuePair apply(HttpServletRequest request) {
-		String minifierType = request.getParameter(_PARAMETER_NAME);
+		String languageId = request.getParameter(_PARAMETER_NAME);
 
-		if (Validator.isNull(minifierType)) {
-			return null;
-		}
+		Set<Locale> availableLocales = LanguageUtil.getAvailableLocales();
 
-		if (minifierType.equals("css") || minifierType.equals("js")) {
-			return new KeyValuePair(_PARAMETER_NAME, minifierType);
+		if (availableLocales.contains(LocaleUtil.fromLanguageId(languageId))) {
+			return new KeyValuePair(_PARAMETER_NAME, languageId);
 		}
 
 		return null;
 	}
 
-	private static final String _PARAMETER_NAME = "minifierType";
+	private static final String _PARAMETER_NAME = "languageId";
 
 }

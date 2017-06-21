@@ -14,44 +14,36 @@
 
 package com.liferay.portal.cacheutil.request.parameter.validators;
 
-import com.liferay.portal.kernel.model.Theme;
-import com.liferay.portal.kernel.service.ThemeLocalService;
 import com.liferay.portal.kernel.util.Function;
 import com.liferay.portal.kernel.util.KeyValuePair;
-import com.liferay.portal.kernel.util.Portal;
+import com.liferay.portal.kernel.util.Validator;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Carlos Sierra Andrés
  */
 @Component(immediate = true, property = "cache.file.name.contributor=true")
-public class ThemeIdRequestParameterCacheValidator
+public class MinifierTypeCacheFileNameContributor
 	implements Function<HttpServletRequest, KeyValuePair> {
 
 	@Override
 	public KeyValuePair apply(HttpServletRequest request) {
-		long companyId = _portal.getCompanyId(request);
-		String themeId = request.getParameter(_PARAMETER_NAME);
+		String minifierType = request.getParameter(_PARAMETER_NAME);
 
-		Theme theme = _themeLocalService.fetchTheme(companyId, themeId);
+		if (Validator.isNull(minifierType)) {
+			return null;
+		}
 
-		if (theme != null) {
-			return new KeyValuePair(_PARAMETER_NAME, themeId);
+		if (minifierType.equals("css") || minifierType.equals("js")) {
+			return new KeyValuePair(_PARAMETER_NAME, minifierType);
 		}
 
 		return null;
 	}
 
-	private static final String _PARAMETER_NAME = "themeId";
-
-	@Reference
-	private Portal _portal;
-
-	@Reference
-	private ThemeLocalService _themeLocalService;
+	private static final String _PARAMETER_NAME = "minifierType";
 
 }
