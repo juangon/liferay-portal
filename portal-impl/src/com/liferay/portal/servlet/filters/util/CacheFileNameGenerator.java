@@ -27,18 +27,9 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.registry.collections.ServiceTrackerCollections;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-
 import java.util.List;
 
-import javax.servlet.AsyncContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Miguel Pastor
@@ -59,14 +50,10 @@ public class CacheFileNameGenerator {
 		StringBundler queryStringSB = new StringBundler(
 			_cacheFileNameContributors.size() * 4);
 
-		HttpServletRequest readOnlyRequest = new ReadOnlyHttpServletRequest(
-			request);
-
 		for (Function<HttpServletRequest, KeyValuePair>
 				cacheFileNameContributor : _cacheFileNameContributors) {
 
-			KeyValuePair keyValuePair = cacheFileNameContributor.apply(
-				readOnlyRequest);
+			KeyValuePair keyValuePair = cacheFileNameContributor.apply(request);
 
 			if (keyValuePair == null) {
 				continue;
@@ -103,60 +90,5 @@ public class CacheFileNameGenerator {
 			(List<Function<HttpServletRequest, KeyValuePair>>)(List<?>)
 				ServiceTrackerCollections.openList(
 					Function.class, "(cache.file.name.contributor=true)");
-
-	private static class ReadOnlyHttpServletRequest
-		extends HttpServletRequestWrapper {
-
-		public ReadOnlyHttpServletRequest(HttpServletRequest request) {
-			super(request);
-		}
-
-		@Override
-		public boolean authenticate(HttpServletResponse response)
-			throws IOException, ServletException {
-
-			return false;
-		}
-
-		@Override
-		public void login(String username, String password)
-			throws ServletException {
-		}
-
-		@Override
-		public void logout() throws ServletException {
-		}
-
-		@Override
-		public void removeAttribute(String name) {
-		}
-
-		@Override
-		public void setAttribute(String name, Object o) {
-		}
-
-		@Override
-		public void setCharacterEncoding(String enc)
-			throws UnsupportedEncodingException {
-		}
-
-		@Override
-		public void setRequest(ServletRequest request) {
-		}
-
-		@Override
-		public AsyncContext startAsync() throws IllegalStateException {
-			throw new UnsupportedOperationException();
-		}
-
-		@Override
-		public AsyncContext startAsync(
-				ServletRequest servletRequest, ServletResponse servletResponse)
-			throws IllegalStateException {
-
-			throw new UnsupportedOperationException();
-		}
-
-	}
 
 }
