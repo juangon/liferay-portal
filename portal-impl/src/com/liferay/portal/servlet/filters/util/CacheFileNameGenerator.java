@@ -16,7 +16,6 @@ package com.liferay.portal.servlet.filters.util;
 
 import com.liferay.portal.kernel.cache.key.CacheKeyGenerator;
 import com.liferay.portal.kernel.cache.key.CacheKeyGeneratorUtil;
-import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.Digester;
 import com.liferay.portal.kernel.util.DigesterUtil;
@@ -48,7 +47,7 @@ import javax.servlet.http.HttpServletResponse;
 public class CacheFileNameGenerator {
 
 	public static String getCacheFileName(
-		final HttpServletRequest request, String cacheName, Log log) {
+		HttpServletRequest request, String cacheName) {
 
 		CacheKeyGenerator cacheKeyGenerator =
 			CacheKeyGeneratorUtil.getCacheKeyGenerator(cacheName);

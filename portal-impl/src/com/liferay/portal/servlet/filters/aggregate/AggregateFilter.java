@@ -314,7 +314,7 @@ public class AggregateFilter extends IgnoreModuleRequestFilter {
 
 	protected String getCacheFileName(HttpServletRequest request) {
 		return CacheFileNameGenerator.getCacheFileName(
-			request, AggregateFilter.class.getName(), _log);
+			request, AggregateFilter.class.getName());
 	}
 
 	protected Object getContent(
