@@ -12,40 +12,37 @@
  * details.
  */
 
-package com.liferay.portal.cacheutil.request.parameter.validators;
+package com.liferay.portal.servlet.filters.util;
 
-import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
 import com.liferay.portal.kernel.util.Function;
 import com.liferay.portal.kernel.util.KeyValuePair;
-import com.liferay.portal.kernel.util.LocaleUtil;
-
-import java.util.Locale;
-import java.util.Set;
+import com.liferay.portal.kernel.util.Validator;
 
 import javax.servlet.http.HttpServletRequest;
-
-import org.osgi.service.component.annotations.Component;
 
 /**
  * @author Carlos Sierra Andrés
  */
-@Component(immediate = true, property = "cache.file.name.contributor=true")
-public class LanguageIdCacheFileNameContributor
+@OSGiBeanProperties(property = "cache.file.name.contributor=true")
+public class MinifierTypeCacheFileNameContributor
 	implements Function<HttpServletRequest, KeyValuePair> {
 
 	@Override
 	public KeyValuePair apply(HttpServletRequest request) {
-		String languageId = request.getParameter(_PARAMETER_NAME);
+		String minifierType = request.getParameter(_PARAMETER_NAME);
 
-		Set<Locale> availableLocales = LanguageUtil.getAvailableLocales();
+		if (Validator.isNull(minifierType)) {
+			return null;
+		}
 
-		if (availableLocales.contains(LocaleUtil.fromLanguageId(languageId))) {
-			return new KeyValuePair(_PARAMETER_NAME, languageId);
+		if (minifierType.equals("css") || minifierType.equals("js")) {
+			return new KeyValuePair(_PARAMETER_NAME, minifierType);
 		}
 
 		return null;
 	}
 
-	private static final String _PARAMETER_NAME = "languageId";
+	private static final String _PARAMETER_NAME = "minifierType";
 
 }

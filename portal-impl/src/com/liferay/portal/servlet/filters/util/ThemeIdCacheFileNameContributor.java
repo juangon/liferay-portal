@@ -12,32 +12,30 @@
  * details.
  */
 
-package com.liferay.portal.cacheutil.request.parameter.validators;
+package com.liferay.portal.servlet.filters.util;
 
 import com.liferay.portal.kernel.model.Theme;
-import com.liferay.portal.kernel.service.ThemeLocalService;
+import com.liferay.portal.kernel.service.ThemeLocalServiceUtil;
+import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
 import com.liferay.portal.kernel.util.Function;
 import com.liferay.portal.kernel.util.KeyValuePair;
-import com.liferay.portal.kernel.util.Portal;
+import com.liferay.portal.kernel.util.PortalUtil;
 
 import javax.servlet.http.HttpServletRequest;
-
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Carlos Sierra Andrés
  */
-@Component(immediate = true, property = "cache.file.name.contributor=true")
+@OSGiBeanProperties(property = "cache.file.name.contributor=true")
 public class ThemeIdCacheFileNameContributor
 	implements Function<HttpServletRequest, KeyValuePair> {
 
 	@Override
 	public KeyValuePair apply(HttpServletRequest request) {
-		long companyId = _portal.getCompanyId(request);
+		long companyId = PortalUtil.getCompanyId(request);
 		String themeId = request.getParameter(_PARAMETER_NAME);
 
-		Theme theme = _themeLocalService.fetchTheme(companyId, themeId);
+		Theme theme = ThemeLocalServiceUtil.fetchTheme(companyId, themeId);
 
 		if (theme != null) {
 			return new KeyValuePair(_PARAMETER_NAME, themeId);
@@ -47,11 +45,5 @@ public class ThemeIdCacheFileNameContributor
 	}
 
 	private static final String _PARAMETER_NAME = "themeId";
-
-	@Reference
-	private Portal _portal;
-
-	@Reference
-	private ThemeLocalService _themeLocalService;
 
 }
