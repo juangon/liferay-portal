@@ -14,45 +14,36 @@
 
 package com.liferay.portal.cacheutil.request.parameter.validators;
 
-import com.liferay.portal.kernel.util.PredicateFilter;
+import com.liferay.portal.kernel.util.Function;
+import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.Validator;
-
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 
 /**
  * @author Carlos Sierra Andrés
  */
-@Component(immediate = true, property = "filter.request.parameter=minifierType")
+@Component(immediate = true, property = "cache.file.name.contributor=true")
 public class MinifierTypeRequestParameterCacheValidator
-	implements PredicateFilter<HttpServletRequest> {
+	implements Function<HttpServletRequest, KeyValuePair> {
 
 	@Override
-	public boolean filter(HttpServletRequest request) {
-		String minifierType = request.getParameter(_parameterName);
+	public KeyValuePair apply(HttpServletRequest request) {
+		String minifierType = request.getParameter(_PARAMETER_NAME);
 
 		if (Validator.isNull(minifierType)) {
-			return false;
+			return null;
 		}
 
 		if (minifierType.equals("css") || minifierType.equals("js")) {
-			return true;
+			return new KeyValuePair(_PARAMETER_NAME, minifierType);
 		}
 
-		return false;
+		return null;
 	}
 
-	@Activate
-	protected void activate(Map<String, Object> properties) {
-		Object parameterNameObject = properties.get("filter.request.parameter");
-
-		_parameterName = parameterNameObject.toString();
-	}
-
-	private String _parameterName;
+	private static final String _PARAMETER_NAME = "minifierType";
 
 }

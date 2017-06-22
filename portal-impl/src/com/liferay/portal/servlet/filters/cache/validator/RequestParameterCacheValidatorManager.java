@@ -20,13 +20,13 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.Digester;
 import com.liferay.portal.kernel.util.DigesterUtil;
+import com.liferay.portal.kernel.util.Function;
 import com.liferay.portal.kernel.util.HttpUtil;
-import com.liferay.portal.kernel.util.PredicateFilter;
+import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.registry.collections.ServiceTrackerCollections;
-import com.liferay.registry.collections.ServiceTrackerMap;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -56,65 +56,33 @@ public class RequestParameterCacheValidatorManager {
 		cacheKeyGenerator.append(StringPool.UNDERLINE);
 		cacheKeyGenerator.append(request.getRequestURI());
 
-		StringBundler queryStringSB = new StringBundler();
+		StringBundler queryStringSB = new StringBundler(
+			_cacheFileNameContributors.size() * 4);
 
 		HttpServletRequest readOnlyRequest = new ReadOnlyHttpServletRequest(
 			request);
 
-		for (String parameterName : _serviceTrackerMap.keySet()) {
-			for (PredicateFilter<HttpServletRequest> predicateFilter :
-					_serviceTrackerMap.getService(parameterName)) {
+		for (Function<HttpServletRequest, KeyValuePair>
+				cacheFileNameContributor : _cacheFileNameContributors) {
 
-				if (predicateFilter == null) {
-					continue;
-				}
+			KeyValuePair keyValuePair = cacheFileNameContributor.apply(
+				readOnlyRequest);
 
-				try {
-					boolean valid = predicateFilter.filter(readOnlyRequest);
-
-					if (valid) {
-						queryStringSB.append(StringPool.UNDERLINE);
-						queryStringSB.append(parameterName);
-						queryStringSB.append(StringPool.UNDERLINE);
-						queryStringSB.append(
-							readOnlyRequest.getParameter(parameterName));
-					}
-					else {
-						if (log.isDebugEnabled()) {
-							StringBundler sb = new StringBundler(5);
-
-							sb.append("Parameter value ");
-							sb.append(
-								readOnlyRequest.getParameter(parameterName));
-							sb.append(" for parameter ");
-							sb.append(parameterName);
-							sb.append(" has been discarded for cache key");
-
-							log.debug(sb.toString());
-						}
-					}
-				}
-				catch (Exception e) {
-					if (log.isInfoEnabled()) {
-						log.info(
-							"Error validating request parameter " +
-								parameterName + " for cache",
-							e);
-					}
-				}
+			if (keyValuePair == null) {
+				continue;
 			}
+
+			queryStringSB.append(StringPool.UNDERLINE);
+			queryStringSB.append(keyValuePair.getKey());
+			queryStringSB.append(StringPool.UNDERLINE);
+			queryStringSB.append(keyValuePair.getValue());
 		}
 
-		String queryString = queryStringSB.toString();
+		cacheKeyGenerator.append(
+			DigesterUtil.digestBase64(
+				Digester.SHA_256, queryStringSB.toString()));
 
-		String queryStringDigest = DigesterUtil.digestBase64(
-			Digester.SHA_256, queryString);
-
-		cacheKeyGenerator.append(queryStringDigest);
-
-		String generatedValue = String.valueOf(cacheKeyGenerator.finish());
-
-		return _sterilizeFileName(generatedValue);
+		return _sterilizeFileName(String.valueOf(cacheKeyGenerator.finish()));
 	}
 
 	private static String _sterilizeFileName(String fileName) {
@@ -130,10 +98,11 @@ public class RequestParameterCacheValidatorManager {
 			});
 	}
 
-	private static final
-		ServiceTrackerMap<String, List<PredicateFilter>> _serviceTrackerMap =
-			ServiceTrackerCollections.openMultiValueMap(
-				PredicateFilter.class, "filter.request.parameter");
+	private static final List<Function<HttpServletRequest, KeyValuePair>>
+		_cacheFileNameContributors =
+			(List<Function<HttpServletRequest, KeyValuePair>>)(List<?>)
+				ServiceTrackerCollections.openList(
+					Function.class, "(cache.file.name.contributor=true)");
 
 	private static class ReadOnlyHttpServletRequest
 		extends HttpServletRequestWrapper {

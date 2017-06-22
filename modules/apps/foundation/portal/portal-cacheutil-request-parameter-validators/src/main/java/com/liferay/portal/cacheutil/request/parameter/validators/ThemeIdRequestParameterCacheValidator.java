@@ -16,46 +16,37 @@ package com.liferay.portal.cacheutil.request.parameter.validators;
 
 import com.liferay.portal.kernel.model.Theme;
 import com.liferay.portal.kernel.service.ThemeLocalService;
+import com.liferay.portal.kernel.util.Function;
+import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.Portal;
-import com.liferay.portal.kernel.util.PredicateFilter;
-
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Carlos Sierra Andrés
  */
-@Component(immediate = true, property = "filter.request.parameter=themeId")
+@Component(immediate = true, property = "cache.file.name.contributor=true")
 public class ThemeIdRequestParameterCacheValidator
-	implements PredicateFilter<HttpServletRequest> {
+	implements Function<HttpServletRequest, KeyValuePair> {
 
 	@Override
-	public boolean filter(HttpServletRequest request) {
+	public KeyValuePair apply(HttpServletRequest request) {
 		long companyId = _portal.getCompanyId(request);
+		String themeId = request.getParameter(_PARAMETER_NAME);
 
-		Theme theme = _themeLocalService.fetchTheme(
-			companyId, request.getParameter(_parameterName));
+		Theme theme = _themeLocalService.fetchTheme(companyId, themeId);
 
 		if (theme != null) {
-			return true;
+			return new KeyValuePair(_PARAMETER_NAME, themeId);
 		}
 
-		return false;
+		return null;
 	}
 
-	@Activate
-	protected void activate(Map<String, Object> properties) {
-		Object parameterNameObject = properties.get("filter.request.parameter");
-
-		_parameterName = parameterNameObject.toString();
-	}
-
-	private String _parameterName;
+	private static final String _PARAMETER_NAME = "themeId";
 
 	@Reference
 	private Portal _portal;

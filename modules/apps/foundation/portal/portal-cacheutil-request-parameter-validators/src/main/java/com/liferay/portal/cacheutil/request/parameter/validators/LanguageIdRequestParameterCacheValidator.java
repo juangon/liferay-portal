@@ -15,40 +15,37 @@
 package com.liferay.portal.cacheutil.request.parameter.validators;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.util.Function;
+import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.PredicateFilter;
 
 import java.util.Locale;
-import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 
 /**
  * @author Carlos Sierra Andrés
  */
-@Component(immediate = true, property = "filter.request.parameter=languageId")
+@Component(immediate = true, property = "cache.file.name.contributor=true")
 public class LanguageIdRequestParameterCacheValidator
-	implements PredicateFilter<HttpServletRequest> {
+	implements Function<HttpServletRequest, KeyValuePair> {
 
 	@Override
-	public boolean filter(HttpServletRequest request) {
+	public KeyValuePair apply(HttpServletRequest request) {
+		String languageId = request.getParameter(_PARAMETER_NAME);
+
 		Set<Locale> availableLocales = LanguageUtil.getAvailableLocales();
 
-		return availableLocales.contains(
-			LocaleUtil.fromLanguageId(request.getParameter(_parameterName)));
+		if (availableLocales.contains(LocaleUtil.fromLanguageId(languageId))) {
+			return new KeyValuePair(_PARAMETER_NAME, languageId);
+		}
+
+		return null;
 	}
 
-	@Activate
-	protected void activate(Map<String, Object> properties) {
-		Object parameterNameObject = properties.get("filter.request.parameter");
-
-		_parameterName = parameterNameObject.toString();
-	}
-
-	private String _parameterName;
+	private static final String _PARAMETER_NAME = "languageId";
 
 }
