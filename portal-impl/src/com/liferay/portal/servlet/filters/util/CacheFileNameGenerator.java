@@ -48,12 +48,14 @@ public class CacheFileNameGenerator {
 		cacheKeyGenerator.append(request.getRequestURI());
 
 		StringBundler queryStringSB = new StringBundler(
-			_cacheFileNameContributors.size() * 4);
+			_cacheFileNameContributorFunctions.size() * 4);
 
 		for (Function<HttpServletRequest, KeyValuePair>
-				cacheFileNameContributor : _cacheFileNameContributors) {
+				cacheFileNameContributorFunction :
+					_cacheFileNameContributorFunctions) {
 
-			KeyValuePair keyValuePair = cacheFileNameContributor.apply(request);
+			KeyValuePair keyValuePair = cacheFileNameContributorFunction.apply(
+				request);
 
 			if (keyValuePair == null) {
 				continue;
@@ -86,7 +88,7 @@ public class CacheFileNameGenerator {
 	}
 
 	private static final List<Function<HttpServletRequest, KeyValuePair>>
-		_cacheFileNameContributors =
+		_cacheFileNameContributorFunctions =
 			(List<Function<HttpServletRequest, KeyValuePair>>)(List<?>)
 				ServiceTrackerCollections.openList(
 					Function.class, "(cache.file.name.contributor=true)");
