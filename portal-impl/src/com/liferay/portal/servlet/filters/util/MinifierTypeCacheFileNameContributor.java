@@ -15,7 +15,6 @@
 package com.liferay.portal.servlet.filters.util;
 
 import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
-import com.liferay.portal.kernel.util.Function;
 import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -26,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @OSGiBeanProperties(property = "cache.file.name.contributor=true")
 public class MinifierTypeCacheFileNameContributor
-	implements Function<HttpServletRequest, KeyValuePair> {
+	implements CacheFileNameContributor {
 
 	@Override
 	public KeyValuePair apply(HttpServletRequest request) {

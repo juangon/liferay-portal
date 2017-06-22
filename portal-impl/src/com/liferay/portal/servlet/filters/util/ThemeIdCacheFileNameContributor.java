@@ -17,7 +17,6 @@ package com.liferay.portal.servlet.filters.util;
 import com.liferay.portal.kernel.model.Theme;
 import com.liferay.portal.kernel.service.ThemeLocalServiceUtil;
 import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
-import com.liferay.portal.kernel.util.Function;
 import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.PortalUtil;
 
@@ -28,7 +27,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @OSGiBeanProperties(property = "cache.file.name.contributor=true")
 public class ThemeIdCacheFileNameContributor
-	implements Function<HttpServletRequest, KeyValuePair> {
+	implements CacheFileNameContributor {
 
 	@Override
 	public KeyValuePair apply(HttpServletRequest request) {

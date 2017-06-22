@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.cache.key.CacheKeyGeneratorUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.Digester;
 import com.liferay.portal.kernel.util.DigesterUtil;
-import com.liferay.portal.kernel.util.Function;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -48,14 +47,12 @@ public class CacheFileNameGenerator {
 		cacheKeyGenerator.append(request.getRequestURI());
 
 		StringBundler queryStringSB = new StringBundler(
-			_cacheFileNameContributorFunctions.size() * 4);
+			_cacheFileNameContributors.size() * 4);
 
-		for (Function<HttpServletRequest, KeyValuePair>
-				cacheFileNameContributorFunction :
-					_cacheFileNameContributorFunctions) {
+		for (CacheFileNameContributor cacheFileNameContributor :
+				_cacheFileNameContributors) {
 
-			KeyValuePair keyValuePair = cacheFileNameContributorFunction.apply(
-				request);
+			KeyValuePair keyValuePair = cacheFileNameContributor.apply(request);
 
 			if (keyValuePair == null) {
 				continue;
@@ -87,10 +84,11 @@ public class CacheFileNameGenerator {
 			});
 	}
 
-	private static final List<Function<HttpServletRequest, KeyValuePair>>
-		_cacheFileNameContributorFunctions =
-			(List<Function<HttpServletRequest, KeyValuePair>>)(List<?>)
+	private static final List<CacheFileNameContributor>
+		_cacheFileNameContributors =
+			(List<CacheFileNameContributor>)(List<?>)
 				ServiceTrackerCollections.openList(
-					Function.class, "(cache.file.name.contributor=true)");
+					CacheFileNameContributor.class,
+					"(cache.file.name.contributor=true)");
 
 }

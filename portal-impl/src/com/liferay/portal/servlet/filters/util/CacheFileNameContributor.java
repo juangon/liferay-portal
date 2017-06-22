@@ -16,6 +16,7 @@ package com.liferay.portal.servlet.filters.util;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
+import com.liferay.portal.kernel.util.Function;
 import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.LocaleUtil;
 
@@ -27,21 +28,6 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author Carlos Sierra Andrés
  */
-@OSGiBeanProperties(property = "cache.file.name.contributor=true")
-public class LanguageIdCacheFileNameContributor
-	implements CacheFileNameContributor {
-
-	@Override
-	public KeyValuePair apply(HttpServletRequest request) {
-		String languageId = request.getParameter("languageId");
-
-		Set<Locale> availableLocales = LanguageUtil.getAvailableLocales();
-
-		if (availableLocales.contains(LocaleUtil.fromLanguageId(languageId))) {
-			return new KeyValuePair("languageId", languageId);
-		}
-
-		return null;
-	}
-
+public interface CacheFileNameContributor
+	extends Function<HttpServletRequest, KeyValuePair> {
 }
