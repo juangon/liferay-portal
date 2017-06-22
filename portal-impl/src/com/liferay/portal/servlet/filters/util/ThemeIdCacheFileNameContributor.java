@@ -33,17 +33,15 @@ public class ThemeIdCacheFileNameContributor
 	@Override
 	public KeyValuePair apply(HttpServletRequest request) {
 		long companyId = PortalUtil.getCompanyId(request);
-		String themeId = request.getParameter(_PARAMETER_NAME);
+		String themeId = request.getParameter("themeId");
 
 		Theme theme = ThemeLocalServiceUtil.fetchTheme(companyId, themeId);
 
 		if (theme != null) {
-			return new KeyValuePair(_PARAMETER_NAME, themeId);
+			return new KeyValuePair("themeId", themeId);
 		}
 
 		return null;
 	}
-
-	private static final String _PARAMETER_NAME = "themeId";
 
 }

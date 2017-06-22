@@ -30,19 +30,17 @@ public class MinifierTypeCacheFileNameContributor
 
 	@Override
 	public KeyValuePair apply(HttpServletRequest request) {
-		String minifierType = request.getParameter(_PARAMETER_NAME);
+		String minifierType = request.getParameter("minifierType");
 
 		if (Validator.isNull(minifierType)) {
 			return null;
 		}
 
 		if (minifierType.equals("css") || minifierType.equals("js")) {
-			return new KeyValuePair(_PARAMETER_NAME, minifierType);
+			return new KeyValuePair("minifierType", minifierType);
 		}
 
 		return null;
 	}
-
-	private static final String _PARAMETER_NAME = "minifierType";
 
 }

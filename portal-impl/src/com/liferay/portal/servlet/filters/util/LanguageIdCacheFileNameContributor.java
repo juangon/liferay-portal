@@ -34,17 +34,15 @@ public class LanguageIdCacheFileNameContributor
 
 	@Override
 	public KeyValuePair apply(HttpServletRequest request) {
-		String languageId = request.getParameter(_PARAMETER_NAME);
+		String languageId = request.getParameter("languageId");
 
 		Set<Locale> availableLocales = LanguageUtil.getAvailableLocales();
 
 		if (availableLocales.contains(LocaleUtil.fromLanguageId(languageId))) {
-			return new KeyValuePair(_PARAMETER_NAME, languageId);
+			return new KeyValuePair("languageId", languageId);
 		}
 
 		return null;
 	}
-
-	private static final String _PARAMETER_NAME = "languageId";
 
 }
