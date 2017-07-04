@@ -88,11 +88,11 @@ public class ServletExceptionAdapter implements Servlet {
 			_modifiableServletContext = modifiableServletContext;
 		}
 
-		public java.lang.String getInitParameter(java.lang.String name) {
+		public String getInitParameter(String name) {
 			return _wrappedServletConfig.getInitParameter(name);
 		}
 
-		public java.util.Enumeration getInitParameterNames() {
+		public Enumeration getInitParameterNames() {
 			return _wrappedServletConfig.getInitParameterNames();
 		}
 
@@ -100,7 +100,7 @@ public class ServletExceptionAdapter implements Servlet {
 			return (ServletContext)_modifiableServletContext;
 		}
 
-		public java.lang.String getServletName() {
+		public String getServletName() {
 			return _wrappedServletConfig.getServletName();
 		}
 
