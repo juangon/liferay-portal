@@ -16,6 +16,8 @@ package com.liferay.portal.osgi.web.wab.extender.internal.adapter;
 
 import java.io.IOException;
 
+import java.util.Enumeration;
+
 import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
