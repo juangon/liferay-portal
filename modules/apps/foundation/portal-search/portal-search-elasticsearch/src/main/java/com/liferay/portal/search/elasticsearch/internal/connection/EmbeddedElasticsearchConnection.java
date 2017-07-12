@@ -40,6 +40,7 @@ import java.util.Map;
 import org.apache.commons.lang.time.StopWatch;
 
 import org.elasticsearch.client.Client;
+import org.elasticsearch.common.inject.Injector;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.discovery.DiscoveryService;
 import org.elasticsearch.node.Node;
