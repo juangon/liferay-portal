@@ -114,7 +114,7 @@ public class ClassLoaderPool {
 		new ConcurrentHashMap<>();
 
 	static {
-		register("SystemClassLoader", ClassLoaderPool.class.getClassLoader());
+		register("GlobalClassLoader", ClassLoaderPool.class.getClassLoader());
 	}
 
 }
