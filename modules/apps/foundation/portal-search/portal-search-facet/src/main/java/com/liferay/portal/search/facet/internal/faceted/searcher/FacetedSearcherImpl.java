@@ -334,13 +334,13 @@ public class FacetedSearcherImpl
 		Indexer<?> indexer = _indexerRegistry.getIndexer(entryClassName);
 
 		if (indexer == null) {
-			continue;
+			return;
 		}
 
 		String searchEngineId = searchContext.getSearchEngineId();
 
 		if (!searchEngineId.equals(indexer.getSearchEngineId())) {
-			continue;
+			return;
 		}
 
 		fullQueryBooleanFilter.add(
