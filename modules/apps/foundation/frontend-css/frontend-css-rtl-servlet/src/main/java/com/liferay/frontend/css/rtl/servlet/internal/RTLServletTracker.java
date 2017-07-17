@@ -93,14 +93,15 @@ public class RTLServletTracker {
 	private Hashtable<String, Object> _buildProperties(
 		ServiceReference<ServletContextHelper> serviceReference) {
 
+		Hashtable<String, Object> properties = new Hashtable<>();
+
 		Object contextName = serviceReference.getProperty(
 			HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_NAME);
-
-		Hashtable<String, Object> properties = new Hashtable<>();
 
 		properties.put(
 			HttpWhiteboardConstants.HTTP_WHITEBOARD_CONTEXT_SELECT,
 			contextName);
+
 		properties.put(
 			HttpWhiteboardConstants.HTTP_WHITEBOARD_SERVLET_NAME,
 			RTLServlet.class.getName());
