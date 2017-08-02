@@ -27,8 +27,13 @@ public class PortalCacheConfiguration {
 	public static final String DEFAULT_PORTAL_CACHE_NAME =
 		"DEFAULT_PORTAL_CACHE_NAME";
 
+	public static final String PORTAL_CACHE_LISTENER_PROPERTIES_KEY_SCOPE =
+		"PORTAL_CACHE_LISTENER_PROPERTIES_KEY_SCOPE";
+
 	public static final String PORTAL_CACHE_LISTENER_SCOPE =
 		"PORTAL_CACHE_LISTENER_SCOPE";
+
+	public static final String PORTAL_CACHE_NAME_DEFAULT = "default";
 
 	public PortalCacheConfiguration(
 		String portalCacheName,
