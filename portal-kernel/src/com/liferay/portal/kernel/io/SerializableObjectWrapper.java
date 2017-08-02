@@ -131,6 +131,7 @@ public class SerializableObjectWrapper implements Externalizable {
 			byte[] data = lazySerializable.getData();
 
 			objectOutput.writeInt(data.length);
+
 			objectOutput.write(data, 0, data.length);
 
 			return;
