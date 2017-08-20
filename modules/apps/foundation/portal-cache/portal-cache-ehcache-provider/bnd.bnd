@@ -12,7 +12,8 @@ Export-Package:\
 	net.sf.ehcache.distribution,\
 	net.sf.ehcache.event,\
 	net.sf.ehcache.management,\
-	net.sf.ehcache.util
+	net.sf.ehcache.util,\
+	net.sf.ehcache.distribution.jgroups
 Import-Package:\
 	!org.quartz,\
 	!org.quartz.impl,\
@@ -45,6 +46,9 @@ Import-Package:\
 	!org.terracotta.toolkit.store,\
 	\
 	!sun.misc,\
+	\
+	!org.apache.logging,\
+	!org.apache.logging.*,\
 	\
 	*
 Liferay-Releng-Module-Group-Description:

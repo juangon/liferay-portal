@@ -781,6 +781,10 @@ public interface PropsKeys {
 
 	public static final String EHCACHE_REPLICATOR_PROPERTIES_DEFAULT = "ehcache.replicator.properties.default";
 
+	public static final String EHCACHE_JGROUPS_PEER_PROVIDER_FACTORY_CLASS = "ehcache.jgroups.peer.provider.factory.class";
+
+	public static final String EHCACHE_JGROUPS_PEER_PROVIDER_FACTORY_PROPERTIES = "ehcache.jgroups.peer.provider.factory.properties";
+	
 	public static final String EHCACHE_RMI_PEER_LISTENER_FACTORY_CLASS = "ehcache.rmi.peer.listener.factory.class";
 
 	public static final String EHCACHE_RMI_PEER_LISTENER_FACTORY_PROPERTIES = "ehcache.rmi.peer.listener.factory.properties";

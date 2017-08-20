@@ -3,3 +3,7 @@ Bundle-SymbolicName: com.liferay.portal.cache.ehcache.multiple
 Bundle-Version: 1.0.0
 Liferay-Releng-Module-Group-Description:
 Liferay-Releng-Module-Group-Title:
+Import-Package:\
+	net.sf.ehcache.distribution.jgroups,\
+	\
+	*
