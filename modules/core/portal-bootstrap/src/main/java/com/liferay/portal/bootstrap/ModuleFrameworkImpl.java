@@ -78,6 +78,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -1132,7 +1133,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 		bundleContext.registerService(
 			ThrowableCollector.class, throwableCollector, dictionary);
 
-		final List<Bundle> bundles = new ArrayList<>();
+		final Map<String, Bundle> bundles = new LinkedHashMap<>();
 
 		final List<Path> jarPaths = new ArrayList<>();
 
@@ -1203,7 +1204,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 			Path filePath = Paths.get(location.substring(prefix.length()));
 
 			if (jarPaths.contains(filePath)) {
-				bundles.add(bundle);
+				bundles.put(bundle.getLocation(), bundle);
 
 				continue;
 			}
@@ -1233,7 +1234,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 					_STATIC_JAR.concat(path), inputStream);
 
 				if (bundle != null) {
-					bundles.add(bundle);
+					bundles.put(bundle.getLocation(), bundle);
 
 					overrideStaticFileNames.add(
 						path.substring(path.lastIndexOf(StringPool.SLASH) + 1));
@@ -1317,7 +1318,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 							StringPool.SLASH.concat(zipEntryName), inputStream);
 
 						if (bundle != null) {
-							bundles.add(bundle);
+							bundles.put(bundle.getLocation(), bundle);
 						}
 					}
 				}
@@ -1362,7 +1363,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 		frameworkStartLevel.setStartLevel(
 			PropsValues.MODULE_FRAMEWORK_BEGINNING_START_LEVEL);
 
-		for (final Bundle bundle : bundles) {
+		for (final Bundle bundle : bundles.values()) {
 			if (_isFragmentBundle(bundle)) {
 				continue;
 			}
