@@ -30,13 +30,13 @@ import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClass
 public interface EhcacheMultipleConfiguration {
 
 	@Meta.AD(
-		deflt = "com.liferay.portal.cache.ehcache.multiple.internal.bootstrap.RMIBootstrapCacheLoaderFactory",
+		deflt = "net.sf.ehcache.distribution.jgroups.JGroupsBootstrapCacheLoaderFactory",
 		required = false
 	)
 	public String bootstrapCacheLoaderFactoryClass();
 
 	@Meta.AD(
-		deflt = "com.liferay.portal.cache.ehcache.multiple.internal.distribution.RMICacheReplicatorFactory",
+		deflt = "net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory",
 		required = false
 	)
 	public String cacheReplicatorFactoryClass();
