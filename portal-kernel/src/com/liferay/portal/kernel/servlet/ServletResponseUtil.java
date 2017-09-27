@@ -327,10 +327,9 @@ public class ServletResponseUtil {
 
 				Range previousRange = null;
 
-				final boolean rangesSortedAndNotOverlapped =
-					rangesSortedAndNotOverlapped(ranges);
+				boolean sequentialRangeList = _isSequentialRangeList(ranges);
 
-				if (!rangesSortedAndNotOverlapped) {
+				if (!sequentialRangeList) {
 					inputStream = _toRandomAccessInputStream(inputStream);
 				}
 
@@ -349,7 +348,7 @@ public class ServletResponseUtil {
 
 					long offset = curRange.getStart();
 
-					if (rangesSortedAndNotOverlapped) {
+					if (sequentialRangeList) {
 						if (previousRange != null) {
 							offset -= previousRange.getEnd() + 1;
 						}
@@ -612,7 +611,7 @@ public class ServletResponseUtil {
 			length);
 	}
 
-	protected static boolean rangesSortedAndNotOverlapped(List<Range> ranges) {
+	private static boolean _isSequentialRangeList(List<Range> ranges) {
 		Range previousRange = null;
 
 		for (Range range : ranges) {
