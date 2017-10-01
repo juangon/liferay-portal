@@ -80,7 +80,14 @@ public class PortletSessionTracker {
 
 		for (HttpSession session : sessions.values()) {
 			try {
-				session.invalidate();
+				try {
+					session.getCreationTime();
+
+					//Only invalidate if valid
+					session.invalidate();
+				}
+				catch (IllegalStateException ise) {
+				}
 			}
 			catch (Exception e) {
 			}
