@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.servlet.ServletInputStreamAdapter;
 import com.liferay.portal.kernel.util.ClassLoaderUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -93,7 +94,7 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 				return null;
 			}
 			else {
-				return _portletRequest.getContextPath();
+				return _request.getContextPath();
 			}
 		}
 
@@ -102,7 +103,7 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 				return null;
 			}
 			else {
-				return _pathInfo;
+				return _request.getPathInfo();
 			}
 		}
 
@@ -111,7 +112,7 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 				return null;
 			}
 			else {
-				return _queryString;
+				return _request.getQueryString();
 			}
 		}
 
@@ -120,7 +121,7 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 				return null;
 			}
 			else {
-				return _requestURI;
+				return _request.getRequestURI();
 			}
 		}
 
@@ -129,7 +130,7 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 				return null;
 			}
 			else {
-				return _servletPath;
+				return _request.getServletPath();
 			}
 		}
 
