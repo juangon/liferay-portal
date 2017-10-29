@@ -379,18 +379,21 @@ public class AggregateFilter extends IgnoreModuleRequestFilter {
 		File cacheDataFile = new File(
 			_tempDir, cacheCommonFileName + "_E_DATA");
 
-		if (cacheDataFile.exists() &&
-			(cacheDataFile.lastModified() ==
-				URLUtil.getLastModifiedTime(resourceURL)) &&
-			!_isLegacyIe(request)) {
+		if (cacheDataFile.exists()) {
+			long lastModified = URLUtil.getLastModifiedTime(resourceURL);
 
-			if (cacheContentTypeFile.exists()) {
-				String contentType = FileUtil.read(cacheContentTypeFile);
+			if (((lastModified == 0) ||
+				 (cacheDataFile.lastModified() == lastModified)) &&
+				!_isLegacyIe(request)) {
 
-				response.setContentType(contentType);
+				if (cacheContentTypeFile.exists()) {
+					String contentType = FileUtil.read(cacheContentTypeFile);
+
+					response.setContentType(contentType);
+				}
+
+				return cacheDataFile;
 			}
-
-			return cacheDataFile;
 		}
 
 		String content = null;
